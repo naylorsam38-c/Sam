@@ -13,8 +13,15 @@ const HOST = process.env.HOST || '127.0.0.1';
 const PORT = Number(process.env.PORT || 8787);
 
 const API_KEY = process.env.ANTHROPIC_API_KEY || '';
+// APP_PASSWORD_HASH is preferred: it keeps the plaintext password out of the
+// environment and out of any launcher script. APP_PASSWORD still works.
 const PASSWORD = process.env.APP_PASSWORD || '';
+const PASSWORD_HASH = (process.env.APP_PASSWORD_HASH || '').trim().toLowerCase();
 const SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
+
+const MIN_PASSWORD_LENGTH = 8;
+const LOGIN_MAX_FAILURES = Number(process.env.LOGIN_MAX_FAILURES || 8);
+const LOGIN_LOCKOUT_MS = Number(process.env.LOGIN_LOCKOUT_MINUTES || 15) * 60 * 1000;
 
 const MODEL_CHAT = process.env.MODEL_CHAT || 'claude-sonnet-5';
 const MODEL_PLAN = process.env.MODEL_PLAN || 'claude-opus-5';
@@ -72,10 +79,44 @@ function parseCookies(header) {
   return out;
 }
 
+function passwordConfigured() {
+  return Boolean(PASSWORD_HASH || PASSWORD);
+}
+
 function passwordMatches(candidate) {
-  const a = crypto.createHash('sha256').update(String(candidate)).digest();
-  const b = crypto.createHash('sha256').update(PASSWORD).digest();
-  return crypto.timingSafeEqual(a, b);
+  const supplied = crypto.createHash('sha256').update(String(candidate)).digest();
+  const expected = PASSWORD_HASH
+    ? Buffer.from(PASSWORD_HASH, 'hex')
+    : crypto.createHash('sha256').update(PASSWORD).digest();
+  // A malformed hash would otherwise throw inside timingSafeEqual.
+  if (expected.length !== supplied.length) return false;
+  return crypto.timingSafeEqual(supplied, expected);
+}
+
+// --- Login throttling -------------------------------------------------------
+// The password is the only barrier in front of the API key, so failed attempts
+// are counted per client address and locked out once they pile up.
+
+const loginFailures = new Map(); // address -> { count, firstAt }
+
+function lockoutRemainingMs(address) {
+  const entry = loginFailures.get(address);
+  if (!entry) return 0;
+  if (Date.now() - entry.firstAt > LOGIN_LOCKOUT_MS) {
+    loginFailures.delete(address);
+    return 0;
+  }
+  if (entry.count < LOGIN_MAX_FAILURES) return 0;
+  return LOGIN_LOCKOUT_MS - (Date.now() - entry.firstAt);
+}
+
+function recordLoginFailure(address) {
+  const entry = loginFailures.get(address);
+  if (!entry || Date.now() - entry.firstAt > LOGIN_LOCKOUT_MS) {
+    loginFailures.set(address, { count: 1, firstAt: Date.now() });
+    return;
+  }
+  entry.count += 1;
 }
 
 // ---------------------------------------------------------------------------
@@ -117,13 +158,32 @@ function writeTasks(tasks) {
 // HTTP helpers
 // ---------------------------------------------------------------------------
 
+// Everything the page needs is served from this origin, so the policy can be
+// strict. frame-ancestors 'none' is what stops the app being framed and
+// clickjacked into spending against the key.
+const SECURITY_HEADERS = {
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Referrer-Policy': 'no-referrer',
+  'Content-Security-Policy': [
+    "default-src 'self'",
+    "script-src 'self'",
+    "style-src 'self'",
+    "img-src 'self' data:",
+    "connect-src 'self'",
+    "form-action 'self'",
+    "base-uri 'none'",
+    "frame-ancestors 'none'",
+  ].join('; '),
+};
+
 function sendJson(res, status, body, headers = {}) {
   const payload = JSON.stringify(body);
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
     'Content-Length': Buffer.byteLength(payload),
     'Cache-Control': 'no-store',
-    'X-Content-Type-Options': 'nosniff',
+    ...SECURITY_HEADERS,
     ...headers,
   });
   res.end(payload);
@@ -177,7 +237,7 @@ function serveStatic(req, res, urlPath) {
     res.writeHead(200, {
       'Content-Type': MIME[path.extname(target)] || 'application/octet-stream',
       'Content-Length': data.length,
-      'X-Content-Type-Options': 'nosniff',
+      ...SECURITY_HEADERS,
     });
     res.end(data);
   });
@@ -259,16 +319,27 @@ const server = http.createServer(async (req, res) => {
         ok: true,
         models: { chat: MODEL_CHAT, plan: MODEL_PLAN },
         key_present: Boolean(API_KEY),
-        password_set: Boolean(PASSWORD),
+        password_set: passwordConfigured(),
       });
     }
 
     if (route === '/api/login' && req.method === 'POST') {
+      if (!passwordConfigured()) {
+        return sendJson(res, 500, { error: 'APP_PASSWORD is not set on the server' });
+      }
+      const address = req.socket.remoteAddress || 'unknown';
+      const waitMs = lockoutRemainingMs(address);
+      if (waitMs > 0) {
+        return sendJson(res, 429, {
+          error: `Too many failed attempts. Try again in ${Math.ceil(waitMs / 60000)} minute(s).`,
+        });
+      }
       const body = await readBody(req);
-      if (!PASSWORD) return sendJson(res, 500, { error: 'APP_PASSWORD is not set on the server' });
       if (!body.password || !passwordMatches(body.password)) {
+        recordLoginFailure(address);
         return sendJson(res, 401, { error: 'Wrong password' });
       }
+      loginFailures.delete(address);
       const secure = process.env.COOKIE_SECURE === '1' ? '; Secure' : '';
       const cookie = `sam_session=${issueToken()}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${SESSION_TTL_MS / 1000}${secure}`;
       return sendJson(res, 200, { ok: true }, { 'Set-Cookie': cookie });
@@ -290,6 +361,19 @@ const server = http.createServer(async (req, res) => {
 
     if (route.startsWith('/api/')) {
       if (!session) return sendJson(res, 401, { error: 'Not authenticated' });
+
+      // Defence in depth behind the cookie, not in place of it. SameSite=Lax
+      // already withholds the cookie cross-site; this rejects anything that
+      // slips through with a foreign Origin on a state-changing request.
+      if (req.method !== 'GET' && req.headers.origin) {
+        let originHost = null;
+        try {
+          originHost = new URL(req.headers.origin).host;
+        } catch { /* unparseable Origin is treated as foreign */ }
+        if (originHost !== req.headers.host) {
+          return sendJson(res, 403, { error: 'Cross-origin request refused' });
+        }
+      }
 
       if (route === '/api/chat' && req.method === 'POST') {
         if (!API_KEY) return sendJson(res, 500, { error: 'ANTHROPIC_API_KEY is not set on the server' });
@@ -390,11 +474,20 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
+// The password guards the API key, so a weak one is refused outright rather
+// than warned about. A hash is accepted without a length check, since the
+// plaintext behind it is never seen here.
+if (!PASSWORD_HASH && PASSWORD && PASSWORD.length < MIN_PASSWORD_LENGTH) {
+  console.error(`APP_PASSWORD must be at least ${MIN_PASSWORD_LENGTH} characters. Refusing to start.`);
+  process.exit(1);
+}
+
 server.listen(PORT, HOST, () => {
   console.log(`Sam standalone listening on http://${HOST}:${PORT}`);
   console.log(`  chat model   : ${MODEL_CHAT}`);
   console.log(`  plan model   : ${MODEL_PLAN}`);
   console.log(`  API key      : ${API_KEY ? 'present' : 'MISSING — set ANTHROPIC_API_KEY'}`);
-  console.log(`  password     : ${PASSWORD ? 'set' : 'MISSING — set APP_PASSWORD'}`);
+  console.log(`  password     : ${PASSWORD_HASH ? 'set (hash)' : PASSWORD ? 'set' : 'MISSING — set APP_PASSWORD'}`);
   console.log(`  daily cap    : ${DAILY_CALL_CAP} calls per session`);
+  console.log(`  login lockout: ${LOGIN_MAX_FAILURES} failures, ${LOGIN_LOCKOUT_MS / 60000} min`);
 });

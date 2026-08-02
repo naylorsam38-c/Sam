@@ -32,10 +32,31 @@ node server.js
 - **Plan** — sends a goal to `claude-opus-5` and renders the result as overview, key parts, build order, risks and next action.
 - **Tasks** — add, tick and delete. Stored in `data/tasks.json`.
 
+## Tests
+
+```bash
+node test.js     # or: npm test
+```
+
+38 checks covering authentication, the login lockout, the model routing, the
+task round-trip, cross-origin refusal, response headers and path traversal. No
+dependencies and no API key needed — the Anthropic call is exercised against a
+local stand-in. The same suite runs in CI on every push.
+
 ## Security
 
 - A password is required. Login sets an HMAC-signed, `HttpOnly`, `SameSite=Lax` cookie.
 - Every `/api/*` route rejects unauthenticated requests with 401 **before** any Anthropic call, so no unauthenticated request can spend against the key.
+- Failed logins are counted per client address and locked out (default: 8 failures, 15 minutes). Without this the password could be brute-forced at full speed.
+- Passwords under 8 characters are refused at startup rather than warned about.
+- `APP_PASSWORD_HASH` accepts a SHA-256 hash so the plaintext password need never sit in the environment or a launcher script:
+  ```powershell
+  # generate the hash, then set APP_PASSWORD_HASH instead of APP_PASSWORD
+  node -e "console.log(require('crypto').createHash('sha256').update('your-password').digest('hex'))"
+  ```
+- State-changing requests carrying a foreign `Origin` are refused with 403, behind the cookie check rather than in place of it.
+- Responses carry a strict CSP, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer` and `nosniff`. `frame-ancestors 'none'` is what stops the app being framed and clicked through.
+- Static file serving is confined to `public/`; traversal attempts cannot reach the source.
 - Per-session daily call cap (`DAILY_CALL_CAP`, default 200) and `max_tokens` ceilings on both models.
 - Binds `127.0.0.1` by default, so it is not reachable from other machines.
 - The API key and password are read from the environment. Neither is in source, and neither is logged.
@@ -58,7 +79,10 @@ Home Screen gives a full-screen app with no address bar.
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `ANTHROPIC_API_KEY` | — | Required for chat and the planner |
-| `APP_PASSWORD` | — | Required; the login password |
+| `APP_PASSWORD` | — | The login password; minimum 8 characters |
+| `APP_PASSWORD_HASH` | — | SHA-256 hex of the password, used instead of `APP_PASSWORD` |
+| `LOGIN_MAX_FAILURES` | `8` | Failed logins before lockout |
+| `LOGIN_LOCKOUT_MINUTES` | `15` | How long a lockout lasts |
 | `SESSION_SECRET` | random per boot | Set it to keep sessions across restarts |
 | `HOST` / `PORT` | `127.0.0.1` / `8787` | Bind address |
 | `MODEL_CHAT` | `claude-sonnet-5` | Chat model |
