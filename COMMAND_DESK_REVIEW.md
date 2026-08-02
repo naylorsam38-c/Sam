@@ -143,6 +143,64 @@ Hardcoded example cases (the same Acme/March fixtures as the tests). The buttons
 
 ---
 
+## H. The two roadmaps — and why one of them can't run
+
+### H1. `COMMANDDESKFINALROADMAP` assumes PostgreSQL. Your live system is SQLite.
+
+This is the blocker. Verified: `core/db.py` line 37 is `sqlite3.connect(...)`. There is no Postgres anywhere in the snapshot.
+
+| Roadmap step | Requires | On SQLite |
+|---|---|---|
+| **Step 7** — `observer_readonly` DB role, `GRANT SELECT`, revoke public | Postgres roles + grants | **Impossible.** SQLite has no users, no roles, no GRANT. |
+| Step 5 — `payload jsonb`, `timestamptz` | Postgres types | Not available |
+| Step 9 — RLS via `current_setting('app.tenant_id')` | Postgres row-level security | Not available |
+| Step 14 — Terraform, RDS, migration chain 001→005 | AWS RDS | Live system is a file on the EC2 box |
+
+Step 7 is the one the roadmap itself singles out: *"it's the only guarantee that survives prompt injection. Everything else assumes the model is behaving."* That guarantee cannot be built on the database you're actually running.
+
+`tenant_id` does exist — but as a plain `TEXT` column in SQLite. It's a label, not a boundary. Nothing enforces it.
+
+**Also absent — every file the roadmap's first half builds:**
+
+```
+MISSING  core/versioning.py      MISSING  core/events.py
+MISSING  core/policy.py          MISSING  core/enforcement.py
+MISSING  core/policy.yaml        MISSING  sql/observer_thresholds.sql
+```
+
+`core/migrations/` contains one Python file (`m001_seed_six_templates.py`), not the `001`–`005` SQL chain with down-scripts the roadmap assumes.
+
+**The decision this forces:** either migrate SQLite → Postgres/RDS first, or rewrite the roadmap's enforcement steps for SQLite and accept that Step 7's protection can't exist. That's yours to make, and nothing past Step 4 should start until it's made.
+
+### H2. `COWORKROADMAPcommanddeskv2` is badly out of date. Treat it as history.
+
+Its "confirmed state" section describes a system you no longer have:
+
+| It says | Reality in the live snapshot |
+|---|---|
+| Backend local at `127.0.0.1:8765` | Deployed on EC2, live at airexploit.com/commanddesk |
+| **"Zero Anthropic API credit. No live Claude call verified yet"** | Claude calls working; Hub on `claude-sonnet-5` |
+| Flutter Android APK is the client | A static web frontend is the client |
+| Project folder inside OneDrive | `/home/ubuntu/commanddesk/` on the box |
+
+One thing it does confirm: *"Model string corrected to `claude-sonnet-5` throughout."* That settles the model-ID question from the start of this session.
+
+### H3. Two of the five files are exact duplicates.
+
+- `test_compare_2.py` — byte-identical to the copy I already ran (25/25 passed).
+- `Command_Desk_Frontend_Workspaces_2.zip` — every file identical to the earlier Workspaces zip.
+
+### H4. `app_3.js` is yet another front end, and it matches none of the others.
+
+I diffed it against every bundled `app.js`. It's distinct. That makes **at least seven separate front-end builds** in circulation, only one of which — `full_system/frontend` — is live. This one has:
+
+- **no login** — same gap as the other non-live builds
+- posts to `/commanddesk/chat`, the ungated path from F3
+- an animated blinking/mouth-moving avatar, superseded by your later static-only instruction
+- `iframe` app panels with `referrerpolicy="no-referrer"` (sensible), and `escapeHtml` on all transcript rendering (also sensible — no injection hole there)
+
+---
+
 ## E. Open question I can't answer from the files
 
 The doc says Nova speaks and Sam types for this phase. The front end does have interactive chat wired to `hub`. If what you're missing is interactive **voice**, that's the parked mic (A6/B8) and it's a later stage by the doc's own order. If what you're missing is interactive **text on the live site**, tell me — because the code for that exists in `commanddesk_rebuild` and the question becomes why it isn't working on the box, which is a Stage 0 answer, not a rebuild.
