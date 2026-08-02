@@ -1,0 +1,13 @@
+{
+  "name": "sam-standalone",
+  "version": "1.0.0",
+  "description": "Self-contained chat + planner + tasks app",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
