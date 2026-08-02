@@ -1,28 +1,29 @@
 /* ==========================================================================
-   Chew Cartel — design system
-   Palette and type are derived from the badge logo: black anchor, tan/gold
-   accent, warm bone paper. Premium but approachable; nothing clinical.
+   The Chew Cartel — design system
+   Palette sampled directly from the badge: the near-black tile reads slightly
+   blue (#15161d), the lettering is a warm cream, and the chow's mane and the
+   bones give the copper accent. Premium but approachable; nothing clinical.
    ========================================================================== */
 
 :root {
   /* Core palette */
-  --ink: #14110f;
-  --ink-soft: #3a332e;
-  --bone: #f7f3ec;
+  --ink: #15161d;
+  --ink-soft: #383a44;
+  --bone: #f6f2ea;
   --paper: #fffdf9;
   --kraft: #e6d9c4;
   --kraft-deep: #cbb896;
-  --tan: #c08a3e;
-  --tan-bright: #dda85a;
-  --brown: #4a3728;
+  --tan: #b4763a;      /* the bones flanking the badge */
+  --tan-bright: #e5c6ad; /* highlight in the chow's mane */
+  --brown: #43372c;
 
   /* Semantic */
   --bg: var(--bone);
   --surface: var(--paper);
   --text: var(--ink);
   --text-muted: #6b625a;
-  --line: rgba(20, 17, 15, 0.12);
-  --line-strong: rgba(20, 17, 15, 0.22);
+  --line: rgba(21, 22, 29, 0.12);
+  --line-strong: rgba(21, 22, 29, 0.22);
   --accent: var(--tan);
   --accent-ink: #8a5f24;
 
@@ -158,11 +159,11 @@ p { margin: 0 0 1.1em; }
 }
 
 .btn:hover {
-  background: var(--tan);
-  border-color: var(--tan);
+  background: var(--tan-bright);
+  border-color: var(--tan-bright);
   color: var(--ink);
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(20, 17, 15, 0.18);
+  box-shadow: 0 8px 22px rgba(21, 22, 29, 0.18);
 }
 
 .btn:active { transform: translateY(0); }
@@ -171,7 +172,7 @@ p { margin: 0 0 1.1em; }
 .btn--ghost:hover { background: var(--ink); border-color: var(--ink); color: var(--bone); }
 
 .btn--light { background: var(--bone); border-color: var(--bone); color: var(--ink); }
-.btn--light:hover { background: var(--tan); border-color: var(--tan); color: var(--ink); }
+.btn--light:hover { background: var(--tan-bright); border-color: var(--tan-bright); color: var(--ink); }
 
 .btn--block { width: 100%; }
 .btn--sm { padding: 0.6rem 1.15rem; font-size: 0.82rem; }
@@ -195,7 +196,7 @@ p { margin: 0 0 1.1em; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(247, 243, 236, 0.92);
+  background: rgba(246, 242, 234, 0.92);
   backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--line);
 }
@@ -256,7 +257,7 @@ p { margin: 0 0 1.1em; }
   height: 1.5rem;
   padding-inline: 0.35rem;
   border-radius: 999px;
-  background: var(--tan);
+  background: var(--tan-bright);
   color: var(--ink);
   font-size: 0.75rem;
   font-family: var(--body);
@@ -304,8 +305,8 @@ p { margin: 0 0 1.1em; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(120% 90% at 78% 18%, rgba(192, 138, 62, 0.34), transparent 62%),
-    radial-gradient(80% 70% at 12% 88%, rgba(74, 55, 40, 0.55), transparent 70%);
+    radial-gradient(120% 90% at 78% 18%, rgba(180, 118, 58, 0.32), transparent 62%),
+    radial-gradient(80% 70% at 12% 88%, rgba(67, 55, 44, 0.55), transparent 70%);
   pointer-events: none;
 }
 
@@ -325,7 +326,7 @@ p { margin: 0 0 1.1em; }
   display: block;
 }
 
-.hero p { color: rgba(247, 243, 236, 0.82); max-width: 48ch; font-size: 1.1rem; }
+.hero p { color: rgba(246, 242, 234, 0.82); max-width: 48ch; font-size: 1.1rem; }
 
 .hero-cta { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
 
@@ -333,7 +334,18 @@ p { margin: 0 0 1.1em; }
   display: grid;
   place-items: center;
 }
-.hero-badge svg { width: min(340px, 78vw); height: auto; }
+/* The badge asset ships on its own dark tile, so round it and lift it off the
+   hero rather than letting a hard square edge float on the gradient. */
+.hero-badge img, .hero-badge svg {
+  width: min(340px, 78vw);
+  height: auto;
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  outline: 1px solid rgba(246, 242, 234, 0.12);
+  outline-offset: -1px;
+}
+
+.brand img { border-radius: 8px; }
 
 @media (min-width: 900px) {
   .hero-inner { grid-template-columns: 1.15fr 0.85fr; gap: 4rem; }
@@ -399,7 +411,7 @@ p { margin: 0 0 1.1em; }
 .card:hover {
   transform: translateY(-4px);
   border-color: var(--kraft-deep);
-  box-shadow: 0 16px 38px rgba(20, 17, 15, 0.13);
+  box-shadow: 0 16px 38px rgba(21, 22, 29, 0.13);
 }
 
 .card-media {
@@ -426,7 +438,7 @@ p { margin: 0 0 1.1em; }
   padding: 0.3rem 0.65rem;
   border-radius: 2px;
 }
-.card-flag--tan { background: var(--tan); color: var(--ink); }
+.card-flag--tan { background: var(--tan-bright); color: var(--ink); }
 
 .card-body { padding: 1.25rem 1.35rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
 
@@ -497,7 +509,7 @@ p { margin: 0 0 1.1em; }
 .subscribe-inner { display: grid; gap: 2.5rem; align-items: center; }
 
 .subscribe h2 { color: var(--bone); }
-.subscribe p { color: rgba(247, 243, 236, 0.84); }
+.subscribe p { color: rgba(246, 242, 234, 0.84); }
 
 .perk-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
 .perk-list li { display: flex; gap: 0.9rem; align-items: flex-start; }
@@ -508,7 +520,7 @@ p { margin: 0 0 1.1em; }
   display: block;
   margin-bottom: 0.15rem;
 }
-.perk-list span { color: rgba(247, 243, 236, 0.78); font-size: 0.94rem; }
+.perk-list span { color: rgba(246, 242, 234, 0.78); font-size: 0.94rem; }
 
 .perk-num {
   flex: none;
@@ -517,7 +529,7 @@ p { margin: 0 0 1.1em; }
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: var(--tan);
+  background: var(--tan-bright);
   color: var(--ink);
   font-family: var(--display);
   font-size: 0.95rem;
@@ -600,7 +612,7 @@ p { margin: 0 0 1.1em; }
 
 .capture { background: var(--ink); color: var(--bone); text-align: center; }
 .capture h2 { color: var(--bone); }
-.capture p { color: rgba(247, 243, 236, 0.8); max-width: 52ch; margin-inline: auto; }
+.capture p { color: rgba(246, 242, 234, 0.8); max-width: 52ch; margin-inline: auto; }
 
 .field-row {
   display: flex;
@@ -645,7 +657,7 @@ label {
 
 .site-footer {
   background: var(--brown);
-  color: rgba(247, 243, 236, 0.85);
+  color: rgba(246, 242, 234, 0.85);
   padding-block: 3.5rem 2rem;
 }
 
@@ -660,19 +672,19 @@ label {
 }
 .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
 .site-footer a { font-size: 0.94rem; }
-.site-footer a:hover { color: var(--tan); }
+.site-footer a:hover { color: var(--tan-bright); }
 .site-footer .brand-name { color: var(--bone); }
 
 .footer-bottom {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(247, 243, 236, 0.18);
+  border-top: 1px solid rgba(246, 242, 234, 0.18);
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: space-between;
   font-size: 0.82rem;
-  color: rgba(247, 243, 236, 0.6);
+  color: rgba(246, 242, 234, 0.6);
 }
 
 /* --------------------------------------------------------------------------
@@ -724,7 +736,7 @@ label {
 }
 .buy-option:hover { border-color: var(--kraft-deep); }
 .buy-option input { margin-top: 0.3rem; accent-color: var(--tan); width: 1.1rem; height: 1.1rem; flex: none; }
-.buy-option:has(input:checked) { border-color: var(--tan); background: rgba(192, 138, 62, 0.09); }
+.buy-option:has(input:checked) { border-color: var(--tan); background: rgba(180, 118, 58, 0.09); }
 .buy-option strong { display: block; font-family: var(--display); letter-spacing: 0.06em; text-transform: uppercase; }
 .buy-option span { font-size: 0.88rem; color: var(--text-muted); }
 .buy-option .opt-price { margin-left: auto; font-family: var(--display); font-size: 1.1rem; }

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Chew Cartel — site behaviour
+   The Chew Cartel — site behaviour
    Cart state lives in localStorage so the whole site works from static
    hosting with no backend. Swap the checkout handler for a real payment
    provider when the store goes live.
@@ -24,16 +24,16 @@ function stars(rating) {
 function packMark() {
   return `
     <svg viewBox="0 0 120 120" aria-hidden="true">
-      <rect x="26" y="22" width="68" height="82" rx="6" fill="#14110f"/>
-      <path d="M26 22h68v12H26z" fill="#4a3728"/>
-      <circle cx="60" cy="64" r="22" fill="none" stroke="#c08a3e" stroke-width="2"/>
-      <g fill="#c08a3e">
+      <rect x="26" y="22" width="68" height="82" rx="6" fill="#15161d"/>
+      <path d="M26 22h68v12H26z" fill="#43372c"/>
+      <circle cx="60" cy="64" r="22" fill="none" stroke="#b4763a" stroke-width="2"/>
+      <g fill="#b4763a">
         <path d="M49 52 L57 59 L52 69 Z"/>
         <path d="M71 52 L63 59 L68 69 Z"/>
         <ellipse cx="60" cy="66" rx="11" ry="10"/>
         <ellipse cx="60" cy="74" rx="6.5" ry="5.5"/>
       </g>
-      <g fill="#14110f">
+      <g fill="#15161d">
         <circle cx="56" cy="64" r="1.5"/>
         <circle cx="64" cy="64" r="1.5"/>
         <ellipse cx="60" cy="71" rx="2.5" ry="2"/>
@@ -207,7 +207,7 @@ function initProduct() {
   const id = new URLSearchParams(location.search).get("id");
   const p = getProduct(id) || PRODUCTS[0];
 
-  document.title = `${p.name} — Chew Cartel`;
+  document.title = `${p.name} — The Chew Cartel`;
 
   const crumb = document.querySelector("[data-pdp-crumb]");
   if (crumb) crumb.textContent = p.name;

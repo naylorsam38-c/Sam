@@ -1,7 +1,7 @@
-# Chew Cartel — retail website
+# The Chew Cartel — retail website
 
-A retail storefront for Chew Cartel, a family dog-treat business that has supplied
-the trade since 2005 and is now selling direct to consumers.
+A retail storefront for The Chew Cartel, a family dog-treat business that has supplied
+the trade for twenty years and is now selling direct to consumers.
 
 Static HTML, CSS and vanilla JavaScript. No build step, no dependencies, no server.
 Open `index.html` in a browser and it runs.
@@ -31,23 +31,34 @@ To add product photography, drop images into `assets/img/` and set the `image`
 field on a product to its path. Any product with `image: null` falls back to the
 placeholder pack mark, so the site never looks broken mid-migration.
 
-## Putting the real logo in
+## The logo
 
-`assets/img/logo.svg` is a **placeholder** rebuilt to match the real badge —
-black disc, tan ring, "CHEW" above the dog's head, "CARTEL" below. Replace that
-one file with the supplied artwork (keep the filename) and it updates in the
-header, footer, hero, favicon and story panel at once.
+`assets/img/logo.png` **is the real badge, but it was extracted from a photograph
+of a screen** because the file itself could not be transferred into this
+environment. The artwork is correct — "THE / CHEW / CARTEL" around the chow chow,
+copper bones either side — but the resolution is low, it carries moire from the
+screen, and the background is a baked-in dark tile rather than transparency.
 
-The palette in `assets/css/site.css` was pulled from the badge: `--ink` for the
-black, `--tan` for the gold, `--kraft` and `--bone` for the paper tones. If the
-real artwork uses different values, change them in `:root` and the whole site
-re-tones.
+It is fine at header and footer size. It is soft in the hero.
+
+**Replace it with the original file** — keep the filename `logo.png`, or drop in
+`logo.svg`/`logo.webp` and update the `<img src>` in the seven pages. A
+transparent PNG or an SVG would also let the rounded-tile treatment in
+`.hero-badge` be removed, since that exists only to make the baked-in square
+edge look deliberate.
+
+The logo itself has not been redrawn or altered in any way.
+
+The palette in `assets/css/site.css` was sampled from the badge: `--ink`
+(`#15161d`) is the tile, `--tan` (`#b4763a`) is the bones, `--tan-bright`
+(`#e5c6ad`) is the highlight in the chow's mane, and the creams follow the
+lettering.
 
 ## Things to confirm before this goes live
 
 These were written as sensible defaults and need checking against reality:
 
-- **"EST. 2005"** on the logo, and the twenty-year timeline throughout.
+- **The founding year.** The badge shows an "EST" date I could not read from the photo, and the twenty-year timeline in the copy came from the brief, not the logo. Confirm which is which.
 - **"340+ stockists"** on the homepage and story page.
 - **All product copy, ingredients and guaranteed analysis** — currently placeholder.
   Ingredient lists and analysis panels have legal weight; they must match the labels.
