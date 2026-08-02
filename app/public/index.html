@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12141a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Sam">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div id="login" class="screen">
+  <form id="login-form" class="card">
+    <h1>Sam</h1>
+    <p class="muted">Enter the app password to continue.</p>
+    <input id="password" type="password" autocomplete="current-password" placeholder="Password" required>
+    <button type="submit" class="primary">Unlock</button>
+    <p id="login-error" class="error" hidden></p>
+  </form>
+</div>
+
+<div id="app" class="screen" hidden>
+  <header>
+    <h1>Sam</h1>
+    <button id="logout" class="ghost">Log out</button>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="chat">Chat</button>
+    <button class="tab" data-tab="plan">Plan</button>
+    <button class="tab" data-tab="tasks">Tasks</button>
+  </nav>
+
+  <!-- Chat -->
+  <section id="panel-chat" class="panel active">
+    <div id="messages" class="messages"></div>
+    <form id="chat-form" class="composer">
+      <textarea id="chat-input" rows="1" placeholder="Ask anything…" required></textarea>
+      <button type="submit" class="primary" id="chat-send">Send</button>
+    </form>
+  </section>
+
+  <!-- Plan -->
+  <section id="panel-plan" class="panel">
+    <form id="plan-form" class="composer stacked">
+      <textarea id="plan-input" rows="3" placeholder="Describe the idea, e.g. a simple habit tracker app" required></textarea>
+      <button type="submit" class="primary" id="plan-go">Plan an idea</button>
+    </form>
+    <div id="plan-output" class="plan-output"></div>
+  </section>
+
+  <!-- Tasks -->
+  <section id="panel-tasks" class="panel">
+    <form id="task-form" class="composer">
+      <input id="task-input" type="text" placeholder="Add a task…" required>
+      <button type="submit" class="primary">Add</button>
+    </form>
+    <ul id="task-list" class="tasks"></ul>
+  </section>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

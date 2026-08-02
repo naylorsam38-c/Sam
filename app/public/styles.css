@@ -1,0 +1,207 @@
+:root {
+  --bg: #12141a;
+  --surface: #1b1e26;
+  --surface-2: #232734;
+  --border: #2e3444;
+  --text: #e8eaf0;
+  --muted: #969db0;
+  --accent: #6d8cff;
+  --danger: #ff6b6b;
+  --ok: #4ec9a0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Respect the iPhone notch and home indicator when run full-screen. */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  -webkit-text-size-adjust: 100%;
+}
+
+.screen[hidden] { display: none; }
+
+/* --- Login ---------------------------------------------------------- */
+
+#login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 360px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+}
+
+.card h1 { margin: 0 0 4px; font-size: 28px; }
+
+/* --- Shell ---------------------------------------------------------- */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 { margin: 0; font-size: 20px; }
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.panel { display: none; padding: 0 16px 24px; }
+.panel.active { display: block; }
+
+/* --- Inputs and buttons --------------------------------------------- */
+
+input, textarea {
+  width: 100%;
+  padding: 13px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+
+input:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.primary {
+  padding: 13px 20px;
+  border: none;
+  background: var(--accent);
+  color: #0d1020;
+  font-weight: 700;
+  /* Comfortable tap target on a phone. */
+  min-height: 46px;
+}
+
+.primary:disabled { opacity: .55; cursor: default; }
+
+.ghost {
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.composer { display: flex; gap: 8px; align-items: flex-start; }
+.composer.stacked { display: block; }
+.composer.stacked .primary { width: 100%; }
+.composer input, .composer textarea { flex: 1; }
+
+/* --- Chat ------------------------------------------------------------ */
+
+.messages { padding: 8px 0 16px; }
+
+.msg {
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  max-width: 88%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.msg.user { background: var(--accent); color: #0d1020; margin-left: auto; }
+.msg.assistant { background: var(--surface); border: 1px solid var(--border); }
+.msg.error { background: #3a1f24; border: 1px solid var(--danger); color: #ffc9c9; }
+.msg.pending { color: var(--muted); font-style: italic; }
+
+/* --- Plan ------------------------------------------------------------ */
+
+.plan-output { margin-top: 16px; }
+
+.plan-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.plan-block h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.plan-block ol, .plan-block ul { margin: 0; padding-left: 20px; }
+.plan-block li { margin-bottom: 6px; }
+.plan-block.next { border-color: var(--ok); }
+
+/* --- Tasks ----------------------------------------------------------- */
+
+.tasks { list-style: none; margin: 16px 0 0; padding: 0; }
+
+.tasks li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.tasks input[type=checkbox] { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--accent); }
+.tasks .title { flex: 1; overflow-wrap: anywhere; }
+.tasks li.done .title { text-decoration: line-through; color: var(--muted); }
+
+.del {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1;
+  padding: 4px 8px;
+}
+
+.del:hover { color: var(--danger); }
+
+.muted { color: var(--muted); }
+.error { color: var(--danger); margin: 8px 0 0; }
+.empty { color: var(--muted); padding: 24px 0; text-align: center; }

@@ -1,0 +1,70 @@
+# Sam — standalone chat / planner / tasks
+
+Self-contained. No database, no build step, no npm dependencies. Runs on
+`127.0.0.1:8787` and is completely separate from airexploit.com and
+/commanddesk — it shares no code, no config and no web server with them.
+
+## Running it on Windows
+
+```powershell
+# once, to store the secrets for your user account
+[Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY","sk-ant-...","User")
+[Environment]::SetEnvironmentVariable("APP_PASSWORD","pick-a-password","User")
+
+# then, in a NEW PowerShell window
+cd path\to\app
+.\start.ps1
+```
+
+Open <http://127.0.0.1:8787> and enter the password.
+
+## Running it on Linux or macOS
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+export APP_PASSWORD=pick-a-password
+node server.js
+```
+
+## What it does
+
+- **Chat** — a conversation with `claude-sonnet-5`, keeping the last 20 turns as context.
+- **Plan** — sends a goal to `claude-opus-5` and renders the result as overview, key parts, build order, risks and next action.
+- **Tasks** — add, tick and delete. Stored in `data/tasks.json`.
+
+## Security
+
+- A password is required. Login sets an HMAC-signed, `HttpOnly`, `SameSite=Lax` cookie.
+- Every `/api/*` route rejects unauthenticated requests with 401 **before** any Anthropic call, so no unauthenticated request can spend against the key.
+- Per-session daily call cap (`DAILY_CALL_CAP`, default 200) and `max_tokens` ceilings on both models.
+- Binds `127.0.0.1` by default, so it is not reachable from other machines.
+- The API key and password are read from the environment. Neither is in source, and neither is logged.
+
+## Before exposing it beyond this machine
+
+1. Set `COOKIE_SECURE=1` so the session cookie is only sent over HTTPS.
+2. Set `SESSION_SECRET` to a fixed random value, otherwise every restart logs everyone out.
+3. Use a real password, not a short one — this is the only thing standing between the internet and your API key.
+
+## Adding it to an iPhone home screen
+
+Requires HTTPS; iOS will not install a home-screen app from plain HTTP. The
+manifest, `apple-mobile-web-app-capable` meta tag and 180×180 touch icon are
+already in place, so once it is served over HTTPS, Safari → Share → Add to
+Home Screen gives a full-screen app with no address bar.
+
+## Configuration
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `ANTHROPIC_API_KEY` | — | Required for chat and the planner |
+| `APP_PASSWORD` | — | Required; the login password |
+| `SESSION_SECRET` | random per boot | Set it to keep sessions across restarts |
+| `HOST` / `PORT` | `127.0.0.1` / `8787` | Bind address |
+| `MODEL_CHAT` | `claude-sonnet-5` | Chat model |
+| `MODEL_PLAN` | `claude-opus-5` | Planner model |
+| `MAX_TOKENS_CHAT` | `1024` | Per-reply ceiling |
+| `MAX_TOKENS_PLAN` | `2048` | Per-plan ceiling |
+| `DAILY_CALL_CAP` | `200` | Calls per session per day |
+| `COOKIE_SECURE` | off | Set to `1` when served over HTTPS |
+| `ANTHROPIC_BASE_URL` | — | Testing only; points the client at a local stub |

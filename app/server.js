@@ -28,7 +28,11 @@ const PUBLIC_DIR = path.join(__dirname, 'public');
 const DATA_DIR = path.join(__dirname, 'data');
 const TASKS_FILE = path.join(DATA_DIR, 'tasks.json');
 
-const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
+// Overridable only so the app can be exercised end-to-end against a local
+// stub during testing. Unset, it always talks to the real API.
+const ANTHROPIC_URL = process.env.ANTHROPIC_BASE_URL
+  ? `${process.env.ANTHROPIC_BASE_URL.replace(/\/$/, '')}/v1/messages`
+  : 'https://api.anthropic.com/v1/messages';
 const ANTHROPIC_VERSION = '2023-06-01';
 
 // ---------------------------------------------------------------------------
