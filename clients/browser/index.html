@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aura — Live Avatar (thin reference client)</title>
+
+    <!-- LiveKit web SDK (self-hosted transport). -->
+    <script src="https://cdn.jsdelivr.net/npm/livekit-client/dist/livekit-client.umd.min.js"></script>
+
+    <style>
+      :root {
+        --bg: #0d0d10;
+        --panel: #16161c;
+        --panel-2: #1e1e26;
+        --gold: #d4af37;
+        --gold-dim: #9a7d28;
+        --text: #ece6d6;
+        --muted: #8a8477;
+        --danger: #c8503c;
+        --ok: #4c9a5c;
+        --radius: 12px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: radial-gradient(1200px 800px at 70% -10%, #1a1712, var(--bg));
+        color: var(--text);
+        min-height: 100vh;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 18px 24px;
+        border-bottom: 1px solid #262029;
+      }
+      header h1 {
+        font-size: 18px;
+        margin: 0;
+        letter-spacing: 2px;
+        font-weight: 600;
+        color: var(--gold);
+      }
+      header .sub { color: var(--muted); font-size: 12px; }
+
+      .wrap {
+        display: grid;
+        grid-template-columns: minmax(320px, 1fr) 380px;
+        gap: 20px;
+        padding: 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      @media (max-width: 860px) {
+        .wrap { grid-template-columns: 1fr; }
+      }
+
+      .stage {
+        position: relative;
+        background: #000;
+        border: 1px solid #2a2330;
+        border-radius: var(--radius);
+        overflow: hidden;
+        aspect-ratio: 9 / 16;
+        max-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .stage video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: #000;
+      }
+      .stage .placeholder {
+        color: var(--muted);
+        font-size: 14px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        background: rgba(0, 0, 0, 0.55);
+        border: 1px solid var(--gold-dim);
+        color: var(--gold);
+        backdrop-filter: blur(4px);
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid #262029;
+        border-radius: var(--radius);
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .panel h2 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .transcript {
+        background: var(--panel-2);
+        border-radius: 8px;
+        padding: 12px;
+        height: 220px;
+        overflow-y: auto;
+        font-size: 14px;
+        line-height: 1.5;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .line { padding: 6px 10px; border-radius: 6px; }
+      .line.user { background: #201a12; border-left: 3px solid var(--gold-dim); }
+      .line.avatar { background: #12181a; border-left: 3px solid #2f5e4a; }
+      .line.partial { opacity: 0.55; font-style: italic; }
+      .line .who { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); display: block; margin-bottom: 2px; }
+
+      .row { display: flex; gap: 10px; align-items: center; }
+      .row.wrap-row { flex-wrap: wrap; }
+
+      input[type="text"], select {
+        background: var(--panel-2);
+        border: 1px solid #322a38;
+        color: var(--text);
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-size: 14px;
+        outline: none;
+      }
+      input[type="text"] { flex: 1; }
+      input[type="text"]:focus, select:focus { border-color: var(--gold-dim); }
+
+      button {
+        background: var(--panel-2);
+        color: var(--text);
+        border: 1px solid #322a38;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s;
+      }
+      button:hover { border-color: var(--gold-dim); }
+      button:disabled { opacity: 0.4; cursor: not-allowed; }
+      button.primary { background: var(--gold); color: #17130a; border-color: var(--gold); font-weight: 700; }
+      button.primary:hover { background: #e5c04a; }
+      button.danger { border-color: var(--danger); color: #f0a99c; }
+      button.active { background: var(--ok); color: #06110a; border-color: var(--ok); }
+
+      label.field { font-size: 12px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+
+      .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); display: inline-block; }
+      .status-dot.on { background: var(--ok); }
+      .foot { color: var(--muted); font-size: 11px; padding: 4px 24px 24px; text-align: center; }
+      code { color: var(--gold); }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>AURA</h1>
+      <span class="sub">live interactive avatar · thin reference client</span>
+      <span style="margin-left:auto" class="sub">
+        <span id="conn-dot" class="status-dot"></span> <span id="conn-label">disconnected</span>
+      </span>
+    </header>
+
+    <div class="wrap">
+      <!-- Avatar stage -->
+      <div class="stage">
+        <div id="badge" class="badge">IDLE</div>
+        <video id="avatar-video" autoplay playsinline muted></video>
+        <div id="stage-placeholder" class="placeholder">
+          Press <strong>Connect</strong> to join the avatar session.
+        </div>
+        <!-- Remote avatar audio is attached here at runtime. -->
+        <div id="audio-sink" style="display:none"></div>
+      </div>
+
+      <!-- Controls -->
+      <div class="panel">
+        <h2>Session</h2>
+        <div class="row wrap-row">
+          <button id="btn-connect" class="primary">Connect</button>
+          <button id="btn-end" class="danger" disabled>End</button>
+        </div>
+
+        <h2>Conversation</h2>
+        <div id="transcript" class="transcript">
+          <div class="line partial"><span class="who">system</span>Not connected.</div>
+        </div>
+
+        <div class="row">
+          <input id="text-input" type="text" placeholder="Type a message…" disabled />
+          <button id="btn-send" disabled>Send</button>
+        </div>
+
+        <h2>Controls</h2>
+        <div class="row wrap-row">
+          <button id="btn-mic" disabled>🎙 Mic Off</button>
+          <button id="btn-interrupt" disabled>⏹ Interrupt</button>
+        </div>
+
+        <label class="field">
+          Avatar
+          <select id="avatar-select" disabled>
+            <option value="nova">Nova</option>
+            <option value="halo">Halo</option>
+            <option value="gaia">Gaia</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="foot">
+      Thin client. All STT / brain / TTS / lip-sync happens server-side. Configure
+      <code>GATEWAY_URL</code> and <code>USER_ID</code> below.
+    </div>
+
+    <script src="./aura-client.js"></script>
+    <script>
+      // ─── Config constants ────────────────────────────────────────────────
+      const GATEWAY_URL = "http://localhost:8080"; // Aura gateway base URL
+      const USER_ID = "demo-user"; // app user identity (x-user-id)
+
+      // ─── DOM refs ────────────────────────────────────────────────────────
+      const $ = (id) => document.getElementById(id);
+      const badge = $("badge");
+      const video = $("avatar-video");
+      const audioSink = $("audio-sink");
+      const placeholder = $("stage-placeholder");
+      const transcript = $("transcript");
+      const connDot = $("conn-dot");
+      const connLabel = $("conn-label");
+
+      const btnConnect = $("btn-connect");
+      const btnEnd = $("btn-end");
+      const btnSend = $("btn-send");
+      const btnMic = $("btn-mic");
+      const btnInterrupt = $("btn-interrupt");
+      const textInput = $("text-input");
+      const avatarSelect = $("avatar-select");
+
+      let client = null;
+      let micOn = false;
+      let partialEl = null;
+
+      // ─── Transcript helpers ──────────────────────────────────────────────
+      function addLine(who, cls, text) {
+        const el = document.createElement("div");
+        el.className = "line " + cls;
+        el.innerHTML = '<span class="who"></span>';
+        el.querySelector(".who").textContent = who;
+        el.appendChild(document.createTextNode(text));
+        transcript.appendChild(el);
+        transcript.scrollTop = transcript.scrollHeight;
+        return el;
+      }
+      function clearTranscript() {
+        transcript.innerHTML = "";
+      }
+
+      function setState(state) {
+        badge.textContent = state;
+      }
+
+      function setEnabled(connected) {
+        btnEnd.disabled = !connected;
+        btnSend.disabled = !connected;
+        btnMic.disabled = !connected;
+        btnInterrupt.disabled = !connected;
+        textInput.disabled = !connected;
+        avatarSelect.disabled = !connected;
+        btnConnect.disabled = connected;
+        connDot.classList.toggle("on", connected);
+        connLabel.textContent = connected ? "connected" : "disconnected";
+      }
+
+      // ─── Wire the AuraClient ─────────────────────────────────────────────
+      async function connect() {
+        btnConnect.disabled = true;
+        clearTranscript();
+        addLine("system", "partial", "Connecting…");
+
+        client = new AuraClient({
+          gatewayUrl: GATEWAY_URL,
+          userId: USER_ID,
+          callbacks: {
+            onState: (state) => setState(state),
+            onPartial: (text) => {
+              if (!partialEl) partialEl = addLine("you", "user partial", "");
+              partialEl.childNodes[1].textContent = text;
+              transcript.scrollTop = transcript.scrollHeight;
+            },
+            onFinal: (text) => {
+              if (partialEl) {
+                partialEl.className = "line user";
+                partialEl.childNodes[1].textContent = text;
+                partialEl = null;
+              } else {
+                addLine("you", "user", text);
+              }
+            },
+            onResponse: (text) => addLine("aura", "avatar", text),
+            onError: (err) => addLine("error", "partial", String(err)),
+            onVideoTrack: (el) => {
+              placeholder.style.display = "none";
+              video.srcObject = el.srcObject;
+              video.muted = true; // audio comes on its own track
+              video.play().catch(() => {});
+            },
+            onAudioTrack: (el) => {
+              audioSink.innerHTML = "";
+              audioSink.appendChild(el);
+            },
+            onConnected: () => {
+              setEnabled(true);
+              addLine("system", "partial", "Connected. Say hello or type a message.");
+            },
+            onDisconnected: () => {
+              setEnabled(false);
+              setState("IDLE");
+              addLine("system", "partial", "Disconnected.");
+            },
+          },
+        });
+
+        try {
+          await client.connect();
+        } catch (e) {
+          addLine("error", "partial", "Connect failed: " + e.message);
+          btnConnect.disabled = false;
+        }
+      }
+
+      // ─── Button handlers ─────────────────────────────────────────────────
+      btnConnect.onclick = connect;
+
+      btnEnd.onclick = async () => {
+        if (client) await client.endSession();
+        client = null;
+        micOn = false;
+        btnMic.textContent = "🎙 Mic Off";
+        btnMic.classList.remove("active");
+        setEnabled(false);
+        video.srcObject = null;
+        placeholder.style.display = "block";
+      };
+
+      btnSend.onclick = () => {
+        const t = textInput.value.trim();
+        if (!t || !client) return;
+        client.sendText(t);
+        addLine("you", "user", t);
+        textInput.value = "";
+      };
+      textInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") btnSend.onclick();
+      });
+
+      btnMic.onclick = async () => {
+        if (!client) return;
+        try {
+          if (!micOn) {
+            await client.enableMic();
+            micOn = true;
+            btnMic.textContent = "🎙 Mic On";
+            btnMic.classList.add("active");
+          } else {
+            await client.mute();
+            micOn = false;
+            btnMic.textContent = "🎙 Mic Off";
+            btnMic.classList.remove("active");
+          }
+        } catch (e) {
+          addLine("error", "partial", "Mic error: " + e.message);
+        }
+      };
+
+      btnInterrupt.onclick = () => client && client.interrupt();
+
+      avatarSelect.onchange = () =>
+        client && client.setAvatar(avatarSelect.value);
+    </script>
+  </body>
+</html>

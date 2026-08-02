@@ -1,0 +1,32 @@
+# ── Always required (runtime core + CPU fallback path) ──────────────────────
+numpy>=1.26
+opencv-python-headless>=4.9
+soundfile>=0.12
+pyyaml>=6.0
+fastapi>=0.111
+uvicorn[standard]>=0.30
+httpx>=0.27
+aiortc>=1.15            # BSD-3 — self-hosted WebRTC (no LiveKit/paid service)
+av>=12                 # PyAV, BSD-3 — media frames for aiortc
+pytest>=8.0
+pytest-asyncio>=0.23
+# system: ffmpeg, espeak-ng   (apt-get install -y ffmpeg espeak-ng)
+
+# ── GPU host (install on the rendering box; licences noted) ─────────────────
+# torch (CUDA build)                     BSD-style
+# faster-whisper                         MIT            (Whisper weights MIT)
+# silero-vad                             MIT
+# kokoro / kokoro-onnx                   Apache-2.0     (commercial-safe TTS)
+# MuseTalk (from source)                 MIT code / trained model commercial-ok
+#   -> AUDIT + PIN every bundled dependency & weight separately;
+#   -> DO NOT ship or reuse MuseTalk's supplied test data (non-commercial only).
+# liveportrait (from source)             MIT  — swap InsightFace detector!
+# gfpgan                                 Apache-2.0     (NOT codeformer)
+# livekit, livekit-api                   Apache-2.0
+# prometheus-client                      Apache-2.0
+#
+# DO NOT install for commercial use without review:
+#   xtts / coqui-tts     -> CPML non-commercial
+#   codeformer           -> S-Lab non-commercial
+#   wav2lip weights      -> non-commercial research
+#   insightface models   -> non-commercial

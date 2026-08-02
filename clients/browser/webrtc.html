@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura — self-hosted WebRTC client</title>
+<style>
+  :root{--gold:#d4af37;--gold2:#f5d77a}
+  body{margin:0;background:radial-gradient(900px 500px at 50% -10%,#1a160a,#0a0a0b 60%);
+    color:#eae7df;font:16px system-ui,Segoe UI,Roboto,sans-serif;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;gap:16px;padding:24px}
+  h1{margin:0;letter-spacing:2px;background:linear-gradient(90deg,var(--gold2),var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  #stage{width:min(92vw,420px);aspect-ratio:5/6;border:1px solid var(--gold);border-radius:16px;
+    overflow:hidden;background:#111;box-shadow:0 0 36px rgba(212,175,55,.25)}
+  #stage video{width:100%;height:100%;object-fit:cover}
+  .badge{font-size:13px;color:#0a0a0b;background:var(--gold);border-radius:20px;padding:3px 12px;font-weight:700}
+  #tx{min-height:22px;color:var(--gold2);font-size:14px;text-align:center;max-width:420px}
+  .row{display:flex;gap:8px;width:min(92vw,420px)}
+  input{flex:1;background:#141416;border:1px solid #2a2a30;color:#eae7df;border-radius:10px;padding:10px}
+  button{background:linear-gradient(90deg,var(--gold),#b8942b);color:#0a0a0b;border:0;border-radius:10px;
+    padding:10px 16px;font-weight:700;cursor:pointer}
+  button.sec{background:#1b1b1f;color:var(--gold2);border:1px solid #2a2a30}
+  small{color:#a09a8c}
+</style>
+</head>
+<body>
+  <h1>A U R A</h1>
+  <div id="stage"><video id="v" autoplay playsinline></video></div>
+  <div><span class="badge" id="state">idle</span></div>
+  <div id="tx"></div>
+  <div class="row">
+    <input id="text" placeholder="Type to Aura…">
+    <button onclick="sendText()">Send</button>
+    <button class="sec" onclick="interrupt()">Interrupt</button>
+  </div>
+  <button id="start" onclick="start()">Start talking</button>
+  <audio id="a" autoplay></audio>
+  <small id="status">not connected</small>
+
+<script>
+// Self-hosted WebRTC — talks directly to the Aura gateway. No LiveKit, no paid service.
+const GATEWAY = location.origin;   // serve this page from the gateway, or set your URL
+const USER = "demo-user";
+let pc, dc;
+
+async function getToken() {
+  const r = await fetch(GATEWAY + "/v1/session", {method:"POST", headers:{"x-user-id":USER}});
+  if (!r.ok) throw new Error("token: " + r.status);
+  return (await r.json()).token;
+}
+
+async function start() {
+  document.getElementById("start").disabled = true;
+  setStatus("connecting…");
+  try {
+    const token = await getToken();
+    pc = new RTCPeerConnection();
+
+    // the avatar's video + audio arrive here
+    pc.ontrack = (e) => {
+      if (e.track.kind === "video") document.getElementById("v").srcObject = e.streams[0];
+      if (e.track.kind === "audio") document.getElementById("a").srcObject = e.streams[0];
+    };
+    // events from the server (state / transcript / response)
+    dc = pc.createDataChannel("aura");
+    dc.onmessage = (m) => onEvent(JSON.parse(m.data));
+
+    // publish the microphone (echo-cancelled) so we can barge in
+    const mic = await navigator.mediaDevices.getUserMedia({
+      audio: {echoCancellation:true, noiseSuppression:true, autoGainControl:true}});
+    mic.getTracks().forEach(t => pc.addTrack(t, mic));
+
+    const offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+    const resp = await fetch(GATEWAY + "/v1/rtc/offer", {
+      method:"POST", headers:{"content-type":"application/json"},
+      body: JSON.stringify({sdp: pc.localDescription.sdp, type: pc.localDescription.type, token})});
+    if (!resp.ok) throw new Error("offer: " + resp.status);
+    await pc.setRemoteDescription(await resp.json());
+    setStatus("live — say hello");
+  } catch (e) { setStatus("error: " + e.message); document.getElementById("start").disabled = false; }
+}
+
+function onEvent(env) {
+  if (env.type === "state") document.getElementById("state").textContent = env.data.state;
+  else if (env.type === "partial_transcript" || env.type === "final_transcript")
+    document.getElementById("tx").textContent = env.data.text || "";
+  else if (env.type === "response_text")
+    document.getElementById("tx").textContent = "Aura: " + (env.data.text || "");
+}
+
+function control(obj){ if (dc && dc.readyState === "open") dc.send(JSON.stringify(obj)); }
+function sendText(){ const t=document.getElementById("text"); control({type:"text_input", text:t.value}); t.value=""; }
+function interrupt(){ control({type:"interrupt"}); }
+function setStatus(s){ document.getElementById("status").textContent = s; }
+</script>
+</body>
+</html>

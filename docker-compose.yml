@@ -1,0 +1,42 @@
+# Aura self-hosted deployment (spec §27). Everything runs on infra you control.
+# Workers share one image but are separate services so they can be pinned to
+# different GPUs later (spec §9) by adding `deploy.resources.reservations`.
+version: "3.9"
+
+services:
+  gateway:
+    build: .
+    command: uvicorn aura.gateway.app:app --host 0.0.0.0 --port 8080
+    env_file: .env
+    ports: ["8080:8080"]        # ONLY public surface (put TLS in front)
+    depends_on: [livekit]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
+      interval: 15s
+      timeout: 3s
+      retries: 5
+
+  avatar-runtime:
+    build: .
+    command: python scripts/run_service.py
+    env_file: .env
+    # GPU access (uncomment on a CUDA host):
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices: [{driver: nvidia, count: 1, capabilities: [gpu]}]
+    volumes:
+      - ./models:/app/models:ro
+      - ./assets:/app/assets:ro
+    depends_on: [livekit]
+    restart: unless-stopped
+
+  livekit:                       # self-hosted transport (Apache-2.0)
+    image: livekit/livekit-server:latest
+    command: --dev            # replace with a keys.yaml config in production
+    ports: ["7880:7880", "7881:7881", "7882:7882/udp"]
+    restart: unless-stopped
+
+  # Your existing Command Desk brain is NOT defined here — Aura reaches it at
+  # AURA_BRAIN_ENDPOINT on the internal network. It stays under your control.
