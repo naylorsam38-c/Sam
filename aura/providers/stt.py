@@ -138,6 +138,60 @@ class DeepgramSTT:
     async def close(self) -> None: ...
 
 
+# ── self-hosted: NVIDIA Parakeet-TDT ────────────────────────────────────────
+class ParakeetSTT:
+    """NVIDIA Parakeet-TDT 0.6B. CC-BY-4.0 — explicitly cleared for commercial
+    use, unlike the ORIGINAL Canary-1B which is CC-BY-NC.
+
+    Faster and lighter than Whisper (RTFx ~3300x on GPU, ~30x realtime even on
+    CPU) with true streaming at ~160ms, which matters more than raw accuracy in
+    a live conversation: the transcript only has to be good enough to hand to
+    the brain, and it has to arrive before the user notices a pause.
+    """
+    info = ProviderInfo(
+        name="parakeet", tier=Tier.SELFHOSTED, licence="Apache-2.0",
+        weight_licence="CC-BY-4.0",
+        cost=Cost(gpu_hour=0.0, note="shares the render GPU; no marginal cost"),
+        requires=Requires(packages=("nemo",), gpu=True),
+        quality=5, latency_ms=160,
+        note="CC-BY-4.0 requires attribution. Use the -Flash/-v2/Qwen Canary "
+             "variants too if you need Canary; the original 1B is CC-BY-NC.",
+    )
+
+    MODEL = "nvidia/parakeet-tdt-0.6b-v2"
+
+    def __init__(self, **_: object) -> None:
+        self._model = None
+
+    async def setup(self) -> None:
+        try:
+            from nemo.collections.asr.models import ASRModel
+        except Exception as e:
+            raise ProviderUnavailable(f"nemo not installed: {e!r}") from e
+        try:
+            self._model = await asyncio.to_thread(
+                ASRModel.from_pretrained, model_name=self.MODEL)
+        except Exception as e:
+            raise ProviderUnavailable(f"parakeet weights unavailable: {e!r}") from e
+        log("stt.parakeet", "info", "loaded", model=self.MODEL)
+
+    async def transcribe(self, wav_path: str) -> Transcript:
+        if self._model is None:
+            raise ProviderUnavailable("parakeet not loaded")
+
+        def _run() -> Transcript:
+            out = self._model.transcribe([wav_path])
+            first = out[0] if out else ""
+            text = (getattr(first, "text", first) or "").strip()
+            return Transcript(text=text, uncertain=not text, no_speech=not text)
+
+        return await asyncio.to_thread(_run)
+
+    async def close(self) -> None:
+        self._model = None
+
+
 register("stt", "null", NullSTT)
+register("stt", "parakeet", ParakeetSTT)
 register("stt", "faster-whisper", FasterWhisperSTT)
 register("stt", "deepgram", DeepgramSTT)

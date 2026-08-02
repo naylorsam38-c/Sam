@@ -30,20 +30,22 @@ _REGISTRY: dict[str, dict[str, Callable[..., Any]]] = {}
 POLICIES: dict[str, dict[str, list[str]]] = {
     # best available quality; bills per minute of use
     "api": {
-        "tts":    ["cartesia", "elevenlabs", "kokoro", "espeak"],
-        "stt":    ["deepgram", "faster-whisper", "null"],
+        "tts":    ["cartesia", "elevenlabs", "chatterbox", "kokoro", "espeak"],
+        "stt":    ["deepgram", "parakeet", "faster-whisper", "null"],
         "avatar": ["simli", "musetalk", "fallback"],
     },
-    # no per-minute fees; bills per GPU-hour
+    # no per-minute fees; bills per GPU-hour.
+    # chatterbox first: it is the only clean self-hosted engine that can clone a
+    # brand voice — Kokoro has 54 fixed presets and no cloning at all.
     "selfhosted": {
-        "tts":    ["kokoro", "espeak"],
-        "stt":    ["faster-whisper", "null"],
+        "tts":    ["chatterbox", "kokoro", "espeak"],
+        "stt":    ["parakeet", "faster-whisper", "null"],
         "avatar": ["musetalk", "fallback"],
     },
     # prefer free local, borrow the API only when local can't run
     "auto": {
-        "tts":    ["kokoro", "cartesia", "elevenlabs", "espeak"],
-        "stt":    ["faster-whisper", "deepgram", "null"],
+        "tts":    ["chatterbox", "kokoro", "cartesia", "elevenlabs", "espeak"],
+        "stt":    ["parakeet", "faster-whisper", "deepgram", "null"],
         "avatar": ["musetalk", "simli", "fallback"],
     },
     # never leaves the machine, never bills

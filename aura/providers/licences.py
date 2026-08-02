@@ -33,10 +33,59 @@ FORBIDDEN_COMPONENTS = (
     "xtts", "xtts-v2", "xtts_v2",
     "tts",              # coqui 'TTS' on PyPI bundles XTTS (exact token only)
     "coqui-tts", "coqui-ai-tts",
-    "wav2lip",          # non-commercial research weights
+    "wav2lip",          # weights are research-licensed; murky in every fork
     "insightface",      # non-commercial weights; blocks InstantID/IP-Adapter-FaceID
     "flux.1-dev",       # non-commercial; FLUX.1-schnell (Apache-2.0) is the swap
+    "sonic",            # portrait animation — repo states non-commercial outright
+    "float",            # DeepBrain FLOAT — CC-BY-NC-ND (no commercial, no derivatives)
+    # ── Speech traps: permissive CODE, restricted WEIGHTS ──────────────────
+    "f5-tts", "f5_tts",  # MIT code, CC-BY-NC-4.0 weights (Emilia dataset)
+    "fish-speech", "fish_speech", "openaudio",   # CC-BY-NC-SA-4.0 weights
+    "vibevoice",        # MIT label, but Microsoft disclaims commercial use and
+                        #   pulled the TTS inference code after misuse
+    "canary-1b",        # original NVIDIA Canary is CC-BY-NC-4.0. The -Flash,
+                        #   -v2 and Canary-Qwen variants are CC-BY-4.0 and fine.
 )
+
+# Components that are USABLE but carry a condition you can grow out of. These are
+# not banned — banning them would be wrong — but shipping one without recording
+# the condition is how a licence becomes a lawsuit two funding rounds later.
+#
+# Format: name -> the condition that ends your free use.
+CONDITIONAL_COMPONENTS = {
+    "ltx-2": "free only under $10M annual revenue; above that a paid Commercial "
+             "Use Agreement is mandatory, with 2x liquidated damages for "
+             "unlicensed commercial use above the cap. Marketed as open weights.",
+    "ltx-video": "same revenue-capped Lightricks licence as ltx-2.",
+    "hunyuanvideo": "Tencent Community Licence, NOT Apache-2.0 despite common "
+                    "reporting. Licence does not apply in the EU, UK or South "
+                    "Korea at all; separate licence required above 100M MAU; "
+                    "outputs may not train competing models; attribution required.",
+    "duix": "Duix.Avatar/HeyGem community licence: free commercial use only "
+            "below 100k users AND $10M revenue. Also offline-only — it does not "
+            "do real-time interaction.",
+    "heygem": "see 'duix' — same project, renamed.",
+    "liveportrait": "MIT code, but pulls InsightFace buffalo_l at inference, "
+                    "which is non-commercial. Swap the detector (YuNet) or the "
+                    "whole pipeline inherits the restriction.",
+    "livetalking": "Apache-2.0, but videos published to Bilibili / WeChat Channels "
+                   "/ Douyin must carry a LiveTalking watermark and attribution.",
+    "echomimic": "Apache-2.0 itself, but built on Wan2.1-Fun-V1.1-1.3B-InP — the "
+                 "base model's own terms still apply and must be checked.",
+    "indextts": "Apache-2.0 code, but the WEIGHTS carry a custom bilibili Model "
+                "Use Licence requiring prior WRITTEN authorisation for commercial "
+                "use. Free tier still needs registration. PRC arbitration.",
+    "higgs-audio": "v2 is Apache-2.0 and fine. v3 flips to a Research and "
+                   "Non-Commercial Licence — commercial needs a paid Boson "
+                   "licence. Also: the tokenizer repo is licensed separately.",
+    "minicpm-o": "Apache badge, but commercial use is gated by a registration "
+                 "questionnaire and caps (<=5,000 edge devices OR <1M DAU).",
+    "kyutai-tts": "CC-BY-4.0 and commercially fine, BUT some bundled voices come "
+                  "from the Expresso dataset and are CC-BY-NC. Use only CC0 "
+                  "donor voices or your own clone.",
+    "voxtral-tts": "Mistral's other 2026 models are Apache-2.0; Voxtral TTS "
+                   "specifically is CC-BY-NC-4.0. Commercial is API-only.",
+}
 
 
 def is_noncommercial(licence: str | None) -> bool:

@@ -182,4 +182,5 @@ money.** Budget for the machine and its running costs, not for API calls.
 | [DEFINITION_OF_DONE](docs/DEFINITION_OF_DONE.md) | checkable acceptance criteria |
 | [LICENSING_REGISTER](docs/LICENSING_REGISTER.md) | commercial-use classification of every component |
 | [COMMERCIAL_GRADE](docs/COMMERCIAL_GRADE.md) | API vs self-hosted, cost break-even, build order |
+| [MODEL_LANDSCAPE](docs/MODEL_LANDSCAPE.md) | researched Aug-2026 open-model survey, licences, traps, hardware |
 ```

@@ -211,7 +211,67 @@ class ElevenLabsTTS:
     async def close(self) -> None: ...
 
 
+# ── self-hosted: Chatterbox (the one that can clone your brand voice) ───────
+class ChatterboxTTS:
+    """Resemble AI's Chatterbox. MIT on code AND weights, with zero-shot voice
+    cloning that is genuinely licensed for commercial use.
+
+    This exists because Kokoro — the other clean self-hosted option — has NO
+    cloning at all, only 54 fixed preset voices. If you want one consistent
+    brand voice that is yours, Kokoro cannot give you that and this can.
+
+    It embeds a PerTh watermark in every output by default. That is not a
+    drawback: EU AI Act Article 50 has required machine-readable marking of
+    synthetic audio since 2 August 2026, so shipping watermarked by default is
+    a compliance feature you would otherwise have to build.
+    """
+    info = ProviderInfo(
+        name="chatterbox", tier=Tier.SELFHOSTED, licence="MIT",
+        weight_licence="MIT",
+        cost=Cost(gpu_hour=0.0, note="shares the render GPU; no marginal cost"),
+        requires=Requires(packages=("chatterbox",), gpu=True),
+        quality=4, latency_ms=470,
+        note="Cloning the voice of a REAL person needs a written release "
+             "covering AI cloning and commercial synthetic use. An MIT licence "
+             "covers the software, never someone's voice.",
+    )
+
+    def __init__(self, reference_audio: str | None = None, **_: object) -> None:
+        self.reference_audio = reference_audio or os.getenv("AURA_VOICE_REFERENCE")
+        self._model = None
+
+    async def setup(self) -> None:
+        try:
+            from chatterbox.tts import ChatterboxTTS as _CB
+        except Exception as e:
+            raise ProviderUnavailable(f"chatterbox not installed: {e!r}") from e
+        try:
+            self._model = await asyncio.to_thread(_CB.from_pretrained, device="cuda")
+        except Exception as e:
+            raise ProviderUnavailable(f"chatterbox failed to load: {e!r}") from e
+        log("tts.chatterbox", "info", "loaded",
+            cloning=bool(self.reference_audio))
+
+    async def synthesize(self, text: str, wav_path: str, *, voice: str,
+                         sample_rate: int) -> str:
+        if self._model is None:
+            raise ProviderUnavailable("chatterbox not loaded")
+
+        def _run() -> str:
+            import torchaudio
+            kw = {"audio_prompt_path": self.reference_audio} if self.reference_audio else {}
+            wav = self._model.generate(text, **kw)
+            torchaudio.save(wav_path, wav, self._model.sr)
+            return wav_path
+
+        return await asyncio.to_thread(_run)
+
+    async def close(self) -> None:
+        self._model = None
+
+
 register("tts", "espeak", EspeakTTS)
 register("tts", "kokoro", KokoroTTS)
+register("tts", "chatterbox", ChatterboxTTS)
 register("tts", "cartesia", CartesiaTTS)
 register("tts", "elevenlabs", ElevenLabsTTS)
