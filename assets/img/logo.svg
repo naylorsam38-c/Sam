@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Chew Cartel">
+  <title>Chew Cartel</title>
+  <!-- Placeholder badge, rebuilt to match the real logo's structure.
+       Swap this file for the supplied artwork when it lands. -->
+  <circle cx="100" cy="100" r="99" fill="#14110f"/>
+  <circle cx="100" cy="100" r="92" fill="none" stroke="#c08a3e" stroke-width="2.5"/>
+  <circle cx="100" cy="100" r="87" fill="none" stroke="#c08a3e" stroke-width="0.9" opacity="0.55"/>
+
+  <text x="100" y="52" text-anchor="middle" fill="#c08a3e"
+        font-family="Oswald, Haettenschweiler, Impact, sans-serif"
+        font-size="34" font-weight="600" letter-spacing="4">CHEW</text>
+
+  <g fill="#c08a3e">
+    <path d="M74 62 L93 79 L81 103 Z"/>
+    <path d="M126 62 L107 79 L119 103 Z"/>
+    <ellipse cx="100" cy="97" rx="26" ry="24"/>
+    <ellipse cx="100" cy="117" rx="16" ry="13"/>
+  </g>
+  <g fill="#14110f">
+    <circle cx="90" cy="93" r="3.4"/>
+    <circle cx="110" cy="93" r="3.4"/>
+    <ellipse cx="100" cy="111" rx="6" ry="4.6"/>
+  </g>
+
+  <text x="100" y="160" text-anchor="middle" fill="#c08a3e"
+        font-family="Oswald, Haettenschweiler, Impact, sans-serif"
+        font-size="30" font-weight="600" letter-spacing="3.5">CARTEL</text>
+
+  <text x="100" y="178" text-anchor="middle" fill="#c08a3e" opacity="0.8"
+        font-family="Oswald, Haettenschweiler, Impact, sans-serif"
+        font-size="10" letter-spacing="3">EST. 2005</text>
+</svg>
