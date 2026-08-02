@@ -1,0 +1,851 @@
+<title>Command Desk — Build Order</title>
+<style>
+  :root {
+    --paper: #eceef1;
+    --card: #f6f7f9;
+    --rule: #d2d7de;
+    --rule-soft: #e0e4ea;
+    --ink: #171b21;
+    --ink-soft: #4a545f;
+    --muted: #737f8c;
+    --amber: #9a6710;
+    --amber-bg: #f3e6cd;
+    --teal: #1f6a5a;
+    --teal-bg: #d9e9e4;
+    --clay: #9d3a2e;
+    --clay-bg: #f2dcd8;
+    --slate: #3c5a7a;
+    --slate-bg: #dde5ee;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14171b;
+      --card: #1b1f25;
+      --rule: #2c333c;
+      --rule-soft: #232931;
+      --ink: #e4e8ed;
+      --ink-soft: #aab4c0;
+      --muted: #7d8794;
+      --amber: #e0a33e;
+      --amber-bg: #33280f;
+      --teal: #62b39c;
+      --teal-bg: #16302a;
+      --clay: #d57d6d;
+      --clay-bg: #331f1b;
+      --slate: #8fb0d4;
+      --slate-bg: #1b2733;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #14171b;
+    --card: #1b1f25;
+    --rule: #2c333c;
+    --rule-soft: #232931;
+    --ink: #e4e8ed;
+    --ink-soft: #aab4c0;
+    --muted: #7d8794;
+    --amber: #e0a33e;
+    --amber-bg: #33280f;
+    --teal: #62b39c;
+    --teal-bg: #16302a;
+    --clay: #d57d6d;
+    --clay-bg: #331f1b;
+    --slate: #8fb0d4;
+    --slate-bg: #1b2733;
+  }
+
+  :root[data-theme="light"] {
+    --paper: #eceef1;
+    --card: #f6f7f9;
+    --rule: #d2d7de;
+    --rule-soft: #e0e4ea;
+    --ink: #171b21;
+    --ink-soft: #4a545f;
+    --muted: #737f8c;
+    --amber: #9a6710;
+    --amber-bg: #f3e6cd;
+    --teal: #1f6a5a;
+    --teal-bg: #d9e9e4;
+    --clay: #9d3a2e;
+    --clay-bg: #f2dcd8;
+    --slate: #3c5a7a;
+    --slate-bg: #dde5ee;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  /* ---------- masthead ---------- */
+
+  .masthead { padding: 40px 0 22px; border-bottom: 2px solid var(--ink); }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 7vw, 40px);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+
+  .standfirst {
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .meta {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+
+  /* ---------- sections ---------- */
+
+  section { padding-top: 44px; }
+
+  h2 {
+    font-size: 22px;
+    letter-spacing: -.01em;
+    font-weight: 700;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+
+  .sec-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 8px;
+  }
+
+  .intro { color: var(--ink-soft); margin: 0 0 4px; max-width: 62ch; }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 26px 0 4px;
+    letter-spacing: -.005em;
+  }
+
+  p { margin: 10px 0; max-width: 66ch; }
+
+  /* ---------- phase header ---------- */
+
+  .phase { border-top: 1px solid var(--rule); padding-top: 30px; margin-top: 34px; }
+  .phase:first-of-type { border-top: 0; }
+
+  .phase-top {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .phase-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .est {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    padding: 3px 8px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    color: var(--ink-soft);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ---------- task ---------- */
+
+  .task {
+    background: var(--card);
+    border: 1px solid var(--rule-soft);
+    border-left: 3px solid var(--rule);
+    border-radius: 2px;
+    padding: 14px 16px;
+    margin: 12px 0;
+  }
+
+  .task.critical { border-left-color: var(--clay); }
+  .task.decision { border-left-color: var(--amber); }
+  .task.done { border-left-color: var(--teal); }
+
+  .task-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+
+  .code {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .task-title { font-weight: 650; font-size: 15.5px; }
+
+  .task p { margin: 8px 0; font-size: 14.5px; color: var(--ink-soft); }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .chip.built { background: var(--teal-bg); color: var(--teal); }
+  .chip.broken { background: var(--clay-bg); color: var(--clay); }
+  .chip.missing { background: var(--slate-bg); color: var(--slate); }
+  .chip.decide { background: var(--amber-bg); color: var(--amber); }
+
+  .done-when {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    border-radius: 2px;
+    padding: 9px 11px;
+    margin-top: 10px;
+  }
+
+  .done-when b {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  code {
+    font-family: var(--mono);
+    font-size: .88em;
+    background: var(--rule-soft);
+    padding: 1px 5px;
+    border-radius: 2px;
+    word-break: break-word;
+  }
+
+  .done-when code { background: transparent; padding: 0; }
+
+  /* ---------- lists ---------- */
+
+  ul, ol { margin: 10px 0; padding-left: 22px; max-width: 64ch; }
+  li { margin: 6px 0; color: var(--ink-soft); }
+  li strong { color: var(--ink); font-weight: 650; }
+
+  /* ---------- state grid ---------- */
+
+  .state-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--rule-soft);
+    border: 1px solid var(--rule-soft);
+    margin: 18px 0;
+  }
+
+  .cell { background: var(--card); padding: 12px 14px; }
+
+  .cell .k {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+
+  .cell .v { font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+  .cell .v.ok { color: var(--teal); }
+  .cell .v.bad { color: var(--clay); }
+  .cell .v.warn { color: var(--amber); }
+
+  /* ---------- table ---------- */
+
+  .scroll { overflow-x: auto; margin: 18px 0; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+    min-width: 440px;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+  }
+
+  th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
+    font-weight: 700;
+  }
+
+  td.num {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--ink);
+  }
+
+  tbody tr:last-child td { border-bottom: 0; }
+
+  tr.total td {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ---------- callout ---------- */
+
+  .callout {
+    border: 1px solid var(--amber);
+    background: var(--amber-bg);
+    border-radius: 2px;
+    padding: 14px 16px;
+    margin: 20px 0;
+  }
+
+  .callout .k {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .callout p { margin: 6px 0; color: var(--ink); font-size: 14.5px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .rule-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+    counter-reset: r;
+  }
+
+  .rule-list li {
+    counter-increment: r;
+    position: relative;
+    padding-left: 34px;
+    margin: 12px 0;
+    color: var(--ink-soft);
+  }
+
+  .rule-list li::before {
+    content: counter(r);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--amber);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    width: 22px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 2px solid var(--ink);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  a { color: var(--amber); }
+  a:focus-visible, summary:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Command Desk</p>
+  <h1>Build order: from here to finished</h1>
+  <p class="standfirst">Every outstanding item from every specification, in the order it should be done, with what each one costs and how you know it's actually finished.</p>
+  <div class="meta">
+    <span>Verified against command_desk_full_system</span>
+    <span>Snapshot 2026-08-02</span>
+    <span>Live: airexploit.com/commanddesk</span>
+  </div>
+</header>
+
+<!-- ===================== STATE ===================== -->
+<section>
+  <p class="sec-label">Starting point</p>
+  <h2>What is actually true right now</h2>
+  <p class="intro">Read from the code, not from the summaries. Everything below was checked directly.</p>
+
+  <div class="state-grid">
+    <div class="cell"><div class="k">Stages 0–4</div><div class="v ok">Built and live</div></div>
+    <div class="cell"><div class="k">Identity gate</div><div class="v ok">Real — bcrypt, lockout</div></div>
+    <div class="cell"><div class="k">Gmail exposure</div><div class="v ok">Blocked at the layer</div></div>
+    <div class="cell"><div class="k">Oversight tests</div><div class="v ok">25 / 25 passing</div></div>
+    <div class="cell"><div class="k">Chat endpoint</div><div class="v bad">Public, no auth</div></div>
+    <div class="cell"><div class="k">Scheduler</div><div class="v bad">Does not exist</div></div>
+    <div class="cell"><div class="k">Calendar</div><div class="v bad">Not started</div></div>
+    <div class="cell"><div class="k">Database</div><div class="v warn">SQLite, not Postgres</div></div>
+    <div class="cell"><div class="k">Front ends</div><div class="v warn">Seven builds, one live</div></div>
+  </div>
+
+  <p>The safety work is genuinely good. The permission layer re-validates the session independently before any Gmail call, the send gate binds a confirmation to one specific draft, a lost network reply is never retried, and the part of oversight that decides whether something went wrong is deterministic and tested. That core is worth keeping.</p>
+
+  <p>What limits you is underneath it: a single box, a SQLite file, two processes where one would do, and nothing anywhere that can wake up on its own.</p>
+</section>
+
+<!-- ===================== RULES ===================== -->
+<section>
+  <p class="sec-label">Throughout</p>
+  <h2>The rules that apply to every phase</h2>
+  <p class="intro">Taken from your own build documents. These don't change between phases.</p>
+
+  <ol class="rule-list">
+    <li><strong>The live system is the only truth.</strong> Never deploy from a zip, a backup, or memory. If the box contradicts a document, the box wins — stop and report.</li>
+    <li><strong>Back up before touching anything</strong>, and confirm the backup restores. A backup you can't restore isn't a backup.</li>
+    <li><strong>New capability goes in new files.</strong> Never overwrite the existing hub or agents. Extend by adding a path, not by rewriting.</li>
+    <li><strong>One stage at a time.</strong> Finish it, prove it, stop, wait. Never build two unknowns at once.</li>
+    <li><strong>"Done" means proof, not "the code ran."</strong> HTTP 200 means the page loaded, not that it works. Nobody can see your phone — you are the final eyes.</li>
+    <li><strong>Reverse-engineer the task before starting it.</strong> What's unclear, what would have to be guessed, what costs money, what can't be undone, what needs you specifically. Ask it all once, up front.</li>
+    <li><strong>Anything leaving the box needs your yes.</strong> Working inside the box is free. Crossing the fence stops.</li>
+    <li><strong>The audit log is always on.</strong> Every state change and action: timestamp, state, trigger, result.</li>
+    <li><strong>Rules that can be enforced must not live in prompts.</strong> If a rule could be code, config or a database grant and it's only in a prompt, the step isn't done.</li>
+  </ol>
+</section>
+
+<!-- ===================== PHASE 0 ===================== -->
+<section>
+  <p class="sec-label">Phase 0</p>
+
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 0</span>
+      <h2>Close what's open</h2>
+      <span class="est">1 day</span>
+    </div>
+    <p class="intro">Nothing new gets built until these are shut. Every one of them is small, and two of them are live exposures.</p>
+
+    <div class="task critical">
+      <div class="task-head"><span class="code">0.1</span><span class="task-title">Shut the unauthenticated chat path</span><span class="chip broken">Broken</span></div>
+      <p><code>/commanddesk/chat</code> reaches the brain with no login. nginx sends it to the adapter, the adapter proxies to core's <code>/api/chat</code>, and nothing on that path checks a session. Anyone who finds the URL spends your API budget and can write into session continuity.</p>
+      <p>Two ways to fix it. Add <code>Depends(require_auth)</code> to the core route — or delete the adapter's <code>/chat</code> proxy entirely, since your live front end talks to <code>/nova/turn</code> and doesn't use it. The second is better: it closes the hole and removes dead weight.</p>
+      <div class="done-when"><b>Done when</b>curl to /commanddesk/chat with no cookie returns 401, and the live front end still works unchanged.</div>
+    </div>
+
+    <div class="task critical">
+      <div class="task-head"><span class="code">0.2</span><span class="task-title">Rotate the login password</span><span class="chip broken">Broken</span></div>
+      <p>The seed credential sits in <code>core/auth.py</code> as a cleartext constant and is written into the build document. Both have travelled in zips. <code>seed_default_user</code> only inserts when the row is missing, so changing the constant alone changes nothing — the stored hash has to be replaced.</p>
+      <div class="done-when"><b>Done when</b>the old password fails on the live login, the new one works, and the constant no longer matches anything real.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">0.3</span><span class="task-title">Restore the single-Gmail-path rule</span><span class="chip broken">Broken</span></div>
+      <p>The snapshot says one code path touches the Gmail API. There are two — <code>style_profile.py</code> builds its own service and reads your sent mail. It's auth-gated at the route and it writes to the audit log, so it isn't a hole, but it skips the permission layer and so leaves no action record and gets no independent session check.</p>
+      <p>Either route it through the permission layer as a third tool, or write down explicitly that it's a second sanctioned path. What can't stand is a documented invariant that isn't true.</p>
+      <div class="done-when"><b>Done when</b>every Gmail call either passes through permission_layer, or is named in the docs as a deliberate exception.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">0.4</span><span class="task-title">Gate the legacy routes</span><span class="chip missing">Housekeeping</span></div>
+      <p><code>/api/tools</code>, <code>/api/groups</code>, <code>/api/agents/*</code>, <code>/api/memory/*</code>, <code>/api/decision</code> and <code>/api/nudge</code> have no auth. They're reachable only from the box — core binds loopback and nginx proxies just three prefixes — so this isn't urgent. It is one decorator each, and it removes the question permanently.</p>
+      <div class="done-when"><b>Done when</b>every route either requires auth or is listed as deliberately public with a reason.</div>
+    </div>
+
+    <div class="task decision">
+      <div class="task-head"><span class="code">0.5</span><span class="task-title">Settle two contradictions in your own documents</span><span class="chip decide">Your call</span></div>
+      <p><strong>Memory window.</strong> The backend spec says fourteen daily summaries. The code says four, and the snapshot calls four the locked figure. It's an environment variable, so it's a one-line change — but decide which is real.</p>
+      <p><strong>Alerting.</strong> The backend spec wants red flags that interrupt immediately. The v3 prompts say nothing is ever pushed, everything is on demand. These cannot both stand. Phase 4 depends on the answer.</p>
+      <div class="done-when"><b>Done when</b>both are written down once, in the COMMAND doc, and the losing version is deleted rather than left to resurface.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">0.6</span><span class="task-title">Retire the superseded documents</span><span class="chip missing">Housekeeping</span></div>
+      <p>Move these out of the working set so nobody builds from them: <strong>Dispatch_ORDER_full</strong> (its "do all of it, don't come back" instruction is the opposite of your one-stage rule), <strong>DISPATCHv4buildspec</strong> (the final roadmap is a strict superset — nothing is lost), <strong>COWORKROADMAP v2</strong> (describes a local backend, a Flutter client and no verified Claude call), and <strong>commanddesk_match.html</strong> (certifies an animated Nova you later dropped).</p>
+      <div class="done-when"><b>Done when</b>the working set is the COMMAND doc, PROMPTS v3, the backend spec, and this roadmap. Nothing else.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">0.7</span><span class="task-title">Collapse seven front ends to one</span><span class="chip missing">Housekeeping</span></div>
+      <p>Seven separate builds are in circulation and only <code>full_system/frontend</code> is live. The others have no login and post to the ungated chat path. Archive them somewhere clearly marked dead. Also clear the orphaned <code>nova_blink.png</code> and <code>nova_mouth_1-4.png</code> left in the live assets folder from the animated build.</p>
+      <div class="done-when"><b>Done when</b>one front end is the front end, and the rest are in an archive folder nobody deploys from.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 1 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 1</span>
+      <h2>Finish the original plan</h2>
+      <span class="est">1–2 days</span>
+    </div>
+    <p class="intro">Stages 0 through 4 are done. Stage 5 is the last one in the COMMAND doc, and it's the easy one by design — the pattern is already proven.</p>
+
+    <div class="task">
+      <div class="task-head"><span class="code">1.1</span><span class="task-title">Prove Stage 4 end to end on your phone</span><span class="chip decide">Needs you</span></div>
+      <p>Draft and send are built, but the doc is explicit that nobody else can confirm this — you are the final eyes. Speak the ask, see the draft, say a listed yes, watch it send. Then check the audit log shows the exact word that opened the gate and the draft it was bound to.</p>
+      <p>One thing to expect: drafting needs the <code>gmail.compose</code> scope. If consent was only ever granted for readonly, this fails with a scope error. That's the named gate, not a bug.</p>
+      <div class="done-when"><b>Done when</b>you have personally watched an email send, and the log names the word and the draft id.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">1.2</span><span class="task-title">Stage 5 — clone the pattern to a second worker</span><span class="chip missing">Not started</span></div>
+      <p>Same router, same permission-layer shape, same gate, same log. Swap the service and the instruction. The doc's own reasoning: this stage repeats a proven thing, so it carries almost no risk.</p>
+      <p>Calendar is the obvious candidate but it's the expensive one — see Phase 5. A cheaper second worker proves the clone works without opening that door.</p>
+      <div class="done-when"><b>Done when</b>a second worker runs a request through the permission layer, logs it, and returns a result on the live site.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">1.3</span><span class="task-title">Fix the test file's own run command</span><span class="chip broken">Small bug</span></div>
+      <p>The docstring in <code>test_compare.py</code> says <code>python -m oversight.test_compare</code>, which raises an ImportError. The working command is <code>python3 -m core.oversight.test_compare</code> from <code>backend/</code>. A test suite nobody can start is a test suite nobody runs.</p>
+      <div class="done-when"><b>Done when</b>the documented command runs and prints 25/25.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 2 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 2</span>
+      <h2>The enforcement core — on SQLite</h2>
+      <span class="est">3 days</span>
+    </div>
+    <p class="intro">This is the valuable half of the big roadmap, and none of it needs Postgres. Your permission layer already does exactly this for Gmail. This generalises it to everything else.</p>
+
+    <div class="task">
+      <div class="task-head"><span class="code">2.1</span><span class="task-title">policy.yaml and a loader that fails closed</span><span class="chip missing">Not started</span></div>
+      <p>One file holding escalation tiers, priorities, loop rules and thresholds. The loader validates at startup and <strong>refuses to start</strong> on a malformed file rather than falling back to defaults.</p>
+      <p>The line that matters: an unknown action returns <code>require_approval</code>. An action nobody anticipated must never default to permitted.</p>
+      <div class="done-when"><b>Done when</b>get_escalation_tier("an_action_that_does_not_exist") returns require_approval, proven by a test.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">2.2</span><span class="task-title">One execution path for every side effect</span><span class="chip missing">Not started</span></div>
+      <p>Every agent action routes through <code>enforcement.py</code>, which checks policy <em>before</em> the action runs. Silent tiers execute and log. Notify tiers execute, log and emit. Approval tiers do not execute at all — they persist a pending record and hand control back to you.</p>
+      <p>Fail closed on error: if the policy lookup itself throws, the action does not run. The middleware becomes a single point of failure, so its failure mode has to be "nothing happens," never "everything is allowed."</p>
+      <p>Then audit for bypasses. Every file write, HTTP call, database mutation and outbound message that can happen without passing through this path is a hole. List any that can't be routed yet rather than quietly leaving them.</p>
+      <div class="done-when"><b>Done when</b>a test agent told to delete a file cannot — even with its prompt edited to say approval isn't needed. Prompt says yes, enforcement says no, no happens.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">2.3</span><span class="task-title">Version stamps on every write</span><span class="chip missing">Not started</span></div>
+      <p>Four strings — prompt, policy, schema, runtime — stamped by one write helper on insert. Existing rows backfill to <code>0.0.0</code>, which honestly marks them as pre-versioning rather than pretending they were stamped.</p>
+      <p>This is what turns your audit log from a list into a record: without it you can't tell which prompt or which policy produced a given decision.</p>
+      <div class="done-when"><b>Done when</b>a new row carries four real version strings without the caller passing them.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">2.4</span><span class="task-title">Observer isolation, the SQLite way</span><span class="chip missing">Not started</span></div>
+      <p>The big roadmap wants a Postgres role with SELECT-only grants, and calls it the one guarantee that survives prompt injection. You can't have that on SQLite — there are no users and no GRANT.</p>
+      <p>What you can have: open Observer's connection as <code>file:aire.db?mode=ro</code>. That's a real refusal from the driver, not the application promising to behave. Weaker than Postgres — same file, no per-table control — but far stronger than a rule in a prompt.</p>
+      <div class="done-when"><b>Done when</b>an INSERT on Observer's connection raises from sqlite3 itself, proven by a test that attempts the write and asserts the failure.</div>
+    </div>
+
+    <div class="callout">
+      <div class="k">Why this order</div>
+      <p>Phase 2 is worth doing before anything in Phases 3–5, because every feature added after it inherits the enforcement path automatically. Every feature added before it has to be retrofitted.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 3 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 3</span>
+      <h2>Something that can wake up on its own</h2>
+      <span class="est">3–4 days</span>
+    </div>
+    <p class="intro">Three features in your backend spec are impossible today for one reason: nothing in the system can fire on a timer. No APScheduler, no Celery, no crontab, no systemd timer. <code>vault.py</code> states it outright.</p>
+
+    <div class="task">
+      <div class="task-head"><span class="code">3.1</span><span class="task-title">Add the scheduler</span><span class="chip missing">Blocks 3.2–3.4</span></div>
+      <p>A systemd timer or APScheduler inside the core process. Every job routes through <code>enforcement.py</code> from Phase 2, so scheduled work is under the same gate as anything else — a background job that can act unsupervised is exactly what shouldn't get its own private path.</p>
+      <div class="done-when"><b>Done when</b>a trivial job fires on schedule and its run appears in the audit log.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">3.2</span><span class="task-title">Per-app status updates</span><span class="chip missing">Not started</span></div>
+      <p>From the backend spec: a running account of what each worker has done in each app — "checked 3 emails, drafted 1 reply, nothing sent" — landing roughly once a minute. Not a live view, a steady heartbeat. Nova reads these and knows the state of play without operating anything.</p>
+      <p>Everything needed is already in the audit log and the actions table. This is a rollup query on a timer, not new instrumentation.</p>
+      <div class="done-when"><b>Done when</b>the panel shows a running per-app account that updates without you asking.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">3.3</span><span class="task-title">The nightly debrief</span><span class="chip missing">Not started</span></div>
+      <p>Nova and the memory agent run a nightly pass: anything untouched lately, anything missed, anything old worth following up. The memory agent retrieves; <strong>Nova decides</strong>. Memory surfaces, the hub judges — that separation is the point.</p>
+      <div class="done-when"><b>Done when</b>a debrief runs unattended overnight and its output is waiting in the morning.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">3.4</span><span class="task-title">Replace lazy expiry with a real sweeper</span><span class="chip missing">Improvement</span></div>
+      <p>Right now the 120-second confirmation window expires <em>lazily</em> — only when the next interaction happens. The safety property holds either way, because the gate stays shut unless the state and draft both match. But with a scheduler you can expire it properly, and the same sweeper catches <code>tool_requested</code>, <code>reading</code>, <code>drafting</code> and <code>sending</code> states that were left hanging.</p>
+      <div class="done-when"><b>Done when</b>an abandoned confirmation returns to idle on its own, and the timeout is logged.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 4 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 4</span>
+      <h2>Oversight, as originally specified</h2>
+      <span class="est">4–7 days</span>
+    </div>
+    <p class="intro">What got built is good but it isn't what the backend spec described. The spec wanted two independent accounts of the same work, cross-referenced. What exists compares stated intent against outcome — valuable, but a different check.</p>
+
+    <div class="task">
+      <div class="task-head"><span class="code">4.1</span><span class="task-title">The hub's own read-only view of each app</span><span class="chip missing">Not started</span></div>
+      <p>From the spec: a link separate from the worker's, so you can open Nova and ask "what's been done in Gmail today?" and get a straight answer. The hub observes, the worker acts, and the wires don't cross.</p>
+      <p>Note this pulls against the current design, which deliberately funnels all Gmail through one path. The honest version is a read-only <em>view over the audit log and actions table</em> rather than a second Gmail connection — same answer, no second credential, no second thing to secure.</p>
+      <div class="done-when"><b>Done when</b>asking Nova what happened in an app today returns a real account drawn from the log.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">4.2</span><span class="task-title">Two independent summaries</span><span class="chip missing">Not started</span></div>
+      <p>The worker summarises its own work. A separate watcher agent summarises the same work. Both roll up. This is the check the spec actually asked for and it's genuinely different from intent-versus-outcome — it catches a worker that misreports, not just one that drifts from its stated plan.</p>
+      <div class="done-when"><b>Done when</b>one piece of work produces two summaries from two different agents.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">4.3</span><span class="task-title">Nova adjudicates, and escalates when she can't</span><span class="chip missing">Not started</span></div>
+      <p>If the two summaries agree, fine. If they disagree, Nova flags it — that's the whole point of having two. Your own build note asks for the tiebreaker to be explicit: Nova adjudicates, and where she can't resolve it she escalates to you rather than silently picking one.</p>
+      <p>Today Angel writes to a review queue you read. There's no adjudication step and no path back through Nova.</p>
+      <div class="done-when"><b>Done when</b>a deliberately mismatched pair of summaries produces a flag, and an unresolvable one reaches you.</div>
+    </div>
+
+    <div class="task decision">
+      <div class="task-head"><span class="code">4.4</span><span class="task-title">Red-flag alerting — blocked on your decision</span><span class="chip decide">Your call</span></div>
+      <p>The spec: anything clearly wrong should interrupt immediately, because a one-minute cadence can miss a fast mistake. The v3 prompts: nothing is ever pushed, everything is on demand.</p>
+      <p>A reasonable resolution is that both are right about different things — routine findings stay pull-only, and one narrow class (an action that already crossed the fence and shouldn't have) interrupts. But that's a call for you, not for whoever builds it.</p>
+      <div class="done-when"><b>Done when</b>the rule is written down once, and the code matches it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 5 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 5</span>
+      <h2>Calendar</h2>
+      <span class="est">1–2 weeks</span>
+    </div>
+    <p class="intro">The one item in the backend spec that was never started at all. It's also the hardest thing on this list, and it's worth being blunt about why.</p>
+
+    <p>Email works as text — the message that arrived, the reply that was drafted, side by side. Calendar doesn't. You need to <em>see</em> it, and Google Calendar won't embed. So it has to be Command Desk's own view backed by a genuine two-way sync.</p>
+
+    <p><strong>Two-way sync is where projects like this die.</strong> Not the reading, not the writing — the reconciliation. An event changed in both places between syncs. A deletion that might be a deletion or might be a failed fetch. Recurring events, where a single edit can mean this instance, all instances, or this and everything after. Time zones across daylight saving. None of that is exotic; all of it has to be decided rather than discovered.</p>
+
+    <div class="task">
+      <div class="task-head"><span class="code">5.1</span><span class="task-title">Read-only calendar view first</span><span class="chip missing">Not started</span></div>
+      <p>Pull events, render a real view, let agents read it to brief and plan. No writes at all. This is the same shape as Stage 3's read-only Gmail proof, and for the same reason: prove the connection where nothing can be damaged.</p>
+      <div class="done-when"><b>Done when</b>your real week renders in Command Desk and Nova can describe your day.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">5.2</span><span class="task-title">Writes, behind the gate</span><span class="chip missing">Not started</span></div>
+      <p>Creating or moving an event is an action with consequences — it can land in someone else's calendar. Through the permission layer, behind confirmation, exactly like send. Same exactly-once guard: a lost network reply must never become two meetings.</p>
+      <div class="done-when"><b>Done when</b>you speak an event, see it, confirm it, and it appears in Google Calendar once.</div>
+    </div>
+
+    <div class="task decision">
+      <div class="task-head"><span class="code">5.3</span><span class="task-title">Two-way sync and conflict resolution</span><span class="chip decide">Design first</span></div>
+      <p>Decide the rules before writing code: which side wins a simultaneous edit, how a deletion is distinguished from a failed fetch, what happens to recurring-event edits, and how far back a sync reaches. Write them down, then build to them.</p>
+      <div class="done-when"><b>Done when</b>a change made in either place appears in the other, and a deliberate simultaneous edit resolves the way the written rule says it should.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 6 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 6</span>
+      <h2>The Postgres question</h2>
+      <span class="est">3–6 weeks — conditional</span>
+    </div>
+    <p class="intro">The final roadmap assumes PostgreSQL throughout: roles and grants, jsonb, timestamptz, row-level security, Terraform, RDS. You're on SQLite. This phase is where that gets resolved — or deliberately doesn't.</p>
+
+    <div class="callout">
+      <div class="k">Ask this before committing</div>
+      <p>Row-level security, <code>tenant_id</code> and Postgres roles exist to keep <em>different customers</em> apart. If Command Desk is one person on one box, that's a month spent on a problem you don't have yet — and one you can solve later, when a second user is real rather than hypothetical.</p>
+      <p>Phase 2 already gives you the fail-closed policy engine, the single enforcement path and a real read-only handle for Observer. That's most of the protection, for about three days.</p>
+    </div>
+
+    <p>If you do go ahead, the order is fixed and the migration itself is the risk — moving a live database with real sessions, real memory and a real inbox history is a project in its own right, not a step.</p>
+
+    <ol>
+      <li><strong>Reversible migrations first.</strong> Every migration gets a matching down script, applied as an atomic batch, tested up-then-down against a clean database in CI <em>before</em> anything touches AWS. One untested down script is the difference between a bad afternoon and a disaster.</li>
+      <li><strong>Event bus.</strong> Eleven event types, persisted with version stamps, indexed on the unhandled-queue lookup because it runs constantly. Hub subscribes rather than polls.</li>
+      <li><strong>Hub's completion guarantee.</strong> A background processor works unhandled events oldest-first to a resolution — completed, escalated, or explicitly superseded. Never blocks foreground work. A pending approval past its 72-hour expiry escalates; it is never auto-approved and never quietly dropped.</li>
+      <li><strong>Observer as a real database role.</strong> SELECT only, on named tables, public grants explicitly revoked, credentials in Secrets Manager, created by a migration so it's reproducible. This is the step Phase 2 could only approximate.</li>
+      <li><strong>Thresholds as SQL.</strong> Five parameterised queries with values injected from policy. The query decides whether a threshold was met; Observer only explains what the rows mean.</li>
+      <li><strong>Decisions table.</strong> Evidence references required — a decision with no evidence isn't recorded as a decision. Three confidence values stored separately, never averaged into one number.</li>
+      <li><strong>Health as counts.</strong> If a number can't come from a live query it isn't displayed. No percentage without both numerator and denominator visible. An empty result shows "no data" — never 0%, never 100%.</li>
+      <li><strong>Semantic judgments as fields.</strong> The model writes <code>drift_detected</code>, <code>same_issue_as_prior</code>, <code>role_drift</code>. Policy decides the consequence. The prompt holds the judgment and never the consequence.</li>
+      <li><strong>Prompt editor versioning.</strong> Bump on every save, all prior versions immutable and retrievable, reject a save that would overwrite without a bump.</li>
+      <li><strong>Slim the prompts — last.</strong> For every remaining sentence, ask whether it's enforced somewhere. If it is, delete it from the prompt. A rule stated twice drifts out of sync.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== ACCEPTANCE ===================== -->
+<section>
+  <p class="sec-label">Proof</p>
+  <h2>The tests that say it's finished</h2>
+  <p class="intro">If any of these fails, the phase it belongs to isn't done, regardless of what else works.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>#</th><th>Test</th><th>Phase</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>Unauthenticated request to every public route returns 401</td><td class="num">0</td></tr>
+        <tr><td class="num">2</td><td>The old password no longer works on the live login</td><td class="num">0</td></tr>
+        <tr><td class="num">3</td><td>You have personally watched an email send, and the log names the word that opened the gate</td><td class="num">1</td></tr>
+        <tr><td class="num">4</td><td>A second worker runs the same pattern end to end</td><td class="num">1</td></tr>
+        <tr><td class="num">5</td><td>An unknown action returns require_approval, not permitted</td><td class="num">2</td></tr>
+        <tr><td class="num">6</td><td>A blocked action stays blocked with a prompt telling the model approval isn't needed</td><td class="num">2</td></tr>
+        <tr><td class="num">7</td><td>An exception inside the policy check blocks the action rather than permitting it</td><td class="num">2</td></tr>
+        <tr><td class="num">8</td><td>An INSERT on Observer's connection is refused by the database driver</td><td class="num">2</td></tr>
+        <tr><td class="num">9</td><td>A new row carries four real version strings without the caller passing them</td><td class="num">2</td></tr>
+        <tr><td class="num">10</td><td>A job fires overnight unattended and appears in the audit log</td><td class="num">3</td></tr>
+        <tr><td class="num">11</td><td>An abandoned confirmation returns to idle on its own</td><td class="num">3</td></tr>
+        <tr><td class="num">12</td><td>Two deliberately mismatched summaries produce a flag that reaches you</td><td class="num">4</td></tr>
+        <tr><td class="num">13</td><td>An event created in either calendar appears in the other, once</td><td class="num">5</td></tr>
+        <tr><td class="num">14</td><td>Task lifecycle replayable from event rows alone, with no transcript</td><td class="num">6</td></tr>
+        <tr><td class="num">15</td><td>CI applies all migrations to a clean database and rolls them all back</td><td class="num">6</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== TIME ===================== -->
+<section>
+  <p class="sec-label">Cost</p>
+  <h2>What each phase buys</h2>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Phase</th><th>What you get</th><th>Time</th></tr></thead>
+      <tbody>
+        <tr><td class="num">0</td><td>Nothing exposed, no contradictions left standing</td><td class="num">1 day</td></tr>
+        <tr><td class="num">1</td><td>The original plan actually finished and proven</td><td class="num">1–2 days</td></tr>
+        <tr><td class="num">2</td><td>Nothing acts without passing a gate, ever</td><td class="num">3 days</td></tr>
+        <tr><td class="num">3</td><td>The system works while you're not looking</td><td class="num">3–4 days</td></tr>
+        <tr><td class="num">4</td><td>Two independent accounts, and a flag when they disagree</td><td class="num">4–7 days</td></tr>
+        <tr><td class="num">5</td><td>Calendar you can see, synced both ways</td><td class="num">1–2 weeks</td></tr>
+        <tr><td class="num">6</td><td>Multi-tenant foundation — only if you need it</td><td class="num">3–6 weeks</td></tr>
+        <tr class="total"><td>0–5</td><td>Everything in the backend spec, finished</td><td class="num">3–5 weeks</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Phases 0 and 1 together are under three days and take you from "live with a hole in it" to "the plan is done." That's the highest-value stretch on the whole list, and everything after it is optional in a way those two aren't.</p>
+</section>
+
+<!-- ===================== OPEN ===================== -->
+<section>
+  <p class="sec-label">Open</p>
+  <h2>Decisions nobody else can make</h2>
+
+  <ul>
+    <li><strong>Memory window</strong> — fourteen days as the backend spec says, or four as the code says.</li>
+    <li><strong>Alerting</strong> — interrupt on a red flag, or on demand only. Phase 4.4 waits on this.</li>
+    <li><strong>Postgres</strong> — migrate, or stay on SQLite and accept the weaker Observer boundary.</li>
+    <li><strong>Second worker</strong> — which service Stage 5 clones to.</li>
+    <li><strong>Retention</strong> — how long conversations, planners and threads are kept. The spec says design it as a setting, not a hardcode, and tune by trial.</li>
+    <li><strong>Vault placement</strong> — separate agent or folded into the hub. Your stated lean is separate, to keep load off Nova.</li>
+    <li><strong>Calendar conflict rules</strong> — which side wins, and what a deletion means. Decide before 5.3, not during.</li>
+  </ul>
+</section>
+
+<!-- ===================== OUT ===================== -->
+<section>
+  <p class="sec-label">Out</p>
+  <h2>Ruled out — do not build</h2>
+
+  <ul>
+    <li><strong>Claude or ChatGPT running inside Command Desk as embedded apps</strong>, and any attempt to wire Claude-with-its-full-tools into the system. You wanted a closed loop with Claude keeping its native tools; it isn't available, and you've decided. They can still appear as pickable apps — the "operates them live in the frame" path is not a target.</li>
+    <li><strong>Anything relying on embedding an app that blocks it.</strong> Assume Gmail, Calendar and Maps cannot be shown in an iframe. The backend link plus per-app updates is the substitute.</li>
+    <li><strong>Video Nova.</strong> Dropped entirely. The original still image, no loop, no motion.</li>
+    <li><strong>Browser-based speech-to-text.</strong> The engine doesn't exist in iPhone Safari, so it can never work as built. The mic stays parked until the phone-records-then-Whisper-on-the-box path is built as a phone app.</li>
+    <li><strong>Rebuilding the permission layer, state machine, auth or oversight.</strong> They work, they're tested, and replacing them would cost weeks to land somewhere worse.</li>
+  </ul>
+</section>
+
+<footer>
+  Verified against command_desk_full_system, snapshot 2026-08-02 · every claim read from source, not from summaries<br>
+  Estimates assume focused work with an agent on the box, and exclude the time you spend confirming each stage on your phone<br>
+  Nothing in this document has been deployed. The live system is unchanged.
+</footer>
+
+</div>
