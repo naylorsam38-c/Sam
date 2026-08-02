@@ -53,14 +53,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      # Intentionally NOT installing the runtime requirements. This check must
+      # work from a bare checkout — a licence gate that needs the whole stack
+      # installed before it can run is a gate you will eventually skip.
       - run: pip install pyyaml
       - name: Fail on any non-commercial component
         run: |
           python - <<'EOF'
           import sys
-          from aura.providers.licences import FORBIDDEN_COMPONENTS
           sys.path.insert(0, "scripts")
-          from licence_audit import scan_tree_and_pkgs
+          from licence_audit import FORBIDDEN_COMPONENTS, scan_tree_and_pkgs
           hits = scan_tree_and_pkgs(".", sorted(set(FORBIDDEN_COMPONENTS)))
           if hits:
               print("Non-commercial components present:")

@@ -58,3 +58,49 @@ def test_clean_manifest_has_no_hard_fails(tmp_path):
                    "commit": "abc123", "sha256": "deadbeef"}])
     fails, pendings = la.audit(lock, str(tmp_path))
     assert fails == []
+
+
+def test_audit_licence_table_loads_without_the_runtime_package():
+    """The audit is a BUILD GATE — it runs in the Dockerfile and in CI, sometimes
+    before the runtime dependencies exist.
+
+    Regression: the shared licence table was reached via `aura.providers.licences`,
+    which executes `aura/providers/__init__.py` and therefore imports every
+    provider module — numpy, cv2, httpx. That made the gate unable to start on a
+    bare checkout, and a gate that cannot start is a gate that does not gate.
+    """
+    import subprocess
+    import sys
+    import textwrap
+
+    # Run in a subprocess with the aura package made unimportable, proving the
+    # table is loaded by path rather than as a package import.
+    code = textwrap.dedent("""
+        import sys, os
+        class _Block:
+            def find_module(self, name, path=None):
+                if name == "aura" or name.startswith("aura."):
+                    raise ImportError(f"blocked: {name}")
+                return None
+        sys.meta_path.insert(0, _Block())
+        sys.path.insert(0, "scripts")
+        from licence_audit import FORBIDDEN_COMPONENTS, _noncommercial
+        assert "insightface" in FORBIDDEN_COMPONENTS
+        assert "codeformer" in FORBIDDEN_COMPONENTS
+        assert _noncommercial("CC-BY-NC-4.0")
+        assert not _noncommercial("MIT")
+        print("OK")
+    """)
+    r = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True)
+    assert r.returncode == 0, f"audit cannot start without the aura package:\n{r.stderr}"
+    assert "OK" in r.stdout
+
+
+def test_forbidden_list_is_shared_with_the_runtime():
+    """The build gate and the runtime registry must ban exactly the same set —
+    otherwise a component is refused at runtime but shipped in the image."""
+    import sys
+    sys.path.insert(0, "scripts")
+    from licence_audit import FORBIDDEN_COMPONENTS
+    from aura.providers.licences import FORBIDDEN_COMPONENTS as RUNTIME
+    assert FORBIDDEN_COMPONENTS == RUNTIME

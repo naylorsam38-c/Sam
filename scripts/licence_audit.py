@@ -31,10 +31,34 @@ import yaml
 
 PLACEHOLDERS = {"PIN_ME", None, "", "null"}
 
-# Single source of truth, shared with the runtime provider registry, so a
-# licence can never be approved at runtime and banned at build time.
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from aura.providers.licences import is_noncommercial as _noncommercial  # noqa: E402
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _load_licence_table():
+    """Load aura/providers/licences.py DIRECTLY BY PATH, not as a package import.
+
+    Same single source of truth the runtime registry uses, so a licence can
+    never be approved at runtime and banned at build time — but reached without
+    executing `aura/providers/__init__.py`, which imports every provider module
+    and therefore numpy, cv2 and httpx.
+
+    That matters because this is a BUILD GATE. It runs in the Dockerfile and in
+    CI, sometimes before the runtime dependencies exist, and a gate that cannot
+    start is a gate that does not gate.
+    """
+    import importlib.util
+    path = os.path.join(_ROOT, "aura", "providers", "licences.py")
+    spec = importlib.util.spec_from_file_location("_aura_licences", path)
+    if spec is None or spec.loader is None:      # pragma: no cover
+        raise RuntimeError(f"cannot load licence table from {path}")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+_LIC = _load_licence_table()
+_noncommercial = _LIC.is_noncommercial
+FORBIDDEN_COMPONENTS = _LIC.FORBIDDEN_COMPONENTS
 
 
 def load(path):
@@ -138,15 +162,30 @@ def audit(lock: dict, root: str):
                 pendings.append(f"{name}: SHA-256 not recorded")
 
     # R7 — every shipped avatar bundle must carry valid, matching provenance
-    for bundle_dir in sorted(glob.glob(os.path.join(root, "assets", "**", "bundle.json"),
-                                       recursive=True)):
-        d = os.path.dirname(bundle_dir)
+    bundles = sorted(glob.glob(os.path.join(root, "assets", "**", "bundle.json"),
+                               recursive=True))
+    if bundles:
+        if root not in sys.path:
+            sys.path.insert(0, root)
         try:
             from aura.studio.provenance import verify_bundle
-            for problem in verify_bundle(d):
-                fails.append(f"R7 {os.path.relpath(d, root)}: {problem}")
-        except Exception as e:
-            fails.append(f"R7 {os.path.relpath(d, root)}: unreadable bundle ({e!r})")
+        except ImportError as e:
+            # The runtime deps are not installed, so R7 CANNOT run. That is an
+            # unverified check, not a passing one and not a bundle defect —
+            # reporting it as either would be a lie about what was checked.
+            verify_bundle = None
+            pendings.append(f"R7 not verified: {e.name or e} unavailable "
+                            f"({len(bundles)} bundle(s) unchecked)")
+        for bundle_json in bundles:
+            d = os.path.dirname(bundle_json)
+            rel = os.path.relpath(d, root)
+            if verify_bundle is None:
+                continue
+            try:
+                for problem in verify_bundle(d):
+                    fails.append(f"R7 {rel}: {problem}")
+            except Exception as e:
+                fails.append(f"R7 {rel}: unreadable bundle ({e!r})")
 
     # R5/R6 — forbidden anywhere in tree / requirements / installed pkgs
     needles = forbidden + ["insightface"]
