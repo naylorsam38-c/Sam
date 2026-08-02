@@ -1,0 +1,86 @@
+# Aura dependency lock + licence manifest (spec §22; correction).
+# Every component that ships MUST have: repo URL, commit hash, package version,
+# model-weight filename (if any), SHA-256, licence (code) and weight licence.
+#
+# Fields left as PIN_ME / null-sha are UNVERIFIED -> scripts/licence_audit.py
+# reports status PENDING (never "licensing verified") until they are filled on
+# the real build host where the exact commits/weights are pulled and hashed.
+#
+# `kind`: infra | code | model_code | model_weight | voice | dataset | test_asset | codec | avatar
+# `download_source`: verified (pinned URL+sha) | unverified (dynamic/unpinned)
+
+approved_code_licences:
+  [MIT, Apache-2.0, BSD-3-Clause, BSD-2-Clause, ISC, MPL-2.0, LGPL-2.1-or-later]
+approved_weight_licences:
+  # explicit commercial grants we accept; extend only after review
+  [Apache-2.0, MIT, BSD-3-Clause, "commercial-use-allowed", "CC0-1.0", "CC-BY-4.0"]
+
+# These MUST NOT appear anywhere in the final image or transitive tree.
+forbidden:
+  - codeformer          # S-Lab License 1.0 — non-commercial
+  - xtts                # Coqui CPML — non-commercial
+  - xtts-v2
+  - xtts_v2
+  - tts                 # coqui 'TTS' pypi pkg bundles XTTS (pip/req exact match only)
+  - coqui-tts
+  - coqui-ai-tts
+  - wav2lip             # non-commercial research weights
+  - insightface         # non-commercial model weights; also blocks InstantID /
+                        #   IP-Adapter-FaceID, the usual identity-consistency route
+  - flux.1-dev          # non-commercial; FLUX.1-schnell (Apache-2.0) is the swap
+
+components:
+  # ── Always-required runtime / CPU fallback ────────────────────────────────
+  - {name: numpy,            kind: code, repo: https://github.com/numpy/numpy, commit: PIN_ME, version: ">=1.26", weight_file: null, sha256: null, licence: BSD-3-Clause, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: opencv-python-headless, kind: code, repo: https://github.com/opencv/opencv-python, commit: PIN_ME, version: ">=4.9", weight_file: null, sha256: null, licence: Apache-2.0, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: soundfile,        kind: code, repo: https://github.com/bastibe/python-soundfile, commit: PIN_ME, version: ">=0.12", weight_file: null, sha256: null, licence: BSD-3-Clause, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: pyyaml,           kind: code, repo: https://github.com/yaml/pyyaml, commit: PIN_ME, version: ">=6.0", weight_file: null, sha256: null, licence: MIT, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: fastapi,          kind: code, repo: https://github.com/tiangolo/fastapi, commit: PIN_ME, version: ">=0.111", weight_file: null, sha256: null, licence: MIT, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: uvicorn,          kind: code, repo: https://github.com/encode/uvicorn, commit: PIN_ME, version: ">=0.30", weight_file: null, sha256: null, licence: BSD-3-Clause, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: httpx,            kind: code, repo: https://github.com/encode/httpx, commit: PIN_ME, version: ">=0.27", weight_file: null, sha256: null, licence: BSD-3-Clause, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: aiortc,           kind: code, repo: https://github.com/aiortc/aiortc, commit: PIN_ME, version: ">=1.15", weight_file: null, sha256: null, licence: BSD-3-Clause, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: av,               kind: code, repo: https://github.com/PyAV-Org/PyAV, commit: PIN_ME, version: ">=12", weight_file: null, sha256: null, licence: BSD-3-Clause, weight_licence: null, dynamic_download: false, download_source: verified}
+
+  # ── Transport (only public surface) ───────────────────────────────────────
+  - {name: livekit-server,   kind: infra, repo: https://github.com/livekit/livekit, commit: PIN_ME, version: PIN_ME, weight_file: null, sha256: null, licence: Apache-2.0, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: livekit-python,   kind: code, repo: https://github.com/livekit/python-sdks, commit: PIN_ME, version: PIN_ME, weight_file: null, sha256: null, licence: Apache-2.0, weight_licence: null, dynamic_download: false, download_source: verified}
+
+  # ── Speech-to-text ────────────────────────────────────────────────────────
+  - {name: faster-whisper,   kind: model_code, repo: https://github.com/SYSTRAN/faster-whisper, commit: PIN_ME, version: PIN_ME, weight_file: null, sha256: null, licence: MIT, weight_licence: null, dynamic_download: true, download_source: unverified, note: "PINS REQUIRED: it fetches CT2 Whisper weights from HF at runtime by default -> pre-download + pin + set local_files_only, else audit rule 3 FAILS"}
+  - {name: whisper-weights-small-en, kind: model_weight, repo: https://huggingface.co/Systran/faster-whisper-small.en, commit: PIN_ME, version: small.en, weight_file: model.bin, sha256: PIN_ME, licence: MIT, weight_licence: MIT, dynamic_download: false, download_source: verified}
+  - {name: silero-vad,       kind: model_weight, repo: https://github.com/snakers4/silero-vad, commit: PIN_ME, version: PIN_ME, weight_file: silero_vad.jit, sha256: PIN_ME, licence: MIT, weight_licence: MIT, dynamic_download: false, download_source: verified}
+
+  # ── TTS ───────────────────────────────────────────────────────────────────
+  - {name: kokoro,           kind: model_code, repo: https://github.com/hexgrad/kokoro, commit: PIN_ME, version: PIN_ME, weight_file: null, sha256: null, licence: Apache-2.0, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: kokoro-82M-weights, kind: model_weight, repo: https://huggingface.co/hexgrad/Kokoro-82M, commit: PIN_ME, version: "82M", weight_file: kokoro-v1_0.pth, sha256: PIN_ME, licence: Apache-2.0, weight_licence: Apache-2.0, dynamic_download: false, download_source: verified}
+
+  # ── Lip sync ──────────────────────────────────────────────────────────────
+  - {name: musetalk-code,    kind: model_code, repo: https://github.com/TMElyralab/MuseTalk, commit: PIN_ME, version: PIN_ME, weight_file: null, sha256: null, licence: MIT, weight_licence: null, dynamic_download: false, download_source: verified, note: "AUDIT + PIN every bundled dependency separately"}
+  - {name: musetalk-weights, kind: model_weight, repo: https://huggingface.co/TMElyralab/MuseTalk, commit: PIN_ME, version: PIN_ME, weight_file: musetalk.pth, sha256: PIN_ME, licence: MIT, weight_licence: "commercial-use-allowed", dynamic_download: false, download_source: verified}
+  # MuseTalk supplied test data is NON-COMMERCIAL -> must not ship. Declared so
+  # the audit FAILS if it is ever added as a shipping asset.
+  - {name: musetalk-test-data, kind: test_asset, repo: https://github.com/TMElyralab/MuseTalk, commit: PIN_ME, version: PIN_ME, weight_file: null, sha256: null, licence: "non-commercial", weight_licence: null, dynamic_download: false, download_source: verified, ship: false}
+
+  # ── Motion (LivePortrait, InsightFace REMOVED) ────────────────────────────
+  - {name: liveportrait-code, kind: model_code, repo: https://github.com/KwaiVGI/LivePortrait, commit: PIN_ME, version: PIN_ME, weight_file: null, sha256: null, licence: MIT, weight_licence: null, dynamic_download: false, download_source: verified, note: "Use ONLY after removing InsightFace pretrained models; detector replaced by YuNet"}
+  - {name: liveportrait-weights, kind: model_weight, repo: https://huggingface.co/KwaiVGI/LivePortrait, commit: PIN_ME, version: PIN_ME, weight_file: liveportrait.safetensors, sha256: PIN_ME, licence: MIT, weight_licence: MIT, dynamic_download: false, download_source: verified}
+
+  # ── Face detector (commercially permitted; replaces InsightFace) ──────────
+  - {name: yunet, kind: model_weight, repo: https://github.com/opencv/opencv_zoo, commit: PIN_ME, version: "2023mar", weight_file: face_detection_yunet_2023mar.onnx, sha256: PIN_ME, licence: MIT, weight_licence: MIT, dynamic_download: false, download_source: verified}
+
+  # ── Restoration (GFPGAN; NOT CodeFormer) ──────────────────────────────────
+  - {name: gfpgan-code, kind: model_code, repo: https://github.com/TencentARC/GFPGAN, commit: PIN_ME, version: PIN_ME, weight_file: null, sha256: null, licence: Apache-2.0, weight_licence: null, dynamic_download: false, download_source: verified}
+  - {name: gfpgan-weights, kind: model_weight, repo: https://github.com/TencentARC/GFPGAN, commit: PIN_ME, version: v1.4, weight_file: GFPGANv1.4.pth, sha256: PIN_ME, licence: Apache-2.0, weight_licence: Apache-2.0, dynamic_download: true, download_source: unverified, note: "pre-download + pin; basicsr/facexlib pull weights dynamically -> pin or audit rule 3 FAILS"}
+
+  # ── Avatar studio: image generation (commercial-safe only) ────────────────
+  - {name: flux-schnell, kind: model_weight, repo: https://huggingface.co/black-forest-labs/FLUX.1-schnell, commit: PIN_ME, version: PIN_ME, weight_file: flux1-schnell.safetensors, sha256: PIN_ME, licence: Apache-2.0, weight_licence: Apache-2.0, dynamic_download: false, download_source: verified, note: "schnell ONLY. FLUX.1-dev is non-commercial and looks identical in the output."}
+  - {name: diffusers, kind: code, repo: https://github.com/huggingface/diffusers, commit: PIN_ME, version: PIN_ME, weight_file: null, sha256: null, licence: Apache-2.0, weight_licence: null, dynamic_download: false, download_source: verified}
+
+  # ── Avatar studio: driving-video generation ───────────────────────────────
+  - {name: wan-2.2-i2v, kind: model_weight, repo: https://huggingface.co/Wan-AI/Wan2.2-I2V-A14B-Diffusers, commit: PIN_ME, version: "2.2", weight_file: PIN_ME, sha256: PIN_ME, licence: Apache-2.0, weight_licence: Apache-2.0, dynamic_download: false, download_source: verified, note: "Apache-2.0 on code AND weights — rare for video models; most carry field-of-use limits."}
+
+  # ── Codec ─────────────────────────────────────────────────────────────────
+  - {name: vp8, kind: codec, repo: https://chromium.googlesource.com/webm/libvpx, commit: PIN_ME, version: PIN_ME, weight_file: null, sha256: null, licence: BSD-3-Clause, weight_licence: null, dynamic_download: false, download_source: verified, note: "royalty-free; avoids H.264 patent pool"}
+
+  # ── Avatar identity asset ─────────────────────────────────────────────────
+  - {name: nova-avatar, kind: avatar, repo: local, commit: null, version: "1", weight_file: assets/nova.png, sha256: PIN_ME, licence: "owner-consent-required", weight_licence: null, dynamic_download: false, download_source: verified, note: "record identity ownership + consent (spec §21)"}

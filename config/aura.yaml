@@ -1,0 +1,78 @@
+# Aura runtime configuration (spec §10 — models are config, never hardcoded).
+# Defaults are chosen for COMMERCIAL-SAFE licensing (see docs/LICENSING_REGISTER.md).
+
+stt:
+  engine: faster-whisper        # MIT; Whisper weights MIT — commercial ok
+  model: small.en
+  device: cuda
+  compute_type: int8_float16
+
+tts:
+  engine: kokoro                # Apache-2.0 — commercial ok (NOT xtts: non-commercial)
+  voice: nova
+  sample_rate: 24000
+
+# ── THE SWITCH ──────────────────────────────────────────────────────────────
+# One block decides whether you pay per minute or per GPU-hour. Nothing else in
+# the codebase changes when you flip it.
+#
+#   api         best hosted quality, ~$0.058/conversation-minute, zero capex
+#   selfhosted  open weights on your GPU, ~$0.50/GPU-hour, no per-minute fee
+#   auto        prefer local, borrow the API only when local cannot run
+#   offline     never leaves the machine, never bills
+#
+# Break-even is ~14% GPU utilisation (~3.5 conversation-hours/day). Below that
+# the API is cheaper AND better; above it, own the card.
+providers:
+  policy: auto
+  tts_engine: auto              # or: cartesia | elevenlabs | kokoro | espeak
+  stt_engine: auto              # or: deepgram | faster-whisper | null
+  avatar_engine: auto           # or: simli | musetalk | fallback
+  commercial: true              # refuse any provider not cleared for commercial use
+  utilisation: 1.0              # expected GPU busy fraction, for the cost report
+
+# ── Avatar asset generation (scripts/make_avatar.py) ────────────────────────
+studio:
+  image_engine: flux-schnell    # Apache-2.0. NOT flux-dev (non-commercial)
+  video_engine: wan             # Wan 2.2, Apache-2.0 code + weights
+  out_dir: assets/generated
+  driving_seconds: 8.0
+  seed: 0
+
+avatar:
+  lipsync: musetalk             # code MIT; trained model commercial-ok; AUDIT+PIN every bundled dep/weight; DO NOT ship its test data (non-commercial)
+  motion: liveportrait          # MIT code; MUST swap InsightFace detector (non-commercial)
+  enhancer: gfpgan              # permissive (NOT codeformer: non-commercial)
+  output_width: 720
+  output_height: 1280
+  output_fps: 25
+  source_image: assets/nova.png
+  # A short loop of real footage to inpaint the mouth onto. THE single biggest
+  # lever on perceived quality — a still image gives one fixed head pose for
+  # every frame, which is what reads as "photo with a moving mouth".
+  # Build one: python scripts/make_avatar.py --name nova --image <portrait>
+  driving_video: null
+
+brain:                          # EXTERNAL — never rebuilt by Aura
+  mode: external
+  endpoint: http://commanddesk-internal/chat
+  timeout_s: 30
+
+transport:
+  engine: livekit               # Apache-2.0, self-hosted
+  codec: vp8                    # royalty-free; h264 carries MPEG-LA patent cost
+  data_channel: true
+  url: ws://livekit:7880
+
+gpu:
+  stt_mem_mb: 1500
+  tts_mem_mb: 1500
+  render_mem_mb: 6000
+  warmup: true
+  devices:                      # move a stage to another GPU later, no code change
+    stt: cuda:0
+    tts: cuda:0
+    render: cuda:0
+
+quality_default: 3              # start at Level 3; ladder degrades visuals only
+drift_budget_ms: 80

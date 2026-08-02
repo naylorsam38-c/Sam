@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.licence_status
+samples/*.wav
+samples/*_v.mp4
+.env
+models/
+out/
