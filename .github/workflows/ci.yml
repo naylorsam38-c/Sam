@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      # espeak-ng backs the fallback TTS; ffmpeg encodes driving loops and demo
+      # clips. Without them several tests skip rather than fail, which is worse
+      # than either — a green run that silently covered less.
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends espeak-ng ffmpeg
+
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest -q --tb=short
+
+      # The audit exits 2 until commits and SHA-256 are pinned on a real build
+      # host, so it must NOT gate the PR — that would be red by design forever.
+      # It runs informationally here; `make build` is where it actually blocks.
+      - name: Licence + dependency audit (informational)
+        if: always()
+        run: |
+          python scripts/licence_audit.py || true
+          echo "status: $(cat .licence_status 2>/dev/null || echo unknown)"
+          echo "The audit gates \`make build\`, not this workflow." >> "$GITHUB_STEP_SUMMARY"
+          echo "Current status: \`$(cat .licence_status 2>/dev/null || echo unknown)\`" >> "$GITHUB_STEP_SUMMARY"
+
+  no-noncommercial-deps:
+    # A separate, genuinely blocking check: the forbidden-component rules are
+    # not "pending" like the pins are. If CodeFormer, XTTS, Wav2Lip, InsightFace
+    # or FLUX.1-dev appear in the tree, that is a hard stop at any stage.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pyyaml
+      - name: Fail on any non-commercial component
+        run: |
+          python - <<'EOF'
+          import sys
+          from aura.providers.licences import FORBIDDEN_COMPONENTS
+          sys.path.insert(0, "scripts")
+          from licence_audit import scan_tree_and_pkgs
+          hits = scan_tree_and_pkgs(".", sorted(set(FORBIDDEN_COMPONENTS)))
+          if hits:
+              print("Non-commercial components present:")
+              for h in hits:
+                  print("  x", h)
+              sys.exit(1)
+          print("No non-commercial components found.")
+          EOF
