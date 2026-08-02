@@ -13,10 +13,10 @@ Marks: `OK` = correct/yes · `NO` = wrong/no · `?` = don't know yet · or write
 | A1 | `SPEC.html` is **Aura** — a self-hosted talking-avatar system. A different project from Command Desk. Two copies were uploaded; they are byte-identical. | |
 | A2 | `CommandDesk_COMMAND_final_merged.md` is the governing document. Stages 0–5. Everything else defers to it. | |
 | A3 | `commanddesk_rebuild` (30 Jul, 22:04, 378-line `app.js`) is **newer and fuller** than `Command_Desk_Home_Redesign` (30 Jul, 17:18, 70-line `app.js`). | |
-| A4 | **Neither front end has a login gate.** No login form, no password check, no auth anywhere. `authMode: "Existing site session"` in `config.js` is a label, not a lock. | |
-| A5 | By the doc's own rule, that means Stage 1 is not done and Stage 3 must not start. | |
-| A6 | Both front ends still wire `webkitSpeechRecognition` — the dead link the doc says to park, and the one that cannot work in iPhone Safari. | |
-| A7 | No backend in any zip. No hub, no six agents, no Ollama, no SQLite, no EC2. Stages 0, 2, 3, 4 have no code here. | |
+| A4 | ~~Neither front end has a login gate.~~ **CORRECTED.** True only of the front-end-only zips. `command_desk_full_system` (dated today) has the gate built properly — see section F. | |
+| A5 | ~~Stage 1 not done, Stage 3 must not start.~~ **CORRECTED.** Stages 1–4 are built and live. | |
+| A6 | The older front-end-only bundles still wire `webkitSpeechRecognition`. The live frontend in `full_system` is static-only with motion stripped. | |
+| A7 | ~~No backend in any zip.~~ **CORRECTED.** `command_desk_full_system` contains the whole backend — 4,347 lines of Python. | |
 | A8 | Clean: no `.mp4`, no `<video>`, straight quotes throughout, chat contract intact (`{avatar, theme, agent, message, session_id}` → `/commanddesk/chat`). | |
 | A9 | The doc says zips are **not** deployment candidates — "the live running system is the ONLY truth." These files are reference. | |
 | A10 | Nothing built in this chat session (the 8787 app) relates to Command Desk. It came from a wrong description of the handoff. | |
@@ -61,6 +61,50 @@ Marks: `OK` = correct/yes · `NO` = wrong/no · `?` = don't know yet · or write
 - Write "tested" or "works" for anything only you can see on your phone.
 - Start a stage before the one before it is proven.
 - Build a second unknown at the same time as a first.
+
+---
+
+## F. Audit of the live system snapshot (`command_desk_full_system`, dated 2026-08-02)
+
+I traced these through the source myself rather than trusting the README.
+
+### F1. The identity gate is real. It holds.
+
+| Check | Result |
+|---|---|
+| Password stored hashed, never plaintext-compared | **PASS** — bcrypt, `checkpw` (`auth.py:47`) |
+| Never in any front-end file | **PASS** — backend-only constant |
+| Gate on backend actions, not just the page | **PASS** — `require_auth` on every gated route, and the permission layer re-checks independently |
+| HTTPS only | **PASS** — `secure=True`, `httponly=True`, `samesite='lax'` |
+| One session identity, shared with the state machine | **PASS** — login opens the real `sessions` row; no parallel session concept |
+| Lockout on repeated guesses | **PASS** — 5 failures / 15-min rolling window → 429 |
+
+The `samesite='lax'` choice is correct and the reasoning in the code is right: `strict` would silently break the Google OAuth callback.
+
+### F2. Gmail is NOT exposed to an unauthenticated caller. Your absolute failure condition holds.
+
+`permission_layer.request_gmail_read` calls `validate_session` **before** any action row, any state transition, and any Gmail call (`permission_layer.py:212`). Draft and send do the same. So even reached through an ungated route, an unauthenticated caller gets `"Not authenticated -- Gmail read refused."` The defence-in-depth is genuine.
+
+### F3. **One real exposure.** `/commanddesk/chat` is public and unauthenticated.
+
+Traced end to end: `https://airexploit.com/commanddesk/chat` → nginx `location /commanddesk/` → adapter :8000 `/chat` → core `/api/chat` → `handle_turn()` → **the brain**. No `require_auth` anywhere on that path.
+
+Consequences:
+- Anyone who finds the URL can talk to your models and **spend your Anthropic budget**.
+- It accepts a caller-supplied `session_id`, so an outsider can write into session transcript and continuity.
+- It contradicts the doc: *"It covers the whole page, not just Gmail... one gate in front of everything leaves no gap to slip through."*
+
+Not affected: Gmail (F2 blocks it).
+
+### F4. The other ungated routes are less alarming than the README implies.
+
+`/api/tools`, `/api/groups`, `/api/agents/*`, `/api/memory/*`, `/api/decision`, `/api/nudge` are all ungated — but core binds `127.0.0.1` and nginx proxies only three core prefixes (`/auth/`, `/oauth/`, `/nova/`). None of them are reachable from the internet. Reachable only from the box itself. Worth fixing, not urgent.
+
+Credit where due: `tools.py` strips credentials out of every read path (`get_tool_public`, `_public`), so even locally nothing leaks a stored token.
+
+### F5. Rotate the login password.
+
+`core/auth.py` carries `DEFAULT_PASSWORD = 'Nova'` as a cleartext constant, and the same credential is written into the COMMAND doc. Both are now in zips that have moved around. The README flags this itself. It's a one-line fix on the box.
 
 ---
 
