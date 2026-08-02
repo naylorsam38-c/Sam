@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review queue — Command Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#16211F;
+  --panel:#1F2E2B;
+  --panel-lift:#273936;
+  --rule:#334844;
+  --text:#E8EDE9;
+  --muted:#8AA09A;
+  --clay:#D4614C;
+  --clay-dim:#3A2622;
+  --amber:#E0A33E;
+  --amber-dim:#3A3021;
+  --mint:#6FB295;
+  --mint-dim:#22332D;
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Public Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--base);
+  color:var(--text);
+  font-family:var(--body);
+  line-height:1.5;
+  padding:22px 16px 64px;
+  max-width:640px;
+  margin:0 auto;
+}
+
+/* ---------- header ---------- */
+.masthead{border-bottom:1px solid var(--rule);padding-bottom:18px;margin-bottom:8px}
+.eyebrow{
+  font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+}
+.masthead h1{
+  font-family:var(--display);font-weight:800;font-size:clamp(30px,9vw,42px);
+  letter-spacing:-.025em;line-height:1;margin:10px 0 12px;
+}
+.tally{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.tally b{color:var(--text);font-weight:600}
+.tally .quiet{color:var(--mint)}
+
+/* ---------- section headings ---------- */
+.band{margin:36px 0 4px;display:flex;align-items:baseline;gap:10px}
+.band-mark{width:22px;height:2px;flex:none;transform:translateY(-4px)}
+.band h2{
+  font-family:var(--display);font-weight:600;font-size:15px;
+  letter-spacing:.01em;
+}
+.band p{
+  font-size:12.5px;color:var(--muted);margin:2px 0 0 32px;
+  max-width:44ch;line-height:1.45;
+}
+.band-wrap{margin-bottom:16px}
+.wrong .band-mark{background:var(--clay)}
+.blind .band-mark{background:var(--amber)}
+
+/* ---------- case card ---------- */
+.case{
+  background:var(--panel);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--rule);
+  border-radius:3px;
+  padding:16px 16px 14px;
+  margin-bottom:12px;
+  opacity:0;
+  transform:translateY(8px);
+  animation:rise .5s cubic-bezier(.2,.7,.3,1) forwards;
+}
+.case.wrong{border-left-color:var(--clay)}
+.case.blind{border-left-color:var(--amber)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+.case-top{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;margin-bottom:11px;
+}
+.trigger{
+  font-family:var(--mono);font-size:9.5px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:4px 7px;border-radius:2px;white-space:nowrap;
+}
+.wrong .trigger{background:var(--clay-dim);color:var(--clay)}
+.blind .trigger{background:var(--amber-dim);color:var(--amber)}
+.stamp{font-family:var(--mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
+
+.headline{
+  font-family:var(--display);font-weight:600;font-size:19px;
+  letter-spacing:-.01em;line-height:1.25;margin-bottom:13px;
+}
+
+/* ---------- the receipt: signature element ---------- */
+.receipt{
+  background:var(--base);border:1px solid var(--rule);border-radius:2px;
+  padding:11px 12px;margin-bottom:12px;
+}
+.line{display:flex;gap:9px;padding:5px 0;align-items:flex-start}
+.line + .line{border-top:1px dotted var(--rule)}
+.who{
+  font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--muted);
+  letter-spacing:.1em;text-transform:uppercase;flex:none;width:56px;
+  padding-top:3px;
+}
+.said{font-family:var(--mono);font-size:12.5px;line-height:1.55;word-break:break-word}
+mark{
+  background:var(--clay-dim);color:var(--clay);
+  padding:1px 3px;border-radius:2px;font-weight:600;
+  text-decoration:underline;text-decoration-style:wavy;
+  text-underline-offset:3px;text-decoration-thickness:1px;
+}
+mark.gap{background:var(--amber-dim);color:var(--amber)}
+
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.chip{
+  font-family:var(--mono);font-size:10.5px;
+  padding:3px 7px;border-radius:2px;border:1px solid var(--rule);
+  color:var(--muted);display:inline-flex;gap:5px;align-items:center;
+}
+.chip i{font-style:normal;font-weight:600}
+.chip.ok{border-color:var(--mint-dim);background:var(--mint-dim);color:var(--mint)}
+.chip.bad{border-color:var(--clay-dim);background:var(--clay-dim);color:var(--clay)}
+.chip.none{border-style:dashed}
+
+.note{font-size:14px;line-height:1.55;color:var(--text);margin-bottom:14px}
+.note .lead{
+  font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--muted);
+  letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:5px;
+}
+.note b{font-weight:600}
+
+.acts{display:flex;gap:8px}
+button{
+  font-family:var(--body);font-size:13.5px;font-weight:600;
+  padding:9px 14px;border-radius:2px;cursor:pointer;
+  border:1px solid var(--rule);background:transparent;color:var(--text);
+  transition:background .15s,border-color .15s;
+}
+button:hover{background:var(--panel-lift)}
+button.keep{border-color:var(--clay);color:var(--clay)}
+button.keep:hover{background:var(--clay-dim)}
+button:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+
+/* ---------- cleared state ---------- */
+.cleared{
+  border-color:var(--mint-dim);border-left-color:var(--mint);
+  background:var(--base);
+}
+.cleared .headline{color:var(--muted);font-size:15px;margin:0}
+
+.footnote{
+  margin-top:34px;padding-top:16px;border-top:1px solid var(--rule);
+  font-size:12.5px;color:var(--muted);line-height:1.6;
+}
+.footnote b{color:var(--text);font-weight:600}
+
+@media (prefers-reduced-motion:reduce){
+  .case{animation:none;opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="eyebrow">Command Desk</div>
+  <h1>Review queue</h1>
+  <p class="tally"><b>3</b> waiting on you &nbsp;·&nbsp; <span class="quiet">47 checked and cleared without asking</span></p>
+</header>
+
+<!-- ============ SOMETHING WENT WRONG ============ -->
+<div class="band-wrap">
+  <div class="band wrong">
+    <span class="band-mark"></span>
+    <h2>Something went wrong</h2>
+  </div>
+  <p>An agent stated a detail nobody gave it, or did something other than what it said.</p>
+</div>
+
+<article class="case wrong" style="animation-delay:.05s">
+  <div class="case-top">
+    <span class="trigger">Made a detail up</span>
+    <span class="stamp">28 Jul · 10:41</span>
+  </div>
+  <h3 class="headline">It invoiced a month you never mentioned.</h3>
+
+  <div class="receipt">
+    <div class="line">
+      <span class="who">You said</span>
+      <span class="said">chase up Acme about that invoice</span>
+    </div>
+    <div class="line">
+      <span class="who">It wrote</span>
+      <span class="said">send <mark>March</mark> invoice to Acme Corp</span>
+    </div>
+    <div class="chips">
+      <span class="chip ok"><i>✓</i> Acme Corp — you said it</span>
+      <span class="chip bad"><i>✗</i> March — never said</span>
+      <span class="chip none">no amount stated</span>
+    </div>
+  </div>
+
+  <p class="note">
+    <span class="lead">What this means</span>
+    You asked about an invoice without naming one. It picked <b>March</b> on its own and
+    wrote that down as if you'd asked for it. Nothing was sent. If it had been,
+    Acme would have received the wrong invoice.
+  </p>
+
+  <div class="acts">
+    <button class="keep">Needs a look</button>
+    <button>That's fine</button>
+  </div>
+</article>
+
+<article class="case wrong" style="animation-delay:.12s">
+  <div class="case-top">
+    <span class="trigger">Made a detail up</span>
+    <span class="stamp">28 Jul · 10:38</span>
+  </div>
+  <h3 class="headline">It filled in a day, an amount and a month, unprompted.</h3>
+
+  <div class="receipt">
+    <div class="line">
+      <span class="who">You said</span>
+      <span class="said">email the invoice to Acme and also schedule a follow-up call for next week</span>
+    </div>
+    <div class="line">
+      <span class="who">It wrote</span>
+      <span class="said">send <mark>March</mark> invoice to Acme Corp for <mark>$250</mark></span>
+    </div>
+    <div class="line">
+      <span class="who">and</span>
+      <span class="said">schedule call with the team on <mark>Thursday</mark></span>
+    </div>
+    <div class="chips">
+      <span class="chip ok"><i>✓</i> Acme — you said it</span>
+      <span class="chip bad"><i>✗</i> March — never said</span>
+      <span class="chip bad"><i>✗</i> $250 — never said</span>
+      <span class="chip bad"><i>✗</i> Thursday — never said</span>
+    </div>
+  </div>
+
+  <p class="note">
+    <span class="lead">What this means</span>
+    You said <b>next week</b>. It chose Thursday. You named no amount. It chose $250.
+    Three invented details in one instruction — this is the local test model guessing
+    to sound certain. Worth knowing before anything runs unattended.
+  </p>
+
+  <div class="acts">
+    <button class="keep">Needs a look</button>
+    <button>That's fine</button>
+  </div>
+</article>
+
+<!-- ============ COULDN'T BE CHECKED ============ -->
+<div class="band-wrap">
+  <div class="band blind">
+    <span class="band-mark"></span>
+    <h2>Couldn't be checked</h2>
+  </div>
+  <p>Nothing here is known to be wrong. The problem is that nobody could tell either way.</p>
+</div>
+
+<article class="case blind" style="animation-delay:.19s">
+  <div class="case-top">
+    <span class="trigger">No intent recorded</span>
+    <span class="stamp">28 Jul · 05:21</span>
+  </div>
+  <h3 class="headline">It acted without saying what it was doing.</h3>
+
+  <div class="receipt">
+    <div class="line">
+      <span class="who">You said</span>
+      <span class="said">Oversight pipeline test — please give a short real reply.</span>
+    </div>
+    <div class="line">
+      <span class="who">It wrote</span>
+      <span class="said"><mark class="gap">nothing recorded</mark></span>
+    </div>
+    <div class="chips">
+      <span class="chip none">no action stated</span>
+      <span class="chip none">no recipient stated</span>
+      <span class="chip none">no amount stated</span>
+    </div>
+  </div>
+
+  <p class="note">
+    <span class="lead">What this means</span>
+    The agent replied, but never wrote down what it intended to do — so there was
+    nothing to check its work against. <b>This isn't an error.</b> It's a hole in the
+    safety net, which is the kind of thing that bites later rather than now.
+  </p>
+
+  <div class="acts">
+    <button class="keep">Needs a look</button>
+    <button>That's fine</button>
+  </div>
+</article>
+
+<article class="case cleared" style="animation-delay:.26s">
+  <div class="case-top">
+    <span class="trigger" style="background:var(--mint-dim);color:var(--mint)">Cleared</span>
+    <span class="stamp">28 Jul · 10:44</span>
+  </div>
+  <h3 class="headline">47 other sessions checked out and never reached this page.</h3>
+</article>
+
+<p class="footnote">
+  A session only lands here if it fails a check. Everything else is verified and
+  filed without asking you.
+  <b>Two of the three above are blind spots, not mistakes</b> — that difference is
+  deliberate, and the queue will always tell you which one you're looking at.
+</p>
+
+<script>
+document.querySelectorAll('.acts button').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var card = btn.closest('.case');
+    var keep = btn.classList.contains('keep');
+    card.style.transition = 'opacity .3s, transform .3s';
+    card.style.opacity = '.35';
+    card.querySelector('.acts').innerHTML =
+      '<span style="font-family:var(--mono);font-size:11px;color:var(--muted)">' +
+      (keep ? 'Kept — marked for a closer look' : 'Cleared') + '</span>';
+  });
+});
+</script>
+
+</body>
+</html>

@@ -108,6 +108,41 @@ Credit where due: `tools.py` strips credentials out of every read path (`get_too
 
 ---
 
+## G. The screenshot, the tests, and the three HTML files
+
+### G1. `test_compare.py` — I ran it. 25/25 passed.
+
+Byte-identical to the copy in the snapshot. The deterministic half of the oversight brain genuinely works: wrong amounts caught, money formatting not creating false mismatches, invented months and weekdays caught, genuine intent not falsely accused.
+
+**One bug:** the run command in its own docstring is wrong. `python -m oversight.test_compare` fails with `ImportError: attempted relative import beyond top-level package`. The working command is:
+
+```bash
+cd backend && python3 -m core.oversight.test_compare
+```
+
+### G2. The screenshot — `[research] ok` is not in any code you've sent me.
+
+Dated **Thu 30 July**, showing the Research room returning `[research] ok` to "hello". I searched every package: that reply exists nowhere in the current backend, nor in any of the six front-end bundles. Two things follow:
+
+- It came from whatever was running on the box on 30 July — consistent with the COMMAND doc's Stage 0 note that builder and tester were frozen on a stale refusal and personal_assistant returned an empty reply.
+- There's no login screen in the screenshot, which fits: 30 July predates the Stage 1 gate.
+
+So this is most likely a **historical** picture, not current state. I can't confirm that without the box.
+
+### G3. `commanddesk_2.html` — this is a working unauthenticated client for the exposure in F3.
+
+It posts straight to `/commanddesk/chat` with `{avatar, theme, agent, message}` and **no session_id and no login**. Served from airexploit.com it reaches the agents. This isn't a theoretical hole — this file is a demonstration of it.
+
+### G4. `commanddesk_match.html` is superseded. Don't treat it as current.
+
+It certifies "Nova, full body, animated face — blinks when idle, mouth moves when she speaks." The live system has **motion stripped, static only**, per your later explicit instruction. The document describes an earlier build.
+
+### G5. `reviewqueue.html` is a mockup, not wired.
+
+Hardcoded example cases (the same Acme/March fixtures as the tests). The buttons only fade the card — no backend call, nothing written to `review_queue`. Also: it pulls fonts from `fonts.googleapis.com`, so every view of your private oversight page makes a request to Google. Worth removing before it goes anywhere real.
+
+---
+
 ## E. Open question I can't answer from the files
 
 The doc says Nova speaks and Sam types for this phase. The front end does have interactive chat wired to `hub`. If what you're missing is interactive **voice**, that's the parked mic (A6/B8) and it's a later stage by the doc's own order. If what you're missing is interactive **text on the live site**, tell me — because the code for that exists in `commanddesk_rebuild` and the question becomes why it isn't working on the box, which is a Stage 0 answer, not a rebuild.
