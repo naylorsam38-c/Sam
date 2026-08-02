@@ -201,6 +201,64 @@ I diffed it against every bundled `app.js`. It's distinct. That makes **at least
 
 ---
 
+## I. What's been dropped — cross-comparing all five dispatch docs
+
+### I1. `DISPATCHv4buildspec` — nothing lost. Safe to discard.
+
+`COMMANDDESKFINALROADMAP` says it supersedes this, and it does. FINAL is a strict superset: it adds reversible migrations with tested down-scripts (Step 2), Hub's event-completion guarantee (Step 6), the 72-hour approval TTL, health-as-counts detail, and 8 acceptance tests instead of 5. Nothing in v4 is absent from FINAL. The same PostgreSQL blocker (section H) applies to both.
+
+### I2. `BACKEND_SPEC_for_Dispatch` — six requirements never built, and absent from the final COMMAND doc.
+
+This is the real find. Verified against the live code, not the README.
+
+| Requirement | Status in the live system |
+|---|---|
+| **Per-app status updates ~once a minute** | **NOT BUILT.** Impossible as designed — there is no scheduler of any kind in the codebase. `vault.py:19` states it outright. |
+| **Nightly Nova + memory debrief** | **NOT BUILT.** Same reason — nothing can fire on a nightly cadence. |
+| **Hub's own read-only link to each app**, separate from the worker's | **NOT BUILT**, and it contradicts the current design, which deliberately funnels all Gmail through one place. |
+| **Two independent summaries, Nova cross-references and adjudicates** | **DIFFERENT.** Oversight compares Hub's *stated intent* against *what happened* — not a worker summary against a watcher summary. Angel writes to a `review_queue` for you, so there's **no tiebreaker and no escalation path through Nova**. |
+| **Red-flag alerting that interrupts immediately** | **NOT BUILT** — and directly contradicted by `PROMPTS v3`: *"Nothing is ever pushed as an alert. Everything is available on demand."* Two of your own documents disagree. |
+| **Calendar: Command Desk's own view + two-way sync** | **NOT BUILT.** No calendar module exists anywhere. |
+| Email style mimicry | **BUILT** — `core/style_profile.py`. |
+
+### I3. A number conflict worth settling in one line.
+
+`BACKEND_SPEC` says worker memory is **14 daily summaries (two weeks)**. The live code says:
+
+```python
+MEMORY_WINDOW_DAYS = int(os.getenv("MEMORY_WINDOW_DAYS", "4"))  # 3-5, tunable
+```
+
+and the snapshot README calls 4 *"Sam's locked 3-5 day spec."* Fourteen versus four. It's env-tunable so changing it is trivial — but two of your documents record different things as "locked."
+
+### I4. A stated invariant that isn't quite true.
+
+The snapshot README says the Gmail tool *"lives in exactly one place… no other path in the codebase touches the Gmail API."* There is a second path: `style_profile.py:60` builds its own Gmail service and reads your sent mail directly.
+
+It is auth-gated at the route (`/api/style_profile/build` has `require_auth`) and it does write to the audit log — so this is **not** a security hole. But it bypasses the permission layer, so that read creates no action record and gets no independent session re-check. The invariant is worth either restoring or restating.
+
+### I5. `Dispatch_ORDER_full` — do not hand this to anyone now.
+
+It opens: *"Do all of it. Don't come back until it's done… Do not ping Sam mid-run with questions."*
+
+That is the direct opposite of the final COMMAND doc, which says *"One stage at a time. Finish, prove, STOP, wait for go"* and requires every task be reverse-engineered and brought back to you **before** work starts. It also tells dispatch to copy `assets/video/*` (video is now explicitly dropped) and defaults the mail worker to Ollama (live runs Haiku). Superseded on every major point.
+
+### I6. Superseded across the older docs — for the record
+
+- **Nova as a 7-second video loop** (`COMMAND_CHAIN_final` Stage 1, plus `Dispatch_ORDER` and `Dispatch_Checklist` both saying copy `assets/video/`) → the final COMMAND doc drops video entirely, and the live frontend is static-only.
+- **"Backend Python untouched, never restarted"** (`Dispatch_Checklist`, `COMMAND_CHAIN` pin 2) → superseded. The Python backend has since had the permission layer, router, state machine, oversight and auth built into it.
+- `Dispatch_Checklist` steps 2.1–2.9 (mail worker read → draft → send) → all completed; they're Stages 2–4 in the final doc.
+
+### I7. Net: what's actually still missing from everything built
+
+1. Calendar — own view, two-way sync. Never started.
+2. Any scheduled work at all — the 1-minute heartbeat and the nightly debrief both need a scheduler that doesn't exist.
+3. Hub's independent read-only view per app ("what happened in Gmail today?").
+4. Worker-vs-watcher dual summaries with Nova adjudicating a disagreement.
+5. Interrupt-level alerting for something clearly wrong — pending your call on push-vs-pull, since your docs conflict.
+
+---
+
 ## E. Open question I can't answer from the files
 
 The doc says Nova speaks and Sam types for this phase. The front end does have interactive chat wired to `hub`. If what you're missing is interactive **voice**, that's the parked mic (A6/B8) and it's a later stage by the doc's own order. If what you're missing is interactive **text on the live site**, tell me — because the code for that exists in `commanddesk_rebuild` and the question becomes why it isn't working on the box, which is a Stage 0 answer, not a rebuild.
