@@ -1,0 +1,511 @@
+<title>Command Desk — Agent Register</title>
+<style>
+  :root {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --clay: #9d3a2e; --clay-bg: #f2dcd8;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+      --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+      --amber: #e0a33e; --amber-bg: #33280f;
+      --teal: #62b39c; --teal-bg: #16302a;
+      --clay: #d57d6d; --clay-bg: #331f1b;
+      --slate: #8fb0d4; --slate-bg: #1b2733;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+    --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+    --amber: #e0a33e; --amber-bg: #33280f;
+    --teal: #62b39c; --teal-bg: #16302a;
+    --clay: #d57d6d; --clay-bg: #331f1b;
+    --slate: #8fb0d4; --slate-bg: #1b2733;
+  }
+  :root[data-theme="light"] {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --clay: #9d3a2e; --clay-bg: #f2dcd8;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+  }
+
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans);
+         font-size: 16px; line-height: 1.58; margin: 0; padding: 0 20px 80px; }
+  .wrap { max-width: 740px; margin: 0 auto; }
+
+  .masthead { padding: 40px 0 22px; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .2em;
+             text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+  h1 { font-size: clamp(28px, 7vw, 40px); line-height: 1.08; letter-spacing: -.02em;
+       font-weight: 700; margin: 0 0 14px; text-wrap: balance; }
+  .standfirst { font-size: 17px; color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+  section { padding-top: 44px; }
+  .part-label { font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+                text-transform: uppercase; color: var(--amber); margin: 0 0 8px; }
+  h2 { font-size: 23px; letter-spacing: -.015em; font-weight: 700; margin: 0 0 8px; text-wrap: balance; }
+  p { margin: 11px 0; max-width: 66ch; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+
+  ul, ol { margin: 9px 0; padding-left: 20px; max-width: 64ch; }
+  li { margin: 5px 0; color: var(--ink-soft); }
+  li strong { color: var(--ink); font-weight: 650; }
+
+  code { font-family: var(--mono); font-size: .87em; background: var(--rule-soft);
+         padding: 1px 5px; border-radius: 2px; word-break: break-word; }
+
+  .scroll { overflow-x: auto; margin: 18px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; min-width: 520px; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+       color: var(--muted); border-bottom: 1px solid var(--rule); font-weight: 700; }
+  td.mono { font-family: var(--mono); font-size: 11.5px; color: var(--ink); white-space: nowrap; }
+  td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  .agent { border: 1px solid var(--rule); border-radius: 2px; margin: 22px 0; overflow: hidden; }
+  .agent-head { background: var(--card); border-bottom: 1px solid var(--rule);
+                padding: 12px 16px; display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+  .agent-id { font-family: var(--mono); font-size: 14.5px; font-weight: 700; letter-spacing: -.01em; }
+  .agent-sub { font-family: var(--mono); font-size: 10.5px; color: var(--muted); }
+  .st { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: .11em;
+        text-transform: uppercase; padding: 3px 6px; border-radius: 2px; margin-left: auto; white-space: nowrap; }
+  .st.live { background: var(--teal-bg); color: var(--teal); }
+  .st.blind { background: var(--amber-bg); color: var(--amber); }
+  .st.orphan { background: var(--slate-bg); color: var(--slate); }
+  .st.none { background: var(--clay-bg); color: var(--clay); }
+
+  .agent-body { padding: 2px 16px 14px; }
+  .agent-body h4 { font-family: var(--mono); font-size: 9.5px; letter-spacing: .13em;
+                   text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 15px 0 5px; }
+  .agent-body p { font-size: 14px; margin: 6px 0; }
+  .agent-body ul { margin: 5px 0; }
+  .agent-body li { font-size: 14px; margin: 4px 0; }
+
+  .quote { font-family: var(--mono); font-size: 12px; line-height: 1.5; color: var(--ink-soft);
+           border-left: 2px solid var(--rule); padding: 2px 0 2px 11px; margin: 7px 0; }
+  .src { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: .04em; }
+
+  .gap { background: var(--clay-bg); border-left: 3px solid var(--clay); border-radius: 2px;
+         padding: 9px 12px; margin: 9px 0; }
+  .gap p { font-size: 13.5px; margin: 4px 0; color: var(--ink); }
+  .gap .k { font-family: var(--mono); font-size: 9px; letter-spacing: .13em; text-transform: uppercase;
+            color: var(--clay); font-weight: 700; margin-bottom: 4px; }
+
+  .box { background: var(--card); border: 1px solid var(--rule-soft);
+         border-left: 3px solid var(--rule); border-radius: 2px; padding: 14px 16px; margin: 18px 0; }
+  .box.warn { border-left-color: var(--clay); }
+  .box.key { border-left-color: var(--amber); }
+  .box.good { border-left-color: var(--teal); }
+  .box .k { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+            font-weight: 700; margin-bottom: 6px; color: var(--muted); }
+  .box.warn .k { color: var(--clay); }
+  .box.key .k { color: var(--amber); }
+  .box.good .k { color: var(--teal); }
+  .box p { margin: 7px 0; font-size: 14.5px; }
+  .box p:first-of-type { margin-top: 0; }
+  .box p:last-child { margin-bottom: 0; }
+
+  footer { margin-top: 54px; padding-top: 18px; border-top: 2px solid var(--ink);
+           font-family: var(--mono); font-size: 11.5px; color: var(--muted); line-height: 1.7; }
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Command Desk</p>
+  <h1>Agent register: all twenty-one</h1>
+  <p class="standfirst">Every agent named anywhere across your twenty-two files. What each one is, what the documents say about it, and — where they say nothing — that stated plainly rather than guessed.</p>
+</header>
+
+<!-- ============ SUMMARY ============ -->
+<section>
+  <p class="part-label">All of them</p>
+  <h2>The full list</h2>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Agent</th><th>State</th><th>Model</th><th>Prompt</th><th>Defined where</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">hub</td><td>Live</td><td class="mono">sonnet-5</td><td class="n">445 w</td><td>prompt.txt + v3 (undeployed)</td></tr>
+        <tr><td class="mono">research</td><td>Live</td><td class="mono">haiku-4.5</td><td class="n">41 w</td><td>prompt.txt only</td></tr>
+        <tr><td class="mono">builder</td><td>Live</td><td class="mono">haiku-4.5</td><td class="n">56 w</td><td>prompt.txt + v3 loop (undeployed)</td></tr>
+        <tr><td class="mono">tester</td><td>Live</td><td class="mono">haiku-4.5</td><td class="n">58 w</td><td>prompt.txt + v3 loop (undeployed)</td></tr>
+        <tr><td class="mono">personal_assistant</td><td>Live</td><td class="mono">haiku-4.5</td><td class="n">55 w</td><td>prompt.txt + COMMAND pin 4</td></tr>
+        <tr><td class="mono">consolidator</td><td>Live</td><td class="mono">llama3.2</td><td class="n">97 w</td><td>prompt.txt + backend spec §4</td></tr>
+        <tr><td class="mono">nova_voice</td><td>Live</td><td class="mono">llama3.2</td><td class="n">122 w</td><td>prompt.txt + COMMAND spine</td></tr>
+        <tr><td class="mono">router</td><td>Live</td><td class="mono">haiku</td><td class="n">own</td><td>router.py + COMMAND spine</td></tr>
+        <tr><td class="mono">clerk</td><td>Runs, unseen</td><td class="mono">haiku</td><td class="n">171 w</td><td>clerk_record.txt</td></tr>
+        <tr><td class="mono">checker</td><td>Runs, unseen</td><td class="mono">haiku</td><td class="n">371 w</td><td>checker_extract.txt</td></tr>
+        <tr><td class="mono">angel</td><td>Runs, unseen</td><td class="mono">haiku</td><td class="n">384 w</td><td>angel_judge.txt</td></tr>
+        <tr><td class="mono">memory</td><td>Orphan</td><td class="mono">—</td><td class="n">35 w</td><td>folder only, not in config</td></tr>
+        <tr><td class="mono">mind</td><td>Orphan</td><td class="mono">—</td><td class="n">35 w</td><td>folder only, not in config</td></tr>
+        <tr><td class="mono">writing</td><td>Orphan</td><td class="mono">—</td><td class="n">27 w</td><td>folder only, not in config</td></tr>
+        <tr><td class="mono">observer</td><td>Not built</td><td class="mono">—</td><td class="n">—</td><td>v3 §OBSERVER — fully specified</td></tr>
+        <tr><td class="mono">watcher</td><td>Not built</td><td class="mono">—</td><td class="n">—</td><td>backend spec §3</td></tr>
+        <tr><td class="mono">calendar worker</td><td>Not built</td><td class="mono">—</td><td class="n">—</td><td>backend spec §6</td></tr>
+        <tr><td class="mono">coding worker</td><td>Not built</td><td class="mono">—</td><td class="n">—</td><td>named only</td></tr>
+        <tr><td class="mono">billing agent</td><td>Not built</td><td class="mono">—</td><td class="n">—</td><td>named only</td></tr>
+        <tr><td class="mono">llama slot A</td><td>Not built</td><td class="mono">—</td><td class="n">—</td><td>named only</td></tr>
+        <tr><td class="mono">llama slot B</td><td>Not built</td><td class="mono">—</td><td class="n">—</td><td>named only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>Eleven agents are running.</strong> Three of those eleven produce output nothing can display. Three more exist as folders with written prompts that were never added to the config. Seven are named in your documents and don't exist.</p>
+</section>
+
+<!-- ============ GROUP 1 ============ -->
+<section>
+  <p class="part-label">Group 1 — Live and reachable</p>
+  <h2>The eight you actually use</h2>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">hub</span><span class="agent-sub">sonnet-5 · shared pool</span><span class="st live">Live</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p>Orchestrator. Routes work, checks results against the goal, decides forward / back / to Sam. Every loop ends here.</p>
+      <h4>Why Sonnet, fixed</h4>
+      <p class="src">v3 §1 — "the complex-reasoning slot, never swapped to a lighter model regardless of what other slots run"</p>
+      <h4>Deployed rules</h4>
+      <ul>
+        <li>Continuity first on open</li>
+        <li>The INTENT line before any concrete action — with worked good/bad examples</li>
+        <li>Never invent a detail that wasn't said; a short INTENT is correct for a vague request</li>
+        <li>Never comment on whether its own intent was carried out</li>
+      </ul>
+      <h4>Written in v3, never deployed</h4>
+      <ul>
+        <li>Three response modes — direct, status line, full brief — with explicit triggers for each</li>
+        <li>Priority engine: critical / high / medium / low, worked highest first</li>
+        <li>Builder-Tester loop ownership including the R3 early break</li>
+        <li>Decision log: anything needing explanation in six months gets a permanent record</li>
+        <li>Provenance: every claim about another agent's work carries evidence, or says "could not be verified"</li>
+        <li>Unknown ≠ fine</li>
+        <li>Escalation tiers — silent / tell after / ask first, with "unsure → ask first"</li>
+        <li>Predictive impact before major work; standing questions; weekly executive summary</li>
+      </ul>
+      <div class="gap"><div class="k">Gap</div><p>The live prompt has zero mentions of escalation, approval, priority, provenance or evidence. Roughly 90% of Hub's designed behaviour is in a markdown file.</p></div>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">personal_assistant</span><span class="agent-sub">haiku-4.5 · shared pool · the mail worker</span><span class="st live">Live</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p>Sam's day — plans, schedules, reminders, follow-ups. And mail.</p>
+      <h4>What the documents establish</h4>
+      <p class="src">COMMAND pin 4 — "The personal_assistant agent IS the mail worker — give it the tool, don't spawn a new agent."</p>
+      <p class="src">COMMAND Stage 3 — "Extending personal_assistant is additive: ADD a path for it to request an action through the permission layer. Do NOT rewrite its existing logic."</p>
+      <p class="src">Backend spec §1 — should mimic how Sam writes, improving as it sees more real messages; surfaces what arrived and the drafted reply side by side.</p>
+      <h4>Deployed rules</h4>
+      <p>Day plan on a new day. Infer through voice noise. Learning nudges ride here. One question only when stuck.</p>
+      <div class="gap"><div class="k">Gap</div><p>Fifty-five words, and not one is "email", "mail", "draft" or "send". Every rule above about how it handles mail exists only in the documents. The permission layer is what's actually keeping it safe.</p></div>
+      <h4>Guardrails in code</h4>
+      <p>Session re-validated inside the permission layer · metadata-only reads · draft trigger beats read trigger · send bound to one draft id behind an exact-match yes-list · exactly-once guard · 30s timeouts with late results discarded.</p>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">builder</span><span class="agent-sub">haiku-4.5 · isolated · build_test</span><span class="st live">Live</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p>Architecture, code, debugging, deployment. Ships work to Tester and reads back what Tester reports before calling anything done.</p>
+      <h4>Why isolated</h4>
+      <p class="src">COMMAND — "Workers do NOT talk to each other in an open link. No free-for-all group chat, no agents scheming amongst themselves with no reins — that is exactly what got builder/tester stuck on 30 July."</p>
+      <h4>Deployed rules</h4>
+      <p>States its isolation correctly. Exchanges context only with Tester.</p>
+      <h4>Written in v3, never deployed</h4>
+      <p>R1 produce → validate. R2 revise → re-validate. <strong>R3 checkpoint</strong> — same issue as R2 with no new finding means terminate and escalate. R4–5 only if R3 surfaced something genuinely new. Hard cap 5. Preserve full history, never hide failed rounds.</p>
+      <div class="gap"><div class="k">Gap</div><p>Zero loop rules in the live prompt. No round structure, no cap, no stopping condition. This is the agent that froze for days.</p></div>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">tester</span><span class="agent-sub">haiku-4.5 · isolated · build_test</span><span class="st live">Live</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p>Verify what Builder ships. Write tests, run them, report bugs and regressions plainly.</p>
+      <h4>Deployed rules</h4>
+      <p>Isolation stated. And one genuinely good line: <em>"Never soften a failing result."</em></p>
+      <h4>What v3 adds</h4>
+      <p>Validates technical correctness <strong>and roadmap compliance</strong> — either failing is drift, and on drift you stop and escalate rather than silently continuing.</p>
+      <div class="gap"><div class="k">Gap</div><p>Same missing loop rules as Builder. And nothing requires evidence for a pass — a Tester that can approve on inspection is a second Builder.</p></div>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">research</span><span class="agent-sub">haiku-4.5 · shared pool</span><span class="st live">Live</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p>Dig into a topic, produce findings with citations when web is available, summarise into actions rather than walls of text. Stores useful findings for the Consolidator when asked.</p>
+      <h4>Deployed rules</h4>
+      <p>All of the above — 41 words, and "actions not walls of text" is a good instruction most people forget.</p>
+      <div class="gap"><div class="k">Gap</div><p>No rule for the empty result. Nothing tells it to say "I found nothing" rather than reaching for what it already knows and presenting it in the same voice as a citation. It writes into the shared pool with no verification between it and everything downstream.</p></div>
+      <h4>Documents say nothing else about it</h4>
+      <p>Research appears in no other file. This 41-word prompt is its complete specification.</p>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">consolidator</span><span class="agent-sub">llama3.2 local · the vault</span><span class="st live">Live</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p>Holds archived daily summaries from every agent, filed by date. Answers one question: have we seen this before?</p>
+      <h4>What the documents establish</h4>
+      <p class="src">Backend spec §4 — "a dedicated, lightweight agent (a 'llama that just holds shit') that stores all summaries from every agent, long-term. It does not orchestrate or decide — it indexes and retrieves."</p>
+      <p class="src">COMMAND — "Memory already works. Do not touch memory. It is not part of this job."</p>
+      <p class="src">v3 §Hub — Sam never talks to it directly; it's excluded from the router menu entirely.</p>
+      <h4>Deployed rules</h4>
+      <p>Five explicit negatives — does not reason, advise, decide, merge, or offer opinions. Answers only from what it was given, or the single word "No".</p>
+      <div class="box good">
+        <div class="k">The one that's complete</div>
+        <p>This is the only prompt in the system defined by what the agent may not do, with a one-word escape hatch that's easier to produce than a fabrication. It's why your memory returns nothing rather than something plausible. It's the pattern the other six should copy.</p>
+      </div>
+      <h4>Open in the documents</h4>
+      <p class="src">Backend spec — "whether the long-term vault is one agent or folds into the hub (Sam leans: separate agent, less load on Nova)" · retention window still TBD, to be tuned by trial · <strong>worker window: spec says 14 days, code says 4</strong></p>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">nova_voice</span><span class="agent-sub">llama3.2 → sonnet-5 on wake</span><span class="st live">Live</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p class="src">COMMAND spine — "Nova is I/O only — ears, mouth, screen. Voice in, speech + result out. She does NOT decide, route, act, or hold memory."</p>
+      <h4>The cost model, which is entirely hers</h4>
+      <p class="src">COMMAND — "The cheap local model is the everyday face — running all day, free. Sonnet is woken ONLY when Sam says so. The face model does NOT decide this itself — no guessing, no auto-wake. Sam holds the switch."</p>
+      <p>Wake phrases: "go deep on this", "switch to sonnet", "think harder". Sleep: "back to normal", "that's enough", "sonnet off". Checked before the router runs, so "go deep on this: &lt;research question&gt;" isn't handed to Research just because half of it looks like research.</p>
+      <h4>Deployed rules</h4>
+      <p>Short and conversational, no lists or markdown — it's spoken. One clarifying question rather than guessing.</p>
+      <div class="gap"><div class="k">Stale rule</div><p>The prompt says "You do not currently have delegation to other specialists through this interface." The router delegates on every turn. The model is telling you it can't do something the system does around it.</p></div>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">router</span><span class="agent-sub">haiku · its own module</span><span class="st live">Live</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p class="src">COMMAND spine — "The router is its own piece — separate from Nova. It takes the text and returns a named worker + confidence. High → hand off. Low → ask Sam which, never guess."</p>
+      <h4>Why not on the free model</h4>
+      <p>It was. llama3.2 misrouted "what's come in" to Builder with a fabricated justification. It didn't fail loudly — it failed persuasively. Routing decides every downstream cost.</p>
+      <h4>Deployed rules</h4>
+      <ul>
+        <li>Returns <code>null</code> when genuinely torn — model-judged, not a numeric cutoff</li>
+        <li><code>nova_voice</code> is a menu option so ordinary conversation resolves cleanly</li>
+        <li><code>consolidator</code> excluded from the menu entirely</li>
+        <li>Routing descriptions written separately from each slot's own prompt</li>
+        <li>Every decision logged — clean route, refusal, or parse failure</li>
+      </ul>
+      <p>The separate descriptions exist because reusing prompts verbatim caused a real misroute: "what's come in" matched Hub, because Hub's own opening line reads as a semantic match too.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GROUP 2 ============ -->
+<section>
+  <p class="part-label">Group 2 — Running, but nothing shows their output</p>
+  <h2>The oversight three</h2>
+  <p class="lede">These run after every session. Their prompts are the best-written in your system. <code>review_queue</code> appears in neither <code>main.py</code> nor the frontend — so all three currently work into a void.</p>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">clerk</span><span class="agent-sub">171 words · records</span><span class="st blind">Runs, unseen</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p>Writes down what happened. What was asked, in the requester's own terms. What the agent did, step by step, in order. What the result was, as stated.</p>
+      <h4>Its rule</h4>
+      <div class="quote">"Facts only. No assessment, no praise, no criticism, no 'successfully', no 'unfortunately', no 'correctly', no 'as expected'."</div>
+      <p>Banning the evaluative adverbs is the sharp part. "Successfully sent" is a judgment wearing a fact's clothing, and once it's in the record everything downstream inherits it.</p>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">checker</span><span class="agent-sub">371 words · extracts</span><span class="st blind">Runs, unseen</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p>An extraction tool. Reads text, pulls four fields — action, recipient, amount, reference — and returns JSON. Nothing else.</p>
+      <h4>Its rules</h4>
+      <ul>
+        <li>Does not judge, advise, or explain</li>
+        <li><code>action</code> must be a concrete verb and object — "send invoice", never "send something", never a summary</li>
+        <li><code>amount</code> only if the text states one; digits only</li>
+      </ul>
+      <p>Note the division: the model <em>extracts</em>, and <code>compare()</code> — plain code — <em>decides</em>. That's why a finding is a fact and not an opinion, and why the verdict can't drift when a model version changes.</p>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">angel</span><span class="agent-sub">384 words · judges</span><span class="st blind">Runs, unseen</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p>Reads one flagged session and writes a short note for Sam. "The last set of eyes before something reaches a real customer."</p>
+      <h4>Its rules</h4>
+      <div class="quote">"You have NO ability to act, fix, undo, or instruct any agent. Do not write as though you can. You are writing to a person who can."</div>
+      <p>Only speaks when a check flags: <code>intent_fabricated</code>, <code>mismatch</code>, <code>no_intent_recorded</code>, <code>intent_too_vague</code>, <code>unverified</code>. A clean check produces no case and no noise.</p>
+      <div class="box key">
+        <div class="k">The rare decision</div>
+        <p>The last three of those are "we couldn't tell" statuses, and they're treated as seriously as an outright mismatch. Almost everyone builds a checker that flags mismatches and silently passes what it couldn't evaluate — which makes "didn't check" and "checked, it's clean" look identical.</p>
+      </div>
+      <div class="gap"><div class="k">Gap</div><p>Its only write lands in <code>review_queue</code>, described as "only Sam's UI reads." There is no such UI. Every case it has ever raised is invisible.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GROUP 3 ============ -->
+<section>
+  <p class="part-label">Group 3 — Written, never connected</p>
+  <h2>Three prompts in folders that aren't in the config</h2>
+  <p class="lede">These have real prompts on the box. They appear nowhere in <code>slots_config.json</code>, so they never load and never run. Two of them are worth reviving.</p>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">mind</span><span class="agent-sub">35 words · audit mode</span><span class="st orphan">Orphan</span></div>
+    <div class="agent-body">
+      <h4>What it says</h4>
+      <div class="quote">"Deep reasoning and creativity. AUDIT MODE: pressure-test Sam's ideas, surface the strongest objection, and call out holes constructively. Never flatter. If solid, say why."</div>
+      <div class="box good">
+        <div class="k">Worth reviving first</div>
+        <p>"Never flatter" and "surface the strongest objection" is the closest thing you have to the independent watcher the backend spec asked for. It's an adversarial reader that already exists, written, and switched off.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">memory</span><span class="agent-sub">35 words · decision log</span><span class="st orphan">Orphan</span></div>
+    <div class="agent-body">
+      <h4>What it says</h4>
+      <div class="quote">"Manage Sam's knowledge base and Decision Log. Recall what Sam knows, what he decided, and why. Flag active decisions before settled topics are reopened."</div>
+      <p><strong>That last clause is the interesting one</strong> — flagging an active decision before a settled topic gets reopened is exactly what the roadmap's decisions table is meant to enable. <code>log_decision</code> already fires in the orchestrator, so the writes are happening; nothing reads them back to stop you relitigating.</p>
+      <p>Overlaps with <code>consolidator</code>. Decide which owns recall before reviving it — two memory agents with different rules is worse than one.</p>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">writing</span><span class="agent-sub">27 words · Sam's voice</span><span class="st orphan">Orphan</span></div>
+    <div class="agent-body">
+      <h4>What it says</h4>
+      <div class="quote">"Draft, edit, and polish in Sam's voice. Return clean ready-to-use text. Keep it direct and usable."</div>
+      <p>Superseded in practice. <code>style_profile.py</code> now learns your voice from real sent mail and the drafting step consumes it. This agent would infer style itself, which the current design explicitly forbids. Delete it unless you want a general writing slot separate from mail.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GROUP 4 ============ -->
+<section>
+  <p class="part-label">Group 4 — Specified, never built</p>
+  <h2>Two with full specifications waiting</h2>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">observer</span><span class="agent-sub">fully specified in v3</span><span class="st none">Not built</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p>A read-only auditor that watches how the system behaves <em>over time</em> and reports objective findings when asked. Not part of decision-making, execution or planning. "Accuracy over usefulness. No evidence, no claim."</p>
+      <h4>Isolation — different shape from Builder/Tester</h4>
+      <p class="src">v3 §3 — "<code>isolated_group: observer_readonly</code> — one-directional. You read out of shared memory; nothing goes back in."</p>
+      <p>Never writes to any table, never edits a lesson or pattern, never joins routing or the build-test loop, never answers for another agent, never executes code, never recommends that another agent change its behaviour.</p>
+      <h4>Its five thresholds</h4>
+      <ul>
+        <li><strong>Duplicated effort</strong> — same problem in 3+ lessons with nothing consolidating it</li>
+        <li><strong>Role drift</strong> — output diverging from its own prompt across 2+ consecutive tasks</li>
+        <li><strong>Stalled pattern</strong> — 30+ days old, stale, never reconfirmed</li>
+        <li><strong>Repeated friction</strong> — same Tester FAIL reason across 2+ separate tasks</li>
+        <li><strong>Unactioned opportunity</strong> — recurring in 3+ lessons across 2+ agents with no task ever created</li>
+      </ul>
+      <h4>Two rules worth lifting whatever else you do</h4>
+      <div class="quote">"Never lower a threshold to produce a finding. 'Nothing crossed threshold this period' is a complete answer."</div>
+      <div class="quote">"Report absence of knowledge as its own finding class — no deployment lessons, no mobile testing history, no backup validation, no disaster-recovery exercise."</div>
+      <p>The first stops an auditor justifying itself by inventing problems. The second is why its thresholds belong in SQL — the query decides whether one was met, Observer only explains what the rows mean.</p>
+      <div class="gap"><div class="k">Gap</div><p><code>slots_config.json</code> contains zero occurrences of "observer". Every word above is sitting in a markdown file. The Clerk/Checker/Angel pipeline is a different thing — it checks one turn's intent against its outcome. Nothing watches patterns across time.</p></div>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head"><span class="agent-id">watcher</span><span class="agent-sub">backend spec §3</span><span class="st none">Not built</span></div>
+    <div class="agent-body">
+      <h4>Job</h4>
+      <p class="src">Backend spec §3 — "For each significant piece of work, produce two independent summaries: the worker's own, and a separate watcher agent's summary of the same work. Nova cross-references the two. If they disagree, Nova flags it — this is the point of having two."</p>
+      <p class="src">Same section, your own build note — "decide the tiebreaker when the two summaries disagree. Nova adjudicates, and if it can't resolve, it escalates to Sam rather than silently picking one. Also add red-flag alerting so anything clearly wrong surfaces immediately instead of waiting for the next minute-summary."</p>
+      <h4>Why this one matters more than it looks</h4>
+      <p>Your oversight compares <strong>stated intent against outcome</strong> — and both come from the same agent. That catches an agent that says one thing and does another. It cannot catch an agent that misreports what it did, because there's only one account of it.</p>
+      <p>The watcher is the second account. It's the difference between checking consistency and checking truth, and it's the single missing piece behind the whole "agents saying they did it" problem.</p>
+      <div class="gap"><div class="k">Gap</div><p>Never built. No prompt exists. The <code>mind</code> orphan above, in audit mode, is the nearest thing you have to a starting point.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GROUP 5 ============ -->
+<section>
+  <p class="part-label">Group 5 — Named only</p>
+  <h2>Five with nothing written about them</h2>
+  <p class="lede">These appear in your documents as names in a list. No prompt, no rules, no model chosen, no scope. I'm not going to invent specifications for them — here is exactly what exists, which is very little.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Agent</th><th>Everything the documents say</th><th>Needed before it can be built</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="mono">calendar<br>worker</td>
+          <td>Backend spec §6: Command Desk gets its own calendar view, two-way synced with the external calendar, readable by agents for planning. Named as the Stage 5 clone candidate.</td>
+          <td>Conflict rules — which side wins a simultaneous edit, how a deletion is told from a failed fetch, recurring-event semantics, sync window</td>
+        </tr>
+        <tr>
+          <td class="mono">coding<br>worker</td>
+          <td>Named twice — COMMAND_CHAIN Stage 4 and Dispatch_Checklist 3.1 — as an example of "clone the pattern". Routing example: "I've got coding to do".</td>
+          <td>Everything. Also: how it differs from <code>builder</code>, which already does architecture, code and shipping</td>
+        </tr>
+        <tr>
+          <td class="mono">billing<br>agent</td>
+          <td>One worked example in the final roadmap: a quote is needed, Hub routes to billing, billing produces it, emits TaskCompleted, Hub checks it against standards.</td>
+          <td>Everything. It's an illustration of the event flow, not a specification</td>
+        </tr>
+        <tr>
+          <td class="mono">llama<br>slot A</td>
+          <td>COWORK Phase 3: "two additional slots → Llama, for Sam's own experimentation, independently promptable." Listed as an open decision.</td>
+          <td>Which Llama variant · self-hosted or hosted · what each is for</td>
+        </tr>
+        <tr>
+          <td class="mono">llama<br>slot B</td>
+          <td>As above. The documents never distinguish the two.</td>
+          <td>As above, plus what makes it different from slot A</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box key">
+    <div class="k">One naming clash to settle</div>
+    <p>The final roadmap's operating model describes a <strong>billing agent</strong> and an <strong>email agent</strong> as separate specialists. Your live system has one <code>personal_assistant</code> doing mail, and COMMAND pin 4 is explicit: <em>"The personal_assistant agent IS the mail worker — give it the tool, don't spawn a new agent."</em></p>
+    <p>Those are different architectures. Decide which before anyone builds against either — otherwise you'll get a second mail agent alongside the one you have.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT TO DO ============ -->
+<section>
+  <p class="part-label">From all of it</p>
+  <h2>What this register says to do</h2>
+
+  <ol>
+    <li><strong>Deploy the prompts you already wrote.</strong> Hub's v3 rules, the Builder/Tester loop with its R3 break. All of it is written, none of it is running.</li>
+    <li><strong>Give Angel a screen.</strong> Three agents run after every session and their output goes nowhere.</li>
+    <li><strong>Tell the mail worker it handles mail.</strong> Fifty-five words with no mention of email.</li>
+    <li><strong>Revive <code>mind</code> as the watcher.</strong> "Never flatter, surface the strongest objection" is the adversarial reader the backend spec asked for, already written and switched off.</li>
+    <li><strong>Build Observer.</strong> Fully specified, zero occurrences in the config. Its thresholds go in SQL, not in model judgment.</li>
+    <li><strong>Settle three collisions.</strong> <code>memory</code> versus <code>consolidator</code> for recall. Billing/email agents versus <code>personal_assistant</code>. Fourteen-day versus four-day memory window.</li>
+    <li><strong>Delete <code>writing</code>,</strong> unless you want a general writing slot — <code>style_profile.py</code> supersedes it and does it better.</li>
+    <li><strong>Leave the five in Group 5 alone</strong> until you've written down what they are. Building from a name is how you get ten designs for the front entry.</li>
+  </ol>
+</section>
+
+<footer>
+  Compiled from all twenty-two supplied files and read directly from slots_config.json, every slots/*/prompt.txt, oversight/prompts/*.txt and router.py<br>
+  Word counts and absences verified, not estimated · nothing invented for agents the documents don't describe<br>
+  Nothing here has been deployed. The live system is unchanged.
+</footer>
+
+</div>
