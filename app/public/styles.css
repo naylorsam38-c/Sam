@@ -22,7 +22,12 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-.screen[hidden] { display: none; }
+/* #login sets display on an id selector, which outweighs a class rule — so the
+   hidden state has to be stated at the same weight or the login form stays on
+   the page behind the app. */
+.screen[hidden],
+#login[hidden],
+#app[hidden] { display: none; }
 
 /* --- Login ---------------------------------------------------------- */
 
@@ -205,3 +210,94 @@ button {
 .muted { color: var(--muted); }
 .error { color: var(--danger); margin: 8px 0 0; }
 .empty { color: var(--muted); padding: 24px 0; text-align: center; }
+
+/* --- Case: lifecycle state, packages and audit trail --------------------- */
+
+.small { font-size: 0.82rem; }
+
+.case-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.9rem;
+}
+.case-head .state {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  background: #2b2f3a;
+  color: #e7e9ee;
+}
+.case-head .owner,
+.case-head .timeout {
+  font-size: 0.74rem;
+  color: #8b93a3;
+}
+.case-head .timeout::before { content: "· "; }
+
+.locked {
+  border-left: 2px solid #c9922f;
+  padding: 0.1rem 0 0.1rem 0.8rem;
+  margin-bottom: 1rem;
+}
+.locked strong {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8b93a3;
+  margin-bottom: 0.25rem;
+}
+.locked p { margin: 0 0 0.3rem; }
+.locked code { font-size: 0.72rem; color: #8b93a3; }
+
+.fields { margin: 0; }
+.fields dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #8b93a3;
+  margin-top: 0.7rem;
+}
+.fields dd { margin: 0.2rem 0 0; }
+.fields dd ul { margin: 0; padding-left: 1.1rem; }
+
+.decisions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1.2rem 0;
+}
+
+.audit { margin: 0; padding-left: 1.1rem; font-size: 0.8rem; color: #99a1b0; }
+.audit li { margin-bottom: 0.3rem; }
+.audit .ev { color: #cfd4de; }
+.audit .to { margin-left: 0.4rem; }
+.audit .req {
+  margin-left: 0.4rem;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.72rem;
+  color: #c9922f;
+}
+.audit .why { display: block; color: #7d8593; }
+
+.busy { opacity: 0.55; }
+
+.item-name { color: var(--text); }
+.item-tail { color: var(--muted); }
+.item-owner,
+.item-ref {
+  display: inline-block;
+  margin-left: 0.45rem;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.68rem;
+  padding: 0.05rem 0.35rem;
+  border-radius: 3px;
+  background: var(--surface-2);
+  color: var(--muted);
+}
+.item-ref { color: #c9922f; }

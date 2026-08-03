@@ -33,7 +33,7 @@
 
   <nav class="tabs">
     <button class="tab active" data-tab="chat">Chat</button>
-    <button class="tab" data-tab="plan">Plan</button>
+    <button class="tab" data-tab="case">Case</button>
     <button class="tab" data-tab="tasks">Tasks</button>
   </nav>
 
@@ -46,13 +46,15 @@
     </form>
   </section>
 
-  <!-- Plan -->
-  <section id="panel-plan" class="panel">
-    <form id="plan-form" class="composer stacked">
-      <textarea id="plan-input" rows="3" placeholder="Describe the idea, e.g. a simple habit tracker app" required></textarea>
-      <button type="submit" class="primary" id="plan-go">Plan an idea</button>
+  <!-- Case: goal formation, planning, approval -->
+  <section id="panel-case" class="panel">
+    <form id="case-form" class="composer stacked">
+      <textarea id="case-input" rows="3" placeholder="What needs to be true when this is done?" required></textarea>
+      <button type="submit" class="primary" id="case-go">Start</button>
     </form>
-    <div id="plan-output" class="plan-output"></div>
+    <p class="muted small">The goal is formed and checked before anything is planned, and nothing is
+      planned before you approve the goal.</p>
+    <div id="case-output" class="plan-output"></div>
   </section>
 
   <!-- Tasks -->

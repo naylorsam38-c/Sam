@@ -21,8 +21,14 @@ jobs:
       - name: Syntax check
         run: |
           node --check server.js
+          node --check lifecycle.js
+          node --check workers.js
           node --check test.js
+          node --check test-lifecycle.js
           node --check public/app.js
+
+      - name: Lifecycle engine tests
+        run: node test-lifecycle.js
 
       - name: End-to-end tests
         run: node test.js

@@ -92,71 +92,168 @@ $('#chat-form').addEventListener('submit', async (e) => {
   }
 });
 
-// --- Plan -------------------------------------------------------------
+// --- Case: the complex-request lifecycle ------------------------------
+// The screen shows the state, who owns it, and only the decisions that are
+// Sam's to make. It never offers a control the state machine would refuse.
+
+let current = null;
+
+function el(tag, className, text) {
+  const n = document.createElement(tag);
+  if (className) n.className = className;
+  if (text !== undefined) n.textContent = text;
+  return n;
+}
+
+// Phases and tasks arrive as objects carrying the reference that ties them to
+// the approved goal. That reference is the point of PLN-004, so it is shown
+// rather than buried in a JSON dump.
+function list(items, ordered) {
+  const n = el(ordered ? 'ol' : 'ul');
+  for (const item of items || []) {
+    const li = el('li');
+    if (typeof item === 'string') {
+      li.textContent = item;
+    } else if (item && (item.name || item.title)) {
+      li.append(el('span', 'item-name', item.name || item.title));
+      const tail = item.done_when || item.outcome;
+      if (tail) li.append(el('span', 'item-tail', ` — ${tail}`));
+      if (item.owner) li.append(el('span', 'item-owner', item.owner));
+      if (item.ref) li.append(el('span', 'item-ref', item.ref));
+    } else {
+      li.textContent = JSON.stringify(item);
+    }
+    n.append(li);
+  }
+  return n;
+}
 
 function block(title, node, className = '') {
-  const wrap = document.createElement('div');
-  wrap.className = `plan-block ${className}`.trim();
-  const h = document.createElement('h3');
-  h.textContent = title;
-  wrap.append(h, node);
+  const wrap = el('div', `plan-block ${className}`.trim());
+  wrap.append(el('h3', null, title), node);
   return wrap;
 }
 
-function list(items, ordered) {
-  const el = document.createElement(ordered ? 'ol' : 'ul');
-  for (const item of items) {
-    const li = document.createElement('li');
-    li.textContent = item;
-    el.append(li);
+function fields(obj, keys) {
+  const dl = el('dl', 'fields');
+  for (const k of keys) {
+    const v = obj?.[k];
+    if (v === undefined || v === null || (Array.isArray(v) && !v.length)) continue;
+    dl.append(el('dt', null, k.replace(/_/g, ' ')));
+    const dd = el('dd');
+    if (Array.isArray(v)) dd.append(list(v, false));
+    else dd.textContent = typeof v === 'string' ? v : JSON.stringify(v);
+    dl.append(dd);
   }
-  return el;
+  return dl;
 }
 
-function paragraph(text) {
-  const p = document.createElement('p');
-  p.style.margin = '0';
-  p.textContent = text;
-  return p;
+async function act(path, body) {
+  const out = $('#case-output');
+  out.classList.add('busy');
+  try {
+    const data = await api(path, { method: 'POST', body: body || {} });
+    current = data.case;
+    renderCase();
+  } catch (ex) {
+    const err = el('p', 'error', ex.message);
+    out.prepend(err);
+  } finally {
+    out.classList.remove('busy');
+  }
 }
 
-function renderPlan(data) {
-  const out = $('#plan-output');
+// Sam is offered exactly the decisions the current state permits — nothing
+// else is a button, so the screen cannot ask for a transition that would be
+// refused.
+const DECISIONS = {
+  goal_review: [
+    { label: 'Approve the goal', primary: true, run: () => act(`/api/case/${current.id}/goal/approve`) },
+    { label: 'Send it back', run: () => act(`/api/case/${current.id}/goal/reject`, { reason: 'returned by Sam' }) },
+  ],
+  goal_approved: [
+    { label: 'Plan it', primary: true, run: () => act(`/api/case/${current.id}/plan`) },
+  ],
+  plan_review: [
+    { label: 'Approve the plan', primary: true, run: () => act(`/api/case/${current.id}/plan/approve`) },
+    { label: 'Send it back', run: () => act(`/api/case/${current.id}/plan/reject`, { reason: 'returned by Sam' }) },
+  ],
+};
+
+function renderCase() {
+  const out = $('#case-output');
   out.replaceChildren();
+  if (!current) return;
 
-  if (!data.plan) {
-    out.append(block('Plan', paragraph(data.raw || 'No plan returned.')));
-    return;
+  const head = el('div', 'case-head');
+  head.append(el('span', 'state', current.state.replace(/_/g, ' ')));
+  head.append(el('span', 'owner', `owner: ${current.owner}`));
+  if (current.timeout_ms) head.append(el('span', 'timeout', `${current.timeout_ms / 1000}s timeout`));
+  out.append(head);
+
+  if (current.locked_goal) {
+    const g = el('div', 'locked');
+    g.append(el('strong', null, 'Locked goal'), el('p', null, current.locked_goal),
+             el('code', null, current.locked_goal_id));
+    out.append(g);
   }
 
-  const p = data.plan;
-  if (p.overview) out.append(block('Overview', paragraph(p.overview)));
-  if (p.key_parts?.length) out.append(block('Key parts', list(p.key_parts, false)));
-  if (p.build_order?.length) out.append(block('Build order', list(p.build_order, true)));
-  if (p.risks?.length) out.append(block('Risks', list(p.risks, false)));
-  if (p.next_action) out.append(block('Next action', paragraph(p.next_action), 'next'));
+  if (current.goal_package) {
+    out.append(block(current.locked_goal ? 'Goal package (approved)' : 'Goal package — your decision',
+      fields(current.goal_package, ['locked_goal_candidate', 'scope', 'exclusions', 'constraints',
+        'assumptions', 'success_criteria', 'known_risks', 'unresolved_questions', 'confidence', 'evidence'])));
+  }
+
+  if (current.plan) {
+    const p = el('div');
+    p.append(fields(current.plan, ['phases', 'tasks', 'dependencies', 'owners', 'required_inputs',
+      'evidence_requirements', 'decision_gates', 'risks', 'rollback', 'completion_criteria', 'final_verification']));
+    out.append(block(current.plan_id ? 'Implementation plan (approved)' : 'Implementation plan — your decision', p));
+  }
+
+  const decisions = DECISIONS[current.state];
+  if (decisions) {
+    const row = el('div', 'decisions');
+    for (const d of decisions) {
+      const b = el('button', d.primary ? 'primary' : 'ghost', d.label);
+      b.addEventListener('click', d.run);
+      row.append(b);
+    }
+    out.append(row);
+  }
+
+  // The audit trail is the record of how the case moved, not a status message.
+  const trail = el('ol', 'audit');
+  for (const row of current.audit || []) {
+    const li = el('li');
+    li.append(el('span', 'ev', row.event));
+    if (row.to) li.append(el('span', 'to', `→ ${row.to}`));
+    if (row.requirement) li.append(el('span', 'req', row.requirement));
+    if (row.reason) li.append(el('span', 'why', row.reason));
+    trail.append(li);
+  }
+  out.append(block('Audit trail', trail, 'trail'));
 }
 
-$('#plan-form').addEventListener('submit', async (e) => {
+$('#case-form').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const goal = $('#plan-input').value.trim();
-  if (!goal) return;
+  const request = $('#case-input').value.trim();
+  if (!request) return;
 
-  const go = $('#plan-go');
+  const go = $('#case-go');
   go.disabled = true;
-  go.textContent = 'Planning…';
-  $('#plan-output').replaceChildren();
+  go.textContent = 'Forming the goal…';
+  $('#case-output').replaceChildren();
 
   try {
-    renderPlan(await api('/api/plan', { method: 'POST', body: { goal } }));
+    const data = await api('/api/case', { method: 'POST', body: { request } });
+    current = data.case;
+    renderCase();
   } catch (ex) {
-    const err = document.createElement('div');
-    err.className = 'msg error';
-    err.textContent = ex.message;
-    $('#plan-output').append(err);
+    $('#case-output').append(el('p', 'error', ex.message));
   } finally {
     go.disabled = false;
-    go.textContent = 'Plan an idea';
+    go.textContent = 'Start';
   }
 });
 
