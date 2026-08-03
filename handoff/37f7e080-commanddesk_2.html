@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14171A">
+<title>Command Desk</title>
+<style>
+  :root{
+    --bg:#14171A; --panel:#1C2126; --edge:#2C343B; --edge-hi:#3D474F;
+    --ink:#E6EAED; --muted:#8A959E; --lamp:#E8A33D; --reply:#7FB6C4; --bad:#C4634F;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  [data-theme="volcano"]{ --bg:#17110F; --panel:#211815; --edge:#38251F; --edge-hi:#4E332A;
+    --ink:#F0E6E1; --muted:#A08C84; --lamp:#E2643C; --reply:#D9A05B; }
+  [data-theme="platinum"]{ --bg:#EDEEF0; --panel:#FFFFFF; --edge:#D3D7DC; --edge-hi:#B6BCC4;
+    --ink:#1A1D21; --muted:#6C757E; --lamp:#B07A1E; --reply:#2F6D80; }
+
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--body);
+    display:flex; flex-direction:column;
+    padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);
+  }
+
+  header{
+    border-bottom:1px solid var(--edge); padding:14px 16px 0;
+    background:var(--panel);
+  }
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .brand h1{
+    font-size:13px; font-family:var(--mono); font-weight:600;
+    letter-spacing:.22em; text-transform:uppercase; margin:0;
+  }
+  .lamp{
+    width:8px;height:8px;border-radius:50%;background:var(--muted);
+    box-shadow:0 0 0 0 transparent; transition:background .3s, box-shadow .3s; flex:none;
+  }
+  .lamp.on{background:var(--lamp); box-shadow:0 0 9px var(--lamp)}
+  .lamp.off{background:var(--bad); box-shadow:0 0 9px var(--bad)}
+  .spacer{flex:1}
+  select{
+    font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    background:transparent; color:var(--muted); border:1px solid var(--edge);
+    border-radius:2px; padding:5px 6px; -webkit-appearance:none; appearance:none;
+  }
+
+  /* signature: the agent rail — labelled switch plates with a lit slot */
+  .rail{display:flex; gap:6px; overflow-x:auto; padding-bottom:12px; scrollbar-width:none}
+  .rail::-webkit-scrollbar{display:none}
+  .slot{
+    flex:none; background:transparent; color:var(--muted);
+    border:1px solid var(--edge); border-bottom-width:3px; border-radius:2px;
+    padding:8px 12px 7px; font-family:var(--mono); font-size:10px;
+    letter-spacing:.14em; text-transform:uppercase; cursor:pointer;
+    transition:color .15s, border-color .15s;
+  }
+  .slot:hover{color:var(--ink); border-color:var(--edge-hi)}
+  .slot[aria-selected="true"]{ color:var(--ink); border-bottom-color:var(--lamp) }
+  .slot:focus-visible{outline:2px solid var(--lamp); outline-offset:2px}
+
+  main{flex:1; overflow-y:auto; padding:20px 16px; display:flex; flex-direction:column; gap:18px}
+
+  .empty{margin:auto; text-align:center; max-width:26ch; color:var(--muted)}
+  .empty p{font-size:14px; line-height:1.6; margin:0}
+
+  .turn{max-width:44ch}
+  .turn .who{
+    font-family:var(--mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:6px;
+  }
+  .turn .text{font-size:15px; line-height:1.55; white-space:pre-wrap; word-wrap:break-word}
+  .turn.you{align-self:flex-end; text-align:right}
+  .turn.agent .text{border-left:2px solid var(--reply); padding-left:12px}
+  .turn.error .text{border-left:2px solid var(--bad); padding-left:12px; color:var(--ink); font-size:14px}
+  .turn.error code{font-family:var(--mono); font-size:12px; color:var(--muted); word-break:break-all}
+
+  .working{font-family:var(--mono); font-size:10px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--muted)}
+  .working::after{content:"";animation:dots 1.2s steps(4,end) infinite}
+  @keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+  @media (prefers-reduced-motion:reduce){ .working::after{content:"..."; animation:none} }
+
+  footer{border-top:1px solid var(--edge); background:var(--panel); padding:12px 16px}
+  .bar{display:flex; gap:10px; align-items:flex-end}
+  textarea{
+    flex:1; background:var(--bg); color:var(--ink); border:1px solid var(--edge);
+    border-radius:2px; padding:11px 12px; font-family:var(--body); font-size:16px;
+    line-height:1.4; resize:none; max-height:140px;
+  }
+  textarea:focus{outline:none; border-color:var(--edge-hi)}
+  button.send{
+    background:var(--lamp); color:var(--bg); border:0; border-radius:2px;
+    padding:12px 16px; font-family:var(--mono); font-size:10px; font-weight:700;
+    letter-spacing:.16em; text-transform:uppercase; cursor:pointer;
+  }
+  button.send:disabled{opacity:.35; cursor:default}
+  button.send:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+</style>
+</head>
+<body data-theme="gunmetal">
+
+<header>
+  <div class="brand">
+    <span class="lamp" id="lamp" title="Backend status"></span>
+    <h1>Command Desk</h1>
+    <span class="spacer"></span>
+    <select id="avatar" aria-label="Voice">
+      <option value="nova">Nova</option><option value="halo">Halo</option><option value="gaia">Gaia</option>
+    </select>
+    <select id="theme" aria-label="Theme">
+      <option value="gunmetal">Gunmetal</option><option value="volcano">Volcano</option><option value="platinum">Platinum</option>
+    </select>
+  </div>
+  <div class="rail" id="rail" role="tablist" aria-label="Agents"></div>
+</header>
+
+<main id="log">
+  <div class="empty" id="empty"><p>Pick an agent. Send it something to do.</p></div>
+</main>
+
+<footer>
+  <div class="bar">
+    <textarea id="msg" rows="1" placeholder="Message the desk"></textarea>
+    <button class="send" id="send" disabled>Send</button>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Same-origin when served from airexploit.com. Falls back to the absolute URL.
+  var API = (location.hostname === 'airexploit.com')
+    ? '/commanddesk'
+    : 'https://airexploit.com/commanddesk';
+
+  var rail=document.getElementById('rail'), log=document.getElementById('log'),
+      empty=document.getElementById('empty'), lamp=document.getElementById('lamp'),
+      msg=document.getElementById('msg'), send=document.getElementById('send'),
+      themeSel=document.getElementById('theme'), avatarSel=document.getElementById('avatar');
+  var agent=null, busy=false;
+
+  var LABEL={hub:'Hub',research:'Research',builder:'Builder',tester:'Tester',
+             personal_assistant:'Assistant',consolidator:'Consolidator'};
+
+  themeSel.onchange=function(){ document.body.dataset.theme=themeSel.value; };
+
+  function add(cls, who, text){
+    empty.remove && empty.parentNode && empty.remove();
+    var d=document.createElement('div'); d.className='turn '+cls;
+    var w=document.createElement('div'); w.className='who'; w.textContent=who;
+    var t=document.createElement('div'); t.className='text';
+    if(cls==='error'){ t.innerHTML=text; } else { t.textContent=text; }
+    d.appendChild(w); d.appendChild(t); log.appendChild(d);
+    log.scrollTop=log.scrollHeight; return d;
+  }
+
+  function pick(id){
+    agent=id;
+    [].forEach.call(rail.children,function(b){
+      b.setAttribute('aria-selected', String(b.dataset.id===id));
+    });
+    check();
+  }
+
+  function check(){ send.disabled = busy || !agent || !msg.value.trim(); }
+  msg.addEventListener('input',function(){
+    msg.style.height='auto'; msg.style.height=Math.min(msg.scrollHeight,140)+'px'; check();
+  });
+  msg.addEventListener('keydown',function(e){
+    if(e.key==='Enter' && !e.shiftKey && !send.disabled){ e.preventDefault(); go(); }
+  });
+  send.onclick=go;
+
+  function netError(e){
+    return 'Can\u2019t reach the backend. If this page isn\u2019t being served from '
+      + 'airexploit.com, the browser blocks the call (no CORS headers on the API). '
+      + 'Serve this file from the same box and it works.<br><br><code>'
+      + String(e && e.message ? e.message : e) + '</code>';
+  }
+
+  function go(){
+    var text=msg.value.trim(); if(!text||!agent||busy) return;
+    busy=true; check();
+    add('you','You',text);
+    msg.value=''; msg.style.height='auto';
+    var wait=document.createElement('div');
+    wait.className='working'; wait.textContent='Working';
+    log.appendChild(wait); log.scrollTop=log.scrollHeight;
+
+    fetch(API+'/chat',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ avatar:avatarSel.value, theme:themeSel.value,
+                            agent:agent, message:text })
+    })
+    .then(function(r){
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(d){
+      wait.remove();
+      add('agent', LABEL[agent]||agent, d.reply || '(empty reply)');
+    })
+    .catch(function(e){
+      wait.remove();
+      add('error','Not sent', netError(e));
+    })
+    .finally(function(){ busy=false; check(); });
+  }
+
+  // boot: status lamp + real agent slots
+  fetch(API+'/health').then(function(r){return r.json();})
+    .then(function(d){ lamp.className='lamp '+(d.status==='ok'?'on':'off'); })
+    .catch(function(){ lamp.className='lamp off'; });
+
+  fetch(API+'/agents').then(function(r){return r.json();})
+    .then(function(list){
+      list.forEach(function(a,i){
+        var b=document.createElement('button');
+        b.className='slot'; b.type='button'; b.role='tab';
+        b.dataset.id=a.id; b.textContent=LABEL[a.id]||a.id;
+        b.setAttribute('aria-selected','false');
+        b.onclick=function(){ pick(a.id); };
+        rail.appendChild(b);
+        if(i===0) pick(a.id);
+      });
+    })
+    .catch(function(e){
+      add('error','No agents loaded', netError(e));
+    });
+})();
+</script>
+</body>
+</html>

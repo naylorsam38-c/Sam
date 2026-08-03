@@ -1,0 +1,359 @@
+<title>Command Desk — What It Is</title>
+<style>
+  :root {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+      --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+      --amber: #e0a33e; --amber-bg: #33280f;
+      --teal: #62b39c; --teal-bg: #16302a;
+      --slate: #8fb0d4; --slate-bg: #1b2733;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+    --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+    --amber: #e0a33e; --amber-bg: #33280f;
+    --teal: #62b39c; --teal-bg: #16302a;
+    --slate: #8fb0d4; --slate-bg: #1b2733;
+  }
+  :root[data-theme="light"] {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+  }
+
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans);
+         font-size: 16px; line-height: 1.6; margin: 0; padding: 0 20px 80px; }
+  .wrap { max-width: 740px; margin: 0 auto; }
+
+  .masthead { padding: 40px 0 22px; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .2em;
+             text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+  h1 { font-size: clamp(28px, 7vw, 40px); line-height: 1.08; letter-spacing: -.02em;
+       font-weight: 700; margin: 0 0 14px; text-wrap: balance; }
+  .standfirst { font-size: 17px; color: var(--ink-soft); margin: 0; max-width: 60ch; }
+  .meta { font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+          margin-top: 16px; display: flex; flex-wrap: wrap; gap: 5px 18px; }
+
+  section { padding-top: 42px; }
+  .part-label { font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+                text-transform: uppercase; color: var(--amber); margin: 0 0 8px; }
+  h2 { font-size: 23px; letter-spacing: -.015em; font-weight: 700; margin: 0 0 8px; text-wrap: balance; }
+  h3 { font-size: 16px; font-weight: 700; margin: 26px 0 6px; }
+  p { margin: 11px 0; max-width: 66ch; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+
+  ul, ol { margin: 9px 0; padding-left: 20px; max-width: 64ch; }
+  li { margin: 6px 0; color: var(--ink-soft); }
+  li strong { color: var(--ink); font-weight: 650; }
+
+  code { font-family: var(--mono); font-size: .87em; background: var(--rule-soft);
+         padding: 1px 5px; border-radius: 2px; word-break: break-word; }
+
+  .scroll { overflow-x: auto; margin: 18px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 500px; }
+  th, td { text-align: left; padding: 9px 11px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+       color: var(--muted); border-bottom: 1px solid var(--rule); font-weight: 700; }
+  td.mono { font-family: var(--mono); font-size: 12px; color: var(--ink); white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  .flow { font-family: var(--mono); font-size: 12.5px; line-height: 1.85; background: var(--card);
+          border: 1px solid var(--rule-soft); border-radius: 2px; padding: 16px 18px;
+          margin: 20px 0; overflow-x: auto; white-space: pre; color: var(--ink); }
+
+  .box { background: var(--card); border: 1px solid var(--rule-soft);
+         border-left: 3px solid var(--teal); border-radius: 2px; padding: 14px 16px; margin: 18px 0; }
+  .box .k { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+            font-weight: 700; margin-bottom: 6px; color: var(--teal); }
+  .box p { margin: 7px 0; font-size: 14.5px; }
+  .box p:first-of-type { margin-top: 0; }
+  .box p:last-child { margin-bottom: 0; }
+
+  .imp { border-top: 2px solid var(--ink); margin-top: 54px; padding-top: 34px; }
+  .imp .part-label { color: var(--slate); }
+
+  footer { margin-top: 50px; padding-top: 18px; border-top: 1px solid var(--rule);
+           font-family: var(--mono); font-size: 11.5px; color: var(--muted); line-height: 1.7; }
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Command Desk</p>
+  <h1>What you have and what it does</h1>
+  <p class="standfirst">The system as built. Read from the code, not from the plans.</p>
+  <div class="meta">
+    <span>Live at airexploit.com/commanddesk</span>
+    <span>EC2, ap-southeast-2</span>
+    <span>Stages 0–4 complete</span>
+  </div>
+</header>
+
+<!-- ============ WHAT IT IS ============ -->
+<section>
+  <p class="part-label">The system</p>
+  <h2>What it is</h2>
+
+  <p>A personal agent system running on your own EC2 box. You talk to it in a browser on your phone. It routes what you say to whichever specialist handles it, that specialist does the work, and the result comes back on screen and out loud.</p>
+
+  <p>It reads your Gmail, drafts replies in your writing style, and sends them after you say yes. It remembers what it has done. It checks its own work afterwards.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Part</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td>Server</td><td>AWS EC2, Ubuntu, Sydney region</td></tr>
+        <tr><td>Web server</td><td>nginx with TLS via Certbot</td></tr>
+        <tr><td>Backend</td><td>FastAPI on port 8765, run under pm2</td></tr>
+        <tr><td>Adapter</td><td>A second small FastAPI service on port 8000</td></tr>
+        <tr><td>Database</td><td>SQLite — sessions, transcripts, memory, vault, drafts, actions, audit log</td></tr>
+        <tr><td>Paid models</td><td>Claude Sonnet 5 and Haiku 4.5</td></tr>
+        <tr><td>Free models</td><td>Ollama running llama3.2, locally on the box</td></tr>
+        <tr><td>Front end</td><td>Static files served from /var/www/commanddesk, plus a staging copy</td></tr>
+        <tr><td>Code</td><td>4,347 lines of Python</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ THE AGENTS ============ -->
+<section>
+  <p class="part-label">The agents</p>
+  <h2>Eleven models, and what each one does</h2>
+
+  <h3>The eight you reach</h3>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Agent</th><th>Runs on</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">nova_voice</td><td class="mono">llama3.2</td><td>The face. Takes what you type, speaks the answer back. Free, all day. Switches to Sonnet 5 when you say "go deep on this" and back down when you say "that's enough".</td></tr>
+        <tr><td class="mono">router</td><td class="mono">haiku</td><td>Reads what you said and names which specialist takes it. Says so when it isn't sure instead of guessing. Logs every decision.</td></tr>
+        <tr><td class="mono">hub</td><td class="mono">sonnet-5</td><td>The orchestrator. Holds the goal, hands work out, checks what comes back, decides whether it goes forward or comes to you. States its intention before acting so it can be checked afterwards.</td></tr>
+        <tr><td class="mono">personal_assistant</td><td class="mono">haiku</td><td>Your day and your mail. Reads the inbox, decides what matters, drafts replies in your style, waits for your yes.</td></tr>
+        <tr><td class="mono">research</td><td class="mono">haiku</td><td>Digs into a topic, produces findings with citations, summarises into actions.</td></tr>
+        <tr><td class="mono">builder</td><td class="mono">haiku</td><td>Architecture, code, debugging, deployment. Hands finished work to Tester.</td></tr>
+        <tr><td class="mono">tester</td><td class="mono">haiku</td><td>Verifies what Builder ships. Writes tests, runs them, reports bugs plainly, never softens a failure.</td></tr>
+        <tr><td class="mono">consolidator</td><td class="mono">llama3.2</td><td>The vault. Holds every archived summary from every agent. Answers "have we seen this before" with the material or a flat No.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The three that watch</h3>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Agent</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">clerk</td><td>Writes a flat factual record of each finished session. Facts only — no "successfully", no "unfortunately".</td></tr>
+        <tr><td class="mono">checker</td><td>Pulls four fields out of what Hub said it would do: action, recipient, amount, reference. Returns them as data.</td></tr>
+        <tr><td class="mono">angel</td><td>Reads a flagged session and writes you a short note. Has no ability to act — it writes to a person who can.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ THE FLOW ============ -->
+<section>
+  <p class="part-label">The flow</p>
+  <h2>What happens when you ask for something</h2>
+
+  <div class="flow">You type on the live site
+   |
+Nova receives it -- checks first for a wake or sleep phrase
+   |
+Router names one worker, with confidence, and logs it
+   |
+Hub locks the goal and hands off
+   |
+Worker does the job, requests any action it needs
+   |
+Permission layer holds the tool and the gate,
+re-checks your session, allows or refuses
+   |
+Real service (Gmail)
+   |
+Result returns through Hub
+   |
+Nova shows it on screen and says it out loud
+   |
+Oversight runs afterwards, in the background</div>
+
+  <p>Every hop writes a line to the audit log: timestamp, agent, tool, what went in, what came out.</p>
+</section>
+
+<!-- ============ WHAT IT CAN DO ============ -->
+<section>
+  <p class="part-label">Capability</p>
+  <h2>What it can actually do today</h2>
+
+  <ul>
+    <li><strong>Hold a conversation</strong> — free on the local model, all day</li>
+    <li><strong>Switch to the heavy model on your word</strong> — and drop back when you say so</li>
+    <li><strong>Pick the right specialist</strong> for what you asked, or tell you it isn't sure</li>
+    <li><strong>Read your Gmail</strong> — sender, subject, date and snippet, on request</li>
+    <li><strong>Draft a reply in your voice</strong>, learned from your own sent mail</li>
+    <li><strong>Send it after you say yes</strong> — and only that exact draft</li>
+    <li><strong>Remember</strong> — each worker carries its recent days; everything older is archived permanently and searchable</li>
+    <li><strong>Log everything</strong> — every state change and every action, with timestamps</li>
+    <li><strong>Check its own work</strong> — after each session, compare what Hub said it would do against what happened</li>
+    <li><strong>Run rooms per agent</strong> — separate conversations, each with its own history</li>
+    <li><strong>Attach apps to a room</strong> — with an honest fallback when a site refuses to embed</li>
+    <li><strong>Spawn new agents from templates</strong> — unlimited, no code changes</li>
+    <li><strong>Run multi-agent group threads</strong> — round-robin discussions between agents</li>
+  </ul>
+</section>
+
+<!-- ============ PROTECTIONS ============ -->
+<section>
+  <p class="part-label">Protection</p>
+  <h2>What stops things going wrong</h2>
+
+  <h3>The login</h3>
+  <p>The whole page sits behind it. Password stored as a bcrypt hash, never compared in plaintext. Five failed attempts inside fifteen minutes locks further tries. The cookie is HttpOnly, Secure, SameSite=Lax. The login session <em>is</em> the working session — one identity, shared with the state machine.</p>
+
+  <h3>The permission layer</h3>
+  <p>One module holds the Gmail tools and the gate. Workers can only <em>request</em>; the layer decides. It re-checks your session itself before it writes anything, changes any state, or touches Gmail — independently of whatever gate the route already applied.</p>
+
+  <h3>The send gate</h3>
+  <ul>
+    <li>Opens only when the state is <code>awaiting_confirmation</code></li>
+    <li>Requires an exact match from a short list — <em>yes, yep, yeah, send it, send that, confirm, confirmed, go ahead, do it</em></li>
+    <li>Bound server-side to that one specific draft; no caller can name a different one</li>
+    <li>Sends an existing draft by id — never composes fresh text at send time, so what goes out is exactly what you saw</li>
+    <li>A near-miss re-asks rather than sending</li>
+  </ul>
+
+  <h3>Exactly once</h3>
+  <p>Before sending, it checks for any existing in-flight or completed action against that draft. If the network reply is lost, the action stays marked in-flight and is <strong>never automatically retried</strong> — only your explicit "it didn't send" clears it. A lost reply cannot become a second email.</p>
+
+  <h3>Timeouts</h3>
+  <p>Reads, drafts and sends each have thirty seconds. The confirmation window is two minutes. A result arriving after its timeout is discarded rather than applied to a session that has moved on.</p>
+
+  <h3>The walls</h3>
+  <p>Builder and Tester see only each other. They never read the shared memory pool and nothing they say enters it. This is a branch in the code, not an instruction.</p>
+
+  <h3>Secrets</h3>
+  <p>The API key, the Google client secret and the OAuth token live in files on the box at restricted permissions. None are in the source. None are logged.</p>
+</section>
+
+<!-- ============ MEMORY ============ -->
+<section>
+  <p class="part-label">Memory</p>
+  <h2>How it remembers</h2>
+
+  <p><strong>Working memory.</strong> Each agent carries a rolling window of its own recent daily summaries — currently four days. Summaries are written lazily, the first time a slot is used after a day went unsummarised.</p>
+
+  <p><strong>The vault.</strong> When the window overflows, the oldest entries age into permanent storage. Insert-only — nothing is ever deleted or overwritten once archived.</p>
+
+  <p><strong>Recall.</strong> Triggered by phrasing like "have we", "did we already", "seen this before", "any history on". The search is a plain keyword scan; the model reports only what the scan actually returned, or says No.</p>
+
+  <p><strong>Style.</strong> Read once from your own sent mail, filtered for noise, bucketed by whether the recipient is work or personal. The drafting step consumes it.</p>
+
+  <div class="box">
+    <div class="k">Why the vault answers "No"</div>
+    <p>It cannot browse and it cannot infer. That's deliberate — a memory that returns nothing is safer than one that returns something plausible.</p>
+  </div>
+</section>
+
+<!-- ============ OVERSIGHT ============ -->
+<section>
+  <p class="part-label">Oversight</p>
+  <h2>How it checks itself</h2>
+
+  <p>After every session, in the background so it never slows a reply:</p>
+
+  <ol>
+    <li><strong>Clerk</strong> records what happened, facts only</li>
+    <li><strong>Checker</strong> extracts what Hub said it would do — action, recipient, amount, reference</li>
+    <li><strong>compare()</strong> — plain code, no model — decides whether the stated intention matches what actually happened</li>
+    <li><strong>ground()</strong> — also code — checks every detail against what you actually said, catching invented months, amounts and weekdays</li>
+    <li><strong>Angel</strong> writes you a note, but only when a check flags something</li>
+  </ol>
+
+  <p>The verdict is code, not judgment. It passes or fails identically every time. There is a test file covering it — twenty-five cases, all passing.</p>
+
+  <p>The statuses it can return: <code>checked</code>, <code>mismatch</code>, <code>intent_fabricated</code>, <code>intent_too_vague</code>, <code>no_intent_recorded</code>, <code>unverified</code>. The last three mean "couldn't tell", and they're treated as seriously as an outright mismatch.</p>
+
+  <p>A clean session produces no case and no noise.</p>
+</section>
+
+<!-- ============ INTERFACE ============ -->
+<section>
+  <p class="part-label">Interface</p>
+  <h2>The front end</h2>
+
+  <ul>
+    <li>Nothing renders until the login confirms your session</li>
+    <li>A room per agent, each with its own transcript and its own session id</li>
+    <li>Nova as a still image; state shown as text — READY, SPEAKING — with no motion anywhere</li>
+    <li>The agent list comes from the live backend, not a hardcoded list</li>
+    <li>An app picker that attempts a real embed and falls back honestly when a site blocks it, with an open-in-new-tab escape</li>
+    <li>Replies spoken aloud through the browser</li>
+    <li>Local storage versioned, so a schema change wipes cleanly rather than accumulating</li>
+  </ul>
+</section>
+
+<!-- ============ WHERE YOU ARE ============ -->
+<section>
+  <p class="part-label">Position</p>
+  <h2>Where you're at</h2>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Stage</th><th>What it was</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="mono">0</td><td>Inventory — what's on the box, which agents answer, where the keys live</td><td>Done</td></tr>
+        <tr><td class="mono">1</td><td>The interface, the state machine, and the login gate</td><td>Done</td></tr>
+        <tr><td class="mono">2</td><td>Gmail credential installed, consent captured, token on the box</td><td>Done</td></tr>
+        <tr><td class="mono">3</td><td>Permission layer, router, and a real inbox read shown on screen</td><td>Done</td></tr>
+        <tr><td class="mono">4</td><td>Draft, then send behind the confirmed yes, exactly once</td><td>Done</td></tr>
+        <tr><td class="mono">5</td><td>Clone the pattern to a second worker</td><td>Next</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Four stages of five, built and live, with the dangerous one behind a gate that has held every test put to it.</p>
+</section>
+
+<!-- ============ IMPROVEMENTS ============ -->
+<section class="imp">
+  <p class="part-label">Improvements</p>
+  <h2>Additions, in order of value</h2>
+  <p class="lede">Everything above is what you have. These are additions.</p>
+
+  <ol>
+    <li><strong>A screen for the oversight findings.</strong> Angel already writes them; a page that reads them makes the checking visible.</li>
+    <li><strong>Deploy the v3 prompts.</strong> Hub's response modes, the priority engine and the Builder/Tester round rules are written and ready to go on the box.</li>
+    <li><strong>Mail instructions in the mail worker's prompt.</strong> The permission layer handles the safety; the prompt can carry the job.</li>
+    <li><strong>The second summary.</strong> A watcher agent summarising the same work independently, so two accounts can be compared rather than one checked against itself. The <code>mind</code> prompt already on the box — "pressure-test, never flatter" — is the starting point.</li>
+    <li><strong>A liveness check.</strong> A dated question to each agent on a schedule, so a quiet agent is visibly quiet.</li>
+    <li><strong>Voice.</strong> Phone records, the box transcribes with Whisper, words go to Nova. Replaces the browser engine that iPhone Safari doesn't carry.</li>
+    <li><strong>Home-screen app.</strong> The manifest is there; the Apple meta tags and a service-worker registration complete it.</li>
+    <li><strong>A prompt editor.</strong> Edit an agent from your phone, versioned, with old versions kept.</li>
+    <li><strong>Observer.</strong> The read-only auditor, fully specified in v3, watching patterns across time rather than single turns.</li>
+    <li><strong>Auth on the remaining routes.</strong> One decorator each.</li>
+    <li><strong>Spend counter.</strong> Token counts in the audit log, so "what did today cost" is a query.</li>
+    <li><strong>A scheduler.</strong> Unlocks the per-app heartbeat and the nightly debrief.</li>
+    <li><strong>Calendar.</strong> Your own view, two-way synced.</li>
+  </ol>
+</section>
+
+<footer>
+  Read from slots_config.json, orchestrator.py, router.py, permission_layer.py, voice_state.py, vault.py, auth.py, style_profile.py, compare.py and the live nginx config<br>
+  Snapshot 2026-08-02
+</footer>
+
+</div>

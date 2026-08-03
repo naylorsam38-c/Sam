@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Command Desk — Spec vs Reverse-Engineered Build</title>
+<style>
+  :root{--bg:#0b0f14;--card:#121821;--line:#243040;--ink:#e7eef6;--dim:#8a97a6;
+        --match:#3ad07a;--seam:#f0b429;--accent:#4a9eff}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:16px}
+  h1{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--dim);font-size:13px;margin:0 0 14px}
+  .banner{background:rgba(58,208,122,.1);border:1px solid var(--match);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px}
+  .banner b{color:var(--match)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--dim);margin-bottom:16px}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
+  .dot.match{background:var(--match)}.dot.seam{background:var(--seam)}
+  .grp{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:20px 0 8px;font-weight:700}
+  .row{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 10px;overflow:hidden}
+  .row-top{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid var(--line)}
+  .code{font-size:11px;color:var(--dim);font-weight:700;min-width:22px}
+  .chip{font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;margin-left:auto}
+  .chip.match{background:rgba(58,208,122,.15);color:var(--match)}
+  .chip.seam{background:rgba(240,180,41,.15);color:var(--seam)}
+  .cols{display:grid;grid-template-columns:1fr 1fr}
+  .col{padding:10px 12px;font-size:13px}
+  .col+.col{border-left:1px solid var(--line)}
+  .lbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+  .proof{color:var(--match);font-size:11px;margin-top:6px}
+  .proof.seam{color:var(--seam)}
+</style>
+</head>
+<body>
+
+<h1>Command Desk — the spec you gave me vs what I actually built</h1>
+<p class="sub">Left column = your machine spec, in your words. Right column = reverse-engineered from the shipped code and confirmed by headless tests, not from memory. Frontend only — no backend touched.</p>
+
+<div class="banner">
+  <b>28/28</b> functional checks · <b>23/23</b> destruction checks · full-body Nova and per-tile activity both verified on a 375-wide render · chat contract and endpoints <b>byte-identical to your live backend</b> so it drops straight in.
+</div>
+
+<div class="legend">
+  <span><span class="dot match"></span>Match — build does what the spec says</span>
+  <span><span class="dot seam"></span>Backend seam — the spec itself marks this as backend, not interface</span>
+</div>
+
+<div class="grp">Chain of command</div>
+<div class="row">
+  <div class="row-top"><span class="code">—</span><span>You → Nova → an LLM → an app</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>You talk to Nova. Nova organises the LLMs. The LLMs hold the apps. Nova never touches an app.</div>
+    <div class="col"><div class="lbl">Build does</div>Home chat posts only to the hub agent. Room chat posts to that room's agent. Nova has no app row and never opens the viewer. Apps live only inside rooms.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: home routes to hub, room routes to the room's agent id.</div></div>
+</div>
+
+<div class="grp">Home — the hub</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">H1</span><span>Nova at top, full body, animated face</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>Nova, full body, animated face. She is the hub agent.</div>
+    <div class="col"><div class="lbl">Build does</div>Nova renders as a full portrait (172×216, object-fit contain — no circle crop). Blinks when idle; mouth moves when she speaks, driven on a timer so it works on the phone. If you add mouth-frame art and list it in config, it swaps real frames automatically.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: container is portrait, fit=contain, not cropped. Talking motion toggles on speech.</div></div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">H2</span><span>Home chat talks to Nova only</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>The chat input at the bottom of home briefs Nova and only her.</div>
+    <div class="col"><div class="lbl">Build does</div>The home composer sends with agent = hub, on the hub's own session.</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">H3</span><span>Her reply shows on home + spoken aloud</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>Her reply appears in a transcript on the home screen and is spoken aloud.</div>
+    <div class="col"><div class="lbl">Build does</div>The home transcript renders the back-and-forth; when read-aloud is on, replies speak. (The transcript element the old version was missing now exists.)</div>
+  </div>
+  <div class="col"><div class="proof">Verified: home transcript shows the reply after send.</div></div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">H4</span><span>One row of five — four blank tiles + plus</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>Directly under Nova: five squares. Four blank LLM tiles (no name), fifth is the plus, in the row.</div>
+    <div class="col"><div class="lbl">Build does</div>Four blank agent tiles + a plus as the 5th, all in one row at 375 wide, no names on tiles.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: 5 in one row, tiles blank, last tile is plus, no overflow.</div></div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">H5</span><span>Each tile shows its own activity</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>Each tile carries its own status — a glance tells you who's busy and who's idle.</div>
+    <div class="col"><div class="lbl">Build does</div>A tile lights whenever THAT agent has a live in-flight request, and the light clears when the work returns. Driven by real per-agent state, not just the open room.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: tile lit during its agent's request, cleared to zero after.</div></div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">H6</span><span>Plus drops a new tile to a 2nd row</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>Tap plus, a new blank tile drops to a second row beneath, identical size.</div>
+    <div class="col"><div class="lbl">Build does</div>Plus adds the next agent; the grid wraps to a second row at the same tile size, capped at the real agents that exist.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: plus adds a tile; tiles never exceed 5 per row, no overflow when wrapped.</div></div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">H7</span><span>No hub button — home is the hub</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>There is no hub button; home is the hub; backing out lands here.</div>
+    <div class="col"><div class="lbl">Build does</div>No hub tile exists. Back, and the switcher's "Home (Nova)", both return to home.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: back returns to home.</div></div>
+</div>
+
+<div class="grp">Inside an LLM room</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">R1</span><span>Whole page becomes that LLM's room</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>Tap a tile and the entire page becomes that one LLM's room.</div>
+    <div class="col"><div class="lbl">Build does</div>Home hides, the room takes the full screen, the agent's name is at the top.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: room visible, home hidden, name correct.</div></div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">R2</span><span>Back button at top → home</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>Back, top of the page, returns to home/hub.</div>
+    <div class="col"><div class="lbl">Build does</div>Back button sits top-left of the room bar and returns home.</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">R3</span><span>Two three-line controls: skin + LLM switcher</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>By the date, two small three-line controls side by side: appearance changer, and an LLM switcher that lists the other LLMs — never a giant box covering the screen.</div>
+    <div class="col"><div class="lbl">Build does</div>Two three-line buttons by the date. One opens a small skin list; the other a small list of the other agents (+ Home). Tapping a name enters that room. Neither covers the page — the old page-filling modal is gone.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: switcher is a dropdown, does not cover the page; switching rooms works.</div></div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">R4</span><span>Room chat talks to that LLM + spoken</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>The chat input in a room talks to that LLM, not Nova; replies in text and speak aloud.</div>
+    <div class="col"><div class="lbl">Build does</div>The room composer sends with that agent's id on its own session; replies render and speak.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: room routes to the correct agent; session per room round-trips.</div></div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">R5</span><span>Add-app control opens the picker</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>The add-app control opens the app picker.</div>
+    <div class="col"><div class="lbl">Build does</div>An Add control in the room's app row opens the picker.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: picker opens from the room.</div></div>
+</div>
+
+<div class="grp">Add-app picker</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">P1</span><span>Pick from a list — never type a name</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>You never type an app name. You tap add app, get a view of apps, and pick one; picking attaches it to this LLM.</div>
+    <div class="col"><div class="lbl">Build does</div>The picker is a tap-list of apps; tapping one attaches it to the room's agent. (A "custom app" option exists as an optional fallback — the main path is tap-to-pick.)</div>
+  </div>
+  <div class="col"><div class="proof">Verified: picker shows a list; tapping adds the app to the room.</div></div>
+</div>
+
+<div class="grp">Inside an app</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">A1</span><span>App opens full-screen, looks like the real app</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>Open an app and it takes the whole screen and looks like the real app.</div>
+    <div class="col"><div class="lbl">Build does</div>The viewer opens full-screen and loads the real site, so embeddable apps look like themselves. Apps that block embedding (Gmail/Google) show an honest full-screen fallback with an open-externally action rather than silently ejecting you — and true in-frame Gmail is part of the backend seam below.</div>
+  </div>
+  <div class="col"><div class="proof">Verified: viewer opens full-screen; a blocked app shows the honest fallback.</div></div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">A2</span><span>The LLM drives the app; you watch</span><span class="chip seam">Backend seam</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>You don't operate it — the LLM that owns the room does, live, while you watch.</div>
+    <div class="col"><div class="lbl">Build does</div>The frontend gives the cockpit: full-screen app, watch/close, back to the LLM's chat, switch or add apps, back to Nova. The actual driving is browser automation on the backend — which your spec marks as a separate build. The frontend is ready to host it.</div>
+  </div>
+  <div class="col"><div class="proof seam">Marked backend by the spec itself — not a frontend miss.</div></div>
+</div>
+
+<div class="row">
+  <div class="row-top"><span class="code">A3</span><span>Options while an app is open</span><span class="chip match">Match</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>Watch (default) / back to the LLM's chat / switch or add another app / back to home to brief Nova.</div>
+    <div class="col"><div class="lbl">Build does</div>Close returns to the room's chat; the room's app row lets you switch or add apps; back returns to home for Nova. All present.</div>
+  </div>
+</div>
+
+<div class="grp">The honest seam — your words, unchanged</div>
+<div class="row">
+  <div class="row-top"><span class="code">—</span><span>Real app operation &amp; real tools are backend</span><span class="chip seam">Backend seam</span></div>
+  <div class="cols">
+    <div class="col"><div class="lbl">Spec</div>An LLM actually operating Gmail is browser automation on the backend. Actually checking the weather needs a real tool layer. The interface is the cockpit; the wiring that moves real machinery is a separate backend build.</div>
+    <div class="col"><div class="lbl">Build does</div>Exactly this. The frontend is the cockpit and nothing here claims to act on its own. No backend was touched, per your instruction. When you build the tool layer, this frontend already speaks the contract it needs.</div>
+  </div>
+  <div class="col"><div class="proof seam">Frontend and spec agree: this is backend. So the two match.</div></div>
+</div>
+
+<p class="sub" style="margin-top:18px">Every interface line matches. The only two amber items are the ones your own spec puts on the backend — the frontend is built to host them the moment that engine exists.</p>
+
+</body>
+</html>

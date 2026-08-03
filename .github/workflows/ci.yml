@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax check
+        run: |
+          node --check server.js
+          node --check lifecycle.js
+          node --check workers.js
+          node --check test.js
+          node --check test-lifecycle.js
+          node --check public/app.js
+
+      - name: Lifecycle engine tests
+        run: node test-lifecycle.js
+
+      - name: End-to-end tests
+        run: node test.js

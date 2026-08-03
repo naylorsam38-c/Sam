@@ -1,0 +1,785 @@
+<title>Command Desk — Build Order</title>
+<style>
+  :root {
+    --paper: #eceef1;
+    --card: #f6f7f9;
+    --rule: #d2d7de;
+    --rule-soft: #e0e4ea;
+    --ink: #171b21;
+    --ink-soft: #4a545f;
+    --muted: #737f8c;
+    --amber: #9a6710;
+    --amber-bg: #f3e6cd;
+    --teal: #1f6a5a;
+    --teal-bg: #d9e9e4;
+    --clay: #9d3a2e;
+    --clay-bg: #f2dcd8;
+    --slate: #3c5a7a;
+    --slate-bg: #dde5ee;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+      --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+      --amber: #e0a33e; --amber-bg: #33280f;
+      --teal: #62b39c; --teal-bg: #16302a;
+      --clay: #d57d6d; --clay-bg: #331f1b;
+      --slate: #8fb0d4; --slate-bg: #1b2733;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+    --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+    --amber: #e0a33e; --amber-bg: #33280f;
+    --teal: #62b39c; --teal-bg: #16302a;
+    --clay: #d57d6d; --clay-bg: #331f1b;
+    --slate: #8fb0d4; --slate-bg: #1b2733;
+  }
+
+  :root[data-theme="light"] {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --clay: #9d3a2e; --clay-bg: #f2dcd8;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+  }
+
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.6;
+    margin: 0; padding: 0 20px 80px;
+  }
+
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  .masthead { padding: 40px 0 22px; border-bottom: 2px solid var(--ink); }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 14px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 7vw, 40px); line-height: 1.08; letter-spacing: -.02em;
+    font-weight: 700; margin: 0 0 14px; text-wrap: balance;
+  }
+
+  .standfirst { font-size: 17px; color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+  .meta {
+    font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+    margin-top: 18px; display: flex; flex-wrap: wrap; gap: 6px 18px;
+  }
+
+  section { padding-top: 44px; }
+
+  h2 { font-size: 22px; letter-spacing: -.01em; font-weight: 700; margin: 0 0 6px; text-wrap: balance; }
+
+  .sec-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--amber); margin: 0 0 8px;
+  }
+
+  .intro { color: var(--ink-soft); margin: 0 0 4px; max-width: 62ch; }
+
+  p { margin: 10px 0; max-width: 66ch; }
+
+  .phase { border-top: 1px solid var(--rule); padding-top: 30px; margin-top: 34px; }
+  .phase:first-of-type { border-top: 0; }
+
+  .phase-top { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+
+  .phase-num {
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+  }
+
+  .est {
+    font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .08em;
+    padding: 3px 8px; border: 1px solid var(--rule); border-radius: 2px;
+    color: var(--ink-soft); margin-left: auto; white-space: nowrap;
+  }
+
+  .task {
+    background: var(--card); border: 1px solid var(--rule-soft);
+    border-left: 3px solid var(--rule); border-radius: 2px;
+    padding: 14px 16px; margin: 12px 0;
+  }
+
+  .task.critical { border-left-color: var(--clay); }
+  .task.decision { border-left-color: var(--amber); }
+
+  .task-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+
+  .code { font-family: var(--mono); font-size: 11.5px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .task-title { font-weight: 650; font-size: 15.5px; }
+
+  .task p { margin: 8px 0; font-size: 14.5px; color: var(--ink-soft); }
+
+  .chip {
+    font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; padding: 3px 7px; border-radius: 2px; white-space: nowrap;
+  }
+
+  .chip.built { background: var(--teal-bg); color: var(--teal); }
+  .chip.broken { background: var(--clay-bg); color: var(--clay); }
+  .chip.missing { background: var(--slate-bg); color: var(--slate); }
+  .chip.decide { background: var(--amber-bg); color: var(--amber); }
+
+  .done-when {
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.5; color: var(--ink);
+    background: var(--paper); border: 1px solid var(--rule-soft); border-radius: 2px;
+    padding: 9px 11px; margin-top: 10px;
+  }
+
+  .done-when b {
+    display: block; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin-bottom: 4px;
+  }
+
+  code {
+    font-family: var(--mono); font-size: .88em; background: var(--rule-soft);
+    padding: 1px 5px; border-radius: 2px; word-break: break-word;
+  }
+
+  .done-when code { background: transparent; padding: 0; }
+
+  ul, ol { margin: 10px 0; padding-left: 22px; max-width: 64ch; }
+  li { margin: 6px 0; color: var(--ink-soft); }
+  li strong { color: var(--ink); font-weight: 650; }
+
+  .state-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); margin: 18px 0;
+  }
+
+  .cell { background: var(--card); padding: 12px 14px; }
+
+  .cell .k {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 5px;
+  }
+
+  .cell .v { font-size: 14.5px; font-weight: 600; line-height: 1.35; }
+  .cell .v.ok { color: var(--teal); }
+  .cell .v.bad { color: var(--clay); }
+  .cell .v.warn { color: var(--amber); }
+
+  .scroll { overflow-x: auto; margin: 18px 0; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 440px; }
+
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+
+  th {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--muted); border-bottom: 1px solid var(--rule); font-weight: 700;
+  }
+
+  td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink); }
+  td.mono { font-family: var(--mono); font-size: 12.5px; color: var(--ink); }
+
+  tbody tr:last-child td { border-bottom: 0; }
+
+  tr.total td { border-top: 2px solid var(--ink); font-weight: 700; color: var(--ink); }
+
+  .callout {
+    border: 1px solid var(--amber); background: var(--amber-bg);
+    border-radius: 2px; padding: 14px 16px; margin: 20px 0;
+  }
+
+  .callout .k {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--amber); font-weight: 700; margin-bottom: 6px;
+  }
+
+  .callout p { margin: 6px 0; color: var(--ink); font-size: 14.5px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .rule-list { list-style: none; padding: 0; margin: 16px 0; counter-reset: r; }
+
+  .rule-list li { counter-increment: r; position: relative; padding-left: 34px; margin: 12px 0; color: var(--ink-soft); }
+
+  .rule-list li::before {
+    content: counter(r); position: absolute; left: 0; top: 1px;
+    font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--amber);
+    border: 1px solid var(--rule); border-radius: 2px;
+    width: 22px; height: 20px; display: grid; place-items: center;
+  }
+
+  footer {
+    margin-top: 56px; padding-top: 18px; border-top: 2px solid var(--ink);
+    font-family: var(--mono); font-size: 11.5px; color: var(--muted); line-height: 1.7;
+  }
+
+  a { color: var(--amber); }
+  a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Command Desk</p>
+  <h1>Build order: from here to finished</h1>
+  <p class="standfirst">Every outstanding item across the backend, the model layer and the interface — in the order it should be done, with what each costs and how you know it's actually finished.</p>
+  <div class="meta">
+    <span>Verified against command_desk_full_system</span>
+    <span>Snapshot 2026-08-02</span>
+    <span>Live: airexploit.com/commanddesk</span>
+  </div>
+</header>
+
+<!-- ===================== STATE ===================== -->
+<section>
+  <p class="sec-label">Starting point</p>
+  <h2>What is actually true right now</h2>
+  <p class="intro">Read from the code, not from the summaries. Everything below was checked directly.</p>
+
+  <div class="state-grid">
+    <div class="cell"><div class="k">Stages 0–4</div><div class="v ok">Built and live</div></div>
+    <div class="cell"><div class="k">Identity gate</div><div class="v ok">Real — bcrypt, lockout</div></div>
+    <div class="cell"><div class="k">Gmail exposure</div><div class="v ok">Blocked at the layer</div></div>
+    <div class="cell"><div class="k">Oversight tests</div><div class="v ok">25 / 25 passing</div></div>
+    <div class="cell"><div class="k">Chat endpoint</div><div class="v bad">Public, no auth</div></div>
+    <div class="cell"><div class="k">Review queue</div><div class="v bad">No screen reads it</div></div>
+    <div class="cell"><div class="k">Voice</div><div class="v bad">Parked — mic is dead</div></div>
+    <div class="cell"><div class="k">Home-screen app</div><div class="v bad">Won't install</div></div>
+    <div class="cell"><div class="k">Prompt editor</div><div class="v bad">Not built</div></div>
+    <div class="cell"><div class="k">Scheduler</div><div class="v bad">Does not exist</div></div>
+    <div class="cell"><div class="k">Calendar</div><div class="v bad">Not started</div></div>
+    <div class="cell"><div class="k">Database</div><div class="v warn">SQLite, not Postgres</div></div>
+  </div>
+
+  <p>The safety work is genuinely good. The permission layer re-validates the session independently before any Gmail call, the send gate binds a confirmation to one specific draft, a lost network reply is never retried, and the part of oversight that decides whether something went wrong is deterministic and tested. That core is worth keeping.</p>
+
+  <p>What's weak is everything you actually touch. Oversight produces findings no screen can display. The mic doesn't work and can't, as built. The home-screen app won't install. There's no way to edit an agent's prompt without going to the box. The system is more finished underneath than it is in front of you.</p>
+</section>
+
+<!-- ===================== RULES ===================== -->
+<section>
+  <p class="sec-label">Throughout</p>
+  <h2>The rules that apply to every phase</h2>
+  <p class="intro">Taken from your own build documents. These don't change between phases.</p>
+
+  <ol class="rule-list">
+    <li><strong>The live system is the only truth.</strong> Never deploy from a zip, a backup, or memory. If the box contradicts a document, the box wins — stop and report.</li>
+    <li><strong>Back up before touching anything</strong>, and confirm the backup restores. A backup you can't restore isn't a backup.</li>
+    <li><strong>New capability goes in new files.</strong> Never overwrite the existing hub or agents. Extend by adding a path, not by rewriting.</li>
+    <li><strong>One stage at a time.</strong> Finish it, prove it, stop, wait. Never build two unknowns at once.</li>
+    <li><strong>"Done" means proof, not "the code ran."</strong> HTTP 200 means the page loaded, not that it works. Nobody can see your phone — you are the final eyes.</li>
+    <li><strong>Reverse-engineer the task before starting it.</strong> What's unclear, what would have to be guessed, what costs money, what can't be undone, what needs you specifically. Ask it all once, up front.</li>
+    <li><strong>Anything leaving the box needs your yes.</strong> Working inside the box is free. Crossing the fence stops.</li>
+    <li><strong>The audit log is always on.</strong> Every state change and action: timestamp, state, trigger, result.</li>
+    <li><strong>Rules that can be enforced must not live in prompts.</strong> If a rule could be code, config or a database grant and it's only in a prompt, the step isn't done.</li>
+  </ol>
+</section>
+
+<!-- ===================== PHASE 0 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 0</span>
+      <h2>Close what's open</h2>
+      <span class="est">1 day</span>
+    </div>
+    <p class="intro">Nothing new gets built until these are shut. Every one is small, and two are live exposures.</p>
+
+    <div class="task critical">
+      <div class="task-head"><span class="code">0.1</span><span class="task-title">Shut the unauthenticated chat path</span><span class="chip broken">Broken</span></div>
+      <p><code>/commanddesk/chat</code> reaches the brain with no login. nginx sends it to the adapter, the adapter proxies to core's <code>/api/chat</code>, and nothing on that path checks a session. Anyone who finds the URL spends your API budget.</p>
+      <p>Add <code>Depends(require_auth)</code> to the core route — or better, delete the adapter's <code>/chat</code> proxy, since your live front end talks to <code>/nova/turn</code> and never uses it. That closes the hole and removes a whole process.</p>
+      <div class="done-when"><b>Done when</b>curl to /commanddesk/chat with no cookie returns 401, and the live front end still works unchanged.</div>
+    </div>
+
+    <div class="task critical">
+      <div class="task-head"><span class="code">0.2</span><span class="task-title">Rotate the login password</span><span class="chip broken">Broken</span></div>
+      <p>The seed credential sits in <code>core/auth.py</code> as a cleartext constant and is written into the build document. Both have travelled in zips. <code>seed_default_user</code> only inserts when the row is missing, so changing the constant alone does nothing — the stored hash has to be replaced.</p>
+      <div class="done-when"><b>Done when</b>the old password fails on the live login and the new one works.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">0.3</span><span class="task-title">Restore the single-Gmail-path rule</span><span class="chip broken">Broken</span></div>
+      <p>The snapshot says one code path touches the Gmail API. There are two — <code>style_profile.py</code> builds its own service and reads your sent mail. Auth-gated and audited, so not a hole, but it skips the permission layer and leaves no action record. Either route it through, or write it down as a sanctioned exception. What can't stand is a documented invariant that isn't true.</p>
+      <div class="done-when"><b>Done when</b>every Gmail call either passes through permission_layer or is named in the docs as a deliberate exception.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">0.4</span><span class="task-title">Gate the legacy routes</span><span class="chip missing">Housekeeping</span></div>
+      <p><code>/api/tools</code>, <code>/api/groups</code>, <code>/api/agents/*</code>, <code>/api/memory/*</code>, <code>/api/decision</code> and <code>/api/nudge</code> have no auth. Reachable only from the box, so not urgent. One decorator each removes the question permanently.</p>
+      <div class="done-when"><b>Done when</b>every route either requires auth or is listed as deliberately public with a reason.</div>
+    </div>
+
+    <div class="task decision">
+      <div class="task-head"><span class="code">0.5</span><span class="task-title">Settle two contradictions in your own documents</span><span class="chip decide">Your call</span></div>
+      <p><strong>Memory window.</strong> The backend spec says fourteen daily summaries. The code says four, and the snapshot calls four the locked figure. One-line change — but decide which is real.</p>
+      <p><strong>Alerting.</strong> The backend spec wants red flags that interrupt immediately. The v3 prompts say nothing is ever pushed. These cannot both stand, and Phase 6 depends on the answer.</p>
+      <div class="done-when"><b>Done when</b>both are written down once and the losing version is deleted rather than left to resurface.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">0.6</span><span class="task-title">Retire the superseded documents</span><span class="chip missing">Housekeeping</span></div>
+      <p>Move these out of the working set: <strong>Dispatch_ORDER_full</strong> (its "do all of it, don't come back" instruction is the opposite of your one-stage rule), <strong>DISPATCHv4buildspec</strong> (the final roadmap is a strict superset), <strong>COWORKROADMAP v2</strong> (describes a local backend, a Flutter client and no verified Claude call), and <strong>commanddesk_match.html</strong> (certifies an animated Nova you later dropped).</p>
+      <div class="done-when"><b>Done when</b>the working set is the COMMAND doc, PROMPTS v3, the backend spec, and this roadmap.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">0.7</span><span class="task-title">Collapse seven front ends to one</span><span class="chip missing">Housekeeping</span></div>
+      <p>Seven builds are in circulation and only <code>full_system/frontend</code> is live. The others have no login and post to the ungated chat path. Archive them clearly. Also clear the orphaned <code>nova_blink.png</code> and <code>nova_mouth_1-4.png</code> left in the live assets folder.</p>
+      <div class="done-when"><b>Done when</b>one front end is the front end, and the rest are somewhere nobody deploys from.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 1 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 1</span>
+      <h2>Finish the original plan</h2>
+      <span class="est">1–2 days</span>
+    </div>
+    <p class="intro">Stages 0 through 4 are done. Stage 5 is the last one in the COMMAND doc, and it's the easy one by design — the pattern is already proven.</p>
+
+    <div class="task">
+      <div class="task-head"><span class="code">1.1</span><span class="task-title">Prove Stage 4 end to end on your phone</span><span class="chip decide">Needs you</span></div>
+      <p>Draft and send are built, but the doc is explicit that nobody else can confirm it. Speak the ask, see the draft, say a listed yes, watch it send. Then check the log shows the exact word that opened the gate and the draft it was bound to.</p>
+      <p>Expect one snag: drafting needs the <code>gmail.compose</code> scope. If consent was only granted for readonly, this fails with a scope error. That's the named gate, not a bug.</p>
+      <div class="done-when"><b>Done when</b>you have personally watched an email send, and the log names the word and the draft id.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">1.2</span><span class="task-title">Stage 5 — clone the pattern to a second worker</span><span class="chip missing">Not started</span></div>
+      <p>Same router, same permission-layer shape, same gate, same log. Swap the service and the instruction. This stage repeats a proven thing, so it carries almost no risk. Calendar is the obvious candidate but it's the expensive one — a cheaper second worker proves the clone without opening that door.</p>
+      <div class="done-when"><b>Done when</b>a second worker runs a request through the permission layer, logs it, and returns a result on the live site.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">1.3</span><span class="task-title">Fix the test file's own run command</span><span class="chip broken">Small bug</span></div>
+      <p>The docstring in <code>test_compare.py</code> says <code>python -m oversight.test_compare</code>, which raises an ImportError. The working command is <code>python3 -m core.oversight.test_compare</code> from <code>backend/</code>. A test suite nobody can start is a test suite nobody runs.</p>
+      <div class="done-when"><b>Done when</b>the documented command runs and prints 25/25.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 2 — THE FACE ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 2</span>
+      <h2>The face — what you actually touch</h2>
+      <span class="est">1–3 weeks</span>
+    </div>
+    <p class="intro">The whole point of the system is that you talk to Nova and see the result. Right now you type, the mic is dead, the home-screen app won't install, and the oversight findings land somewhere no screen reads. This is the weakest layer and it's the one you live in.</p>
+
+    <div class="task critical">
+      <div class="task-head"><span class="code">2.1</span><span class="task-title">The review queue has no screen</span><span class="chip broken">Invisible</span></div>
+      <p>Angel writes its findings to a <code>review_queue</code> table described as "only Sam's UI reads." I searched: <code>review_queue</code> appears in neither <code>main.py</code> nor the live <code>app.js</code>. There is no endpoint and no screen. <strong>The entire oversight pipeline currently produces output nobody can see.</strong></p>
+      <p>The <code>reviewqueue.html</code> you have is a mockup — hardcoded Acme cases, buttons that only fade the card, and it pulls fonts from Google's CDN. The design is good; wire it to real rows and drop the external fonts.</p>
+      <div class="done-when"><b>Done when</b>a real Angel case appears on your phone, and clearing it writes back.</div>
+    </div>
+
+    <div class="task critical">
+      <div class="task-head"><span class="code">2.2</span><span class="task-title">Voice — the fix that was deferred</span><span class="chip broken">Parked</span></div>
+      <p>This is the actual goal of the whole system: <em>Sam talks to Nova live</em>. It's the one thing that isn't true.</p>
+      <p>The dead link is speech-to-text. The browser engine the old build used doesn't exist in iPhone Safari, so it can never work as written — which is why the doc parks the mic and has you typing. The real path is the one your own notes describe: <strong>the phone records audio, the box runs Whisper, the words go to Nova, Nova speaks back.</strong></p>
+      <p>Four pieces: record on device (<code>MediaRecorder</code> works in iOS Safari), upload the clip, run faster-whisper on the box, hand the transcript to <code>/nova/turn</code> exactly as typed text is handled today. Reply speech already works.</p>
+      <p>Worth knowing: your Aura specification solves this same problem with the same component choice. The avatar half is out of scope, but its speech-to-text section is directly reusable.</p>
+      <div class="done-when"><b>Done when</b>you speak on your phone, with no typing, and hear Nova answer.</div>
+    </div>
+
+    <div class="task critical">
+      <div class="task-head"><span class="code">2.3</span><span class="task-title">Make the home-screen app actually install</span><span class="chip broken">Broken</span></div>
+      <p>Checked the live front end: the manifest does say <code>display: standalone</code>, but <code>index.html</code> contains <strong>zero</strong> <code>apple-</code> meta tags, there is no <code>apple-touch-icon</code>, and <code>sw.js</code> exists but is <strong>never registered</strong> by any script.</p>
+      <p>So Add to Home Screen gives you a Safari bookmark with the address bar showing — not the full-screen app. You need <code>apple-mobile-web-app-capable</code>, <code>apple-mobile-web-app-status-bar-style</code>, a 180×180 <code>apple-touch-icon</code>, and an actual <code>navigator.serviceWorker.register('sw.js')</code> call.</p>
+      <div class="done-when"><b>Done when</b>launching from the home screen opens full-screen with no address bar, and still works after a reload.</div>
+    </div>
+
+    <div class="task decision">
+      <div class="task-head"><span class="code">2.4</span><span class="task-title">Decide which interface is the target</span><span class="chip decide">Your call</span></div>
+      <p>Two designs are both "current" in different documents. The COMMAND doc's Stage 1 says: Nova as the still image, <em>no tiles</em>, a mic control, one empty result panel — nothing else on screen. The live build has rooms per agent, a tile grid, a room switcher and an app launcher.</p>
+      <p>Those aren't refinements of each other, they're different products. One description of the home screen needs to win.</p>
+      <div class="done-when"><b>Done when</b>one description of the home screen exists and the live build matches it.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">2.5</span><span class="task-title">Surface the agents you already built</span><span class="chip missing">Hidden</span></div>
+      <p>Spawned agent instances from templates (<code>core/agents.py</code>, unlimited, no cap) and ad-hoc multi-agent conversation groups (<code>core/groups.py</code>) are <strong>fully implemented backend-side</strong> and completely absent from the front end — zero references in <code>app.js</code>.</p>
+      <p>You paid for this feature and can't reach it. It's a UI job only, no backend work.</p>
+      <div class="done-when"><b>Done when</b>you can spawn an agent from your phone without touching the box.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">2.6</span><span class="task-title">Screens for the things Phase 5 and 6 produce</span><span class="chip missing">Follows on</span></div>
+      <p>The per-app status panel ("checked 3 emails, drafted 1 reply, nothing sent") and the calendar view both need a place to live. Design the panel once, in this phase, so those later phases only supply data instead of inventing layout.</p>
+      <div class="done-when"><b>Done when</b>an empty per-app panel exists and renders whatever the backend gives it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 3 — THE BRAINS ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 3</span>
+      <h2>The brains — the model layer</h2>
+      <span class="est">3–5 days</span>
+    </div>
+    <p class="intro">What's running today, verified from <code>slots_config.json</code>:</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Slot</th><th>Brain</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">hub</td><td class="mono">claude-sonnet-5</td><td>The complex-reasoning slot. Never downgraded.</td></tr>
+          <tr><td class="mono">research</td><td class="mono">claude-haiku-4-5</td><td>Cheap tier</td></tr>
+          <tr><td class="mono">builder</td><td class="mono">claude-haiku-4-5</td><td>Cheap tier, walled off with tester</td></tr>
+          <tr><td class="mono">tester</td><td class="mono">claude-haiku-4-5</td><td>Cheap tier, walled off with builder</td></tr>
+          <tr><td class="mono">personal_assistant</td><td class="mono">claude-haiku-4-5</td><td>The mail worker</td></tr>
+          <tr><td class="mono">consolidator</td><td class="mono">ollama / llama3.2</td><td>Free. The vault agent.</td></tr>
+          <tr><td class="mono">nova_voice</td><td class="mono">ollama / llama3.2</td><td>Free, all day. Wakes to Sonnet on your word.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The cost model works and shouldn't be touched: the everyday face is free, Sonnet wakes only when you say so and sleeps when you're done, and the face never decides that for itself. The router is deliberately pinned to Claude's cheap tier rather than Ollama — llama3.2 was tried and confidently misrouted "what's come in" to Builder with a fabricated justification. That was the right call; don't undo it to save pennies.</p>
+
+    <div class="task critical">
+      <div class="task-head"><span class="code">3.1</span><span class="task-title">The live prompt editor — never built</span><span class="chip broken">Missing</span></div>
+      <p>Two separate roadmaps require it and it does not exist. I enumerated every route in <code>main.py</code>: there is no <code>GET</code> or <code>PUT</code> for an agent's prompt anywhere. Today, changing how an agent behaves means going to the box.</p>
+      <p>Build it as specified: per-agent get and put, gated to you only, versioned — bump on every save, all prior versions immutable and retrievable, and reject a save that would overwrite without a bump.</p>
+      <p>Treat this as a privileged write. An endpoint that rewrites an agent's instructions is the single most valuable thing for an attacker to reach.</p>
+      <div class="done-when"><b>Done when</b>you edit Hub's prompt from your phone, the next call reflects it, and a task created before the edit still reports the old version with the old text retrievable.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">3.2</span><span class="task-title">Finish provider-agnostic slots</span><span class="chip missing">Half done</span></div>
+      <p>Better than the docs suggest. <code>llm_router.run()</code> already takes a per-call <code>provider</code> and <code>model</code> override, and <code>slots_config.json</code> already carries per-slot values — so mixing Ollama slots alongside Claude slots works today with no code change.</p>
+      <p>What's missing is the rest of it: only Claude and Ollama paths exist, and there's no per-slot <code>api_key_ref</code> or <code>endpoint</code>. Adding a third provider is still a code edit, and keys aren't referenced by pointer.</p>
+      <div class="done-when"><b>Done when</b>adding a provider or swapping a slot's model is a config edit, and no key is stored anywhere but by reference.</div>
+    </div>
+
+    <div class="task decision">
+      <div class="task-head"><span class="code">3.3</span><span class="task-title">The two experimental Llama slots</span><span class="chip decide">Your call</span></div>
+      <p>Your spec asked for two slots on Llama for your own experimentation, independently promptable. Not built. Blocked on a decision only you can make: which Llama variant, and self-hosted or hosted. Cheap to add once you've said.</p>
+      <div class="done-when"><b>Done when</b>two slots run a model you chose and you can prompt each independently.</div>
+    </div>
+
+    <div class="task decision">
+      <div class="task-head"><span class="code">3.4</span><span class="task-title">Builder and Tester run the same model</span><span class="chip decide">Your call</span></div>
+      <p>The docs describe a cheap/sharp split between them. Both currently run identical Haiku. Either implement the split or delete the claim — right now the documentation describes a distinction that doesn't exist.</p>
+      <div class="done-when"><b>Done when</b>the config and the docs agree.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">3.5</span><span class="task-title">Know what it costs</span><span class="chip missing">Not started</span></div>
+      <p>Sonnet-on-wake is your main cost control and it works. But nothing counts tokens, nothing totals spend, and nothing caps it. Every call already writes to the audit log — add token counts to those rows and you can answer "what did today cost" from a query.</p>
+      <p>Then a ceiling: a daily limit that refuses rather than warns.</p>
+      <div class="done-when"><b>Done when</b>you can ask what today cost and get a real number, and a runaway loop hits a wall instead of a bill.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">3.6</span><span class="task-title">Clear the orphan slots</span><span class="chip missing">Housekeeping</span></div>
+      <p>Three slot folders exist under <code>core/slots/</code> — <code>memory</code>, <code>mind</code>, <code>writing</code> — with prompts and panels, but none appear in <code>slots_config.json</code>. They're leftovers from experiments. Wire them or delete them; don't leave them looking live.</p>
+      <div class="done-when"><b>Done when</b>every folder under slots/ is either in the config or gone.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 4 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 4</span>
+      <h2>The enforcement core — on SQLite</h2>
+      <span class="est">3 days</span>
+    </div>
+    <p class="intro">The valuable half of the big roadmap, and none of it needs Postgres. Your permission layer already does exactly this for Gmail. This generalises it to everything else.</p>
+
+    <div class="task">
+      <div class="task-head"><span class="code">4.1</span><span class="task-title">policy.yaml and a loader that fails closed</span><span class="chip missing">Not started</span></div>
+      <p>One file holding escalation tiers, priorities, loop rules and thresholds. The loader validates at startup and <strong>refuses to start</strong> on a malformed file rather than falling back to defaults.</p>
+      <p>The line that matters: an unknown action returns <code>require_approval</code>. An action nobody anticipated must never default to permitted.</p>
+      <div class="done-when"><b>Done when</b>get_escalation_tier("an_action_that_does_not_exist") returns require_approval, proven by a test.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">4.2</span><span class="task-title">One execution path for every side effect</span><span class="chip missing">Not started</span></div>
+      <p>Every agent action routes through <code>enforcement.py</code>, which checks policy <em>before</em> the action runs. Silent tiers execute and log. Notify tiers execute, log and emit. Approval tiers do not execute at all — they persist a pending record and hand control back to you.</p>
+      <p>Fail closed on error: if the policy lookup itself throws, the action does not run. This middleware becomes a single point of failure, so its failure mode has to be "nothing happens," never "everything is allowed."</p>
+      <p>Then audit for bypasses. Every file write, HTTP call, database mutation and outbound message reachable without passing through this path is a hole. List any that can't be routed yet rather than quietly leaving them.</p>
+      <div class="done-when"><b>Done when</b>a test agent told to delete a file cannot — even with its prompt edited to say approval isn't needed. Prompt says yes, enforcement says no, no happens.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">4.3</span><span class="task-title">Version stamps on every write</span><span class="chip missing">Not started</span></div>
+      <p>Four strings — prompt, policy, schema, runtime — stamped by one write helper on insert. Existing rows backfill to <code>0.0.0</code>, honestly marking them as pre-versioning rather than pretending.</p>
+      <p>This is what turns your audit log from a list into a record. Without it you can't tell which prompt or which policy produced a given decision — and it's what makes the prompt editor in 3.1 auditable rather than just convenient.</p>
+      <div class="done-when"><b>Done when</b>a new row carries four real version strings without the caller passing them.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">4.4</span><span class="task-title">Observer isolation, the SQLite way</span><span class="chip missing">Not started</span></div>
+      <p>The big roadmap wants a Postgres role with SELECT-only grants and calls it the one guarantee that survives prompt injection. You can't have that on SQLite — no users, no GRANT.</p>
+      <p>What you can have: open Observer's connection as <code>file:aire.db?mode=ro</code>. A real refusal from the driver, not the application promising to behave. Weaker than Postgres — same file, no per-table control — but far stronger than a rule in a prompt.</p>
+      <div class="done-when"><b>Done when</b>an INSERT on Observer's connection raises from sqlite3 itself, proven by a test.</div>
+    </div>
+
+    <div class="callout">
+      <div class="k">Why this sits here</div>
+      <p>Every backend feature added after Phase 4 inherits the enforcement path automatically. Anything added before it has to be retrofitted. Phases 2 and 3 are safe to do first because they're the front end and the model config — they don't add new side effects.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 5 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 5</span>
+      <h2>Something that can wake up on its own</h2>
+      <span class="est">3–4 days</span>
+    </div>
+    <p class="intro">Three features in your backend spec are impossible today for one reason: nothing can fire on a timer. No APScheduler, no Celery, no crontab, no systemd timer. <code>vault.py</code> states it outright.</p>
+
+    <div class="task">
+      <div class="task-head"><span class="code">5.1</span><span class="task-title">Add the scheduler</span><span class="chip missing">Blocks 5.2–5.4</span></div>
+      <p>A systemd timer or APScheduler inside the core process. Every job routes through <code>enforcement.py</code> from Phase 4 — a background job that can act unsupervised is exactly what shouldn't get its own private path.</p>
+      <div class="done-when"><b>Done when</b>a trivial job fires on schedule and its run appears in the audit log.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">5.2</span><span class="task-title">Per-app status updates</span><span class="chip missing">Not started</span></div>
+      <p>A running account of what each worker has done in each app — "checked 3 emails, drafted 1 reply, nothing sent" — roughly once a minute. Not a live view, a steady heartbeat. Nova reads these and knows the state of play without operating anything. Everything needed is already in the audit log; this is a rollup on a timer feeding the panel from 2.6.</p>
+      <div class="done-when"><b>Done when</b>the panel shows a running per-app account that updates without you asking.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">5.3</span><span class="task-title">The nightly debrief</span><span class="chip missing">Not started</span></div>
+      <p>Nova and the memory agent run a nightly pass: anything untouched lately, anything missed, anything old worth following up. The memory agent retrieves; <strong>Nova decides</strong>. Memory surfaces, the hub judges — that separation is the point.</p>
+      <div class="done-when"><b>Done when</b>a debrief runs unattended overnight and its output is waiting in the morning.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">5.4</span><span class="task-title">Replace lazy expiry with a real sweeper</span><span class="chip missing">Improvement</span></div>
+      <p>The 120-second confirmation window currently expires only when the next interaction happens. The safety property holds either way — the gate stays shut unless state and draft both match — but a scheduler lets it expire properly, and the same sweeper catches <code>tool_requested</code>, <code>reading</code>, <code>drafting</code> and <code>sending</code> states left hanging.</p>
+      <div class="done-when"><b>Done when</b>an abandoned confirmation returns to idle on its own, and the timeout is logged.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 6 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 6</span>
+      <h2>Oversight, as originally specified</h2>
+      <span class="est">4–7 days</span>
+    </div>
+    <p class="intro">What got built is good but it isn't what the backend spec described. The spec wanted two independent accounts of the same work, cross-referenced. What exists compares stated intent against outcome — valuable, but a different check.</p>
+
+    <div class="task">
+      <div class="task-head"><span class="code">6.1</span><span class="task-title">The hub's own read-only view of each app</span><span class="chip missing">Not started</span></div>
+      <p>From the spec: a link separate from the worker's, so you can ask Nova "what's been done in Gmail today?" and get a straight answer. The hub observes, the worker acts, and the wires don't cross.</p>
+      <p>This pulls against the current design, which deliberately funnels all Gmail through one path. The honest version is a read-only view over the audit log and actions table — same answer, no second credential to secure.</p>
+      <div class="done-when"><b>Done when</b>asking Nova what happened in an app today returns a real account drawn from the log.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">6.2</span><span class="task-title">Two independent summaries</span><span class="chip missing">Not started</span></div>
+      <p>The worker summarises its own work. A separate watcher agent summarises the same work. Both roll up. This catches a worker that <em>misreports</em>, not just one that drifts from its stated plan — genuinely different from what's built.</p>
+      <div class="done-when"><b>Done when</b>one piece of work produces two summaries from two different agents.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">6.3</span><span class="task-title">Nova adjudicates, and escalates when she can't</span><span class="chip missing">Not started</span></div>
+      <p>If the two agree, fine. If they disagree, Nova flags it — that's the whole point of having two. Your own build note asks for the tiebreaker to be explicit: Nova adjudicates, and where she can't resolve it she escalates to you rather than silently picking one. Today Angel writes to a queue with no adjudication step and no path back through Nova.</p>
+      <div class="done-when"><b>Done when</b>a deliberately mismatched pair produces a flag, and an unresolvable one reaches you.</div>
+    </div>
+
+    <div class="task decision">
+      <div class="task-head"><span class="code">6.4</span><span class="task-title">Red-flag alerting — blocked on 0.5</span><span class="chip decide">Your call</span></div>
+      <p>The spec wants anything clearly wrong to interrupt immediately, because a one-minute cadence can miss a fast mistake. The v3 prompts say nothing is ever pushed.</p>
+      <p>A reasonable resolution: both are right about different things — routine findings stay pull-only, and one narrow class (an action that already crossed the fence and shouldn't have) interrupts. But that's your call, not the builder's.</p>
+      <div class="done-when"><b>Done when</b>the rule is written down once, and the code matches it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 7 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 7</span>
+      <h2>Calendar</h2>
+      <span class="est">1–2 weeks</span>
+    </div>
+    <p class="intro">The one item in the backend spec never started at all. It's also the hardest thing on this list, and it's worth being blunt about why.</p>
+
+    <p>Email works as text — the message that arrived, the reply that was drafted, side by side. Calendar doesn't. You need to <em>see</em> it, and Google Calendar won't embed. So it has to be Command Desk's own view backed by a genuine two-way sync.</p>
+
+    <p><strong>Two-way sync is where projects like this die.</strong> Not the reading, not the writing — the reconciliation. An event changed in both places between syncs. A deletion that might be a deletion or might be a failed fetch. Recurring events, where one edit can mean this instance, all instances, or this and everything after. Time zones across daylight saving. None of it is exotic; all of it has to be decided rather than discovered.</p>
+
+    <div class="task">
+      <div class="task-head"><span class="code">7.1</span><span class="task-title">Read-only calendar view first</span><span class="chip missing">Not started</span></div>
+      <p>Pull events, render a real view, let agents read it to brief and plan. No writes. Same shape as Stage 3's read-only Gmail proof, and for the same reason: prove the connection where nothing can be damaged.</p>
+      <div class="done-when"><b>Done when</b>your real week renders in Command Desk and Nova can describe your day.</div>
+    </div>
+
+    <div class="task">
+      <div class="task-head"><span class="code">7.2</span><span class="task-title">Writes, behind the gate</span><span class="chip missing">Not started</span></div>
+      <p>Creating or moving an event has consequences — it lands in someone else's calendar. Through the permission layer, behind confirmation, exactly like send. Same exactly-once guard: a lost network reply must never become two meetings.</p>
+      <div class="done-when"><b>Done when</b>you speak an event, see it, confirm it, and it appears in Google Calendar once.</div>
+    </div>
+
+    <div class="task decision">
+      <div class="task-head"><span class="code">7.3</span><span class="task-title">Two-way sync and conflict resolution</span><span class="chip decide">Design first</span></div>
+      <p>Decide the rules before writing code: which side wins a simultaneous edit, how a deletion is told apart from a failed fetch, what happens to recurring-event edits, how far back a sync reaches. Write them down, then build to them.</p>
+      <div class="done-when"><b>Done when</b>a change in either place appears in the other, and a deliberate simultaneous edit resolves the way the written rule says.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PHASE 8 ===================== -->
+<section>
+  <div class="phase">
+    <div class="phase-top">
+      <span class="phase-num">Phase 8</span>
+      <h2>The Postgres question</h2>
+      <span class="est">3–6 weeks — conditional</span>
+    </div>
+    <p class="intro">The final roadmap assumes PostgreSQL throughout: roles and grants, jsonb, timestamptz, row-level security, Terraform, RDS. You're on SQLite. This is where that gets resolved — or deliberately doesn't.</p>
+
+    <div class="callout">
+      <div class="k">Ask this before committing</div>
+      <p>Row-level security, <code>tenant_id</code> and Postgres roles exist to keep <em>different customers</em> apart. If Command Desk is one person on one box, that's a month spent on a problem you don't have yet — and one you can solve later, when a second user is real rather than hypothetical.</p>
+      <p>Phase 4 already gives you the fail-closed policy engine, the single enforcement path and a real read-only handle for Observer. That's most of the protection, for about three days.</p>
+    </div>
+
+    <p>If you do go ahead, the order is fixed and the migration itself is the risk — moving a live database with real sessions, real memory and a real inbox history is a project in its own right, not a step.</p>
+
+    <ol>
+      <li><strong>Reversible migrations first.</strong> Every migration gets a matching down script, applied as an atomic batch, tested up-then-down against a clean database in CI <em>before</em> anything touches AWS. One untested down script is the difference between a bad afternoon and a disaster.</li>
+      <li><strong>Event bus.</strong> Eleven event types, persisted with version stamps, indexed on the unhandled-queue lookup because it runs constantly. Hub subscribes rather than polls.</li>
+      <li><strong>Hub's completion guarantee.</strong> A background processor works unhandled events oldest-first to a resolution — completed, escalated, or explicitly superseded. Never blocks foreground work. A pending approval past its 72-hour expiry escalates; never auto-approved, never quietly dropped.</li>
+      <li><strong>Observer as a real database role.</strong> SELECT only, on named tables, public grants explicitly revoked, credentials in Secrets Manager, created by a migration so it's reproducible. The step Phase 4 could only approximate.</li>
+      <li><strong>Thresholds as SQL.</strong> Five parameterised queries with values injected from policy. The query decides whether a threshold was met; Observer only explains what the rows mean.</li>
+      <li><strong>Decisions table.</strong> Evidence references required — a decision with no evidence isn't recorded as a decision. Three confidence values stored separately, never averaged into one.</li>
+      <li><strong>Health as counts.</strong> If a number can't come from a live query it isn't displayed. No percentage without both numerator and denominator visible. An empty result shows "no data" — never 0%, never 100%.</li>
+      <li><strong>Semantic judgments as fields.</strong> The model writes <code>drift_detected</code>, <code>same_issue_as_prior</code>, <code>role_drift</code>. Policy decides the consequence. The prompt holds the judgment and never the consequence.</li>
+      <li><strong>Slim the prompts — last.</strong> For every remaining sentence, ask whether it's enforced somewhere. If it is, delete it from the prompt. A rule stated twice drifts out of sync.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== ACCEPTANCE ===================== -->
+<section>
+  <p class="sec-label">Proof</p>
+  <h2>The tests that say it's finished</h2>
+  <p class="intro">If any of these fails, the phase it belongs to isn't done, regardless of what else works.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>#</th><th>Test</th><th>Phase</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>Unauthenticated request to every public route returns 401</td><td class="num">0</td></tr>
+        <tr><td class="num">2</td><td>The old password no longer works on the live login</td><td class="num">0</td></tr>
+        <tr><td class="num">3</td><td>You have personally watched an email send, and the log names the word that opened the gate</td><td class="num">1</td></tr>
+        <tr><td class="num">4</td><td>A second worker runs the same pattern end to end</td><td class="num">1</td></tr>
+        <tr><td class="num">5</td><td>A real Angel finding appears on your phone and clearing it writes back</td><td class="num">2</td></tr>
+        <tr><td class="num">6</td><td>You speak on your phone, with no typing, and hear Nova answer</td><td class="num">2</td></tr>
+        <tr><td class="num">7</td><td>The home-screen icon opens full-screen with no address bar</td><td class="num">2</td></tr>
+        <tr><td class="num">8</td><td>You spawn an agent from the phone without touching the box</td><td class="num">2</td></tr>
+        <tr><td class="num">9</td><td>Editing Hub's prompt takes effect next call; an older task still reports the old version</td><td class="num">3</td></tr>
+        <tr><td class="num">10</td><td>Swapping a slot's model is a config edit, not a code edit</td><td class="num">3</td></tr>
+        <tr><td class="num">11</td><td>You can ask what today cost and get a real number</td><td class="num">3</td></tr>
+        <tr><td class="num">12</td><td>An unknown action returns require_approval, not permitted</td><td class="num">4</td></tr>
+        <tr><td class="num">13</td><td>A blocked action stays blocked with a prompt telling the model approval isn't needed</td><td class="num">4</td></tr>
+        <tr><td class="num">14</td><td>An exception inside the policy check blocks the action rather than permitting it</td><td class="num">4</td></tr>
+        <tr><td class="num">15</td><td>An INSERT on Observer's connection is refused by the database driver</td><td class="num">4</td></tr>
+        <tr><td class="num">16</td><td>A new row carries four real version strings without the caller passing them</td><td class="num">4</td></tr>
+        <tr><td class="num">17</td><td>A job fires overnight unattended and appears in the audit log</td><td class="num">5</td></tr>
+        <tr><td class="num">18</td><td>An abandoned confirmation returns to idle on its own</td><td class="num">5</td></tr>
+        <tr><td class="num">19</td><td>Two deliberately mismatched summaries produce a flag that reaches you</td><td class="num">6</td></tr>
+        <tr><td class="num">20</td><td>An event created in either calendar appears in the other, once</td><td class="num">7</td></tr>
+        <tr><td class="num">21</td><td>Task lifecycle replayable from event rows alone, with no transcript</td><td class="num">8</td></tr>
+        <tr><td class="num">22</td><td>CI applies all migrations to a clean database and rolls them all back</td><td class="num">8</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===================== TIME ===================== -->
+<section>
+  <p class="sec-label">Cost</p>
+  <h2>What each phase buys</h2>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Phase</th><th>What you get</th><th>Time</th></tr></thead>
+      <tbody>
+        <tr><td class="num">0</td><td>Nothing exposed, no contradictions left standing</td><td class="num">1 day</td></tr>
+        <tr><td class="num">1</td><td>The original plan actually finished and proven</td><td class="num">1–2 days</td></tr>
+        <tr><td class="num">2</td><td>You talk to it, it installs on your phone, you can see what it found</td><td class="num">1–3 weeks</td></tr>
+        <tr><td class="num">3</td><td>Change a prompt or a model without going to the box</td><td class="num">3–5 days</td></tr>
+        <tr><td class="num">4</td><td>Nothing acts without passing a gate, ever</td><td class="num">3 days</td></tr>
+        <tr><td class="num">5</td><td>The system works while you're not looking</td><td class="num">3–4 days</td></tr>
+        <tr><td class="num">6</td><td>Two independent accounts, and a flag when they disagree</td><td class="num">4–7 days</td></tr>
+        <tr><td class="num">7</td><td>Calendar you can see, synced both ways</td><td class="num">1–2 weeks</td></tr>
+        <tr><td class="num">8</td><td>Multi-tenant foundation — only if you need it</td><td class="num">3–6 weeks</td></tr>
+        <tr class="total"><td>0–7</td><td>Everything specified, finished</td><td class="num">6–10 weeks</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Phases 0 and 1 are under three days and take you from "live with a hole in it" to "the plan is done." Phase 2 is the longest stretch that isn't optional — it's the difference between a system that works and a system you can use.</p>
+
+  <p>Phases 2 and 3 touch the front end and the model config, so they can run alongside 4 and 5 without colliding. Everything else is strictly in order.</p>
+</section>
+
+<!-- ===================== OPEN ===================== -->
+<section>
+  <p class="sec-label">Open</p>
+  <h2>Decisions nobody else can make</h2>
+
+  <ul>
+    <li><strong>Which interface is the target</strong> — Nova alone with a mic and one panel, or rooms with tiles and an app launcher. Two documents describe two products.</li>
+    <li><strong>Memory window</strong> — fourteen days as the backend spec says, or four as the code says.</li>
+    <li><strong>Alerting</strong> — interrupt on a red flag, or on demand only. Phase 6.4 waits on this.</li>
+    <li><strong>The two Llama slots</strong> — which variant, self-hosted or hosted.</li>
+    <li><strong>Builder / Tester split</strong> — implement the cheap-sharp difference, or delete the claim.</li>
+    <li><strong>Postgres</strong> — migrate, or stay on SQLite and accept the weaker Observer boundary.</li>
+    <li><strong>Second worker</strong> — which service Stage 5 clones to.</li>
+    <li><strong>Retention</strong> — how long conversations, planners and threads are kept. Design it as a setting, not a hardcode, and tune by trial.</li>
+    <li><strong>Vault placement</strong> — separate agent or folded into the hub. Your stated lean is separate, to keep load off Nova.</li>
+    <li><strong>Calendar conflict rules</strong> — which side wins, and what a deletion means. Decide before 7.3, not during.</li>
+  </ul>
+</section>
+
+<!-- ===================== OUT ===================== -->
+<section>
+  <p class="sec-label">Out</p>
+  <h2>Ruled out — do not build</h2>
+
+  <ul>
+    <li><strong>Claude or ChatGPT running inside Command Desk as embedded apps</strong>, and any attempt to wire Claude-with-its-full-tools into the system. You wanted a closed loop with Claude keeping its native tools; it isn't available, and you've decided. They can still appear as pickable apps — the "operates them live in the frame" path is not a target.</li>
+    <li><strong>Anything relying on embedding an app that blocks it.</strong> Assume Gmail, Calendar and Maps cannot be shown in an iframe. The backend link plus per-app updates is the substitute.</li>
+    <li><strong>Video Nova.</strong> Dropped entirely. The original still image, no loop, no motion.</li>
+    <li><strong>Browser-based speech-to-text.</strong> The engine doesn't exist in iPhone Safari. Phase 2.2 replaces it with recording on the phone and transcribing on the box — that's the fix, not a rebuild of the same dead thing.</li>
+    <li><strong>Rebuilding the permission layer, state machine, auth or oversight.</strong> They work, they're tested, and replacing them would cost weeks to land somewhere worse.</li>
+    <li><strong>Downgrading the router to Ollama.</strong> Tried; llama3.2 misrouted with a fabricated justification. The small per-call cost buys instruction-following reliable enough that "never guess" is actually true.</li>
+  </ul>
+</section>
+
+<footer>
+  Verified against command_desk_full_system, snapshot 2026-08-02 · every claim read from source, not from summaries<br>
+  Estimates assume focused work with an agent on the box, and exclude the time you spend confirming each stage on your phone<br>
+  Nothing in this document has been deployed. The live system is unchanged.
+</footer>
+
+</div>

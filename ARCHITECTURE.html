@@ -1,0 +1,513 @@
+<title>Command Desk — The Brain</title>
+<style>
+  :root {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --clay: #9d3a2e; --clay-bg: #f2dcd8;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+      --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+      --amber: #e0a33e; --amber-bg: #33280f;
+      --teal: #62b39c; --teal-bg: #16302a;
+      --clay: #d57d6d; --clay-bg: #331f1b;
+      --slate: #8fb0d4; --slate-bg: #1b2733;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+    --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+    --amber: #e0a33e; --amber-bg: #33280f;
+    --teal: #62b39c; --teal-bg: #16302a;
+    --clay: #d57d6d; --clay-bg: #331f1b;
+    --slate: #8fb0d4; --slate-bg: #1b2733;
+  }
+  :root[data-theme="light"] {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --clay: #9d3a2e; --clay-bg: #f2dcd8;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+  }
+
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans);
+         font-size: 16px; line-height: 1.62; margin: 0; padding: 0 20px 80px; }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  .masthead { padding: 40px 0 22px; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .2em;
+             text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+  h1 { font-size: clamp(28px, 7vw, 40px); line-height: 1.08; letter-spacing: -.02em;
+       font-weight: 700; margin: 0 0 14px; text-wrap: balance; }
+  .standfirst { font-size: 17px; color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+  .toc { margin: 22px 0 0; padding: 0; list-style: none; font-family: var(--mono);
+         font-size: 12px; color: var(--muted); display: grid; gap: 4px; }
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--amber); }
+  .toc .n { color: var(--amber); display: inline-block; width: 24px; }
+
+  section { padding-top: 46px; }
+  .part-label { font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+                text-transform: uppercase; color: var(--amber); margin: 0 0 8px; }
+  h2 { font-size: 24px; letter-spacing: -.015em; font-weight: 700; margin: 0 0 10px; text-wrap: balance; }
+  h3 { font-size: 17px; font-weight: 700; margin: 30px 0 6px; letter-spacing: -.005em; text-wrap: balance; }
+  h4 { font-size: 14px; font-weight: 700; margin: 22px 0 4px;
+       font-family: var(--mono); letter-spacing: .04em; color: var(--ink); }
+  p { margin: 12px 0; max-width: 66ch; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+
+  ul, ol { margin: 12px 0; padding-left: 22px; max-width: 64ch; }
+  li { margin: 7px 0; color: var(--ink-soft); }
+  li strong { color: var(--ink); font-weight: 650; }
+
+  code { font-family: var(--mono); font-size: .87em; background: var(--rule-soft);
+         padding: 1px 5px; border-radius: 2px; word-break: break-word; }
+
+  .scroll { overflow-x: auto; margin: 20px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 480px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 10px; letter-spacing: .13em; text-transform: uppercase;
+       color: var(--muted); border-bottom: 1px solid var(--rule); font-weight: 700; }
+  td.mono { font-family: var(--mono); font-size: 12.5px; color: var(--ink); white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  .box { background: var(--card); border: 1px solid var(--rule-soft);
+         border-left: 3px solid var(--rule); border-radius: 2px; padding: 15px 17px; margin: 18px 0; }
+  .box.warn { border-left-color: var(--clay); }
+  .box.key { border-left-color: var(--amber); }
+  .box.good { border-left-color: var(--teal); }
+  .box .k { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+            font-weight: 700; margin-bottom: 7px; color: var(--muted); }
+  .box.warn .k { color: var(--clay); }
+  .box.key .k { color: var(--amber); }
+  .box.good .k { color: var(--teal); }
+  .box p { margin: 8px 0; font-size: 14.5px; }
+  .box p:first-of-type { margin-top: 0; }
+  .box p:last-child { margin-bottom: 0; }
+  .box ul { margin: 8px 0; }
+  .box li { font-size: 14.5px; }
+
+  .flow { font-family: var(--mono); font-size: 12.5px; line-height: 1.9; background: var(--card);
+          border: 1px solid var(--rule-soft); border-radius: 2px; padding: 15px 17px;
+          margin: 20px 0; overflow-x: auto; white-space: pre; color: var(--ink); }
+
+  .pull { font-size: 19px; line-height: 1.45; font-weight: 600; letter-spacing: -.01em;
+          border-left: 3px solid var(--amber); padding: 4px 0 4px 18px; margin: 26px 0;
+          max-width: 56ch; text-wrap: balance; }
+
+  .tag { font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: .12em;
+         text-transform: uppercase; padding: 3px 7px; border-radius: 2px; white-space: nowrap; }
+  .tag.you { background: var(--teal-bg); color: var(--teal); }
+  .tag.gap { background: var(--clay-bg); color: var(--clay); }
+  .tag.field { background: var(--slate-bg); color: var(--slate); }
+
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 40px 0 0; }
+
+  footer { margin-top: 56px; padding-top: 18px; border-top: 2px solid var(--ink);
+           font-family: var(--mono); font-size: 11.5px; color: var(--muted); line-height: 1.7; }
+  a { color: var(--amber); }
+  a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Command Desk</p>
+  <h1>The brain: what you have, and what actually works</h1>
+  <p class="standfirst">Every model in your system and why it's there, the walls between them and the reason those walls exist, and an honest account of how people build these things when they need results rather than demos.</p>
+  <ul class="toc">
+    <li><span class="n">01</span><a href="#brains">The seven brains</a></li>
+    <li><span class="n">02</span><a href="#walls">The walls, and why they exist</a></li>
+    <li><span class="n">03</span><a href="#guardrails">Your guardrails, mapped</a></li>
+    <li><span class="n">04</span><a href="#lying">The hard problem: it says it did it</a></li>
+    <li><span class="n">05</span><a href="#field">What the field actually does</a></li>
+    <li><span class="n">06</span><a href="#face">Brain to face</a></li>
+    <li><span class="n">07</span><a href="#changes">What I'd change, ranked</a></li>
+  </ul>
+</header>
+
+<!-- ============ 01 ============ -->
+<section id="brains">
+  <p class="part-label">Part 01</p>
+  <h2>The seven brains</h2>
+  <p class="lede">Read from <code>slots_config.json</code>. Every slot's model, job, and the reason it runs on what it runs on.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Slot</th><th>Model</th><th>Job</th><th>Why this model</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="mono">hub</td><td class="mono">sonnet-5</td>
+          <td>Routes work, applies standards to what comes back, decides forward / back / to you</td>
+          <td>The only slot doing genuine multi-step reasoning. Fixed here deliberately — the orchestrator is the one place a cheap model costs you more than it saves.</td>
+        </tr>
+        <tr>
+          <td class="mono">research</td><td class="mono">haiku-4.5</td>
+          <td>Web research, synthesis, citations</td>
+          <td>Retrieval and summarising. Bounded task, structured output, no long reasoning chain.</td>
+        </tr>
+        <tr>
+          <td class="mono">builder</td><td class="mono">haiku-4.5</td>
+          <td>Architecture, code, ship</td>
+          <td>Cheap tier. Walled off with tester.</td>
+        </tr>
+        <tr>
+          <td class="mono">tester</td><td class="mono">haiku-4.5</td>
+          <td>Writes and runs tests, reports bugs</td>
+          <td>Cheap tier. Walled off with builder.</td>
+        </tr>
+        <tr>
+          <td class="mono">personal_<wbr>assistant</td><td class="mono">haiku-4.5</td>
+          <td>Day plan, email — the mail worker</td>
+          <td>Structured data and short reasoning. The permission layer does the dangerous part, not the model.</td>
+        </tr>
+        <tr>
+          <td class="mono">consolidator</td><td class="mono">llama3.2 local</td>
+          <td>The vault. Searches long-term memory, answers yes-here-it-is or no.</td>
+          <td>Free, and it never reasons — <code>vault_search</code> is a deterministic keyword scan. The model only reports what the scan found.</td>
+        </tr>
+        <tr>
+          <td class="mono">nova_voice</td><td class="mono">llama3.2 local</td>
+          <td>The face. Ears, mouth, screen.</td>
+          <td>Runs all day for free. Wakes to Sonnet on your spoken word, sleeps when you say. This is your entire cost model.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Plus one that isn't in the slot list and matters more than most of them:</p>
+
+  <div class="box good">
+    <div class="k">The router</div>
+    <p><strong>Pinned to Claude's cheap tier, not to Ollama — and that was the right call.</strong> llama3.2 was tried first and confidently misrouted a plain "what's come in" to Builder, with a fabricated justification attached.</p>
+    <p>That's the failure mode worth understanding: it didn't fail loudly, it failed <em>persuasively</em>. A small local model will follow instructions right up until the moment it doesn't, and then explain itself fluently. Routing is a control-plane decision — every downstream cost is determined by it — so paying fractions of a cent for reliable instruction-following there is one of the best trades in the system.</p>
+  </div>
+
+  <p>The other good decision in the router: it's <strong>model-judged, not threshold-based</strong>. It returns <code>"worker": null</code> when genuinely torn between two workers, rather than picking whichever score was highest. A numeric threshold gives you a confident wrong answer at 0.51. A model told to say "I don't know" gives you a question. And <code>nova_voice</code> is one of the menu options, so ordinary conversation resolves cleanly rather than being forced into a worker.</p>
+
+  <div class="box">
+    <div class="k">Small thing, real consequence</div>
+    <p>Each slot has a <em>routing description</em> separate from its own <code>prompt.txt</code>. That exists because reusing the prompts verbatim caused a real misroute — "what's come in" matched Hub, because Hub's own opening line reads as a semantic match too. A prompt written to instruct a model is not a prompt written to distinguish it from six others. Two different jobs, two different texts.</p>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section id="walls">
+  <p class="part-label">Part 02</p>
+  <h2>The walls, and why they exist</h2>
+  <p class="lede">Your isolation model is more sophisticated than most systems I see, and it's the part worth understanding properly, because it's the part that stops the failure you already had.</p>
+
+  <h3>Three memory pools, not one</h3>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Pool</th><th>Who's in it</th><th>Sees</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">hub</td><td>hub, research, personal_assistant, consolidator</td><td>The shared contextual pool — continuity, relevant memory, related decisions</td></tr>
+        <tr><td class="mono">isolated</td><td>builder, tester (<code>build_test</code>)</td><td>Only each other's transcript. Never the shared pool.</td></tr>
+        <tr><td class="mono">nova_voice</td><td>nova</td><td>Its own line, kept separate from the working pool</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>In <code>orchestrator.handle_turn</code> this is a genuine branch, not a prompt instruction: if the slot is isolated, <code>allowed</code> becomes its group members and it reads <code>peer_transcript</code>. If it isn't, <code>allowed</code> becomes the contextual slots. An isolated agent cannot see the shared pool because the code never puts it in the prompt — not because it was asked not to look.</p>
+
+  <p class="pull">A wall made of code is a wall. A wall made of instructions is a request.</p>
+
+  <h3>Why builder and tester are sealed together</h3>
+
+  <p>Builder and Tester are adversaries by design. Tester's job is to find Builder wrong. If both draw from the same shared memory, three things go wrong, and they go wrong quietly:</p>
+
+  <ul>
+    <li><strong>Contamination.</strong> Tester reads Builder's reasoning and inherits its blind spots. It stops testing the code and starts testing the plan — agreeing with the assumptions instead of checking the output.</li>
+    <li><strong>Collusion.</strong> Two agents optimising for "resolve this loop" converge on agreeing. Not maliciously — agreement is the cheapest path to a finished-looking state.</li>
+    <li><strong>Pollution.</strong> Their round-by-round argument floods the shared pool that Hub and the assistant depend on, and the signal-to-noise of everything else drops.</li>
+  </ul>
+
+  <p>Sealing them in a two-member group means their loop is loud inside the box and silent outside it. That's exactly right.</p>
+
+  <h3>The straight line, and the incident that proves it</h3>
+
+  <div class="flow">    Sam
+     |
+    Nova  (I/O only -- decides nothing, holds nothing)
+     |
+   Router  (names a worker + confidence, logged every time)
+     |
+    Hub  (goal locked here; checks results against the goal)
+     |
+   Worker  (does the whole job, requests actions)
+     |
+Permission layer  (holds the tool AND the gate)
+     |
+ Real service</div>
+
+  <p>Task goes down. Result comes up. Every loop ends at Hub, and Hub answers to you. There is no sideways link — no open channel where workers talk to each other unsupervised.</p>
+
+  <div class="box warn">
+    <div class="k">30 July — why this rule is in your documents</div>
+    <p>Builder and Tester froze on a stale refusal. An external "scheme to make money without Sam" message lodged in their rolling context and re-fired at every call for days. They correctly refused it — and then couldn't move past it, because nothing cleared the context and nothing noticed they'd stopped producing.</p>
+    <p>Three separate lessons, and your architecture now answers all three: <strong>an open agent-to-agent channel is an attack surface</strong>; <strong>rolling context needs an eviction path</strong>, or one bad turn is permanent; and <strong>a stuck agent looked identical to a working one</strong>, because nothing was checking liveness. The login gate stops the first. The rolling window bounds the second. The third is still open — see Part 07.</p>
+  </div>
+
+  <h3>Memory: two tiers, and a deliberately stupid vault</h3>
+
+  <p>Each worker carries a rolling window of its own daily summaries — nothing else, by default. When that window overflows, the oldest entries age into the vault, which is insert-only; nothing is ever deleted or overwritten once archived.</p>
+
+  <p>The part I'd single out: <strong>the vault agent doesn't reason.</strong> <code>vault_search</code> is a plain deterministic keyword scan. The model's only job is to confirm what the scan actually found, or say a clean "No." It cannot free-browse and it cannot infer.</p>
+
+  <p>That's a genuinely good instinct, and it's the opposite of how most people build memory. Semantic retrieval that "helpfully" surfaces adjacent-but-wrong context is one of the most common sources of confident nonsense in agent systems — the model can't tell that what it was handed isn't what it asked for. A dumb scan returns nothing rather than something plausible, and nothing is a much safer failure.</p>
+</section>
+
+<!-- ============ 03 ============ -->
+<section id="guardrails">
+  <p class="part-label">Part 03</p>
+  <h2>Your guardrails, mapped</h2>
+  <p class="lede">What each one stops, and — the column that matters — whether it lives in code or in a prompt.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Guardrail</th><th>Stops</th><th>Lives in</th></tr></thead>
+      <tbody>
+        <tr><td>Session check inside the permission layer</td><td>Any unauthenticated path reaching Gmail, even through an ungated route</td><td class="mono">code</td></tr>
+        <tr><td>Exact-match yes-list</td><td>"yeah maybe" or "send it later" being read as consent</td><td class="mono">code</td></tr>
+        <tr><td>Confirmation bound to one <code>draft_id</code></td><td>A yes for one draft sending a different one</td><td class="mono">code</td></tr>
+        <tr><td>Exactly-once guard on send</td><td>A lost network reply becoming a second email</td><td class="mono">code</td></tr>
+        <tr><td>In-flight left in-flight</td><td>Automatic retry of something that may already have sent</td><td class="mono">code</td></tr>
+        <tr><td>Isolation branch in the orchestrator</td><td>Builder and Tester contaminating each other's judgment</td><td class="mono">code</td></tr>
+        <tr><td>Deterministic vault scan</td><td>Memory inventing plausible history</td><td class="mono">code</td></tr>
+        <tr><td>Late-result discard</td><td>A timed-out reply applying to a session that moved on</td><td class="mono">code</td></tr>
+        <tr><td>Login lockout</td><td>Scripted password guessing</td><td class="mono">code</td></tr>
+        <tr><td>Router returns null when unsure</td><td>Confident misrouting</td><td class="mono">prompt</td></tr>
+        <tr><td>Provenance discipline</td><td>Claims without evidence</td><td class="mono">prompt</td></tr>
+        <tr><td>"Unknown ≠ fine"</td><td>Missing data reported as no problem</td><td class="mono">prompt</td></tr>
+        <tr><td>Escalation tiers</td><td>Acting without approval</td><td class="mono">prompt only — gap</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>That last row is the one your own prime directive names: <em>rules that can be enforced must not live in prompts.</em> Everything above it is real. Escalation is currently a description of good behaviour, and a description is not a control. That's Phase 4 in the roadmap.</p>
+
+  <div class="box good">
+    <div class="k">The one I'd point at as exemplary</div>
+    <p>The permission layer re-validates the session <em>itself</em>, before it writes an action row, before any state transition, before touching Gmail — regardless of what gate the calling route already applied.</p>
+    <p>That's defence in depth done properly. It means a future mistake elsewhere — a new route added without auth, a refactor that drops a decorator — cannot reach your mail. Most systems check once at the edge and trust everything inside. Yours doesn't, and that's why the ungated <code>/api/chat</code> route I found is a billing problem rather than a mailbox breach.</p>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section id="lying">
+  <p class="part-label">Part 04</p>
+  <h2>The hard problem: it says it did it</h2>
+  <p class="lede">This is the thing you asked about, and it's the central unsolved problem in agent systems. Not hallucinated facts — hallucinated <em>work</em>.</p>
+
+  <h3>Why it happens</h3>
+
+  <p>A model completing "I've updated the config and verified the tests pass" is doing exactly what it does with every other token: producing the most plausible continuation. Nothing in that process consults the filesystem. There's no internal flag separating "I did this" from "this is what doing it would look like." The report and the work are generated by the same machinery, so a confident report is not evidence of work — it's evidence that a confident report was the likely next thing to say.</p>
+
+  <p>It gets worse under exactly the conditions you care about: long tasks, where the model is far from the original instruction; failure, where reporting success ends the interaction and reporting failure invites more work; and vague goals, where "done" is undefined so anything can satisfy it.</p>
+
+  <p class="pull">Never ask a model whether it did the work. Ask the system what changed.</p>
+
+  <h3>Three levels of verification</h3>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Level</th><th>What it is</th><th>Worth</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Self-report</strong></td><td>"I've done it, tests pass"</td><td>Zero. Not weak evidence — <em>no</em> evidence.</td></tr>
+        <tr><td><strong>Model judge</strong></td><td>A second model reviews the first's output</td><td>Real but limited. Catches obvious drift; shares blind spots; biased toward long, confident answers.</td></tr>
+        <tr><td><strong>Ground truth</strong></td><td>Exit codes, database rows, file hashes, HTTP status, a diff</td><td>The only thing that actually settles it.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The discipline that separates working systems from demos is simple to state and unpopular to implement: <strong>define "done" as a machine-checkable predicate before the work starts.</strong> Not "improve the login flow" — "an unauthenticated POST to this route returns 401, proven by this command."</p>
+
+  <p>Your COMMAND doc already says this — <em>"Done" means proof, not "the code ran"</em> — and your roadmap's <em>Done when</em> lines are exactly the right shape. That instinct is ahead of most teams.</p>
+
+  <h3>Where your oversight lands</h3>
+
+  <p>Your Clerk / Checker / Angel pipeline is a genuinely good instance of level two, with one crucial detail most people get wrong: <strong>the verdict is not in the model.</strong> <code>compare()</code> and <code>ground()</code> are deterministic functions. They pass or fail identically forever, and there's a test file proving it — I ran it, 25 of 25.</p>
+
+  <p>The design decision underneath that is the important one. The model extracts fields; <em>code</em> decides whether the fields match. So "the amount was wrong" is a fact, not an opinion, and it can't drift when a model version changes.</p>
+
+  <div class="box key">
+    <div class="k">The three statuses I'd single out</div>
+    <p><code>unverified</code>, <code>intent_too_vague</code> and <code>no_intent_recorded</code> are treated as seriously as an outright mismatch. That's the rare move.</p>
+    <p>Almost everyone builds a checker that flags mismatches and silently passes anything it couldn't evaluate — which means the cases where the system <em>couldn't tell</em> whether something went wrong look identical to the cases where nothing did. Your system refuses that. "I don't know" is a finding.</p>
+  </div>
+
+  <h3>Where the gap still is</h3>
+
+  <p>Your oversight compares <strong>stated intent against outcome</strong>. That catches an agent that says one thing and does another. It does not catch an agent that <em>misreports what it did</em> — because both the intent and the report come from the same agent. If it lies consistently, the comparison passes.</p>
+
+  <p>That's precisely the second check your backend spec asked for and nobody built: a separate watcher summarising the same work independently. Two accounts from two sources, cross-referenced. It's the difference between checking consistency and checking truth.</p>
+
+  <h3>The arithmetic nobody likes</h3>
+
+  <p>Per-step reliability compounds. A model that's right 95% of the time, over a twenty-step task, finishes correctly about 36% of the time. At 99% per step you're still only at 82%.</p>
+
+  <p>You don't fix that with a better prompt. You fix it structurally:</p>
+
+  <ul>
+    <li><strong>Fewer steps.</strong> Every step you can move from the model into code is a step that can't fail probabilistically.</li>
+    <li><strong>Checkpoints.</strong> Verify at boundaries so an error can't propagate twenty steps before anyone notices.</li>
+    <li><strong>Idempotence.</strong> Make retry safe, so recovery doesn't cause a second failure. Your exactly-once send guard is this pattern.</li>
+    <li><strong>Fail closed.</strong> When uncertain, stop. Your <code>in_flight</code> handling — never auto-retry, wait for a human — is the correct shape.</li>
+  </ul>
+</section>
+
+<!-- ============ 05 ============ -->
+<section id="field">
+  <p class="part-label">Part 05</p>
+  <h2>What the field actually does</h2>
+  <p class="lede">Honest version, including where the consensus is contested and where I'm giving you my read rather than an established fact.</p>
+
+  <h3>The main argument: one agent or many</h3>
+
+  <p>There's a real split among people shipping this stuff. Anthropic published on a multi-agent research system where an orchestrator spawns parallel subagents and reported large gains over single-agent on breadth-first research. Cognition published a well-argued piece — <em>Don't Build Multi-Agents</em> — arguing the opposite: that splitting work across agents fragments context, and that a single agent with well-engineered context beats a committee.</p>
+
+  <p>Both are right about different shapes of problem, and the distinction is sharper than the debate usually makes it:</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Multi-agent wins</th><th>Single agent wins</th></tr></thead>
+      <tbody>
+        <tr><td>Read-only, parallel, breadth-first</td><td>Anything with shared evolving state</td></tr>
+        <tr><td>Subtasks genuinely independent</td><td>Later decisions depend on earlier ones</td></tr>
+        <tr><td>Results merge cleanly</td><td>Merging requires judgment</td></tr>
+        <tr><td>Search, research, wide sweeps</td><td>Writing, editing, building</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>Your system is the right shape.</strong> It isn't a committee — it's orchestrator-and-workers with one decision-maker. Nova doesn't decide, the router names one worker, one worker does the whole job, the result returns through Hub. Nobody merges conflicting opinions. The one place you deliberately run two agents against each other is Builder/Tester, where disagreement is the product.</p>
+
+  <p>What the failure looks like when people get this wrong: five agents each holding a slightly different idea of the goal, producing five plausible outputs that can't be reconciled — which is a fair description of the thing you said you didn't want. Ten designs for the front entry.</p>
+
+  <h3>Context engineering has replaced prompt engineering</h3>
+
+  <p>The consensus shift over the last while is that the binding constraint isn't instruction wording, it's <em>what's in the window</em>. Long contexts degrade — attention spreads, middle content gets lost, contradictory old turns compete with current ones. More context is not better context.</p>
+
+  <p>What people do about it: bounded rolling windows with real eviction; summarising a completed phase into a compact note rather than carrying the transcript; keeping durable state in a database and reading only what this turn needs; and giving each agent the narrowest view that lets it do its job.</p>
+
+  <p>Your <code>reads_context</code> / <code>writes_context</code> declarations per slot are this pattern, done declaratively. That's ahead of the curve — most systems shove one growing blob at every agent.</p>
+
+  <h3>Determinism at the edges, model in the middle</h3>
+
+  <p>The most consistent finding across teams that got things working: <strong>use code for control flow and models for judgment.</strong> Loops, retries, branching, ordering, permissions, validation — all code. The model decides what a message means, or which of these is the right approach, and hands the decision back as a typed value.</p>
+
+  <p>Your COMMAND doc's prime directive is a sharper statement of this than most engineering blogs manage: <em>if a rule ends up only in a system prompt when it could have been code, config, or a DB grant, the step is not done.</em></p>
+
+  <h3>Tools: fewer, sharper, with error messages that teach</h3>
+
+  <ul>
+    <li><strong>Fewer tools beats more.</strong> Selection accuracy falls off as the menu grows. Ten well-named tools outperform forty overlapping ones.</li>
+    <li><strong>Validate at the boundary.</strong> Schema-enforced arguments, rejected before execution. Never trust the shape of what a model hands you.</li>
+    <li><strong>Errors should be instructive.</strong> "Missing required field 'recipient'" gets a correct retry. "Error 400" gets three wrong ones.</li>
+    <li><strong>Name for the model's mental model, not the database's.</strong> <code>send_existing_draft</code> is unambiguous; <code>execute_action</code> invites misuse.</li>
+  </ul>
+
+  <h3>Human-in-the-loop, on a clean line</h3>
+
+  <p>Universal across every serious deployment: irreversible actions stop for a human. The good implementations draw the line the way yours does — <strong>by whether the effect leaves the system</strong>, not by whether the action feels significant. Work freely inside; stop at the fence. Anything unclassifiable is treated as outside.</p>
+
+  <p>The pattern people converge on: propose, show the exact artifact, capture explicit consent bound to that artifact, execute once, record. You built that. Most teams discover it after an incident.</p>
+
+  <h3>Evals: the thing everyone skips</h3>
+
+  <p>The single biggest difference between systems that stay working and systems that rot is a test set of real cases with known-correct outcomes, run on every change. Without it you're tuning prompts by vibe and discovering regressions in production.</p>
+
+  <p>Nobody enjoys building this and almost everyone regrets not having it. Twenty real cases beats a thousand synthetic ones. Your <code>test_compare.py</code> is the seed of exactly this — the same idea applied to routing decisions and to worker outputs is the highest-leverage thing missing.</p>
+
+  <h3>Observability: traces, not logs</h3>
+
+  <p>You need to answer "why did it do that" for a specific past turn. That means a full trace — input, retrieved context, model, tool calls, results, output — reconstructable and replayable. Logs tell you what happened; traces tell you why.</p>
+
+  <p>Your audit log is most of the substrate. What's missing is a way to look at it, which is the same gap as the review queue having no screen.</p>
+
+  <div class="box">
+    <div class="k">Where I'd flag uncertainty</div>
+    <p>This field moves fast and a lot of published practice is one team's experience generalised. The parts I'd call solid: determinism over model self-report, human gates on irreversible actions, evals, context discipline, and the reliability arithmetic. The parts still genuinely contested: how many agents, how much memory autonomy, and whether long-horizon self-correction works without a human in the loop. Treat confident claims in either direction — including some of mine — as provisional.</p>
+  </div>
+</section>
+
+<!-- ============ 06 ============ -->
+<section id="face">
+  <p class="part-label">Part 06</p>
+  <h2>Brain to face</h2>
+  <p class="lede">Where most of these systems actually fall over — not the reasoning, the seam between the reasoning and the person.</p>
+
+  <h3>The interface must never claim what the backend hasn't confirmed</h3>
+
+  <p>The commonest UI sin in agent products: showing "Sent ✓" when the request was issued rather than when it completed. Optimistic UI is fine for a like button. It is not fine for something that leaves the building.</p>
+
+  <p>Your backend already models this correctly — <code>in_flight</code> exists precisely because "we asked" and "it happened" are different states. The interface has to carry that honesty through: <em>sending</em>, <em>sent</em>, and <em>unconfirmed — check before retrying</em> are three different messages, and the third one is the one that saves you.</p>
+
+  <h3>Show the work</h3>
+
+  <p>Systems people trust surface what the agent is doing as it does it — which worker took it, which tool was called, what came back. Not for debugging. Because a visible chain of steps is checkable, and a paragraph of prose is not.</p>
+
+  <p>This is also the cheapest defence against the Part 04 problem. An agent that reports "I checked your inbox" alongside a visible <code>gmail_read → 3 messages</code> line is making a claim you can audit at a glance. Hide the machinery and you're back to taking its word.</p>
+
+  <h3>Latency is a design constraint, not an engineering detail</h3>
+
+  <p>Perceived speed is dominated by time-to-first-token, not total time. Streaming a reply that takes eight seconds feels better than a spinner that takes four. For voice the budget is brutal — much beyond a second of silence after you stop speaking reads as broken, which is why real-time voice stacks stream every stage and start rendering before the sentence is finished.</p>
+
+  <p>The corollary for your build: the moment Nova gets a real microphone, every stage needs to overlap. Transcribe while they're still talking, start generating on the first finalised sentence, speak the first sentence while generating the second.</p>
+
+  <h3>Voice-specific things that bite</h3>
+
+  <ul>
+    <li><strong>Barge-in.</strong> If you can't interrupt it mid-sentence, it feels like a recording. Cancel generation and playback the moment speech is detected.</li>
+    <li><strong>Turn-taking.</strong> Deciding you've finished speaking is genuinely hard. Silence detection alone cuts people off mid-thought.</li>
+    <li><strong>Transcription garbling consent.</strong> Your documents already caught this — a near-miss on the yes-list must re-ask, never infer. That's one of the sharpest lines in your spec.</li>
+    <li><strong>Voice hides state.</strong> Screens show status for free; speech doesn't. Which is a good argument for your panel and Nova working together rather than voice alone.</li>
+  </ul>
+
+  <h3>On the ten designs for the front entry</h3>
+
+  <p>What you described is a real and well-known failure, and it isn't fixed by better prompts. It's fixed by the same two moves as everything else here: <strong>one decision-maker</strong>, and <strong>a machine-checkable definition of done before work starts</strong>.</p>
+
+  <p>Your architecture already has the first. The seven front-end builds in circulation are what the second one's absence looks like — each one plausible, each one finished by somebody's standard, none of them the answer, because "the home screen" was never defined as something you could pass or fail.</p>
+</section>
+
+<!-- ============ 07 ============ -->
+<section id="changes">
+  <p class="part-label">Part 07</p>
+  <h2>What I'd change, ranked</h2>
+  <p class="lede">From this analysis specifically — not a repeat of the roadmap's ordering.</p>
+
+  <ol>
+    <li><strong>Give the oversight findings a screen.</strong> You built a verification system whose output nothing can display. Every hour it runs is currently wasted. This is the highest-value hour on the list.</li>
+    <li><strong>Add liveness checking.</strong> The 30 July freeze went undetected because a stuck agent and a working one look identical from outside. A dated health question to each slot, and an alert when one stops answering, closes the third lesson from that incident — the only one still open.</li>
+    <li><strong>Move escalation from prompt to code.</strong> The last row of the guardrail table. It's the difference between a rule and a description.</li>
+    <li><strong>Build the second summary.</strong> Intent-versus-outcome catches drift; it can't catch consistent misreporting. Two independent accounts is the check you specified and don't have.</li>
+    <li><strong>Start an eval set.</strong> Twenty real routing decisions with the correct worker recorded. Run on every prompt change. You already have the pattern in <code>test_compare.py</code> — this applies it where the decisions actually get made.</li>
+    <li><strong>Surface the chain in the UI.</strong> Which worker, which tool, what came back. Trust and debuggability from the same change.</li>
+    <li><strong>Add an eviction path to rolling context.</strong> The 30 July message stuck because nothing could remove it. A way to clear a slot's context without restarting is a five-minute fix for a problem that cost you days.</li>
+  </ol>
+
+  <div class="box good">
+    <div class="k">What not to change</div>
+    <p>The permission layer's independent re-validation. The exactly-once send guard. The refusal to auto-retry an unconfirmed send. The deterministic vault scan. The Builder/Tester wall. The router on a paid tier. The deterministic oversight verdict.</p>
+    <p>Every one of those is a decision a lot of teams get wrong, and several of them look like over-engineering right up until the day they don't. Whoever built this understood the difference between a system that works and a system that appears to work — which is the whole subject of this document.</p>
+  </div>
+</section>
+
+<footer>
+  Architecture read from slots_config.json, orchestrator.py, router.py, permission_layer.py, vault.py and voice_state.py in the 2026-08-02 snapshot<br>
+  Field practice reflects published work and common patterns as of early 2026 — a fast-moving area where consensus is partial and some of it will age badly<br>
+  Nothing here has been deployed. The live system is unchanged.
+</footer>
+
+</div>
