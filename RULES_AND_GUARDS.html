@@ -1,0 +1,656 @@
+<title>Command Desk — Rules and Guards</title>
+<style>
+  :root {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+      --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+      --amber: #e0a33e; --amber-bg: #33280f;
+      --teal: #62b39c; --teal-bg: #16302a;
+      --slate: #8fb0d4; --slate-bg: #1b2733;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+    --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+    --amber: #e0a33e; --amber-bg: #33280f;
+    --teal: #62b39c; --teal-bg: #16302a;
+    --slate: #8fb0d4; --slate-bg: #1b2733;
+  }
+  :root[data-theme="light"] {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+  }
+
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans);
+         font-size: 16px; line-height: 1.58; margin: 0; padding: 0 20px 80px; }
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  .masthead { padding: 40px 0 22px; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .2em;
+             text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+  h1 { font-size: clamp(28px, 7vw, 40px); line-height: 1.08; letter-spacing: -.02em;
+       font-weight: 700; margin: 0 0 14px; text-wrap: balance; }
+  .standfirst { font-size: 17px; color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+  section { padding-top: 42px; }
+  .part-label { font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+                text-transform: uppercase; color: var(--amber); margin: 0 0 8px; }
+  h2 { font-size: 23px; letter-spacing: -.015em; font-weight: 700; margin: 0 0 8px; text-wrap: balance; }
+  p { margin: 11px 0; max-width: 66ch; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+
+  ul, ol { margin: 9px 0; padding-left: 20px; max-width: 64ch; }
+  li { margin: 6px 0; color: var(--ink-soft); }
+  li strong { color: var(--ink); font-weight: 650; }
+
+  code { font-family: var(--mono); font-size: .86em; background: var(--rule-soft);
+         padding: 1px 5px; border-radius: 2px; word-break: break-word; }
+
+  .agent { margin: 30px 0 0; }
+  .agent-h { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+             padding-bottom: 7px; border-bottom: 2px solid var(--ink); margin-bottom: 0; }
+  .agent-name { font-family: var(--mono); font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+  .agent-model { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .agent-does { font-size: 14.5px; color: var(--ink-soft); margin: 11px 0 4px; max-width: 64ch; }
+
+  .scroll { overflow-x: auto; margin: 12px 0 4px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 540px; }
+  th, td { text-align: left; padding: 9px 11px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+       color: var(--muted); border-bottom: 1px solid var(--rule); font-weight: 700; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.r { width: 46%; color: var(--ink); }
+  td.g { color: var(--ink-soft); }
+  td.mono { font-family: var(--mono); font-size: 12px; color: var(--ink); white-space: nowrap; }
+
+  .tag { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: .11em;
+         text-transform: uppercase; padding: 2px 6px; border-radius: 2px; white-space: nowrap;
+         display: inline-block; margin-right: 6px; }
+  .tag.code { background: var(--teal-bg); color: var(--teal); }
+  .tag.prompt { background: var(--slate-bg); color: var(--slate); }
+  .tag.log { background: var(--amber-bg); color: var(--amber); }
+
+  .box { background: var(--card); border: 1px solid var(--rule-soft);
+         border-left: 3px solid var(--teal); border-radius: 2px; padding: 14px 16px; margin: 18px 0; }
+  .box .k { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+            font-weight: 700; margin-bottom: 6px; color: var(--teal); }
+  .box p { margin: 7px 0; font-size: 14.5px; }
+  .box p:first-of-type { margin-top: 0; }
+  .box p:last-child { margin-bottom: 0; }
+
+  .imp { border-top: 2px solid var(--ink); margin-top: 52px; padding-top: 32px; }
+  .imp .part-label { color: var(--slate); }
+
+  footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--rule);
+           font-family: var(--mono); font-size: 11.5px; color: var(--muted); line-height: 1.7; }
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Command Desk</p>
+  <h1>The rules, and what keeps them</h1>
+  <p class="standfirst">The rules over every model, then each model in turn — what it does, the rules that are its own, and the guard holding each one in place.</p>
+</header>
+
+<!-- ============ HOW GUARDS WORK ============ -->
+<section>
+  <p class="part-label">The guards</p>
+  <h2>Three kinds</h2>
+
+  <p class="lede">Every rule in this document carries one. The tag tells you what's holding it.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Guard</th><th>How it holds</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag code">Code</span></td><td>A named piece of the system refuses. The model's cooperation is not required.</td></tr>
+        <tr><td><span class="tag prompt">Prompt</span></td><td>The instruction carries it. The model follows it because it's told to.</td></tr>
+        <tr><td><span class="tag log">Log</span></td><td>Written down as it happens, so the pattern is visible afterwards even when no single instance trips anything.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Most of the strongest guards in this system are Code, and they cluster where they should — around anything that spends money, sends mail, or cannot be undone.</p>
+</section>
+
+<!-- ============ UNIVERSAL ============ -->
+<section>
+  <p class="part-label">Over all of them</p>
+  <h2>The rules every model obeys</h2>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Rule</th><th>Guard</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="r">State only what was actually said. If a detail wasn't given, leave it out — don't guess it, infer it, or reuse it from an earlier example.</td>
+          <td class="g"><span class="tag code">Code</span> <code>ground()</code> compares every stated detail against the request text. An invented month, amount or weekday is caught. Twenty-five test cases cover it.</td>
+        </tr>
+        <tr>
+          <td class="r">Nothing crosses to the outside world without Sam's yes. Work freely inside the box; stop at the fence.</td>
+          <td class="g"><span class="tag code">Code</span> The permission layer holds every outward tool. Send is uncallable unless the state is <code>awaiting_confirmation</code> with a matching yes bound to that draft.</td>
+        </tr>
+        <tr>
+          <td class="r">Anything unclear about whether it's inside or outside is treated as outside.</td>
+          <td class="g"><span class="tag prompt">Prompt</span> Stated in the build rules.</td>
+        </tr>
+        <tr>
+          <td class="r">Report unknown as unknown. Never report an unchecked thing as fine.</td>
+          <td class="g"><span class="tag code">Code</span> Oversight returns <code>unverified</code>, <code>intent_too_vague</code> and <code>no_intent_recorded</code> as their own statuses, each treated as seriously as an outright mismatch.</td>
+        </tr>
+        <tr>
+          <td class="r">Every state change and every action is recorded.</td>
+          <td class="g"><span class="tag log">Log</span> The audit log takes a line on every hop: timestamp, agent, tool, input, outcome.</td>
+        </tr>
+        <tr>
+          <td class="r">Ask everything you need once, at the start. Don't drip questions through the job.</td>
+          <td class="g"><span class="tag prompt">Prompt</span> <span class="tag log">Log</span> Questions per task are visible in the log.</td>
+        </tr>
+        <tr>
+          <td class="r">A worker never reaches a tool directly. It requests; the permission layer decides.</td>
+          <td class="g"><span class="tag code">Code</span> The tools live in one module. No other path in the system calls Gmail.</td>
+        </tr>
+        <tr>
+          <td class="r">No open channel between workers. Task down, result up, every loop ending at Hub.</td>
+          <td class="g"><span class="tag code">Code</span> The orchestrator assembles each agent's context from an allowed set. There is no path for one worker to address another.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ NOVA ============ -->
+<section>
+  <p class="part-label">Model 01</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">nova_voice</span><span class="agent-model">llama3.2 local → sonnet-5 on wake</span></div>
+    <p class="agent-does">The face. Takes what you say, gives the answer back out loud. Ears, mouth and screen — she doesn't decide, route, act, or hold memory. Runs free on the local model all day, and switches to the heavy model only when you say so.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Her rules</th><th>What keeps her to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">She never decides to wake the expensive model. Only Sam's spoken phrase does that.</td>
+            <td class="g"><span class="tag code">Code</span> <code>brain_mode</code> flips on two regexes in <code>voice_state.py</code>, checked before the router runs. She has no path to change it.</td>
+          </tr>
+          <tr>
+            <td class="r">She doesn't route, act, or hold memory — she passes things on.</td>
+            <td class="g"><span class="tag code">Code</span> Her slot carries no tools at all. Routing happens in a separate module before she ever sees the turn.</td>
+          </tr>
+          <tr>
+            <td class="r">Short and conversational. No lists, headers or markdown — it's spoken, not written.</td>
+            <td class="g"><span class="tag prompt">Prompt</span> Stated plainly in her instructions.</td>
+          </tr>
+          <tr>
+            <td class="r">One short clarifying question rather than guessing.</td>
+            <td class="g"><span class="tag prompt">Prompt</span></td>
+          </tr>
+          <tr>
+            <td class="r">Her memory is her own line, separate from the working pool.</td>
+            <td class="g"><span class="tag code">Code</span> Her slot is tagged to its own memory pool in the config.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <div class="k">Why the wake switch is guarded in code</div>
+      <p>A model able to hint its way to a more expensive tier would learn to. Putting the switch entirely outside her reach is what makes the free-all-day cost model actually hold.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROUTER ============ -->
+<section>
+  <p class="part-label">Model 02</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">router</span><span class="agent-model">claude cheap tier · its own module</span></div>
+    <p class="agent-does">Reads what you said and names which worker takes it, with a confidence. Separate from Nova and from every worker — it's a piece on its own.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Its rules</th><th>What keeps it to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">If it isn't clearly one worker, say so and ask. Never pick between two.</td>
+            <td class="g"><span class="tag code">Code</span> Model-judged with no numeric threshold. There's no score to slip past at 0.51 — it returns null and the question reaches Sam.</td>
+          </tr>
+          <tr>
+            <td class="r">Ordinary conversation isn't forced into a worker.</td>
+            <td class="g"><span class="tag code">Code</span> <code>nova_voice</code> is one of its menu options, so plain chat resolves cleanly and confidently.</td>
+          </tr>
+          <tr>
+            <td class="r">The vault is never routed to directly.</td>
+            <td class="g"><span class="tag code">Code</span> <code>consolidator</code> is excluded from the menu entirely.</td>
+          </tr>
+          <tr>
+            <td class="r">Every decision is written down — clean route, refusal, or parse failure.</td>
+            <td class="g"><span class="tag log">Log</span> All three outcomes write to the audit log.</td>
+          </tr>
+          <tr>
+            <td class="r">It runs on the paid tier, not the free local model.</td>
+            <td class="g"><span class="tag code">Code</span> Pinned in config. The local model was tried and routed confidently to the wrong worker, so this is a settled decision.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <div class="k">A detail worth knowing</div>
+      <p>Each worker has a routing description written separately from its own prompt. Reusing the prompts caused a real misroute, because a prompt written to instruct a model reads differently from one written to tell it apart from six others.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HUB ============ -->
+<section>
+  <p class="part-label">Model 03</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">hub</span><span class="agent-model">claude-sonnet-5 · shared pool</span></div>
+    <p class="agent-does">The orchestrator. Holds the goal, hands work out, checks what comes back against that goal, and decides whether it goes forward, goes back for a fix, or comes to you. Every loop in the system ends here.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Its rules</th><th>What keeps it to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">Before any concrete action, state the intention: the real verb and object, plus recipient and amount if either applies.</td>
+            <td class="g"><span class="tag code">Code</span> The line is extracted and compared against what actually happened. A missing one is <code>no_intent_recorded</code>; a vague one is <code>intent_too_vague</code>. Both raise a case.</td>
+          </tr>
+          <tr>
+            <td class="r">Name the actual action — never "send something" or "do the thing".</td>
+            <td class="g"><span class="tag code">Code</span> The extractor rejects placeholder verbs and summaries.</td>
+          </tr>
+          <tr>
+            <td class="r">Use only details that were actually given. A short intention is correct when the request is vague.</td>
+            <td class="g"><span class="tag code">Code</span> <code>ground()</code> catches every invented specific.</td>
+          </tr>
+          <tr>
+            <td class="r">Never comment on whether its own intention was carried out.</td>
+            <td class="g"><span class="tag prompt">Prompt</span> Explicit in its instructions — the checking is someone else's job, and keeping Hub out of it is what makes the check independent.</td>
+          </tr>
+          <tr>
+            <td class="r">Deliver continuity first: what was in flight.</td>
+            <td class="g"><span class="tag code">Code</span> Continuity is assembled and handed to it before the turn begins.</td>
+          </tr>
+          <tr>
+            <td class="r">A specialist's output returns to Hub, not to Sam.</td>
+            <td class="g"><span class="tag code">Code</span> Workers have no path to the user. Everything routes back through Hub structurally.</td>
+          </tr>
+          <tr>
+            <td class="r">Sonnet 5, always. Never swapped down.</td>
+            <td class="g"><span class="tag code">Code</span> Fixed in config.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PA ============ -->
+<section>
+  <p class="part-label">Model 04</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">personal_assistant</span><span class="agent-model">claude-haiku-4.5 · shared pool</span></div>
+    <p class="agent-does">Your day — plans, schedules, reminders, follow-ups. And the mail worker: it reads the inbox, decides what matters, and drafts replies in your voice.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Its rules</th><th>What keeps it to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">It can request a Gmail action. It cannot perform one.</td>
+            <td class="g"><span class="tag code">Code</span> The tool lives in the permission layer, not in the worker. It asks; the layer decides.</td>
+          </tr>
+          <tr>
+            <td class="r">It never sends. Sending happens after Sam's yes and is not its decision.</td>
+            <td class="g"><span class="tag code">Code</span> Send is uncallable unless the state is <code>awaiting_confirmation</code>, the captured word is on the exact list, and that yes is bound to that one draft.</td>
+          </tr>
+          <tr>
+            <td class="r">A near-miss on the confirmation is never treated as a yes.</td>
+            <td class="g"><span class="tag code">Code</span> Exact match only against nine words. "Yes but wait" and "send it later" don't match — Nova re-asks.</td>
+          </tr>
+          <tr>
+            <td class="r">What gets sent is exactly what Sam was shown.</td>
+            <td class="g"><span class="tag code">Code</span> Send takes an existing draft by id. It never composes fresh text at send time.</td>
+          </tr>
+          <tr>
+            <td class="r">A lost network reply never becomes a second email.</td>
+            <td class="g"><span class="tag code">Code</span> The action is written in-flight before the call, and an unclear reply leaves it in-flight. Only Sam's explicit "it didn't send" clears it.</td>
+          </tr>
+          <tr>
+            <td class="r">Reads never touch the message body.</td>
+            <td class="g"><span class="tag code">Code</span> Metadata only — sender, subject, date, snippet.</td>
+          </tr>
+          <tr>
+            <td class="r">Drafting takes precedence over reading, so one request can't fire both.</td>
+            <td class="g"><span class="tag code">Code</span> The draft trigger is checked first and suppresses the read trigger.</td>
+          </tr>
+          <tr>
+            <td class="r">Style comes from Sam's own sent mail, not from the model's idea of him.</td>
+            <td class="g"><span class="tag code">Code</span> The drafting step consumes a stored profile. It never infers tone itself.</td>
+          </tr>
+          <tr>
+            <td class="r">A hung call can't freeze the session.</td>
+            <td class="g"><span class="tag code">Code</span> Thirty seconds on reads, drafts and sends. A result arriving late is discarded, never applied.</td>
+          </tr>
+          <tr>
+            <td class="r">Extending it is additive. Its existing behaviour is never rewritten.</td>
+            <td class="g"><span class="tag prompt">Prompt</span> A standing build rule.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <div class="k">The most heavily guarded model you have</div>
+      <p>Nine of its ten rules are held in code. It's the only agent whose requests reach outside the box, and every one of those paths is gated by something the model can't argue with.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUILDER ============ -->
+<section>
+  <p class="part-label">Model 05</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">builder</span><span class="agent-model">claude-haiku-4.5 · isolated</span></div>
+    <p class="agent-does">Design and ship in one — architecture, code, debugging, deployment. Hands finished work to Tester and reads back what Tester reports before calling anything done.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Its rules</th><th>What keeps it to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">It never reads or writes the shared memory pool.</td>
+            <td class="g"><span class="tag code">Code</span> A branch in the orchestrator. When a slot is isolated, its allowed set becomes its own group — the shared pool is never assembled into its prompt.</td>
+          </tr>
+          <tr>
+            <td class="r">It exchanges context with Tester only.</td>
+            <td class="g"><span class="tag code">Code</span> Both are tagged to the same isolated group; the peer transcript is the only outside context it receives.</td>
+          </tr>
+          <tr>
+            <td class="r">Nothing it says reaches Hub, Research, the assistant or the vault.</td>
+            <td class="g"><span class="tag code">Code</span> The wall runs both ways — the contextual pool excludes anything tagged isolated.</td>
+          </tr>
+          <tr>
+            <td class="r">It doesn't call its own work done until Tester reports back.</td>
+            <td class="g"><span class="tag prompt">Prompt</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTER ============ -->
+<section>
+  <p class="part-label">Model 06</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">tester</span><span class="agent-model">claude-haiku-4.5 · isolated</span></div>
+    <p class="agent-does">Verifies what Builder ships. Writes tests, runs them, reports bugs and regressions plainly.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Its rules</th><th>What keeps it to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">Never soften a failing result.</td>
+            <td class="g"><span class="tag prompt">Prompt</span> Stated in its instructions, in those words.</td>
+          </tr>
+          <tr>
+            <td class="r">Report pass or fail clearly, then hand findings back to Builder.</td>
+            <td class="g"><span class="tag prompt">Prompt</span></td>
+          </tr>
+          <tr>
+            <td class="r">It is walled off from the shared pool, exactly as Builder is.</td>
+            <td class="g"><span class="tag code">Code</span> Same isolation branch.</td>
+          </tr>
+          <tr>
+            <td class="r">It sees Builder's work but not Builder's standing in the wider system.</td>
+            <td class="g"><span class="tag code">Code</span> Only the peer transcript crosses.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <div class="k">Why these two are sealed together</div>
+      <p>Tester's job is to find Builder wrong. If both drew on the same shared memory, Tester would inherit Builder's assumptions and start checking the plan instead of the output. The wall is what keeps the disagreement real — and it's a code path, not a request.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESEARCH ============ -->
+<section>
+  <p class="part-label">Model 07</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">research</span><span class="agent-model">claude-haiku-4.5 · shared pool</span></div>
+    <p class="agent-does">Digs into a topic, produces usable findings with citations when the web is available, and summarises into actions rather than walls of text.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Its rules</th><th>What keeps it to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">Cite sources when the web is available.</td>
+            <td class="g"><span class="tag prompt">Prompt</span></td>
+          </tr>
+          <tr>
+            <td class="r">Summarise into actions, not walls of text.</td>
+            <td class="g"><span class="tag prompt">Prompt</span></td>
+          </tr>
+          <tr>
+            <td class="r">Store useful findings for the vault when asked.</td>
+            <td class="g"><span class="tag code">Code</span> Its writes route into the shared pool and age into the vault on the normal schedule.</td>
+          </tr>
+          <tr>
+            <td class="r">Anything it states about the request itself must have been in the request.</td>
+            <td class="g"><span class="tag code">Code</span> Covered by <code>ground()</code>, same as every other agent.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONSOLIDATOR ============ -->
+<section>
+  <p class="part-label">Model 08</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">consolidator</span><span class="agent-model">llama3.2 local · the vault</span></div>
+    <p class="agent-does">Holds every archived daily summary from every agent, filed by date. Answers one question: have we seen this before? It returns the material, or the single word No.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Its rules</th><th>What keeps it to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">It does not reason, advise, decide, merge, or offer opinions.</td>
+            <td class="g"><span class="tag code">Code</span> The search is a deterministic keyword scan. The model is handed candidates and can only report on them — it cannot browse and cannot query.</td>
+          </tr>
+          <tr>
+            <td class="r">It answers only from what it was actually given.</td>
+            <td class="g"><span class="tag code">Code</span> Its context is the candidate set, nothing else.</td>
+          </tr>
+          <tr>
+            <td class="r">It never guesses or fills a gap with something plausible.</td>
+            <td class="g"><span class="tag prompt">Prompt</span> Five explicit negatives, with "No" as a permitted one-word answer.</td>
+          </tr>
+          <tr>
+            <td class="r">It never acts on what it finds.</td>
+            <td class="g"><span class="tag code">Code</span> It carries two tools, both read-only.</td>
+          </tr>
+          <tr>
+            <td class="r">Sam never talks to it directly.</td>
+            <td class="g"><span class="tag code">Code</span> Excluded from the router's menu.</td>
+          </tr>
+          <tr>
+            <td class="r">It runs free, on the local model, regardless of what the rest of the system uses.</td>
+            <td class="g"><span class="tag code">Code</span> Pinned to Ollama in config.</td>
+          </tr>
+          <tr>
+            <td class="r">Nothing in the vault is ever deleted or overwritten.</td>
+            <td class="g"><span class="tag code">Code</span> Insert-only storage.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <div class="k">Why "No" is the easy answer</div>
+      <p>Most memory systems make "nothing found" the awkward result, so the model reaches for something adjacent and plausible. Here the scan is dumb on purpose and "No" is one word — which is why this memory returns nothing rather than returning something wrong.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLERK ============ -->
+<section>
+  <p class="part-label">Model 09</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">clerk</span><span class="agent-model">cheap tier · runs after each session</span></div>
+    <p class="agent-does">Writes down what happened. What was asked, in the requester's own terms. What the agent did, step by step. What the result was, as stated.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Its rules</th><th>What keeps it to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">Facts only. No assessment, no praise, no criticism.</td>
+            <td class="g"><span class="tag prompt">Prompt</span> With a named list of banned words — "successfully", "unfortunately", "correctly", "as expected".</td>
+          </tr>
+          <tr>
+            <td class="r">It has no opinions about what it records.</td>
+            <td class="g"><span class="tag code">Code</span> It carries no tools and its output feeds only the comparison step.</td>
+          </tr>
+          <tr>
+            <td class="r">It runs after the fact, never in the reply path.</td>
+            <td class="g"><span class="tag code">Code</span> Scheduled as a background task so it adds no latency.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <div class="k">Why the banned words matter</div>
+      <p>"Successfully sent" is a judgment wearing a fact's clothing. Once it's in the record, everything downstream inherits it. Banning the evaluative adverbs keeps the record neutral enough to check against.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHECKER ============ -->
+<section>
+  <p class="part-label">Model 10</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">checker</span><span class="agent-model">cheap tier · extraction only</span></div>
+    <p class="agent-does">Pulls four fields out of what Hub said it would do — action, recipient, amount, reference — and returns them as data. Nothing else.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Its rules</th><th>What keeps it to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">It does not judge, advise, or explain.</td>
+            <td class="g"><span class="tag code">Code</span> Its output is parsed as JSON with four keys. There's nowhere for an opinion to go.</td>
+          </tr>
+          <tr>
+            <td class="r">The action must be a concrete verb and object, never a summary.</td>
+            <td class="g"><span class="tag prompt">Prompt</span> With worked examples of what doesn't count.</td>
+          </tr>
+          <tr>
+            <td class="r">An amount only if the text states one. Digits only.</td>
+            <td class="g"><span class="tag prompt">Prompt</span></td>
+          </tr>
+          <tr>
+            <td class="r">It does not decide whether anything matched.</td>
+            <td class="g"><span class="tag code">Code</span> The verdict belongs to <code>compare()</code>, which is plain code. The model extracts; the code decides.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <div class="k">The division that makes findings facts</div>
+      <p>A model extracts the fields; code decides whether they match. So "the amount was wrong" is a fact, not an opinion — and it can't drift when a model version changes. Twenty-five test cases lock the behaviour.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANGEL ============ -->
+<section>
+  <p class="part-label">Model 11</p>
+  <div class="agent">
+    <div class="agent-h"><span class="agent-name">angel</span><span class="agent-model">cheap tier · the last set of eyes</span></div>
+    <p class="agent-does">Reads one flagged session and writes you a short note. The last read before something reaches a real customer.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Its rules</th><th>What keeps it to it</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="r">It has no ability to act, fix, undo, or instruct any agent — and must not write as though it does.</td>
+            <td class="g"><span class="tag code">Code</span> No tools, no path to any agent. Its only write lands in a queue that Sam's side reads.</td>
+          </tr>
+          <tr>
+            <td class="r">It only speaks when a check flagged something.</td>
+            <td class="g"><span class="tag code">Code</span> It's only invoked on one of five statuses. A clean session produces no case and no noise.</td>
+          </tr>
+          <tr>
+            <td class="r">"Couldn't tell" is treated as seriously as "was wrong".</td>
+            <td class="g"><span class="tag code">Code</span> Three of its five trigger statuses are could-not-verify conditions.</td>
+          </tr>
+          <tr>
+            <td class="r">It writes to a person, not to the system.</td>
+            <td class="g"><span class="tag prompt">Prompt</span> Stated in its opening lines.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box">
+      <div class="k">Why it can't act</div>
+      <p>The moment a checker can fix things, it starts finding fixable problems. Keeping Angel's hands empty is what keeps its findings honest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMPROVEMENTS ============ -->
+<section class="imp">
+  <p class="part-label">Improvements</p>
+  <h2>Guards to add, in order of value</h2>
+  <p class="lede">Each of these moves an existing rule from Prompt to Code, or adds a guard where a rule currently runs on trust.</p>
+
+  <ol>
+    <li><strong>A screen for Angel's findings.</strong> The checking already runs; a page that reads the queue makes it visible.</li>
+    <li><strong>A round counter on Builder and Tester.</strong> Stop at three when the same objection repeats, hard cap at five. Turns a loop rule into a wall.</li>
+    <li><strong>A repetition check.</strong> Compare a slot's last two outputs; near-identical means stuck. Catches an agent that has gone quiet in a way it can't see itself.</li>
+    <li><strong>A dated liveness question.</strong> Each agent asked something on a schedule, so a silent agent is visibly silent.</li>
+    <li><strong>Roster validation on the router.</strong> Check the returned worker name against the real list before acting on it.</li>
+    <li><strong>A banned-word scan on Clerk.</strong> The list is already written; scanning for it makes the rule airtight.</li>
+    <li><strong>An escalation table in config.</strong> Tiers read from a file rather than judged per turn, with anything unrecognised defaulting to "ask Sam".</li>
+    <li><strong>A second, independent summary.</strong> A watcher writing its own account of the same work, so two versions can be compared. The <code>mind</code> prompt already on the box — "pressure-test, never flatter" — is the natural starting point.</li>
+    <li><strong>Auth on the remaining routes.</strong> One decorator each.</li>
+    <li><strong>Mail instructions in the mail worker's prompt.</strong> The guards already hold; the instructions can carry the job description.</li>
+    <li><strong>A read-only connection for an auditor.</strong> Opening the database read-only makes a write refuse at the driver rather than by agreement.</li>
+  </ol>
+</section>
+
+<footer>
+  Rules and guards read from slots_config.json, orchestrator.py, permission_layer.py, voice_state.py, router.py, vault.py, auth.py, compare.py, ground.py and every slots/*/prompt.txt and oversight/prompts/*.txt<br>
+  Snapshot 2026-08-02
+</footer>
+
+</div>
