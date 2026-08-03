@@ -1,0 +1,598 @@
+<title>Command Desk — Agent by Agent</title>
+<style>
+  :root {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --clay: #9d3a2e; --clay-bg: #f2dcd8;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+      --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+      --amber: #e0a33e; --amber-bg: #33280f;
+      --teal: #62b39c; --teal-bg: #16302a;
+      --clay: #d57d6d; --clay-bg: #331f1b;
+      --slate: #8fb0d4; --slate-bg: #1b2733;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14171b; --card: #1b1f25; --rule: #2c333c; --rule-soft: #232931;
+    --ink: #e4e8ed; --ink-soft: #aab4c0; --muted: #7d8794;
+    --amber: #e0a33e; --amber-bg: #33280f;
+    --teal: #62b39c; --teal-bg: #16302a;
+    --clay: #d57d6d; --clay-bg: #331f1b;
+    --slate: #8fb0d4; --slate-bg: #1b2733;
+  }
+  :root[data-theme="light"] {
+    --paper: #eceef1; --card: #f6f7f9; --rule: #d2d7de; --rule-soft: #e0e4ea;
+    --ink: #171b21; --ink-soft: #4a545f; --muted: #737f8c;
+    --amber: #9a6710; --amber-bg: #f3e6cd;
+    --teal: #1f6a5a; --teal-bg: #d9e9e4;
+    --clay: #9d3a2e; --clay-bg: #f2dcd8;
+    --slate: #3c5a7a; --slate-bg: #dde5ee;
+  }
+
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans);
+         font-size: 16px; line-height: 1.6; margin: 0; padding: 0 20px 80px; }
+  .wrap { max-width: 740px; margin: 0 auto; }
+
+  .masthead { padding: 40px 0 22px; border-bottom: 2px solid var(--ink); }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .2em;
+             text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+  h1 { font-size: clamp(28px, 7vw, 40px); line-height: 1.08; letter-spacing: -.02em;
+       font-weight: 700; margin: 0 0 14px; text-wrap: balance; }
+  .standfirst { font-size: 17px; color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+  section { padding-top: 44px; }
+  .part-label { font-family: var(--mono); font-size: 11px; letter-spacing: .18em;
+                text-transform: uppercase; color: var(--amber); margin: 0 0 8px; }
+  h2 { font-size: 23px; letter-spacing: -.015em; font-weight: 700; margin: 0 0 10px; text-wrap: balance; }
+  p { margin: 12px 0; max-width: 66ch; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+
+  ul, ol { margin: 10px 0; padding-left: 20px; max-width: 64ch; }
+  li { margin: 6px 0; color: var(--ink-soft); }
+  li strong { color: var(--ink); font-weight: 650; }
+
+  code { font-family: var(--mono); font-size: .87em; background: var(--rule-soft);
+         padding: 1px 5px; border-radius: 2px; word-break: break-word; }
+
+  .scroll { overflow-x: auto; margin: 20px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 500px; }
+  th, td { text-align: left; padding: 8px 11px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+       color: var(--muted); border-bottom: 1px solid var(--rule); font-weight: 700; }
+  td.mono { font-family: var(--mono); font-size: 12px; color: var(--ink); white-space: nowrap; }
+  td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: 0; }
+  .bad { color: var(--clay); font-weight: 650; }
+  .ok { color: var(--teal); font-weight: 650; }
+
+  /* agent card */
+  .agent { border: 1px solid var(--rule); border-radius: 2px; margin: 26px 0; overflow: hidden; }
+  .agent-head { background: var(--card); border-bottom: 1px solid var(--rule);
+                padding: 14px 17px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .agent-id { font-family: var(--mono); font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+  .agent-model { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .risk { font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: .12em;
+          text-transform: uppercase; padding: 3px 7px; border-radius: 2px; margin-left: auto; white-space: nowrap; }
+  .risk.high { background: var(--clay-bg); color: var(--clay); }
+  .risk.med { background: var(--amber-bg); color: var(--amber); }
+  .risk.low { background: var(--teal-bg); color: var(--teal); }
+
+  .agent-body { padding: 4px 17px 16px; }
+  .agent-body h4 { font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+                   text-transform: uppercase; color: var(--muted); font-weight: 700;
+                   margin: 18px 0 6px; }
+  .agent-body p { font-size: 14.5px; margin: 8px 0; }
+  .agent-body ul { margin: 6px 0; }
+  .agent-body li { font-size: 14.5px; }
+
+  .quote { font-family: var(--mono); font-size: 12.5px; line-height: 1.55; color: var(--ink-soft);
+           border-left: 2px solid var(--rule); padding: 2px 0 2px 12px; margin: 8px 0; }
+
+  .add { background: var(--amber-bg); border: 1px solid var(--amber); border-radius: 2px;
+         padding: 11px 13px; margin: 10px 0; }
+  .add .k { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+            color: var(--amber); font-weight: 700; margin-bottom: 6px; }
+  .add p { font-family: var(--mono); font-size: 12.5px; line-height: 1.6; color: var(--ink); margin: 6px 0; }
+
+  .box { background: var(--card); border: 1px solid var(--rule-soft);
+         border-left: 3px solid var(--rule); border-radius: 2px; padding: 15px 17px; margin: 20px 0; }
+  .box.warn { border-left-color: var(--clay); }
+  .box.key { border-left-color: var(--amber); }
+  .box.good { border-left-color: var(--teal); }
+  .box .k { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+            font-weight: 700; margin-bottom: 7px; color: var(--muted); }
+  .box.warn .k { color: var(--clay); }
+  .box.key .k { color: var(--amber); }
+  .box.good .k { color: var(--teal); }
+  .box p { margin: 8px 0; font-size: 14.5px; }
+  .box p:first-of-type { margin-top: 0; }
+  .box p:last-child { margin-bottom: 0; }
+
+  .pull { font-size: 19px; line-height: 1.45; font-weight: 600; letter-spacing: -.01em;
+          border-left: 3px solid var(--amber); padding: 4px 0 4px 18px; margin: 26px 0;
+          max-width: 56ch; text-wrap: balance; }
+
+  footer { margin-top: 56px; padding-top: 18px; border-top: 2px solid var(--ink);
+           font-family: var(--mono); font-size: 11.5px; color: var(--muted); line-height: 1.7; }
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Command Desk</p>
+  <h1>Agent by agent: job, rules, guardrails</h1>
+  <p class="standfirst">Every model you have, what it does, the rules it's actually running under, and the rules that were designed but never made it onto the box — with the exact text to add and why each one matters.</p>
+</header>
+
+<!-- ============ THE FINDING ============ -->
+<section>
+  <p class="part-label">Read this first</p>
+  <h2>The prompts you designed are not the prompts that are running</h2>
+
+  <p class="lede">I read all seven <code>prompt.txt</code> files off the snapshot and compared them to <code>PROMPTScommanddeskv3.md</code>. They're different documents describing different systems.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Agent</th><th>Live prompt</th><th>What's missing</th><th>Risk</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">hub</td><td class="n">445 w</td><td>Zero mentions of escalation, approval, priority, provenance or evidence. It's almost entirely about the INTENT line.</td><td class="bad">High</td></tr>
+        <tr><td class="mono">personal_assistant</td><td class="n">55 w</td><td><strong>Zero mentions of email, mail, draft or send</strong> — this is your mail worker.</td><td class="bad">High</td></tr>
+        <tr><td class="mono">builder</td><td class="n">56 w</td><td>No loop rules. No round cap. No R3 checkpoint.</td><td class="bad">High</td></tr>
+        <tr><td class="mono">tester</td><td class="n">58 w</td><td>Same — no loop rules, no iteration limit.</td><td class="bad">High</td></tr>
+        <tr><td class="mono">research</td><td class="n">41 w</td><td>No rule about what to do when it finds nothing.</td><td>Medium</td></tr>
+        <tr><td class="mono">nova_voice</td><td class="n">122 w</td><td>Says it can't delegate. The router delegates. Prompt contradicts the system.</td><td>Medium</td></tr>
+        <tr><td class="mono">consolidator</td><td class="n">97 w</td><td>Nothing. This one is genuinely complete.</td><td class="ok">Low</td></tr>
+        <tr><td class="mono">observer</td><td class="n">—</td><td><strong>Doesn't exist.</strong> Fully specified in v3, never created as a slot.</td><td class="bad">High</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The v3 document specifies Hub's three response modes, a priority engine, the Builder/Tester loop with its R3 early-break, a decision log, escalation tiers, and a complete Observer agent. <strong>None of it is deployed.</strong> Your best thinking about how these agents should behave is sitting in a markdown file.</p>
+
+  <p class="pull">Everything below is per agent: what it does, why, what rules it has, and the exact text of the rules it doesn't.</p>
+</section>
+
+<!-- ============ HUB ============ -->
+<section>
+  <p class="part-label">Agent 01</p>
+
+  <div class="agent">
+    <div class="agent-head">
+      <span class="agent-id">hub</span>
+      <span class="agent-model">claude-sonnet-5 · contextual · shared pool</span>
+      <span class="risk high">Highest leverage</span>
+    </div>
+    <div class="agent-body">
+      <h4>What it does</h4>
+      <p>The orchestrator. Takes work, routes it, checks what comes back against the goal, and decides: forward it, send it back for a fix, or bring it to you. Every loop in the system ends here.</p>
+
+      <h4>Why Sonnet and never anything cheaper</h4>
+      <p>It's the only slot doing genuine multi-step reasoning, and it's the slot whose mistakes are most expensive — a bad routing decision or a wrongly-accepted result costs you every downstream call. This is the one place a cheap model costs more than it saves.</p>
+
+      <h4>What it can see</h4>
+      <p>Shared pool: continuity, relevant memory, related decisions. Never Builder or Tester's transcript.</p>
+
+      <h4>Rules in place</h4>
+      <ul>
+        <li>Deliver continuity first — what was in flight</li>
+        <li>State the INTENT line before any concrete action</li>
+        <li><strong>Never invent a detail that wasn't said.</strong> A short INTENT is the correct result for a vague request</li>
+        <li>Never comment on whether its own intent was carried out — that's oversight's job, and keeping Hub out of it is right</li>
+      </ul>
+      <p>The INTENT rule is excellently written. It gives worked examples of good and bad, and explicitly says an incomplete line is correct when the request is incomplete. That's the discipline the whole oversight pipeline depends on.</p>
+
+      <h4>Rules missing — and why each matters</h4>
+
+      <div class="add">
+        <div class="k">Add — response modes</div>
+        <p>Default to a direct answer. No headers, no status panel, no preamble. Use a one-line status prefix only when work is genuinely in flight. Use the full brief only when: Sam asks, a task completes or fails, a blocker appears or clears, drift is detected, or a decision needs authorisation.</p>
+      </div>
+      <p><em>Why:</em> without this, Hub picks its own verbosity every turn. You get a paragraph of scaffolding on "what time is it." Wasted tokens, wasted latency, and it trains you to skim — which is how a real warning gets missed.</p>
+
+      <div class="add">
+        <div class="k">Add — provenance</div>
+        <p>Every non-trivial claim about another agent's work carries evidence: a task id, a message id, a file reference, or the agent's own response. If you cannot find evidence, say "could not be verified." Never reconstruct another agent's work from memory.</p>
+      </div>
+      <p><em>Why:</em> this is the direct defence against Hub relaying a worker's claim as fact. Without it, an unverified claim travels up to you wearing Hub's authority.</p>
+
+      <div class="add">
+        <div class="k">Add — unknown is not fine</div>
+        <p>Missing information is reported as unknown. Never as "no issue" and never as "looks fine." Unknown and verified-absent are different answers.</p>
+      </div>
+      <p><em>Why:</em> the single most common way these systems mislead you. "I didn't check" and "I checked and it's clean" become the same sentence.</p>
+
+      <div class="add">
+        <div class="k">Add — quality gate</div>
+        <p>A specialist's output returns to you, not to Sam. Check it against the locked goal. Send it back for a fix, or forward it, or bring it to Sam for a decision. Specialists do not decide what happens to their own output.</p>
+      </div>
+      <p><em>Why:</em> this is the whole reason Hub exists rather than workers answering you directly. It isn't in the prompt.</p>
+
+      <div class="add">
+        <div class="k">Add — stop conditions</div>
+        <p>Stop and ask Sam when: the goal would change, something is about to leave the box, money would be spent, or the action cannot be undone. Do not stop for wording, ordering, or presentation — decide those yourself.</p>
+      </div>
+      <p><em>Why:</em> without an explicit line, Hub either asks about everything or nothing. Both are failures. This names the fence.</p>
+
+      <h4>Guardrails in code</h4>
+      <p>None specific to Hub. Everything above is prompt-level, which is exactly the gap your own prime directive warns about — escalation should be enforced by <code>enforcement.py</code>, not requested in text.</p>
+
+      <h4>How you'd know it's off task</h4>
+      <p>It answers a simple question with a status panel. It reports another agent's result without naming where the result came from. It says something is fine when nothing checked it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PA ============ -->
+<section>
+  <p class="part-label">Agent 02</p>
+
+  <div class="agent">
+    <div class="agent-head">
+      <span class="agent-id">personal_assistant</span>
+      <span class="agent-model">claude-haiku-4.5 · contextual · shared pool</span>
+      <span class="risk high">Touches the outside world</span>
+    </div>
+    <div class="agent-body">
+      <h4>What it does</h4>
+      <p>Your day — plans, schedules, reminders, follow-ups. <strong>And it is the mail worker.</strong> It's the only agent whose requests can reach Gmail.</p>
+
+      <h4>Why Haiku</h4>
+      <p>Structured data and short reasoning chains. The dangerous part isn't done by the model — the permission layer holds the tool and the gate. That's the right division: a cheap model can safely request an action when something else decides whether it happens.</p>
+
+      <h4>Rules in place</h4>
+      <div class="quote">"Handle Sam's day: plans, schedules, reminders, follow-ups. On a new day, open with a one-line day plan. Infer intent through voice noise. Learning nudges ride here. Shares context with Hub, Research, and Consolidator. Ask one question only when genuinely stuck."</div>
+      <p>That's the entire prompt. <strong>Fifty-five words, and not one of them is "email."</strong></p>
+
+      <div class="box warn">
+        <div class="k">The gap</div>
+        <p>Your mail worker has no instructions about mail. It doesn't know it drafts. It doesn't know it never sends without a yes. It doesn't know it must show you what arrived alongside what it wrote. It doesn't know to mimic your writing style — that whole feature exists in <code>style_profile.py</code> and the prompt never mentions it.</p>
+        <p>The permission layer stops it doing damage, which is why this hasn't bitten you. But safe and correct are different things: a model with no idea what its job is will do that job badly and confidently.</p>
+      </div>
+
+      <h4>Rules missing</h4>
+
+      <div class="add">
+        <div class="k">Add — the mail job, stated</div>
+        <p>You are the mail worker. When Sam asks what has come in, request a read through the permission layer and report what actually came back — sender, subject, and substance. Never describe an email you were not shown.</p>
+        <p>When Sam asks for a reply, request a draft. Show him what arrived and what you wrote, side by side, so he can compare them. You never send. Sending happens only after Sam's explicit yes, and it is not your decision.</p>
+      </div>
+
+      <div class="add">
+        <div class="k">Add — style is supplied, not invented</div>
+        <p>Your drafts use the stored style profile for that recipient context. Do not infer Sam's tone yourself. If no profile exists, say so plainly and write plainly rather than guessing at a voice.</p>
+      </div>
+      <p><em>Why:</em> without this, the model invents a register. And an email that sounds almost-but-not-quite like you is worse than one that sounds neutral.</p>
+
+      <div class="add">
+        <div class="k">Add — report the refusal</div>
+        <p>If the permission layer refuses a request, tell Sam it was refused and why. Never fill the gap by describing what the mail probably says.</p>
+      </div>
+      <p><em>Why:</em> this is the exact point where a helpful model invents an inbox. The layer already returns the refusal reason — the prompt has to say to surface it rather than paper over it.</p>
+
+      <h4>Guardrails in code</h4>
+      <ul>
+        <li>Permission layer re-validates the session before any Gmail call</li>
+        <li>Read is metadata-only — never the full message body</li>
+        <li>Draft triggers take precedence over read triggers, so "draft an email" can't also fire a read</li>
+        <li>Send is bound to one draft id, behind an exact-match yes-list</li>
+        <li>Exactly-once guard; a lost reply is left in-flight, never retried</li>
+        <li>30-second timeouts, late results discarded</li>
+      </ul>
+      <p>This is the most heavily defended agent you have, and appropriately so. Every guardrail is code.</p>
+
+      <h4>How you'd know it's off task</h4>
+      <p>It describes an email in more detail than a metadata-only read could contain. It reports on mail after a refusal. Its drafts sound like nobody in particular.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUILDER / TESTER ============ -->
+<section>
+  <p class="part-label">Agents 03 &amp; 04</p>
+
+  <div class="agent">
+    <div class="agent-head">
+      <span class="agent-id">builder + tester</span>
+      <span class="agent-model">claude-haiku-4.5 ×2 · isolated · build_test group</span>
+      <span class="risk high">Froze once already</span>
+    </div>
+    <div class="agent-body">
+      <h4>What they do</h4>
+      <p>Builder designs and ships. Tester verifies and reports bugs. They are adversaries by design — Tester's job is to find Builder wrong.</p>
+
+      <h4>Why they're sealed together</h4>
+      <p>They see only each other's transcript, never the shared pool, and nobody else sees theirs. Three reasons, all real:</p>
+      <ul>
+        <li><strong>Contamination</strong> — a Tester reading Builder's reasoning inherits its blind spots and starts checking the plan instead of the output</li>
+        <li><strong>Collusion</strong> — two agents both optimising for "close this loop" converge on agreeing, because agreement is the cheapest route to a finished-looking state</li>
+        <li><strong>Pollution</strong> — their round-by-round argument would flood the pool Hub depends on</li>
+      </ul>
+      <p>The isolation is a real branch in <code>orchestrator.handle_turn</code>, not a prompt instruction. That's why it holds.</p>
+
+      <h4>Rules in place</h4>
+      <p>Both prompts correctly state the isolation. Tester's includes one genuinely good line: <em>"Never soften a failing result."</em></p>
+
+      <div class="box warn">
+        <div class="k">The gap that caused 30 July</div>
+        <p>Neither prompt contains any loop rules. No round structure, no iteration cap, no early-break, no instruction about what to do when stuck. Your v3 document specifies all of it. None of it is deployed.</p>
+        <p>These two agents froze for days on a stale refusal, and nothing in their instructions told either one to notice it was repeating itself or to escalate.</p>
+      </div>
+
+      <h4>Rules missing</h4>
+
+      <div class="add">
+        <div class="k">Add to both — the loop</div>
+        <p>Round 1: Builder produces, Tester validates. A pass returns; a fail returns specific, actionable feedback. Round 2: Builder revises, Tester re-validates.</p>
+        <p>Round 3 is a checkpoint. If Tester's feedback is substantially the same issue as round 2 with no genuinely new finding, stop. Do not continue to round 4. Report the sticking point to Hub and escalate to Sam.</p>
+        <p>Hard cap of five rounds under any circumstances. Preserve every round. Never hide a failed one.</p>
+      </div>
+      <p><em>Why:</em> two agents with no stopping rule will loop until something external kills them, and each round costs money while producing less. The R3 checkpoint is the important half — it distinguishes "we're making progress" from "we're restating."</p>
+
+      <div class="add">
+        <div class="k">Add to both — stuck detection</div>
+        <p>If your last two responses are substantially the same as each other, you are stuck. Say so explicitly and stop. Do not rephrase and continue.</p>
+      </div>
+      <p><em>Why:</em> this is the exact failure you had. An agent repeating itself cannot see that it's repeating itself unless it's told to check.</p>
+
+      <div class="add">
+        <div class="k">Add to Tester — evidence</div>
+        <p>A pass requires evidence: the command run and its output. "Looks correct" is not a pass. If you could not run it, the result is "unverified" — which is not a pass either.</p>
+      </div>
+      <p><em>Why:</em> a Tester that can approve on inspection is a second Builder. This is the whole self-report problem, sitting in the one place it does the most damage.</p>
+
+      <h4>Guardrails in code</h4>
+      <p>The isolation branch. That's it. There is no round counter and no cap anywhere in the code — the loop rules above are prompt-level, and per your own prime directive the counter should eventually be code.</p>
+
+      <h4>How you'd know they're off task</h4>
+      <p>Rounds four and five happening at all. Tester passing something without output attached. The same objection appearing twice in different words. And the one you can't currently see: <strong>both going quiet</strong> — nothing checks liveness.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESEARCH ============ -->
+<section>
+  <p class="part-label">Agent 05</p>
+
+  <div class="agent">
+    <div class="agent-head">
+      <span class="agent-id">research</span>
+      <span class="agent-model">claude-haiku-4.5 · contextual · shared pool</span>
+      <span class="risk med">Invents when empty</span>
+    </div>
+    <div class="agent-body">
+      <h4>What it does</h4>
+      <p>Digs into a topic, produces findings with citations, summarises into actions rather than walls of text.</p>
+
+      <h4>Why Haiku</h4>
+      <p>Retrieval and summarising — bounded, structured, no long reasoning chain. Correct tier.</p>
+
+      <h4>Rules in place</h4>
+      <div class="quote">"Dig into a topic, produce usable findings with citations when web is available. Summarise into actions, not walls of text."</div>
+      <p>Forty-one words. The "actions not walls of text" instruction is good and most people forget it.</p>
+
+      <h4>Rules missing</h4>
+
+      <div class="add">
+        <div class="k">Add — the empty result</div>
+        <p>If you could not find something, say you could not find it. Do not fill the gap from prior knowledge without labelling it as such. "I found nothing on this" is a complete and acceptable answer.</p>
+      </div>
+      <p><em>Why:</em> a research agent with nothing to report will reach for what it already knows and present it in the same voice as a citation. That's how unsourced claims enter the shared memory pool — and once they're in the vault, they look like history.</p>
+
+      <div class="add">
+        <div class="k">Add — separate found from known</div>
+        <p>Mark every claim as either sourced — with the source — or as background knowledge. Never blend the two in one sentence.</p>
+      </div>
+
+      <h4>Guardrails in code</h4>
+      <p>None. This agent writes into the shared pool with no verification step between it and everything downstream.</p>
+
+      <h4>How you'd know it's off task</h4>
+      <p>Confident findings with no citations attached. Answers that arrive suspiciously fast for a web lookup.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONSOLIDATOR ============ -->
+<section>
+  <p class="part-label">Agent 06</p>
+
+  <div class="agent">
+    <div class="agent-head">
+      <span class="agent-id">consolidator</span>
+      <span class="agent-model">llama3.2 local · free · the vault</span>
+      <span class="risk low">Correct as written</span>
+    </div>
+    <div class="agent-body">
+      <h4>What it does</h4>
+      <p>Holds archived daily summaries from every agent, filed by date. Answers one question: have we seen this before? Yes, here it is — or no.</p>
+
+      <h4>Why a free local model is right here</h4>
+      <p>Because it isn't allowed to think. <code>vault_search</code> is a deterministic keyword scan; the model's only job is to report what the scan returned. You don't need reasoning for that, so you shouldn't pay for it.</p>
+
+      <h4>Rules in place</h4>
+      <div class="quote">"You do not reason, advise, decide, merge, or offer opinions — your only job is retrieval… answer either with the matching material, only from what was actually given to you, or with the single word 'No'. Never guess, never fill a gap with something plausible, never answer beyond what the candidates actually contain, and never act on what you find."</div>
+
+      <div class="box good">
+        <div class="k">This one is done properly</div>
+        <p>It's the only prompt in your system defined by what the agent may <em>not</em> do, and it's the pattern the others should copy. Five explicit negatives, one permitted output shape, and a clean escape hatch — "No" — that's easier to produce than a fabrication.</p>
+        <p>That last detail matters more than it looks. Most memory systems make "nothing found" the awkward answer, so the model reaches for something adjacent and plausible. Here, "No" is the easy path. That's why your memory returns nothing instead of returning something wrong.</p>
+      </div>
+
+      <h4>Rules missing</h4>
+      <p>Nothing significant. If anything: state that a partial match is reported as partial, not upgraded to a match.</p>
+
+      <h4>How you'd know it's off task</h4>
+      <p>Any answer containing advice. Any answer longer than the material it was given.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NOVA ============ -->
+<section>
+  <p class="part-label">Agent 07</p>
+
+  <div class="agent">
+    <div class="agent-head">
+      <span class="agent-id">nova_voice</span>
+      <span class="agent-model">llama3.2 local → sonnet-5 on wake</span>
+      <span class="risk med">Prompt contradicts the system</span>
+    </div>
+    <div class="agent-body">
+      <h4>What it does</h4>
+      <p>The face. Ears, mouth, screen. It does not decide, route, act, or hold memory — it's I/O. Runs free all day on the local model, and wakes to Sonnet when you say so.</p>
+
+      <h4>Why this is your entire cost model</h4>
+      <p>Small talk and "anything come in?" run at zero marginal cost. Deep work costs real money and happens only when you ask for it. Critically, <strong>the face doesn't decide when to wake</strong> — you hold that switch. An auto-waking model would quietly find reasons to think harder, and you'd find out at the end of the month.</p>
+
+      <h4>Rules in place</h4>
+      <ul>
+        <li>Short and conversational — no lists, headers or markdown, because it's spoken</li>
+        <li>Ask one short clarifying question rather than guessing</li>
+      </ul>
+
+      <div class="box warn">
+        <div class="k">Stale rule</div>
+        <p>The prompt says: <em>"You do not currently have delegation to other specialists through this interface."</em></p>
+        <p>That was true once. It isn't now — <code>nova_turn</code> runs the router before Nova replies, and work does get delegated. So the model is telling you it can't do something the system is doing around it. At best confusing; at worst it declines a request the router would have handled.</p>
+      </div>
+
+      <h4>Rules missing</h4>
+
+      <div class="add">
+        <div class="k">Replace the delegation line</div>
+        <p>Requests that belong to a specialist are routed automatically before you reply. Do not attempt a specialist's work yourself, and do not tell Sam you cannot do something — say what you are doing with it.</p>
+      </div>
+
+      <div class="add">
+        <div class="k">Add — never narrate unseen work</div>
+        <p>Report only what actually came back to you. If a worker returned nothing, say nothing came back. Never describe what a worker is probably doing or has probably found.</p>
+      </div>
+      <p><em>Why:</em> Nova is the voice you hear, so anything it invents arrives with the full authority of the system. It's the last place a fabrication can be caught and the worst place for one to originate.</p>
+
+      <div class="add">
+        <div class="k">Add — the wake switch is Sam's</div>
+        <p>You never decide to escalate to the heavier model. Only Sam's spoken phrase does that. Do not suggest it, and do not imply you would answer better if woken.</p>
+      </div>
+      <p><em>Why:</em> a model that can hint its way to a more expensive tier will learn to. The switch has to be entirely outside its influence.</p>
+
+      <h4>How you'd know it's off task</h4>
+      <p>Long formatted answers — it's forgotten it's being spoken. Describing results you never saw arrive. Suggesting you go deep.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROUTER + OBSERVER ============ -->
+<section>
+  <p class="part-label">Agents 08 &amp; 09</p>
+
+  <div class="agent">
+    <div class="agent-head">
+      <span class="agent-id">router</span>
+      <span class="agent-model">claude cheap tier · its own module</span>
+      <span class="risk low">Well built</span>
+    </div>
+    <div class="agent-body">
+      <h4>What it does</h4>
+      <p>Text in, named worker plus confidence out. Logged every time. Separate from Nova and from every worker.</p>
+
+      <h4>Why it is not on the free local model</h4>
+      <p>It was, and llama3.2 misrouted "what's come in" to Builder with a fabricated justification. It didn't fail loudly — it failed <em>persuasively</em>. Routing decides every downstream cost, so paying fractions of a cent for reliable instruction-following here is the best trade in the system.</p>
+
+      <h4>Rules in place</h4>
+      <ul>
+        <li>Return <code>null</code> when genuinely torn between two workers — never pick the higher score</li>
+        <li><code>nova_voice</code> is a menu option, so ordinary conversation routes cleanly instead of being forced into a worker</li>
+        <li>Each slot has a routing description written separately from its own prompt</li>
+        <li>Every decision — clean route, refusal, parse failure — is logged</li>
+      </ul>
+      <p>That third one exists because reusing prompts verbatim caused a real misroute. A prompt written to instruct a model is not a prompt written to distinguish it from six others.</p>
+
+      <h4>Rule missing</h4>
+      <div class="add">
+        <div class="k">Add — no new workers</div>
+        <p>Return only a worker from the supplied list, or null. Never invent a worker name, and never route to one you were not given.</p>
+      </div>
+
+      <h4>Guardrail worth adding in code</h4>
+      <p>Validate the returned name against the roster before acting on it. Cheap, and it makes the rule above enforced rather than requested.</p>
+    </div>
+  </div>
+
+  <div class="agent">
+    <div class="agent-head">
+      <span class="agent-id">observer</span>
+      <span class="agent-model">specified in v3 · does not exist</span>
+      <span class="risk high">Never built</span>
+    </div>
+    <div class="agent-body">
+      <h4>What it was meant to do</h4>
+      <p>A read-only auditor watching how the system behaves over time. Duplicated effort, role drift, stalled patterns, repeated friction, unactioned opportunities. Reports objective findings when asked. No vote in routing, no part in the loop, cannot be queried by other agents — it only queries them.</p>
+
+      <h4>Why it doesn't exist</h4>
+      <p><code>slots_config.json</code> has zero occurrences of "observer." The Clerk/Checker/Angel pipeline is a different thing — it runs after a session and checks one turn's intent against its outcome. Observer was meant to watch <em>patterns across time</em>, which nothing currently does.</p>
+
+      <h4>Its most important rule, from v3</h4>
+      <div class="quote">"Never lower a threshold to produce a finding. 'Nothing crossed threshold this period' is a complete answer."</div>
+      <p>That's the rule that stops an auditor justifying its existence by inventing problems — and it's the reason its thresholds belong in SQL rather than in model judgment. The query decides whether a threshold was met; Observer only explains what the rows mean.</p>
+
+      <h4>Its second most important property</h4>
+      <p>One-directional isolation. It reads out of shared memory; nothing goes back in. That's a different shape from the Builder/Tester wall, and it needs enforcing at the database, not in a prompt — which on SQLite means a read-only connection.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UNIVERSAL ============ -->
+<section>
+  <p class="part-label">Every agent</p>
+  <h2>Five rules missing from all of them</h2>
+  <p class="lede">These belong in a shared block appended to every prompt. They're the ones that keep an agent on task rather than defining what its task is.</p>
+
+  <div class="add">
+    <div class="k">1 — Report unknown as unknown</div>
+    <p>If you did not check something, say you did not check it. Never report an unchecked thing as fine. "I don't know" is a complete answer and is always preferred to a plausible guess.</p>
+  </div>
+
+  <div class="add">
+    <div class="k">2 — Never claim work you cannot show</div>
+    <p>Do not state that you did something unless you can point at the result — a command and its output, a record, a file, a message id. If you cannot show it, describe what you attempted and what came back instead.</p>
+  </div>
+
+  <div class="add">
+    <div class="k">3 — Stay in your lane</div>
+    <p>Do the job you were given. Do not expand the goal, do not add work nobody asked for, and do not redefine what success means. If the task as given seems wrong, say so once and then do it as specified.</p>
+  </div>
+
+  <div class="add">
+    <div class="k">4 — Stop when stuck</div>
+    <p>If you are repeating yourself, or have tried the same approach twice, stop and say so. Do not rephrase and continue.</p>
+  </div>
+
+  <div class="add">
+    <div class="k">5 — One question, once</div>
+    <p>If you need something from Sam, ask everything you need in one message, at the start. Do not drip questions out through the job.</p>
+  </div>
+
+  <p>Rules 1 and 2 are the direct answer to the "it says it did it" problem. Rule 3 is the answer to ten designs for the front entry. Rule 4 is 30 July. Rule 5 is the thing your COMMAND doc asks for and no prompt currently says.</p>
+
+  <div class="box key">
+    <div class="k">The caveat that matters</div>
+    <p>Every rule in this document is a prompt rule, and a prompt rule is a request. Your own prime directive is right: anything that can be enforced in code should be. The round cap should be a counter. The worker name should be validated against the roster. Escalation should be middleware.</p>
+    <p>Write the prompts anyway — they're the cheapest improvement available and several of these gaps are causing real problems today. Just know which ones are load-bearing and which are polite requests, and move the load-bearing ones into code as you go.</p>
+  </div>
+</section>
+
+<footer>
+  Prompts read from backend/core/slots/*/prompt.txt in the 2026-08-02 snapshot and compared against PROMPTScommanddeskv3.md<br>
+  Word counts and keyword absences verified directly, not estimated<br>
+  Nothing here has been deployed. The live system is unchanged.
+</footer>
+
+</div>
