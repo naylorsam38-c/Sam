@@ -5,17 +5,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 
-const L = require('./lifecycle');
-const W = require('./workers');
-
-// ---------------------------------------------------------------------------
-// Config. Everything sensitive comes from the environment, never from source.
-// ---------------------------------------------------------------------------
-
 // Reads KEY=VALUE lines from a .env sitting next to this file. A variable
 // already set in the real environment always wins, so a launcher or a shell
 // export still overrides the file. Does nothing when the file is absent, and
 // pulls in no dependency -- the app still installs nothing.
+//
+// This runs BEFORE the local modules are required. lifecycle.js and workers.js
+// read their own settings at module load, so loading the file afterwards would
+// leave those modules on their defaults while server.js alone saw the file.
 function loadDotEnv() {
   const file = path.join(__dirname, '.env');
   let text;
@@ -40,6 +37,13 @@ function loadDotEnv() {
 }
 
 loadDotEnv();
+
+const L = require('./lifecycle');
+const W = require('./workers');
+
+// ---------------------------------------------------------------------------
+// Config. Everything sensitive comes from the environment, never from source.
+// ---------------------------------------------------------------------------
 
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = Number(process.env.PORT || 8787);
