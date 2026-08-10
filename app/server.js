@@ -12,6 +12,35 @@ const W = require('./workers');
 // Config. Everything sensitive comes from the environment, never from source.
 // ---------------------------------------------------------------------------
 
+// Reads KEY=VALUE lines from a .env sitting next to this file. A variable
+// already set in the real environment always wins, so a launcher or a shell
+// export still overrides the file. Does nothing when the file is absent, and
+// pulls in no dependency -- the app still installs nothing.
+function loadDotEnv() {
+  const file = path.join(__dirname, '.env');
+  let text;
+  try {
+    text = fs.readFileSync(file, 'utf8');
+  } catch {
+    return;
+  }
+  for (const line of text.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const eq = trimmed.indexOf('=');
+    if (eq < 1) continue;
+    const key = trimmed.slice(0, eq).trim();
+    let value = trimmed.slice(eq + 1).trim();
+    if (value.length > 1 && ((value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'")))) {
+      value = value.slice(1, -1);
+    }
+    if (key && process.env[key] === undefined) process.env[key] = value;
+  }
+}
+
+loadDotEnv();
+
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = Number(process.env.PORT || 8787);
 
