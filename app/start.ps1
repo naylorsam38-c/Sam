@@ -6,6 +6,11 @@
 #   2. Run this script:
 #        .\start.ps1
 #
+# A password shorter than 8 characters is refused by server.js. To keep a short
+# password, set its SHA-256 instead of the plaintext - the length check does not
+# apply to a hash:
+#        $env:APP_PASSWORD_HASH = "<sha256 hex of your password>"
+#
 # To make the key and password stick across reboots instead, run once:
 #   [Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY","sk-ant-...","User")
 #   [Environment]::SetEnvironmentVariable("APP_PASSWORD","pick-a-password","User")
@@ -19,9 +24,12 @@ if (-not $env:ANTHROPIC_API_KEY) {
 if (-not $env:APP_PASSWORD) {
   $env:APP_PASSWORD = [Environment]::GetEnvironmentVariable("APP_PASSWORD", "User")
 }
+if (-not $env:APP_PASSWORD_HASH) {
+  $env:APP_PASSWORD_HASH = [Environment]::GetEnvironmentVariable("APP_PASSWORD_HASH", "User")
+}
 
 if (-not $env:ANTHROPIC_API_KEY) { Write-Host "ANTHROPIC_API_KEY is not set - chat and the planner will return an error." -ForegroundColor Yellow }
-if (-not $env:APP_PASSWORD)      { Write-Error "APP_PASSWORD is not set. Set it, then run this again." }
+if (-not $env:APP_PASSWORD -and -not $env:APP_PASSWORD_HASH) { Write-Error "Neither APP_PASSWORD nor APP_PASSWORD_HASH is set. Set one, then run this again." }
 
 # Keeps sessions valid across restarts. Generated once, stored for this user.
 if (-not $env:SESSION_SECRET) {
