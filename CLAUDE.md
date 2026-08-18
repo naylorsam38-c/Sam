@@ -128,3 +128,85 @@ Offline validation passing does not mean the live requirements are complete.
 Order of work: Connections completeness → OAuth → Brain/Research → governance
 roster → LLM handoffs → Builder/Tester/Playwright gate → test false-confidence →
 remaining live qualification hooks.
+
+---
+
+# THE VERTICAL-SLICE EXECUTION & EVIDENCE STANDARD (owner-supplied)
+
+Full text ships as `VERTICAL-SLICE-STANDARD.md` in the package. This is the
+operating process for every task, not only Command Desk.
+
+## The loop
+
+    Inspect -> Slice -> Implement -> Trace every thread -> Test -> Evidence
+      -> Compare against the source requirement -> DONE -> Next slice
+
+Never: plan everything, build everything, hope the final test catches it.
+
+## The rule that decides completion
+
+A slice is NOT complete because one layer works. It is complete only when every
+thread it touches has been checked and evidenced. Evidence is a completion gate,
+not a progress report.
+
+## Every task produces nine things
+
+1. Requirement (exact, by original ID)      6. Regression evidence
+2. Threads checked (every affected layer)   7. Reverse-engineering comparison
+3. Changes actually made                    8. Result
+4. Tests executed                           9. Next task
+5. Runtime evidence
+
+Result is exactly one of **DONE**, **BLOCKED — named blocker**, **NOT DONE**.
+Never "mostly done", "should work", or an unqualified "PASS".
+
+## The fourteen slices
+
+1 Authentication/session · 2 Connection Gateway foundation · 3 OAuth/provider
+4 Email & linked-account PA · 5 Calendar PA · 6 Brain/Research · 7 LLM role
+(one LLM at a time, as a vertical slice) · 8 LLM-to-LLM handoff
+9 Builder->Tester->Playwright · 10 Hands/laptop · 11 Frontend/live interface
+12 Governance · 13 Pre-live regression · 14 Live qualification
+
+## Anti-drift rules (verbatim in intent)
+
+- Do not expand the task while executing it.
+- Do not silently remove a requirement.
+- Do not replace a real test with a mock.
+- Do not mark live work as offline PASS.
+- Do not mark code existence as completion.
+- Do not collapse independent verification layers.
+- Do not overwrite a governance decision.
+- Do not carry an unresolved dependency silently into the next task.
+- Do not claim evidence that was not actually collected.
+- If the source is ambiguous, stop at the decision point rather than inventing a
+  requirement.
+- Preserve the original terminology and requirement IDs.
+- Maintain a running traceability matrix: source requirement -> task -> change ->
+  test -> evidence -> final state.
+
+## Non-negotiable evidence rules
+
+No mocks. No fake provider responses. No simulated success. No bypassing
+authentication, governance, approval or the actual handoff. No screenshot in
+place of a required runtime artifact. No source inspection in place of a
+required live test. Where a real credential is required, use the real one. If a
+real dependency cannot be exercised: **BLOCKED**, with the blocker named — never
+a substitution.
+
+## The independence property (owner, required not documented)
+
+The pre-live gate is NOT "it will catch anything wrong". The accurate claim:
+
+> The gate has independent layers that can expose disagreements between
+> static/code-level assertions and actual application behaviour. That redundancy
+> is a deliberate safety property and must be preserved.
+
+Enforced, not described:
+- `governance/roles/tester.json` must_do requires independent verification layers
+  and a regression test protecting each non-trivial assertion from matching the
+  wrong code path.
+- Same contract's must_never_do forbids collapsing Tester and Playwright into one
+  check to save time.
+- `tests/gateindependence.test.mjs` fails if either clause is removed, if the two
+  verdicts are computed from each other, or if the dot-all matcher returns.
