@@ -1,0 +1,184 @@
+# SPEC WRITER'S QUESTION BANK — per-part riders
+# Asked only when the assembly includes the part. Each rider's questions are the
+# part's config_schema plus the findings that bite that part specifically.
+# Fields as in universal.yaml. `channel` marks questions that establish an
+# observation channel the assembled app must provide for verification.
+
+parts:
+  auth:
+    - { id: A-01, q: "How do users sign in — email+password, magic link, Google/Microsoft SSO, or several? List all.",
+        why: "[parts] Every starter ships the same quartet; the chosen subset changes every criterion.",
+        maps_to: parts.auth.config.methods, answer_type: multi_enum, gate: R1 }
+    - { id: A-02, q: "Is self-registration open, invite-only, or admin-created?",
+        why: "[parts] Changes the entry flow and the seeded-test-user precondition.",
+        maps_to: parts.auth.config.registration, answer_type: enum, gate: R1 }
+    - { id: A-03, q: "Is password reset on? If yes: what address sends the email, and what does its subject line say?",
+        why: "[parts] active_when in action: the reset-email criterion exists only if this is true; the subject string makes it mechanical.",
+        maps_to: parts.auth.config.password_reset, answer_type: bool_plus_text, gate: R3 }
+    - { id: A-04, q: "How long does a session last, and what does the user see the moment it expires mid-task?",
+        why: "[parts] Session policy is auth's most-skipped config; expiry mid-form is the classic unhandled state.",
+        maps_to: parts.auth.config.session, answer_type: text, gate: R1 }
+    - { id: A-05, q: "Is 2FA required, optional, or off?",
+        why: "[parts] Jetstream ships it as a toggle; a toggle unanswered is a criterion undefined.",
+        maps_to: parts.auth.config.2fa, answer_type: enum, gate: R1 }
+    - { id: A-06, q: "After login, where does each role land?",
+        why: "[gate] The success observation of the login criterion is this exact redirect.",
+        maps_to: parts.auth.config.post_login_route, answer_type: per_role, gate: R3 }
+    - { id: A-07, channel: true,
+        q: "For verification: what seeded test user exists per role, and who maintains those credentials?",
+        why: "[enf] Every login criterion's precondition; states a test account can't reach are unverifiable.",
+        maps_to: bounds.environment.test_tenancy, answer_type: per_role, gate: R10 }
+
+  billing:
+    - { id: B-01, q: "Which provider — Stripe, Lemon Squeezy, other — and whose account? Who holds the API keys and where are they pasted?",
+        why: "[gate] R6 custody; [parts] provider choice changes every webhook and criterion.",
+        maps_to: parts.billing.config.provider, answer_type: enum_plus_custody, gate: R6 }
+    - { id: B-02, q: "One-off payments, subscriptions, or both? If subscriptions: which plans, prices and intervals, exactly?",
+        why: "[parts] The starters split precisely here; a criterion cannot assert an unnamed price.",
+        maps_to: parts.billing.config.mode, answer_type: structured, gate: R1 }
+    - { id: B-03, q: "What happens in the app the moment payment succeeds — and what happens if the webhook confirming it never arrives?",
+        why: "[parts] Stripe documents that event order is not guaranteed; assert eventual states, never sequences.",
+        maps_to: parts.billing.config.on_paid, answer_type: text, gate: R3 }
+    - { id: B-04, q: "Refunds: who can issue one, from where, and what does it change in the app?",
+        why: "[gate] R11 — a charge is a side effect; the refund is its rollback and must be named.",
+        maps_to: substance.actions, answer_type: text, gate: R11 }
+    - { id: B-05, q: "Failed payments and dunning: retry how many times, then what — downgrade, lock, or email?",
+        why: "[parts] Every billing service has a dunning setting; unset means undefined app behaviour on the most common billing event.",
+        maps_to: parts.billing.config.dunning, answer_type: structured, gate: R1 }
+    - { id: B-06, channel: true,
+        q: "For verification: is provider test-mode available, and what is the webhook endpoint the checker may hit with test events?",
+        why: "[enf] `stripe listen`/test-mode is the interposed channel; without it billing criteria cannot run against the live system safely.",
+        maps_to: bounds.environment.test_tenancy, answer_type: text, gate: R10 }
+    - { id: B-07, q: "Tax and receipts: does the provider handle tax (merchant-of-record) or do you, and must a receipt email go out?",
+        why: "[parts] The Stripe/Lemon Squeezy consolidation is exactly this split; a receipt email is an invisible outcome needing a channel.",
+        maps_to: parts.billing.config.tax, answer_type: enum, gate: R1 }
+
+  records:
+    - { id: R-01, q: "Name each record type and its fields — every field, its type, and which are required.",
+        why: "[parts] The domain data model is always business-specific; it cannot be defaulted, only asked.",
+        maps_to: substance.data, answer_type: structured, gate: R12 }
+    - { id: R-02, q: "Who can create, see, edit and delete each record type? (Owner-only? Team? Everyone?)",
+        why: "[enf] The enumerated authz matrix is the only checkable form of permissions.",
+        maps_to: substance.permissions, answer_type: matrix, gate: R1 }
+    - { id: R-03, q: "Is delete soft (recoverable) or hard? If hard, say so out loud.",
+        why: "[gate] R11 — hard delete is irreversible and needs its rollback named or accepted.",
+        maps_to: substance.actions, answer_type: enum, gate: R11 }
+    - { id: R-04, q: "How many records before the list needs search, filters or pagination — and which of those are you asking for?",
+        why: "[parts] Envelope limits: composed blocks break at scale thresholds nobody declared (Bubble's 50k sort cap).",
+        maps_to: bounds, answer_type: structured, gate: R1 }
+    - { id: R-05, q: "Can records be exported? In what format, and does the export include everything or a subset?",
+        why: "[parts] Export is in every CRUD platform and almost no spoken description.",
+        maps_to: parts.records.config.export, answer_type: bool_plus_enum, gate: R1 }
+
+  forms:
+    - { id: F-01, q: "For each form field: what makes an input invalid, and what exact message does the user see?",
+        why: "[gate] Validation strings make error criteria mechanical; 'proper validation' is a banned-word answer.",
+        maps_to: "substance.surfaces[].controls", answer_type: per_field, gate: R4 }
+    - { id: F-02, q: "What happens on submit — where does the data go, and what does the user see next?",
+        why: "[gate] R5/R12 — the endpoint and the storage location are the two mandatory addresses.",
+        maps_to: substance.actions, answer_type: text, gate: R5 }
+    - { id: F-03, q: "Can a half-finished form be saved or is it lost on navigation? Say which.",
+        why: "[parts] Draft state is a universal silent assumption in both directions.",
+        maps_to: parts.forms.config.drafts, answer_type: bool, gate: R1 }
+    - { id: F-04, q: "Can the same form be submitted twice by double-click or refresh? What prevents a duplicate?",
+        why: "[nova] Idempotency keys exist because retries double side effects; forms are where users retry.",
+        maps_to: substance.actions, answer_type: text, gate: R11 }
+
+  notify:
+    - { id: N-01, q: "Which channels — email, in-app, SMS, push — and for which events exactly?",
+        why: "[parts] Novu ships all four; each event×channel pair is a separate criterion.",
+        maps_to: parts.notify.config.matrix, answer_type: matrix, gate: R1 }
+    - { id: N-02, q: "What address or number do messages come FROM, and who owns that domain's sending reputation (DKIM/SPF setup)?",
+        why: "[parts] WP Mail SMTP's 4M installs exist because unsent email is the default; custody question per R6.",
+        maps_to: substance.externals, answer_type: text_plus_custody, gate: R6 }
+    - { id: N-03, q: "Can users turn notifications off, per channel or per event?",
+        why: "[parts] Preference centres are in every notification service; unasked means unbuilt or uncriterioned.",
+        maps_to: parts.notify.config.preferences, answer_type: enum, gate: R1 }
+    - { id: N-04, channel: true,
+        q: "For verification: where may the checker read sent messages (mail-capture endpoint in test tenancy), and how long may delivery take?",
+        why: "[parts] The invisible-outcome gap; the mailbox address and the time budget make 'the email arrives' decidable.",
+        maps_to: bounds.environment.test_tenancy, answer_type: text_plus_ms, gate: R3 }
+
+  files:
+    - { id: FI-01, q: "What file types and maximum size are accepted, and what does the user see when they exceed them?",
+        why: "[parts] Every upload service leads with these two limits; the rejection message is the criterion string.",
+        maps_to: parts.files.config, answer_type: structured, gate: R1 }
+    - { id: FI-02, q: "Where do files physically live (bucket/store, region), and who can fetch a file's URL — is it public, signed, or authenticated?",
+        why: "[gate] R12 plus the most common real-world leak: public buckets nobody decided on.",
+        maps_to: substance.data, answer_type: text, gate: R12 }
+    - { id: FI-03, q: "When a record is deleted, do its files go too?",
+        why: "[parts] Lifecycle again; orphaned files are the default outcome of silence.",
+        maps_to: "substance.data[].lifecycle", answer_type: bool, gate: R1 }
+
+  reports:
+    - { id: RP-01, q: "For each chart or number on the dashboard: what is the exact query behind it, in words?",
+        why: "[enf] A handler that runs and computes the wrong answer passes unless the criterion pins the answer; pin it at spec time.",
+        maps_to: parts.reports.config, answer_type: per_widget, gate: R3 }
+    - { id: RP-02, q: "How fresh must the numbers be — live, minutes, or daily?",
+        why: "[enf] The time budget field; 'live' and 'daily batch' are different architectures and different criteria.",
+        maps_to: parts.reports.config.freshness, answer_type: enum_plus_ms, gate: R3 }
+    - { id: RP-03, q: "What does the dashboard show when there is no data yet — and is a zero a zero or a blank?",
+        why: "[gate] Empty states, dashboard edition; blank-vs-zero is a real decision.",
+        maps_to: "substance.surfaces[].states.empty", answer_type: text, gate: R1 }
+
+  flow:
+    - { id: W-01, q: "For each approval or background job: what starts it, who or what approves it, and what happens on approve and on reject?",
+        why: "[parts] 22 of Budibase's 23 templates are this shape; org approval semantics are always business-specific and must be asked, never defaulted.",
+        maps_to: substance.actions, answer_type: per_flow, gate: R1 }
+    - { id: W-02, q: "How long may a job run or wait before it is considered stuck, and what happens then — retry, alert, or park?",
+        why: "[nova] Every loop needs a Rail-side bound; [parts] Bubble's 300s timeout is the envelope example.",
+        maps_to: bounds, answer_type: structured, gate: R1 }
+    - { id: W-03, q: "If the same job fires twice, is that harmless? If not, what makes it fire exactly once?",
+        why: "[nova] Idempotency; queue redelivery is normal, not exceptional.",
+        maps_to: substance.actions, answer_type: text, gate: R11 }
+    - { id: W-04, channel: true,
+        q: "For verification: where can a script see a job's state (queued/running/done) — an admin endpoint, a table, or a span?",
+        why: "[parts] Invisible-outcome channel for the queue; Tracetest-style spans or a status endpoint, but it must be named.",
+        maps_to: "gate.acceptance[].observe", answer_type: text, gate: R3 }
+
+  permissions:
+    - { id: P-01, q: "List the roles. For each pair (role, screen): allowed or not? For each pair (role, action): allowed or not?",
+        why: "[enf] Only enumerated pairs are checkable; the matrix IS the spec.",
+        maps_to: substance.permissions, answer_type: matrix, gate: R1 }
+    - { id: P-02, q: "Who assigns roles, and can a user ever change their own?",
+        why: "[parts] Privilege escalation by self-service is the classic silent default.",
+        maps_to: substance.permissions, answer_type: text, gate: R1 }
+    - { id: P-03, q: "What does a user see when they hit something they may not do — invisible, disabled, or an error page?",
+        why: "[gate] The deny-path is a surface state; three different builds satisfy 'has permissions' unless this is pinned.",
+        maps_to: "substance.surfaces[].states", answer_type: enum, gate: R3 }
+
+composition:
+  # Asked once per assembly, after parts are selected.
+  - { id: C-01, q: "Which parts are in this assembly, and does any appear twice? Give each instance a short name.",
+        why: "[parts] Instance namespacing is structural, not conventional; two Forms on one page must be distinct by construction.",
+        maps_to: parts, answer_type: list, gate: R1 }
+  - { id: C-02, q: "What does each part need from another (login before billing? records before reports?)? State every such dependency.",
+        why: "[parts] Provides/requires is the composition rule; undeclared dependencies become ordering bugs.",
+        maps_to: "parts[].requires", answer_type: list, gate: R1 }
+  - { id: C-03, q: "Is any part's configuration in conflict with another's (auth says invite-only, billing says self-serve signup)?",
+        why: "[brief] Constraint conflicts collapse compliance; catch the impossible pair at spec time.",
+        maps_to: "parts[].config", answer_type: check, gate: R1 }
+  - { id: C-04, q: "Do two parts write the same data? Who wins?",
+        why: "[parts] Shared-substrate mutation is a documented seam failure (Shopify's sandboxing exists because of it).",
+        maps_to: substance.data, answer_type: check, gate: R12 }
+  - { id: C-05, q: "Summed envelopes: do the parts' combined limits fit the declared ceilings (jobs × runtime, records × queries, files × storage)?",
+        why: "[parts] Two individually working blocks fail when composed at scale; sum the envelopes before building.",
+        maps_to: bounds, answer_type: check, gate: R1 }
+  - { id: C-06, q: "One user journey that crosses at least three parts, end to end: walk it. Where does state hand over?",
+        why: "[parts] The seams are where composition breaks; a walked journey surfaces the handovers no per-part question can.",
+        maps_to: gate.acceptance, answer_type: text, gate: R3 }
+
+custom_detector:
+  # Answers that mean: this piece is NOT a part — it is the custom build.
+  - { id: X-01, q: "Is there a calculation, matching rule, score or price that is YOUR way of doing it — the thing the business actually is?",
+        why: "[parts] OutSystems' own stepdown rule: 'your own algorithms' means leave the blocks. Vendors agree the algorithm is never in the box.",
+        action: "Mark as custom scope with its own acceptance criteria; do not force into a part." }
+  - { id: X-02, q: "Does any approval flow have rules beyond who-approves (thresholds, delegation, escalation chains)?",
+        why: "[parts] Org approval semantics are always business-specific; parts ship thin defaults only.",
+        action: "Custom flow logic; the Flow part hosts it but its rules are authored, not configured." }
+  - { id: X-03, q: "Does any single unit of work exceed a part's envelope (minutes-long jobs, >tens-of-thousands of records in one view)?",
+        why: "[parts] The envelope stopping rule; composition stops where the block's ceiling is.",
+        action: "Custom build for that unit; keep parts for the rest." }
+  - { id: X-04, q: "Does the customer's description keep using a word no part has (their domain noun)? What is its data shape and behaviour?",
+        why: "[parts] The domain model is the never-templated residue; the unmatched noun is its tell.",
+        action: "It is the Records part's schema at minimum, custom logic at most — ask R-01 about it first." }

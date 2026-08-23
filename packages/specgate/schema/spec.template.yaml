@@ -1,0 +1,89 @@
+# SPEC BUILDER — fixed field set template.
+# Every field must be present. Empty is not allowed.
+# Declared absence is allowed for the five substance lists:  externals: {none: "<reason>"}
+# [ASK: question] marks what the conversation did not settle. A spec with any
+# [ASK] cannot pass the gate (it exits "ask-ready" and goes to Sam as a list).
+
+header:
+  spec_id:            # unique; used by every downstream script
+  version: 1          # increments on every change after approval
+  title:              # one line
+  source:             # which conversation, which date
+  status: draft       # draft | gated | approved | superseded
+
+intent:
+  goal:               # one paragraph: what exists at the end that doesn't now
+  user:               # who uses this and what they are trying to do
+  success:            # how Sam will know it worked, in his own words (prose ok)
+  out_of_scope: []    # LOAD-BEARING. Everything not listed is assumed in scope.
+
+substance:
+  surfaces:           # every screen/page/entry point
+    - name:
+      route:
+      purpose:
+      controls:
+        - label:
+          type: button          # or display_only (then: source required, no endpoint)
+          endpoint:             # every non-display control names a real endpoint
+          on_success:
+          on_failure:
+          on_empty:
+          loading:
+      states:
+        empty:
+        loading:
+        error:
+  data:
+    - name:
+      shape:
+      location:       # named storage location — R12
+      read: []
+      write: []
+  actions:
+    - name:
+      trigger:
+      effect:
+      needs_approval: false
+      reversible: true          # if false, rollback: is required — R11
+  externals:
+    - service:
+      what_for:
+      credential:
+      custodian:      # WHO supplies it — R6
+      paste_location: # WHERE they paste it — R6
+  permissions:
+    - component:
+      may_read: []
+      may_write: []
+      may_call: []
+      may_spend:
+
+bounds:
+  constraints: []     # MAXIMUM SEVEN — more means more than one spec
+  budget:             # money, time, or token ceiling
+  environment:        # host, process, port, how it starts and restarts
+  rollback:           # the named way back if it breaks
+
+gate:
+  acceptance:
+    - id: AC-01
+      check:          # no banned words: works/correct/properly/good/reliable/...
+      verify:         # a runnable command whose result the builder does not control
+      evidence:       # what proof must exist: log line, screenshot, response body
+    # human-judgement criteria are allowed, labelled, and counted separately:
+    # - id: AC-xx
+    #   check: "reads as complete to Sam"
+    #   human: true
+    #   evidence: "Sam's sign-off note"
+  missing_info_policy: "Stop and ask; never invent; never substitute a placeholder."
+  evidence_required: []
+
+packets:              # the split, authored at draft time, validated mechanically
+  - packet_id:        # SPEC-xxx/P1
+    job:              # one sentence, imperative
+    inputs: {}        # everything needed, INLINE — no references to other packets
+    tools: []         # the minimal list
+    acceptance: []    # every machine AC covered by exactly one packet
+    budget:           # share of the parent budget
+    depends_on: []    # empty means it can run in parallel

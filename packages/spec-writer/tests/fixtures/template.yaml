@@ -1,0 +1,9 @@
+goal:
+  statement: "A goal statement"
+constraints:
+  list:
+    - "constraint"
+storage:
+  decision: "storage decision"
+acceptance:
+  check: "runnable check"

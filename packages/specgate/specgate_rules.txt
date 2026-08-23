@@ -1,0 +1,32 @@
+SPEC GATE — the twelve rejection rules, as implemented in specgate.py.
+
+This file is the writer-facing statement of the rules. specgate.py remains the
+authority: if the two disagree, the code is right and this file is a bug.
+
+R1  Every field in schema/spec.template.yaml is present and non-empty.
+    Declared absence is allowed for the five substance lists only, and only in
+    the form  externals: {none: "<reason>"}.  Silence is never an answer.
+R2  No unresolved [ASK: ...] marker anywhere in the document.
+    R2-only failures are not a rejection: they exit "ask-ready" (code 3) and
+    route to Sam as a question list.
+R3  Every acceptance criterion names an id, a check, and evidence. A machine
+    criterion additionally names a runnable verify. A criterion that cannot be
+    written mechanically is labelled human: true, never faked with a command.
+R4  No banned word in any criterion's check:
+    works · correct · properly · good · reliable · robust · user-friendly ·
+    clean · appropriate · as expected · seamless · intuitive · handles gracefully
+R5  Every control on every surface names an endpoint, or is type: display_only
+    and names a data source. There is no third option.
+R6  Every external service names its credential, its custodian (who supplies
+    it) and its paste_location (where it goes).
+R7  gate.missing_info_policy is present and non-empty.
+R8  At most seven constraints. More than seven means more than one spec.
+R9  intent.out_of_scope is non-empty. An empty scope boundary is never true.
+R10 No verify step depends on the builder's own report. Scanned mechanically
+    for self-report tells (builder / confirms / manually / attests /
+    self-report / "I verified"); the residue is caught at human approval.
+R11 Every action states needs_approval and reversible. An action with
+    reversible: false must name a rollback.
+R12 Every data item names a storage location.
+
+Exit codes: 0 releasable · 3 ask-ready (R2 only) · 2 back to draft.

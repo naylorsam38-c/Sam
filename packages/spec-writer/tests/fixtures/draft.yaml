@@ -1,0 +1,9 @@
+goal:
+  statement: "Build the described thing."
+constraints:
+  list:
+    - "Must remain self-contained."
+storage:
+  decision: "[ASK] Where and how must this component store its persistent state? The answer must not be inferred; avoid guessword."
+acceptance:
+  check: "Run the supplied executable test command and require exit code 0."
