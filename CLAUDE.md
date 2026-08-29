@@ -210,3 +210,57 @@ Enforced, not described:
   check to save time.
 - `tests/gateindependence.test.mjs` fails if either clause is removed, if the two
   verdicts are computed from each other, or if the dot-all matcher returns.
+
+---
+
+# BUILDER SCAFFOLDS — APPROVED SCOPE (supersedes the seven-archetype plan)
+
+The seven-archetype list is **cancelled**. Full specification ships as
+`requirements-engine/BUILDER-SCAFFOLD-SPEC.md`.
+
+They are **Builder scaffolds/templates, not applications**. They exist to reduce Builder
+invention and improve completion reliability. They are not products, demos or reference apps,
+and nothing here ships to a user.
+
+## Five structural categories — grouped by shape, not by product label
+
+1. **Records & workflow** — records moving through stages with people acting at each stage
+   (absorbs CRM, ticketing/support, project/task tracking, approvals)
+2. **Scheduling & booking** — time slots, availability, reservations against them
+3. **Marketplace & listings** — multiple sellers/providers, browsable listings, two-party transactions
+4. **Community & content** — posts, replies, moderation
+5. **Dashboard & reporting** — data in, visualised and summarised, mostly read-only
+
+**Build none up front.** A scaffold is created only when a real Builder job needs that shape.
+
+## The eight standing requirements
+
+1. `@BUILDER_EXTENSION` is the extension-point convention; greppable as plain text.
+2. No scaffold is validated without `SCAFFOLD_VALIDATED=PASS` from a re-runnable script.
+3. Validation must include real browser/Playwright proof, not merely Node/unit tests.
+4. Validation must include a negative control proving the browser proof fails when a required
+   behaviour is broken.
+5. `HUMAN_ANSWER > existing requirements rules > template defaults` — absolute.
+6. The requirements-rules tier has **no implementation**. Do not invent one. If it is required
+   and absent: stop and report.
+7. Do not begin the visual question layer until at least one scaffold is built and validated.
+8. Do not modify the frozen interview or traceability artefacts.
+
+## Why the browser gate is required, not over-engineering
+
+1,424 passing Node tests did not catch four component families rendering completely unstyled,
+or the toast stack covering the user menu. The first live browser run caught both. A vnode
+assertion passes whether or not any CSS exists.
+
+## Repository facts (verified, not recalled)
+
+- Shared library: `requirements-engine/foundation/index.js`, 193 exports. `LIBRARY_PARTS` and
+  `BLOCK_ZERO` are exported and machine-readable — read those first.
+- Node ≥ 22.5.0, ESM, **zero runtime and dev dependencies**. Playwright never vendored;
+  resolve via `PLAYWRIGHT_ROOT` and `scripts/lib/playwright.mjs`.
+- Builder entry point: `governance/roles/builder.json` (not `brain_builder.json`).
+- No requirements-rules engine exists. No pre-existing `@MARKER` convention exists.
+- Gate lines follow the existing `PRELIVE_GATE=PASS` shape.
+- Visual Question Format spec: still unknown, blocked on Hands/STEP 0 access.
+
+**The shared library is approved, complete and frozen.** Ten parts + Block 0.
