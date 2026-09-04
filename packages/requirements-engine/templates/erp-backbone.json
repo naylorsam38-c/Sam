@@ -1098,6 +1098,106 @@
       "rule": "delete rights stay 'Operations only' to keep the adjustment trail honest — widen deliberately or not at all"
     }
   ],
+  "specialist_engines": [
+    {
+      "kind": "workflow",
+      "name": "Purchase order lifecycle",
+      "stages": [
+        "Draft",
+        "Confirmed",
+        "Received",
+        "Closed",
+        "Cancelled"
+      ],
+      "initial": "Draft",
+      "terminal": [
+        "Closed",
+        "Cancelled"
+      ],
+      "transitions": 3,
+      "person_moved_by": [
+        "Operations",
+        "Purchasing",
+        "Warehouse"
+      ],
+      "automatic_transitions": [],
+      "has_approvals": true,
+      "has_timeouts": false,
+      "cancellable": true
+    },
+    {
+      "kind": "workflow",
+      "name": "Sales order lifecycle",
+      "stages": [
+        "Draft",
+        "Confirmed",
+        "Shipped",
+        "Closed",
+        "Cancelled"
+      ],
+      "initial": "Draft",
+      "terminal": [
+        "Closed",
+        "Cancelled"
+      ],
+      "transitions": 3,
+      "person_moved_by": [
+        "Operations",
+        "Sales",
+        "Warehouse"
+      ],
+      "automatic_transitions": [],
+      "has_approvals": false,
+      "has_timeouts": false,
+      "cancellable": true
+    },
+    {
+      "kind": "notification",
+      "name": "Low stock alert",
+      "trigger_kind": "event",
+      "channels": [
+        "email",
+        "in_app"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Order shipped",
+      "trigger_kind": "event",
+      "channels": [
+        "in_app"
+      ]
+    },
+    {
+      "kind": "report",
+      "name": "Stock on hand",
+      "metrics": [
+        "sum of Product Stock on hand",
+        "count of Products at or below Reorder point"
+      ],
+      "shape": "table",
+      "delivery": "screen"
+    },
+    {
+      "kind": "report",
+      "name": "Sales by month",
+      "metrics": [
+        "sales value"
+      ],
+      "shape": "both",
+      "delivery": "both"
+    },
+    {
+      "kind": "report",
+      "name": "Open orders",
+      "metrics": [
+        "count of Sales orders in Confirmed",
+        "count of Purchase orders in Confirmed"
+      ],
+      "shape": "table",
+      "delivery": "screen"
+    }
+  ],
   "structure": {
     "records": {
       "Product": {

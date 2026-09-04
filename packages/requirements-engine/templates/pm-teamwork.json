@@ -635,6 +635,79 @@
       "rule": "remove 'Task due reminder'"
     }
   ],
+  "specialist_engines": [
+    {
+      "kind": "workflow",
+      "name": "Task lifecycle",
+      "stages": [
+        "To do",
+        "In progress",
+        "Done"
+      ],
+      "initial": "To do",
+      "terminal": [
+        "Done"
+      ],
+      "transitions": 4,
+      "person_moved_by": [
+        "Member"
+      ],
+      "automatic_transitions": [],
+      "has_approvals": false,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "notification",
+      "name": "Task assigned",
+      "trigger_kind": "event",
+      "channels": [
+        "email",
+        "in_app"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Task due reminder",
+      "trigger_kind": "relative_to_date",
+      "channels": [
+        "email",
+        "in_app"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "New comment",
+      "trigger_kind": "event",
+      "channels": [
+        "in_app"
+      ]
+    },
+    {
+      "kind": "report",
+      "name": "Open tasks by person",
+      "metrics": [
+        "count of Tasks not in stage Done, grouped by Assignee"
+      ],
+      "shape": "both",
+      "delivery": "screen"
+    },
+    {
+      "kind": "report",
+      "name": "Overdue tasks",
+      "metrics": [
+        "count of overdue Tasks"
+      ],
+      "shape": "table",
+      "delivery": "screen"
+    },
+    {
+      "kind": "custom_action",
+      "name": "Duplicate",
+      "record": "Task",
+      "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title"
+    }
+  ],
   "structure": {
     "records": {
       "Project": {

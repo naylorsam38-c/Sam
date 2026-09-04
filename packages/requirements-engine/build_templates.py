@@ -155,6 +155,38 @@ def own_field(field):
 TEMPLATES = []
 
 
+def _describe_engines(records, workflows, notifications, reports):
+    """The specialist engines a template actually runs, read straight off the
+    same real per-instance data every other part of this file already
+    authored for it (workflow()/notification()/report()/record()'s own
+    dicts) -- not a separate exercise, not invented: reverse-engineering the
+    five apps always produced this data, it just wasn't listed as its own
+    inventory before. One entry per real workflow, notification, report, and
+    custom record action."""
+    engines = []
+    for wname, w in workflows.items():
+        transitions = w["FL.03"]
+        person_moved_by = sorted({r for t in transitions for r in (t.get("roles") or [])})
+        automatic_events = [t["event"] for t in transitions if t.get("mover") == "automatic"]
+        engines.append(OrderedDict(
+            kind="workflow", name=wname, stages=w["FL.02"]["stages"],
+            initial=w["FL.02"]["initial"], terminal=w["FL.02"]["terminal"],
+            transitions=len(transitions), person_moved_by=person_moved_by,
+            automatic_transitions=automatic_events,
+            has_approvals=bool(w.get("FL.05")), has_timeouts=bool(w.get("FL.10")),
+            cancellable=(w.get("FL.07") or {}).get("allowed") == "yes"))
+    for nname, n in notifications.items():
+        engines.append(OrderedDict(kind="notification", name=nname,
+                                    trigger_kind=n["N.01"]["kind"], channels=n["N.03"]))
+    for rname, r in reports.items():
+        engines.append(OrderedDict(kind="report", name=rname, metrics=r["RP.04"],
+                                    shape=r["RP.03"]["shape"], delivery=r["RP.03"]["delivery"]))
+    for rec_name, rec in records.items():
+        for ca in rec.get("R.15", []):
+            engines.append(OrderedDict(kind="custom_action", name=ca["name"], record=rec_name, effect=ca["effect"]))
+    return engines
+
+
 def template(name, source_app, category, modules, roles, super_role, records, workflows,
              notifications, reports, forms, file_types, answers, per_instance, features,
              ask_customer_extra=None, integrations=None):
@@ -166,7 +198,8 @@ def template(name, source_app, category, modules, roles, super_role, records, wo
                               workflows=list(workflows), file_types=list(file_types),
                               integrations=list(integrations or []), screens=[]),
         super_role=super_role, answers=answers, per_instance=per_instance,
-        ask_customer=ask, features=features))
+        ask_customer=ask, features=features,
+        specialist_engines=_describe_engines(records, workflows, notifications, reports)))
 
 
 # ============================================================================
@@ -824,6 +857,34 @@ if __name__ == "__main__":
         L.append("| Feature | Controlled by | Rule |\n|---|---|---|")
         for ft in t["features"]:
             L.append(f"| {ft['feature']} | `{ft['controlled_by']}` | {ft['rule']} |")
+        L.append("")
+        engines = t["specialist_engines"]
+        L.append(f"**Specialist engines this app runs** ({len(engines)}) — read straight off this "
+                  "template's own real data, not a separate exercise:\n")
+        workflows_ = [e for e in engines if e["kind"] == "workflow"]
+        notifs_ = [e for e in engines if e["kind"] == "notification"]
+        reports_ = [e for e in engines if e["kind"] == "report"]
+        custom_ = [e for e in engines if e["kind"] == "custom_action"]
+        if workflows_:
+            L.append("*Workflow/lifecycle engines:*")
+            for e in workflows_:
+                L.append(f"- `{e['name']}` — stages {e['stages']}; moved by {e['person_moved_by'] or 'nobody directly'}"
+                         + (f"; automatic on: {e['automatic_transitions']}" if e['automatic_transitions'] else "")
+                         + (f"; has approvals" if e['has_approvals'] else "")
+                         + (f"; has timeouts" if e['has_timeouts'] else "")
+                         + (f"; cancellable" if e['cancellable'] else ""))
+        if notifs_:
+            L.append("\n*Notification/reminder engines:*")
+            for e in notifs_:
+                L.append(f"- `{e['name']}` — trigger: {e['trigger_kind']}; channels: {e['channels']}")
+        if reports_:
+            L.append("\n*Reporting engines:*")
+            for e in reports_:
+                L.append(f"- `{e['name']}` — {e['delivery']}/{e['shape']}; metrics: {e['metrics']}")
+        if custom_:
+            L.append("\n*Custom record-action engines:*")
+            for e in custom_:
+                L.append(f"- `{e['name']}` on {e['record']} — {e['effect']}")
         L.append("")
     L.append("\n## Combining templates\n")
     L.append("Modules are the unit of combination, and 'combine' means: union the inventories, union the per-instance answers, "

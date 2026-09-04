@@ -635,6 +635,79 @@
       "rule": "remove the No-show stage and its report"
     }
   ],
+  "specialist_engines": [
+    {
+      "kind": "workflow",
+      "name": "Appointment lifecycle",
+      "stages": [
+        "Booked",
+        "Confirmed",
+        "Completed",
+        "Cancelled",
+        "No-show"
+      ],
+      "initial": "Booked",
+      "terminal": [
+        "Completed",
+        "Cancelled",
+        "No-show"
+      ],
+      "transitions": 5,
+      "person_moved_by": [
+        "Staff"
+      ],
+      "automatic_transitions": [
+        "the deposit payment succeeds, or a staff member confirms manually"
+      ],
+      "has_approvals": false,
+      "has_timeouts": true,
+      "cancellable": true
+    },
+    {
+      "kind": "notification",
+      "name": "Booking confirmation",
+      "trigger_kind": "event",
+      "channels": [
+        "email",
+        "sms"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Appointment reminder",
+      "trigger_kind": "relative_to_date",
+      "channels": [
+        "email",
+        "sms"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Cancellation notice",
+      "trigger_kind": "event",
+      "channels": [
+        "email"
+      ]
+    },
+    {
+      "kind": "report",
+      "name": "Upcoming appointments",
+      "metrics": [
+        "count of Appointments in stage Booked or Confirmed"
+      ],
+      "shape": "table",
+      "delivery": "screen"
+    },
+    {
+      "kind": "report",
+      "name": "No-show rate",
+      "metrics": [
+        "no-show rate"
+      ],
+      "shape": "both",
+      "delivery": "screen"
+    }
+  ],
   "structure": {
     "records": {
       "Service": {

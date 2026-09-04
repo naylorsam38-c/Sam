@@ -15,6 +15,23 @@ Modules: tasking, collaboration, files. Roles: Admin, Member, Guest (super: Admi
 | Task duplication | `R.15:Task` | delete the Duplicate action |
 | Due-date reminders | `A.15 notifications list` | remove 'Task due reminder' |
 
+**Specialist engines this app runs** (7) — read straight off this template's own real data, not a separate exercise:
+
+*Workflow/lifecycle engines:*
+- `Task lifecycle` — stages ['To do', 'In progress', 'Done']; moved by ['Member']
+
+*Notification/reminder engines:*
+- `Task assigned` — trigger: event; channels: ['email', 'in_app']
+- `Task due reminder` — trigger: relative_to_date; channels: ['email', 'in_app']
+- `New comment` — trigger: event; channels: ['in_app']
+
+*Reporting engines:*
+- `Open tasks by person` — screen/both; metrics: ['count of Tasks not in stage Done, grouped by Assignee']
+- `Overdue tasks` — screen/table; metrics: ['count of overdue Tasks']
+
+*Custom record-action engines:*
+- `Duplicate` on Task — creates a copy of the task in stage 'To do' with '(copy)' appended to the title
+
 
 ## crm-pipeline — CRM (modelled on Pipedrive)
 
@@ -27,6 +44,22 @@ Modules: people_directory, pipeline, activities. Roles: Admin, Sales manager, Sa
 | Lost reasons | `R.02:Deal` | edit the Lost reason option list |
 | Pipeline stages | `FL.02:Deal pipeline` | rename/add stages; FL.03 transitions must be restated for any new stage |
 | Win-rate reporting | `A.15 reports list` | remove 'Win rate' |
+
+**Specialist engines this app runs** (6) — read straight off this template's own real data, not a separate exercise:
+
+*Workflow/lifecycle engines:*
+- `Deal pipeline` — stages ['Lead in', 'Contacted', 'Proposal sent', 'Negotiation', 'Won', 'Lost']; moved by ['Sales manager', 'Sales rep']
+
+*Notification/reminder engines:*
+- `Activity due` — trigger: relative_to_date; channels: ['email', 'push', 'in_app']
+- `Deal won` — trigger: event; channels: ['in_app']
+
+*Reporting engines:*
+- `Pipeline by stage` — screen/both; metrics: ['sum of open Deal Value grouped by stage', 'count of Deals grouped by stage']
+- `Win rate` — screen/both; metrics: ['win rate']
+
+*Custom record-action engines:*
+- `Reassign` on Deal — changes the deal's Owner to another person
 
 
 ## booking-frontdesk — booking (modelled on Acuity Scheduling)
@@ -41,6 +74,20 @@ Modules: catalog_services, scheduling, people_directory, deposits. Roles: Owner,
 | Auto-cancel unpaid bookings | `FL.10:Appointment lifecycle` | change or delete the 24-hour Booked timeout |
 | No-show tracking | `FL.02 stages` | remove the No-show stage and its report |
 
+**Specialist engines this app runs** (6) — read straight off this template's own real data, not a separate exercise:
+
+*Workflow/lifecycle engines:*
+- `Appointment lifecycle` — stages ['Booked', 'Confirmed', 'Completed', 'Cancelled', 'No-show']; moved by ['Staff']; automatic on: ['the deposit payment succeeds, or a staff member confirms manually']; has timeouts; cancellable
+
+*Notification/reminder engines:*
+- `Booking confirmation` — trigger: event; channels: ['email', 'sms']
+- `Appointment reminder` — trigger: relative_to_date; channels: ['email', 'sms']
+- `Cancellation notice` — trigger: event; channels: ['email']
+
+*Reporting engines:*
+- `Upcoming appointments` — screen/table; metrics: ['count of Appointments in stage Booked or Confirmed']
+- `No-show rate` — screen/both; metrics: ['no-show rate']
+
 
 ## erp-backbone — ERP (modelled on Odoo (sales + purchasing + inventory core))
 
@@ -54,6 +101,21 @@ Modules: catalog_products, people_directory, ordering, inventory. Roles: Admin, 
 | Role split | `A.15 roles + P.00` | small shops merge Sales/Purchasing/Warehouse into Operations; P.00 = yes lets one person hold several |
 | Stock corrections audit | `R.08:Stock adjustment` | delete rights stay 'Operations only' to keep the adjustment trail honest — widen deliberately or not at all |
 
+**Specialist engines this app runs** (7) — read straight off this template's own real data, not a separate exercise:
+
+*Workflow/lifecycle engines:*
+- `Purchase order lifecycle` — stages ['Draft', 'Confirmed', 'Received', 'Closed', 'Cancelled']; moved by ['Operations', 'Purchasing', 'Warehouse']; has approvals; cancellable
+- `Sales order lifecycle` — stages ['Draft', 'Confirmed', 'Shipped', 'Closed', 'Cancelled']; moved by ['Operations', 'Sales', 'Warehouse']; cancellable
+
+*Notification/reminder engines:*
+- `Low stock alert` — trigger: event; channels: ['email', 'in_app']
+- `Order shipped` — trigger: event; channels: ['in_app']
+
+*Reporting engines:*
+- `Stock on hand` — screen/table; metrics: ['sum of Product Stock on hand', 'count of Products at or below Reorder point']
+- `Sales by month` — both/both; metrics: ['sales value']
+- `Open orders` — screen/table; metrics: ['count of Sales orders in Confirmed', 'count of Purchase orders in Confirmed']
+
 
 ## accounting-ledger — accounting (modelled on Xero (invoicing core))
 
@@ -66,6 +128,24 @@ Modules: people_directory, invoicing, payments. Roles: Admin, Accountant, Adviso
 | Overdue chasing | `N.01:Payment reminder` | change the +3 days offset, or remove the notification to stop chasing |
 | Accrual vs cash reporting | `RP.05:Profit and loss:revenue` | rewrite the definition to 'Payments received in the period' for cash basis — one answer, not a rebuild |
 | Advisor access | `A.15 roles list` | remove Advisor -> external-accountant access disappears |
+
+**Specialist engines this app runs** (8) — read straight off this template's own real data, not a separate exercise:
+
+*Workflow/lifecycle engines:*
+- `Invoice lifecycle` — stages ['Draft', 'Awaiting approval', 'Awaiting payment', 'Paid', 'Voided']; moved by ['Accountant', 'Admin']; automatic on: ['Payments applied to the invoice reach its total']; has approvals
+- `Bill lifecycle` — stages ['Draft', 'Awaiting payment', 'Paid', 'Voided']; moved by ['Accountant', 'Admin']; automatic on: ['Payments applied to the bill reach its total']
+
+*Notification/reminder engines:*
+- `Invoice sent` — trigger: event; channels: ['email']
+- `Payment reminder` — trigger: relative_to_date; channels: ['email']
+- `Payment received` — trigger: event; channels: ['in_app']
+
+*Reporting engines:*
+- `Profit and loss` — both/both; metrics: ['revenue', 'expenses', 'net profit']
+- `Aged receivables` — both/table; metrics: ['overdue invoice totals bucketed by age']
+
+*Custom record-action engines:*
+- `Send` on Invoice — emails the invoice document to the Contact and stamps the sent time
 
 
 ## Combining templates

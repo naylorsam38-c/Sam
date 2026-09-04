@@ -756,6 +756,77 @@
       "rule": "remove 'Win rate'"
     }
   ],
+  "specialist_engines": [
+    {
+      "kind": "workflow",
+      "name": "Deal pipeline",
+      "stages": [
+        "Lead in",
+        "Contacted",
+        "Proposal sent",
+        "Negotiation",
+        "Won",
+        "Lost"
+      ],
+      "initial": "Lead in",
+      "terminal": [
+        "Won",
+        "Lost"
+      ],
+      "transitions": 8,
+      "person_moved_by": [
+        "Sales manager",
+        "Sales rep"
+      ],
+      "automatic_transitions": [],
+      "has_approvals": false,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "notification",
+      "name": "Activity due",
+      "trigger_kind": "relative_to_date",
+      "channels": [
+        "email",
+        "push",
+        "in_app"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Deal won",
+      "trigger_kind": "event",
+      "channels": [
+        "in_app"
+      ]
+    },
+    {
+      "kind": "report",
+      "name": "Pipeline by stage",
+      "metrics": [
+        "sum of open Deal Value grouped by stage",
+        "count of Deals grouped by stage"
+      ],
+      "shape": "both",
+      "delivery": "screen"
+    },
+    {
+      "kind": "report",
+      "name": "Win rate",
+      "metrics": [
+        "win rate"
+      ],
+      "shape": "both",
+      "delivery": "screen"
+    },
+    {
+      "kind": "custom_action",
+      "name": "Reassign",
+      "record": "Deal",
+      "effect": "changes the deal's Owner to another person"
+    }
+  ],
   "structure": {
     "records": {
       "Organisation": {

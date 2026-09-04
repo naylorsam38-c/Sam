@@ -833,6 +833,111 @@
       "rule": "remove Advisor -> external-accountant access disappears"
     }
   ],
+  "specialist_engines": [
+    {
+      "kind": "workflow",
+      "name": "Invoice lifecycle",
+      "stages": [
+        "Draft",
+        "Awaiting approval",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ],
+      "initial": "Draft",
+      "terminal": [
+        "Paid",
+        "Voided"
+      ],
+      "transitions": 5,
+      "person_moved_by": [
+        "Accountant",
+        "Admin"
+      ],
+      "automatic_transitions": [
+        "Payments applied to the invoice reach its total"
+      ],
+      "has_approvals": true,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "workflow",
+      "name": "Bill lifecycle",
+      "stages": [
+        "Draft",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ],
+      "initial": "Draft",
+      "terminal": [
+        "Paid",
+        "Voided"
+      ],
+      "transitions": 4,
+      "person_moved_by": [
+        "Accountant",
+        "Admin"
+      ],
+      "automatic_transitions": [
+        "Payments applied to the bill reach its total"
+      ],
+      "has_approvals": false,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "notification",
+      "name": "Invoice sent",
+      "trigger_kind": "event",
+      "channels": [
+        "email"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Payment reminder",
+      "trigger_kind": "relative_to_date",
+      "channels": [
+        "email"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Payment received",
+      "trigger_kind": "event",
+      "channels": [
+        "in_app"
+      ]
+    },
+    {
+      "kind": "report",
+      "name": "Profit and loss",
+      "metrics": [
+        "revenue",
+        "expenses",
+        "net profit"
+      ],
+      "shape": "both",
+      "delivery": "both"
+    },
+    {
+      "kind": "report",
+      "name": "Aged receivables",
+      "metrics": [
+        "overdue invoice totals bucketed by age"
+      ],
+      "shape": "table",
+      "delivery": "both"
+    },
+    {
+      "kind": "custom_action",
+      "name": "Send",
+      "record": "Invoice",
+      "effect": "emails the invoice document to the Contact and stamps the sent time"
+    }
+  ],
   "structure": {
     "records": {
       "Contact": {
