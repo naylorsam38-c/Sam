@@ -1,0 +1,48 @@
+BINDING CHECK: BOUND-CRM-PIPELINE (customer_complete=False)
+PASS crm-pipeline/SCR-001 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/SCR-002 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/SCR-003 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/SCR-004 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/SCR-005 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/SCR-006 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/SCR-007 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/SCR-008 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
+FAIL crm-pipeline/SCR-009 (screen/report): plain aggregation over existing fields -- no generic reporting engine was built
+PASS crm-pipeline/SCR-010 (screen/report): stage_history
+PASS crm-pipeline/ACT-001 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/ACT-002 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/ACT-003 (action/delete): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/ACT-004 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/ACT-005 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/ACT-006 (action/delete): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/ACT-007 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/ACT-008 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/ACT-009 (action/delete): (existing Builder rule -- CRUD/OAuth, no engine needed)
+FAIL crm-pipeline/ACT-010 (action/custom): a plain restricted field edit -- no specialist engine needed, but the Builder has no generic custom-action execution rule at all
+PASS crm-pipeline/ACT-011 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/ACT-012 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS crm-pipeline/ACT-013 (action/delete): (existing Builder rule -- CRUD/OAuth, no engine needed)
+FAIL crm-pipeline/ACT-014 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL crm-pipeline/ACT-015 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL crm-pipeline/ACT-016 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL crm-pipeline/ACT-017 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL crm-pipeline/ACT-018 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL crm-pipeline/ACT-019 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL crm-pipeline/ACT-020 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL crm-pipeline/ACT-021 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+PASS NTF:Activity due (notification): scheduled_jobs
+FAIL NTF:Deal won (notification): event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine
+FAIL RPT:Pipeline by stage (report): plain aggregation over existing fields -- no generic reporting engine was built
+PASS RPT:Win rate (report): stage_history
+PASS crm-pipeline/OPS-001 (recurring_op): scheduled_jobs
+PASS crm-pipeline/OPS-002 (recurring_op): scheduled_jobs
+PASS crm-pipeline/OPS-003 (recurring_op): scheduled_jobs
+PASS crm-pipeline/OPS-004 (recurring_op): scheduled_jobs
+PASS crm-pipeline/OPS-005 (recurring_op): scheduled_jobs
+PASS crm-pipeline/OPS-006 (recurring_op): scheduled_jobs
+PASS crm-pipeline/OPS-007 (recurring_op): scheduled_jobs
+PASS crm-pipeline/OPS-008 (recurring_op): scheduled_jobs
+PASS crm-pipeline/OPS-009 (recurring_op): scheduled_jobs
+---
+32/44 PASS, 12 FAIL
+NOT CLEAN -- 12 item(s) unbound

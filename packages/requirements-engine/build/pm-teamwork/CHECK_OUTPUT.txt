@@ -1,0 +1,40 @@
+BINDING CHECK: BOUND-PM-TEAMWORK (customer_complete=False)
+PASS pm-teamwork/SCR-001 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/SCR-002 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/SCR-003 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/SCR-004 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/SCR-005 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/SCR-006 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
+FAIL pm-teamwork/SCR-007 (screen/report): plain aggregation over existing fields -- no generic reporting engine was built
+FAIL pm-teamwork/SCR-008 (screen/report): plain aggregation over existing fields -- no generic reporting engine was built
+PASS pm-teamwork/ACT-001 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/ACT-002 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/ACT-003 (action/delete): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/ACT-004 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/ACT-005 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/ACT-006 (action/delete): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/ACT-007 (action/custom): record_cloning
+PASS pm-teamwork/ACT-008 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/ACT-009 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS pm-teamwork/ACT-010 (action/delete): (existing Builder rule -- CRUD/OAuth, no engine needed)
+FAIL pm-teamwork/ACT-011 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL pm-teamwork/ACT-012 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL pm-teamwork/ACT-013 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL pm-teamwork/ACT-014 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL NTF:Task assigned (notification): event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine
+PASS NTF:Task due reminder (notification): scheduled_jobs
+FAIL NTF:New comment (notification): event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine
+FAIL RPT:Open tasks by person (report): plain aggregation over existing fields -- no generic reporting engine was built
+FAIL RPT:Overdue tasks (report): plain aggregation over existing fields -- no generic reporting engine was built
+PASS pm-teamwork/OPS-001 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-002 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-003 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-004 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-005 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-006 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-007 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-008 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-009 (recurring_op): scheduled_jobs
+---
+26/36 PASS, 10 FAIL
+NOT CLEAN -- 10 item(s) unbound
