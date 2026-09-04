@@ -18,6 +18,7 @@ packages/assembly-engine/    completed answers -> one numbered spec (component 2
 packages/builder/            numbered spec -> a real, running application (component 3)
 packages/playwright-tester/  numbered spec -> real Playwright against the live app (component 4)
 packages/defect-report/      real Playwright reports -> defects tied to numbered spec ids (component 5)
+packages/loop/               fix-and-retest loop + Definition of Done gate (component 6)
 packages/specgate/           the spec gate: R1-R12 linter + D1-D8 decomposer
 packages/spec-writer/        transcript -> spec draft, in three model calls
 packages/crawler/            deterministic browser smoke-test harness
