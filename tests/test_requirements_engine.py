@@ -96,6 +96,21 @@ def test_readme_question_counts_match_the_graph():
     assert f"{len(questions)} questions ({fixed} fixed, {per_instance} per-instance)" in claim
 
 
+def test_visual_questions_claim_matches_the_graph():
+    """VISUAL_QUESTIONS.md claims 40 of the 122 questions carry a widget, from a
+    20-entry vocabulary. Check it against the actual graph, not the prose."""
+    graph = json.loads(GRAPH.read_text(encoding="utf-8"))
+    widget_questions = [q for q in graph["questions"] if q.get("widget")]
+    vocab = graph["config"]["widget_vocab"]
+    assert len(widget_questions) == 40
+    assert len(vocab) == 20
+    for q in widget_questions:
+        assert q["widget"] in vocab, f"{q['id']} uses undeclared widget {q['widget']!r}"
+    claim = (ENGINE / "VISUAL_QUESTIONS.md").read_text(encoding="utf-8")
+    assert "40 of the 122 questions" in claim
+    assert "20 widgets" in claim
+
+
 def test_templates_declare_what_the_customer_is_still_asked():
     """The point of a template is that the builder configures, not redesigns.
 

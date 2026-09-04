@@ -61,6 +61,8 @@ for code in G["part_order"]:
             chips.append(f'<span class="chip c">creates {esc(q["creates"]["kind"])}</span>')
         if q["feeds"]:
             chips.append('<span class="chip f">→ recurring ops</span>')
+        if q.get("widget"):
+            chips.append(f'<span class="chip v">👁 {esc(q["widget"])}</span>')
         done = f'<details><summary>done when</summary><code>{esc(json.dumps(q["done"]))}</code><div class="fills">fills ' + ", ".join(f"<code>{esc(f)}</code>" for f in q["fills"]) + "</div></details>" if SHOW_DONE_RULES else ""
         why = f'<p class="why">{esc(q["notes"])}</p>' if q["notes"] else ""
         body.append(f'<article class="q" id="{q["id"]}"><div class="id">{esc(q["id"])}</div><div class="main"><p class="prompt">{esc(q["prompt"])}</p>'
@@ -110,6 +112,7 @@ h1{{font-family:Archivo,sans-serif;font-weight:700;font-size:34px;letter-spacing
 .chips{{display:flex;flex-wrap:wrap;gap:6px}}
 .chip{{font-family:"IBM Plex Mono",monospace;font-size:11.5px;padding:2px 8px;border-radius:3px;background:var(--chip);color:var(--ink2)}}
 .chip.g{{color:var(--accent-ink)}} .chip.c,.chip.f{{color:var(--why);background:var(--whybg)}}
+.chip.v{{color:var(--accent-ink);background:var(--chip);outline:1px solid var(--accent)}}
 .why{{font-size:13px;color:var(--why);background:var(--whybg);padding:6px 10px;border-radius:3px;margin:8px 0 0;max-width:72ch}}
 details{{margin-top:6px;font-size:12.5px}} summary{{cursor:pointer;color:var(--ink2);font-family:"IBM Plex Mono",monospace}}
 code{{font-family:"IBM Plex Mono",monospace;font-size:12px;background:var(--code);padding:1px 5px;border-radius:3px;word-break:break-word}}

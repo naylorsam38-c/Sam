@@ -54,16 +54,33 @@ python assemble.py --combine templates/booking-frontdesk.json templates/accounti
                     --reconcile Customer=Contact -o out/
 ```
 
-## Regression-tested against, not just the happy path
+## Regression-tested against real data only
 
-`tests/test_assembly_engine.py` (repo root) runs this against all five
-requirements-engine templates — synthetically completed for the test only,
-via `fixtures/complete_for_test.py`, since a template's own `ask_customer`
-list is real and this script must run on real, complete answers — plus the
-combine/reconcile path, plus both refusal cases. Building and running that
-regression suite found and fixed three real bugs before anything downstream
-ever saw this script: a `roles_scoped` answer of `"nobody"` (a legal string,
-not a list) crashed the permissions derivation; `F.03`'s extra-field key is
+`tests/test_assembly_engine.py` (repo root) runs the derivations directly
+against the five requirements-engine templates exactly as shipped —
+reverse-engineered from real apps (Asana, Pipedrive, Acuity, Odoo, Xero),
+never completed or fabricated for the test — checking each derived value
+against the real recorded fact it must trace back to (a field's real
+declared type, a role's real recorded grant, a record's real relations).
+The two refusal paths are tested the same way validate_graph.py's and
+check_template.py's own `--selftest` prove their refuse-paths: a real
+template's real (non-empty) `ask_customer` list, and a deliberately invalid
+structure — never a fabricated stand-in for a real product. The combine path
+is tested against the real, unmodified booking-frontdesk and
+accounting-ledger templates, which on their own surface a real unresolved
+decision (accounting's super role stops being super once merged with
+booking's, and needs authority answers it never needed alone) — a
+consequence of a real merge, not a staged one.
+
+That discipline caught three real bugs before anything downstream ever saw
+this script: a `roles_scoped` answer of `"nobody"` (a legal string, not a
+list) crashed the permissions derivation; `F.03`'s extra-field key is
 `field`, not `name`; and `--reconcile` renamed an inventory list entry but
 missed the same record name referenced independently inside a link field's
-`target_record` and a relation's `target`.
+`target_record` and a relation's `target` — found by combining booking's and
+accounting's real Appointment/Contact data, not by inventing a scenario for it.
+
+No answer set that stands in for a real customer's decisions is ever
+fabricated here, including for testing. The only place a *complete* instance
+gets assembled end to end is against real answers — see component 8, built
+from Command Desk's own already-approved spec, never invented.

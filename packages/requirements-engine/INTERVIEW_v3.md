@@ -38,7 +38,7 @@ Conversational. The interviewer may ask these in any words; the script decides w
 <br>*Why: Dropped in the handoff's final pass. It appears on every screen and email; two builders would invent two names.*
 
 **A.06** — Where will people use it — in a web browser, as a phone app (iOS/Android), both, or as a desktop program?  
-<br>type: `multi` · options: `web`, `ios`, `android`, `desktop` · done when: `{"rule": "subset_min1", "options": ["web", "ios", "android", "desktop"]}` · fills: `client.platforms`
+<br>type: `multi` · options: `web`, `ios`, `android`, `desktop` · visual: `icon_multi` · done when: `{"rule": "subset_min1", "options": ["web", "ios", "android", "desktop"]}` · fills: `client.platforms`
 <br>*Why: Never asked in the handoff. The single biggest divergence between two builders.*
 
 **A.07** — Do people need to log in / have accounts?  
@@ -51,7 +51,7 @@ Conversational. The interviewer may ask these in any words; the script decides w
 <br>type: `yesno` · options: `yes`, `no` · done when: `{"rule": "one_of", "options": ["yes", "no"]}` · fills: `billing.required`
 
 **A.10** — Which parts, if any, can be seen without logging in? (e.g. a public landing page, a public booking form, nothing)  
-<br>type: `list` · asked if: A.07 = yes · done when: `{"rule": "min_items", "n": 0}` · fills: `client.public_surfaces`
+<br>type: `list` · asked if: A.07 = yes · visual: `screen_map` · done when: `{"rule": "min_items", "n": 0}` · fills: `client.public_surfaces`
 <br>*Why: 'Nothing' is a valid answer and must be recorded explicitly.*
 
 **A.11** — Do other systems need to push data into, or pull data out of, your app automatically (an API, webhooks)?  
@@ -68,7 +68,7 @@ Conversational. The interviewer may ask these in any words; the script decides w
 <br>type: `list` · done when: `{"rule": "min_items", "n": 0}` · fills: `deviation.flags` · creates: `{"kind": "deviation", "each": true}`
 
 **A.15** — Here's what I understood you'll need — screens, records, roles, forms, notifications, file types, reports, workflows, external systems. Did I miss anything, or get anything wrong? (confirm each list)  
-<br>type: `confirm` · done when: `{"rule": "confirmed_lists", "lists": ["screens", "records", "roles", "forms", "notifications", "file_types", "reports", "workflows", "integrations"]}` · fills: `inventory.screens`, `inventory.records`, `inventory.roles`, `inventory.forms`, `inventory.notifications`, `inventory.file_types`, `inventory.reports`, `inventory.workflows`, `inventory.integrations`
+<br>type: `confirm` · visual: `card_board` · done when: `{"rule": "confirmed_lists", "lists": ["screens", "records", "roles", "forms", "notifications", "file_types", "reports", "workflows", "integrations"]}` · fills: `inventory.screens`, `inventory.records`, `inventory.roles`, `inventory.forms`, `inventory.notifications`, `inventory.file_types`, `inventory.reports`, `inventory.workflows`, `inventory.integrations`
 <br>*Why: Engine proposes from A.01–A.04; owner corrects. Each confirmed item instantiates its part. Empty lists are allowed but must be confirmed empty.*
 
 **A.16** — Is there one role that can always do everything, no matter what? If so, which one?  
@@ -79,27 +79,27 @@ Conversational. The interviewer may ask these in any words; the script decides w
 ## Part C — Client — look, feel and navigation
 
 **C.01** — Are there other apps, brands or products whose look and feel you want this to resemble — or specifically avoid?  
-<br>type: `text` · done when: `{"rule": "non_empty_or_none"}` · fills: `visual.references`
+<br>type: `text` · visual: `style_board` · done when: `{"rule": "non_empty_or_none"}` · fills: `visual.references`
 
 **C.02** — In three words, how should this feel to use? (e.g. playful, fast, minimal / serious, trustworthy, dense)  
-<br>type: `list` · done when: `{"rule": "min_items", "n": 3}` · fills: `visual.tone`
+<br>type: `list` · visual: `chip_select` · done when: `{"rule": "min_items", "n": 3}` · fills: `visual.tone`
 
 **C.03** — How much should be visible at once — spacious and simple, balanced, or dense and information-rich?  
-<br>type: `choice` · options: `spacious`, `balanced`, `dense` · done when: `{"rule": "one_of", "options": ["spacious", "balanced", "dense"]}` · fills: `visual.density`
+<br>type: `choice` · options: `spacious`, `balanced`, `dense` · visual: `visual_abc` · done when: `{"rule": "one_of", "options": ["spacious", "balanced", "dense"]}` · fills: `visual.density`
 
 **C.04** — Is there a primary colour, logo or existing brand material to build from, or should that be designed for you?  
-<br>type: `structured` · done when: `{"rule": "structured", "keys": ["mode"], "one_of": {"mode": ["provided", "design_for_me"]}}` · fills: `visual.brand_assets`
+<br>type: `structured` · visual: `brand_kit` · done when: `{"rule": "structured", "keys": ["mode"], "one_of": {"mode": ["provided", "design_for_me"]}}` · fills: `visual.brand_assets`
 
 **C.05** — On phones, should it be a simplified version of the big-screen layout, or does anything need to work completely differently on mobile?  
-<br>type: `structured` · asked if: A.06 includes any of ['web', 'desktop'] · done when: `{"rule": "structured", "keys": ["mode"], "one_of": {"mode": ["simplified", "different"]}, "if": {"mode": "different", "then_keys": ["what"]}}` · fills: `client.mobile_behaviour`
+<br>type: `structured` · asked if: A.06 includes any of ['web', 'desktop'] · visual: `visual_abc` · done when: `{"rule": "structured", "keys": ["mode"], "one_of": {"mode": ["simplified", "different"]}, "if": {"mode": "different", "then_keys": ["what"]}}` · fills: `client.mobile_behaviour`
 <br>*Why: Only asked if there is a big-screen platform to simplify from.*
 
 **C.06** — After logging in, which screen does each role land on first?  
-<br>type: `structured` · asked if: A.07 = yes · done when: `{"rule": "map_complete", "keys_from": "inventory.roles", "values_from": "inventory.screens"}` · fills: `client.landing_screen_per_role`
+<br>type: `structured` · asked if: A.07 = yes · visual: `screen_picker` · done when: `{"rule": "map_complete", "keys_from": "inventory.roles", "values_from": "inventory.screens"}` · fills: `client.landing_screen_per_role`
 <br>*Why: Handoff classed 'what happens after login' as a system default. It is product-specific: dashboard vs list vs record. Two builders diverge.*
 
 **C.07** — Here is the main menu I'd build from your screens, in this order: [derived]. Reorder, rename or hide anything?  
-<br>type: `confirm` · done when: `{"rule": "confirmed"}` · fills: `client.navigation`
+<br>type: `confirm` · visual: `drag_order` · done when: `{"rule": "confirmed"}` · fills: `client.navigation`
 
 
 ## Part AU — Auth
@@ -107,16 +107,16 @@ Conversational. The interviewer may ask these in any words; the script decides w
 *(asked only if A.07 = yes)*
 
 **AU.01** — How do people get an account — sign up themselves publicly, get invited by someone, or get created by an admin? (any that apply)  
-<br>type: `multi` · options: `public`, `invited`, `admin_created` · done when: `{"rule": "subset_min1", "options": ["public", "invited", "admin_created"]}` · fills: `auth.registration_modes`
+<br>type: `multi` · options: `public`, `invited`, `admin_created` · visual: `icon_multi` · done when: `{"rule": "subset_min1", "options": ["public", "invited", "admin_created"]}` · fills: `auth.registration_modes`
 
 **AU.02** — What information do you need from someone when they register? (each item: what it is, and is it required)  
-<br>type: `structured` · done when: `{"rule": "fields_list", "min": 1, "type_options": "FIELD_TYPES"}` · fills: `auth.registration_fields`
+<br>type: `structured` · visual: `form_builder` · done when: `{"rule": "fields_list", "min": 1, "type_options": "FIELD_TYPES"}` · fills: `auth.registration_fields`
 
 **AU.03** — Must they verify their email address before they can use the app?  
 <br>type: `yesno` · options: `yes`, `no` · done when: `{"rule": "one_of", "options": ["yes", "no"]}` · fills: `auth.email_verification`
 
 **AU.04** — Which login methods? (any that apply)  
-<br>type: `multi` · options: `password`, `google`, `microsoft`, `apple`, `magic_link` · done when: `{"rule": "subset_min1", "options": ["password", "google", "microsoft", "apple", "magic_link"]}` · fills: `auth.methods`
+<br>type: `multi` · options: `password`, `google`, `microsoft`, `apple`, `magic_link` · visual: `login_preview` · done when: `{"rule": "subset_min1", "options": ["password", "google", "microsoft", "apple", "magic_link"]}` · fills: `auth.methods`
 
 **AU.05** — When someone signs up by themselves, which role do they get?  
 <br>type: `choice` · options: `<a confirmed role>` · asked if: AU.01 includes public · done when: `{"rule": "role"}` · fills: `auth.default_role`
@@ -183,37 +183,37 @@ Once per confirmed role, except the super role from A.16. Authority over specifi
 <br>type: `text` · done when: `{"rule": "non_empty"}` · fills: `record.{r}.purpose`
 
 **R.02** — What information does a '${record}' store? For each item: what kind is it, is it required, must it be unique, and (for a list choice) what are the options / (for a link) which record does it link to?  
-<br>type: `structured` · done when: `{"rule": "fields_list", "min": 1, "type_options": "FIELD_TYPES", "per_field_required_keys": ["name", "type", "required", "unique"], "per_field_conditional": {"one_choice": ["options"], "multi_choice": ["options"], "link": ["target_record"], "other": ["custom_rule"]}}` · fills: `record.{r}.fields`
+<br>type: `structured` · visual: `form_builder` · done when: `{"rule": "fields_list", "min": 1, "type_options": "FIELD_TYPES", "per_field_required_keys": ["name", "type", "required", "unique"], "per_field_conditional": {"one_choice": ["options"], "multi_choice": ["options"], "link": ["target_record"], "other": ["custom_rule"]}}` · fills: `record.{r}.fields`
 <br>*Why: Handoff never asked for choice options, uniqueness, or the link target. Each one makes two builders diverge.*
 
 **R.03** — Which of those fields is the '${record}'s name — the thing shown in lists, links and messages?  
-<br>type: `choice` · options: `<a field from R.02>` · done when: `{"rule": "field_of", "from": "R.02"}` · fills: `record.{r}.title_field`
+<br>type: `choice` · options: `<a field from R.02>` · visual: `tap_on_preview` · done when: `{"rule": "field_of", "from": "R.02"}` · fills: `record.{r}.title_field`
 
 **R.04** — Does a '${record}' need a human-readable number or code (like INV-0001)? If so, what format?  
 <br>type: `structured` · done when: `{"rule": "structured", "keys": ["needed"], "if": {"needed": "yes", "then_keys": ["format"]}}` · fills: `record.{r}.human_id`
 
 **R.05** — Who can VIEW a '${record}'? For each role: all of them, only their own, only ones linked to something they belong to (say what), or public (no login)?  
-<br>type: `roles_scoped` · done when: `{"rule": "roles_scoped_min1", "scopes": ["all", "own", "linked", "public"], "if_scope": {"linked": ["via"]}}` · fills: `record.{r}.access.view`
+<br>type: `roles_scoped` · visual: `access_matrix` · done when: `{"rule": "roles_scoped_min1", "scopes": ["all", "own", "linked", "public"], "if_scope": {"linked": ["via"]}}` · fills: `record.{r}.access.view`
 <br>*Why: The handoff's audit resolved the Manager example with a 'their team' scope, then the interview only offered all/own. 'linked' restores it and must name the relation.*
 
 **R.06** — Who can CREATE a '${record}'?  
-<br>type: `roles` · done when: `{"rule": "roles_min1"}` · fills: `record.{r}.access.create`
+<br>type: `roles` · visual: `access_matrix` · done when: `{"rule": "roles_min1"}` · fills: `record.{r}.access.create`
 
 **R.07** — Who can EDIT a '${record}'? For each role: any, only their own, or only linked ones?  
-<br>type: `roles_scoped` · done when: `{"rule": "roles_scoped_min1", "scopes": ["all", "own", "linked"], "if_scope": {"linked": ["via"]}}` · fills: `record.{r}.access.edit`
+<br>type: `roles_scoped` · visual: `access_matrix` · done when: `{"rule": "roles_scoped_min1", "scopes": ["all", "own", "linked"], "if_scope": {"linked": ["via"]}}` · fills: `record.{r}.access.edit`
 
 **R.08** — Who can DELETE a '${record}'? For each role: any, only their own, or only linked ones? ('nobody' is valid)  
-<br>type: `roles_scoped` · done when: `{"rule": "roles_scoped_min1", "scopes": ["all", "own", "linked"], "if_scope": {"linked": ["via"]}, "or_value": "nobody"}` · fills: `record.{r}.access.delete`
+<br>type: `roles_scoped` · visual: `access_matrix` · done when: `{"rule": "roles_scoped_min1", "scopes": ["all", "own", "linked"], "if_scope": {"linked": ["via"]}, "or_value": "nobody"}` · fills: `record.{r}.access.delete`
 
 **R.09** — What makes a '${record}' someone's OWN — the person who created it, or the person named in a particular field (which one)?  
 <br>type: `structured` · asked if: R.05 has scope own or R.07 has scope own or R.08 has scope own · done when: `{"rule": "structured", "keys": ["basis"], "one_of": {"basis": ["creator", "field"]}, "if": {"basis": "field", "then_keys": ["field"]}}` · fills: `record.{r}.ownership_rule`
 <br>*Why: Never asked in the handoff. created_by vs assigned_to is the classic two-builder split.*
 
 **R.10** — Does a '${record}' move through stages over its life (e.g. Draft → Active → Archived)? If so, name them in order.  
-<br>type: `structured` · done when: `{"rule": "structured", "keys": ["has"], "if": {"has": "yes", "then_keys": ["stages"]}}` · fills: `record.{r}.has_lifecycle` · creates: `{"kind": "workflow", "name": "${record} lifecycle", "when": "yes"}`
+<br>type: `structured` · visual: `pipeline_editor` · done when: `{"rule": "structured", "keys": ["has"], "if": {"has": "yes", "then_keys": ["stages"]}}` · fills: `record.{r}.has_lifecycle` · creates: `{"kind": "workflow", "name": "${record} lifecycle", "when": "yes"}`
 
 **R.11** — Is a '${record}' connected to any other record? For each: which record, is it one-to-many or many-to-many, and must the link always exist?  
-<br>type: `structured` · done when: `{"rule": "relations_list", "min": 0, "keys": ["target", "cardinality", "required"], "one_of": {"cardinality": ["one_to_many", "many_to_many"]}}` · fills: `record.{r}.relations`
+<br>type: `structured` · visual: `link_diagram` · done when: `{"rule": "relations_list", "min": 0, "keys": ["target", "cardinality", "required"], "one_of": {"cardinality": ["one_to_many", "many_to_many"]}}` · fills: `record.{r}.relations`
 
 **R.12** — When a '${record}' is deleted, what happens to the things connected to it — deleted too, kept but unlinked, or deletion blocked until they're dealt with?  
 <br>type: `choice` · options: `delete_too`, `keep_unlinked`, `block` · asked if: R.11 has at least 1 · done when: `{"rule": "one_of", "options": ["delete_too", "keep_unlinked", "block"]}` · fills: `record.{r}.on_delete`
@@ -225,7 +225,7 @@ Once per confirmed role, except the super role from A.16. Authority over specifi
 <br>type: `duration` · done when: `{"rule": "duration_or_forever"}` · fills: `record.{r}.retention` · feeds: OPS
 
 **R.15** — Besides create/edit/delete and moving through stages, are there any other buttons people need on a '${record}' (e.g. duplicate, send, print, mark as paid)? For each: who can press it, what it does, and where the result shows up.  
-<br>type: `structured` · done when: `{"rule": "actions_list", "min": 0, "keys": ["name", "who", "effect", "result_location"], "roles_keys": ["who"]}` · fills: `record.{r}.custom_actions`
+<br>type: `structured` · visual: `tap_on_preview` · done when: `{"rule": "actions_list", "min": 0, "keys": ["name", "who", "effect", "result_location"], "roles_keys": ["who"]}` · fills: `record.{r}.custom_actions`
 <br>*Why: This is where every non-CRUD button gets its number. Handoff derived all actions from CRUD + transitions, so 'Duplicate' could never exist.*
 
 
@@ -237,17 +237,17 @@ Once per confirmed role, except the super role from A.16. Authority over specifi
 <br>type: `structured` · done when: `{"rule": "structured", "keys": ["purpose", "fillers"], "roles_keys": ["fillers"]}` · fills: `form.{f}.purpose`, `form.{f}.fillers`
 
 **F.02** — Which record does it create or edit? And does it collect anything that is NOT stored on that record? (list those extra items with their kind)  
-<br>type: `structured` · done when: `{"rule": "structured", "keys": ["target"], "optional_keys": ["extra_fields"], "fields_list_key": "extra_fields"}` · fills: `form.{f}.target_record`, `form.{f}.extra_fields`
+<br>type: `structured` · visual: `form_builder` · done when: `{"rule": "structured", "keys": ["target"], "optional_keys": ["extra_fields"], "fields_list_key": "extra_fields"}` · fills: `form.{f}.target_record`, `form.{f}.extra_fields`
 
 **F.03** — Does any field only appear depending on another answer? (which field, depends on which answer)  
-<br>type: `structured` · done when: `{"rule": "conditional_list", "min": 0, "keys": ["field", "shown_when"]}` · fills: `form.{f}.conditional_fields`
+<br>type: `structured` · visual: `form_builder` · done when: `{"rule": "conditional_list", "min": 0, "keys": ["field", "shown_when"]}` · fills: `form.{f}.conditional_fields`
 <br>*Why: Handoff classified this as 'asked only if the owner indicates' but had no prompt that could surface it.*
 
 **F.04** — Can someone save it as a draft and finish later?  
 <br>type: `yesno` · options: `yes`, `no` · done when: `{"rule": "one_of", "options": ["yes", "no"]}` · fills: `form.{f}.draft_save`
 
 **F.05** — Right after a successful submit, where should they end up?  
-<br>type: `choice` · options: `open_the_record`, `back_to_list`, `stay_with_message`, `another_screen` · done when: `{"rule": "one_of", "if_value": {"another_screen": ["screen"]}, "options": ["open_the_record", "back_to_list", "stay_with_message", "another_screen"]}` · fills: `form.{f}.on_success`
+<br>type: `choice` · options: `open_the_record`, `back_to_list`, `stay_with_message`, `another_screen` · visual: `visual_abc` · done when: `{"rule": "one_of", "if_value": {"another_screen": ["screen"]}, "options": ["open_the_record", "back_to_list", "stay_with_message", "another_screen"]}` · fills: `form.{f}.on_success`
 
 
 ## Part FI — Files
@@ -264,7 +264,7 @@ Once per confirmed role, except the super role from A.16. Authority over specifi
 <br>type: `structured` · done when: `{"rule": "structured", "keys": ["uploaders", "viewers"], "roles_keys": ["uploaders", "viewers"]}` · fills: `file.{ft}.uploaders`, `file.{ft}.viewers`
 
 **FI.04** — What kind of file — image, document, spreadsheet, video/audio, or something else (say which formats)?  
-<br>type: `choice` · options: `image`, `document`, `spreadsheet`, `media`, `other` · done when: `{"rule": "one_of", "if_value": {"other": ["formats"]}, "options": ["image", "document", "spreadsheet", "media", "other"]}` · fills: `file.{ft}.category`
+<br>type: `choice` · options: `image`, `document`, `spreadsheet`, `media`, `other` · visual: `icon_pick` · done when: `{"rule": "one_of", "if_value": {"other": ["formats"]}, "options": ["image", "document", "spreadsheet", "media", "other"]}` · fills: `file.{ft}.category`
 
 **FI.05** — Roughly how large might these get? (e.g. 10 MB, 500 MB)  
 <br>type: `number` · done when: `{"rule": "number"}` · fills: `file.{ft}.max_size_mb`
@@ -286,33 +286,33 @@ Once per confirmed workflow, including every record lifecycle from R.10. Integra
 <br>type: `structured` · done when: `{"rule": "structured", "keys": ["kind"], "one_of": {"kind": ["person", "event", "schedule"]}, "if_any": {"person": ["who", "action"], "event": ["event"], "schedule": ["schedule"]}, "roles_keys": ["who"]}` · fills: `workflow.{w}.trigger` · feeds: OPS
 
 **FL.02** — What are its stages, in order? Which is the starting stage, and which stage(s) mean it's finished?  
-<br>type: `structured` · done when: `{"rule": "stages", "min": 2, "keys": ["stages", "initial", "terminal"]}` · fills: `workflow.{w}.stages`
+<br>type: `structured` · visual: `pipeline_editor` · done when: `{"rule": "stages", "min": 2, "keys": ["stages", "initial", "terminal"]}` · fills: `workflow.{w}.stages`
 
 **FL.03** — For each move from one stage to the next: is it done by a person (which roles) or does it happen automatically when something happens (what)?  
-<br>type: `structured` · done when: `{"rule": "per_transition", "keys": ["from", "to", "mover"], "mover_one_of": ["roles", "automatic"], "if_mover": {"roles": ["roles"], "automatic": ["event"]}}` · fills: `workflow.{w}.transitions`
+<br>type: `structured` · visual: `pipeline_editor` · done when: `{"rule": "per_transition", "keys": ["from", "to", "mover"], "mover_one_of": ["roles", "automatic"], "if_mover": {"roles": ["roles"], "automatic": ["event"]}}` · fills: `workflow.{w}.transitions`
 <br>*Why: Handoff only allowed a person as mover. 'Order becomes Paid when payment arrives' had no home.*
 
 **FL.04** — Must anything be true before a move is allowed (e.g. can't ship without an address)? For each move: the condition, or none.  
 <br>type: `structured` · done when: `{"rule": "per_transition_optional", "keys": ["from", "to", "condition"]}` · fills: `workflow.{w}.preconditions`
 
 **FL.05** — Does any stage need someone's approval before it can move on? Which stage, and which roles approve?  
-<br>type: `structured` · done when: `{"rule": "approvals_list", "min": 0, "keys": ["stage", "approvers"], "roles_keys": ["approvers"]}` · fills: `workflow.{w}.approvals`
+<br>type: `structured` · visual: `pipeline_editor` · done when: `{"rule": "approvals_list", "min": 0, "keys": ["stage", "approvers"], "roles_keys": ["approvers"]}` · fills: `workflow.{w}.approvals`
 
 **FL.06** — If an approver says no, which stage does it go back to, and can it be resubmitted?  
-<br>type: `structured` · asked if: FL.05 has at least 1 · done when: `{"rule": "structured", "keys": ["back_to", "resubmit"]}` · fills: `workflow.{w}.on_reject`
+<br>type: `structured` · asked if: FL.05 has at least 1 · visual: `pipeline_editor` · done when: `{"rule": "structured", "keys": ["back_to", "resubmit"]}` · fills: `workflow.{w}.on_reject`
 <br>*Why: Handoff locked 'standard advance/revert' as a default. Back to previous vs back to start vs terminal Rejected are three different products.*
 
 **FL.07** — Can it be cancelled? By whom, and from which stages?  
-<br>type: `structured` · done when: `{"rule": "structured", "keys": ["allowed"], "if": {"allowed": "yes", "then_keys": ["by", "from_stages"]}, "roles_keys": ["by"]}` · fills: `workflow.{w}.cancel`
+<br>type: `structured` · visual: `pipeline_editor` · done when: `{"rule": "structured", "keys": ["allowed"], "if": {"allowed": "yes", "then_keys": ["by", "from_stages"]}, "roles_keys": ["by"]}` · fills: `workflow.{w}.cancel`
 
 **FL.08** — Once it reaches a finished stage, what should happen? (e.g. nothing, lock it, send something, create something)  
 <br>type: `text` · done when: `{"rule": "non_empty"}` · fills: `workflow.{w}.on_complete`
 
 **FL.09** — From which stage onward, if any, should the record become read-only?  
-<br>type: `choice` · options: `<a stage>`, `never` · done when: `{"rule": "stage_or_never", "from": "FL.02"}` · fills: `workflow.{w}.readonly_from`
+<br>type: `choice` · options: `<a stage>`, `never` · visual: `tap_on_preview` · done when: `{"rule": "stage_or_never", "from": "FL.02"}` · fills: `workflow.{w}.readonly_from`
 
 **FL.10** — Does any stage have a time limit? Which stage, how long, and what happens when it runs out?  
-<br>type: `structured` · done when: `{"rule": "timeouts_list", "min": 0, "keys": ["stage", "duration", "then"]}` · fills: `workflow.{w}.timeouts` · feeds: OPS
+<br>type: `structured` · visual: `pipeline_editor` · done when: `{"rule": "timeouts_list", "min": 0, "keys": ["stage", "duration", "then"]}` · fills: `workflow.{w}.timeouts` · feeds: OPS
 
 **FL.11** — Should anyone be told when it moves stage? Which moves, who, and by which channel?  
 <br>type: `structured` · done when: `{"rule": "notify_list", "min": 0, "keys": ["transition", "recipients", "channels"]}` · fills: `workflow.{w}.stage_notifications` · creates: `{"kind": "notification", "each": true}`
@@ -352,7 +352,7 @@ Once per confirmed external system (incl. 'Public API' if A.11 = yes).
 <br>type: `roles` · done when: `{"rule": "roles_min1"}` · fills: `report.{rp}.viewers`
 
 **RP.03** — Is it a live screen in the app, a downloadable document, or both? And shown as a table, a chart, or both?  
-<br>type: `structured` · done when: `{"rule": "structured", "keys": ["delivery", "shape"], "one_of": {"delivery": ["screen", "document", "both"], "shape": ["table", "chart", "both"]}}` · fills: `report.{rp}.form`
+<br>type: `structured` · visual: `visual_abc` · done when: `{"rule": "structured", "keys": ["delivery", "shape"], "one_of": {"delivery": ["screen", "document", "both"], "shape": ["table", "chart", "both"]}}` · fills: `report.{rp}.form`
 
 **RP.04** — What numbers/metrics does it show? (list them)  
 <br>type: `list` · done when: `{"rule": "min_items", "n": 1}` · fills: `report.{rp}.metrics`
@@ -362,7 +362,7 @@ Once per confirmed external system (incl. 'Public API' if A.11 = yes).
 <br>*Why: Fires once per metric whose name contains a flagged term. Unanswered = build blocked, never defaulted.*
 
 **RP.06** — What should it be filterable or grouped by, and what date range should it show by default?  
-<br>type: `structured` · done when: `{"rule": "structured", "keys": ["filters", "default_range"]}` · fills: `report.{rp}.filters`, `report.{rp}.default_range`
+<br>type: `structured` · visual: `report_mockup` · done when: `{"rule": "structured", "keys": ["filters", "default_range"]}` · fills: `report.{rp}.filters`, `report.{rp}.default_range`
 
 **RP.07** — Can it be exported? By whom?  
 <br>type: `structured` · done when: `{"rule": "structured", "keys": ["allowed"], "if": {"allowed": "yes", "then_keys": ["by"]}, "roles_keys": ["by"]}` · fills: `report.{rp}.export`
@@ -384,10 +384,10 @@ Once per confirmed notification, including those created by FL.11 and RP.08 (tho
 <br>type: `structured` · done when: `{"rule": "recipients", "min": 1, "kinds": ["roles", "owner", "field", "custom"]}` · fills: `notification.{n}.recipients`
 
 **N.03** — Which channels — email, SMS, push, in-app? (any)  
-<br>type: `multi` · options: `email`, `sms`, `push`, `in_app` · done when: `{"rule": "subset_min1", "options": ["email", "sms", "push", "in_app"]}` · fills: `notification.{n}.channels`
+<br>type: `multi` · options: `email`, `sms`, `push`, `in_app` · visual: `icon_multi` · done when: `{"rule": "subset_min1", "options": ["email", "sms", "push", "in_app"]}` · fills: `notification.{n}.channels`
 
 **N.04** — What should the recipient understand or do after reading it? (exact wording is drafted at build time and sent to you to approve)  
-<br>type: `text` · done when: `{"rule": "non_empty"}` · fills: `notification.{n}.intent`
+<br>type: `text` · visual: `message_preview` · done when: `{"rule": "non_empty"}` · fills: `notification.{n}.intent`
 
 **N.05** — Can the recipient switch this one off?  
 <br>type: `yesno` · options: `yes`, `no` · done when: `{"rule": "one_of", "options": ["yes", "no"]}` · fills: `notification.{n}.opt_out`
@@ -404,7 +404,7 @@ Once per confirmed notification, including those created by FL.11 and RP.08 (tho
 <br>type: `choice` · options: `person`, `organisation` · done when: `{"rule": "one_of", "options": ["person", "organisation"]}` · fills: `billing.charged_party`
 
 **B.03** — List your plans. For each: name, price, how often it's billed, what's included, and any limits. Is there a free plan?  
-<br>type: `structured` · done when: `{"rule": "plans_list", "min": 1, "keys": ["name", "price", "interval", "included", "limits"]}` · fills: `billing.plans`
+<br>type: `structured` · visual: `pricing_builder` · done when: `{"rule": "plans_list", "min": 1, "keys": ["name", "price", "interval", "included", "limits"]}` · fills: `billing.plans`
 
 **B.04** — What currency do you bill in?  
 <br>type: `text` · done when: `{"rule": "iso_currency"}` · fills: `billing.currency`
@@ -480,10 +480,10 @@ Generated by the script from earlier answers. The owner confirms or corrects; no
 <br>*Why: This is the recurring-ops namespace. Each item gets its own OPS-nnn id.*
 
 **Z.02** — Here is every numbered button/action in the app and where its result lands: [derived]. Correct?  
-<br>type: `confirm` · done when: `{"rule": "confirmed"}` · fills: `actions.inventory`
+<br>type: `confirm` · visual: `wireframe_walkthrough` · done when: `{"rule": "confirmed"}` · fills: `actions.inventory`
 
 **Z.03** — Here is every screen, who can open it, and what it shows: [derived]. Correct?  
-<br>type: `confirm` · done when: `{"rule": "confirmed"}` · fills: `screens.inventory`
+<br>type: `confirm` · visual: `wireframe_walkthrough` · done when: `{"rule": "confirmed"}` · fills: `screens.inventory`
 
 
 ## Field types (closed list for R.02 / AU.02 / F.02)

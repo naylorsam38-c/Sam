@@ -58,7 +58,29 @@
       "file",
       "link",
       "other"
-    ]
+    ],
+    "widget_vocab": {
+      "icon_multi": "tap device/channel/category icons; each shows a small rendered sample",
+      "icon_pick": "tap one icon from a small set",
+      "style_board": "board of labelled app-style screenshots; tap to like or avoid (credit the shown apps on the tile)",
+      "chip_select": "tap word chips from a curated vocabulary; free-type to add",
+      "visual_abc": "2-4 rendered mockups of the same thing; tap the one you mean",
+      "brand_kit": "logo upload + colour picker with a live header preview",
+      "screen_picker": "tap a screen thumbnail per role",
+      "screen_map": "map of all screens; tap a lock to make one public/private",
+      "drag_order": "drag items to reorder a live preview (menu, columns)",
+      "card_board": "editable cards per inventory list; tap to remove, type to add",
+      "form_builder": "live form preview that rebuilds as fields are added/typed/reordered; conditional fields toggle live",
+      "tap_on_preview": "answer by tapping the element on a rendered mockup (title field, lock stage, button placement)",
+      "access_matrix": "roles x verbs grid with per-cell scope; renders a see-it-as-that-role sample underneath",
+      "pipeline_editor": "stages as draggable pills; draw arrows for moves; badges for approval/timeout; tap an arrow to set who moves it",
+      "link_diagram": "record cards on a canvas; drag a line between two to declare the relationship",
+      "login_preview": "live sign-in screen; toggling a method adds/removes its button",
+      "message_preview": "rendered sample message per channel (email/SMS bubble/push banner); edit intent under it",
+      "report_mockup": "rendered report with toggleable filter chips and a date-range control",
+      "pricing_builder": "plan cards edited in place on a live pricing-page preview",
+      "wireframe_walkthrough": "clickable wireframe of every screen; every numbered button present; tap through and confirm"
+    }
   },
   "parts": [
     {
@@ -221,7 +243,8 @@
       "feeds": [],
       "notes": "Sets how many derived/defaulted values are read back for confirmation. Never changes the spec's content.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.01",
@@ -243,7 +266,8 @@
       "feeds": [],
       "notes": "Done only when at least one record noun can be extracted. Feeds the A.15 inventory proposal.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.02",
@@ -262,7 +286,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.03",
@@ -281,7 +306,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.04",
@@ -300,7 +326,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.05",
@@ -319,7 +346,8 @@
       "feeds": [],
       "notes": "Dropped in the handoff's final pass. It appears on every screen and email; two builders would invent two names.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.06",
@@ -349,7 +377,8 @@
       "feeds": [],
       "notes": "Never asked in the handoff. The single biggest divergence between two builders.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "icon_multi"
     },
     {
       "id": "A.07",
@@ -375,7 +404,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.08",
@@ -401,7 +431,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.09",
@@ -427,7 +458,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.10",
@@ -451,7 +483,8 @@
       "feeds": [],
       "notes": "'Nothing' is a valid answer and must be recorded explicitly.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "screen_map"
     },
     {
       "id": "A.11",
@@ -481,7 +514,8 @@
         "kind": "integration",
         "name": "Public API",
         "when": "yes"
-      }
+      },
+      "widget": null
     },
     {
       "id": "A.12",
@@ -510,7 +544,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.13",
@@ -534,7 +569,8 @@
       "feeds": [],
       "notes": "Drives date/number/currency display format and default timezone. Never asked in the handoff.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "A.14",
@@ -557,7 +593,8 @@
       "creates": {
         "kind": "deviation",
         "each": true
-      }
+      },
+      "widget": null
     },
     {
       "id": "A.15",
@@ -595,7 +632,8 @@
       "feeds": [],
       "notes": "Engine proposes from A.01–A.04; owner corrects. Each confirmed item instantiates its part. Empty lists are allowed but must be confirmed empty.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "card_board"
     },
     {
       "id": "A.16",
@@ -621,7 +659,8 @@
       "feeds": [],
       "notes": "That role is skipped in every per-record/per-workflow authority question and granted everything. Removes dozens of repeat answers.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "C.01",
@@ -640,7 +679,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "style_board"
     },
     {
       "id": "C.02",
@@ -660,7 +700,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "chip_select"
     },
     {
       "id": "C.03",
@@ -688,7 +729,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "visual_abc"
     },
     {
       "id": "C.04",
@@ -716,7 +758,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "brand_kit"
     },
     {
       "id": "C.05",
@@ -757,7 +800,8 @@
       "feeds": [],
       "notes": "Only asked if there is a big-screen platform to simplify from.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "visual_abc"
     },
     {
       "id": "C.06",
@@ -782,7 +826,8 @@
       "feeds": [],
       "notes": "Handoff classed 'what happens after login' as a system default. It is product-specific: dashboard vs list vs record. Two builders diverge.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "screen_picker"
     },
     {
       "id": "C.07",
@@ -801,7 +846,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "drag_order"
     },
     {
       "id": "AU.01",
@@ -829,7 +875,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "icon_multi"
     },
     {
       "id": "AU.02",
@@ -850,7 +897,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "form_builder"
     },
     {
       "id": "AU.03",
@@ -876,7 +924,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "AU.04",
@@ -908,7 +957,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "login_preview"
     },
     {
       "id": "AU.05",
@@ -933,7 +983,8 @@
       "feeds": [],
       "notes": "Never asked in the handoff. Without it one builder makes new signups Members, another makes them Admins.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "AU.06",
@@ -965,7 +1016,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "AU.07",
@@ -1008,7 +1060,8 @@
       "feeds": [],
       "notes": "Handoff's classification said MFA method stays a closed question; the final interview lost it.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "AU.08",
@@ -1033,7 +1086,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "AU.09",
@@ -1059,7 +1113,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "AU.10",
@@ -1078,7 +1133,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "AU.11",
@@ -1112,7 +1168,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "AU.12",
@@ -1155,7 +1212,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "AU.13",
@@ -1174,7 +1232,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "AU.14",
@@ -1209,7 +1268,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "P.00",
@@ -1235,7 +1295,8 @@
       "feeds": [],
       "notes": "Asked once, not per role. Decides single-select vs multi-select role assignment — a visible difference.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "P.01",
@@ -1254,7 +1315,8 @@
       "feeds": [],
       "notes": "Context only. Never a build-spec source by itself.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "P.02",
@@ -1280,7 +1342,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "P.03",
@@ -1310,7 +1373,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "P.04",
@@ -1329,7 +1393,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "R.01",
@@ -1348,7 +1413,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "R.02",
@@ -1389,7 +1455,8 @@
       "feeds": [],
       "notes": "Handoff never asked for choice options, uniqueness, or the link target. Each one makes two builders diverge.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "form_builder"
     },
     {
       "id": "R.03",
@@ -1411,7 +1478,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "tap_on_preview"
     },
     {
       "id": "R.04",
@@ -1439,7 +1507,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "R.05",
@@ -1469,7 +1538,8 @@
       "feeds": [],
       "notes": "The handoff's audit resolved the Manager example with a 'their team' scope, then the interview only offered all/own. 'linked' restores it and must name the relation.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "access_matrix"
     },
     {
       "id": "R.06",
@@ -1488,7 +1558,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "access_matrix"
     },
     {
       "id": "R.07",
@@ -1517,7 +1588,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "access_matrix"
     },
     {
       "id": "R.08",
@@ -1547,7 +1619,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "access_matrix"
     },
     {
       "id": "R.09",
@@ -1599,7 +1672,8 @@
       "feeds": [],
       "notes": "Never asked in the handoff. created_by vs assigned_to is the classic two-builder split.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "R.10",
@@ -1631,7 +1705,8 @@
         "kind": "workflow",
         "name": "${record} lifecycle",
         "when": "yes"
-      }
+      },
+      "widget": "pipeline_editor"
     },
     {
       "id": "R.11",
@@ -1662,7 +1737,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "link_diagram"
     },
     {
       "id": "R.12",
@@ -1694,7 +1770,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "R.13",
@@ -1720,7 +1797,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "R.14",
@@ -1741,7 +1819,8 @@
       ],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "R.15",
@@ -1770,7 +1849,8 @@
       "feeds": [],
       "notes": "This is where every non-CRUD button gets its number. Handoff derived all actions from CRUD + transitions, so 'Duplicate' could never exist.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "tap_on_preview"
     },
     {
       "id": "F.01",
@@ -1797,7 +1877,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "F.02",
@@ -1824,7 +1905,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "form_builder"
     },
     {
       "id": "F.03",
@@ -1848,7 +1930,8 @@
       "feeds": [],
       "notes": "Handoff classified this as 'asked only if the owner indicates' but had no prompt that could surface it.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "form_builder"
     },
     {
       "id": "F.04",
@@ -1874,7 +1957,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "F.05",
@@ -1909,7 +1993,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "visual_abc"
     },
     {
       "id": "FI.01",
@@ -1933,7 +2018,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FI.02",
@@ -1959,7 +2045,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FI.03",
@@ -1987,7 +2074,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FI.04",
@@ -2024,7 +2112,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "icon_pick"
     },
     {
       "id": "FI.05",
@@ -2043,7 +2132,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FI.06",
@@ -2069,7 +2159,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FI.07",
@@ -2095,7 +2186,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FL.01",
@@ -2141,7 +2233,8 @@
       ],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FL.02",
@@ -2166,7 +2259,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "pipeline_editor"
     },
     {
       "id": "FL.03",
@@ -2202,7 +2296,8 @@
       "feeds": [],
       "notes": "Handoff only allowed a person as mover. 'Order becomes Paid when payment arrives' had no home.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "pipeline_editor"
     },
     {
       "id": "FL.04",
@@ -2226,7 +2321,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FL.05",
@@ -2253,7 +2349,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "pipeline_editor"
     },
     {
       "id": "FL.06",
@@ -2280,7 +2377,8 @@
       "feeds": [],
       "notes": "Handoff locked 'standard advance/revert' as a default. Back to previous vs back to start vs terminal Rejected are three different products.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "pipeline_editor"
     },
     {
       "id": "FL.07",
@@ -2312,7 +2410,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "pipeline_editor"
     },
     {
       "id": "FL.08",
@@ -2331,7 +2430,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FL.09",
@@ -2354,7 +2454,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "tap_on_preview"
     },
     {
       "id": "FL.10",
@@ -2381,7 +2482,8 @@
       ],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "pipeline_editor"
     },
     {
       "id": "FL.11",
@@ -2409,7 +2511,8 @@
       "creates": {
         "kind": "notification",
         "each": true
-      }
+      },
+      "widget": null
     },
     {
       "id": "FLX.01",
@@ -2428,7 +2531,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FLX.02",
@@ -2452,7 +2556,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FLX.03",
@@ -2494,7 +2599,8 @@
       ],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FLX.04",
@@ -2520,7 +2626,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "FLX.05",
@@ -2548,7 +2655,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "N.01",
@@ -2592,7 +2700,8 @@
       ],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "N.02",
@@ -2618,7 +2727,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "N.03",
@@ -2648,7 +2758,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "icon_multi"
     },
     {
       "id": "N.04",
@@ -2667,7 +2778,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "message_preview"
     },
     {
       "id": "N.05",
@@ -2693,7 +2805,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "RP.01",
@@ -2712,7 +2825,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "RP.02",
@@ -2731,7 +2845,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "RP.03",
@@ -2766,7 +2881,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "visual_abc"
     },
     {
       "id": "RP.04",
@@ -2786,7 +2902,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "RP.05",
@@ -2809,7 +2926,8 @@
       "feeds": [],
       "notes": "Fires once per metric whose name contains a flagged term. Unanswered = build blocked, never defaulted.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "RP.06",
@@ -2833,7 +2951,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "report_mockup"
     },
     {
       "id": "RP.07",
@@ -2864,7 +2983,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "RP.08",
@@ -2899,7 +3019,8 @@
         "kind": "notification",
         "name": "${report} scheduled delivery",
         "when": "yes"
-      }
+      },
+      "widget": null
     },
     {
       "id": "B.01",
@@ -2927,7 +3048,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "B.02",
@@ -2953,7 +3075,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "B.03",
@@ -2980,7 +3103,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "pricing_builder"
     },
     {
       "id": "B.04",
@@ -2999,7 +3123,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "B.05",
@@ -3034,7 +3159,8 @@
       ],
       "notes": "Never asked in the handoff.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "B.06",
@@ -3062,7 +3188,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "B.07",
@@ -3088,7 +3215,8 @@
       "feeds": [],
       "notes": "Locked as 'card via gateway' in the handoff. Pay-by-invoice changes the product (manual reconciliation, dunning), so it is asked.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "B.08",
@@ -3120,7 +3248,8 @@
       ],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "B.09",
@@ -3158,7 +3287,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "B.10",
@@ -3191,7 +3321,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "B.11",
@@ -3222,7 +3353,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "T.01",
@@ -3248,7 +3380,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "T.02",
@@ -3274,7 +3407,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "T.03",
@@ -3295,7 +3429,8 @@
       "feeds": [],
       "notes": "Never asked in the handoff. Without it, no builder knows who invites people into an org.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "T.04",
@@ -3321,7 +3456,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "T.05",
@@ -3343,7 +3479,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "T.06",
@@ -3371,7 +3508,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "T.07",
@@ -3397,7 +3535,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "T.08",
@@ -3428,7 +3567,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "D.01",
@@ -3455,7 +3595,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "Z.01",
@@ -3474,7 +3615,8 @@
       "feeds": [],
       "notes": "This is the recurring-ops namespace. Each item gets its own OPS-nnn id.",
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": null
     },
     {
       "id": "Z.02",
@@ -3493,7 +3635,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "wireframe_walkthrough"
     },
     {
       "id": "Z.03",
@@ -3512,7 +3655,8 @@
       "feeds": [],
       "notes": null,
       "required": true,
-      "creates": null
+      "creates": null,
+      "widget": "wireframe_walkthrough"
     }
   ],
   "system_defaults": [

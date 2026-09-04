@@ -25,6 +25,47 @@ AMBIGUOUS_METRIC_TERMS = ["active", "completed", "engaged", "churn", "churned", 
 #   remove one → that word derives silently (risk: two builders count it differently).
 SUPER_ROLE_TOKEN = "super"               # token the engine uses for the always-allowed role named in A.16.
 PUBLIC_ROLE_TOKEN = "public"             # token for "not logged in" in any role choice.
+WIDGET_VOCAB = {
+    # visual answer widgets. The QUESTION, gate and done-rule never change - only how the answer is captured.
+    "icon_multi":          "tap device/channel/category icons; each shows a small rendered sample",
+    "icon_pick":           "tap one icon from a small set",
+    "style_board":         "board of labelled app-style screenshots; tap to like or avoid (credit the shown apps on the tile)",
+    "chip_select":         "tap word chips from a curated vocabulary; free-type to add",
+    "visual_abc":          "2-4 rendered mockups of the same thing; tap the one you mean",
+    "brand_kit":           "logo upload + colour picker with a live header preview",
+    "screen_picker":       "tap a screen thumbnail per role",
+    "screen_map":          "map of all screens; tap a lock to make one public/private",
+    "drag_order":          "drag items to reorder a live preview (menu, columns)",
+    "card_board":          "editable cards per inventory list; tap to remove, type to add",
+    "form_builder":        "live form preview that rebuilds as fields are added/typed/reordered; conditional fields toggle live",
+    "tap_on_preview":      "answer by tapping the element on a rendered mockup (title field, lock stage, button placement)",
+    "access_matrix":       "roles x verbs grid with per-cell scope; renders a see-it-as-that-role sample underneath",
+    "pipeline_editor":     "stages as draggable pills; draw arrows for moves; badges for approval/timeout; tap an arrow to set who moves it",
+    "link_diagram":        "record cards on a canvas; drag a line between two to declare the relationship",
+    "login_preview":       "live sign-in screen; toggling a method adds/removes its button",
+    "message_preview":     "rendered sample message per channel (email/SMS bubble/push banner); edit intent under it",
+    "report_mockup":       "rendered report with toggleable filter chips and a date-range control",
+    "pricing_builder":     "plan cards edited in place on a live pricing-page preview",
+    "wireframe_walkthrough": "clickable wireframe of every screen; every numbered button present; tap through and confirm",
+}
+WIDGETS = {
+    # question id -> widget. Remove a line -> that question falls back to plain text/choice input.
+    "A.06": "icon_multi", "A.10": "screen_map", "A.15": "card_board",
+    "C.01": "style_board", "C.02": "chip_select", "C.03": "visual_abc", "C.04": "brand_kit",
+    "C.05": "visual_abc", "C.06": "screen_picker", "C.07": "drag_order",
+    "AU.01": "icon_multi", "AU.02": "form_builder", "AU.04": "login_preview",
+    "R.02": "form_builder", "R.03": "tap_on_preview", "R.05": "access_matrix", "R.06": "access_matrix",
+    "R.07": "access_matrix", "R.08": "access_matrix", "R.10": "pipeline_editor", "R.11": "link_diagram",
+    "R.15": "tap_on_preview",
+    "F.02": "form_builder", "F.03": "form_builder", "F.05": "visual_abc",
+    "FI.04": "icon_pick",
+    "FL.02": "pipeline_editor", "FL.03": "pipeline_editor", "FL.05": "pipeline_editor",
+    "FL.06": "pipeline_editor", "FL.07": "pipeline_editor", "FL.09": "tap_on_preview", "FL.10": "pipeline_editor",
+    "N.03": "icon_multi", "N.04": "message_preview",
+    "RP.03": "visual_abc", "RP.06": "report_mockup",
+    "B.03": "pricing_builder",
+    "Z.02": "wireframe_walkthrough", "Z.03": "wireframe_walkthrough",
+}
 # ============================================================================
 
 import json, os, sys
@@ -590,11 +631,18 @@ deploy("DI.11", "Terms of service and privacy policy documents (or a request to 
 # EMIT
 # ============================================================================
 def build():
+    for q in QUESTIONS:
+        q["widget"] = WIDGETS.get(q["id"])
+    unknown = [k for k in WIDGETS if k not in {q["id"] for q in QUESTIONS}]
+    badv = [k for k, v in WIDGETS.items() if v not in WIDGET_VOCAB]
+    assert not unknown, f"WIDGETS names unknown questions: {unknown}"
+    assert not badv, f"WIDGETS uses undeclared widgets: {badv}"
     graph = OrderedDict(
         version=GRAPH_VERSION,
         part_order=PART_ORDER,
         config=dict(ambiguous_metric_terms=AMBIGUOUS_METRIC_TERMS, super_role_token=SUPER_ROLE_TOKEN,
-                    public_role_token=PUBLIC_ROLE_TOKEN, field_types=FIELD_TYPES),
+                    public_role_token=PUBLIC_ROLE_TOKEN, field_types=FIELD_TYPES,
+                    widget_vocab=WIDGET_VOCAB),
         parts=list(PARTS.values()),
         questions=QUESTIONS,
         system_defaults=DEFAULTS,
@@ -653,6 +701,8 @@ def to_md(graph):
                 bits.append(f"asked if: {gate_text(q['gate'])}")
             if q["per"] != p["per"]:
                 bits.append(f"per: {q['per'] or 'asked once'}")
+            if q.get("widget"):
+                bits.append(f"visual: `{q['widget']}`")
             bits.append(f"done when: `{json.dumps(q['done'])}`")
             bits.append("fills: " + ", ".join(f"`{f}`" for f in q["fills"]))
             if q["creates"]:
