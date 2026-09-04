@@ -32,8 +32,15 @@ Usage:
 import argparse
 import json
 import os
+import struct
 import sys
 import textwrap
+import xml.etree.ElementTree as ET
+
+ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+LOGO_MANIFEST = json.load(open(os.path.join(ASSETS_DIR, "logos", "manifest.json"), encoding="utf-8"))
+LOGOS = {l["id"]: l for l in LOGO_MANIFEST["logos"]}
+LOGO_SPEC = LOGO_MANIFEST["spec"]
 
 # Real, publicly documented OAuth 2.0 endpoints. Not invented, not guessed —
 # refuse (BuildRefused) for any provider not listed here rather than making
@@ -507,7 +514,120 @@ def build_app_py(spec, port):
     return src
 
 
+# --------------------------------------------------------------------------- brand / logo
+def _png_dimensions_and_alpha(path):
+    """Real PNG header parsing (no Pillow, no new dependency): the IHDR chunk
+    is fixed at byte offset 16 (8-byte signature + 4-byte length + 4-byte
+    'IHDR' type), width and height as big-endian uint32, colour type as the
+    tenth IHDR byte. Colour type 4 (greyscale+alpha) or 6 (RGBA) is treated
+    as 'has transparency'; anything else fails LOGO_SPEC's background rule
+    outright rather than guessing whether it is transparent."""
+    with open(path, "rb") as f:
+        head = f.read(33)
+    if head[:8] != b"\x89PNG\r\n\x1a\n" or head[12:16] != b"IHDR":
+        raise BuildRefused(f"{path}: not a valid PNG (bad signature/IHDR)")
+    width, height = struct.unpack(">II", head[16:24])
+    colour_type = head[25]
+    return width, height, colour_type in (4, 6)
+
+
+def _svg_dimensions(path):
+    tree = ET.parse(path)
+    root = tree.getroot()
+    vb = root.get("viewBox")
+    if vb:
+        _, _, w, h = (float(x) for x in vb.split())
+        return w, h
+    w, h = root.get("width"), root.get("height")
+    if w and h:
+        return float(w.rstrip("px")), float(h.rstrip("px"))
+    raise BuildRefused(f"{path}: SVG declares neither viewBox nor width/height")
+
+
+def validate_provided_logo(path):
+    """Checked against LOGO_SPEC (packages/builder/assets/logos/manifest.json)
+    exactly as declared to the customer at C.04 — format, square aspect
+    ratio, size bounds, and (for PNG) an alpha channel. Refuses, never
+    resizes or reinterprets a file that does not meet it."""
+    if not os.path.isfile(path):
+        raise BuildRefused(f"logo file not found: {path}")
+    ext = path.rsplit(".", 1)[-1].lower()
+    if ext not in LOGO_SPEC["format"]:
+        raise BuildRefused(f"{path}: format '.{ext}' not in {LOGO_SPEC['format']}")
+    if ext == "png":
+        w, h, has_alpha = _png_dimensions_and_alpha(path)
+        if not has_alpha:
+            raise BuildRefused(f"{path}: PNG has no alpha channel; {LOGO_SPEC['background']} background required")
+    else:
+        w, h = _svg_dimensions(path)
+    if w != h:
+        raise BuildRefused(f"{path}: {w}x{h} is not square ({LOGO_SPEC['aspect_ratio']} required)")
+    if not (LOGO_SPEC["min_px"] <= w <= LOGO_SPEC["max_px"]):
+        raise BuildRefused(f"{path}: {int(w)}px outside [{LOGO_SPEC['min_px']}, {LOGO_SPEC['max_px']}]")
+    return int(w), int(h)
+
+
+def resolve_logo(brand):
+    """(inline_svg_or_none, alt_text). Three real modes, matching C.04:
+    'premade' embeds a real starter mark; 'provided' validates the real file
+    against LOGO_SPEC and embeds it (SVG inlined, PNG as a data: URI — no
+    external asset pipeline needed); 'design_for_me' has no logo yet, which
+    renders as a clean text wordmark, never a broken image tag. C.04 unasked
+    (assets is None -- not present in the real answers, as for every template
+    predating this question) is treated the same as an explicit 'design_for_me':
+    that mode's whole purpose is to be the safe default when no logo decision
+    exists yet, so this is not a guess about what the answer would have been,
+    just the documented fallback applied to real absence of an answer."""
+    assets = (brand or {}).get("assets")
+    mode = (assets or {}).get("mode") if assets is not None else "design_for_me"
+    app_name = brand.get("app_name") or "App"
+    if mode == "premade":
+        logo_id = assets.get("logo_id")
+        if logo_id not in LOGOS:
+            raise BuildRefused(f"C.04: premade logo_id '{logo_id}' is not in the starter library {sorted(LOGOS)}")
+        svg_path = os.path.join(ASSETS_DIR, "logos", f"{logo_id}.svg")
+        return open(svg_path, encoding="utf-8").read(), f"{app_name} ({LOGOS[logo_id]['name']} mark)"
+    if mode == "provided":
+        path = assets.get("path")
+        if not path:
+            raise BuildRefused("C.04: mode 'provided' with no file path")
+        validate_provided_logo(path)
+        if path.lower().endswith(".svg"):
+            return open(path, encoding="utf-8").read(), app_name
+        import base64
+        data = base64.b64encode(open(path, "rb").read()).decode()
+        return f'<img src="data:image/png;base64,{data}" width="32" height="32" alt="{app_name} logo">', app_name
+    if mode == "design_for_me":
+        return None, app_name
+    raise BuildRefused(f"C.04: unknown brand mode {mode!r}")
+
+
 # --------------------------------------------------------------------------- static screens
+def _render_header(bm):
+    """Real markup, computed once and injected into every real generated page:
+    the resolved logo (or nothing, for design_for_me) plus the real app name.
+    Returns (html, css) rather than a full page — every screen keeps its own
+    <title>/<style>, this is inserted after that, never replacing it."""
+    inline_svg_or_img, app_name = resolve_logo(bm.get("brand") or {})
+    mark = ""
+    if inline_svg_or_img:
+        if inline_svg_or_img.lstrip().startswith("<svg"):
+            mark = inline_svg_or_img.replace("<svg ", '<svg class="app-mark" ', 1)
+        else:
+            mark = inline_svg_or_img.replace('width="32" height="32"', 'width="32" height="32" class="app-mark"')
+    html = f'<header class="app-header">{mark}<span class="app-name">{app_name}</span></header>'
+    css = ("body{margin:0}.app-header{display:flex;align-items:center;gap:10px;padding:12px 16px;"
+           "border-bottom:1px solid #ddd;font-family:system-ui,sans-serif}"
+           ".app-mark{width:28px;height:28px}.app-name{font-weight:600}")
+    return html, css
+
+
+def _inject_header(page_html, header_html, header_css):
+    page_html = page_html.replace("</style>", header_css + "</style>", 1)
+    page_html = page_html.replace("<h1>", header_html + "<h1>", 1)
+    return page_html
+
+
 def build_screens(spec):
     """One real HTML file per numbered screen (SCR-nnn). Three screen kinds have
     a rendering rule: integration_status (what Command Desk needs), list and
@@ -515,15 +635,17 @@ def build_screens(spec):
     placeholder that would look done and is not; see the README for why."""
     pages = {}
     bm = spec["build_model"]
+    header_html, header_style = _render_header(bm)
     for scr in bm["screens_inventory"]:
         if scr["kind"] == "integration_status":
-            pages[scr["id"]] = _render_integration_screen(bm, scr)
+            page = _render_integration_screen(bm, scr)
         elif scr["kind"] == "list":
-            pages[scr["id"]] = _render_list_screen(bm, scr)
+            page = _render_list_screen(bm, scr)
         elif scr["kind"] == "detail":
-            pages[scr["id"]] = _render_detail_screen(bm, scr)
+            page = _render_detail_screen(bm, scr)
         else:
             raise BuildRefused(f"{scr['id']}: no screen rendering rule for kind '{scr['kind']}'")
+        pages[scr["id"]] = _inject_header(page, header_html, header_style)
     pages["index.html"] = pages.get("SCR-001", "<!doctype html><title>App</title><p>No screens.</p>")
     return pages
 

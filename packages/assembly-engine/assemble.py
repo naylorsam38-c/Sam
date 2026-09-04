@@ -418,6 +418,7 @@ def build_model(inst, derived):
         "forms": derived["D02"],
         "integrations": derived["FLX"],
         "auth": {k: v for k, v in inst["answers"].items() if k.startswith("AU.")},
+        "brand": {"app_name": inst["answers"].get("A.05"), "assets": inst["answers"].get("C.04")},
         "screens_inventory": derived["D13"]["screens"],
         "navigation": derived["D13"]["navigation"],
         "landing_per_role": derived["D13"]["landing_per_role"],

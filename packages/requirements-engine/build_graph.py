@@ -212,8 +212,15 @@ Q("C.02", "In three words, how should this feel to use? (e.g. playful, fast, min
   "list", ["visual.tone"], done={"rule": "min_items", "n": 3})
 Q("C.03", "How much should be visible at once — spacious and simple, balanced, or dense and information-rich?",
   "choice", ["visual.density"], options=["spacious", "balanced", "dense"])
-Q("C.04", "Is there a primary colour, logo or existing brand material to build from, or should that be designed for you?",
-  "structured", ["visual.brand_assets"], done={"rule": "structured", "keys": ["mode"], "one_of": {"mode": ["provided", "design_for_me"]}})
+Q("C.04", "Is there a primary colour, logo or existing brand material to build from? If not, pick a mark from the starter "
+  "library (packages/builder/assets/logos/manifest.json) or leave it to be designed later.",
+  "structured", ["visual.brand_assets"],
+  done={"rule": "structured", "keys": ["mode"], "one_of": {"mode": ["provided", "premade", "design_for_me"]},
+        "if_any": {"provided": ["path"], "premade": ["logo_id"]}},
+  notes="'premade' exists so an app never ships with a blank or broken logo slot while a real one is pending -- "
+        "the customer picks a real, named starter mark rather than the app defaulting to nothing. 'provided' is "
+        "validated against the starter library's own manifest.spec (format, aspect ratio, size, background) by "
+        "the Builder, which refuses a file that doesn't meet it rather than resizing or reinterpreting it.")
 Q("C.05", "On phones, should it be a simplified version of the big-screen layout, or does anything need to work completely differently on mobile?",
   "structured", ["client.mobile_behaviour"], gate=g("A.06", "includes_any", ["web", "desktop"]),
   done={"rule": "structured", "keys": ["mode"], "one_of": {"mode": ["simplified", "different"]}, "if": {"mode": "different", "then_keys": ["what"]}},

@@ -87,8 +87,9 @@ Conversational. The interviewer may ask these in any words; the script decides w
 **C.03** — How much should be visible at once — spacious and simple, balanced, or dense and information-rich?  
 <br>type: `choice` · options: `spacious`, `balanced`, `dense` · visual: `visual_abc` · done when: `{"rule": "one_of", "options": ["spacious", "balanced", "dense"]}` · fills: `visual.density`
 
-**C.04** — Is there a primary colour, logo or existing brand material to build from, or should that be designed for you?  
-<br>type: `structured` · visual: `brand_kit` · done when: `{"rule": "structured", "keys": ["mode"], "one_of": {"mode": ["provided", "design_for_me"]}}` · fills: `visual.brand_assets`
+**C.04** — Is there a primary colour, logo or existing brand material to build from? If not, pick a mark from the starter library (packages/builder/assets/logos/manifest.json) or leave it to be designed later.  
+<br>type: `structured` · visual: `brand_kit` · done when: `{"rule": "structured", "keys": ["mode"], "one_of": {"mode": ["provided", "premade", "design_for_me"]}, "if_any": {"provided": ["path"], "premade": ["logo_id"]}}` · fills: `visual.brand_assets`
+<br>*Why: 'premade' exists so an app never ships with a blank or broken logo slot while a real one is pending -- the customer picks a real, named starter mark rather than the app defaulting to nothing. 'provided' is validated against the starter library's own manifest.spec (format, aspect ratio, size, background) by the Builder, which refuses a file that doesn't meet it rather than resizing or reinterpreting it.*
 
 **C.05** — On phones, should it be a simplified version of the big-screen layout, or does anything need to work completely differently on mobile?  
 <br>type: `structured` · asked if: A.06 includes any of ['web', 'desktop'] · visual: `visual_abc` · done when: `{"rule": "structured", "keys": ["mode"], "one_of": {"mode": ["simplified", "different"]}, "if": {"mode": "different", "then_keys": ["what"]}}` · fills: `client.mobile_behaviour`

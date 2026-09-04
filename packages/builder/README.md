@@ -63,6 +63,36 @@ per-route dispatch loop (a `KeyError` building `app.py` for any spec with an
 integration); and `Gmail` not resolving to the `google` provider because
 the resolver only matched literal provider names, not real product aliases.
 
+## Logo library and specification (C.04)
+
+C.04 in the requirements graph asks for a primary brand mark with three real
+modes, and the Builder resolves each one via `resolve_logo()`:
+
+| `assets.mode` | What the Builder does |
+|---|---|
+| `premade` | Embeds one of six real starter SVG marks (`assets/logos/*.svg`, indexed by `assets/logos/manifest.json`) by `logo_id` — inline, no external asset pipeline. Exists so a real app never ships with a blank or broken logo slot while a customer's own mark is still undecided. An unknown `logo_id` refuses rather than falling back silently. |
+| `provided` | The customer's own file, checked against `manifest.json`'s `spec` (`format`, `aspect_ratio`, `min_px`/`max_px`, `background`) by `validate_provided_logo()` before it is embedded — SVG inlined directly, PNG embedded as a `data:` URI. A file that does not meet the spec is **refused**, never resized or reinterpreted, so what ships is always exactly the file that was actually validated. |
+| `design_for_me` | No logo yet — renders a clean text wordmark (the app name alone), never a broken `<img>` tag. |
+
+C.04 unanswered entirely (`assets` absent — every real template that
+predates this question, e.g. `pm-teamwork.json`) takes the same rendering
+path as `design_for_me`. That is not a guess at what the answer would have
+been: `design_for_me`'s whole purpose is to be the safe default when no logo
+decision exists yet, so applying it to a real, genuine absence of an answer
+is the documented fallback, not an invented one.
+
+The starter marks themselves (`compass`, `cube`, `spark`, `orbit`, `grid`,
+`wave`) are small vector icons rendered at 28px in the generated header —
+they do not go through `validate_provided_logo`'s pixel-bound checks, which
+exist for the `provided` (customer-upload) path only.
+
+`tests/test_builder.py` covers all three modes plus `validate_provided_logo`'s
+real refusal cases against real, structurally valid PNG/SVG fixtures built at
+test time (non-square, no alpha channel, undersized, oversized, unsupported
+format), and one end-to-end test that builds a real app with a `premade`
+brand choice and checks the resolved mark's real markup in a live page
+response.
+
 ## What this does not do
 
 - **`report` and `form` screens have no rendering rule yet.** Refused, not

@@ -79,6 +79,7 @@ def command_desk_spec():
             "navigation": ["SCR-001"], "landing_per_role": {},
             "actions_inventory": [{"id": "ACT-001", "kind": "connect", "integration": "Gmail", "roles": ["Sam"]}],
             "recurring_ops": [], "qa_generated_tests": [],
+            "brand": {"app_name": "Command Desk", "assets": {"mode": "design_for_me"}},
         },
     }
 

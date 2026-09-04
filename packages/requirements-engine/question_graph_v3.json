@@ -735,7 +735,7 @@
     {
       "id": "C.04",
       "part": "C",
-      "prompt": "Is there a primary colour, logo or existing brand material to build from, or should that be designed for you?",
+      "prompt": "Is there a primary colour, logo or existing brand material to build from? If not, pick a mark from the starter library (packages/builder/assets/logos/manifest.json) or leave it to be designed later.",
       "type": "structured",
       "options": null,
       "gate": null,
@@ -751,12 +751,21 @@
         "one_of": {
           "mode": [
             "provided",
+            "premade",
             "design_for_me"
+          ]
+        },
+        "if_any": {
+          "provided": [
+            "path"
+          ],
+          "premade": [
+            "logo_id"
           ]
         }
       },
       "feeds": [],
-      "notes": null,
+      "notes": "'premade' exists so an app never ships with a blank or broken logo slot while a real one is pending -- the customer picks a real, named starter mark rather than the app defaulting to nothing. 'provided' is validated against the starter library's own manifest.spec (format, aspect ratio, size, background) by the Builder, which refuses a file that doesn't meet it rather than resizing or reinterpreting it.",
       "required": true,
       "creates": null,
       "widget": "brand_kit"

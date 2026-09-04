@@ -21,11 +21,13 @@ never silently mocked to a green result.
 
 import json
 import socket
+import struct
 import subprocess
 import sys
 import time
 import urllib.error
 import urllib.request
+import zlib
 from pathlib import Path
 
 import pytest
@@ -172,6 +174,7 @@ def command_desk_oauth_spec():
             "navigation": ["SCR-001"], "landing_per_role": {},
             "actions_inventory": [{"id": "ACT-001", "kind": "connect", "integration": "Gmail", "roles": ["Sam"]}],
             "recurring_ops": [], "qa_generated_tests": [],
+            "brand": {"app_name": "Command Desk", "assets": {"mode": "design_for_me"}},
         },
     }
 
@@ -302,3 +305,156 @@ def test_builder_callback_hits_googles_real_token_endpoint_and_handles_rejection
         except urllib.error.HTTPError as e:
             assert e.code == 502
             assert b"token exchange failed" in e.read()
+
+
+# --------------------------------------------------------------------------- logo library (C.04)
+def _make_png(path, width, height, color_type=6):
+    """A real, structurally valid PNG file (real signature, real IHDR, real
+    zlib-compressed IDAT decoding to actual pixel data of the given size) --
+    not a stub. color_type 6 = RGBA (has alpha), 2 = RGB (no alpha), matching
+    the same codes builder._png_dimensions_and_alpha reads from a real file."""
+    channels = {2: 3, 6: 4}[color_type]
+    row = bytes([0] + [128] * (width * channels))  # filter byte 0 + one flat colour
+    raw = row * height
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, color_type, 0, 0, 0)
+
+    def chunk(tag, data):
+        return (struct.pack(">I", len(data)) + tag + data
+                + struct.pack(">I", zlib.crc32(tag + data)))
+
+    png = (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr)
+           + chunk(b"IDAT", zlib.compress(raw)) + chunk(b"IEND", b""))
+    Path(path).write_bytes(png)
+
+
+LOGOS_DIR = BUILDER / "assets" / "logos"
+
+
+def test_resolve_logo_premade_embeds_a_real_starter_mark():
+    inline, alt = bl.resolve_logo({"app_name": "Command Desk", "assets": {"mode": "premade", "logo_id": "compass"}})
+    assert inline.lstrip().startswith("<svg")
+    assert inline == (LOGOS_DIR / "compass.svg").read_text(encoding="utf-8")
+    assert "Command Desk" in alt and "Compass" in alt
+
+
+def test_resolve_logo_premade_refuses_an_id_not_in_the_starter_library():
+    with pytest.raises(bl.BuildRefused, match="not in the starter library"):
+        bl.resolve_logo({"app_name": "X", "assets": {"mode": "premade", "logo_id": "does-not-exist"}})
+
+
+def test_resolve_logo_design_for_me_is_a_text_wordmark_with_no_image():
+    inline, alt = bl.resolve_logo({"app_name": "Command Desk", "assets": {"mode": "design_for_me"}})
+    assert inline is None
+    assert alt == "Command Desk"
+
+
+def test_resolve_logo_treats_an_unanswered_c04_the_same_as_design_for_me():
+    """Real templates that predate the C.04 question (e.g. pm-teamwork.json)
+    carry no brand.assets at all -- this is a real absence of an answer, not
+    a business decision to guess at, so it takes the documented safe-default
+    rendering path rather than refusing."""
+    inline, alt = bl.resolve_logo({"app_name": "PM Tool", "assets": None})
+    assert inline is None
+    assert alt == "PM Tool"
+    inline2, alt2 = bl.resolve_logo({"app_name": "PM Tool"})
+    assert inline2 is None and alt2 == "PM Tool"
+
+
+def test_resolve_logo_refuses_an_unrecognised_mode():
+    with pytest.raises(bl.BuildRefused, match="unknown brand mode"):
+        bl.resolve_logo({"app_name": "X", "assets": {"mode": "not-a-real-mode"}})
+
+
+def test_resolve_logo_provided_embeds_a_real_valid_svg(tmp_path):
+    svg_path = tmp_path / "mine.svg"
+    svg_path.write_text('<svg viewBox="0 0 256 256"><circle r="10"/></svg>', encoding="utf-8")
+    inline, alt = bl.resolve_logo({"app_name": "Acme", "assets": {"mode": "provided", "path": str(svg_path)}})
+    assert inline == svg_path.read_text(encoding="utf-8")
+    assert alt == "Acme"
+
+
+def test_resolve_logo_provided_embeds_a_real_valid_png_as_a_data_uri(tmp_path):
+    png_path = tmp_path / "mine.png"
+    _make_png(png_path, 256, 256, color_type=6)
+    inline, alt = bl.resolve_logo({"app_name": "Acme", "assets": {"mode": "provided", "path": str(png_path)}})
+    assert inline.startswith('<img src="data:image/png;base64,')
+    assert alt == "Acme"
+
+
+def test_resolve_logo_provided_refuses_with_no_path_given():
+    with pytest.raises(bl.BuildRefused, match="no file path"):
+        bl.resolve_logo({"app_name": "Acme", "assets": {"mode": "provided"}})
+
+
+def test_starter_library_svgs_are_real_well_formed_square_marks():
+    """Sanity on the library itself, not the upload validator: the starter
+    marks are small vector icons rendered at 28px in the header (see
+    _render_header's CSS), never customer uploads, so they don't go through
+    validate_provided_logo's min/max pixel bounds meant for that path -- but
+    each one must still be a real, well-formed, square SVG."""
+    for logo_id in bl.LOGOS:
+        w, h = bl._svg_dimensions(str(LOGOS_DIR / f"{logo_id}.svg"))
+        assert w == h > 0
+
+
+def test_validate_provided_logo_refuses_a_missing_file():
+    with pytest.raises(bl.BuildRefused, match="not found"):
+        bl.validate_provided_logo("/no/such/file.png")
+
+
+def test_validate_provided_logo_refuses_an_unsupported_format(tmp_path):
+    bad = tmp_path / "logo.jpg"
+    bad.write_bytes(b"not really a jpeg")
+    with pytest.raises(bl.BuildRefused, match="format"):
+        bl.validate_provided_logo(str(bad))
+
+
+def test_validate_provided_logo_refuses_a_non_square_png(tmp_path):
+    png_path = tmp_path / "wide.png"
+    _make_png(png_path, 512, 256, color_type=6)
+    with pytest.raises(bl.BuildRefused, match="not square"):
+        bl.validate_provided_logo(str(png_path))
+
+
+def test_validate_provided_logo_refuses_a_png_with_no_alpha_channel(tmp_path):
+    png_path = tmp_path / "opaque.png"
+    _make_png(png_path, 256, 256, color_type=2)
+    with pytest.raises(bl.BuildRefused, match="no alpha channel"):
+        bl.validate_provided_logo(str(png_path))
+
+
+def test_validate_provided_logo_refuses_an_undersized_png(tmp_path):
+    png_path = tmp_path / "tiny.png"
+    _make_png(png_path, 64, 64, color_type=6)
+    with pytest.raises(bl.BuildRefused, match=r"outside \["):
+        bl.validate_provided_logo(str(png_path))
+
+
+def test_validate_provided_logo_refuses_an_oversized_png(tmp_path):
+    png_path = tmp_path / "huge.png"
+    _make_png(png_path, 2049, 2049, color_type=6)
+    with pytest.raises(bl.BuildRefused, match=r"outside \["):
+        bl.validate_provided_logo(str(png_path))
+
+
+def test_validate_provided_logo_refuses_a_non_square_svg(tmp_path):
+    svg_path = tmp_path / "wide.svg"
+    svg_path.write_text('<svg viewBox="0 0 300 100"><rect/></svg>', encoding="utf-8")
+    with pytest.raises(bl.BuildRefused, match="not square"):
+        bl.validate_provided_logo(str(svg_path))
+
+
+def test_builder_builds_a_real_page_with_a_premade_logo_embedded(pm_records_spec, tmp_path):
+    """End-to-end: a real spec with a premade brand choice, built for real,
+    served by a real running server -- the response body really contains the
+    resolved starter mark's own markup and the real app name, not a stand-in."""
+    spec = dict(pm_records_spec)
+    spec["build_model"] = dict(pm_records_spec["build_model"])
+    spec["build_model"]["brand"] = {"app_name": "PM Tool", "assets": {"mode": "premade", "logo_id": "grid"}}
+    out = tmp_path / "pm_app_branded"
+    bl.build(spec, str(out), port=8956)
+    with RunningServer(str(out), 8956) as srv:
+        body = srv.get("/SCR-001.html").read().decode("utf-8")
+    assert 'class="app-header"' in body
+    assert "PM Tool" in body
+    assert (LOGOS_DIR / "grid.svg").read_text(encoding="utf-8").split("<svg", 1)[1] in body
