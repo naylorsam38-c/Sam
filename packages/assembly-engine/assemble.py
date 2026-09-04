@@ -1,24 +1,38 @@
 #!/usr/bin/env python3
 """
-assemble.py — component 2 of the chain: completed requirements-engine answers
--> one authoritative, numbered specification for the Builder.
+assemble.py — component 2 of the chain: a template's own locked, numbered
+structure -> one authoritative specification for the Builder.
 
 Does not ask questions (that is the Requirements Engine's job, component 1) and
 does not decide what a good app looks like (that was decided once, in
-question_graph_v3.json, and is not re-decided here). This script only maps
-answers to spec fields, using the mapping the graph itself already declares
-(`fills`, system_defaults, derivations), and refuses to guess anything the
-answer set leaves open.
+question_graph_v3.json, and is not re-decided here). It also does not derive
+that structure from raw answers any more -- that used to happen here, fresh,
+on every run (derive()/build_model(), still defined below), which meant a
+screen or action's number was never actually permanent: reorder an inventory
+list and every number downstream could shift. That computation now runs
+exactly ONCE per template, offline, via lock_structure.py
+(requirements-engine/lock_structure.py), which writes its result back into
+the template file as a frozen "structure" block with permanent, prefixed ids
+(pm-teamwork/SCR-001, never renumbered by a later run). assemble() here only
+loads that structure whole and configures it -- spec id, title, deploy inputs.
+It does not recompute a single screen or action id.
 
 Input: one "instance" JSON in the same shape as requirements-engine/templates/*.json
-(inventory, answers, per_instance, ask_customer, features) — OR several such
-files to combine (--combine), unioned per CONFIG_MAP.md's rule and reconciled
-with --reconcile OldName=NewName for shared records.
+(inventory, answers, per_instance, ask_customer, features, structure) — OR
+several such files to combine (--combine), unioned per CONFIG_MAP.md's rule
+and reconciled with --reconcile OldName=NewName for shared records.
 
 Refuses (exit 2) rather than assembling a guess when:
   * the instance does not fit the graph (reuses check_template.check — the
     requirements engine's own coverage/reference validator, not a second one)
   * ask_customer is non-empty (the front door has not finished its job)
+  * the instance has no locked "structure" (run lock_structure.py first —
+    assemble.py refuses to derive one on the fly)
+  * any numbered screen or action in that structure has a kind the Builder has
+    no registered rendering rule for (REGISTERED_SCREEN_KINDS /
+    REGISTERED_ACTION_KINDS below, kept in lockstep with builder.py's own real
+    rules) — blocks and lists every offending item's permanent id, never
+    silently skips or pretends it will be handled
 
 Output (-o DIR):
   SPEC.json   the numbered field map + the build model, for the Builder
@@ -60,6 +74,92 @@ STORAGE_TYPE = {
 
 class Refused(Exception):
     """Assembly refused: the answer set does not license a spec yet."""
+
+
+# Kinds the Builder (packages/builder/builder.py) actually has a generation
+# rule for today -- checked directly against its own code (build_screens()'s
+# kind dispatch; crud_routes()/oauth_routes()'s own real routes), not guessed.
+# Keep these two sets in lockstep with builder.py by hand: it is the one
+# ground truth for "real Builder capability", and this file must never claim
+# more than that ground truth supports.
+REGISTERED_SCREEN_KINDS = {"list", "detail", "integration_status"}
+REGISTERED_ACTION_KINDS = {"create", "edit", "delete", "connect"}
+
+
+def registration_gaps(structure):
+    """Every numbered screen/action in a locked structure whose kind the
+    Builder has no real rule for, as (id, kind, what) tuples -- never silently
+    dropped, always named by their own permanent id so a human can see exactly
+    what is missing without re-deriving anything."""
+    gaps = []
+    for scr in structure.get("screens_inventory") or []:
+        if scr["kind"] not in REGISTERED_SCREEN_KINDS:
+            gaps.append((scr["id"], "screen", scr["kind"]))
+    for act in structure.get("actions_inventory") or []:
+        if act["kind"] not in REGISTERED_ACTION_KINDS:
+            gaps.append((act["id"], "action", act["kind"]))
+    return gaps
+
+
+def _rename_refs_in_structure(structure, rename):
+    """Rewrite record-name references inside a locked structure, for the real
+    shapes build_model() actually produces (checked against every real
+    structure block the five templates lock, not a generic JSON walk -- same
+    discipline as _rename_refs below, which did the equivalent job for raw
+    per_instance answers before structures were frozen). Renaming a record's
+    own dict key is not enough: a link field's target_record, and any screen/
+    action/notification that names a record, must move with it."""
+    structure = copy.deepcopy(structure)
+    structure["records"] = {
+        rename(name): {
+            **rec,
+            "fields": {fname: (dict(fd, target_record=rename(fd["target_record"])) if fd.get("type") == "link" else fd)
+                       for fname, fd in rec["fields"].items()},
+        }
+        for name, rec in structure["records"].items()
+    }
+    for scr in structure.get("screens_inventory") or []:
+        if scr.get("record"):
+            scr["record"] = rename(scr["record"])
+    for act in structure.get("actions_inventory") or []:
+        if act.get("record"):
+            act["record"] = rename(act["record"])
+    for notif in (structure.get("notifications") or {}).values():
+        trig = notif.get("trigger") or {}
+        if trig.get("record"):
+            trig["record"] = rename(trig["record"])
+        for r_ in notif.get("recipients") or []:
+            if isinstance(r_, dict) and r_.get("kind") == "field" and r_.get("record"):
+                r_["record"] = rename(r_["record"])
+    return structure
+
+
+def _merge_structures(structures):
+    """Union several already-locked structures. Every id inside each one is
+    already permanently prefixed by lock_structure.py with its own template's
+    name, so concatenation can never collide two numbers and never needs a
+    renumber -- exactly the point of freezing them first."""
+    merged = {"records": {}, "roles": {}, "super_role": structures[0].get("super_role"),
+              "workflows": {}, "notifications": {}, "reports": {}, "forms": {},
+              "integrations": {}, "auth": {}, "brand": structures[0].get("brand"),
+              "screens_inventory": [], "navigation": [], "landing_per_role": {},
+              "actions_inventory": [], "recurring_ops": [], "qa_generated_tests": []}
+    for s in structures:
+        merged["records"].update(s["records"])
+        merged["roles"].update(s["roles"])
+        merged["workflows"].update(s["workflows"])
+        merged["notifications"].update(s["notifications"])
+        merged["reports"].update(s["reports"])
+        merged["forms"].update(s["forms"])
+        merged["integrations"].update(s["integrations"])
+        merged["auth"].update(s.get("auth") or {})
+        merged["landing_per_role"].update(s.get("landing_per_role") or {})
+        merged["screens_inventory"] += s["screens_inventory"]
+        merged["navigation"] += s["navigation"]
+        merged["actions_inventory"] += s["actions_inventory"]
+        merged["recurring_ops"] += s["recurring_ops"]
+        merged["qa_generated_tests"] += s["qa_generated_tests"]
+    return merged
 
 
 def _rename_refs(qid, val, rename):
@@ -122,6 +222,13 @@ def combine(paths, reconcile):
             merged["per_instance"][f"{qid}:{':'.join(parts)}"] = _rename_refs(qid, val, rename)
         merged["ask_customer"] += [a for a in i["ask_customer"] if a not in merged["ask_customer"]]
     merged["inventory"] = dict(merged["inventory"])
+
+    missing = [i["template"] for i in insts if not i.get("structure")]
+    if missing:
+        raise Refused("cannot combine -- these templates have no locked structure yet "
+                       "(run lock_structure.py on them first): " + ", ".join(missing))
+    renamed_structures = [_rename_refs_in_structure(i["structure"], rename) for i in insts]
+    merged["structure"] = _merge_structures(renamed_structures)
     return merged
 
 
@@ -263,6 +370,10 @@ def derive(graph, inst):
     d["D11"] = ops_items
 
     # D12 — One numbered action per create/edit/delete grant, custom action, transition, cancel, approve, form submit.
+    # Each action also carries "outcome": a plain restatement of its own already-declared
+    # fields (verb+record, the custom action's own R.15 effect text, the transition's own
+    # from/to, etc.) -- never new business content, just the declared outcome made explicit
+    # per action, so a numbered action's outcome and permitted role are both in one place.
     actions = []
     n = 1
     for r in records:
@@ -270,29 +381,40 @@ def derive(graph, inst):
                                   ("edit", [ro for ro in roles if any(p["record"] == r and p["action"] == "edit" for p in permitted[ro])]),
                                   ("delete", [ro for ro in roles if any(p["record"] == r and p["action"] == "delete" for p in permitted[ro])])):
             if roles_with:
-                actions.append({"id": f"ACT-{n:03d}", "kind": verb, "record": r, "roles": roles_with})
+                verb_text = {"create": "creates a new", "edit": "edits an existing", "delete": "deletes a"}[verb]
+                actions.append({"id": f"ACT-{n:03d}", "kind": verb, "record": r, "roles": roles_with,
+                                 "outcome": f"{verb_text} '{r}' record"})
                 n += 1
         for ca in inst["per_instance"].get(f"R.15:{r}") or []:
-            actions.append({"id": f"ACT-{n:03d}", "kind": "custom", "record": r, "detail": ca})
+            actions.append({"id": f"ACT-{n:03d}", "kind": "custom", "record": r, "detail": ca,
+                             "roles": ca.get("who"), "outcome": ca.get("effect")})
             n += 1
     for w in workflows:
         for t in inst["per_instance"].get(f"FL.03:{w}") or []:
-            actions.append({"id": f"ACT-{n:03d}", "kind": "transition", "workflow": w, "from": t["from"], "to": t["to"], "mover": t.get("mover"), "roles": t.get("roles")})
+            actions.append({"id": f"ACT-{n:03d}", "kind": "transition", "workflow": w, "from": t["from"], "to": t["to"],
+                             "mover": t.get("mover"), "roles": t.get("roles"),
+                             "outcome": f"moves '{w}' from '{t['from']}' to '{t['to']}'"})
             n += 1
         cancel = inst["per_instance"].get(f"FL.07:{w}") or {}
         if cancel.get("allowed") == "yes":
-            actions.append({"id": f"ACT-{n:03d}", "kind": "cancel", "workflow": w, "roles": cancel.get("by")})
+            actions.append({"id": f"ACT-{n:03d}", "kind": "cancel", "workflow": w, "roles": cancel.get("by"),
+                             "from_stages": cancel.get("from_stages"),
+                             "outcome": f"cancels '{w}' from stage(s) {cancel.get('from_stages')}"})
             n += 1
         for a in inst["per_instance"].get(f"FL.05:{w}") or []:
-            actions.append({"id": f"ACT-{n:03d}", "kind": "approve", "workflow": w, "stage": a.get("stage"), "roles": a.get("approvers")})
+            actions.append({"id": f"ACT-{n:03d}", "kind": "approve", "workflow": w, "stage": a.get("stage"), "roles": a.get("approvers"),
+                             "outcome": f"approves '{w}' at stage '{a.get('stage')}'"})
             n += 1
     for fm in inv["forms"]:
-        actions.append({"id": f"ACT-{n:03d}", "kind": "submit", "form": fm})
+        target = (inst["per_instance"].get(f"F.02:{fm}") or {}).get("target")
+        actions.append({"id": f"ACT-{n:03d}", "kind": "submit", "form": fm, "roles": None,
+                         "outcome": f"submits the '{fm}' form" + (f", creating/editing its target record '{target}'" if target else "")})
         n += 1
     for i, flx in d["FLX"].items():
         if (flx.get("timing") or {}).get("kind") == "manual":
-            actions.append({"id": f"ACT-{n:03d}", "kind": "connect", "integration": i,
-                            "roles": (flx["timing"].get("who") or [])})
+            roles_ = flx["timing"].get("who") or []
+            actions.append({"id": f"ACT-{n:03d}", "kind": "connect", "integration": i, "roles": roles_,
+                             "outcome": f"starts the OAuth connect flow for integration '{i}'"})
             n += 1
     d["D12"] = actions
 
@@ -335,7 +457,7 @@ def derive(graph, inst):
 
 
 # --------------------------------------------------------------------------- numbered field map
-def build_field_map(graph, inst, derived):
+def build_field_map(graph, inst):
     """Every spec field, traced to the question/default/derivation/deploy-input
     that owns it (graph_lib.field_source), with its resolved value. Refuses
     (raises Refused) if a field's owning question fires but the answer is absent
@@ -388,6 +510,15 @@ def build_field_map(graph, inst, derived):
 
 
 # --------------------------------------------------------------------------- top level
+# derive() and build_model() are no longer called by assemble() below -- they
+# are used exactly once per template, by requirements-engine/lock_structure.py,
+# to freeze a template's numbered "structure" block. Kept here (not moved)
+# because assemble() still imports this module for Refused/check_template/
+# graph_lib wiring, and because lock_structure.py explicitly reuses these two
+# functions rather than reimplementing derivation logic a second time. Tests
+# that want real structural facts from a real template without a locked
+# structure (e.g. a template that predates lock_structure.py) can still call
+# derive()+build_model() directly; assemble() itself never does.
 def build_model(inst, derived):
     """The concrete, expanded structures the Builder and the Playwright tester
     actually read. Pure function of an instance's real inventory/answers plus
@@ -432,18 +563,26 @@ def assemble(graph, inst, spec_id, title):
     errors = check_template.check(graph, inst)
     if errors:
         raise Refused("instance does not fit the graph:\n" + "\n".join(f"  - {e}" for e in errors))
+    structure = inst.get("structure")
+    if not structure:
+        raise Refused("this template has no locked structure -- run requirements-engine/lock_structure.py "
+                       "on it first. assemble.py configures a structure; it does not derive one from answers.")
     if inst["ask_customer"]:
         raise Refused("front door has not finished: still open for the customer:\n" +
                        "\n".join(f"  - {q}" for q in inst["ask_customer"]))
 
-    derived = derive(graph, inst)
-    fields = build_field_map(graph, inst, derived)
+    gaps = registration_gaps(structure)
+    if gaps:
+        raise Refused("numbered items with no registered Builder implementation -- blocked, not skipped:\n" +
+                       "\n".join(f"  - {id_} ({kind}, kind: {k})" for id_, kind, k in gaps))
+
+    fields = build_field_map(graph, inst)
     return {
         "spec_id": spec_id, "version": 1, "title": title,
         "graph_version": graph["version"],
         "source_template": inst.get("template"),
         "numbered_fields": fields,
-        "build_model": build_model(inst, derived),
+        "build_model": structure,
     }
 
 

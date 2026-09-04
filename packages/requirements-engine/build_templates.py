@@ -788,13 +788,27 @@ template(
 # EMIT
 # ============================================================================
 if __name__ == "__main__":
+    import graph_lib
+    import lock_structure
+
     outdir = os.path.join(here, OUT_DIR)
     os.makedirs(outdir, exist_ok=True)
+    graph = graph_lib.load_graph(os.path.join(here, GRAPH))
     for t in TEMPLATES:
         # strip authoring-only keys
         t["per_instance"] = {k: v for k, v in t["per_instance"].items() if not k.startswith("_")}
         path = os.path.join(outdir, t["template"] + ".json")
+        # a prior locked structure (if this template is already tracked) is the
+        # one thing this rewrite must not disturb -- lock_structure.py reuses
+        # every id whose natural key still matches, so carrying it forward here
+        # keeps regeneration byte-reproducible instead of wiping the freeze.
+        prior_structure = None
+        if os.path.exists(path):
+            prior_structure = json.load(open(path, encoding="utf-8")).get("structure")
+        if prior_structure is not None:
+            t["structure"] = prior_structure
         json.dump(t, open(path, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+        lock_structure.lock_one(graph, path)   # freezes/refreshes "structure" -- reused, never a second numbering pass
         print("wrote", path, f"({len(t['per_instance'])} per-instance answers)")
 
     L = ["# Config map — interview answers -> template features\n",

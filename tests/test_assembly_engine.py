@@ -67,6 +67,113 @@ def test_refuses_when_ask_customer_not_empty():
         tmp.unlink()
 
 
+def test_refuses_when_a_template_has_no_locked_structure():
+    """Every real template is locked (requirements-engine/lock_structure.py has
+    run on all five) -- this proves the refusal fires for one that is not, by
+    taking a real template and removing exactly that one key. assemble.py must
+    not derive a structure on the fly to route around a missing lock."""
+    inst = json.loads((ENGINE / "templates" / "pm-teamwork.json").read_text())
+    assert inst.get("structure"), "fixture assumption: the real template is locked"
+    del inst["structure"]
+    tmp = ASSEMBLY / "_tmp_real_unlocked.json"
+    tmp.write_text(json.dumps(inst))
+    try:
+        r = run(str(tmp), "-o", "/tmp/should_not_be_created_unlocked")
+        assert r.returncode == 2
+        assert "REFUSED" in r.stderr
+        assert "no locked structure" in r.stderr
+    finally:
+        tmp.unlink()
+
+
+def test_registration_gaps_flags_real_report_screens_and_transitions(real_template):
+    """Every one of the five real, locked templates genuinely claims report
+    screens and/or workflow transitions/custom actions -- none of which
+    builder.py has a real generation rule for yet (see packages/builder's own
+    module docstring: only CRUD and OAuth connect are real). registration_gaps
+    must name every one of them by its own permanent, already-frozen id --
+    not silently accept a claim the Builder cannot back up."""
+    structure = real_template["structure"]
+    gaps = ae.registration_gaps(structure)
+    gap_ids = {g[0] for g in gaps}
+    report_screens = [s["id"] for s in structure["screens_inventory"] if s["kind"] == "report"]
+    assert report_screens, f"fixture assumption: {real_template['template']} has real report screens"
+    assert set(report_screens) <= gap_ids
+    # every flagged item genuinely has an unregistered kind -- the gate names
+    # real gaps, not real capability it mistakes for a gap
+    for id_, kind, k in gaps:
+        assert (k not in ae.REGISTERED_SCREEN_KINDS) if kind == "screen" else (k not in ae.REGISTERED_ACTION_KINDS)
+
+
+def test_registration_gaps_does_not_flag_real_crud_or_oauth_connect():
+    """The two things builder.py really can build -- a record's CRUD
+    screens/actions and an OAuth connect action -- must never be reported as
+    gaps. Uses pm-teamwork's real list/detail/create/edit/delete entries
+    (already proven buildable end-to-end in tests/test_builder.py) and
+    Command Desk's real connect action shape from its own approved spec."""
+    pm = json.loads((ENGINE / "templates" / "pm-teamwork.json").read_text())
+    crud_structure = {
+        "screens_inventory": [s for s in pm["structure"]["screens_inventory"] if s["kind"] in ("list", "detail")],
+        "actions_inventory": [a for a in pm["structure"]["actions_inventory"] if a["kind"] in ("create", "edit", "delete")],
+    }
+    assert crud_structure["screens_inventory"] and crud_structure["actions_inventory"]
+    assert ae.registration_gaps(crud_structure) == []
+
+    connect_structure = {
+        "screens_inventory": [{"id": "SCR-001", "kind": "integration_status", "integration": "Gmail"}],
+        "actions_inventory": [{"id": "ACT-001", "kind": "connect", "integration": "Gmail", "roles": ["Sam"]}],
+    }
+    assert ae.registration_gaps(connect_structure) == []
+
+
+def test_assemble_blocks_with_the_real_item_numbers_listed():
+    """End-to-end wiring test for the block-with-numbers rule itself: a
+    minimal, fully-answered mechanism fixture (declared as such, same genre as
+    test_refuses_on_a_structurally_invalid_instance below -- not a stand-in
+    for a real product) whose one real report screen has no registered
+    Builder rule. Proves assemble() reaches registration_gaps (not just the
+    pure function above) and names the exact blocked id in its refusal."""
+    inst = {
+        "template": "mechanism-test", "source_app": "n/a", "category": "n/a", "modules": [],
+        "inventory": {"records": [], "roles": [], "forms": [], "notifications": [],
+                      "reports": ["Test report"], "workflows": [], "file_types": [],
+                      "integrations": [], "screens": []},
+        "super_role": None,
+        "answers": {
+            "0.01": "hands-off", "A.01": "A mechanism-test fixture, not a real product.",
+            "A.02": "Prove assemble.py's registration gate fires.", "A.03": "This test suite.",
+            "A.04": "The gate lists the blocked item's own id.", "A.05": "Mechanism Test",
+            "A.06": ["web"], "A.07": "no", "A.08": "single", "A.09": "no", "A.11": "no",
+            "A.12": {"required": "no"}, "A.13": {"region": "AU", "languages": ["en"]}, "A.14": [],
+            "C.01": "No references.", "C.02": ["simple", "clear", "fast"], "C.03": "balanced",
+            "C.04": {"mode": "design_for_me"}, "C.05": {"mode": "simplified"}, "C.07": True,
+            "Z.01": True, "Z.02": True, "Z.03": True,
+        },
+        "per_instance": {
+            "RP.01:Test report": "How many test items are there?", "RP.02:Test report": ["public"],
+            "RP.03:Test report": {"delivery": "screen", "shape": "table"},
+            "RP.04:Test report": ["count of test items"],
+            "RP.06:Test report": {"filters": [], "default_range": "all time"},
+            "RP.07:Test report": {"allowed": "no"}, "RP.08:Test report": {"enabled": "no"},
+        },
+        "ask_customer": [], "features": [],
+    }
+    graph = graph_lib.load_graph(str(ENGINE / "question_graph_v3.json"))
+    graph["_q"] = {q["id"]: q for q in graph["questions"]}
+    tmp = ASSEMBLY / "_tmp_mechanism_test.json"
+    tmp.write_text(json.dumps(inst))
+    try:
+        sys.path.insert(0, str(ENGINE))
+        import lock_structure
+        lock_structure.lock_one(graph, str(tmp))
+        locked = json.loads(tmp.read_text())
+        with pytest.raises(ae.Refused, match="no registered Builder implementation") as exc_info:
+            ae.assemble(graph, locked, "SPEC-TEST", "mechanism test")
+        assert locked["structure"]["screens_inventory"][0]["id"] in str(exc_info.value)
+    finally:
+        tmp.unlink()
+
+
 def test_refuses_on_a_structurally_invalid_instance():
     """Same genre of test as validate_graph.py's and check_template.py's own
     --selftest: a deliberately invalid structure, to prove the refuse-path

@@ -18,12 +18,13 @@ Templates (added in the same bundle)
 
 | File | What it is |
 |---|---|
-| `build_templates.py` | Five app templates reverse-engineered from mature apps (Asana, Pipedrive, Acuity, Odoo core, Xero), authored as pre-filled interview answers. Run to regenerate `templates/*.json` + `CONFIG_MAP.md`. |
-| `templates/*.json` | One saved answer-set per template: inventory, fixed answers, per-instance answers keyed `QID:Instance`, `ask_customer` list, feature map. |
+| `build_templates.py` | Five app templates reverse-engineered from mature apps (Asana, Pipedrive, Acuity, Odoo core, Xero), authored as pre-filled interview answers. Run to regenerate `templates/*.json` + `CONFIG_MAP.md` — this also re-locks each template's `structure` (see below), reusing a prior lock's ids rather than recomputing them from scratch. |
+| `templates/*.json` | One saved answer-set per template: inventory, fixed answers, per-instance answers keyed `QID:Instance`, `ask_customer` list, feature map, **plus a locked `structure` block** (see `lock_structure.py`). |
 | `CONFIG_MAP.md` | Interview answer → template feature, per template, plus how templates combine (union inventories + answers, re-run the checker). |
 | `check_template.py` | Proves a template fits the graph: real question IDs, legal options, every role/record/field/stage resolves, and full coverage — every question that fires is answered or explicitly left to the customer. `--all`, `--selftest` (six breaks, all caught). |
+| `lock_structure.py` | Freezes a template's numbered build structure **once**, by running the Assembly Engine's own `derive()`/`build_model()` (`packages/assembly-engine/assemble.py`, imported — not reimplemented) and writing the result back into the template as `structure`, with every id permanently prefixed by the template's own name (`pm-teamwork/SCR-001`). Idempotent: re-running it, or reordering a template's own inventory list, never renumbers an id that already exists — only a genuinely new item gets a new number. `--all` locks every template; `assemble.py` (component 2) refuses to assemble a template that has no locked `structure` and no longer derives one on the fly. |
 
-Template status: all five PASS (accounting 152 answers, booking 118, CRM 121, ERP 196, PM 120). The interview itself was not changed.
+Template status: all five PASS check_template.py (accounting 152 answers, booking 118, CRM 121, ERP 196, PM 120) and are all locked (`lock_structure.py --all`). The interview itself was not changed. Every one of the five, at full unfiltered scope, still fails the Assembly Engine's `registration_gaps()` check today — none of their real workflows, custom actions, notifications, or reports has a Builder generation rule yet (see `packages/assembly-engine/README.md`'s "block-with-numbers consequence").
 
 Change a question: edit `build_graph.py`, run `python build_graph.py`, run `python validate_graph.py question_graph_v3.json`. If it prints FAIL, the message says which question or spec field broke and why.
 
