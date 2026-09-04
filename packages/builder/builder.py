@@ -365,29 +365,65 @@ class Handler(BaseHTTPRequestHandler):
             return {{}}
 
     def do_GET(self):
+        self._guarded(self._do_GET)
+
+    def do_POST(self):
+        self._guarded(self._do_POST)
+
+    def do_PUT(self):
+        self._guarded(self._do_PUT)
+
+    def do_DELETE(self):
+        self._guarded(self._do_DELETE)
+
+    def _guarded(self, handler):
+        # No route handler here may crash the request thread on a real
+        # failure (a broken database file, a bad value from the client) --
+        # found by exactly that happening once: an uncaught exception left
+        # the client with a reset connection instead of a real 500, and the
+        # traceback printed to stderr instead of anywhere a caller could see
+        # it. respond() may itself have already sent a partial response by
+        # the time something fails downstream of it, so this is a backstop,
+        # not the primary error path for handlers that build their own
+        # responses.
+        try:
+            handler()
+        except Exception as exc:
+            try:
+                respond(self, 500, {{"error": str(exc)}})
+            except Exception:
+                pass  # headers already sent; nothing more this response can do
+
+    def _do_GET(self):
         parsed = urlparse(self.path)
         path, qs = parsed.path, parse_qs(parsed.query)
         if path == "/" or path == "":
             path = "/index.html"
+        if path == "/favicon.ico":
+            # Browsers request this unconditionally; a plain 404 shows up as a
+            # console error on every single page load with nothing to fix.
+            self.send_response(204)
+            self.end_headers()
+            return
         if path.startswith("/static/") or re.match(r"^/[\\w.-]+\\.html$", path):
             self._serve_static(path.lstrip("/"))
             return
 {get_dispatch}
         respond(self, 404, {{"error": "no route"}})
 
-    def do_POST(self):
+    def _do_POST(self):
         parsed = urlparse(self.path)
         path = parsed.path
 {post_dispatch}
         respond(self, 404, {{"error": "no route"}})
 
-    def do_PUT(self):
+    def _do_PUT(self):
         parsed = urlparse(self.path)
         path = parsed.path
 {put_dispatch}
         respond(self, 404, {{"error": "no route"}})
 
-    def do_DELETE(self):
+    def _do_DELETE(self):
         parsed = urlparse(self.path)
         path = parsed.path
 {delete_dispatch}
@@ -527,11 +563,22 @@ def _render_integration_screen(bm, scr):
             tile.className = 'tile';
             tile.innerHTML = '<b>{provider.title()}</b>: <span class="state-' + state.toLowerCase() + '">' + state + '</span>';
             if (state !== 'linked') {{
+              // A real top-level POST navigation, so the browser follows the
+              // start route's 302 the same way a real click must: location.href
+              // only ever issues GET, and the start route is POST-only (the
+              // spec's own AC-01 requires POST) -- a plain link/onclick here
+              // would 404 in a real browser even though nothing looked broken
+              // in this generator's own tests, which is exactly the class of
+              // defect the Playwright layer exists to catch.
+              const form = document.createElement('form');
+              form.method = 'POST';
+              form.action = '/api/connections/{slug_}/start';
               const btn = document.createElement('button');
+              btn.type = 'submit';
               btn.textContent = 'Connect {provider.title()}';
-              btn.onclick = () => {{ window.location.href = '/api/connections/{slug_}/start'; }};
+              form.appendChild(btn);
               tile.appendChild(document.createElement('br'));
-              tile.appendChild(btn);
+              tile.appendChild(form);
             }}
             tiles.appendChild(tile);
           }} catch (e) {{

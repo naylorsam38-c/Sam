@@ -25,6 +25,13 @@ SKIP_EXTENSIONS = re.compile(
     re.I,
 )
 
+# Shared with packages/playwright-tester/live_test.py, which imports this list
+# rather than keeping its own copy.
+DESTRUCTIVE_WORDS = (
+    "delete", "remove", "destroy", "logout", "sign out",
+    "purchase", "pay", "charge", "submit order",
+)
+
 
 def normalize(url):
     url, _ = urldefrag(url)
@@ -125,10 +132,7 @@ async def main():
                     ).strip()
 
                     lower = label.lower()
-                    if any(word in lower for word in (
-                        "delete", "remove", "destroy", "logout", "sign out",
-                        "purchase", "pay", "charge", "submit order"
-                    )):
+                    if any(word in lower for word in DESTRUCTIVE_WORDS):
                         item["button_results"].append({
                             "label": label,
                             "result": "skipped-destructive",
