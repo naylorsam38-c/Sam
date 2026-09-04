@@ -14,6 +14,7 @@ docs/research/               the nine reports (Markdown is the source of truth)
   exports/                   the same reports as PDF and Word, plus the combined PDF
 packages/requirements-engine/ the v3 question graph (122 questions), its two
                              validators, and five app templates
+packages/assembly-engine/    completed answers -> one numbered spec (component 2)
 packages/specgate/           the spec gate: R1-R12 linter + D1-D8 decomposer
 packages/spec-writer/        transcript -> spec draft, in three model calls
 packages/crawler/            deterministic browser smoke-test harness

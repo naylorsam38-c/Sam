@@ -28,6 +28,8 @@ SYMBOLIC_GATE_VALUES = {"AMBIGUOUS_METRIC_TERMS", "DEFAULTS"}   # gate values th
 
 import copy, json, re, sys
 
+from graph_lib import field_sources
+
 
 def validate(graph):
     errors = []
@@ -132,21 +134,7 @@ def validate(graph):
                     E(f"{q['id']}: feeds OPS but is not an input of {OPS_DERIVATION}")
 
     # traceability: every spec field has exactly one source
-    sources = {}
-    def claim(field, src):
-        sources.setdefault(field, []).append(src)
-    for q in qs:
-        for f in q["fills"]:
-            claim(f, q["id"])
-    for d in graph["system_defaults"]:
-        for f in d["fields"]:
-            claim(f, d["id"])
-    for d in graph["derivations"]:
-        for f in d["outputs"]:
-            claim(f, d["id"])
-    for d in graph["deploy_inputs"]:
-        for f in d["fields"]:
-            claim(f, d["id"])
+    sources = field_sources(graph)
     master = graph["spec_fields"]
     for f in master:
         n = len(sources.get(f, []))
