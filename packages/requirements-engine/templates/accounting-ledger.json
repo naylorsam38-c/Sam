@@ -1027,7 +1027,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "accounting-ledger/REC-001"
       },
       "Invoice": {
         "fields": {
@@ -1118,7 +1119,8 @@
             "effect": "emails the invoice document to the Contact and stamps the sent time",
             "result_location": "the invoice page's activity trail"
           }
-        ]
+        ],
+        "id": "accounting-ledger/REC-002"
       },
       "Invoice line": {
         "fields": {
@@ -1190,7 +1192,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "accounting-ledger/REC-003"
       },
       "Bill": {
         "fields": {
@@ -1271,7 +1274,8 @@
           ]
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "accounting-ledger/REC-004"
       },
       "Payment": {
         "fields": {
@@ -1359,7 +1363,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "accounting-ledger/REC-005"
       }
     },
     "roles": {
@@ -2844,6 +2849,7 @@
         "expect": "reachable"
       }
     ],
+    "locked": true,
     "locked_at_graph_version": "3.0"
   }
 }

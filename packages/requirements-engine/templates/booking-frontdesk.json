@@ -793,7 +793,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "booking-frontdesk/REC-001"
       },
       "Customer": {
         "fields": {
@@ -861,7 +862,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "booking-frontdesk/REC-002"
       },
       "Appointment": {
         "fields": {
@@ -954,7 +956,8 @@
           ]
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "booking-frontdesk/REC-003"
       }
     },
     "roles": {
@@ -1976,6 +1979,7 @@
         "expect": "reachable"
       }
     ],
+    "locked": true,
     "locked_at_graph_version": "3.0"
   }
 }

@@ -903,7 +903,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "crm-pipeline/REC-001"
       },
       "Contact": {
         "fields": {
@@ -980,7 +981,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "crm-pipeline/REC-002"
       },
       "Deal": {
         "fields": {
@@ -1112,7 +1114,8 @@
             "effect": "changes the deal's Owner to another person",
             "result_location": "the deal page; the new owner's pipeline view"
           }
-        ]
+        ],
+        "id": "crm-pipeline/REC-003"
       },
       "Activity": {
         "fields": {
@@ -1221,7 +1224,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "crm-pipeline/REC-004"
       }
     },
     "roles": {
@@ -2890,6 +2894,7 @@
         "expect": "reachable"
       }
     ],
+    "locked": true,
     "locked_at_graph_version": "3.0"
   }
 }

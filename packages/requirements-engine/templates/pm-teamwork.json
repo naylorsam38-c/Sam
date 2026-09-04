@@ -809,7 +809,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "pm-teamwork/REC-001"
       },
       "Task": {
         "fields": {
@@ -926,7 +927,8 @@
             "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
             "result_location": "the same project's task list"
           }
-        ]
+        ],
+        "id": "pm-teamwork/REC-002"
       },
       "Comment": {
         "fields": {
@@ -990,7 +992,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "pm-teamwork/REC-003"
       }
     },
     "roles": {
@@ -2069,6 +2072,7 @@
         "expect": "reachable"
       }
     ],
+    "locked": true,
     "locked_at_graph_version": "3.0"
   }
 }

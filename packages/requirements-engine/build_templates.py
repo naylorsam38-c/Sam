@@ -832,8 +832,8 @@ if __name__ == "__main__":
         t["per_instance"] = {k: v for k, v in t["per_instance"].items() if not k.startswith("_")}
         path = os.path.join(outdir, t["template"] + ".json")
         # a prior locked structure (if this template is already tracked) is the
-        # one thing this rewrite must not disturb -- lock_structure.py reuses
-        # every id whose natural key still matches, so carrying it forward here
+        # one thing this rewrite must not disturb -- lock_structure.py refuses
+        # to touch an already-locked structure, so carrying it forward here
         # keeps regeneration byte-reproducible instead of wiping the freeze.
         prior_structure = None
         if os.path.exists(path):
@@ -841,7 +841,7 @@ if __name__ == "__main__":
         if prior_structure is not None:
             t["structure"] = prior_structure
         json.dump(t, open(path, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
-        lock_structure.lock_one(graph, path)   # freezes/refreshes "structure" -- reused, never a second numbering pass
+        lock_structure.lock_one(graph, path)   # locks "structure" only the first time; a no-op ever after
         print("wrote", path, f"({len(t['per_instance'])} per-instance answers)")
 
     L = ["# Config map — interview answers -> template features\n",

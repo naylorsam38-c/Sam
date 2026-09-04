@@ -1291,7 +1291,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "erp-backbone/REC-001"
       },
       "Supplier": {
         "fields": {
@@ -1384,7 +1385,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "erp-backbone/REC-002"
       },
       "Customer account": {
         "fields": {
@@ -1464,7 +1466,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "erp-backbone/REC-003"
       },
       "Purchase order": {
         "fields": {
@@ -1552,7 +1555,8 @@
           ]
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "erp-backbone/REC-004"
       },
       "Purchase order line": {
         "fields": {
@@ -1629,7 +1633,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "erp-backbone/REC-005"
       },
       "Sales order": {
         "fields": {
@@ -1710,7 +1715,8 @@
           ]
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "erp-backbone/REC-006"
       },
       "Sales order line": {
         "fields": {
@@ -1787,7 +1793,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "erp-backbone/REC-007"
       },
       "Stock adjustment": {
         "fields": {
@@ -1873,7 +1880,8 @@
           "has": "no"
         },
         "retention": "forever",
-        "custom_actions": []
+        "custom_actions": [],
+        "id": "erp-backbone/REC-008"
       }
     },
     "roles": {
@@ -4385,6 +4393,7 @@
         "expect": "reachable"
       }
     ],
+    "locked": true,
     "locked_at_graph_version": "3.0"
   }
 }
