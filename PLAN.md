@@ -47,9 +47,11 @@ named · ❌ not started.
 
 | # | Stage | Artifact | State |
 |---|---|---|---|
+| 0 | Structured interview → answers | `requirements-engine`: 122-question graph, 47 defaults, 15 derivations, 222 spec fields | ✅ graph validates; validator self-test catches all 8 breaks |
+| 0b | Pre-filled answer sets per app category | five templates (Asana, Pipedrive, Acuity, Odoo core, Xero) | ✅ all five fit the graph; checker self-test catches all 6 breaks |
 | 1 | Conversation → transcript | — | ⚠️ manual, and appropriately so |
 | 2 | Transcript → spec draft | `spec-writer`, 3 model calls, 732 lines | ⚠️ works; never run against a real model endpoint |
-| 3 | Gap detection from the question bank | `questions/universal.yaml` (28), `parts.yaml` (50) | ❌ **78 questions authored, none loaded by any code** |
+| 3 | Gap detection from the question bank | `questions/universal.yaml` (28), `parts.yaml` (50) | ❌ **78 questions authored, none loaded by any code** — and see §2b |
 | 4 | Answer loop (`[ASK]` → revision n+1) | `write(prior_spec, answers)` exists | ⚠️ accepted programmatically, not exposed by the CLI; no loop |
 | 5 | The gate, R1-R12 | `specgate.py`, 272 lines, 22 tests | ✅ |
 | 6 | Human approval | — | ✅ deliberately has no code |
@@ -66,9 +68,46 @@ named · ❌ not started.
 
 Stages 1-7 reach approval and decomposition. Stages 8-16 are the product.
 
+### 2b. Two front ends now exist, and only one of them is wired
+
+This is the decision the requirements engine forces, and it changes Phase 1.
+
+There are now two ways into a spec, built to different designs:
+
+- **`spec-writer` + `specgate`** — a free-form transcript, three model calls, a
+  78-question bank that no code loads, producing `spec.template.yaml` and
+  gated by R1–R12.
+- **`requirements-engine`** — a 122-question graph with gates, done-rules,
+  locked defaults, derivations, and 222 spec fields each with exactly one
+  validator-enforced source, plus five pre-filled templates that reduce a new
+  app to ~17 customer questions.
+
+The second is substantially further along and mechanically stronger: it is
+generated from one source of truth, both its validators bite, and its outputs
+regenerate byte-for-byte. The first has the model-facing pipeline and the
+approval/decompose path the second lacks.
+
+They are not competitors so much as two halves that have never met: the
+engine knows *what to ask and what a complete answer set looks like*;
+`specgate`/`decompose` know *how to refuse a bad spec and split an approved one
+into work packets*. Nothing currently converts an engine answer set into a
+`spec.template.yaml`.
+
+**Recommended: make the engine the front end and keep the gate as the gate.**
+Then Phase 1's "wire the question banks" becomes the wrong task — the 78-question
+bank is superseded by the 122-question graph, and the work is instead a
+compiler from engine answers → spec YAML. Whether the `[ASK]` loop survives at
+all depends on that call, because the graph's done-rules already do the job
+`[ASK]` markers were invented for. This is open decision 4 in §8.
+
 ### What running it proved
 
-- 40 tests pass from the repo root (22 gate + 9 writer + 9 new integration).
+- 48 tests pass from the repo root (22 gate + 9 writer + 9 integration + 8 engine).
+- The requirements engine's claims hold: the graph validates, both self-tests
+  catch every break they advertise (8 and 6), all five templates fit the graph,
+  and every generated artifact regenerates byte-for-byte from its source script.
+  Its README was wrong on one checkable number — it claimed 60 fixed / 62
+  per-instance questions where the graph has 61 / 61. Fixed, with a test.
 - `specgate.py` accepts the worked example clean: 3 machine criteria, 1 human.
 - The crawler works. Pointed at a test site it found 2 pages and 4 buttons,
   correctly skipped `Delete account` as destructive, and captured a thrown
@@ -269,7 +308,12 @@ These need answers from you; each changes the work.
    assumption behind the six-to-nine-week estimate. A wider target invalidates it.
 3. **Where does the backend log live** for the request-ID lookup in Phase 2.4?
    That adapter is the one genuinely bespoke piece of the harness.
-4. **Is the product the pipeline or the verification record?** Report 04 argues
+4. **Which front end wins — the 122-question graph or the transcript-plus-gap-scan
+   pipeline?** See §2b. My recommendation is the graph, with `specgate` kept as
+   the gate and a new compiler between them; that retires the 78-question bank
+   and probably the `[ASK]` loop with it. Answering this changes Phase 1
+   entirely, so it is the first thing to settle.
+5. **Is the product the pipeline or the verification record?** Report 04 argues
    the record is the fundable thing and the pipeline is its best demo. The
    phases above serve both, but the ordering assumes the record matters; if you
    want the pipeline as the product, Phase 3 moves ahead of Phase 2 and you

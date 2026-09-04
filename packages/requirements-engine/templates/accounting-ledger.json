@@ -1,0 +1,827 @@
+{
+  "template": "accounting-ledger",
+  "source_app": "Xero (invoicing core)",
+  "category": "accounting",
+  "modules": [
+    "people_directory",
+    "invoicing",
+    "payments"
+  ],
+  "inventory": {
+    "records": [
+      "Contact",
+      "Invoice",
+      "Invoice line",
+      "Bill",
+      "Payment"
+    ],
+    "roles": [
+      "Admin",
+      "Accountant",
+      "Advisor"
+    ],
+    "forms": [],
+    "notifications": [
+      "Invoice sent",
+      "Payment reminder",
+      "Payment received"
+    ],
+    "reports": [
+      "Profit and loss",
+      "Aged receivables"
+    ],
+    "workflows": [
+      "Invoice lifecycle",
+      "Bill lifecycle"
+    ],
+    "file_types": [],
+    "integrations": [],
+    "screens": []
+  },
+  "super_role": "Admin",
+  "answers": {
+    "A.06": [
+      "web"
+    ],
+    "A.07": "yes",
+    "A.08": "single",
+    "A.09": "no",
+    "A.10": [],
+    "A.11": "no",
+    "A.16": "Admin",
+    "P.00": "no",
+    "C.05": {
+      "mode": "simplified"
+    },
+    "C.06": {
+      "Admin": "Profit and loss",
+      "Accountant": "Invoices list",
+      "Advisor": "Profit and loss"
+    },
+    "AU.01": [
+      "invited"
+    ],
+    "AU.02": [
+      {
+        "name": "Full name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Email address",
+        "type": "email",
+        "required": "yes",
+        "unique": "yes"
+      }
+    ],
+    "AU.03": "yes",
+    "AU.04": [
+      "password",
+      "google"
+    ],
+    "AU.07": {
+      "scope": "nobody",
+      "method": "n/a"
+    },
+    "AU.08": {
+      "attempts": 5,
+      "duration": "15 minutes"
+    },
+    "AU.09": "yes",
+    "AU.10": "30 days",
+    "AU.11": {
+      "allowed": "yes",
+      "by": [
+        "super"
+      ],
+      "auto_triggers": []
+    },
+    "AU.12": {
+      "allowed": "yes",
+      "by": "both",
+      "data": "anonymised"
+    },
+    "AU.13": [
+      "super"
+    ],
+    "AU.14": {
+      "required": "yes",
+      "status": "need_drafting"
+    },
+    "AU.06": {
+      "inviters": [
+        "Admin"
+      ],
+      "default_role": "Accountant"
+    }
+  },
+  "per_instance": {
+    "R.01:Contact": "A customer or supplier the business invoices or is billed by.",
+    "R.02:Contact": [
+      {
+        "name": "Name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Email",
+        "type": "email",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Phone",
+        "type": "phone",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Type",
+        "type": "one_choice",
+        "required": "yes",
+        "unique": "no",
+        "options": [
+          "customer",
+          "supplier",
+          "both"
+        ]
+      },
+      {
+        "name": "Payment terms days",
+        "type": "whole_number",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Contact": "Name",
+    "R.04:Contact": {
+      "needed": "no"
+    },
+    "R.05:Contact": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      },
+      {
+        "role": "Advisor",
+        "scope": "all"
+      }
+    ],
+    "R.06:Contact": [
+      "Accountant"
+    ],
+    "R.07:Contact": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.08:Contact": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.10:Contact": {
+      "has": "no"
+    },
+    "R.11:Contact": [],
+    "R.13:Contact": "yes",
+    "R.14:Contact": "forever",
+    "R.15:Contact": [],
+    "R.01:Invoice": "Money owed TO the business by a customer.",
+    "R.02:Invoice": [
+      {
+        "name": "Contact",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Contact"
+      },
+      {
+        "name": "Issue date",
+        "type": "date",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Due date",
+        "type": "date",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Reference",
+        "type": "short_text",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Notes",
+        "type": "long_text",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Invoice": "Contact",
+    "R.04:Invoice": {
+      "needed": "yes",
+      "format": "INV-#### (sequential, never reused)"
+    },
+    "R.05:Invoice": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      },
+      {
+        "role": "Advisor",
+        "scope": "all"
+      }
+    ],
+    "R.06:Invoice": [
+      "Accountant"
+    ],
+    "R.07:Invoice": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.08:Invoice": "nobody",
+    "R.10:Invoice": {
+      "has": "yes",
+      "stages": [
+        "Draft",
+        "Awaiting approval",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ]
+    },
+    "R.11:Invoice": [
+      {
+        "target": "Contact",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Invoice": "yes",
+    "R.14:Invoice": "forever",
+    "R.15:Invoice": [
+      {
+        "name": "Send",
+        "who": [
+          "Accountant"
+        ],
+        "effect": "emails the invoice document to the Contact and stamps the sent time",
+        "result_location": "the invoice page's activity trail"
+      }
+    ],
+    "R.12:Invoice": "block",
+    "R.01:Invoice line": "One charged item on an invoice.",
+    "R.02:Invoice line": [
+      {
+        "name": "Invoice",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Invoice"
+      },
+      {
+        "name": "Description",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Quantity",
+        "type": "decimal_number",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Unit amount",
+        "type": "money",
+        "required": "yes",
+        "unique": "no"
+      }
+    ],
+    "R.03:Invoice line": "Description",
+    "R.04:Invoice line": {
+      "needed": "no"
+    },
+    "R.05:Invoice line": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      },
+      {
+        "role": "Advisor",
+        "scope": "all"
+      }
+    ],
+    "R.06:Invoice line": [
+      "Accountant"
+    ],
+    "R.07:Invoice line": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.08:Invoice line": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.10:Invoice line": {
+      "has": "no"
+    },
+    "R.11:Invoice line": [
+      {
+        "target": "Invoice",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Invoice line": "no",
+    "R.14:Invoice line": "forever",
+    "R.15:Invoice line": [],
+    "R.12:Invoice line": "delete_too",
+    "R.01:Bill": "Money owed BY the business to a supplier.",
+    "R.02:Bill": [
+      {
+        "name": "Contact",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Contact"
+      },
+      {
+        "name": "Issue date",
+        "type": "date",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Due date",
+        "type": "date",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Amount",
+        "type": "money",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Reference",
+        "type": "short_text",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Bill": "Contact",
+    "R.04:Bill": {
+      "needed": "yes",
+      "format": "BILL-#### (sequential)"
+    },
+    "R.05:Bill": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      },
+      {
+        "role": "Advisor",
+        "scope": "all"
+      }
+    ],
+    "R.06:Bill": [
+      "Accountant"
+    ],
+    "R.07:Bill": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.08:Bill": "nobody",
+    "R.10:Bill": {
+      "has": "yes",
+      "stages": [
+        "Draft",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ]
+    },
+    "R.11:Bill": [
+      {
+        "target": "Contact",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Bill": "yes",
+    "R.14:Bill": "forever",
+    "R.15:Bill": [],
+    "R.12:Bill": "block",
+    "R.01:Payment": "A received or made payment applied against an invoice or bill.",
+    "R.02:Payment": [
+      {
+        "name": "Invoice",
+        "type": "link",
+        "required": "no",
+        "unique": "no",
+        "target_record": "Invoice"
+      },
+      {
+        "name": "Bill",
+        "type": "link",
+        "required": "no",
+        "unique": "no",
+        "target_record": "Bill"
+      },
+      {
+        "name": "Amount",
+        "type": "money",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Method",
+        "type": "one_choice",
+        "required": "yes",
+        "unique": "no",
+        "options": [
+          "bank transfer",
+          "card",
+          "cash",
+          "other"
+        ]
+      }
+    ],
+    "R.03:Payment": "Amount",
+    "R.04:Payment": {
+      "needed": "no"
+    },
+    "R.05:Payment": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      },
+      {
+        "role": "Advisor",
+        "scope": "all"
+      }
+    ],
+    "R.06:Payment": [
+      "Accountant"
+    ],
+    "R.07:Payment": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.08:Payment": "nobody",
+    "R.10:Payment": {
+      "has": "no"
+    },
+    "R.11:Payment": [
+      {
+        "target": "Invoice",
+        "cardinality": "one_to_many",
+        "required": "no"
+      },
+      {
+        "target": "Bill",
+        "cardinality": "one_to_many",
+        "required": "no"
+      }
+    ],
+    "R.13:Payment": "no",
+    "R.14:Payment": "forever",
+    "R.15:Payment": [],
+    "R.12:Payment": "block",
+    "FL.01:Invoice lifecycle": {
+      "kind": "person",
+      "who": [
+        "Accountant"
+      ],
+      "action": "creating an invoice (starts in Draft)"
+    },
+    "FL.02:Invoice lifecycle": {
+      "stages": [
+        "Draft",
+        "Awaiting approval",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ],
+      "initial": "Draft",
+      "terminal": [
+        "Paid",
+        "Voided"
+      ]
+    },
+    "FL.03:Invoice lifecycle": [
+      {
+        "from": "Draft",
+        "to": "Awaiting approval",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ]
+      },
+      {
+        "from": "Awaiting approval",
+        "to": "Awaiting payment",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ]
+      },
+      {
+        "from": "Awaiting payment",
+        "to": "Paid",
+        "mover": "automatic",
+        "event": "Payments applied to the invoice reach its total"
+      },
+      {
+        "from": "Awaiting payment",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ]
+      },
+      {
+        "from": "Draft",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ]
+      }
+    ],
+    "FL.04:Invoice lifecycle": [],
+    "FL.05:Invoice lifecycle": [
+      {
+        "stage": "Awaiting approval",
+        "approvers": [
+          "Admin"
+        ]
+      }
+    ],
+    "FL.07:Invoice lifecycle": {
+      "allowed": "no"
+    },
+    "FL.08:Invoice lifecycle": "Paid invoices lock permanently and feed Profit & loss; Voided invoices keep their number and show struck through.",
+    "FL.09:Invoice lifecycle": "Awaiting payment",
+    "FL.10:Invoice lifecycle": [],
+    "FL.11:Invoice lifecycle": [],
+    "FL.06:Invoice lifecycle": {
+      "back_to": "Draft",
+      "resubmit": "yes"
+    },
+    "FL.01:Bill lifecycle": {
+      "kind": "person",
+      "who": [
+        "Accountant"
+      ],
+      "action": "creating a bill (starts in Draft)"
+    },
+    "FL.02:Bill lifecycle": {
+      "stages": [
+        "Draft",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ],
+      "initial": "Draft",
+      "terminal": [
+        "Paid",
+        "Voided"
+      ]
+    },
+    "FL.03:Bill lifecycle": [
+      {
+        "from": "Draft",
+        "to": "Awaiting payment",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ]
+      },
+      {
+        "from": "Awaiting payment",
+        "to": "Paid",
+        "mover": "automatic",
+        "event": "Payments applied to the bill reach its total"
+      },
+      {
+        "from": "Awaiting payment",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ]
+      },
+      {
+        "from": "Draft",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ]
+      }
+    ],
+    "FL.04:Bill lifecycle": [],
+    "FL.05:Bill lifecycle": [],
+    "FL.07:Bill lifecycle": {
+      "allowed": "no"
+    },
+    "FL.08:Bill lifecycle": "Paid bills lock and feed Profit & loss as expenses.",
+    "FL.09:Bill lifecycle": "Awaiting payment",
+    "FL.10:Bill lifecycle": [],
+    "FL.11:Bill lifecycle": [],
+    "N.01:Invoice sent": {
+      "kind": "event",
+      "event": "the Send action runs on an invoice"
+    },
+    "N.02:Invoice sent": [
+      {
+        "kind": "custom",
+        "who": "the invoice's Contact, at their email address"
+      }
+    ],
+    "N.03:Invoice sent": [
+      "email"
+    ],
+    "N.04:Invoice sent": "Here is your invoice: what it's for, the total, the due date and how to pay.",
+    "N.05:Invoice sent": "no",
+    "N.01:Payment reminder": {
+      "kind": "relative_to_date",
+      "record": "Invoice",
+      "date_field": "Due date",
+      "offset": "+3 days"
+    },
+    "N.02:Payment reminder": [
+      {
+        "kind": "custom",
+        "who": "the invoice's Contact — only while the invoice is in Awaiting payment"
+      }
+    ],
+    "N.03:Payment reminder": [
+      "email"
+    ],
+    "N.04:Payment reminder": "This invoice is past due — pay it or tell us why not.",
+    "N.05:Payment reminder": "no",
+    "N.01:Payment received": {
+      "kind": "event",
+      "event": "an invoice moves to Paid"
+    },
+    "N.02:Payment received": [
+      {
+        "kind": "roles",
+        "roles": [
+          "Accountant"
+        ]
+      }
+    ],
+    "N.03:Payment received": [
+      "in_app"
+    ],
+    "N.04:Payment received": "An invoice just got paid in full.",
+    "N.05:Payment received": "yes",
+    "RP.01:Profit and loss": "What did the business earn and spend in the period?",
+    "RP.02:Profit and loss": [
+      "Admin",
+      "Accountant",
+      "Advisor"
+    ],
+    "RP.03:Profit and loss": {
+      "delivery": "both",
+      "shape": "both"
+    },
+    "RP.04:Profit and loss": [
+      "revenue",
+      "expenses",
+      "net profit"
+    ],
+    "RP.06:Profit and loss": {
+      "filters": [
+        "Contact"
+      ],
+      "default_range": "this financial year to date"
+    },
+    "RP.07:Profit and loss": {
+      "allowed": "yes",
+      "by": [
+        "Accountant"
+      ]
+    },
+    "RP.08:Profit and loss": {
+      "enabled": "no"
+    },
+    "RP.01:Aged receivables": "Who owes us money, and how overdue is it?",
+    "RP.02:Aged receivables": [
+      "Admin",
+      "Accountant",
+      "Advisor"
+    ],
+    "RP.03:Aged receivables": {
+      "delivery": "both",
+      "shape": "table"
+    },
+    "RP.04:Aged receivables": [
+      "overdue invoice totals bucketed by age"
+    ],
+    "RP.06:Aged receivables": {
+      "filters": [
+        "Contact"
+      ],
+      "default_range": "as at today"
+    },
+    "RP.07:Aged receivables": {
+      "allowed": "yes",
+      "by": [
+        "Accountant"
+      ]
+    },
+    "RP.08:Aged receivables": {
+      "enabled": "no"
+    },
+    "RP.05:Profit and loss:revenue": "sum of (Quantity x Unit amount) over Invoice lines whose Invoice is in Awaiting payment or Paid (never Draft or Voided), attributed to the Invoice's Issue date — accrual basis, GST-exclusive",
+    "RP.05:Profit and loss:expenses": "sum of Bill Amount for Bills in Awaiting payment or Paid, attributed to the Bill's Issue date — accrual basis",
+    "RP.05:Profit and loss:net profit": "revenue minus expenses, exactly as those two are defined above",
+    "RP.05:Aged receivables:overdue invoice totals bucketed by age": "for each Invoice in Awaiting payment: its total minus applied Payments, bucketed by days past Due date as at today (current, 1-30, 31-60, 61-90, 90+)",
+    "P.01:Accountant": "Does the books: raises invoices, records bills and payments.",
+    "P.02:Accountant": "no",
+    "P.04:Accountant": [
+      "Admin"
+    ],
+    "P.01:Advisor": "An external accountant/bookkeeper with read-only access to everything financial.",
+    "P.02:Advisor": "no",
+    "P.04:Advisor": [
+      "Admin"
+    ]
+  },
+  "ask_customer": [
+    "0.01",
+    "A.01",
+    "A.02",
+    "A.03",
+    "A.04",
+    "A.05",
+    "A.12",
+    "A.13",
+    "A.14",
+    "C.01",
+    "C.02",
+    "C.03",
+    "C.04",
+    "C.07",
+    "Z.01",
+    "Z.02",
+    "Z.03"
+  ],
+  "features": [
+    {
+      "feature": "Invoice approval step",
+      "controlled_by": "FL.05:Invoice lifecycle",
+      "rule": "empty the approvals list -> Draft goes straight to Awaiting payment (sole traders)"
+    },
+    {
+      "feature": "Bills side",
+      "controlled_by": "A.15 records list",
+      "rule": "remove Bill and its lifecycle -> invoicing-only app; P&L expenses metric drops"
+    },
+    {
+      "feature": "Overdue chasing",
+      "controlled_by": "N.01:Payment reminder",
+      "rule": "change the +3 days offset, or remove the notification to stop chasing"
+    },
+    {
+      "feature": "Accrual vs cash reporting",
+      "controlled_by": "RP.05:Profit and loss:revenue",
+      "rule": "rewrite the definition to 'Payments received in the period' for cash basis — one answer, not a rebuild"
+    },
+    {
+      "feature": "Advisor access",
+      "controlled_by": "A.15 roles list",
+      "rule": "remove Advisor -> external-accountant access disappears"
+    }
+  ]
+}

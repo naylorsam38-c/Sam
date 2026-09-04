@@ -1,0 +1,634 @@
+{
+  "template": "pm-teamwork",
+  "source_app": "Asana",
+  "category": "project management",
+  "modules": [
+    "tasking",
+    "collaboration",
+    "files"
+  ],
+  "inventory": {
+    "records": [
+      "Project",
+      "Task",
+      "Comment"
+    ],
+    "roles": [
+      "Admin",
+      "Member",
+      "Guest"
+    ],
+    "forms": [],
+    "notifications": [
+      "Task assigned",
+      "Task due reminder",
+      "New comment"
+    ],
+    "reports": [
+      "Open tasks by person",
+      "Overdue tasks"
+    ],
+    "workflows": [
+      "Task lifecycle"
+    ],
+    "file_types": [
+      "Attachment"
+    ],
+    "integrations": [],
+    "screens": []
+  },
+  "super_role": "Admin",
+  "answers": {
+    "A.06": [
+      "web"
+    ],
+    "A.07": "yes",
+    "A.08": "single",
+    "A.09": "no",
+    "A.10": [],
+    "A.11": "no",
+    "A.16": "Admin",
+    "P.00": "no",
+    "C.05": {
+      "mode": "simplified"
+    },
+    "C.06": {
+      "Admin": "Projects list",
+      "Member": "My tasks",
+      "Guest": "Projects list"
+    },
+    "AU.01": [
+      "invited"
+    ],
+    "AU.02": [
+      {
+        "name": "Full name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Email address",
+        "type": "email",
+        "required": "yes",
+        "unique": "yes"
+      }
+    ],
+    "AU.03": "yes",
+    "AU.04": [
+      "password",
+      "google"
+    ],
+    "AU.07": {
+      "scope": "nobody",
+      "method": "n/a"
+    },
+    "AU.08": {
+      "attempts": 5,
+      "duration": "15 minutes"
+    },
+    "AU.09": "yes",
+    "AU.10": "30 days",
+    "AU.11": {
+      "allowed": "yes",
+      "by": [
+        "super"
+      ],
+      "auto_triggers": []
+    },
+    "AU.12": {
+      "allowed": "yes",
+      "by": "both",
+      "data": "anonymised"
+    },
+    "AU.13": [
+      "super"
+    ],
+    "AU.14": {
+      "required": "yes",
+      "status": "need_drafting"
+    },
+    "AU.06": {
+      "inviters": [
+        "Admin",
+        "Member"
+      ],
+      "default_role": "Member"
+    }
+  },
+  "per_instance": {
+    "R.01:Project": "A container of related work with an owner and a set of tasks.",
+    "R.02:Project": [
+      {
+        "name": "Name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Description",
+        "type": "long_text",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Owner",
+        "type": "other",
+        "required": "yes",
+        "unique": "no",
+        "custom_rule": "reference to a user account (pick-a-person field)"
+      },
+      {
+        "name": "Due date",
+        "type": "date",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Colour",
+        "type": "one_choice",
+        "required": "no",
+        "unique": "no",
+        "options": [
+          "grey",
+          "blue",
+          "green",
+          "red",
+          "purple",
+          "orange"
+        ]
+      }
+    ],
+    "R.03:Project": "Name",
+    "R.04:Project": {
+      "needed": "no"
+    },
+    "R.05:Project": [
+      {
+        "role": "Member",
+        "scope": "all"
+      },
+      {
+        "role": "Guest",
+        "scope": "linked",
+        "via": "Projects the guest was invited to"
+      }
+    ],
+    "R.06:Project": [
+      "Member"
+    ],
+    "R.07:Project": [
+      {
+        "role": "Member",
+        "scope": "all"
+      }
+    ],
+    "R.08:Project": [
+      {
+        "role": "Member",
+        "scope": "own"
+      },
+      {
+        "role": "Admin",
+        "scope": "all"
+      }
+    ],
+    "R.10:Project": {
+      "has": "no"
+    },
+    "R.11:Project": [],
+    "R.13:Project": "yes",
+    "R.14:Project": "forever",
+    "R.15:Project": [],
+    "R.09:Project": {
+      "basis": "field",
+      "field": "Owner"
+    },
+    "R.01:Task": "A single unit of work inside a project, assigned to one person.",
+    "R.02:Task": [
+      {
+        "name": "Title",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Description",
+        "type": "long_text",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Assignee",
+        "type": "other",
+        "required": "no",
+        "unique": "no",
+        "custom_rule": "reference to a user account (pick-a-person field)"
+      },
+      {
+        "name": "Due date",
+        "type": "date",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Priority",
+        "type": "one_choice",
+        "required": "no",
+        "unique": "no",
+        "options": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "name": "Project",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Project"
+      }
+    ],
+    "R.03:Task": "Title",
+    "R.04:Task": {
+      "needed": "no"
+    },
+    "R.05:Task": [
+      {
+        "role": "Member",
+        "scope": "all"
+      },
+      {
+        "role": "Guest",
+        "scope": "linked",
+        "via": "tasks in projects the guest was invited to"
+      }
+    ],
+    "R.06:Task": [
+      "Member"
+    ],
+    "R.07:Task": [
+      {
+        "role": "Member",
+        "scope": "all"
+      }
+    ],
+    "R.08:Task": [
+      {
+        "role": "Member",
+        "scope": "own"
+      },
+      {
+        "role": "Admin",
+        "scope": "all"
+      }
+    ],
+    "R.10:Task": {
+      "has": "yes",
+      "stages": [
+        "To do",
+        "In progress",
+        "Done"
+      ]
+    },
+    "R.11:Task": [
+      {
+        "target": "Project",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Task": "yes",
+    "R.14:Task": "forever",
+    "R.15:Task": [
+      {
+        "name": "Duplicate",
+        "who": [
+          "Member"
+        ],
+        "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
+        "result_location": "the same project's task list"
+      }
+    ],
+    "R.12:Task": "delete_too",
+    "R.09:Task": {
+      "basis": "creator"
+    },
+    "R.01:Comment": "A message left on a task by a person.",
+    "R.02:Comment": [
+      {
+        "name": "Body",
+        "type": "long_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Task",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Task"
+      }
+    ],
+    "R.03:Comment": "Body",
+    "R.04:Comment": {
+      "needed": "no"
+    },
+    "R.05:Comment": [
+      {
+        "role": "Member",
+        "scope": "all"
+      },
+      {
+        "role": "Guest",
+        "scope": "linked",
+        "via": "comments on tasks the guest can see"
+      }
+    ],
+    "R.06:Comment": [
+      "Member",
+      "Guest"
+    ],
+    "R.07:Comment": [
+      {
+        "role": "Member",
+        "scope": "own"
+      }
+    ],
+    "R.08:Comment": [
+      {
+        "role": "Member",
+        "scope": "own"
+      },
+      {
+        "role": "Admin",
+        "scope": "all"
+      }
+    ],
+    "R.10:Comment": {
+      "has": "no"
+    },
+    "R.11:Comment": [
+      {
+        "target": "Task",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Comment": "no",
+    "R.14:Comment": "forever",
+    "R.15:Comment": [],
+    "R.12:Comment": "delete_too",
+    "R.09:Comment": {
+      "basis": "creator"
+    },
+    "FL.01:Task lifecycle": {
+      "kind": "person",
+      "who": [
+        "Member"
+      ],
+      "action": "creating a task (starts in 'To do')"
+    },
+    "FL.02:Task lifecycle": {
+      "stages": [
+        "To do",
+        "In progress",
+        "Done"
+      ],
+      "initial": "To do",
+      "terminal": [
+        "Done"
+      ]
+    },
+    "FL.03:Task lifecycle": [
+      {
+        "from": "To do",
+        "to": "In progress",
+        "mover": "roles",
+        "roles": [
+          "Member"
+        ]
+      },
+      {
+        "from": "In progress",
+        "to": "Done",
+        "mover": "roles",
+        "roles": [
+          "Member"
+        ]
+      },
+      {
+        "from": "Done",
+        "to": "In progress",
+        "mover": "roles",
+        "roles": [
+          "Member"
+        ]
+      },
+      {
+        "from": "In progress",
+        "to": "To do",
+        "mover": "roles",
+        "roles": [
+          "Member"
+        ]
+      }
+    ],
+    "FL.04:Task lifecycle": [],
+    "FL.05:Task lifecycle": [],
+    "FL.07:Task lifecycle": {
+      "allowed": "no"
+    },
+    "FL.08:Task lifecycle": "Nothing further; it stays visible in its finished stage.",
+    "FL.09:Task lifecycle": "never",
+    "FL.10:Task lifecycle": [],
+    "FL.11:Task lifecycle": [],
+    "N.01:Task assigned": {
+      "kind": "event",
+      "event": "a task's Assignee field is set or changed"
+    },
+    "N.02:Task assigned": [
+      {
+        "kind": "field",
+        "record": "Task",
+        "field": "Assignee"
+      }
+    ],
+    "N.03:Task assigned": [
+      "email",
+      "in_app"
+    ],
+    "N.04:Task assigned": "You've been given this task — open it and see what's needed.",
+    "N.05:Task assigned": "yes",
+    "N.01:Task due reminder": {
+      "kind": "relative_to_date",
+      "record": "Task",
+      "date_field": "Due date",
+      "offset": "-24 hours"
+    },
+    "N.02:Task due reminder": [
+      {
+        "kind": "field",
+        "record": "Task",
+        "field": "Assignee"
+      }
+    ],
+    "N.03:Task due reminder": [
+      "email",
+      "in_app"
+    ],
+    "N.04:Task due reminder": "This task is due tomorrow — finish it or move the date.",
+    "N.05:Task due reminder": "yes",
+    "N.01:New comment": {
+      "kind": "event",
+      "event": "a comment is created on a task"
+    },
+    "N.02:New comment": [
+      {
+        "kind": "field",
+        "record": "Task",
+        "field": "Assignee"
+      },
+      {
+        "kind": "owner"
+      }
+    ],
+    "N.03:New comment": [
+      "in_app"
+    ],
+    "N.04:New comment": "Someone said something on your task — read and reply if needed.",
+    "N.05:New comment": "yes",
+    "RP.01:Open tasks by person": "Who is carrying how much open work right now?",
+    "RP.02:Open tasks by person": [
+      "Member"
+    ],
+    "RP.03:Open tasks by person": {
+      "delivery": "screen",
+      "shape": "both"
+    },
+    "RP.04:Open tasks by person": [
+      "count of Tasks not in stage Done, grouped by Assignee"
+    ],
+    "RP.06:Open tasks by person": {
+      "filters": [
+        "Project",
+        "Assignee",
+        "Priority"
+      ],
+      "default_range": "all time"
+    },
+    "RP.07:Open tasks by person": {
+      "allowed": "yes",
+      "by": [
+        "Member"
+      ]
+    },
+    "RP.08:Open tasks by person": {
+      "enabled": "no"
+    },
+    "RP.01:Overdue tasks": "What has slipped past its due date and needs chasing?",
+    "RP.02:Overdue tasks": [
+      "Member"
+    ],
+    "RP.03:Overdue tasks": {
+      "delivery": "screen",
+      "shape": "table"
+    },
+    "RP.04:Overdue tasks": [
+      "count of overdue Tasks"
+    ],
+    "RP.06:Overdue tasks": {
+      "filters": [
+        "Project",
+        "Assignee"
+      ],
+      "default_range": "all time"
+    },
+    "RP.07:Overdue tasks": {
+      "allowed": "yes",
+      "by": [
+        "Member"
+      ]
+    },
+    "RP.08:Overdue tasks": {
+      "enabled": "no"
+    },
+    "RP.05:Overdue tasks:count of overdue Tasks": "a Task counts as overdue when Due date is before today AND its stage is not Done, as at the moment the report is viewed",
+    "P.01:Member": "A person on the team who plans and does the work.",
+    "P.02:Member": "no",
+    "P.04:Member": [
+      "Admin"
+    ],
+    "P.01:Guest": "An outside collaborator invited into specific projects only.",
+    "P.02:Guest": "no",
+    "P.04:Guest": [
+      "Admin",
+      "Member"
+    ],
+    "FI.01:Attachment": {
+      "purpose": "a file added to a task for context",
+      "parent": "Task"
+    },
+    "FI.02:Attachment": "many",
+    "FI.03:Attachment": {
+      "uploaders": [
+        "Member"
+      ],
+      "viewers": [
+        "Member",
+        "Guest"
+      ]
+    },
+    "FI.04:Attachment": "document",
+    "FI.05:Attachment": 50,
+    "FI.06:Attachment": "keep_history",
+    "FI.07:Attachment": "yes"
+  },
+  "ask_customer": [
+    "0.01",
+    "A.01",
+    "A.02",
+    "A.03",
+    "A.04",
+    "A.05",
+    "A.12",
+    "A.13",
+    "A.14",
+    "C.01",
+    "C.02",
+    "C.03",
+    "C.04",
+    "C.07",
+    "Z.01",
+    "Z.02",
+    "Z.03"
+  ],
+  "features": [
+    {
+      "feature": "Guest access",
+      "controlled_by": "A.15 roles list",
+      "rule": "remove role 'Guest' -> every Guest grant and the invite path for guests disappears"
+    },
+    {
+      "feature": "Attachments",
+      "controlled_by": "A.15 file_types list",
+      "rule": "remove 'Attachment' -> files module drops out entirely"
+    },
+    {
+      "feature": "Priorities",
+      "controlled_by": "R.02:Task",
+      "rule": "delete the Priority field -> filter and report grouping on it drop out"
+    },
+    {
+      "feature": "Task duplication",
+      "controlled_by": "R.15:Task",
+      "rule": "delete the Duplicate action"
+    },
+    {
+      "feature": "Due-date reminders",
+      "controlled_by": "A.15 notifications list",
+      "rule": "remove 'Task due reminder'"
+    }
+  ]
+}

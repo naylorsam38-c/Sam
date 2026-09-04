@@ -12,6 +12,8 @@ PLAN.md                      status, gap analysis, and the build order
 docs/research/               the nine reports (Markdown is the source of truth)
   INDEX.md                   what each report covers
   exports/                   the same reports as PDF and Word, plus the combined PDF
+packages/requirements-engine/ the v3 question graph (122 questions), its two
+                             validators, and five app templates
 packages/specgate/           the spec gate: R1-R12 linter + D1-D8 decomposer
 packages/spec-writer/        transcript -> spec draft, in three model calls
 packages/crawler/            deterministic browser smoke-test harness
@@ -22,7 +24,16 @@ tests/                       cross-package integration tests
 
 ```bash
 pip install pyyaml pytest
-pytest                       # 40 tests across all three packages
+pytest                       # 48 tests across all four packages
+```
+
+The requirements engine is self-contained and needs no model:
+
+```bash
+cd packages/requirements-engine
+python validate_graph.py question_graph_v3.json   # the graph is sound
+python validate_graph.py --selftest               # ...and the validator bites
+python check_template.py --all                    # all five templates fit the graph
 ```
 
 The pipeline, as far as it currently reaches:

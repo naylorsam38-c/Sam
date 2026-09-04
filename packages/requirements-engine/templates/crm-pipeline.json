@@ -1,0 +1,751 @@
+{
+  "template": "crm-pipeline",
+  "source_app": "Pipedrive",
+  "category": "CRM",
+  "modules": [
+    "people_directory",
+    "pipeline",
+    "activities"
+  ],
+  "inventory": {
+    "records": [
+      "Organisation",
+      "Contact",
+      "Deal",
+      "Activity"
+    ],
+    "roles": [
+      "Admin",
+      "Sales manager",
+      "Sales rep"
+    ],
+    "forms": [],
+    "notifications": [
+      "Activity due",
+      "Deal won"
+    ],
+    "reports": [
+      "Pipeline by stage",
+      "Win rate"
+    ],
+    "workflows": [
+      "Deal pipeline"
+    ],
+    "file_types": [],
+    "integrations": [],
+    "screens": []
+  },
+  "super_role": "Admin",
+  "answers": {
+    "A.06": [
+      "web"
+    ],
+    "A.07": "yes",
+    "A.08": "single",
+    "A.09": "no",
+    "A.10": [],
+    "A.11": "no",
+    "A.16": "Admin",
+    "P.00": "no",
+    "C.05": {
+      "mode": "simplified"
+    },
+    "C.06": {
+      "Admin": "Pipeline board",
+      "Sales manager": "Pipeline board",
+      "Sales rep": "My pipeline"
+    },
+    "AU.01": [
+      "invited"
+    ],
+    "AU.02": [
+      {
+        "name": "Full name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Email address",
+        "type": "email",
+        "required": "yes",
+        "unique": "yes"
+      }
+    ],
+    "AU.03": "yes",
+    "AU.04": [
+      "password",
+      "google"
+    ],
+    "AU.07": {
+      "scope": "nobody",
+      "method": "n/a"
+    },
+    "AU.08": {
+      "attempts": 5,
+      "duration": "15 minutes"
+    },
+    "AU.09": "yes",
+    "AU.10": "30 days",
+    "AU.11": {
+      "allowed": "yes",
+      "by": [
+        "super"
+      ],
+      "auto_triggers": []
+    },
+    "AU.12": {
+      "allowed": "yes",
+      "by": "both",
+      "data": "anonymised"
+    },
+    "AU.13": [
+      "super"
+    ],
+    "AU.14": {
+      "required": "yes",
+      "status": "need_drafting"
+    },
+    "AU.06": {
+      "inviters": [
+        "Admin",
+        "Sales manager"
+      ],
+      "default_role": "Sales rep"
+    }
+  },
+  "per_instance": {
+    "R.01:Organisation": "A company the business sells to.",
+    "R.02:Organisation": [
+      {
+        "name": "Name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "yes"
+      },
+      {
+        "name": "Website",
+        "type": "url",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Phone",
+        "type": "phone",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Notes",
+        "type": "long_text",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Organisation": "Name",
+    "R.04:Organisation": {
+      "needed": "no"
+    },
+    "R.05:Organisation": [
+      {
+        "role": "Sales rep",
+        "scope": "all"
+      },
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.06:Organisation": [
+      "Sales rep",
+      "Sales manager"
+    ],
+    "R.07:Organisation": [
+      {
+        "role": "Sales rep",
+        "scope": "all"
+      },
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.08:Organisation": [
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.10:Organisation": {
+      "has": "no"
+    },
+    "R.11:Organisation": [],
+    "R.13:Organisation": "yes",
+    "R.14:Organisation": "forever",
+    "R.15:Organisation": [],
+    "R.01:Contact": "A person at an organisation the business talks to.",
+    "R.02:Contact": [
+      {
+        "name": "Full name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Email",
+        "type": "email",
+        "required": "no",
+        "unique": "yes"
+      },
+      {
+        "name": "Phone",
+        "type": "phone",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Organisation",
+        "type": "link",
+        "required": "no",
+        "unique": "no",
+        "target_record": "Organisation"
+      }
+    ],
+    "R.03:Contact": "Full name",
+    "R.04:Contact": {
+      "needed": "no"
+    },
+    "R.05:Contact": [
+      {
+        "role": "Sales rep",
+        "scope": "all"
+      },
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.06:Contact": [
+      "Sales rep",
+      "Sales manager"
+    ],
+    "R.07:Contact": [
+      {
+        "role": "Sales rep",
+        "scope": "all"
+      },
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.08:Contact": [
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.10:Contact": {
+      "has": "no"
+    },
+    "R.11:Contact": [
+      {
+        "target": "Organisation",
+        "cardinality": "one_to_many",
+        "required": "no"
+      }
+    ],
+    "R.13:Contact": "yes",
+    "R.14:Contact": "forever",
+    "R.15:Contact": [],
+    "R.12:Contact": "keep_unlinked",
+    "R.01:Deal": "A potential sale being worked through the pipeline.",
+    "R.02:Deal": [
+      {
+        "name": "Title",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Value",
+        "type": "money",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Owner",
+        "type": "other",
+        "required": "yes",
+        "unique": "no",
+        "custom_rule": "reference to a user account (pick-a-person field)"
+      },
+      {
+        "name": "Contact",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Contact"
+      },
+      {
+        "name": "Organisation",
+        "type": "link",
+        "required": "no",
+        "unique": "no",
+        "target_record": "Organisation"
+      },
+      {
+        "name": "Expected close date",
+        "type": "date",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Lost reason",
+        "type": "one_choice",
+        "required": "no",
+        "unique": "no",
+        "options": [
+          "price",
+          "timing",
+          "competitor",
+          "no response",
+          "other"
+        ]
+      }
+    ],
+    "R.03:Deal": "Title",
+    "R.04:Deal": {
+      "needed": "no"
+    },
+    "R.05:Deal": [
+      {
+        "role": "Sales rep",
+        "scope": "own"
+      },
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.06:Deal": [
+      "Sales rep",
+      "Sales manager"
+    ],
+    "R.07:Deal": [
+      {
+        "role": "Sales rep",
+        "scope": "own"
+      },
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.08:Deal": [
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.10:Deal": {
+      "has": "yes",
+      "stages": [
+        "Lead in",
+        "Contacted",
+        "Proposal sent",
+        "Negotiation",
+        "Won",
+        "Lost"
+      ]
+    },
+    "R.11:Deal": [
+      {
+        "target": "Contact",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      },
+      {
+        "target": "Organisation",
+        "cardinality": "one_to_many",
+        "required": "no"
+      }
+    ],
+    "R.13:Deal": "yes",
+    "R.14:Deal": "forever",
+    "R.15:Deal": [
+      {
+        "name": "Reassign",
+        "who": [
+          "Sales manager"
+        ],
+        "effect": "changes the deal's Owner to another person",
+        "result_location": "the deal page; the new owner's pipeline view"
+      }
+    ],
+    "R.12:Deal": "block",
+    "R.09:Deal": {
+      "basis": "field",
+      "field": "Owner"
+    },
+    "R.01:Activity": "A scheduled call, meeting or to-do attached to a deal.",
+    "R.02:Activity": [
+      {
+        "name": "Subject",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Type",
+        "type": "one_choice",
+        "required": "yes",
+        "unique": "no",
+        "options": [
+          "call",
+          "meeting",
+          "email",
+          "task"
+        ]
+      },
+      {
+        "name": "Due",
+        "type": "date_time",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Done",
+        "type": "yes_no",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Owner",
+        "type": "other",
+        "required": "yes",
+        "unique": "no",
+        "custom_rule": "reference to a user account (pick-a-person field)"
+      },
+      {
+        "name": "Deal",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Deal"
+      }
+    ],
+    "R.03:Activity": "Subject",
+    "R.04:Activity": {
+      "needed": "no"
+    },
+    "R.05:Activity": [
+      {
+        "role": "Sales rep",
+        "scope": "own"
+      },
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.06:Activity": [
+      "Sales rep",
+      "Sales manager"
+    ],
+    "R.07:Activity": [
+      {
+        "role": "Sales rep",
+        "scope": "own"
+      },
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.08:Activity": [
+      {
+        "role": "Sales rep",
+        "scope": "own"
+      },
+      {
+        "role": "Sales manager",
+        "scope": "all"
+      }
+    ],
+    "R.10:Activity": {
+      "has": "no"
+    },
+    "R.11:Activity": [
+      {
+        "target": "Deal",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Activity": "no",
+    "R.14:Activity": "forever",
+    "R.15:Activity": [],
+    "R.12:Activity": "delete_too",
+    "R.09:Activity": {
+      "basis": "field",
+      "field": "Owner"
+    },
+    "FL.01:Deal pipeline": {
+      "kind": "person",
+      "who": [
+        "Sales rep",
+        "Sales manager"
+      ],
+      "action": "creating a deal (starts in 'Lead in')"
+    },
+    "FL.02:Deal pipeline": {
+      "stages": [
+        "Lead in",
+        "Contacted",
+        "Proposal sent",
+        "Negotiation",
+        "Won",
+        "Lost"
+      ],
+      "initial": "Lead in",
+      "terminal": [
+        "Won",
+        "Lost"
+      ]
+    },
+    "FL.03:Deal pipeline": [
+      {
+        "from": "Lead in",
+        "to": "Contacted",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ]
+      },
+      {
+        "from": "Contacted",
+        "to": "Proposal sent",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ]
+      },
+      {
+        "from": "Proposal sent",
+        "to": "Negotiation",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ]
+      },
+      {
+        "from": "Negotiation",
+        "to": "Won",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ]
+      },
+      {
+        "from": "Lead in",
+        "to": "Lost",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ]
+      },
+      {
+        "from": "Contacted",
+        "to": "Lost",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ]
+      },
+      {
+        "from": "Proposal sent",
+        "to": "Lost",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ]
+      },
+      {
+        "from": "Negotiation",
+        "to": "Lost",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ]
+      }
+    ],
+    "FL.04:Deal pipeline": [],
+    "FL.05:Deal pipeline": [],
+    "FL.07:Deal pipeline": {
+      "allowed": "no"
+    },
+    "FL.08:Deal pipeline": "Won: the deal locks and counts toward revenue reporting. Lost: Lost reason becomes required.",
+    "FL.09:Deal pipeline": "Won",
+    "FL.10:Deal pipeline": [],
+    "FL.11:Deal pipeline": [],
+    "N.01:Activity due": {
+      "kind": "relative_to_date",
+      "record": "Activity",
+      "date_field": "Due",
+      "offset": "-1 hour"
+    },
+    "N.02:Activity due": [
+      {
+        "kind": "field",
+        "record": "Activity",
+        "field": "Owner"
+      }
+    ],
+    "N.03:Activity due": [
+      "email",
+      "push",
+      "in_app"
+    ],
+    "N.04:Activity due": "This call/meeting/to-do is coming up — be ready or move it.",
+    "N.05:Activity due": "yes",
+    "N.01:Deal won": {
+      "kind": "event",
+      "event": "a deal moves to stage Won"
+    },
+    "N.02:Deal won": [
+      {
+        "kind": "roles",
+        "roles": [
+          "Sales manager"
+        ]
+      }
+    ],
+    "N.03:Deal won": [
+      "in_app"
+    ],
+    "N.04:Deal won": "A deal just closed — see who won it and its value.",
+    "N.05:Deal won": "yes",
+    "RP.01:Pipeline by stage": "How much potential value sits in each stage of the pipeline?",
+    "RP.02:Pipeline by stage": [
+      "Sales rep",
+      "Sales manager"
+    ],
+    "RP.03:Pipeline by stage": {
+      "delivery": "screen",
+      "shape": "both"
+    },
+    "RP.04:Pipeline by stage": [
+      "sum of open Deal Value grouped by stage",
+      "count of Deals grouped by stage"
+    ],
+    "RP.06:Pipeline by stage": {
+      "filters": [
+        "Owner",
+        "Expected close date"
+      ],
+      "default_range": "all open deals"
+    },
+    "RP.07:Pipeline by stage": {
+      "allowed": "yes",
+      "by": [
+        "Sales manager"
+      ]
+    },
+    "RP.08:Pipeline by stage": {
+      "enabled": "no"
+    },
+    "RP.01:Win rate": "Of the deals we finish, what share do we win?",
+    "RP.02:Win rate": [
+      "Sales manager"
+    ],
+    "RP.03:Win rate": {
+      "delivery": "screen",
+      "shape": "both"
+    },
+    "RP.04:Win rate": [
+      "win rate"
+    ],
+    "RP.06:Win rate": {
+      "filters": [
+        "Owner"
+      ],
+      "default_range": "last 90 days"
+    },
+    "RP.07:Win rate": {
+      "allowed": "yes",
+      "by": [
+        "Sales manager"
+      ]
+    },
+    "RP.08:Win rate": {
+      "enabled": "no"
+    },
+    "RP.05:Win rate:win rate": "deals that entered Won divided by deals that entered Won or Lost, in the selected period, attributed to the date the deal reached that stage; expressed as a percentage",
+    "P.01:Sales manager": "Runs the sales team; sees and edits every deal.",
+    "P.02:Sales manager": "no",
+    "P.04:Sales manager": [
+      "Admin"
+    ],
+    "P.01:Sales rep": "Works their own deals and activities.",
+    "P.02:Sales rep": "no",
+    "P.04:Sales rep": [
+      "Admin",
+      "Sales manager"
+    ]
+  },
+  "ask_customer": [
+    "0.01",
+    "A.01",
+    "A.02",
+    "A.03",
+    "A.04",
+    "A.05",
+    "A.12",
+    "A.13",
+    "A.14",
+    "C.01",
+    "C.02",
+    "C.03",
+    "C.04",
+    "C.07",
+    "Z.01",
+    "Z.02",
+    "Z.03"
+  ],
+  "features": [
+    {
+      "feature": "Rep visibility (own vs all deals)",
+      "controlled_by": "R.05:Deal",
+      "rule": "change 'Sales rep: own' to 'all' for a transparent-pipeline shop"
+    },
+    {
+      "feature": "Organisations layer",
+      "controlled_by": "A.15 records list",
+      "rule": "remove 'Organisation' -> contacts stand alone; Deal loses its Organisation link"
+    },
+    {
+      "feature": "Lost reasons",
+      "controlled_by": "R.02:Deal",
+      "rule": "edit the Lost reason option list"
+    },
+    {
+      "feature": "Pipeline stages",
+      "controlled_by": "FL.02:Deal pipeline",
+      "rule": "rename/add stages; FL.03 transitions must be restated for any new stage"
+    },
+    {
+      "feature": "Win-rate reporting",
+      "controlled_by": "A.15 reports list",
+      "rule": "remove 'Win rate'"
+    }
+  ]
+}
