@@ -17,7 +17,7 @@ PASS erp-backbone/SCR-015 (screen/list): crud_list_detail
 PASS erp-backbone/SCR-016 (screen/detail): crud_list_detail
 PASS erp-backbone/SCR-017 (screen/report): stock_ledger
 PASS erp-backbone/SCR-018 (screen/report): stage_history
-FAIL erp-backbone/SCR-019 (screen/report): plain aggregation over existing fields -- no generic reporting part was built
+PASS erp-backbone/SCR-019 (screen/report): reporting_engine
 PASS erp-backbone/ACT-001 (action/create): crud_list_detail
 PASS erp-backbone/ACT-002 (action/edit): crud_list_detail
 PASS erp-backbone/ACT-003 (action/delete): crud_list_detail
@@ -42,20 +42,20 @@ PASS erp-backbone/ACT-021 (action/delete): crud_list_detail
 PASS erp-backbone/ACT-022 (action/create): crud_list_detail
 PASS erp-backbone/ACT-023 (action/edit): crud_list_detail
 PASS erp-backbone/ACT-024 (action/delete): crud_list_detail
-FAIL erp-backbone/ACT-025 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL erp-backbone/ACT-026 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL erp-backbone/ACT-027 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
+PASS erp-backbone/ACT-025 (action/transition): workflow_executor
+PASS erp-backbone/ACT-026 (action/transition): workflow_executor
+PASS erp-backbone/ACT-027 (action/transition): workflow_executor
 FAIL erp-backbone/ACT-028 (action/cancel): no binding rule for this action kind
 FAIL erp-backbone/ACT-029 (action/approve): no binding rule for this action kind
-FAIL erp-backbone/ACT-030 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL erp-backbone/ACT-031 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL erp-backbone/ACT-032 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
+PASS erp-backbone/ACT-030 (action/transition): workflow_executor
+PASS erp-backbone/ACT-031 (action/transition): workflow_executor
+PASS erp-backbone/ACT-032 (action/transition): workflow_executor
 FAIL erp-backbone/ACT-033 (action/cancel): no binding rule for this action kind
-FAIL NTF:Low stock alert (notification): event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part
-FAIL NTF:Order shipped (notification): event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part
+PASS NTF:Low stock alert (notification): notification_delivery
+PASS NTF:Order shipped (notification): notification_delivery
 PASS RPT:Stock on hand (report): stock_ledger
 PASS RPT:Sales by month (report): stage_history
-FAIL RPT:Open orders (report): plain aggregation over existing fields -- no generic reporting part was built
+PASS RPT:Open orders (report): reporting_engine
 PASS erp-backbone/OPS-001 (recurring_op): scheduled_jobs
 PASS erp-backbone/OPS-002 (recurring_op): scheduled_jobs
 PASS erp-backbone/OPS-003 (recurring_op): scheduled_jobs
@@ -72,5 +72,5 @@ PASS erp-backbone/OPS-013 (recurring_op): scheduled_jobs
 PASS erp-backbone/OPS-014 (recurring_op): scheduled_jobs
 PASS erp-backbone/OPS-015 (recurring_op): scheduled_jobs
 ---
-59/72 PASS, 13 FAIL
-NOT CLEAN -- 13 item(s) unbound
+69/72 PASS, 3 FAIL
+NOT CLEAN -- 3 item(s) unbound

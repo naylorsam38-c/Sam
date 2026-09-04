@@ -20,7 +20,7 @@ ENGINES = [
     "scheduling_availability", "scheduled_jobs", "stock_ledger", "ledger_balancing",
     "search_fts", "import_export", "file_conversion", "email_parsing",
     "bank_feed_ofx", "calendar_ics", "document_signing", "document_generation",
-    "pdf_form_filling",
+    "pdf_form_filling", "workflow_executor", "reporting_engine", "notification_delivery",
 ]
 
 

@@ -2,7 +2,7 @@
 
 A part is real, already-running code — never a description, a stub, or a
 placeholder. `parts_shelf.json` is the machine-readable version this
-directory's tooling reads; this is the human-readable index of the same 18
+directory's tooling reads; this is the human-readable index of the same 22
 parts. Every numbered item across the five locked templates binds to one of
 these by `part_id`, written directly into that item's own entry in its
 assembled spec (`packages/requirements-engine/build/<template>/BOUND_SPEC.json`)
@@ -16,7 +16,17 @@ duplicated — referenced at their real location in `builder.py`):
 | `crud_list_detail` | Record CRUD: sqlite table, `/api/<record>s` routes, list+detail HTML pages | `builder.py::{build_schema,crud_routes,render_crud_handler,_render_list_screen,_render_detail_screen}` |
 | `oauth_connect` | OAuth start/callback/status routes + integration-status page | `builder.py::{oauth_routes,render_oauth_handler,_render_integration_screen,_resolve_provider}` |
 
-Sixteen are the specialist/generic engines built and proven earlier this
+Three are the generic Builder runtime capabilities that used to be missing
+entirely -- a workflow executor, a reporting engine, and notification
+delivery -- built this pass, real code, no per-item logic:
+
+| part_id | what it does | real location |
+|---|---|---|
+| `workflow_executor` | Moves a real record one real stage when a person triggers it; refuses anything not a declared (from, to, role) transition; logs via `audit_trail` (reused) | `packages/builder/engines/workflow_executor.py::transition` |
+| `reporting_engine` | One generic parameterised SQL aggregation (count/sum/avg/min/max, filter, group-by), driven by a structured ReportSpec — no per-report code | `packages/builder/engines/reporting_engine.py::run_report` |
+| `notification_delivery` | Real in-app record + real SMTP send | `packages/builder/engines/notification_delivery.py::deliver` |
+
+Seventeen are the specialist/generic engines built and proven earlier this
 session (`packages/builder/engines/`), each real, stdlib-only, with its own
 `prove()` already run for real (see `PROOFS.md`):
 
@@ -30,7 +40,7 @@ session (`packages/builder/engines/`), each real, stdlib-only, with its own
 | `scheduled_jobs` | Real function on a real background thread after a real delay | every `OPS-nnn` job across all 5 templates; relative-to-date/schedule notification timing |
 | `document_generation` | Real HTML + a real minimal PDF | accounting-ledger `Send` (document half) |
 | `email_parsing` | Real RFC 5322/MIME parsing | accounting-ledger `Send` (message half) |
-| `audit_trail` | Real mutation log, queryable back | on the shelf, not currently bound |
+| `audit_trail` | Real mutation log, queryable back | reused internally by `workflow_executor`; not itself bound to a numbered item |
 | `scheduling_availability` | Real interval-overlap conflict detection | on the shelf, not currently bound |
 | `search_fts` | Real sqlite FTS5 full-text search | on the shelf, not currently bound |
 | `import_export` | Real CSV export/import round-trip | on the shelf, not currently bound |
@@ -41,12 +51,19 @@ session (`packages/builder/engines/`), each real, stdlib-only, with its own
 | `pdf_form_filling` | Real AcroForm PDF generate/fill | on the shelf, not currently bound |
 
 No `app_engine.py` runtime or "foundation modules" exist in this repository
-— those names belong to a different codebase. This repo's own existing,
-real runtime is `builder.py` (CRUD + OAuth only) plus the 16 engines above.
-Where no real part exists for a numbered item — every plain person-triggered
-workflow transition, every plain-aggregation report, `approve`/`cancel`
-actions, event-triggered notification *delivery*, and the `Reassign` custom
-action — none is invented. That gap is a missing **Builder runtime
-capability** (a generic workflow executor, a generic reporting engine), not
-a missing part; conflating the two would misrepresent what's actually
-here.
+— those names belong to a different codebase. This repo's own real runtime
+is `builder.py` (CRUD + OAuth) plus the 20 engines above — which, since
+this pass, includes a generic workflow executor, a generic reporting
+engine, and real notification delivery, so plain person-triggered
+transitions and single-table aggregation reports are now genuinely covered
+where they fit that scope. What's still correctly unbound: `approve`/
+`cancel` actions (no declared rule for either kind at all, not even a
+generic one); the `Reassign` custom action (a plain field edit with no
+custom-action execution rule); automatic transitions gated on a live
+external event (Acuity's deposit-triggered confirm — needs real payment
+processing, not on the shelf); and reports whose own metric needs a
+cross-table join, a computed value, or bucketing (`Profit and loss`,
+`Aged receivables`) — genuinely outside `reporting_engine`'s real,
+single-table scope, not forced through it. None of these is invented or
+stubbed; each is named with its real reason in
+`packages/requirements-engine/build/<template>/CHECK_OUTPUT.txt`.

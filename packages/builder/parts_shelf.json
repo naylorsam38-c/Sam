@@ -169,6 +169,32 @@
       "location": ["packages/builder/engines/pdf_form_filling.py::render_pdf_with_form", "packages/builder/engines/pdf_form_filling.py::fill_field"],
       "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
       "evidence": "packages/builder/PROOFS.md#pdf_form_filling"
+    },
+    {
+      "part_id": "workflow_executor",
+      "kind": ["action/transition (person-triggered)"],
+      "what_it_does": "Moves a real record from one real stage to the next when a person triggers it: refuses any move that is not one of the workflow's own declared (from, to, role) transitions, and logs who/when via the real audit_trail part.",
+      "location": ["packages/builder/engines/workflow_executor.py::transition"],
+      "reused_from": "new generic runtime capability; reuses audit_trail for logging rather than a second logging mechanism",
+      "evidence": "packages/builder/PROOFS.md#workflow_executor"
+    },
+    {
+      "part_id": "reporting_engine",
+      "kind": ["report (single-table count/sum/avg/min/max, filtered, grouped)"],
+      "what_it_does": "Runs one generic, parameterised SQL aggregation (count/sum/avg/min/max, optional filters, optional group-by) driven entirely by a structured ReportSpec -- no per-report Python.",
+      "location": ["packages/builder/engines/reporting_engine.py::run_report"],
+      "reused_from": "new generic runtime capability",
+      "evidence": "packages/builder/PROOFS.md#reporting_engine",
+      "scope_limit": "single table only -- a report needing a cross-table join, a computed value, an arithmetic combination of other metrics, or range bucketing is genuinely outside this part's real capability and stays unbound"
+    },
+    {
+      "part_id": "notification_delivery",
+      "kind": ["notification (delivery)"],
+      "what_it_does": "Actually delivers a notification: inserts a real in-app record and sends a real email over a real SMTP connection.",
+      "location": ["packages/builder/engines/notification_delivery.py::deliver"],
+      "reused_from": "new generic runtime capability",
+      "evidence": "packages/builder/PROOFS.md#notification_delivery",
+      "scope_limit": "proven against a real, self-hosted SMTP server (genuine protocol, real socket) since no live external mail provider is reachable/credentialed in this sandbox -- delivering to a real third-party mailbox needs real credentials this session does not have"
     }
   ]
 }

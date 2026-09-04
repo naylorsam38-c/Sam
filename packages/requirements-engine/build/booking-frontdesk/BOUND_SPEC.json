@@ -468,9 +468,13 @@
         "timing": "immediate",
         "id": "booking-frontdesk/NOTIF-001",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null
         }
       },
       "Appointment reminder": {
@@ -495,12 +499,14 @@
         "id": "booking-frontdesk/NOTIF-002",
         "part_bindings": {
           "parts": [
-            "scheduled_jobs"
+            "scheduled_jobs",
+            "notification_delivery"
           ],
           "locations": [
-            "packages/builder/engines/scheduled_jobs.py::run_after"
+            "packages/builder/engines/scheduled_jobs.py::run_after",
+            "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf"
+          "note": null
         }
       },
       "Cancellation notice": {
@@ -526,9 +532,13 @@
         "timing": "immediate",
         "id": "booking-frontdesk/NOTIF-003",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null
         }
       }
     },
@@ -540,9 +550,13 @@
         },
         "id": "booking-frontdesk/RPT-001",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null
         }
       },
       "No-show rate": {
@@ -763,9 +777,13 @@
         "kind": "report",
         "report": "Upcoming appointments",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null
         }
       },
       {
@@ -1026,9 +1044,13 @@
         ],
         "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Completed'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1043,9 +1065,13 @@
         ],
         "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'No-show'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1060,9 +1086,13 @@
         ],
         "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Cancelled'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1077,9 +1107,13 @@
         ],
         "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Cancelled'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {

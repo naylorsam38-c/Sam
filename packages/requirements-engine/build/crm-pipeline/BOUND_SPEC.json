@@ -740,12 +740,14 @@
         "id": "crm-pipeline/NOTIF-001",
         "part_bindings": {
           "parts": [
-            "scheduled_jobs"
+            "scheduled_jobs",
+            "notification_delivery"
           ],
           "locations": [
-            "packages/builder/engines/scheduled_jobs.py::run_after"
+            "packages/builder/engines/scheduled_jobs.py::run_after",
+            "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf"
+          "note": null
         }
       },
       "Deal won": {
@@ -767,9 +769,13 @@
         "timing": "immediate",
         "id": "crm-pipeline/NOTIF-002",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null
         }
       }
     },
@@ -782,9 +788,13 @@
         },
         "id": "crm-pipeline/RPT-001",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null
         }
       },
       "Win rate": {
@@ -1022,9 +1032,13 @@
         "kind": "report",
         "report": "Pipeline by stage",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null
         }
       },
       {
@@ -1370,9 +1384,13 @@
         ],
         "outcome": "moves 'Deal pipeline' from 'Lead in' to 'Contacted'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1388,9 +1406,13 @@
         ],
         "outcome": "moves 'Deal pipeline' from 'Contacted' to 'Proposal sent'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1406,9 +1428,13 @@
         ],
         "outcome": "moves 'Deal pipeline' from 'Proposal sent' to 'Negotiation'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1424,9 +1450,13 @@
         ],
         "outcome": "moves 'Deal pipeline' from 'Negotiation' to 'Won'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1442,9 +1472,13 @@
         ],
         "outcome": "moves 'Deal pipeline' from 'Lead in' to 'Lost'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1460,9 +1494,13 @@
         ],
         "outcome": "moves 'Deal pipeline' from 'Contacted' to 'Lost'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1478,9 +1516,13 @@
         ],
         "outcome": "moves 'Deal pipeline' from 'Proposal sent' to 'Lost'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1496,9 +1538,13 @@
         ],
         "outcome": "moves 'Deal pipeline' from 'Negotiation' to 'Lost'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       }
     ],

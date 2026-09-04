@@ -1202,9 +1202,13 @@
         "timing": "immediate",
         "id": "erp-backbone/NOTIF-001",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null
         }
       },
       "Order shipped": {
@@ -1226,9 +1230,13 @@
         "timing": "immediate",
         "id": "erp-backbone/NOTIF-002",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null
         }
       }
     },
@@ -1277,9 +1285,13 @@
         },
         "id": "erp-backbone/RPT-003",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null
         }
       }
     },
@@ -1667,9 +1679,13 @@
         "kind": "report",
         "report": "Open orders",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null
         }
       }
     ],
@@ -2249,9 +2265,13 @@
         ],
         "outcome": "moves 'Purchase order lifecycle' from 'Draft' to 'Confirmed'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -2266,9 +2286,13 @@
         ],
         "outcome": "moves 'Purchase order lifecycle' from 'Confirmed' to 'Received'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -2283,9 +2307,13 @@
         ],
         "outcome": "moves 'Purchase order lifecycle' from 'Received' to 'Closed'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -2334,9 +2362,13 @@
         ],
         "outcome": "moves 'Sales order lifecycle' from 'Draft' to 'Confirmed'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -2351,9 +2383,13 @@
         ],
         "outcome": "moves 'Sales order lifecycle' from 'Confirmed' to 'Shipped'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -2368,9 +2404,13 @@
         ],
         "outcome": "moves 'Sales order lifecycle' from 'Shipped' to 'Closed'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {

@@ -13,8 +13,8 @@
 | pm-teamwork/SCR-004 | detail | crud_list_detail |  |
 | pm-teamwork/SCR-005 | list | crud_list_detail |  |
 | pm-teamwork/SCR-006 | detail | crud_list_detail |  |
-| pm-teamwork/SCR-007 | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
-| pm-teamwork/SCR-008 | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
+| pm-teamwork/SCR-007 | report | reporting_engine |  |
+| pm-teamwork/SCR-008 | report | reporting_engine |  |
 
 ## Actions
 
@@ -30,25 +30,25 @@
 | pm-teamwork/ACT-008 | create | crud_list_detail |  |
 | pm-teamwork/ACT-009 | edit | crud_list_detail |  |
 | pm-teamwork/ACT-010 | delete | crud_list_detail |  |
-| pm-teamwork/ACT-011 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| pm-teamwork/ACT-012 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| pm-teamwork/ACT-013 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| pm-teamwork/ACT-014 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
+| pm-teamwork/ACT-011 | transition | workflow_executor |  |
+| pm-teamwork/ACT-012 | transition | workflow_executor |  |
+| pm-teamwork/ACT-013 | transition | workflow_executor |  |
+| pm-teamwork/ACT-014 | transition | workflow_executor |  |
 
 ## Notifications
 
 | id | kind | parts | note |
 |---|---|---|---|
-| Task assigned | notification | **UNBOUND** | event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part |
-| Task due reminder | notification | scheduled_jobs | covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf |
-| New comment | notification | **UNBOUND** | event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part |
+| Task assigned | notification | notification_delivery |  |
+| Task due reminder | notification | scheduled_jobs, notification_delivery |  |
+| New comment | notification | notification_delivery |  |
 
 ## Reports
 
 | id | kind | parts | note |
 |---|---|---|---|
-| Open tasks by person | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
-| Overdue tasks | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
+| Open tasks by person | report | reporting_engine |  |
+| Overdue tasks | report | reporting_engine |  |
 
 ## Recurring ops
 

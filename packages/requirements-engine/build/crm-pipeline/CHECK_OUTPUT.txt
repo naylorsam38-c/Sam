@@ -7,7 +7,7 @@ PASS crm-pipeline/SCR-005 (screen/list): crud_list_detail
 PASS crm-pipeline/SCR-006 (screen/detail): crud_list_detail
 PASS crm-pipeline/SCR-007 (screen/list): crud_list_detail
 PASS crm-pipeline/SCR-008 (screen/detail): crud_list_detail
-FAIL crm-pipeline/SCR-009 (screen/report): plain aggregation over existing fields -- no generic reporting part was built
+PASS crm-pipeline/SCR-009 (screen/report): reporting_engine
 PASS crm-pipeline/SCR-010 (screen/report): stage_history
 PASS crm-pipeline/ACT-001 (action/create): crud_list_detail
 PASS crm-pipeline/ACT-002 (action/edit): crud_list_detail
@@ -22,17 +22,17 @@ FAIL crm-pipeline/ACT-010 (action/custom): a plain restricted field edit -- no s
 PASS crm-pipeline/ACT-011 (action/create): crud_list_detail
 PASS crm-pipeline/ACT-012 (action/edit): crud_list_detail
 PASS crm-pipeline/ACT-013 (action/delete): crud_list_detail
-FAIL crm-pipeline/ACT-014 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL crm-pipeline/ACT-015 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL crm-pipeline/ACT-016 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL crm-pipeline/ACT-017 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL crm-pipeline/ACT-018 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL crm-pipeline/ACT-019 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL crm-pipeline/ACT-020 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL crm-pipeline/ACT-021 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-PASS NTF:Activity due (notification): scheduled_jobs
-FAIL NTF:Deal won (notification): event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part
-FAIL RPT:Pipeline by stage (report): plain aggregation over existing fields -- no generic reporting part was built
+PASS crm-pipeline/ACT-014 (action/transition): workflow_executor
+PASS crm-pipeline/ACT-015 (action/transition): workflow_executor
+PASS crm-pipeline/ACT-016 (action/transition): workflow_executor
+PASS crm-pipeline/ACT-017 (action/transition): workflow_executor
+PASS crm-pipeline/ACT-018 (action/transition): workflow_executor
+PASS crm-pipeline/ACT-019 (action/transition): workflow_executor
+PASS crm-pipeline/ACT-020 (action/transition): workflow_executor
+PASS crm-pipeline/ACT-021 (action/transition): workflow_executor
+PASS NTF:Activity due (notification): scheduled_jobs, notification_delivery
+PASS NTF:Deal won (notification): notification_delivery
+PASS RPT:Pipeline by stage (report): reporting_engine
 PASS RPT:Win rate (report): stage_history
 PASS crm-pipeline/OPS-001 (recurring_op): scheduled_jobs
 PASS crm-pipeline/OPS-002 (recurring_op): scheduled_jobs
@@ -44,5 +44,5 @@ PASS crm-pipeline/OPS-007 (recurring_op): scheduled_jobs
 PASS crm-pipeline/OPS-008 (recurring_op): scheduled_jobs
 PASS crm-pipeline/OPS-009 (recurring_op): scheduled_jobs
 ---
-32/44 PASS, 12 FAIL
-NOT CLEAN -- 12 item(s) unbound
+43/44 PASS, 1 FAIL
+NOT CLEAN -- 1 item(s) unbound

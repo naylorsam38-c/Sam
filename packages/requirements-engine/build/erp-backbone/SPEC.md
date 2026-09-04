@@ -25,7 +25,7 @@
 | erp-backbone/SCR-016 | detail | crud_list_detail |  |
 | erp-backbone/SCR-017 | report | stock_ledger |  |
 | erp-backbone/SCR-018 | report | stage_history |  |
-| erp-backbone/SCR-019 | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
+| erp-backbone/SCR-019 | report | reporting_engine |  |
 
 ## Actions
 
@@ -55,22 +55,22 @@
 | erp-backbone/ACT-022 | create | crud_list_detail |  |
 | erp-backbone/ACT-023 | edit | crud_list_detail |  |
 | erp-backbone/ACT-024 | delete | crud_list_detail |  |
-| erp-backbone/ACT-025 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| erp-backbone/ACT-026 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| erp-backbone/ACT-027 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
+| erp-backbone/ACT-025 | transition | workflow_executor |  |
+| erp-backbone/ACT-026 | transition | workflow_executor |  |
+| erp-backbone/ACT-027 | transition | workflow_executor |  |
 | erp-backbone/ACT-028 | cancel | **UNBOUND** | no binding rule for this action kind |
 | erp-backbone/ACT-029 | approve | **UNBOUND** | no binding rule for this action kind |
-| erp-backbone/ACT-030 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| erp-backbone/ACT-031 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| erp-backbone/ACT-032 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
+| erp-backbone/ACT-030 | transition | workflow_executor |  |
+| erp-backbone/ACT-031 | transition | workflow_executor |  |
+| erp-backbone/ACT-032 | transition | workflow_executor |  |
 | erp-backbone/ACT-033 | cancel | **UNBOUND** | no binding rule for this action kind |
 
 ## Notifications
 
 | id | kind | parts | note |
 |---|---|---|---|
-| Low stock alert | notification | **UNBOUND** | event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part |
-| Order shipped | notification | **UNBOUND** | event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part |
+| Low stock alert | notification | notification_delivery |  |
+| Order shipped | notification | notification_delivery |  |
 
 ## Reports
 
@@ -78,7 +78,7 @@
 |---|---|---|---|
 | Stock on hand | report | stock_ledger |  |
 | Sales by month | report | stage_history |  |
-| Open orders | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
+| Open orders | report | reporting_engine |  |
 
 ## Recurring ops
 

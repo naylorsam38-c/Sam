@@ -97,11 +97,38 @@ TRANSITION_BINDINGS = {
             "but the template models both as one automatic-triggered edge"),
 }
 
+WORKFLOW_EXECUTOR = _resolve(["workflow_executor"], None)
+
+# reports whose own real metric fits reporting_engine's real, single-table
+# scope (count/sum/avg/min/max, filter, one group-by) -- worked out by hand
+# against each report's own real RP.04/RP.06 answers, not assumed:
+#   pm-teamwork "Open tasks by person"/"Overdue tasks": single table (Task),
+#     filter + group-by / two filters. Fits, proven in reporting_engine's
+#     own prove() against this exact shape.
+#   crm-pipeline "Pipeline by stage": single table (Deal), sum+count grouped
+#     by stage. Fits (two run_report() calls, one per metric, no join).
+#   booking-frontdesk "Upcoming appointments": single table (Appointment),
+#     an "in" filter (stage) + a "within_next_days" filter (Start). Fits.
+#   erp-backbone "Open orders": two metrics, each its own single table
+#     (Sales order / Purchase order) -- two independent run_report() calls,
+#     no cross-table join needed for either one. Fits.
+# Left unbound (accounting-ledger "Profit and loss", "Aged receivables"):
+# both need a cross-table join (Invoice -> Invoice line), a computed value
+# (Quantity x Unit amount), an arithmetic combination of other metrics
+# (net profit = revenue - expenses), or age-bucketing -- genuinely outside
+# a single-table count/sum/avg/min/max engine, not forced through it.
+REPORTING_ENGINE = _resolve(["reporting_engine"], None)
+
 REPORT_BINDINGS = {
     "Win rate": _resolve(["stage_history"], None),
     "No-show rate": _resolve(["stage_history"], None),
     "Sales by month": _resolve(["stage_history"], None),
     "Stock on hand": _resolve(["stock_ledger"], None),
+    "Open tasks by person": REPORTING_ENGINE,
+    "Overdue tasks": REPORTING_ENGINE,
+    "Pipeline by stage": REPORTING_ENGINE,
+    "Upcoming appointments": REPORTING_ENGINE,
+    "Open orders": REPORTING_ENGINE,
 }
 
 CRUD_OAUTH = _resolve(["crud_list_detail"], None)
@@ -119,7 +146,7 @@ def bind_action(act):
         return CUSTOM_ACTION_BINDINGS.get(name, ([], [], "no binding rule for this custom action"))
     if act["kind"] == "transition":
         if act.get("mover") != "automatic":
-            return [], [], "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+            return WORKFLOW_EXECUTOR
         key = (act.get("workflow"), act.get("from"), act.get("to"))
         return TRANSITION_BINDINGS.get(key, ([], [], "no binding rule for this automatic transition"))
     return [], [], "no binding rule for this action kind"
@@ -137,12 +164,15 @@ def bind_screen(scr, report_bindings_by_name):
 
 
 def bind_notification(notif):
+    """Every real notification binds to notification_delivery for the real
+    delivery half (real in-app row + real SMTP send). A relative_to_date/
+    schedule-triggered one ALSO binds to scheduled_jobs for the real timing
+    half (wait until due, then fire) -- two parts cooperating, not one
+    covering both concerns."""
     kind = (notif.get("trigger") or {}).get("kind")
     if kind in ("relative_to_date", "schedule"):
-        return _resolve(["scheduled_jobs"],
-                         "covers the real timing half (wait until due, then fire); actual message "
-                         "delivery over email/sms/push has no part on the shelf")
-    return [], [], "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
+        return _resolve(["scheduled_jobs", "notification_delivery"], None)
+    return _resolve(["notification_delivery"], None)
 
 
 def bind_ops():

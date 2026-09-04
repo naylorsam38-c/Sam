@@ -516,9 +516,13 @@
         "timing": "immediate",
         "id": "pm-teamwork/NOTIF-001",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null
         }
       },
       "Task due reminder": {
@@ -543,12 +547,14 @@
         "id": "pm-teamwork/NOTIF-002",
         "part_bindings": {
           "parts": [
-            "scheduled_jobs"
+            "scheduled_jobs",
+            "notification_delivery"
           ],
           "locations": [
-            "packages/builder/engines/scheduled_jobs.py::run_after"
+            "packages/builder/engines/scheduled_jobs.py::run_after",
+            "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf"
+          "note": null
         }
       },
       "New comment": {
@@ -572,9 +578,13 @@
         "timing": "immediate",
         "id": "pm-teamwork/NOTIF-003",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null
         }
       }
     },
@@ -586,9 +596,13 @@
         },
         "id": "pm-teamwork/RPT-001",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null
         }
       },
       "Overdue tasks": {
@@ -598,9 +612,13 @@
         },
         "id": "pm-teamwork/RPT-002",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null
         }
       }
     },
@@ -784,9 +802,13 @@
         "kind": "report",
         "report": "Open tasks by person",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null
         }
       },
       {
@@ -794,9 +816,13 @@
         "kind": "report",
         "report": "Overdue tasks",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null
         }
       }
     ],
@@ -1056,9 +1082,13 @@
         ],
         "outcome": "moves 'Task lifecycle' from 'To do' to 'In progress'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1073,9 +1103,13 @@
         ],
         "outcome": "moves 'Task lifecycle' from 'In progress' to 'Done'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1090,9 +1124,13 @@
         ],
         "outcome": "moves 'Task lifecycle' from 'Done' to 'In progress'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1107,9 +1145,13 @@
         ],
         "outcome": "moves 'Task lifecycle' from 'In progress' to 'To do'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       }
     ],

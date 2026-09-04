@@ -37,24 +37,24 @@
 | accounting-ledger/ACT-011 | edit | crud_list_detail |  |
 | accounting-ledger/ACT-012 | create | crud_list_detail |  |
 | accounting-ledger/ACT-013 | edit | crud_list_detail |  |
-| accounting-ledger/ACT-014 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| accounting-ledger/ACT-015 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
+| accounting-ledger/ACT-014 | transition | workflow_executor |  |
+| accounting-ledger/ACT-015 | transition | workflow_executor |  |
 | accounting-ledger/ACT-016 | transition | ledger_balancing |  |
-| accounting-ledger/ACT-017 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| accounting-ledger/ACT-018 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
+| accounting-ledger/ACT-017 | transition | workflow_executor |  |
+| accounting-ledger/ACT-018 | transition | workflow_executor |  |
 | accounting-ledger/ACT-019 | approve | **UNBOUND** | no binding rule for this action kind |
-| accounting-ledger/ACT-020 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
+| accounting-ledger/ACT-020 | transition | workflow_executor |  |
 | accounting-ledger/ACT-021 | transition | ledger_balancing |  |
-| accounting-ledger/ACT-022 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| accounting-ledger/ACT-023 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
+| accounting-ledger/ACT-022 | transition | workflow_executor |  |
+| accounting-ledger/ACT-023 | transition | workflow_executor |  |
 
 ## Notifications
 
 | id | kind | parts | note |
 |---|---|---|---|
-| Invoice sent | notification | **UNBOUND** | event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part |
-| Payment reminder | notification | scheduled_jobs | covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf |
-| Payment received | notification | **UNBOUND** | event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part |
+| Invoice sent | notification | notification_delivery |  |
+| Payment reminder | notification | scheduled_jobs, notification_delivery |  |
+| Payment received | notification | notification_delivery |  |
 
 ## Reports
 

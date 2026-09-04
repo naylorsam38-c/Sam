@@ -769,9 +769,13 @@
         "timing": "immediate",
         "id": "accounting-ledger/NOTIF-001",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null
         }
       },
       "Payment reminder": {
@@ -794,12 +798,14 @@
         "id": "accounting-ledger/NOTIF-002",
         "part_bindings": {
           "parts": [
-            "scheduled_jobs"
+            "scheduled_jobs",
+            "notification_delivery"
           ],
           "locations": [
-            "packages/builder/engines/scheduled_jobs.py::run_after"
+            "packages/builder/engines/scheduled_jobs.py::run_after",
+            "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf"
+          "note": null
         }
       },
       "Payment received": {
@@ -821,9 +827,13 @@
         "timing": "immediate",
         "id": "accounting-ledger/NOTIF-003",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null
         }
       }
     },
@@ -1447,9 +1457,13 @@
         ],
         "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Awaiting approval'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1464,9 +1478,13 @@
         ],
         "outcome": "moves 'Invoice lifecycle' from 'Awaiting approval' to 'Awaiting payment'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1501,9 +1519,13 @@
         ],
         "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Voided'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1518,9 +1540,13 @@
         ],
         "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Voided'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1550,9 +1576,13 @@
         ],
         "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Awaiting payment'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1587,9 +1617,13 @@
         ],
         "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Voided'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       },
       {
@@ -1604,9 +1638,13 @@
         ],
         "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Voided'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null
         }
       }
     ],

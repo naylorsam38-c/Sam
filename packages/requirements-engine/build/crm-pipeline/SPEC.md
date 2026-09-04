@@ -15,7 +15,7 @@
 | crm-pipeline/SCR-006 | detail | crud_list_detail |  |
 | crm-pipeline/SCR-007 | list | crud_list_detail |  |
 | crm-pipeline/SCR-008 | detail | crud_list_detail |  |
-| crm-pipeline/SCR-009 | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
+| crm-pipeline/SCR-009 | report | reporting_engine |  |
 | crm-pipeline/SCR-010 | report | stage_history |  |
 
 ## Actions
@@ -35,27 +35,27 @@
 | crm-pipeline/ACT-011 | create | crud_list_detail |  |
 | crm-pipeline/ACT-012 | edit | crud_list_detail |  |
 | crm-pipeline/ACT-013 | delete | crud_list_detail |  |
-| crm-pipeline/ACT-014 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| crm-pipeline/ACT-015 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| crm-pipeline/ACT-016 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| crm-pipeline/ACT-017 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| crm-pipeline/ACT-018 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| crm-pipeline/ACT-019 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| crm-pipeline/ACT-020 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
-| crm-pipeline/ACT-021 | transition | **UNBOUND** | person-triggered -- no specialist part needed, but the Builder has no generic workflow executor |
+| crm-pipeline/ACT-014 | transition | workflow_executor |  |
+| crm-pipeline/ACT-015 | transition | workflow_executor |  |
+| crm-pipeline/ACT-016 | transition | workflow_executor |  |
+| crm-pipeline/ACT-017 | transition | workflow_executor |  |
+| crm-pipeline/ACT-018 | transition | workflow_executor |  |
+| crm-pipeline/ACT-019 | transition | workflow_executor |  |
+| crm-pipeline/ACT-020 | transition | workflow_executor |  |
+| crm-pipeline/ACT-021 | transition | workflow_executor |  |
 
 ## Notifications
 
 | id | kind | parts | note |
 |---|---|---|---|
-| Activity due | notification | scheduled_jobs | covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf |
-| Deal won | notification | **UNBOUND** | event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part |
+| Activity due | notification | scheduled_jobs, notification_delivery |  |
+| Deal won | notification | notification_delivery |  |
 
 ## Reports
 
 | id | kind | parts | note |
 |---|---|---|---|
-| Pipeline by stage | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
+| Pipeline by stage | report | reporting_engine |  |
 | Win rate | report | stage_history |  |
 
 ## Recurring ops

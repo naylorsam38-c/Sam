@@ -6,7 +6,7 @@ PASS booking-frontdesk/SCR-004 (screen/detail): crud_list_detail
 PASS booking-frontdesk/SCR-005 (screen/list): crud_list_detail
 PASS booking-frontdesk/SCR-006 (screen/detail): crud_list_detail
 FAIL booking-frontdesk/SCR-007 (screen/form): no binding rule for this screen kind
-FAIL booking-frontdesk/SCR-008 (screen/report): plain aggregation over existing fields -- no generic reporting part was built
+PASS booking-frontdesk/SCR-008 (screen/report): reporting_engine
 PASS booking-frontdesk/SCR-009 (screen/report): stage_history
 PASS booking-frontdesk/ACT-001 (action/create): crud_list_detail
 PASS booking-frontdesk/ACT-002 (action/edit): crud_list_detail
@@ -18,16 +18,16 @@ PASS booking-frontdesk/ACT-007 (action/create): crud_list_detail
 PASS booking-frontdesk/ACT-008 (action/edit): crud_list_detail
 PASS booking-frontdesk/ACT-009 (action/delete): crud_list_detail
 FAIL booking-frontdesk/ACT-010 (action/transition): half of this transition is 'the deposit payment succeeds' -- needs live payment processing, not on the shelf; the other half needs no part at all, but the template models both as one automatic-triggered edge
-FAIL booking-frontdesk/ACT-011 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL booking-frontdesk/ACT-012 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL booking-frontdesk/ACT-013 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
-FAIL booking-frontdesk/ACT-014 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
+PASS booking-frontdesk/ACT-011 (action/transition): workflow_executor
+PASS booking-frontdesk/ACT-012 (action/transition): workflow_executor
+PASS booking-frontdesk/ACT-013 (action/transition): workflow_executor
+PASS booking-frontdesk/ACT-014 (action/transition): workflow_executor
 FAIL booking-frontdesk/ACT-015 (action/cancel): no binding rule for this action kind
 FAIL booking-frontdesk/ACT-016 (action/submit): no binding rule for this action kind
-FAIL NTF:Booking confirmation (notification): event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part
-PASS NTF:Appointment reminder (notification): scheduled_jobs
-FAIL NTF:Cancellation notice (notification): event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part
-FAIL RPT:Upcoming appointments (report): plain aggregation over existing fields -- no generic reporting part was built
+PASS NTF:Booking confirmation (notification): notification_delivery
+PASS NTF:Appointment reminder (notification): scheduled_jobs, notification_delivery
+PASS NTF:Cancellation notice (notification): notification_delivery
+PASS RPT:Upcoming appointments (report): reporting_engine
 PASS RPT:No-show rate (report): stage_history
 PASS booking-frontdesk/OPS-001 (recurring_op): scheduled_jobs
 PASS booking-frontdesk/OPS-002 (recurring_op): scheduled_jobs
@@ -41,5 +41,5 @@ PASS booking-frontdesk/OPS-009 (recurring_op): scheduled_jobs
 PASS booking-frontdesk/OPS-010 (recurring_op): scheduled_jobs
 PASS booking-frontdesk/OPS-011 (recurring_op): scheduled_jobs
 ---
-29/41 PASS, 12 FAIL
-NOT CLEAN -- 12 item(s) unbound
+37/41 PASS, 4 FAIL
+NOT CLEAN -- 4 item(s) unbound
