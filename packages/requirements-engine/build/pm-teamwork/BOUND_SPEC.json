@@ -515,9 +515,10 @@
         ],
         "timing": "immediate",
         "id": "pm-teamwork/NOTIF-001",
-        "engine_bindings": {
-          "engines": [],
-          "note": "event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
         }
       },
       "Task due reminder": {
@@ -540,11 +541,14 @@
         ],
         "timing": "offset:-24 hours",
         "id": "pm-teamwork/NOTIF-002",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
           ],
-          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no engine -- see catalogue"
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf"
         }
       },
       "New comment": {
@@ -567,9 +571,10 @@
         ],
         "timing": "immediate",
         "id": "pm-teamwork/NOTIF-003",
-        "engine_bindings": {
-          "engines": [],
-          "note": "event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
         }
       }
     },
@@ -580,9 +585,10 @@
           "count of Tasks not in stage Done, grouped by Assignee": "auto: count/sum of 'count of Tasks not in stage Done, grouped by Assignee'"
         },
         "id": "pm-teamwork/RPT-001",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       },
       "Overdue tasks": {
@@ -591,9 +597,10 @@
           "count of overdue Tasks": "a Task counts as overdue when Due date is before today AND its stage is not Done, as at the moment the report is viewed"
         },
         "id": "pm-teamwork/RPT-002",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       }
     },
@@ -668,9 +675,16 @@
         "id": "pm-teamwork/SCR-001",
         "kind": "list",
         "record": "Project",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -679,9 +693,16 @@
         "id": "pm-teamwork/SCR-002",
         "kind": "detail",
         "record": "Project",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -690,9 +711,16 @@
         "id": "pm-teamwork/SCR-003",
         "kind": "list",
         "record": "Task",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -701,9 +729,16 @@
         "id": "pm-teamwork/SCR-004",
         "kind": "detail",
         "record": "Task",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -712,9 +747,16 @@
         "id": "pm-teamwork/SCR-005",
         "kind": "list",
         "record": "Comment",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -723,9 +765,16 @@
         "id": "pm-teamwork/SCR-006",
         "kind": "detail",
         "record": "Comment",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -734,18 +783,20 @@
         "id": "pm-teamwork/SCR-007",
         "kind": "report",
         "report": "Open tasks by person",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       },
       {
         "id": "pm-teamwork/SCR-008",
         "kind": "report",
         "report": "Overdue tasks",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       }
     ],
@@ -773,9 +824,16 @@
           "Member"
         ],
         "outcome": "creates a new 'Project' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -788,9 +846,16 @@
           "Member"
         ],
         "outcome": "edits an existing 'Project' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -804,9 +869,16 @@
           "Member"
         ],
         "outcome": "deletes a 'Project' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -819,9 +891,16 @@
           "Member"
         ],
         "outcome": "creates a new 'Task' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -834,9 +913,16 @@
           "Member"
         ],
         "outcome": "edits an existing 'Task' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -850,9 +936,16 @@
           "Member"
         ],
         "outcome": "deletes a 'Task' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -873,9 +966,12 @@
           "Member"
         ],
         "outcome": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "record_cloning"
+          ],
+          "locations": [
+            "packages/builder/engines/record_cloning.py::clone"
           ],
           "note": null
         }
@@ -889,9 +985,16 @@
           "Guest"
         ],
         "outcome": "creates a new 'Comment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -904,9 +1007,16 @@
           "Member"
         ],
         "outcome": "edits an existing 'Comment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -920,9 +1030,16 @@
           "Member"
         ],
         "outcome": "deletes a 'Comment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -938,9 +1055,10 @@
           "Member"
         ],
         "outcome": "moves 'Task lifecycle' from 'To do' to 'In progress'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -954,9 +1072,10 @@
           "Member"
         ],
         "outcome": "moves 'Task lifecycle' from 'In progress' to 'Done'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -970,9 +1089,10 @@
           "Member"
         ],
         "outcome": "moves 'Task lifecycle' from 'Done' to 'In progress'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -986,9 +1106,10 @@
           "Member"
         ],
         "outcome": "moves 'Task lifecycle' from 'In progress' to 'To do'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       }
     ],
@@ -997,9 +1118,12 @@
         "id": "pm-teamwork/OPS-001",
         "source": "R.14:Project",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1008,9 +1132,12 @@
         "id": "pm-teamwork/OPS-002",
         "source": "R.14:Task",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1019,9 +1146,12 @@
         "id": "pm-teamwork/OPS-003",
         "source": "R.14:Comment",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1036,9 +1166,12 @@
           ],
           "action": "creating a task (starts in 'To do')"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1050,9 +1183,12 @@
           "kind": "event",
           "event": "a task's Assignee field is set or changed"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1066,9 +1202,12 @@
           "date_field": "Due date",
           "offset": "-24 hours"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1080,9 +1219,12 @@
           "kind": "event",
           "event": "a comment is created on a task"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1093,9 +1235,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1106,9 +1251,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }

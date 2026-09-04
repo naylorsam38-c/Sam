@@ -738,11 +738,14 @@
         ],
         "timing": "offset:-1 hour",
         "id": "crm-pipeline/NOTIF-001",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
           ],
-          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no engine -- see catalogue"
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf"
         }
       },
       "Deal won": {
@@ -763,9 +766,10 @@
         ],
         "timing": "immediate",
         "id": "crm-pipeline/NOTIF-002",
-        "engine_bindings": {
-          "engines": [],
-          "note": "event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
         }
       }
     },
@@ -777,9 +781,10 @@
           "count of Deals grouped by stage": "auto: count/sum of 'count of Deals grouped by stage'"
         },
         "id": "crm-pipeline/RPT-001",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       },
       "Win rate": {
@@ -788,9 +793,14 @@
           "win rate": "deals that entered Won divided by deals that entered Won or Lost, in the selected period, attributed to the date the deal reached that stage; expressed as a percentage"
         },
         "id": "crm-pipeline/RPT-002",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "stage_history"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_history.py::record_transition",
+            "packages/builder/engines/stage_history.py::entered_at",
+            "packages/builder/engines/stage_history.py::rate_between"
           ],
           "note": null
         }
@@ -867,9 +877,16 @@
         "id": "crm-pipeline/SCR-001",
         "kind": "list",
         "record": "Organisation",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -878,9 +895,16 @@
         "id": "crm-pipeline/SCR-002",
         "kind": "detail",
         "record": "Organisation",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -889,9 +913,16 @@
         "id": "crm-pipeline/SCR-003",
         "kind": "list",
         "record": "Contact",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -900,9 +931,16 @@
         "id": "crm-pipeline/SCR-004",
         "kind": "detail",
         "record": "Contact",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -911,9 +949,16 @@
         "id": "crm-pipeline/SCR-005",
         "kind": "list",
         "record": "Deal",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -922,9 +967,16 @@
         "id": "crm-pipeline/SCR-006",
         "kind": "detail",
         "record": "Deal",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -933,9 +985,16 @@
         "id": "crm-pipeline/SCR-007",
         "kind": "list",
         "record": "Activity",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -944,9 +1003,16 @@
         "id": "crm-pipeline/SCR-008",
         "kind": "detail",
         "record": "Activity",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -955,18 +1021,24 @@
         "id": "crm-pipeline/SCR-009",
         "kind": "report",
         "report": "Pipeline by stage",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       },
       {
         "id": "crm-pipeline/SCR-010",
         "kind": "report",
         "report": "Win rate",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "stage_history"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_history.py::record_transition",
+            "packages/builder/engines/stage_history.py::entered_at",
+            "packages/builder/engines/stage_history.py::rate_between"
           ],
           "note": null
         }
@@ -999,9 +1071,16 @@
           "Sales rep"
         ],
         "outcome": "creates a new 'Organisation' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1015,9 +1094,16 @@
           "Sales rep"
         ],
         "outcome": "edits an existing 'Organisation' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1030,9 +1116,16 @@
           "Sales manager"
         ],
         "outcome": "deletes a 'Organisation' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1046,9 +1139,16 @@
           "Sales rep"
         ],
         "outcome": "creates a new 'Contact' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1062,9 +1162,16 @@
           "Sales rep"
         ],
         "outcome": "edits an existing 'Contact' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1077,9 +1184,16 @@
           "Sales manager"
         ],
         "outcome": "deletes a 'Contact' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1093,9 +1207,16 @@
           "Sales rep"
         ],
         "outcome": "creates a new 'Deal' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1109,9 +1230,16 @@
           "Sales rep"
         ],
         "outcome": "edits an existing 'Deal' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1124,9 +1252,16 @@
           "Sales manager"
         ],
         "outcome": "deletes a 'Deal' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1147,9 +1282,10 @@
           "Sales manager"
         ],
         "outcome": "changes the deal's Owner to another person",
-        "engine_bindings": {
-          "engines": [],
-          "note": "a plain restricted field edit -- no specialist engine needed, but the Builder has no generic custom-action execution rule at all"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "a plain restricted field edit -- no specialist part needed, but the Builder has no generic custom-action execution rule at all"
         }
       },
       {
@@ -1161,9 +1297,16 @@
           "Sales rep"
         ],
         "outcome": "creates a new 'Activity' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1177,9 +1320,16 @@
           "Sales rep"
         ],
         "outcome": "edits an existing 'Activity' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1193,9 +1343,16 @@
           "Sales rep"
         ],
         "outcome": "deletes a 'Activity' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1212,9 +1369,10 @@
           "Sales manager"
         ],
         "outcome": "moves 'Deal pipeline' from 'Lead in' to 'Contacted'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1229,9 +1387,10 @@
           "Sales manager"
         ],
         "outcome": "moves 'Deal pipeline' from 'Contacted' to 'Proposal sent'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1246,9 +1405,10 @@
           "Sales manager"
         ],
         "outcome": "moves 'Deal pipeline' from 'Proposal sent' to 'Negotiation'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1263,9 +1423,10 @@
           "Sales manager"
         ],
         "outcome": "moves 'Deal pipeline' from 'Negotiation' to 'Won'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1280,9 +1441,10 @@
           "Sales manager"
         ],
         "outcome": "moves 'Deal pipeline' from 'Lead in' to 'Lost'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1297,9 +1459,10 @@
           "Sales manager"
         ],
         "outcome": "moves 'Deal pipeline' from 'Contacted' to 'Lost'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1314,9 +1477,10 @@
           "Sales manager"
         ],
         "outcome": "moves 'Deal pipeline' from 'Proposal sent' to 'Lost'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1331,9 +1495,10 @@
           "Sales manager"
         ],
         "outcome": "moves 'Deal pipeline' from 'Negotiation' to 'Lost'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       }
     ],
@@ -1342,9 +1507,12 @@
         "id": "crm-pipeline/OPS-001",
         "source": "R.14:Organisation",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1353,9 +1521,12 @@
         "id": "crm-pipeline/OPS-002",
         "source": "R.14:Contact",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1364,9 +1535,12 @@
         "id": "crm-pipeline/OPS-003",
         "source": "R.14:Deal",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1375,9 +1549,12 @@
         "id": "crm-pipeline/OPS-004",
         "source": "R.14:Activity",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1393,9 +1570,12 @@
           ],
           "action": "creating a deal (starts in 'Lead in')"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1409,9 +1589,12 @@
           "date_field": "Due",
           "offset": "-1 hour"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1423,9 +1606,12 @@
           "kind": "event",
           "event": "a deal moves to stage Won"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1436,9 +1622,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1449,9 +1638,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }

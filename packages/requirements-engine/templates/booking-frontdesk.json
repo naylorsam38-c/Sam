@@ -389,8 +389,7 @@
         "from": "Booked",
         "to": "Confirmed",
         "mover": "automatic",
-        "event": "the deposit payment succeeds, or a staff member confirms manually",
-        "id": "booking-frontdesk/TRN-001"
+        "event": "the deposit payment succeeds, or a staff member confirms manually"
       },
       {
         "from": "Confirmed",
@@ -398,8 +397,7 @@
         "mover": "roles",
         "roles": [
           "Staff"
-        ],
-        "id": "booking-frontdesk/TRN-002"
+        ]
       },
       {
         "from": "Confirmed",
@@ -407,8 +405,7 @@
         "mover": "roles",
         "roles": [
           "Staff"
-        ],
-        "id": "booking-frontdesk/TRN-003"
+        ]
       },
       {
         "from": "Booked",
@@ -416,8 +413,7 @@
         "mover": "roles",
         "roles": [
           "Staff"
-        ],
-        "id": "booking-frontdesk/TRN-004"
+        ]
       },
       {
         "from": "Confirmed",
@@ -425,8 +421,7 @@
         "mover": "roles",
         "roles": [
           "Staff"
-        ],
-        "id": "booking-frontdesk/TRN-005"
+        ]
       }
     ],
     "FL.04:Appointment lifecycle": [],

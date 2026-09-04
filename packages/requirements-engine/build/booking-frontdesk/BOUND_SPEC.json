@@ -467,9 +467,10 @@
         ],
         "timing": "immediate",
         "id": "booking-frontdesk/NOTIF-001",
-        "engine_bindings": {
-          "engines": [],
-          "note": "event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
         }
       },
       "Appointment reminder": {
@@ -492,11 +493,14 @@
         ],
         "timing": "offset:-24 hours",
         "id": "booking-frontdesk/NOTIF-002",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
           ],
-          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no engine -- see catalogue"
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf"
         }
       },
       "Cancellation notice": {
@@ -521,9 +525,10 @@
         ],
         "timing": "immediate",
         "id": "booking-frontdesk/NOTIF-003",
-        "engine_bindings": {
-          "engines": [],
-          "note": "event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
         }
       }
     },
@@ -534,9 +539,10 @@
           "count of Appointments in stage Booked or Confirmed": "auto: count/sum of 'count of Appointments in stage Booked or Confirmed'"
         },
         "id": "booking-frontdesk/RPT-001",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       },
       "No-show rate": {
@@ -545,9 +551,14 @@
           "no-show rate": "appointments that ended No-show divided by appointments that ended Completed or No-show, in the selected period, by the appointment's Start date; expressed as a percentage"
         },
         "id": "booking-frontdesk/RPT-002",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "stage_history"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_history.py::record_transition",
+            "packages/builder/engines/stage_history.py::entered_at",
+            "packages/builder/engines/stage_history.py::rate_between"
           ],
           "note": null
         }
@@ -633,9 +644,16 @@
         "id": "booking-frontdesk/SCR-001",
         "kind": "list",
         "record": "Service",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -644,9 +662,16 @@
         "id": "booking-frontdesk/SCR-002",
         "kind": "detail",
         "record": "Service",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -655,9 +680,16 @@
         "id": "booking-frontdesk/SCR-003",
         "kind": "list",
         "record": "Customer",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -666,9 +698,16 @@
         "id": "booking-frontdesk/SCR-004",
         "kind": "detail",
         "record": "Customer",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -677,9 +716,16 @@
         "id": "booking-frontdesk/SCR-005",
         "kind": "list",
         "record": "Appointment",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -688,9 +734,16 @@
         "id": "booking-frontdesk/SCR-006",
         "kind": "detail",
         "record": "Appointment",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -699,8 +752,9 @@
         "id": "booking-frontdesk/SCR-007",
         "kind": "form",
         "form": "Public booking form",
-        "engine_bindings": {
-          "engines": [],
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
           "note": "no binding rule for this screen kind"
         }
       },
@@ -708,18 +762,24 @@
         "id": "booking-frontdesk/SCR-008",
         "kind": "report",
         "report": "Upcoming appointments",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       },
       {
         "id": "booking-frontdesk/SCR-009",
         "kind": "report",
         "report": "No-show rate",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "stage_history"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_history.py::record_transition",
+            "packages/builder/engines/stage_history.py::entered_at",
+            "packages/builder/engines/stage_history.py::rate_between"
           ],
           "note": null
         }
@@ -749,9 +809,16 @@
           "Owner"
         ],
         "outcome": "creates a new 'Service' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -764,9 +831,16 @@
           "Owner"
         ],
         "outcome": "edits an existing 'Service' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -779,9 +853,16 @@
           "Owner"
         ],
         "outcome": "deletes a 'Service' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -794,9 +875,16 @@
           "Staff"
         ],
         "outcome": "creates a new 'Customer' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -809,9 +897,16 @@
           "Staff"
         ],
         "outcome": "edits an existing 'Customer' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -824,9 +919,16 @@
           "Owner"
         ],
         "outcome": "deletes a 'Customer' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -839,9 +941,16 @@
           "Staff"
         ],
         "outcome": "creates a new 'Appointment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -854,9 +963,16 @@
           "Staff"
         ],
         "outcome": "edits an existing 'Appointment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -869,9 +985,16 @@
           "Owner"
         ],
         "outcome": "deletes a 'Appointment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -885,9 +1008,10 @@
         "mover": "automatic",
         "roles": null,
         "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Confirmed'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "half of this transition is 'the deposit payment succeeds' -- needs live payment processing, not registered; the other half needs no engine at all, but the template models both as one automatic-triggered edge"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "half of this transition is 'the deposit payment succeeds' -- needs live payment processing, not on the shelf; the other half needs no part at all, but the template models both as one automatic-triggered edge"
         }
       },
       {
@@ -901,9 +1025,10 @@
           "Staff"
         ],
         "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Completed'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -917,9 +1042,10 @@
           "Staff"
         ],
         "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'No-show'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -933,9 +1059,10 @@
           "Staff"
         ],
         "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Cancelled'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -949,9 +1076,10 @@
           "Staff"
         ],
         "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Cancelled'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -966,8 +1094,9 @@
           "Confirmed"
         ],
         "outcome": "cancels 'Appointment lifecycle' from stage(s) ['Booked', 'Confirmed']",
-        "engine_bindings": {
-          "engines": [],
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
           "note": "no binding rule for this action kind"
         }
       },
@@ -977,8 +1106,9 @@
         "form": "Public booking form",
         "roles": null,
         "outcome": "submits the 'Public booking form' form, creating/editing its target record 'Appointment'",
-        "engine_bindings": {
-          "engines": [],
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
           "note": "no binding rule for this action kind"
         }
       }
@@ -988,9 +1118,12 @@
         "id": "booking-frontdesk/OPS-001",
         "source": "R.14:Service",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -999,9 +1132,12 @@
         "id": "booking-frontdesk/OPS-002",
         "source": "R.14:Customer",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1010,9 +1146,12 @@
         "id": "booking-frontdesk/OPS-003",
         "source": "R.14:Appointment",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1024,9 +1163,12 @@
           "kind": "event",
           "event": "an appointment is created (public form or by staff); starts in 'Booked'"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1041,9 +1183,12 @@
             "then": "if the deposit is unpaid, the appointment moves to Cancelled and the slot is released"
           }
         ],
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1055,9 +1200,12 @@
           "kind": "event",
           "event": "an appointment reaches stage Confirmed"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1071,9 +1219,12 @@
           "date_field": "Start",
           "offset": "-24 hours"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1085,9 +1236,12 @@
           "kind": "event",
           "event": "an appointment moves to Cancelled"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1098,9 +1252,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1111,9 +1268,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1125,9 +1285,12 @@
           "grace_days": 0,
           "after_repeated": "cancel"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }

@@ -1,44 +1,44 @@
 BINDING CHECK: BOUND-ACCOUNTING-LEDGER (customer_complete=False)
-PASS accounting-ledger/SCR-001 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/SCR-002 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/SCR-003 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/SCR-004 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/SCR-005 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/SCR-006 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/SCR-007 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/SCR-008 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/SCR-009 (screen/list): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/SCR-010 (screen/detail): (existing Builder rule -- CRUD/OAuth, no engine needed)
-FAIL accounting-ledger/SCR-011 (screen/report): plain aggregation over existing fields -- no generic reporting engine was built
-FAIL accounting-ledger/SCR-012 (screen/report): plain aggregation over existing fields -- no generic reporting engine was built
-PASS accounting-ledger/ACT-001 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/ACT-002 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/ACT-003 (action/delete): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/ACT-004 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/ACT-005 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
+PASS accounting-ledger/SCR-001 (screen/list): crud_list_detail
+PASS accounting-ledger/SCR-002 (screen/detail): crud_list_detail
+PASS accounting-ledger/SCR-003 (screen/list): crud_list_detail
+PASS accounting-ledger/SCR-004 (screen/detail): crud_list_detail
+PASS accounting-ledger/SCR-005 (screen/list): crud_list_detail
+PASS accounting-ledger/SCR-006 (screen/detail): crud_list_detail
+PASS accounting-ledger/SCR-007 (screen/list): crud_list_detail
+PASS accounting-ledger/SCR-008 (screen/detail): crud_list_detail
+PASS accounting-ledger/SCR-009 (screen/list): crud_list_detail
+PASS accounting-ledger/SCR-010 (screen/detail): crud_list_detail
+FAIL accounting-ledger/SCR-011 (screen/report): plain aggregation over existing fields -- no generic reporting part was built
+FAIL accounting-ledger/SCR-012 (screen/report): plain aggregation over existing fields -- no generic reporting part was built
+PASS accounting-ledger/ACT-001 (action/create): crud_list_detail
+PASS accounting-ledger/ACT-002 (action/edit): crud_list_detail
+PASS accounting-ledger/ACT-003 (action/delete): crud_list_detail
+PASS accounting-ledger/ACT-004 (action/create): crud_list_detail
+PASS accounting-ledger/ACT-005 (action/edit): crud_list_detail
 PASS accounting-ledger/ACT-006 (action/custom): document_generation, email_parsing
-PASS accounting-ledger/ACT-007 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/ACT-008 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/ACT-009 (action/delete): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/ACT-010 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/ACT-011 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/ACT-012 (action/create): (existing Builder rule -- CRUD/OAuth, no engine needed)
-PASS accounting-ledger/ACT-013 (action/edit): (existing Builder rule -- CRUD/OAuth, no engine needed)
-FAIL accounting-ledger/ACT-014 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
-FAIL accounting-ledger/ACT-015 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+PASS accounting-ledger/ACT-007 (action/create): crud_list_detail
+PASS accounting-ledger/ACT-008 (action/edit): crud_list_detail
+PASS accounting-ledger/ACT-009 (action/delete): crud_list_detail
+PASS accounting-ledger/ACT-010 (action/create): crud_list_detail
+PASS accounting-ledger/ACT-011 (action/edit): crud_list_detail
+PASS accounting-ledger/ACT-012 (action/create): crud_list_detail
+PASS accounting-ledger/ACT-013 (action/edit): crud_list_detail
+FAIL accounting-ledger/ACT-014 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
+FAIL accounting-ledger/ACT-015 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
 PASS accounting-ledger/ACT-016 (action/transition): ledger_balancing
-FAIL accounting-ledger/ACT-017 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
-FAIL accounting-ledger/ACT-018 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL accounting-ledger/ACT-017 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
+FAIL accounting-ledger/ACT-018 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
 FAIL accounting-ledger/ACT-019 (action/approve): no binding rule for this action kind
-FAIL accounting-ledger/ACT-020 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
+FAIL accounting-ledger/ACT-020 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
 PASS accounting-ledger/ACT-021 (action/transition): ledger_balancing
-FAIL accounting-ledger/ACT-022 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
-FAIL accounting-ledger/ACT-023 (action/transition): person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor
-FAIL NTF:Invoice sent (notification): event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine
+FAIL accounting-ledger/ACT-022 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
+FAIL accounting-ledger/ACT-023 (action/transition): person-triggered -- no specialist part needed, but the Builder has no generic workflow executor
+FAIL NTF:Invoice sent (notification): event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part
 PASS NTF:Payment reminder (notification): scheduled_jobs
-FAIL NTF:Payment received (notification): event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine
-FAIL RPT:Profit and loss (report): plain aggregation over existing fields -- no generic reporting engine was built
-FAIL RPT:Aged receivables (report): plain aggregation over existing fields -- no generic reporting engine was built
+FAIL NTF:Payment received (notification): event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part
+FAIL RPT:Profit and loss (report): plain aggregation over existing fields -- no generic reporting part was built
+FAIL RPT:Aged receivables (report): plain aggregation over existing fields -- no generic reporting part was built
 PASS accounting-ledger/OPS-001 (recurring_op): scheduled_jobs
 PASS accounting-ledger/OPS-002 (recurring_op): scheduled_jobs
 PASS accounting-ledger/OPS-003 (recurring_op): scheduled_jobs

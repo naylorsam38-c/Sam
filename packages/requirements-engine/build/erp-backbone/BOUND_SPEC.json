@@ -1201,9 +1201,10 @@
         ],
         "timing": "immediate",
         "id": "erp-backbone/NOTIF-001",
-        "engine_bindings": {
-          "engines": [],
-          "note": "event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
         }
       },
       "Order shipped": {
@@ -1224,9 +1225,10 @@
         ],
         "timing": "immediate",
         "id": "erp-backbone/NOTIF-002",
-        "engine_bindings": {
-          "engines": [],
-          "note": "event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
         }
       }
     },
@@ -1238,9 +1240,13 @@
           "count of Products at or below Reorder point": "auto: count/sum of 'count of Products at or below Reorder point'"
         },
         "id": "erp-backbone/RPT-001",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "stock_ledger"
+          ],
+          "locations": [
+            "packages/builder/engines/stock_ledger.py::apply_order_line",
+            "packages/builder/engines/stock_ledger.py::needs_reorder"
           ],
           "note": null
         }
@@ -1251,9 +1257,14 @@
           "sales value": "auto: count/sum of 'sales value'"
         },
         "id": "erp-backbone/RPT-002",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "stage_history"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_history.py::record_transition",
+            "packages/builder/engines/stage_history.py::entered_at",
+            "packages/builder/engines/stage_history.py::rate_between"
           ],
           "note": null
         }
@@ -1265,9 +1276,10 @@
           "count of Purchase orders in Confirmed": "auto: count/sum of 'count of Purchase orders in Confirmed'"
         },
         "id": "erp-backbone/RPT-003",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       }
     },
@@ -1335,9 +1347,16 @@
         "id": "erp-backbone/SCR-001",
         "kind": "list",
         "record": "Product",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1346,9 +1365,16 @@
         "id": "erp-backbone/SCR-002",
         "kind": "detail",
         "record": "Product",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1357,9 +1383,16 @@
         "id": "erp-backbone/SCR-003",
         "kind": "list",
         "record": "Supplier",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1368,9 +1401,16 @@
         "id": "erp-backbone/SCR-004",
         "kind": "detail",
         "record": "Supplier",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1379,9 +1419,16 @@
         "id": "erp-backbone/SCR-005",
         "kind": "list",
         "record": "Customer account",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1390,9 +1437,16 @@
         "id": "erp-backbone/SCR-006",
         "kind": "detail",
         "record": "Customer account",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1401,9 +1455,16 @@
         "id": "erp-backbone/SCR-007",
         "kind": "list",
         "record": "Purchase order",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1412,9 +1473,16 @@
         "id": "erp-backbone/SCR-008",
         "kind": "detail",
         "record": "Purchase order",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1423,9 +1491,16 @@
         "id": "erp-backbone/SCR-009",
         "kind": "list",
         "record": "Purchase order line",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1434,9 +1509,16 @@
         "id": "erp-backbone/SCR-010",
         "kind": "detail",
         "record": "Purchase order line",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1445,9 +1527,16 @@
         "id": "erp-backbone/SCR-011",
         "kind": "list",
         "record": "Sales order",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1456,9 +1545,16 @@
         "id": "erp-backbone/SCR-012",
         "kind": "detail",
         "record": "Sales order",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1467,9 +1563,16 @@
         "id": "erp-backbone/SCR-013",
         "kind": "list",
         "record": "Sales order line",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1478,9 +1581,16 @@
         "id": "erp-backbone/SCR-014",
         "kind": "detail",
         "record": "Sales order line",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1489,9 +1599,16 @@
         "id": "erp-backbone/SCR-015",
         "kind": "list",
         "record": "Stock adjustment",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1500,9 +1617,16 @@
         "id": "erp-backbone/SCR-016",
         "kind": "detail",
         "record": "Stock adjustment",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1511,9 +1635,13 @@
         "id": "erp-backbone/SCR-017",
         "kind": "report",
         "report": "Stock on hand",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "stock_ledger"
+          ],
+          "locations": [
+            "packages/builder/engines/stock_ledger.py::apply_order_line",
+            "packages/builder/engines/stock_ledger.py::needs_reorder"
           ],
           "note": null
         }
@@ -1522,9 +1650,14 @@
         "id": "erp-backbone/SCR-018",
         "kind": "report",
         "report": "Sales by month",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "stage_history"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_history.py::record_transition",
+            "packages/builder/engines/stage_history.py::entered_at",
+            "packages/builder/engines/stage_history.py::rate_between"
           ],
           "note": null
         }
@@ -1533,9 +1666,10 @@
         "id": "erp-backbone/SCR-019",
         "kind": "report",
         "report": "Open orders",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       }
     ],
@@ -1576,9 +1710,16 @@
           "Operations"
         ],
         "outcome": "creates a new 'Product' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1591,9 +1732,16 @@
           "Operations"
         ],
         "outcome": "edits an existing 'Product' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1606,9 +1754,16 @@
           "Operations"
         ],
         "outcome": "deletes a 'Product' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1622,9 +1777,16 @@
           "Purchasing"
         ],
         "outcome": "creates a new 'Supplier' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1638,9 +1800,16 @@
           "Purchasing"
         ],
         "outcome": "edits an existing 'Supplier' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1653,9 +1822,16 @@
           "Operations"
         ],
         "outcome": "deletes a 'Supplier' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1669,9 +1845,16 @@
           "Sales"
         ],
         "outcome": "creates a new 'Customer account' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1685,9 +1868,16 @@
           "Sales"
         ],
         "outcome": "edits an existing 'Customer account' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1700,9 +1890,16 @@
           "Operations"
         ],
         "outcome": "deletes a 'Customer account' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1715,9 +1912,16 @@
           "Purchasing"
         ],
         "outcome": "creates a new 'Purchase order' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1731,9 +1935,16 @@
           "Purchasing"
         ],
         "outcome": "edits an existing 'Purchase order' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1746,9 +1957,16 @@
           "Operations"
         ],
         "outcome": "deletes a 'Purchase order' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1761,9 +1979,16 @@
           "Purchasing"
         ],
         "outcome": "creates a new 'Purchase order line' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1776,9 +2001,16 @@
           "Purchasing"
         ],
         "outcome": "edits an existing 'Purchase order line' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1791,9 +2023,16 @@
           "Purchasing"
         ],
         "outcome": "deletes a 'Purchase order line' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1806,9 +2045,16 @@
           "Sales"
         ],
         "outcome": "creates a new 'Sales order' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1822,9 +2068,16 @@
           "Sales"
         ],
         "outcome": "edits an existing 'Sales order' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1837,9 +2090,16 @@
           "Operations"
         ],
         "outcome": "deletes a 'Sales order' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1852,9 +2112,16 @@
           "Sales"
         ],
         "outcome": "creates a new 'Sales order line' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1867,9 +2134,16 @@
           "Sales"
         ],
         "outcome": "edits an existing 'Sales order line' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1882,9 +2156,16 @@
           "Sales"
         ],
         "outcome": "deletes a 'Sales order line' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1898,9 +2179,16 @@
           "Warehouse"
         ],
         "outcome": "creates a new 'Stock adjustment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1913,9 +2201,16 @@
           "Operations"
         ],
         "outcome": "edits an existing 'Stock adjustment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1928,9 +2223,16 @@
           "Operations"
         ],
         "outcome": "deletes a 'Stock adjustment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1946,9 +2248,10 @@
           "Purchasing"
         ],
         "outcome": "moves 'Purchase order lifecycle' from 'Draft' to 'Confirmed'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1962,9 +2265,10 @@
           "Warehouse"
         ],
         "outcome": "moves 'Purchase order lifecycle' from 'Confirmed' to 'Received'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1978,9 +2282,10 @@
           "Operations"
         ],
         "outcome": "moves 'Purchase order lifecycle' from 'Received' to 'Closed'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1996,8 +2301,9 @@
           "Confirmed"
         ],
         "outcome": "cancels 'Purchase order lifecycle' from stage(s) ['Draft', 'Confirmed']",
-        "engine_bindings": {
-          "engines": [],
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
           "note": "no binding rule for this action kind"
         }
       },
@@ -2010,8 +2316,9 @@
           "Operations"
         ],
         "outcome": "approves 'Purchase order lifecycle' at stage 'Draft'",
-        "engine_bindings": {
-          "engines": [],
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
           "note": "no binding rule for this action kind"
         }
       },
@@ -2026,9 +2333,10 @@
           "Sales"
         ],
         "outcome": "moves 'Sales order lifecycle' from 'Draft' to 'Confirmed'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -2042,9 +2350,10 @@
           "Warehouse"
         ],
         "outcome": "moves 'Sales order lifecycle' from 'Confirmed' to 'Shipped'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -2058,9 +2367,10 @@
           "Operations"
         ],
         "outcome": "moves 'Sales order lifecycle' from 'Shipped' to 'Closed'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -2076,8 +2386,9 @@
           "Confirmed"
         ],
         "outcome": "cancels 'Sales order lifecycle' from stage(s) ['Draft', 'Confirmed']",
-        "engine_bindings": {
-          "engines": [],
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
           "note": "no binding rule for this action kind"
         }
       }
@@ -2087,9 +2398,12 @@
         "id": "erp-backbone/OPS-001",
         "source": "R.14:Product",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2098,9 +2412,12 @@
         "id": "erp-backbone/OPS-002",
         "source": "R.14:Supplier",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2109,9 +2426,12 @@
         "id": "erp-backbone/OPS-003",
         "source": "R.14:Customer account",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2120,9 +2440,12 @@
         "id": "erp-backbone/OPS-004",
         "source": "R.14:Purchase order",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2131,9 +2454,12 @@
         "id": "erp-backbone/OPS-005",
         "source": "R.14:Purchase order line",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2142,9 +2468,12 @@
         "id": "erp-backbone/OPS-006",
         "source": "R.14:Sales order",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2153,9 +2482,12 @@
         "id": "erp-backbone/OPS-007",
         "source": "R.14:Sales order line",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2164,9 +2496,12 @@
         "id": "erp-backbone/OPS-008",
         "source": "R.14:Stock adjustment",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2181,9 +2516,12 @@
           ],
           "action": "creating a purchase order (starts in Draft)"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2198,9 +2536,12 @@
           ],
           "action": "creating a sales order (starts in Draft)"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2212,9 +2553,12 @@
           "kind": "event",
           "event": "a Product's Stock on hand falls to or below its Reorder point"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2226,9 +2570,12 @@
           "kind": "event",
           "event": "a sales order moves to Shipped"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2239,9 +2586,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2252,9 +2602,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -2265,9 +2618,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }

@@ -542,8 +542,7 @@
         "mover": "roles",
         "roles": [
           "Accountant"
-        ],
-        "id": "accounting-ledger/TRN-001"
+        ]
       },
       {
         "from": "Awaiting approval",
@@ -551,15 +550,13 @@
         "mover": "roles",
         "roles": [
           "Admin"
-        ],
-        "id": "accounting-ledger/TRN-002"
+        ]
       },
       {
         "from": "Awaiting payment",
         "to": "Paid",
         "mover": "automatic",
-        "event": "Payments applied to the invoice reach its total",
-        "id": "accounting-ledger/TRN-003"
+        "event": "Payments applied to the invoice reach its total"
       },
       {
         "from": "Awaiting payment",
@@ -567,8 +564,7 @@
         "mover": "roles",
         "roles": [
           "Admin"
-        ],
-        "id": "accounting-ledger/TRN-004"
+        ]
       },
       {
         "from": "Draft",
@@ -576,8 +572,7 @@
         "mover": "roles",
         "roles": [
           "Accountant"
-        ],
-        "id": "accounting-ledger/TRN-005"
+        ]
       }
     ],
     "FL.04:Invoice lifecycle": [],
@@ -627,15 +622,13 @@
         "mover": "roles",
         "roles": [
           "Accountant"
-        ],
-        "id": "accounting-ledger/TRN-006"
+        ]
       },
       {
         "from": "Awaiting payment",
         "to": "Paid",
         "mover": "automatic",
-        "event": "Payments applied to the bill reach its total",
-        "id": "accounting-ledger/TRN-007"
+        "event": "Payments applied to the bill reach its total"
       },
       {
         "from": "Awaiting payment",
@@ -643,8 +636,7 @@
         "mover": "roles",
         "roles": [
           "Admin"
-        ],
-        "id": "accounting-ledger/TRN-008"
+        ]
       },
       {
         "from": "Draft",
@@ -652,8 +644,7 @@
         "mover": "roles",
         "roles": [
           "Accountant"
-        ],
-        "id": "accounting-ledger/TRN-009"
+        ]
       }
     ],
     "FL.04:Bill lifecycle": [],

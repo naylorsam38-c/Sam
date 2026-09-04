@@ -788,8 +788,7 @@
         "mover": "roles",
         "roles": [
           "Purchasing"
-        ],
-        "id": "erp-backbone/TRN-001"
+        ]
       },
       {
         "from": "Confirmed",
@@ -797,8 +796,7 @@
         "mover": "roles",
         "roles": [
           "Warehouse"
-        ],
-        "id": "erp-backbone/TRN-002"
+        ]
       },
       {
         "from": "Received",
@@ -806,8 +804,7 @@
         "mover": "roles",
         "roles": [
           "Operations"
-        ],
-        "id": "erp-backbone/TRN-003"
+        ]
       }
     ],
     "FL.04:Purchase order lifecycle": [],
@@ -866,8 +863,7 @@
         "mover": "roles",
         "roles": [
           "Sales"
-        ],
-        "id": "erp-backbone/TRN-004"
+        ]
       },
       {
         "from": "Confirmed",
@@ -875,8 +871,7 @@
         "mover": "roles",
         "roles": [
           "Warehouse"
-        ],
-        "id": "erp-backbone/TRN-005"
+        ]
       },
       {
         "from": "Shipped",
@@ -884,8 +879,7 @@
         "mover": "roles",
         "roles": [
           "Operations"
-        ],
-        "id": "erp-backbone/TRN-006"
+        ]
       }
     ],
     "FL.04:Sales order lifecycle": [],

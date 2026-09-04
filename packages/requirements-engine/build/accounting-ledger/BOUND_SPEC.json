@@ -768,9 +768,10 @@
         ],
         "timing": "immediate",
         "id": "accounting-ledger/NOTIF-001",
-        "engine_bindings": {
-          "engines": [],
-          "note": "event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
         }
       },
       "Payment reminder": {
@@ -791,11 +792,14 @@
         ],
         "timing": "offset:+3 days",
         "id": "accounting-ledger/NOTIF-002",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
           ],
-          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no engine -- see catalogue"
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": "covers the real timing half (wait until due, then fire); actual message delivery over email/sms/push has no part on the shelf"
         }
       },
       "Payment received": {
@@ -816,9 +820,10 @@
         ],
         "timing": "immediate",
         "id": "accounting-ledger/NOTIF-003",
-        "engine_bindings": {
-          "engines": [],
-          "note": "event-triggered -- fires synchronously, no timing engine needed; actual message delivery has no engine"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "event-triggered -- fires synchronously, no timing part needed; actual message delivery has no part"
         }
       }
     },
@@ -831,9 +836,10 @@
           "net profit": "auto: count/sum of 'net profit'"
         },
         "id": "accounting-ledger/RPT-001",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       },
       "Aged receivables": {
@@ -842,9 +848,10 @@
           "overdue invoice totals bucketed by age": "for each Invoice in Awaiting payment: its total minus applied Payments, bucketed by days past Due date as at today (current, 1-30, 31-60, 61-90, 90+)"
         },
         "id": "accounting-ledger/RPT-002",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       }
     },
@@ -918,9 +925,16 @@
         "id": "accounting-ledger/SCR-001",
         "kind": "list",
         "record": "Contact",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -929,9 +943,16 @@
         "id": "accounting-ledger/SCR-002",
         "kind": "detail",
         "record": "Contact",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -940,9 +961,16 @@
         "id": "accounting-ledger/SCR-003",
         "kind": "list",
         "record": "Invoice",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -951,9 +979,16 @@
         "id": "accounting-ledger/SCR-004",
         "kind": "detail",
         "record": "Invoice",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -962,9 +997,16 @@
         "id": "accounting-ledger/SCR-005",
         "kind": "list",
         "record": "Invoice line",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -973,9 +1015,16 @@
         "id": "accounting-ledger/SCR-006",
         "kind": "detail",
         "record": "Invoice line",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -984,9 +1033,16 @@
         "id": "accounting-ledger/SCR-007",
         "kind": "list",
         "record": "Bill",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -995,9 +1051,16 @@
         "id": "accounting-ledger/SCR-008",
         "kind": "detail",
         "record": "Bill",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1006,9 +1069,16 @@
         "id": "accounting-ledger/SCR-009",
         "kind": "list",
         "record": "Payment",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1017,9 +1087,16 @@
         "id": "accounting-ledger/SCR-010",
         "kind": "detail",
         "record": "Payment",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1028,18 +1105,20 @@
         "id": "accounting-ledger/SCR-011",
         "kind": "report",
         "report": "Profit and loss",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       },
       {
         "id": "accounting-ledger/SCR-012",
         "kind": "report",
         "report": "Aged receivables",
-        "engine_bindings": {
-          "engines": [],
-          "note": "plain aggregation over existing fields -- no generic reporting engine was built"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "plain aggregation over existing fields -- no generic reporting part was built"
         }
       }
     ],
@@ -1071,9 +1150,16 @@
           "Accountant"
         ],
         "outcome": "creates a new 'Contact' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1086,9 +1172,16 @@
           "Accountant"
         ],
         "outcome": "edits an existing 'Contact' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1101,9 +1194,16 @@
           "Accountant"
         ],
         "outcome": "deletes a 'Contact' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1116,9 +1216,16 @@
           "Accountant"
         ],
         "outcome": "creates a new 'Invoice' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1131,9 +1238,16 @@
           "Accountant"
         ],
         "outcome": "edits an existing 'Invoice' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1154,10 +1268,15 @@
           "Accountant"
         ],
         "outcome": "emails the invoice document to the Contact and stamps the sent time",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "document_generation",
             "email_parsing"
+          ],
+          "locations": [
+            "packages/builder/engines/document_generation.py::render_html",
+            "packages/builder/engines/document_generation.py::render_pdf",
+            "packages/builder/engines/email_parsing.py::parse"
           ],
           "note": "document rendering and message composition are real and proven; actually dispatching over SMTP was never built or proven, so this action is only partially covered"
         }
@@ -1170,9 +1289,16 @@
           "Accountant"
         ],
         "outcome": "creates a new 'Invoice line' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1185,9 +1311,16 @@
           "Accountant"
         ],
         "outcome": "edits an existing 'Invoice line' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1200,9 +1333,16 @@
           "Accountant"
         ],
         "outcome": "deletes a 'Invoice line' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1215,9 +1355,16 @@
           "Accountant"
         ],
         "outcome": "creates a new 'Bill' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1230,9 +1377,16 @@
           "Accountant"
         ],
         "outcome": "edits an existing 'Bill' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1245,9 +1399,16 @@
           "Accountant"
         ],
         "outcome": "creates a new 'Payment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1260,9 +1421,16 @@
           "Accountant"
         ],
         "outcome": "edits an existing 'Payment' record",
-        "engine_bindings": {
-          "engines": [
-            "(existing Builder rule -- CRUD/OAuth, no engine needed)"
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
           ],
           "note": null
         }
@@ -1278,9 +1446,10 @@
           "Accountant"
         ],
         "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Awaiting approval'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1294,9 +1463,10 @@
           "Admin"
         ],
         "outcome": "moves 'Invoice lifecycle' from 'Awaiting approval' to 'Awaiting payment'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1308,9 +1478,13 @@
         "mover": "automatic",
         "roles": null,
         "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Paid'",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "ledger_balancing"
+          ],
+          "locations": [
+            "packages/builder/engines/ledger_balancing.py::applied_total",
+            "packages/builder/engines/ledger_balancing.py::is_paid"
           ],
           "note": null
         }
@@ -1326,9 +1500,10 @@
           "Admin"
         ],
         "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Voided'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1342,9 +1517,10 @@
           "Accountant"
         ],
         "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Voided'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1356,8 +1532,9 @@
           "Admin"
         ],
         "outcome": "approves 'Invoice lifecycle' at stage 'Awaiting approval'",
-        "engine_bindings": {
-          "engines": [],
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
           "note": "no binding rule for this action kind"
         }
       },
@@ -1372,9 +1549,10 @@
           "Accountant"
         ],
         "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Awaiting payment'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1386,9 +1564,13 @@
         "mover": "automatic",
         "roles": null,
         "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Paid'",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "ledger_balancing"
+          ],
+          "locations": [
+            "packages/builder/engines/ledger_balancing.py::applied_total",
+            "packages/builder/engines/ledger_balancing.py::is_paid"
           ],
           "note": null
         }
@@ -1404,9 +1586,10 @@
           "Admin"
         ],
         "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Voided'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       },
       {
@@ -1420,9 +1603,10 @@
           "Accountant"
         ],
         "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Voided'",
-        "engine_bindings": {
-          "engines": [],
-          "note": "person-triggered -- no specialist engine needed, but the Builder has no generic workflow executor"
+        "part_bindings": {
+          "parts": [],
+          "locations": [],
+          "note": "person-triggered -- no specialist part needed, but the Builder has no generic workflow executor"
         }
       }
     ],
@@ -1431,9 +1615,12 @@
         "id": "accounting-ledger/OPS-001",
         "source": "R.14:Contact",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1442,9 +1629,12 @@
         "id": "accounting-ledger/OPS-002",
         "source": "R.14:Invoice",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1453,9 +1643,12 @@
         "id": "accounting-ledger/OPS-003",
         "source": "R.14:Invoice line",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1464,9 +1657,12 @@
         "id": "accounting-ledger/OPS-004",
         "source": "R.14:Bill",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1475,9 +1671,12 @@
         "id": "accounting-ledger/OPS-005",
         "source": "R.14:Payment",
         "detail": "forever",
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1492,9 +1691,12 @@
           ],
           "action": "creating an invoice (starts in Draft)"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1509,9 +1711,12 @@
           ],
           "action": "creating a bill (starts in Draft)"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1523,9 +1728,12 @@
           "kind": "event",
           "event": "the Send action runs on an invoice"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1539,9 +1747,12 @@
           "date_field": "Due date",
           "offset": "+3 days"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1553,9 +1764,12 @@
           "kind": "event",
           "event": "an invoice moves to Paid"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1566,9 +1780,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }
@@ -1579,9 +1796,12 @@
         "detail": {
           "enabled": "no"
         },
-        "engine_bindings": {
-          "engines": [
+        "part_bindings": {
+          "parts": [
             "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
           "note": null
         }

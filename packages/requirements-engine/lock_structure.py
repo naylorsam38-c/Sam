@@ -36,6 +36,7 @@ Usage:
   python lock_structure.py --all
 """
 
+import copy
 import glob
 import json
 import os
@@ -69,7 +70,15 @@ def lock_one(graph, path):
                           "\n".join(f"  - {e}" for e in errors))
 
     derived = ae.derive(graph, t)
-    bm = ae.build_model(t, derived)
+    # build_model()'s nested dicts/lists (e.g. a workflow's "transitions")
+    # are the SAME objects as t["per_instance"]'s own raw answer data --
+    # ae.derive()'s D08 hands them back by reference, not by copy. Mutating
+    # bm in place below (minting ids, prefixing them) would silently corrupt
+    # the real per_instance answers with structure-only fields unless this
+    # is a fully independent copy first -- a real bug this exact check
+    # caught (a "reproduce byte-for-byte" test failing because ids leaked
+    # into per_instance).
+    bm = copy.deepcopy(ae.build_model(t, derived))
     n = {"SCR": 0, "ACT": 0, "REC": 0, "NOTIF": 0, "RPT": 0, "STG": 0, "TRN": 0, "OPS": 0, "QA": 0}
 
     def mint(kind):

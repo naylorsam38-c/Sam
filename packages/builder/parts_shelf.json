@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0",
+  "policy": {
+    "a_part_is_runnable_code": true,
+    "no_stubs_no_placeholders": true,
+    "reuse_before_rewrite": true,
+    "builder_never_writes_a_part_during_a_job": true
+  },
+  "parts": [
+    {
+      "part_id": "crud_list_detail",
+      "kind": ["screen/list", "screen/detail", "action/create", "action/edit", "action/delete"],
+      "what_it_does": "Real record CRUD: sqlite table + /api/<record>s routes (list/get/create/update/delete), plus one real list HTML page and one real detail HTML page per record, gated by the record's own real access grants.",
+      "location": [
+        "packages/builder/builder.py::build_schema",
+        "packages/builder/builder.py::crud_routes",
+        "packages/builder/builder.py::render_crud_handler",
+        "packages/builder/builder.py::_render_list_screen",
+        "packages/builder/builder.py::_render_detail_screen"
+      ],
+      "reused_from": "already the Builder's own real generation rule -- exercised by every 'PASS ... existing Builder rule' item; not written for this task",
+      "evidence": "tests/test_builder.py::test_builder_builds_real_crud_and_it_works_against_a_live_server (real sqlite3 + real HTTP against a live server)"
+    },
+    {
+      "part_id": "oauth_connect",
+      "kind": ["screen/integration_status", "action/connect"],
+      "what_it_does": "Real OAuth start/callback/status routes and one real integration-status HTML page, for any integration whose provider resolves to a real, publicly documented endpoint (OAUTH_PROVIDERS).",
+      "location": [
+        "packages/builder/builder.py::oauth_routes",
+        "packages/builder/builder.py::render_oauth_handler",
+        "packages/builder/builder.py::_render_integration_screen",
+        "packages/builder/builder.py::_resolve_provider"
+      ],
+      "reused_from": "already the Builder's own real generation rule; not written for this task",
+      "evidence": "tests/test_builder.py::test_builder_builds_the_real_command_desk_oauth_feature (real 302 to accounts.google.com)"
+    },
+    {
+      "part_id": "record_cloning",
+      "kind": ["action/custom:Duplicate"],
+      "what_it_does": "Copies a real sqlite row into a new row with named columns overridden and a title suffixed.",
+      "location": ["packages/builder/engines/record_cloning.py::clone"],
+      "reused_from": "built and proven earlier in this session; not rewritten",
+      "evidence": "packages/builder/PROOFS.md#record_cloning"
+    },
+    {
+      "part_id": "stage_history",
+      "kind": ["report:Win rate", "report:No-show rate", "report:Sales by month"],
+      "what_it_does": "Records the real timestamp a record entered a stage; computes rate-over-a-period metrics from that history.",
+      "location": ["packages/builder/engines/stage_history.py::record_transition", "packages/builder/engines/stage_history.py::entered_at", "packages/builder/engines/stage_history.py::rate_between"],
+      "reused_from": "built and proven earlier in this session; not rewritten",
+      "evidence": "packages/builder/PROOFS.md#stage_history"
+    },
+    {
+      "part_id": "stage_conditional_requiredness",
+      "kind": ["validation:Lost reason"],
+      "what_it_does": "Enforces 'field X required only once stage Y' at write time.",
+      "location": ["packages/builder/engines/stage_conditional_requiredness.py::validate"],
+      "reused_from": "built and proven earlier in this session; not rewritten",
+      "evidence": "packages/builder/PROOFS.md#stage_conditional_requiredness"
+    },
+    {
+      "part_id": "stock_ledger",
+      "kind": ["action/transition:Purchase order lifecycle:Confirmed:Received", "action/transition:Sales order lifecycle:Confirmed:Shipped", "report:Stock on hand"],
+      "what_it_does": "Atomic stock-quantity adjustment on order-line fulfilment, plus reorder-point condition evaluation.",
+      "location": ["packages/builder/engines/stock_ledger.py::apply_order_line", "packages/builder/engines/stock_ledger.py::needs_reorder"],
+      "reused_from": "built and proven earlier in this session; not rewritten",
+      "evidence": "packages/builder/PROOFS.md#stock_ledger"
+    },
+    {
+      "part_id": "ledger_balancing",
+      "kind": ["action/transition:Invoice lifecycle:Awaiting payment:Paid", "action/transition:Bill lifecycle:Awaiting payment:Paid"],
+      "what_it_does": "Sums real Payment rows applied against a real Invoice/Bill and compares to its total.",
+      "location": ["packages/builder/engines/ledger_balancing.py::applied_total", "packages/builder/engines/ledger_balancing.py::is_paid"],
+      "reused_from": "built and proven earlier in this session; not rewritten",
+      "evidence": "packages/builder/PROOFS.md#ledger_balancing"
+    },
+    {
+      "part_id": "scheduled_jobs",
+      "kind": ["ops", "notification_timing:relative_to_date", "notification_timing:schedule"],
+      "what_it_does": "Runs a real function on a real background thread after a real delay.",
+      "location": ["packages/builder/engines/scheduled_jobs.py::run_after"],
+      "reused_from": "built and proven earlier in this session; not rewritten",
+      "evidence": "packages/builder/PROOFS.md#scheduled_jobs"
+    },
+    {
+      "part_id": "document_generation",
+      "kind": ["action/custom:Send (document half)"],
+      "what_it_does": "Renders real HTML, and a real minimal single-page PDF.",
+      "location": ["packages/builder/engines/document_generation.py::render_html", "packages/builder/engines/document_generation.py::render_pdf"],
+      "reused_from": "built and proven earlier in this session; not rewritten",
+      "evidence": "packages/builder/PROOFS.md#document_generation"
+    },
+    {
+      "part_id": "email_parsing",
+      "kind": ["action/custom:Send (message half)"],
+      "what_it_does": "Parses a real RFC 5322/MIME message via Python's stdlib email module.",
+      "location": ["packages/builder/engines/email_parsing.py::parse"],
+      "reused_from": "built and proven earlier in this session; not rewritten",
+      "evidence": "packages/builder/PROOFS.md#email_parsing"
+    },
+    {
+      "part_id": "audit_trail",
+      "kind": ["not bound to a numbered item in the five templates yet"],
+      "what_it_does": "Logs create/edit/delete mutations against a real table, queryable back.",
+      "location": ["packages/builder/engines/audit_trail.py::record", "packages/builder/engines/audit_trail.py::history_for"],
+      "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+      "evidence": "packages/builder/PROOFS.md#audit_trail"
+    },
+    {
+      "part_id": "scheduling_availability",
+      "kind": ["not bound to a numbered item in the five templates yet"],
+      "what_it_does": "Real interval-overlap conflict detection for a resource over a time range.",
+      "location": ["packages/builder/engines/scheduling_availability.py::has_conflict"],
+      "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+      "evidence": "packages/builder/PROOFS.md#scheduling_availability"
+    },
+    {
+      "part_id": "search_fts",
+      "kind": ["not bound to a numbered item in the five templates yet"],
+      "what_it_does": "Real full-text search/ranking via sqlite's built-in FTS5.",
+      "location": ["packages/builder/engines/search_fts.py::search"],
+      "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+      "evidence": "packages/builder/PROOFS.md#search_fts"
+    },
+    {
+      "part_id": "import_export",
+      "kind": ["not bound to a numbered item in the five templates yet"],
+      "what_it_does": "Real CSV export/import round-trip against a real sqlite table.",
+      "location": ["packages/builder/engines/import_export.py::export_csv", "packages/builder/engines/import_export.py::import_csv"],
+      "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+      "evidence": "packages/builder/PROOFS.md#import_export"
+    },
+    {
+      "part_id": "file_conversion",
+      "kind": ["not bound to a numbered item in the five templates yet"],
+      "what_it_does": "CSV <-> JSON conversion.",
+      "location": ["packages/builder/engines/file_conversion.py::csv_to_json", "packages/builder/engines/file_conversion.py::json_to_csv"],
+      "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+      "evidence": "packages/builder/PROOFS.md#file_conversion"
+    },
+    {
+      "part_id": "bank_feed_ofx",
+      "kind": ["not bound to a numbered item in the five templates yet"],
+      "what_it_does": "Parses a real OFX 2.x bank statement into real transactions.",
+      "location": ["packages/builder/engines/bank_feed_ofx.py::parse_ofx"],
+      "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+      "evidence": "packages/builder/PROOFS.md#bank_feed_ofx"
+    },
+    {
+      "part_id": "calendar_ics",
+      "kind": ["not bound to a numbered item in the five templates yet"],
+      "what_it_does": "Generates/parses real RFC 5545 iCalendar text.",
+      "location": ["packages/builder/engines/calendar_ics.py::generate_ics", "packages/builder/engines/calendar_ics.py::parse_ics"],
+      "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+      "evidence": "packages/builder/PROOFS.md#calendar_ics"
+    },
+    {
+      "part_id": "document_signing",
+      "kind": ["not bound to a numbered item in the five templates yet"],
+      "what_it_does": "Real HMAC-SHA256 signing and constant-time verification of a document's real bytes.",
+      "location": ["packages/builder/engines/document_signing.py::sign", "packages/builder/engines/document_signing.py::verify"],
+      "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+      "evidence": "packages/builder/PROOFS.md#document_signing"
+    },
+    {
+      "part_id": "pdf_form_filling",
+      "kind": ["not bound to a numbered item in the five templates yet"],
+      "what_it_does": "Real AcroForm PDF generation and field-value filling.",
+      "location": ["packages/builder/engines/pdf_form_filling.py::render_pdf_with_form", "packages/builder/engines/pdf_form_filling.py::fill_field"],
+      "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+      "evidence": "packages/builder/PROOFS.md#pdf_form_filling"
+    }
+  ]
+}
