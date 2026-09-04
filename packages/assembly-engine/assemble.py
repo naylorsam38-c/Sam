@@ -217,6 +217,22 @@ def derive(graph, inst):
         reports[rp] = {"data_source": (inst["per_instance"].get(f"RP.01:{rp}") or ""), "metrics": defs}
     d["D07"] = reports
 
+    # Not a numbered derivation on its own — the graph's Part FLX (external
+    # systems) restates directly into build_model the same way D08 restates
+    # FL.03, since none of the five templates use an integration and this path
+    # has had no real data to derive against until Command Desk (component 8).
+    integrations = {}
+    for i in inv.get("integrations") or []:
+        integrations[i] = {
+            "purpose": inst["per_instance"].get(f"FLX.01:{i}"),
+            "sends": (inst["per_instance"].get(f"FLX.02:{i}") or {}).get("sends"),
+            "receives": (inst["per_instance"].get(f"FLX.02:{i}") or {}).get("receives"),
+            "timing": inst["per_instance"].get(f"FLX.03:{i}"),
+            "connection_scope": inst["per_instance"].get(f"FLX.04:{i}"),
+            "on_unavailable": inst["per_instance"].get(f"FLX.05:{i}"),
+        }
+    d["FLX"] = integrations
+
     # D08 — Edges exactly as listed in FL.03; nothing added.
     d["D08"] = {w: inst["per_instance"].get(f"FL.03:{w}") or [] for w in workflows}
 
@@ -273,6 +289,11 @@ def derive(graph, inst):
     for fm in inv["forms"]:
         actions.append({"id": f"ACT-{n:03d}", "kind": "submit", "form": fm})
         n += 1
+    for i, flx in d["FLX"].items():
+        if (flx.get("timing") or {}).get("kind") == "manual":
+            actions.append({"id": f"ACT-{n:03d}", "kind": "connect", "integration": i,
+                            "roles": (flx["timing"].get("who") or [])})
+            n += 1
     d["D12"] = actions
 
     # D13 — One list + one detail screen per record, one per form/report, plus landing per role.
@@ -285,6 +306,8 @@ def derive(graph, inst):
         screens.append({"id": f"SCR-{n:03d}", "kind": "form", "form": fm}); n += 1
     for rp in inv["reports"]:
         screens.append({"id": f"SCR-{n:03d}", "kind": "report", "report": rp}); n += 1
+    for i in d["FLX"]:
+        screens.append({"id": f"SCR-{n:03d}", "kind": "integration_status", "integration": i}); n += 1
     landing = inst["answers"].get("C.06") or {}
     d["D13"] = {"screens": screens, "navigation": [s["id"] for s in screens], "landing_per_role": landing}
 
@@ -365,17 +388,14 @@ def build_field_map(graph, inst, derived):
 
 
 # --------------------------------------------------------------------------- top level
-def assemble(graph, inst, spec_id, title):
-    errors = check_template.check(graph, inst)
-    if errors:
-        raise Refused("instance does not fit the graph:\n" + "\n".join(f"  - {e}" for e in errors))
-    if inst["ask_customer"]:
-        raise Refused("front door has not finished: still open for the customer:\n" +
-                       "\n".join(f"  - {q}" for q in inst["ask_customer"]))
-
-    derived = derive(graph, inst)
-    fields = build_field_map(graph, inst, derived)
-    build_model = {
+def build_model(inst, derived):
+    """The concrete, expanded structures the Builder and the Playwright tester
+    actually read. Pure function of an instance's real inventory/answers plus
+    its derived values — no completeness check here (that is assemble()'s job)
+    so callers who only need real structural facts (e.g. Builder unit tests
+    against a real template's real records) can call this directly without
+    needing a customer-complete instance."""
+    return {
         "records": {r: {"fields": fields_of(inst, r), "storage": derived["D01"][r], "enums": derived["D14"][r],
                          "access": {"view": inst["per_instance"].get(f"R.05:{r}"), "create": inst["per_instance"].get(f"R.06:{r}"),
                                     "edit": inst["per_instance"].get(f"R.07:{r}"), "delete": inst["per_instance"].get(f"R.08:{r}")},
@@ -396,6 +416,7 @@ def assemble(graph, inst, spec_id, title):
                            for n in inst["inventory"]["notifications"]},
         "reports": derived["D07"],
         "forms": derived["D02"],
+        "integrations": derived["FLX"],
         "auth": {k: v for k, v in inst["answers"].items() if k.startswith("AU.")},
         "screens_inventory": derived["D13"]["screens"],
         "navigation": derived["D13"]["navigation"],
@@ -404,12 +425,24 @@ def assemble(graph, inst, spec_id, title):
         "recurring_ops": derived["D11"],
         "qa_generated_tests": derived["D15"],
     }
+
+
+def assemble(graph, inst, spec_id, title):
+    errors = check_template.check(graph, inst)
+    if errors:
+        raise Refused("instance does not fit the graph:\n" + "\n".join(f"  - {e}" for e in errors))
+    if inst["ask_customer"]:
+        raise Refused("front door has not finished: still open for the customer:\n" +
+                       "\n".join(f"  - {q}" for q in inst["ask_customer"]))
+
+    derived = derive(graph, inst)
+    fields = build_field_map(graph, inst, derived)
     return {
         "spec_id": spec_id, "version": 1, "title": title,
         "graph_version": graph["version"],
         "source_template": inst.get("template"),
         "numbered_fields": fields,
-        "build_model": build_model,
+        "build_model": build_model(inst, derived),
     }
 
 
