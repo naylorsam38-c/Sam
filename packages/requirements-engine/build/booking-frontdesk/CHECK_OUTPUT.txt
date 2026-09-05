@@ -44,7 +44,7 @@ PASS booking-frontdesk/OPS-011 (recurring_op): scheduled_jobs
 CLEAN
 
 QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
-QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 143bf3e98f4fd428
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b
 QUALIFIED form_render_submit@1.0.0 (PRODUCT_QUALIFIED) at cfb66ed4a56c85df
 UNQUALIFIED notification_delivery@1.0.0: status TESTED
 QUALIFIED reporting_engine@1.0.0 (PRODUCT_QUALIFIED) at a0de07a247bf355b

@@ -50,7 +50,7 @@ PASS accounting-ledger/OPS-010 (recurring_op): scheduled_jobs
 CLEAN
 
 QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
-QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 143bf3e98f4fd428
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b
 QUALIFIED document_generation@1.0.0 (PRODUCT_QUALIFIED) at 6ad6f6c2187e4435
 UNQUALIFIED email_parsing@1.0.0: status TESTED
 QUALIFIED ledger_balancing@1.1.0 (PRODUCT_QUALIFIED) at 8e4c702f78f51238

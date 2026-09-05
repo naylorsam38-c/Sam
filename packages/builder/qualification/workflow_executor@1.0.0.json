@@ -2,12 +2,12 @@
  "part_id": "workflow_executor",
  "version": "1.0.0",
  "revision": "e1e8908c90f7f1fb",
- "qualified_at": "2026-09-05T20:35:46+00:00",
- "base_url": "http://127.0.0.1:34489",
+ "qualified_at": "2026-09-05T20:56:13+00:00",
+ "base_url": "http://127.0.0.1:8974",
  "journeys": [
   {
    "journey": "person_move_is_visible_on_the_screen",
-   "subject": "command-desk/ACT-035",
+   "subject": "booking-frontdesk/ACT-010",
    "parts": [
     "workflow_executor"
    ],
@@ -19,60 +19,24 @@
    "steps": [
     {
      "channel": "api",
-     "action": "POST /api/projects",
+     "action": "POST /api/appointments",
      "observed": 201,
      "user_facing": false
     },
     {
      "channel": "browser",
-     "action": "look for a control on command-desk/SCR-008 that moves to 'paused'",
+     "action": "look for a control on booking-frontdesk/SCR-006 that moves to 'Confirmed'",
      "observed": "1 control(s)"
     },
     {
      "channel": "browser",
-     "action": "press the control on command-desk/SCR-008 that moves to 'paused'",
+     "action": "press the control on booking-frontdesk/SCR-006 that moves to 'Confirmed'",
      "observed": "Done."
     },
     {
      "channel": "browser",
-     "action": "open detail command-desk/SCR-008",
-     "observed": "stage shown as 'paused'"
-    }
-   ],
-   "page_errors": []
-  },
-  {
-   "journey": "person_move_is_visible_on_the_screen",
-   "subject": "command-desk/ACT-041",
-   "parts": [
-    "workflow_executor"
-   ],
-   "result": "PASS",
-   "reason": null,
-   "failed_part": null,
-   "notes": [],
-   "browser_verified": true,
-   "steps": [
-    {
-     "channel": "api",
-     "action": "POST /api/linked_services",
-     "observed": 201,
-     "user_facing": false
-    },
-    {
-     "channel": "browser",
-     "action": "look for a control on command-desk/SCR-012 that moves to 'disconnected'",
-     "observed": "1 control(s)"
-    },
-    {
-     "channel": "browser",
-     "action": "press the control on command-desk/SCR-012 that moves to 'disconnected'",
-     "observed": "Done."
-    },
-    {
-     "channel": "browser",
-     "action": "open detail command-desk/SCR-012",
-     "observed": "stage shown as 'disconnected'"
+     "action": "open detail booking-frontdesk/SCR-006",
+     "observed": "stage shown as 'Confirmed'"
     }
    ],
    "page_errors": []

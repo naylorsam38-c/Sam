@@ -28,7 +28,7 @@
    "evidence": "tests/test_builder.py::test_builder_builds_real_crud_and_it_works_against_a_live_server (real sqlite3 + real HTTP against a live server)",
    "version": "1.1.0",
    "status": "PRODUCT_QUALIFIED",
-   "qualified_revision": "143bf3e98f4fd428",
+   "qualified_revision": "389773506209779b",
    "provenance": {
     "read_from": [
      "Asana",

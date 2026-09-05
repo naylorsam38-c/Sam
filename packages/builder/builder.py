@@ -32,6 +32,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import struct
 import sys
 import shutil
@@ -229,19 +230,47 @@ def render_crud_handler(method, path, name, ctx):
                 lines += [f'        row = dict(conn.execute("SELECT * FROM {tbl} WHERE id = ?", (rid,)).fetchone())',
                           f"        effects = run_create_effects(conn, {on_create!r}, row)"]
             lines += ["    finally:", "        conn.close()"]
-        lines.append('    respond(self, 201, {"id": rid, "effects": effects})')
+        lines += [
+            "    _nconn = get_db()",
+            "    try:",
+            f'        _nrow = dict(_nconn.execute("SELECT * FROM {tbl} WHERE id = ?", (rid,)).fetchone())',
+            f'        notified = notify(_nconn, NOTIFICATION_DECLS, "record_created", table={tbl!r}, row=_nrow)',
+            "    finally:",
+            "        _nconn.close()",
+        ]
+        lines.append('    respond(self, 201, {"id": rid, "effects": effects, "notified": notified})')
         return "\n".join(lines) + "\n"
     if name.startswith("update_"):
         fields = ctx["fields"]
         sets = ", ".join(f"{q(slug(name_))} = ?" for name_ in fields)
         gets = ", ".join(f"body.get({name_!r})" for name_ in fields)
+        cols = [slug(f) for f in fields]
+        has_stock = {"stock_on_hand", "reorder_point"} <= set(cols)
         return textwrap.dedent(f"""\
             def {name}(self, record_id, body):
-                values = [{gets}, now_iso(), record_id]
-                n = execute("UPDATE {tbl} SET {sets}, updated_at = ? WHERE id = ?", values)
-                if not n:
-                    respond(self, 404, {{"error": "not found"}}); return
-                respond(self, 200, {{"id": record_id}})
+                _nconn = get_db()
+                try:
+                    _before = _nconn.execute("SELECT * FROM {tbl} WHERE id = ?", (record_id,)).fetchone()
+                    if _before is None:
+                        return respond(self, 404, {{"error": "not found"}})
+                    values = [{gets}, now_iso(), record_id]
+                    _nconn.execute("UPDATE {tbl} SET {sets}, updated_at = ? WHERE id = ?", values)
+                    _nconn.commit()
+                    _after = dict(_nconn.execute("SELECT * FROM {tbl} WHERE id = ?", (record_id,)).fetchone())
+                    notified = []
+                    for _col in {cols!r}:
+                        if _after.get(_col) and _after.get(_col) != _before[_col]:
+                            notified += notify(_nconn, NOTIFICATION_DECLS, "field_set",
+                                               table={tbl!r}, row=_after, column=_col)
+                    if {has_stock!r} and _after.get("stock_on_hand") is not None and _after.get("reorder_point") is not None:
+                        try:
+                            if float(_after["stock_on_hand"]) <= float(_after["reorder_point"]):
+                                notified += notify(_nconn, NOTIFICATION_DECLS, "threshold", table={tbl!r}, row=_after)
+                        except (TypeError, ValueError):
+                            pass
+                    respond(self, 200, {{"id": record_id, "notified": notified}})
+                finally:
+                    _nconn.close()
             """)
     if name.startswith("delete_"):
         return textwrap.dedent(f"""\
@@ -399,6 +428,14 @@ import uuid
 
 DB_PATH = os.environ.get("APP_DB", os.path.join(os.path.dirname(os.path.abspath(__file__)), "app.db"))
 
+#: Every declared notification / recurring op, classified once by the Builder
+#: at generation time (never re-derived at request time) -- see builder.py's
+#: notification_decls()/job_decls(). A None "kind" means the Builder found no
+#: mechanical rule for it; it is still listed, with the real reason, never
+#: silently dropped.
+NOTIFICATION_DECLS = {notification_decls_json}
+RECURRING_JOBS = {recurring_jobs_json}
+
 
 def get_db():
     conn = sqlite3.connect(DB_PATH)
@@ -413,7 +450,148 @@ def init_db():
     audit_trail.ensure_table(conn)
     stage_approval_gate.ensure_table(conn)
     stage_history.ensure_table(conn)
+    notification_delivery.ensure_table(conn)
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS _job_fired (
+            fire_key TEXT PRIMARY KEY,
+            fired_at TEXT NOT NULL
+        )
+    """)
+    conn.commit()
     conn.close()
+
+
+def _recipients_for(conn, decl, table, row):
+    """Who a delivered notification really goes to, from the notification's own
+    declared N.02 recipients. A recipient this app cannot resolve is delivered
+    to the declared description itself rather than dropped, so it is visible."""
+    out = []
+    for r in decl.get("recipients") or []:
+        kind = r.get("kind")
+        if kind == "field" and row is not None:
+            col = "".join(c.lower() if c.isalnum() else "_" for c in r.get("field", "")).strip("_")
+            val = row.get(col)
+            if val:
+                out.append(str(val))
+                continue
+            out.append(f"[{{r.get('field')}} not set on this {{r.get('record')}}]")
+        elif kind == "roles":
+            out.extend(r.get("roles") or [])
+        elif kind == "owner" and row is not None:
+            out.append(str(row.get("owner") or "[owner]"))
+        elif kind == "custom":
+            out.append(str(r.get("who") or "[recipient]"))
+        else:
+            out.append(f"[{{kind}}]")
+    return out or ["[nobody declared]"]
+
+
+def notify(conn, decls, kind, table=None, row=None, stage=None, action=None, column=None, extra=None):
+    """Fires every declared notification whose trigger really just happened.
+    Delivery is in-app only and on purpose: nothing in this system is connected
+    to a mail or SMS provider, so an email leg would be a claim, not a delivery.
+    The channels the notification declares are recorded on the row either way,
+    so what was asked for stays visible next to what really happened."""
+    fired = []
+    for d in decls:
+        if d.get("kind") != kind:
+            continue
+        p = d.get("params") or {{}}
+        if table and p.get("table") and p["table"] != table:
+            continue
+        if kind == "stage_reached" and p.get("stage") != stage:
+            continue
+        if kind == "custom_action" and p.get("action") != action:
+            continue
+        if kind == "field_set" and (column is not None and p.get("column") != column):
+            continue
+        if kind == "field_set" and row is not None and not row.get(p.get("column")):
+            continue
+        subject = d["name"]
+        body = (extra or f"{{d['name']}} — {{table or ''}} {{(row or {{}}).get('id', '') or ''}}").strip()
+        for who in _recipients_for(conn, d, table, row):
+            notification_delivery.deliver(conn, who, subject, body, in_app_only=True)
+        fired.append({{"notification": d["name"], "id": d.get("id"),
+                      "to": _recipients_for(conn, d, table, row),
+                      "declared_channels": d.get("channels") or [],
+                      "delivered_by": "in_app only — no mail or SMS provider is connected"}})
+    return fired
+
+
+def _parse_duration_seconds(text):
+    """A duration phrase from a real R.14/FL.10 answer, turned into seconds --
+    the run-time twin of builder.py's own _parse_duration_seconds, so a job's
+    declared duration is honoured exactly as the Builder classified it."""
+    if not isinstance(text, str):
+        return None
+    m = re.match(r"\\s*([\\d.]+)\\s*(second|minute|hour|day|week|month|year)s?\\s*$", text.strip(), re.I)
+    if not m:
+        return None
+    n = float(m.group(1)); unit = m.group(2).lower()
+    scale = {{"second": 1, "minute": 60, "hour": 3600, "day": 86400,
+             "week": 604800, "month": 2629800, "year": 31557600}}[unit]
+    return n * scale
+
+
+def run_job(conn, decls, job):
+    """Runs one declared recurring job for real, against the real database --
+    or, if the Builder found no mechanical rule for it, reports the real
+    reason. Never guesses: a job whose kind is None here was already refused
+    a rule at build time (see builder.py's _classify_recurring_op)."""
+    kind = job.get("kind")
+    p = job.get("params") or {{}}
+    if kind == "purge":
+        seconds = _parse_duration_seconds(p["duration"])
+        cutoff_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(time.time() - seconds))
+        n = conn.execute(f"DELETE FROM {{p['table']}} WHERE created_at < ?", (cutoff_iso,)).rowcount
+        conn.commit()
+        return {{"job": job["name"], "kind": kind, "ran": True, "deleted": n}}
+    if kind == "date_timeout":
+        seconds = _parse_duration_seconds(p["duration"])
+        rows = [dict(r) for r in conn.execute(
+            f"SELECT * FROM {{p['table']}} WHERE stage = ?", (p["from_stage"],)).fetchall()]
+        moved = []
+        for row in rows:
+            val = row.get(p["field"])
+            cond = (not val) if p["negate"] else bool(val)
+            if not cond:
+                continue
+            hist = conn.execute(
+                "SELECT entered_at FROM _stage_history WHERE record_table = ? AND row_id = ? AND stage = ? "
+                "ORDER BY entered_at DESC LIMIT 1", (p["table"], str(row["id"]), p["from_stage"])).fetchone()
+            if not hist or (time.time() - hist[0]) < seconds:
+                continue
+            conn.execute(f"UPDATE {{p['table']}} SET stage = ? WHERE id = ?", (p["to_stage"], row["id"]))
+            conn.commit()
+            stage_history.record_transition(conn, p["table"], row["id"], p["to_stage"])
+            fired = notify(conn, decls, "stage_reached", table=p["table"], row=row, stage=p["to_stage"])
+            moved.append({{"id": row["id"], "notified": fired}})
+        return {{"job": job["name"], "kind": kind, "ran": True, "moved": moved}}
+    if kind == "due_reminder":
+        offset = str(p.get("offset") or "+0 seconds")
+        seconds = _parse_duration_seconds(offset.lstrip("+-")) or 0
+        sign = -1 if offset.strip().startswith("-") else 1
+        rows = [dict(r) for r in conn.execute(f"SELECT * FROM {{p['table']}}").fetchall()]
+        fired_rows = []
+        for row in rows:
+            raw = row.get(p.get("column"))
+            if not raw:
+                continue
+            try:
+                due = time.mktime(time.strptime(str(raw)[:19], "%Y-%m-%dT%H:%M:%S"))
+            except Exception:
+                continue
+            if time.time() < due + sign * seconds:
+                continue
+            key = f"{{job['id']}}:{{row['id']}}"
+            if conn.execute("SELECT 1 FROM _job_fired WHERE fire_key = ?", (key,)).fetchone():
+                continue
+            conn.execute("INSERT INTO _job_fired (fire_key, fired_at) VALUES (?, ?)", (key, now_iso()))
+            conn.commit()
+            fired = notify(conn, decls, "relative_to_date", table=p["table"], row=row)
+            fired_rows.append({{"id": row["id"], "notified": fired}})
+        return {{"job": job["name"], "kind": kind, "ran": True, "fired": fired_rows}}
+    return {{"job": job["name"], "kind": kind, "ran": False, "reason": job.get("unwired_reason")}}
 
 
 def run_transition_effects(conn, effects, table, row_id, entered_stage):
@@ -772,12 +950,15 @@ def _dispatch_call(method, path, name):
         return f"self.{name}()"
     if method == "GET" and id_path and (name.startswith("approval_status_") or name.startswith("history_")):
         return f"self.{name}(path[len({path!r}):])"
+    if method == "POST" and name == "run_jobs":
+        return f"self.{name}()"
     raise BuildRefused(f"no dispatch rule for {method} {path} -> {name}")
 
 
 def build_app_py(spec, port):
     routes = (crud_routes(spec) + oauth_routes(spec) + api_key_routes(spec) + workflow_routes(spec)
-              + custom_action_routes(spec) + form_routes(spec) + report_routes(spec))
+              + custom_action_routes(spec) + form_routes(spec) + report_routes(spec)
+              + notification_routes(spec))
     handlers = []
     dispatch = {"GET": [], "POST": [], "PUT": [], "DELETE": []}
     for method, path, name, ctx in routes:
@@ -800,6 +981,10 @@ def build_app_py(spec, port):
                 handlers.append(render_oauth_handler(name, ctx))
             elif name.startswith("history_"):
                 handlers.append(render_read_handler(name, ctx))
+            elif name == "list_notifications":
+                handlers.append(render_notification_handler(name, ctx))
+            elif name == "run_jobs":
+                handlers.append(render_jobs_handler(name, ctx))
             else:
                 handlers.append(render_crud_handler(method, path, name, ctx))
         cond = f"path.startswith({path!r})" if path.endswith("/") else f"path == {path!r}"
@@ -807,7 +992,9 @@ def build_app_py(spec, port):
     if spec["build_model"]["integrations"]:
         handlers.append(render_status_handler())
 
-    src = APP_PRELUDE.format(spec_id=spec["spec_id"], title=spec["title"])
+    src = APP_PRELUDE.format(spec_id=spec["spec_id"], title=spec["title"],
+                             notification_decls_json=repr(notification_decls(spec)),
+                             recurring_jobs_json=repr(job_decls(spec)))
     src += ENGINE_IMPORTS
     src += APP_ROUTER.format(
         get_dispatch="".join(dispatch["GET"]) or "        pass",
@@ -828,7 +1015,8 @@ def build_app_py(spec, port):
 VENDORED_ENGINES = ("audit_trail", "workflow_executor", "system_triggered_transition",
                      "custom_action_execution", "form_render_submit", "reporting_engine",
                      "stage_approval_gate", "stage_history", "stock_ledger", "record_cloning",
-                     "ledger_balancing", "document_generation")
+                     "ledger_balancing", "document_generation", "notification_delivery",
+                     "scheduled_jobs")
 
 ENGINE_IMPORTS = """
 ENGINES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "engines")
@@ -837,6 +1025,7 @@ if ENGINES_DIR not in sys.path:
 import audit_trail, workflow_executor, system_triggered_transition
 import custom_action_execution, form_render_submit, reporting_engine, stage_approval_gate
 import stage_history, stock_ledger, record_cloning, ledger_balancing, document_generation
+import notification_delivery, scheduled_jobs
 """
 
 
@@ -845,6 +1034,193 @@ def _stage_names(wf):
     if isinstance(stages, dict):
         stages = stages.get("stages") or []
     return [st["name"] if isinstance(st, dict) else st for st in stages]
+
+
+#: The trigger kinds the Builder can really fire. A declared notification whose
+#: trigger matches none of them is NOT dropped and NOT guessed at: it is carried
+#: into the app as `unwired`, listed on the notifications route with the reason,
+#: and named at build time. A person can see that it was asked for and is not
+#: happening -- which is the honest state, and the opposite of a dead feature.
+NOTIFY_KINDS = ("relative_to_date", "stage_reached", "record_created", "field_set",
+                "custom_action", "threshold")
+
+
+def _classify_notification(spec, name, n):
+    """(kind, params, unwired_reason). Read off the notification's own declared
+    N.01 trigger and the records/workflows the template really has -- never from
+    the prose alone where a real declaration exists."""
+    bm = spec["build_model"]
+    trig = n.get("trigger") or {}
+    if trig.get("kind") == "relative_to_date":
+        record = trig.get("record")
+        if record not in bm["records"]:
+            return None, None, f"anchors on {record!r}, which is not a declared record"
+        field = trig.get("date_field")
+        if field not in bm["records"][record]["fields"]:
+            return None, None, f"anchors on {field!r}, which is not a field of {record}"
+        return "relative_to_date", {"table": table_name(record), "column": slug(field),
+                                    "offset": trig.get("offset") or "+0 days"}, None
+    event = (trig.get("event") or "").strip()
+    if not event:
+        return None, None, "declares no event to fire on"
+    # a stage this template really declares, named in the event text
+    for record in bm["records"]:
+        wf = _workflow_for(spec, record)
+        if not wf:
+            continue
+        for stage in _stage_names(wf):
+            if re.search(r"\b" + re.escape(stage) + r"\b", event):
+                return "stage_reached", {"table": table_name(record), "stage": stage}, None
+    # a custom action this record really declares
+    for record in bm["records"]:
+        for act in _custom_actions_for(spec, record):
+            nm = (act.get("detail") or {}).get("name")
+            if nm and re.search(r"\b" + re.escape(nm) + r"\b", event):
+                return "custom_action", {"table": table_name(record), "action": nm}, None
+    # a record of this template being created
+    for record in bm["records"]:
+        if re.search(r"\b" + re.escape(record.lower()) + r"\b", event.lower()) and "creat" in event.lower():
+            return "record_created", {"table": table_name(record)}, None
+    # a field of this template being set or changed
+    for record in bm["records"]:
+        for field in bm["records"][record]["fields"]:
+            if re.search(r"\b" + re.escape(field) + r"\b", event) and ("set" in event or "chang" in event):
+                return "field_set", {"table": table_name(record), "column": slug(field)}, None
+    # a two-field threshold the stock part already evaluates
+    if "falls to or below" in event.lower():
+        for record in bm["records"]:
+            cols = {slug(f) for f in bm["records"][record]["fields"]}
+            if {"stock_on_hand", "reorder_point"} <= cols:
+                return "threshold", {"table": table_name(record)}, None
+    return None, None, ("names no stage, action, record, field or threshold this app declares, "
+                        "so the Builder has no rule that could fire it")
+
+
+def notification_decls(spec):
+    """Every declared notification, classified. Nothing is invented and nothing
+    is silently dropped."""
+    out = []
+    for name, n in spec["build_model"]["notifications"].items():
+        kind, params, why = _classify_notification(spec, name, n)
+        out.append({"name": name, "id": n.get("id"), "kind": kind, "params": params or {},
+                    "recipients": n.get("recipients") or [], "channels": n.get("channels") or [],
+                    "unwired_reason": why})
+    return out
+
+
+def _parse_duration_seconds(text):
+    """A duration phrase from a real R.14/FL.10 answer, turned into seconds --
+    at build time, the same rule the generated app's own _parse_duration_seconds
+    uses at run time. Returns None if it names no real duration (e.g. "forever")."""
+    if not isinstance(text, str):
+        return None
+    m = re.match(r"\s*([\d.]+)\s*(second|minute|hour|day|week|month|year)s?\s*$", text.strip(), re.I)
+    if not m:
+        return None
+    n = float(m.group(1)); unit = m.group(2).lower()
+    scale = {"second": 1, "minute": 60, "hour": 3600, "day": 86400,
+             "week": 604800, "month": 2629800, "year": 31557600}[unit]
+    return n * scale
+
+
+def _classify_recurring_op(spec, op):
+    """(kind, params, unwired_reason) for one D11 recurring-ops entry, read off
+    its own declared source and detail -- the same discipline as notifications:
+    a duration, stage, field or target this op's own text does not really name
+    is never guessed at, it is reported as unwired with the real reason."""
+    bm = spec["build_model"]
+    source, detail = op["source"], op["detail"]
+    prefix, _, rest = source.partition(":")
+    if prefix == "R.14":
+        record = rest
+        if record not in bm["records"]:
+            return None, {}, f"names {record!r}, which is not a declared record"
+        seconds = _parse_duration_seconds(detail)
+        if seconds is None:
+            return None, {}, f"retention is {detail!r} -- nothing to purge"
+        return "purge", {"table": table_name(record), "duration": detail}, None
+    if prefix == "FL.10":
+        # FL.10's own text names a *workflow*, not a record (e.g.
+        # "FL.10:Appointment lifecycle") -- resolved to its real record the
+        # same mechanical way _workflow_for() does it (matching declared
+        # stages), never by assuming the workflow's name is the record's name
+        # (that assumption broke crm-pipeline's "Deal pipeline" once already).
+        wf_obj = bm["workflows"].get(rest)
+        if wf_obj is None:
+            return None, {}, f"names workflow {rest!r}, which is not declared"
+        record = next((r for r in bm["records"] if _workflow_for(spec, r) is wf_obj), None)
+        if record is None:
+            return None, {}, f"workflow {rest!r} is not the real lifecycle of any declared record"
+        if not isinstance(detail, list) or not detail:
+            return None, {}, "declares no timeout rule"
+        rule = detail[0]
+        from_stage, duration, then = rule.get("stage"), rule.get("duration"), (rule.get("then") or "")
+        wf = _workflow_for(spec, record)
+        stages = _stage_names(wf) if wf else []
+        if from_stage not in stages:
+            return None, {}, f"names stage {from_stage!r}, which {record} does not declare"
+        field = None
+        for f in bm["records"][record]["fields"]:
+            words = [w for w in re.split(r"\W+", f.lower()) if w]
+            if words and all(w in then.lower() for w in words):
+                field = f; break
+        to_stage = None
+        for st in stages:
+            if st != from_stage and re.search(r"\b" + re.escape(st) + r"\b", then):
+                to_stage = st; break
+        if not field or not to_stage:
+            return None, {}, (f"{then!r} does not name both a declared field and a declared stage this "
+                              f"Builder can match mechanically, so it will not guess which rows to move")
+        negate = bool(re.search(r"\bun\w*\b", then.lower())) or re.search(r"\bnot\b", then.lower()) is not None
+        seconds = _parse_duration_seconds(duration)
+        if seconds is None:
+            return None, {}, f"timeout duration {duration!r} is not a real duration"
+        return "date_timeout", {"table": table_name(record), "from_stage": from_stage, "to_stage": to_stage,
+                                "field": slug(field), "negate": negate, "duration": duration}, None
+    if prefix == "N.01":
+        name = rest
+        n = bm["notifications"].get(name)
+        if not n:
+            return None, {}, f"names notification {name!r}, which is not declared"
+        kind, params, why = _classify_notification(spec, name, n)
+        if kind == "relative_to_date":
+            return "due_reminder", dict(params, notif=name), None
+        return None, {}, "fires at the moment of its own event, not on a schedule -- see /api/notifications"
+    if prefix == "RP.08":
+        enabled = isinstance(detail, dict) and str(detail.get("enabled", "no")).lower() == "yes"
+        if not enabled:
+            return None, {}, "declared but turned off -- no export runs"
+        return None, {}, "export is declared enabled but no export engine is wired yet"
+    if prefix == "FL.01":
+        return None, {}, "describes who may create a record, not something to run on a timer"
+    if prefix == "B.08":
+        return None, {}, "needs a declared field or stage marking a 'repeated failure' this app does not have"
+    if prefix == "FLX.03":
+        return None, {}, "an integration event, not a scheduled job"
+    return None, {}, f"source {source!r} has no scheduling rule"
+
+
+def job_decls(spec):
+    """Every declared recurring op, classified. Nothing invented, nothing
+    silently dropped -- the same contract as notification_decls."""
+    out = []
+    for op in spec["build_model"].get("recurring_ops") or []:
+        kind, params, why = _classify_recurring_op(spec, op)
+        out.append({"id": op["id"], "name": op["source"], "kind": kind, "params": params,
+                    "unwired_reason": why})
+    return out
+
+
+def notification_routes(spec):
+    """Two routes every generated app gets, because every family declares
+    notifications and recurring work and neither was reachable before:
+      GET  /api/notifications  what has really been delivered, plus anything
+                               declared that the Builder cannot fire, with why
+      POST /api/jobs/run       runs the declared recurring work now and reports
+                               what each item did (or why it did nothing)"""
+    routes = [("GET", "/api/notifications", "list_notifications", {})]
+    routes.append(("POST", "/api/jobs/run", "run_jobs", {}))
+    return routes
 
 
 def _workflow_for(spec, record):
@@ -1028,7 +1404,9 @@ def render_workflow_handler(name, ctx):
                         return respond(self, 409, {{"error": str(err)}})
                     stage_history.record_transition(conn, "{tbl}", row_id, moved_to)
                     done = run_transition_effects(conn, {effects}, "{tbl}", row_id, moved_to)
-                    respond(self, 200, {{"from": moved_from, "to": moved_to, "effects": done}})
+                    _row = dict(conn.execute("SELECT * FROM {tbl} WHERE id = ?", (row_id,)).fetchone())
+                    notified = notify(conn, NOTIFICATION_DECLS, "stage_reached", table="{tbl}", row=_row, stage=moved_to)
+                    respond(self, 200, {{"from": moved_from, "to": moved_to, "effects": done, "notified": notified}})
                 finally:
                     conn.close()
             ''')
@@ -1054,7 +1432,9 @@ def render_workflow_handler(name, ctx):
                         return respond(self, 409, {{"error": str(err)}})
                     stage_history.record_transition(conn, "{tbl}", row_id, body.get("to"))
                     done = run_transition_effects(conn, {effects}, "{tbl}", row_id, body.get("to"))
-                    respond(self, 200, {{"from": row["stage"], "to": body.get("to"), "effects": done}})
+                    _row = dict(conn.execute("SELECT * FROM {tbl} WHERE id = ?", (row_id,)).fetchone())
+                    notified = notify(conn, NOTIFICATION_DECLS, "stage_reached", table="{tbl}", row=_row, stage=body.get("to"))
+                    respond(self, 200, {{"from": row["stage"], "to": body.get("to"), "effects": done, "notified": notified}})
                 finally:
                     conn.close()
             ''')
@@ -1145,6 +1525,10 @@ def NAME(self, tail, body):
             return respond(self, 400, {"error": str(err)})
         except ValueError as err:
             return respond(self, 400 if "needs a value" in str(err) else 404, {"error": str(err)})
+        _row = conn.execute("SELECT * FROM " + TABLE + " WHERE id = ?", (row_id,)).fetchone()
+        if _row is not None:
+            result["notified"] = notify(conn, NOTIFICATION_DECLS, "custom_action",
+                                        table=TABLE, row=dict(_row), action=action_name)
         respond(self, 200, result)
     finally:
         conn.close()
@@ -1180,6 +1564,40 @@ def NAME(self, body):
                 .replace("FIELDS", json.dumps(ctx["fields"]))
                 .replace("TABLE", repr(ctx["table"]))
                 .replace("FORM", ctx["form"]).lstrip("\n"))
+
+
+def render_notification_handler(name, ctx):
+    return textwrap.dedent(f"""\
+        def {name}(self):
+            \"\"\"What has really been delivered (the real _notifications table),
+            plus every declared notification the Builder cannot fire, with the
+            real reason -- nothing declared is left unlisted.\"\"\"
+            conn = get_db()
+            try:
+                delivered = [dict(r) for r in conn.execute(
+                    "SELECT recipient, subject, body, channel, delivered_at FROM _notifications "
+                    "ORDER BY delivered_at DESC").fetchall()]
+                unwired = [d for d in NOTIFICATION_DECLS if d.get("kind") is None]
+                respond(self, 200, {{"delivered": delivered, "declared": NOTIFICATION_DECLS, "unwired": unwired}})
+            finally:
+                conn.close()
+        """)
+
+
+def render_jobs_handler(name, ctx):
+    return textwrap.dedent(f"""\
+        def {name}(self):
+            \"\"\"Runs every declared recurring job this Builder can really
+            execute, against the real database, right now. A declared job it
+            cannot run is reported with the real reason, never skipped
+            silently and never guessed at.\"\"\"
+            conn = get_db()
+            try:
+                results = [run_job(conn, NOTIFICATION_DECLS, j) for j in RECURRING_JOBS]
+                respond(self, 200, {{"ran_at": now_iso(), "results": results}})
+            finally:
+                conn.close()
+        """)
 
 
 #: report metric engines the generated app can really run: the generic

@@ -40,7 +40,7 @@ PASS pm-teamwork/OPS-009 (recurring_op): scheduled_jobs
 CLEAN
 
 QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
-QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 143bf3e98f4fd428
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b
 UNQUALIFIED notification_delivery@1.0.0: status TESTED
 QUALIFIED record_cloning@1.0.0 (PRODUCT_QUALIFIED) at c9f8c783994f80c1
 QUALIFIED reporting_engine@1.0.0 (PRODUCT_QUALIFIED) at a0de07a247bf355b
