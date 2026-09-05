@@ -1,5 +1,59 @@
 # Section audit: the 22 catalogued parts against the section bar
 
+## Update — 2026-09-05, after merging the verified commanddesk-complete tree
+
+The shelf grew from 22 parts to 33, and gained a real lifecycle
+(`shelf.py`: TESTED → PRODUCT_QUALIFIED → FROZEN, granted only by an
+actual browser-driven receipt, never hand-typed). 14 of 33 are now
+`PRODUCT_QUALIFIED`. This is a different, narrower claim than "complete
+section" below — a qualified part is proven to work in a real browser
+journey; it says nothing about whether it also carries its own UI,
+schema, permissions and notification surface as one unit. Re-checked
+against that stricter bar specifically:
+
+- **`packages/hands` is the closest thing to a genuine complete section
+  found anywhere in this codebase so far**, and wasn't accounted for in
+  the original audit below. It has its own UI (`web/`), its own API
+  (`api.py`), its own schema (`store.py`, real sqlite), real business
+  logic and state transitions (`engine.py`, `session.py`), real
+  validation (`provenance.py`'s KNOWN/SUPPLIED/DERIVED/MISSING typing,
+  enforced before storage), a real permissions-equivalent
+  (`trust_gate.py`, backend-enforced), real audit (reuses `audit_trail`),
+  documented configuration points (`config.py`), and 29 real tests. Two
+  of the fourteen dimensions are genuinely still missing: no
+  notifications (checked directly — no notification code anywhere in
+  `hands/`) and no third-party integrations (checked — none). Not a full
+  pass, but far closer than `crud_list_detail`/`oauth_connect` were.
+- **`reporting_engine` closed its own stated gap.** The version now on
+  the shelf handles joins, computed values, and ratio/difference/
+  age-bucket composites — the accounting-ledger "Profit and loss" /
+  "Aged receivables" reports this document previously said were
+  "genuinely outside this part's real, single-table scope" now bind and
+  pass. That specific line below is superseded; left in place as the
+  historical record of what was true before this merge.
+- **Login/Authentication and Payment are still fully absent** —
+  re-checked directly in the merged `builder.py`: still zero
+  session/login/cookie/current-user code. This is confirmed independently
+  by the incoming tree's own status document, which names the missing
+  sign-in as a blocked, undecided item (a real product decision — staff
+  only or customers too, and which auth method — not an oversight).
+- **`packages/frontdoor` and `packages/interfaces` are new, but they
+  aren't sections under this policy's definition** — they're a
+  cross-cutting intake layer and a cross-cutting presentation layer,
+  each spanning all templates rather than owning one capability
+  end-to-end with its own schema and permissions. Worth naming
+  separately from the section catalogue, not shoehorning into it.
+- The reverse-engineering requirement (three additional reference
+  applications, section 7 of the architecture policy) is **still
+  blocked** — unchanged from below. `hands` answered the earlier,
+  separate "add Hands to the library" request; it is not one of the
+  three reference applications that requirement calls for.
+
+Everything below this line is the original audit, from before the
+merge, kept as the historical record rather than silently rewritten.
+
+---
+
 `SECTION_ARCHITECTURE.md` defines a catalogue entry as a **complete
 section**: UI + API + data model + schema/migrations + business logic +
 validation + state transitions + permissions + error handling +
