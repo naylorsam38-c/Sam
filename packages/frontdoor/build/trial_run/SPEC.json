@@ -1,0 +1,3546 @@
+{
+ "spec_id": "SPEC-FRONTDOOR",
+ "version": 1,
+ "title": "Teamwork Desk",
+ "graph_version": "3.0",
+ "source_template": "pm-teamwork",
+ "numbered_fields": [
+  {
+   "number": "Z.02",
+   "spec_field": "actions.inventory",
+   "value": "confirmed",
+   "source_kind": "question"
+  },
+  {
+   "number": "D12",
+   "spec_field": "actions.inventory.items",
+   "value": "see build_model.D12",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "sys_api_convention",
+   "spec_field": "api.*",
+   "value": "One fixed REST convention for every endpoint, verb and envelope.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_first_admin",
+   "spec_field": "auth.bootstrap_admin",
+   "value": "The first super-role account is seeded from the deploy inputs, not created through the app.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "AU.05",
+   "spec_field": "auth.default_role",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.12",
+   "spec_field": "auth.deletion_allowed",
+   "value": {
+    "allowed": "yes",
+    "by": "both",
+    "data": "anonymised"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.12",
+   "spec_field": "auth.deletion_by",
+   "value": {
+    "allowed": "yes",
+    "by": "both",
+    "data": "anonymised"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.12",
+   "spec_field": "auth.deletion_data_policy",
+   "value": {
+    "allowed": "yes",
+    "by": "both",
+    "data": "anonymised"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.03",
+   "spec_field": "auth.email_verification",
+   "value": "yes",
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_account_identity",
+   "spec_field": "auth.identity_field",
+   "value": "The email address is the account identity; changing it requires re-verification.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "AU.06",
+   "spec_field": "auth.invite_authority",
+   "value": {
+    "inviters": [
+     "Admin",
+     "Member"
+    ],
+    "default_role": "Member"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.06",
+   "spec_field": "auth.invite_default_role",
+   "value": {
+    "inviters": [
+     "Admin",
+     "Member"
+    ],
+    "default_role": "Member"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_invite_expiry",
+   "spec_field": "auth.invite_expiry",
+   "value": "Invitations expire after 7 days and can be re-sent.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "AU.08",
+   "spec_field": "auth.lockout_attempts",
+   "value": {
+    "attempts": 5,
+    "duration": "15 minutes"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.08",
+   "spec_field": "auth.lockout_duration",
+   "value": {
+    "attempts": 5,
+    "duration": "15 minutes"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.04",
+   "spec_field": "auth.methods",
+   "value": [
+    "password",
+    "google"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.07",
+   "spec_field": "auth.mfa_method",
+   "value": {
+    "scope": "nobody",
+    "method": "n/a"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_mfa_recovery",
+   "spec_field": "auth.mfa_recovery",
+   "value": "One-time recovery codes issued at MFA enrolment.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "AU.07",
+   "spec_field": "auth.mfa_scope",
+   "value": {
+    "scope": "nobody",
+    "method": "n/a"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.09",
+   "spec_field": "auth.multi_device",
+   "value": "yes",
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_profile_self_edit",
+   "spec_field": "auth.profile_self_service",
+   "value": "Every user can edit their own name, email, password and notification preferences.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "AU.02",
+   "spec_field": "auth.registration_fields",
+   "value": [
+    {
+     "name": "Full name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no"
+    },
+    {
+     "name": "Email address",
+     "type": "email",
+     "required": "yes",
+     "unique": "yes"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.01",
+   "spec_field": "auth.registration_modes",
+   "value": [
+    "invited"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.07",
+   "spec_field": "auth.required",
+   "value": "yes",
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.13",
+   "spec_field": "auth.reset_others_by",
+   "value": [
+    "super"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_password_reset",
+   "spec_field": "auth.self_reset_flow",
+   "value": "Self-service reset by emailed link, valid 1 hour.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "AU.10",
+   "spec_field": "auth.session_length",
+   "value": "30 days",
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_suspended_experience",
+   "spec_field": "auth.suspended_screen",
+   "value": "A suspended user sees a fixed 'account suspended \u2014 contact <support contact>' screen and nothing else.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "AU.11",
+   "spec_field": "auth.suspension_allowed",
+   "value": {
+    "allowed": "yes",
+    "by": [
+     "super"
+    ],
+    "auto_triggers": []
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.11",
+   "spec_field": "auth.suspension_auto_triggers",
+   "value": {
+    "allowed": "yes",
+    "by": [
+     "super"
+    ],
+    "auto_triggers": []
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.11",
+   "spec_field": "auth.suspension_by",
+   "value": {
+    "allowed": "yes",
+    "by": [
+     "super"
+    ],
+    "auto_triggers": []
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "B.10",
+   "spec_field": "billing.cancellation",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "B.02",
+   "spec_field": "billing.charged_party",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "B.04",
+   "spec_field": "billing.currency",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_billing_details",
+   "spec_field": "billing.details_collection",
+   "value": "Card, billing address and tax IDs are collected by the gateway's hosted form; invoices/receipts are the gateway's.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_billing_details",
+   "spec_field": "billing.invoices",
+   "value": "Card, billing address and tax IDs are collected by the gateway's hosted form; invoices/receipts are the gateway's.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "B.01",
+   "spec_field": "billing.model",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "B.08",
+   "spec_field": "billing.on_failure",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_limit_reached",
+   "spec_field": "billing.on_limit_reached",
+   "value": "Hitting a plan limit shows an upgrade prompt, then blocks the action.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "B.07",
+   "spec_field": "billing.payment_methods",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "B.09",
+   "spec_field": "billing.plan_change",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "D10",
+   "spec_field": "billing.plan_linkage",
+   "value": "see build_model.D10",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "B.03",
+   "spec_field": "billing.plans",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_proration",
+   "spec_field": "billing.proration_rule",
+   "value": "Mid-cycle plan changes are prorated by the gateway.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "B.11",
+   "spec_field": "billing.refunds",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "A.09",
+   "spec_field": "billing.required",
+   "value": "no",
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_tax_calculation",
+   "spec_field": "billing.tax_calculation",
+   "value": "Tax computed by the payment gateway from the billing address.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "B.05",
+   "spec_field": "billing.trial",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "B.06",
+   "spec_field": "billing.usage_charge_timing",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "B.06",
+   "spec_field": "billing.usage_unit",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_idempotency_webhook",
+   "spec_field": "billing.webhook_handling",
+   "value": "Payment webhooks signature-verified and processed exactly once.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "C.06",
+   "spec_field": "client.landing_screen_per_role",
+   "value": {
+    "Admin": "Projects list",
+    "Member": "My tasks",
+    "Guest": "Projects list"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "C.05",
+   "spec_field": "client.mobile_behaviour",
+   "value": {
+    "mode": "simplified"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "C.07",
+   "spec_field": "client.navigation",
+   "value": "confirmed",
+   "source_kind": "question"
+  },
+  {
+   "number": "D13",
+   "spec_field": "client.navigation.derived",
+   "value": "see build_model.D13",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "A.06",
+   "spec_field": "client.platforms",
+   "value": [
+    "web"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.10",
+   "spec_field": "client.public_surfaces",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.12",
+   "spec_field": "data.import_required",
+   "value": {
+    "required": "no"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "A.12",
+   "spec_field": "data.import_sources",
+   "value": {
+    "required": "no"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "DI.10",
+   "spec_field": "deploy.app_store_accounts",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "DI.01",
+   "spec_field": "deploy.domain",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "DI.02",
+   "spec_field": "deploy.email_sender",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "DI.04",
+   "spec_field": "deploy.first_admin_email",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "DI.06",
+   "spec_field": "deploy.gateway_credentials",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "DI.09",
+   "spec_field": "deploy.integration_credentials",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "DI.11",
+   "spec_field": "deploy.legal_documents",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "DI.08",
+   "spec_field": "deploy.oauth_credentials",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "DI.05",
+   "spec_field": "deploy.region",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "DI.07",
+   "spec_field": "deploy.sms_credentials",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "DI.03",
+   "spec_field": "deploy.support_contact",
+   "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+   "source_kind": "deploy_input"
+  },
+  {
+   "number": "A.14",
+   "spec_field": "deviation.flags",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "0.01",
+   "spec_field": "engine.involvement",
+   "value": "guided",
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_file_type_inference",
+   "spec_field": "file.*.allowed_mimes",
+   "value": "Allowed formats come from a fixed allow-list per file category.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_image_handling",
+   "spec_field": "file.*.image_handling",
+   "value": "Images get thumbnails; downloads are served by signed URL.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_file_security_scanning",
+   "spec_field": "file.*.malware_scanning",
+   "value": "Async malware scan before a file is marked active.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "D06",
+   "spec_field": "file.*.retention",
+   "value": "see build_model.D06",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "sys_file_storage",
+   "spec_field": "file.*.storage_backend",
+   "value": "Private object storage for uploads.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "FI.02:Attachment",
+   "spec_field": "file.Attachment.cardinality",
+   "value": "many",
+   "source_kind": "question"
+  },
+  {
+   "number": "FI.07:Attachment",
+   "spec_field": "file.Attachment.cascade_delete",
+   "value": "yes",
+   "source_kind": "question"
+  },
+  {
+   "number": "FI.04:Attachment",
+   "spec_field": "file.Attachment.category",
+   "value": "document",
+   "source_kind": "question"
+  },
+  {
+   "number": "FI.05:Attachment",
+   "spec_field": "file.Attachment.max_size_mb",
+   "value": 50,
+   "source_kind": "question"
+  },
+  {
+   "number": "FI.01:Attachment",
+   "spec_field": "file.Attachment.parent_record",
+   "value": {
+    "purpose": "a file added to a task for context",
+    "parent": "Task"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "FI.01:Attachment",
+   "spec_field": "file.Attachment.purpose",
+   "value": {
+    "purpose": "a file added to a task for context",
+    "parent": "Task"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "FI.03:Attachment",
+   "spec_field": "file.Attachment.uploaders",
+   "value": {
+    "uploaders": [
+     "Member"
+    ],
+    "viewers": [
+     "Member",
+     "Guest"
+    ]
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "FI.06:Attachment",
+   "spec_field": "file.Attachment.versioning",
+   "value": "keep_history",
+   "source_kind": "question"
+  },
+  {
+   "number": "FI.03:Attachment",
+   "spec_field": "file.Attachment.viewers",
+   "value": {
+    "uploaders": [
+     "Member"
+    ],
+    "viewers": [
+     "Member",
+     "Guest"
+    ]
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "D02",
+   "spec_field": "form.*.fields",
+   "value": "see build_model.D02",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "sys_form_failure",
+   "spec_field": "form.*.layout",
+   "value": "A failed submit shows inline errors and keeps what was typed; forms are single-page; public forms get spam protection.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_form_failure",
+   "spec_field": "form.*.on_failure",
+   "value": "A failed submit shows inline errors and keeps what was typed; forms are single-page; public forms get spam protection.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_form_failure",
+   "spec_field": "form.*.spam_protection",
+   "value": "A failed submit shows inline errors and keeps what was typed; forms are single-page; public forms get spam protection.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_retry_policy",
+   "spec_field": "integration.*.retry_policy",
+   "value": "Failed external calls retry 3\u00d7 with exponential backoff + jitter.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "A.11",
+   "spec_field": "integration.public_api_required",
+   "value": "no",
+   "source_kind": "question"
+  },
+  {
+   "number": "A.15",
+   "spec_field": "inventory.file_types",
+   "value": [
+    "Attachment"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.15",
+   "spec_field": "inventory.forms",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.15",
+   "spec_field": "inventory.integrations",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.15",
+   "spec_field": "inventory.notifications",
+   "value": [
+    "Task assigned",
+    "Task due reminder",
+    "New comment"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.15",
+   "spec_field": "inventory.records",
+   "value": [
+    "Project",
+    "Task",
+    "Comment"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.15",
+   "spec_field": "inventory.reports",
+   "value": [
+    "Open tasks by person",
+    "Overdue tasks"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.15",
+   "spec_field": "inventory.roles",
+   "value": [
+    "Admin",
+    "Member",
+    "Guest"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.15",
+   "spec_field": "inventory.screens",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "A.15",
+   "spec_field": "inventory.workflows",
+   "value": [
+    "Task lifecycle"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.14",
+   "spec_field": "legal.terms_required",
+   "value": {
+    "required": "yes",
+    "status": "need_drafting"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "AU.14",
+   "spec_field": "legal.terms_status",
+   "value": {
+    "required": "yes",
+    "status": "need_drafting"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_locale_formatting",
+   "spec_field": "locale.formatting",
+   "value": "Dates, numbers and currency display in the format of A.13's region; stored in UTC; shown in the viewer's timezone.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "A.13",
+   "spec_field": "locale.languages",
+   "value": {
+    "region": "Australia",
+    "languages": [
+     "English"
+    ]
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "A.13",
+   "spec_field": "locale.primary_region",
+   "value": {
+    "region": "Australia",
+    "languages": [
+     "English"
+    ]
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_locale_formatting",
+   "spec_field": "locale.timezone_handling",
+   "value": "Dates, numbers and currency display in the format of A.13's region; stored in UTC; shown in the viewer's timezone.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_notification_copywriting",
+   "spec_field": "notification.*.copy_final",
+   "value": "Message wording drafted at build time and approved by the owner before launch; never shipped unseen.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_notification_retry",
+   "spec_field": "notification.*.retry_policy",
+   "value": "3 delivery retries then dead-letter.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "D05",
+   "spec_field": "notification.*.timing",
+   "value": "see build_model.D05",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "N.03:Task assigned",
+   "spec_field": "notification.Task assigned.channels",
+   "value": [
+    "email",
+    "in_app"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "N.03:Task due reminder",
+   "spec_field": "notification.Task due reminder.channels",
+   "value": [
+    "email",
+    "in_app"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "N.03:New comment",
+   "spec_field": "notification.New comment.channels",
+   "value": [
+    "in_app"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "N.04:Task assigned",
+   "spec_field": "notification.Task assigned.intent",
+   "value": "You've been given this task \u2014 open it and see what's needed.",
+   "source_kind": "question"
+  },
+  {
+   "number": "N.04:Task due reminder",
+   "spec_field": "notification.Task due reminder.intent",
+   "value": "This task is due tomorrow \u2014 finish it or move the date.",
+   "source_kind": "question"
+  },
+  {
+   "number": "N.04:New comment",
+   "spec_field": "notification.New comment.intent",
+   "value": "Someone said something on your task \u2014 read and reply if needed.",
+   "source_kind": "question"
+  },
+  {
+   "number": "N.05:Task assigned",
+   "spec_field": "notification.Task assigned.opt_out",
+   "value": "yes",
+   "source_kind": "question"
+  },
+  {
+   "number": "N.05:Task due reminder",
+   "spec_field": "notification.Task due reminder.opt_out",
+   "value": "yes",
+   "source_kind": "question"
+  },
+  {
+   "number": "N.05:New comment",
+   "spec_field": "notification.New comment.opt_out",
+   "value": "yes",
+   "source_kind": "question"
+  },
+  {
+   "number": "N.02:Task assigned",
+   "spec_field": "notification.Task assigned.recipients",
+   "value": [
+    {
+     "kind": "field",
+     "record": "Task",
+     "field": "Assignee"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "N.02:Task due reminder",
+   "spec_field": "notification.Task due reminder.recipients",
+   "value": [
+    {
+     "kind": "field",
+     "record": "Task",
+     "field": "Assignee"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "N.02:New comment",
+   "spec_field": "notification.New comment.recipients",
+   "value": [
+    {
+     "kind": "field",
+     "record": "Task",
+     "field": "Assignee"
+    },
+    {
+     "kind": "owner"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "N.01:Task assigned",
+   "spec_field": "notification.Task assigned.trigger",
+   "value": {
+    "kind": "event",
+    "event": "a task's Assignee field is set or changed"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "N.01:Task due reminder",
+   "spec_field": "notification.Task due reminder.trigger",
+   "value": {
+    "kind": "relative_to_date",
+    "record": "Task",
+    "date_field": "Due date",
+    "offset": "-24 hours"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "N.01:New comment",
+   "spec_field": "notification.New comment.trigger",
+   "value": {
+    "kind": "event",
+    "event": "a comment is created on a task"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_inapp_inbox",
+   "spec_field": "notify.inbox",
+   "value": "If any notification uses in-app, the app has one notification inbox with read/unread state.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "Z.01",
+   "spec_field": "ops.recurring_operations",
+   "value": "confirmed",
+   "source_kind": "question"
+  },
+  {
+   "number": "D11",
+   "spec_field": "ops.recurring_operations.items",
+   "value": "see build_model.D11",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "A.03",
+   "spec_field": "product.audience",
+   "value": "The app's own roles are kept, so each person only sees and does their part.",
+   "source_kind": "question"
+  },
+  {
+   "number": "A.01",
+   "spec_field": "product.description",
+   "value": "Run my small team's projects: tasks, who's doing what, and whether it's actually done.",
+   "source_kind": "question"
+  },
+  {
+   "number": "A.02",
+   "spec_field": "product.goals",
+   "value": "Use it to run my small team's projects: tasks, who's doing what, and whether it's actually done.",
+   "source_kind": "question"
+  },
+  {
+   "number": "A.05",
+   "spec_field": "product.name",
+   "value": "Teamwork Desk",
+   "source_kind": "question"
+  },
+  {
+   "number": "A.04",
+   "spec_field": "product.success_definition",
+   "value": "It is being used, and what it holds is what is really going on.",
+   "source_kind": "question"
+  },
+  {
+   "number": "D15",
+   "spec_field": "qa.generated_tests",
+   "value": "see build_model.D15",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "sys_qa_pass_conditions",
+   "spec_field": "qa.pass_condition.*",
+   "value": "Every node's pass/fail check is generated from that node's own answers.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_audit_fields",
+   "spec_field": "record.*.audit_fields",
+   "value": "created_at/updated_at/created_by/updated_by on every table.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_concurrent_edit",
+   "spec_field": "record.*.concurrency",
+   "value": "Last save wins; a user saving over a newer version is warned and shown the newer version.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_list_behaviour",
+   "spec_field": "record.*.exportable",
+   "value": "Every record list is searchable and filterable on its visible fields, sorted newest first, exportable by anyone who can view it.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "D01",
+   "spec_field": "record.*.field.*.storage_type",
+   "value": "see build_model.D01",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "D14",
+   "spec_field": "record.*.field.*.storage_type_for_options",
+   "value": "see build_model.D14",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "sys_field_type_defaults",
+   "spec_field": "record.*.field.*.validation",
+   "value": "Each field type carries one standard validation rule and error message.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_database_identifiers",
+   "spec_field": "record.*.id_strategy",
+   "value": "UUIDv4 primary keys on every table.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_list_behaviour",
+   "spec_field": "record.*.list_behaviour",
+   "value": "Every record list is searchable and filterable on its visible fields, sorted newest first, exportable by anyone who can view it.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "R.06:Project",
+   "spec_field": "record.Project.access.create",
+   "value": [
+    "Member"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.06:Task",
+   "spec_field": "record.Task.access.create",
+   "value": [
+    "Member"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.06:Comment",
+   "spec_field": "record.Comment.access.create",
+   "value": [
+    "Member",
+    "Guest"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.08:Project",
+   "spec_field": "record.Project.access.delete",
+   "value": [
+    {
+     "role": "Member",
+     "scope": "own"
+    },
+    {
+     "role": "Admin",
+     "scope": "all"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.08:Task",
+   "spec_field": "record.Task.access.delete",
+   "value": [
+    {
+     "role": "Member",
+     "scope": "own"
+    },
+    {
+     "role": "Admin",
+     "scope": "all"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.08:Comment",
+   "spec_field": "record.Comment.access.delete",
+   "value": [
+    {
+     "role": "Member",
+     "scope": "own"
+    },
+    {
+     "role": "Admin",
+     "scope": "all"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.07:Project",
+   "spec_field": "record.Project.access.edit",
+   "value": [
+    {
+     "role": "Member",
+     "scope": "all"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.07:Task",
+   "spec_field": "record.Task.access.edit",
+   "value": [
+    {
+     "role": "Member",
+     "scope": "all"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.07:Comment",
+   "spec_field": "record.Comment.access.edit",
+   "value": [
+    {
+     "role": "Member",
+     "scope": "own"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.05:Project",
+   "spec_field": "record.Project.access.view",
+   "value": [
+    {
+     "role": "Member",
+     "scope": "all"
+    },
+    {
+     "role": "Guest",
+     "scope": "linked",
+     "via": "Projects the guest was invited to"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.05:Task",
+   "spec_field": "record.Task.access.view",
+   "value": [
+    {
+     "role": "Member",
+     "scope": "all"
+    },
+    {
+     "role": "Guest",
+     "scope": "linked",
+     "via": "tasks in projects the guest was invited to"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.05:Comment",
+   "spec_field": "record.Comment.access.view",
+   "value": [
+    {
+     "role": "Member",
+     "scope": "all"
+    },
+    {
+     "role": "Guest",
+     "scope": "linked",
+     "via": "comments on tasks the guest can see"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.13:Project",
+   "spec_field": "record.Project.archivable",
+   "value": "yes",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.13:Task",
+   "spec_field": "record.Task.archivable",
+   "value": "yes",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.13:Comment",
+   "spec_field": "record.Comment.archivable",
+   "value": "no",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.15:Project",
+   "spec_field": "record.Project.custom_actions",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.15:Task",
+   "spec_field": "record.Task.custom_actions",
+   "value": [
+    {
+     "name": "Duplicate",
+     "who": [
+      "Member"
+     ],
+     "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
+     "result_location": "the same project's task list",
+     "execution": {
+      "op": "clone",
+      "overrides": {
+       "stage": "To do"
+      },
+      "title_column": "title",
+      "title_suffix": " (copy)"
+     }
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.15:Comment",
+   "spec_field": "record.Comment.custom_actions",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.02:Project",
+   "spec_field": "record.Project.fields",
+   "value": [
+    {
+     "name": "Name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no"
+    },
+    {
+     "name": "Description",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no"
+    },
+    {
+     "name": "Owner",
+     "type": "other",
+     "required": "yes",
+     "unique": "no",
+     "custom_rule": "reference to a user account (pick-a-person field)"
+    },
+    {
+     "name": "Due date",
+     "type": "date",
+     "required": "no",
+     "unique": "no"
+    },
+    {
+     "name": "Colour",
+     "type": "one_choice",
+     "required": "no",
+     "unique": "no",
+     "options": [
+      "grey",
+      "blue",
+      "green",
+      "red",
+      "purple",
+      "orange"
+     ]
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.02:Task",
+   "spec_field": "record.Task.fields",
+   "value": [
+    {
+     "name": "Title",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no"
+    },
+    {
+     "name": "Description",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no"
+    },
+    {
+     "name": "Assignee",
+     "type": "other",
+     "required": "no",
+     "unique": "no",
+     "custom_rule": "reference to a user account (pick-a-person field)"
+    },
+    {
+     "name": "Due date",
+     "type": "date",
+     "required": "no",
+     "unique": "no"
+    },
+    {
+     "name": "Priority",
+     "type": "one_choice",
+     "required": "no",
+     "unique": "no",
+     "options": [
+      "low",
+      "medium",
+      "high"
+     ]
+    },
+    {
+     "name": "Project",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Project"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.02:Comment",
+   "spec_field": "record.Comment.fields",
+   "value": [
+    {
+     "name": "Body",
+     "type": "long_text",
+     "required": "yes",
+     "unique": "no"
+    },
+    {
+     "name": "Task",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Task"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.10:Project",
+   "spec_field": "record.Project.has_lifecycle",
+   "value": {
+    "has": "no"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "R.10:Task",
+   "spec_field": "record.Task.has_lifecycle",
+   "value": {
+    "has": "yes",
+    "stages": [
+     "To do",
+     "In progress",
+     "Done"
+    ]
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "R.10:Comment",
+   "spec_field": "record.Comment.has_lifecycle",
+   "value": {
+    "has": "no"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "R.04:Project",
+   "spec_field": "record.Project.human_id",
+   "value": {
+    "needed": "no"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "R.04:Task",
+   "spec_field": "record.Task.human_id",
+   "value": {
+    "needed": "no"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "R.04:Comment",
+   "spec_field": "record.Comment.human_id",
+   "value": {
+    "needed": "no"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "R.12:Project",
+   "spec_field": "record.Project.on_delete",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "R.12:Task",
+   "spec_field": "record.Task.on_delete",
+   "value": "delete_too",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.12:Comment",
+   "spec_field": "record.Comment.on_delete",
+   "value": "delete_too",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.09:Project",
+   "spec_field": "record.Project.ownership_rule",
+   "value": {
+    "basis": "field",
+    "field": "Owner"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "R.09:Task",
+   "spec_field": "record.Task.ownership_rule",
+   "value": {
+    "basis": "creator"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "R.09:Comment",
+   "spec_field": "record.Comment.ownership_rule",
+   "value": {
+    "basis": "creator"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "R.01:Project",
+   "spec_field": "record.Project.purpose",
+   "value": "A container of related work with an owner and a set of tasks.",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.01:Task",
+   "spec_field": "record.Task.purpose",
+   "value": "A single unit of work inside a project, assigned to one person.",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.01:Comment",
+   "spec_field": "record.Comment.purpose",
+   "value": "A message left on a task by a person.",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.11:Project",
+   "spec_field": "record.Project.relations",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.11:Task",
+   "spec_field": "record.Task.relations",
+   "value": [
+    {
+     "target": "Project",
+     "cardinality": "one_to_many",
+     "required": "yes"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.11:Comment",
+   "spec_field": "record.Comment.relations",
+   "value": [
+    {
+     "target": "Task",
+     "cardinality": "one_to_many",
+     "required": "yes"
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "R.14:Project",
+   "spec_field": "record.Project.retention",
+   "value": "forever",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.14:Task",
+   "spec_field": "record.Task.retention",
+   "value": "forever",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.14:Comment",
+   "spec_field": "record.Comment.retention",
+   "value": "forever",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.03:Project",
+   "spec_field": "record.Project.title_field",
+   "value": "Name",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.03:Task",
+   "spec_field": "record.Task.title_field",
+   "value": "Title",
+   "source_kind": "question"
+  },
+  {
+   "number": "R.03:Comment",
+   "spec_field": "record.Comment.title_field",
+   "value": "Body",
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_report_caching",
+   "spec_field": "report.*.cache_policy",
+   "value": "Reports regenerate on demand, cached 5 min.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "D07",
+   "spec_field": "report.*.data_source",
+   "value": "see build_model.D07",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "D07",
+   "spec_field": "report.*.metric.*.derived_definition",
+   "value": "see build_model.D07",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "RP.06:Open tasks by person",
+   "spec_field": "report.Open tasks by person.default_range",
+   "value": {
+    "filters": [
+     "Project",
+     "Assignee",
+     "Priority"
+    ],
+    "default_range": "all time"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.06:Overdue tasks",
+   "spec_field": "report.Overdue tasks.default_range",
+   "value": {
+    "filters": [
+     "Project",
+     "Assignee"
+    ],
+    "default_range": "all time"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.07:Open tasks by person",
+   "spec_field": "report.Open tasks by person.export",
+   "value": {
+    "allowed": "yes",
+    "by": [
+     "Member"
+    ]
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.07:Overdue tasks",
+   "spec_field": "report.Overdue tasks.export",
+   "value": {
+    "allowed": "yes",
+    "by": [
+     "Member"
+    ]
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.06:Open tasks by person",
+   "spec_field": "report.Open tasks by person.filters",
+   "value": {
+    "filters": [
+     "Project",
+     "Assignee",
+     "Priority"
+    ],
+    "default_range": "all time"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.06:Overdue tasks",
+   "spec_field": "report.Overdue tasks.filters",
+   "value": {
+    "filters": [
+     "Project",
+     "Assignee"
+    ],
+    "default_range": "all time"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.03:Open tasks by person",
+   "spec_field": "report.Open tasks by person.form",
+   "value": {
+    "delivery": "screen",
+    "shape": "both"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.03:Overdue tasks",
+   "spec_field": "report.Overdue tasks.form",
+   "value": {
+    "delivery": "screen",
+    "shape": "table"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.05:Overdue tasks:count of overdue Tasks",
+   "spec_field": "report.Overdue tasks.metric.count of overdue Tasks.definition",
+   "value": "a Task counts as overdue when Due date is before today AND its stage is not Done, as at the moment the report is viewed",
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.04:Open tasks by person",
+   "spec_field": "report.Open tasks by person.metrics",
+   "value": [
+    "count of Tasks not in stage Done, grouped by Assignee"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.04:Overdue tasks",
+   "spec_field": "report.Overdue tasks.metrics",
+   "value": [
+    "count of overdue Tasks"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.01:Open tasks by person",
+   "spec_field": "report.Open tasks by person.question",
+   "value": "Who is carrying how much open work right now?",
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.01:Overdue tasks",
+   "spec_field": "report.Overdue tasks.question",
+   "value": "What has slipped past its due date and needs chasing?",
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.08:Open tasks by person",
+   "spec_field": "report.Open tasks by person.scheduled_delivery",
+   "value": {
+    "enabled": "no"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.08:Overdue tasks",
+   "spec_field": "report.Overdue tasks.scheduled_delivery",
+   "value": {
+    "enabled": "no"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.02:Open tasks by person",
+   "spec_field": "report.Open tasks by person.viewers",
+   "value": [
+    "Member"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "RP.02:Overdue tasks",
+   "spec_field": "report.Overdue tasks.viewers",
+   "value": [
+    "Member"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "D04",
+   "spec_field": "role.*.forbidden_actions",
+   "value": "see build_model.D04",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "D04",
+   "spec_field": "role.*.is_admin",
+   "value": "see build_model.D04",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "D04",
+   "spec_field": "role.*.permitted_actions",
+   "value": "see build_model.D04",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "D03",
+   "spec_field": "role.*.visible_screens",
+   "value": "see build_model.D03",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "P.04:Admin",
+   "spec_field": "role.Admin.assignable_by",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "P.04:Member",
+   "spec_field": "role.Member.assignable_by",
+   "value": [
+    "Admin"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "P.04:Guest",
+   "spec_field": "role.Guest.assignable_by",
+   "value": [
+    "Admin",
+    "Member"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "P.03:Admin",
+   "spec_field": "role.Admin.billing_access",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "P.03:Member",
+   "spec_field": "role.Member.billing_access",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "P.03:Guest",
+   "spec_field": "role.Guest.billing_access",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "P.01:Admin",
+   "spec_field": "role.Admin.description",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "P.01:Member",
+   "spec_field": "role.Member.description",
+   "value": "A person on the team who plans and does the work.",
+   "source_kind": "question"
+  },
+  {
+   "number": "P.01:Guest",
+   "spec_field": "role.Guest.description",
+   "value": "An outside collaborator invited into specific projects only.",
+   "source_kind": "question"
+  },
+  {
+   "number": "P.02:Admin",
+   "spec_field": "role.Admin.sees_private_data",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "P.02:Member",
+   "spec_field": "role.Member.sees_private_data",
+   "value": "no",
+   "source_kind": "question"
+  },
+  {
+   "number": "P.02:Guest",
+   "spec_field": "role.Guest.sees_private_data",
+   "value": "no",
+   "source_kind": "question"
+  },
+  {
+   "number": "P.00",
+   "spec_field": "roles.multi_role_per_person",
+   "value": "no",
+   "source_kind": "question"
+  },
+  {
+   "number": "A.16",
+   "spec_field": "roles.super_role",
+   "value": "Admin",
+   "source_kind": "question"
+  },
+  {
+   "number": "D03",
+   "spec_field": "screen.*.access",
+   "value": "see build_model.D03",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "D03",
+   "spec_field": "screen.*.contents",
+   "value": "see build_model.D03",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "sys_screen_interaction_pattern",
+   "spec_field": "screen.*.interaction_states",
+   "value": "Standard loading / empty / error / success / back / leave-and-return behaviour on every screen.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "Z.03",
+   "spec_field": "screens.inventory",
+   "value": "confirmed",
+   "source_kind": "question"
+  },
+  {
+   "number": "D13",
+   "spec_field": "screens.inventory.items",
+   "value": "see build_model.D13",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "T.07",
+   "spec_field": "tenancy.branding",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "T.02",
+   "spec_field": "tenancy.creation",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "T.06",
+   "spec_field": "tenancy.isolation",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_client_isolation",
+   "spec_field": "tenancy.isolation_mechanism",
+   "value": "Row-level security enforces organisation isolation in the database.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "A.08",
+   "spec_field": "tenancy.mode",
+   "value": "single",
+   "source_kind": "question"
+  },
+  {
+   "number": "T.01",
+   "spec_field": "tenancy.multi_membership",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "T.05",
+   "spec_field": "tenancy.operator_role",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "T.03",
+   "spec_field": "tenancy.org_admin_role",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_org_switcher",
+   "spec_field": "tenancy.org_settings",
+   "value": "A person in several organisations switches with a standard switcher; each organisation has its own timezone setting defaulting to A.13.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "D09",
+   "spec_field": "tenancy.role_visibility",
+   "value": "see build_model.D09",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "T.04",
+   "spec_field": "tenancy.roles_scope",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "T.08",
+   "spec_field": "tenancy.suspend_delete",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_org_switcher",
+   "spec_field": "tenancy.switcher",
+   "value": "A person in several organisations switches with a standard switcher; each organisation has its own timezone setting defaulting to A.13.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "sys_theme",
+   "spec_field": "visual.accessibility",
+   "value": "Light theme only; WCAG 2.1 AA contrast and keyboard access.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "C.04",
+   "spec_field": "visual.brand_assets",
+   "value": {
+    "mode": "premade",
+    "logo_id": "grid"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "C.03",
+   "spec_field": "visual.density",
+   "value": "balanced",
+   "source_kind": "question"
+  },
+  {
+   "number": "C.01",
+   "spec_field": "visual.references",
+   "value": "none",
+   "source_kind": "question"
+  },
+  {
+   "number": "sys_theme",
+   "spec_field": "visual.theme",
+   "value": "Light theme only; WCAG 2.1 AA contrast and keyboard access.",
+   "source_kind": "system_default"
+  },
+  {
+   "number": "C.02",
+   "spec_field": "visual.tone",
+   "value": [
+    "clear",
+    "efficient",
+    "calm"
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "D08",
+   "spec_field": "workflow.*.transition_graph",
+   "value": "see build_model.D08",
+   "source_kind": "derivation"
+  },
+  {
+   "number": "FL.05:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.approvals",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "FL.07:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.cancel",
+   "value": {
+    "allowed": "no"
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "FL.08:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.on_complete",
+   "value": "Nothing further; it stays visible in its finished stage.",
+   "source_kind": "question"
+  },
+  {
+   "number": "FL.06:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.on_reject",
+   "value": null,
+   "source_kind": "question"
+  },
+  {
+   "number": "FL.04:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.preconditions",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "FL.09:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.readonly_from",
+   "value": "never",
+   "source_kind": "question"
+  },
+  {
+   "number": "FL.11:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.stage_notifications",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "FL.02:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.stages",
+   "value": {
+    "stages": [
+     "To do",
+     "In progress",
+     "Done"
+    ],
+    "initial": "To do",
+    "terminal": [
+     "Done"
+    ]
+   },
+   "source_kind": "question"
+  },
+  {
+   "number": "FL.10:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.timeouts",
+   "value": [],
+   "source_kind": "question"
+  },
+  {
+   "number": "FL.03:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.transitions",
+   "value": [
+    {
+     "from": "To do",
+     "to": "In progress",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ]
+    },
+    {
+     "from": "In progress",
+     "to": "Done",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ]
+    },
+    {
+     "from": "Done",
+     "to": "In progress",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ]
+    },
+    {
+     "from": "In progress",
+     "to": "To do",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ]
+    }
+   ],
+   "source_kind": "question"
+  },
+  {
+   "number": "FL.01:Task lifecycle",
+   "spec_field": "workflow.Task lifecycle.trigger",
+   "value": {
+    "kind": "person",
+    "who": [
+     "Member"
+    ],
+    "action": "creating a task (starts in 'To do')"
+   },
+   "source_kind": "question"
+  }
+ ],
+ "build_model": {
+  "records": {
+   "Project": {
+    "fields": {
+     "Name": {
+      "name": "Name",
+      "type": "short_text",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Description": {
+      "name": "Description",
+      "type": "long_text",
+      "required": "no",
+      "unique": "no"
+     },
+     "Owner": {
+      "name": "Owner",
+      "type": "other",
+      "required": "yes",
+      "unique": "no",
+      "custom_rule": "reference to a user account (pick-a-person field)"
+     },
+     "Due date": {
+      "name": "Due date",
+      "type": "date",
+      "required": "no",
+      "unique": "no"
+     },
+     "Colour": {
+      "name": "Colour",
+      "type": "one_choice",
+      "required": "no",
+      "unique": "no",
+      "options": [
+       "grey",
+       "blue",
+       "green",
+       "red",
+       "purple",
+       "orange"
+      ]
+     }
+    },
+    "storage": {
+     "Name": "VARCHAR(255)",
+     "Description": "TEXT",
+     "Owner": "FOREIGN_KEY_ROLE",
+     "Due date": "DATE",
+     "Colour": "ENUM"
+    },
+    "enums": {
+     "Colour": [
+      "grey",
+      "blue",
+      "green",
+      "red",
+      "purple",
+      "orange"
+     ]
+    },
+    "access": {
+     "view": [
+      {
+       "role": "Member",
+       "scope": "all"
+      },
+      {
+       "role": "Guest",
+       "scope": "linked",
+       "via": "Projects the guest was invited to"
+      }
+     ],
+     "create": [
+      "Member"
+     ],
+     "edit": [
+      {
+       "role": "Member",
+       "scope": "all"
+      }
+     ],
+     "delete": [
+      {
+       "role": "Member",
+       "scope": "own"
+      },
+      {
+       "role": "Admin",
+       "scope": "all"
+      }
+     ]
+    },
+    "title_field": "Name",
+    "id_style": {
+     "needed": "no"
+    },
+    "lifecycle": {
+     "has": "no"
+    },
+    "retention": "forever",
+    "custom_actions": [],
+    "on_create": [],
+    "id": "pm-teamwork/REC-001"
+   },
+   "Task": {
+    "fields": {
+     "Title": {
+      "name": "Title",
+      "type": "short_text",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Description": {
+      "name": "Description",
+      "type": "long_text",
+      "required": "no",
+      "unique": "no"
+     },
+     "Assignee": {
+      "name": "Assignee",
+      "type": "other",
+      "required": "no",
+      "unique": "no",
+      "custom_rule": "reference to a user account (pick-a-person field)"
+     },
+     "Due date": {
+      "name": "Due date",
+      "type": "date",
+      "required": "no",
+      "unique": "no"
+     },
+     "Priority": {
+      "name": "Priority",
+      "type": "one_choice",
+      "required": "no",
+      "unique": "no",
+      "options": [
+       "low",
+       "medium",
+       "high"
+      ]
+     },
+     "Project": {
+      "name": "Project",
+      "type": "link",
+      "required": "yes",
+      "unique": "no",
+      "target_record": "Project"
+     }
+    },
+    "storage": {
+     "Title": "VARCHAR(255)",
+     "Description": "TEXT",
+     "Assignee": "FOREIGN_KEY_ROLE",
+     "Due date": "DATE",
+     "Priority": "ENUM",
+     "Project": "FOREIGN_KEY"
+    },
+    "enums": {
+     "Priority": [
+      "low",
+      "medium",
+      "high"
+     ]
+    },
+    "access": {
+     "view": [
+      {
+       "role": "Member",
+       "scope": "all"
+      },
+      {
+       "role": "Guest",
+       "scope": "linked",
+       "via": "tasks in projects the guest was invited to"
+      }
+     ],
+     "create": [
+      "Member"
+     ],
+     "edit": [
+      {
+       "role": "Member",
+       "scope": "all"
+      }
+     ],
+     "delete": [
+      {
+       "role": "Member",
+       "scope": "own"
+      },
+      {
+       "role": "Admin",
+       "scope": "all"
+      }
+     ]
+    },
+    "title_field": "Title",
+    "id_style": {
+     "needed": "no"
+    },
+    "lifecycle": {
+     "has": "yes",
+     "stages": [
+      "To do",
+      "In progress",
+      "Done"
+     ]
+    },
+    "retention": "forever",
+    "custom_actions": [
+     {
+      "name": "Duplicate",
+      "who": [
+       "Member"
+      ],
+      "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
+      "result_location": "the same project's task list",
+      "execution": {
+       "op": "clone",
+       "overrides": {
+        "stage": "To do"
+       },
+       "title_column": "title",
+       "title_suffix": " (copy)"
+      }
+     }
+    ],
+    "on_create": [],
+    "id": "pm-teamwork/REC-002"
+   },
+   "Comment": {
+    "fields": {
+     "Body": {
+      "name": "Body",
+      "type": "long_text",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Task": {
+      "name": "Task",
+      "type": "link",
+      "required": "yes",
+      "unique": "no",
+      "target_record": "Task"
+     }
+    },
+    "storage": {
+     "Body": "TEXT",
+     "Task": "FOREIGN_KEY"
+    },
+    "enums": {},
+    "access": {
+     "view": [
+      {
+       "role": "Member",
+       "scope": "all"
+      },
+      {
+       "role": "Guest",
+       "scope": "linked",
+       "via": "comments on tasks the guest can see"
+      }
+     ],
+     "create": [
+      "Member",
+      "Guest"
+     ],
+     "edit": [
+      {
+       "role": "Member",
+       "scope": "own"
+      }
+     ],
+     "delete": [
+      {
+       "role": "Member",
+       "scope": "own"
+      },
+      {
+       "role": "Admin",
+       "scope": "all"
+      }
+     ]
+    },
+    "title_field": "Body",
+    "id_style": {
+     "needed": "no"
+    },
+    "lifecycle": {
+     "has": "no"
+    },
+    "retention": "forever",
+    "custom_actions": [],
+    "on_create": [],
+    "id": "pm-teamwork/REC-003"
+   }
+  },
+  "roles": {
+   "Admin": {
+    "permitted": [
+     {
+      "action": "delete",
+      "record": "Project",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Task",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Comment",
+      "scope": "all"
+     }
+    ],
+    "is_admin": true
+   },
+   "Member": {
+    "permitted": [
+     {
+      "action": "view",
+      "record": "Project",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Project",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Project",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Project",
+      "scope": "own"
+     },
+     {
+      "action": "view",
+      "record": "Task",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Task",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Task",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Task",
+      "scope": "own"
+     },
+     {
+      "action": "view",
+      "record": "Comment",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Comment",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Comment",
+      "scope": "own"
+     },
+     {
+      "action": "delete",
+      "record": "Comment",
+      "scope": "own"
+     }
+    ],
+    "is_admin": false
+   },
+   "Guest": {
+    "permitted": [
+     {
+      "action": "view",
+      "record": "Project",
+      "scope": "linked"
+     },
+     {
+      "action": "view",
+      "record": "Task",
+      "scope": "linked"
+     },
+     {
+      "action": "view",
+      "record": "Comment",
+      "scope": "linked"
+     },
+     {
+      "action": "create",
+      "record": "Comment",
+      "scope": "all"
+     }
+    ],
+    "is_admin": false
+   }
+  },
+  "super_role": "Admin",
+  "workflows": {
+   "Task lifecycle": {
+    "trigger": {
+     "kind": "person",
+     "who": [
+      "Member"
+     ],
+     "action": "creating a task (starts in 'To do')"
+    },
+    "stages": [
+     {
+      "id": "pm-teamwork/STG-001",
+      "name": "To do"
+     },
+     {
+      "id": "pm-teamwork/STG-002",
+      "name": "In progress"
+     },
+     {
+      "id": "pm-teamwork/STG-003",
+      "name": "Done"
+     }
+    ],
+    "transitions": [
+     {
+      "from": "To do",
+      "to": "In progress",
+      "mover": "roles",
+      "roles": [
+       "Member"
+      ],
+      "id": "pm-teamwork/TRN-001"
+     },
+     {
+      "from": "In progress",
+      "to": "Done",
+      "mover": "roles",
+      "roles": [
+       "Member"
+      ],
+      "id": "pm-teamwork/TRN-002"
+     },
+     {
+      "from": "Done",
+      "to": "In progress",
+      "mover": "roles",
+      "roles": [
+       "Member"
+      ],
+      "id": "pm-teamwork/TRN-003"
+     },
+     {
+      "from": "In progress",
+      "to": "To do",
+      "mover": "roles",
+      "roles": [
+       "Member"
+      ],
+      "id": "pm-teamwork/TRN-004"
+     }
+    ],
+    "approvals": [],
+    "on_reject": null,
+    "cancel": {
+     "allowed": "no"
+    },
+    "timeouts": [],
+    "effects": [],
+    "initial": "To do",
+    "terminal": [
+     "Done"
+    ]
+   }
+  },
+  "notifications": {
+   "Task assigned": {
+    "trigger": {
+     "kind": "event",
+     "event": "a task's Assignee field is set or changed"
+    },
+    "recipients": [
+     {
+      "kind": "field",
+      "record": "Task",
+      "field": "Assignee"
+     }
+    ],
+    "channels": [
+     "email",
+     "in_app"
+    ],
+    "timing": "immediate",
+    "id": "pm-teamwork/NOTIF-001"
+   },
+   "Task due reminder": {
+    "trigger": {
+     "kind": "relative_to_date",
+     "record": "Task",
+     "date_field": "Due date",
+     "offset": "-24 hours"
+    },
+    "recipients": [
+     {
+      "kind": "field",
+      "record": "Task",
+      "field": "Assignee"
+     }
+    ],
+    "channels": [
+     "email",
+     "in_app"
+    ],
+    "timing": "offset:-24 hours",
+    "id": "pm-teamwork/NOTIF-002"
+   },
+   "New comment": {
+    "trigger": {
+     "kind": "event",
+     "event": "a comment is created on a task"
+    },
+    "recipients": [
+     {
+      "kind": "field",
+      "record": "Task",
+      "field": "Assignee"
+     },
+     {
+      "kind": "owner"
+     }
+    ],
+    "channels": [
+     "in_app"
+    ],
+    "timing": "immediate",
+    "id": "pm-teamwork/NOTIF-003"
+   }
+  },
+  "reports": {
+   "Open tasks by person": {
+    "data_source": "Who is carrying how much open work right now?",
+    "metrics": {
+     "count of Tasks not in stage Done, grouped by Assignee": "auto: count/sum of 'count of Tasks not in stage Done, grouped by Assignee'"
+    },
+    "spec": [
+     {
+      "metric": "count of Tasks not in stage Done, grouped by Assignee",
+      "spec": {
+       "table": "tasks",
+       "aggregation": "count",
+       "group_by": "assignee",
+       "filters": [
+        {
+         "field": "stage",
+         "op": "!=",
+         "value": "Done"
+        }
+       ]
+      }
+     }
+    ],
+    "id": "pm-teamwork/RPT-001"
+   },
+   "Overdue tasks": {
+    "data_source": "What has slipped past its due date and needs chasing?",
+    "metrics": {
+     "count of overdue Tasks": "a Task counts as overdue when Due date is before today AND its stage is not Done, as at the moment the report is viewed"
+    },
+    "spec": [
+     {
+      "metric": "count of overdue Tasks",
+      "spec": {
+       "table": "tasks",
+       "aggregation": "count",
+       "filters": [
+        {
+         "field": "due_date",
+         "op": "before_now"
+        },
+        {
+         "field": "stage",
+         "op": "!=",
+         "value": "Done"
+        }
+       ]
+      }
+     }
+    ],
+    "id": "pm-teamwork/RPT-002"
+   }
+  },
+  "forms": {},
+  "integrations": {},
+  "auth": {
+   "AU.01": [
+    "invited"
+   ],
+   "AU.02": [
+    {
+     "name": "Full name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no"
+    },
+    {
+     "name": "Email address",
+     "type": "email",
+     "required": "yes",
+     "unique": "yes"
+    }
+   ],
+   "AU.03": "yes",
+   "AU.04": [
+    "password",
+    "google"
+   ],
+   "AU.07": {
+    "scope": "nobody",
+    "method": "n/a"
+   },
+   "AU.08": {
+    "attempts": 5,
+    "duration": "15 minutes"
+   },
+   "AU.09": "yes",
+   "AU.10": "30 days",
+   "AU.11": {
+    "allowed": "yes",
+    "by": [
+     "super"
+    ],
+    "auto_triggers": []
+   },
+   "AU.12": {
+    "allowed": "yes",
+    "by": "both",
+    "data": "anonymised"
+   },
+   "AU.13": [
+    "super"
+   ],
+   "AU.14": {
+    "required": "yes",
+    "status": "need_drafting"
+   },
+   "AU.06": {
+    "inviters": [
+     "Admin",
+     "Member"
+    ],
+    "default_role": "Member"
+   }
+  },
+  "brand": {
+   "app_name": "Teamwork Desk",
+   "assets": {
+    "mode": "premade",
+    "logo_id": "grid"
+   }
+  },
+  "screens_inventory": [
+   {
+    "id": "pm-teamwork/SCR-001",
+    "kind": "list",
+    "record": "Project"
+   },
+   {
+    "id": "pm-teamwork/SCR-002",
+    "kind": "detail",
+    "record": "Project"
+   },
+   {
+    "id": "pm-teamwork/SCR-003",
+    "kind": "list",
+    "record": "Task"
+   },
+   {
+    "id": "pm-teamwork/SCR-004",
+    "kind": "detail",
+    "record": "Task"
+   },
+   {
+    "id": "pm-teamwork/SCR-005",
+    "kind": "list",
+    "record": "Comment"
+   },
+   {
+    "id": "pm-teamwork/SCR-006",
+    "kind": "detail",
+    "record": "Comment"
+   },
+   {
+    "id": "pm-teamwork/SCR-007",
+    "kind": "report",
+    "report": "Open tasks by person"
+   },
+   {
+    "id": "pm-teamwork/SCR-008",
+    "kind": "report",
+    "report": "Overdue tasks"
+   }
+  ],
+  "navigation": [
+   "pm-teamwork/SCR-001",
+   "pm-teamwork/SCR-002",
+   "pm-teamwork/SCR-003",
+   "pm-teamwork/SCR-004",
+   "pm-teamwork/SCR-005",
+   "pm-teamwork/SCR-006",
+   "pm-teamwork/SCR-007",
+   "pm-teamwork/SCR-008"
+  ],
+  "landing_per_role": {
+   "Admin": "Projects list",
+   "Member": "My tasks",
+   "Guest": "Projects list"
+  },
+  "actions_inventory": [
+   {
+    "id": "pm-teamwork/ACT-001",
+    "kind": "create",
+    "record": "Project",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "creates a new 'Project' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-002",
+    "kind": "edit",
+    "record": "Project",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "edits an existing 'Project' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-003",
+    "kind": "delete",
+    "record": "Project",
+    "roles": [
+     "Admin",
+     "Member"
+    ],
+    "outcome": "deletes a 'Project' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-004",
+    "kind": "create",
+    "record": "Task",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "creates a new 'Task' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-005",
+    "kind": "edit",
+    "record": "Task",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "edits an existing 'Task' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-006",
+    "kind": "delete",
+    "record": "Task",
+    "roles": [
+     "Admin",
+     "Member"
+    ],
+    "outcome": "deletes a 'Task' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-007",
+    "kind": "custom",
+    "record": "Task",
+    "detail": {
+     "name": "Duplicate",
+     "who": [
+      "Member"
+     ],
+     "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
+     "result_location": "the same project's task list",
+     "execution": {
+      "op": "clone",
+      "overrides": {
+       "stage": "To do"
+      },
+      "title_column": "title",
+      "title_suffix": " (copy)"
+     }
+    },
+    "roles": [
+     "Member"
+    ],
+    "outcome": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title"
+   },
+   {
+    "id": "pm-teamwork/ACT-008",
+    "kind": "create",
+    "record": "Comment",
+    "roles": [
+     "Member",
+     "Guest"
+    ],
+    "outcome": "creates a new 'Comment' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-009",
+    "kind": "edit",
+    "record": "Comment",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "edits an existing 'Comment' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-010",
+    "kind": "delete",
+    "record": "Comment",
+    "roles": [
+     "Admin",
+     "Member"
+    ],
+    "outcome": "deletes a 'Comment' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-011",
+    "kind": "transition",
+    "workflow": "Task lifecycle",
+    "from": "To do",
+    "to": "In progress",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "moves 'Task lifecycle' from 'To do' to 'In progress'"
+   },
+   {
+    "id": "pm-teamwork/ACT-012",
+    "kind": "transition",
+    "workflow": "Task lifecycle",
+    "from": "In progress",
+    "to": "Done",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "moves 'Task lifecycle' from 'In progress' to 'Done'"
+   },
+   {
+    "id": "pm-teamwork/ACT-013",
+    "kind": "transition",
+    "workflow": "Task lifecycle",
+    "from": "Done",
+    "to": "In progress",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "moves 'Task lifecycle' from 'Done' to 'In progress'"
+   },
+   {
+    "id": "pm-teamwork/ACT-014",
+    "kind": "transition",
+    "workflow": "Task lifecycle",
+    "from": "In progress",
+    "to": "To do",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "moves 'Task lifecycle' from 'In progress' to 'To do'"
+   }
+  ],
+  "recurring_ops": [
+   {
+    "id": "pm-teamwork/OPS-001",
+    "source": "R.14:Project",
+    "detail": "forever"
+   },
+   {
+    "id": "pm-teamwork/OPS-002",
+    "source": "R.14:Task",
+    "detail": "forever"
+   },
+   {
+    "id": "pm-teamwork/OPS-003",
+    "source": "R.14:Comment",
+    "detail": "forever"
+   },
+   {
+    "id": "pm-teamwork/OPS-004",
+    "source": "FL.01:Task lifecycle",
+    "detail": {
+     "kind": "person",
+     "who": [
+      "Member"
+     ],
+     "action": "creating a task (starts in 'To do')"
+    }
+   },
+   {
+    "id": "pm-teamwork/OPS-005",
+    "source": "N.01:Task assigned",
+    "detail": {
+     "kind": "event",
+     "event": "a task's Assignee field is set or changed"
+    }
+   },
+   {
+    "id": "pm-teamwork/OPS-006",
+    "source": "N.01:Task due reminder",
+    "detail": {
+     "kind": "relative_to_date",
+     "record": "Task",
+     "date_field": "Due date",
+     "offset": "-24 hours"
+    }
+   },
+   {
+    "id": "pm-teamwork/OPS-007",
+    "source": "N.01:New comment",
+    "detail": {
+     "kind": "event",
+     "event": "a comment is created on a task"
+    }
+   },
+   {
+    "id": "pm-teamwork/OPS-008",
+    "source": "RP.08:Open tasks by person",
+    "detail": {
+     "enabled": "no"
+    }
+   },
+   {
+    "id": "pm-teamwork/OPS-009",
+    "source": "RP.08:Overdue tasks",
+    "detail": {
+     "enabled": "no"
+    }
+   }
+  ],
+  "qa_generated_tests": [
+   {
+    "id": "pm-teamwork/QA-001",
+    "action_id": "pm-teamwork/ACT-001",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-001",
+     "kind": "create",
+     "record": "Project",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "creates a new 'Project' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-002",
+    "action_id": "pm-teamwork/ACT-002",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-002",
+     "kind": "edit",
+     "record": "Project",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "edits an existing 'Project' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-003",
+    "action_id": "pm-teamwork/ACT-003",
+    "role": "Admin",
+    "action": {
+     "id": "pm-teamwork/ACT-003",
+     "kind": "delete",
+     "record": "Project",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Project' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-004",
+    "action_id": "pm-teamwork/ACT-003",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-003",
+     "kind": "delete",
+     "record": "Project",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Project' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-005",
+    "action_id": "pm-teamwork/ACT-004",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-004",
+     "kind": "create",
+     "record": "Task",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "creates a new 'Task' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-006",
+    "action_id": "pm-teamwork/ACT-005",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-005",
+     "kind": "edit",
+     "record": "Task",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "edits an existing 'Task' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-007",
+    "action_id": "pm-teamwork/ACT-006",
+    "role": "Admin",
+    "action": {
+     "id": "pm-teamwork/ACT-006",
+     "kind": "delete",
+     "record": "Task",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Task' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-008",
+    "action_id": "pm-teamwork/ACT-006",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-006",
+     "kind": "delete",
+     "record": "Task",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Task' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-009",
+    "action_id": "pm-teamwork/ACT-007",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-007",
+     "kind": "custom",
+     "record": "Task",
+     "detail": {
+      "name": "Duplicate",
+      "who": [
+       "Member"
+      ],
+      "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
+      "result_location": "the same project's task list",
+      "execution": {
+       "op": "clone",
+       "overrides": {
+        "stage": "To do"
+       },
+       "title_column": "title",
+       "title_suffix": " (copy)"
+      }
+     },
+     "roles": [
+      "Member"
+     ],
+     "outcome": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-010",
+    "action_id": "pm-teamwork/ACT-008",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-008",
+     "kind": "create",
+     "record": "Comment",
+     "roles": [
+      "Member",
+      "Guest"
+     ],
+     "outcome": "creates a new 'Comment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-011",
+    "action_id": "pm-teamwork/ACT-008",
+    "role": "Guest",
+    "action": {
+     "id": "pm-teamwork/ACT-008",
+     "kind": "create",
+     "record": "Comment",
+     "roles": [
+      "Member",
+      "Guest"
+     ],
+     "outcome": "creates a new 'Comment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-012",
+    "action_id": "pm-teamwork/ACT-009",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-009",
+     "kind": "edit",
+     "record": "Comment",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "edits an existing 'Comment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-013",
+    "action_id": "pm-teamwork/ACT-010",
+    "role": "Admin",
+    "action": {
+     "id": "pm-teamwork/ACT-010",
+     "kind": "delete",
+     "record": "Comment",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Comment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-014",
+    "action_id": "pm-teamwork/ACT-010",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-010",
+     "kind": "delete",
+     "record": "Comment",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Comment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-015",
+    "action_id": "pm-teamwork/ACT-011",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-011",
+     "kind": "transition",
+     "workflow": "Task lifecycle",
+     "from": "To do",
+     "to": "In progress",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "moves 'Task lifecycle' from 'To do' to 'In progress'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-016",
+    "action_id": "pm-teamwork/ACT-012",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-012",
+     "kind": "transition",
+     "workflow": "Task lifecycle",
+     "from": "In progress",
+     "to": "Done",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "moves 'Task lifecycle' from 'In progress' to 'Done'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-017",
+    "action_id": "pm-teamwork/ACT-013",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-013",
+     "kind": "transition",
+     "workflow": "Task lifecycle",
+     "from": "Done",
+     "to": "In progress",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "moves 'Task lifecycle' from 'Done' to 'In progress'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-018",
+    "action_id": "pm-teamwork/ACT-014",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-014",
+     "kind": "transition",
+     "workflow": "Task lifecycle",
+     "from": "In progress",
+     "to": "To do",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "moves 'Task lifecycle' from 'In progress' to 'To do'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-019",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-001",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-020",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-002",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-021",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-003",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-022",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-004",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-023",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-005",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-024",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-006",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-025",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-007",
+    "role": "Admin",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-026",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-008",
+    "role": "Admin",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-027",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-001",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-028",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-002",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-029",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-003",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-030",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-004",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-031",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-005",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-032",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-006",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-033",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-007",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-034",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-008",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-035",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-001",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-036",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-002",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-037",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-003",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-038",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-004",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-039",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-005",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-040",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-006",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-041",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-007",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-042",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-008",
+    "role": "Guest",
+    "expect": "reachable"
+   }
+  ],
+  "locked": true,
+  "locked_at_graph_version": "3.0"
+ }
+}
