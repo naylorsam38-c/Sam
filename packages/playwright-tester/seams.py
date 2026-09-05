@@ -368,10 +368,21 @@ async def report_screen_reflects_written_rows(page, bm, base, tmpdir):
                 continue
             filters = sp.get("filters") or []
             wf = _workflow_for({"build_model": bm}, record)
-            bad = [f for f in filters if f["field"] == "stage" and wf and f["value"] != (wf.get("initial") or wf["stages"][0]["name"])]
+            initial = wf.get("initial") or wf["stages"][0]["name"] if wf else None
+            # A fresh row starts at the workflow's initial stage. That satisfies
+            # an exclusion filter (!=/not_in) unless the excluded value IS the
+            # initial stage; it only fails an equality filter (=/in) that names
+            # a different stage -- checking the value alone, ignoring op, wrongly
+            # treated "stage != Done" as unsatisfiable by a row that starts at
+            # "To do", which does satisfy it.
+            bad = [f for f in filters if f["field"] == "stage" and wf and (
+                (f["op"] in ("=",) and f["value"] != initial) or
+                (f["op"] == "in" and initial not in (f.get("value") or [])) or
+                (f["op"] == "!=" and f["value"] == initial) or
+                (f["op"] == "not_in" and initial in (f.get("value") or [])))]
             if bad:
-                block = (f"metric {m['metric']!r} counts rows at stage {bad[0]['value']!r}; a new row starts at "
-                         f"{(wf.get('initial') or wf['stages'][0]['name'])!r} and no screen offers a control to move it")
+                block = (f"metric {m['metric']!r} needs stage {bad[0]['field']} {bad[0]['op']} {bad[0]['value']!r}; "
+                         f"a new row starts at {initial!r} and no screen offers a control to move it")
                 continue
             chosen = (m, record)
             break
