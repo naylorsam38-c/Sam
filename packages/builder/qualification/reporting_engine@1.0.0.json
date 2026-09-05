@@ -1,0 +1,77 @@
+{
+ "part_id": "reporting_engine",
+ "version": "1.0.0",
+ "revision": "a0de07a247bf355b",
+ "qualified_at": "2026-09-05T20:35:46+00:00",
+ "base_url": "http://127.0.0.1:34489",
+ "journeys": [
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "command-desk/SCR-018",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "BLOCKED",
+   "reason": "metric 'jobs failed per agent per week' counts rows at stage 'failed'; a new row starts at 'queued' and no screen offers a control to move it",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report command-desk/SCR-018",
+     "observed": {
+      "jobs done per agent per week": {},
+      "jobs failed per agent per week": {}
+     }
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "command-desk/SCR-019",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report command-desk/SCR-019",
+     "observed": {
+      "spend on hosted model calls": {
+       "seam-1a07347f120-seed": null
+      }
+     }
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/jobs (no screen creates this record)",
+     "observed": {
+      "status": 201,
+      "body": {
+       "What was asked": "seam-1a0734838fb",
+       "Agent": "seam-1a0734838fb",
+       "Cost": 1.25
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "reload the report screen",
+     "observed": {
+      "seam-1a07347f120-seed": null,
+      "seam-1a0734838fb": 1.25
+     }
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

@@ -1,0 +1,1328 @@
+# Interface qualification — every control, real Chromium, outcomes verified by API
+
+Run 2026-09-05 09:20:11 UTC. 18 interface runs.
+
+| Interface | Mode | Checks | Passed | Failed | Browser errors |
+|---|---|---|---|---|---|
+| pm-teamwork-console | server | 40 | 40 | 0 | 0 |
+| pm-teamwork-board | server | 40 | 40 | 0 | 0 |
+| pm-teamwork-pocket | server | 40 | 40 | 0 | 0 |
+| crm-pipeline-console | server | 50 | 50 | 0 | 0 |
+| crm-pipeline-board | server | 50 | 50 | 0 | 0 |
+| crm-pipeline-pocket | server | 50 | 50 | 0 | 0 |
+| booking-frontdesk-console | server | 36 | 36 | 0 | 0 |
+| booking-frontdesk-board | server | 36 | 36 | 0 | 0 |
+| booking-frontdesk-pocket | server | 36 | 36 | 0 | 0 |
+| erp-backbone-console | server | 101 | 101 | 0 | 0 |
+| erp-backbone-board | server | 101 | 101 | 0 | 0 |
+| erp-backbone-pocket | server | 101 | 101 | 0 | 0 |
+| accounting-ledger-console | server | 103 | 103 | 0 | 0 |
+| accounting-ledger-board | server | 103 | 103 | 0 | 0 |
+| accounting-ledger-pocket | server | 103 | 103 | 0 | 0 |
+| crm-pipeline-console-file | file | 50 | 50 | 0 | 0 |
+| erp-backbone-board-file | file | 101 | 101 | 0 | 0 |
+| accounting-ledger-pocket-file | file | 103 | 103 | 0 | 0 |
+
+## Failures
+
+None.
+
+## Every step
+
+### pm-teamwork-console (server)
+
+- PASS page rendered
+- PASS role switched to Member
+- PASS created Project as Member (API shows the new row)
+- PASS created Task as Member (API shows the new row)
+- PASS Task starts in 'To do'
+- PASS created Comment as Member (API shows the new row)
+- PASS opened Project cbdd7b94
+- PASS edited Project title saved (API)
+- PASS opened Task 9d6d1c9a
+- PASS edited Task title saved (API)
+- PASS opened Comment 78bd9e16
+- PASS saved Comment (API)
+- PASS opened Project cbdd7b94
+- PASS created Task as Member (API shows the new row)
+- PASS Task starts in 'To do'
+- PASS opened Task 9d6d1c9a
+- PASS created Comment as Member (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Task 9d6d1c9a
+- PASS Admin (not a declared mover) is offered no move on Task
+- PASS role switched to Member
+- PASS opened Task 9d6d1c9a
+- PASS Task: Member moved 'To do' → 'In progress' (API)
+- PASS opened Task 9d6d1c9a
+- PASS Task: Member moved 'In progress' → 'Done' (API)
+- PASS created Task as Member (API shows the new row)
+- PASS Task starts in 'To do'
+- PASS opened Task 954e8269
+- PASS Duplicate: a copy exists with ' (copy)' (API)
+- PASS Duplicate: copy in 'To do'
+- PASS Duplicate is in the activity trail (API)
+- PASS report 'Open tasks by person': 1 metric(s) rendered, API 200
+- PASS report 'Open tasks by person' shows the groups of count of Tasks not in stage Done, grouped by Assignee
+- PASS report 'Overdue tasks': 1 metric(s) rendered, API 200
+- PASS report 'Overdue tasks' shows count of overdue Tasks = 0
+- PASS opened Project cbdd7b94
+- PASS deleted Project as Member (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### pm-teamwork-board (server)
+
+- PASS page rendered
+- PASS role switched to Member
+- PASS created Project as Member (API shows the new row)
+- PASS created Task as Member (API shows the new row)
+- PASS Task starts in 'To do'
+- PASS created Comment as Member (API shows the new row)
+- PASS opened Project 6a33122b
+- PASS edited Project title saved (API)
+- PASS opened Task 1d910407
+- PASS edited Task title saved (API)
+- PASS opened Comment aceccaf7
+- PASS saved Comment (API)
+- PASS opened Project 6a33122b
+- PASS created Task as Member (API shows the new row)
+- PASS Task starts in 'To do'
+- PASS opened Task 1d910407
+- PASS created Comment as Member (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Task 1d910407
+- PASS Admin (not a declared mover) is offered no move on Task
+- PASS role switched to Member
+- PASS opened Task 1d910407
+- PASS Task: Member moved 'To do' → 'In progress' (API)
+- PASS opened Task 1d910407
+- PASS Task: Member moved 'In progress' → 'Done' (API)
+- PASS created Task as Member (API shows the new row)
+- PASS Task starts in 'To do'
+- PASS opened Task e07175b7
+- PASS Duplicate: a copy exists with ' (copy)' (API)
+- PASS Duplicate: copy in 'To do'
+- PASS Duplicate is in the activity trail (API)
+- PASS report 'Open tasks by person': 1 metric(s) rendered, API 200
+- PASS report 'Open tasks by person' shows the groups of count of Tasks not in stage Done, grouped by Assignee
+- PASS report 'Overdue tasks': 1 metric(s) rendered, API 200
+- PASS report 'Overdue tasks' shows count of overdue Tasks = 0
+- PASS opened Project 6a33122b
+- PASS deleted Project as Member (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### pm-teamwork-pocket (server)
+
+- PASS page rendered
+- PASS role switched to Member
+- PASS created Project as Member (API shows the new row)
+- PASS created Task as Member (API shows the new row)
+- PASS Task starts in 'To do'
+- PASS created Comment as Member (API shows the new row)
+- PASS opened Project 39fab94d
+- PASS edited Project title saved (API)
+- PASS opened Task d9d4fdd3
+- PASS edited Task title saved (API)
+- PASS opened Comment 1576f7dc
+- PASS saved Comment (API)
+- PASS opened Project 39fab94d
+- PASS created Task as Member (API shows the new row)
+- PASS Task starts in 'To do'
+- PASS opened Task d9d4fdd3
+- PASS created Comment as Member (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Task d9d4fdd3
+- PASS Admin (not a declared mover) is offered no move on Task
+- PASS role switched to Member
+- PASS opened Task d9d4fdd3
+- PASS Task: Member moved 'To do' → 'In progress' (API)
+- PASS opened Task d9d4fdd3
+- PASS Task: Member moved 'In progress' → 'Done' (API)
+- PASS created Task as Member (API shows the new row)
+- PASS Task starts in 'To do'
+- PASS opened Task 3f74a6b9
+- PASS Duplicate: a copy exists with ' (copy)' (API)
+- PASS Duplicate: copy in 'To do'
+- PASS Duplicate is in the activity trail (API)
+- PASS report 'Open tasks by person': 1 metric(s) rendered, API 200
+- PASS report 'Open tasks by person' shows the groups of count of Tasks not in stage Done, grouped by Assignee
+- PASS report 'Overdue tasks': 1 metric(s) rendered, API 200
+- PASS report 'Overdue tasks' shows count of overdue Tasks = 0
+- PASS opened Project 39fab94d
+- PASS deleted Project as Member (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### crm-pipeline-console (server)
+
+- PASS page rendered
+- PASS role switched to Sales rep
+- PASS created Organisation as Sales rep (API shows the new row)
+- PASS created Contact as Sales rep (API shows the new row)
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS created Activity as Sales rep (API shows the new row)
+- PASS opened Organisation 4795b112
+- PASS edited Organisation title saved (API)
+- PASS opened Contact 9beefb5a
+- PASS edited Contact title saved (API)
+- PASS opened Deal f1e924ef
+- PASS edited Deal title saved (API)
+- PASS opened Activity dd321c35
+- PASS edited Activity title saved (API)
+- PASS opened Organisation 4795b112
+- PASS created Contact as Sales rep (API shows the new row)
+- PASS opened Contact 9beefb5a
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS opened Deal f1e924ef
+- PASS created Activity as Sales rep (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Deal f1e924ef
+- PASS Admin (not a declared mover) is offered no move on Deal
+- PASS role switched to Sales rep
+- PASS opened Deal f1e924ef
+- PASS Deal: Sales rep moved 'Lead in' → 'Contacted' (API)
+- PASS opened Deal f1e924ef
+- PASS Deal: Sales rep moved 'Contacted' → 'Proposal sent' (API)
+- PASS opened Deal f1e924ef
+- PASS Deal: Sales rep moved 'Proposal sent' → 'Negotiation' (API)
+- PASS opened Deal f1e924ef
+- PASS Deal: Sales rep moved 'Negotiation' → 'Lost' (API)
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS role switched to Sales manager
+- PASS opened Deal 35584ddc
+- PASS Reassign: ['owner'] set from input (API)
+- PASS Reassign is in the activity trail (API)
+- PASS report 'Pipeline by stage': 2 metric(s) rendered, API 200
+- PASS report 'Pipeline by stage' shows the groups of sum of open Deal Value grouped by stage
+- PASS report 'Pipeline by stage' shows the groups of count of Deals grouped by stage
+- PASS report 'Win rate': 1 metric(s) rendered, API 200
+- PASS report 'Win rate' shows win rate = 0.0%
+- PASS opened Organisation 4795b112
+- PASS deleted Organisation as Sales manager (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### crm-pipeline-board (server)
+
+- PASS page rendered
+- PASS role switched to Sales rep
+- PASS created Organisation as Sales rep (API shows the new row)
+- PASS created Contact as Sales rep (API shows the new row)
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS created Activity as Sales rep (API shows the new row)
+- PASS opened Organisation 1e3ca6c2
+- PASS edited Organisation title saved (API)
+- PASS opened Contact 98db3eb1
+- PASS edited Contact title saved (API)
+- PASS opened Deal f50ce937
+- PASS edited Deal title saved (API)
+- PASS opened Activity d9d34023
+- PASS edited Activity title saved (API)
+- PASS opened Organisation 1e3ca6c2
+- PASS created Contact as Sales rep (API shows the new row)
+- PASS opened Contact 98db3eb1
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS opened Deal f50ce937
+- PASS created Activity as Sales rep (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Deal f50ce937
+- PASS Admin (not a declared mover) is offered no move on Deal
+- PASS role switched to Sales rep
+- PASS opened Deal f50ce937
+- PASS Deal: Sales rep moved 'Lead in' → 'Contacted' (API)
+- PASS opened Deal f50ce937
+- PASS Deal: Sales rep moved 'Contacted' → 'Proposal sent' (API)
+- PASS opened Deal f50ce937
+- PASS Deal: Sales rep moved 'Proposal sent' → 'Negotiation' (API)
+- PASS opened Deal f50ce937
+- PASS Deal: Sales rep moved 'Negotiation' → 'Lost' (API)
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS role switched to Sales manager
+- PASS opened Deal 618fe427
+- PASS Reassign: ['owner'] set from input (API)
+- PASS Reassign is in the activity trail (API)
+- PASS report 'Pipeline by stage': 2 metric(s) rendered, API 200
+- PASS report 'Pipeline by stage' shows the groups of sum of open Deal Value grouped by stage
+- PASS report 'Pipeline by stage' shows the groups of count of Deals grouped by stage
+- PASS report 'Win rate': 1 metric(s) rendered, API 200
+- PASS report 'Win rate' shows win rate = 0.0%
+- PASS opened Organisation 1e3ca6c2
+- PASS deleted Organisation as Sales manager (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### crm-pipeline-pocket (server)
+
+- PASS page rendered
+- PASS role switched to Sales rep
+- PASS created Organisation as Sales rep (API shows the new row)
+- PASS created Contact as Sales rep (API shows the new row)
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS created Activity as Sales rep (API shows the new row)
+- PASS opened Organisation 2d21ff8a
+- PASS edited Organisation title saved (API)
+- PASS opened Contact 19371e98
+- PASS edited Contact title saved (API)
+- PASS opened Deal 2a642409
+- PASS edited Deal title saved (API)
+- PASS opened Activity 5c2664c5
+- PASS edited Activity title saved (API)
+- PASS opened Organisation 2d21ff8a
+- PASS created Contact as Sales rep (API shows the new row)
+- PASS opened Contact 19371e98
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS opened Deal 2a642409
+- PASS created Activity as Sales rep (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Deal 2a642409
+- PASS Admin (not a declared mover) is offered no move on Deal
+- PASS role switched to Sales rep
+- PASS opened Deal 2a642409
+- PASS Deal: Sales rep moved 'Lead in' → 'Contacted' (API)
+- PASS opened Deal 2a642409
+- PASS Deal: Sales rep moved 'Contacted' → 'Proposal sent' (API)
+- PASS opened Deal 2a642409
+- PASS Deal: Sales rep moved 'Proposal sent' → 'Negotiation' (API)
+- PASS opened Deal 2a642409
+- PASS Deal: Sales rep moved 'Negotiation' → 'Lost' (API)
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS role switched to Sales manager
+- PASS opened Deal b9ded79e
+- PASS Reassign: ['owner'] set from input (API)
+- PASS Reassign is in the activity trail (API)
+- PASS report 'Pipeline by stage': 2 metric(s) rendered, API 200
+- PASS report 'Pipeline by stage' shows the groups of sum of open Deal Value grouped by stage
+- PASS report 'Pipeline by stage' shows the groups of count of Deals grouped by stage
+- PASS report 'Win rate': 1 metric(s) rendered, API 200
+- PASS report 'Win rate' shows win rate = 0.0%
+- PASS opened Organisation 2d21ff8a
+- PASS deleted Organisation as Sales manager (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### booking-frontdesk-console (server)
+
+- PASS page rendered
+- PASS created Service as Owner (API shows the new row)
+- PASS role switched to Staff
+- PASS created Customer as Staff (API shows the new row)
+- PASS created Appointment as Staff (API shows the new row)
+- PASS Appointment starts in 'Booked'
+- PASS role switched to Owner
+- PASS opened Service 51f0afc0
+- PASS edited Service title saved (API)
+- PASS role switched to Staff
+- PASS opened Customer 32996113
+- PASS edited Customer title saved (API)
+- PASS opened Appointment 3112b450
+- PASS saved Appointment (API)
+- PASS opened Service 51f0afc0
+- PASS created Appointment as Staff (API shows the new row)
+- PASS Appointment starts in 'Booked'
+- PASS role switched to Owner
+- PASS opened Appointment 3112b450
+- PASS Owner (not a declared mover) is offered no move on Appointment
+- PASS role switched to Staff
+- PASS opened Appointment 3112b450
+- PASS Appointment: Staff moved 'Booked' → 'Confirmed' (API)
+- PASS opened Appointment 3112b450
+- PASS Appointment: Staff moved 'Confirmed' → 'No-show' (API)
+- PASS report 'Upcoming appointments': 1 metric(s) rendered, API 200
+- PASS report 'Upcoming appointments' shows count of Appointments in stage Booked or Confirmed = 0
+- PASS report 'No-show rate': 1 metric(s) rendered, API 200
+- PASS report 'No-show rate' shows no-show rate = 100.0%
+- PASS form 'Public booking form' created a Appointment (API)
+- PASS role switched to Owner
+- PASS opened Service 51f0afc0
+- PASS deleted Service as Owner (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### booking-frontdesk-board (server)
+
+- PASS page rendered
+- PASS created Service as Owner (API shows the new row)
+- PASS role switched to Staff
+- PASS created Customer as Staff (API shows the new row)
+- PASS created Appointment as Staff (API shows the new row)
+- PASS Appointment starts in 'Booked'
+- PASS role switched to Owner
+- PASS opened Service 8c9e8cba
+- PASS edited Service title saved (API)
+- PASS role switched to Staff
+- PASS opened Customer be1cac76
+- PASS edited Customer title saved (API)
+- PASS opened Appointment ff3fb00c
+- PASS saved Appointment (API)
+- PASS opened Service 8c9e8cba
+- PASS created Appointment as Staff (API shows the new row)
+- PASS Appointment starts in 'Booked'
+- PASS role switched to Owner
+- PASS opened Appointment ff3fb00c
+- PASS Owner (not a declared mover) is offered no move on Appointment
+- PASS role switched to Staff
+- PASS opened Appointment ff3fb00c
+- PASS Appointment: Staff moved 'Booked' → 'Confirmed' (API)
+- PASS opened Appointment ff3fb00c
+- PASS Appointment: Staff moved 'Confirmed' → 'No-show' (API)
+- PASS report 'Upcoming appointments': 1 metric(s) rendered, API 200
+- PASS report 'Upcoming appointments' shows count of Appointments in stage Booked or Confirmed = 0
+- PASS report 'No-show rate': 1 metric(s) rendered, API 200
+- PASS report 'No-show rate' shows no-show rate = 100.0%
+- PASS form 'Public booking form' created a Appointment (API)
+- PASS role switched to Owner
+- PASS opened Service 8c9e8cba
+- PASS deleted Service as Owner (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### booking-frontdesk-pocket (server)
+
+- PASS page rendered
+- PASS created Service as Owner (API shows the new row)
+- PASS role switched to Staff
+- PASS created Customer as Staff (API shows the new row)
+- PASS created Appointment as Staff (API shows the new row)
+- PASS Appointment starts in 'Booked'
+- PASS role switched to Owner
+- PASS opened Service 92c178ac
+- PASS edited Service title saved (API)
+- PASS role switched to Staff
+- PASS opened Customer b83c2071
+- PASS edited Customer title saved (API)
+- PASS opened Appointment cd9a527d
+- PASS saved Appointment (API)
+- PASS opened Service 92c178ac
+- PASS created Appointment as Staff (API shows the new row)
+- PASS Appointment starts in 'Booked'
+- PASS role switched to Owner
+- PASS opened Appointment cd9a527d
+- PASS Owner (not a declared mover) is offered no move on Appointment
+- PASS role switched to Staff
+- PASS opened Appointment cd9a527d
+- PASS Appointment: Staff moved 'Booked' → 'Confirmed' (API)
+- PASS opened Appointment cd9a527d
+- PASS Appointment: Staff moved 'Confirmed' → 'No-show' (API)
+- PASS report 'Upcoming appointments': 1 metric(s) rendered, API 200
+- PASS report 'Upcoming appointments' shows count of Appointments in stage Booked or Confirmed = 0
+- PASS report 'No-show rate': 1 metric(s) rendered, API 200
+- PASS report 'No-show rate' shows no-show rate = 100.0%
+- PASS form 'Public booking form' created a Appointment (API)
+- PASS role switched to Owner
+- PASS opened Service 92c178ac
+- PASS deleted Service as Owner (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### erp-backbone-console (server)
+
+- PASS page rendered
+- PASS role switched to Operations
+- PASS created Product as Operations (API shows the new row)
+- PASS role switched to Purchasing
+- PASS created Supplier as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS created Customer account as Sales (API shows the new row)
+- PASS role switched to Purchasing
+- PASS created Purchase order as Purchasing (API shows the new row)
+- PASS Purchase order starts in 'Draft'
+- PASS created Purchase order line as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS created Sales order as Sales (API shows the new row)
+- PASS Sales order starts in 'Draft'
+- PASS created Sales order line as Sales (API shows the new row)
+- PASS role switched to Warehouse
+- PASS created Stock adjustment as Warehouse (API shows the new row)
+- PASS role switched to Operations
+- PASS opened Product 08390add
+- PASS edited Product title saved (API)
+- PASS role switched to Purchasing
+- PASS opened Supplier 89df43e8
+- PASS edited Supplier title saved (API)
+- PASS role switched to Sales
+- PASS opened Customer account c6571f87
+- PASS edited Customer account title saved (API)
+- PASS role switched to Purchasing
+- PASS opened Purchase order 6a7ab7d5
+- PASS saved Purchase order (API)
+- PASS opened Purchase order line 1b63266f
+- PASS saved Purchase order line (API)
+- PASS role switched to Sales
+- PASS opened Sales order b86d61e2
+- PASS saved Sales order (API)
+- PASS opened Sales order line d2c520aa
+- PASS saved Sales order line (API)
+- PASS role switched to Operations
+- PASS opened Stock adjustment 22a34fb7
+- PASS saved Stock adjustment (API)
+- PASS role switched to Purchasing
+- PASS opened Supplier 89df43e8
+- PASS created Purchase order as Purchasing (API shows the new row)
+- PASS Purchase order starts in 'Draft'
+- PASS opened Purchase order 6a7ab7d5
+- PASS created Purchase order line as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS opened Customer account c6571f87
+- PASS created Sales order as Sales (API shows the new row)
+- PASS Sales order starts in 'Draft'
+- PASS opened Sales order b86d61e2
+- PASS created Sales order line as Sales (API shows the new row)
+- PASS role switched to Warehouse
+- PASS opened Product 08390add
+- PASS created Stock adjustment as Warehouse (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Purchase order 6a7ab7d5
+- PASS Admin (not a declared mover) is offered no move on Purchase order
+- PASS role switched to Operations
+- PASS opened Purchase order 6a7ab7d5
+- PASS Purchase order declined by Operations → back to 'Draft'
+- PASS the decline is what the gate now records
+- PASS opened Purchase order 6a7ab7d5
+- PASS Purchase order approved by Operations at 'Draft' (API)
+- PASS role switched to Purchasing
+- PASS opened Purchase order 6a7ab7d5
+- PASS Purchase order: Purchasing moved 'Draft' → 'Confirmed' (API)
+- PASS role switched to Warehouse
+- PASS opened Purchase order 6a7ab7d5
+- PASS Purchase order: Warehouse moved 'Confirmed' → 'Received' (API)
+- PASS stock effect on 'Received': 11 + 35 = 46 (API)
+- PASS the page told the user about the stock movement
+- PASS role switched to Operations
+- PASS opened Purchase order 6a7ab7d5
+- PASS Purchase order: Operations moved 'Received' → 'Closed' (API)
+- PASS role switched to Admin
+- PASS opened Sales order b86d61e2
+- PASS Admin (not a declared mover) is offered no move on Sales order
+- PASS role switched to Sales
+- PASS opened Sales order b86d61e2
+- PASS Sales order: Sales moved 'Draft' → 'Confirmed' (API)
+- PASS role switched to Warehouse
+- PASS opened Sales order b86d61e2
+- PASS Sales order: Warehouse moved 'Confirmed' → 'Shipped' (API)
+- PASS stock effect on 'Shipped': 46 − 39 = 7 (API)
+- PASS the page told the user about the stock movement
+- PASS role switched to Operations
+- PASS opened Sales order b86d61e2
+- PASS Sales order: Operations moved 'Shipped' → 'Closed' (API)
+- PASS report 'Stock on hand': 2 metric(s) rendered, API 200
+- PASS report 'Stock on hand' shows sum of Product Stock on hand = 7
+- PASS report 'Stock on hand' shows count of Products at or below Reorder point = 1
+- PASS report 'Sales by month': 1 metric(s) rendered, API 200
+- PASS report 'Sales by month' shows the groups of sales value
+- PASS report 'Open orders': 2 metric(s) rendered, API 200
+- PASS report 'Open orders' shows count of Sales orders in Confirmed = 0
+- PASS report 'Open orders' shows count of Purchase orders in Confirmed = 0
+- PASS opened Product 08390add
+- PASS deleted Product as Operations (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### erp-backbone-board (server)
+
+- PASS page rendered
+- PASS role switched to Operations
+- PASS created Product as Operations (API shows the new row)
+- PASS role switched to Purchasing
+- PASS created Supplier as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS created Customer account as Sales (API shows the new row)
+- PASS role switched to Purchasing
+- PASS created Purchase order as Purchasing (API shows the new row)
+- PASS Purchase order starts in 'Draft'
+- PASS created Purchase order line as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS created Sales order as Sales (API shows the new row)
+- PASS Sales order starts in 'Draft'
+- PASS created Sales order line as Sales (API shows the new row)
+- PASS role switched to Warehouse
+- PASS created Stock adjustment as Warehouse (API shows the new row)
+- PASS role switched to Operations
+- PASS opened Product 8ef4526b
+- PASS edited Product title saved (API)
+- PASS role switched to Purchasing
+- PASS opened Supplier 3c51cf5b
+- PASS edited Supplier title saved (API)
+- PASS role switched to Sales
+- PASS opened Customer account d1af564f
+- PASS edited Customer account title saved (API)
+- PASS role switched to Purchasing
+- PASS opened Purchase order 75750073
+- PASS saved Purchase order (API)
+- PASS opened Purchase order line 62b53b63
+- PASS saved Purchase order line (API)
+- PASS role switched to Sales
+- PASS opened Sales order a620c0c6
+- PASS saved Sales order (API)
+- PASS opened Sales order line 2245c5ba
+- PASS saved Sales order line (API)
+- PASS role switched to Operations
+- PASS opened Stock adjustment 28664f79
+- PASS saved Stock adjustment (API)
+- PASS role switched to Purchasing
+- PASS opened Supplier 3c51cf5b
+- PASS created Purchase order as Purchasing (API shows the new row)
+- PASS Purchase order starts in 'Draft'
+- PASS opened Purchase order 75750073
+- PASS created Purchase order line as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS opened Customer account d1af564f
+- PASS created Sales order as Sales (API shows the new row)
+- PASS Sales order starts in 'Draft'
+- PASS opened Sales order a620c0c6
+- PASS created Sales order line as Sales (API shows the new row)
+- PASS role switched to Warehouse
+- PASS opened Product 8ef4526b
+- PASS created Stock adjustment as Warehouse (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Purchase order 75750073
+- PASS Admin (not a declared mover) is offered no move on Purchase order
+- PASS role switched to Operations
+- PASS opened Purchase order 75750073
+- PASS Purchase order declined by Operations → back to 'Draft'
+- PASS the decline is what the gate now records
+- PASS opened Purchase order 75750073
+- PASS Purchase order approved by Operations at 'Draft' (API)
+- PASS role switched to Purchasing
+- PASS opened Purchase order 75750073
+- PASS Purchase order: Purchasing moved 'Draft' → 'Confirmed' (API)
+- PASS role switched to Warehouse
+- PASS opened Purchase order 75750073
+- PASS Purchase order: Warehouse moved 'Confirmed' → 'Received' (API)
+- PASS stock effect on 'Received': 11 + 35 = 46 (API)
+- PASS the page told the user about the stock movement
+- PASS role switched to Operations
+- PASS opened Purchase order 75750073
+- PASS Purchase order: Operations moved 'Received' → 'Closed' (API)
+- PASS role switched to Admin
+- PASS opened Sales order a620c0c6
+- PASS Admin (not a declared mover) is offered no move on Sales order
+- PASS role switched to Sales
+- PASS opened Sales order a620c0c6
+- PASS Sales order: Sales moved 'Draft' → 'Confirmed' (API)
+- PASS role switched to Warehouse
+- PASS opened Sales order a620c0c6
+- PASS Sales order: Warehouse moved 'Confirmed' → 'Shipped' (API)
+- PASS stock effect on 'Shipped': 46 − 39 = 7 (API)
+- PASS the page told the user about the stock movement
+- PASS role switched to Operations
+- PASS opened Sales order a620c0c6
+- PASS Sales order: Operations moved 'Shipped' → 'Closed' (API)
+- PASS report 'Stock on hand': 2 metric(s) rendered, API 200
+- PASS report 'Stock on hand' shows sum of Product Stock on hand = 7
+- PASS report 'Stock on hand' shows count of Products at or below Reorder point = 1
+- PASS report 'Sales by month': 1 metric(s) rendered, API 200
+- PASS report 'Sales by month' shows the groups of sales value
+- PASS report 'Open orders': 2 metric(s) rendered, API 200
+- PASS report 'Open orders' shows count of Sales orders in Confirmed = 0
+- PASS report 'Open orders' shows count of Purchase orders in Confirmed = 0
+- PASS opened Product 8ef4526b
+- PASS deleted Product as Operations (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### erp-backbone-pocket (server)
+
+- PASS page rendered
+- PASS role switched to Operations
+- PASS created Product as Operations (API shows the new row)
+- PASS role switched to Purchasing
+- PASS created Supplier as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS created Customer account as Sales (API shows the new row)
+- PASS role switched to Purchasing
+- PASS created Purchase order as Purchasing (API shows the new row)
+- PASS Purchase order starts in 'Draft'
+- PASS created Purchase order line as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS created Sales order as Sales (API shows the new row)
+- PASS Sales order starts in 'Draft'
+- PASS created Sales order line as Sales (API shows the new row)
+- PASS role switched to Warehouse
+- PASS created Stock adjustment as Warehouse (API shows the new row)
+- PASS role switched to Operations
+- PASS opened Product e20e89c1
+- PASS edited Product title saved (API)
+- PASS role switched to Purchasing
+- PASS opened Supplier bea7b121
+- PASS edited Supplier title saved (API)
+- PASS role switched to Sales
+- PASS opened Customer account e55daa12
+- PASS edited Customer account title saved (API)
+- PASS role switched to Purchasing
+- PASS opened Purchase order 0f1de33b
+- PASS saved Purchase order (API)
+- PASS opened Purchase order line ff132cb5
+- PASS saved Purchase order line (API)
+- PASS role switched to Sales
+- PASS opened Sales order 85a7ec18
+- PASS saved Sales order (API)
+- PASS opened Sales order line 8887ff01
+- PASS saved Sales order line (API)
+- PASS role switched to Operations
+- PASS opened Stock adjustment 03e072e1
+- PASS saved Stock adjustment (API)
+- PASS role switched to Purchasing
+- PASS opened Supplier bea7b121
+- PASS created Purchase order as Purchasing (API shows the new row)
+- PASS Purchase order starts in 'Draft'
+- PASS opened Purchase order 0f1de33b
+- PASS created Purchase order line as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS opened Customer account e55daa12
+- PASS created Sales order as Sales (API shows the new row)
+- PASS Sales order starts in 'Draft'
+- PASS opened Sales order 85a7ec18
+- PASS created Sales order line as Sales (API shows the new row)
+- PASS role switched to Warehouse
+- PASS opened Product e20e89c1
+- PASS created Stock adjustment as Warehouse (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Purchase order 0f1de33b
+- PASS Admin (not a declared mover) is offered no move on Purchase order
+- PASS role switched to Operations
+- PASS opened Purchase order 0f1de33b
+- PASS Purchase order declined by Operations → back to 'Draft'
+- PASS the decline is what the gate now records
+- PASS opened Purchase order 0f1de33b
+- PASS Purchase order approved by Operations at 'Draft' (API)
+- PASS role switched to Purchasing
+- PASS opened Purchase order 0f1de33b
+- PASS Purchase order: Purchasing moved 'Draft' → 'Confirmed' (API)
+- PASS role switched to Warehouse
+- PASS opened Purchase order 0f1de33b
+- PASS Purchase order: Warehouse moved 'Confirmed' → 'Received' (API)
+- PASS stock effect on 'Received': 11 + 35 = 46 (API)
+- PASS the page told the user about the stock movement
+- PASS role switched to Operations
+- PASS opened Purchase order 0f1de33b
+- PASS Purchase order: Operations moved 'Received' → 'Closed' (API)
+- PASS role switched to Admin
+- PASS opened Sales order 85a7ec18
+- PASS Admin (not a declared mover) is offered no move on Sales order
+- PASS role switched to Sales
+- PASS opened Sales order 85a7ec18
+- PASS Sales order: Sales moved 'Draft' → 'Confirmed' (API)
+- PASS role switched to Warehouse
+- PASS opened Sales order 85a7ec18
+- PASS Sales order: Warehouse moved 'Confirmed' → 'Shipped' (API)
+- PASS stock effect on 'Shipped': 46 − 39 = 7 (API)
+- PASS the page told the user about the stock movement
+- PASS role switched to Operations
+- PASS opened Sales order 85a7ec18
+- PASS Sales order: Operations moved 'Shipped' → 'Closed' (API)
+- PASS report 'Stock on hand': 2 metric(s) rendered, API 200
+- PASS report 'Stock on hand' shows sum of Product Stock on hand = 7
+- PASS report 'Stock on hand' shows count of Products at or below Reorder point = 1
+- PASS report 'Sales by month': 1 metric(s) rendered, API 200
+- PASS report 'Sales by month' shows the groups of sales value
+- PASS report 'Open orders': 2 metric(s) rendered, API 200
+- PASS report 'Open orders' shows count of Sales orders in Confirmed = 0
+- PASS report 'Open orders' shows count of Purchase orders in Confirmed = 0
+- PASS opened Product e20e89c1
+- PASS deleted Product as Operations (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### accounting-ledger-console (server)
+
+- PASS page rendered
+- PASS role switched to Accountant
+- PASS created Contact as Accountant (API shows the new row)
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS created Payment as Accountant (API shows the new row)
+- PASS opened Contact cc1253a1
+- PASS edited Contact title saved (API)
+- PASS opened Invoice 473f3df5
+- PASS saved Invoice (API)
+- PASS opened Invoice line 17466521
+- PASS edited Invoice line title saved (API)
+- PASS opened Bill ede32eac
+- PASS saved Bill (API)
+- PASS opened Payment e3ad64c6
+- PASS saved Payment (API)
+- PASS opened Contact cc1253a1
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice 473f3df5
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS opened Contact cc1253a1
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS opened Invoice 473f3df5
+- PASS created Payment as Accountant (API shows the new row)
+- PASS role switched to Advisor
+- PASS opened Invoice 473f3df5
+- PASS Advisor (not a declared mover) is offered no move on Invoice
+- PASS role switched to Accountant
+- PASS opened Invoice 473f3df5
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice 473f3df5
+- PASS Invoice declined by Admin → back to 'Draft'
+- PASS the decline is what the gate now records
+- PASS role switched to Accountant
+- PASS opened Invoice 473f3df5
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice 473f3df5
+- PASS Invoice approved by Admin at 'Awaiting approval' (API)
+- PASS opened Invoice 473f3df5
+- PASS Invoice: Admin moved 'Awaiting approval' → 'Awaiting payment' (API)
+- PASS opened Invoice 473f3df5
+- PASS Invoice: Admin moved 'Awaiting payment' → 'Voided' (API)
+- PASS role switched to Accountant
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice 7c696690
+- PASS Send: 'sent_at' stamped (API)
+- PASS Send: generated document shown
+- PASS Send is in the activity trail (API)
+- PASS role switched to Advisor
+- PASS opened Bill ede32eac
+- PASS Advisor (not a declared mover) is offered no move on Bill
+- PASS role switched to Accountant
+- PASS opened Bill ede32eac
+- PASS Bill: Accountant moved 'Draft' → 'Awaiting payment' (API)
+- PASS role switched to Admin
+- PASS opened Bill ede32eac
+- PASS Bill: Admin moved 'Awaiting payment' → 'Voided' (API)
+- PASS role switched to Accountant
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice f4a83204
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS ledger: Invoice total is 1406.25
+- PASS opened Invoice f4a83204
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice f4a83204
+- PASS Invoice approved by Admin at 'Awaiting approval' (API)
+- PASS opened Invoice f4a83204
+- PASS Invoice: Admin moved 'Awaiting approval' → 'Awaiting payment' (API)
+- PASS ledger: Invoice is in 'Awaiting payment' awaiting payment
+- PASS role switched to Accountant
+- PASS opened Invoice f4a83204
+- PASS ledger: part payment (703.12) left Invoice in 'Awaiting payment' (API)
+- PASS the page told the user how much is applied
+- PASS opened Invoice f4a83204
+- PASS ledger: paying the balance (703.13) moved Invoice 'Awaiting payment' → 'Paid' (API)
+- PASS the page told the user the target settled
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS ledger: Bill total is 38.5
+- PASS opened Bill 88efb8ef
+- PASS Bill: Accountant moved 'Draft' → 'Awaiting payment' (API)
+- PASS ledger: Bill is in 'Awaiting payment' awaiting payment
+- PASS opened Bill 88efb8ef
+- PASS ledger: part payment (19.25) left Bill in 'Awaiting payment' (API)
+- PASS the page told the user how much is applied
+- PASS opened Bill 88efb8ef
+- PASS ledger: paying the balance (19.25) moved Bill 'Awaiting payment' → 'Paid' (API)
+- PASS the page told the user the target settled
+- PASS opened Contact cc1253a1
+- PASS deleted Contact as Accountant (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### accounting-ledger-board (server)
+
+- PASS page rendered
+- PASS role switched to Accountant
+- PASS created Contact as Accountant (API shows the new row)
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS created Payment as Accountant (API shows the new row)
+- PASS opened Contact 16cf5c18
+- PASS edited Contact title saved (API)
+- PASS opened Invoice 2a154085
+- PASS saved Invoice (API)
+- PASS opened Invoice line c5f227ec
+- PASS edited Invoice line title saved (API)
+- PASS opened Bill 037deb9c
+- PASS saved Bill (API)
+- PASS opened Payment bb3ebaaf
+- PASS saved Payment (API)
+- PASS opened Contact 16cf5c18
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice 2a154085
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS opened Contact 16cf5c18
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS opened Invoice 2a154085
+- PASS created Payment as Accountant (API shows the new row)
+- PASS role switched to Advisor
+- PASS opened Invoice 2a154085
+- PASS Advisor (not a declared mover) is offered no move on Invoice
+- PASS role switched to Accountant
+- PASS opened Invoice 2a154085
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice 2a154085
+- PASS Invoice declined by Admin → back to 'Draft'
+- PASS the decline is what the gate now records
+- PASS role switched to Accountant
+- PASS opened Invoice 2a154085
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice 2a154085
+- PASS Invoice approved by Admin at 'Awaiting approval' (API)
+- PASS opened Invoice 2a154085
+- PASS Invoice: Admin moved 'Awaiting approval' → 'Awaiting payment' (API)
+- PASS opened Invoice 2a154085
+- PASS Invoice: Admin moved 'Awaiting payment' → 'Voided' (API)
+- PASS role switched to Accountant
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice e13dc731
+- PASS Send: 'sent_at' stamped (API)
+- PASS Send: generated document shown
+- PASS Send is in the activity trail (API)
+- PASS role switched to Advisor
+- PASS opened Bill 037deb9c
+- PASS Advisor (not a declared mover) is offered no move on Bill
+- PASS role switched to Accountant
+- PASS opened Bill 037deb9c
+- PASS Bill: Accountant moved 'Draft' → 'Awaiting payment' (API)
+- PASS role switched to Admin
+- PASS opened Bill 037deb9c
+- PASS Bill: Admin moved 'Awaiting payment' → 'Voided' (API)
+- PASS role switched to Accountant
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice 5be612b3
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS ledger: Invoice total is 1406.25
+- PASS opened Invoice 5be612b3
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice 5be612b3
+- PASS Invoice approved by Admin at 'Awaiting approval' (API)
+- PASS opened Invoice 5be612b3
+- PASS Invoice: Admin moved 'Awaiting approval' → 'Awaiting payment' (API)
+- PASS ledger: Invoice is in 'Awaiting payment' awaiting payment
+- PASS role switched to Accountant
+- PASS opened Invoice 5be612b3
+- PASS ledger: part payment (703.12) left Invoice in 'Awaiting payment' (API)
+- PASS the page told the user how much is applied
+- PASS opened Invoice 5be612b3
+- PASS ledger: paying the balance (703.13) moved Invoice 'Awaiting payment' → 'Paid' (API)
+- PASS the page told the user the target settled
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS ledger: Bill total is 38.5
+- PASS opened Bill 95612c70
+- PASS Bill: Accountant moved 'Draft' → 'Awaiting payment' (API)
+- PASS ledger: Bill is in 'Awaiting payment' awaiting payment
+- PASS opened Bill 95612c70
+- PASS ledger: part payment (19.25) left Bill in 'Awaiting payment' (API)
+- PASS the page told the user how much is applied
+- PASS opened Bill 95612c70
+- PASS ledger: paying the balance (19.25) moved Bill 'Awaiting payment' → 'Paid' (API)
+- PASS the page told the user the target settled
+- PASS opened Contact 16cf5c18
+- PASS deleted Contact as Accountant (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### accounting-ledger-pocket (server)
+
+- PASS page rendered
+- PASS role switched to Accountant
+- PASS created Contact as Accountant (API shows the new row)
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS created Payment as Accountant (API shows the new row)
+- PASS opened Contact 79ffce20
+- PASS edited Contact title saved (API)
+- PASS opened Invoice fbe35efe
+- PASS saved Invoice (API)
+- PASS opened Invoice line 66570f5f
+- PASS edited Invoice line title saved (API)
+- PASS opened Bill b31d9b0a
+- PASS saved Bill (API)
+- PASS opened Payment 7065b4ab
+- PASS saved Payment (API)
+- PASS opened Contact 79ffce20
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice fbe35efe
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS opened Contact 79ffce20
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS opened Invoice fbe35efe
+- PASS created Payment as Accountant (API shows the new row)
+- PASS role switched to Advisor
+- PASS opened Invoice fbe35efe
+- PASS Advisor (not a declared mover) is offered no move on Invoice
+- PASS role switched to Accountant
+- PASS opened Invoice fbe35efe
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice fbe35efe
+- PASS Invoice declined by Admin → back to 'Draft'
+- PASS the decline is what the gate now records
+- PASS role switched to Accountant
+- PASS opened Invoice fbe35efe
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice fbe35efe
+- PASS Invoice approved by Admin at 'Awaiting approval' (API)
+- PASS opened Invoice fbe35efe
+- PASS Invoice: Admin moved 'Awaiting approval' → 'Awaiting payment' (API)
+- PASS opened Invoice fbe35efe
+- PASS Invoice: Admin moved 'Awaiting payment' → 'Voided' (API)
+- PASS role switched to Accountant
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice e889409c
+- PASS Send: 'sent_at' stamped (API)
+- PASS Send: generated document shown
+- PASS Send is in the activity trail (API)
+- PASS role switched to Advisor
+- PASS opened Bill b31d9b0a
+- PASS Advisor (not a declared mover) is offered no move on Bill
+- PASS role switched to Accountant
+- PASS opened Bill b31d9b0a
+- PASS Bill: Accountant moved 'Draft' → 'Awaiting payment' (API)
+- PASS role switched to Admin
+- PASS opened Bill b31d9b0a
+- PASS Bill: Admin moved 'Awaiting payment' → 'Voided' (API)
+- PASS role switched to Accountant
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice 24aa1e23
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS ledger: Invoice total is 1406.25
+- PASS opened Invoice 24aa1e23
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice 24aa1e23
+- PASS Invoice approved by Admin at 'Awaiting approval' (API)
+- PASS opened Invoice 24aa1e23
+- PASS Invoice: Admin moved 'Awaiting approval' → 'Awaiting payment' (API)
+- PASS ledger: Invoice is in 'Awaiting payment' awaiting payment
+- PASS role switched to Accountant
+- PASS opened Invoice 24aa1e23
+- PASS ledger: part payment (703.12) left Invoice in 'Awaiting payment' (API)
+- PASS the page told the user how much is applied
+- PASS opened Invoice 24aa1e23
+- PASS ledger: paying the balance (703.13) moved Invoice 'Awaiting payment' → 'Paid' (API)
+- PASS the page told the user the target settled
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS ledger: Bill total is 38.5
+- PASS opened Bill 33b0b38b
+- PASS Bill: Accountant moved 'Draft' → 'Awaiting payment' (API)
+- PASS ledger: Bill is in 'Awaiting payment' awaiting payment
+- PASS opened Bill 33b0b38b
+- PASS ledger: part payment (19.25) left Bill in 'Awaiting payment' (API)
+- PASS the page told the user how much is applied
+- PASS opened Bill 33b0b38b
+- PASS ledger: paying the balance (19.25) moved Bill 'Awaiting payment' → 'Paid' (API)
+- PASS the page told the user the target settled
+- PASS opened Contact 79ffce20
+- PASS deleted Contact as Accountant (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### crm-pipeline-console-file (file)
+
+- PASS page rendered
+- PASS role switched to Sales rep
+- PASS created Organisation as Sales rep (API shows the new row)
+- PASS created Contact as Sales rep (API shows the new row)
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS created Activity as Sales rep (API shows the new row)
+- PASS opened Organisation 006b83a8
+- PASS edited Organisation title saved (API)
+- PASS opened Contact a7850310
+- PASS edited Contact title saved (API)
+- PASS opened Deal 94fb36d0
+- PASS edited Deal title saved (API)
+- PASS opened Activity cecc1fb6
+- PASS edited Activity title saved (API)
+- PASS opened Organisation 006b83a8
+- PASS created Contact as Sales rep (API shows the new row)
+- PASS opened Contact a7850310
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS opened Deal 94fb36d0
+- PASS created Activity as Sales rep (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Deal 94fb36d0
+- PASS Admin (not a declared mover) is offered no move on Deal
+- PASS role switched to Sales rep
+- PASS opened Deal 94fb36d0
+- PASS Deal: Sales rep moved 'Lead in' → 'Contacted' (API)
+- PASS opened Deal 94fb36d0
+- PASS Deal: Sales rep moved 'Contacted' → 'Proposal sent' (API)
+- PASS opened Deal 94fb36d0
+- PASS Deal: Sales rep moved 'Proposal sent' → 'Negotiation' (API)
+- PASS opened Deal 94fb36d0
+- PASS Deal: Sales rep moved 'Negotiation' → 'Lost' (API)
+- PASS created Deal as Sales rep (API shows the new row)
+- PASS Deal starts in 'Lead in'
+- PASS role switched to Sales manager
+- PASS opened Deal feea70c8
+- PASS Reassign: ['owner'] set from input (API)
+- PASS Reassign is in the activity trail (API)
+- PASS report 'Pipeline by stage': 2 metric(s) rendered, API 200
+- PASS report 'Pipeline by stage' shows the groups of sum of open Deal Value grouped by stage
+- PASS report 'Pipeline by stage' shows the groups of count of Deals grouped by stage
+- PASS report 'Win rate': 1 metric(s) rendered, API 200
+- PASS report 'Win rate' shows win rate = 0.0%
+- PASS opened Organisation 006b83a8
+- PASS deleted Organisation as Sales manager (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### erp-backbone-board-file (file)
+
+- PASS page rendered
+- PASS role switched to Operations
+- PASS created Product as Operations (API shows the new row)
+- PASS role switched to Purchasing
+- PASS created Supplier as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS created Customer account as Sales (API shows the new row)
+- PASS role switched to Purchasing
+- PASS created Purchase order as Purchasing (API shows the new row)
+- PASS Purchase order starts in 'Draft'
+- PASS created Purchase order line as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS created Sales order as Sales (API shows the new row)
+- PASS Sales order starts in 'Draft'
+- PASS created Sales order line as Sales (API shows the new row)
+- PASS role switched to Warehouse
+- PASS created Stock adjustment as Warehouse (API shows the new row)
+- PASS role switched to Operations
+- PASS opened Product d47afda0
+- PASS edited Product title saved (API)
+- PASS role switched to Purchasing
+- PASS opened Supplier e9a036c8
+- PASS edited Supplier title saved (API)
+- PASS role switched to Sales
+- PASS opened Customer account 744a3b46
+- PASS edited Customer account title saved (API)
+- PASS role switched to Purchasing
+- PASS opened Purchase order 38cb8315
+- PASS saved Purchase order (API)
+- PASS opened Purchase order line 33214f0b
+- PASS saved Purchase order line (API)
+- PASS role switched to Sales
+- PASS opened Sales order eaa1dee5
+- PASS saved Sales order (API)
+- PASS opened Sales order line 052d4cdd
+- PASS saved Sales order line (API)
+- PASS role switched to Operations
+- PASS opened Stock adjustment f9ad3e97
+- PASS saved Stock adjustment (API)
+- PASS role switched to Purchasing
+- PASS opened Supplier e9a036c8
+- PASS created Purchase order as Purchasing (API shows the new row)
+- PASS Purchase order starts in 'Draft'
+- PASS opened Purchase order 38cb8315
+- PASS created Purchase order line as Purchasing (API shows the new row)
+- PASS role switched to Sales
+- PASS opened Customer account 744a3b46
+- PASS created Sales order as Sales (API shows the new row)
+- PASS Sales order starts in 'Draft'
+- PASS opened Sales order eaa1dee5
+- PASS created Sales order line as Sales (API shows the new row)
+- PASS role switched to Warehouse
+- PASS opened Product d47afda0
+- PASS created Stock adjustment as Warehouse (API shows the new row)
+- PASS role switched to Admin
+- PASS opened Purchase order 38cb8315
+- PASS Admin (not a declared mover) is offered no move on Purchase order
+- PASS role switched to Operations
+- PASS opened Purchase order 38cb8315
+- PASS Purchase order declined by Operations → back to 'Draft'
+- PASS the decline is what the gate now records
+- PASS opened Purchase order 38cb8315
+- PASS Purchase order approved by Operations at 'Draft' (API)
+- PASS role switched to Purchasing
+- PASS opened Purchase order 38cb8315
+- PASS Purchase order: Purchasing moved 'Draft' → 'Confirmed' (API)
+- PASS role switched to Warehouse
+- PASS opened Purchase order 38cb8315
+- PASS Purchase order: Warehouse moved 'Confirmed' → 'Received' (API)
+- PASS stock effect on 'Received': 11 + 35 = 46 (API)
+- PASS the page told the user about the stock movement
+- PASS role switched to Operations
+- PASS opened Purchase order 38cb8315
+- PASS Purchase order: Operations moved 'Received' → 'Closed' (API)
+- PASS role switched to Admin
+- PASS opened Sales order eaa1dee5
+- PASS Admin (not a declared mover) is offered no move on Sales order
+- PASS role switched to Sales
+- PASS opened Sales order eaa1dee5
+- PASS Sales order: Sales moved 'Draft' → 'Confirmed' (API)
+- PASS role switched to Warehouse
+- PASS opened Sales order eaa1dee5
+- PASS Sales order: Warehouse moved 'Confirmed' → 'Shipped' (API)
+- PASS stock effect on 'Shipped': 46 − 39 = 7 (API)
+- PASS the page told the user about the stock movement
+- PASS role switched to Operations
+- PASS opened Sales order eaa1dee5
+- PASS Sales order: Operations moved 'Shipped' → 'Closed' (API)
+- PASS report 'Stock on hand': 2 metric(s) rendered, API 200
+- PASS report 'Stock on hand' shows sum of Product Stock on hand = 7
+- PASS report 'Stock on hand' shows count of Products at or below Reorder point = 1
+- PASS report 'Sales by month': 1 metric(s) rendered, API 200
+- PASS report 'Sales by month' shows the groups of sales value
+- PASS report 'Open orders': 2 metric(s) rendered, API 200
+- PASS report 'Open orders' shows count of Sales orders in Confirmed = 0
+- PASS report 'Open orders' shows count of Purchase orders in Confirmed = 0
+- PASS opened Product d47afda0
+- PASS deleted Product as Operations (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors
+
+### accounting-ledger-pocket-file (file)
+
+- PASS page rendered
+- PASS role switched to Accountant
+- PASS created Contact as Accountant (API shows the new row)
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS created Payment as Accountant (API shows the new row)
+- PASS opened Contact 19510d14
+- PASS edited Contact title saved (API)
+- PASS opened Invoice c1c19fef
+- PASS saved Invoice (API)
+- PASS opened Invoice line 5cb792e1
+- PASS edited Invoice line title saved (API)
+- PASS opened Bill cb4f3cec
+- PASS saved Bill (API)
+- PASS opened Payment d52a88a7
+- PASS saved Payment (API)
+- PASS opened Contact 19510d14
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice c1c19fef
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS opened Contact 19510d14
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS opened Invoice c1c19fef
+- PASS created Payment as Accountant (API shows the new row)
+- PASS role switched to Advisor
+- PASS opened Invoice c1c19fef
+- PASS Advisor (not a declared mover) is offered no move on Invoice
+- PASS role switched to Accountant
+- PASS opened Invoice c1c19fef
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice c1c19fef
+- PASS Invoice declined by Admin → back to 'Draft'
+- PASS the decline is what the gate now records
+- PASS role switched to Accountant
+- PASS opened Invoice c1c19fef
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice c1c19fef
+- PASS Invoice approved by Admin at 'Awaiting approval' (API)
+- PASS opened Invoice c1c19fef
+- PASS Invoice: Admin moved 'Awaiting approval' → 'Awaiting payment' (API)
+- PASS opened Invoice c1c19fef
+- PASS Invoice: Admin moved 'Awaiting payment' → 'Voided' (API)
+- PASS role switched to Accountant
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice 1a2f253b
+- PASS Send: 'sent_at' stamped (API)
+- PASS Send: generated document shown
+- PASS Send is in the activity trail (API)
+- PASS role switched to Advisor
+- PASS opened Bill cb4f3cec
+- PASS Advisor (not a declared mover) is offered no move on Bill
+- PASS role switched to Accountant
+- PASS opened Bill cb4f3cec
+- PASS Bill: Accountant moved 'Draft' → 'Awaiting payment' (API)
+- PASS role switched to Admin
+- PASS opened Bill cb4f3cec
+- PASS Bill: Admin moved 'Awaiting payment' → 'Voided' (API)
+- PASS role switched to Accountant
+- PASS created Invoice as Accountant (API shows the new row)
+- PASS Invoice starts in 'Draft'
+- PASS opened Invoice 9e8a5986
+- PASS created Invoice line as Accountant (API shows the new row)
+- PASS ledger: Invoice total is 1406.25
+- PASS opened Invoice 9e8a5986
+- PASS Invoice: Accountant moved 'Draft' → 'Awaiting approval' (API)
+- PASS role switched to Admin
+- PASS opened Invoice 9e8a5986
+- PASS Invoice approved by Admin at 'Awaiting approval' (API)
+- PASS opened Invoice 9e8a5986
+- PASS Invoice: Admin moved 'Awaiting approval' → 'Awaiting payment' (API)
+- PASS ledger: Invoice is in 'Awaiting payment' awaiting payment
+- PASS role switched to Accountant
+- PASS opened Invoice 9e8a5986
+- PASS ledger: part payment (703.12) left Invoice in 'Awaiting payment' (API)
+- PASS the page told the user how much is applied
+- PASS opened Invoice 9e8a5986
+- PASS ledger: paying the balance (703.13) moved Invoice 'Awaiting payment' → 'Paid' (API)
+- PASS the page told the user the target settled
+- PASS created Bill as Accountant (API shows the new row)
+- PASS Bill starts in 'Draft'
+- PASS ledger: Bill total is 38.5
+- PASS opened Bill 55a0741b
+- PASS Bill: Accountant moved 'Draft' → 'Awaiting payment' (API)
+- PASS ledger: Bill is in 'Awaiting payment' awaiting payment
+- PASS opened Bill 55a0741b
+- PASS ledger: part payment (19.25) left Bill in 'Awaiting payment' (API)
+- PASS the page told the user how much is applied
+- PASS opened Bill 55a0741b
+- PASS ledger: paying the balance (19.25) moved Bill 'Awaiting payment' → 'Paid' (API)
+- PASS the page told the user the target settled
+- PASS opened Contact 19510d14
+- PASS deleted Contact as Accountant (API 404)
+- PASS Home returns to the overview
+- PASS every rendered control kind was pressed
+- PASS no browser errors

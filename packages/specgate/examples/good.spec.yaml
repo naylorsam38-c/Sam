@@ -1,0 +1,129 @@
+# A complete spec that passes the gate — the "Linked Services" example
+# from the design document, made whole.
+header:
+  spec_id: SPEC-014
+  version: 3
+  title: Linked Services page with working Gmail connection
+  source: "conversation 2026-08-22, Command Desk session"
+  status: approved
+
+intent:
+  goal: >
+    The Linked Services page at /commanddesk/#connections shows the real
+    connection state of Gmail and lets the user start the Gmail OAuth flow,
+    where today the page renders tiles whose buttons do nothing.
+  user: "Sam, on his own Command Desk, connecting his own accounts."
+  success: >
+    I click Connect on the Gmail tile, complete Google's consent screen,
+    land back on the page, and the tile says linked without me refreshing.
+  out_of_scope:
+    - Any provider other than Gmail
+    - Token refresh scheduling (separate spec)
+    - Mobile layout
+
+substance:
+  surfaces:
+    - name: Linked Services
+      route: "/commanddesk/#connections"
+      purpose: show connection state and start OAuth flows
+      controls:
+        - label: Connect Gmail
+          type: button
+          endpoint: "POST /api/connections/gmail/start"
+          on_success: redirect to OAuth consent
+          on_failure: inline error, tile stays MISSING
+          on_empty: n/a
+          loading: spinner in tile
+        - label: Gmail status tile
+          type: display_only
+          source: "GET /api/connections/status"
+      states:
+        empty: all tiles MISSING, with a line telling the user what to do
+        loading: skeleton tiles
+        error: banner naming which call failed
+  data:
+    - name: connection_record
+      shape: "{provider, state, expires_at, scopes[]}"
+      location: "sqlite ./commanddesk.db table connections"
+      read: [ui, api]
+      write: [api]
+  actions:
+    - name: start_gmail_oauth
+      trigger: "POST /api/connections/gmail/start"
+      effect: "creates state nonce row; 302 to accounts.google.com consent"
+      needs_approval: false
+      reversible: true
+    - name: store_gmail_tokens
+      trigger: "GET /api/connections/gmail/callback"
+      effect: "exchanges code, writes connection_record state=linked"
+      needs_approval: false
+      reversible: false
+      rollback: "DELETE /api/connections/gmail removes the record and revokes the token"
+  externals:
+    - service: Google OAuth 2.0 (Gmail readonly scope)
+      what_for: user consents; we exchange the code for tokens
+      credential: "OAuth client id + secret"
+      custodian: Sam
+      paste_location: ".env as GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET"
+  permissions:
+    - component: api
+      may_read: [connections table, .env]
+      may_write: [connections table]
+      may_call: ["accounts.google.com", "oauth2.googleapis.com"]
+      may_spend: nothing
+
+bounds:
+  constraints:
+    - "Server listens on localhost:8788 only"
+    - "No new dependencies beyond the existing requirements.txt"
+    - "Tokens stored encrypted at rest with the existing app key"
+  budget: 40
+  environment: "commanddesk.py on localhost:8788, started by run.sh"
+  rollback: "git revert of the feature commit; DELETE /api/connections/gmail for data"
+
+gate:
+  acceptance:
+    - id: AC-01
+      check: "Clicking Connect issues POST /api/connections/gmail/start and the response is 302 to accounts.google.com"
+      verify: "curl -s -o /dev/null -w '%{http_code} %{redirect_url}' -X POST localhost:8788/api/connections/gmail/start | grep -E '^302 https://accounts.google.com'"
+      evidence: raw response headers, timestamped
+    - id: AC-02
+      check: "GET /api/connections/status returns gmail.state == 'linked' and gmail.expires_at in the future after callback completes"
+      verify: "curl -s localhost:8788/api/connections/status | jq -e '.gmail.state==\"linked\" and (.gmail.expires_at | fromdateiso8601 > now)'"
+      evidence: raw response body, timestamped
+    - id: AC-03
+      check: "With the backend stopped, clicking Connect shows the string 'Cannot reach server' within 5s and does not blank the tile"
+      verify: "python tests/e2e_backend_down.py --timeout 5 --expect 'Cannot reach server'"
+      evidence: playwright screenshot + console log
+    - id: AC-04
+      check: "The page reads as complete and unembarrassing to Sam"
+      human: true
+      evidence: "Sam's sign-off note in the approval record"
+  missing_info_policy: "Stop and ask; never invent; never substitute a placeholder."
+  evidence_required:
+    - "AC-01: response headers file in evidence/"
+    - "AC-02: response body file in evidence/"
+    - "AC-03: screenshot + console log in evidence/"
+
+packets:
+  - packet_id: SPEC-014/P1
+    job: "Implement POST /api/connections/gmail/start and the callback handler in commanddesk.py"
+    inputs:
+      routes: "POST /api/connections/gmail/start ; GET /api/connections/gmail/callback"
+      table_ddl: "CREATE TABLE IF NOT EXISTS connections (provider TEXT PRIMARY KEY, state TEXT, expires_at TEXT, scopes TEXT)"
+      env_keys: "GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET in .env"
+    tools: [python, sqlite3, curl]
+    acceptance: [AC-01, AC-02]
+    budget: 25
+    depends_on: []
+  - packet_id: SPEC-014/P2
+    job: "Wire the Linked Services page controls to the API and implement empty/loading/error states"
+    inputs:
+      route: "/commanddesk/#connections"
+      status_endpoint: "GET /api/connections/status"
+      start_endpoint: "POST /api/connections/gmail/start"
+      error_string: "Cannot reach server"
+    tools: [javascript, playwright]
+    acceptance: [AC-03]
+    budget: 15
+    depends_on: [SPEC-014/P1]

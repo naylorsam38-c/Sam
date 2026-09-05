@@ -1,0 +1,118 @@
+{
+  "description": "The seven policy dials the merge specification (\u00a722) refuses to guess. Each ships at its stated safe default so the build proceeds; each is the owner's to change. These live inside the governance bundle deliberately \u2014 loosening a spend cap or narrowing dual-control is a change to what the system is allowed to do, and must go through the same accepted-hash path as any other rule.",
+  "status": "defaults_in_force",
+  "set_by": "default",
+  "set_at": null,
+  "decisions": {
+    "cancellation_window": {
+      "spec_ref": "\u00a710.4",
+      "question": "How long may a consequential external action sit in a cancellable queue after approval, before it fires?",
+      "value_seconds": 60,
+      "default_seconds": 60,
+      "applies_to": [
+        "external_visible",
+        "irreversible"
+      ],
+      "rationale": "A short queue makes the irreversible moment explicit and recoverable without making approval feel unresponsive."
+    },
+    "park_expiry": {
+      "spec_ref": "\u00a716",
+      "question": "Does a task waiting on an owner decision ever expire?",
+      "policy": "never_auto_abandon",
+      "default_policy": "never_auto_abandon",
+      "expiry_seconds": null,
+      "on_expiry": "ABANDON",
+      "rationale": "Elapsed time is never approval. Expiry may only cancel, never approve, and by default it does not cancel either."
+    },
+    "dual_control": {
+      "spec_ref": "\u00a79.4",
+      "question": "Which actions require a second distinct approver?",
+      "required_for": [
+        "IRREVERSIBLE",
+        "PROTECTED_ACTIONS"
+      ],
+      "default_required_for": [
+        "IRREVERSIBLE",
+        "PROTECTED_ACTIONS"
+      ],
+      "initiator_may_be_sole_approver": false,
+      "rationale": "The task initiator approving their own irreversible action is a single point of failure with no second opinion."
+    },
+    "budgets": {
+      "spec_ref": "\u00a717",
+      "question": "What token/cost ceilings apply, and what happens at the ceiling?",
+      "per_task_usd": 5.0,
+      "per_project_usd": 50.0,
+      "per_org_usd": 250.0,
+      "qualification_usd": 25.0,
+      "on_breach": "PARK_BUDGET_EXCEEDED",
+      "default_on_breach": "PARK_BUDGET_EXCEEDED",
+      "rationale": "Conservative caps that park rather than degrade. A silent downgrade to a cheaper model would change the work without telling anyone."
+    },
+    "park_reminders": {
+      "spec_ref": "\u00a716",
+      "question": "How often is the owner reminded that a task is waiting on them?",
+      "cadence_seconds": [
+        3600,
+        14400,
+        86400
+      ],
+      "then_every_seconds": 86400,
+      "default_cadence_seconds": [
+        3600,
+        14400,
+        86400
+      ],
+      "channels": [
+        "in_app"
+      ],
+      "rationale": "Escalating then daily. Reminders never approve and never resume; they only ask."
+    },
+    "model_routing": {
+      "spec_ref": "\u00a718",
+      "question": "Which provider and model does each worker use by default?",
+      "status": "unset_owner_decision",
+      "default_provider": null,
+      "default_model": null,
+      "per_role": {},
+      "rationale": "Left unset on purpose. Routing currently follows the existing LLM router configuration (env LLM_PROVIDER / LLM_MODEL, with per-role recommendations from each role contract). Naming a model per worker is an owner decision with real cost and quality consequences, and this file will not invent one."
+    },
+    "deployment_target": {
+      "spec_ref": "\u00a721 Layer 5",
+      "question": "Where does live qualification run?",
+      "status": "unset_owner_decision",
+      "target": null,
+      "rationale": "Left unset on purpose. Docker and nginx configuration exist in the donor tree, but the concrete host, domain and credentials are the owner's to supply, and live qualification cannot be claimed against a target nobody has named."
+    },
+    "brain_retention_on_disconnect": {
+      "spec_ref": "fix list A14 / C23",
+      "question": "When a user disconnects a service, what happens to evidence Brain ingested through it?",
+      "policy": "purge",
+      "default_policy": "purge",
+      "allowed": [
+        "purge",
+        "mark",
+        "retain"
+      ],
+      "status": "set_by_owner",
+      "rationale": "The owner asked for this to be resolved and implemented rather than left open. 'purge' is the setting because the connection was the licence to hold the data: a user who disconnects in order to be forgotten is not served by evidence that outlives their decision. 'mark' keeps the evidence and records that its source is gone; 'retain' leaves it untouched. Whichever is set, the outcome is audited and reported back through the disconnect response.",
+      "depends_on": [
+        "src/capabilities/brain.js forgetConnection",
+        "src/connections/store.js applyRetentionPolicy",
+        "brain_documents.connection_id, added in migration 14"
+      ]
+    },
+    "connection_quotas": {
+      "spec_ref": "fix list A11 / A12 / A15",
+      "question": "What call ceiling applies to each connected provider, per hour?",
+      "per_provider": {},
+      "default_ceiling": null,
+      "status": "unmetered_by_default",
+      "rationale": "The accounting, the backoff and the cost attribution are built and always run \u2014 every provider call is recorded against its connection. The CEILING is a number about somebody's paid account, and inventing one would either throttle legitimate work or fail to protect the account. A provider absent from per_provider is unmetered and reports itself as unmetered rather than being silently throttled.",
+      "depends_on": [
+        "src/connections/store.js quota(), usage(), backoff(), costAttribution()",
+        "src/connections/capabilities.js connectedAdapter"
+      ]
+    }
+  }
+}

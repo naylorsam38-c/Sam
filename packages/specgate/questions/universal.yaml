@@ -1,0 +1,220 @@
+# SPEC WRITER'S QUESTION BANK — universal questions
+# Asked for every spec, keyed to the fifteen-dimension completeness model.
+# Each question: id, dim (dimension number), q (the question, answerable in one
+# sentence), why (the finding it reverse-engineers), maps_to (spec field),
+# answer_type, gate (which rejection rule fails if this stays unanswered).
+# Source keys: [gate]=spec gate design · [enf]=spec-enforcement findings ·
+# [parts]=parts-library report · [brief]=brief-structure report · [nova]=Nova v2.
+
+universal:
+  # ---- 1 WHO ----------------------------------------------------------------
+  - id: U-01
+    dim: 1
+    q: "Who uses this, and what are they trying to get done in one sentence each?"
+    why: "[brief] Unstated requirements are followed ~41% of the time; the user's job is the requirement most often left unstated."
+    maps_to: intent.user
+    answer_type: text
+    gate: R1
+  - id: U-02
+    dim: 1
+    q: "Is there more than one kind of user (admin vs member vs anonymous)? Name each."
+    why: "[enf] States a test account cannot reach are unverifiable; every role must be enumerated to be checked."
+    maps_to: substance.permissions
+    answer_type: list
+    gate: R1
+  # ---- 2 ENTRY --------------------------------------------------------------
+  - id: U-03
+    dim: 2
+    q: "What is the exact URL or entry point, and what does the very first screen show before any data exists?"
+    why: "[gate] Empty states are one of the five dimensions speakers always omit as obvious."
+    maps_to: substance.surfaces[0]
+    answer_type: text
+    gate: R1
+  - id: U-04
+    dim: 2
+    q: "How does a brand-new user get from arrival to their first successful action — every screen in between?"
+    why: "[parts] Every starter kit ships onboarding because every app needs it and every speaker skips it."
+    maps_to: substance.surfaces
+    answer_type: text
+    gate: R1
+  # ---- 3 SURFACES -----------------------------------------------------------
+  - id: U-05
+    dim: 3
+    q: "List every screen. For each: its route, its purpose in one line."
+    why: "[gate] Surfaces are the largest hole class; the dead-buttons failure began as an unlisted control."
+    maps_to: substance.surfaces
+    answer_type: list
+    gate: R1
+  - id: U-06
+    dim: 3
+    q: "For every control on every screen: what endpoint does it call — or is it deliberately display-only?"
+    why: "[gate] R5: a control with neither is a rejection, not a warning. There is no third option."
+    maps_to: substance.surfaces[].controls
+    answer_type: per_control
+    gate: R5
+  - id: U-07
+    dim: 3
+    q: "Will two copies of the same component ever appear on one page? If yes, what distinguishes their names?"
+    why: "[parts] Flat naming breaks composition (Salesforce namespaces exist for this; web components' global registry is the counter-example)."
+    maps_to: substance.surfaces[].controls[].label
+    answer_type: bool_plus_scheme
+    gate: R5
+  # ---- 4 ACTIONS ------------------------------------------------------------
+  - id: U-08
+    dim: 4
+    q: "For each control: what does the user see on success, on failure, while loading, and when there is nothing to show?"
+    why: "[gate] The four states speakers never mention; [parts] Playwright/Maestro auto-wait exists because loading is universal."
+    maps_to: substance.surfaces[].controls
+    answer_type: per_control
+    gate: R1
+  - id: U-09
+    dim: 4
+    q: "Which actions change something outside this app (send, charge, delete, post)? For each: is it reversible, and how?"
+    why: "[gate] R11; [nova] retries re-execute — an unreversible action without rollback doubles on retry."
+    maps_to: substance.actions
+    answer_type: per_action
+    gate: R11
+  - id: U-10
+    dim: 4
+    q: "Which actions must a human approve before they run?"
+    why: "[nova] Park-by-default for side effects; approval is a field, not a vibe."
+    maps_to: substance.actions[].needs_approval
+    answer_type: per_action_bool
+    gate: R11
+  # ---- 5 DATA ---------------------------------------------------------------
+  - id: U-11
+    dim: 5
+    q: "What is stored? For each thing: its fields, where it lives (exact store), and who can read and write it."
+    why: "[gate] R12; [enf] a criterion over a row needs the row's address to go and look."
+    maps_to: substance.data
+    answer_type: list
+    gate: R12
+  - id: U-12
+    dim: 5
+    q: "What happens to the data when a record's parent is deleted — cascade, orphan, or forbid?"
+    why: "[parts] Lifecycle is in every CRUD platform's data model and no speaker's description."
+    maps_to: substance.data[].lifecycle
+    answer_type: enum
+    gate: R1
+  # ---- 6 EXTERNALS ----------------------------------------------------------
+  - id: U-13
+    dim: 6
+    q: "List every outside service. For each: what it is for, what credential it needs, WHO supplies that credential, and WHERE they paste it."
+    why: "[gate] R6 — credential custody is the classic silently-assumed answer."
+    maps_to: substance.externals
+    answer_type: list
+    gate: R6
+  - id: U-14
+    dim: 6
+    q: "For each external: what should the app do when that service is down — block, degrade, or queue?"
+    why: "[enf] 'With the backend stopped…' criteria exist only if the degraded behaviour was ever decided."
+    maps_to: substance.externals[].on_outage
+    answer_type: per_external_enum
+    gate: R1
+  # ---- 7 IDENTITY -----------------------------------------------------------
+  - id: U-15
+    dim: 7
+    q: "How does the system know who the user is — and how long does that hold (session length, remember-me, logout)?"
+    why: "[parts] Auth is the most universal part (11/14 sources) and session policy is its most-skipped config."
+    maps_to: parts.auth.config
+    answer_type: text
+    gate: R1
+  # ---- 8 PERMISSIONS --------------------------------------------------------
+  - id: U-16
+    dim: 8
+    q: "For each role: name one thing it MUST be able to do and one thing it MUST NOT — per screen it touches."
+    why: "[enf] Authorisation matrices are machine-checkable only for enumerated role-endpoint pairs; unenumerated = unverifiable."
+    maps_to: substance.permissions
+    answer_type: matrix
+    gate: R1
+  # ---- 9 ERRORS -------------------------------------------------------------
+  - id: U-17
+    dim: 9
+    q: "For the three most likely failures (server down, bad input, no permission): what exact words does the user see?"
+    why: "[gate] Errors are a top-five hole; exact strings make the criterion mechanical ('shows \"Cannot reach server\" within 5s')."
+    maps_to: substance.surfaces[].states.error
+    answer_type: text
+    gate: R3
+  # ---- 10 EMPTY STATES ------------------------------------------------------
+  - id: U-18
+    dim: 10
+    q: "Before any data exists, what does each list, table and dashboard show, and what does it tell the user to do?"
+    why: "[gate] Empty is a state, not an accident; unspecified empty states become blank panels."
+    maps_to: substance.surfaces[].states.empty
+    answer_type: per_surface
+    gate: R1
+  # ---- 11 MONEY AND LIMITS --------------------------------------------------
+  - id: U-19
+    dim: 11
+    q: "What are the ceilings — spend, records, file size, requests per minute, retry attempts, timeouts?"
+    why: "[parts] Bubble's documented envelope limits (300s workflows, 50k sorted records) are where composed blocks silently break; declare yours."
+    maps_to: bounds
+    answer_type: list
+    gate: R1
+  - id: U-20
+    dim: 11
+    q: "What is the build budget (money, time or tokens), and what should happen when it is hit?"
+    why: "[gate] Budget is a required field; [nova] hard stops with partial results beat silent overruns."
+    maps_to: bounds.budget
+    answer_type: number_plus_policy
+    gate: R1
+  # ---- 12 ENVIRONMENT -------------------------------------------------------
+  - id: U-21
+    dim: 12
+    q: "Where does this run — host, process, port — and how is it started and restarted?"
+    why: "[gate] Environment is required; [enf] a verifier needs a reachable URL, not a description."
+    maps_to: bounds.environment
+    answer_type: text
+    gate: R1
+  - id: U-22
+    dim: 12
+    q: "Is there a test tenant or test account the verifier may use on the live system, and what marks its traffic as synthetic?"
+    why: "[enf] Destructive controls cannot be click-proven on production without a test tenant + cleanup contract; the synthetic-traffic marker is the documented pattern."
+    maps_to: bounds.environment.test_tenancy
+    answer_type: text
+    gate: R10
+  # ---- 13 ROLLBACK ----------------------------------------------------------
+  - id: U-23
+    dim: 13
+    q: "If the deployment breaks, what is the named way back — and who may pull that lever?"
+    why: "[gate] R11 at spec level; 'git revert' is an answer, 'we'll figure it out' is not."
+    maps_to: bounds.rollback
+    answer_type: text
+    gate: R11
+  # ---- 14 ACCEPTANCE --------------------------------------------------------
+  - id: U-24
+    dim: 14
+    q: "For each thing you just said, what observation proves it — a command and its output, a response body, a row, a message in a mailbox?"
+    why: "[enf] The six-field tuple: a criterion needs precondition, trigger, channel+address, extraction, decision rule, and time budget."
+    maps_to: gate.acceptance
+    answer_type: per_criterion
+    gate: R3
+  - id: U-25
+    dim: 14
+    q: "For every outcome that is NOT on screen (email, row, webhook, queued job): where exactly does a script go to look, and how long may it wait?"
+    why: "[parts] The invisible-outcome gap is the weakest area of all existing formats; the channel must be declared or the criterion is undecidable."
+    maps_to: gate.acceptance[].observe
+    answer_type: per_criterion
+    gate: R3
+  - id: U-26
+    dim: 14
+    q: "Which criteria genuinely need a human eye? (Fewer is better; each must name the exact evidence the human looks at.)"
+    why: "[gate] human:true criteria are counted separately; [enf] the human judges diffs and named evidence packs, never whole pages."
+    maps_to: gate.acceptance[].human
+    answer_type: list
+    gate: R3
+  # ---- 15 OUT OF SCOPE ------------------------------------------------------
+  - id: U-27
+    dim: 15
+    q: "Name at least three things a reasonable person might assume is included that you are NOT building."
+    why: "[gate] R9 — everything not listed is assumed in scope; an empty boundary is never true."
+    maps_to: intent.out_of_scope
+    answer_type: list
+    gate: R9
+  - id: U-28
+    dim: 15
+    q: "Of the things now in scope: which are load-bearing (failure blocks release) and which are nice-to-have?"
+    why: "[nova] Load-bearing gates escalation and retry policy; unlabelled criteria all gate equally, which means none really do."
+    maps_to: gate.acceptance[].load_bearing
+    answer_type: per_criterion_bool
+    gate: R3

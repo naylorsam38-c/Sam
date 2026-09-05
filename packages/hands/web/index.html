@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hands — session</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="bar">
+  <h1>HANDS</h1>
+  <label class="token">API token
+    <input id="token" data-testid="token" type="password" autocomplete="off">
+  </label>
+</header>
+
+<main class="workspace">
+  <section class="panel" data-testid="panel-start">
+    <h2>Start a session</h2>
+    <label>Workflow
+      <select id="workflow" data-testid="workflow"></select>
+    </label>
+    <label>Customer
+      <input id="customer" data-testid="customer" value="sam">
+    </label>
+    <button id="start" data-testid="start">Start</button>
+    <p class="session" data-testid="session-id"></p>
+  </section>
+
+  <section class="panel" data-testid="panel-document" hidden>
+    <h2>Document</h2>
+    <input id="file" data-testid="file" type="file" accept="application/pdf">
+    <button id="upload" data-testid="upload">Upload</button>
+  </section>
+
+  <section class="panel" data-testid="panel-price" hidden>
+    <h2>Price</h2>
+    <p class="muted">The price is locked before anything executes.</p>
+    <label>Amount (cents)<input id="price" data-testid="price" value="5000"></label>
+    <label>Scope<input id="scope" data-testid="scope" value="one document, up to 4 modules"></label>
+    <button id="lock-price" data-testid="lock-price">Lock price</button>
+  </section>
+
+  <section class="panel" data-testid="panel-fields" hidden>
+    <h2>Fields</h2>
+    <table><tbody id="fields" data-testid="fields"></tbody></table>
+  </section>
+
+  <section class="panel gate" data-testid="panel-gate" hidden>
+    <h2>ACTION REQUIRED</h2>
+    <p class="muted">Nothing below has happened yet. It happens only if you approve it.</p>
+    <pre id="gate-payload" data-testid="gate-payload"></pre>
+    <div class="row">
+      <button id="approve" data-testid="approve">Approve</button>
+      <button id="decline" class="ghost" data-testid="decline">Decline</button>
+    </div>
+  </section>
+
+  <section class="panel" data-testid="panel-run" hidden>
+    <h2>Run</h2>
+    <button id="execute" data-testid="execute">Continue</button>
+    <button id="finalise" data-testid="finalise" hidden>Finish</button>
+    <p class="state">State: <strong id="state" data-testid="state">—</strong></p>
+  </section>
+
+  <section class="panel" data-testid="panel-result" hidden>
+    <h2>Files</h2>
+    <ul id="documents" data-testid="documents"></ul>
+    <h2>Audit trail</h2>
+    <ol id="trail" data-testid="trail" class="trail"></ol>
+  </section>
+</main>
+
+<p id="error" data-testid="error" class="error" hidden></p>
+<script src="/app.js"></script>
+</body>
+</html>

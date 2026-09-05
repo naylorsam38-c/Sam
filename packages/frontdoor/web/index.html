@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Make me an app</title>
+<style>
+:root{--ink:#12151c;--mut:#6b7280;--line:#e5e7eb;--acc:#2563eb;--ok:#15803d;--warn:#b45309;--bg:#f7f8fa;--card:#fff;--r:14px}
+*{box-sizing:border-box}html,body{margin:0}
+body{font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 120px}
+header{display:flex;align-items:center;gap:12px;padding:6px 0 22px}
+.dot{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--acc),#7c3aed)}
+header b{font-size:18px}header span{color:var(--mut);font-size:14px;margin-left:auto}
+.bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:26px}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .25s}
+h1{font-size:30px;line-height:1.2;margin:0 0 6px;letter-spacing:-.02em}
+.help{color:var(--mut);margin:0 0 22px;font-size:16px}
+textarea,input[type=text]{width:100%;font:inherit;padding:16px;border:2px solid var(--line);border-radius:var(--r);background:var(--card);resize:vertical}
+textarea:focus,input:focus{outline:none;border-color:var(--acc)}
+.opts{display:grid;gap:12px}
+.opts.two{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:16px 18px;cursor:pointer;font:inherit;color:inherit;transition:border-color .12s,transform .12s}
+.opt:hover{border-color:#c7d2fe}.opt.on{border-color:var(--acc);background:#f5f8ff}
+.opt .tick{flex:0 0 22px;height:22px;margin-top:2px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:13px;color:#fff}
+.opt.on .tick{background:var(--acc);border-color:var(--acc)}
+.opt b{display:block;font-size:17px}.opt small{color:var(--mut);font-size:14.5px;display:block;margin-top:2px}
+.opt ul{margin:10px 0 0;padding-left:18px;color:var(--mut);font-size:14px}.opt ul li{margin:2px 0}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.shot{background:var(--card);border:2px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;padding:0;font:inherit;color:inherit;text-align:left;transition:border-color .12s}
+.shot:hover{border-color:#c7d2fe}.shot.on{border-color:var(--acc)}
+.shot img{display:block;width:100%;height:190px;object-fit:cover;object-position:top left;background:#eef1f5;border-bottom:1px solid var(--line)}
+.shot .cap{padding:13px 15px}.shot b{display:block}.shot small{color:var(--mut);font-size:14px}
+.swatch{width:36px;height:36px;border-radius:9px;flex:0 0 36px;display:grid;place-items:center}
+.swatch svg{width:22px;height:22px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:14px 20px calc(14px + env(safe-area-inset-bottom))}
+.nav .in{max-width:860px;margin:0 auto;display:flex;gap:12px;align-items:center}
+.btn{font:inherit;font-weight:600;padding:13px 26px;border-radius:11px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;min-height:48px}
+.btn.primary{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.primary:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{border:0;color:var(--mut)}
+.nav .sp{margin-left:auto}
+.flag{background:#fff8ec;border:1px solid #f3ddb4;color:var(--warn);border-radius:var(--r);padding:16px 18px;margin:0 0 18px}
+.flag b{display:block;margin-bottom:4px;color:#8a4d00}
+.flag p{margin:6px 0 0;font-size:15px;color:#6b4a1c}
+.sug{background:#f0f7ff;border:1px solid #c9dcf7;border-radius:var(--r);padding:14px 18px;margin:0 0 18px;font-size:15px;color:#1e40af}
+.review{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:20px 22px;margin-bottom:16px}
+.review h3{margin:0 0 10px;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.review ul{margin:0;padding-left:20px}.review li{margin:4px 0}
+.built{text-align:center;padding:30px 0}
+.built .big{font-size:26px;font-weight:700;margin-bottom:6px}
+.built a.card{display:block;background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:18px;margin:10px 0;text-decoration:none;color:inherit;text-align:left}
+.built a.card:hover{border-color:var(--acc)}
+.spin{width:34px;height:34px;border:4px solid var(--line);border-top-color:var(--acc);border-radius:50%;margin:30px auto;animation:s 1s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+.err{background:#fef2f2;border:1px solid #fbd0d0;color:#b91c1c;border-radius:var(--r);padding:16px 18px}
+@media(max-width:600px){h1{font-size:25px}.wrap{padding:20px 16px 130px}}
+</style></head>
+<body>
+<div class="wrap">
+  <header><span class="dot"></span><b id="brand">Make me an app</b><span id="count"></span></header>
+  <div class="bar"><i id="prog" style="width:0"></i></div>
+  <main id="stage"></main>
+</div>
+<nav class="nav"><div class="in">
+  <button class="btn ghost" id="back" hidden>Back</button>
+  <span class="sp"></span>
+  <button class="btn primary" id="next">Next</button>
+</div></nav>
+
+<script>
+const A = {};                 // the answers
+let CAT = null, QS = [], i = 0, built = null, busy = false;
+const $ = (s) => document.querySelector(s);
+
+async function boot() {
+  CAT = await (await fetch('/api/catalogue')).json();
+  QS = await refreshQuestions();
+  render();
+}
+async function refreshQuestions() {
+  const r = await fetch('/api/questions', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(A)});
+  return (await r.json()).questions;
+}
+const esc = (s) => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function markSvg(colour){return '<svg viewBox="0 0 24 24" fill="none" stroke="'+colour+'" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>';}
+
+function render() {
+  const stage = $('#stage'), back = $('#back'), next = $('#next');
+  $('#prog').style.width = Math.round((i / (QS.length + 1)) * 100) + '%';
+  $('#count').textContent = built ? '' : `${Math.min(i+1, QS.length+1)} of ${QS.length+1}`;
+  back.hidden = i === 0 || !!built;
+  next.hidden = !!built;
+
+  if (built) return renderBuilt(stage);
+  if (i >= QS.length) return renderReview(stage);
+
+  const q = QS[i];
+  let html = `<h1>${esc(q.ask)}</h1>` + (q.help ? `<p class="help">${esc(q.help)}</p>` : '');
+
+  // anything they asked for that this system cannot do, said before they choose
+  if (q.id === 'cards' && A.does) {
+    const gaps = matchGaps(A.does);
+    for (const g of gaps) html += `<div class="flag"><b>${esc(g.plain.replace(/\.$/,''))} — not something this can build.</b>${esc(g.why)}<p>${esc(g.instead)}</p></div>`;
+    const hits = matchHits(A.does);
+    if (hits.length) html += `<div class="sug">From what you wrote, these look right — ticked for you. Change anything.</div>`;
+  }
+
+  if (q.kind === 'words') {
+    const long = q.id === 'does';
+    html += long ? `<textarea id="w" rows="4" autofocus placeholder="A shared list of our members, so we can see who has joined and who we still need to call.">${esc(A[q.id]||'')}</textarea>`
+                 : `<input type="text" id="w" autofocus value="${esc(A[q.id]||'')}" placeholder="Give it a name">`;
+  } else if (q.id === 'look') {
+    html += '<div class="shots">' + q.options.map(o => `
+      <button class="shot${A.look===o.value?' on':''}" data-v="${o.value}">
+        <img src="/shots/${o.image}" alt="${esc(o.label)}">
+        <span class="cap"><b>${esc(o.label)}</b><small>${esc(o.sub)}</small></span>
+      </button>`).join('') + '</div>';
+  } else if (q.id === 'mark') {
+    html += '<div class="opts two">' + q.options.map(o => `
+      <button class="opt${A.mark===o.value?' on':''}" data-v="${o.value}">
+        <span class="swatch" style="background:${o.colour?esc(o.colour)+'1a':'#f1f3f7'}">${o.colour?markSvg(esc(o.colour)):''}</span>
+        <span><b>${esc(o.label)}</b><small>${esc(o.sub)}</small></span>
+      </button>`).join('') + '</div>';
+  } else {
+    const many = q.kind === 'tap_many';
+    const on = (v) => many ? (A[q.id]||[]).includes(v) : A[q.id] === v;
+    html += '<div class="opts">' + q.options.map(o => `
+      <button class="opt${on(o.value)?' on':''}" data-v="${o.value}">
+        <span class="tick">${many?'✓':'●'}</span>
+        <span><b>${esc(o.label)}</b><small>${esc(o.sub)}</small>
+        ${o.detail?('<ul>'+o.detail.map(d=>`<li>${esc(d)}</li>`).join('')+'</ul>'):''}</span>
+      </button>`).join('') + '</div>';
+  }
+  stage.innerHTML = html;
+  stage.querySelectorAll('[data-v]').forEach(el => el.onclick = () => choose(q, el.dataset.v));
+  next.textContent = 'Next';
+  next.disabled = !answered(q);
+  const w = document.getElementById('w');
+  if (w) w.oninput = () => { A[q.id] = w.value; next.disabled = !answered(q); };
+}
+
+function matchHits(words){const l=' '+words.toLowerCase()+' ';return CAT.capabilities.filter(c=>c.sounds_like.some(s=>l.includes(s)));}
+function matchGaps(words){const l=' '+words.toLowerCase()+' ';return CAT.not_on_the_shelf.filter(g=>g.they_say.some(s=>l.includes(s)));}
+function answered(q){const v=A[q.id];return q.kind==='tap_many'?(v&&v.length):!!(v&&String(v).trim());}
+
+function choose(q, v) {
+  if (q.kind === 'tap_many') {
+    const cur = new Set(A[q.id] || []);
+    cur.has(v) ? cur.delete(v) : cur.add(v);
+    A[q.id] = [...cur];
+  } else A[q.id] = v;
+  render();
+}
+
+$('#back').onclick = () => { if (i > 0) { i--; render(); } };
+$('#next').onclick = async () => {
+  if (busy) return;
+  if (i >= QS.length) return build();
+  const q = QS[i];
+  if (!answered(q)) return;
+  // their words pre-tick the cards; they always confirm on the next screen
+  if (q.id === 'does' && !A.cards) A.cards = matchHits(A.does).map(c => c.id);
+  QS = await refreshQuestions();          // question 8 appears only if it is really needed
+  i++; render();
+};
+
+function renderReview(stage) {
+  const picked = CAT.capabilities.filter(c => (A.cards||[]).includes(c.id));
+  const gaps = matchGaps(A.does || '');
+  stage.innerHTML = `<h1>Here is what you will get.</h1>
+    <p class="help">Nothing is built until you press the button.</p>
+    <div class="review"><h3>${esc(A.name)} will hold</h3><ul>
+      ${picked.map(c => `<li><b>${esc(c.name)}</b> — ${esc(c.one_line)}</li>`).join('')}
+    </ul></div>
+    <div class="review"><h3>and every app gets</h3><ul>
+      ${CAT.always_included.map(x => `<li>${esc(x)}</li>`).join('')}
+    </ul></div>
+    <div class="review"><h3>Look</h3><ul>
+      <li>${esc((QS.find(q=>q.id==='look').options.find(o=>o.value===A.look)||{}).label)}, ${esc(A.density)}${A.mark==='design_for_me'?', no mark yet':', the '+esc(A.mark)+' mark'}</li>
+      <li>You get all three looks either way — this is just the one you open first.</li>
+    </ul></div>
+    ${gaps.length ? `<div class="flag"><b>Not in this app</b>${gaps.map(g=>esc(g.plain)).join(' ')} ${esc(gaps.map(g=>g.instead).join(' '))}</div>` : ''}`;
+  $('#next').textContent = 'Build it';
+  $('#next').disabled = false;
+}
+
+async function build() {
+  busy = true;
+  $('#stage').innerHTML = `<h1>Building ${esc(A.name)}.</h1><p class="help">Writing the spec, building the app, generating the three interfaces.</p><div class="spin"></div>`;
+  $('#next').hidden = true; $('#back').hidden = true;
+  let res;
+  try {
+    res = await (await fetch('/api/build', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(A)})).json();
+  } catch (e) { res = {error: String(e)}; }
+  busy = false;
+  if (res.error) {
+    $('#stage').innerHTML = `<h1>It stopped, and said why.</h1><div class="err">${esc(res.error)}</div>
+      <p class="help">Nothing was half-built. Go back and change an answer.</p>`;
+    $('#back').hidden = false;
+    return;
+  }
+  built = res; render();
+}
+
+function renderBuilt(stage) {
+  $('#prog').style.width = '100%';
+  stage.innerHTML = `<div class="built">
+      <p class="big">${esc(built.name)} is built.</p>
+      <p class="help">${built.records} things it keeps track of · ${built.screens} screens · ${built.actions} buttons · 3 interfaces</p>
+    </div>
+    <a class="card" href="${built.open}" target="_blank"><b>Open your app →</b><small>Pick any of the three looks. Everything works.</small></a>
+    <a class="card" href="${built.summary}" target="_blank"><b>What it does, in plain English →</b><small>Including what it does NOT do, and every question that was answered for you.</small></a>`;
+}
+boot();
+</script>
+</body></html>

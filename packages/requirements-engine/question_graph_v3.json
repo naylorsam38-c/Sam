@@ -1,0 +1,4639 @@
+{
+  "version": "3.0",
+  "part_order": [
+    "0",
+    "A",
+    "C",
+    "AU",
+    "P",
+    "R",
+    "F",
+    "FI",
+    "FL",
+    "FLX",
+    "RP",
+    "N",
+    "B",
+    "T",
+    "D",
+    "Z"
+  ],
+  "config": {
+    "ambiguous_metric_terms": [
+      "active",
+      "completed",
+      "engaged",
+      "churn",
+      "churned",
+      "converted",
+      "conversion",
+      "retained",
+      "retention",
+      "revenue",
+      "growth",
+      "at risk",
+      "overdue",
+      "on time",
+      "utilisation",
+      "utilization",
+      "average",
+      "rate"
+    ],
+    "super_role_token": "super",
+    "public_role_token": "public",
+    "field_types": [
+      "short_text",
+      "long_text",
+      "whole_number",
+      "decimal_number",
+      "money",
+      "date",
+      "date_time",
+      "yes_no",
+      "one_choice",
+      "multi_choice",
+      "email",
+      "phone",
+      "url",
+      "file",
+      "link",
+      "other"
+    ],
+    "widget_vocab": {
+      "icon_multi": "tap device/channel/category icons; each shows a small rendered sample",
+      "icon_pick": "tap one icon from a small set",
+      "style_board": "board of labelled app-style screenshots; tap to like or avoid (credit the shown apps on the tile)",
+      "chip_select": "tap word chips from a curated vocabulary; free-type to add",
+      "visual_abc": "2-4 rendered mockups of the same thing; tap the one you mean",
+      "brand_kit": "logo upload + colour picker with a live header preview",
+      "screen_picker": "tap a screen thumbnail per role",
+      "screen_map": "map of all screens; tap a lock to make one public/private",
+      "drag_order": "drag items to reorder a live preview (menu, columns)",
+      "card_board": "editable cards per inventory list; tap to remove, type to add",
+      "form_builder": "live form preview that rebuilds as fields are added/typed/reordered; conditional fields toggle live",
+      "tap_on_preview": "answer by tapping the element on a rendered mockup (title field, lock stage, button placement)",
+      "access_matrix": "roles x verbs grid with per-cell scope; renders a see-it-as-that-role sample underneath",
+      "pipeline_editor": "stages as draggable pills; draw arrows for moves; badges for approval/timeout; tap an arrow to set who moves it",
+      "link_diagram": "record cards on a canvas; drag a line between two to declare the relationship",
+      "login_preview": "live sign-in screen; toggling a method adds/removes its button",
+      "message_preview": "rendered sample message per channel (email/SMS bubble/push banner); edit intent under it",
+      "report_mockup": "rendered report with toggleable filter chips and a date-range control",
+      "pricing_builder": "plan cards edited in place on a live pricing-page preview",
+      "wireframe_walkthrough": "clickable wireframe of every screen; every numbered button present; tap through and confirm"
+    }
+  },
+  "parts": [
+    {
+      "code": "0",
+      "title": "Setup",
+      "per": null,
+      "gate": null,
+      "intro": "Asked once. Changes how much the interviewer asks, never what gets built or verified."
+    },
+    {
+      "code": "A",
+      "title": "The idea",
+      "per": null,
+      "gate": null,
+      "intro": "Conversational. The interviewer may ask these in any words; the script decides when each field is filled."
+    },
+    {
+      "code": "C",
+      "title": "Client — look, feel and navigation",
+      "per": null,
+      "gate": null,
+      "intro": ""
+    },
+    {
+      "code": "AU",
+      "title": "Auth",
+      "per": null,
+      "gate": {
+        "q": "A.07",
+        "op": "eq",
+        "value": "yes"
+      },
+      "intro": ""
+    },
+    {
+      "code": "P",
+      "title": "Permissions — roles",
+      "per": "role",
+      "gate": {
+        "q": "A.07",
+        "op": "eq",
+        "value": "yes"
+      },
+      "intro": "Once per confirmed role, except the super role from A.16. Authority over specific things is asked where it is exercised (Records, Flow, Billing)."
+    },
+    {
+      "code": "R",
+      "title": "Records",
+      "per": "record",
+      "gate": null,
+      "intro": ""
+    },
+    {
+      "code": "F",
+      "title": "Forms",
+      "per": "form",
+      "gate": null,
+      "intro": ""
+    },
+    {
+      "code": "FI",
+      "title": "Files",
+      "per": "file_type",
+      "gate": null,
+      "intro": ""
+    },
+    {
+      "code": "FL",
+      "title": "Flow — processes and external systems",
+      "per": "workflow",
+      "gate": null,
+      "intro": "Once per confirmed workflow, including every record lifecycle from R.10. Integrations are Flow instances (FL.X questions)."
+    },
+    {
+      "code": "FLX",
+      "title": "Flow — external systems",
+      "per": "integration",
+      "gate": null,
+      "intro": "Once per confirmed external system (incl. 'Public API' if A.11 = yes)."
+    },
+    {
+      "code": "N",
+      "title": "Notify",
+      "per": "notification",
+      "gate": null,
+      "intro": "Once per confirmed notification, including those created by FL.11 and RP.08 (those arrive pre-filled and only ask what is still empty)."
+    },
+    {
+      "code": "RP",
+      "title": "Reports",
+      "per": "report",
+      "gate": null,
+      "intro": ""
+    },
+    {
+      "code": "B",
+      "title": "Billing",
+      "per": null,
+      "gate": {
+        "q": "A.09",
+        "op": "eq",
+        "value": "yes"
+      },
+      "intro": ""
+    },
+    {
+      "code": "T",
+      "title": "Organisations (tenants)",
+      "per": null,
+      "gate": {
+        "q": "A.08",
+        "op": "eq",
+        "value": "multiple"
+      },
+      "intro": ""
+    },
+    {
+      "code": "D",
+      "title": "Deviations",
+      "per": "deviation",
+      "gate": {
+        "q": "A.14",
+        "op": "min_items",
+        "value": 1
+      },
+      "intro": ""
+    },
+    {
+      "code": "Z",
+      "title": "Read-back",
+      "per": null,
+      "gate": null,
+      "intro": "Generated by the script from earlier answers. The owner confirms or corrects; nothing new is asked."
+    }
+  ],
+  "questions": [
+    {
+      "id": "0.01",
+      "part": "0",
+      "prompt": "How involved do you want to be? Full (you decide everything), guided (you decide the product things, I'll propose the rest and you confirm), or hands-off (you answer the essentials, I'll fill the rest with standard behaviour and show you the list at the end).",
+      "type": "choice",
+      "options": [
+        "full",
+        "guided",
+        "hands-off"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "engine.involvement"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "full",
+          "guided",
+          "hands-off"
+        ]
+      },
+      "feeds": [],
+      "notes": "Sets how many derived/defaulted values are read back for confirmation. Never changes the spec's content.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.01",
+      "part": "A",
+      "prompt": "What are you trying to build? Describe it like you're explaining it to a friend.",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "product.description"
+      ],
+      "done": {
+        "rule": "non_empty_and_extracts",
+        "must_extract": [
+          "records"
+        ]
+      },
+      "feeds": [],
+      "notes": "Done only when at least one record noun can be extracted. Feeds the A.15 inventory proposal.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.02",
+      "part": "A",
+      "prompt": "What should people be able to accomplish with it?",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "product.goals"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.03",
+      "part": "A",
+      "prompt": "Who is it for?",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "product.audience"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.04",
+      "part": "A",
+      "prompt": "How will you know it's working — what does success look like to you?",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "product.success_definition"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.05",
+      "part": "A",
+      "prompt": "What is the app called?",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "product.name"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": "Dropped in the handoff's final pass. It appears on every screen and email; two builders would invent two names.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.06",
+      "part": "A",
+      "prompt": "Where will people use it — in a web browser, as a phone app (iOS/Android), both, or as a desktop program?",
+      "type": "multi",
+      "options": [
+        "web",
+        "ios",
+        "android",
+        "desktop"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "client.platforms"
+      ],
+      "done": {
+        "rule": "subset_min1",
+        "options": [
+          "web",
+          "ios",
+          "android",
+          "desktop"
+        ]
+      },
+      "feeds": [],
+      "notes": "Never asked in the handoff. The single biggest divergence between two builders.",
+      "required": true,
+      "creates": null,
+      "widget": "icon_multi"
+    },
+    {
+      "id": "A.07",
+      "part": "A",
+      "prompt": "Do people need to log in / have accounts?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.required"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.08",
+      "part": "A",
+      "prompt": "Is this for one organisation/user base, or for many separate organisations that must never see each other's data?",
+      "type": "choice",
+      "options": [
+        "single",
+        "multiple"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "tenancy.mode"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "single",
+          "multiple"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.09",
+      "part": "A",
+      "prompt": "Does this involve charging people money?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "billing.required"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.10",
+      "part": "A",
+      "prompt": "Which parts, if any, can be seen without logging in? (e.g. a public landing page, a public booking form, nothing)",
+      "type": "list",
+      "options": null,
+      "gate": {
+        "q": "A.07",
+        "op": "eq",
+        "value": "yes"
+      },
+      "per": null,
+      "fills": [
+        "client.public_surfaces"
+      ],
+      "done": {
+        "rule": "min_items",
+        "n": 0
+      },
+      "feeds": [],
+      "notes": "'Nothing' is a valid answer and must be recorded explicitly.",
+      "required": true,
+      "creates": null,
+      "widget": "screen_map"
+    },
+    {
+      "id": "A.11",
+      "part": "A",
+      "prompt": "Do other systems need to push data into, or pull data out of, your app automatically (an API, webhooks)?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "integration.public_api_required"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": {
+        "kind": "integration",
+        "name": "Public API",
+        "when": "yes"
+      },
+      "widget": null
+    },
+    {
+      "id": "A.12",
+      "part": "A",
+      "prompt": "Is there existing data that has to be brought in before launch (a spreadsheet, an old system)? If so, what and where from?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "data.import_required",
+        "data.import_sources"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "required"
+        ],
+        "if": {
+          "required": "yes",
+          "then_keys": [
+            "sources"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.13",
+      "part": "A",
+      "prompt": "What country are most of your users in, and do you need more than one language?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "locale.primary_region",
+        "locale.languages"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "region",
+          "languages"
+        ]
+      },
+      "feeds": [],
+      "notes": "Drives date/number/currency display format and default timezone. Never asked in the handoff.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "A.14",
+      "part": "A",
+      "prompt": "Is there anything you want to work differently from how a typical app of this kind normally works?",
+      "type": "list",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "deviation.flags"
+      ],
+      "done": {
+        "rule": "min_items",
+        "n": 0
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": {
+        "kind": "deviation",
+        "each": true
+      },
+      "widget": null
+    },
+    {
+      "id": "A.15",
+      "part": "A",
+      "prompt": "Here's what I understood you'll need — screens, records, roles, forms, notifications, file types, reports, workflows, external systems. Did I miss anything, or get anything wrong? (confirm each list)",
+      "type": "confirm",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "inventory.screens",
+        "inventory.records",
+        "inventory.roles",
+        "inventory.forms",
+        "inventory.notifications",
+        "inventory.file_types",
+        "inventory.reports",
+        "inventory.workflows",
+        "inventory.integrations"
+      ],
+      "done": {
+        "rule": "confirmed_lists",
+        "lists": [
+          "screens",
+          "records",
+          "roles",
+          "forms",
+          "notifications",
+          "file_types",
+          "reports",
+          "workflows",
+          "integrations"
+        ]
+      },
+      "feeds": [],
+      "notes": "Engine proposes from A.01–A.04; owner corrects. Each confirmed item instantiates its part. Empty lists are allowed but must be confirmed empty.",
+      "required": true,
+      "creates": null,
+      "widget": "card_board"
+    },
+    {
+      "id": "A.16",
+      "part": "A",
+      "prompt": "Is there one role that can always do everything, no matter what? If so, which one?",
+      "type": "choice",
+      "options": [
+        "<a confirmed role>",
+        "none"
+      ],
+      "gate": {
+        "q": "A.07",
+        "op": "eq",
+        "value": "yes"
+      },
+      "per": null,
+      "fills": [
+        "roles.super_role"
+      ],
+      "done": {
+        "rule": "role_or_none"
+      },
+      "feeds": [],
+      "notes": "That role is skipped in every per-record/per-workflow authority question and granted everything. Removes dozens of repeat answers.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "C.01",
+      "part": "C",
+      "prompt": "Are there other apps, brands or products whose look and feel you want this to resemble — or specifically avoid?",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "visual.references"
+      ],
+      "done": {
+        "rule": "non_empty_or_none"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "style_board"
+    },
+    {
+      "id": "C.02",
+      "part": "C",
+      "prompt": "In three words, how should this feel to use? (e.g. playful, fast, minimal / serious, trustworthy, dense)",
+      "type": "list",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "visual.tone"
+      ],
+      "done": {
+        "rule": "min_items",
+        "n": 3
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "chip_select"
+    },
+    {
+      "id": "C.03",
+      "part": "C",
+      "prompt": "How much should be visible at once — spacious and simple, balanced, or dense and information-rich?",
+      "type": "choice",
+      "options": [
+        "spacious",
+        "balanced",
+        "dense"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "visual.density"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "spacious",
+          "balanced",
+          "dense"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "visual_abc"
+    },
+    {
+      "id": "C.04",
+      "part": "C",
+      "prompt": "Is there a primary colour, logo or existing brand material to build from? If not, pick a mark from the starter library (packages/builder/assets/logos/manifest.json) or leave it to be designed later.",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "visual.brand_assets"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "mode"
+        ],
+        "one_of": {
+          "mode": [
+            "provided",
+            "premade",
+            "design_for_me"
+          ]
+        },
+        "if_any": {
+          "provided": [
+            "path"
+          ],
+          "premade": [
+            "logo_id"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": "'premade' exists so an app never ships with a blank or broken logo slot while a real one is pending -- the customer picks a real, named starter mark rather than the app defaulting to nothing. 'provided' is validated against the starter library's own manifest.spec (format, aspect ratio, size, background) by the Builder, which refuses a file that doesn't meet it rather than resizing or reinterpreting it.",
+      "required": true,
+      "creates": null,
+      "widget": "brand_kit"
+    },
+    {
+      "id": "C.05",
+      "part": "C",
+      "prompt": "On phones, should it be a simplified version of the big-screen layout, or does anything need to work completely differently on mobile?",
+      "type": "structured",
+      "options": null,
+      "gate": {
+        "q": "A.06",
+        "op": "includes_any",
+        "value": [
+          "web",
+          "desktop"
+        ]
+      },
+      "per": null,
+      "fills": [
+        "client.mobile_behaviour"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "mode"
+        ],
+        "one_of": {
+          "mode": [
+            "simplified",
+            "different"
+          ]
+        },
+        "if": {
+          "mode": "different",
+          "then_keys": [
+            "what"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": "Only asked if there is a big-screen platform to simplify from.",
+      "required": true,
+      "creates": null,
+      "widget": "visual_abc"
+    },
+    {
+      "id": "C.06",
+      "part": "C",
+      "prompt": "After logging in, which screen does each role land on first?",
+      "type": "structured",
+      "options": null,
+      "gate": {
+        "q": "A.07",
+        "op": "eq",
+        "value": "yes"
+      },
+      "per": null,
+      "fills": [
+        "client.landing_screen_per_role"
+      ],
+      "done": {
+        "rule": "map_complete",
+        "keys_from": "inventory.roles",
+        "values_from": "inventory.screens"
+      },
+      "feeds": [],
+      "notes": "Handoff classed 'what happens after login' as a system default. It is product-specific: dashboard vs list vs record. Two builders diverge.",
+      "required": true,
+      "creates": null,
+      "widget": "screen_picker"
+    },
+    {
+      "id": "C.07",
+      "part": "C",
+      "prompt": "Here is the main menu I'd build from your screens, in this order: [derived]. Reorder, rename or hide anything?",
+      "type": "confirm",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "client.navigation"
+      ],
+      "done": {
+        "rule": "confirmed"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "drag_order"
+    },
+    {
+      "id": "AU.01",
+      "part": "AU",
+      "prompt": "How do people get an account — sign up themselves publicly, get invited by someone, or get created by an admin? (any that apply)",
+      "type": "multi",
+      "options": [
+        "public",
+        "invited",
+        "admin_created"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.registration_modes"
+      ],
+      "done": {
+        "rule": "subset_min1",
+        "options": [
+          "public",
+          "invited",
+          "admin_created"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "icon_multi"
+    },
+    {
+      "id": "AU.02",
+      "part": "AU",
+      "prompt": "What information do you need from someone when they register? (each item: what it is, and is it required)",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.registration_fields"
+      ],
+      "done": {
+        "rule": "fields_list",
+        "min": 1,
+        "type_options": "FIELD_TYPES"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "form_builder"
+    },
+    {
+      "id": "AU.03",
+      "part": "AU",
+      "prompt": "Must they verify their email address before they can use the app?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.email_verification"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "AU.04",
+      "part": "AU",
+      "prompt": "Which login methods? (any that apply)",
+      "type": "multi",
+      "options": [
+        "password",
+        "google",
+        "microsoft",
+        "apple",
+        "magic_link"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.methods"
+      ],
+      "done": {
+        "rule": "subset_min1",
+        "options": [
+          "password",
+          "google",
+          "microsoft",
+          "apple",
+          "magic_link"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "login_preview"
+    },
+    {
+      "id": "AU.05",
+      "part": "AU",
+      "prompt": "When someone signs up by themselves, which role do they get?",
+      "type": "choice",
+      "options": [
+        "<a confirmed role>"
+      ],
+      "gate": {
+        "q": "AU.01",
+        "op": "includes",
+        "value": "public"
+      },
+      "per": null,
+      "fills": [
+        "auth.default_role"
+      ],
+      "done": {
+        "rule": "role"
+      },
+      "feeds": [],
+      "notes": "Never asked in the handoff. Without it one builder makes new signups Members, another makes them Admins.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "AU.06",
+      "part": "AU",
+      "prompt": "Who can invite people, and which role does an invited person get by default?",
+      "type": "structured",
+      "options": null,
+      "gate": {
+        "q": "AU.01",
+        "op": "includes",
+        "value": "invited"
+      },
+      "per": null,
+      "fills": [
+        "auth.invite_authority",
+        "auth.invite_default_role"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "inviters",
+          "default_role"
+        ],
+        "roles_keys": [
+          "inviters",
+          "default_role"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "AU.07",
+      "part": "AU",
+      "prompt": "Is two-factor authentication required — for nobody, admins only, or everyone? And by which method — authenticator app, SMS code, or either?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.mfa_scope",
+        "auth.mfa_method"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "scope",
+          "method"
+        ],
+        "one_of": {
+          "scope": [
+            "nobody",
+            "admins",
+            "everyone"
+          ],
+          "method": [
+            "app",
+            "sms",
+            "either",
+            "n/a"
+          ]
+        },
+        "if": {
+          "scope": "nobody",
+          "then_value": {
+            "method": "n/a"
+          }
+        }
+      },
+      "feeds": [],
+      "notes": "Handoff's classification said MFA method stays a closed question; the final interview lost it.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "AU.08",
+      "part": "AU",
+      "prompt": "After how many failed login attempts should an account be temporarily locked, and for how long? ('never lock' is a valid answer)",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.lockout_attempts",
+        "auth.lockout_duration"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "attempts",
+          "duration"
+        ],
+        "or_value": "never"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "AU.09",
+      "part": "AU",
+      "prompt": "Can one person be logged in on more than one device at the same time?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.multi_device"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "AU.10",
+      "part": "AU",
+      "prompt": "How long can someone stay signed in before being asked to sign in again?",
+      "type": "duration",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.session_length"
+      ],
+      "done": {
+        "rule": "duration_or_never"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "AU.11",
+      "part": "AU",
+      "prompt": "Can accounts be suspended? If so, who can do it, and does anything trigger it automatically (e.g. unpaid bill)?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.suspension_allowed",
+        "auth.suspension_by",
+        "auth.suspension_auto_triggers"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "allowed"
+        ],
+        "if": {
+          "allowed": "yes",
+          "then_keys": [
+            "by",
+            "auto_triggers"
+          ]
+        },
+        "roles_keys": [
+          "by"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "AU.12",
+      "part": "AU",
+      "prompt": "Can accounts be deleted? By whom — the person themselves, an admin, or both? And what happens to their data: kept, anonymised, or fully erased?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.deletion_allowed",
+        "auth.deletion_by",
+        "auth.deletion_data_policy"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "allowed"
+        ],
+        "if": {
+          "allowed": "yes",
+          "then_keys": [
+            "by",
+            "data"
+          ]
+        },
+        "one_of": {
+          "by": [
+            "self",
+            "admin",
+            "both"
+          ],
+          "data": [
+            "kept",
+            "anonymised",
+            "erased"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "AU.13",
+      "part": "AU",
+      "prompt": "Who, if anyone, may reset someone else's password on their behalf?",
+      "type": "roles",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "auth.reset_others_by"
+      ],
+      "done": {
+        "rule": "roles_or_nobody"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "AU.14",
+      "part": "AU",
+      "prompt": "Must people accept terms of service / a privacy policy when they sign up? Do those documents exist already?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "legal.terms_required",
+        "legal.terms_status"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "required"
+        ],
+        "if": {
+          "required": "yes",
+          "then_keys": [
+            "status"
+          ]
+        },
+        "one_of": {
+          "status": [
+            "have_them",
+            "need_drafting"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "P.00",
+      "part": "P",
+      "prompt": "Can one person hold more than one role at the same time?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "roles.multi_role_per_person"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": "Asked once, not per role. Decides single-select vs multi-select role assignment — a visible difference.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "P.01",
+      "part": "P",
+      "prompt": "In one sentence, who is a '${role}' — what kind of person holds this role?",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": "role",
+      "fills": [
+        "role.{r}.description"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": "Context only. Never a build-spec source by itself.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "P.02",
+      "part": "P",
+      "prompt": "Can a '${role}' see other people's private information anywhere in the app (personal settings, contact details, private notes)?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": "role",
+      "fills": [
+        "role.{r}.sees_private_data"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "P.03",
+      "part": "P",
+      "prompt": "Can a '${role}' see or change billing and payment details?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": {
+        "q": "A.09",
+        "op": "eq",
+        "value": "yes"
+      },
+      "per": "role",
+      "fills": [
+        "role.{r}.billing_access"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "P.04",
+      "part": "P",
+      "prompt": "Who can give someone the '${role}' role, or take it away?",
+      "type": "roles",
+      "options": null,
+      "gate": null,
+      "per": "role",
+      "fills": [
+        "role.{r}.assignable_by"
+      ],
+      "done": {
+        "rule": "roles_min1"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "R.01",
+      "part": "R",
+      "prompt": "What does a '${record}' represent, in one sentence?",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.purpose"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "R.02",
+      "part": "R",
+      "prompt": "What information does a '${record}' store? For each item: what kind is it, is it required, must it be unique, and (for a list choice) what are the options / (for a link) which record does it link to?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.fields"
+      ],
+      "done": {
+        "rule": "fields_list",
+        "min": 1,
+        "type_options": "FIELD_TYPES",
+        "per_field_required_keys": [
+          "name",
+          "type",
+          "required",
+          "unique"
+        ],
+        "per_field_conditional": {
+          "one_choice": [
+            "options"
+          ],
+          "multi_choice": [
+            "options"
+          ],
+          "link": [
+            "target_record"
+          ],
+          "other": [
+            "custom_rule"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": "Handoff never asked for choice options, uniqueness, or the link target. Each one makes two builders diverge.",
+      "required": true,
+      "creates": null,
+      "widget": "form_builder"
+    },
+    {
+      "id": "R.03",
+      "part": "R",
+      "prompt": "Which of those fields is the '${record}'s name — the thing shown in lists, links and messages?",
+      "type": "choice",
+      "options": [
+        "<a field from R.02>"
+      ],
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.title_field"
+      ],
+      "done": {
+        "rule": "field_of",
+        "from": "R.02"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "tap_on_preview"
+    },
+    {
+      "id": "R.04",
+      "part": "R",
+      "prompt": "Does a '${record}' need a human-readable number or code (like INV-0001)? If so, what format?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.human_id"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "needed"
+        ],
+        "if": {
+          "needed": "yes",
+          "then_keys": [
+            "format"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "R.05",
+      "part": "R",
+      "prompt": "Who can VIEW a '${record}'? For each role: all of them, only their own, only ones linked to something they belong to (say what), or public (no login)?",
+      "type": "roles_scoped",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.access.view"
+      ],
+      "done": {
+        "rule": "roles_scoped_min1",
+        "scopes": [
+          "all",
+          "own",
+          "linked",
+          "public"
+        ],
+        "if_scope": {
+          "linked": [
+            "via"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": "The handoff's audit resolved the Manager example with a 'their team' scope, then the interview only offered all/own. 'linked' restores it and must name the relation.",
+      "required": true,
+      "creates": null,
+      "widget": "access_matrix"
+    },
+    {
+      "id": "R.06",
+      "part": "R",
+      "prompt": "Who can CREATE a '${record}'?",
+      "type": "roles",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.access.create"
+      ],
+      "done": {
+        "rule": "roles_min1"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "access_matrix"
+    },
+    {
+      "id": "R.07",
+      "part": "R",
+      "prompt": "Who can EDIT a '${record}'? For each role: any, only their own, or only linked ones?",
+      "type": "roles_scoped",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.access.edit"
+      ],
+      "done": {
+        "rule": "roles_scoped_min1",
+        "scopes": [
+          "all",
+          "own",
+          "linked"
+        ],
+        "if_scope": {
+          "linked": [
+            "via"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "access_matrix"
+    },
+    {
+      "id": "R.08",
+      "part": "R",
+      "prompt": "Who can DELETE a '${record}'? For each role: any, only their own, or only linked ones? ('nobody' is valid)",
+      "type": "roles_scoped",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.access.delete"
+      ],
+      "done": {
+        "rule": "roles_scoped_min1",
+        "scopes": [
+          "all",
+          "own",
+          "linked"
+        ],
+        "if_scope": {
+          "linked": [
+            "via"
+          ]
+        },
+        "or_value": "nobody"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "access_matrix"
+    },
+    {
+      "id": "R.09",
+      "part": "R",
+      "prompt": "What makes a '${record}' someone's OWN — the person who created it, or the person named in a particular field (which one)?",
+      "type": "structured",
+      "options": null,
+      "gate": {
+        "any": [
+          {
+            "q": "R.05",
+            "op": "scope_includes",
+            "value": "own"
+          },
+          {
+            "q": "R.07",
+            "op": "scope_includes",
+            "value": "own"
+          },
+          {
+            "q": "R.08",
+            "op": "scope_includes",
+            "value": "own"
+          }
+        ]
+      },
+      "per": "record",
+      "fills": [
+        "record.{r}.ownership_rule"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "basis"
+        ],
+        "one_of": {
+          "basis": [
+            "creator",
+            "field"
+          ]
+        },
+        "if": {
+          "basis": "field",
+          "then_keys": [
+            "field"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": "Never asked in the handoff. created_by vs assigned_to is the classic two-builder split.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "R.10",
+      "part": "R",
+      "prompt": "Does a '${record}' move through stages over its life (e.g. Draft → Active → Archived)? If so, name them in order.",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.has_lifecycle"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "has"
+        ],
+        "if": {
+          "has": "yes",
+          "then_keys": [
+            "stages"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": {
+        "kind": "workflow",
+        "name": "${record} lifecycle",
+        "when": "yes"
+      },
+      "widget": "pipeline_editor"
+    },
+    {
+      "id": "R.11",
+      "part": "R",
+      "prompt": "Is a '${record}' connected to any other record? For each: which record, is it one-to-many or many-to-many, and must the link always exist?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.relations"
+      ],
+      "done": {
+        "rule": "relations_list",
+        "min": 0,
+        "keys": [
+          "target",
+          "cardinality",
+          "required"
+        ],
+        "one_of": {
+          "cardinality": [
+            "one_to_many",
+            "many_to_many"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "link_diagram"
+    },
+    {
+      "id": "R.12",
+      "part": "R",
+      "prompt": "When a '${record}' is deleted, what happens to the things connected to it — deleted too, kept but unlinked, or deletion blocked until they're dealt with?",
+      "type": "choice",
+      "options": [
+        "delete_too",
+        "keep_unlinked",
+        "block"
+      ],
+      "gate": {
+        "q": "R.11",
+        "op": "min_items",
+        "value": 1
+      },
+      "per": "record",
+      "fills": [
+        "record.{r}.on_delete"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "delete_too",
+          "keep_unlinked",
+          "block"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "R.13",
+      "part": "R",
+      "prompt": "Should old or inactive '${record}'s be archivable (hidden but kept) rather than deleted?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.archivable"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "R.14",
+      "part": "R",
+      "prompt": "How long should '${record}' data be kept before it is permanently removed — forever, or a set time after it's archived/closed?",
+      "type": "duration",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.retention"
+      ],
+      "done": {
+        "rule": "duration_or_forever"
+      },
+      "feeds": [
+        "OPS"
+      ],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "R.15",
+      "part": "R",
+      "prompt": "Besides create/edit/delete and moving through stages, are there any other buttons people need on a '${record}' (e.g. duplicate, send, print, mark as paid)? For each: who can press it, what it does, and where the result shows up.",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "record",
+      "fills": [
+        "record.{r}.custom_actions"
+      ],
+      "done": {
+        "rule": "actions_list",
+        "min": 0,
+        "keys": [
+          "name",
+          "who",
+          "effect",
+          "result_location"
+        ],
+        "roles_keys": [
+          "who"
+        ]
+      },
+      "feeds": [],
+      "notes": "This is where every non-CRUD button gets its number. Handoff derived all actions from CRUD + transitions, so 'Duplicate' could never exist.",
+      "required": true,
+      "creates": null,
+      "widget": "tap_on_preview"
+    },
+    {
+      "id": "F.01",
+      "part": "F",
+      "prompt": "What is the '${form}' for, and who fills it out?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "form",
+      "fills": [
+        "form.{f}.purpose",
+        "form.{f}.fillers"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "purpose",
+          "fillers"
+        ],
+        "roles_keys": [
+          "fillers"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "F.02",
+      "part": "F",
+      "prompt": "Which record does it create or edit? And does it collect anything that is NOT stored on that record? (list those extra items with their kind)",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "form",
+      "fills": [
+        "form.{f}.target_record",
+        "form.{f}.extra_fields"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "target"
+        ],
+        "optional_keys": [
+          "extra_fields"
+        ],
+        "fields_list_key": "extra_fields"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "form_builder"
+    },
+    {
+      "id": "F.03",
+      "part": "F",
+      "prompt": "Does any field only appear depending on another answer? (which field, depends on which answer)",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "form",
+      "fills": [
+        "form.{f}.conditional_fields"
+      ],
+      "done": {
+        "rule": "conditional_list",
+        "min": 0,
+        "keys": [
+          "field",
+          "shown_when"
+        ]
+      },
+      "feeds": [],
+      "notes": "Handoff classified this as 'asked only if the owner indicates' but had no prompt that could surface it.",
+      "required": true,
+      "creates": null,
+      "widget": "form_builder"
+    },
+    {
+      "id": "F.04",
+      "part": "F",
+      "prompt": "Can someone save it as a draft and finish later?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": "form",
+      "fills": [
+        "form.{f}.draft_save"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "F.05",
+      "part": "F",
+      "prompt": "Right after a successful submit, where should they end up?",
+      "type": "choice",
+      "options": [
+        "open_the_record",
+        "back_to_list",
+        "stay_with_message",
+        "another_screen"
+      ],
+      "gate": null,
+      "per": "form",
+      "fills": [
+        "form.{f}.on_success"
+      ],
+      "done": {
+        "rule": "one_of",
+        "if_value": {
+          "another_screen": [
+            "screen"
+          ]
+        },
+        "options": [
+          "open_the_record",
+          "back_to_list",
+          "stay_with_message",
+          "another_screen"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "visual_abc"
+    },
+    {
+      "id": "FI.01",
+      "part": "FI",
+      "prompt": "What is a '${file_type}' used for, and which record is it attached to?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "file_type",
+      "fills": [
+        "file.{ft}.purpose",
+        "file.{ft}.parent_record"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "purpose",
+          "parent"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FI.02",
+      "part": "FI",
+      "prompt": "One per record, or many?",
+      "type": "choice",
+      "options": [
+        "one",
+        "many"
+      ],
+      "gate": null,
+      "per": "file_type",
+      "fills": [
+        "file.{ft}.cardinality"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "one",
+          "many"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FI.03",
+      "part": "FI",
+      "prompt": "Who can upload it, and who can view/download it? ('public' allowed for viewing)",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "file_type",
+      "fills": [
+        "file.{ft}.uploaders",
+        "file.{ft}.viewers"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "uploaders",
+          "viewers"
+        ],
+        "roles_keys": [
+          "uploaders",
+          "viewers"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FI.04",
+      "part": "FI",
+      "prompt": "What kind of file — image, document, spreadsheet, video/audio, or something else (say which formats)?",
+      "type": "choice",
+      "options": [
+        "image",
+        "document",
+        "spreadsheet",
+        "media",
+        "other"
+      ],
+      "gate": null,
+      "per": "file_type",
+      "fills": [
+        "file.{ft}.category"
+      ],
+      "done": {
+        "rule": "one_of",
+        "if_value": {
+          "other": [
+            "formats"
+          ]
+        },
+        "options": [
+          "image",
+          "document",
+          "spreadsheet",
+          "media",
+          "other"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "icon_pick"
+    },
+    {
+      "id": "FI.05",
+      "part": "FI",
+      "prompt": "Roughly how large might these get? (e.g. 10 MB, 500 MB)",
+      "type": "number",
+      "options": null,
+      "gate": null,
+      "per": "file_type",
+      "fills": [
+        "file.{ft}.max_size_mb"
+      ],
+      "done": {
+        "rule": "number"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FI.06",
+      "part": "FI",
+      "prompt": "If someone uploads a new version, keep the old one (history) or replace it?",
+      "type": "choice",
+      "options": [
+        "keep_history",
+        "replace"
+      ],
+      "gate": null,
+      "per": "file_type",
+      "fills": [
+        "file.{ft}.versioning"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "keep_history",
+          "replace"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FI.07",
+      "part": "FI",
+      "prompt": "When the record it belongs to is deleted, delete the file too?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": "file_type",
+      "fills": [
+        "file.{ft}.cascade_delete"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FL.01",
+      "part": "FL",
+      "prompt": "What starts '${workflow}' — a person doing something (who, doing what), something happening automatically (what), or a schedule (when)?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.trigger"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "kind"
+        ],
+        "one_of": {
+          "kind": [
+            "person",
+            "event",
+            "schedule"
+          ]
+        },
+        "if_any": {
+          "person": [
+            "who",
+            "action"
+          ],
+          "event": [
+            "event"
+          ],
+          "schedule": [
+            "schedule"
+          ]
+        },
+        "roles_keys": [
+          "who"
+        ]
+      },
+      "feeds": [
+        "OPS"
+      ],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FL.02",
+      "part": "FL",
+      "prompt": "What are its stages, in order? Which is the starting stage, and which stage(s) mean it's finished?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.stages"
+      ],
+      "done": {
+        "rule": "stages",
+        "min": 2,
+        "keys": [
+          "stages",
+          "initial",
+          "terminal"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "pipeline_editor"
+    },
+    {
+      "id": "FL.03",
+      "part": "FL",
+      "prompt": "For each move from one stage to the next: is it done by a person (which roles) or does it happen automatically when something happens (what)?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.transitions"
+      ],
+      "done": {
+        "rule": "per_transition",
+        "keys": [
+          "from",
+          "to",
+          "mover"
+        ],
+        "mover_one_of": [
+          "roles",
+          "automatic"
+        ],
+        "if_mover": {
+          "roles": [
+            "roles"
+          ],
+          "automatic": [
+            "event"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": "Handoff only allowed a person as mover. 'Order becomes Paid when payment arrives' had no home.",
+      "required": true,
+      "creates": null,
+      "widget": "pipeline_editor"
+    },
+    {
+      "id": "FL.04",
+      "part": "FL",
+      "prompt": "Must anything be true before a move is allowed (e.g. can't ship without an address)? For each move: the condition, or none.",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.preconditions"
+      ],
+      "done": {
+        "rule": "per_transition_optional",
+        "keys": [
+          "from",
+          "to",
+          "condition"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FL.05",
+      "part": "FL",
+      "prompt": "Does any stage need someone's approval before it can move on? Which stage, and which roles approve?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.approvals"
+      ],
+      "done": {
+        "rule": "approvals_list",
+        "min": 0,
+        "keys": [
+          "stage",
+          "approvers"
+        ],
+        "roles_keys": [
+          "approvers"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "pipeline_editor"
+    },
+    {
+      "id": "FL.06",
+      "part": "FL",
+      "prompt": "If an approver says no, which stage does it go back to, and can it be resubmitted?",
+      "type": "structured",
+      "options": null,
+      "gate": {
+        "q": "FL.05",
+        "op": "min_items",
+        "value": 1
+      },
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.on_reject"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "back_to",
+          "resubmit"
+        ]
+      },
+      "feeds": [],
+      "notes": "Handoff locked 'standard advance/revert' as a default. Back to previous vs back to start vs terminal Rejected are three different products.",
+      "required": true,
+      "creates": null,
+      "widget": "pipeline_editor"
+    },
+    {
+      "id": "FL.07",
+      "part": "FL",
+      "prompt": "Can it be cancelled? By whom, and from which stages?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.cancel"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "allowed"
+        ],
+        "if": {
+          "allowed": "yes",
+          "then_keys": [
+            "by",
+            "from_stages"
+          ]
+        },
+        "roles_keys": [
+          "by"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "pipeline_editor"
+    },
+    {
+      "id": "FL.08",
+      "part": "FL",
+      "prompt": "Once it reaches a finished stage, what should happen? (e.g. nothing, lock it, send something, create something)",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.on_complete"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FL.09",
+      "part": "FL",
+      "prompt": "From which stage onward, if any, should the record become read-only?",
+      "type": "choice",
+      "options": [
+        "<a stage>",
+        "never"
+      ],
+      "gate": null,
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.readonly_from"
+      ],
+      "done": {
+        "rule": "stage_or_never",
+        "from": "FL.02"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "tap_on_preview"
+    },
+    {
+      "id": "FL.10",
+      "part": "FL",
+      "prompt": "Does any stage have a time limit? Which stage, how long, and what happens when it runs out?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.timeouts"
+      ],
+      "done": {
+        "rule": "timeouts_list",
+        "min": 0,
+        "keys": [
+          "stage",
+          "duration",
+          "then"
+        ]
+      },
+      "feeds": [
+        "OPS"
+      ],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "pipeline_editor"
+    },
+    {
+      "id": "FL.11",
+      "part": "FL",
+      "prompt": "Should anyone be told when it moves stage? Which moves, who, and by which channel?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "workflow",
+      "fills": [
+        "workflow.{w}.stage_notifications"
+      ],
+      "done": {
+        "rule": "notify_list",
+        "min": 0,
+        "keys": [
+          "transition",
+          "recipients",
+          "channels"
+        ]
+      },
+      "feeds": [],
+      "notes": "Owners never list 'tell the assignee on stage change' as a notification in A.15. Asked here so it exists.",
+      "required": true,
+      "creates": {
+        "kind": "notification",
+        "each": true
+      },
+      "widget": null
+    },
+    {
+      "id": "FLX.01",
+      "part": "FLX",
+      "prompt": "Why do you need '${integration}' — what is it for?",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": "integration",
+      "fills": [
+        "integration.{i}.purpose"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FLX.02",
+      "part": "FLX",
+      "prompt": "What does your app send to it, and what does it get back?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "integration",
+      "fills": [
+        "integration.{i}.sends",
+        "integration.{i}.receives"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "sends",
+          "receives"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FLX.03",
+      "part": "FLX",
+      "prompt": "When does that exchange happen — when something happens in your app (what), on a schedule (when), or when someone presses a button (who)?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "integration",
+      "fills": [
+        "integration.{i}.timing"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "kind"
+        ],
+        "one_of": {
+          "kind": [
+            "event",
+            "schedule",
+            "manual"
+          ]
+        },
+        "if_any": {
+          "event": [
+            "event"
+          ],
+          "schedule": [
+            "schedule"
+          ],
+          "manual": [
+            "who"
+          ]
+        }
+      },
+      "feeds": [
+        "OPS"
+      ],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FLX.04",
+      "part": "FLX",
+      "prompt": "Is it one connection for the whole organisation, or does each person connect their own account?",
+      "type": "choice",
+      "options": [
+        "organisation",
+        "per_user"
+      ],
+      "gate": null,
+      "per": "integration",
+      "fills": [
+        "integration.{i}.connection_scope"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "organisation",
+          "per_user"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "FLX.05",
+      "part": "FLX",
+      "prompt": "If '${integration}' is unavailable, what should the person see — a blocking message, nothing (it quietly retries later), or the app carries on without it?",
+      "type": "choice",
+      "options": [
+        "block_with_message",
+        "queue_silently",
+        "continue_without"
+      ],
+      "gate": null,
+      "per": "integration",
+      "fills": [
+        "integration.{i}.on_unavailable"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "block_with_message",
+          "queue_silently",
+          "continue_without"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "N.01",
+      "part": "N",
+      "prompt": "What sends '${notification}' — something happening (what), a time relative to a date on a record (which date, how long before/after), or a fixed schedule?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "notification",
+      "fills": [
+        "notification.{n}.trigger"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "kind"
+        ],
+        "one_of": {
+          "kind": [
+            "event",
+            "relative_to_date",
+            "schedule"
+          ]
+        },
+        "if_any": {
+          "event": [
+            "event"
+          ],
+          "relative_to_date": [
+            "record",
+            "date_field",
+            "offset"
+          ],
+          "schedule": [
+            "schedule"
+          ]
+        }
+      },
+      "feeds": [
+        "OPS"
+      ],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "N.02",
+      "part": "N",
+      "prompt": "Who receives it — roles, the record's owner, a person named in a field on the record (which), or someone else?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "notification",
+      "fills": [
+        "notification.{n}.recipients"
+      ],
+      "done": {
+        "rule": "recipients",
+        "min": 1,
+        "kinds": [
+          "roles",
+          "owner",
+          "field",
+          "custom"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "N.03",
+      "part": "N",
+      "prompt": "Which channels — email, SMS, push, in-app? (any)",
+      "type": "multi",
+      "options": [
+        "email",
+        "sms",
+        "push",
+        "in_app"
+      ],
+      "gate": null,
+      "per": "notification",
+      "fills": [
+        "notification.{n}.channels"
+      ],
+      "done": {
+        "rule": "subset_min1",
+        "options": [
+          "email",
+          "sms",
+          "push",
+          "in_app"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "icon_multi"
+    },
+    {
+      "id": "N.04",
+      "part": "N",
+      "prompt": "What should the recipient understand or do after reading it? (exact wording is drafted at build time and sent to you to approve)",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": "notification",
+      "fills": [
+        "notification.{n}.intent"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "message_preview"
+    },
+    {
+      "id": "N.05",
+      "part": "N",
+      "prompt": "Can the recipient switch this one off?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": "notification",
+      "fills": [
+        "notification.{n}.opt_out"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "RP.01",
+      "part": "RP",
+      "prompt": "What question does '${report}' answer for the person reading it?",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": "report",
+      "fills": [
+        "report.{rp}.question"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "RP.02",
+      "part": "RP",
+      "prompt": "Who can view it?",
+      "type": "roles",
+      "options": null,
+      "gate": null,
+      "per": "report",
+      "fills": [
+        "report.{rp}.viewers"
+      ],
+      "done": {
+        "rule": "roles_min1"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "RP.03",
+      "part": "RP",
+      "prompt": "Is it a live screen in the app, a downloadable document, or both? And shown as a table, a chart, or both?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "report",
+      "fills": [
+        "report.{rp}.form"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "delivery",
+          "shape"
+        ],
+        "one_of": {
+          "delivery": [
+            "screen",
+            "document",
+            "both"
+          ],
+          "shape": [
+            "table",
+            "chart",
+            "both"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "visual_abc"
+    },
+    {
+      "id": "RP.04",
+      "part": "RP",
+      "prompt": "What numbers/metrics does it show? (list them)",
+      "type": "list",
+      "options": null,
+      "gate": null,
+      "per": "report",
+      "fills": [
+        "report.{rp}.metrics"
+      ],
+      "done": {
+        "rule": "min_items",
+        "n": 1
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "RP.05",
+      "part": "RP",
+      "prompt": "For '${metric}': exactly how is it calculated — when does something count, and as at which date?",
+      "type": "text",
+      "options": null,
+      "gate": {
+        "q": "RP.04",
+        "op": "any_item_matches",
+        "value": "AMBIGUOUS_METRIC_TERMS"
+      },
+      "per": "ambiguous_metric",
+      "fills": [
+        "report.{rp}.metric.{m}.definition"
+      ],
+      "done": {
+        "rule": "non_empty"
+      },
+      "feeds": [],
+      "notes": "Fires once per metric whose name contains a flagged term. Unanswered = build blocked, never defaulted.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "RP.06",
+      "part": "RP",
+      "prompt": "What should it be filterable or grouped by, and what date range should it show by default?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "report",
+      "fills": [
+        "report.{rp}.filters",
+        "report.{rp}.default_range"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "filters",
+          "default_range"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "report_mockup"
+    },
+    {
+      "id": "RP.07",
+      "part": "RP",
+      "prompt": "Can it be exported? By whom?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "report",
+      "fills": [
+        "report.{rp}.export"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "allowed"
+        ],
+        "if": {
+          "allowed": "yes",
+          "then_keys": [
+            "by"
+          ]
+        },
+        "roles_keys": [
+          "by"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "RP.08",
+      "part": "RP",
+      "prompt": "Should it be sent to anyone automatically on a schedule? Who, how often?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "report",
+      "fills": [
+        "report.{rp}.scheduled_delivery"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "enabled"
+        ],
+        "if": {
+          "enabled": "yes",
+          "then_keys": [
+            "recipients",
+            "schedule"
+          ]
+        }
+      },
+      "feeds": [
+        "OPS"
+      ],
+      "notes": null,
+      "required": true,
+      "creates": {
+        "kind": "notification",
+        "name": "${report} scheduled delivery",
+        "when": "yes"
+      },
+      "widget": null
+    },
+    {
+      "id": "B.01",
+      "part": "B",
+      "prompt": "What are you charging for — subscriptions, one-off purchases, usage, or a mix?",
+      "type": "multi",
+      "options": [
+        "subscription",
+        "one_off",
+        "usage"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "billing.model"
+      ],
+      "done": {
+        "rule": "subset_min1",
+        "options": [
+          "subscription",
+          "one_off",
+          "usage"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "B.02",
+      "part": "B",
+      "prompt": "Who pays — each person, or a whole organisation at once?",
+      "type": "choice",
+      "options": [
+        "person",
+        "organisation"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "billing.charged_party"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "person",
+          "organisation"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "B.03",
+      "part": "B",
+      "prompt": "List your plans. For each: name, price, how often it's billed, what's included, and any limits. Is there a free plan?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "billing.plans"
+      ],
+      "done": {
+        "rule": "plans_list",
+        "min": 1,
+        "keys": [
+          "name",
+          "price",
+          "interval",
+          "included",
+          "limits"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "pricing_builder"
+    },
+    {
+      "id": "B.04",
+      "part": "B",
+      "prompt": "What currency do you bill in?",
+      "type": "text",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "billing.currency"
+      ],
+      "done": {
+        "rule": "iso_currency"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "B.05",
+      "part": "B",
+      "prompt": "Is there a free trial? How long, and is a card required to start it?",
+      "type": "structured",
+      "options": null,
+      "gate": {
+        "q": "B.01",
+        "op": "includes",
+        "value": "subscription"
+      },
+      "per": null,
+      "fills": [
+        "billing.trial"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "enabled"
+        ],
+        "if": {
+          "enabled": "yes",
+          "then_keys": [
+            "days",
+            "card_required"
+          ]
+        }
+      },
+      "feeds": [
+        "OPS"
+      ],
+      "notes": "Never asked in the handoff.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "B.06",
+      "part": "B",
+      "prompt": "What unit is counted for usage billing, and when is it charged?",
+      "type": "structured",
+      "options": null,
+      "gate": {
+        "q": "B.01",
+        "op": "includes",
+        "value": "usage"
+      },
+      "per": null,
+      "fills": [
+        "billing.usage_unit",
+        "billing.usage_charge_timing"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "unit",
+          "timing"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "B.07",
+      "part": "B",
+      "prompt": "Card only, or can customers also pay by invoice / bank transfer?",
+      "type": "choice",
+      "options": [
+        "card_only",
+        "card_and_invoice"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "billing.payment_methods"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "card_only",
+          "card_and_invoice"
+        ]
+      },
+      "feeds": [],
+      "notes": "Locked as 'card via gateway' in the handoff. Pay-by-invoice changes the product (manual reconciliation, dunning), so it is asked.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "B.08",
+      "part": "B",
+      "prompt": "If a payment fails: keep access for how many days before restricting? And after repeated failure — suspend, downgrade to free, or cancel?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "billing.on_failure"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "grace_days",
+          "after_repeated"
+        ],
+        "one_of": {
+          "after_repeated": [
+            "suspend",
+            "downgrade",
+            "cancel"
+          ]
+        }
+      },
+      "feeds": [
+        "OPS"
+      ],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "B.09",
+      "part": "B",
+      "prompt": "Can customers change plan themselves? Does an upgrade take effect immediately or at the next cycle? A downgrade?",
+      "type": "structured",
+      "options": null,
+      "gate": {
+        "q": "B.01",
+        "op": "includes",
+        "value": "subscription"
+      },
+      "per": null,
+      "fills": [
+        "billing.plan_change"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "self_serve",
+          "upgrade_timing",
+          "downgrade_timing"
+        ],
+        "one_of": {
+          "upgrade_timing": [
+            "immediate",
+            "next_cycle"
+          ],
+          "downgrade_timing": [
+            "immediate",
+            "next_cycle"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "B.10",
+      "part": "B",
+      "prompt": "Can customers cancel themselves? Do they keep access until the end of the paid period, or lose it immediately?",
+      "type": "structured",
+      "options": null,
+      "gate": {
+        "q": "B.01",
+        "op": "includes",
+        "value": "subscription"
+      },
+      "per": null,
+      "fills": [
+        "billing.cancellation"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "self_serve",
+          "access_after"
+        ],
+        "one_of": {
+          "access_after": [
+            "period_end",
+            "immediate"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "B.11",
+      "part": "B",
+      "prompt": "Are refunds allowed? Who exactly may issue one?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "billing.refunds"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "allowed"
+        ],
+        "if": {
+          "allowed": "yes",
+          "then_keys": [
+            "by"
+          ]
+        },
+        "roles_keys": [
+          "by"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "T.01",
+      "part": "T",
+      "prompt": "Can one person belong to more than one organisation?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "tenancy.multi_membership"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "T.02",
+      "part": "T",
+      "prompt": "How does a new organisation come to exist — someone signs up and creates it, or you (the operator) create it?",
+      "type": "multi",
+      "options": [
+        "self_signup",
+        "operator_created"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "tenancy.creation"
+      ],
+      "done": {
+        "rule": "subset_min1",
+        "options": [
+          "self_signup",
+          "operator_created"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "T.03",
+      "part": "T",
+      "prompt": "Inside an organisation, which role manages its members and settings?",
+      "type": "choice",
+      "options": [
+        "<a confirmed role>"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "tenancy.org_admin_role"
+      ],
+      "done": {
+        "rule": "role"
+      },
+      "feeds": [],
+      "notes": "Never asked in the handoff. Without it, no builder knows who invites people into an org.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "T.04",
+      "part": "T",
+      "prompt": "Are the roles the same in every organisation, or can each organisation define its own?",
+      "type": "choice",
+      "options": [
+        "same_everywhere",
+        "per_organisation"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "tenancy.roles_scope"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "same_everywhere",
+          "per_organisation"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "T.05",
+      "part": "T",
+      "prompt": "Is there an operator role (you) that can see across all organisations? Which role?",
+      "type": "choice",
+      "options": [
+        "<a confirmed role>",
+        "none"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "tenancy.operator_role"
+      ],
+      "done": {
+        "rule": "role_or_none"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "T.06",
+      "part": "T",
+      "prompt": "By default, is everything about an organisation — records, files, reports, billing, workflows — completely separate from the others? If not, what is shared and how?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "tenancy.isolation"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "complete"
+        ],
+        "if": {
+          "complete": "no",
+          "then_keys": [
+            "shared"
+          ]
+        }
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "T.07",
+      "part": "T",
+      "prompt": "Can organisations set their own branding (logo, colours)?",
+      "type": "yesno",
+      "options": [
+        "yes",
+        "no"
+      ],
+      "gate": null,
+      "per": null,
+      "fills": [
+        "tenancy.branding"
+      ],
+      "done": {
+        "rule": "one_of",
+        "options": [
+          "yes",
+          "no"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "T.08",
+      "part": "T",
+      "prompt": "Can an organisation be suspended or deleted? By whom, and what happens to its members and data?",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "tenancy.suspend_delete"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "suspend_allowed",
+          "delete_allowed"
+        ],
+        "if_any_yes": [
+          "by",
+          "members",
+          "data"
+        ],
+        "roles_keys": [
+          "by"
+        ]
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "D.01",
+      "part": "D",
+      "prompt": "You said '${deviation}' should work differently from the standard. Which standard behaviour is it replacing, exactly what should happen instead, and which screens/records does it apply to? Everything you don't mention keeps the standard behaviour.",
+      "type": "structured",
+      "options": null,
+      "gate": null,
+      "per": "deviation",
+      "fills": [
+        "deviation.{d}.default_overridden",
+        "deviation.{d}.behaviour",
+        "deviation.{d}.scope"
+      ],
+      "done": {
+        "rule": "structured",
+        "keys": [
+          "default_id",
+          "behaviour",
+          "scope"
+        ],
+        "default_id_in": "DEFAULTS"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "Z.01",
+      "part": "Z",
+      "prompt": "Here is everything the app will do on its own, with nobody clicking: [derived list of scheduled jobs — retention purges, stage time-outs, date-relative reminders, scheduled reports, subscription renewals, trial expiries, integration syncs]. Correct?",
+      "type": "confirm",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "ops.recurring_operations"
+      ],
+      "done": {
+        "rule": "confirmed"
+      },
+      "feeds": [],
+      "notes": "This is the recurring-ops namespace. Each item gets its own OPS-nnn id.",
+      "required": true,
+      "creates": null,
+      "widget": null
+    },
+    {
+      "id": "Z.02",
+      "part": "Z",
+      "prompt": "Here is every numbered button/action in the app and where its result lands: [derived]. Correct?",
+      "type": "confirm",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "actions.inventory"
+      ],
+      "done": {
+        "rule": "confirmed"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "wireframe_walkthrough"
+    },
+    {
+      "id": "Z.03",
+      "part": "Z",
+      "prompt": "Here is every screen, who can open it, and what it shows: [derived]. Correct?",
+      "type": "confirm",
+      "options": null,
+      "gate": null,
+      "per": null,
+      "fills": [
+        "screens.inventory"
+      ],
+      "done": {
+        "rule": "confirmed"
+      },
+      "feeds": [],
+      "notes": null,
+      "required": true,
+      "creates": null,
+      "widget": "wireframe_walkthrough"
+    }
+  ],
+  "system_defaults": [
+    {
+      "id": "sys_credential_storage",
+      "area": "security",
+      "behaviour": "Secrets in an environment vault, never in code or the database.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_encryption_rest",
+      "area": "security",
+      "behaviour": "AES-256 at rest for database and file storage.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_encryption_transit",
+      "area": "security",
+      "behaviour": "TLS everywhere; HttpOnly/Secure/SameSite cookies.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_database_identifiers",
+      "area": "records",
+      "behaviour": "UUIDv4 primary keys on every table.",
+      "fields": [
+        "record.*.id_strategy"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_audit_fields",
+      "area": "records",
+      "behaviour": "created_at/updated_at/created_by/updated_by on every table.",
+      "fields": [
+        "record.*.audit_fields"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_request_timeout",
+      "area": "client",
+      "behaviour": "15 s request timeout → transaction aborted, HTTP 504.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_retry_policy",
+      "area": "flow",
+      "behaviour": "Failed external calls retry 3× with exponential backoff + jitter.",
+      "fields": [
+        "integration.*.retry_policy"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_idempotency_webhook",
+      "area": "billing",
+      "behaviour": "Payment webhooks signature-verified and processed exactly once.",
+      "fields": [
+        "billing.webhook_handling"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_duplicate_click",
+      "area": "client",
+      "behaviour": "Submit buttons disable on click.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_error_handling",
+      "area": "client",
+      "behaviour": "RFC 7807 error bodies; stack traces masked in production.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_logging",
+      "area": "client",
+      "behaviour": "Structured JSON audit log of every mutation and failed authorisation.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_file_storage",
+      "area": "files",
+      "behaviour": "Private object storage for uploads.",
+      "fields": [
+        "file.*.storage_backend"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_file_security_scanning",
+      "area": "files",
+      "behaviour": "Async malware scan before a file is marked active.",
+      "fields": [
+        "file.*.malware_scanning"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_file_upload_fail",
+      "area": "files",
+      "behaviour": "Failed upload/scan → file marked broken, transaction rolled back, 400.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_client_isolation",
+      "area": "tenancy",
+      "behaviour": "Row-level security enforces organisation isolation in the database.",
+      "fields": [
+        "tenancy.isolation_mechanism"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_backup_recovery",
+      "area": "ops",
+      "behaviour": "Nightly encrypted backups, 30-day retention.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_session_security_protections",
+      "area": "auth",
+      "behaviour": "Signed session tokens; CSRF-safe cookie rules.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_notification_audit",
+      "area": "notify",
+      "behaviour": "Every notification logged with channel, recipient, status, retries.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_notification_retry",
+      "area": "notify",
+      "behaviour": "3 delivery retries then dead-letter.",
+      "fields": [
+        "notification.*.retry_policy"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_report_storage",
+      "area": "reports",
+      "behaviour": "Generated documents stored transiently behind 1-hour signed URLs.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_report_timeout",
+      "area": "reports",
+      "behaviour": "Report generation times out at 60 s.",
+      "fields": [],
+      "why": null
+    },
+    {
+      "id": "sys_api_convention",
+      "area": "technical",
+      "behaviour": "One fixed REST convention for every endpoint, verb and envelope.",
+      "fields": [
+        "api.*"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_screen_interaction_pattern",
+      "area": "client",
+      "behaviour": "Standard loading / empty / error / success / back / leave-and-return behaviour on every screen.",
+      "fields": [
+        "screen.*.interaction_states"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_field_type_defaults",
+      "area": "records",
+      "behaviour": "Each field type carries one standard validation rule and error message.",
+      "fields": [
+        "record.*.field.*.validation"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_report_caching",
+      "area": "reports",
+      "behaviour": "Reports regenerate on demand, cached 5 min.",
+      "fields": [
+        "report.*.cache_policy"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_tax_calculation",
+      "area": "billing",
+      "behaviour": "Tax computed by the payment gateway from the billing address.",
+      "fields": [
+        "billing.tax_calculation"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_notification_copywriting",
+      "area": "notify",
+      "behaviour": "Message wording drafted at build time and approved by the owner before launch; never shipped unseen.",
+      "fields": [
+        "notification.*.copy_final"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_file_type_inference",
+      "area": "files",
+      "behaviour": "Allowed formats come from a fixed allow-list per file category.",
+      "fields": [
+        "file.*.allowed_mimes"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_qa_pass_conditions",
+      "area": "qa",
+      "behaviour": "Every node's pass/fail check is generated from that node's own answers.",
+      "fields": [
+        "qa.pass_condition.*"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_account_identity",
+      "area": "auth",
+      "behaviour": "The email address is the account identity; changing it requires re-verification.",
+      "fields": [
+        "auth.identity_field"
+      ],
+      "why": "Handoff never stated what identifies an account."
+    },
+    {
+      "id": "sys_password_reset",
+      "area": "auth",
+      "behaviour": "Self-service reset by emailed link, valid 1 hour.",
+      "fields": [
+        "auth.self_reset_flow"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_mfa_recovery",
+      "area": "auth",
+      "behaviour": "One-time recovery codes issued at MFA enrolment.",
+      "fields": [
+        "auth.mfa_recovery"
+      ],
+      "why": "Classification kept this as a question; owners cannot meaningfully choose otherwise."
+    },
+    {
+      "id": "sys_profile_self_edit",
+      "area": "auth",
+      "behaviour": "Every user can edit their own name, email, password and notification preferences.",
+      "fields": [
+        "auth.profile_self_service"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_suspended_experience",
+      "area": "auth",
+      "behaviour": "A suspended user sees a fixed 'account suspended — contact <support contact>' screen and nothing else.",
+      "fields": [
+        "auth.suspended_screen"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_first_admin",
+      "area": "auth",
+      "behaviour": "The first super-role account is seeded from the deploy inputs, not created through the app.",
+      "fields": [
+        "auth.bootstrap_admin"
+      ],
+      "why": "A complete working app needs a first login; nothing in the handoff created one."
+    },
+    {
+      "id": "sys_theme",
+      "area": "client",
+      "behaviour": "Light theme only; WCAG 2.1 AA contrast and keyboard access.",
+      "fields": [
+        "visual.theme",
+        "visual.accessibility"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_locale_formatting",
+      "area": "client",
+      "behaviour": "Dates, numbers and currency display in the format of A.13's region; stored in UTC; shown in the viewer's timezone.",
+      "fields": [
+        "locale.formatting",
+        "locale.timezone_handling"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_concurrent_edit",
+      "area": "records",
+      "behaviour": "Last save wins; a user saving over a newer version is warned and shown the newer version.",
+      "fields": [
+        "record.*.concurrency"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_list_behaviour",
+      "area": "records",
+      "behaviour": "Every record list is searchable and filterable on its visible fields, sorted newest first, exportable by anyone who can view it.",
+      "fields": [
+        "record.*.list_behaviour",
+        "record.*.exportable"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_form_failure",
+      "area": "forms",
+      "behaviour": "A failed submit shows inline errors and keeps what was typed; forms are single-page; public forms get spam protection.",
+      "fields": [
+        "form.*.on_failure",
+        "form.*.layout",
+        "form.*.spam_protection"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_inapp_inbox",
+      "area": "notify",
+      "behaviour": "If any notification uses in-app, the app has one notification inbox with read/unread state.",
+      "fields": [
+        "notify.inbox"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_image_handling",
+      "area": "files",
+      "behaviour": "Images get thumbnails; downloads are served by signed URL.",
+      "fields": [
+        "file.*.image_handling"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_limit_reached",
+      "area": "billing",
+      "behaviour": "Hitting a plan limit shows an upgrade prompt, then blocks the action.",
+      "fields": [
+        "billing.on_limit_reached"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_billing_details",
+      "area": "billing",
+      "behaviour": "Card, billing address and tax IDs are collected by the gateway's hosted form; invoices/receipts are the gateway's.",
+      "fields": [
+        "billing.details_collection",
+        "billing.invoices"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_proration",
+      "area": "billing",
+      "behaviour": "Mid-cycle plan changes are prorated by the gateway.",
+      "fields": [
+        "billing.proration_rule"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_org_switcher",
+      "area": "tenancy",
+      "behaviour": "A person in several organisations switches with a standard switcher; each organisation has its own timezone setting defaulting to A.13.",
+      "fields": [
+        "tenancy.switcher",
+        "tenancy.org_settings"
+      ],
+      "why": null
+    },
+    {
+      "id": "sys_invite_expiry",
+      "area": "auth",
+      "behaviour": "Invitations expire after 7 days and can be re-sent.",
+      "fields": [
+        "auth.invite_expiry"
+      ],
+      "why": null
+    }
+  ],
+  "derivations": [
+    {
+      "id": "D01",
+      "outputs": [
+        "record.*.field.*.storage_type"
+      ],
+      "inputs": [
+        "R.02"
+      ],
+      "rule": "Fixed 1:1 map from field type to column type.",
+      "safe_because": "Exhaustive, unique per type."
+    },
+    {
+      "id": "D02",
+      "outputs": [
+        "form.*.fields"
+      ],
+      "inputs": [
+        "F.02",
+        "R.02"
+      ],
+      "rule": "Form fields = target record's fields + extra fields.",
+      "safe_because": "Restatement of answers."
+    },
+    {
+      "id": "D03",
+      "outputs": [
+        "screen.*.contents",
+        "screen.*.access",
+        "role.*.visible_screens"
+      ],
+      "inputs": [
+        "A.15",
+        "R.05",
+        "R.06",
+        "R.07",
+        "R.08",
+        "FL.03",
+        "FL.05"
+      ],
+      "rule": "A screen shows its record/form fields; a role sees a screen if it can view/act on anything on it.",
+      "safe_because": "Mechanical union of explicit grants."
+    },
+    {
+      "id": "D04",
+      "outputs": [
+        "role.*.permitted_actions",
+        "role.*.forbidden_actions",
+        "role.*.is_admin"
+      ],
+      "inputs": [
+        "R.05",
+        "R.06",
+        "R.07",
+        "R.08",
+        "R.15",
+        "FL.03",
+        "FL.05",
+        "FL.07",
+        "AU.11",
+        "AU.12",
+        "AU.13",
+        "P.04",
+        "B.11"
+      ],
+      "rule": "Permitted = every explicit grant; forbidden = everything else (default deny); admin = any user-management grant.",
+      "safe_because": "Enumeration, no judgement."
+    },
+    {
+      "id": "D05",
+      "outputs": [
+        "notification.*.timing"
+      ],
+      "inputs": [
+        "N.01"
+      ],
+      "rule": "Immediate on event; offset for relative_to_date; cron for schedule.",
+      "safe_because": "Read from the owner's own trigger."
+    },
+    {
+      "id": "D06",
+      "outputs": [
+        "file.*.retention"
+      ],
+      "inputs": [
+        "R.14",
+        "FI.01"
+      ],
+      "rule": "File inherits its parent record's retention.",
+      "safe_because": "Direct inheritance."
+    },
+    {
+      "id": "D07",
+      "outputs": [
+        "report.*.data_source",
+        "report.*.metric.*.derived_definition"
+      ],
+      "inputs": [
+        "RP.04",
+        "RP.05",
+        "R.02"
+      ],
+      "rule": "Unflagged metric = count/sum of the named field; flagged metric = RP.05 text.",
+      "safe_because": "Flagged terms never derive."
+    },
+    {
+      "id": "D08",
+      "outputs": [
+        "workflow.*.transition_graph"
+      ],
+      "inputs": [
+        "FL.02",
+        "FL.03"
+      ],
+      "rule": "Edges exactly as listed in FL.03; nothing added.",
+      "safe_because": "Never invents a transition."
+    },
+    {
+      "id": "D09",
+      "outputs": [
+        "tenancy.role_visibility"
+      ],
+      "inputs": [
+        "T.05",
+        "T.06"
+      ],
+      "rule": "Operator role sees all orgs; everyone else sees their memberships.",
+      "safe_because": "Restatement."
+    },
+    {
+      "id": "D10",
+      "outputs": [
+        "billing.plan_linkage"
+      ],
+      "inputs": [
+        "B.03"
+      ],
+      "rule": "Each subscription event links to one plan by name.",
+      "safe_because": "Restatement."
+    },
+    {
+      "id": "D11",
+      "outputs": [
+        "ops.recurring_operations.items"
+      ],
+      "inputs": [
+        "R.14",
+        "FL.01",
+        "FL.10",
+        "FLX.03",
+        "N.01",
+        "RP.08",
+        "B.05",
+        "B.08"
+      ],
+      "rule": "Every duration/schedule answer becomes one OPS-nnn job; confirmed in Z.01.",
+      "safe_because": "Mechanical collection; owner confirms the list."
+    },
+    {
+      "id": "D12",
+      "outputs": [
+        "actions.inventory.items"
+      ],
+      "inputs": [
+        "R.06",
+        "R.07",
+        "R.08",
+        "R.15",
+        "FL.03",
+        "FL.07",
+        "FL.05",
+        "F.01"
+      ],
+      "rule": "One numbered action per create/edit/delete grant, custom action, transition, cancel, approve, and form submit.",
+      "safe_because": "Enumeration; owner confirms in Z.02."
+    },
+    {
+      "id": "D13",
+      "outputs": [
+        "screens.inventory.items",
+        "client.navigation.derived"
+      ],
+      "inputs": [
+        "A.15",
+        "C.06",
+        "D03"
+      ],
+      "rule": "One list + one detail screen per record, one per form/report, plus landing per role.",
+      "safe_because": "Enumeration; owner confirms in Z.03 / C.07."
+    },
+    {
+      "id": "D14",
+      "outputs": [
+        "record.*.field.*.storage_type_for_options"
+      ],
+      "inputs": [
+        "R.02"
+      ],
+      "rule": "Choice options become an enum with the exact listed values.",
+      "safe_because": "Restatement."
+    },
+    {
+      "id": "D15",
+      "outputs": [
+        "qa.generated_tests"
+      ],
+      "inputs": [
+        "*"
+      ],
+      "rule": "For every numbered action and transition: perform it as each role, assert the declared outcome and location.",
+      "safe_because": "Definitionally downstream of answers; no LLM in the pass/fail path."
+    }
+  ],
+  "deploy_inputs": [
+    {
+      "id": "DI.01",
+      "prompt": "Web address (domain) the app will live at",
+      "fields": [
+        "deploy.domain"
+      ],
+      "gate": null
+    },
+    {
+      "id": "DI.02",
+      "prompt": "Sender name and email address for outgoing email",
+      "fields": [
+        "deploy.email_sender"
+      ],
+      "gate": null
+    },
+    {
+      "id": "DI.03",
+      "prompt": "Support contact shown to users (email or URL)",
+      "fields": [
+        "deploy.support_contact"
+      ],
+      "gate": null
+    },
+    {
+      "id": "DI.04",
+      "prompt": "Email address of the first super-role account",
+      "fields": [
+        "deploy.first_admin_email"
+      ],
+      "gate": {
+        "q": "A.07",
+        "op": "eq",
+        "value": "yes"
+      }
+    },
+    {
+      "id": "DI.05",
+      "prompt": "Hosting region / data residency (e.g. Australia)",
+      "fields": [
+        "deploy.region"
+      ],
+      "gate": null
+    },
+    {
+      "id": "DI.06",
+      "prompt": "Payment gateway account credentials",
+      "fields": [
+        "deploy.gateway_credentials"
+      ],
+      "gate": {
+        "q": "A.09",
+        "op": "eq",
+        "value": "yes"
+      }
+    },
+    {
+      "id": "DI.07",
+      "prompt": "SMS provider credentials and sender ID",
+      "fields": [
+        "deploy.sms_credentials"
+      ],
+      "gate": {
+        "q": "N.03",
+        "op": "any_instance_includes",
+        "value": "sms"
+      }
+    },
+    {
+      "id": "DI.08",
+      "prompt": "OAuth client credentials for each social login chosen",
+      "fields": [
+        "deploy.oauth_credentials"
+      ],
+      "gate": {
+        "q": "AU.04",
+        "op": "includes_any",
+        "value": [
+          "google",
+          "microsoft",
+          "apple"
+        ]
+      }
+    },
+    {
+      "id": "DI.09",
+      "prompt": "Credentials / API keys for each external system",
+      "fields": [
+        "deploy.integration_credentials"
+      ],
+      "gate": {
+        "q": "A.15",
+        "op": "list_nonempty",
+        "value": "integrations"
+      }
+    },
+    {
+      "id": "DI.10",
+      "prompt": "App-store developer accounts",
+      "fields": [
+        "deploy.app_store_accounts"
+      ],
+      "gate": {
+        "q": "A.06",
+        "op": "includes_any",
+        "value": [
+          "ios",
+          "android"
+        ]
+      }
+    },
+    {
+      "id": "DI.11",
+      "prompt": "Terms of service and privacy policy documents (or a request to draft them)",
+      "fields": [
+        "deploy.legal_documents"
+      ],
+      "gate": {
+        "q": "AU.14",
+        "op": "eq",
+        "value": "yes"
+      }
+    }
+  ],
+  "spec_fields": [
+    "engine.involvement",
+    "product.description",
+    "product.goals",
+    "product.audience",
+    "product.success_definition",
+    "product.name",
+    "client.platforms",
+    "auth.required",
+    "tenancy.mode",
+    "billing.required",
+    "client.public_surfaces",
+    "integration.public_api_required",
+    "data.import_required",
+    "data.import_sources",
+    "locale.primary_region",
+    "locale.languages",
+    "deviation.flags",
+    "inventory.screens",
+    "inventory.records",
+    "inventory.roles",
+    "inventory.forms",
+    "inventory.notifications",
+    "inventory.file_types",
+    "inventory.reports",
+    "inventory.workflows",
+    "inventory.integrations",
+    "roles.super_role",
+    "visual.references",
+    "visual.tone",
+    "visual.density",
+    "visual.brand_assets",
+    "client.mobile_behaviour",
+    "client.landing_screen_per_role",
+    "client.navigation",
+    "auth.registration_modes",
+    "auth.registration_fields",
+    "auth.email_verification",
+    "auth.methods",
+    "auth.default_role",
+    "auth.invite_authority",
+    "auth.invite_default_role",
+    "auth.mfa_scope",
+    "auth.mfa_method",
+    "auth.lockout_attempts",
+    "auth.lockout_duration",
+    "auth.multi_device",
+    "auth.session_length",
+    "auth.suspension_allowed",
+    "auth.suspension_by",
+    "auth.suspension_auto_triggers",
+    "auth.deletion_allowed",
+    "auth.deletion_by",
+    "auth.deletion_data_policy",
+    "auth.reset_others_by",
+    "legal.terms_required",
+    "legal.terms_status",
+    "roles.multi_role_per_person",
+    "role.{r}.description",
+    "role.{r}.sees_private_data",
+    "role.{r}.billing_access",
+    "role.{r}.assignable_by",
+    "record.{r}.purpose",
+    "record.{r}.fields",
+    "record.{r}.title_field",
+    "record.{r}.human_id",
+    "record.{r}.access.view",
+    "record.{r}.access.create",
+    "record.{r}.access.edit",
+    "record.{r}.access.delete",
+    "record.{r}.ownership_rule",
+    "record.{r}.has_lifecycle",
+    "record.{r}.relations",
+    "record.{r}.on_delete",
+    "record.{r}.archivable",
+    "record.{r}.retention",
+    "record.{r}.custom_actions",
+    "form.{f}.purpose",
+    "form.{f}.fillers",
+    "form.{f}.target_record",
+    "form.{f}.extra_fields",
+    "form.{f}.conditional_fields",
+    "form.{f}.draft_save",
+    "form.{f}.on_success",
+    "file.{ft}.purpose",
+    "file.{ft}.parent_record",
+    "file.{ft}.cardinality",
+    "file.{ft}.uploaders",
+    "file.{ft}.viewers",
+    "file.{ft}.category",
+    "file.{ft}.max_size_mb",
+    "file.{ft}.versioning",
+    "file.{ft}.cascade_delete",
+    "workflow.{w}.trigger",
+    "workflow.{w}.stages",
+    "workflow.{w}.transitions",
+    "workflow.{w}.preconditions",
+    "workflow.{w}.approvals",
+    "workflow.{w}.on_reject",
+    "workflow.{w}.cancel",
+    "workflow.{w}.on_complete",
+    "workflow.{w}.readonly_from",
+    "workflow.{w}.timeouts",
+    "workflow.{w}.stage_notifications",
+    "integration.{i}.purpose",
+    "integration.{i}.sends",
+    "integration.{i}.receives",
+    "integration.{i}.timing",
+    "integration.{i}.connection_scope",
+    "integration.{i}.on_unavailable",
+    "notification.{n}.trigger",
+    "notification.{n}.recipients",
+    "notification.{n}.channels",
+    "notification.{n}.intent",
+    "notification.{n}.opt_out",
+    "report.{rp}.question",
+    "report.{rp}.viewers",
+    "report.{rp}.form",
+    "report.{rp}.metrics",
+    "report.{rp}.metric.{m}.definition",
+    "report.{rp}.filters",
+    "report.{rp}.default_range",
+    "report.{rp}.export",
+    "report.{rp}.scheduled_delivery",
+    "billing.model",
+    "billing.charged_party",
+    "billing.plans",
+    "billing.currency",
+    "billing.trial",
+    "billing.usage_unit",
+    "billing.usage_charge_timing",
+    "billing.payment_methods",
+    "billing.on_failure",
+    "billing.plan_change",
+    "billing.cancellation",
+    "billing.refunds",
+    "tenancy.multi_membership",
+    "tenancy.creation",
+    "tenancy.org_admin_role",
+    "tenancy.roles_scope",
+    "tenancy.operator_role",
+    "tenancy.isolation",
+    "tenancy.branding",
+    "tenancy.suspend_delete",
+    "deviation.{d}.default_overridden",
+    "deviation.{d}.behaviour",
+    "deviation.{d}.scope",
+    "ops.recurring_operations",
+    "actions.inventory",
+    "screens.inventory",
+    "record.*.id_strategy",
+    "record.*.audit_fields",
+    "integration.*.retry_policy",
+    "billing.webhook_handling",
+    "file.*.storage_backend",
+    "file.*.malware_scanning",
+    "tenancy.isolation_mechanism",
+    "notification.*.retry_policy",
+    "api.*",
+    "screen.*.interaction_states",
+    "record.*.field.*.validation",
+    "report.*.cache_policy",
+    "billing.tax_calculation",
+    "notification.*.copy_final",
+    "file.*.allowed_mimes",
+    "qa.pass_condition.*",
+    "auth.identity_field",
+    "auth.self_reset_flow",
+    "auth.mfa_recovery",
+    "auth.profile_self_service",
+    "auth.suspended_screen",
+    "auth.bootstrap_admin",
+    "visual.theme",
+    "visual.accessibility",
+    "locale.formatting",
+    "locale.timezone_handling",
+    "record.*.concurrency",
+    "record.*.list_behaviour",
+    "record.*.exportable",
+    "form.*.on_failure",
+    "form.*.layout",
+    "form.*.spam_protection",
+    "notify.inbox",
+    "file.*.image_handling",
+    "billing.on_limit_reached",
+    "billing.details_collection",
+    "billing.invoices",
+    "billing.proration_rule",
+    "tenancy.switcher",
+    "tenancy.org_settings",
+    "auth.invite_expiry",
+    "record.*.field.*.storage_type",
+    "form.*.fields",
+    "screen.*.contents",
+    "screen.*.access",
+    "role.*.visible_screens",
+    "role.*.permitted_actions",
+    "role.*.forbidden_actions",
+    "role.*.is_admin",
+    "notification.*.timing",
+    "file.*.retention",
+    "report.*.data_source",
+    "report.*.metric.*.derived_definition",
+    "workflow.*.transition_graph",
+    "tenancy.role_visibility",
+    "billing.plan_linkage",
+    "ops.recurring_operations.items",
+    "actions.inventory.items",
+    "screens.inventory.items",
+    "client.navigation.derived",
+    "record.*.field.*.storage_type_for_options",
+    "qa.generated_tests",
+    "deploy.domain",
+    "deploy.email_sender",
+    "deploy.support_contact",
+    "deploy.first_admin_email",
+    "deploy.region",
+    "deploy.gateway_credentials",
+    "deploy.sms_credentials",
+    "deploy.oauth_credentials",
+    "deploy.integration_credentials",
+    "deploy.app_store_accounts",
+    "deploy.legal_documents"
+  ]
+}

@@ -1,0 +1,4670 @@
+{
+  "template": "command-desk",
+  "source_app": "Command Desk (Sam's own product) — Interview v3 answers, 5 September 2026",
+  "category": "agent desk",
+  "modules": [
+    "agents",
+    "jobs",
+    "conversations",
+    "memory",
+    "linked_services",
+    "documents"
+  ],
+  "inventory": {
+    "records": [
+      "Agent",
+      "Conversation",
+      "Job",
+      "Project",
+      "Memory entry",
+      "Linked service",
+      "Document"
+    ],
+    "roles": [
+      "Sam"
+    ],
+    "forms": [
+      "Add an agent",
+      "Connect a service",
+      "Upload a document"
+    ],
+    "notifications": [
+      "Agent stopped",
+      "Job failed",
+      "Job done",
+      "Approval needed"
+    ],
+    "reports": [
+      "Activity per agent",
+      "Cost"
+    ],
+    "workflows": [
+      "Agent lifecycle",
+      "Conversation lifecycle",
+      "Job lifecycle",
+      "Project lifecycle",
+      "Linked service lifecycle",
+      "Document lifecycle"
+    ],
+    "file_types": [
+      "Document file"
+    ],
+    "integrations": [
+      "Gmail",
+      "Google Calendar",
+      "Tavily search",
+      "Model providers"
+    ],
+    "screens": []
+  },
+  "super_role": "Sam",
+  "answers": {
+    "0.01": "guided",
+    "A.01": "A desk where one agent runs other agents. The builder-tester loop runs as a script. An email agent is attached to Sam's real email. Hands and the Brain pipeline are specialists on the desk.",
+    "A.02": "One front agent (Nova) that Sam talks to, which dispatches to the specialists, so Sam has minimal direct contact with them and it keeps on top of everything in flight.",
+    "A.03": "Sam only. Single user.",
+    "A.04": "Sam tells Nova a job and finds the real result waiting — an actual draft in his inbox, the Brain pipeline actually gathered and configured. Verified by outcome, not by a report.",
+    "A.05": "Command Desk",
+    "A.06": [
+      "web",
+      "ios",
+      "android",
+      "desktop"
+    ],
+    "A.07": "yes",
+    "A.08": "single",
+    "A.09": "no",
+    "A.10": [],
+    "A.11": "no",
+    "A.12": {
+      "required": "no"
+    },
+    "A.13": {
+      "region": "Australia",
+      "languages": [
+        "English"
+      ]
+    },
+    "A.14": [],
+    "A.16": "Sam",
+    "C.01": "Minimal. Centre orb is the yin-yang, sized like the ChatGPT voice orb, spoken to; the outer gold ring spins while Nova works, the inner glyph stays still. The whole interface slides across to reveal a full-panel left menu, not an overlay. Home carries only the composer at the bottom, time top-left, settings top-right.",
+    "C.02": [
+      "calm",
+      "minimal",
+      "premium"
+    ],
+    "C.03": "spacious",
+    "C.04": {
+      "mode": "provided",
+      "path": "orb-glyph.png + orb-rotor.png (gold; Sam's own mark, cut from the reference screenshot)"
+    },
+    "C.05": {
+      "mode": "simplified"
+    },
+    "C.06": {
+      "Sam": "Home"
+    },
+    "AU.01": [
+      "admin_created"
+    ],
+    "AU.02": [],
+    "AU.03": "no",
+    "AU.04": [
+      "password"
+    ],
+    "AU.07": {
+      "scope": "nobody",
+      "method": "n/a"
+    },
+    "AU.08": "never",
+    "AU.09": "yes",
+    "AU.10": "never",
+    "AU.11": {
+      "allowed": "no"
+    },
+    "AU.12": {
+      "allowed": "no"
+    },
+    "AU.13": [],
+    "AU.14": {
+      "required": "no"
+    },
+    "P.00": "no",
+    "Z.01": "confirmed",
+    "C.07": "confirmed",
+    "Z.02": "confirmed",
+    "Z.03": "confirmed"
+  },
+  "per_instance": {
+    "R.01:Agent": "A named specialist with a model, a role, and a set of things it can do.",
+    "R.02:Agent": [
+      {
+        "name": "Name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "yes"
+      },
+      {
+        "name": "Role",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Model",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Instructions",
+        "type": "long_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Tools it may use",
+        "type": "other",
+        "required": "no",
+        "unique": "no",
+        "custom_rule": "the names of the tools this agent is allowed to call"
+      },
+      {
+        "name": "Is on",
+        "type": "yes_no",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Reports to",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Agent"
+      }
+    ],
+    "R.03:Agent": "Name",
+    "R.04:Agent": {
+      "needed": "no"
+    },
+    "R.05:Agent": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.06:Agent": [
+      "Sam"
+    ],
+    "R.07:Agent": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.08:Agent": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.10:Agent": {
+      "has": "yes",
+      "stages": [
+        "running",
+        "stopped-and-reported",
+        "offline"
+      ]
+    },
+    "R.11:Agent": [
+      {
+        "target": "Job",
+        "cardinality": "one_to_many",
+        "required": "no"
+      },
+      {
+        "target": "Project",
+        "cardinality": "one_to_many",
+        "required": "no"
+      }
+    ],
+    "R.13:Agent": "yes",
+    "R.14:Agent": "forever",
+    "R.15:Agent": [
+      {
+        "name": "Pause",
+        "who": [
+          "Sam"
+        ],
+        "effect": "stops the agent running and records that Sam paused it",
+        "result_location": "the agent's own screen, and by voice through Nova",
+        "execution": {
+          "op": "set_fields",
+          "fields": {
+            "is_on": 0,
+            "stage": "stopped-and-reported"
+          }
+        }
+      }
+    ],
+    "R.12:Agent": "keep_unlinked",
+    "R.01:Conversation": "A single thread between Sam and one agent, kept so it can be picked up later.",
+    "R.02:Conversation": [
+      {
+        "name": "Topic",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Agent",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Agent"
+      },
+      {
+        "name": "When",
+        "type": "date_time",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Messages",
+        "type": "long_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "What came of it",
+        "type": "long_text",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Read",
+        "type": "yes_no",
+        "required": "yes",
+        "unique": "no"
+      }
+    ],
+    "R.03:Conversation": "Topic",
+    "R.04:Conversation": {
+      "needed": "no"
+    },
+    "R.05:Conversation": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.06:Conversation": [
+      "Sam"
+    ],
+    "R.07:Conversation": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.08:Conversation": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.10:Conversation": {
+      "has": "yes",
+      "stages": [
+        "open",
+        "needs attention",
+        "closed"
+      ]
+    },
+    "R.11:Conversation": [
+      {
+        "target": "Job",
+        "cardinality": "one_to_many",
+        "required": "no"
+      }
+    ],
+    "R.13:Conversation": "yes",
+    "R.14:Conversation": "forever",
+    "R.15:Conversation": [],
+    "R.12:Conversation": "keep_unlinked",
+    "R.01:Job": "One piece of work an agent is doing.",
+    "R.02:Job": [
+      {
+        "name": "What was asked",
+        "type": "long_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Agent",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Agent"
+      },
+      {
+        "name": "Result",
+        "type": "long_text",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Started at",
+        "type": "date_time",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Finished at",
+        "type": "date_time",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Cost",
+        "type": "money",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Job": "What was asked",
+    "R.04:Job": {
+      "needed": "no"
+    },
+    "R.05:Job": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.06:Job": [
+      "Sam"
+    ],
+    "R.07:Job": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.08:Job": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.10:Job": {
+      "has": "yes",
+      "stages": [
+        "queued",
+        "running",
+        "done",
+        "failed"
+      ]
+    },
+    "R.11:Job": [
+      {
+        "target": "Agent",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      },
+      {
+        "target": "Project",
+        "cardinality": "one_to_many",
+        "required": "no"
+      },
+      {
+        "target": "Conversation",
+        "cardinality": "one_to_many",
+        "required": "no"
+      },
+      {
+        "target": "Document",
+        "cardinality": "one_to_many",
+        "required": "no"
+      }
+    ],
+    "R.13:Job": "yes",
+    "R.14:Job": "forever",
+    "R.15:Job": [
+      {
+        "name": "Retry",
+        "who": [
+          "Sam"
+        ],
+        "effect": "runs the same job again from the start",
+        "result_location": "the job's own screen, and by voice through Nova",
+        "execution": {
+          "op": "reset_to_stage",
+          "stage_column": "stage",
+          "stage": "queued",
+          "clear": [
+            "result",
+            "finished_at"
+          ]
+        }
+      }
+    ],
+    "R.12:Job": "keep_unlinked",
+    "R.01:Project": "A group of jobs and conversations under one goal; selecting one sets context system-wide.",
+    "R.02:Project": [
+      {
+        "name": "Name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "yes"
+      },
+      {
+        "name": "Goal",
+        "type": "long_text",
+        "required": "yes",
+        "unique": "no"
+      }
+    ],
+    "R.03:Project": "Name",
+    "R.04:Project": {
+      "needed": "no"
+    },
+    "R.05:Project": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.06:Project": [
+      "Sam"
+    ],
+    "R.07:Project": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.08:Project": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.10:Project": {
+      "has": "yes",
+      "stages": [
+        "active",
+        "paused",
+        "finished"
+      ]
+    },
+    "R.11:Project": [
+      {
+        "target": "Job",
+        "cardinality": "one_to_many",
+        "required": "no"
+      },
+      {
+        "target": "Conversation",
+        "cardinality": "one_to_many",
+        "required": "no"
+      }
+    ],
+    "R.13:Project": "yes",
+    "R.14:Project": "forever",
+    "R.15:Project": [],
+    "R.12:Project": "keep_unlinked",
+    "R.01:Memory entry": "What Hub stores and recalls.",
+    "R.02:Memory entry": [
+      {
+        "name": "Content",
+        "type": "long_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "When",
+        "type": "date_time",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Project",
+        "type": "link",
+        "required": "no",
+        "unique": "no",
+        "target_record": "Project"
+      },
+      {
+        "name": "Agent",
+        "type": "link",
+        "required": "no",
+        "unique": "no",
+        "target_record": "Agent"
+      }
+    ],
+    "R.03:Memory entry": "Content",
+    "R.04:Memory entry": {
+      "needed": "no"
+    },
+    "R.05:Memory entry": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.06:Memory entry": [
+      "Sam"
+    ],
+    "R.07:Memory entry": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.08:Memory entry": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.10:Memory entry": {
+      "has": "no"
+    },
+    "R.11:Memory entry": [
+      {
+        "target": "Project",
+        "cardinality": "one_to_many",
+        "required": "no"
+      },
+      {
+        "target": "Agent",
+        "cardinality": "one_to_many",
+        "required": "no"
+      }
+    ],
+    "R.13:Memory entry": "yes",
+    "R.14:Memory entry": "forever",
+    "R.15:Memory entry": [],
+    "R.12:Memory entry": "keep_unlinked",
+    "R.01:Linked service": "A connected account (Gmail, calendar) or a pasted API key (Tavily search, model providers).",
+    "R.02:Linked service": [
+      {
+        "name": "Service",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Token or key",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Used by",
+        "type": "link",
+        "required": "no",
+        "unique": "no",
+        "target_record": "Agent"
+      },
+      {
+        "name": "Live",
+        "type": "yes_no",
+        "required": "yes",
+        "unique": "no"
+      }
+    ],
+    "R.03:Linked service": "Service",
+    "R.04:Linked service": {
+      "needed": "no"
+    },
+    "R.05:Linked service": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.06:Linked service": [
+      "Sam"
+    ],
+    "R.07:Linked service": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.08:Linked service": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.10:Linked service": {
+      "has": "yes",
+      "stages": [
+        "connected",
+        "expired",
+        "disconnected"
+      ]
+    },
+    "R.11:Linked service": [
+      {
+        "target": "Agent",
+        "cardinality": "one_to_many",
+        "required": "no"
+      }
+    ],
+    "R.13:Linked service": "yes",
+    "R.14:Linked service": "forever",
+    "R.15:Linked service": [],
+    "R.12:Linked service": "keep_unlinked",
+    "R.01:Document": "A file Hands works on.",
+    "R.02:Document": [
+      {
+        "name": "File",
+        "type": "file",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Type",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Job",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Job"
+      }
+    ],
+    "R.03:Document": "Type",
+    "R.04:Document": {
+      "needed": "no"
+    },
+    "R.05:Document": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.06:Document": [
+      "Sam"
+    ],
+    "R.07:Document": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.08:Document": [
+      {
+        "role": "Sam",
+        "scope": "all"
+      }
+    ],
+    "R.10:Document": {
+      "has": "yes",
+      "stages": [
+        "received",
+        "filled",
+        "signed",
+        "done"
+      ]
+    },
+    "R.11:Document": [
+      {
+        "target": "Job",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Document": "yes",
+    "R.14:Document": "forever",
+    "R.15:Document": [
+      {
+        "name": "Open source document",
+        "who": [
+          "Sam"
+        ],
+        "effect": "opens the original uploaded file",
+        "result_location": "the document's own screen, and by voice through Nova",
+        "execution": {
+          "op": "clear_fields",
+          "fields": []
+        }
+      }
+    ],
+    "R.12:Document": "keep_unlinked",
+    "F.01:Add an agent": {
+      "purpose": "adds a specialist to the desk",
+      "fillers": [
+        "Sam"
+      ]
+    },
+    "F.02:Add an agent": {
+      "target": "Agent",
+      "extra_fields": []
+    },
+    "F.03:Add an agent": [],
+    "F.04:Add an agent": "yes",
+    "F.05:Add an agent": "open_the_record",
+    "F.01:Connect a service": {
+      "purpose": "connects an account or stores an API key",
+      "fillers": [
+        "Sam"
+      ]
+    },
+    "F.02:Connect a service": {
+      "target": "Linked service",
+      "extra_fields": []
+    },
+    "F.03:Connect a service": [],
+    "F.04:Connect a service": "yes",
+    "F.05:Connect a service": "open_the_record",
+    "F.01:Upload a document": {
+      "purpose": "gives Hands a file to work on",
+      "fillers": [
+        "Sam"
+      ]
+    },
+    "F.02:Upload a document": {
+      "target": "Document",
+      "extra_fields": []
+    },
+    "F.03:Upload a document": [],
+    "F.04:Upload a document": "yes",
+    "F.05:Upload a document": "open_the_record",
+    "FI.01:Document file": {
+      "purpose": "the file Hands works on",
+      "parent": "Document"
+    },
+    "FI.02:Document file": "many",
+    "FI.03:Document file": {
+      "uploaders": [
+        "Sam"
+      ],
+      "viewers": [
+        "Sam"
+      ]
+    },
+    "FI.04:Document file": "other",
+    "FI.05:Document file": 100,
+    "FI.06:Document file": "keep_history",
+    "FI.07:Document file": "yes",
+    "FL.01:Job lifecycle": {
+      "kind": "event",
+      "event": "an agent is given a job; it starts in 'queued'"
+    },
+    "FL.02:Job lifecycle": {
+      "stages": [
+        "queued",
+        "running",
+        "done",
+        "failed"
+      ],
+      "initial": "queued",
+      "terminal": [
+        "done",
+        "failed"
+      ]
+    },
+    "FL.03:Job lifecycle": [
+      {
+        "from": "queued",
+        "to": "running",
+        "mover": "automatic",
+        "event": "the agent picks the job up"
+      },
+      {
+        "from": "running",
+        "to": "done",
+        "mover": "automatic",
+        "event": "the agent finishes and writes a real result"
+      },
+      {
+        "from": "running",
+        "to": "failed",
+        "mover": "automatic",
+        "event": "the agent errors or stops before finishing"
+      }
+    ],
+    "FL.01:Document lifecycle": {
+      "kind": "event",
+      "event": "a document is uploaded; it starts in 'received'"
+    },
+    "FL.02:Document lifecycle": {
+      "stages": [
+        "received",
+        "filled",
+        "signed",
+        "done"
+      ],
+      "initial": "received",
+      "terminal": [
+        "done"
+      ]
+    },
+    "FL.03:Document lifecycle": [
+      {
+        "from": "received",
+        "to": "filled",
+        "mover": "automatic",
+        "event": "Hands fills the fields it can"
+      },
+      {
+        "from": "filled",
+        "to": "signed",
+        "mover": "automatic",
+        "event": "Sam approves at the Trust Gate"
+      },
+      {
+        "from": "signed",
+        "to": "done",
+        "mover": "automatic",
+        "event": "the completed copy is written and attested"
+      }
+    ],
+    "FL.02:Agent lifecycle": {
+      "stages": [
+        "running",
+        "stopped-and-reported",
+        "offline"
+      ],
+      "initial": "running",
+      "terminal": [
+        "offline"
+      ]
+    },
+    "FL.05:Agent lifecycle": [],
+    "FL.07:Agent lifecycle": {
+      "allowed": "no"
+    },
+    "FL.09:Agent lifecycle": "never",
+    "FL.10:Agent lifecycle": [],
+    "FL.11:Agent lifecycle": [
+      {
+        "transition": "running -> stopped-and-reported",
+        "recipients": [
+          "Sam"
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ]
+      }
+    ],
+    "FL.02:Conversation lifecycle": {
+      "stages": [
+        "open",
+        "needs attention",
+        "closed"
+      ],
+      "initial": "open",
+      "terminal": [
+        "closed"
+      ]
+    },
+    "FL.05:Conversation lifecycle": [],
+    "FL.07:Conversation lifecycle": {
+      "allowed": "no"
+    },
+    "FL.09:Conversation lifecycle": "never",
+    "FL.10:Conversation lifecycle": [],
+    "FL.11:Conversation lifecycle": [],
+    "FL.05:Job lifecycle": [
+      {
+        "stage": "running",
+        "approvers": [
+          "Sam"
+        ]
+      }
+    ],
+    "FL.07:Job lifecycle": {
+      "allowed": "no"
+    },
+    "FL.09:Job lifecycle": "never",
+    "FL.10:Job lifecycle": [],
+    "FL.11:Job lifecycle": [
+      {
+        "transition": "running -> done",
+        "recipients": [
+          "Sam"
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ]
+      },
+      {
+        "transition": "running -> failed",
+        "recipients": [
+          "Sam"
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ]
+      }
+    ],
+    "FL.02:Project lifecycle": {
+      "stages": [
+        "active",
+        "paused",
+        "finished"
+      ],
+      "initial": "active",
+      "terminal": [
+        "finished"
+      ]
+    },
+    "FL.05:Project lifecycle": [],
+    "FL.07:Project lifecycle": {
+      "allowed": "no"
+    },
+    "FL.09:Project lifecycle": "never",
+    "FL.10:Project lifecycle": [],
+    "FL.11:Project lifecycle": [],
+    "FL.02:Linked service lifecycle": {
+      "stages": [
+        "connected",
+        "expired",
+        "disconnected"
+      ],
+      "initial": "connected",
+      "terminal": [
+        "disconnected"
+      ]
+    },
+    "FL.05:Linked service lifecycle": [],
+    "FL.07:Linked service lifecycle": {
+      "allowed": "no"
+    },
+    "FL.09:Linked service lifecycle": "never",
+    "FL.10:Linked service lifecycle": [],
+    "FL.11:Linked service lifecycle": [],
+    "FL.05:Document lifecycle": [],
+    "FL.07:Document lifecycle": {
+      "allowed": "no"
+    },
+    "FL.09:Document lifecycle": "never",
+    "FL.10:Document lifecycle": [],
+    "FL.11:Document lifecycle": [],
+    "FLX.01:Gmail": "Sam's real email — the email agent reads it and drafts replies into it.",
+    "FLX.02:Gmail": {
+      "sends": "draft replies and labels",
+      "receives": "threads and messages"
+    },
+    "FLX.03:Gmail": {
+      "kind": "event",
+      "event": "a message arrives, or Sam commands the agent from inside the thread"
+    },
+    "FLX.04:Gmail": "per_user",
+    "FLX.05:Gmail": "continue_without",
+    "FLX.01:Google Calendar": "what is coming up, so the desk can plan around it.",
+    "FLX.02:Google Calendar": {
+      "sends": "events it is asked to create",
+      "receives": "the calendar's events"
+    },
+    "FLX.03:Google Calendar": {
+      "kind": "event",
+      "event": "the calendar surface is opened, or an agent needs the day's shape"
+    },
+    "FLX.04:Google Calendar": "per_user",
+    "FLX.05:Google Calendar": "continue_without",
+    "FLX.01:Tavily search": "web search for the agents that need to look something up.",
+    "FLX.02:Tavily search": {
+      "sends": "a search query",
+      "receives": "results with sources"
+    },
+    "FLX.03:Tavily search": {
+      "kind": "event",
+      "event": "an agent runs a job that needs the web"
+    },
+    "FLX.04:Tavily search": "per_user",
+    "FLX.05:Tavily search": "continue_without",
+    "FLX.01:Model providers": "the LLMs the agents run on — Ollama locally, hosted only where speed forces it.",
+    "FLX.02:Model providers": {
+      "sends": "prompts",
+      "receives": "completions"
+    },
+    "FLX.03:Model providers": {
+      "kind": "event",
+      "event": "any agent takes a turn"
+    },
+    "FLX.04:Model providers": "per_user",
+    "FLX.05:Model providers": "continue_without",
+    "N.01:Agent stopped": {
+      "kind": "event",
+      "event": "an agent moves to stopped-and-reported"
+    },
+    "N.02:Agent stopped": [
+      {
+        "kind": "roles",
+        "roles": [
+          "Sam"
+        ]
+      }
+    ],
+    "N.03:Agent stopped": [
+      "in_app",
+      "email"
+    ],
+    "N.04:Agent stopped": "an agent has stopped, why it stopped, and what it could be doing instead",
+    "N.05:Agent stopped": "yes",
+    "N.01:Job failed": {
+      "kind": "event",
+      "event": "a job moves to failed"
+    },
+    "N.02:Job failed": [
+      {
+        "kind": "roles",
+        "roles": [
+          "Sam"
+        ]
+      }
+    ],
+    "N.03:Job failed": [
+      "in_app",
+      "email"
+    ],
+    "N.04:Job failed": "a job failed and what it was",
+    "N.05:Job failed": "yes",
+    "N.01:Job done": {
+      "kind": "event",
+      "event": "a job moves to done"
+    },
+    "N.02:Job done": [
+      {
+        "kind": "roles",
+        "roles": [
+          "Sam"
+        ]
+      }
+    ],
+    "N.03:Job done": [
+      "in_app",
+      "email"
+    ],
+    "N.04:Job done": "a job finished, and where the real result is",
+    "N.05:Job done": "yes",
+    "N.01:Approval needed": {
+      "kind": "event",
+      "event": "an agent reaches an irreversible action — sending an email, paying for something"
+    },
+    "N.02:Approval needed": [
+      {
+        "kind": "roles",
+        "roles": [
+          "Sam"
+        ]
+      }
+    ],
+    "N.03:Approval needed": [
+      "in_app",
+      "email"
+    ],
+    "N.04:Approval needed": "an irreversible action is waiting; the reply is already drafted for one-tap approval",
+    "N.05:Approval needed": "yes",
+    "RP.01:Activity per agent": "What got done, per agent, this week?",
+    "RP.02:Activity per agent": [
+      "Sam"
+    ],
+    "RP.03:Activity per agent": {
+      "delivery": "screen",
+      "shape": "both"
+    },
+    "RP.04:Activity per agent": [
+      "jobs done per agent per week",
+      "jobs failed per agent per week"
+    ],
+    "RP.06:Activity per agent": {
+      "filters": [
+        "Agent",
+        "Project"
+      ],
+      "default_range": "last 7 days"
+    },
+    "RP.07:Activity per agent": {
+      "allowed": "yes",
+      "by": [
+        "Sam"
+      ]
+    },
+    "RP.08:Activity per agent": {
+      "enabled": "no"
+    },
+    "RP.01:Cost": "What did the hosted model calls cost?",
+    "RP.02:Cost": [
+      "Sam"
+    ],
+    "RP.03:Cost": {
+      "delivery": "screen",
+      "shape": "both"
+    },
+    "RP.04:Cost": [
+      "spend on hosted model calls"
+    ],
+    "RP.06:Cost": {
+      "filters": [
+        "Agent"
+      ],
+      "default_range": "last 30 days"
+    },
+    "RP.07:Cost": {
+      "allowed": "yes",
+      "by": [
+        "Sam"
+      ]
+    },
+    "RP.08:Cost": {
+      "enabled": "no"
+    },
+    "RP.05:Cost:spend on hosted model calls": "the sum of the Job record's own Cost field over the Jobs in the period -- every job records what its hosted calls really cost -- by the job's Finished at date",
+    "FL.01:Agent lifecycle": {
+      "kind": "event",
+      "event": "an agent is created and switched on; it starts in 'running'"
+    },
+    "FL.03:Agent lifecycle": [
+      {
+        "from": "running",
+        "to": "stopped-and-reported",
+        "mover": "automatic",
+        "event": "the agent stops and reports that it stopped, why, and what it could be doing instead"
+      },
+      {
+        "from": "stopped-and-reported",
+        "to": "running",
+        "mover": "automatic",
+        "event": "the agent is switched back on (On = yes)"
+      },
+      {
+        "from": "stopped-and-reported",
+        "to": "offline",
+        "mover": "automatic",
+        "event": "the agent is switched off (On = no)"
+      }
+    ],
+    "FL.04:Agent lifecycle": [],
+    "FL.08:Agent lifecycle": "the agent stops running; its last report stays on the record and its jobs are left where they are",
+    "FL.01:Conversation lifecycle": {
+      "kind": "event",
+      "event": "an agent writes the first message of a thread; it starts in 'open'"
+    },
+    "FL.03:Conversation lifecycle": [
+      {
+        "from": "open",
+        "to": "needs attention",
+        "mover": "automatic",
+        "event": "the thread carries something Sam has not read that Hub judges he needs to see"
+      },
+      {
+        "from": "needs attention",
+        "to": "closed",
+        "mover": "automatic",
+        "event": "Sam has read it and nothing on it is outstanding"
+      },
+      {
+        "from": "open",
+        "to": "closed",
+        "mover": "automatic",
+        "event": "the job it belongs to reaches done or failed and nothing on it is outstanding"
+      }
+    ],
+    "FL.04:Conversation lifecycle": [],
+    "FL.08:Conversation lifecycle": "the conversation locks and stays readable; Hub keeps it as the record of what was discussed",
+    "FL.01:Project lifecycle": {
+      "kind": "person",
+      "who": [
+        "Sam"
+      ],
+      "action": "creates a project and sets its goal"
+    },
+    "FL.03:Project lifecycle": [
+      {
+        "from": "active",
+        "to": "paused",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ]
+      },
+      {
+        "from": "paused",
+        "to": "active",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ]
+      },
+      {
+        "from": "active",
+        "to": "finished",
+        "mover": "automatic",
+        "event": "Sam marks the goal met and no job under the project is queued or running"
+      }
+    ],
+    "FL.04:Project lifecycle": [],
+    "FL.08:Project lifecycle": "the project locks: its jobs and conversations stay linked and readable, and it stops setting system-wide context",
+    "FL.01:Linked service lifecycle": {
+      "kind": "event",
+      "event": "a service is connected through the Connect a service form; it starts in 'connected'"
+    },
+    "FL.03:Linked service lifecycle": [
+      {
+        "from": "connected",
+        "to": "expired",
+        "mover": "automatic",
+        "event": "a real call to the service is refused because its token or key is no longer valid"
+      },
+      {
+        "from": "expired",
+        "to": "connected",
+        "mover": "automatic",
+        "event": "the service is reconnected and a real call to it succeeds"
+      },
+      {
+        "from": "expired",
+        "to": "disconnected",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ]
+      },
+      {
+        "from": "connected",
+        "to": "disconnected",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ]
+      }
+    ],
+    "FL.04:Linked service lifecycle": [],
+    "FL.08:Linked service lifecycle": "the service stops being offered to agents; nothing that used it is deleted",
+    "FL.04:Job lifecycle": [
+      {
+        "from": "queued",
+        "to": "running",
+        "condition": "the job's agent exists and is on"
+      }
+    ],
+    "FL.08:Job lifecycle": "the job locks, its result and its cost stay on the record, and the done or failed notification fires",
+    "FL.04:Document lifecycle": [
+      {
+        "from": "filled",
+        "to": "signed",
+        "condition": "every detected field is filled or waived"
+      }
+    ],
+    "FL.08:Document lifecycle": "the completed copy and its attestation stay on the record; the original is untouched",
+    "FL.06:Job lifecycle": {
+      "back_to": "failed",
+      "resubmit": "yes"
+    },
+    "RP.05:Activity per agent:jobs done per agent per week": "a job counts once, in the ISO week its Finished at falls in, against the agent named on the job, when its stage is done",
+    "RP.05:Activity per agent:jobs failed per agent per week": "a job counts once, in the ISO week its Finished at falls in, against the agent named on the job, when its stage is failed; a job that was retried and then finished counts as done in the week it finished and no longer counts as a failure"
+  },
+  "ask_customer": [],
+  "features": [
+    {
+      "feature": "Hosted models",
+      "controlled_by": "Linked service records",
+      "rule": "every model provider is a Linked service; removing the hosted ones leaves Ollama only"
+    },
+    {
+      "feature": "Email notifications",
+      "controlled_by": "N.03",
+      "rule": "drop 'email' from the channels and the yin-yang badge is the only notice"
+    },
+    {
+      "feature": "Voice",
+      "controlled_by": "R.15 actions",
+      "rule": "every extra action is a button AND a voice command; dropping voice leaves the buttons"
+    }
+  ],
+  "specialist_engines": [
+    {
+      "kind": "workflow",
+      "name": "Agent lifecycle",
+      "stages": [
+        "running",
+        "stopped-and-reported",
+        "offline"
+      ],
+      "initial": "running",
+      "terminal": [
+        "offline"
+      ],
+      "transitions": 3,
+      "person_moved_by": [],
+      "automatic_transitions": [
+        "the agent stops and reports that it stopped, why, and what it could be doing instead",
+        "the agent is switched back on (On = yes)",
+        "the agent is switched off (On = no)"
+      ],
+      "has_approvals": false,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "workflow",
+      "name": "Conversation lifecycle",
+      "stages": [
+        "open",
+        "needs attention",
+        "closed"
+      ],
+      "initial": "open",
+      "terminal": [
+        "closed"
+      ],
+      "transitions": 3,
+      "person_moved_by": [],
+      "automatic_transitions": [
+        "the thread carries something Sam has not read that Hub judges he needs to see",
+        "Sam has read it and nothing on it is outstanding",
+        "the job it belongs to reaches done or failed and nothing on it is outstanding"
+      ],
+      "has_approvals": false,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "workflow",
+      "name": "Job lifecycle",
+      "stages": [
+        "queued",
+        "running",
+        "done",
+        "failed"
+      ],
+      "initial": "queued",
+      "terminal": [
+        "done",
+        "failed"
+      ],
+      "transitions": 3,
+      "person_moved_by": [],
+      "automatic_transitions": [
+        "the agent picks the job up",
+        "the agent finishes and writes a real result",
+        "the agent errors or stops before finishing"
+      ],
+      "has_approvals": true,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "workflow",
+      "name": "Project lifecycle",
+      "stages": [
+        "active",
+        "paused",
+        "finished"
+      ],
+      "initial": "active",
+      "terminal": [
+        "finished"
+      ],
+      "transitions": 3,
+      "person_moved_by": [],
+      "automatic_transitions": [
+        "Sam marks the goal met and no job under the project is queued or running"
+      ],
+      "has_approvals": false,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "workflow",
+      "name": "Linked service lifecycle",
+      "stages": [
+        "connected",
+        "expired",
+        "disconnected"
+      ],
+      "initial": "connected",
+      "terminal": [
+        "disconnected"
+      ],
+      "transitions": 4,
+      "person_moved_by": [],
+      "automatic_transitions": [
+        "a real call to the service is refused because its token or key is no longer valid",
+        "the service is reconnected and a real call to it succeeds"
+      ],
+      "has_approvals": false,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "workflow",
+      "name": "Document lifecycle",
+      "stages": [
+        "received",
+        "filled",
+        "signed",
+        "done"
+      ],
+      "initial": "received",
+      "terminal": [
+        "done"
+      ],
+      "transitions": 3,
+      "person_moved_by": [],
+      "automatic_transitions": [
+        "Hands fills the fields it can",
+        "Sam approves at the Trust Gate",
+        "the completed copy is written and attested"
+      ],
+      "has_approvals": false,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "notification",
+      "name": "Agent stopped",
+      "trigger_kind": "event",
+      "channels": [
+        "in_app",
+        "email"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Job failed",
+      "trigger_kind": "event",
+      "channels": [
+        "in_app",
+        "email"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Job done",
+      "trigger_kind": "event",
+      "channels": [
+        "in_app",
+        "email"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Approval needed",
+      "trigger_kind": "event",
+      "channels": [
+        "in_app",
+        "email"
+      ]
+    },
+    {
+      "kind": "report",
+      "name": "Activity per agent",
+      "metrics": [
+        "jobs done per agent per week",
+        "jobs failed per agent per week"
+      ],
+      "shape": "both",
+      "delivery": "screen"
+    },
+    {
+      "kind": "report",
+      "name": "Cost",
+      "metrics": [
+        "spend on hosted model calls"
+      ],
+      "shape": "both",
+      "delivery": "screen"
+    }
+  ],
+  "report_specs": {
+    "Activity per agent": [
+      {
+        "metric": "jobs done per agent per week",
+        "spec": {
+          "table": "jobs",
+          "aggregation": "count",
+          "group_by": "agent",
+          "filters": [
+            {
+              "field": "stage",
+              "op": "=",
+              "value": "done"
+            }
+          ]
+        }
+      },
+      {
+        "metric": "jobs failed per agent per week",
+        "spec": {
+          "table": "jobs",
+          "aggregation": "count",
+          "group_by": "agent",
+          "filters": [
+            {
+              "field": "stage",
+              "op": "=",
+              "value": "failed"
+            }
+          ]
+        }
+      }
+    ],
+    "Cost": [
+      {
+        "metric": "spend on hosted model calls",
+        "spec": {
+          "table": "jobs",
+          "aggregation": "sum",
+          "value_field": "cost",
+          "group_by": "agent"
+        }
+      }
+    ]
+  },
+  "integration_auth": {
+    "Gmail": "oauth",
+    "Google Calendar": "oauth",
+    "Tavily search": "api_key",
+    "Model providers": "api_key"
+  },
+  "structure": {
+    "records": {
+      "Agent": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "yes"
+          },
+          "Role": {
+            "name": "Role",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Model": {
+            "name": "Model",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Instructions": {
+            "name": "Instructions",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Tools it may use": {
+            "name": "Tools it may use",
+            "type": "other",
+            "required": "no",
+            "unique": "no",
+            "custom_rule": "the names of the tools this agent is allowed to call"
+          },
+          "Is on": {
+            "name": "Is on",
+            "type": "yes_no",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Reports to": {
+            "name": "Reports to",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Agent"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Role": "VARCHAR(255)",
+          "Model": "VARCHAR(255)",
+          "Instructions": "TEXT",
+          "Tools it may use": "FOREIGN_KEY_ROLE",
+          "Is on": "BOOLEAN",
+          "Reports to": "FOREIGN_KEY"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "running",
+            "stopped-and-reported",
+            "offline"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [
+          {
+            "name": "Pause",
+            "who": [
+              "Sam"
+            ],
+            "effect": "stops the agent running and records that Sam paused it",
+            "result_location": "the agent's own screen, and by voice through Nova",
+            "execution": {
+              "op": "set_fields",
+              "fields": {
+                "is_on": 0,
+                "stage": "stopped-and-reported"
+              }
+            }
+          }
+        ],
+        "id": "command-desk/REC-001"
+      },
+      "Conversation": {
+        "fields": {
+          "Topic": {
+            "name": "Topic",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Agent": {
+            "name": "Agent",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Agent"
+          },
+          "When": {
+            "name": "When",
+            "type": "date_time",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Messages": {
+            "name": "Messages",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "What came of it": {
+            "name": "What came of it",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          },
+          "Read": {
+            "name": "Read",
+            "type": "yes_no",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Topic": "VARCHAR(255)",
+          "Agent": "FOREIGN_KEY",
+          "When": "DATETIME",
+          "Messages": "TEXT",
+          "What came of it": "TEXT",
+          "Read": "BOOLEAN"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Topic",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "open",
+            "needs attention",
+            "closed"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "id": "command-desk/REC-002"
+      },
+      "Job": {
+        "fields": {
+          "What was asked": {
+            "name": "What was asked",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Agent": {
+            "name": "Agent",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Agent"
+          },
+          "Result": {
+            "name": "Result",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          },
+          "Started at": {
+            "name": "Started at",
+            "type": "date_time",
+            "required": "no",
+            "unique": "no"
+          },
+          "Finished at": {
+            "name": "Finished at",
+            "type": "date_time",
+            "required": "no",
+            "unique": "no"
+          },
+          "Cost": {
+            "name": "Cost",
+            "type": "money",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "What was asked": "TEXT",
+          "Agent": "FOREIGN_KEY",
+          "Result": "TEXT",
+          "Started at": "DATETIME",
+          "Finished at": "DATETIME",
+          "Cost": "DECIMAL(18,2)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "What was asked",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "queued",
+            "running",
+            "done",
+            "failed"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [
+          {
+            "name": "Retry",
+            "who": [
+              "Sam"
+            ],
+            "effect": "runs the same job again from the start",
+            "result_location": "the job's own screen, and by voice through Nova",
+            "execution": {
+              "op": "reset_to_stage",
+              "stage_column": "stage",
+              "stage": "queued",
+              "clear": [
+                "result",
+                "finished_at"
+              ]
+            }
+          }
+        ],
+        "id": "command-desk/REC-003"
+      },
+      "Project": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "yes"
+          },
+          "Goal": {
+            "name": "Goal",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Goal": "TEXT"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "active",
+            "paused",
+            "finished"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "id": "command-desk/REC-004"
+      },
+      "Memory entry": {
+        "fields": {
+          "Content": {
+            "name": "Content",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "When": {
+            "name": "When",
+            "type": "date_time",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Project": {
+            "name": "Project",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Project"
+          },
+          "Agent": {
+            "name": "Agent",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Agent"
+          }
+        },
+        "storage": {
+          "Content": "TEXT",
+          "When": "DATETIME",
+          "Project": "FOREIGN_KEY",
+          "Agent": "FOREIGN_KEY"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Content",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "id": "command-desk/REC-005"
+      },
+      "Linked service": {
+        "fields": {
+          "Service": {
+            "name": "Service",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Token or key": {
+            "name": "Token or key",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Used by": {
+            "name": "Used by",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Agent"
+          },
+          "Live": {
+            "name": "Live",
+            "type": "yes_no",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Service": "VARCHAR(255)",
+          "Token or key": "VARCHAR(255)",
+          "Used by": "FOREIGN_KEY",
+          "Live": "BOOLEAN"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Service",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "connected",
+            "expired",
+            "disconnected"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "id": "command-desk/REC-006"
+      },
+      "Document": {
+        "fields": {
+          "File": {
+            "name": "File",
+            "type": "file",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Type": {
+            "name": "Type",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Job": {
+            "name": "Job",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Job"
+          }
+        },
+        "storage": {
+          "File": "FILE_REF",
+          "Type": "VARCHAR(255)",
+          "Job": "FOREIGN_KEY"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Type",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "received",
+            "filled",
+            "signed",
+            "done"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [
+          {
+            "name": "Open source document",
+            "who": [
+              "Sam"
+            ],
+            "effect": "opens the original uploaded file",
+            "result_location": "the document's own screen, and by voice through Nova",
+            "execution": {
+              "op": "clear_fields",
+              "fields": []
+            }
+          }
+        ],
+        "id": "command-desk/REC-007"
+      }
+    },
+    "roles": {
+      "Sam": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Agent",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Agent",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Agent",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Agent",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Conversation",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Conversation",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Conversation",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Conversation",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Job",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Job",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Job",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Job",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Project",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Project",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Project",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Project",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Memory entry",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Memory entry",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Memory entry",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Memory entry",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Linked service",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Linked service",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Linked service",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Linked service",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Document",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Document",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Document",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Document",
+            "scope": "all"
+          }
+        ],
+        "is_admin": true
+      }
+    },
+    "super_role": "Sam",
+    "workflows": {
+      "Agent lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "an agent is created and switched on; it starts in 'running'"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-001",
+            "name": "running"
+          },
+          {
+            "id": "command-desk/STG-002",
+            "name": "stopped-and-reported"
+          },
+          {
+            "id": "command-desk/STG-003",
+            "name": "offline"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "running",
+            "to": "stopped-and-reported",
+            "mover": "automatic",
+            "event": "the agent stops and reports that it stopped, why, and what it could be doing instead",
+            "id": "command-desk/TRN-001"
+          },
+          {
+            "from": "stopped-and-reported",
+            "to": "running",
+            "mover": "automatic",
+            "event": "the agent is switched back on (On = yes)",
+            "id": "command-desk/TRN-002"
+          },
+          {
+            "from": "stopped-and-reported",
+            "to": "offline",
+            "mover": "automatic",
+            "event": "the agent is switched off (On = no)",
+            "id": "command-desk/TRN-003"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "running",
+        "terminal": [
+          "offline"
+        ]
+      },
+      "Conversation lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "an agent writes the first message of a thread; it starts in 'open'"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-004",
+            "name": "open"
+          },
+          {
+            "id": "command-desk/STG-005",
+            "name": "needs attention"
+          },
+          {
+            "id": "command-desk/STG-006",
+            "name": "closed"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "open",
+            "to": "needs attention",
+            "mover": "automatic",
+            "event": "the thread carries something Sam has not read that Hub judges he needs to see",
+            "id": "command-desk/TRN-004"
+          },
+          {
+            "from": "needs attention",
+            "to": "closed",
+            "mover": "automatic",
+            "event": "Sam has read it and nothing on it is outstanding",
+            "id": "command-desk/TRN-005"
+          },
+          {
+            "from": "open",
+            "to": "closed",
+            "mover": "automatic",
+            "event": "the job it belongs to reaches done or failed and nothing on it is outstanding",
+            "id": "command-desk/TRN-006"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "open",
+        "terminal": [
+          "closed"
+        ]
+      },
+      "Job lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "an agent is given a job; it starts in 'queued'"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-007",
+            "name": "queued"
+          },
+          {
+            "id": "command-desk/STG-008",
+            "name": "running"
+          },
+          {
+            "id": "command-desk/STG-009",
+            "name": "done"
+          },
+          {
+            "id": "command-desk/STG-010",
+            "name": "failed"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "queued",
+            "to": "running",
+            "mover": "automatic",
+            "event": "the agent picks the job up",
+            "id": "command-desk/TRN-007"
+          },
+          {
+            "from": "running",
+            "to": "done",
+            "mover": "automatic",
+            "event": "the agent finishes and writes a real result",
+            "id": "command-desk/TRN-008"
+          },
+          {
+            "from": "running",
+            "to": "failed",
+            "mover": "automatic",
+            "event": "the agent errors or stops before finishing",
+            "id": "command-desk/TRN-009"
+          }
+        ],
+        "approvals": [
+          {
+            "stage": "running",
+            "approvers": [
+              "Sam"
+            ]
+          }
+        ],
+        "on_reject": {
+          "back_to": "failed",
+          "resubmit": "yes"
+        },
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "queued",
+        "terminal": [
+          "done",
+          "failed"
+        ]
+      },
+      "Project lifecycle": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Sam"
+          ],
+          "action": "creates a project and sets its goal"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-011",
+            "name": "active"
+          },
+          {
+            "id": "command-desk/STG-012",
+            "name": "paused"
+          },
+          {
+            "id": "command-desk/STG-013",
+            "name": "finished"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "active",
+            "to": "paused",
+            "mover": "roles",
+            "roles": [
+              "Sam"
+            ],
+            "id": "command-desk/TRN-010"
+          },
+          {
+            "from": "paused",
+            "to": "active",
+            "mover": "roles",
+            "roles": [
+              "Sam"
+            ],
+            "id": "command-desk/TRN-011"
+          },
+          {
+            "from": "active",
+            "to": "finished",
+            "mover": "automatic",
+            "event": "Sam marks the goal met and no job under the project is queued or running",
+            "id": "command-desk/TRN-012"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "active",
+        "terminal": [
+          "finished"
+        ]
+      },
+      "Linked service lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "a service is connected through the Connect a service form; it starts in 'connected'"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-014",
+            "name": "connected"
+          },
+          {
+            "id": "command-desk/STG-015",
+            "name": "expired"
+          },
+          {
+            "id": "command-desk/STG-016",
+            "name": "disconnected"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "connected",
+            "to": "expired",
+            "mover": "automatic",
+            "event": "a real call to the service is refused because its token or key is no longer valid",
+            "id": "command-desk/TRN-013"
+          },
+          {
+            "from": "expired",
+            "to": "connected",
+            "mover": "automatic",
+            "event": "the service is reconnected and a real call to it succeeds",
+            "id": "command-desk/TRN-014"
+          },
+          {
+            "from": "expired",
+            "to": "disconnected",
+            "mover": "roles",
+            "roles": [
+              "Sam"
+            ],
+            "id": "command-desk/TRN-015"
+          },
+          {
+            "from": "connected",
+            "to": "disconnected",
+            "mover": "roles",
+            "roles": [
+              "Sam"
+            ],
+            "id": "command-desk/TRN-016"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "connected",
+        "terminal": [
+          "disconnected"
+        ]
+      },
+      "Document lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "a document is uploaded; it starts in 'received'"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-017",
+            "name": "received"
+          },
+          {
+            "id": "command-desk/STG-018",
+            "name": "filled"
+          },
+          {
+            "id": "command-desk/STG-019",
+            "name": "signed"
+          },
+          {
+            "id": "command-desk/STG-020",
+            "name": "done"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "received",
+            "to": "filled",
+            "mover": "automatic",
+            "event": "Hands fills the fields it can",
+            "id": "command-desk/TRN-017"
+          },
+          {
+            "from": "filled",
+            "to": "signed",
+            "mover": "automatic",
+            "event": "Sam approves at the Trust Gate",
+            "id": "command-desk/TRN-018"
+          },
+          {
+            "from": "signed",
+            "to": "done",
+            "mover": "automatic",
+            "event": "the completed copy is written and attested",
+            "id": "command-desk/TRN-019"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "received",
+        "terminal": [
+          "done"
+        ]
+      }
+    },
+    "notifications": {
+      "Agent stopped": {
+        "trigger": {
+          "kind": "event",
+          "event": "an agent moves to stopped-and-reported"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sam"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "command-desk/NOTIF-001"
+      },
+      "Job failed": {
+        "trigger": {
+          "kind": "event",
+          "event": "a job moves to failed"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sam"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "command-desk/NOTIF-002"
+      },
+      "Job done": {
+        "trigger": {
+          "kind": "event",
+          "event": "a job moves to done"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sam"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "command-desk/NOTIF-003"
+      },
+      "Approval needed": {
+        "trigger": {
+          "kind": "event",
+          "event": "an agent reaches an irreversible action — sending an email, paying for something"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sam"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "command-desk/NOTIF-004"
+      }
+    },
+    "reports": {
+      "Activity per agent": {
+        "data_source": "What got done, per agent, this week?",
+        "metrics": {
+          "jobs done per agent per week": "auto: count/sum of 'jobs done per agent per week'",
+          "jobs failed per agent per week": "auto: count/sum of 'jobs failed per agent per week'"
+        },
+        "spec": [
+          {
+            "metric": "jobs done per agent per week",
+            "spec": {
+              "table": "jobs",
+              "aggregation": "count",
+              "group_by": "agent",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "=",
+                  "value": "done"
+                }
+              ]
+            }
+          },
+          {
+            "metric": "jobs failed per agent per week",
+            "spec": {
+              "table": "jobs",
+              "aggregation": "count",
+              "group_by": "agent",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "=",
+                  "value": "failed"
+                }
+              ]
+            }
+          }
+        ],
+        "id": "command-desk/RPT-001"
+      },
+      "Cost": {
+        "data_source": "What did the hosted model calls cost?",
+        "metrics": {
+          "spend on hosted model calls": "auto: count/sum of 'spend on hosted model calls'"
+        },
+        "spec": [
+          {
+            "metric": "spend on hosted model calls",
+            "spec": {
+              "table": "jobs",
+              "aggregation": "sum",
+              "value_field": "cost",
+              "group_by": "agent"
+            }
+          }
+        ],
+        "id": "command-desk/RPT-002"
+      }
+    },
+    "forms": {
+      "Add an agent": [
+        "Name",
+        "Role",
+        "Model",
+        "Instructions",
+        "Tools it may use",
+        "Is on",
+        "Reports to"
+      ],
+      "Connect a service": [
+        "Service",
+        "Token or key",
+        "Used by",
+        "Live"
+      ],
+      "Upload a document": [
+        "File",
+        "Type",
+        "Job"
+      ]
+    },
+    "integrations": {
+      "Gmail": {
+        "purpose": "Sam's real email — the email agent reads it and drafts replies into it.",
+        "sends": "draft replies and labels",
+        "receives": "threads and messages",
+        "timing": {
+          "kind": "event",
+          "event": "a message arrives, or Sam commands the agent from inside the thread"
+        },
+        "connection_scope": "per_user",
+        "on_unavailable": "continue_without",
+        "auth": "oauth"
+      },
+      "Google Calendar": {
+        "purpose": "what is coming up, so the desk can plan around it.",
+        "sends": "events it is asked to create",
+        "receives": "the calendar's events",
+        "timing": {
+          "kind": "event",
+          "event": "the calendar surface is opened, or an agent needs the day's shape"
+        },
+        "connection_scope": "per_user",
+        "on_unavailable": "continue_without",
+        "auth": "oauth"
+      },
+      "Tavily search": {
+        "purpose": "web search for the agents that need to look something up.",
+        "sends": "a search query",
+        "receives": "results with sources",
+        "timing": {
+          "kind": "event",
+          "event": "an agent runs a job that needs the web"
+        },
+        "connection_scope": "per_user",
+        "on_unavailable": "continue_without",
+        "auth": "api_key"
+      },
+      "Model providers": {
+        "purpose": "the LLMs the agents run on — Ollama locally, hosted only where speed forces it.",
+        "sends": "prompts",
+        "receives": "completions",
+        "timing": {
+          "kind": "event",
+          "event": "any agent takes a turn"
+        },
+        "connection_scope": "per_user",
+        "on_unavailable": "continue_without",
+        "auth": "api_key"
+      }
+    },
+    "auth": {
+      "AU.01": [
+        "admin_created"
+      ],
+      "AU.02": [],
+      "AU.03": "no",
+      "AU.04": [
+        "password"
+      ],
+      "AU.07": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "AU.08": "never",
+      "AU.09": "yes",
+      "AU.10": "never",
+      "AU.11": {
+        "allowed": "no"
+      },
+      "AU.12": {
+        "allowed": "no"
+      },
+      "AU.13": [],
+      "AU.14": {
+        "required": "no"
+      }
+    },
+    "brand": {
+      "app_name": "Command Desk",
+      "assets": {
+        "mode": "provided",
+        "path": "orb-glyph.png + orb-rotor.png (gold; Sam's own mark, cut from the reference screenshot)"
+      }
+    },
+    "screens_inventory": [
+      {
+        "id": "command-desk/SCR-001",
+        "kind": "list",
+        "record": "Agent"
+      },
+      {
+        "id": "command-desk/SCR-002",
+        "kind": "detail",
+        "record": "Agent"
+      },
+      {
+        "id": "command-desk/SCR-003",
+        "kind": "list",
+        "record": "Conversation"
+      },
+      {
+        "id": "command-desk/SCR-004",
+        "kind": "detail",
+        "record": "Conversation"
+      },
+      {
+        "id": "command-desk/SCR-005",
+        "kind": "list",
+        "record": "Job"
+      },
+      {
+        "id": "command-desk/SCR-006",
+        "kind": "detail",
+        "record": "Job"
+      },
+      {
+        "id": "command-desk/SCR-007",
+        "kind": "list",
+        "record": "Project"
+      },
+      {
+        "id": "command-desk/SCR-008",
+        "kind": "detail",
+        "record": "Project"
+      },
+      {
+        "id": "command-desk/SCR-009",
+        "kind": "list",
+        "record": "Memory entry"
+      },
+      {
+        "id": "command-desk/SCR-010",
+        "kind": "detail",
+        "record": "Memory entry"
+      },
+      {
+        "id": "command-desk/SCR-011",
+        "kind": "list",
+        "record": "Linked service"
+      },
+      {
+        "id": "command-desk/SCR-012",
+        "kind": "detail",
+        "record": "Linked service"
+      },
+      {
+        "id": "command-desk/SCR-013",
+        "kind": "list",
+        "record": "Document"
+      },
+      {
+        "id": "command-desk/SCR-014",
+        "kind": "detail",
+        "record": "Document"
+      },
+      {
+        "id": "command-desk/SCR-015",
+        "kind": "form",
+        "form": "Add an agent",
+        "record": "Agent"
+      },
+      {
+        "id": "command-desk/SCR-016",
+        "kind": "form",
+        "form": "Connect a service",
+        "record": "Linked service"
+      },
+      {
+        "id": "command-desk/SCR-017",
+        "kind": "form",
+        "form": "Upload a document",
+        "record": "Document"
+      },
+      {
+        "id": "command-desk/SCR-018",
+        "kind": "report",
+        "report": "Activity per agent"
+      },
+      {
+        "id": "command-desk/SCR-019",
+        "kind": "report",
+        "report": "Cost"
+      },
+      {
+        "id": "command-desk/SCR-020",
+        "kind": "integration_status",
+        "integration": "Gmail"
+      },
+      {
+        "id": "command-desk/SCR-021",
+        "kind": "integration_status",
+        "integration": "Google Calendar"
+      },
+      {
+        "id": "command-desk/SCR-022",
+        "kind": "integration_status",
+        "integration": "Tavily search"
+      },
+      {
+        "id": "command-desk/SCR-023",
+        "kind": "integration_status",
+        "integration": "Model providers"
+      }
+    ],
+    "navigation": [
+      "command-desk/SCR-001",
+      "command-desk/SCR-002",
+      "command-desk/SCR-003",
+      "command-desk/SCR-004",
+      "command-desk/SCR-005",
+      "command-desk/SCR-006",
+      "command-desk/SCR-007",
+      "command-desk/SCR-008",
+      "command-desk/SCR-009",
+      "command-desk/SCR-010",
+      "command-desk/SCR-011",
+      "command-desk/SCR-012",
+      "command-desk/SCR-013",
+      "command-desk/SCR-014",
+      "command-desk/SCR-015",
+      "command-desk/SCR-016",
+      "command-desk/SCR-017",
+      "command-desk/SCR-018",
+      "command-desk/SCR-019",
+      "command-desk/SCR-020",
+      "command-desk/SCR-021",
+      "command-desk/SCR-022",
+      "command-desk/SCR-023"
+    ],
+    "landing_per_role": {
+      "Sam": "Home"
+    },
+    "actions_inventory": [
+      {
+        "id": "command-desk/ACT-001",
+        "kind": "create",
+        "record": "Agent",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Agent' record"
+      },
+      {
+        "id": "command-desk/ACT-002",
+        "kind": "edit",
+        "record": "Agent",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Agent' record"
+      },
+      {
+        "id": "command-desk/ACT-003",
+        "kind": "delete",
+        "record": "Agent",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Agent' record"
+      },
+      {
+        "id": "command-desk/ACT-004",
+        "kind": "custom",
+        "record": "Agent",
+        "detail": {
+          "name": "Pause",
+          "who": [
+            "Sam"
+          ],
+          "effect": "stops the agent running and records that Sam paused it",
+          "result_location": "the agent's own screen, and by voice through Nova",
+          "execution": {
+            "op": "set_fields",
+            "fields": {
+              "is_on": 0,
+              "stage": "stopped-and-reported"
+            }
+          }
+        },
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "stops the agent running and records that Sam paused it"
+      },
+      {
+        "id": "command-desk/ACT-005",
+        "kind": "create",
+        "record": "Conversation",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Conversation' record"
+      },
+      {
+        "id": "command-desk/ACT-006",
+        "kind": "edit",
+        "record": "Conversation",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Conversation' record"
+      },
+      {
+        "id": "command-desk/ACT-007",
+        "kind": "delete",
+        "record": "Conversation",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Conversation' record"
+      },
+      {
+        "id": "command-desk/ACT-008",
+        "kind": "create",
+        "record": "Job",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Job' record"
+      },
+      {
+        "id": "command-desk/ACT-009",
+        "kind": "edit",
+        "record": "Job",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Job' record"
+      },
+      {
+        "id": "command-desk/ACT-010",
+        "kind": "delete",
+        "record": "Job",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Job' record"
+      },
+      {
+        "id": "command-desk/ACT-011",
+        "kind": "custom",
+        "record": "Job",
+        "detail": {
+          "name": "Retry",
+          "who": [
+            "Sam"
+          ],
+          "effect": "runs the same job again from the start",
+          "result_location": "the job's own screen, and by voice through Nova",
+          "execution": {
+            "op": "reset_to_stage",
+            "stage_column": "stage",
+            "stage": "queued",
+            "clear": [
+              "result",
+              "finished_at"
+            ]
+          }
+        },
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "runs the same job again from the start"
+      },
+      {
+        "id": "command-desk/ACT-012",
+        "kind": "create",
+        "record": "Project",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Project' record"
+      },
+      {
+        "id": "command-desk/ACT-013",
+        "kind": "edit",
+        "record": "Project",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Project' record"
+      },
+      {
+        "id": "command-desk/ACT-014",
+        "kind": "delete",
+        "record": "Project",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Project' record"
+      },
+      {
+        "id": "command-desk/ACT-015",
+        "kind": "create",
+        "record": "Memory entry",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Memory entry' record"
+      },
+      {
+        "id": "command-desk/ACT-016",
+        "kind": "edit",
+        "record": "Memory entry",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Memory entry' record"
+      },
+      {
+        "id": "command-desk/ACT-017",
+        "kind": "delete",
+        "record": "Memory entry",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Memory entry' record"
+      },
+      {
+        "id": "command-desk/ACT-018",
+        "kind": "create",
+        "record": "Linked service",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Linked service' record"
+      },
+      {
+        "id": "command-desk/ACT-019",
+        "kind": "edit",
+        "record": "Linked service",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Linked service' record"
+      },
+      {
+        "id": "command-desk/ACT-020",
+        "kind": "delete",
+        "record": "Linked service",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Linked service' record"
+      },
+      {
+        "id": "command-desk/ACT-021",
+        "kind": "create",
+        "record": "Document",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Document' record"
+      },
+      {
+        "id": "command-desk/ACT-022",
+        "kind": "edit",
+        "record": "Document",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Document' record"
+      },
+      {
+        "id": "command-desk/ACT-023",
+        "kind": "delete",
+        "record": "Document",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Document' record"
+      },
+      {
+        "id": "command-desk/ACT-024",
+        "kind": "custom",
+        "record": "Document",
+        "detail": {
+          "name": "Open source document",
+          "who": [
+            "Sam"
+          ],
+          "effect": "opens the original uploaded file",
+          "result_location": "the document's own screen, and by voice through Nova",
+          "execution": {
+            "op": "clear_fields",
+            "fields": []
+          }
+        },
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "opens the original uploaded file"
+      },
+      {
+        "id": "command-desk/ACT-025",
+        "kind": "transition",
+        "workflow": "Agent lifecycle",
+        "from": "running",
+        "to": "stopped-and-reported",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Agent lifecycle' from 'running' to 'stopped-and-reported'"
+      },
+      {
+        "id": "command-desk/ACT-026",
+        "kind": "transition",
+        "workflow": "Agent lifecycle",
+        "from": "stopped-and-reported",
+        "to": "running",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Agent lifecycle' from 'stopped-and-reported' to 'running'"
+      },
+      {
+        "id": "command-desk/ACT-027",
+        "kind": "transition",
+        "workflow": "Agent lifecycle",
+        "from": "stopped-and-reported",
+        "to": "offline",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Agent lifecycle' from 'stopped-and-reported' to 'offline'"
+      },
+      {
+        "id": "command-desk/ACT-028",
+        "kind": "transition",
+        "workflow": "Conversation lifecycle",
+        "from": "open",
+        "to": "needs attention",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Conversation lifecycle' from 'open' to 'needs attention'"
+      },
+      {
+        "id": "command-desk/ACT-029",
+        "kind": "transition",
+        "workflow": "Conversation lifecycle",
+        "from": "needs attention",
+        "to": "closed",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Conversation lifecycle' from 'needs attention' to 'closed'"
+      },
+      {
+        "id": "command-desk/ACT-030",
+        "kind": "transition",
+        "workflow": "Conversation lifecycle",
+        "from": "open",
+        "to": "closed",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Conversation lifecycle' from 'open' to 'closed'"
+      },
+      {
+        "id": "command-desk/ACT-031",
+        "kind": "transition",
+        "workflow": "Job lifecycle",
+        "from": "queued",
+        "to": "running",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Job lifecycle' from 'queued' to 'running'"
+      },
+      {
+        "id": "command-desk/ACT-032",
+        "kind": "transition",
+        "workflow": "Job lifecycle",
+        "from": "running",
+        "to": "done",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Job lifecycle' from 'running' to 'done'"
+      },
+      {
+        "id": "command-desk/ACT-033",
+        "kind": "transition",
+        "workflow": "Job lifecycle",
+        "from": "running",
+        "to": "failed",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Job lifecycle' from 'running' to 'failed'"
+      },
+      {
+        "id": "command-desk/ACT-034",
+        "kind": "approve",
+        "workflow": "Job lifecycle",
+        "stage": "running",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "approves 'Job lifecycle' at stage 'running'"
+      },
+      {
+        "id": "command-desk/ACT-035",
+        "kind": "transition",
+        "workflow": "Project lifecycle",
+        "from": "active",
+        "to": "paused",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "moves 'Project lifecycle' from 'active' to 'paused'"
+      },
+      {
+        "id": "command-desk/ACT-036",
+        "kind": "transition",
+        "workflow": "Project lifecycle",
+        "from": "paused",
+        "to": "active",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "moves 'Project lifecycle' from 'paused' to 'active'"
+      },
+      {
+        "id": "command-desk/ACT-037",
+        "kind": "transition",
+        "workflow": "Project lifecycle",
+        "from": "active",
+        "to": "finished",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Project lifecycle' from 'active' to 'finished'"
+      },
+      {
+        "id": "command-desk/ACT-038",
+        "kind": "transition",
+        "workflow": "Linked service lifecycle",
+        "from": "connected",
+        "to": "expired",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Linked service lifecycle' from 'connected' to 'expired'"
+      },
+      {
+        "id": "command-desk/ACT-039",
+        "kind": "transition",
+        "workflow": "Linked service lifecycle",
+        "from": "expired",
+        "to": "connected",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Linked service lifecycle' from 'expired' to 'connected'"
+      },
+      {
+        "id": "command-desk/ACT-040",
+        "kind": "transition",
+        "workflow": "Linked service lifecycle",
+        "from": "expired",
+        "to": "disconnected",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "moves 'Linked service lifecycle' from 'expired' to 'disconnected'"
+      },
+      {
+        "id": "command-desk/ACT-041",
+        "kind": "transition",
+        "workflow": "Linked service lifecycle",
+        "from": "connected",
+        "to": "disconnected",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "moves 'Linked service lifecycle' from 'connected' to 'disconnected'"
+      },
+      {
+        "id": "command-desk/ACT-042",
+        "kind": "transition",
+        "workflow": "Document lifecycle",
+        "from": "received",
+        "to": "filled",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Document lifecycle' from 'received' to 'filled'"
+      },
+      {
+        "id": "command-desk/ACT-043",
+        "kind": "transition",
+        "workflow": "Document lifecycle",
+        "from": "filled",
+        "to": "signed",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Document lifecycle' from 'filled' to 'signed'"
+      },
+      {
+        "id": "command-desk/ACT-044",
+        "kind": "transition",
+        "workflow": "Document lifecycle",
+        "from": "signed",
+        "to": "done",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Document lifecycle' from 'signed' to 'done'"
+      },
+      {
+        "id": "command-desk/ACT-045",
+        "kind": "submit",
+        "form": "Add an agent",
+        "record": "Agent",
+        "roles": null,
+        "outcome": "submits the 'Add an agent' form, creating/editing its target record 'Agent'"
+      },
+      {
+        "id": "command-desk/ACT-046",
+        "kind": "submit",
+        "form": "Connect a service",
+        "record": "Linked service",
+        "roles": null,
+        "outcome": "submits the 'Connect a service' form, creating/editing its target record 'Linked service'"
+      },
+      {
+        "id": "command-desk/ACT-047",
+        "kind": "submit",
+        "form": "Upload a document",
+        "record": "Document",
+        "roles": null,
+        "outcome": "submits the 'Upload a document' form, creating/editing its target record 'Document'"
+      }
+    ],
+    "recurring_ops": [
+      {
+        "id": "command-desk/OPS-001",
+        "source": "R.14:Agent",
+        "detail": "forever"
+      },
+      {
+        "id": "command-desk/OPS-002",
+        "source": "R.14:Conversation",
+        "detail": "forever"
+      },
+      {
+        "id": "command-desk/OPS-003",
+        "source": "R.14:Job",
+        "detail": "forever"
+      },
+      {
+        "id": "command-desk/OPS-004",
+        "source": "R.14:Project",
+        "detail": "forever"
+      },
+      {
+        "id": "command-desk/OPS-005",
+        "source": "R.14:Memory entry",
+        "detail": "forever"
+      },
+      {
+        "id": "command-desk/OPS-006",
+        "source": "R.14:Linked service",
+        "detail": "forever"
+      },
+      {
+        "id": "command-desk/OPS-007",
+        "source": "R.14:Document",
+        "detail": "forever"
+      },
+      {
+        "id": "command-desk/OPS-008",
+        "source": "FL.01:Agent lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "an agent is created and switched on; it starts in 'running'"
+        }
+      },
+      {
+        "id": "command-desk/OPS-009",
+        "source": "FL.01:Conversation lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "an agent writes the first message of a thread; it starts in 'open'"
+        }
+      },
+      {
+        "id": "command-desk/OPS-010",
+        "source": "FL.01:Job lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "an agent is given a job; it starts in 'queued'"
+        }
+      },
+      {
+        "id": "command-desk/OPS-011",
+        "source": "FL.01:Project lifecycle",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Sam"
+          ],
+          "action": "creates a project and sets its goal"
+        }
+      },
+      {
+        "id": "command-desk/OPS-012",
+        "source": "FL.01:Linked service lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "a service is connected through the Connect a service form; it starts in 'connected'"
+        }
+      },
+      {
+        "id": "command-desk/OPS-013",
+        "source": "FL.01:Document lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "a document is uploaded; it starts in 'received'"
+        }
+      },
+      {
+        "id": "command-desk/OPS-014",
+        "source": "FLX.03:Gmail",
+        "detail": {
+          "kind": "event",
+          "event": "a message arrives, or Sam commands the agent from inside the thread"
+        }
+      },
+      {
+        "id": "command-desk/OPS-015",
+        "source": "FLX.03:Google Calendar",
+        "detail": {
+          "kind": "event",
+          "event": "the calendar surface is opened, or an agent needs the day's shape"
+        }
+      },
+      {
+        "id": "command-desk/OPS-016",
+        "source": "FLX.03:Tavily search",
+        "detail": {
+          "kind": "event",
+          "event": "an agent runs a job that needs the web"
+        }
+      },
+      {
+        "id": "command-desk/OPS-017",
+        "source": "FLX.03:Model providers",
+        "detail": {
+          "kind": "event",
+          "event": "any agent takes a turn"
+        }
+      },
+      {
+        "id": "command-desk/OPS-018",
+        "source": "N.01:Agent stopped",
+        "detail": {
+          "kind": "event",
+          "event": "an agent moves to stopped-and-reported"
+        }
+      },
+      {
+        "id": "command-desk/OPS-019",
+        "source": "N.01:Job failed",
+        "detail": {
+          "kind": "event",
+          "event": "a job moves to failed"
+        }
+      },
+      {
+        "id": "command-desk/OPS-020",
+        "source": "N.01:Job done",
+        "detail": {
+          "kind": "event",
+          "event": "a job moves to done"
+        }
+      },
+      {
+        "id": "command-desk/OPS-021",
+        "source": "N.01:Approval needed",
+        "detail": {
+          "kind": "event",
+          "event": "an agent reaches an irreversible action — sending an email, paying for something"
+        }
+      },
+      {
+        "id": "command-desk/OPS-022",
+        "source": "RP.08:Activity per agent",
+        "detail": {
+          "enabled": "no"
+        }
+      },
+      {
+        "id": "command-desk/OPS-023",
+        "source": "RP.08:Cost",
+        "detail": {
+          "enabled": "no"
+        }
+      }
+    ],
+    "qa_generated_tests": [
+      {
+        "id": "command-desk/QA-001",
+        "action_id": "command-desk/ACT-001",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-001",
+          "kind": "create",
+          "record": "Agent",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Agent' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-002",
+        "action_id": "command-desk/ACT-002",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-002",
+          "kind": "edit",
+          "record": "Agent",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Agent' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-003",
+        "action_id": "command-desk/ACT-003",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-003",
+          "kind": "delete",
+          "record": "Agent",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Agent' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-004",
+        "action_id": "command-desk/ACT-004",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-004",
+          "kind": "custom",
+          "record": "Agent",
+          "detail": {
+            "name": "Pause",
+            "who": [
+              "Sam"
+            ],
+            "effect": "stops the agent running and records that Sam paused it",
+            "result_location": "the agent's own screen, and by voice through Nova",
+            "execution": {
+              "op": "set_fields",
+              "fields": {
+                "is_on": 0,
+                "stage": "stopped-and-reported"
+              }
+            }
+          },
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "stops the agent running and records that Sam paused it"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-005",
+        "action_id": "command-desk/ACT-005",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-005",
+          "kind": "create",
+          "record": "Conversation",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Conversation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-006",
+        "action_id": "command-desk/ACT-006",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-006",
+          "kind": "edit",
+          "record": "Conversation",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Conversation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-007",
+        "action_id": "command-desk/ACT-007",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-007",
+          "kind": "delete",
+          "record": "Conversation",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Conversation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-008",
+        "action_id": "command-desk/ACT-008",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-008",
+          "kind": "create",
+          "record": "Job",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Job' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-009",
+        "action_id": "command-desk/ACT-009",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-009",
+          "kind": "edit",
+          "record": "Job",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Job' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-010",
+        "action_id": "command-desk/ACT-010",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-010",
+          "kind": "delete",
+          "record": "Job",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Job' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-011",
+        "action_id": "command-desk/ACT-011",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-011",
+          "kind": "custom",
+          "record": "Job",
+          "detail": {
+            "name": "Retry",
+            "who": [
+              "Sam"
+            ],
+            "effect": "runs the same job again from the start",
+            "result_location": "the job's own screen, and by voice through Nova",
+            "execution": {
+              "op": "reset_to_stage",
+              "stage_column": "stage",
+              "stage": "queued",
+              "clear": [
+                "result",
+                "finished_at"
+              ]
+            }
+          },
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "runs the same job again from the start"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-012",
+        "action_id": "command-desk/ACT-012",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-012",
+          "kind": "create",
+          "record": "Project",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Project' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-013",
+        "action_id": "command-desk/ACT-013",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-013",
+          "kind": "edit",
+          "record": "Project",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Project' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-014",
+        "action_id": "command-desk/ACT-014",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-014",
+          "kind": "delete",
+          "record": "Project",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Project' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-015",
+        "action_id": "command-desk/ACT-015",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-015",
+          "kind": "create",
+          "record": "Memory entry",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Memory entry' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-016",
+        "action_id": "command-desk/ACT-016",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-016",
+          "kind": "edit",
+          "record": "Memory entry",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Memory entry' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-017",
+        "action_id": "command-desk/ACT-017",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-017",
+          "kind": "delete",
+          "record": "Memory entry",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Memory entry' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-018",
+        "action_id": "command-desk/ACT-018",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-018",
+          "kind": "create",
+          "record": "Linked service",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Linked service' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-019",
+        "action_id": "command-desk/ACT-019",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-019",
+          "kind": "edit",
+          "record": "Linked service",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Linked service' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-020",
+        "action_id": "command-desk/ACT-020",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-020",
+          "kind": "delete",
+          "record": "Linked service",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Linked service' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-021",
+        "action_id": "command-desk/ACT-021",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-021",
+          "kind": "create",
+          "record": "Document",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Document' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-022",
+        "action_id": "command-desk/ACT-022",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-022",
+          "kind": "edit",
+          "record": "Document",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Document' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-023",
+        "action_id": "command-desk/ACT-023",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-023",
+          "kind": "delete",
+          "record": "Document",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Document' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-024",
+        "action_id": "command-desk/ACT-024",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-024",
+          "kind": "custom",
+          "record": "Document",
+          "detail": {
+            "name": "Open source document",
+            "who": [
+              "Sam"
+            ],
+            "effect": "opens the original uploaded file",
+            "result_location": "the document's own screen, and by voice through Nova",
+            "execution": {
+              "op": "clear_fields",
+              "fields": []
+            }
+          },
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "opens the original uploaded file"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-025",
+        "action_id": "command-desk/ACT-025",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-025",
+          "kind": "transition",
+          "workflow": "Agent lifecycle",
+          "from": "running",
+          "to": "stopped-and-reported",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Agent lifecycle' from 'running' to 'stopped-and-reported'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-026",
+        "action_id": "command-desk/ACT-026",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-026",
+          "kind": "transition",
+          "workflow": "Agent lifecycle",
+          "from": "stopped-and-reported",
+          "to": "running",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Agent lifecycle' from 'stopped-and-reported' to 'running'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-027",
+        "action_id": "command-desk/ACT-027",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-027",
+          "kind": "transition",
+          "workflow": "Agent lifecycle",
+          "from": "stopped-and-reported",
+          "to": "offline",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Agent lifecycle' from 'stopped-and-reported' to 'offline'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-028",
+        "action_id": "command-desk/ACT-028",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-028",
+          "kind": "transition",
+          "workflow": "Conversation lifecycle",
+          "from": "open",
+          "to": "needs attention",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Conversation lifecycle' from 'open' to 'needs attention'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-029",
+        "action_id": "command-desk/ACT-029",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-029",
+          "kind": "transition",
+          "workflow": "Conversation lifecycle",
+          "from": "needs attention",
+          "to": "closed",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Conversation lifecycle' from 'needs attention' to 'closed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-030",
+        "action_id": "command-desk/ACT-030",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-030",
+          "kind": "transition",
+          "workflow": "Conversation lifecycle",
+          "from": "open",
+          "to": "closed",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Conversation lifecycle' from 'open' to 'closed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-031",
+        "action_id": "command-desk/ACT-031",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-031",
+          "kind": "transition",
+          "workflow": "Job lifecycle",
+          "from": "queued",
+          "to": "running",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Job lifecycle' from 'queued' to 'running'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-032",
+        "action_id": "command-desk/ACT-032",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-032",
+          "kind": "transition",
+          "workflow": "Job lifecycle",
+          "from": "running",
+          "to": "done",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Job lifecycle' from 'running' to 'done'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-033",
+        "action_id": "command-desk/ACT-033",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-033",
+          "kind": "transition",
+          "workflow": "Job lifecycle",
+          "from": "running",
+          "to": "failed",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Job lifecycle' from 'running' to 'failed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-034",
+        "action_id": "command-desk/ACT-034",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-034",
+          "kind": "approve",
+          "workflow": "Job lifecycle",
+          "stage": "running",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "approves 'Job lifecycle' at stage 'running'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-035",
+        "action_id": "command-desk/ACT-035",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-035",
+          "kind": "transition",
+          "workflow": "Project lifecycle",
+          "from": "active",
+          "to": "paused",
+          "mover": "roles",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "moves 'Project lifecycle' from 'active' to 'paused'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-036",
+        "action_id": "command-desk/ACT-036",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-036",
+          "kind": "transition",
+          "workflow": "Project lifecycle",
+          "from": "paused",
+          "to": "active",
+          "mover": "roles",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "moves 'Project lifecycle' from 'paused' to 'active'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-037",
+        "action_id": "command-desk/ACT-037",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-037",
+          "kind": "transition",
+          "workflow": "Project lifecycle",
+          "from": "active",
+          "to": "finished",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Project lifecycle' from 'active' to 'finished'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-038",
+        "action_id": "command-desk/ACT-038",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-038",
+          "kind": "transition",
+          "workflow": "Linked service lifecycle",
+          "from": "connected",
+          "to": "expired",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Linked service lifecycle' from 'connected' to 'expired'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-039",
+        "action_id": "command-desk/ACT-039",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-039",
+          "kind": "transition",
+          "workflow": "Linked service lifecycle",
+          "from": "expired",
+          "to": "connected",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Linked service lifecycle' from 'expired' to 'connected'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-040",
+        "action_id": "command-desk/ACT-040",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-040",
+          "kind": "transition",
+          "workflow": "Linked service lifecycle",
+          "from": "expired",
+          "to": "disconnected",
+          "mover": "roles",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "moves 'Linked service lifecycle' from 'expired' to 'disconnected'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-041",
+        "action_id": "command-desk/ACT-041",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-041",
+          "kind": "transition",
+          "workflow": "Linked service lifecycle",
+          "from": "connected",
+          "to": "disconnected",
+          "mover": "roles",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "moves 'Linked service lifecycle' from 'connected' to 'disconnected'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-042",
+        "action_id": "command-desk/ACT-042",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-042",
+          "kind": "transition",
+          "workflow": "Document lifecycle",
+          "from": "received",
+          "to": "filled",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Document lifecycle' from 'received' to 'filled'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-043",
+        "action_id": "command-desk/ACT-043",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-043",
+          "kind": "transition",
+          "workflow": "Document lifecycle",
+          "from": "filled",
+          "to": "signed",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Document lifecycle' from 'filled' to 'signed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-044",
+        "action_id": "command-desk/ACT-044",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-044",
+          "kind": "transition",
+          "workflow": "Document lifecycle",
+          "from": "signed",
+          "to": "done",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Document lifecycle' from 'signed' to 'done'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-045",
+        "action_id": "command-desk/ACT-045",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-045",
+          "kind": "submit",
+          "form": "Add an agent",
+          "record": "Agent",
+          "roles": null,
+          "outcome": "submits the 'Add an agent' form, creating/editing its target record 'Agent'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-046",
+        "action_id": "command-desk/ACT-046",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-046",
+          "kind": "submit",
+          "form": "Connect a service",
+          "record": "Linked service",
+          "roles": null,
+          "outcome": "submits the 'Connect a service' form, creating/editing its target record 'Linked service'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-047",
+        "action_id": "command-desk/ACT-047",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-047",
+          "kind": "submit",
+          "form": "Upload a document",
+          "record": "Document",
+          "roles": null,
+          "outcome": "submits the 'Upload a document' form, creating/editing its target record 'Document'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-048",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-001",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-049",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-002",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-050",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-003",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-051",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-004",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-052",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-005",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-053",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-006",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-054",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-007",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-055",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-008",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-056",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-009",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-057",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-010",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-058",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-011",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-059",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-012",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-060",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-013",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-061",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-014",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-062",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-015",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-063",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-016",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-064",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-017",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-065",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-018",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-066",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-019",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-067",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-020",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-068",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-021",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-069",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-022",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-070",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-023",
+        "role": "Sam",
+        "expect": "reachable"
+      }
+    ],
+    "locked": true,
+    "locked_at_graph_version": "3.0"
+  }
+}

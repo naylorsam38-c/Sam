@@ -1,0 +1,18 @@
+{
+  "spec": {
+    "format": ["svg", "png"],
+    "aspect_ratio": "1:1",
+    "min_px": 256,
+    "max_px": 2048,
+    "background": "transparent",
+    "note": "PNG must be square, >=256x256, <=2048x2048, with an alpha channel (transparent background). SVG must declare width==height in its viewBox. Anything outside this is refused, not resized or reinterpreted."
+  },
+  "logos": [
+    {"id": "compass", "name": "Compass", "colour": "#3B5A73", "description": "a circle with an inset diamond, for tools that point somewhere"},
+    {"id": "cube",    "name": "Cube",    "colour": "#4B5563", "description": "an isometric cube outline, for building/assembly tools"},
+    {"id": "spark",   "name": "Spark",   "colour": "#2A7F7F", "description": "a four-point spark, for fast/lightweight tools"},
+    {"id": "orbit",   "name": "Orbit",   "colour": "#4C4A9E", "description": "a ring around a dot, for hub/dashboard tools"},
+    {"id": "grid",    "name": "Grid",    "colour": "#2F6B4F", "description": "a 2x2 grid of squares, for records/data tools"},
+    {"id": "wave",    "name": "Wave",    "colour": "#8A6A1F", "description": "a single smooth curve, for monitoring/flow tools"}
+  ]
+}

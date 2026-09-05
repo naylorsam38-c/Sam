@@ -1,0 +1,4389 @@
+{
+ "template": "booking-frontdesk+accounting-ledger",
+ "source_app": "Acuity Scheduling + Xero (invoicing core)",
+ "category": "combined",
+ "modules": [
+  "catalog_services",
+  "deposits",
+  "invoicing",
+  "payments",
+  "people_directory",
+  "scheduling"
+ ],
+ "inventory": {
+  "records": [
+   "Service",
+   "Contact",
+   "Appointment",
+   "Invoice",
+   "Invoice line",
+   "Bill",
+   "Payment"
+  ],
+  "roles": [
+   "Owner",
+   "Staff",
+   "Admin",
+   "Accountant",
+   "Advisor"
+  ],
+  "forms": [
+   "Public booking form"
+  ],
+  "notifications": [
+   "Booking confirmation",
+   "Appointment reminder",
+   "Cancellation notice",
+   "Invoice sent",
+   "Payment reminder",
+   "Payment received"
+  ],
+  "reports": [
+   "Upcoming appointments",
+   "No-show rate"
+  ],
+  "workflows": [
+   "Appointment lifecycle",
+   "Invoice lifecycle",
+   "Bill lifecycle"
+  ],
+  "file_types": [],
+  "integrations": [],
+  "screens": []
+ },
+ "super_role": "Owner",
+ "answers": {
+  "A.06": [
+   "web"
+  ],
+  "A.07": "yes",
+  "A.08": "single",
+  "A.09": "no",
+  "A.10": [],
+  "A.11": "no",
+  "A.16": "Admin",
+  "P.00": "no",
+  "C.05": {
+   "mode": "simplified",
+   "what": "the public booking flow is mobile-first: one step per screen (service -> time -> details -> pay)"
+  },
+  "C.06": {
+   "Owner": "Calendar",
+   "Staff": "Calendar",
+   "Admin": "Invoices list",
+   "Accountant": "Invoices list",
+   "Advisor": "Invoices list"
+  },
+  "B.01": [
+   "one_off"
+  ],
+  "B.02": "person",
+  "B.04": "AUD",
+  "B.07": "card_only",
+  "B.08": {
+   "grace_days": 0,
+   "after_repeated": "cancel"
+  },
+  "B.11": {
+   "allowed": "yes",
+   "by": [
+    "Owner"
+   ]
+  },
+  "AU.01": [
+   "invited"
+  ],
+  "AU.02": [
+   {
+    "name": "Full name",
+    "type": "short_text",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Email address",
+    "type": "email",
+    "required": "yes",
+    "unique": "yes"
+   }
+  ],
+  "AU.03": "yes",
+  "AU.04": [
+   "password",
+   "google"
+  ],
+  "AU.07": {
+   "scope": "nobody",
+   "method": "n/a"
+  },
+  "AU.08": {
+   "attempts": 5,
+   "duration": "15 minutes"
+  },
+  "AU.09": "yes",
+  "AU.10": "30 days",
+  "AU.11": {
+   "allowed": "yes",
+   "by": [
+    "super"
+   ],
+   "auto_triggers": []
+  },
+  "AU.12": {
+   "allowed": "yes",
+   "by": "both",
+   "data": "anonymised"
+  },
+  "AU.13": [
+   "super"
+  ],
+  "AU.14": {
+   "required": "yes",
+   "status": "need_drafting"
+  },
+  "AU.06": {
+   "inviters": [
+    "Admin"
+   ],
+   "default_role": "Accountant"
+  },
+  "A.01": "Take bookings for my clinic and invoice people afterwards.",
+  "A.05": "Front Room",
+  "C.03": "spacious",
+  "C.04": {
+   "mode": "premade",
+   "logo_id": "wave"
+  },
+  "C.02": [
+   "quick",
+   "simple",
+   "direct"
+  ],
+  "A.03": "Your team's roles are kept, and outsiders get a public page with no account.",
+  "A.02": "Use it to take bookings for my clinic and invoice people afterwards.",
+  "A.04": "It is being used, and what it holds is what is really going on.",
+  "0.01": "guided",
+  "A.12": {
+   "required": "no"
+  },
+  "A.13": {
+   "region": "Australia",
+   "languages": [
+    "English"
+   ]
+  },
+  "A.14": [],
+  "C.01": "none",
+  "C.07": "confirmed",
+  "Z.01": "confirmed",
+  "Z.02": "confirmed",
+  "Z.03": "confirmed",
+  "B.03": [
+   {
+    "name": "Per appointment",
+    "price": "the Price set on the Service being booked",
+    "interval": "one_off",
+    "included": "one appointment of that service",
+    "limits": "none"
+   }
+  ]
+ },
+ "per_instance": {
+  "R.01:Service": "Something customers can book: a name, a length and a price.",
+  "R.02:Service": [
+   {
+    "name": "Name",
+    "type": "short_text",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Description",
+    "type": "long_text",
+    "required": "no",
+    "unique": "no"
+   },
+   {
+    "name": "Duration minutes",
+    "type": "whole_number",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Price",
+    "type": "money",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Deposit required",
+    "type": "yes_no",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Deposit amount",
+    "type": "money",
+    "required": "no",
+    "unique": "no"
+   }
+  ],
+  "R.03:Service": "Name",
+  "R.04:Service": {
+   "needed": "no"
+  },
+  "R.05:Service": [
+   {
+    "role": "Staff",
+    "scope": "all"
+   },
+   {
+    "role": "public",
+    "scope": "public"
+   }
+  ],
+  "R.06:Service": [
+   "Owner"
+  ],
+  "R.07:Service": [
+   {
+    "role": "Owner",
+    "scope": "all"
+   }
+  ],
+  "R.08:Service": [
+   {
+    "role": "Owner",
+    "scope": "all"
+   }
+  ],
+  "R.10:Service": {
+   "has": "no"
+  },
+  "R.11:Service": [],
+  "R.13:Service": "yes",
+  "R.14:Service": "forever",
+  "R.15:Service": [],
+  "R.01:Contact": "A customer or supplier the business invoices or is billed by.",
+  "R.02:Contact": [
+   {
+    "name": "Name",
+    "type": "short_text",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Email",
+    "type": "email",
+    "required": "no",
+    "unique": "no"
+   },
+   {
+    "name": "Phone",
+    "type": "phone",
+    "required": "no",
+    "unique": "no"
+   },
+   {
+    "name": "Type",
+    "type": "one_choice",
+    "required": "yes",
+    "unique": "no",
+    "options": [
+     "customer",
+     "supplier",
+     "both"
+    ]
+   },
+   {
+    "name": "Payment terms days",
+    "type": "whole_number",
+    "required": "no",
+    "unique": "no"
+   }
+  ],
+  "R.03:Contact": "Name",
+  "R.04:Contact": {
+   "needed": "no"
+  },
+  "R.05:Contact": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   },
+   {
+    "role": "Advisor",
+    "scope": "all"
+   }
+  ],
+  "R.06:Contact": [
+   "Accountant"
+  ],
+  "R.07:Contact": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   }
+  ],
+  "R.08:Contact": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   }
+  ],
+  "R.10:Contact": {
+   "has": "no"
+  },
+  "R.11:Contact": [],
+  "R.13:Contact": "yes",
+  "R.14:Contact": "forever",
+  "R.15:Contact": [],
+  "R.01:Appointment": "A booked time slot for one customer, one service and one staff member.",
+  "R.02:Appointment": [
+   {
+    "name": "Service",
+    "type": "link",
+    "required": "yes",
+    "unique": "no",
+    "target_record": "Service"
+   },
+   {
+    "name": "Customer",
+    "type": "link",
+    "required": "yes",
+    "unique": "no",
+    "target_record": "Contact"
+   },
+   {
+    "name": "Staff member",
+    "type": "other",
+    "required": "yes",
+    "unique": "no",
+    "custom_rule": "reference to a user account (pick-a-person field)"
+   },
+   {
+    "name": "Start",
+    "type": "date_time",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Notes",
+    "type": "long_text",
+    "required": "no",
+    "unique": "no"
+   },
+   {
+    "name": "Deposit paid",
+    "type": "yes_no",
+    "required": "no",
+    "unique": "no"
+   }
+  ],
+  "R.03:Appointment": "Start",
+  "R.04:Appointment": {
+   "needed": "yes",
+   "format": "APT-#### (sequential)"
+  },
+  "R.05:Appointment": [
+   {
+    "role": "Staff",
+    "scope": "all"
+   }
+  ],
+  "R.06:Appointment": [
+   "Staff",
+   "public"
+  ],
+  "R.07:Appointment": [
+   {
+    "role": "Staff",
+    "scope": "all"
+   }
+  ],
+  "R.08:Appointment": [
+   {
+    "role": "Owner",
+    "scope": "all"
+   }
+  ],
+  "R.10:Appointment": {
+   "has": "yes",
+   "stages": [
+    "Booked",
+    "Confirmed",
+    "Completed",
+    "Cancelled",
+    "No-show"
+   ]
+  },
+  "R.11:Appointment": [
+   {
+    "target": "Service",
+    "cardinality": "one_to_many",
+    "required": "yes"
+   },
+   {
+    "target": "Contact",
+    "cardinality": "one_to_many",
+    "required": "yes"
+   }
+  ],
+  "R.13:Appointment": "yes",
+  "R.14:Appointment": "forever",
+  "R.15:Appointment": [],
+  "R.12:Appointment": "block",
+  "FL.01:Appointment lifecycle": {
+   "kind": "event",
+   "event": "an appointment is created (public form or by staff); starts in 'Booked'"
+  },
+  "FL.02:Appointment lifecycle": {
+   "stages": [
+    "Booked",
+    "Confirmed",
+    "Completed",
+    "Cancelled",
+    "No-show"
+   ],
+   "initial": "Booked",
+   "terminal": [
+    "Completed",
+    "Cancelled",
+    "No-show"
+   ]
+  },
+  "FL.03:Appointment lifecycle": [
+   {
+    "from": "Booked",
+    "to": "Confirmed",
+    "mover": "roles",
+    "roles": [
+     "Staff"
+    ]
+   },
+   {
+    "from": "Confirmed",
+    "to": "Completed",
+    "mover": "roles",
+    "roles": [
+     "Staff"
+    ]
+   },
+   {
+    "from": "Confirmed",
+    "to": "No-show",
+    "mover": "roles",
+    "roles": [
+     "Staff"
+    ]
+   },
+   {
+    "from": "Booked",
+    "to": "Cancelled",
+    "mover": "roles",
+    "roles": [
+     "Staff"
+    ]
+   },
+   {
+    "from": "Confirmed",
+    "to": "Cancelled",
+    "mover": "roles",
+    "roles": [
+     "Staff"
+    ]
+   }
+  ],
+  "FL.04:Appointment lifecycle": [],
+  "FL.05:Appointment lifecycle": [],
+  "FL.07:Appointment lifecycle": {
+   "allowed": "no"
+  },
+  "FL.08:Appointment lifecycle": "Completed/No-show appointments lock and feed the reports.",
+  "FL.09:Appointment lifecycle": "Completed",
+  "FL.10:Appointment lifecycle": [
+   {
+    "stage": "Booked",
+    "duration": "24 hours",
+    "then": "if the deposit is unpaid, the appointment moves to Cancelled and the slot is released"
+   }
+  ],
+  "FL.11:Appointment lifecycle": [],
+  "N.01:Booking confirmation": {
+   "kind": "event",
+   "event": "an appointment reaches stage Confirmed"
+  },
+  "N.02:Booking confirmation": [
+   {
+    "kind": "field",
+    "record": "Appointment",
+    "field": "Customer"
+   }
+  ],
+  "N.03:Booking confirmation": [
+   "email",
+   "sms"
+  ],
+  "N.04:Booking confirmation": "Your booking is locked in \u2014 here's the time, the service and how to change it.",
+  "N.05:Booking confirmation": "no",
+  "N.01:Appointment reminder": {
+   "kind": "relative_to_date",
+   "record": "Appointment",
+   "date_field": "Start",
+   "offset": "-24 hours"
+  },
+  "N.02:Appointment reminder": [
+   {
+    "kind": "field",
+    "record": "Appointment",
+    "field": "Customer"
+   }
+  ],
+  "N.03:Appointment reminder": [
+   "email",
+   "sms"
+  ],
+  "N.04:Appointment reminder": "Your appointment is tomorrow \u2014 reply or use the link to reschedule.",
+  "N.05:Appointment reminder": "yes",
+  "N.01:Cancellation notice": {
+   "kind": "event",
+   "event": "an appointment moves to Cancelled"
+  },
+  "N.02:Cancellation notice": [
+   {
+    "kind": "field",
+    "record": "Appointment",
+    "field": "Customer"
+   },
+   {
+    "kind": "field",
+    "record": "Appointment",
+    "field": "Staff member"
+   }
+  ],
+  "N.03:Cancellation notice": [
+   "email"
+  ],
+  "N.04:Cancellation notice": "This booking was cancelled \u2014 rebook if it wasn't you.",
+  "N.05:Cancellation notice": "no",
+  "RP.01:Upcoming appointments": "What's booked for the coming days, per staff member?",
+  "RP.02:Upcoming appointments": [
+   "Staff"
+  ],
+  "RP.03:Upcoming appointments": {
+   "delivery": "screen",
+   "shape": "table"
+  },
+  "RP.04:Upcoming appointments": [
+   "count of Appointments in stage Booked or Confirmed"
+  ],
+  "RP.06:Upcoming appointments": {
+   "filters": [
+    "Staff member",
+    "Service"
+   ],
+   "default_range": "next 7 days"
+  },
+  "RP.07:Upcoming appointments": {
+   "allowed": "yes",
+   "by": [
+    "Staff"
+   ]
+  },
+  "RP.08:Upcoming appointments": {
+   "enabled": "no"
+  },
+  "RP.01:No-show rate": "How often do customers fail to turn up?",
+  "RP.02:No-show rate": [
+   "Owner"
+  ],
+  "RP.03:No-show rate": {
+   "delivery": "screen",
+   "shape": "both"
+  },
+  "RP.04:No-show rate": [
+   "no-show rate"
+  ],
+  "RP.06:No-show rate": {
+   "filters": [
+    "Staff member",
+    "Service"
+   ],
+   "default_range": "last 30 days"
+  },
+  "RP.07:No-show rate": {
+   "allowed": "yes",
+   "by": [
+    "Owner"
+   ]
+  },
+  "RP.08:No-show rate": {
+   "enabled": "no"
+  },
+  "F.01:Public booking form": {
+   "purpose": "lets a customer pick a service, a time and a staff member and book it without an account",
+   "fillers": [
+    "public"
+   ]
+  },
+  "F.02:Public booking form": {
+   "target": "Appointment",
+   "extra_fields": []
+  },
+  "F.03:Public booking form": [],
+  "F.04:Public booking form": "no",
+  "F.05:Public booking form": "stay_with_message",
+  "RP.05:No-show rate:no-show rate": "appointments that ended No-show divided by appointments that ended Completed or No-show, in the selected period, by the appointment's Start date; expressed as a percentage",
+  "P.01:Staff": "A person who delivers services and manages their own calendar.",
+  "P.02:Staff": "no",
+  "P.03:Staff": "no",
+  "P.04:Staff": [
+   "Owner"
+  ],
+  "R.01:Invoice": "Money owed TO the business by a customer.",
+  "R.02:Invoice": [
+   {
+    "name": "Contact",
+    "type": "link",
+    "required": "yes",
+    "unique": "no",
+    "target_record": "Contact"
+   },
+   {
+    "name": "Issue date",
+    "type": "date",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Due date",
+    "type": "date",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Reference",
+    "type": "short_text",
+    "required": "no",
+    "unique": "no"
+   },
+   {
+    "name": "Notes",
+    "type": "long_text",
+    "required": "no",
+    "unique": "no"
+   },
+   {
+    "name": "Sent at",
+    "type": "date_time",
+    "required": "no",
+    "unique": "no"
+   }
+  ],
+  "R.03:Invoice": "Contact",
+  "R.04:Invoice": {
+   "needed": "yes",
+   "format": "INV-#### (sequential, never reused)"
+  },
+  "R.05:Invoice": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   },
+   {
+    "role": "Advisor",
+    "scope": "all"
+   }
+  ],
+  "R.06:Invoice": [
+   "Accountant"
+  ],
+  "R.07:Invoice": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   }
+  ],
+  "R.08:Invoice": "nobody",
+  "R.10:Invoice": {
+   "has": "yes",
+   "stages": [
+    "Draft",
+    "Awaiting approval",
+    "Awaiting payment",
+    "Paid",
+    "Voided"
+   ]
+  },
+  "R.11:Invoice": [
+   {
+    "target": "Contact",
+    "cardinality": "one_to_many",
+    "required": "yes"
+   }
+  ],
+  "R.13:Invoice": "yes",
+  "R.14:Invoice": "forever",
+  "R.15:Invoice": [
+   {
+    "name": "Send",
+    "who": [
+     "Accountant"
+    ],
+    "effect": "emails the invoice document to the Contact and stamps the sent time",
+    "result_location": "the invoice page's activity trail",
+    "execution": {
+     "op": "generate_document",
+     "stamp_column": "sent_at",
+     "title_columns": [
+      "reference"
+     ],
+     "line_table": "invoice_lines",
+     "line_fk": "invoice",
+     "line_columns": [
+      "description",
+      "quantity",
+      "unit_amount"
+     ],
+     "body_columns": [
+      "contact",
+      "issue_date",
+      "due_date",
+      "notes"
+     ],
+     "dispatch": "none"
+    }
+   }
+  ],
+  "R.12:Invoice": "block",
+  "R.01:Invoice line": "One charged item on an invoice.",
+  "R.02:Invoice line": [
+   {
+    "name": "Invoice",
+    "type": "link",
+    "required": "yes",
+    "unique": "no",
+    "target_record": "Invoice"
+   },
+   {
+    "name": "Description",
+    "type": "short_text",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Quantity",
+    "type": "decimal_number",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Unit amount",
+    "type": "money",
+    "required": "yes",
+    "unique": "no"
+   }
+  ],
+  "R.03:Invoice line": "Description",
+  "R.04:Invoice line": {
+   "needed": "no"
+  },
+  "R.05:Invoice line": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   },
+   {
+    "role": "Advisor",
+    "scope": "all"
+   }
+  ],
+  "R.06:Invoice line": [
+   "Accountant"
+  ],
+  "R.07:Invoice line": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   }
+  ],
+  "R.08:Invoice line": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   }
+  ],
+  "R.10:Invoice line": {
+   "has": "no"
+  },
+  "R.11:Invoice line": [
+   {
+    "target": "Invoice",
+    "cardinality": "one_to_many",
+    "required": "yes"
+   }
+  ],
+  "R.13:Invoice line": "no",
+  "R.14:Invoice line": "forever",
+  "R.15:Invoice line": [],
+  "R.12:Invoice line": "delete_too",
+  "R.01:Bill": "Money owed BY the business to a supplier.",
+  "R.02:Bill": [
+   {
+    "name": "Contact",
+    "type": "link",
+    "required": "yes",
+    "unique": "no",
+    "target_record": "Contact"
+   },
+   {
+    "name": "Issue date",
+    "type": "date",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Due date",
+    "type": "date",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Amount",
+    "type": "money",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Reference",
+    "type": "short_text",
+    "required": "no",
+    "unique": "no"
+   }
+  ],
+  "R.03:Bill": "Contact",
+  "R.04:Bill": {
+   "needed": "yes",
+   "format": "BILL-#### (sequential)"
+  },
+  "R.05:Bill": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   },
+   {
+    "role": "Advisor",
+    "scope": "all"
+   }
+  ],
+  "R.06:Bill": [
+   "Accountant"
+  ],
+  "R.07:Bill": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   }
+  ],
+  "R.08:Bill": "nobody",
+  "R.10:Bill": {
+   "has": "yes",
+   "stages": [
+    "Draft",
+    "Awaiting payment",
+    "Paid",
+    "Voided"
+   ]
+  },
+  "R.11:Bill": [
+   {
+    "target": "Contact",
+    "cardinality": "one_to_many",
+    "required": "yes"
+   }
+  ],
+  "R.13:Bill": "yes",
+  "R.14:Bill": "forever",
+  "R.15:Bill": [],
+  "R.12:Bill": "block",
+  "R.01:Payment": "A received or made payment applied against an invoice or bill.",
+  "R.02:Payment": [
+   {
+    "name": "Invoice",
+    "type": "link",
+    "required": "no",
+    "unique": "no",
+    "target_record": "Invoice"
+   },
+   {
+    "name": "Bill",
+    "type": "link",
+    "required": "no",
+    "unique": "no",
+    "target_record": "Bill"
+   },
+   {
+    "name": "Amount",
+    "type": "money",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Date",
+    "type": "date",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Method",
+    "type": "one_choice",
+    "required": "yes",
+    "unique": "no",
+    "options": [
+     "bank transfer",
+     "card",
+     "cash",
+     "other"
+    ]
+   }
+  ],
+  "R.03:Payment": "Amount",
+  "R.04:Payment": {
+   "needed": "no"
+  },
+  "R.05:Payment": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   },
+   {
+    "role": "Advisor",
+    "scope": "all"
+   }
+  ],
+  "R.06:Payment": [
+   "Accountant"
+  ],
+  "R.07:Payment": [
+   {
+    "role": "Accountant",
+    "scope": "all"
+   }
+  ],
+  "R.08:Payment": "nobody",
+  "R.10:Payment": {
+   "has": "no"
+  },
+  "R.11:Payment": [
+   {
+    "target": "Invoice",
+    "cardinality": "one_to_many",
+    "required": "no"
+   },
+   {
+    "target": "Bill",
+    "cardinality": "one_to_many",
+    "required": "no"
+   }
+  ],
+  "R.13:Payment": "no",
+  "R.14:Payment": "forever",
+  "R.15:Payment": [],
+  "R.12:Payment": "block",
+  "FL.01:Invoice lifecycle": {
+   "kind": "person",
+   "who": [
+    "Accountant"
+   ],
+   "action": "creating an invoice (starts in Draft)"
+  },
+  "FL.02:Invoice lifecycle": {
+   "stages": [
+    "Draft",
+    "Awaiting approval",
+    "Awaiting payment",
+    "Paid",
+    "Voided"
+   ],
+   "initial": "Draft",
+   "terminal": [
+    "Paid",
+    "Voided"
+   ]
+  },
+  "FL.03:Invoice lifecycle": [
+   {
+    "from": "Draft",
+    "to": "Awaiting approval",
+    "mover": "roles",
+    "roles": [
+     "Accountant"
+    ]
+   },
+   {
+    "from": "Awaiting approval",
+    "to": "Awaiting payment",
+    "mover": "roles",
+    "roles": [
+     "Admin"
+    ]
+   },
+   {
+    "from": "Awaiting payment",
+    "to": "Paid",
+    "mover": "automatic",
+    "event": "Payments applied to the invoice reach its total"
+   },
+   {
+    "from": "Awaiting payment",
+    "to": "Voided",
+    "mover": "roles",
+    "roles": [
+     "Admin"
+    ]
+   },
+   {
+    "from": "Draft",
+    "to": "Voided",
+    "mover": "roles",
+    "roles": [
+     "Accountant"
+    ]
+   }
+  ],
+  "FL.04:Invoice lifecycle": [],
+  "FL.05:Invoice lifecycle": [
+   {
+    "stage": "Awaiting approval",
+    "approvers": [
+     "Admin"
+    ]
+   }
+  ],
+  "FL.07:Invoice lifecycle": {
+   "allowed": "no"
+  },
+  "FL.08:Invoice lifecycle": "Paid invoices lock permanently and feed Profit & loss; Voided invoices keep their number and show struck through.",
+  "FL.09:Invoice lifecycle": "Awaiting payment",
+  "FL.10:Invoice lifecycle": [],
+  "FL.11:Invoice lifecycle": [],
+  "FL.06:Invoice lifecycle": {
+   "back_to": "Draft",
+   "resubmit": "yes"
+  },
+  "FL.01:Bill lifecycle": {
+   "kind": "person",
+   "who": [
+    "Accountant"
+   ],
+   "action": "creating a bill (starts in Draft)"
+  },
+  "FL.02:Bill lifecycle": {
+   "stages": [
+    "Draft",
+    "Awaiting payment",
+    "Paid",
+    "Voided"
+   ],
+   "initial": "Draft",
+   "terminal": [
+    "Paid",
+    "Voided"
+   ]
+  },
+  "FL.03:Bill lifecycle": [
+   {
+    "from": "Draft",
+    "to": "Awaiting payment",
+    "mover": "roles",
+    "roles": [
+     "Accountant"
+    ]
+   },
+   {
+    "from": "Awaiting payment",
+    "to": "Paid",
+    "mover": "automatic",
+    "event": "Payments applied to the bill reach its total"
+   },
+   {
+    "from": "Awaiting payment",
+    "to": "Voided",
+    "mover": "roles",
+    "roles": [
+     "Admin"
+    ]
+   },
+   {
+    "from": "Draft",
+    "to": "Voided",
+    "mover": "roles",
+    "roles": [
+     "Accountant"
+    ]
+   }
+  ],
+  "FL.04:Bill lifecycle": [],
+  "FL.05:Bill lifecycle": [],
+  "FL.07:Bill lifecycle": {
+   "allowed": "no"
+  },
+  "FL.08:Bill lifecycle": "Paid bills lock and feed Profit & loss as expenses.",
+  "FL.09:Bill lifecycle": "Awaiting payment",
+  "FL.10:Bill lifecycle": [],
+  "FL.11:Bill lifecycle": [],
+  "N.01:Invoice sent": {
+   "kind": "event",
+   "event": "the Send action runs on an invoice"
+  },
+  "N.02:Invoice sent": [
+   {
+    "kind": "custom",
+    "who": "the invoice's Contact, at their email address"
+   }
+  ],
+  "N.03:Invoice sent": [
+   "email"
+  ],
+  "N.04:Invoice sent": "Here is your invoice: what it's for, the total, the due date and how to pay.",
+  "N.05:Invoice sent": "no",
+  "N.01:Payment reminder": {
+   "kind": "relative_to_date",
+   "record": "Invoice",
+   "date_field": "Due date",
+   "offset": "+3 days"
+  },
+  "N.02:Payment reminder": [
+   {
+    "kind": "custom",
+    "who": "the invoice's Contact \u2014 only while the invoice is in Awaiting payment"
+   }
+  ],
+  "N.03:Payment reminder": [
+   "email"
+  ],
+  "N.04:Payment reminder": "This invoice is past due \u2014 pay it or tell us why not.",
+  "N.05:Payment reminder": "no",
+  "N.01:Payment received": {
+   "kind": "event",
+   "event": "an invoice moves to Paid"
+  },
+  "N.02:Payment received": [
+   {
+    "kind": "roles",
+    "roles": [
+     "Accountant"
+    ]
+   }
+  ],
+  "N.03:Payment received": [
+   "in_app"
+  ],
+  "N.04:Payment received": "An invoice just got paid in full.",
+  "N.05:Payment received": "yes",
+  "P.01:Accountant": "Does the books: raises invoices, records bills and payments.",
+  "P.02:Accountant": "no",
+  "P.04:Accountant": [
+   "Admin"
+  ],
+  "P.01:Advisor": "An external accountant/bookkeeper with read-only access to everything financial.",
+  "P.02:Advisor": "no",
+  "P.04:Advisor": [
+   "Admin"
+  ],
+  "P.01:Admin": "Was in charge before the pieces were joined; now an ordinary role, with the same authority as Staff.",
+  "P.02:Admin": "no",
+  "P.03:Admin": "no",
+  "P.04:Admin": [
+   "Owner"
+  ]
+ },
+ "ask_customer": [],
+ "features": [
+  {
+   "feature": "Deposits",
+   "controlled_by": "R.02:Service (Deposit required)",
+   "rule": "set every Service's Deposit required = no -> A.09 flips to no, Part B drops, Booked auto-confirms"
+  },
+  {
+   "feature": "SMS reminders",
+   "controlled_by": "N.03 answers",
+   "rule": "remove 'sms' from the channels -> DI.07 (SMS credentials) no longer needed"
+  },
+  {
+   "feature": "Customer accounts",
+   "controlled_by": "AU.01",
+   "rule": "add 'public' self-registration and a 'Customer' role to let customers log in and see their own bookings (R.05:Appointment gains Customer: own)"
+  },
+  {
+   "feature": "Auto-cancel unpaid bookings",
+   "controlled_by": "FL.10:Appointment lifecycle",
+   "rule": "change or delete the 24-hour Booked timeout"
+  },
+  {
+   "feature": "No-show tracking",
+   "controlled_by": "FL.02 stages",
+   "rule": "remove the No-show stage and its report"
+  },
+  {
+   "feature": "Invoice approval step",
+   "controlled_by": "FL.05:Invoice lifecycle",
+   "rule": "empty the approvals list -> Draft goes straight to Awaiting payment (sole traders)"
+  },
+  {
+   "feature": "Bills side",
+   "controlled_by": "A.15 records list",
+   "rule": "remove Bill and its lifecycle -> invoicing-only app"
+  },
+  {
+   "feature": "Overdue chasing",
+   "controlled_by": "N.01:Payment reminder",
+   "rule": "change the +3 days offset, or remove the notification to stop chasing"
+  },
+  {
+   "feature": "Advisor access",
+   "controlled_by": "A.15 roles list",
+   "rule": "remove Advisor -> external-accountant access disappears"
+  }
+ ],
+ "structure": {
+  "records": {
+   "Service": {
+    "fields": {
+     "Name": {
+      "name": "Name",
+      "type": "short_text",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Description": {
+      "name": "Description",
+      "type": "long_text",
+      "required": "no",
+      "unique": "no"
+     },
+     "Duration minutes": {
+      "name": "Duration minutes",
+      "type": "whole_number",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Price": {
+      "name": "Price",
+      "type": "money",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Deposit required": {
+      "name": "Deposit required",
+      "type": "yes_no",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Deposit amount": {
+      "name": "Deposit amount",
+      "type": "money",
+      "required": "no",
+      "unique": "no"
+     }
+    },
+    "storage": {
+     "Name": "VARCHAR(255)",
+     "Description": "TEXT",
+     "Duration minutes": "INTEGER",
+     "Price": "DECIMAL(18,2)",
+     "Deposit required": "BOOLEAN",
+     "Deposit amount": "DECIMAL(18,2)"
+    },
+    "enums": {},
+    "access": {
+     "view": [
+      {
+       "role": "Staff",
+       "scope": "all"
+      },
+      {
+       "role": "public",
+       "scope": "public"
+      }
+     ],
+     "create": [
+      "Owner"
+     ],
+     "edit": [
+      {
+       "role": "Owner",
+       "scope": "all"
+      }
+     ],
+     "delete": [
+      {
+       "role": "Owner",
+       "scope": "all"
+      }
+     ]
+    },
+    "title_field": "Name",
+    "id_style": {
+     "needed": "no"
+    },
+    "lifecycle": {
+     "has": "no"
+    },
+    "retention": "forever",
+    "custom_actions": [],
+    "on_create": [],
+    "id": "booking-frontdesk/REC-001"
+   },
+   "Contact": {
+    "fields": {
+     "Name": {
+      "name": "Name",
+      "type": "short_text",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Email": {
+      "name": "Email",
+      "type": "email",
+      "required": "no",
+      "unique": "no"
+     },
+     "Phone": {
+      "name": "Phone",
+      "type": "phone",
+      "required": "no",
+      "unique": "no"
+     },
+     "Type": {
+      "name": "Type",
+      "type": "one_choice",
+      "required": "yes",
+      "unique": "no",
+      "options": [
+       "customer",
+       "supplier",
+       "both"
+      ]
+     },
+     "Payment terms days": {
+      "name": "Payment terms days",
+      "type": "whole_number",
+      "required": "no",
+      "unique": "no"
+     }
+    },
+    "storage": {
+     "Name": "VARCHAR(255)",
+     "Email": "VARCHAR(255)",
+     "Phone": "VARCHAR(40)",
+     "Type": "ENUM",
+     "Payment terms days": "INTEGER"
+    },
+    "enums": {
+     "Type": [
+      "customer",
+      "supplier",
+      "both"
+     ]
+    },
+    "access": {
+     "view": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      },
+      {
+       "role": "Advisor",
+       "scope": "all"
+      }
+     ],
+     "create": [
+      "Accountant"
+     ],
+     "edit": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      }
+     ],
+     "delete": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      }
+     ]
+    },
+    "title_field": "Name",
+    "id_style": {
+     "needed": "no"
+    },
+    "lifecycle": {
+     "has": "no"
+    },
+    "retention": "forever",
+    "custom_actions": [],
+    "on_create": [],
+    "id": "accounting-ledger/REC-001"
+   },
+   "Appointment": {
+    "fields": {
+     "Service": {
+      "name": "Service",
+      "type": "link",
+      "required": "yes",
+      "unique": "no",
+      "target_record": "Service"
+     },
+     "Customer": {
+      "name": "Customer",
+      "type": "link",
+      "required": "yes",
+      "unique": "no",
+      "target_record": "Contact"
+     },
+     "Staff member": {
+      "name": "Staff member",
+      "type": "other",
+      "required": "yes",
+      "unique": "no",
+      "custom_rule": "reference to a user account (pick-a-person field)"
+     },
+     "Start": {
+      "name": "Start",
+      "type": "date_time",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Notes": {
+      "name": "Notes",
+      "type": "long_text",
+      "required": "no",
+      "unique": "no"
+     },
+     "Deposit paid": {
+      "name": "Deposit paid",
+      "type": "yes_no",
+      "required": "no",
+      "unique": "no"
+     }
+    },
+    "storage": {
+     "Service": "FOREIGN_KEY",
+     "Customer": "FOREIGN_KEY",
+     "Staff member": "FOREIGN_KEY_ROLE",
+     "Start": "DATETIME",
+     "Notes": "TEXT",
+     "Deposit paid": "BOOLEAN"
+    },
+    "enums": {},
+    "access": {
+     "view": [
+      {
+       "role": "Staff",
+       "scope": "all"
+      }
+     ],
+     "create": [
+      "Staff",
+      "public"
+     ],
+     "edit": [
+      {
+       "role": "Staff",
+       "scope": "all"
+      }
+     ],
+     "delete": [
+      {
+       "role": "Owner",
+       "scope": "all"
+      }
+     ]
+    },
+    "title_field": "Start",
+    "id_style": {
+     "needed": "yes",
+     "format": "APT-#### (sequential)"
+    },
+    "lifecycle": {
+     "has": "yes",
+     "stages": [
+      "Booked",
+      "Confirmed",
+      "Completed",
+      "Cancelled",
+      "No-show"
+     ]
+    },
+    "retention": "forever",
+    "custom_actions": [],
+    "on_create": [],
+    "id": "booking-frontdesk/REC-003"
+   },
+   "Invoice": {
+    "fields": {
+     "Contact": {
+      "name": "Contact",
+      "type": "link",
+      "required": "yes",
+      "unique": "no",
+      "target_record": "Contact"
+     },
+     "Issue date": {
+      "name": "Issue date",
+      "type": "date",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Due date": {
+      "name": "Due date",
+      "type": "date",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Reference": {
+      "name": "Reference",
+      "type": "short_text",
+      "required": "no",
+      "unique": "no"
+     },
+     "Notes": {
+      "name": "Notes",
+      "type": "long_text",
+      "required": "no",
+      "unique": "no"
+     },
+     "Sent at": {
+      "name": "Sent at",
+      "type": "date_time",
+      "required": "no",
+      "unique": "no"
+     }
+    },
+    "storage": {
+     "Contact": "FOREIGN_KEY",
+     "Issue date": "DATE",
+     "Due date": "DATE",
+     "Reference": "VARCHAR(255)",
+     "Notes": "TEXT",
+     "Sent at": "DATETIME"
+    },
+    "enums": {},
+    "access": {
+     "view": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      },
+      {
+       "role": "Advisor",
+       "scope": "all"
+      }
+     ],
+     "create": [
+      "Accountant"
+     ],
+     "edit": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      }
+     ],
+     "delete": "nobody"
+    },
+    "title_field": "Contact",
+    "id_style": {
+     "needed": "yes",
+     "format": "INV-#### (sequential, never reused)"
+    },
+    "lifecycle": {
+     "has": "yes",
+     "stages": [
+      "Draft",
+      "Awaiting approval",
+      "Awaiting payment",
+      "Paid",
+      "Voided"
+     ]
+    },
+    "retention": "forever",
+    "custom_actions": [
+     {
+      "name": "Send",
+      "who": [
+       "Accountant"
+      ],
+      "effect": "emails the invoice document to the Contact and stamps the sent time",
+      "result_location": "the invoice page's activity trail",
+      "execution": {
+       "op": "generate_document",
+       "stamp_column": "sent_at",
+       "title_columns": [
+        "reference"
+       ],
+       "line_table": "invoice_lines",
+       "line_fk": "invoice",
+       "line_columns": [
+        "description",
+        "quantity",
+        "unit_amount"
+       ],
+       "body_columns": [
+        "contact",
+        "issue_date",
+        "due_date",
+        "notes"
+       ],
+       "dispatch": "none"
+      }
+     }
+    ],
+    "on_create": [],
+    "id": "accounting-ledger/REC-002"
+   },
+   "Invoice line": {
+    "fields": {
+     "Invoice": {
+      "name": "Invoice",
+      "type": "link",
+      "required": "yes",
+      "unique": "no",
+      "target_record": "Invoice"
+     },
+     "Description": {
+      "name": "Description",
+      "type": "short_text",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Quantity": {
+      "name": "Quantity",
+      "type": "decimal_number",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Unit amount": {
+      "name": "Unit amount",
+      "type": "money",
+      "required": "yes",
+      "unique": "no"
+     }
+    },
+    "storage": {
+     "Invoice": "FOREIGN_KEY",
+     "Description": "VARCHAR(255)",
+     "Quantity": "DECIMAL(18,4)",
+     "Unit amount": "DECIMAL(18,2)"
+    },
+    "enums": {},
+    "access": {
+     "view": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      },
+      {
+       "role": "Advisor",
+       "scope": "all"
+      }
+     ],
+     "create": [
+      "Accountant"
+     ],
+     "edit": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      }
+     ],
+     "delete": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      }
+     ]
+    },
+    "title_field": "Description",
+    "id_style": {
+     "needed": "no"
+    },
+    "lifecycle": {
+     "has": "no"
+    },
+    "retention": "forever",
+    "custom_actions": [],
+    "on_create": [],
+    "id": "accounting-ledger/REC-003"
+   },
+   "Bill": {
+    "fields": {
+     "Contact": {
+      "name": "Contact",
+      "type": "link",
+      "required": "yes",
+      "unique": "no",
+      "target_record": "Contact"
+     },
+     "Issue date": {
+      "name": "Issue date",
+      "type": "date",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Due date": {
+      "name": "Due date",
+      "type": "date",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Amount": {
+      "name": "Amount",
+      "type": "money",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Reference": {
+      "name": "Reference",
+      "type": "short_text",
+      "required": "no",
+      "unique": "no"
+     }
+    },
+    "storage": {
+     "Contact": "FOREIGN_KEY",
+     "Issue date": "DATE",
+     "Due date": "DATE",
+     "Amount": "DECIMAL(18,2)",
+     "Reference": "VARCHAR(255)"
+    },
+    "enums": {},
+    "access": {
+     "view": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      },
+      {
+       "role": "Advisor",
+       "scope": "all"
+      }
+     ],
+     "create": [
+      "Accountant"
+     ],
+     "edit": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      }
+     ],
+     "delete": "nobody"
+    },
+    "title_field": "Contact",
+    "id_style": {
+     "needed": "yes",
+     "format": "BILL-#### (sequential)"
+    },
+    "lifecycle": {
+     "has": "yes",
+     "stages": [
+      "Draft",
+      "Awaiting payment",
+      "Paid",
+      "Voided"
+     ]
+    },
+    "retention": "forever",
+    "custom_actions": [],
+    "on_create": [],
+    "id": "accounting-ledger/REC-004"
+   },
+   "Payment": {
+    "fields": {
+     "Invoice": {
+      "name": "Invoice",
+      "type": "link",
+      "required": "no",
+      "unique": "no",
+      "target_record": "Invoice"
+     },
+     "Bill": {
+      "name": "Bill",
+      "type": "link",
+      "required": "no",
+      "unique": "no",
+      "target_record": "Bill"
+     },
+     "Amount": {
+      "name": "Amount",
+      "type": "money",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Date": {
+      "name": "Date",
+      "type": "date",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Method": {
+      "name": "Method",
+      "type": "one_choice",
+      "required": "yes",
+      "unique": "no",
+      "options": [
+       "bank transfer",
+       "card",
+       "cash",
+       "other"
+      ]
+     }
+    },
+    "storage": {
+     "Invoice": "FOREIGN_KEY",
+     "Bill": "FOREIGN_KEY",
+     "Amount": "DECIMAL(18,2)",
+     "Date": "DATE",
+     "Method": "ENUM"
+    },
+    "enums": {
+     "Method": [
+      "bank transfer",
+      "card",
+      "cash",
+      "other"
+     ]
+    },
+    "access": {
+     "view": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      },
+      {
+       "role": "Advisor",
+       "scope": "all"
+      }
+     ],
+     "create": [
+      "Accountant"
+     ],
+     "edit": [
+      {
+       "role": "Accountant",
+       "scope": "all"
+      }
+     ],
+     "delete": "nobody"
+    },
+    "title_field": "Amount",
+    "id_style": {
+     "needed": "no"
+    },
+    "lifecycle": {
+     "has": "no"
+    },
+    "retention": "forever",
+    "custom_actions": [],
+    "on_create": [
+     {
+      "op": "ledger_balance",
+      "link_column": "invoice",
+      "table": "invoices",
+      "total": {
+       "kind": "lines",
+       "line_table": "invoice_lines",
+       "line_fk": "invoice",
+       "quantity_column": "quantity",
+       "amount_column": "unit_amount"
+      },
+      "payments_table": "payments",
+      "amount_column": "amount",
+      "event": "Payments applied to the invoice reach its total"
+     },
+     {
+      "op": "ledger_balance",
+      "link_column": "bill",
+      "table": "bills",
+      "total": {
+       "kind": "column",
+       "column": "amount"
+      },
+      "payments_table": "payments",
+      "amount_column": "amount",
+      "event": "Payments applied to the bill reach its total"
+     }
+    ],
+    "id": "accounting-ledger/REC-005"
+   }
+  },
+  "roles": {
+   "Owner": {
+    "permitted": [
+     {
+      "action": "create",
+      "record": "Service",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Service",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Service",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Customer",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Appointment",
+      "scope": "all"
+     }
+    ],
+    "is_admin": true
+   },
+   "Staff": {
+    "permitted": [
+     {
+      "action": "view",
+      "record": "Service",
+      "scope": "all"
+     },
+     {
+      "action": "view",
+      "record": "Customer",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Customer",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Customer",
+      "scope": "all"
+     },
+     {
+      "action": "view",
+      "record": "Appointment",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Appointment",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Appointment",
+      "scope": "all"
+     }
+    ],
+    "is_admin": false
+   },
+   "Admin": {
+    "permitted": [],
+    "is_admin": true
+   },
+   "Accountant": {
+    "permitted": [
+     {
+      "action": "view",
+      "record": "Contact",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Contact",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Contact",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Contact",
+      "scope": "all"
+     },
+     {
+      "action": "view",
+      "record": "Invoice",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Invoice",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Invoice",
+      "scope": "all"
+     },
+     {
+      "action": "view",
+      "record": "Invoice line",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Invoice line",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Invoice line",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Invoice line",
+      "scope": "all"
+     },
+     {
+      "action": "view",
+      "record": "Bill",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Bill",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Bill",
+      "scope": "all"
+     },
+     {
+      "action": "view",
+      "record": "Payment",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Payment",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Payment",
+      "scope": "all"
+     }
+    ],
+    "is_admin": false
+   },
+   "Advisor": {
+    "permitted": [
+     {
+      "action": "view",
+      "record": "Contact",
+      "scope": "all"
+     },
+     {
+      "action": "view",
+      "record": "Invoice",
+      "scope": "all"
+     },
+     {
+      "action": "view",
+      "record": "Invoice line",
+      "scope": "all"
+     },
+     {
+      "action": "view",
+      "record": "Bill",
+      "scope": "all"
+     },
+     {
+      "action": "view",
+      "record": "Payment",
+      "scope": "all"
+     }
+    ],
+    "is_admin": false
+   }
+  },
+  "super_role": "Owner",
+  "workflows": {
+   "Appointment lifecycle": {
+    "trigger": {
+     "kind": "event",
+     "event": "an appointment is created (public form or by staff); starts in 'Booked'"
+    },
+    "stages": [
+     {
+      "id": "booking-frontdesk/STG-001",
+      "name": "Booked"
+     },
+     {
+      "id": "booking-frontdesk/STG-002",
+      "name": "Confirmed"
+     },
+     {
+      "id": "booking-frontdesk/STG-003",
+      "name": "Completed"
+     },
+     {
+      "id": "booking-frontdesk/STG-004",
+      "name": "Cancelled"
+     },
+     {
+      "id": "booking-frontdesk/STG-005",
+      "name": "No-show"
+     }
+    ],
+    "transitions": [
+     {
+      "from": "Booked",
+      "to": "Confirmed",
+      "mover": "roles",
+      "roles": [
+       "Staff"
+      ],
+      "id": "booking-frontdesk/TRN-001"
+     },
+     {
+      "from": "Confirmed",
+      "to": "Completed",
+      "mover": "roles",
+      "roles": [
+       "Staff"
+      ],
+      "id": "booking-frontdesk/TRN-002"
+     },
+     {
+      "from": "Confirmed",
+      "to": "No-show",
+      "mover": "roles",
+      "roles": [
+       "Staff"
+      ],
+      "id": "booking-frontdesk/TRN-003"
+     },
+     {
+      "from": "Booked",
+      "to": "Cancelled",
+      "mover": "roles",
+      "roles": [
+       "Staff"
+      ],
+      "id": "booking-frontdesk/TRN-004"
+     },
+     {
+      "from": "Confirmed",
+      "to": "Cancelled",
+      "mover": "roles",
+      "roles": [
+       "Staff"
+      ],
+      "id": "booking-frontdesk/TRN-005"
+     }
+    ],
+    "approvals": [],
+    "on_reject": null,
+    "cancel": {
+     "allowed": "no"
+    },
+    "timeouts": [
+     {
+      "stage": "Booked",
+      "duration": "24 hours",
+      "then": "if the deposit is unpaid, the appointment moves to Cancelled and the slot is released"
+     }
+    ],
+    "effects": [],
+    "initial": "Booked",
+    "terminal": [
+     "Completed",
+     "Cancelled",
+     "No-show"
+    ]
+   },
+   "Invoice lifecycle": {
+    "trigger": {
+     "kind": "person",
+     "who": [
+      "Accountant"
+     ],
+     "action": "creating an invoice (starts in Draft)"
+    },
+    "stages": [
+     {
+      "id": "accounting-ledger/STG-001",
+      "name": "Draft"
+     },
+     {
+      "id": "accounting-ledger/STG-002",
+      "name": "Awaiting approval"
+     },
+     {
+      "id": "accounting-ledger/STG-003",
+      "name": "Awaiting payment"
+     },
+     {
+      "id": "accounting-ledger/STG-004",
+      "name": "Paid"
+     },
+     {
+      "id": "accounting-ledger/STG-005",
+      "name": "Voided"
+     }
+    ],
+    "transitions": [
+     {
+      "from": "Draft",
+      "to": "Awaiting approval",
+      "mover": "roles",
+      "roles": [
+       "Accountant"
+      ],
+      "id": "accounting-ledger/TRN-001"
+     },
+     {
+      "from": "Awaiting approval",
+      "to": "Awaiting payment",
+      "mover": "roles",
+      "roles": [
+       "Admin"
+      ],
+      "id": "accounting-ledger/TRN-002"
+     },
+     {
+      "from": "Awaiting payment",
+      "to": "Paid",
+      "mover": "automatic",
+      "event": "Payments applied to the invoice reach its total",
+      "id": "accounting-ledger/TRN-003"
+     },
+     {
+      "from": "Awaiting payment",
+      "to": "Voided",
+      "mover": "roles",
+      "roles": [
+       "Admin"
+      ],
+      "id": "accounting-ledger/TRN-004"
+     },
+     {
+      "from": "Draft",
+      "to": "Voided",
+      "mover": "roles",
+      "roles": [
+       "Accountant"
+      ],
+      "id": "accounting-ledger/TRN-005"
+     }
+    ],
+    "approvals": [
+     {
+      "stage": "Awaiting approval",
+      "approvers": [
+       "Admin"
+      ]
+     }
+    ],
+    "on_reject": {
+     "back_to": "Draft",
+     "resubmit": "yes"
+    },
+    "cancel": {
+     "allowed": "no"
+    },
+    "timeouts": [],
+    "effects": [],
+    "initial": "Draft",
+    "terminal": [
+     "Paid",
+     "Voided"
+    ]
+   },
+   "Bill lifecycle": {
+    "trigger": {
+     "kind": "person",
+     "who": [
+      "Accountant"
+     ],
+     "action": "creating a bill (starts in Draft)"
+    },
+    "stages": [
+     {
+      "id": "accounting-ledger/STG-006",
+      "name": "Draft"
+     },
+     {
+      "id": "accounting-ledger/STG-007",
+      "name": "Awaiting payment"
+     },
+     {
+      "id": "accounting-ledger/STG-008",
+      "name": "Paid"
+     },
+     {
+      "id": "accounting-ledger/STG-009",
+      "name": "Voided"
+     }
+    ],
+    "transitions": [
+     {
+      "from": "Draft",
+      "to": "Awaiting payment",
+      "mover": "roles",
+      "roles": [
+       "Accountant"
+      ],
+      "id": "accounting-ledger/TRN-006"
+     },
+     {
+      "from": "Awaiting payment",
+      "to": "Paid",
+      "mover": "automatic",
+      "event": "Payments applied to the bill reach its total",
+      "id": "accounting-ledger/TRN-007"
+     },
+     {
+      "from": "Awaiting payment",
+      "to": "Voided",
+      "mover": "roles",
+      "roles": [
+       "Admin"
+      ],
+      "id": "accounting-ledger/TRN-008"
+     },
+     {
+      "from": "Draft",
+      "to": "Voided",
+      "mover": "roles",
+      "roles": [
+       "Accountant"
+      ],
+      "id": "accounting-ledger/TRN-009"
+     }
+    ],
+    "approvals": [],
+    "on_reject": null,
+    "cancel": {
+     "allowed": "no"
+    },
+    "timeouts": [],
+    "effects": [],
+    "initial": "Draft",
+    "terminal": [
+     "Paid",
+     "Voided"
+    ]
+   }
+  },
+  "notifications": {
+   "Booking confirmation": {
+    "trigger": {
+     "kind": "event",
+     "event": "an appointment reaches stage Confirmed"
+    },
+    "recipients": [
+     {
+      "kind": "field",
+      "record": "Appointment",
+      "field": "Customer"
+     }
+    ],
+    "channels": [
+     "email",
+     "sms"
+    ],
+    "timing": "immediate",
+    "id": "booking-frontdesk/NOTIF-001"
+   },
+   "Appointment reminder": {
+    "trigger": {
+     "kind": "relative_to_date",
+     "record": "Appointment",
+     "date_field": "Start",
+     "offset": "-24 hours"
+    },
+    "recipients": [
+     {
+      "kind": "field",
+      "record": "Appointment",
+      "field": "Customer"
+     }
+    ],
+    "channels": [
+     "email",
+     "sms"
+    ],
+    "timing": "offset:-24 hours",
+    "id": "booking-frontdesk/NOTIF-002"
+   },
+   "Cancellation notice": {
+    "trigger": {
+     "kind": "event",
+     "event": "an appointment moves to Cancelled"
+    },
+    "recipients": [
+     {
+      "kind": "field",
+      "record": "Appointment",
+      "field": "Customer"
+     },
+     {
+      "kind": "field",
+      "record": "Appointment",
+      "field": "Staff member"
+     }
+    ],
+    "channels": [
+     "email"
+    ],
+    "timing": "immediate",
+    "id": "booking-frontdesk/NOTIF-003"
+   },
+   "Invoice sent": {
+    "trigger": {
+     "kind": "event",
+     "event": "the Send action runs on an invoice"
+    },
+    "recipients": [
+     {
+      "kind": "custom",
+      "who": "the invoice's Contact, at their email address"
+     }
+    ],
+    "channels": [
+     "email"
+    ],
+    "timing": "immediate",
+    "id": "accounting-ledger/NOTIF-001"
+   },
+   "Payment reminder": {
+    "trigger": {
+     "kind": "relative_to_date",
+     "record": "Invoice",
+     "date_field": "Due date",
+     "offset": "+3 days"
+    },
+    "recipients": [
+     {
+      "kind": "custom",
+      "who": "the invoice's Contact \u2014 only while the invoice is in Awaiting payment"
+     }
+    ],
+    "channels": [
+     "email"
+    ],
+    "timing": "offset:+3 days",
+    "id": "accounting-ledger/NOTIF-002"
+   },
+   "Payment received": {
+    "trigger": {
+     "kind": "event",
+     "event": "an invoice moves to Paid"
+    },
+    "recipients": [
+     {
+      "kind": "roles",
+      "roles": [
+       "Accountant"
+      ]
+     }
+    ],
+    "channels": [
+     "in_app"
+    ],
+    "timing": "immediate",
+    "id": "accounting-ledger/NOTIF-003"
+   }
+  },
+  "reports": {
+   "Upcoming appointments": {
+    "data_source": "What's booked for the coming days, per staff member?",
+    "metrics": {
+     "count of Appointments in stage Booked or Confirmed": "auto: count/sum of 'count of Appointments in stage Booked or Confirmed'"
+    },
+    "spec": [
+     {
+      "metric": "count of Appointments in stage Booked or Confirmed",
+      "spec": {
+       "table": "appointments",
+       "aggregation": "count",
+       "filters": [
+        {
+         "field": "stage",
+         "op": "in",
+         "value": [
+          "Booked",
+          "Confirmed"
+         ]
+        },
+        {
+         "field": "start",
+         "op": "within_next_days",
+         "value": 7
+        }
+       ]
+      }
+     }
+    ],
+    "id": "booking-frontdesk/RPT-001"
+   },
+   "No-show rate": {
+    "data_source": "How often do customers fail to turn up?",
+    "metrics": {
+     "no-show rate": "appointments that ended No-show divided by appointments that ended Completed or No-show, in the selected period, by the appointment's Start date; expressed as a percentage"
+    },
+    "spec": [
+     {
+      "metric": "no-show rate",
+      "spec": {
+       "engine": "stage_history",
+       "kind": "rate_over_last_days",
+       "table": "appointments",
+       "numerator_stage": "No-show",
+       "denominator_stages": [
+        "Completed",
+        "No-show"
+       ],
+       "days": 30
+      }
+     }
+    ],
+    "id": "booking-frontdesk/RPT-002"
+   }
+  },
+  "forms": {
+   "Public booking form": [
+    "Service",
+    "Customer",
+    "Staff member",
+    "Start",
+    "Notes",
+    "Deposit paid"
+   ]
+  },
+  "integrations": {},
+  "auth": {
+   "AU.01": [
+    "invited"
+   ],
+   "AU.02": [
+    {
+     "name": "Full name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no"
+    },
+    {
+     "name": "Email address",
+     "type": "email",
+     "required": "yes",
+     "unique": "yes"
+    }
+   ],
+   "AU.03": "yes",
+   "AU.04": [
+    "password",
+    "google"
+   ],
+   "AU.07": {
+    "scope": "nobody",
+    "method": "n/a"
+   },
+   "AU.08": {
+    "attempts": 5,
+    "duration": "15 minutes"
+   },
+   "AU.09": "yes",
+   "AU.10": "30 days",
+   "AU.11": {
+    "allowed": "yes",
+    "by": [
+     "super"
+    ],
+    "auto_triggers": []
+   },
+   "AU.12": {
+    "allowed": "yes",
+    "by": "both",
+    "data": "anonymised"
+   },
+   "AU.13": [
+    "super"
+   ],
+   "AU.14": {
+    "required": "yes",
+    "status": "need_drafting"
+   },
+   "AU.06": {
+    "inviters": [
+     "Admin"
+    ],
+    "default_role": "Accountant"
+   }
+  },
+  "brand": {
+   "app_name": null,
+   "assets": null
+  },
+  "screens_inventory": [
+   {
+    "id": "booking-frontdesk/SCR-001",
+    "kind": "list",
+    "record": "Service"
+   },
+   {
+    "id": "booking-frontdesk/SCR-002",
+    "kind": "detail",
+    "record": "Service"
+   },
+   {
+    "id": "booking-frontdesk/SCR-003",
+    "kind": "list",
+    "record": "Contact"
+   },
+   {
+    "id": "booking-frontdesk/SCR-004",
+    "kind": "detail",
+    "record": "Contact"
+   },
+   {
+    "id": "booking-frontdesk/SCR-005",
+    "kind": "list",
+    "record": "Appointment"
+   },
+   {
+    "id": "booking-frontdesk/SCR-006",
+    "kind": "detail",
+    "record": "Appointment"
+   },
+   {
+    "id": "booking-frontdesk/SCR-007",
+    "kind": "form",
+    "form": "Public booking form",
+    "record": "Appointment"
+   },
+   {
+    "id": "booking-frontdesk/SCR-008",
+    "kind": "report",
+    "report": "Upcoming appointments"
+   },
+   {
+    "id": "booking-frontdesk/SCR-009",
+    "kind": "report",
+    "report": "No-show rate"
+   },
+   {
+    "id": "accounting-ledger/SCR-001",
+    "kind": "list",
+    "record": "Contact"
+   },
+   {
+    "id": "accounting-ledger/SCR-002",
+    "kind": "detail",
+    "record": "Contact"
+   },
+   {
+    "id": "accounting-ledger/SCR-003",
+    "kind": "list",
+    "record": "Invoice"
+   },
+   {
+    "id": "accounting-ledger/SCR-004",
+    "kind": "detail",
+    "record": "Invoice"
+   },
+   {
+    "id": "accounting-ledger/SCR-005",
+    "kind": "list",
+    "record": "Invoice line"
+   },
+   {
+    "id": "accounting-ledger/SCR-006",
+    "kind": "detail",
+    "record": "Invoice line"
+   },
+   {
+    "id": "accounting-ledger/SCR-007",
+    "kind": "list",
+    "record": "Bill"
+   },
+   {
+    "id": "accounting-ledger/SCR-008",
+    "kind": "detail",
+    "record": "Bill"
+   },
+   {
+    "id": "accounting-ledger/SCR-009",
+    "kind": "list",
+    "record": "Payment"
+   },
+   {
+    "id": "accounting-ledger/SCR-010",
+    "kind": "detail",
+    "record": "Payment"
+   }
+  ],
+  "navigation": [
+   "booking-frontdesk/SCR-001",
+   "booking-frontdesk/SCR-002",
+   "booking-frontdesk/SCR-003",
+   "booking-frontdesk/SCR-004",
+   "booking-frontdesk/SCR-005",
+   "booking-frontdesk/SCR-006",
+   "booking-frontdesk/SCR-007",
+   "booking-frontdesk/SCR-008",
+   "booking-frontdesk/SCR-009",
+   "accounting-ledger/SCR-001",
+   "accounting-ledger/SCR-002",
+   "accounting-ledger/SCR-003",
+   "accounting-ledger/SCR-004",
+   "accounting-ledger/SCR-005",
+   "accounting-ledger/SCR-006",
+   "accounting-ledger/SCR-007",
+   "accounting-ledger/SCR-008",
+   "accounting-ledger/SCR-009",
+   "accounting-ledger/SCR-010"
+  ],
+  "landing_per_role": {
+   "Owner": "Calendar",
+   "Staff": "Calendar",
+   "Admin": "Invoices list",
+   "Accountant": "Invoices list",
+   "Advisor": "Invoices list"
+  },
+  "actions_inventory": [
+   {
+    "id": "booking-frontdesk/ACT-001",
+    "kind": "create",
+    "record": "Service",
+    "roles": [
+     "Owner"
+    ],
+    "outcome": "creates a new 'Service' record"
+   },
+   {
+    "id": "booking-frontdesk/ACT-002",
+    "kind": "edit",
+    "record": "Service",
+    "roles": [
+     "Owner"
+    ],
+    "outcome": "edits an existing 'Service' record"
+   },
+   {
+    "id": "booking-frontdesk/ACT-003",
+    "kind": "delete",
+    "record": "Service",
+    "roles": [
+     "Owner"
+    ],
+    "outcome": "deletes a 'Service' record"
+   },
+   {
+    "id": "booking-frontdesk/ACT-004",
+    "kind": "create",
+    "record": "Contact",
+    "roles": [
+     "Staff"
+    ],
+    "outcome": "creates a new 'Customer' record"
+   },
+   {
+    "id": "booking-frontdesk/ACT-005",
+    "kind": "edit",
+    "record": "Contact",
+    "roles": [
+     "Staff"
+    ],
+    "outcome": "edits an existing 'Customer' record"
+   },
+   {
+    "id": "booking-frontdesk/ACT-006",
+    "kind": "delete",
+    "record": "Contact",
+    "roles": [
+     "Owner"
+    ],
+    "outcome": "deletes a 'Customer' record"
+   },
+   {
+    "id": "booking-frontdesk/ACT-007",
+    "kind": "create",
+    "record": "Appointment",
+    "roles": [
+     "Staff"
+    ],
+    "outcome": "creates a new 'Appointment' record"
+   },
+   {
+    "id": "booking-frontdesk/ACT-008",
+    "kind": "edit",
+    "record": "Appointment",
+    "roles": [
+     "Staff"
+    ],
+    "outcome": "edits an existing 'Appointment' record"
+   },
+   {
+    "id": "booking-frontdesk/ACT-009",
+    "kind": "delete",
+    "record": "Appointment",
+    "roles": [
+     "Owner"
+    ],
+    "outcome": "deletes a 'Appointment' record"
+   },
+   {
+    "id": "booking-frontdesk/ACT-010",
+    "kind": "transition",
+    "workflow": "Appointment lifecycle",
+    "from": "Booked",
+    "to": "Confirmed",
+    "mover": "roles",
+    "roles": [
+     "Staff"
+    ],
+    "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Confirmed'"
+   },
+   {
+    "id": "booking-frontdesk/ACT-011",
+    "kind": "transition",
+    "workflow": "Appointment lifecycle",
+    "from": "Confirmed",
+    "to": "Completed",
+    "mover": "roles",
+    "roles": [
+     "Staff"
+    ],
+    "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Completed'"
+   },
+   {
+    "id": "booking-frontdesk/ACT-012",
+    "kind": "transition",
+    "workflow": "Appointment lifecycle",
+    "from": "Confirmed",
+    "to": "No-show",
+    "mover": "roles",
+    "roles": [
+     "Staff"
+    ],
+    "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'No-show'"
+   },
+   {
+    "id": "booking-frontdesk/ACT-013",
+    "kind": "transition",
+    "workflow": "Appointment lifecycle",
+    "from": "Booked",
+    "to": "Cancelled",
+    "mover": "roles",
+    "roles": [
+     "Staff"
+    ],
+    "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Cancelled'"
+   },
+   {
+    "id": "booking-frontdesk/ACT-014",
+    "kind": "transition",
+    "workflow": "Appointment lifecycle",
+    "from": "Confirmed",
+    "to": "Cancelled",
+    "mover": "roles",
+    "roles": [
+     "Staff"
+    ],
+    "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Cancelled'"
+   },
+   {
+    "id": "booking-frontdesk/ACT-015",
+    "kind": "submit",
+    "form": "Public booking form",
+    "record": "Appointment",
+    "roles": null,
+    "outcome": "submits the 'Public booking form' form, creating/editing its target record 'Appointment'"
+   },
+   {
+    "id": "accounting-ledger/ACT-001",
+    "kind": "create",
+    "record": "Contact",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "creates a new 'Contact' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-002",
+    "kind": "edit",
+    "record": "Contact",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "edits an existing 'Contact' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-003",
+    "kind": "delete",
+    "record": "Contact",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "deletes a 'Contact' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-004",
+    "kind": "create",
+    "record": "Invoice",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "creates a new 'Invoice' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-005",
+    "kind": "edit",
+    "record": "Invoice",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "edits an existing 'Invoice' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-006",
+    "kind": "custom",
+    "record": "Invoice",
+    "detail": {
+     "name": "Send",
+     "who": [
+      "Accountant"
+     ],
+     "effect": "emails the invoice document to the Contact and stamps the sent time",
+     "result_location": "the invoice page's activity trail",
+     "execution": {
+      "op": "generate_document",
+      "stamp_column": "sent_at",
+      "title_columns": [
+       "reference"
+      ],
+      "line_table": "invoice_lines",
+      "line_fk": "invoice",
+      "line_columns": [
+       "description",
+       "quantity",
+       "unit_amount"
+      ],
+      "body_columns": [
+       "contact",
+       "issue_date",
+       "due_date",
+       "notes"
+      ],
+      "dispatch": "none"
+     }
+    },
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "emails the invoice document to the Contact and stamps the sent time"
+   },
+   {
+    "id": "accounting-ledger/ACT-007",
+    "kind": "create",
+    "record": "Invoice line",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "creates a new 'Invoice line' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-008",
+    "kind": "edit",
+    "record": "Invoice line",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "edits an existing 'Invoice line' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-009",
+    "kind": "delete",
+    "record": "Invoice line",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "deletes a 'Invoice line' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-010",
+    "kind": "create",
+    "record": "Bill",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "creates a new 'Bill' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-011",
+    "kind": "edit",
+    "record": "Bill",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "edits an existing 'Bill' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-012",
+    "kind": "create",
+    "record": "Payment",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "creates a new 'Payment' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-013",
+    "kind": "edit",
+    "record": "Payment",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "edits an existing 'Payment' record"
+   },
+   {
+    "id": "accounting-ledger/ACT-014",
+    "kind": "transition",
+    "workflow": "Invoice lifecycle",
+    "from": "Draft",
+    "to": "Awaiting approval",
+    "mover": "roles",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Awaiting approval'"
+   },
+   {
+    "id": "accounting-ledger/ACT-015",
+    "kind": "transition",
+    "workflow": "Invoice lifecycle",
+    "from": "Awaiting approval",
+    "to": "Awaiting payment",
+    "mover": "roles",
+    "roles": [
+     "Admin"
+    ],
+    "outcome": "moves 'Invoice lifecycle' from 'Awaiting approval' to 'Awaiting payment'"
+   },
+   {
+    "id": "accounting-ledger/ACT-016",
+    "kind": "transition",
+    "workflow": "Invoice lifecycle",
+    "from": "Awaiting payment",
+    "to": "Paid",
+    "mover": "automatic",
+    "roles": null,
+    "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Paid'"
+   },
+   {
+    "id": "accounting-ledger/ACT-017",
+    "kind": "transition",
+    "workflow": "Invoice lifecycle",
+    "from": "Awaiting payment",
+    "to": "Voided",
+    "mover": "roles",
+    "roles": [
+     "Admin"
+    ],
+    "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Voided'"
+   },
+   {
+    "id": "accounting-ledger/ACT-018",
+    "kind": "transition",
+    "workflow": "Invoice lifecycle",
+    "from": "Draft",
+    "to": "Voided",
+    "mover": "roles",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Voided'"
+   },
+   {
+    "id": "accounting-ledger/ACT-019",
+    "kind": "approve",
+    "workflow": "Invoice lifecycle",
+    "stage": "Awaiting approval",
+    "roles": [
+     "Admin"
+    ],
+    "outcome": "approves 'Invoice lifecycle' at stage 'Awaiting approval'"
+   },
+   {
+    "id": "accounting-ledger/ACT-020",
+    "kind": "transition",
+    "workflow": "Bill lifecycle",
+    "from": "Draft",
+    "to": "Awaiting payment",
+    "mover": "roles",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Awaiting payment'"
+   },
+   {
+    "id": "accounting-ledger/ACT-021",
+    "kind": "transition",
+    "workflow": "Bill lifecycle",
+    "from": "Awaiting payment",
+    "to": "Paid",
+    "mover": "automatic",
+    "roles": null,
+    "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Paid'"
+   },
+   {
+    "id": "accounting-ledger/ACT-022",
+    "kind": "transition",
+    "workflow": "Bill lifecycle",
+    "from": "Awaiting payment",
+    "to": "Voided",
+    "mover": "roles",
+    "roles": [
+     "Admin"
+    ],
+    "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Voided'"
+   },
+   {
+    "id": "accounting-ledger/ACT-023",
+    "kind": "transition",
+    "workflow": "Bill lifecycle",
+    "from": "Draft",
+    "to": "Voided",
+    "mover": "roles",
+    "roles": [
+     "Accountant"
+    ],
+    "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Voided'"
+   }
+  ],
+  "recurring_ops": [
+   {
+    "id": "booking-frontdesk/OPS-001",
+    "source": "R.14:Service",
+    "detail": "forever"
+   },
+   {
+    "id": "booking-frontdesk/OPS-002",
+    "source": "R.14:Customer",
+    "detail": "forever"
+   },
+   {
+    "id": "booking-frontdesk/OPS-003",
+    "source": "R.14:Appointment",
+    "detail": "forever"
+   },
+   {
+    "id": "booking-frontdesk/OPS-004",
+    "source": "FL.01:Appointment lifecycle",
+    "detail": {
+     "kind": "event",
+     "event": "an appointment is created (public form or by staff); starts in 'Booked'"
+    }
+   },
+   {
+    "id": "booking-frontdesk/OPS-005",
+    "source": "FL.10:Appointment lifecycle",
+    "detail": [
+     {
+      "stage": "Booked",
+      "duration": "24 hours",
+      "then": "if the deposit is unpaid, the appointment moves to Cancelled and the slot is released"
+     }
+    ]
+   },
+   {
+    "id": "booking-frontdesk/OPS-006",
+    "source": "N.01:Booking confirmation",
+    "detail": {
+     "kind": "event",
+     "event": "an appointment reaches stage Confirmed"
+    }
+   },
+   {
+    "id": "booking-frontdesk/OPS-007",
+    "source": "N.01:Appointment reminder",
+    "detail": {
+     "kind": "relative_to_date",
+     "record": "Appointment",
+     "date_field": "Start",
+     "offset": "-24 hours"
+    }
+   },
+   {
+    "id": "booking-frontdesk/OPS-008",
+    "source": "N.01:Cancellation notice",
+    "detail": {
+     "kind": "event",
+     "event": "an appointment moves to Cancelled"
+    }
+   },
+   {
+    "id": "booking-frontdesk/OPS-009",
+    "source": "RP.08:Upcoming appointments",
+    "detail": {
+     "enabled": "no"
+    }
+   },
+   {
+    "id": "booking-frontdesk/OPS-010",
+    "source": "RP.08:No-show rate",
+    "detail": {
+     "enabled": "no"
+    }
+   },
+   {
+    "id": "booking-frontdesk/OPS-011",
+    "source": "B.08",
+    "detail": {
+     "grace_days": 0,
+     "after_repeated": "cancel"
+    }
+   },
+   {
+    "id": "accounting-ledger/OPS-001",
+    "source": "R.14:Contact",
+    "detail": "forever"
+   },
+   {
+    "id": "accounting-ledger/OPS-002",
+    "source": "R.14:Invoice",
+    "detail": "forever"
+   },
+   {
+    "id": "accounting-ledger/OPS-003",
+    "source": "R.14:Invoice line",
+    "detail": "forever"
+   },
+   {
+    "id": "accounting-ledger/OPS-004",
+    "source": "R.14:Bill",
+    "detail": "forever"
+   },
+   {
+    "id": "accounting-ledger/OPS-005",
+    "source": "R.14:Payment",
+    "detail": "forever"
+   },
+   {
+    "id": "accounting-ledger/OPS-006",
+    "source": "FL.01:Invoice lifecycle",
+    "detail": {
+     "kind": "person",
+     "who": [
+      "Accountant"
+     ],
+     "action": "creating an invoice (starts in Draft)"
+    }
+   },
+   {
+    "id": "accounting-ledger/OPS-007",
+    "source": "FL.01:Bill lifecycle",
+    "detail": {
+     "kind": "person",
+     "who": [
+      "Accountant"
+     ],
+     "action": "creating a bill (starts in Draft)"
+    }
+   },
+   {
+    "id": "accounting-ledger/OPS-008",
+    "source": "N.01:Invoice sent",
+    "detail": {
+     "kind": "event",
+     "event": "the Send action runs on an invoice"
+    }
+   },
+   {
+    "id": "accounting-ledger/OPS-009",
+    "source": "N.01:Payment reminder",
+    "detail": {
+     "kind": "relative_to_date",
+     "record": "Invoice",
+     "date_field": "Due date",
+     "offset": "+3 days"
+    }
+   },
+   {
+    "id": "accounting-ledger/OPS-010",
+    "source": "N.01:Payment received",
+    "detail": {
+     "kind": "event",
+     "event": "an invoice moves to Paid"
+    }
+   }
+  ],
+  "qa_generated_tests": [
+   {
+    "id": "booking-frontdesk/QA-001",
+    "action_id": "booking-frontdesk/ACT-001",
+    "role": "Owner",
+    "action": {
+     "id": "booking-frontdesk/ACT-001",
+     "kind": "create",
+     "record": "Service",
+     "roles": [
+      "Owner"
+     ],
+     "outcome": "creates a new 'Service' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-002",
+    "action_id": "booking-frontdesk/ACT-002",
+    "role": "Owner",
+    "action": {
+     "id": "booking-frontdesk/ACT-002",
+     "kind": "edit",
+     "record": "Service",
+     "roles": [
+      "Owner"
+     ],
+     "outcome": "edits an existing 'Service' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-003",
+    "action_id": "booking-frontdesk/ACT-003",
+    "role": "Owner",
+    "action": {
+     "id": "booking-frontdesk/ACT-003",
+     "kind": "delete",
+     "record": "Service",
+     "roles": [
+      "Owner"
+     ],
+     "outcome": "deletes a 'Service' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-004",
+    "action_id": "booking-frontdesk/ACT-004",
+    "role": "Staff",
+    "action": {
+     "id": "booking-frontdesk/ACT-004",
+     "kind": "create",
+     "record": "Customer",
+     "roles": [
+      "Staff"
+     ],
+     "outcome": "creates a new 'Customer' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-005",
+    "action_id": "booking-frontdesk/ACT-005",
+    "role": "Staff",
+    "action": {
+     "id": "booking-frontdesk/ACT-005",
+     "kind": "edit",
+     "record": "Customer",
+     "roles": [
+      "Staff"
+     ],
+     "outcome": "edits an existing 'Customer' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-006",
+    "action_id": "booking-frontdesk/ACT-006",
+    "role": "Owner",
+    "action": {
+     "id": "booking-frontdesk/ACT-006",
+     "kind": "delete",
+     "record": "Customer",
+     "roles": [
+      "Owner"
+     ],
+     "outcome": "deletes a 'Customer' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-007",
+    "action_id": "booking-frontdesk/ACT-007",
+    "role": "Staff",
+    "action": {
+     "id": "booking-frontdesk/ACT-007",
+     "kind": "create",
+     "record": "Appointment",
+     "roles": [
+      "Staff"
+     ],
+     "outcome": "creates a new 'Appointment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-008",
+    "action_id": "booking-frontdesk/ACT-008",
+    "role": "Staff",
+    "action": {
+     "id": "booking-frontdesk/ACT-008",
+     "kind": "edit",
+     "record": "Appointment",
+     "roles": [
+      "Staff"
+     ],
+     "outcome": "edits an existing 'Appointment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-009",
+    "action_id": "booking-frontdesk/ACT-009",
+    "role": "Owner",
+    "action": {
+     "id": "booking-frontdesk/ACT-009",
+     "kind": "delete",
+     "record": "Appointment",
+     "roles": [
+      "Owner"
+     ],
+     "outcome": "deletes a 'Appointment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-010",
+    "action_id": "booking-frontdesk/ACT-010",
+    "role": "Staff",
+    "action": {
+     "id": "booking-frontdesk/ACT-010",
+     "kind": "transition",
+     "workflow": "Appointment lifecycle",
+     "from": "Booked",
+     "to": "Confirmed",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ],
+     "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Confirmed'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-011",
+    "action_id": "booking-frontdesk/ACT-011",
+    "role": "Staff",
+    "action": {
+     "id": "booking-frontdesk/ACT-011",
+     "kind": "transition",
+     "workflow": "Appointment lifecycle",
+     "from": "Confirmed",
+     "to": "Completed",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ],
+     "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Completed'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-012",
+    "action_id": "booking-frontdesk/ACT-012",
+    "role": "Staff",
+    "action": {
+     "id": "booking-frontdesk/ACT-012",
+     "kind": "transition",
+     "workflow": "Appointment lifecycle",
+     "from": "Confirmed",
+     "to": "No-show",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ],
+     "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'No-show'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-013",
+    "action_id": "booking-frontdesk/ACT-013",
+    "role": "Staff",
+    "action": {
+     "id": "booking-frontdesk/ACT-013",
+     "kind": "transition",
+     "workflow": "Appointment lifecycle",
+     "from": "Booked",
+     "to": "Cancelled",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ],
+     "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Cancelled'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-014",
+    "action_id": "booking-frontdesk/ACT-014",
+    "role": "Staff",
+    "action": {
+     "id": "booking-frontdesk/ACT-014",
+     "kind": "transition",
+     "workflow": "Appointment lifecycle",
+     "from": "Confirmed",
+     "to": "Cancelled",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ],
+     "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Cancelled'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-015",
+    "action_id": "booking-frontdesk/ACT-015",
+    "role": "<any authenticated role>",
+    "action": {
+     "id": "booking-frontdesk/ACT-015",
+     "kind": "submit",
+     "form": "Public booking form",
+     "record": "Appointment",
+     "roles": null,
+     "outcome": "submits the 'Public booking form' form, creating/editing its target record 'Appointment'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "booking-frontdesk/QA-016",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-001",
+    "role": "Owner",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "booking-frontdesk/QA-017",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-002",
+    "role": "Owner",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "booking-frontdesk/QA-018",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-003",
+    "role": "Owner",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "booking-frontdesk/QA-019",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-004",
+    "role": "Owner",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "booking-frontdesk/QA-020",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-005",
+    "role": "Owner",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "booking-frontdesk/QA-021",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-006",
+    "role": "Owner",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "booking-frontdesk/QA-022",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-007",
+    "role": "Owner",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-023",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-008",
+    "role": "Owner",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-024",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-009",
+    "role": "Owner",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-025",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-001",
+    "role": "Staff",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-026",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-002",
+    "role": "Staff",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-027",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-003",
+    "role": "Staff",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-028",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-004",
+    "role": "Staff",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-029",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-005",
+    "role": "Staff",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-030",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-006",
+    "role": "Staff",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-031",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-007",
+    "role": "Staff",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-032",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-008",
+    "role": "Staff",
+    "expect": "reachable"
+   },
+   {
+    "id": "booking-frontdesk/QA-033",
+    "kind": "screen_access",
+    "screen_id": "booking-frontdesk/SCR-009",
+    "role": "Staff",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-001",
+    "action_id": "accounting-ledger/ACT-001",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-001",
+     "kind": "create",
+     "record": "Contact",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "creates a new 'Contact' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-002",
+    "action_id": "accounting-ledger/ACT-002",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-002",
+     "kind": "edit",
+     "record": "Contact",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "edits an existing 'Contact' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-003",
+    "action_id": "accounting-ledger/ACT-003",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-003",
+     "kind": "delete",
+     "record": "Contact",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "deletes a 'Contact' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-004",
+    "action_id": "accounting-ledger/ACT-004",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-004",
+     "kind": "create",
+     "record": "Invoice",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "creates a new 'Invoice' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-005",
+    "action_id": "accounting-ledger/ACT-005",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-005",
+     "kind": "edit",
+     "record": "Invoice",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "edits an existing 'Invoice' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-006",
+    "action_id": "accounting-ledger/ACT-006",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-006",
+     "kind": "custom",
+     "record": "Invoice",
+     "detail": {
+      "name": "Send",
+      "who": [
+       "Accountant"
+      ],
+      "effect": "emails the invoice document to the Contact and stamps the sent time",
+      "result_location": "the invoice page's activity trail",
+      "execution": {
+       "op": "generate_document",
+       "stamp_column": "sent_at",
+       "title_columns": [
+        "reference"
+       ],
+       "line_table": "invoice_lines",
+       "line_fk": "invoice",
+       "line_columns": [
+        "description",
+        "quantity",
+        "unit_amount"
+       ],
+       "body_columns": [
+        "contact",
+        "issue_date",
+        "due_date",
+        "notes"
+       ],
+       "dispatch": "none"
+      }
+     },
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "emails the invoice document to the Contact and stamps the sent time"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-007",
+    "action_id": "accounting-ledger/ACT-007",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-007",
+     "kind": "create",
+     "record": "Invoice line",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "creates a new 'Invoice line' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-008",
+    "action_id": "accounting-ledger/ACT-008",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-008",
+     "kind": "edit",
+     "record": "Invoice line",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "edits an existing 'Invoice line' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-009",
+    "action_id": "accounting-ledger/ACT-009",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-009",
+     "kind": "delete",
+     "record": "Invoice line",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "deletes a 'Invoice line' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-010",
+    "action_id": "accounting-ledger/ACT-010",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-010",
+     "kind": "create",
+     "record": "Bill",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "creates a new 'Bill' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-011",
+    "action_id": "accounting-ledger/ACT-011",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-011",
+     "kind": "edit",
+     "record": "Bill",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "edits an existing 'Bill' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-012",
+    "action_id": "accounting-ledger/ACT-012",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-012",
+     "kind": "create",
+     "record": "Payment",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "creates a new 'Payment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-013",
+    "action_id": "accounting-ledger/ACT-013",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-013",
+     "kind": "edit",
+     "record": "Payment",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "edits an existing 'Payment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-014",
+    "action_id": "accounting-ledger/ACT-014",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-014",
+     "kind": "transition",
+     "workflow": "Invoice lifecycle",
+     "from": "Draft",
+     "to": "Awaiting approval",
+     "mover": "roles",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Awaiting approval'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-015",
+    "action_id": "accounting-ledger/ACT-015",
+    "role": "Admin",
+    "action": {
+     "id": "accounting-ledger/ACT-015",
+     "kind": "transition",
+     "workflow": "Invoice lifecycle",
+     "from": "Awaiting approval",
+     "to": "Awaiting payment",
+     "mover": "roles",
+     "roles": [
+      "Admin"
+     ],
+     "outcome": "moves 'Invoice lifecycle' from 'Awaiting approval' to 'Awaiting payment'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-016",
+    "action_id": "accounting-ledger/ACT-016",
+    "role": "<any authenticated role>",
+    "action": {
+     "id": "accounting-ledger/ACT-016",
+     "kind": "transition",
+     "workflow": "Invoice lifecycle",
+     "from": "Awaiting payment",
+     "to": "Paid",
+     "mover": "automatic",
+     "roles": null,
+     "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Paid'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-017",
+    "action_id": "accounting-ledger/ACT-017",
+    "role": "Admin",
+    "action": {
+     "id": "accounting-ledger/ACT-017",
+     "kind": "transition",
+     "workflow": "Invoice lifecycle",
+     "from": "Awaiting payment",
+     "to": "Voided",
+     "mover": "roles",
+     "roles": [
+      "Admin"
+     ],
+     "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Voided'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-018",
+    "action_id": "accounting-ledger/ACT-018",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-018",
+     "kind": "transition",
+     "workflow": "Invoice lifecycle",
+     "from": "Draft",
+     "to": "Voided",
+     "mover": "roles",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Voided'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-019",
+    "action_id": "accounting-ledger/ACT-019",
+    "role": "Admin",
+    "action": {
+     "id": "accounting-ledger/ACT-019",
+     "kind": "approve",
+     "workflow": "Invoice lifecycle",
+     "stage": "Awaiting approval",
+     "roles": [
+      "Admin"
+     ],
+     "outcome": "approves 'Invoice lifecycle' at stage 'Awaiting approval'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-020",
+    "action_id": "accounting-ledger/ACT-020",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-020",
+     "kind": "transition",
+     "workflow": "Bill lifecycle",
+     "from": "Draft",
+     "to": "Awaiting payment",
+     "mover": "roles",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Awaiting payment'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-021",
+    "action_id": "accounting-ledger/ACT-021",
+    "role": "<any authenticated role>",
+    "action": {
+     "id": "accounting-ledger/ACT-021",
+     "kind": "transition",
+     "workflow": "Bill lifecycle",
+     "from": "Awaiting payment",
+     "to": "Paid",
+     "mover": "automatic",
+     "roles": null,
+     "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Paid'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-022",
+    "action_id": "accounting-ledger/ACT-022",
+    "role": "Admin",
+    "action": {
+     "id": "accounting-ledger/ACT-022",
+     "kind": "transition",
+     "workflow": "Bill lifecycle",
+     "from": "Awaiting payment",
+     "to": "Voided",
+     "mover": "roles",
+     "roles": [
+      "Admin"
+     ],
+     "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Voided'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-023",
+    "action_id": "accounting-ledger/ACT-023",
+    "role": "Accountant",
+    "action": {
+     "id": "accounting-ledger/ACT-023",
+     "kind": "transition",
+     "workflow": "Bill lifecycle",
+     "from": "Draft",
+     "to": "Voided",
+     "mover": "roles",
+     "roles": [
+      "Accountant"
+     ],
+     "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Voided'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "accounting-ledger/QA-024",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-001",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "accounting-ledger/QA-025",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-002",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "accounting-ledger/QA-026",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-003",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "accounting-ledger/QA-027",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-004",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "accounting-ledger/QA-028",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-005",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "accounting-ledger/QA-029",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-006",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "accounting-ledger/QA-030",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-007",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "accounting-ledger/QA-031",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-008",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "accounting-ledger/QA-032",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-009",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "accounting-ledger/QA-033",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-010",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "accounting-ledger/QA-034",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-001",
+    "role": "Accountant",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-035",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-002",
+    "role": "Accountant",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-036",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-003",
+    "role": "Accountant",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-037",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-004",
+    "role": "Accountant",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-038",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-005",
+    "role": "Accountant",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-039",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-006",
+    "role": "Accountant",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-040",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-007",
+    "role": "Accountant",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-041",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-008",
+    "role": "Accountant",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-042",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-009",
+    "role": "Accountant",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-043",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-010",
+    "role": "Accountant",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-044",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-001",
+    "role": "Advisor",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-045",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-002",
+    "role": "Advisor",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-046",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-003",
+    "role": "Advisor",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-047",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-004",
+    "role": "Advisor",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-048",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-005",
+    "role": "Advisor",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-049",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-006",
+    "role": "Advisor",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-050",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-007",
+    "role": "Advisor",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-051",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-008",
+    "role": "Advisor",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-052",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-009",
+    "role": "Advisor",
+    "expect": "reachable"
+   },
+   {
+    "id": "accounting-ledger/QA-053",
+    "kind": "screen_access",
+    "screen_id": "accounting-ledger/SCR-010",
+    "role": "Advisor",
+    "expect": "reachable"
+   }
+  ]
+ },
+ "front_door": {
+  "answers": {
+   "does": "Take bookings for my clinic and invoice people afterwards.",
+   "cards": [
+    "bookings",
+    "money"
+   ],
+   "who": "team_public",
+   "look": "pocket",
+   "density": "spacious",
+   "mark": "wave",
+   "name": "Front Room",
+   "boss": "Owner"
+  },
+  "filled_without_asking": [
+   [
+    "Customer and Contact",
+    "Both pieces you picked hold the same kind of person, under different names. They are one record, called Contact."
+   ],
+   [
+    "authority of Admin",
+    "Admin was in charge of its own piece; you put Owner in charge, so Admin now has the same authority as Staff, and Owner assigns it."
+   ],
+   [
+    "0.01",
+    "You decide the product; the plumbing is proposed and shown to you at the end."
+   ],
+   [
+    "A.02",
+    "Taken from what you said the app should do."
+   ],
+   [
+    "A.03",
+    "Taken from who you said uses it."
+   ],
+   [
+    "A.04",
+    "Taken from what you said the app should do."
+   ],
+   [
+    "A.12",
+    "Nothing is being imported from an old system. Say so and this changes."
+   ],
+   [
+    "A.13",
+    "Dates, money and times use Australian English."
+   ],
+   [
+    "A.14",
+    "Nothing about this app works differently from the normal way."
+   ],
+   [
+    "C.01",
+    "No other app's look is being copied."
+   ],
+   [
+    "C.02",
+    "Taken from the look you picked."
+   ],
+   [
+    "C.07",
+    "The menu is the order the screens were built in."
+   ],
+   [
+    "Z.01",
+    "What the app does on its own is listed in your summary."
+   ],
+   [
+    "Z.02",
+    "Every button and where its result lands is listed in your summary."
+   ],
+   [
+    "Z.03",
+    "Every screen and who can open it is listed in your summary."
+   ],
+   [
+    "B.03",
+    "What you charge is one payment per appointment, at whatever price you set on each service inside the app. There are no subscriptions or plans."
+   ]
+  ],
+  "note": "Built by packages/frontdoor/intake.py from eight answers."
+ }
+}

@@ -1,0 +1,419 @@
+{
+ "base_url": "http://127.0.0.1:8904",
+ "journeys": [
+  {
+   "journey": "form_submit_lands_in_list_and_detail",
+   "subject": "-",
+   "parts": [
+    "form_render_submit",
+    "crud_list_detail"
+   ],
+   "result": "N/A",
+   "reason": "the spec declares no form screen",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "erp-backbone/SCR-017",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report erp-backbone/SCR-017",
+     "observed": {
+      "sum of Product Stock on hand": null,
+      "count of Products at or below Reorder point": 0
+     }
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/products (no screen creates this record)",
+     "observed": {
+      "status": 201,
+      "body": {
+       "Name": "seam-1a070e09952",
+       "SKU": "seam-1a070e09952",
+       "Sale price": 1.25,
+       "Cost": 1.25,
+       "Stock on hand": 1
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "reload the report screen",
+     "observed": 1
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "erp-backbone/SCR-018",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "BLOCKED",
+   "reason": "metric 'sales value' is computed by the stage_history part, not by writing one row",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report erp-backbone/SCR-018",
+     "observed": {
+      "sales value": {
+       "2025-10": 0,
+       "2025-11": 0,
+       "2025-12": 0,
+       "2026-01": 0,
+       "2026-02": 0,
+       "2026-03": 0,
+       "2026-04": 0,
+       "2026-05": 0,
+       "2026-06": 0,
+       "2026-07": 0,
+       "2026-08": 0,
+       "2026-09": 0
+      }
+     }
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "erp-backbone/SCR-019",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "BLOCKED",
+   "reason": "metric 'count of Purchase orders in Confirmed' counts rows at stage 'Confirmed'; a new row starts at 'Draft' and no screen offers a control to move it",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report erp-backbone/SCR-019",
+     "observed": {
+      "count of Sales orders in Confirmed": 0,
+      "count of Purchase orders in Confirmed": 0
+     }
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "person_move_is_visible_on_the_screen",
+   "subject": "erp-backbone/ACT-025",
+   "parts": [
+    "workflow_executor"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/purchase_orders",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a control on erp-backbone/SCR-008 that moves to 'Confirmed'",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "api",
+     "action": "the gate at 'Draft': Operations approves first",
+     "observed": {
+      "status": 200,
+      "body": {
+       "decision": "APPROVED",
+       "stage": "Draft"
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press the control on erp-backbone/SCR-008 that moves to 'Confirmed'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open detail erp-backbone/SCR-008",
+     "observed": "stage shown as 'Confirmed'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "person_move_is_visible_on_the_screen",
+   "subject": "erp-backbone/ACT-029",
+   "parts": [
+    "workflow_executor"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/sales_orders",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a control on erp-backbone/SCR-012 that moves to 'Confirmed'",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "browser",
+     "action": "press the control on erp-backbone/SCR-012 that moves to 'Confirmed'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open detail erp-backbone/SCR-012",
+     "observed": "stage shown as 'Confirmed'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "gated_system_move_is_visible_on_the_screen",
+   "subject": "-",
+   "parts": [
+    "system_triggered_transition",
+    "stage_approval_gate"
+   ],
+   "result": "N/A",
+   "reason": "no workflow has an automatic edge with an event leaving its initial stage",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  },
+  {
+   "journey": "stock_moves_on_the_screen_when_an_order_enters_its_stage",
+   "subject": "Purchase order lifecycle:Received",
+   "parts": [
+    "stock_ledger"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/products stock 10",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/purchase_orders",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/purchase_order_lines qty 4",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press Approve on erp-backbone/SCR-008 at gated stage 'Draft'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Confirmed' on erp-backbone/SCR-008",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Received' on erp-backbone/SCR-008",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open the product's detail erp-backbone/SCR-002 and read Stock on hand",
+     "observed": "14"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "stock_moves_on_the_screen_when_an_order_enters_its_stage",
+   "subject": "Sales order lifecycle:Shipped",
+   "parts": [
+    "stock_ledger"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/products stock 10",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/sales_orders",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/sales_order_lines qty 4",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Confirmed' on erp-backbone/SCR-012",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Shipped' on erp-backbone/SCR-012",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open the product's detail erp-backbone/SCR-002 and read Stock on hand",
+     "observed": "6"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "rate_report_reflects_the_moves_made_on_the_screen",
+   "subject": "-",
+   "parts": [
+    "stage_history"
+   ],
+   "result": "N/A",
+   "reason": "no report metric is a stage-history rate",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  }
+ ],
+ "parts": {
+  "form_render_submit": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "crud_list_detail": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "reporting_engine": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 2,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "workflow_executor": {
+   "PASS": 2,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 2
+  },
+  "system_triggered_transition": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "stage_approval_gate": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "stock_ledger": {
+   "PASS": 2,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 2
+  },
+  "stage_history": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  }
+ },
+ "receipts_written": [
+  {
+   "part_id": "reporting_engine",
+   "version": "1.0.0",
+   "revision": "a0de07a247bf355b"
+  },
+  {
+   "part_id": "workflow_executor",
+   "version": "1.0.0",
+   "revision": "e1e8908c90f7f1fb"
+  },
+  {
+   "part_id": "stock_ledger",
+   "version": "1.1.0",
+   "revision": "094c3be30a31bf03"
+  }
+ ],
+ "receipts_refused": []
+}

@@ -1,0 +1,49 @@
+{
+ "part_id": "oauth_connect",
+ "version": "1.0.0",
+ "revision": "deb7b65f11d7715d",
+ "qualified_at": "2026-09-05T20:35:46+00:00",
+ "base_url": "http://127.0.0.1:34489",
+ "journeys": [
+  {
+   "journey": "oauth_connect_click_reaches_provider",
+   "subject": "command-desk/SCR-020",
+   "parts": [
+    "oauth_connect"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "click Connect on command-desk/SCR-020",
+     "observed": "302 -> Location: 'https://accounts.google.com/o/oauth2/v2/auth?client_id=test-client.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A34489%2Fapi%2Fconnections%2Fgoogle%2Fcallback&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.readonly&state=dc27406a-8455-4281-a0b3-5834eba35b89&access_type=offline' "
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "oauth_connect_click_reaches_provider",
+   "subject": "command-desk/SCR-021",
+   "parts": [
+    "oauth_connect"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "click Connect on command-desk/SCR-021",
+     "observed": "302 -> Location: 'https://accounts.google.com/o/oauth2/v2/auth?client_id=test-client.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A34489%2Fapi%2Fconnections%2Fgoogle%2Fcallback&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.readonly&state=453fd08f-500f-4a8a-be8e-ce86bc28dc8d&access_type=offline' "
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

@@ -1,0 +1,120 @@
+{
+  "role_id": "memory",
+  "role_name": "Memory",
+  "tier": "State_And_Knowledge",
+  "version": "2.1",
+  "authority_scope": "Storage, indexing, scoped retrieval, conflict isolation, and lifecycle governance of permanent records, working sessions, and decision logs.",
+  "may_do": [
+    "Store structured turn logs, decision logs, goal history, and worker handoff artifacts",
+    "Execute scoped retrieval queries for authorized workers",
+    "Maintain rolling 3-day summary views per worker",
+    "Index facts, entity records, and system preferences with cryptographic provenance",
+    "Isolate and mark contradictory or conflicting records explicitly"
+  ],
+  "must_do": [
+    "Store every record with timestamp, provenance, record type, and governing workflow ID",
+    "Return only records strictly matching the authorized scoped retrieval parameters",
+    "Preserve all Daily Reviewer summaries permanently without truncation",
+    "Generate rolling 3-day summaries strictly from verified permanent records",
+    "Explicitly mark conflicting records rather than silently overwriting them",
+    "Enforce immutability on completed decision records and audit logs"
+  ],
+  "must_never_do": [
+    "Infer or invent new facts from adjacent or historical records",
+    "Return records outside the requesting worker's authorized scope",
+    "Silently delete, modify, or overwrite historical audit entries",
+    "Accept unverified worker self-summaries into permanent memory"
+  ],
+  "auto_fails": [
+    "AUTO-FAIL-02.01: Returning fabricated or inferred facts not present in stored records",
+    "AUTO-FAIL-02.02: Leaking isolated memory records across isolated group boundaries",
+    "AUTO-FAIL-02.03: Overwriting a confirmed decision log without explicit supersede metadata"
+  ],
+  "output_contract": {
+    "type": "object",
+    "required": [
+      "status",
+      "query",
+      "record_count",
+      "records",
+      "conflicts",
+      "evidence"
+    ],
+    "properties": {
+      "status": {
+        "type": "string",
+        "enum": [
+          "success",
+          "empty",
+          "conflict_detected",
+          "error"
+        ]
+      },
+      "query": {
+        "type": "object"
+      },
+      "record_count": {
+        "type": "integer"
+      },
+      "records": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      },
+      "conflicts": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "evidence": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "inbound_sources": [
+      "hub",
+      "consolidator",
+      "daily_reviewer",
+      "brain_builder"
+    ],
+    "outbound_targets": [
+      "hub",
+      "scoped_workers"
+    ],
+    "context_bus_read": [
+      "hub.last_output",
+      "consolidator.decision",
+      "daily_review.summary"
+    ],
+    "context_bus_write": [
+      "memory.relevant",
+      "decisions.related"
+    ],
+    "memory_scope": "system_store",
+    "brain_requirements": {
+      "class": "retrieval_and_indexing",
+      "min_context": 32768,
+      "recommended_models": [
+        "claude-3-5-haiku",
+        "gpt-4o-mini",
+        "llama-3.1-8b"
+      ],
+      "temperature": 0.0
+    }
+  },
+  "replaceability_profile": {
+    "deterministic_scoring_min": 0.99,
+    "test_suite": "test_memory_conformance"
+  },
+  "capabilities": {
+    "hands_adapters": [],
+    "rationale": "A capability, not a worker. Holds no Hands authority.",
+    "default": "deny \u2014 a role reaches only the adapters listed here"
+  }
+}

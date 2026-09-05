@@ -1,0 +1,40 @@
+{
+ "part_id": "record_cloning",
+ "version": "1.0.0",
+ "revision": "c9f8c783994f80c1",
+ "qualified_at": "2026-09-05T09:22:08+00:00",
+ "base_url": "http://127.0.0.1:8901",
+ "journeys": [
+  {
+   "journey": "clone_appears_in_the_list_screen",
+   "subject": "pm-teamwork/ACT-007",
+   "parts": [
+    "record_cloning"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/tasks",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Duplicate' on pm-teamwork/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open list pm-teamwork/SCR-003 and look for 'seam-1a070e00d63 (copy)'",
+     "observed": true
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

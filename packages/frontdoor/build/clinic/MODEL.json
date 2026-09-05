@@ -1,0 +1,879 @@
+{
+ "family": "booking-frontdesk+accounting-ledger",
+ "spec_id": "SPEC-FRONTDOOR",
+ "app_name": "Front Room",
+ "roles": [
+  "Owner",
+  "Staff",
+  "Admin",
+  "Accountant",
+  "Advisor"
+ ],
+ "role_admin": {
+  "Owner": true,
+  "Staff": false,
+  "Admin": true,
+  "Accountant": false,
+  "Advisor": false
+ },
+ "super_role": "Owner",
+ "records": {
+  "Service": {
+   "table": "services",
+   "title_field": "Name",
+   "fields": [
+    {
+     "name": "Name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "name"
+    },
+    {
+     "name": "Description",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "description"
+    },
+    {
+     "name": "Duration minutes",
+     "type": "whole_number",
+     "required": "yes",
+     "unique": "no",
+     "slug": "duration_minutes"
+    },
+    {
+     "name": "Price",
+     "type": "money",
+     "required": "yes",
+     "unique": "no",
+     "slug": "price"
+    },
+    {
+     "name": "Deposit required",
+     "type": "yes_no",
+     "required": "yes",
+     "unique": "no",
+     "slug": "deposit_required"
+    },
+    {
+     "name": "Deposit amount",
+     "type": "money",
+     "required": "no",
+     "unique": "no",
+     "slug": "deposit_amount"
+    }
+   ],
+   "access": {
+    "view": [
+     "Staff",
+     "public"
+    ],
+    "create": [
+     "Owner"
+    ],
+    "edit": [
+     "Owner"
+    ],
+    "delete": [
+     "Owner"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Contact": {
+   "table": "contacts",
+   "title_field": "Name",
+   "fields": [
+    {
+     "name": "Name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "name"
+    },
+    {
+     "name": "Email",
+     "type": "email",
+     "required": "no",
+     "unique": "no",
+     "slug": "email"
+    },
+    {
+     "name": "Phone",
+     "type": "phone",
+     "required": "no",
+     "unique": "no",
+     "slug": "phone"
+    },
+    {
+     "name": "Type",
+     "type": "one_choice",
+     "required": "yes",
+     "unique": "no",
+     "options": [
+      "customer",
+      "supplier",
+      "both"
+     ],
+     "slug": "type"
+    },
+    {
+     "name": "Payment terms days",
+     "type": "whole_number",
+     "required": "no",
+     "unique": "no",
+     "slug": "payment_terms_days"
+    }
+   ],
+   "access": {
+    "view": [
+     "Accountant",
+     "Advisor"
+    ],
+    "create": [
+     "Accountant"
+    ],
+    "edit": [
+     "Accountant"
+    ],
+    "delete": [
+     "Accountant"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Appointment": {
+   "table": "appointments",
+   "title_field": "Start",
+   "fields": [
+    {
+     "name": "Service",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Service",
+     "slug": "service"
+    },
+    {
+     "name": "Customer",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Contact",
+     "slug": "customer"
+    },
+    {
+     "name": "Staff member",
+     "type": "other",
+     "required": "yes",
+     "unique": "no",
+     "custom_rule": "reference to a user account (pick-a-person field)",
+     "slug": "staff_member"
+    },
+    {
+     "name": "Start",
+     "type": "date_time",
+     "required": "yes",
+     "unique": "no",
+     "slug": "start"
+    },
+    {
+     "name": "Notes",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "notes"
+    },
+    {
+     "name": "Deposit paid",
+     "type": "yes_no",
+     "required": "no",
+     "unique": "no",
+     "slug": "deposit_paid"
+    }
+   ],
+   "access": {
+    "view": [
+     "Staff"
+    ],
+    "create": [
+     "Staff",
+     "public"
+    ],
+    "edit": [
+     "Staff"
+    ],
+    "delete": [
+     "Owner"
+    ]
+   },
+   "has_stage": true,
+   "workflow": "Appointment lifecycle",
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Invoice": {
+   "table": "invoices",
+   "title_field": "Contact",
+   "fields": [
+    {
+     "name": "Contact",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Contact",
+     "slug": "contact"
+    },
+    {
+     "name": "Issue date",
+     "type": "date",
+     "required": "yes",
+     "unique": "no",
+     "slug": "issue_date"
+    },
+    {
+     "name": "Due date",
+     "type": "date",
+     "required": "yes",
+     "unique": "no",
+     "slug": "due_date"
+    },
+    {
+     "name": "Reference",
+     "type": "short_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "reference"
+    },
+    {
+     "name": "Notes",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "notes"
+    },
+    {
+     "name": "Sent at",
+     "type": "date_time",
+     "required": "no",
+     "unique": "no",
+     "slug": "sent_at"
+    }
+   ],
+   "access": {
+    "view": [
+     "Accountant",
+     "Advisor"
+    ],
+    "create": [
+     "Accountant"
+    ],
+    "edit": [
+     "Accountant"
+    ],
+    "delete": []
+   },
+   "has_stage": true,
+   "workflow": "Invoice lifecycle",
+   "custom_actions": [
+    {
+     "name": "Send",
+     "who": [
+      "Accountant"
+     ],
+     "effect": "emails the invoice document to the Contact and stamps the sent time",
+     "result_location": "the invoice page's activity trail",
+     "execution": {
+      "op": "generate_document",
+      "stamp_column": "sent_at",
+      "title_columns": [
+       "reference"
+      ],
+      "line_table": "invoice_lines",
+      "line_fk": "invoice",
+      "line_columns": [
+       "description",
+       "quantity",
+       "unit_amount"
+      ],
+      "body_columns": [
+       "contact",
+       "issue_date",
+       "due_date",
+       "notes"
+      ],
+      "dispatch": "none"
+     }
+    }
+   ],
+   "on_create": []
+  },
+  "Invoice line": {
+   "table": "invoice_lines",
+   "title_field": "Description",
+   "fields": [
+    {
+     "name": "Invoice",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Invoice",
+     "slug": "invoice"
+    },
+    {
+     "name": "Description",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "description"
+    },
+    {
+     "name": "Quantity",
+     "type": "decimal_number",
+     "required": "yes",
+     "unique": "no",
+     "slug": "quantity"
+    },
+    {
+     "name": "Unit amount",
+     "type": "money",
+     "required": "yes",
+     "unique": "no",
+     "slug": "unit_amount"
+    }
+   ],
+   "access": {
+    "view": [
+     "Accountant",
+     "Advisor"
+    ],
+    "create": [
+     "Accountant"
+    ],
+    "edit": [
+     "Accountant"
+    ],
+    "delete": [
+     "Accountant"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Bill": {
+   "table": "bills",
+   "title_field": "Contact",
+   "fields": [
+    {
+     "name": "Contact",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Contact",
+     "slug": "contact"
+    },
+    {
+     "name": "Issue date",
+     "type": "date",
+     "required": "yes",
+     "unique": "no",
+     "slug": "issue_date"
+    },
+    {
+     "name": "Due date",
+     "type": "date",
+     "required": "yes",
+     "unique": "no",
+     "slug": "due_date"
+    },
+    {
+     "name": "Amount",
+     "type": "money",
+     "required": "yes",
+     "unique": "no",
+     "slug": "amount"
+    },
+    {
+     "name": "Reference",
+     "type": "short_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "reference"
+    }
+   ],
+   "access": {
+    "view": [
+     "Accountant",
+     "Advisor"
+    ],
+    "create": [
+     "Accountant"
+    ],
+    "edit": [
+     "Accountant"
+    ],
+    "delete": []
+   },
+   "has_stage": true,
+   "workflow": "Bill lifecycle",
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Payment": {
+   "table": "payments",
+   "title_field": "Amount",
+   "fields": [
+    {
+     "name": "Invoice",
+     "type": "link",
+     "required": "no",
+     "unique": "no",
+     "target_record": "Invoice",
+     "slug": "invoice"
+    },
+    {
+     "name": "Bill",
+     "type": "link",
+     "required": "no",
+     "unique": "no",
+     "target_record": "Bill",
+     "slug": "bill"
+    },
+    {
+     "name": "Amount",
+     "type": "money",
+     "required": "yes",
+     "unique": "no",
+     "slug": "amount"
+    },
+    {
+     "name": "Date",
+     "type": "date",
+     "required": "yes",
+     "unique": "no",
+     "slug": "date"
+    },
+    {
+     "name": "Method",
+     "type": "one_choice",
+     "required": "yes",
+     "unique": "no",
+     "options": [
+      "bank transfer",
+      "card",
+      "cash",
+      "other"
+     ],
+     "slug": "method"
+    }
+   ],
+   "access": {
+    "view": [
+     "Accountant",
+     "Advisor"
+    ],
+    "create": [
+     "Accountant"
+    ],
+    "edit": [
+     "Accountant"
+    ],
+    "delete": []
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": [
+    {
+     "op": "ledger_balance",
+     "link_column": "invoice",
+     "table": "invoices",
+     "total": {
+      "kind": "lines",
+      "line_table": "invoice_lines",
+      "line_fk": "invoice",
+      "quantity_column": "quantity",
+      "amount_column": "unit_amount"
+     },
+     "payments_table": "payments",
+     "amount_column": "amount",
+     "event": "Payments applied to the invoice reach its total"
+    },
+    {
+     "op": "ledger_balance",
+     "link_column": "bill",
+     "table": "bills",
+     "total": {
+      "kind": "column",
+      "column": "amount"
+     },
+     "payments_table": "payments",
+     "amount_column": "amount",
+     "event": "Payments applied to the bill reach its total"
+    }
+   ]
+  }
+ },
+ "workflows": {
+  "Appointment lifecycle": {
+   "stages": [
+    "Booked",
+    "Confirmed",
+    "Completed",
+    "Cancelled",
+    "No-show"
+   ],
+   "initial": "Booked",
+   "terminal": [
+    "Completed",
+    "Cancelled",
+    "No-show"
+   ],
+   "transitions": [
+    {
+     "from": "Booked",
+     "to": "Confirmed",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ]
+    },
+    {
+     "from": "Confirmed",
+     "to": "Completed",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ]
+    },
+    {
+     "from": "Confirmed",
+     "to": "No-show",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ]
+    },
+    {
+     "from": "Booked",
+     "to": "Cancelled",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ]
+    },
+    {
+     "from": "Confirmed",
+     "to": "Cancelled",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ]
+    }
+   ],
+   "approvals": [],
+   "on_reject": null,
+   "effects": []
+  },
+  "Invoice lifecycle": {
+   "stages": [
+    "Draft",
+    "Awaiting approval",
+    "Awaiting payment",
+    "Paid",
+    "Voided"
+   ],
+   "initial": "Draft",
+   "terminal": [
+    "Paid",
+    "Voided"
+   ],
+   "transitions": [
+    {
+     "from": "Draft",
+     "to": "Awaiting approval",
+     "mover": "roles",
+     "roles": [
+      "Accountant"
+     ]
+    },
+    {
+     "from": "Awaiting approval",
+     "to": "Awaiting payment",
+     "mover": "roles",
+     "roles": [
+      "Admin"
+     ]
+    },
+    {
+     "from": "Awaiting payment",
+     "to": "Paid",
+     "mover": "automatic",
+     "event": "Payments applied to the invoice reach its total"
+    },
+    {
+     "from": "Awaiting payment",
+     "to": "Voided",
+     "mover": "roles",
+     "roles": [
+      "Admin"
+     ]
+    },
+    {
+     "from": "Draft",
+     "to": "Voided",
+     "mover": "roles",
+     "roles": [
+      "Accountant"
+     ]
+    }
+   ],
+   "approvals": [
+    {
+     "stage": "Awaiting approval",
+     "approvers": [
+      "Admin"
+     ]
+    }
+   ],
+   "on_reject": {
+    "back_to": "Draft",
+    "resubmit": "yes"
+   },
+   "effects": []
+  },
+  "Bill lifecycle": {
+   "stages": [
+    "Draft",
+    "Awaiting payment",
+    "Paid",
+    "Voided"
+   ],
+   "initial": "Draft",
+   "terminal": [
+    "Paid",
+    "Voided"
+   ],
+   "transitions": [
+    {
+     "from": "Draft",
+     "to": "Awaiting payment",
+     "mover": "roles",
+     "roles": [
+      "Accountant"
+     ]
+    },
+    {
+     "from": "Awaiting payment",
+     "to": "Paid",
+     "mover": "automatic",
+     "event": "Payments applied to the bill reach its total"
+    },
+    {
+     "from": "Awaiting payment",
+     "to": "Voided",
+     "mover": "roles",
+     "roles": [
+      "Admin"
+     ]
+    },
+    {
+     "from": "Draft",
+     "to": "Voided",
+     "mover": "roles",
+     "roles": [
+      "Accountant"
+     ]
+    }
+   ],
+   "approvals": [],
+   "on_reject": null,
+   "effects": []
+  }
+ },
+ "forms": {
+  "Public booking form": {
+   "record": "Appointment",
+   "slug": "public_booking_form",
+   "fields": [
+    "service",
+    "customer",
+    "staff_member",
+    "start",
+    "notes",
+    "deposit_paid"
+   ]
+  }
+ },
+ "reports": {
+  "Upcoming appointments": {
+   "slug": "upcoming_appointments",
+   "question": "What's booked for the coming days, per staff member?",
+   "metrics": [
+    "count of Appointments in stage Booked or Confirmed"
+   ],
+   "specs": [
+    {
+     "metric": "count of Appointments in stage Booked or Confirmed",
+     "spec": {
+      "table": "appointments",
+      "aggregation": "count",
+      "filters": [
+       {
+        "field": "stage",
+        "op": "in",
+        "value": [
+         "Booked",
+         "Confirmed"
+        ]
+       },
+       {
+        "field": "start",
+        "op": "within_next_days",
+        "value": 7
+       }
+      ]
+     }
+    }
+   ]
+  },
+  "No-show rate": {
+   "slug": "no_show_rate",
+   "question": "How often do customers fail to turn up?",
+   "metrics": [
+    "no-show rate"
+   ],
+   "specs": [
+    {
+     "metric": "no-show rate",
+     "spec": {
+      "engine": "stage_history",
+      "kind": "rate_over_last_days",
+      "table": "appointments",
+      "numerator_stage": "No-show",
+      "denominator_stages": [
+       "Completed",
+       "No-show"
+      ],
+      "days": 30
+     }
+    }
+   ]
+  }
+ },
+ "landing_per_role": {
+  "Owner": "Calendar",
+  "Staff": "Calendar",
+  "Admin": "Invoices list",
+  "Accountant": "Invoices list",
+  "Advisor": "Invoices list"
+ },
+ "screens": [
+  {
+   "id": "booking-frontdesk/SCR-001",
+   "kind": "list",
+   "record": "Service"
+  },
+  {
+   "id": "booking-frontdesk/SCR-002",
+   "kind": "detail",
+   "record": "Service"
+  },
+  {
+   "id": "booking-frontdesk/SCR-003",
+   "kind": "list",
+   "record": "Contact"
+  },
+  {
+   "id": "booking-frontdesk/SCR-004",
+   "kind": "detail",
+   "record": "Contact"
+  },
+  {
+   "id": "booking-frontdesk/SCR-005",
+   "kind": "list",
+   "record": "Appointment"
+  },
+  {
+   "id": "booking-frontdesk/SCR-006",
+   "kind": "detail",
+   "record": "Appointment"
+  },
+  {
+   "id": "booking-frontdesk/SCR-007",
+   "kind": "form",
+   "record": "Appointment",
+   "form": "Public booking form"
+  },
+  {
+   "id": "booking-frontdesk/SCR-008",
+   "kind": "report",
+   "report": "Upcoming appointments"
+  },
+  {
+   "id": "booking-frontdesk/SCR-009",
+   "kind": "report",
+   "report": "No-show rate"
+  },
+  {
+   "id": "accounting-ledger/SCR-001",
+   "kind": "list",
+   "record": "Contact"
+  },
+  {
+   "id": "accounting-ledger/SCR-002",
+   "kind": "detail",
+   "record": "Contact"
+  },
+  {
+   "id": "accounting-ledger/SCR-003",
+   "kind": "list",
+   "record": "Invoice"
+  },
+  {
+   "id": "accounting-ledger/SCR-004",
+   "kind": "detail",
+   "record": "Invoice"
+  },
+  {
+   "id": "accounting-ledger/SCR-005",
+   "kind": "list",
+   "record": "Invoice line"
+  },
+  {
+   "id": "accounting-ledger/SCR-006",
+   "kind": "detail",
+   "record": "Invoice line"
+  },
+  {
+   "id": "accounting-ledger/SCR-007",
+   "kind": "list",
+   "record": "Bill"
+  },
+  {
+   "id": "accounting-ledger/SCR-008",
+   "kind": "detail",
+   "record": "Bill"
+  },
+  {
+   "id": "accounting-ledger/SCR-009",
+   "kind": "list",
+   "record": "Payment"
+  },
+  {
+   "id": "accounting-ledger/SCR-010",
+   "kind": "detail",
+   "record": "Payment"
+  }
+ ]
+}

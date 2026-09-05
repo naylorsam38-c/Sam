@@ -1,0 +1,9 @@
+goal:
+  statement: "Build a specification writer."
+constraints:
+  list:
+    - "Do not guess."
+storage:
+  decision: "[ASK] What storage behaviour is required?"
+acceptance:
+  check: "Run the executable acceptance checks."

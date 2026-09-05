@@ -1,0 +1,417 @@
+{
+ "base_url": "http://127.0.0.1:8905",
+ "journeys": [
+  {
+   "journey": "form_submit_lands_in_list_and_detail",
+   "subject": "-",
+   "parts": [
+    "form_render_submit",
+    "crud_list_detail"
+   ],
+   "result": "N/A",
+   "reason": "the spec declares no form screen",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  },
+  {
+   "journey": "person_move_is_visible_on_the_screen",
+   "subject": "accounting-ledger/ACT-014",
+   "parts": [
+    "workflow_executor"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/invoices",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a control on accounting-ledger/SCR-004 that moves to 'Awaiting approval'",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "browser",
+     "action": "press the control on accounting-ledger/SCR-004 that moves to 'Awaiting approval'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open detail accounting-ledger/SCR-004",
+     "observed": "stage shown as 'Awaiting approval'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "person_move_is_visible_on_the_screen",
+   "subject": "accounting-ledger/ACT-020",
+   "parts": [
+    "workflow_executor"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/bills",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a control on accounting-ledger/SCR-008 that moves to 'Awaiting payment'",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "browser",
+     "action": "press the control on accounting-ledger/SCR-008 that moves to 'Awaiting payment'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open detail accounting-ledger/SCR-008",
+     "observed": "stage shown as 'Awaiting payment'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "gated_system_move_is_visible_on_the_screen",
+   "subject": "-",
+   "parts": [
+    "system_triggered_transition",
+    "stage_approval_gate"
+   ],
+   "result": "N/A",
+   "reason": "no workflow has an automatic edge with an event leaving its initial stage",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  },
+  {
+   "journey": "custom_action_is_pressable_and_visible",
+   "subject": "accounting-ledger/ACT-006",
+   "parts": [
+    "custom_action_execution"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/invoices",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a 'Send' control on accounting-ledger/SCR-004",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Send' on accounting-ledger/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "api",
+     "action": "GET /api/history/invoices/d843bcde-4e14-4427-ae09-d155f383fb6f",
+     "observed": {
+      "status": 200,
+      "entries": 1
+     },
+     "user_facing": false
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "payment_settles_its_target_on_the_screen",
+   "subject": "Payment->Invoice",
+   "parts": [
+    "ledger_balancing"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/invoices",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/invoice_lines 2 x 50",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Awaiting approval' on accounting-ledger/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press Approve on accounting-ledger/SCR-004 at gated stage 'Awaiting approval'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Awaiting payment' on accounting-ledger/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/payments for the full 100 (no screen creates a payment)",
+     "observed": {
+      "status": 201,
+      "effects": [
+       {
+        "op": "ledger_balance",
+        "target": "invoices",
+        "target_id": "fb809b41-d9ce-4579-86a5-58cb586ca8c3",
+        "total": 100,
+        "applied": 100,
+        "settled": true,
+        "moved": {
+         "from": "Awaiting payment",
+         "to": "Paid"
+        }
+       }
+      ]
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "open accounting-ledger/SCR-004",
+     "observed": "stage shown as 'Paid'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "payment_settles_its_target_on_the_screen",
+   "subject": "Payment->Bill",
+   "parts": [
+    "ledger_balancing"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/bills",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Awaiting payment' on accounting-ledger/SCR-008",
+     "observed": "Done."
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/payments for the full 1.25 (no screen creates a payment)",
+     "observed": {
+      "status": 201,
+      "effects": [
+       {
+        "op": "ledger_balance",
+        "target": "bills",
+        "target_id": "c426ed3c-7efd-476a-b362-cb09995cb498",
+        "total": 1.25,
+        "applied": 1.25,
+        "settled": true,
+        "moved": {
+         "from": "Awaiting payment",
+         "to": "Paid"
+        }
+       }
+      ]
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "open accounting-ledger/SCR-008",
+     "observed": "stage shown as 'Paid'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "sent_document_is_stamped_on_the_screen",
+   "subject": "accounting-ledger/ACT-006",
+   "parts": [
+    "document_generation"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/invoices",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Send' on accounting-ledger/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "re-open accounting-ledger/SCR-004 and read 'sent_at'",
+     "observed": "2026-09-05T09:23:00Z"
+    },
+    {
+     "channel": "api",
+     "action": "the trail names the generated document",
+     "observed": "invoices-08eb0560-c46f-47dd-9dba-3560d11c7b1c.pdf",
+     "user_facing": false
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "rate_report_reflects_the_moves_made_on_the_screen",
+   "subject": "-",
+   "parts": [
+    "stage_history"
+   ],
+   "result": "N/A",
+   "reason": "no report metric is a stage-history rate",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  }
+ ],
+ "parts": {
+  "form_render_submit": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "crud_list_detail": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "workflow_executor": {
+   "PASS": 2,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 2
+  },
+  "system_triggered_transition": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "stage_approval_gate": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "custom_action_execution": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "ledger_balancing": {
+   "PASS": 2,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 2
+  },
+  "document_generation": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "stage_history": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  }
+ },
+ "receipts_written": [
+  {
+   "part_id": "workflow_executor",
+   "version": "1.0.0",
+   "revision": "e1e8908c90f7f1fb"
+  },
+  {
+   "part_id": "custom_action_execution",
+   "version": "1.1.0",
+   "revision": "177cfc2d6d4d4a01"
+  },
+  {
+   "part_id": "ledger_balancing",
+   "version": "1.1.0",
+   "revision": "8e4c702f78f51238"
+  },
+  {
+   "part_id": "document_generation",
+   "version": "1.0.0",
+   "revision": "6ad6f6c2187e4435"
+  }
+ ],
+ "receipts_refused": []
+}

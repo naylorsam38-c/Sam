@@ -1,0 +1,84 @@
+        <!doctype html>
+        <title>Service</title>
+        <style>body{font-family:system-ui,sans-serif;max-width:600px;margin:40px auto}
+        table{border-collapse:collapse} th,td{border:1px solid #ccc;padding:6px;text-align:left}
+        [data-field]{outline:none} #controls{margin:12px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+        #controls button{padding:6px 12px;cursor:pointer}body{margin:0}.app-header{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid #ddd;font-family:system-ui,sans-serif}.app-mark{width:28px;height:28px}.app-name{font-weight:600}</style>
+        <header class="app-header"><svg class="app-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <path d="M6 40 Q 20 16, 32 34 T 58 26" fill="none" stroke="#8A6A1F" stroke-width="5" stroke-linecap="round"/>
+</svg>
+<span class="app-name">Front Room (Wave mark)</span></header><h1>Service detail</h1>
+        <div id="state">Loading…</div>
+        <table id="fields" hidden><tr><th>Name</th><td><span data-field="name"></span></td></tr><tr><th>Description</th><td><span data-field="description"></span></td></tr><tr><th>Duration minutes</th><td><span data-field="duration_minutes"></span></td></tr><tr><th>Price</th><td><span data-field="price"></span></td></tr><tr><th>Deposit required</th><td><span data-field="deposit_required"></span></td></tr><tr><th>Deposit amount</th><td><span data-field="deposit_amount"></span></td></tr></table>
+        <div id="controls"></div>
+        <button id="save" hidden>Save</button>
+        <script>
+        const FIELD_KEYS = ["name", "description", "duration_minutes", "price", "deposit_required", "deposit_amount"];
+        const id = new URLSearchParams(window.location.search).get('id');
+
+const TRANSITIONS = [], APPROVALS = [], ACTIONS = [];
+async function post(path, body) {
+  const res = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+  const out = await res.json().catch(() => ({}));
+  if (res.ok) await load();   // re-read first: load() hides the state line on success
+  const st = document.getElementById('state');
+  st.hidden = false;
+  st.textContent = res.ok ? 'Done.' : (out.error || 'Refused.');
+}
+function renderControls(row) {
+  // every declared control, labelled with the role the declaration names:
+  // the generated app has no sign-in, so the press carries that role and
+  // the route still refuses anything the declaration does not allow
+  const box = document.getElementById('controls'); box.innerHTML = '';
+  for (const t of TRANSITIONS.filter(t => t.mover === 'roles' && t.from === row.stage)) {
+    const r = (t.roles || [])[0];
+    const b = document.createElement('button'); b.textContent = 'Move to ' + t.to + ' (as ' + r + ')'; b.dataset.move = t.to;
+    b.onclick = () => post('/api/moves/services/' + id, {to: t.to, role: r}); box.appendChild(b);
+  }
+  const gate = APPROVALS.find(g => g.stage === row.stage);
+  if (gate) {
+    const r = (gate.approvers || [])[0];
+    for (const d of ['APPROVED', 'DECLINED']) {
+      const b = document.createElement('button'); b.textContent = (d === 'APPROVED' ? 'Approve' : 'Decline') + ' (as ' + r + ')';
+      b.onclick = () => post('/api/approvals/services/' + id, {decision: d, by: r}); box.appendChild(b);
+    }
+  }
+  for (const a of ACTIONS) {
+    const r = (a.who || [])[0];
+    const b = document.createElement('button'); b.textContent = a.name + ' (as ' + r + ')';
+    b.onclick = () => {
+      const inputs = {};
+      for (const f of a.inputs) { const v = window.prompt(f.replace(/_/g, ' ')); if (v === null) return; inputs[f] = v; }
+      post('/api/actions/services/' + id + '/' + encodeURIComponent(a.name), {role: r, inputs});
+    };
+    box.appendChild(b);
+  }
+}
+        async function load() {
+          const state = document.getElementById('state');
+          try {
+            const res = await fetch('/api/services/' + id);
+            if (!res.ok) throw new Error('not found');
+            const row = await res.json();
+            for (const key of FIELD_KEYS) {
+              document.querySelector(`[data-field="${key}"]`).textContent = row[key] ?? '';
+            }
+            const st = document.querySelector('[data-field="stage"]');
+            if (st) st.textContent = row.stage ?? '';
+            renderControls(row);
+            document.getElementById('fields').hidden = false;
+            state.hidden = true;
+
+document.getElementById('save').hidden = false;
+document.getElementById('save').onclick = async () => {
+  const body = {};
+  for (const key of FIELD_KEYS) body[key] = document.querySelector(`[data-field="${key}"]`).textContent;
+  const res = await fetch('/api/services/' + id, {method: 'PUT', body: JSON.stringify(body)});
+  document.getElementById('state').textContent = res.ok ? 'Saved.' : 'Save failed.';
+};
+          } catch (e) {
+            state.textContent = 'Cannot reach server';
+          }
+        }
+        if (id) load(); else document.getElementById('state').textContent = 'No id given.';
+        </script>

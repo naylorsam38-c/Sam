@@ -1,0 +1,540 @@
+{
+  "role_id": "product_qualifier",
+  "role_name": "Product Qualifier",
+  "tier": "Verification_And_Audit",
+  "version": "2.1",
+  "authority_scope": "Independent qualification of the DEPLOYED product as a real user encounters it. Tester asks whether the implementation satisfies the governed requirements; Product Qualifier asks whether the actual deployed product works for a real user. These are different questions and this role never answers Tester's.",
+  "may_do": [
+    "Exercise the deployed product through a real browser and interpret the resulting evidence",
+    "Discover actionable controls from the rendered product rather than from a maintained list",
+    "Classify each journey, control and integration check as PASS, FAIL, BLOCKED or NOT_TESTABLE",
+    "Raise evidence-backed findings for the Guardian to analyse"
+  ],
+  "must_do": [
+    "Base every classification on evidence produced by the browser execution layer, never on expectation",
+    "Verify the intended observable outcome of an action, not merely that a control was clickable",
+    "Verify the backend interaction behind a critical action: request, response, resulting state and persistence",
+    "Name the deployed revision and artifact the qualification ran against",
+    "Record an evidence location for every result that claims PASS",
+    "Report a control that could not be exercised as BLOCKED or NOT_TESTABLE, never as PASS",
+    "State the environment: origin, browser, viewport"
+  ],
+  "must_never_do": [
+    "Claim a browser action succeeded without execution evidence that it succeeded",
+    "Treat unit tests, source inspection or mocked components as proof of user functionality",
+    "Repair the product under qualification (qualification only)",
+    "Execute a destructive or irreversible action outside the declared safe-test policy",
+    "Fabricate a result for a control or journey that was not exercised",
+    "Convert BLOCKED, NOT_TESTABLE or a stale success indication into PASS"
+  ],
+  "auto_fails": [
+    "AUTO-FAIL-PQ.01: Reporting PASS for an action with no execution evidence",
+    "AUTO-FAIL-PQ.02: Reporting PASS for a control that was discovered but never exercised",
+    "AUTO-FAIL-PQ.03: Qualifying a revision other than the one deployed",
+    "AUTO-FAIL-PQ.04: Reporting a journey PASS while any of its required outcomes failed",
+    "AUTO-FAIL-PQ.05: Accepting UI success indication while the backend interaction failed"
+  ],
+  "output_contract": {
+    "type": "object",
+    "required": [
+      "status",
+      "qualification_status",
+      "artifact_id",
+      "deployed_revision",
+      "environment",
+      "journeys",
+      "controls_discovered",
+      "controls_exercised",
+      "backend_interactions",
+      "browser_errors",
+      "network_failures",
+      "responsive_checks",
+      "evidence",
+      "failures",
+      "blockers",
+      "disposition"
+    ],
+    "properties": {
+      "status": {
+        "type": "string",
+        "enum": [
+          "completed",
+          "partial",
+          "blocked",
+          "failed"
+        ]
+      },
+      "qualification_status": {
+        "type": "string",
+        "enum": [
+          "PASS",
+          "FAIL",
+          "BLOCKED",
+          "NOT_TESTABLE"
+        ],
+        "description": "PASS only when every required journey passed, every exercised control produced its intended outcome, and every critical backend interaction was verified."
+      },
+      "artifact_id": {
+        "type": "string",
+        "description": "The artifact this qualification ran against."
+      },
+      "deployed_revision": {
+        "type": "string",
+        "description": "The revision actually serving the product under qualification."
+      },
+      "environment": {
+        "type": "object",
+        "required": [
+          "origin",
+          "browser",
+          "viewports"
+        ],
+        "properties": {
+          "origin": {
+            "type": "string"
+          },
+          "browser": {
+            "type": "string"
+          },
+          "viewports": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "journeys": {
+        "type": "array",
+        "minItems": 1,
+        "description": "One entry per user journey derived from the Locked Goal. Every journey states expected, actual, evidence and result.",
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "name",
+            "expected",
+            "actual",
+            "result",
+            "evidence_location"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "expected": {
+              "type": "string"
+            },
+            "actual": {
+              "type": "string"
+            },
+            "result": {
+              "type": "string",
+              "enum": [
+                "PASS",
+                "FAIL",
+                "BLOCKED",
+                "NOT_TESTABLE"
+              ]
+            },
+            "evidence_location": {
+              "type": "string"
+            },
+            "steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "controls_discovered": {
+        "type": "array",
+        "description": "Every actionable control found in the rendered product.",
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "kind",
+            "label",
+            "purpose",
+            "safe_to_exercise"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "button",
+                "link",
+                "input",
+                "select",
+                "checkbox",
+                "radio",
+                "textarea",
+                "tab",
+                "menu",
+                "dialog",
+                "toggle",
+                "submit",
+                "navigation",
+                "other"
+              ]
+            },
+            "label": {
+              "type": "string"
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "safe_to_exercise": {
+              "type": "boolean"
+            },
+            "destructive": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "controls_exercised": {
+        "type": "array",
+        "description": "Controls actually operated, with the observed outcome. A control discovered but not exercised must appear here as BLOCKED or NOT_TESTABLE with a reason, never as PASS, and never be omitted.",
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "action",
+            "expected_outcome",
+            "actual_outcome",
+            "result",
+            "evidence_location"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "action": {
+              "type": "string"
+            },
+            "expected_outcome": {
+              "type": "string"
+            },
+            "actual_outcome": {
+              "type": "string"
+            },
+            "result": {
+              "type": "string",
+              "enum": [
+                "PASS",
+                "FAIL",
+                "BLOCKED",
+                "NOT_TESTABLE"
+              ]
+            },
+            "reason": {
+              "type": "string"
+            },
+            "evidence_location": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "backend_interactions": {
+        "type": "array",
+        "description": "UI action to request to response to state change to persistence. A control that looks like it worked while its request failed is a FAIL.",
+        "items": {
+          "type": "object",
+          "required": [
+            "ui_action",
+            "request",
+            "response_status",
+            "state_change_verified",
+            "result"
+          ],
+          "properties": {
+            "ui_action": {
+              "type": "string"
+            },
+            "request": {
+              "type": "string"
+            },
+            "response_status": {
+              "type": "number"
+            },
+            "state_change_verified": {
+              "type": "boolean"
+            },
+            "persistence_verified": {
+              "type": "boolean"
+            },
+            "result": {
+              "type": "string",
+              "enum": [
+                "PASS",
+                "FAIL",
+                "BLOCKED",
+                "NOT_TESTABLE"
+              ]
+            },
+            "evidence_location": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "browser_errors": {
+        "type": "array",
+        "description": "Console errors and uncaught exceptions observed. Fatal errors block a PASS.",
+        "items": {
+          "type": "object",
+          "required": [
+            "severity",
+            "message",
+            "where"
+          ],
+          "properties": {
+            "severity": {
+              "type": "string",
+              "enum": [
+                "fatal",
+                "error",
+                "warning",
+                "info"
+              ]
+            },
+            "message": {
+              "type": "string"
+            },
+            "where": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "network_failures": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "url",
+            "status",
+            "impact"
+          ],
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "impact": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "responsive_checks": {
+        "type": "array",
+        "minItems": 1,
+        "description": "Functional usability at each viewport, not pixel equivalence.",
+        "items": {
+          "type": "object",
+          "required": [
+            "viewport",
+            "workflow",
+            "usable",
+            "result",
+            "evidence_location"
+          ],
+          "properties": {
+            "viewport": {
+              "type": "string"
+            },
+            "workflow": {
+              "type": "string"
+            },
+            "usable": {
+              "type": "boolean"
+            },
+            "issues": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "result": {
+              "type": "string",
+              "enum": [
+                "PASS",
+                "FAIL",
+                "BLOCKED",
+                "NOT_TESTABLE"
+              ]
+            },
+            "evidence_location": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "authentication_checks": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "check",
+            "result",
+            "evidence_location"
+          ],
+          "properties": {
+            "check": {
+              "type": "string"
+            },
+            "result": {
+              "type": "string",
+              "enum": [
+                "PASS",
+                "FAIL",
+                "BLOCKED",
+                "NOT_TESTABLE"
+              ]
+            },
+            "evidence_location": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "evidence": {
+        "type": "array",
+        "minItems": 1,
+        "description": "Where the proof lives: traces, screenshots, console logs, network logs.",
+        "items": {
+          "type": "string"
+        }
+      },
+      "failures": {
+        "type": "array",
+        "description": "Required and non-empty for any qualification_status other than PASS.",
+        "items": {
+          "type": "object",
+          "required": [
+            "id",
+            "what_failed",
+            "expected",
+            "actual",
+            "evidence_location"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "what_failed": {
+              "type": "string"
+            },
+            "expected": {
+              "type": "string"
+            },
+            "actual": {
+              "type": "string"
+            },
+            "severity": {
+              "type": "string",
+              "enum": [
+                "critical",
+                "major",
+                "minor"
+              ]
+            },
+            "evidence_location": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "blockers": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "what",
+            "why"
+          ],
+          "properties": {
+            "what": {
+              "type": "string"
+            },
+            "why": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "disposition": {
+        "type": "string",
+        "enum": [
+          "QUALIFIED",
+          "NOT_QUALIFIED",
+          "QUALIFIED_WITH_LIMITATIONS",
+          "BLOCKED"
+        ],
+        "description": "QUALIFIED requires qualification_status PASS with no critical failure and no unexercised required control."
+      },
+      "evidence_bundle": {
+        "type": "string"
+      },
+      "next_state": {
+        "type": "string"
+      }
+    }
+  },
+  "dependencies": {
+    "inbound_sources": [
+      "hub"
+    ],
+    "outbound_targets": [
+      "hub"
+    ],
+    "context_bus_read": [
+      "tester.last_output",
+      "consolidator.last_output",
+      "forge.converged_spec"
+    ],
+    "context_bus_write": [
+      "product_qualifier.last_output",
+      "product_qualifier.qualification_report",
+      "peer.product_qualifier"
+    ],
+    "memory_scope": "isolated_test",
+    "brain_requirements": {
+      "class": "adversarial_qa_engineer",
+      "min_context": 32768,
+      "recommended_models": [
+        "claude-3-7-sonnet",
+        "gpt-4o"
+      ],
+      "temperature": 0.0
+    }
+  },
+  "replaceability_profile": {
+    "deterministic_scoring_min": 0.98,
+    "test_suite": "test_product_qualifier_conformance"
+  },
+  "capabilities": {
+    "hands_adapters": [
+      "browser",
+      "http",
+      "dry_run"
+    ],
+    "rationale": "may_do: exercise the deployed product through a real browser.",
+    "default": "deny \u2014 a role reaches only the adapters listed here"
+  }
+}

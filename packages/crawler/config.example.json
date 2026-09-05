@@ -1,0 +1,7 @@
+{
+  "base_url": "http://localhost:3000",
+  "same_origin_only": true,
+  "max_pages": 100,
+  "timeout_ms": 15000,
+  "notes": "Keep destructive actions disabled unless this is an isolated test environment."
+}

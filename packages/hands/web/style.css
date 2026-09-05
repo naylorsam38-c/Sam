@@ -1,0 +1,51 @@
+/* Hands — white central workspace, dark gunmetal surround, thin borders,
+   no decorative animation. */
+:root {
+  --gunmetal: #22282e;
+  --line: #d8dde2;
+  --ink: #12171c;
+  --muted: #5d6873;
+  --accent: #1f57c3;
+  --gate: #8a5b00;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--gunmetal);
+  color: var(--ink);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.bar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 14px 20px; color: #f2f5f8;
+}
+.bar h1 { font-size: 18px; letter-spacing: .18em; margin: 0; font-weight: 600; }
+.token { font-size: 12px; color: #b7c0c9; display: flex; gap: 8px; align-items: center; }
+.workspace {
+  background: #fff; margin: 0 auto 40px; max-width: 780px; padding: 8px 24px 24px;
+  border: 1px solid var(--line); box-shadow: 0 2px 14px rgba(0,0,0,.28);
+}
+.panel { border-top: 1px solid var(--line); padding: 18px 0; }
+.panel:first-child { border-top: 0; }
+h2 { font-size: 15px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 12px; }
+label { display: block; margin: 0 0 10px; font-size: 13px; color: var(--muted); }
+input, select { display: block; width: 100%; padding: 8px 10px; margin-top: 4px;
+  border: 1px solid var(--line); border-radius: 2px; font: inherit; color: var(--ink); }
+button {
+  padding: 9px 16px; border: 1px solid var(--accent); background: var(--accent);
+  color: #fff; border-radius: 2px; font: inherit; cursor: pointer;
+}
+button.ghost { background: #fff; color: var(--accent); }
+.row { display: flex; gap: 10px; }
+.muted { color: var(--muted); font-size: 13px; }
+.session { font-family: ui-monospace, monospace; font-size: 13px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+td { border-bottom: 1px solid var(--line); padding: 7px 4px; vertical-align: top; }
+.tag { font-size: 11px; letter-spacing: .05em; padding: 2px 6px; border: 1px solid var(--line); }
+.tag.MISSING { border-color: #b03030; color: #b03030; }
+.tag.REQUIRES_APPROVAL { border-color: var(--gate); color: var(--gate); }
+.gate { border-left: 3px solid var(--gate); padding-left: 14px; }
+.gate h2 { color: var(--gate); }
+pre { background: #f6f8fa; border: 1px solid var(--line); padding: 10px; overflow-x: auto; font-size: 12px; }
+.trail { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); padding-left: 20px; }
+.error { max-width: 780px; margin: 0 auto 40px; color: #ffd7d7; font-size: 13px; }

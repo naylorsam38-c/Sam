@@ -1,0 +1,2023 @@
+{
+  "template": "booking-frontdesk",
+  "source_app": "Acuity Scheduling",
+  "category": "booking",
+  "modules": [
+    "catalog_services",
+    "scheduling",
+    "people_directory",
+    "deposits"
+  ],
+  "inventory": {
+    "records": [
+      "Service",
+      "Customer",
+      "Appointment"
+    ],
+    "roles": [
+      "Owner",
+      "Staff"
+    ],
+    "forms": [
+      "Public booking form"
+    ],
+    "notifications": [
+      "Booking confirmation",
+      "Appointment reminder",
+      "Cancellation notice"
+    ],
+    "reports": [
+      "Upcoming appointments",
+      "No-show rate"
+    ],
+    "workflows": [
+      "Appointment lifecycle"
+    ],
+    "file_types": [],
+    "integrations": [],
+    "screens": []
+  },
+  "super_role": "Owner",
+  "answers": {
+    "A.06": [
+      "web"
+    ],
+    "A.07": "yes",
+    "A.08": "single",
+    "A.09": "yes",
+    "A.10": [
+      "public booking page",
+      "public booking form"
+    ],
+    "A.11": "no",
+    "A.16": "Owner",
+    "P.00": "no",
+    "C.05": {
+      "mode": "different",
+      "what": "the public booking flow is mobile-first: one step per screen (service -> time -> details -> pay)"
+    },
+    "C.06": {
+      "Owner": "Calendar",
+      "Staff": "Calendar"
+    },
+    "B.01": [
+      "one_off"
+    ],
+    "B.02": "person",
+    "B.04": "AUD",
+    "B.07": "card_only",
+    "B.08": {
+      "grace_days": 0,
+      "after_repeated": "cancel"
+    },
+    "B.11": {
+      "allowed": "yes",
+      "by": [
+        "Owner"
+      ]
+    },
+    "AU.01": [
+      "invited"
+    ],
+    "AU.02": [
+      {
+        "name": "Full name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Email address",
+        "type": "email",
+        "required": "yes",
+        "unique": "yes"
+      }
+    ],
+    "AU.03": "yes",
+    "AU.04": [
+      "password",
+      "google"
+    ],
+    "AU.07": {
+      "scope": "nobody",
+      "method": "n/a"
+    },
+    "AU.08": {
+      "attempts": 5,
+      "duration": "15 minutes"
+    },
+    "AU.09": "yes",
+    "AU.10": "30 days",
+    "AU.11": {
+      "allowed": "yes",
+      "by": [
+        "super"
+      ],
+      "auto_triggers": []
+    },
+    "AU.12": {
+      "allowed": "yes",
+      "by": "both",
+      "data": "anonymised"
+    },
+    "AU.13": [
+      "super"
+    ],
+    "AU.14": {
+      "required": "yes",
+      "status": "need_drafting"
+    },
+    "AU.06": {
+      "inviters": [
+        "Owner"
+      ],
+      "default_role": "Staff"
+    }
+  },
+  "per_instance": {
+    "R.01:Service": "Something customers can book: a name, a length and a price.",
+    "R.02:Service": [
+      {
+        "name": "Name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Description",
+        "type": "long_text",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Duration minutes",
+        "type": "whole_number",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Price",
+        "type": "money",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Deposit required",
+        "type": "yes_no",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Deposit amount",
+        "type": "money",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Service": "Name",
+    "R.04:Service": {
+      "needed": "no"
+    },
+    "R.05:Service": [
+      {
+        "role": "Staff",
+        "scope": "all"
+      },
+      {
+        "role": "public",
+        "scope": "public"
+      }
+    ],
+    "R.06:Service": [
+      "Owner"
+    ],
+    "R.07:Service": [
+      {
+        "role": "Owner",
+        "scope": "all"
+      }
+    ],
+    "R.08:Service": [
+      {
+        "role": "Owner",
+        "scope": "all"
+      }
+    ],
+    "R.10:Service": {
+      "has": "no"
+    },
+    "R.11:Service": [],
+    "R.13:Service": "yes",
+    "R.14:Service": "forever",
+    "R.15:Service": [],
+    "R.01:Customer": "A person who books appointments; created from the public booking form.",
+    "R.02:Customer": [
+      {
+        "name": "Full name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Email",
+        "type": "email",
+        "required": "yes",
+        "unique": "yes"
+      },
+      {
+        "name": "Phone",
+        "type": "phone",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Notes",
+        "type": "long_text",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Customer": "Full name",
+    "R.04:Customer": {
+      "needed": "no"
+    },
+    "R.05:Customer": [
+      {
+        "role": "Staff",
+        "scope": "all"
+      }
+    ],
+    "R.06:Customer": [
+      "Staff",
+      "public"
+    ],
+    "R.07:Customer": [
+      {
+        "role": "Staff",
+        "scope": "all"
+      }
+    ],
+    "R.08:Customer": [
+      {
+        "role": "Owner",
+        "scope": "all"
+      }
+    ],
+    "R.10:Customer": {
+      "has": "no"
+    },
+    "R.11:Customer": [],
+    "R.13:Customer": "yes",
+    "R.14:Customer": "forever",
+    "R.15:Customer": [],
+    "R.01:Appointment": "A booked time slot for one customer, one service and one staff member.",
+    "R.02:Appointment": [
+      {
+        "name": "Service",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Service"
+      },
+      {
+        "name": "Customer",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Customer"
+      },
+      {
+        "name": "Staff member",
+        "type": "other",
+        "required": "yes",
+        "unique": "no",
+        "custom_rule": "reference to a user account (pick-a-person field)"
+      },
+      {
+        "name": "Start",
+        "type": "date_time",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Notes",
+        "type": "long_text",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Deposit paid",
+        "type": "yes_no",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Appointment": "Start",
+    "R.04:Appointment": {
+      "needed": "yes",
+      "format": "APT-#### (sequential)"
+    },
+    "R.05:Appointment": [
+      {
+        "role": "Staff",
+        "scope": "all"
+      }
+    ],
+    "R.06:Appointment": [
+      "Staff",
+      "public"
+    ],
+    "R.07:Appointment": [
+      {
+        "role": "Staff",
+        "scope": "all"
+      }
+    ],
+    "R.08:Appointment": [
+      {
+        "role": "Owner",
+        "scope": "all"
+      }
+    ],
+    "R.10:Appointment": {
+      "has": "yes",
+      "stages": [
+        "Booked",
+        "Confirmed",
+        "Completed",
+        "Cancelled",
+        "No-show"
+      ]
+    },
+    "R.11:Appointment": [
+      {
+        "target": "Service",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      },
+      {
+        "target": "Customer",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Appointment": "yes",
+    "R.14:Appointment": "forever",
+    "R.15:Appointment": [],
+    "R.12:Appointment": "block",
+    "FL.01:Appointment lifecycle": {
+      "kind": "event",
+      "event": "an appointment is created (public form or by staff); starts in 'Booked'"
+    },
+    "FL.02:Appointment lifecycle": {
+      "stages": [
+        "Booked",
+        "Confirmed",
+        "Completed",
+        "Cancelled",
+        "No-show"
+      ],
+      "initial": "Booked",
+      "terminal": [
+        "Completed",
+        "Cancelled",
+        "No-show"
+      ]
+    },
+    "FL.03:Appointment lifecycle": [
+      {
+        "from": "Booked",
+        "to": "Confirmed",
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ]
+      },
+      {
+        "from": "Confirmed",
+        "to": "Completed",
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ]
+      },
+      {
+        "from": "Confirmed",
+        "to": "No-show",
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ]
+      },
+      {
+        "from": "Booked",
+        "to": "Cancelled",
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ]
+      },
+      {
+        "from": "Confirmed",
+        "to": "Cancelled",
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ]
+      }
+    ],
+    "FL.04:Appointment lifecycle": [],
+    "FL.05:Appointment lifecycle": [],
+    "FL.07:Appointment lifecycle": {
+      "allowed": "no"
+    },
+    "FL.08:Appointment lifecycle": "Completed/No-show appointments lock and feed the reports.",
+    "FL.09:Appointment lifecycle": "Completed",
+    "FL.10:Appointment lifecycle": [
+      {
+        "stage": "Booked",
+        "duration": "24 hours",
+        "then": "if the deposit is unpaid, the appointment moves to Cancelled and the slot is released"
+      }
+    ],
+    "FL.11:Appointment lifecycle": [],
+    "N.01:Booking confirmation": {
+      "kind": "event",
+      "event": "an appointment reaches stage Confirmed"
+    },
+    "N.02:Booking confirmation": [
+      {
+        "kind": "field",
+        "record": "Appointment",
+        "field": "Customer"
+      }
+    ],
+    "N.03:Booking confirmation": [
+      "email",
+      "sms"
+    ],
+    "N.04:Booking confirmation": "Your booking is locked in — here's the time, the service and how to change it.",
+    "N.05:Booking confirmation": "no",
+    "N.01:Appointment reminder": {
+      "kind": "relative_to_date",
+      "record": "Appointment",
+      "date_field": "Start",
+      "offset": "-24 hours"
+    },
+    "N.02:Appointment reminder": [
+      {
+        "kind": "field",
+        "record": "Appointment",
+        "field": "Customer"
+      }
+    ],
+    "N.03:Appointment reminder": [
+      "email",
+      "sms"
+    ],
+    "N.04:Appointment reminder": "Your appointment is tomorrow — reply or use the link to reschedule.",
+    "N.05:Appointment reminder": "yes",
+    "N.01:Cancellation notice": {
+      "kind": "event",
+      "event": "an appointment moves to Cancelled"
+    },
+    "N.02:Cancellation notice": [
+      {
+        "kind": "field",
+        "record": "Appointment",
+        "field": "Customer"
+      },
+      {
+        "kind": "field",
+        "record": "Appointment",
+        "field": "Staff member"
+      }
+    ],
+    "N.03:Cancellation notice": [
+      "email"
+    ],
+    "N.04:Cancellation notice": "This booking was cancelled — rebook if it wasn't you.",
+    "N.05:Cancellation notice": "no",
+    "RP.01:Upcoming appointments": "What's booked for the coming days, per staff member?",
+    "RP.02:Upcoming appointments": [
+      "Staff"
+    ],
+    "RP.03:Upcoming appointments": {
+      "delivery": "screen",
+      "shape": "table"
+    },
+    "RP.04:Upcoming appointments": [
+      "count of Appointments in stage Booked or Confirmed"
+    ],
+    "RP.06:Upcoming appointments": {
+      "filters": [
+        "Staff member",
+        "Service"
+      ],
+      "default_range": "next 7 days"
+    },
+    "RP.07:Upcoming appointments": {
+      "allowed": "yes",
+      "by": [
+        "Staff"
+      ]
+    },
+    "RP.08:Upcoming appointments": {
+      "enabled": "no"
+    },
+    "RP.01:No-show rate": "How often do customers fail to turn up?",
+    "RP.02:No-show rate": [
+      "Owner"
+    ],
+    "RP.03:No-show rate": {
+      "delivery": "screen",
+      "shape": "both"
+    },
+    "RP.04:No-show rate": [
+      "no-show rate"
+    ],
+    "RP.06:No-show rate": {
+      "filters": [
+        "Staff member",
+        "Service"
+      ],
+      "default_range": "last 30 days"
+    },
+    "RP.07:No-show rate": {
+      "allowed": "yes",
+      "by": [
+        "Owner"
+      ]
+    },
+    "RP.08:No-show rate": {
+      "enabled": "no"
+    },
+    "F.01:Public booking form": {
+      "purpose": "lets a customer pick a service, a time and a staff member and book it without an account",
+      "fillers": [
+        "public"
+      ]
+    },
+    "F.02:Public booking form": {
+      "target": "Appointment",
+      "extra_fields": []
+    },
+    "F.03:Public booking form": [],
+    "F.04:Public booking form": "no",
+    "F.05:Public booking form": "stay_with_message",
+    "RP.05:No-show rate:no-show rate": "appointments that ended No-show divided by appointments that ended Completed or No-show, in the selected period, by the appointment's Start date; expressed as a percentage",
+    "P.01:Staff": "A person who delivers services and manages their own calendar.",
+    "P.02:Staff": "no",
+    "P.03:Staff": "no",
+    "P.04:Staff": [
+      "Owner"
+    ]
+  },
+  "ask_customer": [
+    "0.01",
+    "A.01",
+    "A.02",
+    "A.03",
+    "A.04",
+    "A.05",
+    "A.12",
+    "A.13",
+    "A.14",
+    "C.01",
+    "C.02",
+    "C.03",
+    "C.04",
+    "C.07",
+    "Z.01",
+    "Z.02",
+    "Z.03",
+    "B.03"
+  ],
+  "features": [
+    {
+      "feature": "Deposits",
+      "controlled_by": "R.02:Service (Deposit required)",
+      "rule": "set every Service's Deposit required = no -> A.09 flips to no, Part B drops, Booked auto-confirms"
+    },
+    {
+      "feature": "SMS reminders",
+      "controlled_by": "N.03 answers",
+      "rule": "remove 'sms' from the channels -> DI.07 (SMS credentials) no longer needed"
+    },
+    {
+      "feature": "Customer accounts",
+      "controlled_by": "AU.01",
+      "rule": "add 'public' self-registration and a 'Customer' role to let customers log in and see their own bookings (R.05:Appointment gains Customer: own)"
+    },
+    {
+      "feature": "Auto-cancel unpaid bookings",
+      "controlled_by": "FL.10:Appointment lifecycle",
+      "rule": "change or delete the 24-hour Booked timeout"
+    },
+    {
+      "feature": "No-show tracking",
+      "controlled_by": "FL.02 stages",
+      "rule": "remove the No-show stage and its report"
+    }
+  ],
+  "specialist_engines": [
+    {
+      "kind": "workflow",
+      "name": "Appointment lifecycle",
+      "stages": [
+        "Booked",
+        "Confirmed",
+        "Completed",
+        "Cancelled",
+        "No-show"
+      ],
+      "initial": "Booked",
+      "terminal": [
+        "Completed",
+        "Cancelled",
+        "No-show"
+      ],
+      "transitions": 5,
+      "person_moved_by": [
+        "Staff"
+      ],
+      "automatic_transitions": [],
+      "has_approvals": false,
+      "has_timeouts": true,
+      "cancellable": false
+    },
+    {
+      "kind": "notification",
+      "name": "Booking confirmation",
+      "trigger_kind": "event",
+      "channels": [
+        "email",
+        "sms"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Appointment reminder",
+      "trigger_kind": "relative_to_date",
+      "channels": [
+        "email",
+        "sms"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Cancellation notice",
+      "trigger_kind": "event",
+      "channels": [
+        "email"
+      ]
+    },
+    {
+      "kind": "report",
+      "name": "Upcoming appointments",
+      "metrics": [
+        "count of Appointments in stage Booked or Confirmed"
+      ],
+      "shape": "table",
+      "delivery": "screen"
+    },
+    {
+      "kind": "report",
+      "name": "No-show rate",
+      "metrics": [
+        "no-show rate"
+      ],
+      "shape": "both",
+      "delivery": "screen"
+    }
+  ],
+  "report_specs": {
+    "Upcoming appointments": [
+      {
+        "metric": "count of Appointments in stage Booked or Confirmed",
+        "spec": {
+          "table": "appointments",
+          "aggregation": "count",
+          "filters": [
+            {
+              "field": "stage",
+              "op": "in",
+              "value": [
+                "Booked",
+                "Confirmed"
+              ]
+            },
+            {
+              "field": "start",
+              "op": "within_next_days",
+              "value": 7
+            }
+          ]
+        }
+      }
+    ],
+    "No-show rate": [
+      {
+        "metric": "no-show rate",
+        "spec": {
+          "engine": "stage_history",
+          "kind": "rate_over_last_days",
+          "table": "appointments",
+          "numerator_stage": "No-show",
+          "denominator_stages": [
+            "Completed",
+            "No-show"
+          ],
+          "days": 30
+        }
+      }
+    ]
+  },
+  "structure": {
+    "records": {
+      "Service": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Description": {
+            "name": "Description",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          },
+          "Duration minutes": {
+            "name": "Duration minutes",
+            "type": "whole_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Price": {
+            "name": "Price",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Deposit required": {
+            "name": "Deposit required",
+            "type": "yes_no",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Deposit amount": {
+            "name": "Deposit amount",
+            "type": "money",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Description": "TEXT",
+          "Duration minutes": "INTEGER",
+          "Price": "DECIMAL(18,2)",
+          "Deposit required": "BOOLEAN",
+          "Deposit amount": "DECIMAL(18,2)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Staff",
+              "scope": "all"
+            },
+            {
+              "role": "public",
+              "scope": "public"
+            }
+          ],
+          "create": [
+            "Owner"
+          ],
+          "edit": [
+            {
+              "role": "Owner",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Owner",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "booking-frontdesk/REC-001"
+      },
+      "Customer": {
+        "fields": {
+          "Full name": {
+            "name": "Full name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Email": {
+            "name": "Email",
+            "type": "email",
+            "required": "yes",
+            "unique": "yes"
+          },
+          "Phone": {
+            "name": "Phone",
+            "type": "phone",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Full name": "VARCHAR(255)",
+          "Email": "VARCHAR(255)",
+          "Phone": "VARCHAR(40)",
+          "Notes": "TEXT"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Staff",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Staff",
+            "public"
+          ],
+          "edit": [
+            {
+              "role": "Staff",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Owner",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Full name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "booking-frontdesk/REC-002"
+      },
+      "Appointment": {
+        "fields": {
+          "Service": {
+            "name": "Service",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Service"
+          },
+          "Customer": {
+            "name": "Customer",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Customer"
+          },
+          "Staff member": {
+            "name": "Staff member",
+            "type": "other",
+            "required": "yes",
+            "unique": "no",
+            "custom_rule": "reference to a user account (pick-a-person field)"
+          },
+          "Start": {
+            "name": "Start",
+            "type": "date_time",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          },
+          "Deposit paid": {
+            "name": "Deposit paid",
+            "type": "yes_no",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Service": "FOREIGN_KEY",
+          "Customer": "FOREIGN_KEY",
+          "Staff member": "FOREIGN_KEY_ROLE",
+          "Start": "DATETIME",
+          "Notes": "TEXT",
+          "Deposit paid": "BOOLEAN"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Staff",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Staff",
+            "public"
+          ],
+          "edit": [
+            {
+              "role": "Staff",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Owner",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Start",
+        "id_style": {
+          "needed": "yes",
+          "format": "APT-#### (sequential)"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "Booked",
+            "Confirmed",
+            "Completed",
+            "Cancelled",
+            "No-show"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "booking-frontdesk/REC-003"
+      }
+    },
+    "roles": {
+      "Owner": {
+        "permitted": [
+          {
+            "action": "create",
+            "record": "Service",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Service",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Service",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Customer",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Appointment",
+            "scope": "all"
+          }
+        ],
+        "is_admin": true
+      },
+      "Staff": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Service",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Customer",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Customer",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Customer",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Appointment",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Appointment",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Appointment",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      }
+    },
+    "super_role": "Owner",
+    "workflows": {
+      "Appointment lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "an appointment is created (public form or by staff); starts in 'Booked'"
+        },
+        "stages": [
+          {
+            "id": "booking-frontdesk/STG-001",
+            "name": "Booked"
+          },
+          {
+            "id": "booking-frontdesk/STG-002",
+            "name": "Confirmed"
+          },
+          {
+            "id": "booking-frontdesk/STG-003",
+            "name": "Completed"
+          },
+          {
+            "id": "booking-frontdesk/STG-004",
+            "name": "Cancelled"
+          },
+          {
+            "id": "booking-frontdesk/STG-005",
+            "name": "No-show"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "Booked",
+            "to": "Confirmed",
+            "mover": "roles",
+            "roles": [
+              "Staff"
+            ],
+            "id": "booking-frontdesk/TRN-001"
+          },
+          {
+            "from": "Confirmed",
+            "to": "Completed",
+            "mover": "roles",
+            "roles": [
+              "Staff"
+            ],
+            "id": "booking-frontdesk/TRN-002"
+          },
+          {
+            "from": "Confirmed",
+            "to": "No-show",
+            "mover": "roles",
+            "roles": [
+              "Staff"
+            ],
+            "id": "booking-frontdesk/TRN-003"
+          },
+          {
+            "from": "Booked",
+            "to": "Cancelled",
+            "mover": "roles",
+            "roles": [
+              "Staff"
+            ],
+            "id": "booking-frontdesk/TRN-004"
+          },
+          {
+            "from": "Confirmed",
+            "to": "Cancelled",
+            "mover": "roles",
+            "roles": [
+              "Staff"
+            ],
+            "id": "booking-frontdesk/TRN-005"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [
+          {
+            "stage": "Booked",
+            "duration": "24 hours",
+            "then": "if the deposit is unpaid, the appointment moves to Cancelled and the slot is released"
+          }
+        ],
+        "effects": [],
+        "initial": "Booked",
+        "terminal": [
+          "Completed",
+          "Cancelled",
+          "No-show"
+        ]
+      }
+    },
+    "notifications": {
+      "Booking confirmation": {
+        "trigger": {
+          "kind": "event",
+          "event": "an appointment reaches stage Confirmed"
+        },
+        "recipients": [
+          {
+            "kind": "field",
+            "record": "Appointment",
+            "field": "Customer"
+          }
+        ],
+        "channels": [
+          "email",
+          "sms"
+        ],
+        "timing": "immediate",
+        "id": "booking-frontdesk/NOTIF-001"
+      },
+      "Appointment reminder": {
+        "trigger": {
+          "kind": "relative_to_date",
+          "record": "Appointment",
+          "date_field": "Start",
+          "offset": "-24 hours"
+        },
+        "recipients": [
+          {
+            "kind": "field",
+            "record": "Appointment",
+            "field": "Customer"
+          }
+        ],
+        "channels": [
+          "email",
+          "sms"
+        ],
+        "timing": "offset:-24 hours",
+        "id": "booking-frontdesk/NOTIF-002"
+      },
+      "Cancellation notice": {
+        "trigger": {
+          "kind": "event",
+          "event": "an appointment moves to Cancelled"
+        },
+        "recipients": [
+          {
+            "kind": "field",
+            "record": "Appointment",
+            "field": "Customer"
+          },
+          {
+            "kind": "field",
+            "record": "Appointment",
+            "field": "Staff member"
+          }
+        ],
+        "channels": [
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "booking-frontdesk/NOTIF-003"
+      }
+    },
+    "reports": {
+      "Upcoming appointments": {
+        "data_source": "What's booked for the coming days, per staff member?",
+        "metrics": {
+          "count of Appointments in stage Booked or Confirmed": "auto: count/sum of 'count of Appointments in stage Booked or Confirmed'"
+        },
+        "spec": [
+          {
+            "metric": "count of Appointments in stage Booked or Confirmed",
+            "spec": {
+              "table": "appointments",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "in",
+                  "value": [
+                    "Booked",
+                    "Confirmed"
+                  ]
+                },
+                {
+                  "field": "start",
+                  "op": "within_next_days",
+                  "value": 7
+                }
+              ]
+            }
+          }
+        ],
+        "id": "booking-frontdesk/RPT-001"
+      },
+      "No-show rate": {
+        "data_source": "How often do customers fail to turn up?",
+        "metrics": {
+          "no-show rate": "appointments that ended No-show divided by appointments that ended Completed or No-show, in the selected period, by the appointment's Start date; expressed as a percentage"
+        },
+        "spec": [
+          {
+            "metric": "no-show rate",
+            "spec": {
+              "engine": "stage_history",
+              "kind": "rate_over_last_days",
+              "table": "appointments",
+              "numerator_stage": "No-show",
+              "denominator_stages": [
+                "Completed",
+                "No-show"
+              ],
+              "days": 30
+            }
+          }
+        ],
+        "id": "booking-frontdesk/RPT-002"
+      }
+    },
+    "forms": {
+      "Public booking form": [
+        "Service",
+        "Customer",
+        "Staff member",
+        "Start",
+        "Notes",
+        "Deposit paid"
+      ]
+    },
+    "integrations": {},
+    "auth": {
+      "AU.01": [
+        "invited"
+      ],
+      "AU.02": [
+        {
+          "name": "Full name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Email address",
+          "type": "email",
+          "required": "yes",
+          "unique": "yes"
+        }
+      ],
+      "AU.03": "yes",
+      "AU.04": [
+        "password",
+        "google"
+      ],
+      "AU.07": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "AU.08": {
+        "attempts": 5,
+        "duration": "15 minutes"
+      },
+      "AU.09": "yes",
+      "AU.10": "30 days",
+      "AU.11": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "AU.12": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "AU.13": [
+        "super"
+      ],
+      "AU.14": {
+        "required": "yes",
+        "status": "need_drafting"
+      },
+      "AU.06": {
+        "inviters": [
+          "Owner"
+        ],
+        "default_role": "Staff"
+      }
+    },
+    "brand": {
+      "app_name": null,
+      "assets": null
+    },
+    "screens_inventory": [
+      {
+        "id": "booking-frontdesk/SCR-001",
+        "kind": "list",
+        "record": "Service"
+      },
+      {
+        "id": "booking-frontdesk/SCR-002",
+        "kind": "detail",
+        "record": "Service"
+      },
+      {
+        "id": "booking-frontdesk/SCR-003",
+        "kind": "list",
+        "record": "Customer"
+      },
+      {
+        "id": "booking-frontdesk/SCR-004",
+        "kind": "detail",
+        "record": "Customer"
+      },
+      {
+        "id": "booking-frontdesk/SCR-005",
+        "kind": "list",
+        "record": "Appointment"
+      },
+      {
+        "id": "booking-frontdesk/SCR-006",
+        "kind": "detail",
+        "record": "Appointment"
+      },
+      {
+        "id": "booking-frontdesk/SCR-007",
+        "kind": "form",
+        "form": "Public booking form",
+        "record": "Appointment"
+      },
+      {
+        "id": "booking-frontdesk/SCR-008",
+        "kind": "report",
+        "report": "Upcoming appointments"
+      },
+      {
+        "id": "booking-frontdesk/SCR-009",
+        "kind": "report",
+        "report": "No-show rate"
+      }
+    ],
+    "navigation": [
+      "booking-frontdesk/SCR-001",
+      "booking-frontdesk/SCR-002",
+      "booking-frontdesk/SCR-003",
+      "booking-frontdesk/SCR-004",
+      "booking-frontdesk/SCR-005",
+      "booking-frontdesk/SCR-006",
+      "booking-frontdesk/SCR-007",
+      "booking-frontdesk/SCR-008",
+      "booking-frontdesk/SCR-009"
+    ],
+    "landing_per_role": {
+      "Owner": "Calendar",
+      "Staff": "Calendar"
+    },
+    "actions_inventory": [
+      {
+        "id": "booking-frontdesk/ACT-001",
+        "kind": "create",
+        "record": "Service",
+        "roles": [
+          "Owner"
+        ],
+        "outcome": "creates a new 'Service' record"
+      },
+      {
+        "id": "booking-frontdesk/ACT-002",
+        "kind": "edit",
+        "record": "Service",
+        "roles": [
+          "Owner"
+        ],
+        "outcome": "edits an existing 'Service' record"
+      },
+      {
+        "id": "booking-frontdesk/ACT-003",
+        "kind": "delete",
+        "record": "Service",
+        "roles": [
+          "Owner"
+        ],
+        "outcome": "deletes a 'Service' record"
+      },
+      {
+        "id": "booking-frontdesk/ACT-004",
+        "kind": "create",
+        "record": "Customer",
+        "roles": [
+          "Staff"
+        ],
+        "outcome": "creates a new 'Customer' record"
+      },
+      {
+        "id": "booking-frontdesk/ACT-005",
+        "kind": "edit",
+        "record": "Customer",
+        "roles": [
+          "Staff"
+        ],
+        "outcome": "edits an existing 'Customer' record"
+      },
+      {
+        "id": "booking-frontdesk/ACT-006",
+        "kind": "delete",
+        "record": "Customer",
+        "roles": [
+          "Owner"
+        ],
+        "outcome": "deletes a 'Customer' record"
+      },
+      {
+        "id": "booking-frontdesk/ACT-007",
+        "kind": "create",
+        "record": "Appointment",
+        "roles": [
+          "Staff"
+        ],
+        "outcome": "creates a new 'Appointment' record"
+      },
+      {
+        "id": "booking-frontdesk/ACT-008",
+        "kind": "edit",
+        "record": "Appointment",
+        "roles": [
+          "Staff"
+        ],
+        "outcome": "edits an existing 'Appointment' record"
+      },
+      {
+        "id": "booking-frontdesk/ACT-009",
+        "kind": "delete",
+        "record": "Appointment",
+        "roles": [
+          "Owner"
+        ],
+        "outcome": "deletes a 'Appointment' record"
+      },
+      {
+        "id": "booking-frontdesk/ACT-010",
+        "kind": "transition",
+        "workflow": "Appointment lifecycle",
+        "from": "Booked",
+        "to": "Confirmed",
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ],
+        "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Confirmed'"
+      },
+      {
+        "id": "booking-frontdesk/ACT-011",
+        "kind": "transition",
+        "workflow": "Appointment lifecycle",
+        "from": "Confirmed",
+        "to": "Completed",
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ],
+        "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Completed'"
+      },
+      {
+        "id": "booking-frontdesk/ACT-012",
+        "kind": "transition",
+        "workflow": "Appointment lifecycle",
+        "from": "Confirmed",
+        "to": "No-show",
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ],
+        "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'No-show'"
+      },
+      {
+        "id": "booking-frontdesk/ACT-013",
+        "kind": "transition",
+        "workflow": "Appointment lifecycle",
+        "from": "Booked",
+        "to": "Cancelled",
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ],
+        "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Cancelled'"
+      },
+      {
+        "id": "booking-frontdesk/ACT-014",
+        "kind": "transition",
+        "workflow": "Appointment lifecycle",
+        "from": "Confirmed",
+        "to": "Cancelled",
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ],
+        "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Cancelled'"
+      },
+      {
+        "id": "booking-frontdesk/ACT-015",
+        "kind": "submit",
+        "form": "Public booking form",
+        "record": "Appointment",
+        "roles": null,
+        "outcome": "submits the 'Public booking form' form, creating/editing its target record 'Appointment'"
+      }
+    ],
+    "recurring_ops": [
+      {
+        "id": "booking-frontdesk/OPS-001",
+        "source": "R.14:Service",
+        "detail": "forever"
+      },
+      {
+        "id": "booking-frontdesk/OPS-002",
+        "source": "R.14:Customer",
+        "detail": "forever"
+      },
+      {
+        "id": "booking-frontdesk/OPS-003",
+        "source": "R.14:Appointment",
+        "detail": "forever"
+      },
+      {
+        "id": "booking-frontdesk/OPS-004",
+        "source": "FL.01:Appointment lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "an appointment is created (public form or by staff); starts in 'Booked'"
+        }
+      },
+      {
+        "id": "booking-frontdesk/OPS-005",
+        "source": "FL.10:Appointment lifecycle",
+        "detail": [
+          {
+            "stage": "Booked",
+            "duration": "24 hours",
+            "then": "if the deposit is unpaid, the appointment moves to Cancelled and the slot is released"
+          }
+        ]
+      },
+      {
+        "id": "booking-frontdesk/OPS-006",
+        "source": "N.01:Booking confirmation",
+        "detail": {
+          "kind": "event",
+          "event": "an appointment reaches stage Confirmed"
+        }
+      },
+      {
+        "id": "booking-frontdesk/OPS-007",
+        "source": "N.01:Appointment reminder",
+        "detail": {
+          "kind": "relative_to_date",
+          "record": "Appointment",
+          "date_field": "Start",
+          "offset": "-24 hours"
+        }
+      },
+      {
+        "id": "booking-frontdesk/OPS-008",
+        "source": "N.01:Cancellation notice",
+        "detail": {
+          "kind": "event",
+          "event": "an appointment moves to Cancelled"
+        }
+      },
+      {
+        "id": "booking-frontdesk/OPS-009",
+        "source": "RP.08:Upcoming appointments",
+        "detail": {
+          "enabled": "no"
+        }
+      },
+      {
+        "id": "booking-frontdesk/OPS-010",
+        "source": "RP.08:No-show rate",
+        "detail": {
+          "enabled": "no"
+        }
+      },
+      {
+        "id": "booking-frontdesk/OPS-011",
+        "source": "B.08",
+        "detail": {
+          "grace_days": 0,
+          "after_repeated": "cancel"
+        }
+      }
+    ],
+    "qa_generated_tests": [
+      {
+        "id": "booking-frontdesk/QA-001",
+        "action_id": "booking-frontdesk/ACT-001",
+        "role": "Owner",
+        "action": {
+          "id": "booking-frontdesk/ACT-001",
+          "kind": "create",
+          "record": "Service",
+          "roles": [
+            "Owner"
+          ],
+          "outcome": "creates a new 'Service' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-002",
+        "action_id": "booking-frontdesk/ACT-002",
+        "role": "Owner",
+        "action": {
+          "id": "booking-frontdesk/ACT-002",
+          "kind": "edit",
+          "record": "Service",
+          "roles": [
+            "Owner"
+          ],
+          "outcome": "edits an existing 'Service' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-003",
+        "action_id": "booking-frontdesk/ACT-003",
+        "role": "Owner",
+        "action": {
+          "id": "booking-frontdesk/ACT-003",
+          "kind": "delete",
+          "record": "Service",
+          "roles": [
+            "Owner"
+          ],
+          "outcome": "deletes a 'Service' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-004",
+        "action_id": "booking-frontdesk/ACT-004",
+        "role": "Staff",
+        "action": {
+          "id": "booking-frontdesk/ACT-004",
+          "kind": "create",
+          "record": "Customer",
+          "roles": [
+            "Staff"
+          ],
+          "outcome": "creates a new 'Customer' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-005",
+        "action_id": "booking-frontdesk/ACT-005",
+        "role": "Staff",
+        "action": {
+          "id": "booking-frontdesk/ACT-005",
+          "kind": "edit",
+          "record": "Customer",
+          "roles": [
+            "Staff"
+          ],
+          "outcome": "edits an existing 'Customer' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-006",
+        "action_id": "booking-frontdesk/ACT-006",
+        "role": "Owner",
+        "action": {
+          "id": "booking-frontdesk/ACT-006",
+          "kind": "delete",
+          "record": "Customer",
+          "roles": [
+            "Owner"
+          ],
+          "outcome": "deletes a 'Customer' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-007",
+        "action_id": "booking-frontdesk/ACT-007",
+        "role": "Staff",
+        "action": {
+          "id": "booking-frontdesk/ACT-007",
+          "kind": "create",
+          "record": "Appointment",
+          "roles": [
+            "Staff"
+          ],
+          "outcome": "creates a new 'Appointment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-008",
+        "action_id": "booking-frontdesk/ACT-008",
+        "role": "Staff",
+        "action": {
+          "id": "booking-frontdesk/ACT-008",
+          "kind": "edit",
+          "record": "Appointment",
+          "roles": [
+            "Staff"
+          ],
+          "outcome": "edits an existing 'Appointment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-009",
+        "action_id": "booking-frontdesk/ACT-009",
+        "role": "Owner",
+        "action": {
+          "id": "booking-frontdesk/ACT-009",
+          "kind": "delete",
+          "record": "Appointment",
+          "roles": [
+            "Owner"
+          ],
+          "outcome": "deletes a 'Appointment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-010",
+        "action_id": "booking-frontdesk/ACT-010",
+        "role": "Staff",
+        "action": {
+          "id": "booking-frontdesk/ACT-010",
+          "kind": "transition",
+          "workflow": "Appointment lifecycle",
+          "from": "Booked",
+          "to": "Confirmed",
+          "mover": "roles",
+          "roles": [
+            "Staff"
+          ],
+          "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Confirmed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-011",
+        "action_id": "booking-frontdesk/ACT-011",
+        "role": "Staff",
+        "action": {
+          "id": "booking-frontdesk/ACT-011",
+          "kind": "transition",
+          "workflow": "Appointment lifecycle",
+          "from": "Confirmed",
+          "to": "Completed",
+          "mover": "roles",
+          "roles": [
+            "Staff"
+          ],
+          "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Completed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-012",
+        "action_id": "booking-frontdesk/ACT-012",
+        "role": "Staff",
+        "action": {
+          "id": "booking-frontdesk/ACT-012",
+          "kind": "transition",
+          "workflow": "Appointment lifecycle",
+          "from": "Confirmed",
+          "to": "No-show",
+          "mover": "roles",
+          "roles": [
+            "Staff"
+          ],
+          "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'No-show'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-013",
+        "action_id": "booking-frontdesk/ACT-013",
+        "role": "Staff",
+        "action": {
+          "id": "booking-frontdesk/ACT-013",
+          "kind": "transition",
+          "workflow": "Appointment lifecycle",
+          "from": "Booked",
+          "to": "Cancelled",
+          "mover": "roles",
+          "roles": [
+            "Staff"
+          ],
+          "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Cancelled'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-014",
+        "action_id": "booking-frontdesk/ACT-014",
+        "role": "Staff",
+        "action": {
+          "id": "booking-frontdesk/ACT-014",
+          "kind": "transition",
+          "workflow": "Appointment lifecycle",
+          "from": "Confirmed",
+          "to": "Cancelled",
+          "mover": "roles",
+          "roles": [
+            "Staff"
+          ],
+          "outcome": "moves 'Appointment lifecycle' from 'Confirmed' to 'Cancelled'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-015",
+        "action_id": "booking-frontdesk/ACT-015",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "booking-frontdesk/ACT-015",
+          "kind": "submit",
+          "form": "Public booking form",
+          "record": "Appointment",
+          "roles": null,
+          "outcome": "submits the 'Public booking form' form, creating/editing its target record 'Appointment'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "booking-frontdesk/QA-016",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-001",
+        "role": "Owner",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "booking-frontdesk/QA-017",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-002",
+        "role": "Owner",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "booking-frontdesk/QA-018",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-003",
+        "role": "Owner",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "booking-frontdesk/QA-019",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-004",
+        "role": "Owner",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "booking-frontdesk/QA-020",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-005",
+        "role": "Owner",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "booking-frontdesk/QA-021",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-006",
+        "role": "Owner",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "booking-frontdesk/QA-022",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-007",
+        "role": "Owner",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-023",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-008",
+        "role": "Owner",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-024",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-009",
+        "role": "Owner",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-025",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-001",
+        "role": "Staff",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-026",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-002",
+        "role": "Staff",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-027",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-003",
+        "role": "Staff",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-028",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-004",
+        "role": "Staff",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-029",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-005",
+        "role": "Staff",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-030",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-006",
+        "role": "Staff",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-031",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-007",
+        "role": "Staff",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-032",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-008",
+        "role": "Staff",
+        "expect": "reachable"
+      },
+      {
+        "id": "booking-frontdesk/QA-033",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-009",
+        "role": "Staff",
+        "expect": "reachable"
+      }
+    ],
+    "locked": true,
+    "locked_at_graph_version": "3.0"
+  }
+}

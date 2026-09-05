@@ -1,0 +1,522 @@
+{
+ "family": "crm-pipeline",
+ "spec_id": "SPEC-CRM-PIPELINE-REF",
+ "app_name": "Pipeline",
+ "roles": [
+  "Admin",
+  "Sales manager",
+  "Sales rep"
+ ],
+ "role_admin": {
+  "Admin": true,
+  "Sales manager": false,
+  "Sales rep": false
+ },
+ "super_role": "Admin",
+ "records": {
+  "Organisation": {
+   "table": "organisations",
+   "title_field": "Name",
+   "fields": [
+    {
+     "name": "Name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "yes",
+     "slug": "name"
+    },
+    {
+     "name": "Website",
+     "type": "url",
+     "required": "no",
+     "unique": "no",
+     "slug": "website"
+    },
+    {
+     "name": "Phone",
+     "type": "phone",
+     "required": "no",
+     "unique": "no",
+     "slug": "phone"
+    },
+    {
+     "name": "Notes",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "notes"
+    }
+   ],
+   "access": {
+    "view": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "create": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "edit": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "delete": [
+     "Sales manager"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Contact": {
+   "table": "contacts",
+   "title_field": "Full name",
+   "fields": [
+    {
+     "name": "Full name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "full_name"
+    },
+    {
+     "name": "Email",
+     "type": "email",
+     "required": "no",
+     "unique": "yes",
+     "slug": "email"
+    },
+    {
+     "name": "Phone",
+     "type": "phone",
+     "required": "no",
+     "unique": "no",
+     "slug": "phone"
+    },
+    {
+     "name": "Organisation",
+     "type": "link",
+     "required": "no",
+     "unique": "no",
+     "target_record": "Organisation",
+     "slug": "organisation"
+    }
+   ],
+   "access": {
+    "view": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "create": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "edit": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "delete": [
+     "Sales manager"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Deal": {
+   "table": "deals",
+   "title_field": "Title",
+   "fields": [
+    {
+     "name": "Title",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "title"
+    },
+    {
+     "name": "Value",
+     "type": "money",
+     "required": "yes",
+     "unique": "no",
+     "slug": "value"
+    },
+    {
+     "name": "Owner",
+     "type": "other",
+     "required": "yes",
+     "unique": "no",
+     "custom_rule": "reference to a user account (pick-a-person field)",
+     "slug": "owner"
+    },
+    {
+     "name": "Contact",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Contact",
+     "slug": "contact"
+    },
+    {
+     "name": "Organisation",
+     "type": "link",
+     "required": "no",
+     "unique": "no",
+     "target_record": "Organisation",
+     "slug": "organisation"
+    },
+    {
+     "name": "Expected close date",
+     "type": "date",
+     "required": "no",
+     "unique": "no",
+     "slug": "expected_close_date"
+    },
+    {
+     "name": "Lost reason",
+     "type": "one_choice",
+     "required": "no",
+     "unique": "no",
+     "options": [
+      "price",
+      "timing",
+      "competitor",
+      "no response",
+      "other"
+     ],
+     "slug": "lost_reason"
+    }
+   ],
+   "access": {
+    "view": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "create": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "edit": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "delete": [
+     "Sales manager"
+    ]
+   },
+   "has_stage": true,
+   "workflow": "Deal pipeline",
+   "custom_actions": [
+    {
+     "name": "Reassign",
+     "who": [
+      "Sales manager"
+     ],
+     "effect": "changes the deal's Owner to another person",
+     "result_location": "the deal page; the new owner's pipeline view",
+     "execution": {
+      "op": "set_fields_from_input",
+      "fields": [
+       "owner"
+      ]
+     }
+    }
+   ],
+   "on_create": []
+  },
+  "Activity": {
+   "table": "activitys",
+   "title_field": "Subject",
+   "fields": [
+    {
+     "name": "Subject",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "subject"
+    },
+    {
+     "name": "Type",
+     "type": "one_choice",
+     "required": "yes",
+     "unique": "no",
+     "options": [
+      "call",
+      "meeting",
+      "email",
+      "task"
+     ],
+     "slug": "type"
+    },
+    {
+     "name": "Due",
+     "type": "date_time",
+     "required": "yes",
+     "unique": "no",
+     "slug": "due"
+    },
+    {
+     "name": "Done",
+     "type": "yes_no",
+     "required": "no",
+     "unique": "no",
+     "slug": "done"
+    },
+    {
+     "name": "Owner",
+     "type": "other",
+     "required": "yes",
+     "unique": "no",
+     "custom_rule": "reference to a user account (pick-a-person field)",
+     "slug": "owner"
+    },
+    {
+     "name": "Deal",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Deal",
+     "slug": "deal"
+    }
+   ],
+   "access": {
+    "view": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "create": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "edit": [
+     "Sales rep",
+     "Sales manager"
+    ],
+    "delete": [
+     "Sales rep",
+     "Sales manager"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  }
+ },
+ "workflows": {
+  "Deal pipeline": {
+   "stages": [
+    "Lead in",
+    "Contacted",
+    "Proposal sent",
+    "Negotiation",
+    "Won",
+    "Lost"
+   ],
+   "initial": "Lead in",
+   "terminal": [
+    "Won",
+    "Lost"
+   ],
+   "transitions": [
+    {
+     "from": "Lead in",
+     "to": "Contacted",
+     "mover": "roles",
+     "roles": [
+      "Sales rep",
+      "Sales manager"
+     ]
+    },
+    {
+     "from": "Contacted",
+     "to": "Proposal sent",
+     "mover": "roles",
+     "roles": [
+      "Sales rep",
+      "Sales manager"
+     ]
+    },
+    {
+     "from": "Proposal sent",
+     "to": "Negotiation",
+     "mover": "roles",
+     "roles": [
+      "Sales rep",
+      "Sales manager"
+     ]
+    },
+    {
+     "from": "Negotiation",
+     "to": "Won",
+     "mover": "roles",
+     "roles": [
+      "Sales rep",
+      "Sales manager"
+     ]
+    },
+    {
+     "from": "Lead in",
+     "to": "Lost",
+     "mover": "roles",
+     "roles": [
+      "Sales rep",
+      "Sales manager"
+     ]
+    },
+    {
+     "from": "Contacted",
+     "to": "Lost",
+     "mover": "roles",
+     "roles": [
+      "Sales rep",
+      "Sales manager"
+     ]
+    },
+    {
+     "from": "Proposal sent",
+     "to": "Lost",
+     "mover": "roles",
+     "roles": [
+      "Sales rep",
+      "Sales manager"
+     ]
+    },
+    {
+     "from": "Negotiation",
+     "to": "Lost",
+     "mover": "roles",
+     "roles": [
+      "Sales rep",
+      "Sales manager"
+     ]
+    }
+   ],
+   "approvals": [],
+   "on_reject": null,
+   "effects": []
+  }
+ },
+ "forms": {},
+ "reports": {
+  "Pipeline by stage": {
+   "slug": "pipeline_by_stage",
+   "question": "How much potential value sits in each stage of the pipeline?",
+   "metrics": [
+    "sum of open Deal Value grouped by stage",
+    "count of Deals grouped by stage"
+   ],
+   "specs": [
+    {
+     "metric": "sum of open Deal Value grouped by stage",
+     "spec": {
+      "table": "deals",
+      "aggregation": "sum",
+      "value_field": "value",
+      "group_by": "stage",
+      "filters": [
+       {
+        "field": "stage",
+        "op": "not_in",
+        "value": [
+         "Won",
+         "Lost"
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "metric": "count of Deals grouped by stage",
+     "spec": {
+      "table": "deals",
+      "aggregation": "count",
+      "group_by": "stage"
+     }
+    }
+   ]
+  },
+  "Win rate": {
+   "slug": "win_rate",
+   "question": "Of the deals we finish, what share do we win?",
+   "metrics": [
+    "win rate"
+   ],
+   "specs": [
+    {
+     "metric": "win rate",
+     "spec": {
+      "engine": "stage_history",
+      "kind": "rate_over_last_days",
+      "table": "deals",
+      "numerator_stage": "Won",
+      "denominator_stages": [
+       "Won",
+       "Lost"
+      ],
+      "days": 90
+     }
+    }
+   ]
+  }
+ },
+ "landing_per_role": {
+  "Admin": "Pipeline board",
+  "Sales manager": "Pipeline board",
+  "Sales rep": "My pipeline"
+ },
+ "screens": [
+  {
+   "id": "crm-pipeline/SCR-001",
+   "kind": "list",
+   "record": "Organisation"
+  },
+  {
+   "id": "crm-pipeline/SCR-002",
+   "kind": "detail",
+   "record": "Organisation"
+  },
+  {
+   "id": "crm-pipeline/SCR-003",
+   "kind": "list",
+   "record": "Contact"
+  },
+  {
+   "id": "crm-pipeline/SCR-004",
+   "kind": "detail",
+   "record": "Contact"
+  },
+  {
+   "id": "crm-pipeline/SCR-005",
+   "kind": "list",
+   "record": "Deal"
+  },
+  {
+   "id": "crm-pipeline/SCR-006",
+   "kind": "detail",
+   "record": "Deal"
+  },
+  {
+   "id": "crm-pipeline/SCR-007",
+   "kind": "list",
+   "record": "Activity"
+  },
+  {
+   "id": "crm-pipeline/SCR-008",
+   "kind": "detail",
+   "record": "Activity"
+  },
+  {
+   "id": "crm-pipeline/SCR-009",
+   "kind": "report",
+   "report": "Pipeline by stage"
+  },
+  {
+   "id": "crm-pipeline/SCR-010",
+   "kind": "report",
+   "report": "Win rate"
+  }
+ ]
+}

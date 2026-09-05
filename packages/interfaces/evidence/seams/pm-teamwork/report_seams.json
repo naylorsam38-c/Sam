@@ -1,0 +1,261 @@
+{
+ "base_url": "http://127.0.0.1:8901",
+ "journeys": [
+  {
+   "journey": "form_submit_lands_in_list_and_detail",
+   "subject": "-",
+   "parts": [
+    "form_render_submit",
+    "crud_list_detail"
+   ],
+   "result": "N/A",
+   "reason": "the spec declares no form screen",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "pm-teamwork/SCR-007",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "BLOCKED",
+   "reason": "metric 'count of Tasks not in stage Done, grouped by Assignee' counts rows at stage 'Done'; a new row starts at 'To do' and no screen offers a control to move it",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report pm-teamwork/SCR-007",
+     "observed": {
+      "count of Tasks not in stage Done, grouped by Assignee": {}
+     }
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "pm-teamwork/SCR-008",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "BLOCKED",
+   "reason": "metric 'count of overdue Tasks' counts rows at stage 'Done'; a new row starts at 'To do' and no screen offers a control to move it",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report pm-teamwork/SCR-008",
+     "observed": {
+      "count of overdue Tasks": 0
+     }
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "person_move_is_visible_on_the_screen",
+   "subject": "pm-teamwork/ACT-011",
+   "parts": [
+    "workflow_executor"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/tasks",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a control on pm-teamwork/SCR-004 that moves to 'In progress'",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "browser",
+     "action": "press the control on pm-teamwork/SCR-004 that moves to 'In progress'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open detail pm-teamwork/SCR-004",
+     "observed": "stage shown as 'In progress'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "custom_action_is_pressable_and_visible",
+   "subject": "pm-teamwork/ACT-007",
+   "parts": [
+    "custom_action_execution"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/tasks",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a 'Duplicate' control on pm-teamwork/SCR-004",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Duplicate' on pm-teamwork/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "api",
+     "action": "GET /api/history/tasks/ed98c8af-91de-4619-8a0f-83064055d1ed",
+     "observed": {
+      "status": 200,
+      "entries": 1
+     },
+     "user_facing": false
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "clone_appears_in_the_list_screen",
+   "subject": "pm-teamwork/ACT-007",
+   "parts": [
+    "record_cloning"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/tasks",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Duplicate' on pm-teamwork/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open list pm-teamwork/SCR-003 and look for 'seam-1a070e00d63 (copy)'",
+     "observed": true
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "rate_report_reflects_the_moves_made_on_the_screen",
+   "subject": "-",
+   "parts": [
+    "stage_history"
+   ],
+   "result": "N/A",
+   "reason": "no report metric is a stage-history rate",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  }
+ ],
+ "parts": {
+  "form_render_submit": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "crud_list_detail": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "reporting_engine": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 2,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "workflow_executor": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "custom_action_execution": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "record_cloning": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "stage_history": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  }
+ },
+ "receipts_written": [
+  {
+   "part_id": "workflow_executor",
+   "version": "1.0.0",
+   "revision": "e1e8908c90f7f1fb"
+  },
+  {
+   "part_id": "custom_action_execution",
+   "version": "1.1.0",
+   "revision": "177cfc2d6d4d4a01"
+  },
+  {
+   "part_id": "record_cloning",
+   "version": "1.0.0",
+   "revision": "c9f8c783994f80c1"
+  }
+ ],
+ "receipts_refused": []
+}

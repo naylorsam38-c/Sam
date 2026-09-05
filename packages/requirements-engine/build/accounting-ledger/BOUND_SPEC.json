@@ -1,0 +1,2854 @@
+{
+  "spec_id": "BOUND-ACCOUNTING-LEDGER",
+  "customer_complete": false,
+  "ask_customer_open": [
+    "0.01",
+    "A.01",
+    "A.02",
+    "A.03",
+    "A.04",
+    "A.05",
+    "A.12",
+    "A.13",
+    "A.14",
+    "C.01",
+    "C.02",
+    "C.03",
+    "C.04",
+    "C.07",
+    "Z.01",
+    "Z.02",
+    "Z.03"
+  ],
+  "source_template": "accounting-ledger",
+  "graph_version": "3.0",
+  "build_model": {
+    "records": {
+      "Contact": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Email": {
+            "name": "Email",
+            "type": "email",
+            "required": "no",
+            "unique": "no"
+          },
+          "Phone": {
+            "name": "Phone",
+            "type": "phone",
+            "required": "no",
+            "unique": "no"
+          },
+          "Type": {
+            "name": "Type",
+            "type": "one_choice",
+            "required": "yes",
+            "unique": "no",
+            "options": [
+              "customer",
+              "supplier",
+              "both"
+            ]
+          },
+          "Payment terms days": {
+            "name": "Payment terms days",
+            "type": "whole_number",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Email": "VARCHAR(255)",
+          "Phone": "VARCHAR(40)",
+          "Type": "ENUM",
+          "Payment terms days": "INTEGER"
+        },
+        "enums": {
+          "Type": [
+            "customer",
+            "supplier",
+            "both"
+          ]
+        },
+        "access": {
+          "view": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            },
+            {
+              "role": "Advisor",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Accountant"
+          ],
+          "edit": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "accounting-ledger/REC-001"
+      },
+      "Invoice": {
+        "fields": {
+          "Contact": {
+            "name": "Contact",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Contact"
+          },
+          "Issue date": {
+            "name": "Issue date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Due date": {
+            "name": "Due date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Reference": {
+            "name": "Reference",
+            "type": "short_text",
+            "required": "no",
+            "unique": "no"
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          },
+          "Sent at": {
+            "name": "Sent at",
+            "type": "date_time",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Contact": "FOREIGN_KEY",
+          "Issue date": "DATE",
+          "Due date": "DATE",
+          "Reference": "VARCHAR(255)",
+          "Notes": "TEXT",
+          "Sent at": "DATETIME"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            },
+            {
+              "role": "Advisor",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Accountant"
+          ],
+          "edit": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ],
+          "delete": "nobody"
+        },
+        "title_field": "Contact",
+        "id_style": {
+          "needed": "yes",
+          "format": "INV-#### (sequential, never reused)"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "Draft",
+            "Awaiting approval",
+            "Awaiting payment",
+            "Paid",
+            "Voided"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [
+          {
+            "name": "Send",
+            "who": [
+              "Accountant"
+            ],
+            "effect": "emails the invoice document to the Contact and stamps the sent time",
+            "result_location": "the invoice page's activity trail",
+            "execution": {
+              "op": "generate_document",
+              "stamp_column": "sent_at",
+              "title_columns": [
+                "reference"
+              ],
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "line_columns": [
+                "description",
+                "quantity",
+                "unit_amount"
+              ],
+              "body_columns": [
+                "contact",
+                "issue_date",
+                "due_date",
+                "notes"
+              ],
+              "dispatch": "none"
+            }
+          }
+        ],
+        "on_create": [],
+        "id": "accounting-ledger/REC-002"
+      },
+      "Invoice line": {
+        "fields": {
+          "Invoice": {
+            "name": "Invoice",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Invoice"
+          },
+          "Description": {
+            "name": "Description",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Quantity": {
+            "name": "Quantity",
+            "type": "decimal_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Unit amount": {
+            "name": "Unit amount",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Invoice": "FOREIGN_KEY",
+          "Description": "VARCHAR(255)",
+          "Quantity": "DECIMAL(18,4)",
+          "Unit amount": "DECIMAL(18,2)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            },
+            {
+              "role": "Advisor",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Accountant"
+          ],
+          "edit": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Description",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "accounting-ledger/REC-003"
+      },
+      "Bill": {
+        "fields": {
+          "Contact": {
+            "name": "Contact",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Contact"
+          },
+          "Issue date": {
+            "name": "Issue date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Due date": {
+            "name": "Due date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Amount": {
+            "name": "Amount",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Reference": {
+            "name": "Reference",
+            "type": "short_text",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Contact": "FOREIGN_KEY",
+          "Issue date": "DATE",
+          "Due date": "DATE",
+          "Amount": "DECIMAL(18,2)",
+          "Reference": "VARCHAR(255)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            },
+            {
+              "role": "Advisor",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Accountant"
+          ],
+          "edit": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ],
+          "delete": "nobody"
+        },
+        "title_field": "Contact",
+        "id_style": {
+          "needed": "yes",
+          "format": "BILL-#### (sequential)"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "Draft",
+            "Awaiting payment",
+            "Paid",
+            "Voided"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "accounting-ledger/REC-004"
+      },
+      "Payment": {
+        "fields": {
+          "Invoice": {
+            "name": "Invoice",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Invoice"
+          },
+          "Bill": {
+            "name": "Bill",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Bill"
+          },
+          "Amount": {
+            "name": "Amount",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Date": {
+            "name": "Date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Method": {
+            "name": "Method",
+            "type": "one_choice",
+            "required": "yes",
+            "unique": "no",
+            "options": [
+              "bank transfer",
+              "card",
+              "cash",
+              "other"
+            ]
+          }
+        },
+        "storage": {
+          "Invoice": "FOREIGN_KEY",
+          "Bill": "FOREIGN_KEY",
+          "Amount": "DECIMAL(18,2)",
+          "Date": "DATE",
+          "Method": "ENUM"
+        },
+        "enums": {
+          "Method": [
+            "bank transfer",
+            "card",
+            "cash",
+            "other"
+          ]
+        },
+        "access": {
+          "view": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            },
+            {
+              "role": "Advisor",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Accountant"
+          ],
+          "edit": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ],
+          "delete": "nobody"
+        },
+        "title_field": "Amount",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [
+          {
+            "op": "ledger_balance",
+            "link_column": "invoice",
+            "table": "invoices",
+            "total": {
+              "kind": "lines",
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "quantity_column": "quantity",
+              "amount_column": "unit_amount"
+            },
+            "payments_table": "payments",
+            "amount_column": "amount",
+            "event": "Payments applied to the invoice reach its total"
+          },
+          {
+            "op": "ledger_balance",
+            "link_column": "bill",
+            "table": "bills",
+            "total": {
+              "kind": "column",
+              "column": "amount"
+            },
+            "payments_table": "payments",
+            "amount_column": "amount",
+            "event": "Payments applied to the bill reach its total"
+          }
+        ],
+        "id": "accounting-ledger/REC-005"
+      }
+    },
+    "roles": {
+      "Admin": {
+        "permitted": [],
+        "is_admin": true
+      },
+      "Accountant": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Invoice",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Invoice",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Invoice",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Invoice line",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Invoice line",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Invoice line",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Invoice line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Bill",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Bill",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Bill",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Payment",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Payment",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Payment",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      },
+      "Advisor": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Invoice",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Invoice line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Bill",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Payment",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      }
+    },
+    "super_role": "Admin",
+    "workflows": {
+      "Invoice lifecycle": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Accountant"
+          ],
+          "action": "creating an invoice (starts in Draft)"
+        },
+        "stages": [
+          {
+            "id": "accounting-ledger/STG-001",
+            "name": "Draft"
+          },
+          {
+            "id": "accounting-ledger/STG-002",
+            "name": "Awaiting approval"
+          },
+          {
+            "id": "accounting-ledger/STG-003",
+            "name": "Awaiting payment"
+          },
+          {
+            "id": "accounting-ledger/STG-004",
+            "name": "Paid"
+          },
+          {
+            "id": "accounting-ledger/STG-005",
+            "name": "Voided"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "Draft",
+            "to": "Awaiting approval",
+            "mover": "roles",
+            "roles": [
+              "Accountant"
+            ],
+            "id": "accounting-ledger/TRN-001"
+          },
+          {
+            "from": "Awaiting approval",
+            "to": "Awaiting payment",
+            "mover": "roles",
+            "roles": [
+              "Admin"
+            ],
+            "id": "accounting-ledger/TRN-002"
+          },
+          {
+            "from": "Awaiting payment",
+            "to": "Paid",
+            "mover": "automatic",
+            "event": "Payments applied to the invoice reach its total",
+            "id": "accounting-ledger/TRN-003"
+          },
+          {
+            "from": "Awaiting payment",
+            "to": "Voided",
+            "mover": "roles",
+            "roles": [
+              "Admin"
+            ],
+            "id": "accounting-ledger/TRN-004"
+          },
+          {
+            "from": "Draft",
+            "to": "Voided",
+            "mover": "roles",
+            "roles": [
+              "Accountant"
+            ],
+            "id": "accounting-ledger/TRN-005"
+          }
+        ],
+        "approvals": [
+          {
+            "stage": "Awaiting approval",
+            "approvers": [
+              "Admin"
+            ]
+          }
+        ],
+        "on_reject": {
+          "back_to": "Draft",
+          "resubmit": "yes"
+        },
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "effects": [],
+        "initial": "Draft",
+        "terminal": [
+          "Paid",
+          "Voided"
+        ]
+      },
+      "Bill lifecycle": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Accountant"
+          ],
+          "action": "creating a bill (starts in Draft)"
+        },
+        "stages": [
+          {
+            "id": "accounting-ledger/STG-006",
+            "name": "Draft"
+          },
+          {
+            "id": "accounting-ledger/STG-007",
+            "name": "Awaiting payment"
+          },
+          {
+            "id": "accounting-ledger/STG-008",
+            "name": "Paid"
+          },
+          {
+            "id": "accounting-ledger/STG-009",
+            "name": "Voided"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "Draft",
+            "to": "Awaiting payment",
+            "mover": "roles",
+            "roles": [
+              "Accountant"
+            ],
+            "id": "accounting-ledger/TRN-006"
+          },
+          {
+            "from": "Awaiting payment",
+            "to": "Paid",
+            "mover": "automatic",
+            "event": "Payments applied to the bill reach its total",
+            "id": "accounting-ledger/TRN-007"
+          },
+          {
+            "from": "Awaiting payment",
+            "to": "Voided",
+            "mover": "roles",
+            "roles": [
+              "Admin"
+            ],
+            "id": "accounting-ledger/TRN-008"
+          },
+          {
+            "from": "Draft",
+            "to": "Voided",
+            "mover": "roles",
+            "roles": [
+              "Accountant"
+            ],
+            "id": "accounting-ledger/TRN-009"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "effects": [],
+        "initial": "Draft",
+        "terminal": [
+          "Paid",
+          "Voided"
+        ]
+      }
+    },
+    "notifications": {
+      "Invoice sent": {
+        "trigger": {
+          "kind": "event",
+          "event": "the Send action runs on an invoice"
+        },
+        "recipients": [
+          {
+            "kind": "custom",
+            "who": "the invoice's Contact, at their email address"
+          }
+        ],
+        "channels": [
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "accounting-ledger/NOTIF-001",
+        "part_bindings": {
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      "Payment reminder": {
+        "trigger": {
+          "kind": "relative_to_date",
+          "record": "Invoice",
+          "date_field": "Due date",
+          "offset": "+3 days"
+        },
+        "recipients": [
+          {
+            "kind": "custom",
+            "who": "the invoice's Contact — only while the invoice is in Awaiting payment"
+          }
+        ],
+        "channels": [
+          "email"
+        ],
+        "timing": "offset:+3 days",
+        "id": "accounting-ledger/NOTIF-002",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs",
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after",
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            },
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      "Payment received": {
+        "trigger": {
+          "kind": "event",
+          "event": "an invoice moves to Paid"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Accountant"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app"
+        ],
+        "timing": "immediate",
+        "id": "accounting-ledger/NOTIF-003",
+        "part_bindings": {
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
+        }
+      }
+    },
+    "reports": {},
+    "forms": {},
+    "integrations": {},
+    "auth": {
+      "AU.01": [
+        "invited"
+      ],
+      "AU.02": [
+        {
+          "name": "Full name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Email address",
+          "type": "email",
+          "required": "yes",
+          "unique": "yes"
+        }
+      ],
+      "AU.03": "yes",
+      "AU.04": [
+        "password",
+        "google"
+      ],
+      "AU.07": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "AU.08": {
+        "attempts": 5,
+        "duration": "15 minutes"
+      },
+      "AU.09": "yes",
+      "AU.10": "30 days",
+      "AU.11": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "AU.12": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "AU.13": [
+        "super"
+      ],
+      "AU.14": {
+        "required": "yes",
+        "status": "need_drafting"
+      },
+      "AU.06": {
+        "inviters": [
+          "Admin"
+        ],
+        "default_role": "Accountant"
+      }
+    },
+    "brand": {
+      "app_name": null,
+      "assets": null
+    },
+    "screens_inventory": [
+      {
+        "id": "accounting-ledger/SCR-001",
+        "kind": "list",
+        "record": "Contact",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/SCR-002",
+        "kind": "detail",
+        "record": "Contact",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/SCR-003",
+        "kind": "list",
+        "record": "Invoice",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/SCR-004",
+        "kind": "detail",
+        "record": "Invoice",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/SCR-005",
+        "kind": "list",
+        "record": "Invoice line",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/SCR-006",
+        "kind": "detail",
+        "record": "Invoice line",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/SCR-007",
+        "kind": "list",
+        "record": "Bill",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/SCR-008",
+        "kind": "detail",
+        "record": "Bill",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/SCR-009",
+        "kind": "list",
+        "record": "Payment",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/SCR-010",
+        "kind": "detail",
+        "record": "Payment",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      }
+    ],
+    "navigation": [
+      "accounting-ledger/SCR-001",
+      "accounting-ledger/SCR-002",
+      "accounting-ledger/SCR-003",
+      "accounting-ledger/SCR-004",
+      "accounting-ledger/SCR-005",
+      "accounting-ledger/SCR-006",
+      "accounting-ledger/SCR-007",
+      "accounting-ledger/SCR-008",
+      "accounting-ledger/SCR-009",
+      "accounting-ledger/SCR-010"
+    ],
+    "landing_per_role": {
+      "Admin": "Invoices list",
+      "Accountant": "Invoices list",
+      "Advisor": "Invoices list"
+    },
+    "actions_inventory": [
+      {
+        "id": "accounting-ledger/ACT-001",
+        "kind": "create",
+        "record": "Contact",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "creates a new 'Contact' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-002",
+        "kind": "edit",
+        "record": "Contact",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "edits an existing 'Contact' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-003",
+        "kind": "delete",
+        "record": "Contact",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "deletes a 'Contact' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-004",
+        "kind": "create",
+        "record": "Invoice",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "creates a new 'Invoice' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-005",
+        "kind": "edit",
+        "record": "Invoice",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "edits an existing 'Invoice' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-006",
+        "kind": "custom",
+        "record": "Invoice",
+        "detail": {
+          "name": "Send",
+          "who": [
+            "Accountant"
+          ],
+          "effect": "emails the invoice document to the Contact and stamps the sent time",
+          "result_location": "the invoice page's activity trail",
+          "execution": {
+            "op": "generate_document",
+            "stamp_column": "sent_at",
+            "title_columns": [
+              "reference"
+            ],
+            "line_table": "invoice_lines",
+            "line_fk": "invoice",
+            "line_columns": [
+              "description",
+              "quantity",
+              "unit_amount"
+            ],
+            "body_columns": [
+              "contact",
+              "issue_date",
+              "due_date",
+              "notes"
+            ],
+            "dispatch": "none"
+          }
+        },
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "emails the invoice document to the Contact and stamps the sent time",
+        "part_bindings": {
+          "parts": [
+            "document_generation",
+            "email_parsing"
+          ],
+          "locations": [
+            "packages/builder/engines/document_generation.py::render_html",
+            "packages/builder/engines/document_generation.py::render_pdf",
+            "packages/builder/engines/email_parsing.py::parse"
+          ],
+          "note": "document rendering and message composition are real and proven; actually dispatching over SMTP was never built or proven, so this action is only partially covered",
+          "pins": [
+            {
+              "part_id": "document_generation",
+              "version": "1.0.0",
+              "revision": "6ad6f6c2187e4435",
+              "status": "PRODUCT_QUALIFIED"
+            },
+            {
+              "part_id": "email_parsing",
+              "version": "1.0.0",
+              "revision": "01bf04c590a69771",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-007",
+        "kind": "create",
+        "record": "Invoice line",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "creates a new 'Invoice line' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-008",
+        "kind": "edit",
+        "record": "Invoice line",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "edits an existing 'Invoice line' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-009",
+        "kind": "delete",
+        "record": "Invoice line",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "deletes a 'Invoice line' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-010",
+        "kind": "create",
+        "record": "Bill",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "creates a new 'Bill' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-011",
+        "kind": "edit",
+        "record": "Bill",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "edits an existing 'Bill' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-012",
+        "kind": "create",
+        "record": "Payment",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "creates a new 'Payment' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-013",
+        "kind": "edit",
+        "record": "Payment",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "edits an existing 'Payment' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-014",
+        "kind": "transition",
+        "workflow": "Invoice lifecycle",
+        "from": "Draft",
+        "to": "Awaiting approval",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Awaiting approval'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-015",
+        "kind": "transition",
+        "workflow": "Invoice lifecycle",
+        "from": "Awaiting approval",
+        "to": "Awaiting payment",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ],
+        "outcome": "moves 'Invoice lifecycle' from 'Awaiting approval' to 'Awaiting payment'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-016",
+        "kind": "transition",
+        "workflow": "Invoice lifecycle",
+        "from": "Awaiting payment",
+        "to": "Paid",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Paid'",
+        "part_bindings": {
+          "parts": [
+            "ledger_balancing"
+          ],
+          "locations": [
+            "packages/builder/engines/ledger_balancing.py::applied_total",
+            "packages/builder/engines/ledger_balancing.py::is_paid",
+            "packages/builder/engines/ledger_balancing.py::line_total",
+            "packages/builder/engines/ledger_balancing.py::settles"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "ledger_balancing",
+              "version": "1.1.0",
+              "revision": "8e4c702f78f51238",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-017",
+        "kind": "transition",
+        "workflow": "Invoice lifecycle",
+        "from": "Awaiting payment",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ],
+        "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Voided'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-018",
+        "kind": "transition",
+        "workflow": "Invoice lifecycle",
+        "from": "Draft",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Voided'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-019",
+        "kind": "approve",
+        "workflow": "Invoice lifecycle",
+        "stage": "Awaiting approval",
+        "roles": [
+          "Admin"
+        ],
+        "outcome": "approves 'Invoice lifecycle' at stage 'Awaiting approval'",
+        "part_bindings": {
+          "parts": [
+            "stage_approval_gate"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_approval_gate.py::decide",
+            "packages/builder/engines/stage_approval_gate.py::check_may_leave",
+            "packages/builder/engines/stage_approval_gate.py::decision_for"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_approval_gate",
+              "version": "1.0.0",
+              "revision": "e05ac2be0b3c4cc8",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-020",
+        "kind": "transition",
+        "workflow": "Bill lifecycle",
+        "from": "Draft",
+        "to": "Awaiting payment",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Awaiting payment'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-021",
+        "kind": "transition",
+        "workflow": "Bill lifecycle",
+        "from": "Awaiting payment",
+        "to": "Paid",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Paid'",
+        "part_bindings": {
+          "parts": [
+            "ledger_balancing"
+          ],
+          "locations": [
+            "packages/builder/engines/ledger_balancing.py::applied_total",
+            "packages/builder/engines/ledger_balancing.py::is_paid",
+            "packages/builder/engines/ledger_balancing.py::line_total",
+            "packages/builder/engines/ledger_balancing.py::settles"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "ledger_balancing",
+              "version": "1.1.0",
+              "revision": "8e4c702f78f51238",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-022",
+        "kind": "transition",
+        "workflow": "Bill lifecycle",
+        "from": "Awaiting payment",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ],
+        "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Voided'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/ACT-023",
+        "kind": "transition",
+        "workflow": "Bill lifecycle",
+        "from": "Draft",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Voided'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      }
+    ],
+    "recurring_ops": [
+      {
+        "id": "accounting-ledger/OPS-001",
+        "source": "R.14:Contact",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-002",
+        "source": "R.14:Invoice",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-003",
+        "source": "R.14:Invoice line",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-004",
+        "source": "R.14:Bill",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-005",
+        "source": "R.14:Payment",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-006",
+        "source": "FL.01:Invoice lifecycle",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Accountant"
+          ],
+          "action": "creating an invoice (starts in Draft)"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-007",
+        "source": "FL.01:Bill lifecycle",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Accountant"
+          ],
+          "action": "creating a bill (starts in Draft)"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-008",
+        "source": "N.01:Invoice sent",
+        "detail": {
+          "kind": "event",
+          "event": "the Send action runs on an invoice"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-009",
+        "source": "N.01:Payment reminder",
+        "detail": {
+          "kind": "relative_to_date",
+          "record": "Invoice",
+          "date_field": "Due date",
+          "offset": "+3 days"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-010",
+        "source": "N.01:Payment received",
+        "detail": {
+          "kind": "event",
+          "event": "an invoice moves to Paid"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      }
+    ],
+    "qa_generated_tests": [
+      {
+        "id": "accounting-ledger/QA-001",
+        "action_id": "accounting-ledger/ACT-001",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-001",
+          "kind": "create",
+          "record": "Contact",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "creates a new 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-002",
+        "action_id": "accounting-ledger/ACT-002",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-002",
+          "kind": "edit",
+          "record": "Contact",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "edits an existing 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-003",
+        "action_id": "accounting-ledger/ACT-003",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-003",
+          "kind": "delete",
+          "record": "Contact",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "deletes a 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-004",
+        "action_id": "accounting-ledger/ACT-004",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-004",
+          "kind": "create",
+          "record": "Invoice",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "creates a new 'Invoice' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-005",
+        "action_id": "accounting-ledger/ACT-005",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-005",
+          "kind": "edit",
+          "record": "Invoice",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "edits an existing 'Invoice' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-006",
+        "action_id": "accounting-ledger/ACT-006",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-006",
+          "kind": "custom",
+          "record": "Invoice",
+          "detail": {
+            "name": "Send",
+            "who": [
+              "Accountant"
+            ],
+            "effect": "emails the invoice document to the Contact and stamps the sent time",
+            "result_location": "the invoice page's activity trail",
+            "execution": {
+              "op": "generate_document",
+              "stamp_column": "sent_at",
+              "title_columns": [
+                "reference"
+              ],
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "line_columns": [
+                "description",
+                "quantity",
+                "unit_amount"
+              ],
+              "body_columns": [
+                "contact",
+                "issue_date",
+                "due_date",
+                "notes"
+              ],
+              "dispatch": "none"
+            }
+          },
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "emails the invoice document to the Contact and stamps the sent time"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-007",
+        "action_id": "accounting-ledger/ACT-007",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-007",
+          "kind": "create",
+          "record": "Invoice line",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "creates a new 'Invoice line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-008",
+        "action_id": "accounting-ledger/ACT-008",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-008",
+          "kind": "edit",
+          "record": "Invoice line",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "edits an existing 'Invoice line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-009",
+        "action_id": "accounting-ledger/ACT-009",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-009",
+          "kind": "delete",
+          "record": "Invoice line",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "deletes a 'Invoice line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-010",
+        "action_id": "accounting-ledger/ACT-010",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-010",
+          "kind": "create",
+          "record": "Bill",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "creates a new 'Bill' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-011",
+        "action_id": "accounting-ledger/ACT-011",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-011",
+          "kind": "edit",
+          "record": "Bill",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "edits an existing 'Bill' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-012",
+        "action_id": "accounting-ledger/ACT-012",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-012",
+          "kind": "create",
+          "record": "Payment",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "creates a new 'Payment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-013",
+        "action_id": "accounting-ledger/ACT-013",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-013",
+          "kind": "edit",
+          "record": "Payment",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "edits an existing 'Payment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-014",
+        "action_id": "accounting-ledger/ACT-014",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-014",
+          "kind": "transition",
+          "workflow": "Invoice lifecycle",
+          "from": "Draft",
+          "to": "Awaiting approval",
+          "mover": "roles",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Awaiting approval'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-015",
+        "action_id": "accounting-ledger/ACT-015",
+        "role": "Admin",
+        "action": {
+          "id": "accounting-ledger/ACT-015",
+          "kind": "transition",
+          "workflow": "Invoice lifecycle",
+          "from": "Awaiting approval",
+          "to": "Awaiting payment",
+          "mover": "roles",
+          "roles": [
+            "Admin"
+          ],
+          "outcome": "moves 'Invoice lifecycle' from 'Awaiting approval' to 'Awaiting payment'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-016",
+        "action_id": "accounting-ledger/ACT-016",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "accounting-ledger/ACT-016",
+          "kind": "transition",
+          "workflow": "Invoice lifecycle",
+          "from": "Awaiting payment",
+          "to": "Paid",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Paid'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-017",
+        "action_id": "accounting-ledger/ACT-017",
+        "role": "Admin",
+        "action": {
+          "id": "accounting-ledger/ACT-017",
+          "kind": "transition",
+          "workflow": "Invoice lifecycle",
+          "from": "Awaiting payment",
+          "to": "Voided",
+          "mover": "roles",
+          "roles": [
+            "Admin"
+          ],
+          "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Voided'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-018",
+        "action_id": "accounting-ledger/ACT-018",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-018",
+          "kind": "transition",
+          "workflow": "Invoice lifecycle",
+          "from": "Draft",
+          "to": "Voided",
+          "mover": "roles",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Voided'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-019",
+        "action_id": "accounting-ledger/ACT-019",
+        "role": "Admin",
+        "action": {
+          "id": "accounting-ledger/ACT-019",
+          "kind": "approve",
+          "workflow": "Invoice lifecycle",
+          "stage": "Awaiting approval",
+          "roles": [
+            "Admin"
+          ],
+          "outcome": "approves 'Invoice lifecycle' at stage 'Awaiting approval'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-020",
+        "action_id": "accounting-ledger/ACT-020",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-020",
+          "kind": "transition",
+          "workflow": "Bill lifecycle",
+          "from": "Draft",
+          "to": "Awaiting payment",
+          "mover": "roles",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Awaiting payment'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-021",
+        "action_id": "accounting-ledger/ACT-021",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "accounting-ledger/ACT-021",
+          "kind": "transition",
+          "workflow": "Bill lifecycle",
+          "from": "Awaiting payment",
+          "to": "Paid",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Paid'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-022",
+        "action_id": "accounting-ledger/ACT-022",
+        "role": "Admin",
+        "action": {
+          "id": "accounting-ledger/ACT-022",
+          "kind": "transition",
+          "workflow": "Bill lifecycle",
+          "from": "Awaiting payment",
+          "to": "Voided",
+          "mover": "roles",
+          "roles": [
+            "Admin"
+          ],
+          "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Voided'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-023",
+        "action_id": "accounting-ledger/ACT-023",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-023",
+          "kind": "transition",
+          "workflow": "Bill lifecycle",
+          "from": "Draft",
+          "to": "Voided",
+          "mover": "roles",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Voided'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-024",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-001",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-025",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-002",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-026",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-003",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-027",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-004",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-028",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-005",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-029",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-006",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-030",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-007",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-031",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-008",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-032",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-009",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-033",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-010",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-034",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-001",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-035",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-002",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-036",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-003",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-037",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-004",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-038",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-005",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-039",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-006",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-040",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-007",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-041",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-008",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-042",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-009",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-043",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-010",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-044",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-001",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-045",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-002",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-046",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-003",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-047",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-004",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-048",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-005",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-049",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-006",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-050",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-007",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-051",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-008",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-052",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-009",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-053",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-010",
+        "role": "Advisor",
+        "expect": "reachable"
+      }
+    ],
+    "locked": true,
+    "locked_at_graph_version": "3.0"
+  }
+}

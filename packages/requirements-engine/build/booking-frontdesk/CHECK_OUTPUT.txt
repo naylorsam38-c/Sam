@@ -1,0 +1,56 @@
+BINDING CHECK: BOUND-BOOKING-FRONTDESK (customer_complete=False)
+PASS booking-frontdesk/SCR-001 (screen/list): crud_list_detail
+PASS booking-frontdesk/SCR-002 (screen/detail): crud_list_detail
+PASS booking-frontdesk/SCR-003 (screen/list): crud_list_detail
+PASS booking-frontdesk/SCR-004 (screen/detail): crud_list_detail
+PASS booking-frontdesk/SCR-005 (screen/list): crud_list_detail
+PASS booking-frontdesk/SCR-006 (screen/detail): crud_list_detail
+PASS booking-frontdesk/SCR-007 (screen/form): form_render_submit
+PASS booking-frontdesk/SCR-008 (screen/report): reporting_engine
+PASS booking-frontdesk/SCR-009 (screen/report): stage_history
+PASS booking-frontdesk/ACT-001 (action/create): crud_list_detail
+PASS booking-frontdesk/ACT-002 (action/edit): crud_list_detail
+PASS booking-frontdesk/ACT-003 (action/delete): crud_list_detail
+PASS booking-frontdesk/ACT-004 (action/create): crud_list_detail
+PASS booking-frontdesk/ACT-005 (action/edit): crud_list_detail
+PASS booking-frontdesk/ACT-006 (action/delete): crud_list_detail
+PASS booking-frontdesk/ACT-007 (action/create): crud_list_detail
+PASS booking-frontdesk/ACT-008 (action/edit): crud_list_detail
+PASS booking-frontdesk/ACT-009 (action/delete): crud_list_detail
+PASS booking-frontdesk/ACT-010 (action/transition): workflow_executor
+PASS booking-frontdesk/ACT-011 (action/transition): workflow_executor
+PASS booking-frontdesk/ACT-012 (action/transition): workflow_executor
+PASS booking-frontdesk/ACT-013 (action/transition): workflow_executor
+PASS booking-frontdesk/ACT-014 (action/transition): workflow_executor
+PASS booking-frontdesk/ACT-015 (action/submit): form_render_submit
+PASS NTF:Booking confirmation (notification): notification_delivery
+PASS NTF:Appointment reminder (notification): scheduled_jobs, notification_delivery
+PASS NTF:Cancellation notice (notification): notification_delivery
+PASS RPT:Upcoming appointments (report): reporting_engine
+PASS RPT:No-show rate (report): stage_history
+PASS booking-frontdesk/OPS-001 (recurring_op): scheduled_jobs
+PASS booking-frontdesk/OPS-002 (recurring_op): scheduled_jobs
+PASS booking-frontdesk/OPS-003 (recurring_op): scheduled_jobs
+PASS booking-frontdesk/OPS-004 (recurring_op): scheduled_jobs
+PASS booking-frontdesk/OPS-005 (recurring_op): scheduled_jobs
+PASS booking-frontdesk/OPS-006 (recurring_op): scheduled_jobs
+PASS booking-frontdesk/OPS-007 (recurring_op): scheduled_jobs
+PASS booking-frontdesk/OPS-008 (recurring_op): scheduled_jobs
+PASS booking-frontdesk/OPS-009 (recurring_op): scheduled_jobs
+PASS booking-frontdesk/OPS-010 (recurring_op): scheduled_jobs
+PASS booking-frontdesk/OPS-011 (recurring_op): scheduled_jobs
+---
+40/40 PASS, 0 FAIL
+CLEAN
+
+QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 143bf3e98f4fd428
+QUALIFIED form_render_submit@1.0.0 (PRODUCT_QUALIFIED) at cfb66ed4a56c85df
+UNQUALIFIED notification_delivery@1.0.0: status TESTED
+QUALIFIED reporting_engine@1.0.0 (PRODUCT_QUALIFIED) at a0de07a247bf355b
+UNQUALIFIED scheduled_jobs@1.0.0: status TESTED
+QUALIFIED stage_history@1.1.0 (PRODUCT_QUALIFIED) at a2820dad41d0c83c
+QUALIFIED workflow_executor@1.0.0 (PRODUCT_QUALIFIED) at e1e8908c90f7f1fb
+---
+5/7 parts qualified at their pinned revision, 2 problem(s)
+QUALIFICATION NOT CLEAN -- 2 part(s) unqualified, drifted or missing
