@@ -121,6 +121,13 @@ def test_a_real_persistent_defect_is_reported_and_stops_the_loop(
     assert result["cycles_run"] == 2, "must stop as soon as two consecutive cycles agree, not run all 3"
     assert "identical defects" in result["reason"]
     defects = result["history"][-1]["defects"]
-    assert len(defects) == 1
-    assert defects[0]["spec_ref"] == "SCR-001"
-    assert defects[0]["observed"] == "a defect this test deliberately injected"
+    # Two defects, and both are real. The injected text is the screen defect.
+    # The second is the shelf gate doing its job: the fault was injected into
+    # _render_integration_screen, which is part of oauth_connect's source, so
+    # the app was built from bytes that are not the shelf's qualified bytes —
+    # exactly how 42f7cf6c shipped (markup changed after qualification).
+    assert len(defects) == 2, defects
+    by_kind = {d["kind"]: d for d in defects}
+    assert by_kind["unavailable_state_wrong"]["spec_ref"] == "SCR-001"
+    assert by_kind["unavailable_state_wrong"]["observed"] == "a defect this test deliberately injected"
+    assert by_kind["part_drift"]["evidence"]["part_id"] == "oauth_connect"

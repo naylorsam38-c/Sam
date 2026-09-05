@@ -1,0 +1,51 @@
+{
+ "part_id": "stage_history",
+ "version": "1.1.0",
+ "revision": "a2820dad41d0c83c",
+ "qualified_at": "2026-09-05T09:22:41+00:00",
+ "base_url": "http://127.0.0.1:8903",
+ "journeys": [
+  {
+   "journey": "rate_report_reflects_the_moves_made_on_the_screen",
+   "subject": "booking-frontdesk/SCR-009:no-show rate",
+   "parts": [
+    "stage_history"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/appointments",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Confirmed' on booking-frontdesk/SCR-006",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to No-show' on booking-frontdesk/SCR-006",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open report booking-frontdesk/SCR-009 and read 'no-show rate'",
+     "observed": {
+      "rate": 1,
+      "percentage": 100,
+      "numerator": 1,
+      "denominator": 1,
+      "window_days": 30
+     }
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

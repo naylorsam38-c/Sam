@@ -308,7 +308,15 @@
           "Member"
         ],
         "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
-        "result_location": "the same project's task list"
+        "result_location": "the same project's task list",
+        "execution": {
+          "op": "clone",
+          "overrides": {
+            "stage": "To do"
+          },
+          "title_column": "title",
+          "title_suffix": " (copy)"
+        }
       }
     ],
     "R.12:Task": "delete_too",
@@ -704,6 +712,45 @@
       "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title"
     }
   ],
+  "report_specs": {
+    "Open tasks by person": [
+      {
+        "metric": "count of Tasks not in stage Done, grouped by Assignee",
+        "spec": {
+          "table": "tasks",
+          "aggregation": "count",
+          "group_by": "assignee",
+          "filters": [
+            {
+              "field": "stage",
+              "op": "!=",
+              "value": "Done"
+            }
+          ]
+        }
+      }
+    ],
+    "Overdue tasks": [
+      {
+        "metric": "count of overdue Tasks",
+        "spec": {
+          "table": "tasks",
+          "aggregation": "count",
+          "filters": [
+            {
+              "field": "due_date",
+              "op": "before_now"
+            },
+            {
+              "field": "stage",
+              "op": "!=",
+              "value": "Done"
+            }
+          ]
+        }
+      }
+    ]
+  },
   "structure": {
     "records": {
       "Project": {
@@ -806,6 +853,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "pm-teamwork/REC-001"
       },
       "Task": {
@@ -921,9 +969,18 @@
               "Member"
             ],
             "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
-            "result_location": "the same project's task list"
+            "result_location": "the same project's task list",
+            "execution": {
+              "op": "clone",
+              "overrides": {
+                "stage": "To do"
+              },
+              "title_column": "title",
+              "title_suffix": " (copy)"
+            }
           }
         ],
+        "on_create": [],
         "id": "pm-teamwork/REC-002"
       },
       "Comment": {
@@ -989,6 +1046,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "pm-teamwork/REC-003"
       }
     },
@@ -1172,6 +1230,7 @@
           "allowed": "no"
         },
         "timeouts": [],
+        "effects": [],
         "initial": "To do",
         "terminal": [
           "Done"
@@ -1247,6 +1306,23 @@
         "metrics": {
           "count of Tasks not in stage Done, grouped by Assignee": "auto: count/sum of 'count of Tasks not in stage Done, grouped by Assignee'"
         },
+        "spec": [
+          {
+            "metric": "count of Tasks not in stage Done, grouped by Assignee",
+            "spec": {
+              "table": "tasks",
+              "aggregation": "count",
+              "group_by": "assignee",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "!=",
+                  "value": "Done"
+                }
+              ]
+            }
+          }
+        ],
         "id": "pm-teamwork/RPT-001"
       },
       "Overdue tasks": {
@@ -1254,6 +1330,26 @@
         "metrics": {
           "count of overdue Tasks": "a Task counts as overdue when Due date is before today AND its stage is not Done, as at the moment the report is viewed"
         },
+        "spec": [
+          {
+            "metric": "count of overdue Tasks",
+            "spec": {
+              "table": "tasks",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "due_date",
+                  "op": "before_now"
+                },
+                {
+                  "field": "stage",
+                  "op": "!=",
+                  "value": "Done"
+                }
+              ]
+            }
+          }
+        ],
         "id": "pm-teamwork/RPT-002"
       }
     },
@@ -1447,7 +1543,15 @@
             "Member"
           ],
           "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
-          "result_location": "the same project's task list"
+          "result_location": "the same project's task list",
+          "execution": {
+            "op": "clone",
+            "overrides": {
+              "stage": "To do"
+            },
+            "title_column": "title",
+            "title_suffix": " (copy)"
+          }
         },
         "roles": [
           "Member"
@@ -1739,7 +1843,15 @@
               "Member"
             ],
             "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
-            "result_location": "the same project's task list"
+            "result_location": "the same project's task list",
+            "execution": {
+              "op": "clone",
+              "overrides": {
+                "stage": "To do"
+              },
+              "title_column": "title",
+              "title_suffix": " (copy)"
+            }
           },
           "roles": [
             "Member"

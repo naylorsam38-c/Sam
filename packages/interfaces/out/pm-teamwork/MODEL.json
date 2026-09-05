@@ -1,0 +1,373 @@
+{
+ "family": "pm-teamwork",
+ "spec_id": "SPEC-PM-TEAMWORK-REF",
+ "app_name": "Teamwork",
+ "roles": [
+  "Admin",
+  "Member",
+  "Guest"
+ ],
+ "role_admin": {
+  "Admin": true,
+  "Member": false,
+  "Guest": false
+ },
+ "super_role": "Admin",
+ "records": {
+  "Project": {
+   "table": "projects",
+   "title_field": "Name",
+   "fields": [
+    {
+     "name": "Name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "name"
+    },
+    {
+     "name": "Description",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "description"
+    },
+    {
+     "name": "Owner",
+     "type": "other",
+     "required": "yes",
+     "unique": "no",
+     "custom_rule": "reference to a user account (pick-a-person field)",
+     "slug": "owner"
+    },
+    {
+     "name": "Due date",
+     "type": "date",
+     "required": "no",
+     "unique": "no",
+     "slug": "due_date"
+    },
+    {
+     "name": "Colour",
+     "type": "one_choice",
+     "required": "no",
+     "unique": "no",
+     "options": [
+      "grey",
+      "blue",
+      "green",
+      "red",
+      "purple",
+      "orange"
+     ],
+     "slug": "colour"
+    }
+   ],
+   "access": {
+    "view": [
+     "Member",
+     "Guest"
+    ],
+    "create": [
+     "Member"
+    ],
+    "edit": [
+     "Member"
+    ],
+    "delete": [
+     "Member",
+     "Admin"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Task": {
+   "table": "tasks",
+   "title_field": "Title",
+   "fields": [
+    {
+     "name": "Title",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "title"
+    },
+    {
+     "name": "Description",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "description"
+    },
+    {
+     "name": "Assignee",
+     "type": "other",
+     "required": "no",
+     "unique": "no",
+     "custom_rule": "reference to a user account (pick-a-person field)",
+     "slug": "assignee"
+    },
+    {
+     "name": "Due date",
+     "type": "date",
+     "required": "no",
+     "unique": "no",
+     "slug": "due_date"
+    },
+    {
+     "name": "Priority",
+     "type": "one_choice",
+     "required": "no",
+     "unique": "no",
+     "options": [
+      "low",
+      "medium",
+      "high"
+     ],
+     "slug": "priority"
+    },
+    {
+     "name": "Project",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Project",
+     "slug": "project"
+    }
+   ],
+   "access": {
+    "view": [
+     "Member",
+     "Guest"
+    ],
+    "create": [
+     "Member"
+    ],
+    "edit": [
+     "Member"
+    ],
+    "delete": [
+     "Member",
+     "Admin"
+    ]
+   },
+   "has_stage": true,
+   "workflow": "Task lifecycle",
+   "custom_actions": [
+    {
+     "name": "Duplicate",
+     "who": [
+      "Member"
+     ],
+     "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
+     "result_location": "the same project's task list",
+     "execution": {
+      "op": "clone",
+      "overrides": {
+       "stage": "To do"
+      },
+      "title_column": "title",
+      "title_suffix": " (copy)"
+     }
+    }
+   ],
+   "on_create": []
+  },
+  "Comment": {
+   "table": "comments",
+   "title_field": "Body",
+   "fields": [
+    {
+     "name": "Body",
+     "type": "long_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "body"
+    },
+    {
+     "name": "Task",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Task",
+     "slug": "task"
+    }
+   ],
+   "access": {
+    "view": [
+     "Member",
+     "Guest"
+    ],
+    "create": [
+     "Member",
+     "Guest"
+    ],
+    "edit": [
+     "Member"
+    ],
+    "delete": [
+     "Member",
+     "Admin"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  }
+ },
+ "workflows": {
+  "Task lifecycle": {
+   "stages": [
+    "To do",
+    "In progress",
+    "Done"
+   ],
+   "initial": "To do",
+   "terminal": [
+    "Done"
+   ],
+   "transitions": [
+    {
+     "from": "To do",
+     "to": "In progress",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ]
+    },
+    {
+     "from": "In progress",
+     "to": "Done",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ]
+    },
+    {
+     "from": "Done",
+     "to": "In progress",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ]
+    },
+    {
+     "from": "In progress",
+     "to": "To do",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ]
+    }
+   ],
+   "approvals": [],
+   "on_reject": null,
+   "effects": []
+  }
+ },
+ "forms": {},
+ "reports": {
+  "Open tasks by person": {
+   "slug": "open_tasks_by_person",
+   "question": "Who is carrying how much open work right now?",
+   "metrics": [
+    "count of Tasks not in stage Done, grouped by Assignee"
+   ],
+   "specs": [
+    {
+     "metric": "count of Tasks not in stage Done, grouped by Assignee",
+     "spec": {
+      "table": "tasks",
+      "aggregation": "count",
+      "group_by": "assignee",
+      "filters": [
+       {
+        "field": "stage",
+        "op": "!=",
+        "value": "Done"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  "Overdue tasks": {
+   "slug": "overdue_tasks",
+   "question": "What has slipped past its due date and needs chasing?",
+   "metrics": [
+    "count of overdue Tasks"
+   ],
+   "specs": [
+    {
+     "metric": "count of overdue Tasks",
+     "spec": {
+      "table": "tasks",
+      "aggregation": "count",
+      "filters": [
+       {
+        "field": "due_date",
+        "op": "before_now"
+       },
+       {
+        "field": "stage",
+        "op": "!=",
+        "value": "Done"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ },
+ "landing_per_role": {
+  "Admin": "Projects list",
+  "Member": "My tasks",
+  "Guest": "Projects list"
+ },
+ "screens": [
+  {
+   "id": "pm-teamwork/SCR-001",
+   "kind": "list",
+   "record": "Project"
+  },
+  {
+   "id": "pm-teamwork/SCR-002",
+   "kind": "detail",
+   "record": "Project"
+  },
+  {
+   "id": "pm-teamwork/SCR-003",
+   "kind": "list",
+   "record": "Task"
+  },
+  {
+   "id": "pm-teamwork/SCR-004",
+   "kind": "detail",
+   "record": "Task"
+  },
+  {
+   "id": "pm-teamwork/SCR-005",
+   "kind": "list",
+   "record": "Comment"
+  },
+  {
+   "id": "pm-teamwork/SCR-006",
+   "kind": "detail",
+   "record": "Comment"
+  },
+  {
+   "id": "pm-teamwork/SCR-007",
+   "kind": "report",
+   "report": "Open tasks by person"
+  },
+  {
+   "id": "pm-teamwork/SCR-008",
+   "kind": "report",
+   "report": "Overdue tasks"
+  }
+ ]
+}

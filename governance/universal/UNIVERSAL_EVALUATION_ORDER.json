@@ -1,0 +1,54 @@
+{
+  "order_id": "EVAL-v2.1",
+  "title": "Universal Evaluation Order",
+  "steps": [
+    {
+      "step": 1,
+      "id": "EVAL-001",
+      "name": "Validate authority and permissions",
+      "desc": "Check caller authority, role scope, and permission tier."
+    },
+    {
+      "step": 2,
+      "id": "EVAL-002",
+      "name": "Validate required input fields",
+      "desc": "Verify all mandatory payload fields exist and are non-empty."
+    },
+    {
+      "step": 3,
+      "id": "EVAL-003",
+      "name": "Check auto-fail conditions",
+      "desc": "Evaluate if input or requested task violates any auto-fail condition."
+    },
+    {
+      "step": 4,
+      "id": "EVAL-004",
+      "name": "Validate task and goal alignment",
+      "desc": "Ensure work aligns with active Locked Goal and Execution Spec."
+    },
+    {
+      "step": 5,
+      "id": "EVAL-005",
+      "name": "Evaluate the role rubric",
+      "desc": "Execute role-specific work according to its measurable requirements."
+    },
+    {
+      "step": 6,
+      "id": "EVAL-006",
+      "name": "Validate evidence",
+      "desc": "Attach citations, logs, outputs, and factual artifacts."
+    },
+    {
+      "step": 7,
+      "id": "EVAL-007",
+      "name": "Validate output format",
+      "desc": "Ensure output strictly conforms to the Standard Return Contract."
+    },
+    {
+      "step": 8,
+      "id": "EVAL-008",
+      "name": "Return the result and next state",
+      "desc": "Transmit verified output payload to Hub or handoff receiver."
+    }
+  ]
+}

@@ -10,7 +10,7 @@ No model in the loop.
 Usage:
   python check_template.py templates/<name>.json [more...]     validate; exit 0 = all PASS
   python check_template.py --all                                validate every templates/*.json
-  python check_template.py --selftest                           break a passing template six ways; each must be caught
+  python check_template.py --selftest                           break a passing template seven ways; each must be caught
 """
 
 # ============================================================================
@@ -249,6 +249,53 @@ def check(g, t):
     if c06 is not None and set(c06.keys()) != set(roles):
         E.append(f"C.06: landing screens must cover exactly the roles {sorted(roles)}, got {sorted(c06)}")
 
+    # -- 3b. executable blocks (report_specs / transition_effects / create_effects) --
+    # Each is the executable form of a prose answer and must point only at
+    # things the inventory really declares: a report and its own RP.04 metrics,
+    # a workflow and its own stages, a record. The Builder runs these; a
+    # dangling one would be a button that looks built and is not.
+    def _slug(name):
+        return "".join(c.lower() if c.isalnum() else "_" for c in str(name)).strip("_")
+    for rp, entries in (t.get("report_specs") or {}).items():
+        if rp not in inv["reports"]:
+            E.append(f"report_specs: report '{rp}' not in inventory")
+            continue
+        metrics = per.get(f"RP.04:{rp}") or []
+        for e_ in entries or []:
+            if e_.get("metric") not in metrics:
+                E.append(f"report_specs:{rp}: metric '{e_.get('metric')}' not listed in RP.04:{rp}")
+            if not isinstance(e_.get("spec"), dict) or not e_["spec"]:
+                E.append(f"report_specs:{rp}: metric '{e_.get('metric')}' has no spec")
+        for m in metrics:
+            if m not in {e_.get("metric") for e_ in entries or []}:
+                E.append(f"report_specs:{rp}: RP.04 metric '{m}' has no executable spec")
+    for w, effects in (t.get("transition_effects") or {}).items():
+        if w not in inv["workflows"]:
+            E.append(f"transition_effects: workflow '{w}' not in inventory")
+            continue
+        stages = (per.get(f"FL.02:{w}") or {}).get("stages") or []
+        for e_ in effects or []:
+            if e_.get("on_enter") not in stages:
+                E.append(f"transition_effects:{w}: on_enter '{e_.get('on_enter')}' is not a declared stage")
+            if not e_.get("op"):
+                E.append(f"transition_effects:{w}: effect has no op")
+    for rec, effects in (t.get("create_effects") or {}).items():
+        if rec not in records:
+            E.append(f"create_effects: record '{rec}' not in inventory")
+            continue
+        field_slugs = {_slug(fd.get("name")) for fd in per.get(f"R.02:{rec}") or []}
+        for e_ in effects or []:
+            if not e_.get("op"):
+                E.append(f"create_effects:{rec}: effect has no op")
+            link = e_.get("link_column")
+            if link and link not in field_slugs:
+                E.append(f"create_effects:{rec}: link_column '{link}' is not a field of {rec}")
+    for rec in records:
+        for ca in per.get(f"R.15:{rec}") or []:
+            ex = ca.get("execution")
+            if ex is not None and (not isinstance(ex, dict) or not ex.get("op")):
+                E.append(f"R.15:{rec}: action '{ca.get('name')}' has an execution block with no op")
+
     # -- 4. gate evaluation (tri-state) ---------------------------------------
     def ans_for_gate(qid, inst):
         if qid in ask or any(a.split(":")[0] == qid and a.endswith(":*") for a in ask):
@@ -325,22 +372,35 @@ def check(g, t):
 def selftest():
     g = load_graph()
     base_t = json.load(open(os.path.join(here, TEMPLATE_DIR, "accounting-ledger.json"), encoding="utf-8"))
+    pm_t = json.load(open(os.path.join(here, TEMPLATE_DIR, "pm-teamwork.json"), encoding="utf-8"))
     base = set(check(g, base_t))
-    results, allok = [], not base
+    pm_base = set(check(g, pm_t))
+    results, allok = [], not base and not pm_base
 
     def case(name, mutate):
-        t = copy.deepcopy(base_t)
+        # a case names a key; whichever real template carries it is the one broken
+        src, src_base = (base_t, base) if _has_key(base_t, mutate) else (pm_t, pm_base)
+        t = copy.deepcopy(src)
         mutate(t)
-        new = [e for e in check(g, t) if e not in base]
+        new = [e for e in check(g, t) if e not in src_base]
         results.append((name, bool(new), new[:1]))
 
+    def _has_key(t, mutate):
+        try:
+            mutate(copy.deepcopy(t))
+            return True
+        except (KeyError, IndexError, AttributeError):
+            return False
+
     case("illegal option value", lambda t: t["per_instance"].__setitem__("R.12:Invoice", "explode"))
-    case("unknown role in a grant", lambda t: t["per_instance"].__setitem__("RP.02:Profit and loss", ["Wizard"]))
+    case("unknown role in a grant", lambda t: t["per_instance"].__setitem__("R.06:Invoice", ["Wizard"]))
     case("transition to an undeclared stage", lambda t: t["per_instance"]["FL.03:Bill lifecycle"].append(
         {"from": "Draft", "to": "Shredded", "mover": "roles", "roles": ["Accountant"]}))
     case("title field that does not exist", lambda t: t["per_instance"].__setitem__("R.03:Contact", "Nickname"))
     case("coverage hole (answer deleted)", lambda t: t["per_instance"].pop("N.03:Invoice sent"))
-    case("ambiguous metric without a definition", lambda t: t["per_instance"].pop("RP.05:Profit and loss:revenue"))
+    case("ambiguous metric without a definition", lambda t: t["per_instance"].pop("RP.05:Overdue tasks:count of overdue Tasks"))
+    case("executable effect on a field that does not exist",
+         lambda t: t["create_effects"]["Payment"][0].__setitem__("link_column", "nonexistent"))
     for name, caught, sample in results:
         print(f"  [{'caught' if caught else 'MISSED'}] {name}" + (f" -> {sample[0]}" if sample else ""))
         allok = allok and caught

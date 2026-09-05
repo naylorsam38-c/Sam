@@ -388,8 +388,10 @@
       {
         "from": "Booked",
         "to": "Confirmed",
-        "mover": "automatic",
-        "event": "the deposit payment succeeds, or a staff member confirms manually"
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ]
       },
       {
         "from": "Confirmed",
@@ -427,14 +429,7 @@
     "FL.04:Appointment lifecycle": [],
     "FL.05:Appointment lifecycle": [],
     "FL.07:Appointment lifecycle": {
-      "allowed": "yes",
-      "by": [
-        "Staff"
-      ],
-      "from_stages": [
-        "Booked",
-        "Confirmed"
-      ]
+      "allowed": "no"
     },
     "FL.08:Appointment lifecycle": "Completed/No-show appointments lock and feed the reports.",
     "FL.09:Appointment lifecycle": "Completed",
@@ -567,12 +562,7 @@
       "target": "Appointment",
       "extra_fields": []
     },
-    "F.03:Public booking form": [
-      {
-        "field": "Deposit payment step",
-        "shown_when": "the chosen Service has Deposit required = yes"
-      }
-    ],
+    "F.03:Public booking form": [],
     "F.04:Public booking form": "no",
     "F.05:Public booking form": "stay_with_message",
     "RP.05:No-show rate:no-show rate": "appointments that ended No-show divided by appointments that ended Completed or No-show, in the selected period, by the appointment's Start date; expressed as a percentage",
@@ -651,12 +641,10 @@
       "person_moved_by": [
         "Staff"
       ],
-      "automatic_transitions": [
-        "the deposit payment succeeds, or a staff member confirms manually"
-      ],
+      "automatic_transitions": [],
       "has_approvals": false,
       "has_timeouts": true,
-      "cancellable": true
+      "cancellable": false
     },
     {
       "kind": "notification",
@@ -703,6 +691,48 @@
       "delivery": "screen"
     }
   ],
+  "report_specs": {
+    "Upcoming appointments": [
+      {
+        "metric": "count of Appointments in stage Booked or Confirmed",
+        "spec": {
+          "table": "appointments",
+          "aggregation": "count",
+          "filters": [
+            {
+              "field": "stage",
+              "op": "in",
+              "value": [
+                "Booked",
+                "Confirmed"
+              ]
+            },
+            {
+              "field": "start",
+              "op": "within_next_days",
+              "value": 7
+            }
+          ]
+        }
+      }
+    ],
+    "No-show rate": [
+      {
+        "metric": "no-show rate",
+        "spec": {
+          "engine": "stage_history",
+          "kind": "rate_over_last_days",
+          "table": "appointments",
+          "numerator_stage": "No-show",
+          "denominator_stages": [
+            "Completed",
+            "No-show"
+          ],
+          "days": 30
+        }
+      }
+    ]
+  },
   "structure": {
     "records": {
       "Service": {
@@ -789,6 +819,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "booking-frontdesk/REC-001"
       },
       "Customer": {
@@ -858,6 +889,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "booking-frontdesk/REC-002"
       },
       "Appointment": {
@@ -952,6 +984,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "booking-frontdesk/REC-003"
       }
     },
@@ -1060,8 +1093,10 @@
           {
             "from": "Booked",
             "to": "Confirmed",
-            "mover": "automatic",
-            "event": "the deposit payment succeeds, or a staff member confirms manually",
+            "mover": "roles",
+            "roles": [
+              "Staff"
+            ],
             "id": "booking-frontdesk/TRN-001"
           },
           {
@@ -1104,14 +1139,7 @@
         "approvals": [],
         "on_reject": null,
         "cancel": {
-          "allowed": "yes",
-          "by": [
-            "Staff"
-          ],
-          "from_stages": [
-            "Booked",
-            "Confirmed"
-          ]
+          "allowed": "no"
         },
         "timeouts": [
           {
@@ -1120,6 +1148,7 @@
             "then": "if the deposit is unpaid, the appointment moves to Cancelled and the slot is released"
           }
         ],
+        "effects": [],
         "initial": "Booked",
         "terminal": [
           "Completed",
@@ -1199,6 +1228,30 @@
         "metrics": {
           "count of Appointments in stage Booked or Confirmed": "auto: count/sum of 'count of Appointments in stage Booked or Confirmed'"
         },
+        "spec": [
+          {
+            "metric": "count of Appointments in stage Booked or Confirmed",
+            "spec": {
+              "table": "appointments",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "in",
+                  "value": [
+                    "Booked",
+                    "Confirmed"
+                  ]
+                },
+                {
+                  "field": "start",
+                  "op": "within_next_days",
+                  "value": 7
+                }
+              ]
+            }
+          }
+        ],
         "id": "booking-frontdesk/RPT-001"
       },
       "No-show rate": {
@@ -1206,6 +1259,22 @@
         "metrics": {
           "no-show rate": "appointments that ended No-show divided by appointments that ended Completed or No-show, in the selected period, by the appointment's Start date; expressed as a percentage"
         },
+        "spec": [
+          {
+            "metric": "no-show rate",
+            "spec": {
+              "engine": "stage_history",
+              "kind": "rate_over_last_days",
+              "table": "appointments",
+              "numerator_stage": "No-show",
+              "denominator_stages": [
+                "Completed",
+                "No-show"
+              ],
+              "days": 30
+            }
+          }
+        ],
         "id": "booking-frontdesk/RPT-002"
       }
     },
@@ -1216,8 +1285,7 @@
         "Staff member",
         "Start",
         "Notes",
-        "Deposit paid",
-        "Deposit payment step"
+        "Deposit paid"
       ]
     },
     "integrations": {},
@@ -1318,7 +1386,8 @@
       {
         "id": "booking-frontdesk/SCR-007",
         "kind": "form",
-        "form": "Public booking form"
+        "form": "Public booking form",
+        "record": "Appointment"
       },
       {
         "id": "booking-frontdesk/SCR-008",
@@ -1434,8 +1503,10 @@
         "workflow": "Appointment lifecycle",
         "from": "Booked",
         "to": "Confirmed",
-        "mover": "automatic",
-        "roles": null,
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ],
         "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Confirmed'"
       },
       {
@@ -1488,21 +1559,9 @@
       },
       {
         "id": "booking-frontdesk/ACT-015",
-        "kind": "cancel",
-        "workflow": "Appointment lifecycle",
-        "roles": [
-          "Staff"
-        ],
-        "from_stages": [
-          "Booked",
-          "Confirmed"
-        ],
-        "outcome": "cancels 'Appointment lifecycle' from stage(s) ['Booked', 'Confirmed']"
-      },
-      {
-        "id": "booking-frontdesk/ACT-016",
         "kind": "submit",
         "form": "Public booking form",
+        "record": "Appointment",
         "roles": null,
         "outcome": "submits the 'Public booking form' form, creating/editing its target record 'Appointment'"
       }
@@ -1730,15 +1789,17 @@
       {
         "id": "booking-frontdesk/QA-010",
         "action_id": "booking-frontdesk/ACT-010",
-        "role": "<any authenticated role>",
+        "role": "Staff",
         "action": {
           "id": "booking-frontdesk/ACT-010",
           "kind": "transition",
           "workflow": "Appointment lifecycle",
           "from": "Booked",
           "to": "Confirmed",
-          "mover": "automatic",
-          "roles": null,
+          "mover": "roles",
+          "roles": [
+            "Staff"
+          ],
           "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Confirmed'"
         },
         "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
@@ -1818,156 +1879,138 @@
       {
         "id": "booking-frontdesk/QA-015",
         "action_id": "booking-frontdesk/ACT-015",
-        "role": "Staff",
-        "action": {
-          "id": "booking-frontdesk/ACT-015",
-          "kind": "cancel",
-          "workflow": "Appointment lifecycle",
-          "roles": [
-            "Staff"
-          ],
-          "from_stages": [
-            "Booked",
-            "Confirmed"
-          ],
-          "outcome": "cancels 'Appointment lifecycle' from stage(s) ['Booked', 'Confirmed']"
-        },
-        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
-      },
-      {
-        "id": "booking-frontdesk/QA-016",
-        "action_id": "booking-frontdesk/ACT-016",
         "role": "<any authenticated role>",
         "action": {
-          "id": "booking-frontdesk/ACT-016",
+          "id": "booking-frontdesk/ACT-015",
           "kind": "submit",
           "form": "Public booking form",
+          "record": "Appointment",
           "roles": null,
           "outcome": "submits the 'Public booking form' form, creating/editing its target record 'Appointment'"
         },
         "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
       },
       {
-        "id": "booking-frontdesk/QA-017",
+        "id": "booking-frontdesk/QA-016",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-001",
+        "role": "Owner",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "booking-frontdesk/QA-017",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-002",
         "role": "Owner",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "booking-frontdesk/QA-018",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-002",
+        "screen_id": "booking-frontdesk/SCR-003",
         "role": "Owner",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "booking-frontdesk/QA-019",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-003",
+        "screen_id": "booking-frontdesk/SCR-004",
         "role": "Owner",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "booking-frontdesk/QA-020",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-004",
+        "screen_id": "booking-frontdesk/SCR-005",
         "role": "Owner",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "booking-frontdesk/QA-021",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-005",
+        "screen_id": "booking-frontdesk/SCR-006",
         "role": "Owner",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "booking-frontdesk/QA-022",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-006",
+        "screen_id": "booking-frontdesk/SCR-007",
         "role": "Owner",
-        "expect": "blocked (403 or absent from navigation)"
+        "expect": "reachable"
       },
       {
         "id": "booking-frontdesk/QA-023",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-007",
+        "screen_id": "booking-frontdesk/SCR-008",
         "role": "Owner",
         "expect": "reachable"
       },
       {
         "id": "booking-frontdesk/QA-024",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-008",
+        "screen_id": "booking-frontdesk/SCR-009",
         "role": "Owner",
         "expect": "reachable"
       },
       {
         "id": "booking-frontdesk/QA-025",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-009",
-        "role": "Owner",
-        "expect": "reachable"
-      },
-      {
-        "id": "booking-frontdesk/QA-026",
-        "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-001",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-027",
+        "id": "booking-frontdesk/QA-026",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-002",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-028",
+        "id": "booking-frontdesk/QA-027",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-003",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-029",
+        "id": "booking-frontdesk/QA-028",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-004",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-030",
+        "id": "booking-frontdesk/QA-029",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-005",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-031",
+        "id": "booking-frontdesk/QA-030",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-006",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-032",
+        "id": "booking-frontdesk/QA-031",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-007",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-033",
+        "id": "booking-frontdesk/QA-032",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-008",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-034",
+        "id": "booking-frontdesk/QA-033",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-009",
         "role": "Staff",

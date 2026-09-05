@@ -208,8 +208,12 @@ def test_records_screens_load_cleanly_in_a_real_browser(graph, tmp_path):
     inst = json.loads((ENGINE / "templates" / "pm-teamwork.json").read_text())
     derived = ae.derive(graph, inst)
     bm = ae.build_model(inst, derived)
+    # scoped the same way tests/test_builder.py's records fixture is: this
+    # template's report carries no executable ReportSpec and its 'Duplicate'
+    # button declares no executable effect, so the Builder really refuses both
     bm["screens_inventory"] = [s for s in bm["screens_inventory"] if s["kind"] != "report"]
     bm["reports"] = {}
+    bm["actions_inventory"] = [a for a in bm["actions_inventory"] if a["kind"] != "custom"]
     spec = {"spec_id": "SPEC-TEST-PM-PW", "title": "pm-teamwork records", "graph_version": graph["version"],
             "source_template": inst["template"], "numbered_fields": [], "build_model": bm}
 

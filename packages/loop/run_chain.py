@@ -4,10 +4,13 @@ run_chain.py — component 6: the fix-and-retest loop and the Definition of
 Done gate.
 
 Runs one full cycle: Build -> start the real server -> Live Playwright
-Tester (normal, then backend-down) -> stop the server -> Defect Report.
-Definition of Done is exactly what the task states it must be: the run
-passes only when the defect count is zero across both modes, never because
-the build alone succeeded.
+Tester (normal, then seam journeys, then backend-down) -> stop the server ->
+Defect Report. Definition of Done is exactly what the task states it must be:
+the run passes only when the defect count is zero across every mode, never
+because the build alone succeeded — and, since the shelf gained a lifecycle,
+only when every part the app was built from is PRODUCT_QUALIFIED (or FROZEN)
+at exactly the revision the app vendored. A part no real browser has driven,
+or a seam no screen lets a user press, is a defect here.
 
 What "the Builder fixes the defects" means for a deterministic, non-LLM
 Builder (packages/builder/builder.py has no model in it: every generation
@@ -38,7 +41,10 @@ import urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 BUILDER = os.path.join(HERE, "..", "builder", "builder.py")
 TESTER = os.path.join(HERE, "..", "playwright-tester", "live_test.py")
+SEAMS = os.path.join(HERE, "..", "playwright-tester", "seams.py")
 DEFECT_REPORT = os.path.join(HERE, "..", "defect-report", "defect_report.py")
+sys.path.insert(0, os.path.join(HERE, "..", "builder"))
+import shelf as shelf_lib  # noqa: E402  the shelf's own lifecycle rules, not restated here
 
 
 class RunningServer:
@@ -93,6 +99,11 @@ def one_cycle(spec_path, spec, out_dir, port, oauth_env):
         with RunningServer(app_dir, port, env=oauth_env):
             rn = _run(TESTER, spec_path, "--base-url", f"http://127.0.0.1:{port}",
                       "--mode", "normal", "-o", normal_path)
+            # the seams between the parts this app was built from, driven in the
+            # same real browser against the same running app; passes issue the
+            # qualification receipts the Definition of Done below reads
+            rs = _run(SEAMS, spec_path, "--base-url", f"http://127.0.0.1:{port}",
+                      "--app-dir", app_dir, "-o", os.path.join(out_dir, "report_seams"))
             db_file = os.path.join(app_dir, "app.db")
             if os.path.exists(db_file):
                 open(db_file, "wb").write(b"not a sqlite database")  # real failure, not a stopped process (see README)
@@ -103,9 +114,11 @@ def one_cycle(spec_path, spec, out_dir, port, oauth_env):
                         "expected": "the built app.py starts and answers on its port",
                         "observed": str(exc), "evidence": {}}], {"app_dir": app_dir}
 
-    if rn.returncode not in (0, 1):
+    if rn.returncode not in (0, 1) or not os.path.exists(os.path.join(normal_path, "report_normal.json")):
+        # a Python traceback also exits 1, so the report file is the real proof the tester ran
         return False, [{"id": "DEFECT-TESTER-CRASH", "spec_ref": spec["spec_id"], "kind": "tester_crashed",
-                        "expected": "live_test.py runs to completion", "observed": rn.stderr.strip(), "evidence": {}}], \
+                        "expected": "live_test.py runs to completion and writes report_normal.json",
+                        "observed": (rn.stderr or "")[-2000:].strip(), "evidence": {}}], \
                {"app_dir": app_dir}
 
     defect_out = os.path.join(out_dir, "defects")
@@ -118,9 +131,61 @@ def one_cycle(spec_path, spec, out_dir, port, oauth_env):
         [{"id": "DEFECT-REPORT-CRASH", "spec_ref": spec["spec_id"], "kind": "defect_report_crashed",
           "expected": "defect_report.py runs to completion", "observed": rr.stderr.strip(), "evidence": {}}]
 
+    defects += seam_defects(spec, rs, os.path.join(out_dir, "report_seams", "report_seams.json"))
+    defects += qualification_defects(spec, app_dir)
+
     return (len(defects) == 0), defects, {
         "app_dir": app_dir, "normal_report": normal_path, "down_report": down_path, "defects": defect_out,
+        "seams_report": os.path.join(out_dir, "report_seams"),
     }
+
+
+def seam_defects(spec, rs, report_path):
+    """Every FAILED or BLOCKED seam journey is a defect against the numbered
+    item it drove. BLOCKED counts: an app whose declared action no screen can
+    press is not done, whatever the API says."""
+    if rs.returncode not in (0, 1) or not os.path.exists(report_path):
+        return [{"id": "DEFECT-SEAMS-CRASH", "spec_ref": spec["spec_id"], "kind": "seams_crashed",
+                 "expected": "seams.py runs to completion", "observed": (rs.stderr or "")[-2000:].strip(), "evidence": {}}]
+    report = json.load(open(report_path))
+    out = []
+    for d in report["journeys"]:
+        if d["result"] in ("PASS", "N/A"):
+            continue
+        out.append({"id": f"DEFECT-SEAM-{d['subject'].split('/')[-1]}-{d['journey']}",
+                    "spec_ref": d["subject"], "kind": f"seam_{d['result'].lower()}",
+                    "expected": f"{d['journey']} passes end to end in a real browser",
+                    "observed": d["reason"], "evidence": {"steps": d["steps"], "parts": d["parts"]}})
+    return out
+
+
+def qualification_defects(spec, app_dir):
+    """The Definition of Done also asks the shelf: is every part this app was
+    built from at the required lifecycle status, at exactly the revision the
+    app vendored? A TESTED part in a shipped app is the 42f7cf6c failure."""
+    manifest_path = os.path.join(app_dir, "MANIFEST.json")
+    if not os.path.exists(manifest_path):
+        return [{"id": "DEFECT-NO-MANIFEST", "spec_ref": spec["spec_id"], "kind": "no_manifest",
+                 "expected": "the built app carries MANIFEST.json", "observed": "missing", "evidence": {}}]
+    manifest = json.load(open(manifest_path))
+    shelf = shelf_lib.load_shelf()
+    by_id = {p["part_id"]: p for p in shelf["parts"]}
+    out = []
+    for pin in manifest["parts"]:
+        part = by_id.get(pin["part_id"])
+        if part is None:
+            out.append({"id": f"DEFECT-PART-{pin['part_id']}", "spec_ref": spec["spec_id"], "kind": "part_missing",
+                        "expected": f"{pin['part_id']} is on the shelf", "observed": "not on the shelf", "evidence": pin})
+            continue
+        current = shelf_lib.source_revision(part)
+        if current != pin["revision"]:
+            out.append({"id": f"DEFECT-PART-{pin['part_id']}", "spec_ref": spec["spec_id"], "kind": "part_drift",
+                        "expected": f"{pin['part_id']} at {pin['revision']}", "observed": f"shelf is at {current}", "evidence": pin})
+        elif not shelf_lib.meets(part):
+            out.append({"id": f"DEFECT-PART-{pin['part_id']}", "spec_ref": spec["spec_id"], "kind": "part_unqualified",
+                        "expected": f"{pin['part_id']} at {shelf_lib.REQUIRED_STATUS_FOR_DEPLOYABLE}",
+                        "observed": f"status {part['status']}", "evidence": pin})
+    return out
 
 
 def run_to_done(spec_path, out_dir, port, iterations, oauth_env):
@@ -159,10 +224,12 @@ def main(argv=None):
         # generic across providers; the Builder names the env var per-provider
         # (OAUTH_PROVIDERS in builder.py) so this passes it through by name
         spec = json.load(open(args.spec, encoding="utf-8"))
-        for name in spec["build_model"]["integrations"]:
+        for name, flx in spec["build_model"]["integrations"].items():
+            if flx.get("auth") == "api_key":
+                continue  # a pasted key has no OAuth client id — the same split the Builder makes
             sys.path.insert(0, os.path.join(HERE, "..", "builder"))
             import builder as bl
-            provider = bl._resolve_provider(name, spec["build_model"]["integrations"][name])
+            provider = bl._resolve_provider(name, flx)
             oauth_env[f"{provider.upper()}_CLIENT_ID"] = args.oauth_client_id
 
     result = run_to_done(args.spec, args.out, args.port, args.iterations, oauth_env)

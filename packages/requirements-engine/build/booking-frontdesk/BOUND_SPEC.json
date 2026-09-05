@@ -109,6 +109,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "booking-frontdesk/REC-001"
       },
       "Customer": {
@@ -178,6 +179,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "booking-frontdesk/REC-002"
       },
       "Appointment": {
@@ -272,6 +274,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "booking-frontdesk/REC-003"
       }
     },
@@ -380,8 +383,10 @@
           {
             "from": "Booked",
             "to": "Confirmed",
-            "mover": "automatic",
-            "event": "the deposit payment succeeds, or a staff member confirms manually",
+            "mover": "roles",
+            "roles": [
+              "Staff"
+            ],
             "id": "booking-frontdesk/TRN-001"
           },
           {
@@ -424,14 +429,7 @@
         "approvals": [],
         "on_reject": null,
         "cancel": {
-          "allowed": "yes",
-          "by": [
-            "Staff"
-          ],
-          "from_stages": [
-            "Booked",
-            "Confirmed"
-          ]
+          "allowed": "no"
         },
         "timeouts": [
           {
@@ -440,6 +438,7 @@
             "then": "if the deposit is unpaid, the appointment moves to Cancelled and the slot is released"
           }
         ],
+        "effects": [],
         "initial": "Booked",
         "terminal": [
           "Completed",
@@ -474,7 +473,15 @@
           "locations": [
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       "Appointment reminder": {
@@ -506,7 +513,21 @@
             "packages/builder/engines/scheduled_jobs.py::run_after",
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            },
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       "Cancellation notice": {
@@ -538,7 +559,15 @@
           "locations": [
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       }
     },
@@ -548,6 +577,30 @@
         "metrics": {
           "count of Appointments in stage Booked or Confirmed": "auto: count/sum of 'count of Appointments in stage Booked or Confirmed'"
         },
+        "spec": [
+          {
+            "metric": "count of Appointments in stage Booked or Confirmed",
+            "spec": {
+              "table": "appointments",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "in",
+                  "value": [
+                    "Booked",
+                    "Confirmed"
+                  ]
+                },
+                {
+                  "field": "start",
+                  "op": "within_next_days",
+                  "value": 7
+                }
+              ]
+            }
+          }
+        ],
         "id": "booking-frontdesk/RPT-001",
         "part_bindings": {
           "parts": [
@@ -556,7 +609,15 @@
           "locations": [
             "packages/builder/engines/reporting_engine.py::run_report"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       "No-show rate": {
@@ -564,6 +625,22 @@
         "metrics": {
           "no-show rate": "appointments that ended No-show divided by appointments that ended Completed or No-show, in the selected period, by the appointment's Start date; expressed as a percentage"
         },
+        "spec": [
+          {
+            "metric": "no-show rate",
+            "spec": {
+              "engine": "stage_history",
+              "kind": "rate_over_last_days",
+              "table": "appointments",
+              "numerator_stage": "No-show",
+              "denominator_stages": [
+                "Completed",
+                "No-show"
+              ],
+              "days": 30
+            }
+          }
+        ],
         "id": "booking-frontdesk/RPT-002",
         "part_bindings": {
           "parts": [
@@ -572,9 +649,19 @@
           "locations": [
             "packages/builder/engines/stage_history.py::record_transition",
             "packages/builder/engines/stage_history.py::entered_at",
-            "packages/builder/engines/stage_history.py::rate_between"
+            "packages/builder/engines/stage_history.py::rate_between",
+            "packages/builder/engines/stage_history.py::rate_over_last_days",
+            "packages/builder/engines/stage_history.py::line_value_by_month"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_history",
+              "version": "1.1.0",
+              "revision": "a2820dad41d0c83c",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     },
@@ -585,8 +672,7 @@
         "Staff member",
         "Start",
         "Notes",
-        "Deposit paid",
-        "Deposit payment step"
+        "Deposit paid"
       ]
     },
     "integrations": {},
@@ -669,7 +755,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -687,7 +781,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -705,7 +807,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -723,7 +833,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -741,7 +859,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -759,17 +885,41 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
         "id": "booking-frontdesk/SCR-007",
         "kind": "form",
         "form": "Public booking form",
+        "record": "Appointment",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "no binding rule for this screen kind"
+          "parts": [
+            "form_render_submit"
+          ],
+          "locations": [
+            "packages/builder/engines/form_render_submit.py::render_form",
+            "packages/builder/engines/form_render_submit.py::validate",
+            "packages/builder/engines/form_render_submit.py::submit",
+            "packages/builder/engines/form_render_submit.py::read_back"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "form_render_submit",
+              "version": "1.0.0",
+              "revision": "cfb66ed4a56c85df",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -783,7 +933,15 @@
           "locations": [
             "packages/builder/engines/reporting_engine.py::run_report"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -797,9 +955,19 @@
           "locations": [
             "packages/builder/engines/stage_history.py::record_transition",
             "packages/builder/engines/stage_history.py::entered_at",
-            "packages/builder/engines/stage_history.py::rate_between"
+            "packages/builder/engines/stage_history.py::rate_between",
+            "packages/builder/engines/stage_history.py::rate_over_last_days",
+            "packages/builder/engines/stage_history.py::line_value_by_month"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_history",
+              "version": "1.1.0",
+              "revision": "a2820dad41d0c83c",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     ],
@@ -838,7 +1006,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -860,7 +1036,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -882,7 +1066,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -904,7 +1096,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -926,7 +1126,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -948,7 +1156,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -970,7 +1186,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -992,7 +1216,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1014,7 +1246,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1023,13 +1263,27 @@
         "workflow": "Appointment lifecycle",
         "from": "Booked",
         "to": "Confirmed",
-        "mover": "automatic",
-        "roles": null,
+        "mover": "roles",
+        "roles": [
+          "Staff"
+        ],
         "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Confirmed'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "half of this transition is 'the deposit payment succeeds' -- needs live payment processing, not on the shelf; the other half needs no part at all, but the template models both as one automatic-triggered edge"
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1050,7 +1304,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1071,7 +1333,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1092,7 +1362,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1113,37 +1391,43 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
         "id": "booking-frontdesk/ACT-015",
-        "kind": "cancel",
-        "workflow": "Appointment lifecycle",
-        "roles": [
-          "Staff"
-        ],
-        "from_stages": [
-          "Booked",
-          "Confirmed"
-        ],
-        "outcome": "cancels 'Appointment lifecycle' from stage(s) ['Booked', 'Confirmed']",
-        "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "no binding rule for this action kind"
-        }
-      },
-      {
-        "id": "booking-frontdesk/ACT-016",
         "kind": "submit",
         "form": "Public booking form",
+        "record": "Appointment",
         "roles": null,
         "outcome": "submits the 'Public booking form' form, creating/editing its target record 'Appointment'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "no binding rule for this action kind"
+          "parts": [
+            "form_render_submit"
+          ],
+          "locations": [
+            "packages/builder/engines/form_render_submit.py::render_form",
+            "packages/builder/engines/form_render_submit.py::validate",
+            "packages/builder/engines/form_render_submit.py::submit",
+            "packages/builder/engines/form_render_submit.py::read_back"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "form_render_submit",
+              "version": "1.0.0",
+              "revision": "cfb66ed4a56c85df",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     ],
@@ -1159,7 +1443,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1173,7 +1465,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1187,7 +1487,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1204,7 +1512,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1224,7 +1540,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1241,7 +1565,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1260,7 +1592,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1277,7 +1617,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1293,7 +1641,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1309,7 +1665,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1326,7 +1690,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       }
     ],
@@ -1469,15 +1841,17 @@
       {
         "id": "booking-frontdesk/QA-010",
         "action_id": "booking-frontdesk/ACT-010",
-        "role": "<any authenticated role>",
+        "role": "Staff",
         "action": {
           "id": "booking-frontdesk/ACT-010",
           "kind": "transition",
           "workflow": "Appointment lifecycle",
           "from": "Booked",
           "to": "Confirmed",
-          "mover": "automatic",
-          "roles": null,
+          "mover": "roles",
+          "roles": [
+            "Staff"
+          ],
           "outcome": "moves 'Appointment lifecycle' from 'Booked' to 'Confirmed'"
         },
         "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
@@ -1557,156 +1931,138 @@
       {
         "id": "booking-frontdesk/QA-015",
         "action_id": "booking-frontdesk/ACT-015",
-        "role": "Staff",
-        "action": {
-          "id": "booking-frontdesk/ACT-015",
-          "kind": "cancel",
-          "workflow": "Appointment lifecycle",
-          "roles": [
-            "Staff"
-          ],
-          "from_stages": [
-            "Booked",
-            "Confirmed"
-          ],
-          "outcome": "cancels 'Appointment lifecycle' from stage(s) ['Booked', 'Confirmed']"
-        },
-        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
-      },
-      {
-        "id": "booking-frontdesk/QA-016",
-        "action_id": "booking-frontdesk/ACT-016",
         "role": "<any authenticated role>",
         "action": {
-          "id": "booking-frontdesk/ACT-016",
+          "id": "booking-frontdesk/ACT-015",
           "kind": "submit",
           "form": "Public booking form",
+          "record": "Appointment",
           "roles": null,
           "outcome": "submits the 'Public booking form' form, creating/editing its target record 'Appointment'"
         },
         "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
       },
       {
-        "id": "booking-frontdesk/QA-017",
+        "id": "booking-frontdesk/QA-016",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-001",
+        "role": "Owner",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "booking-frontdesk/QA-017",
+        "kind": "screen_access",
+        "screen_id": "booking-frontdesk/SCR-002",
         "role": "Owner",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "booking-frontdesk/QA-018",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-002",
+        "screen_id": "booking-frontdesk/SCR-003",
         "role": "Owner",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "booking-frontdesk/QA-019",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-003",
+        "screen_id": "booking-frontdesk/SCR-004",
         "role": "Owner",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "booking-frontdesk/QA-020",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-004",
+        "screen_id": "booking-frontdesk/SCR-005",
         "role": "Owner",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "booking-frontdesk/QA-021",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-005",
+        "screen_id": "booking-frontdesk/SCR-006",
         "role": "Owner",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "booking-frontdesk/QA-022",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-006",
+        "screen_id": "booking-frontdesk/SCR-007",
         "role": "Owner",
-        "expect": "blocked (403 or absent from navigation)"
+        "expect": "reachable"
       },
       {
         "id": "booking-frontdesk/QA-023",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-007",
+        "screen_id": "booking-frontdesk/SCR-008",
         "role": "Owner",
         "expect": "reachable"
       },
       {
         "id": "booking-frontdesk/QA-024",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-008",
+        "screen_id": "booking-frontdesk/SCR-009",
         "role": "Owner",
         "expect": "reachable"
       },
       {
         "id": "booking-frontdesk/QA-025",
         "kind": "screen_access",
-        "screen_id": "booking-frontdesk/SCR-009",
-        "role": "Owner",
-        "expect": "reachable"
-      },
-      {
-        "id": "booking-frontdesk/QA-026",
-        "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-001",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-027",
+        "id": "booking-frontdesk/QA-026",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-002",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-028",
+        "id": "booking-frontdesk/QA-027",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-003",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-029",
+        "id": "booking-frontdesk/QA-028",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-004",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-030",
+        "id": "booking-frontdesk/QA-029",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-005",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-031",
+        "id": "booking-frontdesk/QA-030",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-006",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-032",
+        "id": "booking-frontdesk/QA-031",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-007",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-033",
+        "id": "booking-frontdesk/QA-032",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-008",
         "role": "Staff",
         "expect": "reachable"
       },
       {
-        "id": "booking-frontdesk/QA-034",
+        "id": "booking-frontdesk/QA-033",
         "kind": "screen_access",
         "screen_id": "booking-frontdesk/SCR-009",
         "role": "Staff",

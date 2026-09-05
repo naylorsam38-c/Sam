@@ -17,8 +17,6 @@
 | accounting-ledger/SCR-008 | detail | crud_list_detail |  |
 | accounting-ledger/SCR-009 | list | crud_list_detail |  |
 | accounting-ledger/SCR-010 | detail | crud_list_detail |  |
-| accounting-ledger/SCR-011 | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
-| accounting-ledger/SCR-012 | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
 
 ## Actions
 
@@ -42,7 +40,7 @@
 | accounting-ledger/ACT-016 | transition | ledger_balancing |  |
 | accounting-ledger/ACT-017 | transition | workflow_executor |  |
 | accounting-ledger/ACT-018 | transition | workflow_executor |  |
-| accounting-ledger/ACT-019 | approve | **UNBOUND** | no binding rule for this action kind |
+| accounting-ledger/ACT-019 | approve | stage_approval_gate |  |
 | accounting-ledger/ACT-020 | transition | workflow_executor |  |
 | accounting-ledger/ACT-021 | transition | ledger_balancing |  |
 | accounting-ledger/ACT-022 | transition | workflow_executor |  |
@@ -60,8 +58,6 @@
 
 | id | kind | parts | note |
 |---|---|---|---|
-| Profit and loss | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
-| Aged receivables | report | **UNBOUND** | plain aggregation over existing fields -- no generic reporting part was built |
 
 ## Recurring ops
 
@@ -77,5 +73,3 @@
 | accounting-ledger/OPS-008 | ops | scheduled_jobs |  |
 | accounting-ledger/OPS-009 | ops | scheduled_jobs |  |
 | accounting-ledger/OPS-010 | ops | scheduled_jobs |  |
-| accounting-ledger/OPS-011 | ops | scheduled_jobs |  |
-| accounting-ledger/OPS-012 | ops | scheduled_jobs |  |

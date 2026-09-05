@@ -99,6 +99,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "crm-pipeline/REC-001"
       },
       "Contact": {
@@ -177,6 +178,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "crm-pipeline/REC-002"
       },
       "Deal": {
@@ -307,9 +309,16 @@
               "Sales manager"
             ],
             "effect": "changes the deal's Owner to another person",
-            "result_location": "the deal page; the new owner's pipeline view"
+            "result_location": "the deal page; the new owner's pipeline view",
+            "execution": {
+              "op": "set_fields_from_input",
+              "fields": [
+                "owner"
+              ]
+            }
           }
         ],
+        "on_create": [],
         "id": "crm-pipeline/REC-003"
       },
       "Activity": {
@@ -420,6 +429,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "crm-pipeline/REC-004"
       }
     },
@@ -709,6 +719,7 @@
           "allowed": "no"
         },
         "timeouts": [],
+        "effects": [],
         "initial": "Lead in",
         "terminal": [
           "Won",
@@ -747,7 +758,21 @@
             "packages/builder/engines/scheduled_jobs.py::run_after",
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            },
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       "Deal won": {
@@ -775,7 +800,15 @@
           "locations": [
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       }
     },
@@ -786,6 +819,35 @@
           "sum of open Deal Value grouped by stage": "auto: count/sum of 'sum of open Deal Value grouped by stage'",
           "count of Deals grouped by stage": "auto: count/sum of 'count of Deals grouped by stage'"
         },
+        "spec": [
+          {
+            "metric": "sum of open Deal Value grouped by stage",
+            "spec": {
+              "table": "deals",
+              "aggregation": "sum",
+              "value_field": "value",
+              "group_by": "stage",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "not_in",
+                  "value": [
+                    "Won",
+                    "Lost"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "metric": "count of Deals grouped by stage",
+            "spec": {
+              "table": "deals",
+              "aggregation": "count",
+              "group_by": "stage"
+            }
+          }
+        ],
         "id": "crm-pipeline/RPT-001",
         "part_bindings": {
           "parts": [
@@ -794,7 +856,15 @@
           "locations": [
             "packages/builder/engines/reporting_engine.py::run_report"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       "Win rate": {
@@ -802,6 +872,22 @@
         "metrics": {
           "win rate": "deals that entered Won divided by deals that entered Won or Lost, in the selected period, attributed to the date the deal reached that stage; expressed as a percentage"
         },
+        "spec": [
+          {
+            "metric": "win rate",
+            "spec": {
+              "engine": "stage_history",
+              "kind": "rate_over_last_days",
+              "table": "deals",
+              "numerator_stage": "Won",
+              "denominator_stages": [
+                "Won",
+                "Lost"
+              ],
+              "days": 90
+            }
+          }
+        ],
         "id": "crm-pipeline/RPT-002",
         "part_bindings": {
           "parts": [
@@ -810,9 +896,19 @@
           "locations": [
             "packages/builder/engines/stage_history.py::record_transition",
             "packages/builder/engines/stage_history.py::entered_at",
-            "packages/builder/engines/stage_history.py::rate_between"
+            "packages/builder/engines/stage_history.py::rate_between",
+            "packages/builder/engines/stage_history.py::rate_over_last_days",
+            "packages/builder/engines/stage_history.py::line_value_by_month"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_history",
+              "version": "1.1.0",
+              "revision": "a2820dad41d0c83c",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     },
@@ -898,7 +994,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -916,7 +1020,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -934,7 +1046,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -952,7 +1072,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -970,7 +1098,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -988,7 +1124,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1006,7 +1150,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1024,7 +1176,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1038,7 +1198,15 @@
           "locations": [
             "packages/builder/engines/reporting_engine.py::run_report"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1052,9 +1220,19 @@
           "locations": [
             "packages/builder/engines/stage_history.py::record_transition",
             "packages/builder/engines/stage_history.py::entered_at",
-            "packages/builder/engines/stage_history.py::rate_between"
+            "packages/builder/engines/stage_history.py::rate_between",
+            "packages/builder/engines/stage_history.py::rate_over_last_days",
+            "packages/builder/engines/stage_history.py::line_value_by_month"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_history",
+              "version": "1.1.0",
+              "revision": "a2820dad41d0c83c",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     ],
@@ -1096,7 +1274,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1119,7 +1305,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1141,7 +1335,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1164,7 +1366,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1187,7 +1397,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1209,7 +1427,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1232,7 +1458,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1255,7 +1489,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1277,7 +1519,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1290,16 +1540,35 @@
             "Sales manager"
           ],
           "effect": "changes the deal's Owner to another person",
-          "result_location": "the deal page; the new owner's pipeline view"
+          "result_location": "the deal page; the new owner's pipeline view",
+          "execution": {
+            "op": "set_fields_from_input",
+            "fields": [
+              "owner"
+            ]
+          }
         },
         "roles": [
           "Sales manager"
         ],
         "outcome": "changes the deal's Owner to another person",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "a plain restricted field edit -- no specialist part needed, but the Builder has no generic custom-action execution rule at all"
+          "parts": [
+            "custom_action_execution"
+          ],
+          "locations": [
+            "packages/builder/engines/custom_action_execution.py::run",
+            "packages/builder/engines/custom_action_execution.py::OPERATIONS"
+          ],
+          "note": "a plain restricted field edit: the generic custom-action rule performs it as set_fields and enforces the action's own declared 'who'",
+          "pins": [
+            {
+              "part_id": "custom_action_execution",
+              "version": "1.1.0",
+              "revision": "177cfc2d6d4d4a01",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1322,7 +1591,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1345,7 +1622,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1368,7 +1653,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1390,7 +1683,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1412,7 +1713,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1434,7 +1743,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1456,7 +1773,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1478,7 +1803,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1500,7 +1833,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1522,7 +1863,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1544,7 +1893,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     ],
@@ -1560,7 +1917,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1574,7 +1939,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1588,7 +1961,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1602,7 +1983,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1623,7 +2012,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1642,7 +2039,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1659,7 +2064,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1675,7 +2088,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1691,7 +2112,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       }
     ],
@@ -1947,7 +2376,13 @@
               "Sales manager"
             ],
             "effect": "changes the deal's Owner to another person",
-            "result_location": "the deal page; the new owner's pipeline view"
+            "result_location": "the deal page; the new owner's pipeline view",
+            "execution": {
+              "op": "set_fields_from_input",
+              "fields": [
+                "owner"
+              ]
+            }
           },
           "roles": [
             "Sales manager"

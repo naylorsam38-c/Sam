@@ -1,0 +1,65 @@
+{
+ "part_id": "form_render_submit",
+ "version": "1.0.0",
+ "revision": "cfb66ed4a56c85df",
+ "qualified_at": "2026-09-05T09:22:40+00:00",
+ "base_url": "http://127.0.0.1:8903",
+ "journeys": [
+  {
+   "journey": "form_submit_lands_in_list_and_detail",
+   "subject": "booking-frontdesk/SCR-007",
+   "parts": [
+    "form_render_submit",
+    "crud_list_detail"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [
+    "FRESH_INSTALL_GAP: required field 'Service' links to 'Service'; with no Service rows yet, this form cannot be completed from the screen",
+    "FRESH_INSTALL_GAP: required field 'Customer' links to 'Customer'; with no Customer rows yet, this form cannot be completed from the screen"
+   ],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open form booking-frontdesk/SCR-007",
+     "observed": "Public booking form"
+    },
+    {
+     "channel": "api",
+     "action": "seed one 'Service' so required link 'Service' has something to pick",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "seed one 'Customer' so required link 'Customer' has something to pick",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "fill every declared control",
+     "observed": "6 controls, carrier=staff_member=seam-1a070e03587"
+    },
+    {
+     "channel": "browser",
+     "action": "click Save",
+     "observed": "saved e87607e3-0501-4fa4-8db1-9608ce777ea8"
+    },
+    {
+     "channel": "browser",
+     "action": "open list booking-frontdesk/SCR-005",
+     "observed": "2 cell(s) carry seam-1a070e03587"
+    },
+    {
+     "channel": "browser",
+     "action": "open detail booking-frontdesk/SCR-006?id=e87607e3-0501-4fa4-8db1-9608ce777ea8",
+     "observed": "staff_member='seam-1a070e03587'"
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Connector · pocket</title><meta name="generator" content="packages/interfaces/make_interfaces.py from SPEC-FRONTDOOR"><style>
+:root{--acc:#ea580c;--acc-2:#db2777;--bg:#0f1218;--sur:#171b24;--sur-2:#1f2431;--ink:#eef1f6;--mut:#8f98a8;--line:#2a3140;--ok:#34d399;--err:#f87171;--warn:#fbbf24;--r:16px}
+*{box-sizing:border-box}html,body{margin:0;background:#05070a}body{font:16px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0}h1{font-size:18px;font-weight:700;flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin:20px 0 8px}h4{font-size:14px;margin-bottom:4px}
+.phone{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);display:flex;flex-direction:column;position:relative}.screen{flex:1;padding-bottom:84px}
+.topbar{display:flex;align-items:center;gap:8px;padding:14px 12px;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);z-index:3;border-bottom:1px solid var(--line)}.back{background:none;border:0;color:var(--acc);font-size:30px;line-height:1;width:44px;height:44px;cursor:pointer}.spacer{width:44px;display:inline-block}.who{font-size:12px;color:var(--mut);width:auto;padding:0 6px}
+.body{padding:14px 14px 20px}.body.detail{padding-top:6px}
+.rolebox{background:var(--sur);border-radius:var(--r);padding:12px 14px;margin-bottom:14px}.role{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:var(--mut)}.role select{font:inherit;background:var(--sur-2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:44px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}.stat{background:var(--sur);border-radius:var(--r);padding:16px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;min-height:88px}.stat b{font-size:30px;color:var(--acc);font-weight:800}.stat span{color:var(--mut);font-size:13px}
+.sheet-card{background:var(--sur);border-radius:var(--r);padding:16px;margin-top:12px}.sheet-card h3{margin-top:0}
+.menu{list-style:none;padding:0;margin:0 0 14px;background:var(--sur);border-radius:var(--r);overflow:hidden}.menu li + li{border-top:1px solid var(--line)}.menu a{display:flex;align-items:center;gap:12px;padding:14px 16px;color:var(--ink);text-decoration:none;min-height:52px}.menu .ic{color:var(--acc);width:20px;text-align:center}.menu .n{margin-left:auto;color:var(--mut);font-size:13px}
+.rowcard{display:flex;align-items:center;gap:10px;background:var(--sur);border-radius:14px;padding:14px;margin-bottom:10px;color:var(--ink);text-decoration:none;min-height:64px}.rowcard:active{background:var(--sur-2)}.rc-main{flex:1;min-width:0;display:flex;flex-direction:column}.rc-main b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chev{color:var(--mut);font-size:22px}
+.empty{padding:50px 20px;text-align:center;color:var(--mut)}
+.fab{position:fixed;right:max(16px,calc(50% - 224px));bottom:88px;width:58px;height:58px;border-radius:50%;background:var(--acc);color:#fff;border:0;font-size:32px;line-height:1;box-shadow:0 12px 30px -8px color-mix(in srgb,var(--acc) 70%,transparent);cursor:pointer;z-index:4}
+.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;display:flex;background:color-mix(in srgb,var(--sur) 92%,transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:5}.tb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--mut);text-decoration:none;font-size:11px;padding:6px 2px;min-height:52px;border-radius:12px}.tb .ic{font-size:20px;line-height:1}.tb.on{color:var(--acc)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-weight:600;padding:12px 18px;border-radius:14px;border:1px solid var(--line);background:var(--sur-2);color:var(--ink);cursor:pointer;min-height:44px;text-decoration:none}.btn.primary{background:var(--acc);border-color:var(--acc);color:#fff}.btn.danger{color:var(--err);border-color:#5a2a2a}.btn.small{min-height:36px;padding:6px 12px;font-size:14px}.btn.move{border-color:var(--acc);color:var(--acc);width:100%}
+.lnk{background:none;border:0;color:var(--acc);cursor:pointer;font:inherit;padding:8px;font-weight:600}.lnk.danger{color:var(--err)}.lnk.big{font-size:26px}
+.muted{color:var(--mut)}.small{font-size:13px}
+.stage{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--sur-2);color:var(--mut);white-space:nowrap}.stage.s0{background:color-mix(in srgb,var(--acc) 25%,transparent);color:var(--acc)}.stage.s1{background:#3b2f14;color:#fbbf24}.stage.s2{background:#123626;color:#34d399}.stage.s3{background:#2b2144;color:#c4b5fd}.stage.s4{background:#3d1c1c;color:#f87171}.stage.s5{background:#14333a;color:#67e8f9}
+.notice{position:fixed;left:50%;transform:translateX(-50%);bottom:96px;width:min(440px,calc(100% - 24px));display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;z-index:6;box-shadow:0 10px 30px rgba(0,0,0,.5)}.notice-ok{background:#123626;color:var(--ok)}.notice-err{background:#3d1c1c;color:var(--err)}.notice-info{background:#1b2a4a;color:#93c5fd}
+.demo-banner{background:#3b2f14;color:var(--warn);padding:8px 14px;font-size:12px;text-align:center}
+.fields{display:flex;flex-direction:column;gap:12px}.fld{display:flex;flex-direction:column;gap:6px}.fld-l{font-size:13px;color:var(--mut)}.fld-l b{color:var(--err)}.fld input,.fld select,.fld textarea{font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--sur-2);color:var(--ink);width:100%;min-height:46px}.fld input[type=checkbox]{width:24px;height:24px;min-height:0}.frm-actions{margin-top:16px;display:flex;gap:8px;flex-direction:column}.frm-actions .btn{width:100%}
+.ro{display:flex;flex-direction:column;gap:10px;margin:0;background:var(--sur);border-radius:var(--r);padding:14px}.ro div{display:flex;justify-content:space-between;gap:12px}.ro dt{color:var(--mut);font-size:13px}.ro dd{margin:0;text-align:right}
+.detail .frm{background:var(--sur);border-radius:var(--r);padding:14px;margin-top:8px}
+.rail{list-style:none;display:flex;gap:6px;padding:0;margin:0 0 12px;overflow-x:auto}.rail li{font-size:12px;padding:6px 12px;border-radius:20px;background:var(--sur-2);color:var(--mut);white-space:nowrap}.rail li.past{background:#123626;color:var(--ok)}.rail li.now{background:var(--acc);color:#fff;font-weight:700}
+.moves{display:flex;flex-direction:column;gap:8px}.gate{padding:12px 14px;border-radius:12px;font-size:14px}.gate.wait{background:#3b2f14;color:var(--warn)}.gate.ok{background:#123626;color:var(--ok)}.decide{display:flex;flex-direction:column;gap:8px;margin:10px 0}.decide input{padding:12px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;background:var(--sur-2);color:var(--ink)}
+.act{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}.act .btn{width:100%}.inputs{display:flex;flex-direction:column;gap:10px;background:var(--sur);padding:12px;border-radius:12px;margin-bottom:12px}
+.related .count{font-size:11px;background:var(--sur-2);padding:1px 8px;border-radius:10px}.mini{list-style:none;padding:0;margin:0 0 10px;background:var(--sur);border-radius:var(--r);overflow:hidden}.mini li{padding:12px 14px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap}.mini li a{font-weight:600;color:var(--ink);text-decoration:none}.related .btn.small{width:100%;min-height:44px}
+.trail ul{list-style:none;padding:0;margin:0}.trail li{font-size:14px;padding:8px 0;border-bottom:1px dashed var(--line)}.trail time{display:block;color:var(--mut);font-size:11px}
+.danger-zone{margin-top:24px}.danger-zone .btn{width:100%}
+.report .question{color:var(--mut);margin:0 0 10px;font-size:14px}.metric{padding:12px 0;border-top:1px solid var(--line)}.metric h4{color:var(--mut);font-weight:500}.big{font-size:42px;font-weight:800;color:var(--acc);margin:0}
+.bars{list-style:none;padding:0;margin:0}.bars li{display:grid;grid-template-columns:96px 1fr 56px;gap:8px;align-items:center;padding:5px 0}.bar{height:14px;background:var(--sur-2);border-radius:7px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc);border-radius:7px}.bar-v{text-align:right;font-variant-numeric:tabular-nums}.bar-l{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center;z-index:20}.modal{background:var(--sur);color:var(--ink);border-radius:20px 20px 0 0;width:min(480px,100%);max-height:85vh;display:flex;flex-direction:column}.modal-h{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}.modal-h b{margin-right:auto}.doc-body{padding:16px;overflow:auto}.doc-body h1{text-align:left;font-size:20px;margin-bottom:8px}
+
+</style></head><body>
+<div id="app" data-family="crm-pipeline" data-design="pocket"></div>
+<script>window.MODEL = {"family":"crm-pipeline","spec_id":"SPEC-FRONTDOOR","app_name":"Connector","roles":["Admin","Sales manager","Sales rep"],"role_admin":{"Admin":true,"Sales manager":false,"Sales rep":false},"super_role":"Admin","records":{"Organisation":{"table":"organisations","title_field":"Name","fields":[{"name":"Name","type":"short_text","required":"yes","unique":"yes","slug":"name"},{"name":"Website","type":"url","required":"no","unique":"no","slug":"website"},{"name":"Phone","type":"phone","required":"no","unique":"no","slug":"phone"},{"name":"Notes","type":"long_text","required":"no","unique":"no","slug":"notes"}],"access":{"view":["Sales rep","Sales manager"],"create":["Sales rep","Sales manager"],"edit":["Sales rep","Sales manager"],"delete":["Sales manager"]},"has_stage":false,"workflow":null,"custom_actions":[],"on_create":[]},"Contact":{"table":"contacts","title_field":"Full name","fields":[{"name":"Full name","type":"short_text","required":"yes","unique":"no","slug":"full_name"},{"name":"Email","type":"email","required":"no","unique":"yes","slug":"email"},{"name":"Phone","type":"phone","required":"no","unique":"no","slug":"phone"},{"name":"Organisation","type":"link","required":"no","unique":"no","target_record":"Organisation","slug":"organisation"}],"access":{"view":["Sales rep","Sales manager"],"create":["Sales rep","Sales manager"],"edit":["Sales rep","Sales manager"],"delete":["Sales manager"]},"has_stage":false,"workflow":null,"custom_actions":[],"on_create":[]},"Deal":{"table":"deals","title_field":"Title","fields":[{"name":"Title","type":"short_text","required":"yes","unique":"no","slug":"title"},{"name":"Value","type":"money","required":"yes","unique":"no","slug":"value"},{"name":"Owner","type":"other","required":"yes","unique":"no","custom_rule":"reference to a user account (pick-a-person field)","slug":"owner"},{"name":"Contact","type":"link","required":"yes","unique":"no","target_record":"Contact","slug":"contact"},{"name":"Organisation","type":"link","required":"no","unique":"no","target_record":"Organisation","slug":"organisation"},{"name":"Expected close date","type":"date","required":"no","unique":"no","slug":"expected_close_date"},{"name":"Lost reason","type":"one_choice","required":"no","unique":"no","options":["price","timing","competitor","no response","other"],"slug":"lost_reason"}],"access":{"view":["Sales rep","Sales manager"],"create":["Sales rep","Sales manager"],"edit":["Sales rep","Sales manager"],"delete":["Sales manager"]},"has_stage":true,"workflow":"Deal pipeline","custom_actions":[{"name":"Reassign","who":["Sales manager"],"effect":"changes the deal's Owner to another person","result_location":"the deal page; the new owner's pipeline view","execution":{"op":"set_fields_from_input","fields":["owner"]}}],"on_create":[]},"Activity":{"table":"activitys","title_field":"Subject","fields":[{"name":"Subject","type":"short_text","required":"yes","unique":"no","slug":"subject"},{"name":"Type","type":"one_choice","required":"yes","unique":"no","options":["call","meeting","email","task"],"slug":"type"},{"name":"Due","type":"date_time","required":"yes","unique":"no","slug":"due"},{"name":"Done","type":"yes_no","required":"no","unique":"no","slug":"done"},{"name":"Owner","type":"other","required":"yes","unique":"no","custom_rule":"reference to a user account (pick-a-person field)","slug":"owner"},{"name":"Deal","type":"link","required":"yes","unique":"no","target_record":"Deal","slug":"deal"}],"access":{"view":["Sales rep","Sales manager"],"create":["Sales rep","Sales manager"],"edit":["Sales rep","Sales manager"],"delete":["Sales rep","Sales manager"]},"has_stage":false,"workflow":null,"custom_actions":[],"on_create":[]}},"workflows":{"Deal pipeline":{"stages":["Lead in","Contacted","Proposal sent","Negotiation","Won","Lost"],"initial":"Lead in","terminal":["Won","Lost"],"transitions":[{"from":"Lead in","to":"Contacted","mover":"roles","roles":["Sales rep","Sales manager"]},{"from":"Contacted","to":"Proposal sent","mover":"roles","roles":["Sales rep","Sales manager"]},{"from":"Proposal sent","to":"Negotiation","mover":"roles","roles":["Sales rep","Sales manager"]},{"from":"Negotiation","to":"Won","mover":"roles","roles":["Sales rep","Sales manager"]},{"from":"Lead in","to":"Lost","mover":"roles","roles":["Sales rep","Sales manager"]},{"from":"Contacted","to":"Lost","mover":"roles","roles":["Sales rep","Sales manager"]},{"from":"Proposal sent","to":"Lost","mover":"roles","roles":["Sales rep","Sales manager"]},{"from":"Negotiation","to":"Lost","mover":"roles","roles":["Sales rep","Sales manager"]}],"approvals":[],"on_reject":null,"effects":[]}},"forms":{},"reports":{"Pipeline by stage":{"slug":"pipeline_by_stage","question":"How much potential value sits in each stage of the pipeline?","metrics":["sum of open Deal Value grouped by stage","count of Deals grouped by stage"],"specs":[{"metric":"sum of open Deal Value grouped by stage","spec":{"table":"deals","aggregation":"sum","value_field":"value","group_by":"stage","filters":[{"field":"stage","op":"not_in","value":["Won","Lost"]}]}},{"metric":"count of Deals grouped by stage","spec":{"table":"deals","aggregation":"count","group_by":"stage"}}]},"Win rate":{"slug":"win_rate","question":"Of the deals we finish, what share do we win?","metrics":["win rate"],"specs":[{"metric":"win rate","spec":{"engine":"stage_history","kind":"rate_over_last_days","table":"deals","numerator_stage":"Won","denominator_stages":["Won","Lost"],"days":90}}]}},"landing_per_role":{"Admin":"Pipeline board","Sales manager":"Pipeline board","Sales rep":"My pipeline"},"screens":[{"id":"crm-pipeline/SCR-001","kind":"list","record":"Organisation"},{"id":"crm-pipeline/SCR-002","kind":"detail","record":"Organisation"},{"id":"crm-pipeline/SCR-003","kind":"list","record":"Contact"},{"id":"crm-pipeline/SCR-004","kind":"detail","record":"Contact"},{"id":"crm-pipeline/SCR-005","kind":"list","record":"Deal"},{"id":"crm-pipeline/SCR-006","kind":"detail","record":"Deal"},{"id":"crm-pipeline/SCR-007","kind":"list","record":"Activity"},{"id":"crm-pipeline/SCR-008","kind":"detail","record":"Activity"},{"id":"crm-pipeline/SCR-009","kind":"report","report":"Pipeline by stage"},{"id":"crm-pipeline/SCR-010","kind":"report","report":"Win rate"}]};</script>
+<script>
+/* demo_store.js — the generated app's routes, in the browser, for when there is
+   no server (the HTML opened straight from disk). It follows the same declared
+   rules the real parts enforce — legal transitions by role, approval gates,
+   declared custom actions, form validation, report specs, transition and
+   create effects — so what a button does standalone is what it does against
+   the real app. It is a demonstration store, not the product: data lives in
+   this browser only, and the page says so. */
+(function () {
+  'use strict';
+  const M = window.MODEL;
+  const KEY = 'ui-demo:' + M.family;
+  let DB = null;
+
+  function fresh() {
+    const db = { tables: {}, audit: [], stages: [], approvals: [] };
+    for (const d of Object.values(M.records)) db.tables[d.table] = [];
+    return db;
+  }
+  function load() {
+    if (DB) return DB;
+    try { const raw = localStorage.getItem(KEY); DB = raw ? JSON.parse(raw) : fresh(); } catch (e) { DB = fresh(); }
+    for (const d of Object.values(M.records)) if (!DB.tables[d.table]) DB.tables[d.table] = [];
+    return DB;
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch (e) { /* per-viewer convenience only */ } }
+  const now = () => Date.now() / 1000;
+  const iso = () => new Date().toISOString().replace(/\.\d+Z$/, 'Z');
+  const uuid = () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); });
+  const slug = (n) => String(n).toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/^_+|_+$/g, '');
+  const recByTable = (t) => Object.entries(M.records).find(([n, d]) => d.table === t);
+  const wfFor = (rname) => (M.records[rname].workflow ? M.workflows[M.records[rname].workflow] : null);
+  const R = (status, data) => ({ status, data });
+  const audit = (table, row_id, action, before, after) => { DB.audit.push({ table, row_id, action, before, after, at: now() }); };
+  const enterStage = (table, row_id, stage) => { DB.stages.push({ record_table: table, row_id, stage, entered_at: now() }); };
+
+  function gateFor(wf, stage) { return (wf.approvals || []).find((g) => g.stage === stage) || null; }
+  function decisionFor(table, row_id, stage) {
+    const hits = DB.approvals.filter((a) => a.table === table && a.row_id === row_id && a.stage === stage);
+    return hits.length ? hits[hits.length - 1] : null;
+  }
+  function checkMayLeave(wf, table, row) {
+    const g = gateFor(wf, row.stage); if (!g) return null;
+    const d = decisionFor(table, row.id, row.stage);
+    if (!d) throw Object.assign(new Error(table + ' ' + row.id + ' is waiting in \'' + row.stage + '\' for ' + JSON.stringify(g.approvers) + ' to approve'), { code: 409, waiting: true });
+    return d;
+  }
+  function fireEvent(rname, table, row, event) {
+    const wf = wfFor(rname);
+    const edge = wf.transitions.find((t) => t.mover === 'automatic' && t.from === row.stage && t.event === event);
+    if (!edge) {
+      if (!wf.transitions.some((t) => t.mover === 'automatic' && t.event === event)) throw Object.assign(new Error('no declared event ' + JSON.stringify(event)), { code: 400 });
+      throw Object.assign(new Error('event ' + JSON.stringify(event) + ' does not leave stage \'' + row.stage + '\''), { code: 409 });
+    }
+    const from = row.stage; row.stage = edge.to;
+    audit(table, row.id, 'transition', { stage: from, by: 'system', event }, { stage: edge.to, by: 'system' });
+    enterStage(table, row.id, edge.to);
+    return { from, to: edge.to };
+  }
+  function transitionEffects(rname, table, row, entered) {
+    const wf = wfFor(rname); const done = [];
+    for (const eff of (wf && wf.effects) || []) {
+      if (eff.on_enter !== entered) continue;
+      if (eff.op === 'apply_order_lines') {
+        const lines = DB.tables[eff.line_table].filter((l) => l[eff.line_fk] === row.id);
+        const out = [];
+        for (const l of lines) {
+          const p = DB.tables[eff.product_table].find((x) => x.id === l[eff.product_fk]);
+          if (!p) { out.push({ product_id: null, quantity: l[eff.quantity_column], new_stock: null, reorder_needed: null, error: 'line has no Product' }); continue; }
+          const q = parseInt(l[eff.quantity_column] || 0, 10);
+          p.stock_on_hand = (parseInt(p.stock_on_hand || 0, 10)) + (eff.direction === 'receive' ? q : -q);
+          out.push({ product_id: p.id, quantity: q, new_stock: p.stock_on_hand, reorder_needed: p.reorder_point != null && p.stock_on_hand <= p.reorder_point });
+        }
+        done.push({ op: 'apply_order_lines', direction: eff.direction, lines: out });
+      }
+    }
+    return done;
+  }
+  function createEffects(rname, row) {
+    const done = [];
+    for (const eff of M.records[rname].on_create || []) {
+      if (eff.op !== 'ledger_balance') continue;
+      const targetId = row[eff.link_column]; if (!targetId) continue;
+      const target = DB.tables[eff.table].find((x) => x.id === targetId);
+      let total = null;
+      if (eff.total.kind === 'lines') total = DB.tables[eff.total.line_table].filter((l) => l[eff.total.line_fk] === targetId).reduce((s, l) => s + (parseFloat(l[eff.total.quantity_column]) || 0) * (parseFloat(l[eff.total.amount_column]) || 0), 0);
+      else total = target ? target[eff.total.column] : null;
+      const applied = DB.tables[eff.payments_table].filter((p) => p[eff.link_column] === targetId).reduce((s, p) => s + (parseFloat(p[eff.amount_column]) || 0), 0);
+      const settled = total != null && parseFloat(total) > 0 && applied >= parseFloat(total);
+      const result = { op: 'ledger_balance', target: eff.table, target_id: targetId, total, applied, settled, moved: null };
+      if (settled && target) {
+        const tr = recByTable(eff.table);
+        try { checkMayLeave(wfFor(tr[0]), eff.table, target); result.moved = fireEvent(tr[0], eff.table, target, eff.event); }
+        catch (e) { result.moved = null; result.not_moved_because = e.message; }
+      }
+      done.push(result);
+    }
+    return done;
+  }
+
+  // -------------------------------------------------------------- reports (reporting_engine / stage_history / stock_ledger rules)
+  function passes(row, f) {
+    const v = row[f.field];
+    switch (f.op) {
+      case '=': return v == f.value; case '!=': return v != f.value;
+      case '<': return v < f.value; case '>': return v > f.value; case '<=': return v <= f.value; case '>=': return v >= f.value;
+      case 'in': return (f.value || []).includes(v); case 'not_in': return !(f.value || []).includes(v);
+      case 'before_now': return v != null && String(v).slice(0, 10) < new Date().toISOString().slice(0, 10);
+      case 'within_next_days': { if (v == null) return false; const d = String(v).slice(0, 10); const t = new Date().toISOString().slice(0, 10); const e = new Date(Date.now() + f.value * 86400000).toISOString().slice(0, 10); return d >= t && d <= e; }
+      default: return true;
+    }
+  }
+  function runReport(sp) {
+    if (!sp.engine || sp.engine === 'reporting_engine') {
+      let rows = DB.tables[sp.table] || [];
+      for (const f of sp.filters || []) rows = rows.filter((r) => passes(r, f));
+      const agg = (rs) => {
+        if (sp.aggregation === 'count') return rs.length;
+        const vals = rs.map((r) => parseFloat(r[sp.value_field])).filter((x) => !isNaN(x));
+        if (sp.aggregation === 'sum') return vals.reduce((a, b) => a + b, 0);
+        if (sp.aggregation === 'avg') return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+        if (sp.aggregation === 'min') return vals.length ? Math.min.apply(null, vals) : null;
+        if (sp.aggregation === 'max') return vals.length ? Math.max.apply(null, vals) : null;
+        return null;
+      };
+      if (!sp.group_by) return agg(rows);
+      const out = {};
+      for (const r of rows) { const k = r[sp.group_by] == null ? 'null' : String(r[sp.group_by]); (out[k] = out[k] || []).push(r); }
+      for (const k of Object.keys(out)) out[k] = agg(out[k]);
+      return out;
+    }
+    if (sp.engine === 'stage_history' && sp.kind === 'rate_over_last_days') {
+      const since = now() - sp.days * 86400;
+      const inWin = DB.stages.filter((s) => s.record_table === sp.table && s.entered_at >= since);
+      const numer = new Set(inWin.filter((s) => s.stage === sp.numerator_stage).map((s) => s.row_id)).size;
+      const denom = new Set(inWin.filter((s) => sp.denominator_stages.includes(s.stage)).map((s) => s.row_id)).size;
+      const rate = denom ? numer / denom : null;
+      return { rate, percentage: rate == null ? null : Math.round(rate * 1000) / 10, numerator: numer, denominator: denom, window_days: sp.days };
+    }
+    if (sp.engine === 'stage_history' && sp.kind === 'line_value_by_month') {
+      const months = sp.months || 12; const out = {}; const d = new Date();
+      const keys = []; let y = d.getUTCFullYear(), m = d.getUTCMonth() + 1;
+      for (let i = 0; i < months; i++) { keys.push(y + '-' + String(m).padStart(2, '0')); m--; if (m === 0) { m = 12; y--; } }
+      keys.reverse().forEach((k) => { out[k] = 0; });
+      const latest = {};
+      for (const s of DB.stages) if (s.record_table === sp.table && s.stage === sp.stage) latest[s.row_id] = Math.max(latest[s.row_id] || 0, s.entered_at);
+      const since = now() - months * 31 * 86400;
+      for (const [rowId, at] of Object.entries(latest)) {
+        if (at < since) continue;
+        const k = new Date(at * 1000).toISOString().slice(0, 7);
+        const v = DB.tables[sp.line_table].filter((l) => l[sp.line_fk] === rowId).reduce((s, l) => s + (parseFloat(l[sp.quantity_column]) || 0) * (parseFloat(l[sp.price_column]) || 0), 0);
+        out[k] = (out[k] || 0) + v;
+      }
+      return out;
+    }
+    if (sp.engine === 'stock_ledger' && sp.kind === 'count_at_or_below_reorder') {
+      return DB.tables[sp.table].filter((p) => p[sp.reorder_column] != null && p[sp.stock_column] != null && parseFloat(p[sp.stock_column]) <= parseFloat(p[sp.reorder_column])).length;
+    }
+    throw new Error('no rule for report metric');
+  }
+
+  // -------------------------------------------------------------- the routes
+  function call(method, path, body) {
+    load(); body = body || {};
+    try {
+      const out = route(method, path, body); save(); return Promise.resolve(out);
+    } catch (e) { return Promise.resolve(R(e.code || 500, { error: e.message, waiting_for_approval: !!e.waiting })); }
+  }
+  function route(method, path, body) {
+    let m;
+    if ((m = path.match(/^\/api\/reports\/([^/]+)$/)) && method === 'GET') {
+      const rp = Object.values(M.reports).find((r) => r.slug === m[1]); if (!rp) return R(404, { error: 'no route' });
+      const out = {}; for (const e of rp.specs) out[e.metric] = runReport(e.spec); return R(200, out);
+    }
+    if ((m = path.match(/^\/api\/forms\/([^/]+)$/)) && method === 'POST') {
+      const fm = Object.values(M.forms).find((f) => f.slug === m[1]); if (!fm) return R(404, { error: 'no route' });
+      const d = M.records[fm.record]; const row = { id: uuid(), created_at: iso(), updated_at: iso() };
+      for (const f of d.fields) {
+        if (!fm.fields.includes(f.slug)) { row[f.slug] = null; continue; }
+        const v = body[f.slug];
+        if (f.type === 'yes_no') { row[f.slug] = v ? 1 : 0; continue; }
+        if (v == null || v === '') { if (f.required === 'yes') throw Object.assign(new Error(f.name + ' is required'), { code: 400 }); row[f.slug] = null; continue; }
+        row[f.slug] = v;
+      }
+      for (const k of Object.keys(body)) if (!d.fields.some((f) => f.slug === k)) throw Object.assign(new Error('[' + k + '] is not a field of this record'), { code: 400 });
+      if (d.has_stage) { row.stage = wfFor(fm.record).initial; }
+      DB.tables[d.table].push(row); if (d.has_stage) enterStage(d.table, row.id, row.stage);
+      return R(201, { id: row.id });
+    }
+    if ((m = path.match(/^\/api\/(moves|events|approvals|actions|history)\/([^/]+)\/([^/]+)(?:\/(.+))?$/))) {
+      const [, kind, table, id, tail] = m; const hit = recByTable(table); if (!hit) return R(404, { error: 'no route' });
+      const [rname, d] = hit; const row = DB.tables[table].find((x) => x.id === id);
+      if (kind === 'history' && method === 'GET') return R(200, { audit: DB.audit.filter((a) => a.table === table && a.row_id === id).map((a) => ({ action: a.action, before: a.before, after: a.after, at: a.at })), stages: DB.stages.filter((s) => s.record_table === table && s.row_id === id).map((s) => ({ stage: s.stage, entered_at: s.entered_at })) });
+      if (!row) return R(404, { error: 'no such row' });
+      const wf = wfFor(rname);
+      if (kind === 'moves' && method === 'POST') {
+        if (!wf) return R(404, { error: 'no route' });
+        checkMayLeave(wf, table, row);
+        const t = wf.transitions.find((x) => x.mover === 'roles' && x.from === row.stage && x.to === body.to && (x.roles || []).includes(body.role));
+        if (!t) return R(409, { error: 'no declared person-triggered transition from \'' + row.stage + '\' to \'' + body.to + '\' for role \'' + body.role + '\'' });
+        const from = row.stage; row.stage = body.to; audit(table, id, 'transition', { stage: from, by: body.role }, { stage: body.to, by: body.role }); enterStage(table, id, body.to);
+        return R(200, { from, to: body.to, effects: transitionEffects(rname, table, row, body.to) });
+      }
+      if (kind === 'events' && method === 'POST') { if (!wf) return R(404, { error: 'no route' }); checkMayLeave(wf, table, row); const mv = fireEvent(rname, table, row, body.event); return R(200, Object.assign(mv, { effects: transitionEffects(rname, table, row, mv.to) })); }
+      if (kind === 'approvals' && method === 'GET') { if (!wf || !(wf.approvals || []).length) return R(404, { error: 'no route' }); const g = gateFor(wf, row.stage); const dec = g ? decisionFor(table, id, row.stage) : null; return R(200, { stage: row.stage, gate: g, decision: dec ? { decision: dec.decision, decided_by: dec.decided_by, reason: dec.reason } : null }); }
+      if (kind === 'approvals' && method === 'POST') {
+        if (!wf || !(wf.approvals || []).length) return R(404, { error: 'no route' });
+        const g = gateFor(wf, row.stage); if (!g) return R(409, { error: '\'' + row.stage + '\' is not a gated stage; there is nothing to approve' });
+        if (!(g.approvers || []).includes(body.by)) return R(403, { error: '\'' + body.by + '\' does not approve \'' + row.stage + '\'; declared: ' + JSON.stringify(g.approvers) });
+        if (body.decision !== 'APPROVED' && body.decision !== 'DECLINED') return R(400, { error: 'decision must be APPROVED or DECLINED' });
+        DB.approvals.push({ table, row_id: id, stage: row.stage, decision: body.decision, decided_by: body.by, reason: body.reason || null, at: now() });
+        audit(table, id, 'approval:' + row.stage, null, { decision: body.decision, by: body.by, reason: body.reason || null });
+        if (body.decision === 'DECLINED' && wf.on_reject && wf.on_reject.back_to) { row.stage = wf.on_reject.back_to; enterStage(table, id, row.stage); return R(200, { decision: 'DECLINED', stage: row.stage }); }
+        return R(200, { decision: body.decision, stage: row.stage });
+      }
+      if (kind === 'actions' && method === 'POST') {
+        const name = decodeURIComponent(tail || ''); const a = d.custom_actions.find((x) => x.name === name);
+        if (!a) return R(404, { error: 'no declared action ' + JSON.stringify(name) });
+        if (!(a.who || []).includes(body.role)) return R(403, { error: '\'' + body.role + '\' may not press \'' + name + '\'; declared: ' + JSON.stringify(a.who) });
+        const ex = a.execution || {}; const inputs = body.inputs || {};
+        if (ex.op === 'clone') {
+          const copy = Object.assign({}, row, { id: uuid(), created_at: iso(), updated_at: iso() }, ex.overrides || {});
+          if (ex.title_column && ex.title_suffix) copy[ex.title_column] = (copy[ex.title_column] || '') + ex.title_suffix;
+          DB.tables[table].push(copy); if ((ex.overrides || {}).stage) enterStage(table, copy.id, ex.overrides.stage);
+          audit(table, id, 'custom:' + name, {}, { cloned_to: copy.id }); return R(200, { action: name, by: body.role, cloned_to: copy.id });
+        }
+        if (ex.op === 'generate_document') {
+          const title = (ex.title_columns || []).map((c) => row[c] || '').join(' ').trim() || id;
+          const lines = (ex.body_columns || []).map((c) => c.replace(/_/g, ' ') + ': ' + (row[c] == null ? '' : row[c]));
+          let total = 0;
+          if (ex.line_table) { for (const l of DB.tables[ex.line_table].filter((x) => x[ex.line_fk] === id)) { lines.push((ex.line_columns || []).map((c) => l[c] == null ? '' : l[c]).join(' | ')); total += (parseFloat(l.quantity) || 0) * (parseFloat(l.unit_amount) || 0); } lines.push('Total: ' + total.toFixed(2)); }
+          const html = '<h1>' + title + '</h1>' + lines.map((l) => '<p>' + l + '</p>').join('');
+          const stamp = iso(); if (ex.stamp_column) row[ex.stamp_column] = stamp;
+          audit(table, id, 'custom:' + name, {}, { document: table + '-' + id + '.pdf', stamped: stamp });
+          return R(200, { action: name, by: body.role, document_html: html, document_pdf: null, stamped: stamp, total, email: 'not dispatched: no outbound email part is on the shelf (demo mode: no PDF file either)' });
+        }
+        let changes = {};
+        if (ex.op === 'set_fields') changes = Object.assign({}, ex.fields);
+        else if (ex.op === 'clear_fields') { for (const f of ex.fields) changes[f] = null; }
+        else if (ex.op === 'reset_to_stage') { changes[ex.stage_column] = ex.stage; for (const f of ex.clear || []) changes[f] = null; }
+        else if (ex.op === 'set_fields_from_input') { const missing = ex.fields.filter((f) => inputs[f] == null || inputs[f] === ''); if (missing.length) return R(400, { error: '\'' + name + '\' needs a value for ' + JSON.stringify(missing) + ' and none was supplied' }); for (const f of ex.fields) changes[f] = inputs[f]; }
+        else return R(400, { error: 'no rule for op ' + JSON.stringify(ex.op) });
+        if (!Object.keys(changes).length) return R(400, { error: '\'' + name + '\' would change nothing' });
+        const before = {}; for (const k of Object.keys(changes)) before[k] = row[k];
+        Object.assign(row, changes); audit(table, id, 'custom:' + name, before, changes);
+        return R(200, { action: name, by: body.role, before, after: changes });
+      }
+      return R(404, { error: 'no route' });
+    }
+    if ((m = path.match(/^\/api\/([^/]+)(?:\/([^/]+))?$/))) {
+      const [, table, id] = m; const hit = recByTable(table); if (!hit) return R(404, { error: 'no route' });
+      const [rname, d] = hit; const rows = DB.tables[table];
+      if (method === 'GET' && !id) return R(200, rows.slice().sort((a, b) => (a.created_at < b.created_at ? 1 : -1)));
+      if (method === 'GET') { const r = rows.find((x) => x.id === id); return r ? R(200, r) : R(404, { error: 'not found' }); }
+      if (method === 'POST' && !id) {
+        if (!d.access.create || !d.access.create.length) return R(404, { error: 'no route' });
+        const row = { id: uuid(), created_at: iso(), updated_at: iso() };
+        for (const f of d.fields) row[f.slug] = body[f.name] == null ? null : body[f.name];
+        if (d.has_stage) row.stage = wfFor(rname).initial;
+        rows.push(row); if (d.has_stage) enterStage(table, row.id, row.stage);
+        return R(201, { id: row.id, effects: createEffects(rname, row) });
+      }
+      if (method === 'PUT' && id) {
+        const r = rows.find((x) => x.id === id); if (!r) return R(404, { error: 'not found' });
+        for (const f of d.fields) r[f.slug] = body[f.name] == null ? null : body[f.name];
+        r.updated_at = iso(); return R(200, { id });
+      }
+      if (method === 'DELETE' && id) {
+        if (!d.access.delete || d.access.delete === 'nobody' || !d.access.delete.length) return R(404, { error: 'no route' });
+        const i = rows.findIndex((x) => x.id === id); if (i < 0) return R(404, { deleted: false });
+        rows.splice(i, 1); return R(200, { deleted: true });
+      }
+    }
+    return R(404, { error: 'no route' });
+  }
+  window.DemoStore = { call, reset() { DB = fresh(); save(); } };
+})();
+
+</script>
+<script>
+/* parts.js — render fragments the three designs compose differently.
+   Everything actionable carries data-act; nothing is shown that the current
+   role may not really do (the same rules the generated routes enforce). */
+window.PARTS = (function () {
+  'use strict';
+  const h = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const fmtTime = (t) => { try { return new Date(t * 1000).toLocaleString(); } catch (e) { return String(t); } };
+  // the label a person reads ("Activities", "Invoice lines"); table names keep the Builder's own rule
+  const plural = (name) => /[^aeiou]y$/i.test(name) ? name.slice(0, -1) + 'ies' : /(s|x|z|ch|sh)$/i.test(name) ? name + 'es' : name + 's';
+
+  function notice(v) {
+    const n = v.S.notice; if (!n) return '';
+    return '<div class="notice notice-' + n.kind + '" role="status"><span>' + h(n.text) + '</span><button class="lnk" data-act="dismiss" aria-label="Dismiss">×</button></div>';
+  }
+  function modeBanner(v) {
+    if (v.mode !== 'demo') return '';
+    return '<div class="demo-banner">Demo mode — ' + h(v.modeReason) + '. Data lives only in this browser. <button class="lnk" data-act="resetDemo">Clear demo data</button></div>';
+  }
+  function roleSelect(v) {
+    return '<label class="role"><span>Acting as</span><select data-act="role" aria-label="Role">' + v.M.roles.map((r) => '<option' + (r === v.role ? ' selected' : '') + '>' + h(r) + '</option>').join('') + '</select></label>';
+  }
+  function stagePill(v, record, stage) {
+    const idx = v.stagesOf(record).indexOf(stage);
+    return '<span class="stage s' + (idx < 0 ? 0 : idx) + (v.isTerminal(record, stage) ? ' terminal' : '') + '">' + h(stage) + '</span>';
+  }
+
+  // ---- list cells / cards
+  function cells(v, record, row) {
+    return v.rec(record).fields.map((f) => '<td>' + h(v.display(f, row)) + '</td>').join('') + (v.rec(record).has_stage ? '<td>' + stagePill(v, record, row.stage) + '</td>' : '');
+  }
+  function headers(v, record) {
+    return v.rec(record).fields.map((f) => '<th>' + h(f.name) + '</th>').join('') + (v.rec(record).has_stage ? '<th>Stage</th>' : '');
+  }
+  function cardSummary(v, record, row, n) {
+    const fs = v.rec(record).fields.filter((f) => f.name !== v.rec(record).title_field).slice(0, n || 3);
+    return fs.map((f) => { const d = v.display(f, row); return d ? '<span class="kv"><i>' + h(f.name) + '</i> ' + h(d) + '</span>' : ''; }).join('');
+  }
+
+  // ---- forms
+  function newForm(v, record, opts) {
+    opts = opts || {};
+    const attrs = 'data-act="create" data-record="' + h(record) + '"' + (opts.parent ? ' data-parent="' + h(opts.parent) + '" data-parent-id="' + h(opts.parentId) + '"' : '');
+    return '<form class="frm" ' + attrs + '><div class="fields">' + v.fieldRows(record, null, { lockedParent: opts.parent, parentId: opts.parentId }) + '</div>' +
+      '<div class="frm-actions"><button type="submit" class="btn primary" data-act="create">Create ' + h(record) + '</button>' +
+      (opts.cancel ? '<button type="button" class="btn" data-act="' + opts.cancel.act + '" ' + (opts.cancel.attrs || '') + '>Cancel</button>' : '') + '</div></form>';
+  }
+  function editForm(v, record, row) {
+    return '<form class="frm" data-act="save" data-record="' + h(record) + '" data-id="' + h(row.id) + '"><div class="fields">' + v.fieldRows(record, row) + '</div>' +
+      '<div class="frm-actions"><button type="submit" class="btn primary" data-act="save">Save</button></div></form>';
+  }
+  function readOnly(v, record, row) {
+    return '<dl class="ro">' + v.rec(record).fields.map((f) => '<div><dt>' + h(f.name) + '</dt><dd>' + (h(v.display(f, row)) || '<span class="muted">—</span>') + '</dd></div>').join('') + '</dl>';
+  }
+  function publicForm(v, name) {
+    const fm = v.M.forms[name]; const d = v.rec(fm.record);
+    const fields = fm.fields.map((sl) => d.fields.find((f) => f.slug === sl)).filter(Boolean);
+    return '<form class="frm public" data-act="submitForm" data-form="' + h(name) + '"><div class="fields">' +
+      fields.map((f) => '<label class="fld"><span class="fld-l">' + h(f.name) + (f.required === 'yes' ? ' <b>*</b>' : '') + '</span>' + v.control(f, null) + '</label>').join('') +
+      '</div><div class="frm-actions"><button type="submit" class="btn primary" data-act="submitForm">Submit</button></div></form>';
+  }
+
+  // ---- lifecycle + actions for one row
+  function lifecycle(v, record, row) {
+    if (!v.rec(record).has_stage) return '';
+    const stages = v.stagesOf(record); const cur = stages.indexOf(row.stage);
+    const rail = '<ol class="rail">' + stages.map((s, i) => '<li class="' + (i < cur ? 'past' : i === cur ? 'now' : '') + (v.isTerminal(record, s) ? ' terminal' : '') + '">' + h(s) + '</li>').join('') + '</ol>';
+    const moves = v.movesFor(record, row, v.role);
+    const ap = v.approvalState(record, row);
+    let gate = '';
+    if (ap) {
+      const who = (ap.gate.approvers || []).join(', ');
+      if (ap.decision && ap.decision.decision === 'APPROVED') gate = '<p class="gate ok">Approved by ' + h(ap.decision.decided_by) + (ap.decision.reason ? ' — ' + h(ap.decision.reason) : '') + '. It may move on.</p>';
+      else gate = '<p class="gate wait">Waiting in <b>' + h(row.stage) + '</b> for <b>' + h(who) + '</b> to approve.</p>';
+      if (ap.mayDecide && !(ap.decision && ap.decision.decision === 'APPROVED')) {
+        gate += '<form class="decide" data-act="approve" data-record="' + h(record) + '" data-id="' + h(row.id) + '" data-decision="APPROVED">' +
+          '<input name="reason" placeholder="Reason (optional)">' +
+          '<button type="submit" class="btn primary" data-act="approve" data-record="' + h(record) + '" data-id="' + h(row.id) + '" data-decision="APPROVED">Approve</button>' +
+          '<button type="button" class="btn danger" data-act="approve" data-record="' + h(record) + '" data-id="' + h(row.id) + '" data-decision="DECLINED">Decline</button></form>';
+      }
+    }
+    const btns = moves.length ? '<div class="moves">' + moves.map((t) => '<button class="btn move" data-act="move" data-record="' + h(record) + '" data-id="' + h(row.id) + '" data-to="' + h(t.to) + '">→ ' + h(t.to) + '</button>').join('') + '</div>' :
+      (v.rec(record).has_stage ? '<p class="muted small">' + (v.isTerminal(record, row.stage) ? 'Finished stage.' : 'No move you can make from here as ' + h(v.role) + '.') + '</p>' : '');
+    return '<section class="life"><h3>Lifecycle</h3>' + rail + gate + btns + '</section>';
+  }
+  function customActions(v, record, row) {
+    const acts = v.actionsFor(record, v.role); if (!acts.length) return '';
+    const pend = v.S.inputsFor;
+    return '<section class="acts"><h3>Actions</h3>' + acts.map((a) => {
+      const ex = a.execution || {};
+      let html = '<div class="act"><button class="btn" data-act="action" data-record="' + h(record) + '" data-id="' + h(row.id) + '" data-action="' + h(a.name) + '">' + h(a.name) + '</button><span class="muted small">' + h(a.effect) + '</span></div>';
+      if (pend && pend.record === record && pend.id === row.id && pend.action === a.name) {
+        html += '<form class="inputs" data-act="action" data-record="' + h(record) + '" data-id="' + h(row.id) + '" data-action="' + h(a.name) + '">' +
+          ex.fields.map((f) => '<label class="fld"><span class="fld-l">' + h(f.replace(/_/g, ' ')) + '</span><input name="' + h(f) + '" required autofocus></label>').join('') +
+          '<button type="submit" class="btn primary" data-act="action">Confirm ' + h(a.name) + '</button><button type="button" class="btn" data-act="cancelInputs">Cancel</button></form>';
+      }
+      return html;
+    }).join('') + '</section>';
+  }
+  function related(v, record, row) {
+    const kids = v.childRows(record, row.id); if (!kids.length) return '';
+    return kids.map((k) => {
+      const canAdd = v.canCreate(k.record);
+      const adding = v.S.view.kind === 'new' && v.S.view.record === k.record && v.S.view.parentId === row.id;
+      return '<section class="related"><h3>' + h(plural(k.record)) + ' <span class="count">' + k.rows.length + '</span></h3>' +
+        (k.rows.length ? '<ul class="mini">' + k.rows.map((r) => '<li><a href="#" data-act="open" data-record="' + h(k.record) + '" data-id="' + h(r.id) + '">' + h(v.titleOf(k.record, r)) + '</a> <span class="muted small">' + h(cardText(v, k.record, r)) + '</span>' +
+          (v.canDelete(k.record) ? ' <button class="lnk danger" data-act="remove" data-record="' + h(k.record) + '" data-id="' + h(r.id) + '" data-confirm="Delete this ' + h(k.record) + '?">delete</button>' : '') + '</li>').join('') + '</ul>' : '<p class="muted small">None yet.</p>') +
+        (canAdd ? (adding ? newForm(v, k.record, { parent: record, parentId: row.id, cancel: { act: 'open', attrs: 'data-record="' + h(record) + '" data-id="' + h(row.id) + '"' } }) :
+          '<button class="btn small" data-act="newRow" data-record="' + h(k.record) + '" data-parent="' + h(record) + '" data-parent-id="' + h(row.id) + '">+ Add ' + h(k.record) + '</button>') : '') + '</section>';
+    }).join('');
+  }
+  function cardText(v, record, row) {
+    return v.rec(record).fields.filter((f) => f.name !== v.rec(record).title_field && !(f.type === 'link')).slice(0, 2).map((f) => v.display(f, row)).filter(Boolean).join(' · ');
+  }
+  function trail(v) {
+    const d = v.S.detail; if (!d) return '';
+    const items = (d.history.audit || []).map((a) => ({ at: a.at, text: a.action.startsWith('transition') ? 'Moved ' + h((a.before || {}).stage) + ' → ' + h((a.after || {}).stage) + ' by ' + h((a.after || {}).by || 'system') :
+      a.action.startsWith('approval:') ? h((a.after || {}).decision) + ' by ' + h((a.after || {}).by) + ((a.after || {}).reason ? ' — ' + h(a.after.reason) : '') :
+      a.action.startsWith('custom:') ? h(a.action.slice(7)) + (a.after && a.after.cloned_to ? ' → copy ' + h(String(a.after.cloned_to).slice(0, 8)) : a.after && a.after.document ? ' → ' + h(a.after.document) : a.after ? ' ' + h(JSON.stringify(a.after)) : '') : h(a.action) }));
+    if (!items.length) return '<section class="trail"><h3>Activity</h3><p class="muted small">Nothing yet.</p></section>';
+    return '<section class="trail"><h3>Activity</h3><ul>' + items.map((i) => '<li><time>' + h(fmtTime(i.at)) + '</time> ' + i.text + '</li>').join('') + '</ul></section>';
+  }
+  function docModal(v) {
+    const d = v.S.docShown; if (!d) return '';
+    return '<div class="overlay" data-act="closeDoc"><div class="modal doc"><div class="modal-h"><b>Generated document</b>' + (d.pdf ? ' <a class="btn small" href="' + h(d.pdf) + '" target="_blank" rel="noopener">Open PDF</a>' : '') + '<button class="lnk" data-act="closeDoc" aria-label="Close">×</button></div><div class="doc-body">' + d.html + '</div></div></div>';
+  }
+  function reportBody(v, name) {
+    const rv = v.reportView(name); const rp = rv.rp;
+    let body = '';
+    if (rv.error) body = '<p class="notice notice-err">' + h(rv.error) + '</p>';
+    else if (!rv.data) body = '<p class="muted">Loading…</p>';
+    else body = rp.metrics.map((m) => '<div class="metric"><h4>' + h(m) + '</h4>' + metricView(rv.data[m]) + '</div>').join('');
+    return '<div class="report"><p class="question">' + h(rp.question) + '</p>' + body + '<button class="btn small" data-act="runReport" data-report="' + h(name) + '">Refresh</button></div>';
+  }
+  function metricView(val) {
+    if (val == null) return '<p class="muted">No data yet.</p>';
+    if (typeof val === 'number') return '<p class="big">' + h(Number.isInteger(val) ? val : val.toFixed(2)) + '</p>';
+    if (typeof val === 'object' && 'percentage' in val) return '<p class="big">' + (val.percentage == null ? '—' : h(Number(val.percentage).toFixed(1)) + '%') + '</p><p class="muted small">' + h(val.numerator) + ' of ' + h(val.denominator) + ' in the last ' + h(val.window_days) + ' days</p>';
+    if (typeof val === 'object') {
+      const entries = Object.entries(val); if (!entries.length) return '<p class="muted">Nothing to count yet.</p>';
+      const max = Math.max.apply(null, entries.map(([, x]) => Number(x) || 0)) || 1;
+      return '<ul class="bars">' + entries.map(([k, x]) => '<li><span class="bar-l">' + h(k) + '</span><span class="bar"><i style="width:' + Math.round((Number(x) || 0) / max * 100) + '%"></i></span><span class="bar-v">' + h(Number.isInteger(Number(x)) ? x : Number(x).toFixed(2)) + '</span></li>').join('') + '</ul>';
+    }
+    return '<p>' + h(JSON.stringify(val)) + '</p>';
+  }
+  function detailBody(v) {
+    const d = v.S.detail; if (!d) return '';
+    const canEdit = v.canEdit(d.record);
+    return (canEdit ? editForm(v, d.record, d.row) : readOnly(v, d.record, d.row)) + lifecycle(v, d.record, d.row) + customActions(v, d.record, d.row) + related(v, d.record, d.row) + trail(v) +
+      (v.canDelete(d.record) ? '<p class="danger-zone"><button class="btn danger" data-act="remove" data-record="' + h(d.record) + '" data-id="' + h(d.row.id) + '" data-confirm="Delete this ' + h(d.record) + '?">Delete ' + h(d.record) + '</button></p>' : '');
+  }
+  return { h, plural, notice, modeBanner, roleSelect, stagePill, cells, headers, cardSummary, cardText, newForm, editForm, readOnly, publicForm, lifecycle, customActions, related, trail, docModal, reportBody, metricView, detailBody };
+})();
+
+</script>
+<script>
+/* pocket.js — Design 3 "Pocket": mobile-first. Bottom tab bar, card lists with big
+   tap targets, full-screen detail pages with a back button, a floating "New"
+   button, an action sheet for moves/actions, stat tiles on Home. */
+window.DESIGN = (function () {
+  'use strict';
+  const P = window.PARTS; const h = h_; function h_(s) { return P.h(s); }
+  const ICONS = { home: '⌂', rec: '▤', rep: '◔', form: '✎', more: '⋯' };
+  function tabbar(v) {
+    const cur = v.S.view;
+    const tabs = [{ act: 'home', label: 'Home', icon: ICONS.home, on: cur.kind === 'home', extra: '' }]
+      .concat(v.visibleRecords.slice(0, 3).map((r) => ({ act: 'nav', label: P.plural(r), icon: ICONS.rec, on: ['list', 'detail', 'new'].includes(cur.kind) && (cur.record === r || cur.parent === r), extra: 'data-kind="list" data-record="' + h(r) + '"' })))
+      .concat([{ act: 'nav', label: 'More', icon: ICONS.more, on: cur.kind === 'more', extra: 'data-kind="more"' }]);
+    return '<nav class="tabbar">' + tabs.map((t) => '<a href="#" class="tb' + (t.on ? ' on' : '') + '" data-act="' + t.act + '" ' + t.extra + '><span class="ic">' + t.icon + '</span><span>' + h(t.label) + '</span></a>').join('') + '</nav>';
+  }
+  function topbar(v, title, back, right) {
+    return '<header class="topbar">' + (back ? '<button class="back" data-act="' + back.act + '" ' + (back.attrs || '') + ' aria-label="Back">‹</button>' : '<span class="spacer"></span>') + '<h1>' + h(title) + '</h1>' + (right || '<span class="spacer"></span>') + '</header>';
+  }
+  function home(v) {
+    const stats = v.visibleRecords.map((r) => '<a href="#" class="stat" data-act="nav" data-kind="list" data-record="' + h(r) + '"><b>' + v.rowsOf(r).length + '</b><span>' + h(P.plural(r)) + '</span></a>').join('');
+    const reps = v.reports.map((name) => { const rv = v.reportView(name); return '<section class="sheet-card"><h3>' + h(name) + '</h3>' + (rv.data ? P.reportBody(v, name) : '<p class="muted small">' + h(rv.rp.question) + '</p><button class="btn small" data-act="runReport" data-report="' + h(name) + '">Run</button>') + '</section>'; }).join('');
+    return topbar(v, v.M.app_name, null, '<span class="who">' + h(v.role) + '</span>') + '<div class="body"><section class="rolebox">' + P.roleSelect(v) + '</section><div class="stats">' + stats + '</div>' + reps + '</div>';
+  }
+  function more(v) {
+    return topbar(v, 'More') + '<div class="body"><ul class="menu">' +
+      v.visibleRecords.map((r) => '<li><a href="#" data-act="nav" data-kind="list" data-record="' + h(r) + '"><span class="ic">' + ICONS.rec + '</span>' + h(P.plural(r)) + '<span class="n">' + v.rowsOf(r).length + '</span></a></li>').join('') +
+      v.reports.map((r) => '<li><a href="#" data-act="nav" data-kind="report" data-report="' + h(r) + '"><span class="ic">' + ICONS.rep + '</span>' + h(r) + '</a></li>').join('') +
+      v.forms.map((f) => '<li><a href="#" data-act="nav" data-kind="form" data-form="' + h(f) + '"><span class="ic">' + ICONS.form + '</span>' + h(f) + '</a></li>').join('') +
+      '</ul><section class="rolebox">' + P.roleSelect(v) + '</section></div>';
+  }
+  function list(v, record) {
+    const rows = v.rowsOf(record); const d = v.rec(record);
+    const cards = rows.map((r) => '<a href="#" class="rowcard" data-act="open" data-record="' + h(record) + '" data-id="' + h(r.id) + '"><div class="rc-main"><b>' + h(v.titleOf(record, r)) + '</b><span class="muted small">' + h(P.cardText(v, record, r)) + '</span></div>' + (d.has_stage ? P.stagePill(v, record, r.stage) : '') + '<span class="chev">›</span></a>').join('');
+    return topbar(v, P.plural(record), { act: 'home' }) + '<div class="body">' + (cards || '<div class="empty">No ' + h(P.plural(record).toLowerCase()) + ' yet.</div>') + '</div>' +
+      (v.canCreate(record) ? '<button class="fab" data-act="newRow" data-record="' + h(record) + '" aria-label="New ' + h(record) + '">+</button>' : '');
+  }
+  function detail(v) {
+    const d = v.S.detail;
+    return topbar(v, v.titleOf(d.record, d.row), { act: 'back' }, d.row.stage ? P.stagePill(v, d.record, d.row.stage) : '<span class="spacer"></span>') + '<div class="body detail">' + P.detailBody(v) + '</div>';
+  }
+  function newPage(v, record) {
+    return topbar(v, 'New ' + record, { act: 'nav', attrs: 'data-kind="list" data-record="' + h(record) + '"' }) + '<div class="body">' + P.newForm(v, record) + '</div>';
+  }
+  function render(v) {
+    const cur = v.S.view; let page = '';
+    if (cur.kind === 'home') page = home(v);
+    else if (cur.kind === 'more') page = more(v);
+    else if (cur.kind === 'list') page = list(v, cur.record);
+    else if (cur.kind === 'detail' || (cur.kind === 'new' && cur.parent)) page = detail(v);
+    else if (cur.kind === 'new') page = newPage(v, cur.record);
+    else if (cur.kind === 'report') page = topbar(v, cur.report, { act: 'nav', attrs: 'data-kind="more"' }) + '<div class="body"><section class="sheet-card">' + P.reportBody(v, cur.report) + '</section></div>';
+    else if (cur.kind === 'form') page = topbar(v, cur.form, { act: 'nav', attrs: 'data-kind="more"' }) + '<div class="body"><section class="sheet-card">' + P.publicForm(v, cur.form) + '</section></div>';
+    return '<div class="phone">' + P.modeBanner(v) + '<div class="screen">' + page + P.notice(v) + '</div>' + tabbar(v) + '</div>' + P.docModal(v);
+  }
+  return { render };
+})();
+
+</script>
+<script>
+/* runtime.js — shared by every generated interface.
+   MODEL (injected) describes the family exactly as its SPEC.json build_model does:
+   records, fields, access, workflows, approvals, custom actions, forms, reports, roles.
+   Every control on the page carries data-act="<verb>"; one dispatcher below performs
+   it against the real generated routes (or the in-browser demo store when there is
+   no server) and re-renders. Nothing here invents a capability the spec does not
+   declare: a button appears only when the current role really may press it. */
+(function () {
+  'use strict';
+  const M = window.MODEL;
+  const $ = (sel, root) => (root || document).querySelector(sel);
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  // ------------------------------------------------------------------ transport
+  const Api = {
+    mode: 'server',          // 'server' | 'demo'
+    reason: '',
+    async call(method, path, body) {
+      if (this.mode === 'demo') return window.DemoStore.call(method, path, body);
+      let res;
+      try {
+        res = await fetch(path, { method, headers: { 'Content-Type': 'application/json' }, body: body == null ? undefined : JSON.stringify(body) });
+      } catch (e) {
+        this.mode = 'demo'; this.reason = 'no server reachable';
+        return window.DemoStore.call(method, path, body);
+      }
+      let data = null;
+      try { data = await res.json(); } catch (e) { data = null; }
+      return { status: res.status, data };
+    },
+  };
+  if (location.protocol === 'file:') { Api.mode = 'demo'; Api.reason = 'opened as a file'; }
+
+  // ------------------------------------------------------------------ model helpers
+  const slug = (name) => String(name).toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/^_+|_+$/g, '');
+  const rec = (name) => M.records[name];
+  const wfOf = (name) => (rec(name).workflow ? M.workflows[rec(name).workflow] : null);
+  const isAdmin = (role) => !!M.role_admin[role];
+  const may = (list, role) => isAdmin(role) || (Array.isArray(list) && list.includes(role));
+  const canView = (r, role) => may(rec(r).access.view, role);
+  const canCreate = (r, role) => may(rec(r).access.create, role);
+  const canEdit = (r, role) => may(rec(r).access.edit, role);
+  const canDelete = (r, role) => may(rec(r).access.delete, role);
+  const titleOf = (r, row, depth) => {
+    const fname = rec(r).title_field;
+    const f = rec(r).fields.find((x) => x.name === fname);
+    const v = row && f ? row[f.slug] : null;
+    if (v == null || v === '') return row ? row.id.slice(0, 8) : '';
+    // a title that is a link (accounting's Invoice is titled by its Contact) shows
+    // the linked record's own title, never its id -- found in a screenshot
+    if (f.type === 'link' && f.target_record && (depth || 0) < 2) {
+      const hit = (S.rows[rec(f.target_record).table] || []).find((x) => x.id === v);
+      // two orders for one supplier must still tell apart: the short id rides along
+      if (hit) return titleOf(f.target_record, hit, (depth || 0) + 1) + ((depth || 0) === 0 ? ' · ' + row.id.slice(0, 8) : '');
+    }
+    return String(v);
+  };
+  // person-moved edges the current role may take from the row's stage: exactly workflow_executor's rule
+  const movesFor = (r, row, role) => {
+    const wf = wfOf(r); if (!wf || !row) return [];
+    return wf.transitions.filter((t) => t.mover === 'roles' && t.from === row.stage && (t.roles || []).includes(role));
+  };
+  const gateFor = (r, row) => { const wf = wfOf(r); if (!wf || !row) return null; return (wf.approvals || []).find((g) => g.stage === row.stage) || null; };
+  const actionsFor = (r, role) => rec(r).custom_actions.filter((a) => (a.who || []).includes(role));
+  const childrenOf = (r) => Object.entries(M.records).filter(([n, d]) => d.fields.some((f) => f.type === 'link' && f.target_record === r)).map(([n]) => n);
+
+  // ------------------------------------------------------------------ state
+  const S = {
+    role: M.super_role || M.roles[0],
+    view: { kind: 'home' },
+    rows: {},          // table -> rows
+    detail: null,      // {record, row, history, approval}
+    report: null,      // {name, data}
+    notice: null,      // {kind: 'ok'|'err'|'info', text}
+    busy: false,
+    inputsFor: null,   // pending custom action needing inputs {record,id,action}
+    docShown: null,    // document html from generate_document
+  };
+  const D = window.DESIGN;
+
+  async function loadAll() {
+    for (const [name, d] of Object.entries(M.records)) {
+      if (!canView(name, S.role)) { S.rows[d.table] = []; continue; }
+      const r = await Api.call('GET', '/api/' + d.table);
+      S.rows[d.table] = r.status === 200 && Array.isArray(r.data) ? r.data : [];
+    }
+  }
+  async function openDetail(record, id) {
+    const d = rec(record);
+    const r = await Api.call('GET', '/api/' + d.table + '/' + id);
+    if (r.status !== 200) { notice('err', 'Could not open ' + record); return; }
+    const h = await Api.call('GET', '/api/history/' + d.table + '/' + id);
+    let approval = null;
+    if (wfOf(record) && (wfOf(record).approvals || []).length) {
+      const a = await Api.call('GET', '/api/approvals/' + d.table + '/' + id);
+      approval = a.status === 200 ? a.data : null;
+    }
+    S.detail = { record, row: r.data, history: h.status === 200 ? h.data : { audit: [], stages: [] }, approval };
+    S.view = { kind: 'detail', record, id };
+  }
+  function notice(kind, text) { S.notice = { kind, text }; }
+
+  // ------------------------------------------------------------------ actions (one per data-act verb)
+  const Act = {
+    async role(p) { S.role = p.role; S.view = { kind: 'home' }; S.detail = null; await loadAll(); },
+    async nav(p) { S.view = { kind: p.kind, record: p.record, report: p.report, form: p.form }; S.detail = null; S.report = null; if (p.kind === 'report') await Act.runReport({ report: p.report }); },
+    async home() { S.view = { kind: 'home' }; S.detail = null; },
+    async open(p) { await openDetail(p.record, p.id); },
+    async back(p) { S.view = { kind: 'list', record: S.detail ? S.detail.record : p.record }; S.detail = null; },
+    async newRow(p) { S.view = { kind: 'new', record: p.record, parent: p.parent || null, parentId: p.parentId || null }; },
+    async create(p, form) {
+      const d = rec(p.record); const body = {};
+      for (const f of d.fields) body[f.name] = valueFrom(form, f);
+      const r = await Api.call('POST', '/api/' + d.table, body);
+      if (r.status !== 201) return notice('err', (r.data && r.data.error) || 'Create failed');
+      notice('ok', p.record + ' created' + effectsText(r.data.effects));
+      await loadAll();
+      if (p.parent) { await openDetail(p.parent, p.parentId); } else { await openDetail(p.record, r.data.id); }
+    },
+    async save(p, form) {
+      const d = rec(p.record); const body = {};
+      for (const f of d.fields) body[f.name] = valueFrom(form, f);
+      const r = await Api.call('PUT', '/api/' + d.table + '/' + p.id, body);
+      if (r.status !== 200) return notice('err', (r.data && r.data.error) || 'Save failed');
+      notice('ok', 'Saved'); await loadAll(); await openDetail(p.record, p.id);
+    },
+    async remove(p) {
+      const d = rec(p.record);
+      const r = await Api.call('DELETE', '/api/' + d.table + '/' + p.id);
+      if (r.status !== 200) return notice('err', (r.data && r.data.error) || 'Delete failed');
+      notice('ok', p.record + ' deleted'); await loadAll();
+      if (S.detail && S.detail.record === p.record && S.detail.row.id === p.id) { S.view = { kind: 'list', record: p.record }; S.detail = null; }
+      else if (S.detail) await openDetail(S.detail.record, S.detail.row.id);
+    },
+    async move(p) {
+      const d = rec(p.record);
+      const r = await Api.call('POST', '/api/moves/' + d.table + '/' + p.id, { to: p.to, role: S.role });
+      if (r.status !== 200) return notice('err', (r.data && r.data.error) || 'Move refused');
+      notice('ok', 'Moved to ' + p.to + effectsText(r.data.effects));
+      await loadAll(); if (S.view.kind === 'detail') await openDetail(p.record, p.id);
+    },
+    async approve(p, form) {
+      const d = rec(p.record);
+      const reason = form ? (form.querySelector('[name=reason]') || {}).value : '';
+      const r = await Api.call('POST', '/api/approvals/' + d.table + '/' + p.id, { decision: p.decision, by: S.role, reason: reason || null });
+      if (r.status !== 200) return notice('err', (r.data && r.data.error) || 'Decision refused');
+      notice('ok', p.decision === 'APPROVED' ? 'Approved' : 'Declined — sent back to ' + r.data.stage);
+      await loadAll(); await openDetail(p.record, p.id);
+    },
+    async action(p, form) {
+      const d = rec(p.record); const a = d.custom_actions.find((x) => x.name === p.action);
+      const ex = a.execution || {};
+      let inputs = null;
+      if (ex.op === 'set_fields_from_input') {
+        if (!form) { S.inputsFor = { record: p.record, id: p.id, action: p.action, fields: ex.fields }; return; }
+        inputs = {}; for (const f of ex.fields) inputs[f] = (form.querySelector('[name="' + f + '"]') || {}).value;
+      }
+      const r = await Api.call('POST', '/api/actions/' + d.table + '/' + p.id + '/' + encodeURIComponent(p.action), { role: S.role, inputs: inputs || {} });
+      S.inputsFor = null;
+      if (r.status !== 200) return notice('err', (r.data && r.data.error) || p.action + ' refused');
+      if (r.data.cloned_to) notice('ok', p.action + ': copy created');
+      else if (r.data.document_html) { notice('ok', p.action + ': document generated; ' + r.data.email); S.docShown = { html: r.data.document_html, pdf: r.data.document_pdf }; }
+      else notice('ok', p.action + ' done');
+      await loadAll(); await openDetail(p.record, p.id);
+    },
+    async cancelInputs() { S.inputsFor = null; },
+    async closeDoc() { S.docShown = null; },
+    async submitForm(p, form) {
+      const fm = M.forms[p.form]; const d = rec(fm.record); const body = {};
+      for (const sl of fm.fields) { const f = d.fields.find((x) => x.slug === sl); if (f) body[sl] = valueFrom(form, f); }
+      const r = await Api.call('POST', '/api/forms/' + fm.slug, body);
+      if (r.status !== 201) return notice('err', (r.data && r.data.error) || 'Submission refused');
+      notice('ok', p.form + ' submitted (' + r.data.id.slice(0, 8) + ')'); await loadAll();
+      form.reset();
+    },
+    async runReport(p) {
+      const rp = M.reports[p.report];
+      const r = await Api.call('GET', '/api/reports/' + rp.slug);
+      S.report = { name: p.report, data: r.status === 200 ? r.data : null, error: r.status === 200 ? null : ((r.data && r.data.error) || 'report failed') };
+      S.view = { kind: 'report', report: p.report };
+    },
+    async dismiss() { S.notice = null; },
+    async resetDemo() { if (Api.mode === 'demo') { window.DemoStore.reset(); await loadAll(); S.view = { kind: 'home' }; S.detail = null; notice('info', 'Demo data cleared'); } },
+  };
+  function effectsText(effects) {
+    if (!effects || !effects.length) return '';
+    return ' · ' + effects.map((e) => {
+      if (e.op === 'apply_order_lines') return (e.lines || []).map((l) => 'stock ' + (e.direction === 'ship' ? '−' : '+') + l.quantity + ' → ' + l.new_stock + (l.reorder_needed ? ' (reorder)' : '')).join(', ') || 'no lines';
+      if (e.op === 'ledger_balance') return 'applied ' + e.applied + ' of ' + e.total + (e.settled ? (e.moved ? ' → ' + e.moved.to : ' (settled)') : '');
+      return e.op;
+    }).join('; ');
+  }
+  function valueFrom(form, f) {
+    const el = form.querySelector('[name="' + f.slug + '"]');
+    if (!el) return null;
+    if (f.type === 'yes_no') return el.checked ? 1 : 0;
+    const v = el.value;
+    if (v === '') return null;
+    if (f.type === 'whole_number') return parseInt(v, 10);
+    if (f.type === 'decimal_number' || f.type === 'money') return parseFloat(v);
+    return v;
+  }
+
+  // ------------------------------------------------------------------ field controls (shared by every design)
+  function linkOptions(f, current) {
+    const t = rec(f.target_record); const rows = S.rows[t.table] || [];
+    return '<option value="">—</option>' + rows.map((r) => '<option value="' + esc(r.id) + '"' + (r.id === current ? ' selected' : '') + '>' + esc(titleOf(f.target_record, r)) + '</option>').join('');
+  }
+  function control(f, value) {
+    const name = 'name="' + f.slug + '"' + (f.required === 'yes' ? ' required' : '');
+    const v = value == null ? '' : value;
+    switch (f.type) {
+      case 'long_text': return '<textarea ' + name + ' rows="3">' + esc(v) + '</textarea>';
+      case 'whole_number': return '<input type="number" step="1" ' + name + ' value="' + esc(v) + '">';
+      case 'decimal_number': return '<input type="number" step="0.01" ' + name + ' value="' + esc(v) + '">';
+      case 'money': return '<input type="number" step="0.01" ' + name + ' value="' + esc(v) + '">';
+      case 'date': return '<input type="date" ' + name + ' value="' + esc(v) + '">';
+      case 'date_time': return '<input type="datetime-local" ' + name + ' value="' + esc(v) + '">';
+      case 'yes_no': return '<input type="checkbox" ' + name + (v ? ' checked' : '') + '>';
+      case 'one_choice': return '<select ' + name + '><option value="">—</option>' + (f.options || []).map((o) => '<option' + (o === v ? ' selected' : '') + '>' + esc(o) + '</option>').join('') + '</select>';
+      case 'multi_choice': return '<select multiple ' + name + '>' + (f.options || []).map((o) => '<option' + (String(v).split(',').includes(o) ? ' selected' : '') + '>' + esc(o) + '</option>').join('') + '</select>';
+      case 'email': return '<input type="email" ' + name + ' value="' + esc(v) + '">';
+      case 'phone': return '<input type="tel" ' + name + ' value="' + esc(v) + '">';
+      case 'url': return '<input type="url" ' + name + ' value="' + esc(v) + '">';
+      case 'link': return '<select ' + name + '>' + linkOptions(f, v) + '</select>';
+      default: return '<input type="text" ' + name + ' value="' + esc(v) + '">';
+    }
+  }
+  function display(f, row) {
+    const v = row[f.slug];
+    if (v == null || v === '') return '';
+    if (f.type === 'link') { const t = rec(f.target_record); const hit = (S.rows[t.table] || []).find((r) => r.id === v); return hit ? titleOf(f.target_record, hit) : String(v).slice(0, 8); }
+    if (f.type === 'yes_no') return v ? 'yes' : 'no';
+    if (f.type === 'money') return Number(v).toFixed(2);
+    return String(v);
+  }
+  function fieldRows(record, row, opts) {
+    const d = rec(record); opts = opts || {};
+    return d.fields.filter((f) => !(opts.lockedParent && f.type === 'link' && f.target_record === opts.lockedParent)).map((f) =>
+      '<label class="fld"><span class="fld-l">' + esc(f.name) + (f.required === 'yes' ? ' <b>*</b>' : '') + '</span>' + control(f, row ? row[f.slug] : (opts.defaults || {})[f.slug]) + '</label>').join('') +
+      (opts.lockedParent ? d.fields.filter((f) => f.type === 'link' && f.target_record === opts.lockedParent).map((f) => '<input type="hidden" name="' + f.slug + '" value="' + esc(opts.parentId) + '">').join('') : '');
+  }
+
+  // ------------------------------------------------------------------ view model handed to the design
+  function vm() {
+    const role = S.role;
+    const visibleRecords = Object.keys(M.records).filter((r) => canView(r, role));
+    const reports = Object.keys(M.reports);
+    const forms = Object.keys(M.forms);
+    const out = { M, S, role, esc, slug, rec, wfOf, titleOf, display, control, fieldRows, movesFor, gateFor, actionsFor, childrenOf,
+      canCreate: (r) => canCreate(r, role), canEdit: (r) => canEdit(r, role), canDelete: (r) => canDelete(r, role),
+      visibleRecords, reports, forms, mode: Api.mode, modeReason: Api.reason,
+      rowsOf: (r) => S.rows[rec(r).table] || [],
+      stagesOf: (r) => (wfOf(r) ? wfOf(r).stages : []),
+      isTerminal: (r, st) => (wfOf(r) ? (wfOf(r).terminal || []).includes(st) : false),
+      approvalState: (r, row) => {
+        const g = gateFor(r, row); if (!g) return null;
+        const dec = S.detail && S.detail.row.id === row.id ? S.detail.approval && S.detail.approval.decision : null;
+        return { gate: g, decision: dec, mayDecide: (g.approvers || []).includes(role) };
+      },
+      childRows: (parent, id) => childrenOf(parent).map((c) => {
+        const link = rec(c).fields.find((f) => f.type === 'link' && f.target_record === parent);
+        return { record: c, link, rows: (S.rows[rec(c).table] || []).filter((x) => x[link.slug] === id) };
+      }),
+      reportView: (name) => {
+        const rp = M.reports[name]; const data = S.report && S.report.name === name ? S.report.data : null;
+        return { rp, data, error: S.report && S.report.name === name ? S.report.error : null };
+      },
+    };
+    return out;
+  }
+
+  // ------------------------------------------------------------------ render + dispatch
+  function render() {
+    const root = $('#app');
+    root.innerHTML = D.render(vm());
+    const focus = root.querySelector('[autofocus]'); if (focus) focus.focus();
+  }
+  document.addEventListener('click', async (ev) => {
+    const el = ev.target.closest('[data-act]'); if (!el) return;
+    // an overlay closes only when the scrim itself is clicked, never when a click
+    // inside its modal bubbles up to it (found in Board: stopPropagation on the
+    // modal had silenced every button inside it instead)
+    if (el.classList.contains('overlay') && ev.target !== el) return;
+    if (el.tagName === 'SELECT' || el.tagName === 'INPUT' || el.tagName === 'FORM') return; // change/submit handle these
+    if (el.tagName === 'BUTTON' && el.type === 'submit' && el.closest('form')) return; // handled on submit
+    ev.preventDefault();
+    if (el.dataset.confirm && !window.confirm(el.dataset.confirm)) return;
+    await run(el.dataset, el.closest('form'));
+  });
+  document.addEventListener('submit', async (ev) => {
+    const form = ev.target; const act = form.dataset.act; if (!act) return;
+    ev.preventDefault();
+    if (!form.reportValidity()) return;
+    await run(form.dataset, form);
+  });
+  document.addEventListener('change', async (ev) => {
+    const el = ev.target; if (el.dataset && el.dataset.act === 'role') { await run({ act: 'role', role: el.value }); }
+  });
+  async function run(p, form) {
+    if (S.busy) return; S.busy = true;
+    try { S.notice = null; await Act[p.act](p, form); } catch (e) { notice('err', String(e && e.message || e)); console.error(e); }
+    S.busy = false; render();
+  }
+  window.UI = { state: S, api: Api, render, run, vm };
+  (async () => { await loadAll(); render(); })();
+})();
+
+</script>
+</body></html>

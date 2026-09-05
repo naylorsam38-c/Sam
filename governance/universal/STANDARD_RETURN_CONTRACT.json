@@ -1,0 +1,51 @@
+{
+  "contract_id": "SRC-v2.1",
+  "title": "Standard Return Contract",
+  "required_fields": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "accepted",
+        "rejected",
+        "completed",
+        "partial",
+        "blocked",
+        "failed",
+        "escalated",
+        "cancelled"
+      ],
+      "description": "Execution status of the task."
+    },
+    "result": {
+      "type": "any",
+      "description": "The requested work only. No conversational filler or unrequested narrative."
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "References, test results, citations, or factual proofs for every material claim."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "description": "Confidence level; strictly never used as a substitute for factual evidence."
+    },
+    "unresolved_gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specific missing facts, unfulfilled success criteria, or skipped items with reasons."
+    },
+    "next_state": {
+      "type": "string",
+      "description": "Proposed next workflow state."
+    }
+  }
+}

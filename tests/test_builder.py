@@ -119,14 +119,18 @@ def graph():
 @pytest.fixture(scope="module")
 def pm_records_spec(graph):
     """pm-teamwork's real records/access data, scoped to what the Builder
-    supports today (list/detail/CRUD) — report screens are a real, documented,
-    refused gap (test_builder_refuses_on_report_screens below), excluded here
-    so this fixture can build, not because the data is fabricated."""
+    supports today (list/detail/CRUD) — report screens and pm-teamwork's own
+    'Duplicate' custom action are real, documented, refused gaps (its report
+    carries no executable ReportSpec and Duplicate declares no executable
+    effect; see test_builder_refuses_what_it_cannot_really_build below),
+    excluded here so this fixture can build, not because the data is
+    fabricated."""
     inst = json.loads((ENGINE / "templates" / "pm-teamwork.json").read_text())
     derived = ae.derive(graph, inst)
     bm = ae.build_model(inst, derived)
     bm["screens_inventory"] = [s for s in bm["screens_inventory"] if s["kind"] != "report"]
     bm["reports"] = {}
+    bm["actions_inventory"] = [a for a in bm["actions_inventory"] if a["kind"] != "custom"]
     return {"spec_id": "SPEC-TEST-PM", "title": "pm-teamwork (records/CRUD path)",
             "graph_version": graph["version"], "source_template": inst["template"],
             "numbered_fields": [], "build_model": bm}
@@ -134,11 +138,18 @@ def pm_records_spec(graph):
 
 @pytest.fixture(scope="module")
 def pm_full_spec(graph):
-    """The same real data, unscoped — used only to prove the refusal path."""
+    """The same real data, unscoped, with its executable blocks stripped --
+    used only to prove the refusal path. The real template now carries a
+    ReportSpec for every metric and an execution block on Duplicate (that is
+    what lets pm-teamwork build end to end), so the refusal is proven on a
+    copy that lacks them, exactly the state every template was in before."""
     inst = json.loads((ENGINE / "templates" / "pm-teamwork.json").read_text())
+    inst.pop("report_specs", None)
+    for act in inst["per_instance"].get("R.15:Task") or []:
+        act.pop("execution", None)
     derived = ae.derive(graph, inst)
     bm = ae.build_model(inst, derived)
-    return {"spec_id": "SPEC-TEST-PM-FULL", "title": "pm-teamwork (unscoped)",
+    return {"spec_id": "SPEC-TEST-PM-FULL", "title": "pm-teamwork (unscoped, executable blocks stripped)",
             "graph_version": graph["version"], "source_template": inst["template"],
             "numbered_fields": [], "build_model": bm}
 
@@ -180,9 +191,17 @@ def command_desk_oauth_spec():
 
 
 # --------------------------------------------------------------------------- record/CRUD path
-def test_builder_refuses_on_a_screen_kind_it_has_no_rule_for(pm_full_spec, tmp_path):
-    with pytest.raises(bl.BuildRefused, match="no screen rendering rule for kind 'report'"):
+def test_builder_refuses_what_it_cannot_really_build(pm_full_spec, tmp_path):
+    """The Builder now has a rule for report screens and custom actions — but a
+    rule needs what it runs on. pm-teamwork's report carries no executable
+    ReportSpec and its 'Duplicate' button declares no executable effect, so the
+    build is refused and both are named. Nothing is rendered as a placeholder."""
+    with pytest.raises(bl.BuildRefused) as err:
         bl.build(pm_full_spec, str(tmp_path / "out"), port=0)
+    message = str(err.value)
+    assert "declares no executable effect" in message
+    assert "has no executable ReportSpec" in message
+    assert not (tmp_path / "out" / "app.py").exists(), "a refused build must write nothing"
 
 
 def test_builder_builds_real_crud_and_it_works_against_a_live_server(pm_records_spec, tmp_path):

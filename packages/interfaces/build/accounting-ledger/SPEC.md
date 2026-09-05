@@ -1,0 +1,434 @@
+# Ledger (accounting-ledger)
+
+`SPEC-ACCOUNTING-LEDGER-REF` — assembled from `accounting-ledger` against graph 3.0. Every field below is numbered by the question, default, or derivation that owns it — nothing here was guessed.
+
+## actions
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| Z.02 | `actions.inventory` | confirmed | question |
+| D12 | `actions.inventory.items` | see build_model.D12 | derivation |
+
+## api
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| sys_api_convention | `api.*` | One fixed REST convention for every endpoint, verb and envelope. | system_default |
+
+## auth
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| sys_first_admin | `auth.bootstrap_admin` | The first super-role account is seeded from the deploy inputs, not created throu… | system_default |
+| AU.05 | `auth.default_role` | null | question |
+| AU.12 | `auth.deletion_allowed` | {"allowed": "yes", "by": "both", "data": "anonymised"} | question |
+| AU.12 | `auth.deletion_by` | {"allowed": "yes", "by": "both", "data": "anonymised"} | question |
+| AU.12 | `auth.deletion_data_policy` | {"allowed": "yes", "by": "both", "data": "anonymised"} | question |
+| AU.03 | `auth.email_verification` | yes | question |
+| sys_account_identity | `auth.identity_field` | The email address is the account identity; changing it requires re-verification. | system_default |
+| AU.06 | `auth.invite_authority` | {"inviters": ["Admin"], "default_role": "Accountant"} | question |
+| AU.06 | `auth.invite_default_role` | {"inviters": ["Admin"], "default_role": "Accountant"} | question |
+| sys_invite_expiry | `auth.invite_expiry` | Invitations expire after 7 days and can be re-sent. | system_default |
+| AU.08 | `auth.lockout_attempts` | {"attempts": 5, "duration": "15 minutes"} | question |
+| AU.08 | `auth.lockout_duration` | {"attempts": 5, "duration": "15 minutes"} | question |
+| AU.04 | `auth.methods` | ["password", "google"] | question |
+| AU.07 | `auth.mfa_method` | {"scope": "nobody", "method": "n/a"} | question |
+| sys_mfa_recovery | `auth.mfa_recovery` | One-time recovery codes issued at MFA enrolment. | system_default |
+| AU.07 | `auth.mfa_scope` | {"scope": "nobody", "method": "n/a"} | question |
+| AU.09 | `auth.multi_device` | yes | question |
+| sys_profile_self_edit | `auth.profile_self_service` | Every user can edit their own name, email, password and notification preferences… | system_default |
+| AU.02 | `auth.registration_fields` | [{"name": "Full name", "type": "short_text", "required": "yes", "unique": "no"},… | question |
+| AU.01 | `auth.registration_modes` | ["invited"] | question |
+| A.07 | `auth.required` | yes | question |
+| AU.13 | `auth.reset_others_by` | ["super"] | question |
+| sys_password_reset | `auth.self_reset_flow` | Self-service reset by emailed link, valid 1 hour. | system_default |
+| AU.10 | `auth.session_length` | 30 days | question |
+| sys_suspended_experience | `auth.suspended_screen` | A suspended user sees a fixed 'account suspended — contact <support contact>' sc… | system_default |
+| AU.11 | `auth.suspension_allowed` | {"allowed": "yes", "by": ["super"], "auto_triggers": []} | question |
+| AU.11 | `auth.suspension_auto_triggers` | {"allowed": "yes", "by": ["super"], "auto_triggers": []} | question |
+| AU.11 | `auth.suspension_by` | {"allowed": "yes", "by": ["super"], "auto_triggers": []} | question |
+
+## billing
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| B.10 | `billing.cancellation` | null | question |
+| B.02 | `billing.charged_party` | null | question |
+| B.04 | `billing.currency` | null | question |
+| sys_billing_details | `billing.details_collection` | Card, billing address and tax IDs are collected by the gateway's hosted form; in… | system_default |
+| sys_billing_details | `billing.invoices` | Card, billing address and tax IDs are collected by the gateway's hosted form; in… | system_default |
+| B.01 | `billing.model` | null | question |
+| B.08 | `billing.on_failure` | null | question |
+| sys_limit_reached | `billing.on_limit_reached` | Hitting a plan limit shows an upgrade prompt, then blocks the action. | system_default |
+| B.07 | `billing.payment_methods` | null | question |
+| B.09 | `billing.plan_change` | null | question |
+| D10 | `billing.plan_linkage` | see build_model.D10 | derivation |
+| B.03 | `billing.plans` | null | question |
+| sys_proration | `billing.proration_rule` | Mid-cycle plan changes are prorated by the gateway. | system_default |
+| B.11 | `billing.refunds` | null | question |
+| A.09 | `billing.required` | no | question |
+| sys_tax_calculation | `billing.tax_calculation` | Tax computed by the payment gateway from the billing address. | system_default |
+| B.05 | `billing.trial` | null | question |
+| B.06 | `billing.usage_charge_timing` | null | question |
+| B.06 | `billing.usage_unit` | null | question |
+| sys_idempotency_webhook | `billing.webhook_handling` | Payment webhooks signature-verified and processed exactly once. | system_default |
+
+## client
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| C.06 | `client.landing_screen_per_role` | {"Admin": "Invoices list", "Accountant": "Invoices list", "Advisor": "Invoices l… | question |
+| C.05 | `client.mobile_behaviour` | {"mode": "simplified"} | question |
+| C.07 | `client.navigation` | confirmed | question |
+| D13 | `client.navigation.derived` | see build_model.D13 | derivation |
+| A.06 | `client.platforms` | ["web"] | question |
+| A.10 | `client.public_surfaces` | [] | question |
+
+## data
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| A.12 | `data.import_required` | {"required": "no"} | question |
+| A.12 | `data.import_sources` | {"required": "no"} | question |
+
+## deploy
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| DI.10 | `deploy.app_store_accounts` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+| DI.01 | `deploy.domain` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+| DI.02 | `deploy.email_sender` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+| DI.04 | `deploy.first_admin_email` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+| DI.06 | `deploy.gateway_credentials` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+| DI.09 | `deploy.integration_credentials` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+| DI.11 | `deploy.legal_documents` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+| DI.08 | `deploy.oauth_credentials` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+| DI.05 | `deploy.region` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+| DI.07 | `deploy.sms_credentials` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+| DI.03 | `deploy.support_contact` | [PENDING — collected at deploy time, not at requirements time] | deploy_input |
+
+## deviation
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| A.14 | `deviation.flags` | [] | question |
+
+## engine
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| 0.01 | `engine.involvement` | guided | question |
+
+## file
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| sys_file_type_inference | `file.*.allowed_mimes` | Allowed formats come from a fixed allow-list per file category. | system_default |
+| sys_image_handling | `file.*.image_handling` | Images get thumbnails; downloads are served by signed URL. | system_default |
+| sys_file_security_scanning | `file.*.malware_scanning` | Async malware scan before a file is marked active. | system_default |
+| D06 | `file.*.retention` | see build_model.D06 | derivation |
+| sys_file_storage | `file.*.storage_backend` | Private object storage for uploads. | system_default |
+
+## form
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| D02 | `form.*.fields` | see build_model.D02 | derivation |
+| sys_form_failure | `form.*.layout` | A failed submit shows inline errors and keeps what was typed; forms are single-p… | system_default |
+| sys_form_failure | `form.*.on_failure` | A failed submit shows inline errors and keeps what was typed; forms are single-p… | system_default |
+| sys_form_failure | `form.*.spam_protection` | A failed submit shows inline errors and keeps what was typed; forms are single-p… | system_default |
+
+## integration
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| sys_retry_policy | `integration.*.retry_policy` | Failed external calls retry 3× with exponential backoff + jitter. | system_default |
+| A.11 | `integration.public_api_required` | no | question |
+
+## inventory
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| A.15 | `inventory.file_types` | [] | question |
+| A.15 | `inventory.forms` | [] | question |
+| A.15 | `inventory.integrations` | [] | question |
+| A.15 | `inventory.notifications` | ["Invoice sent", "Payment reminder", "Payment received"] | question |
+| A.15 | `inventory.records` | ["Contact", "Invoice", "Invoice line", "Bill", "Payment"] | question |
+| A.15 | `inventory.reports` | [] | question |
+| A.15 | `inventory.roles` | ["Admin", "Accountant", "Advisor"] | question |
+| A.15 | `inventory.screens` | [] | question |
+| A.15 | `inventory.workflows` | ["Invoice lifecycle", "Bill lifecycle"] | question |
+
+## legal
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| AU.14 | `legal.terms_required` | {"required": "yes", "status": "need_drafting"} | question |
+| AU.14 | `legal.terms_status` | {"required": "yes", "status": "need_drafting"} | question |
+
+## locale
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| sys_locale_formatting | `locale.formatting` | Dates, numbers and currency display in the format of A.13's region; stored in UT… | system_default |
+| A.13 | `locale.languages` | {"region": "Australia", "languages": ["English"]} | question |
+| A.13 | `locale.primary_region` | {"region": "Australia", "languages": ["English"]} | question |
+| sys_locale_formatting | `locale.timezone_handling` | Dates, numbers and currency display in the format of A.13's region; stored in UT… | system_default |
+
+## notification
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| sys_notification_copywriting | `notification.*.copy_final` | Message wording drafted at build time and approved by the owner before launch; n… | system_default |
+| sys_notification_retry | `notification.*.retry_policy` | 3 delivery retries then dead-letter. | system_default |
+| D05 | `notification.*.timing` | see build_model.D05 | derivation |
+| N.03:Invoice sent | `notification.Invoice sent.channels` | ["email"] | question |
+| N.04:Invoice sent | `notification.Invoice sent.intent` | Here is your invoice: what it's for, the total, the due date and how to pay. | question |
+| N.05:Invoice sent | `notification.Invoice sent.opt_out` | no | question |
+| N.02:Invoice sent | `notification.Invoice sent.recipients` | [{"kind": "custom", "who": "the invoice's Contact, at their email address"}] | question |
+| N.01:Invoice sent | `notification.Invoice sent.trigger` | {"kind": "event", "event": "the Send action runs on an invoice"} | question |
+| N.03:Payment received | `notification.Payment received.channels` | ["in_app"] | question |
+| N.04:Payment received | `notification.Payment received.intent` | An invoice just got paid in full. | question |
+| N.05:Payment received | `notification.Payment received.opt_out` | yes | question |
+| N.02:Payment received | `notification.Payment received.recipients` | [{"kind": "roles", "roles": ["Accountant"]}] | question |
+| N.01:Payment received | `notification.Payment received.trigger` | {"kind": "event", "event": "an invoice moves to Paid"} | question |
+| N.03:Payment reminder | `notification.Payment reminder.channels` | ["email"] | question |
+| N.04:Payment reminder | `notification.Payment reminder.intent` | This invoice is past due — pay it or tell us why not. | question |
+| N.05:Payment reminder | `notification.Payment reminder.opt_out` | no | question |
+| N.02:Payment reminder | `notification.Payment reminder.recipients` | [{"kind": "custom", "who": "the invoice's Contact — only while the invoice is in… | question |
+| N.01:Payment reminder | `notification.Payment reminder.trigger` | {"kind": "relative_to_date", "record": "Invoice", "date_field": "Due date", "off… | question |
+
+## notify
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| sys_inapp_inbox | `notify.inbox` | If any notification uses in-app, the app has one notification inbox with read/un… | system_default |
+
+## ops
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| Z.01 | `ops.recurring_operations` | confirmed | question |
+| D11 | `ops.recurring_operations.items` | see build_model.D11 | derivation |
+
+## product
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| A.03 | `product.audience` | A small business's accountant, its admin, and an outside advisor with read-only … | question |
+| A.01 | `product.description` | The books: contacts, invoices with lines, bills, and the payments applied to the… | question |
+| A.02 | `product.goals` | Raise invoices, record bills and payments, and know what is owed. | question |
+| A.05 | `product.name` | Ledger | question |
+| A.04 | `product.success_definition` | Every invoice is sent, every payment is applied, and nothing is paid twice. | question |
+
+## qa
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| D15 | `qa.generated_tests` | see build_model.D15 | derivation |
+| sys_qa_pass_conditions | `qa.pass_condition.*` | Every node's pass/fail check is generated from that node's own answers. | system_default |
+
+## record
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| sys_audit_fields | `record.*.audit_fields` | created_at/updated_at/created_by/updated_by on every table. | system_default |
+| sys_concurrent_edit | `record.*.concurrency` | Last save wins; a user saving over a newer version is warned and shown the newer… | system_default |
+| sys_list_behaviour | `record.*.exportable` | Every record list is searchable and filterable on its visible fields, sorted new… | system_default |
+| D01 | `record.*.field.*.storage_type` | see build_model.D01 | derivation |
+| D14 | `record.*.field.*.storage_type_for_options` | see build_model.D14 | derivation |
+| sys_field_type_defaults | `record.*.field.*.validation` | Each field type carries one standard validation rule and error message. | system_default |
+| sys_database_identifiers | `record.*.id_strategy` | UUIDv4 primary keys on every table. | system_default |
+| sys_list_behaviour | `record.*.list_behaviour` | Every record list is searchable and filterable on its visible fields, sorted new… | system_default |
+| R.06:Bill | `record.Bill.access.create` | ["Accountant"] | question |
+| R.08:Bill | `record.Bill.access.delete` | nobody | question |
+| R.07:Bill | `record.Bill.access.edit` | [{"role": "Accountant", "scope": "all"}] | question |
+| R.05:Bill | `record.Bill.access.view` | [{"role": "Accountant", "scope": "all"}, {"role": "Advisor", "scope": "all"}] | question |
+| R.13:Bill | `record.Bill.archivable` | yes | question |
+| R.15:Bill | `record.Bill.custom_actions` | [] | question |
+| R.02:Bill | `record.Bill.fields` | [{"name": "Contact", "type": "link", "required": "yes", "unique": "no", "target_… | question |
+| R.10:Bill | `record.Bill.has_lifecycle` | {"has": "yes", "stages": ["Draft", "Awaiting payment", "Paid", "Voided"]} | question |
+| R.04:Bill | `record.Bill.human_id` | {"needed": "yes", "format": "BILL-#### (sequential)"} | question |
+| R.12:Bill | `record.Bill.on_delete` | block | question |
+| R.09:Bill | `record.Bill.ownership_rule` | null | question |
+| R.01:Bill | `record.Bill.purpose` | Money owed BY the business to a supplier. | question |
+| R.11:Bill | `record.Bill.relations` | [{"target": "Contact", "cardinality": "one_to_many", "required": "yes"}] | question |
+| R.14:Bill | `record.Bill.retention` | forever | question |
+| R.03:Bill | `record.Bill.title_field` | Contact | question |
+| R.06:Contact | `record.Contact.access.create` | ["Accountant"] | question |
+| R.08:Contact | `record.Contact.access.delete` | [{"role": "Accountant", "scope": "all"}] | question |
+| R.07:Contact | `record.Contact.access.edit` | [{"role": "Accountant", "scope": "all"}] | question |
+| R.05:Contact | `record.Contact.access.view` | [{"role": "Accountant", "scope": "all"}, {"role": "Advisor", "scope": "all"}] | question |
+| R.13:Contact | `record.Contact.archivable` | yes | question |
+| R.15:Contact | `record.Contact.custom_actions` | [] | question |
+| R.02:Contact | `record.Contact.fields` | [{"name": "Name", "type": "short_text", "required": "yes", "unique": "no"}, {"na… | question |
+| R.10:Contact | `record.Contact.has_lifecycle` | {"has": "no"} | question |
+| R.04:Contact | `record.Contact.human_id` | {"needed": "no"} | question |
+| R.12:Contact | `record.Contact.on_delete` | null | question |
+| R.09:Contact | `record.Contact.ownership_rule` | null | question |
+| R.01:Contact | `record.Contact.purpose` | A customer or supplier the business invoices or is billed by. | question |
+| R.11:Contact | `record.Contact.relations` | [] | question |
+| R.14:Contact | `record.Contact.retention` | forever | question |
+| R.03:Contact | `record.Contact.title_field` | Name | question |
+| R.06:Invoice line | `record.Invoice line.access.create` | ["Accountant"] | question |
+| R.08:Invoice line | `record.Invoice line.access.delete` | [{"role": "Accountant", "scope": "all"}] | question |
+| R.07:Invoice line | `record.Invoice line.access.edit` | [{"role": "Accountant", "scope": "all"}] | question |
+| R.05:Invoice line | `record.Invoice line.access.view` | [{"role": "Accountant", "scope": "all"}, {"role": "Advisor", "scope": "all"}] | question |
+| R.13:Invoice line | `record.Invoice line.archivable` | no | question |
+| R.15:Invoice line | `record.Invoice line.custom_actions` | [] | question |
+| R.02:Invoice line | `record.Invoice line.fields` | [{"name": "Invoice", "type": "link", "required": "yes", "unique": "no", "target_… | question |
+| R.10:Invoice line | `record.Invoice line.has_lifecycle` | {"has": "no"} | question |
+| R.04:Invoice line | `record.Invoice line.human_id` | {"needed": "no"} | question |
+| R.12:Invoice line | `record.Invoice line.on_delete` | delete_too | question |
+| R.09:Invoice line | `record.Invoice line.ownership_rule` | null | question |
+| R.01:Invoice line | `record.Invoice line.purpose` | One charged item on an invoice. | question |
+| R.11:Invoice line | `record.Invoice line.relations` | [{"target": "Invoice", "cardinality": "one_to_many", "required": "yes"}] | question |
+| R.14:Invoice line | `record.Invoice line.retention` | forever | question |
+| R.03:Invoice line | `record.Invoice line.title_field` | Description | question |
+| R.06:Invoice | `record.Invoice.access.create` | ["Accountant"] | question |
+| R.08:Invoice | `record.Invoice.access.delete` | nobody | question |
+| R.07:Invoice | `record.Invoice.access.edit` | [{"role": "Accountant", "scope": "all"}] | question |
+| R.05:Invoice | `record.Invoice.access.view` | [{"role": "Accountant", "scope": "all"}, {"role": "Advisor", "scope": "all"}] | question |
+| R.13:Invoice | `record.Invoice.archivable` | yes | question |
+| R.15:Invoice | `record.Invoice.custom_actions` | [{"name": "Send", "who": ["Accountant"], "effect": "emails the invoice document … | question |
+| R.02:Invoice | `record.Invoice.fields` | [{"name": "Contact", "type": "link", "required": "yes", "unique": "no", "target_… | question |
+| R.10:Invoice | `record.Invoice.has_lifecycle` | {"has": "yes", "stages": ["Draft", "Awaiting approval", "Awaiting payment", "Pai… | question |
+| R.04:Invoice | `record.Invoice.human_id` | {"needed": "yes", "format": "INV-#### (sequential, never reused)"} | question |
+| R.12:Invoice | `record.Invoice.on_delete` | block | question |
+| R.09:Invoice | `record.Invoice.ownership_rule` | null | question |
+| R.01:Invoice | `record.Invoice.purpose` | Money owed TO the business by a customer. | question |
+| R.11:Invoice | `record.Invoice.relations` | [{"target": "Contact", "cardinality": "one_to_many", "required": "yes"}] | question |
+| R.14:Invoice | `record.Invoice.retention` | forever | question |
+| R.03:Invoice | `record.Invoice.title_field` | Contact | question |
+| R.06:Payment | `record.Payment.access.create` | ["Accountant"] | question |
+| R.08:Payment | `record.Payment.access.delete` | nobody | question |
+| R.07:Payment | `record.Payment.access.edit` | [{"role": "Accountant", "scope": "all"}] | question |
+| R.05:Payment | `record.Payment.access.view` | [{"role": "Accountant", "scope": "all"}, {"role": "Advisor", "scope": "all"}] | question |
+| R.13:Payment | `record.Payment.archivable` | no | question |
+| R.15:Payment | `record.Payment.custom_actions` | [] | question |
+| R.02:Payment | `record.Payment.fields` | [{"name": "Invoice", "type": "link", "required": "no", "unique": "no", "target_r… | question |
+| R.10:Payment | `record.Payment.has_lifecycle` | {"has": "no"} | question |
+| R.04:Payment | `record.Payment.human_id` | {"needed": "no"} | question |
+| R.12:Payment | `record.Payment.on_delete` | block | question |
+| R.09:Payment | `record.Payment.ownership_rule` | null | question |
+| R.01:Payment | `record.Payment.purpose` | A received or made payment applied against an invoice or bill. | question |
+| R.11:Payment | `record.Payment.relations` | [{"target": "Invoice", "cardinality": "one_to_many", "required": "no"}, {"target… | question |
+| R.14:Payment | `record.Payment.retention` | forever | question |
+| R.03:Payment | `record.Payment.title_field` | Amount | question |
+
+## report
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| sys_report_caching | `report.*.cache_policy` | Reports regenerate on demand, cached 5 min. | system_default |
+| D07 | `report.*.data_source` | see build_model.D07 | derivation |
+| D07 | `report.*.metric.*.derived_definition` | see build_model.D07 | derivation |
+
+## role
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| D04 | `role.*.forbidden_actions` | see build_model.D04 | derivation |
+| D04 | `role.*.is_admin` | see build_model.D04 | derivation |
+| D04 | `role.*.permitted_actions` | see build_model.D04 | derivation |
+| D03 | `role.*.visible_screens` | see build_model.D03 | derivation |
+| P.04:Accountant | `role.Accountant.assignable_by` | ["Admin"] | question |
+| P.03:Accountant | `role.Accountant.billing_access` | null | question |
+| P.01:Accountant | `role.Accountant.description` | Does the books: raises invoices, records bills and payments. | question |
+| P.02:Accountant | `role.Accountant.sees_private_data` | no | question |
+| P.04:Admin | `role.Admin.assignable_by` | null | question |
+| P.03:Admin | `role.Admin.billing_access` | null | question |
+| P.01:Admin | `role.Admin.description` | null | question |
+| P.02:Admin | `role.Admin.sees_private_data` | null | question |
+| P.04:Advisor | `role.Advisor.assignable_by` | ["Admin"] | question |
+| P.03:Advisor | `role.Advisor.billing_access` | null | question |
+| P.01:Advisor | `role.Advisor.description` | An external accountant/bookkeeper with read-only access to everything financial. | question |
+| P.02:Advisor | `role.Advisor.sees_private_data` | no | question |
+
+## roles
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| P.00 | `roles.multi_role_per_person` | no | question |
+| A.16 | `roles.super_role` | Admin | question |
+
+## screen
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| D03 | `screen.*.access` | see build_model.D03 | derivation |
+| D03 | `screen.*.contents` | see build_model.D03 | derivation |
+| sys_screen_interaction_pattern | `screen.*.interaction_states` | Standard loading / empty / error / success / back / leave-and-return behaviour o… | system_default |
+
+## screens
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| Z.03 | `screens.inventory` | confirmed | question |
+| D13 | `screens.inventory.items` | see build_model.D13 | derivation |
+
+## tenancy
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| T.07 | `tenancy.branding` | null | question |
+| T.02 | `tenancy.creation` | null | question |
+| T.06 | `tenancy.isolation` | null | question |
+| sys_client_isolation | `tenancy.isolation_mechanism` | Row-level security enforces organisation isolation in the database. | system_default |
+| A.08 | `tenancy.mode` | single | question |
+| T.01 | `tenancy.multi_membership` | null | question |
+| T.05 | `tenancy.operator_role` | null | question |
+| T.03 | `tenancy.org_admin_role` | null | question |
+| sys_org_switcher | `tenancy.org_settings` | A person in several organisations switches with a standard switcher; each organi… | system_default |
+| D09 | `tenancy.role_visibility` | see build_model.D09 | derivation |
+| T.04 | `tenancy.roles_scope` | null | question |
+| T.08 | `tenancy.suspend_delete` | null | question |
+| sys_org_switcher | `tenancy.switcher` | A person in several organisations switches with a standard switcher; each organi… | system_default |
+
+## visual
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| sys_theme | `visual.accessibility` | Light theme only; WCAG 2.1 AA contrast and keyboard access. | system_default |
+| C.04 | `visual.brand_assets` | {"mode": "design_for_me"} | question |
+| C.03 | `visual.density` | balanced | question |
+| C.01 | `visual.references` | none | question |
+| sys_theme | `visual.theme` | Light theme only; WCAG 2.1 AA contrast and keyboard access. | system_default |
+| C.02 | `visual.tone` | ["trustworthy", "quiet", "exact"] | question |
+
+## workflow
+
+| # | Field | Value | Source |
+|---|---|---|---|
+| D08 | `workflow.*.transition_graph` | see build_model.D08 | derivation |
+| FL.05:Bill lifecycle | `workflow.Bill lifecycle.approvals` | [] | question |
+| FL.07:Bill lifecycle | `workflow.Bill lifecycle.cancel` | {"allowed": "no"} | question |
+| FL.08:Bill lifecycle | `workflow.Bill lifecycle.on_complete` | Paid bills lock and feed Profit & loss as expenses. | question |
+| FL.06:Bill lifecycle | `workflow.Bill lifecycle.on_reject` | null | question |
+| FL.04:Bill lifecycle | `workflow.Bill lifecycle.preconditions` | [] | question |
+| FL.09:Bill lifecycle | `workflow.Bill lifecycle.readonly_from` | Awaiting payment | question |
+| FL.11:Bill lifecycle | `workflow.Bill lifecycle.stage_notifications` | [] | question |
+| FL.02:Bill lifecycle | `workflow.Bill lifecycle.stages` | {"stages": ["Draft", "Awaiting payment", "Paid", "Voided"], "initial": "Draft", … | question |
+| FL.10:Bill lifecycle | `workflow.Bill lifecycle.timeouts` | [] | question |
+| FL.03:Bill lifecycle | `workflow.Bill lifecycle.transitions` | [{"from": "Draft", "to": "Awaiting payment", "mover": "roles", "roles": ["Accoun… | question |
+| FL.01:Bill lifecycle | `workflow.Bill lifecycle.trigger` | {"kind": "person", "who": ["Accountant"], "action": "creating a bill (starts in … | question |
+| FL.05:Invoice lifecycle | `workflow.Invoice lifecycle.approvals` | [{"stage": "Awaiting approval", "approvers": ["Admin"]}] | question |
+| FL.07:Invoice lifecycle | `workflow.Invoice lifecycle.cancel` | {"allowed": "no"} | question |
+| FL.08:Invoice lifecycle | `workflow.Invoice lifecycle.on_complete` | Paid invoices lock permanently and feed Profit & loss; Voided invoices keep thei… | question |
+| FL.06:Invoice lifecycle | `workflow.Invoice lifecycle.on_reject` | {"back_to": "Draft", "resubmit": "yes"} | question |
+| FL.04:Invoice lifecycle | `workflow.Invoice lifecycle.preconditions` | [] | question |
+| FL.09:Invoice lifecycle | `workflow.Invoice lifecycle.readonly_from` | Awaiting payment | question |
+| FL.11:Invoice lifecycle | `workflow.Invoice lifecycle.stage_notifications` | [] | question |
+| FL.02:Invoice lifecycle | `workflow.Invoice lifecycle.stages` | {"stages": ["Draft", "Awaiting approval", "Awaiting payment", "Paid", "Voided"],… | question |
+| FL.10:Invoice lifecycle | `workflow.Invoice lifecycle.timeouts` | [] | question |
+| FL.03:Invoice lifecycle | `workflow.Invoice lifecycle.transitions` | [{"from": "Draft", "to": "Awaiting approval", "mover": "roles", "roles": ["Accou… | question |
+| FL.01:Invoice lifecycle | `workflow.Invoice lifecycle.trigger` | {"kind": "person", "who": ["Accountant"], "action": "creating an invoice (starts… | question |
+
+## Build model summary
+
+- Records: Contact, Invoice, Invoice line, Bill, Payment
+- Roles: Admin, Accountant, Advisor (super: Admin)
+- Workflows: Invoice lifecycle, Bill lifecycle
+- Screens: 10 (`SPEC-ACCOUNTING-LEDGER-REF` navigation order)
+- Actions: 23
+- Generated QA tests: 53

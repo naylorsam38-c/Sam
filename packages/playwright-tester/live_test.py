@@ -43,6 +43,8 @@ from pathlib import Path
 CRAWLER_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "crawler")
 sys.path.insert(0, os.path.abspath(CRAWLER_DIR))
 from crawler import DESTRUCTIVE_WORDS  # noqa: E402 — the exact same skip list, not a second copy
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "builder")))
+from builder import _screen_filename  # noqa: E402 — the Builder's own naming, not a second copy
 
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 
@@ -68,7 +70,10 @@ CHROMIUM_PATH = _default_chromium_path()
 def _screen_url(base_url, scr):
     if scr["kind"] == "integration_status" and scr["id"] == "SCR-001":
         return base_url + "/"  # index.html mirrors the first screen, matching builder.py's own convention
-    return base_url + f"/{scr['id']}.html" + (f"?id={scr.get('_probe_id')}" if scr.get("_probe_id") else "")
+    # the Builder's own filename rule: a locked, template-prefixed id such as
+    # 'command-desk/SCR-001' is one static file, not a nested path (found by
+    # the seam journeys 2026-09-05: every prefixed screen was 404 here)
+    return base_url + f"/static/{_screen_filename(scr['id'])}" + (f"?id={scr.get('_probe_id')}" if scr.get("_probe_id") else "")
 
 
 async def _launch(pw):
@@ -105,7 +110,19 @@ async def run_normal(spec, base_url, out_dir):
                 results["screens"].append(entry)
                 continue
 
-            if scr["kind"] == "integration_status":
+            if scr["kind"] == "integration_status" and \
+                    (bm.get("integrations", {}).get(scr.get("integration")) or {}).get("auth") == "api_key":
+                # a pasted-key service has no OAuth tiles and no Connect button:
+                # its real screen is a key field, a Save key button and a state
+                # line (found running the loop on Command Desk, 2026-09-05 —
+                # this branch used to wait 30s for #tiles and crash the tester)
+                has_field = await page.locator("#key").count() == 1
+                has_save = await page.get_by_role("button", name=re.compile("save key", re.I)).count() == 1
+                entry["key_screen"] = {"key_field": has_field, "save_button": has_save}
+                entry["empty_state_observed"] = (await page.locator("#state").inner_text()) == ""
+                if not (has_field and has_save):
+                    entry["error"] = "pasted-key screen is missing its key field or Save key button"
+            elif scr["kind"] == "integration_status":
                 integration = scr["integration"]
                 tile_text = await page.locator("#tiles").inner_text()
                 entry["empty_state_observed"] = "MISSING" in tile_text if tile_text else None

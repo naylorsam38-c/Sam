@@ -1,0 +1,5 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Win rate</title></head><body><header class="app-header"><svg class="app-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <circle cx="32" cy="32" r="24" fill="none" stroke="#4C4A9E" stroke-width="4"/>
+  <circle cx="32" cy="32" r="6" fill="#4C4A9E"/>
+</svg>
+<span class="app-name">Connector (Orbit mark)</span></header><h1>Win rate</h1><table id='numbers'></table><script>fetch('/api/reports/win_rate').then(r => r.json()).then(d => {document.getElementById('numbers').innerHTML = Object.entries(d).map(([metric, value]) => '<tr><td>' + metric + '</td><td class=\'value\'>' + JSON.stringify(value) + '</td></tr>').join('');});</script></body></html>

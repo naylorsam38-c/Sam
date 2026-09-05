@@ -49,7 +49,7 @@ def test_graph_validator_selftest_catches_every_break():
 def test_every_template_fits_the_graph():
     r = run("check_template.py", "--all")
     assert r.returncode == 0, r.stdout + r.stderr
-    assert len(TEMPLATES) == 5
+    assert len(TEMPLATES) == 6   # the five reverse-engineered templates + command-desk (the agent-app one)
     for path in TEMPLATES:
         assert f"{path.stem}" in r.stdout
     assert "FAIL" not in r.stdout
@@ -59,7 +59,7 @@ def test_template_checker_selftest_catches_every_break():
     r = run("check_template.py", "--selftest")
     assert r.returncode == 0, r.stdout + r.stderr
     assert "SELFTEST PASS" in r.stdout
-    assert r.stdout.count("[caught]") == 6
+    assert r.stdout.count("[caught]") == 7   # six original breaks + one executable-block break
 
 
 @pytest.mark.parametrize("script", sorted(GENERATED))
@@ -107,7 +107,7 @@ def test_readme_question_counts_match_the_graph():
 
 
 def test_every_template_is_already_locked():
-    """Every one of the five real templates must carry a frozen "structure"
+    """Every one of the six real templates must carry a frozen "structure"
     block -- the whole point of lock_structure.py is that assemble.py never
     derives one on the fly, so nothing may ship without one already locked."""
     for path in TEMPLATES:
@@ -198,5 +198,10 @@ def test_templates_declare_what_the_customer_is_still_asked():
         t = json.loads(path.read_text(encoding="utf-8"))
         assert t["source_app"], f"{path.stem} names no source app"
         assert t["modules"], f"{path.stem} declares no modules"
-        assert t["ask_customer"], f"{path.stem} asks the customer nothing"
+        if t["template"] == "command-desk":
+            # not a reverse-engineered template to configure: it is Sam's own
+            # product, fully answered, which is why it can actually assemble
+            assert t["ask_customer"] == [], "command-desk is answered; nothing is left open"
+        else:
+            assert t["ask_customer"], f"{path.stem} asks the customer nothing"
         assert t["features"], f"{path.stem} maps no features to answers"

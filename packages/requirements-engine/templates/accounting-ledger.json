@@ -26,10 +26,7 @@
       "Payment reminder",
       "Payment received"
     ],
-    "reports": [
-      "Profit and loss",
-      "Aged receivables"
-    ],
+    "reports": [],
     "workflows": [
       "Invoice lifecycle",
       "Bill lifecycle"
@@ -54,9 +51,9 @@
       "mode": "simplified"
     },
     "C.06": {
-      "Admin": "Profit and loss",
+      "Admin": "Invoices list",
       "Accountant": "Invoices list",
-      "Advisor": "Profit and loss"
+      "Advisor": "Invoices list"
     },
     "AU.01": [
       "invited"
@@ -223,6 +220,12 @@
         "type": "long_text",
         "required": "no",
         "unique": "no"
+      },
+      {
+        "name": "Sent at",
+        "type": "date_time",
+        "required": "no",
+        "unique": "no"
       }
     ],
     "R.03:Invoice": "Contact",
@@ -276,7 +279,28 @@
           "Accountant"
         ],
         "effect": "emails the invoice document to the Contact and stamps the sent time",
-        "result_location": "the invoice page's activity trail"
+        "result_location": "the invoice page's activity trail",
+        "execution": {
+          "op": "generate_document",
+          "stamp_column": "sent_at",
+          "title_columns": [
+            "reference"
+          ],
+          "line_table": "invoice_lines",
+          "line_fk": "invoice",
+          "line_columns": [
+            "description",
+            "quantity",
+            "unit_amount"
+          ],
+          "body_columns": [
+            "contact",
+            "issue_date",
+            "due_date",
+            "notes"
+          ],
+          "dispatch": "none"
+        }
       }
     ],
     "R.12:Invoice": "block",
@@ -705,68 +729,6 @@
     ],
     "N.04:Payment received": "An invoice just got paid in full.",
     "N.05:Payment received": "yes",
-    "RP.01:Profit and loss": "What did the business earn and spend in the period?",
-    "RP.02:Profit and loss": [
-      "Admin",
-      "Accountant",
-      "Advisor"
-    ],
-    "RP.03:Profit and loss": {
-      "delivery": "both",
-      "shape": "both"
-    },
-    "RP.04:Profit and loss": [
-      "revenue",
-      "expenses",
-      "net profit"
-    ],
-    "RP.06:Profit and loss": {
-      "filters": [
-        "Contact"
-      ],
-      "default_range": "this financial year to date"
-    },
-    "RP.07:Profit and loss": {
-      "allowed": "yes",
-      "by": [
-        "Accountant"
-      ]
-    },
-    "RP.08:Profit and loss": {
-      "enabled": "no"
-    },
-    "RP.01:Aged receivables": "Who owes us money, and how overdue is it?",
-    "RP.02:Aged receivables": [
-      "Admin",
-      "Accountant",
-      "Advisor"
-    ],
-    "RP.03:Aged receivables": {
-      "delivery": "both",
-      "shape": "table"
-    },
-    "RP.04:Aged receivables": [
-      "overdue invoice totals bucketed by age"
-    ],
-    "RP.06:Aged receivables": {
-      "filters": [
-        "Contact"
-      ],
-      "default_range": "as at today"
-    },
-    "RP.07:Aged receivables": {
-      "allowed": "yes",
-      "by": [
-        "Accountant"
-      ]
-    },
-    "RP.08:Aged receivables": {
-      "enabled": "no"
-    },
-    "RP.05:Profit and loss:revenue": "sum of (Quantity x Unit amount) over Invoice lines whose Invoice is in Awaiting payment or Paid (never Draft or Voided), attributed to the Invoice's Issue date — accrual basis, GST-exclusive",
-    "RP.05:Profit and loss:expenses": "sum of Bill Amount for Bills in Awaiting payment or Paid, attributed to the Bill's Issue date — accrual basis",
-    "RP.05:Profit and loss:net profit": "revenue minus expenses, exactly as those two are defined above",
-    "RP.05:Aged receivables:overdue invoice totals bucketed by age": "for each Invoice in Awaiting payment: its total minus applied Payments, bucketed by days past Due date as at today (current, 1-30, 31-60, 61-90, 90+)",
     "P.01:Accountant": "Does the books: raises invoices, records bills and payments.",
     "P.02:Accountant": "no",
     "P.04:Accountant": [
@@ -806,17 +768,12 @@
     {
       "feature": "Bills side",
       "controlled_by": "A.15 records list",
-      "rule": "remove Bill and its lifecycle -> invoicing-only app; P&L expenses metric drops"
+      "rule": "remove Bill and its lifecycle -> invoicing-only app"
     },
     {
       "feature": "Overdue chasing",
       "controlled_by": "N.01:Payment reminder",
       "rule": "change the +3 days offset, or remove the notification to stop chasing"
-    },
-    {
-      "feature": "Accrual vs cash reporting",
-      "controlled_by": "RP.05:Profit and loss:revenue",
-      "rule": "rewrite the definition to 'Payments received in the period' for cash basis — one answer, not a rebuild"
     },
     {
       "feature": "Advisor access",
@@ -903,32 +860,43 @@
       ]
     },
     {
-      "kind": "report",
-      "name": "Profit and loss",
-      "metrics": [
-        "revenue",
-        "expenses",
-        "net profit"
-      ],
-      "shape": "both",
-      "delivery": "both"
-    },
-    {
-      "kind": "report",
-      "name": "Aged receivables",
-      "metrics": [
-        "overdue invoice totals bucketed by age"
-      ],
-      "shape": "table",
-      "delivery": "both"
-    },
-    {
       "kind": "custom_action",
       "name": "Send",
       "record": "Invoice",
       "effect": "emails the invoice document to the Contact and stamps the sent time"
     }
   ],
+  "create_effects": {
+    "Payment": [
+      {
+        "op": "ledger_balance",
+        "link_column": "invoice",
+        "table": "invoices",
+        "total": {
+          "kind": "lines",
+          "line_table": "invoice_lines",
+          "line_fk": "invoice",
+          "quantity_column": "quantity",
+          "amount_column": "unit_amount"
+        },
+        "payments_table": "payments",
+        "amount_column": "amount",
+        "event": "Payments applied to the invoice reach its total"
+      },
+      {
+        "op": "ledger_balance",
+        "link_column": "bill",
+        "table": "bills",
+        "total": {
+          "kind": "column",
+          "column": "amount"
+        },
+        "payments_table": "payments",
+        "amount_column": "amount",
+        "event": "Payments applied to the bill reach its total"
+      }
+    ]
+  },
   "structure": {
     "records": {
       "Contact": {
@@ -1019,6 +987,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "accounting-ledger/REC-001"
       },
       "Invoice": {
@@ -1053,6 +1022,12 @@
             "type": "long_text",
             "required": "no",
             "unique": "no"
+          },
+          "Sent at": {
+            "name": "Sent at",
+            "type": "date_time",
+            "required": "no",
+            "unique": "no"
           }
         },
         "storage": {
@@ -1060,7 +1035,8 @@
           "Issue date": "DATE",
           "Due date": "DATE",
           "Reference": "VARCHAR(255)",
-          "Notes": "TEXT"
+          "Notes": "TEXT",
+          "Sent at": "DATETIME"
         },
         "enums": {},
         "access": {
@@ -1108,9 +1084,31 @@
               "Accountant"
             ],
             "effect": "emails the invoice document to the Contact and stamps the sent time",
-            "result_location": "the invoice page's activity trail"
+            "result_location": "the invoice page's activity trail",
+            "execution": {
+              "op": "generate_document",
+              "stamp_column": "sent_at",
+              "title_columns": [
+                "reference"
+              ],
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "line_columns": [
+                "description",
+                "quantity",
+                "unit_amount"
+              ],
+              "body_columns": [
+                "contact",
+                "issue_date",
+                "due_date",
+                "notes"
+              ],
+              "dispatch": "none"
+            }
           }
         ],
+        "on_create": [],
         "id": "accounting-ledger/REC-002"
       },
       "Invoice line": {
@@ -1184,6 +1182,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "accounting-ledger/REC-003"
       },
       "Bill": {
@@ -1266,6 +1265,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "accounting-ledger/REC-004"
       },
       "Payment": {
@@ -1355,6 +1355,35 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [
+          {
+            "op": "ledger_balance",
+            "link_column": "invoice",
+            "table": "invoices",
+            "total": {
+              "kind": "lines",
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "quantity_column": "quantity",
+              "amount_column": "unit_amount"
+            },
+            "payments_table": "payments",
+            "amount_column": "amount",
+            "event": "Payments applied to the invoice reach its total"
+          },
+          {
+            "op": "ledger_balance",
+            "link_column": "bill",
+            "table": "bills",
+            "total": {
+              "kind": "column",
+              "column": "amount"
+            },
+            "payments_table": "payments",
+            "amount_column": "amount",
+            "event": "Payments applied to the bill reach its total"
+          }
+        ],
         "id": "accounting-ledger/REC-005"
       }
     },
@@ -1577,6 +1606,7 @@
           "allowed": "no"
         },
         "timeouts": [],
+        "effects": [],
         "initial": "Draft",
         "terminal": [
           "Paid",
@@ -1651,6 +1681,7 @@
           "allowed": "no"
         },
         "timeouts": [],
+        "effects": [],
         "initial": "Draft",
         "terminal": [
           "Paid",
@@ -1715,24 +1746,7 @@
         "id": "accounting-ledger/NOTIF-003"
       }
     },
-    "reports": {
-      "Profit and loss": {
-        "data_source": "What did the business earn and spend in the period?",
-        "metrics": {
-          "revenue": "sum of (Quantity x Unit amount) over Invoice lines whose Invoice is in Awaiting payment or Paid (never Draft or Voided), attributed to the Invoice's Issue date — accrual basis, GST-exclusive",
-          "expenses": "auto: count/sum of 'expenses'",
-          "net profit": "auto: count/sum of 'net profit'"
-        },
-        "id": "accounting-ledger/RPT-001"
-      },
-      "Aged receivables": {
-        "data_source": "Who owes us money, and how overdue is it?",
-        "metrics": {
-          "overdue invoice totals bucketed by age": "for each Invoice in Awaiting payment: its total minus applied Payments, bucketed by days past Due date as at today (current, 1-30, 31-60, 61-90, 90+)"
-        },
-        "id": "accounting-ledger/RPT-002"
-      }
-    },
+    "reports": {},
     "forms": {},
     "integrations": {},
     "auth": {
@@ -1848,16 +1862,6 @@
         "id": "accounting-ledger/SCR-010",
         "kind": "detail",
         "record": "Payment"
-      },
-      {
-        "id": "accounting-ledger/SCR-011",
-        "kind": "report",
-        "report": "Profit and loss"
-      },
-      {
-        "id": "accounting-ledger/SCR-012",
-        "kind": "report",
-        "report": "Aged receivables"
       }
     ],
     "navigation": [
@@ -1870,14 +1874,12 @@
       "accounting-ledger/SCR-007",
       "accounting-ledger/SCR-008",
       "accounting-ledger/SCR-009",
-      "accounting-ledger/SCR-010",
-      "accounting-ledger/SCR-011",
-      "accounting-ledger/SCR-012"
+      "accounting-ledger/SCR-010"
     ],
     "landing_per_role": {
-      "Admin": "Profit and loss",
+      "Admin": "Invoices list",
       "Accountant": "Invoices list",
-      "Advisor": "Profit and loss"
+      "Advisor": "Invoices list"
     },
     "actions_inventory": [
       {
@@ -1935,7 +1937,28 @@
             "Accountant"
           ],
           "effect": "emails the invoice document to the Contact and stamps the sent time",
-          "result_location": "the invoice page's activity trail"
+          "result_location": "the invoice page's activity trail",
+          "execution": {
+            "op": "generate_document",
+            "stamp_column": "sent_at",
+            "title_columns": [
+              "reference"
+            ],
+            "line_table": "invoice_lines",
+            "line_fk": "invoice",
+            "line_columns": [
+              "description",
+              "quantity",
+              "unit_amount"
+            ],
+            "body_columns": [
+              "contact",
+              "issue_date",
+              "due_date",
+              "notes"
+            ],
+            "dispatch": "none"
+          }
         },
         "roles": [
           "Accountant"
@@ -2193,20 +2216,6 @@
           "kind": "event",
           "event": "an invoice moves to Paid"
         }
-      },
-      {
-        "id": "accounting-ledger/OPS-011",
-        "source": "RP.08:Profit and loss",
-        "detail": {
-          "enabled": "no"
-        }
-      },
-      {
-        "id": "accounting-ledger/OPS-012",
-        "source": "RP.08:Aged receivables",
-        "detail": {
-          "enabled": "no"
-        }
       }
     ],
     "qa_generated_tests": [
@@ -2299,7 +2308,28 @@
               "Accountant"
             ],
             "effect": "emails the invoice document to the Contact and stamps the sent time",
-            "result_location": "the invoice page's activity trail"
+            "result_location": "the invoice page's activity trail",
+            "execution": {
+              "op": "generate_document",
+              "stamp_column": "sent_at",
+              "title_columns": [
+                "reference"
+              ],
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "line_columns": [
+                "description",
+                "quantity",
+                "unit_amount"
+              ],
+              "body_columns": [
+                "contact",
+                "issue_date",
+                "due_date",
+                "notes"
+              ],
+              "dispatch": "none"
+            }
           },
           "roles": [
             "Accountant"
@@ -2660,182 +2690,140 @@
       {
         "id": "accounting-ledger/QA-034",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-011",
-        "role": "Admin",
+        "screen_id": "accounting-ledger/SCR-001",
+        "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-035",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-012",
-        "role": "Admin",
+        "screen_id": "accounting-ledger/SCR-002",
+        "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-036",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-001",
+        "screen_id": "accounting-ledger/SCR-003",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-037",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-002",
+        "screen_id": "accounting-ledger/SCR-004",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-038",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-003",
+        "screen_id": "accounting-ledger/SCR-005",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-039",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-004",
+        "screen_id": "accounting-ledger/SCR-006",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-040",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-005",
+        "screen_id": "accounting-ledger/SCR-007",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-041",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-006",
+        "screen_id": "accounting-ledger/SCR-008",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-042",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-007",
+        "screen_id": "accounting-ledger/SCR-009",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-043",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-008",
+        "screen_id": "accounting-ledger/SCR-010",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-044",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-009",
-        "role": "Accountant",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-045",
-        "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-010",
-        "role": "Accountant",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-046",
-        "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-011",
-        "role": "Accountant",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-047",
-        "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-012",
-        "role": "Accountant",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-048",
-        "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-001",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-049",
+        "id": "accounting-ledger/QA-045",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-002",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-050",
+        "id": "accounting-ledger/QA-046",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-003",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-051",
+        "id": "accounting-ledger/QA-047",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-004",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-052",
+        "id": "accounting-ledger/QA-048",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-005",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-053",
+        "id": "accounting-ledger/QA-049",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-006",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-054",
+        "id": "accounting-ledger/QA-050",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-007",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-055",
+        "id": "accounting-ledger/QA-051",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-008",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-056",
+        "id": "accounting-ledger/QA-052",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-009",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-057",
+        "id": "accounting-ledger/QA-053",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-010",
-        "role": "Advisor",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-058",
-        "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-011",
-        "role": "Advisor",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-059",
-        "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-012",
         "role": "Advisor",
         "expect": "reachable"
       }

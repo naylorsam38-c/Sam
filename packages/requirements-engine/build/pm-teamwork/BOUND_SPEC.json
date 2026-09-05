@@ -124,6 +124,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "pm-teamwork/REC-001"
       },
       "Task": {
@@ -239,9 +240,18 @@
               "Member"
             ],
             "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
-            "result_location": "the same project's task list"
+            "result_location": "the same project's task list",
+            "execution": {
+              "op": "clone",
+              "overrides": {
+                "stage": "To do"
+              },
+              "title_column": "title",
+              "title_suffix": " (copy)"
+            }
           }
         ],
+        "on_create": [],
         "id": "pm-teamwork/REC-002"
       },
       "Comment": {
@@ -307,6 +317,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "pm-teamwork/REC-003"
       }
     },
@@ -490,6 +501,7 @@
           "allowed": "no"
         },
         "timeouts": [],
+        "effects": [],
         "initial": "To do",
         "terminal": [
           "Done"
@@ -522,7 +534,15 @@
           "locations": [
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       "Task due reminder": {
@@ -554,7 +574,21 @@
             "packages/builder/engines/scheduled_jobs.py::run_after",
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            },
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       "New comment": {
@@ -584,7 +618,15 @@
           "locations": [
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       }
     },
@@ -594,6 +636,23 @@
         "metrics": {
           "count of Tasks not in stage Done, grouped by Assignee": "auto: count/sum of 'count of Tasks not in stage Done, grouped by Assignee'"
         },
+        "spec": [
+          {
+            "metric": "count of Tasks not in stage Done, grouped by Assignee",
+            "spec": {
+              "table": "tasks",
+              "aggregation": "count",
+              "group_by": "assignee",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "!=",
+                  "value": "Done"
+                }
+              ]
+            }
+          }
+        ],
         "id": "pm-teamwork/RPT-001",
         "part_bindings": {
           "parts": [
@@ -602,7 +661,15 @@
           "locations": [
             "packages/builder/engines/reporting_engine.py::run_report"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       "Overdue tasks": {
@@ -610,6 +677,26 @@
         "metrics": {
           "count of overdue Tasks": "a Task counts as overdue when Due date is before today AND its stage is not Done, as at the moment the report is viewed"
         },
+        "spec": [
+          {
+            "metric": "count of overdue Tasks",
+            "spec": {
+              "table": "tasks",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "due_date",
+                  "op": "before_now"
+                },
+                {
+                  "field": "stage",
+                  "op": "!=",
+                  "value": "Done"
+                }
+              ]
+            }
+          }
+        ],
         "id": "pm-teamwork/RPT-002",
         "part_bindings": {
           "parts": [
@@ -618,7 +705,15 @@
           "locations": [
             "packages/builder/engines/reporting_engine.py::run_report"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     },
@@ -704,7 +799,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -722,7 +825,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -740,7 +851,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -758,7 +877,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -776,7 +903,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -794,7 +929,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -808,7 +951,15 @@
           "locations": [
             "packages/builder/engines/reporting_engine.py::run_report"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -822,7 +973,15 @@
           "locations": [
             "packages/builder/engines/reporting_engine.py::run_report"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     ],
@@ -861,7 +1020,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -883,7 +1050,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -906,7 +1081,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -928,7 +1111,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -950,7 +1141,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -973,7 +1172,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -986,7 +1193,15 @@
             "Member"
           ],
           "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
-          "result_location": "the same project's task list"
+          "result_location": "the same project's task list",
+          "execution": {
+            "op": "clone",
+            "overrides": {
+              "stage": "To do"
+            },
+            "title_column": "title",
+            "title_suffix": " (copy)"
+          }
         },
         "roles": [
           "Member"
@@ -999,7 +1214,15 @@
           "locations": [
             "packages/builder/engines/record_cloning.py::clone"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "record_cloning",
+              "version": "1.0.0",
+              "revision": "c9f8c783994f80c1",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1022,7 +1245,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1044,7 +1275,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1067,7 +1306,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1088,7 +1335,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1109,7 +1364,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1130,7 +1393,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1151,7 +1422,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     ],
@@ -1167,7 +1446,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1181,7 +1468,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1195,7 +1490,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1215,7 +1518,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1232,7 +1543,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1251,7 +1570,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1268,7 +1595,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1284,7 +1619,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1300,7 +1643,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       }
     ],
@@ -1443,7 +1794,15 @@
               "Member"
             ],
             "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
-            "result_location": "the same project's task list"
+            "result_location": "the same project's task list",
+            "execution": {
+              "op": "clone",
+              "overrides": {
+                "stage": "To do"
+              },
+              "title_column": "title",
+              "title_suffix": " (copy)"
+            }
           },
           "roles": [
             "Member"

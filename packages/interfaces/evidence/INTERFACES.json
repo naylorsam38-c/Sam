@@ -1,0 +1,5485 @@
+[
+ {
+  "interface": "pm-teamwork-console",
+  "family": "pm-teamwork",
+  "design": "console",
+  "mode": "server",
+  "checks": 40,
+  "passed": 40,
+  "failed": [],
+  "controls_pressed": [
+   "action:clone",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Member"
+   ],
+   [
+    true,
+    "created Project as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "created Task as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "Task starts in 'To do'"
+   ],
+   [
+    true,
+    "created Comment as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Project cbdd7b94"
+   ],
+   [
+    true,
+    "edited Project title saved (API)"
+   ],
+   [
+    true,
+    "opened Task 9d6d1c9a"
+   ],
+   [
+    true,
+    "edited Task title saved (API)"
+   ],
+   [
+    true,
+    "opened Comment 78bd9e16"
+   ],
+   [
+    true,
+    "saved Comment (API)"
+   ],
+   [
+    true,
+    "opened Project cbdd7b94"
+   ],
+   [
+    true,
+    "created Task as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "Task starts in 'To do'"
+   ],
+   [
+    true,
+    "opened Task 9d6d1c9a"
+   ],
+   [
+    true,
+    "created Comment as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Task 9d6d1c9a"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Task"
+   ],
+   [
+    true,
+    "role switched to Member"
+   ],
+   [
+    true,
+    "opened Task 9d6d1c9a"
+   ],
+   [
+    true,
+    "Task: Member moved 'To do' \u2192 'In progress' (API)"
+   ],
+   [
+    true,
+    "opened Task 9d6d1c9a"
+   ],
+   [
+    true,
+    "Task: Member moved 'In progress' \u2192 'Done' (API)"
+   ],
+   [
+    true,
+    "created Task as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "Task starts in 'To do'"
+   ],
+   [
+    true,
+    "opened Task 954e8269"
+   ],
+   [
+    true,
+    "Duplicate: a copy exists with ' (copy)' (API)"
+   ],
+   [
+    true,
+    "Duplicate: copy in 'To do'"
+   ],
+   [
+    true,
+    "Duplicate is in the activity trail (API)"
+   ],
+   [
+    true,
+    "report 'Open tasks by person': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Open tasks by person' shows the groups of count of Tasks not in stage Done, grouped by Assignee"
+   ],
+   [
+    true,
+    "report 'Overdue tasks': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Overdue tasks' shows count of overdue Tasks = 0"
+   ],
+   [
+    true,
+    "opened Project cbdd7b94"
+   ],
+   [
+    true,
+    "deleted Project as Member (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "pm-teamwork-board",
+  "family": "pm-teamwork",
+  "design": "board",
+  "mode": "server",
+  "checks": 40,
+  "passed": 40,
+  "failed": [],
+  "controls_pressed": [
+   "action:clone",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Member"
+   ],
+   [
+    true,
+    "created Project as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "created Task as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "Task starts in 'To do'"
+   ],
+   [
+    true,
+    "created Comment as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Project 6a33122b"
+   ],
+   [
+    true,
+    "edited Project title saved (API)"
+   ],
+   [
+    true,
+    "opened Task 1d910407"
+   ],
+   [
+    true,
+    "edited Task title saved (API)"
+   ],
+   [
+    true,
+    "opened Comment aceccaf7"
+   ],
+   [
+    true,
+    "saved Comment (API)"
+   ],
+   [
+    true,
+    "opened Project 6a33122b"
+   ],
+   [
+    true,
+    "created Task as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "Task starts in 'To do'"
+   ],
+   [
+    true,
+    "opened Task 1d910407"
+   ],
+   [
+    true,
+    "created Comment as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Task 1d910407"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Task"
+   ],
+   [
+    true,
+    "role switched to Member"
+   ],
+   [
+    true,
+    "opened Task 1d910407"
+   ],
+   [
+    true,
+    "Task: Member moved 'To do' \u2192 'In progress' (API)"
+   ],
+   [
+    true,
+    "opened Task 1d910407"
+   ],
+   [
+    true,
+    "Task: Member moved 'In progress' \u2192 'Done' (API)"
+   ],
+   [
+    true,
+    "created Task as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "Task starts in 'To do'"
+   ],
+   [
+    true,
+    "opened Task e07175b7"
+   ],
+   [
+    true,
+    "Duplicate: a copy exists with ' (copy)' (API)"
+   ],
+   [
+    true,
+    "Duplicate: copy in 'To do'"
+   ],
+   [
+    true,
+    "Duplicate is in the activity trail (API)"
+   ],
+   [
+    true,
+    "report 'Open tasks by person': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Open tasks by person' shows the groups of count of Tasks not in stage Done, grouped by Assignee"
+   ],
+   [
+    true,
+    "report 'Overdue tasks': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Overdue tasks' shows count of overdue Tasks = 0"
+   ],
+   [
+    true,
+    "opened Project 6a33122b"
+   ],
+   [
+    true,
+    "deleted Project as Member (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "pm-teamwork-pocket",
+  "family": "pm-teamwork",
+  "design": "pocket",
+  "mode": "server",
+  "checks": 40,
+  "passed": 40,
+  "failed": [],
+  "controls_pressed": [
+   "action:clone",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:more",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Member"
+   ],
+   [
+    true,
+    "created Project as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "created Task as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "Task starts in 'To do'"
+   ],
+   [
+    true,
+    "created Comment as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Project 39fab94d"
+   ],
+   [
+    true,
+    "edited Project title saved (API)"
+   ],
+   [
+    true,
+    "opened Task d9d4fdd3"
+   ],
+   [
+    true,
+    "edited Task title saved (API)"
+   ],
+   [
+    true,
+    "opened Comment 1576f7dc"
+   ],
+   [
+    true,
+    "saved Comment (API)"
+   ],
+   [
+    true,
+    "opened Project 39fab94d"
+   ],
+   [
+    true,
+    "created Task as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "Task starts in 'To do'"
+   ],
+   [
+    true,
+    "opened Task d9d4fdd3"
+   ],
+   [
+    true,
+    "created Comment as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Task d9d4fdd3"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Task"
+   ],
+   [
+    true,
+    "role switched to Member"
+   ],
+   [
+    true,
+    "opened Task d9d4fdd3"
+   ],
+   [
+    true,
+    "Task: Member moved 'To do' \u2192 'In progress' (API)"
+   ],
+   [
+    true,
+    "opened Task d9d4fdd3"
+   ],
+   [
+    true,
+    "Task: Member moved 'In progress' \u2192 'Done' (API)"
+   ],
+   [
+    true,
+    "created Task as Member (API shows the new row)"
+   ],
+   [
+    true,
+    "Task starts in 'To do'"
+   ],
+   [
+    true,
+    "opened Task 3f74a6b9"
+   ],
+   [
+    true,
+    "Duplicate: a copy exists with ' (copy)' (API)"
+   ],
+   [
+    true,
+    "Duplicate: copy in 'To do'"
+   ],
+   [
+    true,
+    "Duplicate is in the activity trail (API)"
+   ],
+   [
+    true,
+    "report 'Open tasks by person': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Open tasks by person' shows the groups of count of Tasks not in stage Done, grouped by Assignee"
+   ],
+   [
+    true,
+    "report 'Overdue tasks': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Overdue tasks' shows count of overdue Tasks = 0"
+   ],
+   [
+    true,
+    "opened Project 39fab94d"
+   ],
+   [
+    true,
+    "deleted Project as Member (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "crm-pipeline-console",
+  "family": "crm-pipeline",
+  "design": "console",
+  "mode": "server",
+  "checks": 50,
+  "passed": 50,
+  "failed": [],
+  "controls_pressed": [
+   "action:confirm-inputs",
+   "action:set_fields_from_input",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Sales rep"
+   ],
+   [
+    true,
+    "created Organisation as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "created Contact as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "created Activity as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Organisation 4795b112"
+   ],
+   [
+    true,
+    "edited Organisation title saved (API)"
+   ],
+   [
+    true,
+    "opened Contact 9beefb5a"
+   ],
+   [
+    true,
+    "edited Contact title saved (API)"
+   ],
+   [
+    true,
+    "opened Deal f1e924ef"
+   ],
+   [
+    true,
+    "edited Deal title saved (API)"
+   ],
+   [
+    true,
+    "opened Activity dd321c35"
+   ],
+   [
+    true,
+    "edited Activity title saved (API)"
+   ],
+   [
+    true,
+    "opened Organisation 4795b112"
+   ],
+   [
+    true,
+    "created Contact as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact 9beefb5a"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "opened Deal f1e924ef"
+   ],
+   [
+    true,
+    "created Activity as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Deal f1e924ef"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Deal"
+   ],
+   [
+    true,
+    "role switched to Sales rep"
+   ],
+   [
+    true,
+    "opened Deal f1e924ef"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Lead in' \u2192 'Contacted' (API)"
+   ],
+   [
+    true,
+    "opened Deal f1e924ef"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Contacted' \u2192 'Proposal sent' (API)"
+   ],
+   [
+    true,
+    "opened Deal f1e924ef"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Proposal sent' \u2192 'Negotiation' (API)"
+   ],
+   [
+    true,
+    "opened Deal f1e924ef"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Negotiation' \u2192 'Lost' (API)"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "role switched to Sales manager"
+   ],
+   [
+    true,
+    "opened Deal 35584ddc"
+   ],
+   [
+    true,
+    "Reassign: ['owner'] set from input (API)"
+   ],
+   [
+    true,
+    "Reassign is in the activity trail (API)"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage' shows the groups of sum of open Deal Value grouped by stage"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage' shows the groups of count of Deals grouped by stage"
+   ],
+   [
+    true,
+    "report 'Win rate': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Win rate' shows win rate = 0.0%"
+   ],
+   [
+    true,
+    "opened Organisation 4795b112"
+   ],
+   [
+    true,
+    "deleted Organisation as Sales manager (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "crm-pipeline-board",
+  "family": "crm-pipeline",
+  "design": "board",
+  "mode": "server",
+  "checks": 50,
+  "passed": 50,
+  "failed": [],
+  "controls_pressed": [
+   "action:confirm-inputs",
+   "action:set_fields_from_input",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Sales rep"
+   ],
+   [
+    true,
+    "created Organisation as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "created Contact as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "created Activity as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Organisation 1e3ca6c2"
+   ],
+   [
+    true,
+    "edited Organisation title saved (API)"
+   ],
+   [
+    true,
+    "opened Contact 98db3eb1"
+   ],
+   [
+    true,
+    "edited Contact title saved (API)"
+   ],
+   [
+    true,
+    "opened Deal f50ce937"
+   ],
+   [
+    true,
+    "edited Deal title saved (API)"
+   ],
+   [
+    true,
+    "opened Activity d9d34023"
+   ],
+   [
+    true,
+    "edited Activity title saved (API)"
+   ],
+   [
+    true,
+    "opened Organisation 1e3ca6c2"
+   ],
+   [
+    true,
+    "created Contact as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact 98db3eb1"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "opened Deal f50ce937"
+   ],
+   [
+    true,
+    "created Activity as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Deal f50ce937"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Deal"
+   ],
+   [
+    true,
+    "role switched to Sales rep"
+   ],
+   [
+    true,
+    "opened Deal f50ce937"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Lead in' \u2192 'Contacted' (API)"
+   ],
+   [
+    true,
+    "opened Deal f50ce937"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Contacted' \u2192 'Proposal sent' (API)"
+   ],
+   [
+    true,
+    "opened Deal f50ce937"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Proposal sent' \u2192 'Negotiation' (API)"
+   ],
+   [
+    true,
+    "opened Deal f50ce937"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Negotiation' \u2192 'Lost' (API)"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "role switched to Sales manager"
+   ],
+   [
+    true,
+    "opened Deal 618fe427"
+   ],
+   [
+    true,
+    "Reassign: ['owner'] set from input (API)"
+   ],
+   [
+    true,
+    "Reassign is in the activity trail (API)"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage' shows the groups of sum of open Deal Value grouped by stage"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage' shows the groups of count of Deals grouped by stage"
+   ],
+   [
+    true,
+    "report 'Win rate': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Win rate' shows win rate = 0.0%"
+   ],
+   [
+    true,
+    "opened Organisation 1e3ca6c2"
+   ],
+   [
+    true,
+    "deleted Organisation as Sales manager (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "crm-pipeline-pocket",
+  "family": "crm-pipeline",
+  "design": "pocket",
+  "mode": "server",
+  "checks": 50,
+  "passed": 50,
+  "failed": [],
+  "controls_pressed": [
+   "action:confirm-inputs",
+   "action:set_fields_from_input",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:more",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Sales rep"
+   ],
+   [
+    true,
+    "created Organisation as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "created Contact as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "created Activity as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Organisation 2d21ff8a"
+   ],
+   [
+    true,
+    "edited Organisation title saved (API)"
+   ],
+   [
+    true,
+    "opened Contact 19371e98"
+   ],
+   [
+    true,
+    "edited Contact title saved (API)"
+   ],
+   [
+    true,
+    "opened Deal 2a642409"
+   ],
+   [
+    true,
+    "edited Deal title saved (API)"
+   ],
+   [
+    true,
+    "opened Activity 5c2664c5"
+   ],
+   [
+    true,
+    "edited Activity title saved (API)"
+   ],
+   [
+    true,
+    "opened Organisation 2d21ff8a"
+   ],
+   [
+    true,
+    "created Contact as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact 19371e98"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "opened Deal 2a642409"
+   ],
+   [
+    true,
+    "created Activity as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Deal 2a642409"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Deal"
+   ],
+   [
+    true,
+    "role switched to Sales rep"
+   ],
+   [
+    true,
+    "opened Deal 2a642409"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Lead in' \u2192 'Contacted' (API)"
+   ],
+   [
+    true,
+    "opened Deal 2a642409"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Contacted' \u2192 'Proposal sent' (API)"
+   ],
+   [
+    true,
+    "opened Deal 2a642409"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Proposal sent' \u2192 'Negotiation' (API)"
+   ],
+   [
+    true,
+    "opened Deal 2a642409"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Negotiation' \u2192 'Lost' (API)"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "role switched to Sales manager"
+   ],
+   [
+    true,
+    "opened Deal b9ded79e"
+   ],
+   [
+    true,
+    "Reassign: ['owner'] set from input (API)"
+   ],
+   [
+    true,
+    "Reassign is in the activity trail (API)"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage' shows the groups of sum of open Deal Value grouped by stage"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage' shows the groups of count of Deals grouped by stage"
+   ],
+   [
+    true,
+    "report 'Win rate': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Win rate' shows win rate = 0.0%"
+   ],
+   [
+    true,
+    "opened Organisation 2d21ff8a"
+   ],
+   [
+    true,
+    "deleted Organisation as Sales manager (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "booking-frontdesk-console",
+  "family": "booking-frontdesk",
+  "design": "console",
+  "mode": "server",
+  "checks": 36,
+  "passed": 36,
+  "failed": [],
+  "controls_pressed": [
+   "create",
+   "home",
+   "move",
+   "nav:form",
+   "nav:list",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save",
+   "submitForm"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "created Service as Owner (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Staff"
+   ],
+   [
+    true,
+    "created Customer as Staff (API shows the new row)"
+   ],
+   [
+    true,
+    "created Appointment as Staff (API shows the new row)"
+   ],
+   [
+    true,
+    "Appointment starts in 'Booked'"
+   ],
+   [
+    true,
+    "role switched to Owner"
+   ],
+   [
+    true,
+    "opened Service 51f0afc0"
+   ],
+   [
+    true,
+    "edited Service title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Staff"
+   ],
+   [
+    true,
+    "opened Customer 32996113"
+   ],
+   [
+    true,
+    "edited Customer title saved (API)"
+   ],
+   [
+    true,
+    "opened Appointment 3112b450"
+   ],
+   [
+    true,
+    "saved Appointment (API)"
+   ],
+   [
+    true,
+    "opened Service 51f0afc0"
+   ],
+   [
+    true,
+    "created Appointment as Staff (API shows the new row)"
+   ],
+   [
+    true,
+    "Appointment starts in 'Booked'"
+   ],
+   [
+    true,
+    "role switched to Owner"
+   ],
+   [
+    true,
+    "opened Appointment 3112b450"
+   ],
+   [
+    true,
+    "Owner (not a declared mover) is offered no move on Appointment"
+   ],
+   [
+    true,
+    "role switched to Staff"
+   ],
+   [
+    true,
+    "opened Appointment 3112b450"
+   ],
+   [
+    true,
+    "Appointment: Staff moved 'Booked' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "opened Appointment 3112b450"
+   ],
+   [
+    true,
+    "Appointment: Staff moved 'Confirmed' \u2192 'No-show' (API)"
+   ],
+   [
+    true,
+    "report 'Upcoming appointments': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Upcoming appointments' shows count of Appointments in stage Booked or Confirmed = 0"
+   ],
+   [
+    true,
+    "report 'No-show rate': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'No-show rate' shows no-show rate = 100.0%"
+   ],
+   [
+    true,
+    "form 'Public booking form' created a Appointment (API)"
+   ],
+   [
+    true,
+    "role switched to Owner"
+   ],
+   [
+    true,
+    "opened Service 51f0afc0"
+   ],
+   [
+    true,
+    "deleted Service as Owner (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "booking-frontdesk-board",
+  "family": "booking-frontdesk",
+  "design": "board",
+  "mode": "server",
+  "checks": 36,
+  "passed": 36,
+  "failed": [],
+  "controls_pressed": [
+   "create",
+   "home",
+   "move",
+   "nav:form",
+   "nav:list",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save",
+   "submitForm"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "created Service as Owner (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Staff"
+   ],
+   [
+    true,
+    "created Customer as Staff (API shows the new row)"
+   ],
+   [
+    true,
+    "created Appointment as Staff (API shows the new row)"
+   ],
+   [
+    true,
+    "Appointment starts in 'Booked'"
+   ],
+   [
+    true,
+    "role switched to Owner"
+   ],
+   [
+    true,
+    "opened Service 8c9e8cba"
+   ],
+   [
+    true,
+    "edited Service title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Staff"
+   ],
+   [
+    true,
+    "opened Customer be1cac76"
+   ],
+   [
+    true,
+    "edited Customer title saved (API)"
+   ],
+   [
+    true,
+    "opened Appointment ff3fb00c"
+   ],
+   [
+    true,
+    "saved Appointment (API)"
+   ],
+   [
+    true,
+    "opened Service 8c9e8cba"
+   ],
+   [
+    true,
+    "created Appointment as Staff (API shows the new row)"
+   ],
+   [
+    true,
+    "Appointment starts in 'Booked'"
+   ],
+   [
+    true,
+    "role switched to Owner"
+   ],
+   [
+    true,
+    "opened Appointment ff3fb00c"
+   ],
+   [
+    true,
+    "Owner (not a declared mover) is offered no move on Appointment"
+   ],
+   [
+    true,
+    "role switched to Staff"
+   ],
+   [
+    true,
+    "opened Appointment ff3fb00c"
+   ],
+   [
+    true,
+    "Appointment: Staff moved 'Booked' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "opened Appointment ff3fb00c"
+   ],
+   [
+    true,
+    "Appointment: Staff moved 'Confirmed' \u2192 'No-show' (API)"
+   ],
+   [
+    true,
+    "report 'Upcoming appointments': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Upcoming appointments' shows count of Appointments in stage Booked or Confirmed = 0"
+   ],
+   [
+    true,
+    "report 'No-show rate': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'No-show rate' shows no-show rate = 100.0%"
+   ],
+   [
+    true,
+    "form 'Public booking form' created a Appointment (API)"
+   ],
+   [
+    true,
+    "role switched to Owner"
+   ],
+   [
+    true,
+    "opened Service 8c9e8cba"
+   ],
+   [
+    true,
+    "deleted Service as Owner (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "booking-frontdesk-pocket",
+  "family": "booking-frontdesk",
+  "design": "pocket",
+  "mode": "server",
+  "checks": 36,
+  "passed": 36,
+  "failed": [],
+  "controls_pressed": [
+   "create",
+   "home",
+   "move",
+   "nav:form",
+   "nav:list",
+   "nav:more",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save",
+   "submitForm"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "created Service as Owner (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Staff"
+   ],
+   [
+    true,
+    "created Customer as Staff (API shows the new row)"
+   ],
+   [
+    true,
+    "created Appointment as Staff (API shows the new row)"
+   ],
+   [
+    true,
+    "Appointment starts in 'Booked'"
+   ],
+   [
+    true,
+    "role switched to Owner"
+   ],
+   [
+    true,
+    "opened Service 92c178ac"
+   ],
+   [
+    true,
+    "edited Service title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Staff"
+   ],
+   [
+    true,
+    "opened Customer b83c2071"
+   ],
+   [
+    true,
+    "edited Customer title saved (API)"
+   ],
+   [
+    true,
+    "opened Appointment cd9a527d"
+   ],
+   [
+    true,
+    "saved Appointment (API)"
+   ],
+   [
+    true,
+    "opened Service 92c178ac"
+   ],
+   [
+    true,
+    "created Appointment as Staff (API shows the new row)"
+   ],
+   [
+    true,
+    "Appointment starts in 'Booked'"
+   ],
+   [
+    true,
+    "role switched to Owner"
+   ],
+   [
+    true,
+    "opened Appointment cd9a527d"
+   ],
+   [
+    true,
+    "Owner (not a declared mover) is offered no move on Appointment"
+   ],
+   [
+    true,
+    "role switched to Staff"
+   ],
+   [
+    true,
+    "opened Appointment cd9a527d"
+   ],
+   [
+    true,
+    "Appointment: Staff moved 'Booked' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "opened Appointment cd9a527d"
+   ],
+   [
+    true,
+    "Appointment: Staff moved 'Confirmed' \u2192 'No-show' (API)"
+   ],
+   [
+    true,
+    "report 'Upcoming appointments': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Upcoming appointments' shows count of Appointments in stage Booked or Confirmed = 0"
+   ],
+   [
+    true,
+    "report 'No-show rate': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'No-show rate' shows no-show rate = 100.0%"
+   ],
+   [
+    true,
+    "form 'Public booking form' created a Appointment (API)"
+   ],
+   [
+    true,
+    "role switched to Owner"
+   ],
+   [
+    true,
+    "opened Service 92c178ac"
+   ],
+   [
+    true,
+    "deleted Service as Owner (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "erp-backbone-console",
+  "family": "erp-backbone",
+  "design": "console",
+  "mode": "server",
+  "checks": 101,
+  "passed": 101,
+  "failed": [],
+  "controls_pressed": [
+   "approve:APPROVED",
+   "approve:DECLINED",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "created Product as Operations (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "created Supplier as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "created Customer account as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "created Purchase order as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "Purchase order starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Purchase order line as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "created Sales order as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "Sales order starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Sales order line as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "created Stock adjustment as Warehouse (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Product 08390add"
+   ],
+   [
+    true,
+    "edited Product title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Supplier 89df43e8"
+   ],
+   [
+    true,
+    "edited Supplier title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Customer account c6571f87"
+   ],
+   [
+    true,
+    "edited Customer account title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Purchase order 6a7ab7d5"
+   ],
+   [
+    true,
+    "saved Purchase order (API)"
+   ],
+   [
+    true,
+    "opened Purchase order line 1b63266f"
+   ],
+   [
+    true,
+    "saved Purchase order line (API)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Sales order b86d61e2"
+   ],
+   [
+    true,
+    "saved Sales order (API)"
+   ],
+   [
+    true,
+    "opened Sales order line d2c520aa"
+   ],
+   [
+    true,
+    "saved Sales order line (API)"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Stock adjustment 22a34fb7"
+   ],
+   [
+    true,
+    "saved Stock adjustment (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Supplier 89df43e8"
+   ],
+   [
+    true,
+    "created Purchase order as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "Purchase order starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Purchase order 6a7ab7d5"
+   ],
+   [
+    true,
+    "created Purchase order line as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Customer account c6571f87"
+   ],
+   [
+    true,
+    "created Sales order as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "Sales order starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Sales order b86d61e2"
+   ],
+   [
+    true,
+    "created Sales order line as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Product 08390add"
+   ],
+   [
+    true,
+    "created Stock adjustment as Warehouse (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Purchase order 6a7ab7d5"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Purchase order"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Purchase order 6a7ab7d5"
+   ],
+   [
+    true,
+    "Purchase order declined by Operations \u2192 back to 'Draft'"
+   ],
+   [
+    true,
+    "the decline is what the gate now records"
+   ],
+   [
+    true,
+    "opened Purchase order 6a7ab7d5"
+   ],
+   [
+    true,
+    "Purchase order approved by Operations at 'Draft' (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Purchase order 6a7ab7d5"
+   ],
+   [
+    true,
+    "Purchase order: Purchasing moved 'Draft' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Purchase order 6a7ab7d5"
+   ],
+   [
+    true,
+    "Purchase order: Warehouse moved 'Confirmed' \u2192 'Received' (API)"
+   ],
+   [
+    true,
+    "stock effect on 'Received': 11 + 35 = 46 (API)"
+   ],
+   [
+    true,
+    "the page told the user about the stock movement"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Purchase order 6a7ab7d5"
+   ],
+   [
+    true,
+    "Purchase order: Operations moved 'Received' \u2192 'Closed' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Sales order b86d61e2"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Sales order"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Sales order b86d61e2"
+   ],
+   [
+    true,
+    "Sales order: Sales moved 'Draft' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Sales order b86d61e2"
+   ],
+   [
+    true,
+    "Sales order: Warehouse moved 'Confirmed' \u2192 'Shipped' (API)"
+   ],
+   [
+    true,
+    "stock effect on 'Shipped': 46 \u2212 39 = 7 (API)"
+   ],
+   [
+    true,
+    "the page told the user about the stock movement"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Sales order b86d61e2"
+   ],
+   [
+    true,
+    "Sales order: Operations moved 'Shipped' \u2192 'Closed' (API)"
+   ],
+   [
+    true,
+    "report 'Stock on hand': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Stock on hand' shows sum of Product Stock on hand = 7"
+   ],
+   [
+    true,
+    "report 'Stock on hand' shows count of Products at or below Reorder point = 1"
+   ],
+   [
+    true,
+    "report 'Sales by month': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Sales by month' shows the groups of sales value"
+   ],
+   [
+    true,
+    "report 'Open orders': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Open orders' shows count of Sales orders in Confirmed = 0"
+   ],
+   [
+    true,
+    "report 'Open orders' shows count of Purchase orders in Confirmed = 0"
+   ],
+   [
+    true,
+    "opened Product 08390add"
+   ],
+   [
+    true,
+    "deleted Product as Operations (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "erp-backbone-board",
+  "family": "erp-backbone",
+  "design": "board",
+  "mode": "server",
+  "checks": 101,
+  "passed": 101,
+  "failed": [],
+  "controls_pressed": [
+   "approve:APPROVED",
+   "approve:DECLINED",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "created Product as Operations (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "created Supplier as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "created Customer account as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "created Purchase order as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "Purchase order starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Purchase order line as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "created Sales order as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "Sales order starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Sales order line as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "created Stock adjustment as Warehouse (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Product 8ef4526b"
+   ],
+   [
+    true,
+    "edited Product title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Supplier 3c51cf5b"
+   ],
+   [
+    true,
+    "edited Supplier title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Customer account d1af564f"
+   ],
+   [
+    true,
+    "edited Customer account title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Purchase order 75750073"
+   ],
+   [
+    true,
+    "saved Purchase order (API)"
+   ],
+   [
+    true,
+    "opened Purchase order line 62b53b63"
+   ],
+   [
+    true,
+    "saved Purchase order line (API)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Sales order a620c0c6"
+   ],
+   [
+    true,
+    "saved Sales order (API)"
+   ],
+   [
+    true,
+    "opened Sales order line 2245c5ba"
+   ],
+   [
+    true,
+    "saved Sales order line (API)"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Stock adjustment 28664f79"
+   ],
+   [
+    true,
+    "saved Stock adjustment (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Supplier 3c51cf5b"
+   ],
+   [
+    true,
+    "created Purchase order as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "Purchase order starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Purchase order 75750073"
+   ],
+   [
+    true,
+    "created Purchase order line as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Customer account d1af564f"
+   ],
+   [
+    true,
+    "created Sales order as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "Sales order starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Sales order a620c0c6"
+   ],
+   [
+    true,
+    "created Sales order line as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Product 8ef4526b"
+   ],
+   [
+    true,
+    "created Stock adjustment as Warehouse (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Purchase order 75750073"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Purchase order"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Purchase order 75750073"
+   ],
+   [
+    true,
+    "Purchase order declined by Operations \u2192 back to 'Draft'"
+   ],
+   [
+    true,
+    "the decline is what the gate now records"
+   ],
+   [
+    true,
+    "opened Purchase order 75750073"
+   ],
+   [
+    true,
+    "Purchase order approved by Operations at 'Draft' (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Purchase order 75750073"
+   ],
+   [
+    true,
+    "Purchase order: Purchasing moved 'Draft' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Purchase order 75750073"
+   ],
+   [
+    true,
+    "Purchase order: Warehouse moved 'Confirmed' \u2192 'Received' (API)"
+   ],
+   [
+    true,
+    "stock effect on 'Received': 11 + 35 = 46 (API)"
+   ],
+   [
+    true,
+    "the page told the user about the stock movement"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Purchase order 75750073"
+   ],
+   [
+    true,
+    "Purchase order: Operations moved 'Received' \u2192 'Closed' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Sales order a620c0c6"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Sales order"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Sales order a620c0c6"
+   ],
+   [
+    true,
+    "Sales order: Sales moved 'Draft' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Sales order a620c0c6"
+   ],
+   [
+    true,
+    "Sales order: Warehouse moved 'Confirmed' \u2192 'Shipped' (API)"
+   ],
+   [
+    true,
+    "stock effect on 'Shipped': 46 \u2212 39 = 7 (API)"
+   ],
+   [
+    true,
+    "the page told the user about the stock movement"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Sales order a620c0c6"
+   ],
+   [
+    true,
+    "Sales order: Operations moved 'Shipped' \u2192 'Closed' (API)"
+   ],
+   [
+    true,
+    "report 'Stock on hand': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Stock on hand' shows sum of Product Stock on hand = 7"
+   ],
+   [
+    true,
+    "report 'Stock on hand' shows count of Products at or below Reorder point = 1"
+   ],
+   [
+    true,
+    "report 'Sales by month': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Sales by month' shows the groups of sales value"
+   ],
+   [
+    true,
+    "report 'Open orders': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Open orders' shows count of Sales orders in Confirmed = 0"
+   ],
+   [
+    true,
+    "report 'Open orders' shows count of Purchase orders in Confirmed = 0"
+   ],
+   [
+    true,
+    "opened Product 8ef4526b"
+   ],
+   [
+    true,
+    "deleted Product as Operations (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "erp-backbone-pocket",
+  "family": "erp-backbone",
+  "design": "pocket",
+  "mode": "server",
+  "checks": 101,
+  "passed": 101,
+  "failed": [],
+  "controls_pressed": [
+   "approve:APPROVED",
+   "approve:DECLINED",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:more",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "created Product as Operations (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "created Supplier as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "created Customer account as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "created Purchase order as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "Purchase order starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Purchase order line as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "created Sales order as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "Sales order starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Sales order line as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "created Stock adjustment as Warehouse (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Product e20e89c1"
+   ],
+   [
+    true,
+    "edited Product title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Supplier bea7b121"
+   ],
+   [
+    true,
+    "edited Supplier title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Customer account e55daa12"
+   ],
+   [
+    true,
+    "edited Customer account title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Purchase order 0f1de33b"
+   ],
+   [
+    true,
+    "saved Purchase order (API)"
+   ],
+   [
+    true,
+    "opened Purchase order line ff132cb5"
+   ],
+   [
+    true,
+    "saved Purchase order line (API)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Sales order 85a7ec18"
+   ],
+   [
+    true,
+    "saved Sales order (API)"
+   ],
+   [
+    true,
+    "opened Sales order line 8887ff01"
+   ],
+   [
+    true,
+    "saved Sales order line (API)"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Stock adjustment 03e072e1"
+   ],
+   [
+    true,
+    "saved Stock adjustment (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Supplier bea7b121"
+   ],
+   [
+    true,
+    "created Purchase order as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "Purchase order starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Purchase order 0f1de33b"
+   ],
+   [
+    true,
+    "created Purchase order line as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Customer account e55daa12"
+   ],
+   [
+    true,
+    "created Sales order as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "Sales order starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Sales order 85a7ec18"
+   ],
+   [
+    true,
+    "created Sales order line as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Product e20e89c1"
+   ],
+   [
+    true,
+    "created Stock adjustment as Warehouse (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Purchase order 0f1de33b"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Purchase order"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Purchase order 0f1de33b"
+   ],
+   [
+    true,
+    "Purchase order declined by Operations \u2192 back to 'Draft'"
+   ],
+   [
+    true,
+    "the decline is what the gate now records"
+   ],
+   [
+    true,
+    "opened Purchase order 0f1de33b"
+   ],
+   [
+    true,
+    "Purchase order approved by Operations at 'Draft' (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Purchase order 0f1de33b"
+   ],
+   [
+    true,
+    "Purchase order: Purchasing moved 'Draft' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Purchase order 0f1de33b"
+   ],
+   [
+    true,
+    "Purchase order: Warehouse moved 'Confirmed' \u2192 'Received' (API)"
+   ],
+   [
+    true,
+    "stock effect on 'Received': 11 + 35 = 46 (API)"
+   ],
+   [
+    true,
+    "the page told the user about the stock movement"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Purchase order 0f1de33b"
+   ],
+   [
+    true,
+    "Purchase order: Operations moved 'Received' \u2192 'Closed' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Sales order 85a7ec18"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Sales order"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Sales order 85a7ec18"
+   ],
+   [
+    true,
+    "Sales order: Sales moved 'Draft' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Sales order 85a7ec18"
+   ],
+   [
+    true,
+    "Sales order: Warehouse moved 'Confirmed' \u2192 'Shipped' (API)"
+   ],
+   [
+    true,
+    "stock effect on 'Shipped': 46 \u2212 39 = 7 (API)"
+   ],
+   [
+    true,
+    "the page told the user about the stock movement"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Sales order 85a7ec18"
+   ],
+   [
+    true,
+    "Sales order: Operations moved 'Shipped' \u2192 'Closed' (API)"
+   ],
+   [
+    true,
+    "report 'Stock on hand': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Stock on hand' shows sum of Product Stock on hand = 7"
+   ],
+   [
+    true,
+    "report 'Stock on hand' shows count of Products at or below Reorder point = 1"
+   ],
+   [
+    true,
+    "report 'Sales by month': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Sales by month' shows the groups of sales value"
+   ],
+   [
+    true,
+    "report 'Open orders': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Open orders' shows count of Sales orders in Confirmed = 0"
+   ],
+   [
+    true,
+    "report 'Open orders' shows count of Purchase orders in Confirmed = 0"
+   ],
+   [
+    true,
+    "opened Product e20e89c1"
+   ],
+   [
+    true,
+    "deleted Product as Operations (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "accounting-ledger-console",
+  "family": "accounting-ledger",
+  "design": "console",
+  "mode": "server",
+  "checks": 103,
+  "passed": 103,
+  "failed": [],
+  "controls_pressed": [
+   "action:generate_document",
+   "approve:APPROVED",
+   "approve:DECLINED",
+   "closeDoc",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Contact as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Payment as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact cc1253a1"
+   ],
+   [
+    true,
+    "edited Contact title saved (API)"
+   ],
+   [
+    true,
+    "opened Invoice 473f3df5"
+   ],
+   [
+    true,
+    "saved Invoice (API)"
+   ],
+   [
+    true,
+    "opened Invoice line 17466521"
+   ],
+   [
+    true,
+    "edited Invoice line title saved (API)"
+   ],
+   [
+    true,
+    "opened Bill ede32eac"
+   ],
+   [
+    true,
+    "saved Bill (API)"
+   ],
+   [
+    true,
+    "opened Payment e3ad64c6"
+   ],
+   [
+    true,
+    "saved Payment (API)"
+   ],
+   [
+    true,
+    "opened Contact cc1253a1"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice 473f3df5"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact cc1253a1"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice 473f3df5"
+   ],
+   [
+    true,
+    "created Payment as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Advisor"
+   ],
+   [
+    true,
+    "opened Invoice 473f3df5"
+   ],
+   [
+    true,
+    "Advisor (not a declared mover) is offered no move on Invoice"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice 473f3df5"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice 473f3df5"
+   ],
+   [
+    true,
+    "Invoice declined by Admin \u2192 back to 'Draft'"
+   ],
+   [
+    true,
+    "the decline is what the gate now records"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice 473f3df5"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice 473f3df5"
+   ],
+   [
+    true,
+    "Invoice approved by Admin at 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "opened Invoice 473f3df5"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting approval' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "opened Invoice 473f3df5"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting payment' \u2192 'Voided' (API)"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice 7c696690"
+   ],
+   [
+    true,
+    "Send: 'sent_at' stamped (API)"
+   ],
+   [
+    true,
+    "Send: generated document shown"
+   ],
+   [
+    true,
+    "Send is in the activity trail (API)"
+   ],
+   [
+    true,
+    "role switched to Advisor"
+   ],
+   [
+    true,
+    "opened Bill ede32eac"
+   ],
+   [
+    true,
+    "Advisor (not a declared mover) is offered no move on Bill"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Bill ede32eac"
+   ],
+   [
+    true,
+    "Bill: Accountant moved 'Draft' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Bill ede32eac"
+   ],
+   [
+    true,
+    "Bill: Admin moved 'Awaiting payment' \u2192 'Voided' (API)"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice f4a83204"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "ledger: Invoice total is 1406.25"
+   ],
+   [
+    true,
+    "opened Invoice f4a83204"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice f4a83204"
+   ],
+   [
+    true,
+    "Invoice approved by Admin at 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "opened Invoice f4a83204"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting approval' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "ledger: Invoice is in 'Awaiting payment' awaiting payment"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice f4a83204"
+   ],
+   [
+    true,
+    "ledger: part payment (703.12) left Invoice in 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "the page told the user how much is applied"
+   ],
+   [
+    true,
+    "opened Invoice f4a83204"
+   ],
+   [
+    true,
+    "ledger: paying the balance (703.13) moved Invoice 'Awaiting payment' \u2192 'Paid' (API)"
+   ],
+   [
+    true,
+    "the page told the user the target settled"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "ledger: Bill total is 38.5"
+   ],
+   [
+    true,
+    "opened Bill 88efb8ef"
+   ],
+   [
+    true,
+    "Bill: Accountant moved 'Draft' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "ledger: Bill is in 'Awaiting payment' awaiting payment"
+   ],
+   [
+    true,
+    "opened Bill 88efb8ef"
+   ],
+   [
+    true,
+    "ledger: part payment (19.25) left Bill in 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "the page told the user how much is applied"
+   ],
+   [
+    true,
+    "opened Bill 88efb8ef"
+   ],
+   [
+    true,
+    "ledger: paying the balance (19.25) moved Bill 'Awaiting payment' \u2192 'Paid' (API)"
+   ],
+   [
+    true,
+    "the page told the user the target settled"
+   ],
+   [
+    true,
+    "opened Contact cc1253a1"
+   ],
+   [
+    true,
+    "deleted Contact as Accountant (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "accounting-ledger-board",
+  "family": "accounting-ledger",
+  "design": "board",
+  "mode": "server",
+  "checks": 103,
+  "passed": 103,
+  "failed": [],
+  "controls_pressed": [
+   "action:generate_document",
+   "approve:APPROVED",
+   "approve:DECLINED",
+   "closeDoc",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Contact as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Payment as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact 16cf5c18"
+   ],
+   [
+    true,
+    "edited Contact title saved (API)"
+   ],
+   [
+    true,
+    "opened Invoice 2a154085"
+   ],
+   [
+    true,
+    "saved Invoice (API)"
+   ],
+   [
+    true,
+    "opened Invoice line c5f227ec"
+   ],
+   [
+    true,
+    "edited Invoice line title saved (API)"
+   ],
+   [
+    true,
+    "opened Bill 037deb9c"
+   ],
+   [
+    true,
+    "saved Bill (API)"
+   ],
+   [
+    true,
+    "opened Payment bb3ebaaf"
+   ],
+   [
+    true,
+    "saved Payment (API)"
+   ],
+   [
+    true,
+    "opened Contact 16cf5c18"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice 2a154085"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact 16cf5c18"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice 2a154085"
+   ],
+   [
+    true,
+    "created Payment as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Advisor"
+   ],
+   [
+    true,
+    "opened Invoice 2a154085"
+   ],
+   [
+    true,
+    "Advisor (not a declared mover) is offered no move on Invoice"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice 2a154085"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice 2a154085"
+   ],
+   [
+    true,
+    "Invoice declined by Admin \u2192 back to 'Draft'"
+   ],
+   [
+    true,
+    "the decline is what the gate now records"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice 2a154085"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice 2a154085"
+   ],
+   [
+    true,
+    "Invoice approved by Admin at 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "opened Invoice 2a154085"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting approval' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "opened Invoice 2a154085"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting payment' \u2192 'Voided' (API)"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice e13dc731"
+   ],
+   [
+    true,
+    "Send: 'sent_at' stamped (API)"
+   ],
+   [
+    true,
+    "Send: generated document shown"
+   ],
+   [
+    true,
+    "Send is in the activity trail (API)"
+   ],
+   [
+    true,
+    "role switched to Advisor"
+   ],
+   [
+    true,
+    "opened Bill 037deb9c"
+   ],
+   [
+    true,
+    "Advisor (not a declared mover) is offered no move on Bill"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Bill 037deb9c"
+   ],
+   [
+    true,
+    "Bill: Accountant moved 'Draft' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Bill 037deb9c"
+   ],
+   [
+    true,
+    "Bill: Admin moved 'Awaiting payment' \u2192 'Voided' (API)"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice 5be612b3"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "ledger: Invoice total is 1406.25"
+   ],
+   [
+    true,
+    "opened Invoice 5be612b3"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice 5be612b3"
+   ],
+   [
+    true,
+    "Invoice approved by Admin at 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "opened Invoice 5be612b3"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting approval' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "ledger: Invoice is in 'Awaiting payment' awaiting payment"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice 5be612b3"
+   ],
+   [
+    true,
+    "ledger: part payment (703.12) left Invoice in 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "the page told the user how much is applied"
+   ],
+   [
+    true,
+    "opened Invoice 5be612b3"
+   ],
+   [
+    true,
+    "ledger: paying the balance (703.13) moved Invoice 'Awaiting payment' \u2192 'Paid' (API)"
+   ],
+   [
+    true,
+    "the page told the user the target settled"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "ledger: Bill total is 38.5"
+   ],
+   [
+    true,
+    "opened Bill 95612c70"
+   ],
+   [
+    true,
+    "Bill: Accountant moved 'Draft' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "ledger: Bill is in 'Awaiting payment' awaiting payment"
+   ],
+   [
+    true,
+    "opened Bill 95612c70"
+   ],
+   [
+    true,
+    "ledger: part payment (19.25) left Bill in 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "the page told the user how much is applied"
+   ],
+   [
+    true,
+    "opened Bill 95612c70"
+   ],
+   [
+    true,
+    "ledger: paying the balance (19.25) moved Bill 'Awaiting payment' \u2192 'Paid' (API)"
+   ],
+   [
+    true,
+    "the page told the user the target settled"
+   ],
+   [
+    true,
+    "opened Contact 16cf5c18"
+   ],
+   [
+    true,
+    "deleted Contact as Accountant (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "accounting-ledger-pocket",
+  "family": "accounting-ledger",
+  "design": "pocket",
+  "mode": "server",
+  "checks": 103,
+  "passed": 103,
+  "failed": [],
+  "controls_pressed": [
+   "action:generate_document",
+   "approve:APPROVED",
+   "approve:DECLINED",
+   "closeDoc",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:more",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Contact as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Payment as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact 79ffce20"
+   ],
+   [
+    true,
+    "edited Contact title saved (API)"
+   ],
+   [
+    true,
+    "opened Invoice fbe35efe"
+   ],
+   [
+    true,
+    "saved Invoice (API)"
+   ],
+   [
+    true,
+    "opened Invoice line 66570f5f"
+   ],
+   [
+    true,
+    "edited Invoice line title saved (API)"
+   ],
+   [
+    true,
+    "opened Bill b31d9b0a"
+   ],
+   [
+    true,
+    "saved Bill (API)"
+   ],
+   [
+    true,
+    "opened Payment 7065b4ab"
+   ],
+   [
+    true,
+    "saved Payment (API)"
+   ],
+   [
+    true,
+    "opened Contact 79ffce20"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice fbe35efe"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact 79ffce20"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice fbe35efe"
+   ],
+   [
+    true,
+    "created Payment as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Advisor"
+   ],
+   [
+    true,
+    "opened Invoice fbe35efe"
+   ],
+   [
+    true,
+    "Advisor (not a declared mover) is offered no move on Invoice"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice fbe35efe"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice fbe35efe"
+   ],
+   [
+    true,
+    "Invoice declined by Admin \u2192 back to 'Draft'"
+   ],
+   [
+    true,
+    "the decline is what the gate now records"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice fbe35efe"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice fbe35efe"
+   ],
+   [
+    true,
+    "Invoice approved by Admin at 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "opened Invoice fbe35efe"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting approval' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "opened Invoice fbe35efe"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting payment' \u2192 'Voided' (API)"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice e889409c"
+   ],
+   [
+    true,
+    "Send: 'sent_at' stamped (API)"
+   ],
+   [
+    true,
+    "Send: generated document shown"
+   ],
+   [
+    true,
+    "Send is in the activity trail (API)"
+   ],
+   [
+    true,
+    "role switched to Advisor"
+   ],
+   [
+    true,
+    "opened Bill b31d9b0a"
+   ],
+   [
+    true,
+    "Advisor (not a declared mover) is offered no move on Bill"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Bill b31d9b0a"
+   ],
+   [
+    true,
+    "Bill: Accountant moved 'Draft' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Bill b31d9b0a"
+   ],
+   [
+    true,
+    "Bill: Admin moved 'Awaiting payment' \u2192 'Voided' (API)"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice 24aa1e23"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "ledger: Invoice total is 1406.25"
+   ],
+   [
+    true,
+    "opened Invoice 24aa1e23"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice 24aa1e23"
+   ],
+   [
+    true,
+    "Invoice approved by Admin at 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "opened Invoice 24aa1e23"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting approval' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "ledger: Invoice is in 'Awaiting payment' awaiting payment"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice 24aa1e23"
+   ],
+   [
+    true,
+    "ledger: part payment (703.12) left Invoice in 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "the page told the user how much is applied"
+   ],
+   [
+    true,
+    "opened Invoice 24aa1e23"
+   ],
+   [
+    true,
+    "ledger: paying the balance (703.13) moved Invoice 'Awaiting payment' \u2192 'Paid' (API)"
+   ],
+   [
+    true,
+    "the page told the user the target settled"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "ledger: Bill total is 38.5"
+   ],
+   [
+    true,
+    "opened Bill 33b0b38b"
+   ],
+   [
+    true,
+    "Bill: Accountant moved 'Draft' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "ledger: Bill is in 'Awaiting payment' awaiting payment"
+   ],
+   [
+    true,
+    "opened Bill 33b0b38b"
+   ],
+   [
+    true,
+    "ledger: part payment (19.25) left Bill in 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "the page told the user how much is applied"
+   ],
+   [
+    true,
+    "opened Bill 33b0b38b"
+   ],
+   [
+    true,
+    "ledger: paying the balance (19.25) moved Bill 'Awaiting payment' \u2192 'Paid' (API)"
+   ],
+   [
+    true,
+    "the page told the user the target settled"
+   ],
+   [
+    true,
+    "opened Contact 79ffce20"
+   ],
+   [
+    true,
+    "deleted Contact as Accountant (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "crm-pipeline-console-file",
+  "family": "crm-pipeline",
+  "design": "console",
+  "mode": "file",
+  "checks": 50,
+  "passed": 50,
+  "failed": [],
+  "controls_pressed": [
+   "action:confirm-inputs",
+   "action:set_fields_from_input",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Sales rep"
+   ],
+   [
+    true,
+    "created Organisation as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "created Contact as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "created Activity as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Organisation 006b83a8"
+   ],
+   [
+    true,
+    "edited Organisation title saved (API)"
+   ],
+   [
+    true,
+    "opened Contact a7850310"
+   ],
+   [
+    true,
+    "edited Contact title saved (API)"
+   ],
+   [
+    true,
+    "opened Deal 94fb36d0"
+   ],
+   [
+    true,
+    "edited Deal title saved (API)"
+   ],
+   [
+    true,
+    "opened Activity cecc1fb6"
+   ],
+   [
+    true,
+    "edited Activity title saved (API)"
+   ],
+   [
+    true,
+    "opened Organisation 006b83a8"
+   ],
+   [
+    true,
+    "created Contact as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact a7850310"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "opened Deal 94fb36d0"
+   ],
+   [
+    true,
+    "created Activity as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Deal 94fb36d0"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Deal"
+   ],
+   [
+    true,
+    "role switched to Sales rep"
+   ],
+   [
+    true,
+    "opened Deal 94fb36d0"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Lead in' \u2192 'Contacted' (API)"
+   ],
+   [
+    true,
+    "opened Deal 94fb36d0"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Contacted' \u2192 'Proposal sent' (API)"
+   ],
+   [
+    true,
+    "opened Deal 94fb36d0"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Proposal sent' \u2192 'Negotiation' (API)"
+   ],
+   [
+    true,
+    "opened Deal 94fb36d0"
+   ],
+   [
+    true,
+    "Deal: Sales rep moved 'Negotiation' \u2192 'Lost' (API)"
+   ],
+   [
+    true,
+    "created Deal as Sales rep (API shows the new row)"
+   ],
+   [
+    true,
+    "Deal starts in 'Lead in'"
+   ],
+   [
+    true,
+    "role switched to Sales manager"
+   ],
+   [
+    true,
+    "opened Deal feea70c8"
+   ],
+   [
+    true,
+    "Reassign: ['owner'] set from input (API)"
+   ],
+   [
+    true,
+    "Reassign is in the activity trail (API)"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage' shows the groups of sum of open Deal Value grouped by stage"
+   ],
+   [
+    true,
+    "report 'Pipeline by stage' shows the groups of count of Deals grouped by stage"
+   ],
+   [
+    true,
+    "report 'Win rate': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Win rate' shows win rate = 0.0%"
+   ],
+   [
+    true,
+    "opened Organisation 006b83a8"
+   ],
+   [
+    true,
+    "deleted Organisation as Sales manager (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "erp-backbone-board-file",
+  "family": "erp-backbone",
+  "design": "board",
+  "mode": "file",
+  "checks": 101,
+  "passed": 101,
+  "failed": [],
+  "controls_pressed": [
+   "approve:APPROVED",
+   "approve:DECLINED",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:report",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "runReport",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "created Product as Operations (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "created Supplier as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "created Customer account as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "created Purchase order as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "Purchase order starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Purchase order line as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "created Sales order as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "Sales order starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Sales order line as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "created Stock adjustment as Warehouse (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Product d47afda0"
+   ],
+   [
+    true,
+    "edited Product title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Supplier e9a036c8"
+   ],
+   [
+    true,
+    "edited Supplier title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Customer account 744a3b46"
+   ],
+   [
+    true,
+    "edited Customer account title saved (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Purchase order 38cb8315"
+   ],
+   [
+    true,
+    "saved Purchase order (API)"
+   ],
+   [
+    true,
+    "opened Purchase order line 33214f0b"
+   ],
+   [
+    true,
+    "saved Purchase order line (API)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Sales order eaa1dee5"
+   ],
+   [
+    true,
+    "saved Sales order (API)"
+   ],
+   [
+    true,
+    "opened Sales order line 052d4cdd"
+   ],
+   [
+    true,
+    "saved Sales order line (API)"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Stock adjustment f9ad3e97"
+   ],
+   [
+    true,
+    "saved Stock adjustment (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Supplier e9a036c8"
+   ],
+   [
+    true,
+    "created Purchase order as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "Purchase order starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Purchase order 38cb8315"
+   ],
+   [
+    true,
+    "created Purchase order line as Purchasing (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Customer account 744a3b46"
+   ],
+   [
+    true,
+    "created Sales order as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "Sales order starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Sales order eaa1dee5"
+   ],
+   [
+    true,
+    "created Sales order line as Sales (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Product d47afda0"
+   ],
+   [
+    true,
+    "created Stock adjustment as Warehouse (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Purchase order 38cb8315"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Purchase order"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Purchase order 38cb8315"
+   ],
+   [
+    true,
+    "Purchase order declined by Operations \u2192 back to 'Draft'"
+   ],
+   [
+    true,
+    "the decline is what the gate now records"
+   ],
+   [
+    true,
+    "opened Purchase order 38cb8315"
+   ],
+   [
+    true,
+    "Purchase order approved by Operations at 'Draft' (API)"
+   ],
+   [
+    true,
+    "role switched to Purchasing"
+   ],
+   [
+    true,
+    "opened Purchase order 38cb8315"
+   ],
+   [
+    true,
+    "Purchase order: Purchasing moved 'Draft' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Purchase order 38cb8315"
+   ],
+   [
+    true,
+    "Purchase order: Warehouse moved 'Confirmed' \u2192 'Received' (API)"
+   ],
+   [
+    true,
+    "stock effect on 'Received': 11 + 35 = 46 (API)"
+   ],
+   [
+    true,
+    "the page told the user about the stock movement"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Purchase order 38cb8315"
+   ],
+   [
+    true,
+    "Purchase order: Operations moved 'Received' \u2192 'Closed' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Sales order eaa1dee5"
+   ],
+   [
+    true,
+    "Admin (not a declared mover) is offered no move on Sales order"
+   ],
+   [
+    true,
+    "role switched to Sales"
+   ],
+   [
+    true,
+    "opened Sales order eaa1dee5"
+   ],
+   [
+    true,
+    "Sales order: Sales moved 'Draft' \u2192 'Confirmed' (API)"
+   ],
+   [
+    true,
+    "role switched to Warehouse"
+   ],
+   [
+    true,
+    "opened Sales order eaa1dee5"
+   ],
+   [
+    true,
+    "Sales order: Warehouse moved 'Confirmed' \u2192 'Shipped' (API)"
+   ],
+   [
+    true,
+    "stock effect on 'Shipped': 46 \u2212 39 = 7 (API)"
+   ],
+   [
+    true,
+    "the page told the user about the stock movement"
+   ],
+   [
+    true,
+    "role switched to Operations"
+   ],
+   [
+    true,
+    "opened Sales order eaa1dee5"
+   ],
+   [
+    true,
+    "Sales order: Operations moved 'Shipped' \u2192 'Closed' (API)"
+   ],
+   [
+    true,
+    "report 'Stock on hand': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Stock on hand' shows sum of Product Stock on hand = 7"
+   ],
+   [
+    true,
+    "report 'Stock on hand' shows count of Products at or below Reorder point = 1"
+   ],
+   [
+    true,
+    "report 'Sales by month': 1 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Sales by month' shows the groups of sales value"
+   ],
+   [
+    true,
+    "report 'Open orders': 2 metric(s) rendered, API 200"
+   ],
+   [
+    true,
+    "report 'Open orders' shows count of Sales orders in Confirmed = 0"
+   ],
+   [
+    true,
+    "report 'Open orders' shows count of Purchase orders in Confirmed = 0"
+   ],
+   [
+    true,
+    "opened Product d47afda0"
+   ],
+   [
+    true,
+    "deleted Product as Operations (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ },
+ {
+  "interface": "accounting-ledger-pocket-file",
+  "family": "accounting-ledger",
+  "design": "pocket",
+  "mode": "file",
+  "checks": 103,
+  "passed": 103,
+  "failed": [],
+  "controls_pressed": [
+   "action:generate_document",
+   "approve:APPROVED",
+   "approve:DECLINED",
+   "closeDoc",
+   "create",
+   "home",
+   "move",
+   "nav:list",
+   "nav:more",
+   "newRow",
+   "newRow:child",
+   "open",
+   "remove",
+   "role",
+   "save"
+  ],
+  "browser_errors": [],
+  "steps": [
+   [
+    true,
+    "page rendered"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Contact as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "created Payment as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact 19510d14"
+   ],
+   [
+    true,
+    "edited Contact title saved (API)"
+   ],
+   [
+    true,
+    "opened Invoice c1c19fef"
+   ],
+   [
+    true,
+    "saved Invoice (API)"
+   ],
+   [
+    true,
+    "opened Invoice line 5cb792e1"
+   ],
+   [
+    true,
+    "edited Invoice line title saved (API)"
+   ],
+   [
+    true,
+    "opened Bill cb4f3cec"
+   ],
+   [
+    true,
+    "saved Bill (API)"
+   ],
+   [
+    true,
+    "opened Payment d52a88a7"
+   ],
+   [
+    true,
+    "saved Payment (API)"
+   ],
+   [
+    true,
+    "opened Contact 19510d14"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice c1c19fef"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "opened Contact 19510d14"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice c1c19fef"
+   ],
+   [
+    true,
+    "created Payment as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "role switched to Advisor"
+   ],
+   [
+    true,
+    "opened Invoice c1c19fef"
+   ],
+   [
+    true,
+    "Advisor (not a declared mover) is offered no move on Invoice"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice c1c19fef"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice c1c19fef"
+   ],
+   [
+    true,
+    "Invoice declined by Admin \u2192 back to 'Draft'"
+   ],
+   [
+    true,
+    "the decline is what the gate now records"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice c1c19fef"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice c1c19fef"
+   ],
+   [
+    true,
+    "Invoice approved by Admin at 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "opened Invoice c1c19fef"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting approval' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "opened Invoice c1c19fef"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting payment' \u2192 'Voided' (API)"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice 1a2f253b"
+   ],
+   [
+    true,
+    "Send: 'sent_at' stamped (API)"
+   ],
+   [
+    true,
+    "Send: generated document shown"
+   ],
+   [
+    true,
+    "Send is in the activity trail (API)"
+   ],
+   [
+    true,
+    "role switched to Advisor"
+   ],
+   [
+    true,
+    "opened Bill cb4f3cec"
+   ],
+   [
+    true,
+    "Advisor (not a declared mover) is offered no move on Bill"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Bill cb4f3cec"
+   ],
+   [
+    true,
+    "Bill: Accountant moved 'Draft' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Bill cb4f3cec"
+   ],
+   [
+    true,
+    "Bill: Admin moved 'Awaiting payment' \u2192 'Voided' (API)"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "created Invoice as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Invoice starts in 'Draft'"
+   ],
+   [
+    true,
+    "opened Invoice 9e8a5986"
+   ],
+   [
+    true,
+    "created Invoice line as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "ledger: Invoice total is 1406.25"
+   ],
+   [
+    true,
+    "opened Invoice 9e8a5986"
+   ],
+   [
+    true,
+    "Invoice: Accountant moved 'Draft' \u2192 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "role switched to Admin"
+   ],
+   [
+    true,
+    "opened Invoice 9e8a5986"
+   ],
+   [
+    true,
+    "Invoice approved by Admin at 'Awaiting approval' (API)"
+   ],
+   [
+    true,
+    "opened Invoice 9e8a5986"
+   ],
+   [
+    true,
+    "Invoice: Admin moved 'Awaiting approval' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "ledger: Invoice is in 'Awaiting payment' awaiting payment"
+   ],
+   [
+    true,
+    "role switched to Accountant"
+   ],
+   [
+    true,
+    "opened Invoice 9e8a5986"
+   ],
+   [
+    true,
+    "ledger: part payment (703.12) left Invoice in 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "the page told the user how much is applied"
+   ],
+   [
+    true,
+    "opened Invoice 9e8a5986"
+   ],
+   [
+    true,
+    "ledger: paying the balance (703.13) moved Invoice 'Awaiting payment' \u2192 'Paid' (API)"
+   ],
+   [
+    true,
+    "the page told the user the target settled"
+   ],
+   [
+    true,
+    "created Bill as Accountant (API shows the new row)"
+   ],
+   [
+    true,
+    "Bill starts in 'Draft'"
+   ],
+   [
+    true,
+    "ledger: Bill total is 38.5"
+   ],
+   [
+    true,
+    "opened Bill 55a0741b"
+   ],
+   [
+    true,
+    "Bill: Accountant moved 'Draft' \u2192 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "ledger: Bill is in 'Awaiting payment' awaiting payment"
+   ],
+   [
+    true,
+    "opened Bill 55a0741b"
+   ],
+   [
+    true,
+    "ledger: part payment (19.25) left Bill in 'Awaiting payment' (API)"
+   ],
+   [
+    true,
+    "the page told the user how much is applied"
+   ],
+   [
+    true,
+    "opened Bill 55a0741b"
+   ],
+   [
+    true,
+    "ledger: paying the balance (19.25) moved Bill 'Awaiting payment' \u2192 'Paid' (API)"
+   ],
+   [
+    true,
+    "the page told the user the target settled"
+   ],
+   [
+    true,
+    "opened Contact 19510d14"
+   ],
+   [
+    true,
+    "deleted Contact as Accountant (API 404)"
+   ],
+   [
+    true,
+    "Home returns to the overview"
+   ],
+   [
+    true,
+    "every rendered control kind was pressed"
+   ],
+   [
+    true,
+    "no browser errors"
+   ]
+  ]
+ }
+]

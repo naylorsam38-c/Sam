@@ -21,6 +21,8 @@ ENGINES = [
     "search_fts", "import_export", "file_conversion", "email_parsing",
     "bank_feed_ofx", "calendar_ics", "document_signing", "document_generation",
     "pdf_form_filling", "workflow_executor", "reporting_engine", "notification_delivery",
+    "system_triggered_transition", "custom_action_execution", "form_render_submit",
+    "stage_approval_gate",
 ]
 
 

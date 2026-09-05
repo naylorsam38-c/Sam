@@ -1,0 +1,41 @@
+{
+  "contract_id": "DOD-v2.1",
+  "title": "Universal Definition of Done Contract",
+  "rules": [
+    {
+      "id": "DOD-001",
+      "name": "Objective Completion",
+      "desc": "All success criteria defined in the Locked Goal and Execution Specification are satisfied."
+    },
+    {
+      "id": "DOD-002",
+      "name": "Independent Verification Passed",
+      "desc": "Verification must be performed by Tester or Consolidator, never by the authoring worker."
+    },
+    {
+      "id": "DOD-003",
+      "name": "Zero Unresolved Auto-Fails",
+      "desc": "No auto-fail triggers remain active or unaddressed."
+    },
+    {
+      "id": "DOD-004",
+      "name": "Evidence Complete",
+      "desc": "Every assertion and generated artifact is backed by verifiable evidence."
+    },
+    {
+      "id": "DOD-005",
+      "name": "Format Compliant",
+      "desc": "Output strictly validates against the schema defined in the role contract."
+    },
+    {
+      "id": "DOD-006",
+      "name": "No Silent Requirement Drops",
+      "desc": "Every requirement in the input bundle is either completely fulfilled or declared in unresolved_gaps with rationale."
+    },
+    {
+      "id": "DOD-007",
+      "name": "Non-Self-Assessment Enforced",
+      "desc": "Authoring worker has not graded, scored, or summarized its own performance."
+    }
+  ]
+}

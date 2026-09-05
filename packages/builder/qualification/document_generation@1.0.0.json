@@ -1,0 +1,46 @@
+{
+ "part_id": "document_generation",
+ "version": "1.0.0",
+ "revision": "6ad6f6c2187e4435",
+ "qualified_at": "2026-09-05T09:23:01+00:00",
+ "base_url": "http://127.0.0.1:8905",
+ "journeys": [
+  {
+   "journey": "sent_document_is_stamped_on_the_screen",
+   "subject": "accounting-ledger/ACT-006",
+   "parts": [
+    "document_generation"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/invoices",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Send' on accounting-ledger/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "re-open accounting-ledger/SCR-004 and read 'sent_at'",
+     "observed": "2026-09-05T09:23:00Z"
+    },
+    {
+     "channel": "api",
+     "action": "the trail names the generated document",
+     "observed": "invoices-08eb0560-c46f-47dd-9dba-3560d11c7b1c.pdf",
+     "user_facing": false
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

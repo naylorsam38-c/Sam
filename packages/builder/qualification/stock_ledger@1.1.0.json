@@ -1,0 +1,110 @@
+{
+ "part_id": "stock_ledger",
+ "version": "1.1.0",
+ "revision": "094c3be30a31bf03",
+ "qualified_at": "2026-09-05T09:22:52+00:00",
+ "base_url": "http://127.0.0.1:8904",
+ "journeys": [
+  {
+   "journey": "stock_moves_on_the_screen_when_an_order_enters_its_stage",
+   "subject": "Purchase order lifecycle:Received",
+   "parts": [
+    "stock_ledger"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/products stock 10",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/purchase_orders",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/purchase_order_lines qty 4",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press Approve on erp-backbone/SCR-008 at gated stage 'Draft'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Confirmed' on erp-backbone/SCR-008",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Received' on erp-backbone/SCR-008",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open the product's detail erp-backbone/SCR-002 and read Stock on hand",
+     "observed": "14"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "stock_moves_on_the_screen_when_an_order_enters_its_stage",
+   "subject": "Sales order lifecycle:Shipped",
+   "parts": [
+    "stock_ledger"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/products stock 10",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/sales_orders",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/sales_order_lines qty 4",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Confirmed' on erp-backbone/SCR-012",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Shipped' on erp-backbone/SCR-012",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open the product's detail erp-backbone/SCR-002 and read Stock on hand",
+     "observed": "6"
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

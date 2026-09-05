@@ -380,7 +380,13 @@
           "Sales manager"
         ],
         "effect": "changes the deal's Owner to another person",
-        "result_location": "the deal page; the new owner's pipeline view"
+        "result_location": "the deal page; the new owner's pipeline view",
+        "execution": {
+          "op": "set_fields_from_input",
+          "fields": [
+            "owner"
+          ]
+        }
       }
     ],
     "R.12:Deal": "block",
@@ -819,6 +825,53 @@
       "effect": "changes the deal's Owner to another person"
     }
   ],
+  "report_specs": {
+    "Pipeline by stage": [
+      {
+        "metric": "sum of open Deal Value grouped by stage",
+        "spec": {
+          "table": "deals",
+          "aggregation": "sum",
+          "value_field": "value",
+          "group_by": "stage",
+          "filters": [
+            {
+              "field": "stage",
+              "op": "not_in",
+              "value": [
+                "Won",
+                "Lost"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "metric": "count of Deals grouped by stage",
+        "spec": {
+          "table": "deals",
+          "aggregation": "count",
+          "group_by": "stage"
+        }
+      }
+    ],
+    "Win rate": [
+      {
+        "metric": "win rate",
+        "spec": {
+          "engine": "stage_history",
+          "kind": "rate_over_last_days",
+          "table": "deals",
+          "numerator_stage": "Won",
+          "denominator_stages": [
+            "Won",
+            "Lost"
+          ],
+          "days": 90
+        }
+      }
+    ]
+  },
   "structure": {
     "records": {
       "Organisation": {
@@ -896,6 +949,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "crm-pipeline/REC-001"
       },
       "Contact": {
@@ -974,6 +1028,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "crm-pipeline/REC-002"
       },
       "Deal": {
@@ -1104,9 +1159,16 @@
               "Sales manager"
             ],
             "effect": "changes the deal's Owner to another person",
-            "result_location": "the deal page; the new owner's pipeline view"
+            "result_location": "the deal page; the new owner's pipeline view",
+            "execution": {
+              "op": "set_fields_from_input",
+              "fields": [
+                "owner"
+              ]
+            }
           }
         ],
+        "on_create": [],
         "id": "crm-pipeline/REC-003"
       },
       "Activity": {
@@ -1217,6 +1279,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "crm-pipeline/REC-004"
       }
     },
@@ -1506,6 +1569,7 @@
           "allowed": "no"
         },
         "timeouts": [],
+        "effects": [],
         "initial": "Lead in",
         "terminal": [
           "Won",
@@ -1563,6 +1627,35 @@
           "sum of open Deal Value grouped by stage": "auto: count/sum of 'sum of open Deal Value grouped by stage'",
           "count of Deals grouped by stage": "auto: count/sum of 'count of Deals grouped by stage'"
         },
+        "spec": [
+          {
+            "metric": "sum of open Deal Value grouped by stage",
+            "spec": {
+              "table": "deals",
+              "aggregation": "sum",
+              "value_field": "value",
+              "group_by": "stage",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "not_in",
+                  "value": [
+                    "Won",
+                    "Lost"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "metric": "count of Deals grouped by stage",
+            "spec": {
+              "table": "deals",
+              "aggregation": "count",
+              "group_by": "stage"
+            }
+          }
+        ],
         "id": "crm-pipeline/RPT-001"
       },
       "Win rate": {
@@ -1570,6 +1663,22 @@
         "metrics": {
           "win rate": "deals that entered Won divided by deals that entered Won or Lost, in the selected period, attributed to the date the deal reached that stage; expressed as a percentage"
         },
+        "spec": [
+          {
+            "metric": "win rate",
+            "spec": {
+              "engine": "stage_history",
+              "kind": "rate_over_last_days",
+              "table": "deals",
+              "numerator_stage": "Won",
+              "denominator_stages": [
+                "Won",
+                "Lost"
+              ],
+              "days": 90
+            }
+          }
+        ],
         "id": "crm-pipeline/RPT-002"
       }
     },
@@ -1806,7 +1915,13 @@
             "Sales manager"
           ],
           "effect": "changes the deal's Owner to another person",
-          "result_location": "the deal page; the new owner's pipeline view"
+          "result_location": "the deal page; the new owner's pipeline view",
+          "execution": {
+            "op": "set_fields_from_input",
+            "fields": [
+              "owner"
+            ]
+          }
         },
         "roles": [
           "Sales manager"
@@ -2266,7 +2381,13 @@
               "Sales manager"
             ],
             "effect": "changes the deal's Owner to another person",
-            "result_location": "the deal page; the new owner's pipeline view"
+            "result_location": "the deal page; the new owner's pipeline view",
+            "execution": {
+              "op": "set_fields_from_input",
+              "fields": [
+                "owner"
+              ]
+            }
           },
           "roles": [
             "Sales manager"

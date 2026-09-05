@@ -45,12 +45,10 @@ PASS erp-backbone/ACT-024 (action/delete): crud_list_detail
 PASS erp-backbone/ACT-025 (action/transition): workflow_executor
 PASS erp-backbone/ACT-026 (action/transition): workflow_executor
 PASS erp-backbone/ACT-027 (action/transition): workflow_executor
-FAIL erp-backbone/ACT-028 (action/cancel): no binding rule for this action kind
-FAIL erp-backbone/ACT-029 (action/approve): no binding rule for this action kind
+PASS erp-backbone/ACT-028 (action/approve): stage_approval_gate
+PASS erp-backbone/ACT-029 (action/transition): workflow_executor
 PASS erp-backbone/ACT-030 (action/transition): workflow_executor
 PASS erp-backbone/ACT-031 (action/transition): workflow_executor
-PASS erp-backbone/ACT-032 (action/transition): workflow_executor
-FAIL erp-backbone/ACT-033 (action/cancel): no binding rule for this action kind
 PASS NTF:Low stock alert (notification): notification_delivery
 PASS NTF:Order shipped (notification): notification_delivery
 PASS RPT:Stock on hand (report): stock_ledger
@@ -72,5 +70,18 @@ PASS erp-backbone/OPS-013 (recurring_op): scheduled_jobs
 PASS erp-backbone/OPS-014 (recurring_op): scheduled_jobs
 PASS erp-backbone/OPS-015 (recurring_op): scheduled_jobs
 ---
-69/72 PASS, 3 FAIL
-NOT CLEAN -- 3 item(s) unbound
+70/70 PASS, 0 FAIL
+CLEAN
+
+QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 143bf3e98f4fd428
+UNQUALIFIED notification_delivery@1.0.0: status TESTED
+QUALIFIED reporting_engine@1.0.0 (PRODUCT_QUALIFIED) at a0de07a247bf355b
+UNQUALIFIED scheduled_jobs@1.0.0: status TESTED
+QUALIFIED stage_approval_gate@1.0.0 (PRODUCT_QUALIFIED) at e05ac2be0b3c4cc8
+QUALIFIED stage_history@1.1.0 (PRODUCT_QUALIFIED) at a2820dad41d0c83c
+QUALIFIED stock_ledger@1.1.0 (PRODUCT_QUALIFIED) at 094c3be30a31bf03
+QUALIFIED workflow_executor@1.0.0 (PRODUCT_QUALIFIED) at e1e8908c90f7f1fb
+---
+6/8 parts qualified at their pinned revision, 2 problem(s)
+QUALIFICATION NOT CLEAN -- 2 part(s) unqualified, drifted or missing

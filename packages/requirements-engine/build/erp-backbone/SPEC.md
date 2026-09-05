@@ -58,12 +58,10 @@
 | erp-backbone/ACT-025 | transition | workflow_executor |  |
 | erp-backbone/ACT-026 | transition | workflow_executor |  |
 | erp-backbone/ACT-027 | transition | workflow_executor |  |
-| erp-backbone/ACT-028 | cancel | **UNBOUND** | no binding rule for this action kind |
-| erp-backbone/ACT-029 | approve | **UNBOUND** | no binding rule for this action kind |
+| erp-backbone/ACT-028 | approve | stage_approval_gate |  |
+| erp-backbone/ACT-029 | transition | workflow_executor |  |
 | erp-backbone/ACT-030 | transition | workflow_executor |  |
 | erp-backbone/ACT-031 | transition | workflow_executor |  |
-| erp-backbone/ACT-032 | transition | workflow_executor |  |
-| erp-backbone/ACT-033 | cancel | **UNBOUND** | no binding rule for this action kind |
 
 ## Notifications
 

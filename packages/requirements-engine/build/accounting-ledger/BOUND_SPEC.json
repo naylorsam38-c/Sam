@@ -112,6 +112,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "accounting-ledger/REC-001"
       },
       "Invoice": {
@@ -146,6 +147,12 @@
             "type": "long_text",
             "required": "no",
             "unique": "no"
+          },
+          "Sent at": {
+            "name": "Sent at",
+            "type": "date_time",
+            "required": "no",
+            "unique": "no"
           }
         },
         "storage": {
@@ -153,7 +160,8 @@
           "Issue date": "DATE",
           "Due date": "DATE",
           "Reference": "VARCHAR(255)",
-          "Notes": "TEXT"
+          "Notes": "TEXT",
+          "Sent at": "DATETIME"
         },
         "enums": {},
         "access": {
@@ -201,9 +209,31 @@
               "Accountant"
             ],
             "effect": "emails the invoice document to the Contact and stamps the sent time",
-            "result_location": "the invoice page's activity trail"
+            "result_location": "the invoice page's activity trail",
+            "execution": {
+              "op": "generate_document",
+              "stamp_column": "sent_at",
+              "title_columns": [
+                "reference"
+              ],
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "line_columns": [
+                "description",
+                "quantity",
+                "unit_amount"
+              ],
+              "body_columns": [
+                "contact",
+                "issue_date",
+                "due_date",
+                "notes"
+              ],
+              "dispatch": "none"
+            }
           }
         ],
+        "on_create": [],
         "id": "accounting-ledger/REC-002"
       },
       "Invoice line": {
@@ -277,6 +307,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "accounting-ledger/REC-003"
       },
       "Bill": {
@@ -359,6 +390,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "accounting-ledger/REC-004"
       },
       "Payment": {
@@ -448,6 +480,35 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [
+          {
+            "op": "ledger_balance",
+            "link_column": "invoice",
+            "table": "invoices",
+            "total": {
+              "kind": "lines",
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "quantity_column": "quantity",
+              "amount_column": "unit_amount"
+            },
+            "payments_table": "payments",
+            "amount_column": "amount",
+            "event": "Payments applied to the invoice reach its total"
+          },
+          {
+            "op": "ledger_balance",
+            "link_column": "bill",
+            "table": "bills",
+            "total": {
+              "kind": "column",
+              "column": "amount"
+            },
+            "payments_table": "payments",
+            "amount_column": "amount",
+            "event": "Payments applied to the bill reach its total"
+          }
+        ],
         "id": "accounting-ledger/REC-005"
       }
     },
@@ -670,6 +731,7 @@
           "allowed": "no"
         },
         "timeouts": [],
+        "effects": [],
         "initial": "Draft",
         "terminal": [
           "Paid",
@@ -744,6 +806,7 @@
           "allowed": "no"
         },
         "timeouts": [],
+        "effects": [],
         "initial": "Draft",
         "terminal": [
           "Paid",
@@ -775,7 +838,15 @@
           "locations": [
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       "Payment reminder": {
@@ -805,7 +876,21 @@
             "packages/builder/engines/scheduled_jobs.py::run_after",
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            },
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       "Payment received": {
@@ -833,38 +918,19 @@
           "locations": [
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       }
     },
-    "reports": {
-      "Profit and loss": {
-        "data_source": "What did the business earn and spend in the period?",
-        "metrics": {
-          "revenue": "sum of (Quantity x Unit amount) over Invoice lines whose Invoice is in Awaiting payment or Paid (never Draft or Voided), attributed to the Invoice's Issue date — accrual basis, GST-exclusive",
-          "expenses": "auto: count/sum of 'expenses'",
-          "net profit": "auto: count/sum of 'net profit'"
-        },
-        "id": "accounting-ledger/RPT-001",
-        "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
-        }
-      },
-      "Aged receivables": {
-        "data_source": "Who owes us money, and how overdue is it?",
-        "metrics": {
-          "overdue invoice totals bucketed by age": "for each Invoice in Awaiting payment: its total minus applied Payments, bucketed by days past Due date as at today (current, 1-30, 31-60, 61-90, 90+)"
-        },
-        "id": "accounting-ledger/RPT-002",
-        "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
-        }
-      }
-    },
+    "reports": {},
     "forms": {},
     "integrations": {},
     "auth": {
@@ -946,7 +1012,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -964,7 +1038,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -982,7 +1064,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1000,7 +1090,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1018,7 +1116,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1036,7 +1142,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1054,7 +1168,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1072,7 +1194,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1090,7 +1220,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1108,27 +1246,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
-        }
-      },
-      {
-        "id": "accounting-ledger/SCR-011",
-        "kind": "report",
-        "report": "Profit and loss",
-        "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
-        }
-      },
-      {
-        "id": "accounting-ledger/SCR-012",
-        "kind": "report",
-        "report": "Aged receivables",
-        "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "plain aggregation over existing fields -- no generic reporting part was built"
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     ],
@@ -1142,14 +1268,12 @@
       "accounting-ledger/SCR-007",
       "accounting-ledger/SCR-008",
       "accounting-ledger/SCR-009",
-      "accounting-ledger/SCR-010",
-      "accounting-ledger/SCR-011",
-      "accounting-ledger/SCR-012"
+      "accounting-ledger/SCR-010"
     ],
     "landing_per_role": {
-      "Admin": "Profit and loss",
+      "Admin": "Invoices list",
       "Accountant": "Invoices list",
-      "Advisor": "Profit and loss"
+      "Advisor": "Invoices list"
     },
     "actions_inventory": [
       {
@@ -1171,7 +1295,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1193,7 +1325,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1215,7 +1355,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1237,7 +1385,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1259,7 +1415,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1272,7 +1436,28 @@
             "Accountant"
           ],
           "effect": "emails the invoice document to the Contact and stamps the sent time",
-          "result_location": "the invoice page's activity trail"
+          "result_location": "the invoice page's activity trail",
+          "execution": {
+            "op": "generate_document",
+            "stamp_column": "sent_at",
+            "title_columns": [
+              "reference"
+            ],
+            "line_table": "invoice_lines",
+            "line_fk": "invoice",
+            "line_columns": [
+              "description",
+              "quantity",
+              "unit_amount"
+            ],
+            "body_columns": [
+              "contact",
+              "issue_date",
+              "due_date",
+              "notes"
+            ],
+            "dispatch": "none"
+          }
         },
         "roles": [
           "Accountant"
@@ -1288,7 +1473,21 @@
             "packages/builder/engines/document_generation.py::render_pdf",
             "packages/builder/engines/email_parsing.py::parse"
           ],
-          "note": "document rendering and message composition are real and proven; actually dispatching over SMTP was never built or proven, so this action is only partially covered"
+          "note": "document rendering and message composition are real and proven; actually dispatching over SMTP was never built or proven, so this action is only partially covered",
+          "pins": [
+            {
+              "part_id": "document_generation",
+              "version": "1.0.0",
+              "revision": "6ad6f6c2187e4435",
+              "status": "PRODUCT_QUALIFIED"
+            },
+            {
+              "part_id": "email_parsing",
+              "version": "1.0.0",
+              "revision": "01bf04c590a69771",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1310,7 +1509,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1332,7 +1539,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1354,7 +1569,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1376,7 +1599,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1398,7 +1629,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1420,7 +1659,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1442,7 +1689,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1463,7 +1718,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1484,7 +1747,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1502,9 +1773,19 @@
           ],
           "locations": [
             "packages/builder/engines/ledger_balancing.py::applied_total",
-            "packages/builder/engines/ledger_balancing.py::is_paid"
+            "packages/builder/engines/ledger_balancing.py::is_paid",
+            "packages/builder/engines/ledger_balancing.py::line_total",
+            "packages/builder/engines/ledger_balancing.py::settles"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "ledger_balancing",
+              "version": "1.1.0",
+              "revision": "8e4c702f78f51238",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1525,7 +1806,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1546,7 +1835,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1559,9 +1856,23 @@
         ],
         "outcome": "approves 'Invoice lifecycle' at stage 'Awaiting approval'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "no binding rule for this action kind"
+          "parts": [
+            "stage_approval_gate"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_approval_gate.py::decide",
+            "packages/builder/engines/stage_approval_gate.py::check_may_leave",
+            "packages/builder/engines/stage_approval_gate.py::decision_for"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_approval_gate",
+              "version": "1.0.0",
+              "revision": "e05ac2be0b3c4cc8",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1582,7 +1893,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1600,9 +1919,19 @@
           ],
           "locations": [
             "packages/builder/engines/ledger_balancing.py::applied_total",
-            "packages/builder/engines/ledger_balancing.py::is_paid"
+            "packages/builder/engines/ledger_balancing.py::is_paid",
+            "packages/builder/engines/ledger_balancing.py::line_total",
+            "packages/builder/engines/ledger_balancing.py::settles"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "ledger_balancing",
+              "version": "1.1.0",
+              "revision": "8e4c702f78f51238",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1623,7 +1952,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1644,7 +1981,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     ],
@@ -1660,7 +2005,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1674,7 +2027,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1688,7 +2049,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1702,7 +2071,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1716,7 +2093,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1736,7 +2121,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1756,7 +2149,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1773,7 +2174,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1792,7 +2201,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -1809,39 +2226,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
-        }
-      },
-      {
-        "id": "accounting-ledger/OPS-011",
-        "source": "RP.08:Profit and loss",
-        "detail": {
-          "enabled": "no"
-        },
-        "part_bindings": {
-          "parts": [
-            "scheduled_jobs"
-          ],
-          "locations": [
-            "packages/builder/engines/scheduled_jobs.py::run_after"
-          ],
-          "note": null
-        }
-      },
-      {
-        "id": "accounting-ledger/OPS-012",
-        "source": "RP.08:Aged receivables",
-        "detail": {
-          "enabled": "no"
-        },
-        "part_bindings": {
-          "parts": [
-            "scheduled_jobs"
-          ],
-          "locations": [
-            "packages/builder/engines/scheduled_jobs.py::run_after"
-          ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       }
     ],
@@ -1935,7 +2328,28 @@
               "Accountant"
             ],
             "effect": "emails the invoice document to the Contact and stamps the sent time",
-            "result_location": "the invoice page's activity trail"
+            "result_location": "the invoice page's activity trail",
+            "execution": {
+              "op": "generate_document",
+              "stamp_column": "sent_at",
+              "title_columns": [
+                "reference"
+              ],
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "line_columns": [
+                "description",
+                "quantity",
+                "unit_amount"
+              ],
+              "body_columns": [
+                "contact",
+                "issue_date",
+                "due_date",
+                "notes"
+              ],
+              "dispatch": "none"
+            }
           },
           "roles": [
             "Accountant"
@@ -2296,182 +2710,140 @@
       {
         "id": "accounting-ledger/QA-034",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-011",
-        "role": "Admin",
+        "screen_id": "accounting-ledger/SCR-001",
+        "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-035",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-012",
-        "role": "Admin",
+        "screen_id": "accounting-ledger/SCR-002",
+        "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-036",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-001",
+        "screen_id": "accounting-ledger/SCR-003",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-037",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-002",
+        "screen_id": "accounting-ledger/SCR-004",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-038",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-003",
+        "screen_id": "accounting-ledger/SCR-005",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-039",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-004",
+        "screen_id": "accounting-ledger/SCR-006",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-040",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-005",
+        "screen_id": "accounting-ledger/SCR-007",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-041",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-006",
+        "screen_id": "accounting-ledger/SCR-008",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-042",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-007",
+        "screen_id": "accounting-ledger/SCR-009",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-043",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-008",
+        "screen_id": "accounting-ledger/SCR-010",
         "role": "Accountant",
         "expect": "reachable"
       },
       {
         "id": "accounting-ledger/QA-044",
         "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-009",
-        "role": "Accountant",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-045",
-        "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-010",
-        "role": "Accountant",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-046",
-        "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-011",
-        "role": "Accountant",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-047",
-        "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-012",
-        "role": "Accountant",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-048",
-        "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-001",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-049",
+        "id": "accounting-ledger/QA-045",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-002",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-050",
+        "id": "accounting-ledger/QA-046",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-003",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-051",
+        "id": "accounting-ledger/QA-047",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-004",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-052",
+        "id": "accounting-ledger/QA-048",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-005",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-053",
+        "id": "accounting-ledger/QA-049",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-006",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-054",
+        "id": "accounting-ledger/QA-050",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-007",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-055",
+        "id": "accounting-ledger/QA-051",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-008",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-056",
+        "id": "accounting-ledger/QA-052",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-009",
         "role": "Advisor",
         "expect": "reachable"
       },
       {
-        "id": "accounting-ledger/QA-057",
+        "id": "accounting-ledger/QA-053",
         "kind": "screen_access",
         "screen_id": "accounting-ledger/SCR-010",
-        "role": "Advisor",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-058",
-        "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-011",
-        "role": "Advisor",
-        "expect": "reachable"
-      },
-      {
-        "id": "accounting-ledger/QA-059",
-        "kind": "screen_access",
-        "screen_id": "accounting-ledger/SCR-012",
         "role": "Advisor",
         "expect": "reachable"
       }

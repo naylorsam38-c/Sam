@@ -82,22 +82,35 @@ class Refused(Exception):
 # Keep these two sets in lockstep with builder.py by hand: it is the one
 # ground truth for "real Builder capability", and this file must never claim
 # more than that ground truth supports.
-REGISTERED_SCREEN_KINDS = {"list", "detail", "integration_status"}
-REGISTERED_ACTION_KINDS = {"create", "edit", "delete", "connect"}
+REGISTERED_SCREEN_KINDS = {"list", "detail", "integration_status", "form", "report"}
+REGISTERED_ACTION_KINDS = {"create", "edit", "delete", "connect", "transition", "custom",
+                           "submit", "approve"}
 
 
 def registration_gaps(structure):
-    """Every numbered screen/action in a locked structure whose kind the
-    Builder has no real rule for, as (id, kind, what) tuples -- never silently
-    dropped, always named by their own permanent id so a human can see exactly
-    what is missing without re-deriving anything."""
+    """Every numbered screen/action in a locked structure the Builder has no
+    real rule for, as (id, kind, what) tuples -- never silently dropped, always
+    named by their own permanent id so a human can see exactly what is missing
+    without re-deriving anything.
+
+    A registered KIND is not enough: the Builder's rule for a report needs that
+    report's own executable ReportSpec, and its rule for a custom action needs
+    that action's own executable effect. An item that does not carry what its
+    rule needs is still a gap, because the Builder will still refuse it -- this
+    gate stays in lockstep with what builder.py can really do, not with what it
+    recognises the name of."""
     gaps = []
+    reports = structure.get("reports") or {}
     for scr in structure.get("screens_inventory") or []:
         if scr["kind"] not in REGISTERED_SCREEN_KINDS:
             gaps.append((scr["id"], "screen", scr["kind"]))
+        elif scr["kind"] == "report" and not (reports.get(scr.get("report")) or {}).get("spec"):
+            gaps.append((scr["id"], "screen", "report (no executable ReportSpec)"))
     for act in structure.get("actions_inventory") or []:
         if act["kind"] not in REGISTERED_ACTION_KINDS:
             gaps.append((act["id"], "action", act["kind"]))
+        elif act["kind"] == "custom" and not (act.get("detail") or {}).get("execution"):
+            gaps.append((act["id"], "action", "custom (no executable effect)"))
     return gaps
 
 
@@ -407,7 +420,7 @@ def derive(graph, inst):
             n += 1
     for fm in inv["forms"]:
         target = (inst["per_instance"].get(f"F.02:{fm}") or {}).get("target")
-        actions.append({"id": f"ACT-{n:03d}", "kind": "submit", "form": fm, "roles": None,
+        actions.append({"id": f"ACT-{n:03d}", "kind": "submit", "form": fm, "record": target, "roles": None,
                          "outcome": f"submits the '{fm}' form" + (f", creating/editing its target record '{target}'" if target else "")})
         n += 1
     for i, flx in d["FLX"].items():
@@ -425,7 +438,8 @@ def derive(graph, inst):
         screens.append({"id": f"SCR-{n:03d}", "kind": "list", "record": r}); n += 1
         screens.append({"id": f"SCR-{n:03d}", "kind": "detail", "record": r}); n += 1
     for fm in inv["forms"]:
-        screens.append({"id": f"SCR-{n:03d}", "kind": "form", "form": fm}); n += 1
+        screens.append({"id": f"SCR-{n:03d}", "kind": "form", "form": fm,
+                         "record": (inst["per_instance"].get(f"F.02:{fm}") or {}).get("target")}); n += 1
     for rp in inv["reports"]:
         screens.append({"id": f"SCR-{n:03d}", "kind": "report", "report": rp}); n += 1
     for i in d["FLX"]:
@@ -532,7 +546,11 @@ def build_model(inst, derived):
                                     "edit": inst["per_instance"].get(f"R.07:{r}"), "delete": inst["per_instance"].get(f"R.08:{r}")},
                          "title_field": inst["per_instance"].get(f"R.03:{r}"), "id_style": inst["per_instance"].get(f"R.04:{r}"),
                          "lifecycle": inst["per_instance"].get(f"R.10:{r}"), "retention": inst["per_instance"].get(f"R.14:{r}"),
-                         "custom_actions": inst["per_instance"].get(f"R.15:{r}") or []}
+                         "custom_actions": inst["per_instance"].get(f"R.15:{r}") or [],
+                         # declared, executable effects of creating a row (accounting-ledger's
+                         # Payment settling the Invoice/Bill it is applied to) -- from the
+                         # template's own create_effects block, never inferred from prose
+                         "on_create": (inst.get("create_effects") or {}).get(r) or []}
                     for r in inst["inventory"]["records"]},
         "roles": {ro: {"permitted": derived["D04"]["permitted_actions"][ro], "is_admin": derived["D04"]["is_admin"][ro]}
                   for ro in inst["inventory"]["roles"]},
@@ -540,14 +558,20 @@ def build_model(inst, derived):
         "workflows": {w: {"trigger": inst["per_instance"].get(f"FL.01:{w}"), "stages": inst["per_instance"].get(f"FL.02:{w}"),
                            "transitions": derived["D08"][w], "approvals": inst["per_instance"].get(f"FL.05:{w}") or [],
                            "on_reject": inst["per_instance"].get(f"FL.06:{w}"), "cancel": inst["per_instance"].get(f"FL.07:{w}"),
-                           "timeouts": inst["per_instance"].get(f"FL.10:{w}") or []}
+                           "timeouts": inst["per_instance"].get(f"FL.10:{w}") or [],
+                           # the executable form of FL.08's on_complete prose (erp-backbone's
+                           # stock movements on Received/Shipped) -- from the template's own
+                           # transition_effects block; a workflow without one has none
+                           "effects": (inst.get("transition_effects") or {}).get(w) or []}
                       for w in inst["inventory"]["workflows"]},
         "notifications": {n: {"trigger": inst["per_instance"].get(f"N.01:{n}"), "recipients": inst["per_instance"].get(f"N.02:{n}"),
                                "channels": inst["per_instance"].get(f"N.03:{n}"), "timing": derived["D05"][n]}
                            for n in inst["inventory"]["notifications"]},
-        "reports": derived["D07"],
+        "reports": {name: dict(rep, spec=(inst.get("report_specs") or {}).get(name))
+                     for name, rep in derived["D07"].items()},
         "forms": derived["D02"],
-        "integrations": derived["FLX"],
+        "integrations": {name: dict(flx, auth=(inst.get("integration_auth") or {}).get(name, "oauth"))
+                          for name, flx in derived["FLX"].items()},
         "auth": {k: v for k, v in inst["answers"].items() if k.startswith("AU.")},
         "brand": {"app_name": inst["answers"].get("A.05"), "assets": inst["answers"].get("C.04")},
         "screens_inventory": derived["D13"]["screens"],
@@ -577,6 +601,15 @@ def assemble(graph, inst, spec_id, title):
                        "\n".join(f"  - {id_} ({kind}, kind: {k})" for id_, kind, k in gaps))
 
     fields = build_field_map(graph, inst)
+    # The structure is frozen at lock time, before the customer answers the
+    # questions every template leaves open (A.05 name, C.04 brand, and the
+    # auth block). Those mint no ids -- they are configuration, exactly what
+    # this function exists to apply -- so they are overlaid here from the
+    # instance's own answers. Found by building a reference instance and
+    # seeing "App" as its name on every screen.
+    structure = copy.deepcopy(structure)
+    structure["brand"] = {"app_name": inst["answers"].get("A.05"), "assets": inst["answers"].get("C.04")}
+    structure["auth"] = {k: v for k, v in inst["answers"].items() if k.startswith("AU.")}
     return {
         "spec_id": spec_id, "version": 1, "title": title,
         "graph_version": graph["version"],

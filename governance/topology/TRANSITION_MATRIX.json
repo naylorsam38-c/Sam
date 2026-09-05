@@ -1,0 +1,255 @@
+{
+  "description": "Axis 1 — workflow legality. Which task state may follow which, who may perform the move, and what evidence the move requires. This table is declarative on purpose: an auditor can read it without reading the runtime, and a move that is absent from it is illegal by default. Axis 2 (who may speak to whom) lives in COMMUNICATION_MATRIX.json and is enforced independently; both must pass.",
+  "axis": "workflow_legality",
+  "version": 1,
+  "enforced_by": "src/kernel/osRuntime.js #advance — the only writer of tasks.stage",
+  "default": "DENY",
+  "initial_state": "intake",
+  "terminal_states": ["completed"],
+  "state_order": [
+    "intake",
+    "goal_lock",
+    "direction_generation",
+    "direction_verification",
+    "execution",
+    "execution_verification",
+    "final_assembly",
+    "delivery",
+    "completed"
+  ],
+  "states": {
+    "intake": {
+      "canonical_state": "INTAKE",
+      "owner": "personal_assistant",
+      "transitions": [
+        {
+          "to": "goal_lock",
+          "kind": "advance",
+          "operation": "submitIntake",
+          "actor": "personal_assistant",
+          "evidence": [
+            "proposed_goal_package_complete",
+            "category_assigned_by_rubric",
+            "success_criteria_normalised"
+          ]
+        }
+      ]
+    },
+    "goal_lock": {
+      "canonical_state": "LOCKED_GOAL",
+      "owner": "nova_hub",
+      "parks_awaiting_owner": true,
+      "park_reason": "GOAL_APPROVAL",
+      "transitions": [
+        {
+          "to": "direction_generation",
+          "kind": "advance",
+          "operation": "approveGoal",
+          "actor": "owner",
+          "evidence": ["approval_digest_equals_locked_goal_digest"],
+          "note": "Elapsed time is never approval. The digest is the approval token."
+        },
+        { "to": "intake", "kind": "rollback", "operation": "rollback", "actor": "owner" }
+      ]
+    },
+    "direction_generation": {
+      "canonical_state": "FORGE",
+      "owner": "forge",
+      "transitions": [
+        {
+          "to": "direction_verification",
+          "kind": "advance",
+          "operation": "submitDirection",
+          "actor": "forge",
+          "evidence": [
+            "every_requirement_traces_to_a_locked_goal_criterion",
+            "no_unauthorised_scope"
+          ]
+        },
+        { "to": "intake", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "goal_lock", "kind": "rollback", "operation": "rollback", "actor": "owner" }
+      ]
+    },
+    "direction_verification": {
+      "canonical_state": "MIND_REVIEW",
+      "owner": "mind",
+      "transitions": [
+        {
+          "to": "execution",
+          "kind": "advance",
+          "operation": "reviewDirection",
+          "actor": "mind",
+          "decision": "PASS",
+          "evidence": ["no_material_finding_open", "handoff_envelope_accepted"]
+        },
+        {
+          "to": "direction_generation",
+          "kind": "repair",
+          "operation": "reviewDirection",
+          "actor": "mind",
+          "decision": "RETURN",
+          "evidence": ["at_least_one_material_finding"],
+          "note": "Materiality Stop Rule — a non-material preference may not start another round."
+        },
+        { "to": "intake", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "goal_lock", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "direction_generation", "kind": "rollback", "operation": "rollback", "actor": "owner" }
+      ]
+    },
+    "execution": {
+      "canonical_state": "BUILD",
+      "owner": "builder",
+      "transitions": [
+        {
+          "to": "execution_verification",
+          "kind": "advance",
+          "operation": "submitImplementation",
+          "actor": "builder",
+          "evidence": [
+            "artifact_recorded_with_digest",
+            "no_silent_requirement_drop",
+            "handoff_envelope_accepted"
+          ]
+        },
+        { "to": "intake", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "goal_lock", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "direction_generation", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "direction_verification", "kind": "rollback", "operation": "rollback", "actor": "owner" }
+      ]
+    },
+    "execution_verification": {
+      "canonical_state": "TEST",
+      "owner": "tester",
+      "transitions": [
+        {
+          "to": "final_assembly",
+          "kind": "advance",
+          "operation": "reviewExecution",
+          "actor": "tester",
+          "decision": "PASS",
+          "evidence": [
+            "tested_artifact_id_equals_built_artifact_id",
+            "every_result_pass_with_evidence_location",
+            "every_requirement_and_criterion_covered"
+          ]
+        },
+        {
+          "to": "execution",
+          "kind": "repair",
+          "operation": "reviewExecution",
+          "actor": "tester",
+          "decision": "FAIL|BLOCKED|NOT_TESTABLE",
+          "evidence": ["numbered_failure_report_with_reproduction_expected_actual_evidence"]
+        },
+        { "to": "intake", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "goal_lock", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "direction_generation", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "direction_verification", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "execution", "kind": "rollback", "operation": "rollback", "actor": "owner" }
+      ]
+    },
+    "final_assembly": {
+      "canonical_state": "COMPLETION",
+      "owner": "consolidator",
+      "transitions": [
+        {
+          "to": "delivery",
+          "kind": "advance",
+          "operation": "consolidate",
+          "actor": "consolidator",
+          "evidence": ["final_package_references_verified_artifact", "no_unreconciled_conflict"]
+        },
+        { "to": "intake", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "goal_lock", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "direction_generation", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "direction_verification", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "execution", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "execution_verification", "kind": "rollback", "operation": "rollback", "actor": "owner" }
+      ]
+    },
+    "delivery": {
+      "canonical_state": "COMPLETE",
+      "owner": "nova_hub",
+      "transitions": [
+        {
+          "to": "completed",
+          "kind": "advance",
+          "operation": "complete",
+          "actor": "nova_hub",
+          "evidence": ["completion_law_all_clauses_pass"]
+        },
+        { "to": "intake", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "goal_lock", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "direction_generation", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "direction_verification", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "execution", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "execution_verification", "kind": "rollback", "operation": "rollback", "actor": "owner" },
+        { "to": "final_assembly", "kind": "rollback", "operation": "rollback", "actor": "owner" }
+      ]
+    },
+    "completed": {
+      "canonical_state": "COMPLETE",
+      "owner": null,
+      "terminal": true,
+      "transitions": [],
+      "note": "A completed task is never reopened. A changed goal is a new task with a new Locked Goal, so the audit chain of the finished one stays intact."
+    }
+  },
+  "forbidden_examples": [
+    {
+      "from": "execution",
+      "to": "final_assembly",
+      "reason": "skips Tester; a build would reach consolidation with no independent verification"
+    },
+    {
+      "from": "execution",
+      "to": "delivery",
+      "reason": "skips Tester and Consolidator"
+    },
+    {
+      "from": "direction_generation",
+      "to": "execution",
+      "reason": "skips Mind; Forge would approve its own direction"
+    },
+    {
+      "from": "intake",
+      "to": "completed",
+      "reason": "skips every gate including the Locked Goal"
+    },
+    {
+      "from": "goal_lock",
+      "to": "execution",
+      "reason": "builds against a goal the owner never approved"
+    },
+    {
+      "from": "execution_verification",
+      "to": "delivery",
+      "reason": "skips Consolidator"
+    },
+    {
+      "from": "completed",
+      "to": "execution",
+      "reason": "a completed task is terminal; reopening it would rewrite a closed audit chain"
+    }
+  ],
+  "spec_states_not_yet_modelled": {
+    "note": "§4.1 of the merge specification defines a longer state list than the runtime currently implements. These states are named here so the gap is visible rather than implied, and each will be added to this table by the increment that implements it. Until then they are not legal states and the runtime cannot enter them.",
+    "states": [
+      "CONTEXT_ASSEMBLY",
+      "RESEARCH",
+      "OWNER_DIRECTION",
+      "ROADMAP",
+      "HAND_PREPARATION",
+      "OWNER_APPROVAL",
+      "HAND_EXECUTION",
+      "VERIFICATION",
+      "MEMORY_COMMIT",
+      "PARKED_AWAITING_OWNER",
+      "BUDGET_EXCEEDED",
+      "CONCURRENT_MODIFICATION",
+      "DRIFT_DETECTED",
+      "ABANDONED",
+      "FAILED"
+    ]
+  }
+}

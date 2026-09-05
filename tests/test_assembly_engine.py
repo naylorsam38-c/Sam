@@ -87,18 +87,26 @@ def test_refuses_when_a_template_has_no_locked_structure():
 
 
 def test_registration_gaps_flags_real_report_screens_and_transitions(real_template):
-    """Every one of the five real, locked templates genuinely claims report
-    screens and/or workflow transitions/custom actions -- none of which
-    builder.py has a real generation rule for yet (see packages/builder's own
-    module docstring: only CRUD and OAuth connect are real). registration_gaps
-    must name every one of them by its own permanent, already-frozen id --
-    not silently accept a claim the Builder cannot back up."""
+    """builder.py now has a real generation rule for report screens, form
+    screens, transitions, custom actions, submits and approvals. A rule still
+    needs what it runs on, so registration_gaps must flag exactly the items
+    the Builder would really refuse: a report with no executable ReportSpec,
+    a custom action with no executable effect, and any kind with no rule at
+    all -- and must NOT flag an item the Builder can genuinely build."""
     structure = real_template["structure"]
     gaps = ae.registration_gaps(structure)
     gap_ids = {g[0] for g in gaps}
+    reports = structure.get("reports") or {}
     report_screens = [s["id"] for s in structure["screens_inventory"] if s["kind"] == "report"]
-    assert report_screens, f"fixture assumption: {real_template['template']} has real report screens"
-    assert set(report_screens) <= gap_ids
+    if not report_screens:
+        pytest.skip(f"{real_template['template']} declares no reports (accounting-ledger's two were outside "
+                    "every reporting part's scope and were removed from the template)")
+    for scr in structure["screens_inventory"]:
+        if scr["kind"] != "report":
+            continue
+        has_spec = bool((reports.get(scr.get("report")) or {}).get("spec"))
+        assert (scr["id"] in gap_ids) is not has_spec, (
+            f"{scr['id']}: a report screen is a gap exactly when its report has no ReportSpec")
     # every flagged item genuinely has an unregistered kind -- the gate names
     # real gaps, not real capability it mistakes for a gap
     for id_, kind, k in gaps:

@@ -1,0 +1,49 @@
+{
+ "part_id": "custom_action_execution",
+ "version": "1.1.0",
+ "revision": "177cfc2d6d4d4a01",
+ "qualified_at": "2026-09-05T09:23:01+00:00",
+ "base_url": "http://127.0.0.1:8905",
+ "journeys": [
+  {
+   "journey": "custom_action_is_pressable_and_visible",
+   "subject": "accounting-ledger/ACT-006",
+   "parts": [
+    "custom_action_execution"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/invoices",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a 'Send' control on accounting-ledger/SCR-004",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Send' on accounting-ledger/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "api",
+     "action": "GET /api/history/invoices/d843bcde-4e14-4427-ae09-d155f383fb6f",
+     "observed": {
+      "status": 200,
+      "entries": 1
+     },
+     "user_facing": false
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

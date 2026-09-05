@@ -18,7 +18,7 @@ PASS crm-pipeline/ACT-006 (action/delete): crud_list_detail
 PASS crm-pipeline/ACT-007 (action/create): crud_list_detail
 PASS crm-pipeline/ACT-008 (action/edit): crud_list_detail
 PASS crm-pipeline/ACT-009 (action/delete): crud_list_detail
-FAIL crm-pipeline/ACT-010 (action/custom): a plain restricted field edit -- no specialist part needed, but the Builder has no generic custom-action execution rule at all
+PASS crm-pipeline/ACT-010 (action/custom): custom_action_execution
 PASS crm-pipeline/ACT-011 (action/create): crud_list_detail
 PASS crm-pipeline/ACT-012 (action/edit): crud_list_detail
 PASS crm-pipeline/ACT-013 (action/delete): crud_list_detail
@@ -44,5 +44,17 @@ PASS crm-pipeline/OPS-007 (recurring_op): scheduled_jobs
 PASS crm-pipeline/OPS-008 (recurring_op): scheduled_jobs
 PASS crm-pipeline/OPS-009 (recurring_op): scheduled_jobs
 ---
-43/44 PASS, 1 FAIL
-NOT CLEAN -- 1 item(s) unbound
+44/44 PASS, 0 FAIL
+CLEAN
+
+QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 143bf3e98f4fd428
+QUALIFIED custom_action_execution@1.1.0 (PRODUCT_QUALIFIED) at 177cfc2d6d4d4a01
+UNQUALIFIED notification_delivery@1.0.0: status TESTED
+QUALIFIED reporting_engine@1.0.0 (PRODUCT_QUALIFIED) at a0de07a247bf355b
+UNQUALIFIED scheduled_jobs@1.0.0: status TESTED
+QUALIFIED stage_history@1.1.0 (PRODUCT_QUALIFIED) at a2820dad41d0c83c
+QUALIFIED workflow_executor@1.0.0 (PRODUCT_QUALIFIED) at e1e8908c90f7f1fb
+---
+5/7 parts qualified at their pinned revision, 2 problem(s)
+QUALIFICATION NOT CLEAN -- 2 part(s) unqualified, drifted or missing

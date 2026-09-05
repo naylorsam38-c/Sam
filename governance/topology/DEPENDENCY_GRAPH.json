@@ -1,0 +1,226 @@
+{
+  "nodes": [
+    {
+      "id": "nova_hub",
+      "name": "Nova / Hub",
+      "tier": "Orchestrator"
+    },
+    {
+      "id": "memory",
+      "name": "Memory",
+      "tier": "State_And_Knowledge"
+    },
+    {
+      "id": "forge",
+      "name": "Forge",
+      "tier": "Reasoning_And_Architecture"
+    },
+    {
+      "id": "mind",
+      "name": "Mind",
+      "tier": "Reasoning_And_Architecture"
+    },
+    {
+      "id": "builder",
+      "name": "Builder",
+      "tier": "Construction_And_Execution"
+    },
+    {
+      "id": "tester",
+      "name": "Tester",
+      "tier": "Verification_And_Audit"
+    },
+    {
+      "id": "personal_assistant",
+      "name": "Personal Assistant",
+      "tier": "User_Operations"
+    },
+    {
+      "id": "billing_quoting",
+      "name": "Billing / Quoting",
+      "tier": "Commercial_Operations"
+    },
+    {
+      "id": "consolidator",
+      "name": "Consolidator",
+      "tier": "Verification_And_Audit"
+    },
+    {
+      "id": "daily_reviewer",
+      "name": "Daily Reviewer",
+      "tier": "Verification_And_Audit"
+    },
+    {
+      "id": "guardian_angel",
+      "name": "Guardian Angel",
+      "tier": "Safety_And_Oversight"
+    },
+    {
+      "id": "independent_summary",
+      "name": "Independent Summary Worker",
+      "tier": "Verification_And_Audit"
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing Worker",
+      "tier": "Commercial_Operations"
+    },
+    {
+      "id": "brain_builder",
+      "name": "Brain Builder",
+      "tier": "State_And_Knowledge"
+    }
+  ],
+  "edges": [
+    {
+      "from": "user",
+      "to": "nova_hub",
+      "type": "BIDIRECTIONAL",
+      "channel": "user_chat"
+    },
+    {
+      "from": "nova_hub",
+      "to": "memory",
+      "type": "SCOPED_QUERY",
+      "channel": "context_bus"
+    },
+    {
+      "from": "nova_hub",
+      "to": "forge",
+      "type": "TASK_DISPATCH",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "forge",
+      "to": "mind",
+      "type": "SEALED_LOOP_PAIR",
+      "channel": "sealed_chamber"
+    },
+    {
+      "from": "mind",
+      "to": "forge",
+      "type": "SEALED_LOOP_PAIR",
+      "channel": "sealed_chamber"
+    },
+    {
+      "from": "forge",
+      "to": "nova_hub",
+      "type": "CONVERGED_RETURN",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "nova_hub",
+      "to": "builder",
+      "type": "TASK_DISPATCH",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "builder",
+      "to": "nova_hub",
+      "type": "DELIVERABLE_RETURN",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "nova_hub",
+      "to": "tester",
+      "type": "VERIFICATION_DISPATCH",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "tester",
+      "to": "nova_hub",
+      "type": "VERDICT_RETURN",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "nova_hub",
+      "to": "personal_assistant",
+      "type": "TASK_DISPATCH",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "personal_assistant",
+      "to": "nova_hub",
+      "type": "DRAFT_RETURN",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "nova_hub",
+      "to": "billing_quoting",
+      "type": "TASK_DISPATCH",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "billing_quoting",
+      "to": "nova_hub",
+      "type": "QUOTE_RETURN",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "nova_hub",
+      "to": "marketing",
+      "type": "TASK_DISPATCH",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "marketing",
+      "to": "nova_hub",
+      "type": "INTEL_RETURN",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "nova_hub",
+      "to": "consolidator",
+      "type": "VALIDATION_GATE",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "consolidator",
+      "to": "nova_hub",
+      "type": "GATE_PASS_REJECT",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "consolidator",
+      "to": "memory",
+      "type": "DECISION_WRITE_DOWN",
+      "channel": "permanent_store"
+    },
+    {
+      "from": "nova_hub",
+      "to": "independent_summary",
+      "type": "SUMMARY_DISPATCH",
+      "channel": "orchestrator"
+    },
+    {
+      "from": "independent_summary",
+      "to": "nova_hub",
+      "type": "SUMMARY_RETURN",
+      "channel": "continuity_bus"
+    },
+    {
+      "from": "daily_reviewer",
+      "to": "memory",
+      "type": "AUDIT_WRITE_DOWN",
+      "channel": "permanent_store"
+    },
+    {
+      "from": "daily_reviewer",
+      "to": "nova_hub",
+      "type": "EXECUTIVE_BRIEF",
+      "channel": "daily_brief"
+    },
+    {
+      "from": "guardian_angel",
+      "to": "user",
+      "type": "OUT_OF_BAND_ALERT",
+      "channel": "emergency_alert"
+    },
+    {
+      "from": "brain_builder",
+      "to": "memory",
+      "type": "KNOWLEDGE_INDEX",
+      "channel": "knowledge_store"
+    }
+  ]
+}

@@ -38,3 +38,14 @@ PASS pm-teamwork/OPS-009 (recurring_op): scheduled_jobs
 ---
 36/36 PASS, 0 FAIL
 CLEAN
+
+QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 143bf3e98f4fd428
+UNQUALIFIED notification_delivery@1.0.0: status TESTED
+QUALIFIED record_cloning@1.0.0 (PRODUCT_QUALIFIED) at c9f8c783994f80c1
+QUALIFIED reporting_engine@1.0.0 (PRODUCT_QUALIFIED) at a0de07a247bf355b
+UNQUALIFIED scheduled_jobs@1.0.0: status TESTED
+QUALIFIED workflow_executor@1.0.0 (PRODUCT_QUALIFIED) at e1e8908c90f7f1fb
+---
+4/6 parts qualified at their pinned revision, 2 problem(s)
+QUALIFICATION NOT CLEAN -- 2 part(s) unqualified, drifted or missing

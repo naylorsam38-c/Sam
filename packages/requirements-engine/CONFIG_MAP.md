@@ -77,7 +77,7 @@ Modules: catalog_services, scheduling, people_directory, deposits. Roles: Owner,
 **Specialist engines this app runs** (6) — read straight off this template's own real data, not a separate exercise:
 
 *Workflow/lifecycle engines:*
-- `Appointment lifecycle` — stages ['Booked', 'Confirmed', 'Completed', 'Cancelled', 'No-show']; moved by ['Staff']; automatic on: ['the deposit payment succeeds, or a staff member confirms manually']; has timeouts; cancellable
+- `Appointment lifecycle` — stages ['Booked', 'Confirmed', 'Completed', 'Cancelled', 'No-show']; moved by ['Staff']; has timeouts
 
 *Notification/reminder engines:*
 - `Booking confirmation` — trigger: event; channels: ['email', 'sms']
@@ -104,8 +104,8 @@ Modules: catalog_products, people_directory, ordering, inventory. Roles: Admin, 
 **Specialist engines this app runs** (7) — read straight off this template's own real data, not a separate exercise:
 
 *Workflow/lifecycle engines:*
-- `Purchase order lifecycle` — stages ['Draft', 'Confirmed', 'Received', 'Closed', 'Cancelled']; moved by ['Operations', 'Purchasing', 'Warehouse']; has approvals; cancellable
-- `Sales order lifecycle` — stages ['Draft', 'Confirmed', 'Shipped', 'Closed', 'Cancelled']; moved by ['Operations', 'Sales', 'Warehouse']; cancellable
+- `Purchase order lifecycle` — stages ['Draft', 'Confirmed', 'Received', 'Closed', 'Cancelled']; moved by ['Operations', 'Purchasing', 'Warehouse']; has approvals
+- `Sales order lifecycle` — stages ['Draft', 'Confirmed', 'Shipped', 'Closed', 'Cancelled']; moved by ['Operations', 'Sales', 'Warehouse']
 
 *Notification/reminder engines:*
 - `Low stock alert` — trigger: event; channels: ['email', 'in_app']
@@ -124,12 +124,11 @@ Modules: people_directory, invoicing, payments. Roles: Admin, Accountant, Adviso
 | Feature | Controlled by | Rule |
 |---|---|---|
 | Invoice approval step | `FL.05:Invoice lifecycle` | empty the approvals list -> Draft goes straight to Awaiting payment (sole traders) |
-| Bills side | `A.15 records list` | remove Bill and its lifecycle -> invoicing-only app; P&L expenses metric drops |
+| Bills side | `A.15 records list` | remove Bill and its lifecycle -> invoicing-only app |
 | Overdue chasing | `N.01:Payment reminder` | change the +3 days offset, or remove the notification to stop chasing |
-| Accrual vs cash reporting | `RP.05:Profit and loss:revenue` | rewrite the definition to 'Payments received in the period' for cash basis — one answer, not a rebuild |
 | Advisor access | `A.15 roles list` | remove Advisor -> external-accountant access disappears |
 
-**Specialist engines this app runs** (8) — read straight off this template's own real data, not a separate exercise:
+**Specialist engines this app runs** (6) — read straight off this template's own real data, not a separate exercise:
 
 *Workflow/lifecycle engines:*
 - `Invoice lifecycle` — stages ['Draft', 'Awaiting approval', 'Awaiting payment', 'Paid', 'Voided']; moved by ['Accountant', 'Admin']; automatic on: ['Payments applied to the invoice reach its total']; has approvals
@@ -139,10 +138,6 @@ Modules: people_directory, invoicing, payments. Roles: Admin, Accountant, Adviso
 - `Invoice sent` — trigger: event; channels: ['email']
 - `Payment reminder` — trigger: relative_to_date; channels: ['email']
 - `Payment received` — trigger: event; channels: ['in_app']
-
-*Reporting engines:*
-- `Profit and loss` — both/both; metrics: ['revenue', 'expenses', 'net profit']
-- `Aged receivables` — both/table; metrics: ['overdue invoice totals bucketed by age']
 
 *Custom record-action engines:*
 - `Send` on Invoice — emails the invoice document to the Contact and stamps the sent time

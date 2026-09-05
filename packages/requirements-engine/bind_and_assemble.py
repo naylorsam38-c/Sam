@@ -50,17 +50,25 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ASSEMBLY_DIR = os.path.join(HERE, "..", "assembly-engine")
 BUILDER_DIR = os.path.join(HERE, "..", "builder")
 sys.path.insert(0, os.path.abspath(ASSEMBLY_DIR))
+sys.path.insert(0, os.path.abspath(BUILDER_DIR))
 sys.path.insert(0, HERE)
 
 import assemble as ae               # noqa: E402  (registration_gaps() / REGISTERED_*_KINDS -- reused, not reimplemented)
 import check_capability_bindings    # noqa: E402
+import shelf as shelf_lib           # noqa: E402  (pin() / source_revision() -- the shelf's own identity, not recomputed here)
 
 TEMPLATE_DIR = os.path.join(HERE, "templates")
 BUILD_DIR = os.path.join(HERE, "build")
-TEMPLATES = ["pm-teamwork", "crm-pipeline", "booking-frontdesk", "erp-backbone", "accounting-ledger"]
+TEMPLATES = ["pm-teamwork", "crm-pipeline", "booking-frontdesk", "erp-backbone", "accounting-ledger",
+             "command-desk"]
 
 SHELF = json.load(open(os.path.join(BUILDER_DIR, "parts_shelf.json"), encoding="utf-8"))
 PARTS_BY_ID = {p["part_id"]: p for p in SHELF["parts"]}
+# the exact identity of every part as it is at bind time -- version, source
+# revision, lifecycle status -- computed once here and written into every
+# binding as `pins`, so a bound spec names not just WHICH part but WHICH BYTES
+# of it, and the checker can report drift when the shelf later moves on.
+PINS_BY_ID = {p["part_id"]: shelf_lib.pin(p) for p in SHELF["parts"]}
 
 
 def _resolve(part_ids, note):
@@ -78,8 +86,12 @@ def _resolve(part_ids, note):
 
 CUSTOM_ACTION_BINDINGS = {
     "Duplicate": _resolve(["record_cloning"], None),
-    "Reassign": _resolve([], "a plain restricted field edit -- no specialist part needed, "
-                              "but the Builder has no generic custom-action execution rule at all"),
+    "Reassign": _resolve(["custom_action_execution"],
+                          "a plain restricted field edit: the generic custom-action rule performs it as "
+                          "set_fields and enforces the action's own declared 'who'"),
+    "Open source document": _resolve(["preserved_original_document_store"],
+                      "the part serves the stored original by its recorded path and re-checks its "
+                      "hash; the screen that opens it is a plain detail screen"),
     "Send": _resolve(["document_generation", "email_parsing"],
                       "document rendering and message composition are real and proven; actually "
                       "dispatching over SMTP was never built or proven, so this action is only "
@@ -91,6 +103,12 @@ TRANSITION_BINDINGS = {
     ("Bill lifecycle", "Awaiting payment", "Paid"): _resolve(["ledger_balancing"], None),
     ("Purchase order lifecycle", "Confirmed", "Received"): _resolve(["stock_ledger"], None),
     ("Sales order lifecycle", "Confirmed", "Shipped"): _resolve(["stock_ledger"], None),
+    ("Document lifecycle", "received", "filled"): _resolve(
+        ["document_field_detection", "value_provenance"],
+        "detection and provenance are real; a field whose value is MISSING stops here rather "
+        "than moving on, which is the part's own behaviour"),
+    ("Document lifecycle", "filled", "signed"): _resolve(["trust_gate_approval"], None),
+    ("Document lifecycle", "signed", "done"): _resolve(["preserved_original_document_store"], None),
     ("Appointment lifecycle", "Booked", "Confirmed"): _resolve(
         [], "half of this transition is 'the deposit payment succeeds' -- needs live "
             "payment processing, not on the shelf; the other half needs no part at all, "
@@ -98,41 +116,47 @@ TRANSITION_BINDINGS = {
 }
 
 WORKFLOW_EXECUTOR = _resolve(["workflow_executor"], None)
+SYSTEM_TRANSITION = _resolve(["system_triggered_transition"],
+    "the move itself is real and refuses anything not declared; whatever the declared event "
+    "implies beyond moving the record needs its own part, and gets one where it exists")
+CUSTOM_ACTION = _resolve(["custom_action_execution"], None)
+APPROVAL_GATE = _resolve(["stage_approval_gate"], None)
+FORM = _resolve(["form_render_submit"], None)
 
 # reports whose own real metric fits reporting_engine's real, single-table
 # scope (count/sum/avg/min/max, filter, one group-by) -- worked out by hand
 # against each report's own real RP.04/RP.06 answers, not assumed:
-#   pm-teamwork "Open tasks by person"/"Overdue tasks": single table (Task),
-#     filter + group-by / two filters. Fits, proven in reporting_engine's
-#     own prove() against this exact shape.
-#   crm-pipeline "Pipeline by stage": single table (Deal), sum+count grouped
-#     by stage. Fits (two run_report() calls, one per metric, no join).
-#   booking-frontdesk "Upcoming appointments": single table (Appointment),
-#     an "in" filter (stage) + a "within_next_days" filter (Start). Fits.
-#   erp-backbone "Open orders": two metrics, each its own single table
-#     (Sales order / Purchase order) -- two independent run_report() calls,
-#     no cross-table join needed for either one. Fits.
-# Left unbound (accounting-ledger "Profit and loss", "Aged receivables"):
-# both need a cross-table join (Invoice -> Invoice line), a computed value
-# (Quantity x Unit amount), an arithmetic combination of other metrics
-# (net profit = revenue - expenses), or age-bucketing -- genuinely outside
-# a single-table count/sum/avg/min/max engine, not forced through it.
+#   pm-teamwork "Open tasks by person"/"Overdue tasks": single table (Task).
+#   crm-pipeline "Pipeline by stage": single table (Deal), sum+count by stage.
+#   booking-frontdesk "Upcoming appointments": single table (Appointment).
+#   erp-backbone "Open orders": two metrics, each its own single table.
+#   command-desk "Activity per agent": single table (Job), count of done /
+#     failed grouped by agent, filtered to the week. Fits.
+#   command-desk "Cost": single table (Job), sum of the Job record's own Cost
+#     field grouped by agent, filtered to the period. Fits, now that the
+#     answers put the cost of a hosted model call on the Job (Sam, 2026-09-04).
+# Left unbound: accounting-ledger "Profit and loss" and "Aged receivables"
+# (cross-table join, computed values, arithmetic between metrics, age
+# bucketing) -- genuinely outside a single-table aggregation.
 REPORTING_ENGINE = _resolve(["reporting_engine"], None)
 
 REPORT_BINDINGS = {
-    "Win rate": _resolve(["stage_history"], None),
-    "No-show rate": _resolve(["stage_history"], None),
-    "Sales by month": _resolve(["stage_history"], None),
-    "Stock on hand": _resolve(["stock_ledger"], None),
     "Open tasks by person": REPORTING_ENGINE,
     "Overdue tasks": REPORTING_ENGINE,
     "Pipeline by stage": REPORTING_ENGINE,
     "Upcoming appointments": REPORTING_ENGINE,
     "Open orders": REPORTING_ENGINE,
+    "Activity per agent": REPORTING_ENGINE,
+    "Cost": REPORTING_ENGINE,
+    "Win rate": _resolve(["stage_history"], None),
+    "No-show rate": _resolve(["stage_history"], None),
+    "Sales by month": _resolve(["stage_history"], None),
+    "Stock on hand": _resolve(["stock_ledger"], None),
 }
 
 CRUD_OAUTH = _resolve(["crud_list_detail"], None)
 OAUTH = _resolve(["oauth_connect"], None)
+API_KEY = _resolve(["api_key_connect"], None)
 NO_RULE = ([], [], None)
 
 
@@ -141,20 +165,30 @@ def bind_action(act):
         return OAUTH
     if act["kind"] in ("create", "edit", "delete"):
         return CRUD_OAUTH
+    if act["kind"] == "submit":
+        return FORM
+    if act["kind"] == "approve":
+        return APPROVAL_GATE
     if act["kind"] == "custom":
         name = (act.get("detail") or {}).get("name")
-        return CUSTOM_ACTION_BINDINGS.get(name, ([], [], "no binding rule for this custom action"))
+        return CUSTOM_ACTION_BINDINGS.get(name, CUSTOM_ACTION)
     if act["kind"] == "transition":
         if act.get("mover") != "automatic":
             return WORKFLOW_EXECUTOR
         key = (act.get("workflow"), act.get("from"), act.get("to"))
-        return TRANSITION_BINDINGS.get(key, ([], [], "no binding rule for this automatic transition"))
+        # an edge with its own domain rule wins; otherwise the generic system mover
+        return TRANSITION_BINDINGS.get(key, SYSTEM_TRANSITION)
     return [], [], "no binding rule for this action kind"
 
 
-def bind_screen(scr, report_bindings_by_name):
+def bind_screen(scr, report_bindings_by_name, integrations=None):
     if scr["kind"] == "integration_status":
-        return OAUTH
+        # the screen's own integration declares how it authenticates; a pasted
+        # key is a different real rule from an OAuth round trip
+        auth = ((integrations or {}).get(scr.get("integration")) or {}).get("auth")
+        return API_KEY if auth == "api_key" else OAUTH
+    if scr["kind"] == "form":
+        return FORM
     if scr["kind"] in ("list", "detail"):
         return CRUD_OAUTH
     if scr["kind"] == "report":
@@ -164,11 +198,6 @@ def bind_screen(scr, report_bindings_by_name):
 
 
 def bind_notification(notif):
-    """Every real notification binds to notification_delivery for the real
-    delivery half (real in-app row + real SMTP send). A relative_to_date/
-    schedule-triggered one ALSO binds to scheduled_jobs for the real timing
-    half (wait until due, then fire) -- two parts cooperating, not one
-    covering both concerns."""
     kind = (notif.get("trigger") or {}).get("kind")
     if kind in ("relative_to_date", "schedule"):
         return _resolve(["scheduled_jobs", "notification_delivery"], None)
@@ -191,21 +220,20 @@ def bind_structure(structure, inventory):
     report_engines = {name: REPORT_BINDINGS.get(name, ([], [], "plain aggregation over existing fields -- no generic reporting part was built"))
                        for name in inventory["reports"]}
 
+    def binding(parts, locations, note):
+        return {"parts": parts, "locations": locations, "note": note,
+                "pins": [PINS_BY_ID[pid] for pid in parts]}
+
     for scr in s["screens_inventory"]:
-        parts, locations, note = bind_screen(scr, report_engines)
-        scr["part_bindings"] = {"parts": parts, "locations": locations, "note": note}
+        scr["part_bindings"] = binding(*bind_screen(scr, report_engines, s.get("integrations")))
     for act in s["actions_inventory"]:
-        parts, locations, note = bind_action(act)
-        act["part_bindings"] = {"parts": parts, "locations": locations, "note": note}
+        act["part_bindings"] = binding(*bind_action(act))
     for name, notif in s["notifications"].items():
-        parts, locations, note = bind_notification(notif)
-        notif["part_bindings"] = {"parts": parts, "locations": locations, "note": note}
+        notif["part_bindings"] = binding(*bind_notification(notif))
     for name, rep in s["reports"].items():
-        parts, locations, note = report_engines[name]
-        rep["part_bindings"] = {"parts": parts, "locations": locations, "note": note}
+        rep["part_bindings"] = binding(*report_engines[name])
     for op in s["recurring_ops"]:
-        parts, locations, note = bind_ops()
-        op["part_bindings"] = {"parts": parts, "locations": locations, "note": note}
+        op["part_bindings"] = binding(*bind_ops())
     return s
 
 

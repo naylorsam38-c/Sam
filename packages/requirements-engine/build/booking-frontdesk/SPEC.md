@@ -13,7 +13,7 @@
 | booking-frontdesk/SCR-004 | detail | crud_list_detail |  |
 | booking-frontdesk/SCR-005 | list | crud_list_detail |  |
 | booking-frontdesk/SCR-006 | detail | crud_list_detail |  |
-| booking-frontdesk/SCR-007 | form | **UNBOUND** | no binding rule for this screen kind |
+| booking-frontdesk/SCR-007 | form | form_render_submit |  |
 | booking-frontdesk/SCR-008 | report | reporting_engine |  |
 | booking-frontdesk/SCR-009 | report | stage_history |  |
 
@@ -30,13 +30,12 @@
 | booking-frontdesk/ACT-007 | create | crud_list_detail |  |
 | booking-frontdesk/ACT-008 | edit | crud_list_detail |  |
 | booking-frontdesk/ACT-009 | delete | crud_list_detail |  |
-| booking-frontdesk/ACT-010 | transition | **UNBOUND** | half of this transition is 'the deposit payment succeeds' -- needs live payment processing, not on the shelf; the other half needs no part at all, but the template models both as one automatic-triggered edge |
+| booking-frontdesk/ACT-010 | transition | workflow_executor |  |
 | booking-frontdesk/ACT-011 | transition | workflow_executor |  |
 | booking-frontdesk/ACT-012 | transition | workflow_executor |  |
 | booking-frontdesk/ACT-013 | transition | workflow_executor |  |
 | booking-frontdesk/ACT-014 | transition | workflow_executor |  |
-| booking-frontdesk/ACT-015 | cancel | **UNBOUND** | no binding rule for this action kind |
-| booking-frontdesk/ACT-016 | submit | **UNBOUND** | no binding rule for this action kind |
+| booking-frontdesk/ACT-015 | submit | form_render_submit |  |
 
 ## Notifications
 

@@ -116,6 +116,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "erp-backbone/REC-001"
       },
       "Supplier": {
@@ -210,6 +211,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "erp-backbone/REC-002"
       },
       "Customer account": {
@@ -291,6 +293,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "erp-backbone/REC-003"
       },
       "Purchase order": {
@@ -380,6 +383,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "erp-backbone/REC-004"
       },
       "Purchase order line": {
@@ -458,6 +462,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "erp-backbone/REC-005"
       },
       "Sales order": {
@@ -540,6 +545,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "erp-backbone/REC-006"
       },
       "Sales order line": {
@@ -618,6 +624,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "erp-backbone/REC-007"
       },
       "Stock adjustment": {
@@ -705,6 +712,7 @@
         },
         "retention": "forever",
         "custom_actions": [],
+        "on_create": [],
         "id": "erp-backbone/REC-008"
       }
     },
@@ -1083,17 +1091,21 @@
           "resubmit": "yes"
         },
         "cancel": {
-          "allowed": "yes",
-          "by": [
-            "Operations",
-            "Purchasing"
-          ],
-          "from_stages": [
-            "Draft",
-            "Confirmed"
-          ]
+          "allowed": "no"
         },
         "timeouts": [],
+        "effects": [
+          {
+            "on_enter": "Received",
+            "op": "apply_order_lines",
+            "line_table": "purchase_order_lines",
+            "line_fk": "purchase_order",
+            "product_table": "products",
+            "product_fk": "product",
+            "quantity_column": "quantity",
+            "direction": "receive"
+          }
+        ],
         "initial": "Draft",
         "terminal": [
           "Closed",
@@ -1162,17 +1174,21 @@
         "approvals": [],
         "on_reject": null,
         "cancel": {
-          "allowed": "yes",
-          "by": [
-            "Operations",
-            "Sales"
-          ],
-          "from_stages": [
-            "Draft",
-            "Confirmed"
-          ]
+          "allowed": "no"
         },
         "timeouts": [],
+        "effects": [
+          {
+            "on_enter": "Shipped",
+            "op": "apply_order_lines",
+            "line_table": "sales_order_lines",
+            "line_fk": "sales_order",
+            "product_table": "products",
+            "product_fk": "product",
+            "quantity_column": "quantity",
+            "direction": "ship"
+          }
+        ],
         "initial": "Draft",
         "terminal": [
           "Closed",
@@ -1208,7 +1224,15 @@
           "locations": [
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       "Order shipped": {
@@ -1236,7 +1260,15 @@
           "locations": [
             "packages/builder/engines/notification_delivery.py::deliver"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
         }
       }
     },
@@ -1247,6 +1279,26 @@
           "sum of Product Stock on hand": "auto: count/sum of 'sum of Product Stock on hand'",
           "count of Products at or below Reorder point": "auto: count/sum of 'count of Products at or below Reorder point'"
         },
+        "spec": [
+          {
+            "metric": "sum of Product Stock on hand",
+            "spec": {
+              "table": "products",
+              "aggregation": "sum",
+              "value_field": "stock_on_hand"
+            }
+          },
+          {
+            "metric": "count of Products at or below Reorder point",
+            "spec": {
+              "engine": "stock_ledger",
+              "kind": "count_at_or_below_reorder",
+              "table": "products",
+              "stock_column": "stock_on_hand",
+              "reorder_column": "reorder_point"
+            }
+          }
+        ],
         "id": "erp-backbone/RPT-001",
         "part_bindings": {
           "parts": [
@@ -1254,9 +1306,19 @@
           ],
           "locations": [
             "packages/builder/engines/stock_ledger.py::apply_order_line",
-            "packages/builder/engines/stock_ledger.py::needs_reorder"
+            "packages/builder/engines/stock_ledger.py::needs_reorder",
+            "packages/builder/engines/stock_ledger.py::apply_order_lines",
+            "packages/builder/engines/stock_ledger.py::count_at_or_below_reorder"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stock_ledger",
+              "version": "1.1.0",
+              "revision": "094c3be30a31bf03",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       "Sales by month": {
@@ -1264,6 +1326,22 @@
         "metrics": {
           "sales value": "auto: count/sum of 'sales value'"
         },
+        "spec": [
+          {
+            "metric": "sales value",
+            "spec": {
+              "engine": "stage_history",
+              "kind": "line_value_by_month",
+              "table": "sales_orders",
+              "stage": "Shipped",
+              "line_table": "sales_order_lines",
+              "line_fk": "sales_order",
+              "quantity_column": "quantity",
+              "price_column": "unit_price",
+              "months": 12
+            }
+          }
+        ],
         "id": "erp-backbone/RPT-002",
         "part_bindings": {
           "parts": [
@@ -1272,9 +1350,19 @@
           "locations": [
             "packages/builder/engines/stage_history.py::record_transition",
             "packages/builder/engines/stage_history.py::entered_at",
-            "packages/builder/engines/stage_history.py::rate_between"
+            "packages/builder/engines/stage_history.py::rate_between",
+            "packages/builder/engines/stage_history.py::rate_over_last_days",
+            "packages/builder/engines/stage_history.py::line_value_by_month"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_history",
+              "version": "1.1.0",
+              "revision": "a2820dad41d0c83c",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       "Open orders": {
@@ -1283,6 +1371,36 @@
           "count of Sales orders in Confirmed": "auto: count/sum of 'count of Sales orders in Confirmed'",
           "count of Purchase orders in Confirmed": "auto: count/sum of 'count of Purchase orders in Confirmed'"
         },
+        "spec": [
+          {
+            "metric": "count of Sales orders in Confirmed",
+            "spec": {
+              "table": "sales_orders",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "=",
+                  "value": "Confirmed"
+                }
+              ]
+            }
+          },
+          {
+            "metric": "count of Purchase orders in Confirmed",
+            "spec": {
+              "table": "purchase_orders",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "=",
+                  "value": "Confirmed"
+                }
+              ]
+            }
+          }
+        ],
         "id": "erp-backbone/RPT-003",
         "part_bindings": {
           "parts": [
@@ -1291,7 +1409,15 @@
           "locations": [
             "packages/builder/engines/reporting_engine.py::run_report"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     },
@@ -1370,7 +1496,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1388,7 +1522,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1406,7 +1548,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1424,7 +1574,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1442,7 +1600,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1460,7 +1626,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1478,7 +1652,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1496,7 +1678,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1514,7 +1704,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1532,7 +1730,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1550,7 +1756,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1568,7 +1782,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1586,7 +1808,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1604,7 +1834,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1622,7 +1860,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1640,7 +1886,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1653,9 +1907,19 @@
           ],
           "locations": [
             "packages/builder/engines/stock_ledger.py::apply_order_line",
-            "packages/builder/engines/stock_ledger.py::needs_reorder"
+            "packages/builder/engines/stock_ledger.py::needs_reorder",
+            "packages/builder/engines/stock_ledger.py::apply_order_lines",
+            "packages/builder/engines/stock_ledger.py::count_at_or_below_reorder"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stock_ledger",
+              "version": "1.1.0",
+              "revision": "094c3be30a31bf03",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1669,9 +1933,19 @@
           "locations": [
             "packages/builder/engines/stage_history.py::record_transition",
             "packages/builder/engines/stage_history.py::entered_at",
-            "packages/builder/engines/stage_history.py::rate_between"
+            "packages/builder/engines/stage_history.py::rate_between",
+            "packages/builder/engines/stage_history.py::rate_over_last_days",
+            "packages/builder/engines/stage_history.py::line_value_by_month"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_history",
+              "version": "1.1.0",
+              "revision": "a2820dad41d0c83c",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1685,7 +1959,15 @@
           "locations": [
             "packages/builder/engines/reporting_engine.py::run_report"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     ],
@@ -1737,7 +2019,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1759,7 +2049,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1781,7 +2079,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1804,7 +2110,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1827,7 +2141,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1849,7 +2171,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1872,7 +2202,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1895,7 +2233,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1917,7 +2263,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1939,7 +2293,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1962,7 +2324,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -1984,7 +2354,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2006,7 +2384,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2028,7 +2414,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2050,7 +2444,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2072,7 +2474,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2095,7 +2505,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2117,7 +2535,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2139,7 +2565,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2161,7 +2595,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2183,7 +2625,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2206,7 +2656,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2228,7 +2686,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2250,7 +2716,15 @@
             "packages/builder/builder.py::_render_list_screen",
             "packages/builder/builder.py::_render_detail_screen"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "143bf3e98f4fd428",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2271,7 +2745,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2292,7 +2774,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
@@ -2313,30 +2803,19 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
         "id": "erp-backbone/ACT-028",
-        "kind": "cancel",
-        "workflow": "Purchase order lifecycle",
-        "roles": [
-          "Operations",
-          "Purchasing"
-        ],
-        "from_stages": [
-          "Draft",
-          "Confirmed"
-        ],
-        "outcome": "cancels 'Purchase order lifecycle' from stage(s) ['Draft', 'Confirmed']",
-        "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "no binding rule for this action kind"
-        }
-      },
-      {
-        "id": "erp-backbone/ACT-029",
         "kind": "approve",
         "workflow": "Purchase order lifecycle",
         "stage": "Draft",
@@ -2345,13 +2824,27 @@
         ],
         "outcome": "approves 'Purchase order lifecycle' at stage 'Draft'",
         "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "no binding rule for this action kind"
+          "parts": [
+            "stage_approval_gate"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_approval_gate.py::decide",
+            "packages/builder/engines/stage_approval_gate.py::check_may_leave",
+            "packages/builder/engines/stage_approval_gate.py::decision_for"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_approval_gate",
+              "version": "1.0.0",
+              "revision": "e05ac2be0b3c4cc8",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
-        "id": "erp-backbone/ACT-030",
+        "id": "erp-backbone/ACT-029",
         "kind": "transition",
         "workflow": "Sales order lifecycle",
         "from": "Draft",
@@ -2368,11 +2861,19 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
-        "id": "erp-backbone/ACT-031",
+        "id": "erp-backbone/ACT-030",
         "kind": "transition",
         "workflow": "Sales order lifecycle",
         "from": "Confirmed",
@@ -2389,11 +2890,19 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       },
       {
-        "id": "erp-backbone/ACT-032",
+        "id": "erp-backbone/ACT-031",
         "kind": "transition",
         "workflow": "Sales order lifecycle",
         "from": "Shipped",
@@ -2410,26 +2919,15 @@
           "locations": [
             "packages/builder/engines/workflow_executor.py::transition"
           ],
-          "note": null
-        }
-      },
-      {
-        "id": "erp-backbone/ACT-033",
-        "kind": "cancel",
-        "workflow": "Sales order lifecycle",
-        "roles": [
-          "Operations",
-          "Sales"
-        ],
-        "from_stages": [
-          "Draft",
-          "Confirmed"
-        ],
-        "outcome": "cancels 'Sales order lifecycle' from stage(s) ['Draft', 'Confirmed']",
-        "part_bindings": {
-          "parts": [],
-          "locations": [],
-          "note": "no binding rule for this action kind"
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
         }
       }
     ],
@@ -2445,7 +2943,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2459,7 +2965,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2473,7 +2987,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2487,7 +3009,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2501,7 +3031,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2515,7 +3053,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2529,7 +3075,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2543,7 +3097,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2563,7 +3125,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2583,7 +3153,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2600,7 +3178,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2617,7 +3203,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2633,7 +3227,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2649,7 +3251,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       },
       {
@@ -2665,7 +3275,15 @@
           "locations": [
             "packages/builder/engines/scheduled_jobs.py::run_after"
           ],
-          "note": null
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
         }
       }
     ],
@@ -3209,46 +3827,6 @@
         "role": "Operations",
         "action": {
           "id": "erp-backbone/ACT-028",
-          "kind": "cancel",
-          "workflow": "Purchase order lifecycle",
-          "roles": [
-            "Operations",
-            "Purchasing"
-          ],
-          "from_stages": [
-            "Draft",
-            "Confirmed"
-          ],
-          "outcome": "cancels 'Purchase order lifecycle' from stage(s) ['Draft', 'Confirmed']"
-        },
-        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
-      },
-      {
-        "id": "erp-backbone/QA-036",
-        "action_id": "erp-backbone/ACT-028",
-        "role": "Purchasing",
-        "action": {
-          "id": "erp-backbone/ACT-028",
-          "kind": "cancel",
-          "workflow": "Purchase order lifecycle",
-          "roles": [
-            "Operations",
-            "Purchasing"
-          ],
-          "from_stages": [
-            "Draft",
-            "Confirmed"
-          ],
-          "outcome": "cancels 'Purchase order lifecycle' from stage(s) ['Draft', 'Confirmed']"
-        },
-        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
-      },
-      {
-        "id": "erp-backbone/QA-037",
-        "action_id": "erp-backbone/ACT-029",
-        "role": "Operations",
-        "action": {
-          "id": "erp-backbone/ACT-029",
           "kind": "approve",
           "workflow": "Purchase order lifecycle",
           "stage": "Draft",
@@ -3260,11 +3838,11 @@
         "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
       },
       {
-        "id": "erp-backbone/QA-038",
-        "action_id": "erp-backbone/ACT-030",
+        "id": "erp-backbone/QA-036",
+        "action_id": "erp-backbone/ACT-029",
         "role": "Sales",
         "action": {
-          "id": "erp-backbone/ACT-030",
+          "id": "erp-backbone/ACT-029",
           "kind": "transition",
           "workflow": "Sales order lifecycle",
           "from": "Draft",
@@ -3278,11 +3856,11 @@
         "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
       },
       {
-        "id": "erp-backbone/QA-039",
-        "action_id": "erp-backbone/ACT-031",
+        "id": "erp-backbone/QA-037",
+        "action_id": "erp-backbone/ACT-030",
         "role": "Warehouse",
         "action": {
-          "id": "erp-backbone/ACT-031",
+          "id": "erp-backbone/ACT-030",
           "kind": "transition",
           "workflow": "Sales order lifecycle",
           "from": "Confirmed",
@@ -3296,11 +3874,11 @@
         "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
       },
       {
-        "id": "erp-backbone/QA-040",
-        "action_id": "erp-backbone/ACT-032",
+        "id": "erp-backbone/QA-038",
+        "action_id": "erp-backbone/ACT-031",
         "role": "Operations",
         "action": {
-          "id": "erp-backbone/ACT-032",
+          "id": "erp-backbone/ACT-031",
           "kind": "transition",
           "workflow": "Sales order lifecycle",
           "from": "Shipped",
@@ -3314,705 +3892,665 @@
         "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
       },
       {
+        "id": "erp-backbone/QA-039",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-040",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
         "id": "erp-backbone/QA-041",
-        "action_id": "erp-backbone/ACT-033",
-        "role": "Operations",
-        "action": {
-          "id": "erp-backbone/ACT-033",
-          "kind": "cancel",
-          "workflow": "Sales order lifecycle",
-          "roles": [
-            "Operations",
-            "Sales"
-          ],
-          "from_stages": [
-            "Draft",
-            "Confirmed"
-          ],
-          "outcome": "cancels 'Sales order lifecycle' from stage(s) ['Draft', 'Confirmed']"
-        },
-        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-042",
-        "action_id": "erp-backbone/ACT-033",
-        "role": "Sales",
-        "action": {
-          "id": "erp-backbone/ACT-033",
-          "kind": "cancel",
-          "workflow": "Sales order lifecycle",
-          "roles": [
-            "Operations",
-            "Sales"
-          ],
-          "from_stages": [
-            "Draft",
-            "Confirmed"
-          ],
-          "outcome": "cancels 'Sales order lifecycle' from stage(s) ['Draft', 'Confirmed']"
-        },
-        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-043",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-001",
+        "screen_id": "erp-backbone/SCR-005",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-044",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-002",
+        "screen_id": "erp-backbone/SCR-006",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-045",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-003",
+        "screen_id": "erp-backbone/SCR-007",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-046",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-004",
+        "screen_id": "erp-backbone/SCR-008",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-047",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-005",
+        "screen_id": "erp-backbone/SCR-009",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-048",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-006",
+        "screen_id": "erp-backbone/SCR-010",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-049",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-007",
+        "screen_id": "erp-backbone/SCR-011",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-050",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-008",
+        "screen_id": "erp-backbone/SCR-012",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-051",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-009",
+        "screen_id": "erp-backbone/SCR-013",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-052",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-010",
+        "screen_id": "erp-backbone/SCR-014",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-053",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-011",
+        "screen_id": "erp-backbone/SCR-015",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-054",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-012",
+        "screen_id": "erp-backbone/SCR-016",
         "role": "Admin",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-055",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-013",
-        "role": "Admin",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-056",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-014",
-        "role": "Admin",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-057",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-015",
-        "role": "Admin",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-058",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-016",
-        "role": "Admin",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-059",
-        "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-017",
         "role": "Admin",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-060",
+        "id": "erp-backbone/QA-056",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-018",
         "role": "Admin",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-061",
+        "id": "erp-backbone/QA-057",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-019",
         "role": "Admin",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-062",
+        "id": "erp-backbone/QA-058",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-001",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-059",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-060",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-061",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-062",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-063",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-002",
+        "screen_id": "erp-backbone/SCR-006",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-064",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-003",
+        "screen_id": "erp-backbone/SCR-007",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-065",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-004",
+        "screen_id": "erp-backbone/SCR-008",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-066",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-005",
+        "screen_id": "erp-backbone/SCR-009",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-067",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-006",
+        "screen_id": "erp-backbone/SCR-010",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-068",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-007",
+        "screen_id": "erp-backbone/SCR-011",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-069",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-008",
+        "screen_id": "erp-backbone/SCR-012",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-070",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-009",
+        "screen_id": "erp-backbone/SCR-013",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-071",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-010",
+        "screen_id": "erp-backbone/SCR-014",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-072",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-011",
+        "screen_id": "erp-backbone/SCR-015",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-073",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-012",
+        "screen_id": "erp-backbone/SCR-016",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-074",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-013",
+        "screen_id": "erp-backbone/SCR-017",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-075",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-014",
+        "screen_id": "erp-backbone/SCR-018",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-076",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-015",
+        "screen_id": "erp-backbone/SCR-019",
         "role": "Operations",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-077",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-016",
-        "role": "Operations",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Sales",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-078",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-017",
-        "role": "Operations",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Sales",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-079",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-018",
-        "role": "Operations",
-        "expect": "reachable"
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-080",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-019",
-        "role": "Operations",
-        "expect": "reachable"
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-081",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-001",
+        "screen_id": "erp-backbone/SCR-005",
         "role": "Sales",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-082",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-002",
+        "screen_id": "erp-backbone/SCR-006",
         "role": "Sales",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-083",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-003",
+        "screen_id": "erp-backbone/SCR-007",
         "role": "Sales",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-084",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-004",
+        "screen_id": "erp-backbone/SCR-008",
         "role": "Sales",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-085",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-005",
-        "role": "Sales",
-        "expect": "reachable"
-      },
-      {
-        "id": "erp-backbone/QA-086",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-006",
-        "role": "Sales",
-        "expect": "reachable"
-      },
-      {
-        "id": "erp-backbone/QA-087",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-007",
-        "role": "Sales",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-088",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-008",
-        "role": "Sales",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-089",
-        "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-009",
         "role": "Sales",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
-        "id": "erp-backbone/QA-090",
+        "id": "erp-backbone/QA-086",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-010",
         "role": "Sales",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
-        "id": "erp-backbone/QA-091",
+        "id": "erp-backbone/QA-087",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-011",
         "role": "Sales",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-092",
+        "id": "erp-backbone/QA-088",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-012",
         "role": "Sales",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-093",
+        "id": "erp-backbone/QA-089",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-013",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-090",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-091",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-092",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-093",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
         "role": "Sales",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-094",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-014",
+        "screen_id": "erp-backbone/SCR-018",
         "role": "Sales",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-095",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-015",
-        "role": "Sales",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-096",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-016",
-        "role": "Sales",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-097",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-017",
-        "role": "Sales",
-        "expect": "reachable"
-      },
-      {
-        "id": "erp-backbone/QA-098",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-018",
-        "role": "Sales",
-        "expect": "reachable"
-      },
-      {
-        "id": "erp-backbone/QA-099",
-        "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-019",
         "role": "Sales",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-100",
+        "id": "erp-backbone/QA-096",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-001",
         "role": "Purchasing",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-101",
+        "id": "erp-backbone/QA-097",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-002",
         "role": "Purchasing",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-102",
+        "id": "erp-backbone/QA-098",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-003",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-099",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-100",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-101",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-102",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
         "role": "Purchasing",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-103",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-004",
+        "screen_id": "erp-backbone/SCR-008",
         "role": "Purchasing",
         "expect": "reachable"
       },
       {
         "id": "erp-backbone/QA-104",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-005",
-        "role": "Purchasing",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-105",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-006",
-        "role": "Purchasing",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-106",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-007",
-        "role": "Purchasing",
-        "expect": "reachable"
-      },
-      {
-        "id": "erp-backbone/QA-107",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-008",
-        "role": "Purchasing",
-        "expect": "reachable"
-      },
-      {
-        "id": "erp-backbone/QA-108",
-        "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-009",
         "role": "Purchasing",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-109",
+        "id": "erp-backbone/QA-105",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-010",
         "role": "Purchasing",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-110",
+        "id": "erp-backbone/QA-106",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-011",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-107",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-108",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-109",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-110",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
         "role": "Purchasing",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-111",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-012",
+        "screen_id": "erp-backbone/SCR-016",
         "role": "Purchasing",
         "expect": "blocked (403 or absent from navigation)"
       },
       {
         "id": "erp-backbone/QA-112",
         "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-013",
-        "role": "Purchasing",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-113",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-014",
-        "role": "Purchasing",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-114",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-015",
-        "role": "Purchasing",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-115",
-        "kind": "screen_access",
-        "screen_id": "erp-backbone/SCR-016",
-        "role": "Purchasing",
-        "expect": "blocked (403 or absent from navigation)"
-      },
-      {
-        "id": "erp-backbone/QA-116",
-        "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-017",
         "role": "Purchasing",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-117",
+        "id": "erp-backbone/QA-113",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-018",
         "role": "Purchasing",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-118",
+        "id": "erp-backbone/QA-114",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-019",
         "role": "Purchasing",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-119",
+        "id": "erp-backbone/QA-115",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-001",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-120",
+        "id": "erp-backbone/QA-116",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-002",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-121",
+        "id": "erp-backbone/QA-117",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-003",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-122",
+        "id": "erp-backbone/QA-118",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-004",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-123",
+        "id": "erp-backbone/QA-119",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-005",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-124",
+        "id": "erp-backbone/QA-120",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-006",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-125",
+        "id": "erp-backbone/QA-121",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-007",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-126",
+        "id": "erp-backbone/QA-122",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-008",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-127",
+        "id": "erp-backbone/QA-123",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-009",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-128",
+        "id": "erp-backbone/QA-124",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-010",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-129",
+        "id": "erp-backbone/QA-125",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-011",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-130",
+        "id": "erp-backbone/QA-126",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-012",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-131",
+        "id": "erp-backbone/QA-127",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-013",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-132",
+        "id": "erp-backbone/QA-128",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-014",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-133",
+        "id": "erp-backbone/QA-129",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-015",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-134",
+        "id": "erp-backbone/QA-130",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-016",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-135",
+        "id": "erp-backbone/QA-131",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-017",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-136",
+        "id": "erp-backbone/QA-132",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-018",
         "role": "Warehouse",
         "expect": "reachable"
       },
       {
-        "id": "erp-backbone/QA-137",
+        "id": "erp-backbone/QA-133",
         "kind": "screen_access",
         "screen_id": "erp-backbone/SCR-019",
         "role": "Warehouse",

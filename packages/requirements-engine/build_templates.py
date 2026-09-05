@@ -189,9 +189,16 @@ def _describe_engines(records, workflows, notifications, reports):
 
 def template(name, source_app, category, modules, roles, super_role, records, workflows,
              notifications, reports, forms, file_types, answers, per_instance, features,
-             ask_customer_extra=None, integrations=None):
+             ask_customer_extra=None, integrations=None,
+             report_specs=None, transition_effects=None, create_effects=None):
+    """report_specs / transition_effects / create_effects are the EXECUTABLE
+    form of answers that are otherwise prose (RP.05 metric definitions,
+    FL.08 on_complete, FL.03 automatic events): the same shape command-desk
+    already carries, so the Builder runs them instead of refusing them. Each
+    is keyed by the real report / workflow / record name it belongs to and is
+    validated by check_template.py against that inventory."""
     ask = list(ASK_ALWAYS) + (ask_customer_extra or [])
-    TEMPLATES.append(OrderedDict(
+    t = OrderedDict(
         template=name, source_app=source_app, category=category, modules=modules,
         inventory=OrderedDict(records=list(records), roles=list(roles), forms=list(forms),
                               notifications=list(notifications), reports=list(reports),
@@ -199,7 +206,14 @@ def template(name, source_app, category, modules, roles, super_role, records, wo
                               integrations=list(integrations or []), screens=[]),
         super_role=super_role, answers=answers, per_instance=per_instance,
         ask_customer=ask, features=features,
-        specialist_engines=_describe_engines(records, workflows, notifications, reports)))
+        specialist_engines=_describe_engines(records, workflows, notifications, reports))
+    if report_specs:
+        t["report_specs"] = report_specs
+    if transition_effects:
+        t["transition_effects"] = transition_effects
+    if create_effects:
+        t["create_effects"] = create_effects
+    TEMPLATES.append(t)
 
 
 # ============================================================================
@@ -227,7 +241,10 @@ pm_records = {
         ownership=OWN_CREATOR,
         custom_actions=[{"name": "Duplicate", "who": ["Member"],
                          "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
-                         "result_location": "the same project's task list"}]),
+                         "result_location": "the same project's task list",
+                         # the executable form of that effect, run by the record_cloning part
+                         "execution": {"op": "clone", "overrides": {"stage": "To do"},
+                                       "title_column": "title", "title_suffix": " (copy)"}}]),
     "Comment": record(
         "A message left on a task by a person.",
         [f("Body", "long_text", "yes"), f("Task", "link", "yes", target_record="Task")],
@@ -266,11 +283,25 @@ pm_reports = {
                             definitions={"count of overdue Tasks":
                                          "a Task counts as overdue when Due date is before today AND its stage is not Done, as at the moment the report is viewed"}),
 }
+pm_report_specs = {
+    # each metric of each report as the generic reporting engine runs it, read
+    # off the report's own RP.04/RP.05 answers above (column names are the
+    # Builder's slugs of the real field names)
+    "Open tasks by person": [
+        {"metric": "count of Tasks not in stage Done, grouped by Assignee",
+         "spec": {"table": "tasks", "aggregation": "count", "group_by": "assignee",
+                  "filters": [{"field": "stage", "op": "!=", "value": "Done"}]}}],
+    "Overdue tasks": [
+        {"metric": "count of overdue Tasks",
+         "spec": {"table": "tasks", "aggregation": "count",
+                  "filters": [{"field": "due_date", "op": "before_now"},
+                              {"field": "stage", "op": "!=", "value": "Done"}]}}],
+}
 template(
     "pm-teamwork", "Asana", "project management",
     ["tasking", "collaboration", "files"],
     pm_roles, "Admin", pm_records, pm_workflows, pm_notifications, pm_reports,
-    forms=[], file_types=["Attachment"],
+    forms=[], file_types=["Attachment"], report_specs=pm_report_specs,
     answers=dict(
         {"A.06": ["web"], "A.07": "yes", "A.08": "single", "A.09": "no", "A.10": [],
          "A.11": "no", "A.16": "Admin", "P.00": "no",
@@ -335,7 +366,10 @@ crm_records = {
         ownership=own_field("Owner"),
         custom_actions=[{"name": "Reassign", "who": ["Sales manager"],
                          "effect": "changes the deal's Owner to another person",
-                         "result_location": "the deal page; the new owner's pipeline view"}]),
+                         "result_location": "the deal page; the new owner's pipeline view",
+                         # the new owner is chosen when the button is pressed, so the
+                         # effect takes its value from the press (custom_action_execution)
+                         "execution": {"op": "set_fields_from_input", "fields": ["owner"]}}]),
     "Activity": record(
         "A scheduled call, meeting or to-do attached to a deal.",
         [f("Subject", "short_text", "yes"),
@@ -381,11 +415,25 @@ crm_reports = {
                        definitions={"win rate":
                                     "deals that entered Won divided by deals that entered Won or Lost, in the selected period, attributed to the date the deal reached that stage; expressed as a percentage"}),
 }
+crm_report_specs = {
+    "Pipeline by stage": [
+        {"metric": "sum of open Deal Value grouped by stage",
+         "spec": {"table": "deals", "aggregation": "sum", "value_field": "value", "group_by": "stage",
+                  "filters": [{"field": "stage", "op": "not_in", "value": ["Won", "Lost"]}]}},
+        {"metric": "count of Deals grouped by stage",
+         "spec": {"table": "deals", "aggregation": "count", "group_by": "stage"}}],
+    # "win rate" is a rate over the real stage-entry history (RP.05 above), so
+    # it runs on the stage_history part, not the single-table reporting engine
+    "Win rate": [
+        {"metric": "win rate",
+         "spec": {"engine": "stage_history", "kind": "rate_over_last_days", "table": "deals",
+                  "numerator_stage": "Won", "denominator_stages": ["Won", "Lost"], "days": 90}}],
+}
 template(
     "crm-pipeline", "Pipedrive", "CRM",
     ["people_directory", "pipeline", "activities"],
     crm_roles, "Admin", crm_records, crm_workflows, crm_notifications, crm_reports,
-    forms=[], file_types=[],
+    forms=[], file_types=[], report_specs=crm_report_specs,
     answers=dict(
         {"A.06": ["web"], "A.07": "yes", "A.08": "single", "A.09": "no", "A.10": [],
          "A.11": "no", "A.16": "Admin", "P.00": "no",
@@ -447,12 +495,16 @@ bk_workflows = {
         {"kind": "event", "event": "an appointment is created (public form or by staff); starts in 'Booked'"},
         ["Booked", "Confirmed", "Completed", "Cancelled", "No-show"], "Booked",
         ["Completed", "Cancelled", "No-show"],
-        [t_move("Booked", "Confirmed", event="the deposit payment succeeds, or a staff member confirms manually"),
+        # a staff member confirms the booking. (The source app also confirmed on a
+        # successful deposit payment; live payment processing is not on the shelf,
+        # so that half is not modelled -- the shelf's own note on this edge.)
+        [t_move("Booked", "Confirmed", ["Staff"]),
          t_move("Confirmed", "Completed", ["Staff"]),
          t_move("Confirmed", "No-show", ["Staff"]),
          t_move("Booked", "Cancelled", ["Staff"]),
          t_move("Confirmed", "Cancelled", ["Staff"])],
-        cancel={"allowed": "yes", "by": ["Staff"], "from_stages": ["Booked", "Confirmed"]},
+        # cancelling is a declared person-moved transition to Cancelled (above),
+        # not a separate cancel action -- the same shape command-desk uses
         readonly_from="Completed",
         on_complete="Completed/No-show appointments lock and feed the reports.",
         timeouts=[{"stage": "Booked", "duration": "24 hours",
@@ -487,16 +539,27 @@ bk_forms = {
         "F.01": {"purpose": "lets a customer pick a service, a time and a staff member and book it without an account",
                  "fillers": ["public"]},
         "F.02": {"target": "Appointment", "extra_fields": []},
-        "F.03": [{"field": "Deposit payment step", "shown_when": "the chosen Service has Deposit required = yes"}],
+        "F.03": [],   # the source app's deposit-payment step needs live payment processing, which is not on the shelf
         "F.04": "no",
         "F.05": "stay_with_message",
     }
+}
+bk_report_specs = {
+    "Upcoming appointments": [
+        {"metric": "count of Appointments in stage Booked or Confirmed",
+         "spec": {"table": "appointments", "aggregation": "count",
+                  "filters": [{"field": "stage", "op": "in", "value": ["Booked", "Confirmed"]},
+                              {"field": "start", "op": "within_next_days", "value": 7}]}}],
+    "No-show rate": [
+        {"metric": "no-show rate",
+         "spec": {"engine": "stage_history", "kind": "rate_over_last_days", "table": "appointments",
+                  "numerator_stage": "No-show", "denominator_stages": ["Completed", "No-show"], "days": 30}}],
 }
 template(
     "booking-frontdesk", "Acuity Scheduling", "booking",
     ["catalog_services", "scheduling", "people_directory", "deposits"],
     bk_roles, "Owner", bk_records, bk_workflows, bk_notifications, bk_reports,
-    forms=list(bk_forms), file_types=[],
+    forms=list(bk_forms), file_types=[], report_specs=bk_report_specs,
     answers=dict(
         {"A.06": ["web"], "A.07": "yes", "A.08": "single", "A.09": "yes",
          "A.10": ["public booking page", "public booking form"],
@@ -614,7 +677,6 @@ erp_workflows = {
          t_move("Received", "Closed", ["Operations"])],
         approvals=[{"stage": "Draft", "approvers": ["Operations"]}],
         on_reject={"back_to": "Draft", "resubmit": "yes"},
-        cancel={"allowed": "yes", "by": ["Operations", "Purchasing"], "from_stages": ["Draft", "Confirmed"]},
         readonly_from="Received",
         on_complete="On Received, each line's Quantity is added to its Product's Stock on hand."),
     "Sales order lifecycle": workflow(
@@ -623,7 +685,6 @@ erp_workflows = {
         [t_move("Draft", "Confirmed", ["Sales"]),
          t_move("Confirmed", "Shipped", ["Warehouse"]),
          t_move("Shipped", "Closed", ["Operations"])],
-        cancel={"allowed": "yes", "by": ["Operations", "Sales"], "from_stages": ["Draft", "Confirmed"]},
         readonly_from="Shipped",
         on_complete="On Shipped, each line's Quantity is subtracted from its Product's Stock on hand."),
 }
@@ -650,11 +711,44 @@ erp_reports = {
                           ["count of Sales orders in Confirmed", "count of Purchase orders in Confirmed"],
                           ["Supplier", "Customer account"], "as at now", ["Operations"]),
 }
+erp_report_specs = {
+    "Stock on hand": [
+        {"metric": "sum of Product Stock on hand",
+         "spec": {"table": "products", "aggregation": "sum", "value_field": "stock_on_hand"}},
+        # a two-column comparison: the stock_ledger part, not a single-field filter
+        {"metric": "count of Products at or below Reorder point",
+         "spec": {"engine": "stock_ledger", "kind": "count_at_or_below_reorder", "table": "products",
+                  "stock_column": "stock_on_hand", "reorder_column": "reorder_point"}}],
+    "Sales by month": [
+        {"metric": "sales value",
+         "spec": {"engine": "stage_history", "kind": "line_value_by_month", "table": "sales_orders",
+                  "stage": "Shipped", "line_table": "sales_order_lines", "line_fk": "sales_order",
+                  "quantity_column": "quantity", "price_column": "unit_price", "months": 12}}],
+    "Open orders": [
+        {"metric": "count of Sales orders in Confirmed",
+         "spec": {"table": "sales_orders", "aggregation": "count",
+                  "filters": [{"field": "stage", "op": "=", "value": "Confirmed"}]}},
+        {"metric": "count of Purchase orders in Confirmed",
+         "spec": {"table": "purchase_orders", "aggregation": "count",
+                  "filters": [{"field": "stage", "op": "=", "value": "Confirmed"}]}}],
+}
+# FL.08's on_complete, executable: the stock_ledger part applies every line of
+# the order to its Product the moment the order enters the named stage
+erp_transition_effects = {
+    "Purchase order lifecycle": [
+        {"on_enter": "Received", "op": "apply_order_lines", "line_table": "purchase_order_lines",
+         "line_fk": "purchase_order", "product_table": "products", "product_fk": "product",
+         "quantity_column": "quantity", "direction": "receive"}],
+    "Sales order lifecycle": [
+        {"on_enter": "Shipped", "op": "apply_order_lines", "line_table": "sales_order_lines",
+         "line_fk": "sales_order", "product_table": "products", "product_fk": "product",
+         "quantity_column": "quantity", "direction": "ship"}],
+}
 template(
     "erp-backbone", "Odoo (sales + purchasing + inventory core)", "ERP",
     ["catalog_products", "people_directory", "ordering", "inventory"],
     erp_roles, "Admin", erp_records, erp_workflows, erp_notifications, erp_reports,
-    forms=[], file_types=[],
+    forms=[], file_types=[], report_specs=erp_report_specs, transition_effects=erp_transition_effects,
     answers=dict(
         {"A.06": ["web"], "A.07": "yes", "A.08": "single", "A.09": "no", "A.10": [],
          "A.11": "no", "A.16": "Admin", "P.00": "yes",
@@ -699,7 +793,10 @@ ac_records = {
     "Invoice": record(
         "Money owed TO the business by a customer.",
         [f("Contact", "link", "yes", target_record="Contact"), f("Issue date", "date", "yes"),
-         f("Due date", "date", "yes"), f("Reference", "short_text"), f("Notes", "long_text")],
+         f("Due date", "date", "yes"), f("Reference", "short_text"), f("Notes", "long_text"),
+         # where the Send action "stamps the sent time" (R.15 below): set by the
+         # app when Send runs, never typed by a person
+         f("Sent at", "date_time")],
         "Contact", {"needed": "yes", "format": "INV-#### (sequential, never reused)"},
         scoped(("Accountant", "all"), ("Advisor", "all")), ["Accountant"],
         scoped(("Accountant", "all")), "nobody",
@@ -707,7 +804,18 @@ ac_records = {
         lifecycle=["Draft", "Awaiting approval", "Awaiting payment", "Paid", "Voided"],
         custom_actions=[{"name": "Send", "who": ["Accountant"],
                          "effect": "emails the invoice document to the Contact and stamps the sent time",
-                         "result_location": "the invoice page's activity trail"}]),
+                         "result_location": "the invoice page's activity trail",
+                         # executable: the document_generation part renders the real invoice
+                         # document from the row and its lines and the sent time is stamped.
+                         # Dispatching it over email is NOT performed: no outbound-mail part
+                         # is on the shelf (bind_and_assemble.py records the same gap), and
+                         # the action reports that honestly rather than claiming it was sent.
+                         "execution": {"op": "generate_document", "stamp_column": "sent_at",
+                                       "title_columns": ["reference"],
+                                       "line_table": "invoice_lines", "line_fk": "invoice",
+                                       "line_columns": ["description", "quantity", "unit_amount"],
+                                       "body_columns": ["contact", "issue_date", "due_date", "notes"],
+                                       "dispatch": "none"}}]),
     "Invoice line": record(
         "One charged item on an invoice.",
         [f("Invoice", "link", "yes", target_record="Invoice"), f("Description", "short_text", "yes"),
@@ -770,7 +878,12 @@ ac_notifications = {
                                      [{"kind": "roles", "roles": ["Accountant"]}],
                                      ["in_app"], "An invoice just got paid in full."),
 }
-ac_reports = {
+ac_reports = {}
+# Not modelled: "Profit and loss" and "Aged receivables". Both need cross-table
+# joins, arithmetic between metrics and age bucketing -- outside every reporting
+# part on the shelf (reporting_engine's own scope note names them). Left out so
+# the template only declares what its parts can really run, as command-desk does.
+_ac_reports_not_on_shelf = {
     "Profit and loss": report("What did the business earn and spend in the period?",
                               ["Admin", "Accountant", "Advisor"], {"delivery": "both", "shape": "both"},
                               ["revenue", "expenses", "net profit"],
@@ -786,34 +899,45 @@ ac_reports = {
                                definitions={"overdue invoice totals bucketed by age":
                                             "for each Invoice in Awaiting payment: its total minus applied Payments, bucketed by days past Due date as at today (current, 1-30, 31-60, 61-90, 90+)"}),
 }
+# FL.03's automatic edges, executable: creating a Payment applies it to the
+# Invoice or Bill it names; when the payments applied reach that target's total
+# the ledger_balancing part fires the declared event, and the workflow moves
+ac_create_effects = {
+    "Payment": [
+        {"op": "ledger_balance", "link_column": "invoice", "table": "invoices",
+         "total": {"kind": "lines", "line_table": "invoice_lines", "line_fk": "invoice",
+                   "quantity_column": "quantity", "amount_column": "unit_amount"},
+         "payments_table": "payments", "amount_column": "amount",
+         "event": "Payments applied to the invoice reach its total"},
+        {"op": "ledger_balance", "link_column": "bill", "table": "bills",
+         "total": {"kind": "column", "column": "amount"},
+         "payments_table": "payments", "amount_column": "amount",
+         "event": "Payments applied to the bill reach its total"}],
+}
 template(
     "accounting-ledger", "Xero (invoicing core)", "accounting",
     ["people_directory", "invoicing", "payments"],
     ac_roles, "Admin", ac_records, ac_workflows, ac_notifications, ac_reports,
-    forms=[], file_types=[],
+    forms=[], file_types=[], create_effects=ac_create_effects,
     answers=dict(
         {"A.06": ["web"], "A.07": "yes", "A.08": "single", "A.09": "no", "A.10": [],
          "A.11": "no", "A.16": "Admin", "P.00": "no",
          "C.05": {"mode": "simplified"},
-         "C.06": {"Admin": "Profit and loss", "Accountant": "Invoices list", "Advisor": "Profit and loss"}},
+         "C.06": {"Admin": "Invoices list", "Accountant": "Invoices list", "Advisor": "Invoices list"}},
         **std_auth(["invited"], inviters=["Admin"], invite_role="Accountant")),
     per_instance=dict(
         {f"{k}:{n}": v for n, rec in ac_records.items() for k, v in rec.items()},
         **{f"{k}:{n}": v for n, w in ac_workflows.items() for k, v in w.items()},
         **{f"{k}:{n}": v for n, x in ac_notifications.items() for k, v in x.items()},
         **{f"{k}:{n}": v for n, x in ac_reports.items() for k, v in x.items() if k != "_metric_definitions"},
-        **{f"RP.05:Profit and loss:{m}": d for m, d in ac_reports["Profit and loss"]["_metric_definitions"].items()},
-        **{"RP.05:Aged receivables:overdue invoice totals bucketed by age":
-           ac_reports["Aged receivables"]["_metric_definitions"]["overdue invoice totals bucketed by age"]},
         **{"P.01:Accountant": "Does the books: raises invoices, records bills and payments.",
            "P.02:Accountant": "no", "P.04:Accountant": ["Admin"],
            "P.01:Advisor": "An external accountant/bookkeeper with read-only access to everything financial.",
            "P.02:Advisor": "no", "P.04:Advisor": ["Admin"]}),
     features=[
         {"feature": "Invoice approval step", "controlled_by": "FL.05:Invoice lifecycle", "rule": "empty the approvals list -> Draft goes straight to Awaiting payment (sole traders)"},
-        {"feature": "Bills side", "controlled_by": "A.15 records list", "rule": "remove Bill and its lifecycle -> invoicing-only app; P&L expenses metric drops"},
+        {"feature": "Bills side", "controlled_by": "A.15 records list", "rule": "remove Bill and its lifecycle -> invoicing-only app"},
         {"feature": "Overdue chasing", "controlled_by": "N.01:Payment reminder", "rule": "change the +3 days offset, or remove the notification to stop chasing"},
-        {"feature": "Accrual vs cash reporting", "controlled_by": "RP.05:Profit and loss:revenue", "rule": "rewrite the definition to 'Payments received in the period' for cash basis — one answer, not a rebuild"},
         {"feature": "Advisor access", "controlled_by": "A.15 roles list", "rule": "remove Advisor -> external-accountant access disappears"},
     ])
 

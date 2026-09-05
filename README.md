@@ -3,6 +3,12 @@
 Everything from the Nova project in one repository: nine research reports, three
 code packages, and the plan that connects them.
 
+Command Desk itself: **[COMMAND_DESK_INTERVIEW_ANSWERS.md](COMMAND_DESK_INTERVIEW_ANSWERS.md)**
+(the answers that govern it) compiled into **[COMMAND_DESK_COMPILE.md](COMMAND_DESK_COMPILE.md)**
+(numbered items, part bindings, and the live proof) plus
+[PROPOSED_ANSWERS.md](PROPOSED_ANSWERS.md) (the plumbing filled in under
+0.01 = guided, for Sam to correct).
+
 **Start with [PLAN.md](PLAN.md)** — where this is, what is missing, and the route.
 
 ## Layout
@@ -16,12 +22,25 @@ packages/requirements-engine/ the v3 question graph (122 questions), its two
                              validators, and five app templates
 packages/assembly-engine/    completed answers -> one numbered spec (component 2)
 packages/builder/            numbered spec -> a real, running application (component 3)
+                             + shelf.py: the parts shelf's lifecycle (TESTED -> PRODUCT_QUALIFIED -> FROZEN),
+                             source revisions, receipts, provenance — see PARTS_SHELF.md "Lifecycle"
 packages/playwright-tester/  numbered spec -> real Playwright against the live app (component 4)
+                             + seams.py: seam journeys between shelf parts; the only thing that
+                             can make a part PRODUCT_QUALIFIED
 packages/defect-report/      real Playwright reports -> defects tied to numbered spec ids (component 5)
 packages/loop/               fix-and-retest loop + Definition of Done gate (component 6)
+packages/frontdoor/          eight questions a non-technical person can answer -> a built,
+                             tested app with three interfaces. catalogue.py is the honest list
+                             of what can and cannot be built — see packages/frontdoor/README.md
+packages/interfaces/         the five families built end to end + 15 working interfaces
+                             (3 designs x 5 families), every control driven in real Chromium
+                             — see FINDINGS_2026-09-05_INTERFACES.md
 packages/specgate/           the spec gate: R1-R12 linter + D1-D8 decomposer
 packages/spec-writer/        transcript -> spec draft, in three model calls
 packages/crawler/            deterministic browser smoke-test harness
+packages/hands/              the paperwork-execution engine: defined workflows,
+                             value provenance, a backend-enforced Trust Gate,
+                             an operator screen, and 29 live tests
 tests/                       cross-package integration tests
 ```
 
@@ -29,7 +48,7 @@ tests/                       cross-package integration tests
 
 ```bash
 pip install pyyaml pytest
-pytest                       # 48 tests across all four packages
+pytest                       # 227 tests across every package (a dozen of them drive real Chromium)
 ```
 
 The requirements engine is self-contained and needs no model:

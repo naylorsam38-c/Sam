@@ -9,8 +9,6 @@ PASS accounting-ledger/SCR-007 (screen/list): crud_list_detail
 PASS accounting-ledger/SCR-008 (screen/detail): crud_list_detail
 PASS accounting-ledger/SCR-009 (screen/list): crud_list_detail
 PASS accounting-ledger/SCR-010 (screen/detail): crud_list_detail
-FAIL accounting-ledger/SCR-011 (screen/report): plain aggregation over existing fields -- no generic reporting part was built
-FAIL accounting-ledger/SCR-012 (screen/report): plain aggregation over existing fields -- no generic reporting part was built
 PASS accounting-ledger/ACT-001 (action/create): crud_list_detail
 PASS accounting-ledger/ACT-002 (action/edit): crud_list_detail
 PASS accounting-ledger/ACT-003 (action/delete): crud_list_detail
@@ -29,7 +27,7 @@ PASS accounting-ledger/ACT-015 (action/transition): workflow_executor
 PASS accounting-ledger/ACT-016 (action/transition): ledger_balancing
 PASS accounting-ledger/ACT-017 (action/transition): workflow_executor
 PASS accounting-ledger/ACT-018 (action/transition): workflow_executor
-FAIL accounting-ledger/ACT-019 (action/approve): no binding rule for this action kind
+PASS accounting-ledger/ACT-019 (action/approve): stage_approval_gate
 PASS accounting-ledger/ACT-020 (action/transition): workflow_executor
 PASS accounting-ledger/ACT-021 (action/transition): ledger_balancing
 PASS accounting-ledger/ACT-022 (action/transition): workflow_executor
@@ -37,8 +35,6 @@ PASS accounting-ledger/ACT-023 (action/transition): workflow_executor
 PASS NTF:Invoice sent (notification): notification_delivery
 PASS NTF:Payment reminder (notification): scheduled_jobs, notification_delivery
 PASS NTF:Payment received (notification): notification_delivery
-FAIL RPT:Profit and loss (report): plain aggregation over existing fields -- no generic reporting part was built
-FAIL RPT:Aged receivables (report): plain aggregation over existing fields -- no generic reporting part was built
 PASS accounting-ledger/OPS-001 (recurring_op): scheduled_jobs
 PASS accounting-ledger/OPS-002 (recurring_op): scheduled_jobs
 PASS accounting-ledger/OPS-003 (recurring_op): scheduled_jobs
@@ -49,8 +45,19 @@ PASS accounting-ledger/OPS-007 (recurring_op): scheduled_jobs
 PASS accounting-ledger/OPS-008 (recurring_op): scheduled_jobs
 PASS accounting-ledger/OPS-009 (recurring_op): scheduled_jobs
 PASS accounting-ledger/OPS-010 (recurring_op): scheduled_jobs
-PASS accounting-ledger/OPS-011 (recurring_op): scheduled_jobs
-PASS accounting-ledger/OPS-012 (recurring_op): scheduled_jobs
 ---
-47/52 PASS, 5 FAIL
-NOT CLEAN -- 5 item(s) unbound
+46/46 PASS, 0 FAIL
+CLEAN
+
+QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 143bf3e98f4fd428
+QUALIFIED document_generation@1.0.0 (PRODUCT_QUALIFIED) at 6ad6f6c2187e4435
+UNQUALIFIED email_parsing@1.0.0: status TESTED
+QUALIFIED ledger_balancing@1.1.0 (PRODUCT_QUALIFIED) at 8e4c702f78f51238
+UNQUALIFIED notification_delivery@1.0.0: status TESTED
+UNQUALIFIED scheduled_jobs@1.0.0: status TESTED
+QUALIFIED stage_approval_gate@1.0.0 (PRODUCT_QUALIFIED) at e05ac2be0b3c4cc8
+QUALIFIED workflow_executor@1.0.0 (PRODUCT_QUALIFIED) at e1e8908c90f7f1fb
+---
+5/8 parts qualified at their pinned revision, 3 problem(s)
+QUALIFICATION NOT CLEAN -- 3 part(s) unqualified, drifted or missing

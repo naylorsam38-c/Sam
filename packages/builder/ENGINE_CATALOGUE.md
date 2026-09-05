@@ -2,31 +2,26 @@
 
 This is a parts library, not a framework: every entry below is one
 already-implemented, already-proven Python module in
-`packages/builder/engines/` (plus two generic Builder rules already in
-`builder.py` itself — `crud_list_detail`, `oauth_connect`; see
-`packages/builder/PARTS_SHELF.md` for the full 22-part index including
-those two). The Builder picks the entries a numbered item needs, by name,
-and wires them into the generated app. **It never writes an engine during
-a job** — if a numbered item names no entry here, the Builder refuses (same
+`packages/builder/engines/`. The Builder (`builder.py`) picks the entries a
+numbered item needs, by name, and wires them into the generated app. **It
+never writes an engine during a job** — if a numbered item names no entry
+here, or names one whose kind has no engine, the Builder refuses (same
 `BuildRefused` discipline as every other unregistered kind), listing the
-item's own permanent number. Bindings are written directly into each
-template's own generated spec — see
-`packages/requirements-engine/build/<template>/BOUND_SPEC.json` and its
-`CHECK_OUTPUT.txt` — not a separate document. `packages/builder/PROOFS.md`
-holds every entry's real, just-run evidence in full.
+item's own permanent number. See `packages/requirements-engine/BINDINGS.md`
+for the actual name -> engine bindings across all five locked templates, and
+`packages/builder/PROOFS.md` for every entry's real, just-run evidence in
+full.
 
-Populated from three sources: (1) every specialist engine already declared
-across the five locked templates
-(`packages/requirements-engine/SPECIALIST_ENGINES.md`) — 8 of the 20
-below; (2) the engines those five apps actually run that the templates
-never captured (document generation, PDF form filling, OCR, e-signature,
-payment processing, bank feed and email parsing, file conversion, calendar
-sync, scheduled jobs, import/export, search, audit trail) — 9 more; (3)
-the three generic Builder runtime capabilities that were missing entirely
-until this pass — a workflow executor, a reporting engine, real
-notification delivery. Three real capabilities from source (2) (OCR, live
-payment processing, live e-signature) plus one from source (1) (live
-third-party calendar OAuth sync) are explicitly **not** registered, named
+Populated from two sources, per directive: (1) every specialist engine
+already declared across the five locked templates
+(`packages/requirements-engine/SPECIALIST_ENGINES.md`) — 8 of the 17 below;
+(2) the engines those five apps actually run that the templates never
+captured (document generation, PDF form filling, OCR, e-signature, payment
+processing, bank feed and email parsing, file conversion, calendar sync,
+scheduled jobs, import/export, search, audit trail) — of which 9 more are
+registered below, and 3 real capabilities from that same list (OCR, live
+payment processing, live e-signature) plus one from the specialist-engine
+side (live third-party calendar OAuth sync) are explicitly **not**, named
 at the bottom, with the real reason.
 
 ---
@@ -290,72 +285,6 @@ an externally-sourced PDF's form is not attempted.
 **Evidence**: a real PDF with 2 real blank fields; one filled with a real
 value; both fields re-read by the independent parser — only the filled one
 changed (`PROOFS.md#pdf_form_filling`).
-
-## workflow_executor
-
-**What it does**: Moves a real record from one real stage to the next when
-a person triggers it — the one generic runtime the Builder previously had
-no rule for at all.
-**Inputs**: `transition(conn, table, row_id, stage_column, transitions,
-to_stage, actor_role)` — `transitions` is the workflow's own real declared
-list, exactly the shape already in every locked template's structure.
-**Outputs**: the new stage on success.
-**Failure cases**: raises `IllegalTransition` if no declared `(from, to)`
-pair for the record's current stage and requested target exists, or if it
-exists but `actor_role` is not one of that transition's own declared
-roles — the real row is never mutated in either case. Only `mover ==
-"roles"` entries are ever matched; an `"automatic"` entry is, by
-definition, not person-triggered and stays out of this part's scope.
-**Location**: `packages/builder/engines/workflow_executor.py`.
-**Evidence**: against pm-teamwork's own real, locked Task lifecycle
-transitions — a legal move succeeds and is logged (via `audit_trail`,
-reused); an undeclared `(from, to)` pair is refused; a declared pair with
-the wrong role is refused; the real row is unaffected by both refusals
-(`PROOFS.md#workflow_executor`).
-
-## reporting_engine
-
-**What it does**: Runs one generic, parameterised SQL aggregation —
-count/sum/avg/min/max, optional filters, optional group-by — over a real
-table. No Python is written per report; only a structured `ReportSpec`
-varies.
-**Inputs**: `run_report(conn, spec)` — `spec: {table, aggregation,
-value_field?, group_by?, filters?: [{field, op, value}]}`. `op` ∈ `{=, !=,
-<, >, <=, >=, in, not_in, before_now, within_next_days}`.
-**Outputs**: a single number, or `{group_value: number}` when `group_by`
-is given.
-**Failure cases**: `_safe_ident()` raises `ValueError` on any table/column/
-group-by name that is not a safe SQL identifier, before any query runs.
-**Scope, stated plainly**: single table only. A report needing a
-cross-table join, a computed value (e.g. `Quantity x Unit price`), an
-arithmetic combination of other metrics (e.g. `net profit = revenue -
-expenses`), or bucketed ranges is genuinely outside this part's real
-capability — left unbound, not forced through it.
-**Location**: `packages/builder/engines/reporting_engine.py`.
-**Evidence**: pm-teamwork's own two real reports, run over real inserted
-rows and hand-verified: "Open tasks by person" (count, filtered, grouped)
-and "Overdue tasks" (count, two filters including a real date comparison)
-(`PROOFS.md#reporting_engine`).
-
-## notification_delivery
-
-**What it does**: Actually delivers — a real in-app record inserted into a
-real table, and a real email sent over a real SMTP connection.
-**Inputs**: `deliver(conn, recipient_email, subject, body, smtp_host,
-smtp_port, in_app_only=False)`.
-**Outputs**: `{in_app: bool, email: bool}`.
-**Failure cases**: `smtplib.SMTPException`/`OSError` on send propagate
-uncaught — a failed delivery is never reported as a success.
-**Scope, stated plainly**: no live external mail provider is reachable or
-credentialed in this sandbox. Proven against a real, self-hosted SMTP
-server (a genuine protocol implementation over a real socket, not a mock
-of `smtplib`) — real delivery mechanics, real bytes received, just not to
-a real third-party mailbox, which needs real credentials this session does
-not have.
-**Location**: `packages/builder/engines/notification_delivery.py`.
-**Evidence**: a real SMTP server started on a real OS-assigned port; a
-real message sent to it; the real in-app row and the real bytes the
-server actually received both checked (`PROOFS.md#notification_delivery`).
 
 ---
 

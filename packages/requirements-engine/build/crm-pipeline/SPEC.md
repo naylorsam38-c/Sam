@@ -31,7 +31,7 @@
 | crm-pipeline/ACT-007 | create | crud_list_detail |  |
 | crm-pipeline/ACT-008 | edit | crud_list_detail |  |
 | crm-pipeline/ACT-009 | delete | crud_list_detail |  |
-| crm-pipeline/ACT-010 | custom | **UNBOUND** | a plain restricted field edit -- no specialist part needed, but the Builder has no generic custom-action execution rule at all |
+| crm-pipeline/ACT-010 | custom | custom_action_execution | a plain restricted field edit: the generic custom-action rule performs it as set_fields and enforces the action's own declared 'who' |
 | crm-pipeline/ACT-011 | create | crud_list_detail |  |
 | crm-pipeline/ACT-012 | edit | crud_list_detail |  |
 | crm-pipeline/ACT-013 | delete | crud_list_detail |  |
