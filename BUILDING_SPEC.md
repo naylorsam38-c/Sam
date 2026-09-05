@@ -6,6 +6,22 @@ line below was checked directly against this codebase just now, not
 copied from an earlier report. Full suite passes: **227 tests + 1
 skipped, 0 failed.**
 
+## Update — Phase A's engine half is done (commit `078bc68`)
+
+A delta applied and independently verified: every generated app now has
+real `notify()`/`run_job()` functions, `GET /api/notifications`, and
+`POST /api/jobs/run`, wired into create/update/move/action handlers.
+Verified myself, not taken on claim — built booking-frontdesk fresh,
+created a real unpaid-deposit appointment and a paid control case,
+backdated real stage-history rows past the declared 24h window, and hit
+both routes over real HTTP: the unpaid appointment auto-cancelled and
+delivered a real in-app notification; the paid one was untouched; a
+second job run did not refire. Item 1 and 2 below are now **engine-done,
+UI-open** rather than fully stuck — `notification_delivery` and
+`scheduled_jobs` stay `TESTED` (not `PRODUCT_QUALIFIED`) until a bell/
+inbox and a job-trigger screen exist and a real seam journey drives them.
+Item 5 (audit trail) is unaffected by this delta and still fully open.
+
 ## What's real and working (don't re-build this)
 
 - All 6 templates build, run, and pass their checker CLEAN (0 FAIL each)
@@ -21,21 +37,17 @@ skipped, 0 failed.**
 
 ## Stuck items, each re-verified just now, most to least severe
 
-**1. Nobody can see a notification.** Confirmed by grep: no
-`/api/notifications` route in `builder.py`, no bell/inbox anywhere in
-`packages/interfaces/src/` (checked `.py`, `.html`, `.js`). Every family
-declares real notifications; `notification_delivery` is proven; nothing
-surfaces one to a person using the app. Needs: `GET /api/notifications`
-in `builder.py`'s route table, a bell/inbox view in each of the three
-interface layouts, one seam journey proving a person sees a real one.
+**1. Nobody can see a notification — engine now real, UI still open.**
+`GET /api/notifications` exists and works (verified live). Still needed:
+a bell/inbox view in each of the three interface layouts, one seam
+journey proving a person sees a real one in a browser.
 
-**2. Nothing runs on a schedule.** Confirmed: no `/api/jobs` or
-`jobs/run` route. Every family declares `OPS-nnn` recurring work
-(purges, reminders, timeouts); `scheduled_jobs` is proven; nothing
-triggers it inside a generated app. The apps are inert until a person
-clicks something. Needs: a tick loop in generated `app.py`, a
-`POST /api/jobs/run` route (or an actual background thread), a screen
-showing what ran, one seam journey.
+**2. Nothing runs on a schedule — engine now real, UI still open.**
+`POST /api/jobs/run` exists and works (verified live: a real 24h
+unpaid-deposit timeout auto-cancelled a real appointment and notified
+the right people; a second run didn't refire). Still needed: something
+to actually call this on a timer (today it's triggered manually, not by
+a tick loop), a screen showing what ran, one seam journey.
 
 **3. There is no sign-in.** Confirmed: zero session/login/cookie/
 current-user code anywhere in `builder.py`. Every template answers the
@@ -90,11 +102,13 @@ real box, no real SMTP/payment credentials in this sandbox.
 
 ## Proposed order (cheapest, highest-impact first)
 
-**Phase A — make the apps act on their own.** Closes items 1, 2, 5.
-Both engines (`notification_delivery`, `scheduled_jobs`) are already
-proven; they need a route, a screen, and a seam journey each — no new
-engine logic. Qualifies 3 more parts. Today all six apps are silent
-until someone clicks.
+**Phase A — make the apps act on their own.** Engine half done (commit
+`078bc68`, verified live). What's left to fully close items 1, 2: a
+bell/inbox screen in the three interfaces, an actual timer/tick loop
+(today `/api/jobs/run` has to be called, it doesn't fire itself), and
+one seam journey per part so `notification_delivery`/`scheduled_jobs`
+move from `TESTED` to `PRODUCT_QUALIFIED`. Item 5 (audit trail) is
+separate and still fully open.
 
 **Phase B — sign-in.** Closes item 3. Blocked on your decision above;
 this is the line between "proven" and "something you can hand to
@@ -111,6 +125,6 @@ rule.** Closes items 6 and 9. Cheap, mostly a decision plus a small fix.
 template need, one at a time, each proven the same way as everything
 else here — never speculatively.
 
-Unless told otherwise, Phase A is the next concrete work: `GET
-/api/notifications` + `POST /api/jobs/run` in `builder.py`, a bell/"what
-ran on its own" view in the three interfaces, two seam journeys.
+Unless told otherwise, finishing Phase A's UI half is next: a bell/"what
+ran on its own" view in the three interfaces, an actual timer to call
+`/api/jobs/run` on its own, and two seam journeys.
