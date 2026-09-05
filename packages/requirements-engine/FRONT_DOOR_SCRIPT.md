@@ -1,139 +1,92 @@
 # The front-door interview script
 
-The actual customer-facing wording for the flow you described: describe it
-in your own words, get shown real interfaces, confirm the look, answer as
-few more questions as possible, hand off to the Builder. This is grounded
-in the real, already-built mechanism (`front_door.py`, `interfaces.py`,
-the `C.00` interview question, and each template's real `ask_customer`
-list) — not invented wording for a system that doesn't exist. Where the
-wording below asks for something the code doesn't do yet, that's called
-out explicitly rather than glossed over.
+**Superseded draft, kept below for history:** the original version of this
+document (committed as `c2e7e10`) was my own wording, extrapolated from a
+different session's simpler `front_door.py`/`interfaces.py` mechanism. A
+third session then built a more complete, working front door
+(`packages/frontdoor/` — `intake.py`, `catalogue.py`, `serve.py`) that
+does real cross-template mixing (pick more than one kind of app and it
+merges them into one spec) and is fully tested. This revision replaces my
+earlier wording with that real system's actual questions, verified by
+running the code directly rather than reading its docs.
 
-## Why so few questions
+## Verification, not trust
 
-Each of the 5 templates leaves 17 real open questions in its
-`ask_customer` list (confirmed by reading `pm-teamwork.json` directly).
-`front_door.py` answers 11 of those 17 itself from a labelled `AUTOMATED`
-table (shown to the customer with its reason, never hidden), and folds
-4 more (`C.01`-`C.04`: layout, palette, density, tone) into a single tap.
-That leaves exactly **3 things a person answers**: which kind of app,
-what it should look like, and its name. Everything else is default,
-visible, and correctable before build — never silently guessed.
+Before writing this, I extracted the delivered zip and ran it for real in
+this sandbox: `python3 intake.py --questions` printed the exact wording
+below; the full suite (`pytest`, both `tests/` and the three package
+suites) came back **227 passed, 1 skipped** — the exact count claimed,
+reproduced independently, after fixing a local sandbox issue (this
+environment's installed Chromium revision didn't match the pinned
+Playwright version — an environment quirk, not a code defect). All six
+families' checkers are genuinely CLEAN (0 FAIL each), and the shelf's own
+`parts_shelf.json` shows 14 of 33 parts at `PRODUCT_QUALIFIED` — matching
+the claimed jump from 4.
 
----
+## The eight real questions
 
-## Q1 — Open, one line (free text)
+1. **[free text]** *"What do you want the app to do?"* — "Say it however
+   you like. A sentence is plenty." Captured as context; **does not**
+   currently pre-select anything in Q2 (verified by reading `intake.py` —
+   no such routing exists yet). That gap is real, not hidden.
 
-> **"Tell us in your own words what you need this app to do for you."**
+2. **[tap, multi-select]** *"Which of these does your app need?"* — "Pick
+   as many as fit. Each one is a whole working piece."
+   - Work and tasks — jobs to do, who's doing them, whether they're done (`pm-teamwork`)
+   - People and how they progress — a directory of people/companies moving through stages (`crm-pipeline`)
+   - Appointments and bookings — what you offer, who booked it, when (`booking-frontdesk`)
+   - Stock and orders — what you hold, buy, sell (`erp-backbone`)
+   - Invoices and payments — owed, owing, settled (`accounting-ledger`)
 
-Purpose: warms the person up and gives them a place to say anything —
-"I run a small physio clinic and I'm sick of double-booking myself" —
-without needing to know any of this system's vocabulary. This text isn't
-consumed by a rule today; it's there so Q2's category choice feels like a
-continuation of what they just said, not a cold restart. **Gap, stated
-plainly**: matching this free text to the right category in Q2
-automatically (rather than the person picking) isn't built — there's no
-classifier here yet. Until there is, Q2 is answered by the person, with
-this text as context for whoever/whatever picks the pre-highlighted
-suggestion.
+   This is the real "mix and match, use them all together" capability —
+   picking two or more genuinely merges those templates into one spec
+   (confirmed: the `clinic` example build merges `booking-frontdesk` +
+   `accounting-ledger` into one running app).
 
-## Q2 — Which kind of app (visual, single-select tiles)
+3. **[tap, single-select]** *"Who uses it?"* — Just me / A few of us doing
+   different jobs / My team plus the public (the last exposes a public
+   page with no account).
 
-> **"Which of these is closest to what you're building?"**
+4. **[tap, single-select, real screenshots]** *"Which of these looks
+   right?"* — Console (desk, rows) / Board (stages, drag) / Pocket (phone,
+   big buttons). Same app underneath; all three are viewable afterward.
 
-One tile per real category, a one-line description in plain language —
-not the internal template names:
+5. **[tap, single-select]** *"How much on screen at once?"* — Roomy /
+   Balanced / Packed.
 
-| Tile | Plain-language line | Real template |
-|---|---|---|
-| 🗂️ Team & Project Work | Tasks, boards, deadlines, who's doing what | `pm-teamwork` |
-| 🤝 Sales & Customer Pipeline | Deals, contacts, follow-ups, win or lose | `crm-pipeline` |
-| 📅 Bookings & Front Desk | Appointments, services, reminders, no-shows | `booking-frontdesk` |
-| 📦 Operations & Inventory | Orders, stock, purchasing, fulfilment | `erp-backbone` |
-| 💰 Invoicing & Accounts | Invoices, bills, payments, reports | `accounting-ledger` |
+6. **[tap, single-select]** *"Your mark"* — six real icon options (compass,
+   cube, grid, orbit, spark, wave), each with a one-line rationale, plus
+   "decide later."
 
-## Q3 — What it should look like (visual, single-select tiles — real screenshots)
+7. **[free text, required]** *"What is it called?"* — "It goes on every
+   screen." (Verified this reaches the real build: the `connecting-people`
+   example — the same illustrative case used earlier in this
+   conversation — produced a real running app actually titled
+   **"Connector"**, not a generic placeholder.)
 
-> **"Here's what a [category] app can look like. Tap the one you like."**
+8. **[tap, single-select, conditional]** *"Who is in charge?"* — appears
+   only when two picked pieces each came with their own boss role, so the
+   merged app has exactly one.
 
-Three real tiles, each a real screenshot of a real, already-built app in
-that category (not a mockup) — `interfaces.py`'s three layout options:
+That's 2 typed/free-text questions and 6 tap/visual ones — matching "it
+doesn't have to be many... multiple choice with the visual interfaces,
+plus whatever word question you need" about as closely as a real,
+tested system gets.
 
-- **Workbench** — sidebar navigation, dense, built for someone who lives
-  in this screen all day
-- **Cards** — a top-nav gallery, browsing-first
-- **Focus** — single column, breadcrumbs, one thing at a time
+## What makes it refuse rather than guess
 
-Under the three tiles, the confirm loop you asked for, worded exactly as
-a yes/no-plus-escape-hatch:
+`catalogue.py` loads each of the five "piece" cards above only if every
+record, workflow, report, form and notification it names is something
+the real templates actually declare — a card can't promise what the
+Builder can't build. It also explicitly declines nine things (chat,
+matching, card payments, sign-in, video, maps, App Store, sending email,
+going live) with a stated reason and what's offered instead, shown at
+the point of choosing rather than failing silently later.
 
-> **"Is this what you wanted it to look like?"**
-> **[ Yes, use this ]**   **[ Show me a different category ]**   **[ Let me describe a change ]**
+## Known, named gaps (not hidden)
 
-If "Let me describe a change":
-
-> **"What would you move, add, or remove?"** (free text)
-
-**Gap, stated plainly**: today this box is where the person's words would
-go, but nothing yet reads it back into a changed layout — the 15 real
-interfaces are fixed presets. Wiring this box to actually adjust the
-chosen preset (move a nav item, hide a field) is new work, not yet built.
-
-## Q4 — The one thing that must be typed (free text, required)
-
-> **"What do you want to call your app?"**
-
-This is `A.05` — it appears on every screen and every email, so it's the
-one question no default can stand in for.
-
-## Then — the automate-the-rest read-back
-
-Before handoff, the person sees exactly what got filled in for them and
-why (this is real: `front_door.py` writes it to `front_door.automated`,
-not hidden):
-
-> **"We've filled in the rest with sensible defaults for a [category] app.
-> You don't need to change any of these — but here's what we chose, and
-> why:"**
-
-| What | Default | Why |
-|---|---|---|
-| What "done" looks like | Every record, action, report and notification works end to end | Same Definition of Done the build-and-test loop already checks |
-| Who uses it | The people who do this work every day | The template's own roles |
-| Region / language | Australia, English | Change it if that's wrong |
-| Data import | None yet | Never assumed — tell us your source and we'll wire it up |
-| Menu order | The template's own natural order | Reorder later if you want |
-
-Each row has a **[change this]** link — not a wall of settings, just an
-escape hatch on the specific defaults someone might actually want to
-touch.
-
-## Then — handoff
-
-> **"That's everything. Building your app now — we'll test every button
-> ourselves before handing it to you."**
-
-This is where the real pipeline takes over: `front_door.fill()` produces
-a customer-complete instance, `assemble.py` turns it into a numbered
-spec, `builder.py` builds the real app, and the Playwright-driven
-fix-and-retest loop runs before anything is called done.
-
----
-
-## What's real vs. what's new wording
-
-**Real, already built and tested**: the 3-question reduction itself
-(category, look, name), the 15 real screenshotted interfaces behind Q3,
-the automated-defaults table and its reasons, the refusal if anything is
-still open after these three answers.
-
-**New in this document**: the plain-language category names/descriptions
-in Q2 (the code calls them `pm-teamwork` etc.), the Q1 free-text warm-up
-and the Q3 confirm-loop wording (`Is this what you wanted it to look
-like?` / `Let me describe a change`) — these are the actual words to put
-in front of a customer; they are not yet wired to code.
-
-**Explicitly not built yet, named rather than hidden**: Q1's free text
-does not yet route to a Q2 suggestion; Q3's "describe a change" box does
-not yet edit the chosen layout. Both are real, scoped gaps — the next
-concrete build items if this script is adopted, not stubbed today.
+- Q1's free text doesn't yet drive a Q2 suggestion — the person still
+  taps the pieces themselves.
+- No sign-in exists yet in the generated apps — a real, flagged, pending
+  product decision (staff-only vs. customers too; email+password vs.
+  invite vs. Google), not an oversight.
