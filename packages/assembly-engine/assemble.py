@@ -114,6 +114,28 @@ def registration_gaps(structure):
     return gaps
 
 
+#: Flip to True once a real sign-in engine exists on the shelf and builder.py
+#: enforces sessions on every route (Job 6 of the 2026-09-06 Codex handoff).
+#: Until then, an unenforced auth requirement is reported on the assembled
+#: spec (never hidden) but does not block the build -- flipping this before
+#: that engine exists would make every template refuse, with no part able to
+#: close the gap, which is worse than an honest, visible, non-blocking flag.
+ENFORCE_AUTH_GATE = False
+
+
+def auth_registration_gap(auth):
+    """None if `auth` (the AU.* answers) needs nothing the Builder cannot
+    build, or a human-readable reason if it does. Today the Builder has zero
+    sign-in enforcement of any kind, so any account-creation mode beyond "no
+    real accounts" (AU.01 unset or explicitly none) is a real gap -- the app
+    would tell every visitor they are whoever the request claims to be."""
+    creation = auth.get("AU.01")
+    if not creation or creation in ("none", []):
+        return None
+    return (f"AU.01 declares real accounts (creation: {creation!r}) but no sign-in engine is "
+            f"registered on the shelf yet -- every route would trust an unauthenticated caller")
+
+
 def _rename_refs_in_structure(structure, rename):
     """Rewrite record-name references inside a locked structure, for the real
     shapes build_model() actually produces (checked against every real
@@ -610,12 +632,19 @@ def assemble(graph, inst, spec_id, title):
     structure = copy.deepcopy(structure)
     structure["brand"] = {"app_name": inst["answers"].get("A.05"), "assets": inst["answers"].get("C.04")}
     structure["auth"] = {k: v for k, v in inst["answers"].items() if k.startswith("AU.")}
+    auth_gap = auth_registration_gap(structure["auth"])
+    if auth_gap and ENFORCE_AUTH_GATE:
+        raise Refused(f"auth registration gap -- blocked, not skipped:\n  - {auth_gap}")
     return {
         "spec_id": spec_id, "version": 1, "title": title,
         "graph_version": graph["version"],
         "source_template": inst.get("template"),
         "numbered_fields": fields,
         "build_model": structure,
+        # None once ENFORCE_AUTH_GATE is on and every family has a real sign-in
+        # part -- until then this is the honest, visible record that nothing
+        # enforces who is acting, carried on the spec rather than hidden.
+        "auth_registration_gap": auth_gap,
     }
 
 
