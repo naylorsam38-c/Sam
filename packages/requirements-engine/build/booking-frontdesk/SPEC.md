@@ -67,3 +67,9 @@
 | booking-frontdesk/OPS-009 | ops | scheduled_jobs |  |
 | booking-frontdesk/OPS-010 | ops | scheduled_jobs |  |
 | booking-frontdesk/OPS-011 | ops | scheduled_jobs |  |
+
+## Interface
+
+| id | kind | parts | note |
+|---|---|---|---|
+| booking-frontdesk/IFC-001 | interface | **UNBOUND** | no interface chosen yet -- the front door has not run for this instance |

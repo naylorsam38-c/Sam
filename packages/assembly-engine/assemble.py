@@ -177,6 +177,11 @@ def _merge_structures(structures):
     merged = {"records": {}, "roles": {}, "super_role": structures[0].get("super_role"),
               "workflows": {}, "notifications": {}, "reports": {}, "forms": {},
               "integrations": {}, "auth": {}, "brand": structures[0].get("brand"),
+              # one interface choice for the whole combined app, same rule as
+              # brand/accent above: the lead template's (the one whose person
+              # is in charge, per intake.py's own reconciliation) wins rather
+              # than inventing a second, conflicting pick.
+              "interface": structures[0].get("interface"),
               "screens_inventory": [], "navigation": [], "landing_per_role": {},
               "actions_inventory": [], "recurring_ops": [], "qa_generated_tests": []}
     for s in structures:

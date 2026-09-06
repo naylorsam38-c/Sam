@@ -2,8 +2,8 @@
  "part_id": "oauth_connect",
  "version": "1.0.0",
  "revision": "deb7b65f11d7715d",
- "qualified_at": "2026-09-05T20:35:46+00:00",
- "base_url": "http://127.0.0.1:34489",
+ "qualified_at": "2026-09-06T00:45:36+00:00",
+ "base_url": "http://127.0.0.1:38847",
  "journeys": [
   {
    "journey": "oauth_connect_click_reaches_provider",
@@ -20,7 +20,7 @@
     {
      "channel": "browser",
      "action": "click Connect on command-desk/SCR-020",
-     "observed": "302 -> Location: 'https://accounts.google.com/o/oauth2/v2/auth?client_id=test-client.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A34489%2Fapi%2Fconnections%2Fgoogle%2Fcallback&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.readonly&state=dc27406a-8455-4281-a0b3-5834eba35b89&access_type=offline' "
+     "observed": "302 -> Location: 'https://accounts.google.com/o/oauth2/v2/auth?client_id=test-client.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A38847%2Fapi%2Fconnections%2Fgoogle%2Fcallback&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.readonly&state=1f979f48-9548-4898-b5eb-93d8c58310c3&access_type=offline' "
     }
    ],
    "page_errors": []
@@ -40,7 +40,7 @@
     {
      "channel": "browser",
      "action": "click Connect on command-desk/SCR-021",
-     "observed": "302 -> Location: 'https://accounts.google.com/o/oauth2/v2/auth?client_id=test-client.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A34489%2Fapi%2Fconnections%2Fgoogle%2Fcallback&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.readonly&state=453fd08f-500f-4a8a-be8e-ce86bc28dc8d&access_type=offline' "
+     "observed": "302 -> Location: 'https://accounts.google.com/o/oauth2/v2/auth?client_id=test-client.apps.googleusercontent.com&redirect_uri=http%3A%2F%2F127.0.0.1%3A38847%2Fapi%2Fconnections%2Fgoogle%2Fcallback&response_type=code&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.readonly&state=4d6ee13c-3862-460d-b6da-1599953594b2&access_type=offline' "
     }
    ],
    "page_errors": []

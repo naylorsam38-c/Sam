@@ -2181,6 +2181,16 @@
       }
     ],
     "locked": true,
-    "locked_at_graph_version": "3.0"
+    "locked_at_graph_version": "3.0",
+    "interface": {
+      "id": "pm-teamwork/IFC-001",
+      "kind": "interface",
+      "options": [
+        "console",
+        "board",
+        "pocket"
+      ],
+      "chosen": null
+    }
   }
 }

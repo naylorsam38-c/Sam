@@ -2,8 +2,8 @@
  "part_id": "stage_approval_gate",
  "version": "1.0.0",
  "revision": "e05ac2be0b3c4cc8",
- "qualified_at": "2026-09-05T20:35:46+00:00",
- "base_url": "http://127.0.0.1:34489",
+ "qualified_at": "2026-09-06T00:45:36+00:00",
+ "base_url": "http://127.0.0.1:38847",
  "journeys": [
   {
    "journey": "gated_system_move_is_visible_on_the_screen",
@@ -32,7 +32,21 @@
       "body": {
        "from": "running",
        "to": "stopped-and-reported",
-       "effects": []
+       "effects": [],
+       "notified": [
+        {
+         "notification": "Agent stopped",
+         "id": "command-desk/NOTIF-001",
+         "to": [
+          "Sam"
+         ],
+         "declared_channels": [
+          "in_app",
+          "email"
+         ],
+         "delivered_by": "in_app only \u2014 no mail or SMS provider is connected"
+        }
+       ]
       }
      },
      "user_facing": false
@@ -45,7 +59,8 @@
       "body": {
        "from": "stopped-and-reported",
        "to": "running",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -58,7 +73,21 @@
       "body": {
        "from": "running",
        "to": "stopped-and-reported",
-       "effects": []
+       "effects": [],
+       "notified": [
+        {
+         "notification": "Agent stopped",
+         "id": "command-desk/NOTIF-001",
+         "to": [
+          "Sam"
+         ],
+         "declared_channels": [
+          "in_app",
+          "email"
+         ],
+         "delivered_by": "in_app only \u2014 no mail or SMS provider is connected"
+        }
+       ]
       }
      },
      "user_facing": false
@@ -98,7 +127,8 @@
       "body": {
        "from": "open",
        "to": "needs attention",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -111,7 +141,8 @@
       "body": {
        "from": "needs attention",
        "to": "closed",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -151,7 +182,8 @@
       "body": {
        "from": "queued",
        "to": "running",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -162,7 +194,7 @@
      "observed": {
       "status": 409,
       "body": {
-       "error": "jobs bc2e8feb-e6c7-4564-b46e-c4420ad87ccf is waiting in 'running' for ['Sam'] to approve",
+       "error": "jobs 38a15cc6-e3c9-4b74-a363-0e2fe1d57777 is waiting in 'running' for ['Sam'] to approve",
        "waiting_for_approval": true
       }
      },
@@ -181,7 +213,21 @@
       "body": {
        "from": "running",
        "to": "done",
-       "effects": []
+       "effects": [],
+       "notified": [
+        {
+         "notification": "Job done",
+         "id": "command-desk/NOTIF-003",
+         "to": [
+          "Sam"
+         ],
+         "declared_channels": [
+          "in_app",
+          "email"
+         ],
+         "delivered_by": "in_app only \u2014 no mail or SMS provider is connected"
+        }
+       ]
       }
      },
      "user_facing": false
@@ -221,7 +267,8 @@
       "body": {
        "from": "active",
        "to": "finished",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -261,7 +308,8 @@
       "body": {
        "from": "connected",
        "to": "expired",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -274,7 +322,8 @@
       "body": {
        "from": "expired",
        "to": "connected",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -287,7 +336,8 @@
       "body": {
        "from": "connected",
        "to": "expired",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -300,7 +350,8 @@
       "body": {
        "from": "expired",
        "to": "connected",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -340,7 +391,8 @@
       "body": {
        "from": "received",
        "to": "filled",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -353,7 +405,8 @@
       "body": {
        "from": "filled",
        "to": "signed",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false
@@ -366,7 +419,8 @@
       "body": {
        "from": "signed",
        "to": "done",
-       "effects": []
+       "effects": [],
+       "notified": []
       }
      },
      "user_facing": false

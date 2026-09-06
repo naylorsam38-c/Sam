@@ -69,9 +69,10 @@ PASS erp-backbone/OPS-012 (recurring_op): scheduled_jobs
 PASS erp-backbone/OPS-013 (recurring_op): scheduled_jobs
 PASS erp-backbone/OPS-014 (recurring_op): scheduled_jobs
 PASS erp-backbone/OPS-015 (recurring_op): scheduled_jobs
+FAIL erp-backbone/IFC-001 (interface): no interface chosen yet -- the front door has not run for this instance
 ---
-70/70 PASS, 0 FAIL
-CLEAN
+70/71 PASS, 1 FAIL
+NOT CLEAN -- 1 item(s) unbound
 
 QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
 QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b

@@ -45,9 +45,10 @@ PASS accounting-ledger/OPS-007 (recurring_op): scheduled_jobs
 PASS accounting-ledger/OPS-008 (recurring_op): scheduled_jobs
 PASS accounting-ledger/OPS-009 (recurring_op): scheduled_jobs
 PASS accounting-ledger/OPS-010 (recurring_op): scheduled_jobs
+FAIL accounting-ledger/IFC-001 (interface): no interface chosen yet -- the front door has not run for this instance
 ---
-46/46 PASS, 0 FAIL
-CLEAN
+46/47 PASS, 1 FAIL
+NOT CLEAN -- 1 item(s) unbound
 
 QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
 QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b

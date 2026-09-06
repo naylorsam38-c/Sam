@@ -2,8 +2,8 @@
  "part_id": "reporting_engine",
  "version": "1.0.0",
  "revision": "a0de07a247bf355b",
- "qualified_at": "2026-09-05T20:35:46+00:00",
- "base_url": "http://127.0.0.1:34489",
+ "qualified_at": "2026-09-06T00:45:36+00:00",
+ "base_url": "http://127.0.0.1:38847",
  "journeys": [
   {
    "journey": "report_screen_reflects_written_rows",
@@ -12,7 +12,7 @@
     "reporting_engine"
    ],
    "result": "BLOCKED",
-   "reason": "metric 'jobs failed per agent per week' counts rows at stage 'failed'; a new row starts at 'queued' and no screen offers a control to move it",
+   "reason": "metric 'jobs failed per agent per week' needs stage stage = 'failed'; a new row starts at 'queued' and no screen offers a control to move it",
    "failed_part": null,
    "notes": [],
    "browser_verified": false,
@@ -45,7 +45,7 @@
      "action": "open report command-desk/SCR-019",
      "observed": {
       "spend on hosted model calls": {
-       "seam-1a07347f120-seed": null
+       "seam-1a0742ca7fa-seed": null
       }
      }
     },
@@ -55,8 +55,8 @@
      "observed": {
       "status": 201,
       "body": {
-       "What was asked": "seam-1a0734838fb",
-       "Agent": "seam-1a0734838fb",
+       "What was asked": "seam-1a0742cf054",
+       "Agent": "seam-1a0742cf054",
        "Cost": 1.25
       }
      },
@@ -66,8 +66,8 @@
      "channel": "browser",
      "action": "reload the report screen",
      "observed": {
-      "seam-1a07347f120-seed": null,
-      "seam-1a0734838fb": 1.25
+      "seam-1a0742ca7fa-seed": null,
+      "seam-1a0742cf054": 1.25
      }
     }
    ],

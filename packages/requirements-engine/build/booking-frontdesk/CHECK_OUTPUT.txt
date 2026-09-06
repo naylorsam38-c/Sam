@@ -39,9 +39,10 @@ PASS booking-frontdesk/OPS-008 (recurring_op): scheduled_jobs
 PASS booking-frontdesk/OPS-009 (recurring_op): scheduled_jobs
 PASS booking-frontdesk/OPS-010 (recurring_op): scheduled_jobs
 PASS booking-frontdesk/OPS-011 (recurring_op): scheduled_jobs
+FAIL booking-frontdesk/IFC-001 (interface): no interface chosen yet -- the front door has not run for this instance
 ---
-40/40 PASS, 0 FAIL
-CLEAN
+40/41 PASS, 1 FAIL
+NOT CLEAN -- 1 item(s) unbound
 
 QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
 QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b

@@ -2132,6 +2132,8 @@ def parts_used(spec):
         used.append("stock_ledger")
     if any(e.get("op") == "ledger_balance" for r in bm.get("records", {}).values() for e in r.get("on_create") or []):
         used.append("ledger_balancing")
+    if bm.get("interface") and bm["interface"].get("chosen"):
+        used.append("interface_picker")
     return used
 
 

@@ -316,6 +316,8 @@ def build_instance(answers):
                        "The booking piece comes with a page the public can use. You said your team only, "
                        "so it is built but only your people can reach it."))
 
+    if inst["structure"].get("interface"):
+        inst["structure"]["interface"]["chosen"] = answers["look"]
     inst["template"] = "+".join(c["template"] for c in picked)
     inst["front_door"] = {"answers": answers, "filled_without_asking": filled,
                           "note": "Built by packages/frontdoor/intake.py from eight answers."}
@@ -342,10 +344,15 @@ def run(answers, out_dir, port=8900):
     # the accent comes from the first piece they picked, so a combined app still
     # has one colour rather than an invented one
     accent_family = _templates_for(answers["cards"])[0]["template"]
+    chosen = spec["build_model"]["interface"]["chosen"]
     for design in mi.DESIGNS:
         html = mi.page(model, design, accent_family)
         open(os.path.join(static, f"ui-{design}.html"), "w", encoding="utf-8").write(html)
-    open(os.path.join(static, "index.html"), "w", encoding="utf-8").write(mi.chooser(model, accent_family))
+    # '/' serves the picked design directly -- the front door already asked
+    # "which does it look like", so landing on a second picker here would
+    # undo that answer. The other two stay reachable at their own ui-*.html
+    # paths for "show me another version".
+    open(os.path.join(static, "index.html"), "w", encoding="utf-8").write(mi.page(model, chosen, accent_family))
     json.dump(model, open(os.path.join(out_dir, "MODEL.json"), "w", encoding="utf-8"), indent=1)
     open(os.path.join(out_dir, "YOUR_APP.md"), "w", encoding="utf-8").write(summary(answers, spec, filled))
     return spec, app_dir, result, filled

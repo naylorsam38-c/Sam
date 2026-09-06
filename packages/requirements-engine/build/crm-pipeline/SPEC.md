@@ -71,3 +71,9 @@
 | crm-pipeline/OPS-007 | ops | scheduled_jobs |  |
 | crm-pipeline/OPS-008 | ops | scheduled_jobs |  |
 | crm-pipeline/OPS-009 | ops | scheduled_jobs |  |
+
+## Interface
+
+| id | kind | parts | note |
+|---|---|---|---|
+| crm-pipeline/IFC-001 | interface | **UNBOUND** | no interface chosen yet -- the front door has not run for this instance |

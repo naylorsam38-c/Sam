@@ -2070,6 +2070,22 @@
       }
     ],
     "locked": true,
-    "locked_at_graph_version": "3.0"
+    "locked_at_graph_version": "3.0",
+    "interface": {
+      "id": "booking-frontdesk/IFC-001",
+      "kind": "interface",
+      "options": [
+        "console",
+        "board",
+        "pocket"
+      ],
+      "chosen": null,
+      "part_bindings": {
+        "parts": [],
+        "locations": [],
+        "note": "no interface chosen yet -- the front door has not run for this instance",
+        "pins": []
+      }
+    }
   }
 }

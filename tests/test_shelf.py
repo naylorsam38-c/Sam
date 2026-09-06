@@ -199,7 +199,11 @@ def test_the_checker_reports_drift_when_the_shelf_moves_on(tmp_path):
 def test_the_checker_separates_binding_from_qualification():
     text = check_capability_bindings.check_spec(str(BOUND / "command-desk" / "BOUND_SPEC.json"))
     binding, qualification = text.split("QUALIFICATION CHECK")
-    assert "99/99 PASS" in binding and "\nCLEAN" in binding
+    # 99/100, not 100/100: IFC-001 is honestly unbound on this verification-only
+    # spec (no front door ever runs against a raw locked template) -- the point
+    # of this test is that binding and qualification report independently, not
+    # that command-desk is fully bound.
+    assert "99/100 PASS" in binding and "NOT CLEAN" in binding
     assert "parts qualified at their pinned revision" in qualification
     # unqualified parts are named, one per line, never folded into the binding verdict
     for line in qualification.splitlines():

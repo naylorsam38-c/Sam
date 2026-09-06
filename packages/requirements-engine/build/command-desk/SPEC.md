@@ -126,3 +126,9 @@
 | command-desk/OPS-021 | ops | scheduled_jobs |  |
 | command-desk/OPS-022 | ops | scheduled_jobs |  |
 | command-desk/OPS-023 | ops | scheduled_jobs |  |
+
+## Interface
+
+| id | kind | parts | note |
+|---|---|---|---|
+| command-desk/IFC-001 | interface | **UNBOUND** | no interface chosen yet -- the front door has not run for this instance |

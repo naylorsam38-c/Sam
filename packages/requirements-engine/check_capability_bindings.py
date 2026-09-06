@@ -58,6 +58,8 @@ def check_spec(path, require_qualified=False):
         check_item(f"RPT:{name}", "report", rep["part_bindings"])
     for op in bm["recurring_ops"]:
         check_item(op["id"], "recurring_op", op["part_bindings"])
+    if bm.get("interface"):
+        check_item(bm["interface"]["id"], "interface", bm["interface"]["part_bindings"])
 
     total, passed = len(results), sum(results)
     failed = total - passed

@@ -62,7 +62,19 @@ def lock_one(graph, path):
     name = t["template"]
 
     if t.get("structure"):
-        return t["structure"], True
+        bm = t["structure"]
+        if "interface" not in bm:
+            # A wholly new numbered kind, added after this template was
+            # already locked. This is deliberately NOT a relock: nothing
+            # else in bm is touched, re-derived, or renumbered -- the
+            # existing invariant (an id, once minted, never moves) holds.
+            # Minting exactly one IFC-001 the first time this key is absent
+            # is additive, not a recomputation, so it's safe to do on an
+            # already-locked template.
+            bm["interface"] = {"id": f"{name}/IFC-001", "kind": "interface",
+                                "options": ["console", "board", "pocket"], "chosen": None}
+            json.dump(t, open(path, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+        return bm, True
 
     errors = check_template.check(graph, t)
     if errors:

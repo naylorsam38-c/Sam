@@ -210,6 +210,15 @@ def bind_ops():
     return _resolve(["scheduled_jobs"], None)
 
 
+def bind_interface(ifc):
+    # A person hasn't answered "which does it look like" yet on this
+    # verification-only spec (front_door/intake.py answers it for real
+    # apps) -- unbound with the real reason, never guessed at a default.
+    if not ifc.get("chosen"):
+        return [], [], "no interface chosen yet -- the front door has not run for this instance"
+    return _resolve(["interface_picker"], None)
+
+
 def bind_structure(structure, inventory):
     """Pure function: returns a DEEP COPY of structure with a
     'part_bindings' block added to every numbered item -- never mutates the
@@ -234,6 +243,8 @@ def bind_structure(structure, inventory):
         rep["part_bindings"] = binding(*report_engines[name])
     for op in s["recurring_ops"]:
         op["part_bindings"] = binding(*bind_ops())
+    if s.get("interface"):
+        s["interface"]["part_bindings"] = binding(*bind_interface(s["interface"]))
     return s
 
 
@@ -256,6 +267,8 @@ def render_md(name, t, bound):
     table("Notifications", [dict(v, _name=k) for k, v in bound["notifications"].items()], lambda n: n["_name"], lambda n: "notification")
     table("Reports", [dict(v, _name=k) for k, v in bound["reports"].items()], lambda r: r["_name"], lambda r: "report")
     table("Recurring ops", bound["recurring_ops"], lambda o: o["id"], lambda o: "ops")
+    if bound.get("interface"):
+        table("Interface", [bound["interface"]], lambda i: i["id"], lambda i: "interface")
     return "\n".join(out) + "\n"
 
 

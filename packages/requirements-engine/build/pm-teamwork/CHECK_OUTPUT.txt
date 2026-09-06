@@ -35,9 +35,10 @@ PASS pm-teamwork/OPS-006 (recurring_op): scheduled_jobs
 PASS pm-teamwork/OPS-007 (recurring_op): scheduled_jobs
 PASS pm-teamwork/OPS-008 (recurring_op): scheduled_jobs
 PASS pm-teamwork/OPS-009 (recurring_op): scheduled_jobs
+FAIL pm-teamwork/IFC-001 (interface): no interface chosen yet -- the front door has not run for this instance
 ---
-36/36 PASS, 0 FAIL
-CLEAN
+36/37 PASS, 1 FAIL
+NOT CLEAN -- 1 item(s) unbound
 
 QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
 QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b

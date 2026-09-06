@@ -94,6 +94,7 @@ PROVENANCE = {
     "workflow_executor":              {"read_from": ["Asana", "Pipedrive", "Acuity Scheduling", "Odoo core", "Xero core"], "implementation": ORIGINAL},
     "reporting_engine":               {"read_from": ["Asana", "Pipedrive", "Acuity Scheduling", "Odoo core", "Xero core"], "implementation": ORIGINAL},
     "notification_delivery":          {"read_from": ["Asana", "Pipedrive", "Acuity Scheduling", "Odoo core", "Xero core"], "implementation": ORIGINAL},
+    "interface_picker":               {"read_from": ["Asana", "Pipedrive", "Acuity Scheduling", "Odoo core", "Xero core"], "implementation": ORIGINAL},
     "system_triggered_transition":    {"read_from": ["Command Desk interview answers"], "implementation": ORIGINAL},
     "custom_action_execution":        {"read_from": ["Command Desk interview answers"], "implementation": ORIGINAL},
     "form_render_submit":             {"read_from": ["Command Desk interview answers"], "implementation": ORIGINAL},

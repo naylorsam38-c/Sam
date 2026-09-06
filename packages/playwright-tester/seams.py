@@ -58,6 +58,7 @@ JOURNEYS = {
     "clone_appears_in_the_list_screen": ["record_cloning"],
     "sent_document_is_stamped_on_the_screen": ["document_generation"],
     "rate_report_reflects_the_moves_made_on_the_screen": ["stage_history"],
+    "chosen_interface_is_served_at_root": ["interface_picker"],
 }
 
 #: Write qualification receipts (via shelf.py) for every part that has at
@@ -440,6 +441,32 @@ async def report_screen_reflects_written_rows(page, bm, base, tmpdir):
     if not screens:
         out.append(Journey("report_screen_reflects_written_rows", "-").not_applicable("the spec declares no report screen"))
     return out
+
+
+async def chosen_interface_is_served_at_root(page, bm, base, tmpdir):
+    """'/' serves the interface the front door chose -- never a picker, never
+    a default -- and the two not chosen stay reachable at their own path, so
+    'show me another version' still works."""
+    ifc = bm.get("interface")
+    if not ifc:
+        return [Journey("chosen_interface_is_served_at_root", "-")
+                .not_applicable("the spec declares no interface item")]
+    j = Journey("chosen_interface_is_served_at_root", ifc["id"])
+    chosen = ifc.get("chosen")
+    if not chosen:
+        return [j.blocked("no interface chosen -- the Builder should have refused this spec, not built it")]
+    await _goto(page, f"{base}/")
+    design = await page.eval_on_selector("#app", "el => el.getAttribute('data-design')")
+    j.step("browser", "open / and read #app[data-design]", design)
+    if design != chosen:
+        return [j.failed(f"'/' serves {design!r}, the chosen interface is {chosen!r}")]
+    for other in [d for d in ifc["options"] if d != chosen]:
+        resp = await _goto(page, f"{base}/ui-{other}.html")
+        other_design = await page.eval_on_selector("#app", "el => el.getAttribute('data-design')")
+        j.step("browser", f"open /ui-{other}.html", {"status": resp.status if resp else None, "data-design": other_design})
+        if other_design != other:
+            return [j.failed(f"/ui-{other}.html does not serve the {other!r} design (got {other_design!r})")]
+    return [j.passed()]
 
 
 async def api_key_screen_connects_never_echoes(page, bm, base, tmpdir):
@@ -1057,6 +1084,7 @@ RUNNERS = {
     "clone_appears_in_the_list_screen": clone_appears_in_the_list_screen,
     "sent_document_is_stamped_on_the_screen": sent_document_is_stamped_on_the_screen,
     "rate_report_reflects_the_moves_made_on_the_screen": rate_report_reflects_the_moves_made_on_the_screen,
+    "chosen_interface_is_served_at_root": chosen_interface_is_served_at_root,
 }
 assert set(RUNNERS) == set(JOURNEYS), "every journey in JOURNEYS needs a runner and vice versa"
 

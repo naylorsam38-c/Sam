@@ -43,9 +43,10 @@ PASS crm-pipeline/OPS-006 (recurring_op): scheduled_jobs
 PASS crm-pipeline/OPS-007 (recurring_op): scheduled_jobs
 PASS crm-pipeline/OPS-008 (recurring_op): scheduled_jobs
 PASS crm-pipeline/OPS-009 (recurring_op): scheduled_jobs
+FAIL crm-pipeline/IFC-001 (interface): no interface chosen yet -- the front door has not run for this instance
 ---
-44/44 PASS, 0 FAIL
-CLEAN
+44/45 PASS, 1 FAIL
+NOT CLEAN -- 1 item(s) unbound
 
 QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
 QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b

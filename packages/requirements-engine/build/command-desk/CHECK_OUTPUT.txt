@@ -98,9 +98,10 @@ PASS command-desk/OPS-020 (recurring_op): scheduled_jobs
 PASS command-desk/OPS-021 (recurring_op): scheduled_jobs
 PASS command-desk/OPS-022 (recurring_op): scheduled_jobs
 PASS command-desk/OPS-023 (recurring_op): scheduled_jobs
+FAIL command-desk/IFC-001 (interface): no interface chosen yet -- the front door has not run for this instance
 ---
-99/99 PASS, 0 FAIL
-CLEAN
+99/100 PASS, 1 FAIL
+NOT CLEAN -- 1 item(s) unbound
 
 QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
 QUALIFIED api_key_connect@1.0.0 (PRODUCT_QUALIFIED) at 7b5afa7a951e53ee

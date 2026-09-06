@@ -882,6 +882,35 @@
    "seam_journeys": [
     "gated_system_move_is_visible_on_the_screen"
    ]
+  },
+  {
+   "part_id": "interface_picker",
+   "kind": [
+    "interface"
+   ],
+   "what_it_does": "Builds all three real interface designs (Console/Board/Pocket) for a template and serves the one the customer picked at '/' -- the other two stay reachable at their own paths. Refuses to build if no interface has been chosen.",
+   "location": [
+    "packages/interfaces/make_interfaces.py",
+    "packages/builder/builder.py::build_app_py"
+   ],
+   "reused_from": "new generic runtime capability; the three designs were already built and proven (packages/interfaces/evidence/INTERFACES.md, 1244 checks) -- this part is what makes the customer's pick the one actually served",
+   "evidence": "packages/interfaces/evidence/INTERFACES.md",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "provenance": {
+    "read_from": [
+     "Asana",
+     "Pipedrive",
+     "Acuity Scheduling",
+     "Odoo core",
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "chosen_interface_is_served_at_root"
+   ]
   }
  ],
  "lifecycle": {
