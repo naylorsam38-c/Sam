@@ -1,0 +1,26 @@
+{
+  "template": "command-desk",
+  "source_app": "Command Desk (Sam's own internal tool)",
+  "category": "internal ops tool",
+  "modules": [
+    "integrations"
+  ],
+  "inventory": {
+    "records": [],
+    "roles": [],
+    "forms": [],
+    "notifications": [],
+    "reports": [],
+    "workflows": [],
+    "file_types": [],
+    "integrations": [
+      "Gmail"
+    ],
+    "screens": []
+  },
+  "super_role": null,
+  "answers": {},
+  "per_instance": {},
+  "ask_customer": [],
+  "features": []
+}

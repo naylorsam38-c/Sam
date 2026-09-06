@@ -1,0 +1,133 @@
+{
+ "part_id": "crud_list_detail",
+ "version": "1.1.0",
+ "revision": "389773506209779b",
+ "qualified_at": "2026-09-06T00:45:36+00:00",
+ "base_url": "http://127.0.0.1:38847",
+ "journeys": [
+  {
+   "journey": "form_submit_lands_in_list_and_detail",
+   "subject": "command-desk/SCR-015",
+   "parts": [
+    "form_render_submit",
+    "crud_list_detail"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [
+    "FRESH_INSTALL_GAP: required field 'Reports to' links to 'Agent'; with no Agent rows yet, this form cannot be completed from the screen"
+   ],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open form command-desk/SCR-015",
+     "observed": "Add an agent"
+    },
+    {
+     "channel": "api",
+     "action": "seed one 'Agent' so required link 'Reports to' has something to pick",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "fill every declared control",
+     "observed": "7 controls, carrier=name=seam-1a0742c7722"
+    },
+    {
+     "channel": "browser",
+     "action": "click Save",
+     "observed": "saved 173001b5-0bf2-4347-8f01-4e4f763519eb"
+    },
+    {
+     "channel": "browser",
+     "action": "open list command-desk/SCR-001",
+     "observed": "5 cell(s) carry seam-1a0742c7722"
+    },
+    {
+     "channel": "browser",
+     "action": "open detail command-desk/SCR-002?id=173001b5-0bf2-4347-8f01-4e4f763519eb",
+     "observed": "name='seam-1a0742c7722'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "form_submit_lands_in_list_and_detail",
+   "subject": "command-desk/SCR-016",
+   "parts": [
+    "form_render_submit",
+    "crud_list_detail"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open form command-desk/SCR-016",
+     "observed": "Connect a service"
+    },
+    {
+     "channel": "browser",
+     "action": "fill every declared control",
+     "observed": "4 controls, carrier=service=seam-1a0742ca0a9"
+    },
+    {
+     "channel": "browser",
+     "action": "click Save",
+     "observed": "saved 6564377d-0d1c-455b-b11d-0ad2d2401bf1"
+    },
+    {
+     "channel": "browser",
+     "action": "open list command-desk/SCR-011",
+     "observed": "2 cell(s) carry seam-1a0742ca0a9"
+    },
+    {
+     "channel": "browser",
+     "action": "open detail command-desk/SCR-012?id=6564377d-0d1c-455b-b11d-0ad2d2401bf1",
+     "observed": "service='seam-1a0742ca0a9'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "form_submit_lands_in_list_and_detail",
+   "subject": "command-desk/SCR-017",
+   "parts": [
+    "form_render_submit",
+    "crud_list_detail"
+   ],
+   "result": "FAIL",
+   "reason": "submit did not report saved; the page says \"Error binding parameter 2: type 'dict' is not supported\"",
+   "failed_part": "form_render_submit",
+   "notes": [
+    "FRESH_INSTALL_GAP: required field 'Job' links to 'Job'; with no Job rows yet, this form cannot be completed from the screen"
+   ],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open form command-desk/SCR-017",
+     "observed": "Upload a document"
+    },
+    {
+     "channel": "api",
+     "action": "seed one 'Job' so required link 'Job' has something to pick",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "fill every declared control",
+     "observed": "3 controls, carrier=type=seam-1a0742ca7fa"
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

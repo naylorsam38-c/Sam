@@ -1,0 +1,88 @@
+BINDING CHECK: BOUND-ERP-BACKBONE (customer_complete=False)
+PASS erp-backbone/SCR-001 (screen/list): crud_list_detail
+PASS erp-backbone/SCR-002 (screen/detail): crud_list_detail
+PASS erp-backbone/SCR-003 (screen/list): crud_list_detail
+PASS erp-backbone/SCR-004 (screen/detail): crud_list_detail
+PASS erp-backbone/SCR-005 (screen/list): crud_list_detail
+PASS erp-backbone/SCR-006 (screen/detail): crud_list_detail
+PASS erp-backbone/SCR-007 (screen/list): crud_list_detail
+PASS erp-backbone/SCR-008 (screen/detail): crud_list_detail
+PASS erp-backbone/SCR-009 (screen/list): crud_list_detail
+PASS erp-backbone/SCR-010 (screen/detail): crud_list_detail
+PASS erp-backbone/SCR-011 (screen/list): crud_list_detail
+PASS erp-backbone/SCR-012 (screen/detail): crud_list_detail
+PASS erp-backbone/SCR-013 (screen/list): crud_list_detail
+PASS erp-backbone/SCR-014 (screen/detail): crud_list_detail
+PASS erp-backbone/SCR-015 (screen/list): crud_list_detail
+PASS erp-backbone/SCR-016 (screen/detail): crud_list_detail
+PASS erp-backbone/SCR-017 (screen/report): stock_ledger
+PASS erp-backbone/SCR-018 (screen/report): stage_history
+PASS erp-backbone/SCR-019 (screen/report): reporting_engine
+PASS erp-backbone/ACT-001 (action/create): crud_list_detail
+PASS erp-backbone/ACT-002 (action/edit): crud_list_detail
+PASS erp-backbone/ACT-003 (action/delete): crud_list_detail
+PASS erp-backbone/ACT-004 (action/create): crud_list_detail
+PASS erp-backbone/ACT-005 (action/edit): crud_list_detail
+PASS erp-backbone/ACT-006 (action/delete): crud_list_detail
+PASS erp-backbone/ACT-007 (action/create): crud_list_detail
+PASS erp-backbone/ACT-008 (action/edit): crud_list_detail
+PASS erp-backbone/ACT-009 (action/delete): crud_list_detail
+PASS erp-backbone/ACT-010 (action/create): crud_list_detail
+PASS erp-backbone/ACT-011 (action/edit): crud_list_detail
+PASS erp-backbone/ACT-012 (action/delete): crud_list_detail
+PASS erp-backbone/ACT-013 (action/create): crud_list_detail
+PASS erp-backbone/ACT-014 (action/edit): crud_list_detail
+PASS erp-backbone/ACT-015 (action/delete): crud_list_detail
+PASS erp-backbone/ACT-016 (action/create): crud_list_detail
+PASS erp-backbone/ACT-017 (action/edit): crud_list_detail
+PASS erp-backbone/ACT-018 (action/delete): crud_list_detail
+PASS erp-backbone/ACT-019 (action/create): crud_list_detail
+PASS erp-backbone/ACT-020 (action/edit): crud_list_detail
+PASS erp-backbone/ACT-021 (action/delete): crud_list_detail
+PASS erp-backbone/ACT-022 (action/create): crud_list_detail
+PASS erp-backbone/ACT-023 (action/edit): crud_list_detail
+PASS erp-backbone/ACT-024 (action/delete): crud_list_detail
+PASS erp-backbone/ACT-025 (action/transition): workflow_executor
+PASS erp-backbone/ACT-026 (action/transition): workflow_executor
+PASS erp-backbone/ACT-027 (action/transition): workflow_executor
+PASS erp-backbone/ACT-028 (action/approve): stage_approval_gate
+PASS erp-backbone/ACT-029 (action/transition): workflow_executor
+PASS erp-backbone/ACT-030 (action/transition): workflow_executor
+PASS erp-backbone/ACT-031 (action/transition): workflow_executor
+PASS NTF:Low stock alert (notification): notification_delivery
+PASS NTF:Order shipped (notification): notification_delivery
+PASS RPT:Stock on hand (report): stock_ledger
+PASS RPT:Sales by month (report): stage_history
+PASS RPT:Open orders (report): reporting_engine
+PASS erp-backbone/OPS-001 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-002 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-003 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-004 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-005 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-006 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-007 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-008 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-009 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-010 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-011 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-012 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-013 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-014 (recurring_op): scheduled_jobs
+PASS erp-backbone/OPS-015 (recurring_op): scheduled_jobs
+FAIL erp-backbone/IFC-001 (interface): no interface chosen yet -- the front door has not run for this instance
+---
+70/71 PASS, 1 FAIL
+NOT CLEAN -- 1 item(s) unbound
+
+QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b
+UNQUALIFIED notification_delivery@1.0.0: status TESTED
+QUALIFIED reporting_engine@1.0.0 (PRODUCT_QUALIFIED) at a0de07a247bf355b
+UNQUALIFIED scheduled_jobs@1.0.0: status TESTED
+QUALIFIED stage_approval_gate@1.0.0 (PRODUCT_QUALIFIED) at e05ac2be0b3c4cc8
+QUALIFIED stage_history@1.1.0 (PRODUCT_QUALIFIED) at a2820dad41d0c83c
+QUALIFIED stock_ledger@1.1.0 (PRODUCT_QUALIFIED) at 094c3be30a31bf03
+QUALIFIED workflow_executor@1.0.0 (PRODUCT_QUALIFIED) at e1e8908c90f7f1fb
+---
+6/8 parts qualified at their pinned revision, 2 problem(s)
+QUALIFICATION NOT CLEAN -- 2 part(s) unqualified, drifted or missing

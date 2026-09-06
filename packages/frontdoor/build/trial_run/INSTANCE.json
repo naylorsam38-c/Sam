@@ -1,0 +1,2267 @@
+{
+ "template": "pm-teamwork",
+ "source_app": "Asana",
+ "category": "project management",
+ "modules": [
+  "tasking",
+  "collaboration",
+  "files"
+ ],
+ "inventory": {
+  "records": [
+   "Project",
+   "Task",
+   "Comment"
+  ],
+  "roles": [
+   "Admin",
+   "Member",
+   "Guest"
+  ],
+  "forms": [],
+  "notifications": [
+   "Task assigned",
+   "Task due reminder",
+   "New comment"
+  ],
+  "reports": [
+   "Open tasks by person",
+   "Overdue tasks"
+  ],
+  "workflows": [
+   "Task lifecycle"
+  ],
+  "file_types": [
+   "Attachment"
+  ],
+  "integrations": [],
+  "screens": []
+ },
+ "super_role": "Admin",
+ "answers": {
+  "A.06": [
+   "web"
+  ],
+  "A.07": "yes",
+  "A.08": "single",
+  "A.09": "no",
+  "A.10": [],
+  "A.11": "no",
+  "A.16": "Admin",
+  "P.00": "no",
+  "C.05": {
+   "mode": "simplified"
+  },
+  "C.06": {
+   "Admin": "Projects list",
+   "Member": "My tasks",
+   "Guest": "Projects list"
+  },
+  "AU.01": [
+   "invited"
+  ],
+  "AU.02": [
+   {
+    "name": "Full name",
+    "type": "short_text",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Email address",
+    "type": "email",
+    "required": "yes",
+    "unique": "yes"
+   }
+  ],
+  "AU.03": "yes",
+  "AU.04": [
+   "password",
+   "google"
+  ],
+  "AU.07": {
+   "scope": "nobody",
+   "method": "n/a"
+  },
+  "AU.08": {
+   "attempts": 5,
+   "duration": "15 minutes"
+  },
+  "AU.09": "yes",
+  "AU.10": "30 days",
+  "AU.11": {
+   "allowed": "yes",
+   "by": [
+    "super"
+   ],
+   "auto_triggers": []
+  },
+  "AU.12": {
+   "allowed": "yes",
+   "by": "both",
+   "data": "anonymised"
+  },
+  "AU.13": [
+   "super"
+  ],
+  "AU.14": {
+   "required": "yes",
+   "status": "need_drafting"
+  },
+  "AU.06": {
+   "inviters": [
+    "Admin",
+    "Member"
+   ],
+   "default_role": "Member"
+  },
+  "A.01": "Run my small team's projects: tasks, who's doing what, and whether it's actually done.",
+  "A.05": "Teamwork Desk",
+  "C.03": "balanced",
+  "C.04": {
+   "mode": "premade",
+   "logo_id": "grid"
+  },
+  "C.02": [
+   "clear",
+   "efficient",
+   "calm"
+  ],
+  "A.03": "The app's own roles are kept, so each person only sees and does their part.",
+  "A.02": "Use it to run my small team's projects: tasks, who's doing what, and whether it's actually done.",
+  "A.04": "It is being used, and what it holds is what is really going on.",
+  "0.01": "guided",
+  "A.12": {
+   "required": "no"
+  },
+  "A.13": {
+   "region": "Australia",
+   "languages": [
+    "English"
+   ]
+  },
+  "A.14": [],
+  "C.01": "none",
+  "C.07": "confirmed",
+  "Z.01": "confirmed",
+  "Z.02": "confirmed",
+  "Z.03": "confirmed"
+ },
+ "per_instance": {
+  "R.01:Project": "A container of related work with an owner and a set of tasks.",
+  "R.02:Project": [
+   {
+    "name": "Name",
+    "type": "short_text",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Description",
+    "type": "long_text",
+    "required": "no",
+    "unique": "no"
+   },
+   {
+    "name": "Owner",
+    "type": "other",
+    "required": "yes",
+    "unique": "no",
+    "custom_rule": "reference to a user account (pick-a-person field)"
+   },
+   {
+    "name": "Due date",
+    "type": "date",
+    "required": "no",
+    "unique": "no"
+   },
+   {
+    "name": "Colour",
+    "type": "one_choice",
+    "required": "no",
+    "unique": "no",
+    "options": [
+     "grey",
+     "blue",
+     "green",
+     "red",
+     "purple",
+     "orange"
+    ]
+   }
+  ],
+  "R.03:Project": "Name",
+  "R.04:Project": {
+   "needed": "no"
+  },
+  "R.05:Project": [
+   {
+    "role": "Member",
+    "scope": "all"
+   },
+   {
+    "role": "Guest",
+    "scope": "linked",
+    "via": "Projects the guest was invited to"
+   }
+  ],
+  "R.06:Project": [
+   "Member"
+  ],
+  "R.07:Project": [
+   {
+    "role": "Member",
+    "scope": "all"
+   }
+  ],
+  "R.08:Project": [
+   {
+    "role": "Member",
+    "scope": "own"
+   },
+   {
+    "role": "Admin",
+    "scope": "all"
+   }
+  ],
+  "R.10:Project": {
+   "has": "no"
+  },
+  "R.11:Project": [],
+  "R.13:Project": "yes",
+  "R.14:Project": "forever",
+  "R.15:Project": [],
+  "R.09:Project": {
+   "basis": "field",
+   "field": "Owner"
+  },
+  "R.01:Task": "A single unit of work inside a project, assigned to one person.",
+  "R.02:Task": [
+   {
+    "name": "Title",
+    "type": "short_text",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Description",
+    "type": "long_text",
+    "required": "no",
+    "unique": "no"
+   },
+   {
+    "name": "Assignee",
+    "type": "other",
+    "required": "no",
+    "unique": "no",
+    "custom_rule": "reference to a user account (pick-a-person field)"
+   },
+   {
+    "name": "Due date",
+    "type": "date",
+    "required": "no",
+    "unique": "no"
+   },
+   {
+    "name": "Priority",
+    "type": "one_choice",
+    "required": "no",
+    "unique": "no",
+    "options": [
+     "low",
+     "medium",
+     "high"
+    ]
+   },
+   {
+    "name": "Project",
+    "type": "link",
+    "required": "yes",
+    "unique": "no",
+    "target_record": "Project"
+   }
+  ],
+  "R.03:Task": "Title",
+  "R.04:Task": {
+   "needed": "no"
+  },
+  "R.05:Task": [
+   {
+    "role": "Member",
+    "scope": "all"
+   },
+   {
+    "role": "Guest",
+    "scope": "linked",
+    "via": "tasks in projects the guest was invited to"
+   }
+  ],
+  "R.06:Task": [
+   "Member"
+  ],
+  "R.07:Task": [
+   {
+    "role": "Member",
+    "scope": "all"
+   }
+  ],
+  "R.08:Task": [
+   {
+    "role": "Member",
+    "scope": "own"
+   },
+   {
+    "role": "Admin",
+    "scope": "all"
+   }
+  ],
+  "R.10:Task": {
+   "has": "yes",
+   "stages": [
+    "To do",
+    "In progress",
+    "Done"
+   ]
+  },
+  "R.11:Task": [
+   {
+    "target": "Project",
+    "cardinality": "one_to_many",
+    "required": "yes"
+   }
+  ],
+  "R.13:Task": "yes",
+  "R.14:Task": "forever",
+  "R.15:Task": [
+   {
+    "name": "Duplicate",
+    "who": [
+     "Member"
+    ],
+    "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
+    "result_location": "the same project's task list",
+    "execution": {
+     "op": "clone",
+     "overrides": {
+      "stage": "To do"
+     },
+     "title_column": "title",
+     "title_suffix": " (copy)"
+    }
+   }
+  ],
+  "R.12:Task": "delete_too",
+  "R.09:Task": {
+   "basis": "creator"
+  },
+  "R.01:Comment": "A message left on a task by a person.",
+  "R.02:Comment": [
+   {
+    "name": "Body",
+    "type": "long_text",
+    "required": "yes",
+    "unique": "no"
+   },
+   {
+    "name": "Task",
+    "type": "link",
+    "required": "yes",
+    "unique": "no",
+    "target_record": "Task"
+   }
+  ],
+  "R.03:Comment": "Body",
+  "R.04:Comment": {
+   "needed": "no"
+  },
+  "R.05:Comment": [
+   {
+    "role": "Member",
+    "scope": "all"
+   },
+   {
+    "role": "Guest",
+    "scope": "linked",
+    "via": "comments on tasks the guest can see"
+   }
+  ],
+  "R.06:Comment": [
+   "Member",
+   "Guest"
+  ],
+  "R.07:Comment": [
+   {
+    "role": "Member",
+    "scope": "own"
+   }
+  ],
+  "R.08:Comment": [
+   {
+    "role": "Member",
+    "scope": "own"
+   },
+   {
+    "role": "Admin",
+    "scope": "all"
+   }
+  ],
+  "R.10:Comment": {
+   "has": "no"
+  },
+  "R.11:Comment": [
+   {
+    "target": "Task",
+    "cardinality": "one_to_many",
+    "required": "yes"
+   }
+  ],
+  "R.13:Comment": "no",
+  "R.14:Comment": "forever",
+  "R.15:Comment": [],
+  "R.12:Comment": "delete_too",
+  "R.09:Comment": {
+   "basis": "creator"
+  },
+  "FL.01:Task lifecycle": {
+   "kind": "person",
+   "who": [
+    "Member"
+   ],
+   "action": "creating a task (starts in 'To do')"
+  },
+  "FL.02:Task lifecycle": {
+   "stages": [
+    "To do",
+    "In progress",
+    "Done"
+   ],
+   "initial": "To do",
+   "terminal": [
+    "Done"
+   ]
+  },
+  "FL.03:Task lifecycle": [
+   {
+    "from": "To do",
+    "to": "In progress",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ]
+   },
+   {
+    "from": "In progress",
+    "to": "Done",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ]
+   },
+   {
+    "from": "Done",
+    "to": "In progress",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ]
+   },
+   {
+    "from": "In progress",
+    "to": "To do",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ]
+   }
+  ],
+  "FL.04:Task lifecycle": [],
+  "FL.05:Task lifecycle": [],
+  "FL.07:Task lifecycle": {
+   "allowed": "no"
+  },
+  "FL.08:Task lifecycle": "Nothing further; it stays visible in its finished stage.",
+  "FL.09:Task lifecycle": "never",
+  "FL.10:Task lifecycle": [],
+  "FL.11:Task lifecycle": [],
+  "N.01:Task assigned": {
+   "kind": "event",
+   "event": "a task's Assignee field is set or changed"
+  },
+  "N.02:Task assigned": [
+   {
+    "kind": "field",
+    "record": "Task",
+    "field": "Assignee"
+   }
+  ],
+  "N.03:Task assigned": [
+   "email",
+   "in_app"
+  ],
+  "N.04:Task assigned": "You've been given this task \u2014 open it and see what's needed.",
+  "N.05:Task assigned": "yes",
+  "N.01:Task due reminder": {
+   "kind": "relative_to_date",
+   "record": "Task",
+   "date_field": "Due date",
+   "offset": "-24 hours"
+  },
+  "N.02:Task due reminder": [
+   {
+    "kind": "field",
+    "record": "Task",
+    "field": "Assignee"
+   }
+  ],
+  "N.03:Task due reminder": [
+   "email",
+   "in_app"
+  ],
+  "N.04:Task due reminder": "This task is due tomorrow \u2014 finish it or move the date.",
+  "N.05:Task due reminder": "yes",
+  "N.01:New comment": {
+   "kind": "event",
+   "event": "a comment is created on a task"
+  },
+  "N.02:New comment": [
+   {
+    "kind": "field",
+    "record": "Task",
+    "field": "Assignee"
+   },
+   {
+    "kind": "owner"
+   }
+  ],
+  "N.03:New comment": [
+   "in_app"
+  ],
+  "N.04:New comment": "Someone said something on your task \u2014 read and reply if needed.",
+  "N.05:New comment": "yes",
+  "RP.01:Open tasks by person": "Who is carrying how much open work right now?",
+  "RP.02:Open tasks by person": [
+   "Member"
+  ],
+  "RP.03:Open tasks by person": {
+   "delivery": "screen",
+   "shape": "both"
+  },
+  "RP.04:Open tasks by person": [
+   "count of Tasks not in stage Done, grouped by Assignee"
+  ],
+  "RP.06:Open tasks by person": {
+   "filters": [
+    "Project",
+    "Assignee",
+    "Priority"
+   ],
+   "default_range": "all time"
+  },
+  "RP.07:Open tasks by person": {
+   "allowed": "yes",
+   "by": [
+    "Member"
+   ]
+  },
+  "RP.08:Open tasks by person": {
+   "enabled": "no"
+  },
+  "RP.01:Overdue tasks": "What has slipped past its due date and needs chasing?",
+  "RP.02:Overdue tasks": [
+   "Member"
+  ],
+  "RP.03:Overdue tasks": {
+   "delivery": "screen",
+   "shape": "table"
+  },
+  "RP.04:Overdue tasks": [
+   "count of overdue Tasks"
+  ],
+  "RP.06:Overdue tasks": {
+   "filters": [
+    "Project",
+    "Assignee"
+   ],
+   "default_range": "all time"
+  },
+  "RP.07:Overdue tasks": {
+   "allowed": "yes",
+   "by": [
+    "Member"
+   ]
+  },
+  "RP.08:Overdue tasks": {
+   "enabled": "no"
+  },
+  "RP.05:Overdue tasks:count of overdue Tasks": "a Task counts as overdue when Due date is before today AND its stage is not Done, as at the moment the report is viewed",
+  "P.01:Member": "A person on the team who plans and does the work.",
+  "P.02:Member": "no",
+  "P.04:Member": [
+   "Admin"
+  ],
+  "P.01:Guest": "An outside collaborator invited into specific projects only.",
+  "P.02:Guest": "no",
+  "P.04:Guest": [
+   "Admin",
+   "Member"
+  ],
+  "FI.01:Attachment": {
+   "purpose": "a file added to a task for context",
+   "parent": "Task"
+  },
+  "FI.02:Attachment": "many",
+  "FI.03:Attachment": {
+   "uploaders": [
+    "Member"
+   ],
+   "viewers": [
+    "Member",
+    "Guest"
+   ]
+  },
+  "FI.04:Attachment": "document",
+  "FI.05:Attachment": 50,
+  "FI.06:Attachment": "keep_history",
+  "FI.07:Attachment": "yes"
+ },
+ "ask_customer": [],
+ "features": [
+  {
+   "feature": "Guest access",
+   "controlled_by": "A.15 roles list",
+   "rule": "remove role 'Guest' -> every Guest grant and the invite path for guests disappears"
+  },
+  {
+   "feature": "Attachments",
+   "controlled_by": "A.15 file_types list",
+   "rule": "remove 'Attachment' -> files module drops out entirely"
+  },
+  {
+   "feature": "Priorities",
+   "controlled_by": "R.02:Task",
+   "rule": "delete the Priority field -> filter and report grouping on it drop out"
+  },
+  {
+   "feature": "Task duplication",
+   "controlled_by": "R.15:Task",
+   "rule": "delete the Duplicate action"
+  },
+  {
+   "feature": "Due-date reminders",
+   "controlled_by": "A.15 notifications list",
+   "rule": "remove 'Task due reminder'"
+  }
+ ],
+ "specialist_engines": [
+  {
+   "kind": "workflow",
+   "name": "Task lifecycle",
+   "stages": [
+    "To do",
+    "In progress",
+    "Done"
+   ],
+   "initial": "To do",
+   "terminal": [
+    "Done"
+   ],
+   "transitions": 4,
+   "person_moved_by": [
+    "Member"
+   ],
+   "automatic_transitions": [],
+   "has_approvals": false,
+   "has_timeouts": false,
+   "cancellable": false
+  },
+  {
+   "kind": "notification",
+   "name": "Task assigned",
+   "trigger_kind": "event",
+   "channels": [
+    "email",
+    "in_app"
+   ]
+  },
+  {
+   "kind": "notification",
+   "name": "Task due reminder",
+   "trigger_kind": "relative_to_date",
+   "channels": [
+    "email",
+    "in_app"
+   ]
+  },
+  {
+   "kind": "notification",
+   "name": "New comment",
+   "trigger_kind": "event",
+   "channels": [
+    "in_app"
+   ]
+  },
+  {
+   "kind": "report",
+   "name": "Open tasks by person",
+   "metrics": [
+    "count of Tasks not in stage Done, grouped by Assignee"
+   ],
+   "shape": "both",
+   "delivery": "screen"
+  },
+  {
+   "kind": "report",
+   "name": "Overdue tasks",
+   "metrics": [
+    "count of overdue Tasks"
+   ],
+   "shape": "table",
+   "delivery": "screen"
+  },
+  {
+   "kind": "custom_action",
+   "name": "Duplicate",
+   "record": "Task",
+   "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title"
+  }
+ ],
+ "report_specs": {
+  "Open tasks by person": [
+   {
+    "metric": "count of Tasks not in stage Done, grouped by Assignee",
+    "spec": {
+     "table": "tasks",
+     "aggregation": "count",
+     "group_by": "assignee",
+     "filters": [
+      {
+       "field": "stage",
+       "op": "!=",
+       "value": "Done"
+      }
+     ]
+    }
+   }
+  ],
+  "Overdue tasks": [
+   {
+    "metric": "count of overdue Tasks",
+    "spec": {
+     "table": "tasks",
+     "aggregation": "count",
+     "filters": [
+      {
+       "field": "due_date",
+       "op": "before_now"
+      },
+      {
+       "field": "stage",
+       "op": "!=",
+       "value": "Done"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "structure": {
+  "records": {
+   "Project": {
+    "fields": {
+     "Name": {
+      "name": "Name",
+      "type": "short_text",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Description": {
+      "name": "Description",
+      "type": "long_text",
+      "required": "no",
+      "unique": "no"
+     },
+     "Owner": {
+      "name": "Owner",
+      "type": "other",
+      "required": "yes",
+      "unique": "no",
+      "custom_rule": "reference to a user account (pick-a-person field)"
+     },
+     "Due date": {
+      "name": "Due date",
+      "type": "date",
+      "required": "no",
+      "unique": "no"
+     },
+     "Colour": {
+      "name": "Colour",
+      "type": "one_choice",
+      "required": "no",
+      "unique": "no",
+      "options": [
+       "grey",
+       "blue",
+       "green",
+       "red",
+       "purple",
+       "orange"
+      ]
+     }
+    },
+    "storage": {
+     "Name": "VARCHAR(255)",
+     "Description": "TEXT",
+     "Owner": "FOREIGN_KEY_ROLE",
+     "Due date": "DATE",
+     "Colour": "ENUM"
+    },
+    "enums": {
+     "Colour": [
+      "grey",
+      "blue",
+      "green",
+      "red",
+      "purple",
+      "orange"
+     ]
+    },
+    "access": {
+     "view": [
+      {
+       "role": "Member",
+       "scope": "all"
+      },
+      {
+       "role": "Guest",
+       "scope": "linked",
+       "via": "Projects the guest was invited to"
+      }
+     ],
+     "create": [
+      "Member"
+     ],
+     "edit": [
+      {
+       "role": "Member",
+       "scope": "all"
+      }
+     ],
+     "delete": [
+      {
+       "role": "Member",
+       "scope": "own"
+      },
+      {
+       "role": "Admin",
+       "scope": "all"
+      }
+     ]
+    },
+    "title_field": "Name",
+    "id_style": {
+     "needed": "no"
+    },
+    "lifecycle": {
+     "has": "no"
+    },
+    "retention": "forever",
+    "custom_actions": [],
+    "on_create": [],
+    "id": "pm-teamwork/REC-001"
+   },
+   "Task": {
+    "fields": {
+     "Title": {
+      "name": "Title",
+      "type": "short_text",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Description": {
+      "name": "Description",
+      "type": "long_text",
+      "required": "no",
+      "unique": "no"
+     },
+     "Assignee": {
+      "name": "Assignee",
+      "type": "other",
+      "required": "no",
+      "unique": "no",
+      "custom_rule": "reference to a user account (pick-a-person field)"
+     },
+     "Due date": {
+      "name": "Due date",
+      "type": "date",
+      "required": "no",
+      "unique": "no"
+     },
+     "Priority": {
+      "name": "Priority",
+      "type": "one_choice",
+      "required": "no",
+      "unique": "no",
+      "options": [
+       "low",
+       "medium",
+       "high"
+      ]
+     },
+     "Project": {
+      "name": "Project",
+      "type": "link",
+      "required": "yes",
+      "unique": "no",
+      "target_record": "Project"
+     }
+    },
+    "storage": {
+     "Title": "VARCHAR(255)",
+     "Description": "TEXT",
+     "Assignee": "FOREIGN_KEY_ROLE",
+     "Due date": "DATE",
+     "Priority": "ENUM",
+     "Project": "FOREIGN_KEY"
+    },
+    "enums": {
+     "Priority": [
+      "low",
+      "medium",
+      "high"
+     ]
+    },
+    "access": {
+     "view": [
+      {
+       "role": "Member",
+       "scope": "all"
+      },
+      {
+       "role": "Guest",
+       "scope": "linked",
+       "via": "tasks in projects the guest was invited to"
+      }
+     ],
+     "create": [
+      "Member"
+     ],
+     "edit": [
+      {
+       "role": "Member",
+       "scope": "all"
+      }
+     ],
+     "delete": [
+      {
+       "role": "Member",
+       "scope": "own"
+      },
+      {
+       "role": "Admin",
+       "scope": "all"
+      }
+     ]
+    },
+    "title_field": "Title",
+    "id_style": {
+     "needed": "no"
+    },
+    "lifecycle": {
+     "has": "yes",
+     "stages": [
+      "To do",
+      "In progress",
+      "Done"
+     ]
+    },
+    "retention": "forever",
+    "custom_actions": [
+     {
+      "name": "Duplicate",
+      "who": [
+       "Member"
+      ],
+      "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
+      "result_location": "the same project's task list",
+      "execution": {
+       "op": "clone",
+       "overrides": {
+        "stage": "To do"
+       },
+       "title_column": "title",
+       "title_suffix": " (copy)"
+      }
+     }
+    ],
+    "on_create": [],
+    "id": "pm-teamwork/REC-002"
+   },
+   "Comment": {
+    "fields": {
+     "Body": {
+      "name": "Body",
+      "type": "long_text",
+      "required": "yes",
+      "unique": "no"
+     },
+     "Task": {
+      "name": "Task",
+      "type": "link",
+      "required": "yes",
+      "unique": "no",
+      "target_record": "Task"
+     }
+    },
+    "storage": {
+     "Body": "TEXT",
+     "Task": "FOREIGN_KEY"
+    },
+    "enums": {},
+    "access": {
+     "view": [
+      {
+       "role": "Member",
+       "scope": "all"
+      },
+      {
+       "role": "Guest",
+       "scope": "linked",
+       "via": "comments on tasks the guest can see"
+      }
+     ],
+     "create": [
+      "Member",
+      "Guest"
+     ],
+     "edit": [
+      {
+       "role": "Member",
+       "scope": "own"
+      }
+     ],
+     "delete": [
+      {
+       "role": "Member",
+       "scope": "own"
+      },
+      {
+       "role": "Admin",
+       "scope": "all"
+      }
+     ]
+    },
+    "title_field": "Body",
+    "id_style": {
+     "needed": "no"
+    },
+    "lifecycle": {
+     "has": "no"
+    },
+    "retention": "forever",
+    "custom_actions": [],
+    "on_create": [],
+    "id": "pm-teamwork/REC-003"
+   }
+  },
+  "roles": {
+   "Admin": {
+    "permitted": [
+     {
+      "action": "delete",
+      "record": "Project",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Task",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Comment",
+      "scope": "all"
+     }
+    ],
+    "is_admin": true
+   },
+   "Member": {
+    "permitted": [
+     {
+      "action": "view",
+      "record": "Project",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Project",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Project",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Project",
+      "scope": "own"
+     },
+     {
+      "action": "view",
+      "record": "Task",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Task",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Task",
+      "scope": "all"
+     },
+     {
+      "action": "delete",
+      "record": "Task",
+      "scope": "own"
+     },
+     {
+      "action": "view",
+      "record": "Comment",
+      "scope": "all"
+     },
+     {
+      "action": "create",
+      "record": "Comment",
+      "scope": "all"
+     },
+     {
+      "action": "edit",
+      "record": "Comment",
+      "scope": "own"
+     },
+     {
+      "action": "delete",
+      "record": "Comment",
+      "scope": "own"
+     }
+    ],
+    "is_admin": false
+   },
+   "Guest": {
+    "permitted": [
+     {
+      "action": "view",
+      "record": "Project",
+      "scope": "linked"
+     },
+     {
+      "action": "view",
+      "record": "Task",
+      "scope": "linked"
+     },
+     {
+      "action": "view",
+      "record": "Comment",
+      "scope": "linked"
+     },
+     {
+      "action": "create",
+      "record": "Comment",
+      "scope": "all"
+     }
+    ],
+    "is_admin": false
+   }
+  },
+  "super_role": "Admin",
+  "workflows": {
+   "Task lifecycle": {
+    "trigger": {
+     "kind": "person",
+     "who": [
+      "Member"
+     ],
+     "action": "creating a task (starts in 'To do')"
+    },
+    "stages": [
+     {
+      "id": "pm-teamwork/STG-001",
+      "name": "To do"
+     },
+     {
+      "id": "pm-teamwork/STG-002",
+      "name": "In progress"
+     },
+     {
+      "id": "pm-teamwork/STG-003",
+      "name": "Done"
+     }
+    ],
+    "transitions": [
+     {
+      "from": "To do",
+      "to": "In progress",
+      "mover": "roles",
+      "roles": [
+       "Member"
+      ],
+      "id": "pm-teamwork/TRN-001"
+     },
+     {
+      "from": "In progress",
+      "to": "Done",
+      "mover": "roles",
+      "roles": [
+       "Member"
+      ],
+      "id": "pm-teamwork/TRN-002"
+     },
+     {
+      "from": "Done",
+      "to": "In progress",
+      "mover": "roles",
+      "roles": [
+       "Member"
+      ],
+      "id": "pm-teamwork/TRN-003"
+     },
+     {
+      "from": "In progress",
+      "to": "To do",
+      "mover": "roles",
+      "roles": [
+       "Member"
+      ],
+      "id": "pm-teamwork/TRN-004"
+     }
+    ],
+    "approvals": [],
+    "on_reject": null,
+    "cancel": {
+     "allowed": "no"
+    },
+    "timeouts": [],
+    "effects": [],
+    "initial": "To do",
+    "terminal": [
+     "Done"
+    ]
+   }
+  },
+  "notifications": {
+   "Task assigned": {
+    "trigger": {
+     "kind": "event",
+     "event": "a task's Assignee field is set or changed"
+    },
+    "recipients": [
+     {
+      "kind": "field",
+      "record": "Task",
+      "field": "Assignee"
+     }
+    ],
+    "channels": [
+     "email",
+     "in_app"
+    ],
+    "timing": "immediate",
+    "id": "pm-teamwork/NOTIF-001"
+   },
+   "Task due reminder": {
+    "trigger": {
+     "kind": "relative_to_date",
+     "record": "Task",
+     "date_field": "Due date",
+     "offset": "-24 hours"
+    },
+    "recipients": [
+     {
+      "kind": "field",
+      "record": "Task",
+      "field": "Assignee"
+     }
+    ],
+    "channels": [
+     "email",
+     "in_app"
+    ],
+    "timing": "offset:-24 hours",
+    "id": "pm-teamwork/NOTIF-002"
+   },
+   "New comment": {
+    "trigger": {
+     "kind": "event",
+     "event": "a comment is created on a task"
+    },
+    "recipients": [
+     {
+      "kind": "field",
+      "record": "Task",
+      "field": "Assignee"
+     },
+     {
+      "kind": "owner"
+     }
+    ],
+    "channels": [
+     "in_app"
+    ],
+    "timing": "immediate",
+    "id": "pm-teamwork/NOTIF-003"
+   }
+  },
+  "reports": {
+   "Open tasks by person": {
+    "data_source": "Who is carrying how much open work right now?",
+    "metrics": {
+     "count of Tasks not in stage Done, grouped by Assignee": "auto: count/sum of 'count of Tasks not in stage Done, grouped by Assignee'"
+    },
+    "spec": [
+     {
+      "metric": "count of Tasks not in stage Done, grouped by Assignee",
+      "spec": {
+       "table": "tasks",
+       "aggregation": "count",
+       "group_by": "assignee",
+       "filters": [
+        {
+         "field": "stage",
+         "op": "!=",
+         "value": "Done"
+        }
+       ]
+      }
+     }
+    ],
+    "id": "pm-teamwork/RPT-001"
+   },
+   "Overdue tasks": {
+    "data_source": "What has slipped past its due date and needs chasing?",
+    "metrics": {
+     "count of overdue Tasks": "a Task counts as overdue when Due date is before today AND its stage is not Done, as at the moment the report is viewed"
+    },
+    "spec": [
+     {
+      "metric": "count of overdue Tasks",
+      "spec": {
+       "table": "tasks",
+       "aggregation": "count",
+       "filters": [
+        {
+         "field": "due_date",
+         "op": "before_now"
+        },
+        {
+         "field": "stage",
+         "op": "!=",
+         "value": "Done"
+        }
+       ]
+      }
+     }
+    ],
+    "id": "pm-teamwork/RPT-002"
+   }
+  },
+  "forms": {},
+  "integrations": {},
+  "auth": {
+   "AU.01": [
+    "invited"
+   ],
+   "AU.02": [
+    {
+     "name": "Full name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no"
+    },
+    {
+     "name": "Email address",
+     "type": "email",
+     "required": "yes",
+     "unique": "yes"
+    }
+   ],
+   "AU.03": "yes",
+   "AU.04": [
+    "password",
+    "google"
+   ],
+   "AU.07": {
+    "scope": "nobody",
+    "method": "n/a"
+   },
+   "AU.08": {
+    "attempts": 5,
+    "duration": "15 minutes"
+   },
+   "AU.09": "yes",
+   "AU.10": "30 days",
+   "AU.11": {
+    "allowed": "yes",
+    "by": [
+     "super"
+    ],
+    "auto_triggers": []
+   },
+   "AU.12": {
+    "allowed": "yes",
+    "by": "both",
+    "data": "anonymised"
+   },
+   "AU.13": [
+    "super"
+   ],
+   "AU.14": {
+    "required": "yes",
+    "status": "need_drafting"
+   },
+   "AU.06": {
+    "inviters": [
+     "Admin",
+     "Member"
+    ],
+    "default_role": "Member"
+   }
+  },
+  "brand": {
+   "app_name": null,
+   "assets": null
+  },
+  "screens_inventory": [
+   {
+    "id": "pm-teamwork/SCR-001",
+    "kind": "list",
+    "record": "Project"
+   },
+   {
+    "id": "pm-teamwork/SCR-002",
+    "kind": "detail",
+    "record": "Project"
+   },
+   {
+    "id": "pm-teamwork/SCR-003",
+    "kind": "list",
+    "record": "Task"
+   },
+   {
+    "id": "pm-teamwork/SCR-004",
+    "kind": "detail",
+    "record": "Task"
+   },
+   {
+    "id": "pm-teamwork/SCR-005",
+    "kind": "list",
+    "record": "Comment"
+   },
+   {
+    "id": "pm-teamwork/SCR-006",
+    "kind": "detail",
+    "record": "Comment"
+   },
+   {
+    "id": "pm-teamwork/SCR-007",
+    "kind": "report",
+    "report": "Open tasks by person"
+   },
+   {
+    "id": "pm-teamwork/SCR-008",
+    "kind": "report",
+    "report": "Overdue tasks"
+   }
+  ],
+  "navigation": [
+   "pm-teamwork/SCR-001",
+   "pm-teamwork/SCR-002",
+   "pm-teamwork/SCR-003",
+   "pm-teamwork/SCR-004",
+   "pm-teamwork/SCR-005",
+   "pm-teamwork/SCR-006",
+   "pm-teamwork/SCR-007",
+   "pm-teamwork/SCR-008"
+  ],
+  "landing_per_role": {
+   "Admin": "Projects list",
+   "Member": "My tasks",
+   "Guest": "Projects list"
+  },
+  "actions_inventory": [
+   {
+    "id": "pm-teamwork/ACT-001",
+    "kind": "create",
+    "record": "Project",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "creates a new 'Project' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-002",
+    "kind": "edit",
+    "record": "Project",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "edits an existing 'Project' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-003",
+    "kind": "delete",
+    "record": "Project",
+    "roles": [
+     "Admin",
+     "Member"
+    ],
+    "outcome": "deletes a 'Project' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-004",
+    "kind": "create",
+    "record": "Task",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "creates a new 'Task' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-005",
+    "kind": "edit",
+    "record": "Task",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "edits an existing 'Task' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-006",
+    "kind": "delete",
+    "record": "Task",
+    "roles": [
+     "Admin",
+     "Member"
+    ],
+    "outcome": "deletes a 'Task' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-007",
+    "kind": "custom",
+    "record": "Task",
+    "detail": {
+     "name": "Duplicate",
+     "who": [
+      "Member"
+     ],
+     "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
+     "result_location": "the same project's task list",
+     "execution": {
+      "op": "clone",
+      "overrides": {
+       "stage": "To do"
+      },
+      "title_column": "title",
+      "title_suffix": " (copy)"
+     }
+    },
+    "roles": [
+     "Member"
+    ],
+    "outcome": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title"
+   },
+   {
+    "id": "pm-teamwork/ACT-008",
+    "kind": "create",
+    "record": "Comment",
+    "roles": [
+     "Member",
+     "Guest"
+    ],
+    "outcome": "creates a new 'Comment' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-009",
+    "kind": "edit",
+    "record": "Comment",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "edits an existing 'Comment' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-010",
+    "kind": "delete",
+    "record": "Comment",
+    "roles": [
+     "Admin",
+     "Member"
+    ],
+    "outcome": "deletes a 'Comment' record"
+   },
+   {
+    "id": "pm-teamwork/ACT-011",
+    "kind": "transition",
+    "workflow": "Task lifecycle",
+    "from": "To do",
+    "to": "In progress",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "moves 'Task lifecycle' from 'To do' to 'In progress'"
+   },
+   {
+    "id": "pm-teamwork/ACT-012",
+    "kind": "transition",
+    "workflow": "Task lifecycle",
+    "from": "In progress",
+    "to": "Done",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "moves 'Task lifecycle' from 'In progress' to 'Done'"
+   },
+   {
+    "id": "pm-teamwork/ACT-013",
+    "kind": "transition",
+    "workflow": "Task lifecycle",
+    "from": "Done",
+    "to": "In progress",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "moves 'Task lifecycle' from 'Done' to 'In progress'"
+   },
+   {
+    "id": "pm-teamwork/ACT-014",
+    "kind": "transition",
+    "workflow": "Task lifecycle",
+    "from": "In progress",
+    "to": "To do",
+    "mover": "roles",
+    "roles": [
+     "Member"
+    ],
+    "outcome": "moves 'Task lifecycle' from 'In progress' to 'To do'"
+   }
+  ],
+  "recurring_ops": [
+   {
+    "id": "pm-teamwork/OPS-001",
+    "source": "R.14:Project",
+    "detail": "forever"
+   },
+   {
+    "id": "pm-teamwork/OPS-002",
+    "source": "R.14:Task",
+    "detail": "forever"
+   },
+   {
+    "id": "pm-teamwork/OPS-003",
+    "source": "R.14:Comment",
+    "detail": "forever"
+   },
+   {
+    "id": "pm-teamwork/OPS-004",
+    "source": "FL.01:Task lifecycle",
+    "detail": {
+     "kind": "person",
+     "who": [
+      "Member"
+     ],
+     "action": "creating a task (starts in 'To do')"
+    }
+   },
+   {
+    "id": "pm-teamwork/OPS-005",
+    "source": "N.01:Task assigned",
+    "detail": {
+     "kind": "event",
+     "event": "a task's Assignee field is set or changed"
+    }
+   },
+   {
+    "id": "pm-teamwork/OPS-006",
+    "source": "N.01:Task due reminder",
+    "detail": {
+     "kind": "relative_to_date",
+     "record": "Task",
+     "date_field": "Due date",
+     "offset": "-24 hours"
+    }
+   },
+   {
+    "id": "pm-teamwork/OPS-007",
+    "source": "N.01:New comment",
+    "detail": {
+     "kind": "event",
+     "event": "a comment is created on a task"
+    }
+   },
+   {
+    "id": "pm-teamwork/OPS-008",
+    "source": "RP.08:Open tasks by person",
+    "detail": {
+     "enabled": "no"
+    }
+   },
+   {
+    "id": "pm-teamwork/OPS-009",
+    "source": "RP.08:Overdue tasks",
+    "detail": {
+     "enabled": "no"
+    }
+   }
+  ],
+  "qa_generated_tests": [
+   {
+    "id": "pm-teamwork/QA-001",
+    "action_id": "pm-teamwork/ACT-001",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-001",
+     "kind": "create",
+     "record": "Project",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "creates a new 'Project' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-002",
+    "action_id": "pm-teamwork/ACT-002",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-002",
+     "kind": "edit",
+     "record": "Project",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "edits an existing 'Project' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-003",
+    "action_id": "pm-teamwork/ACT-003",
+    "role": "Admin",
+    "action": {
+     "id": "pm-teamwork/ACT-003",
+     "kind": "delete",
+     "record": "Project",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Project' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-004",
+    "action_id": "pm-teamwork/ACT-003",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-003",
+     "kind": "delete",
+     "record": "Project",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Project' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-005",
+    "action_id": "pm-teamwork/ACT-004",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-004",
+     "kind": "create",
+     "record": "Task",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "creates a new 'Task' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-006",
+    "action_id": "pm-teamwork/ACT-005",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-005",
+     "kind": "edit",
+     "record": "Task",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "edits an existing 'Task' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-007",
+    "action_id": "pm-teamwork/ACT-006",
+    "role": "Admin",
+    "action": {
+     "id": "pm-teamwork/ACT-006",
+     "kind": "delete",
+     "record": "Task",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Task' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-008",
+    "action_id": "pm-teamwork/ACT-006",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-006",
+     "kind": "delete",
+     "record": "Task",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Task' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-009",
+    "action_id": "pm-teamwork/ACT-007",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-007",
+     "kind": "custom",
+     "record": "Task",
+     "detail": {
+      "name": "Duplicate",
+      "who": [
+       "Member"
+      ],
+      "effect": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title",
+      "result_location": "the same project's task list",
+      "execution": {
+       "op": "clone",
+       "overrides": {
+        "stage": "To do"
+       },
+       "title_column": "title",
+       "title_suffix": " (copy)"
+      }
+     },
+     "roles": [
+      "Member"
+     ],
+     "outcome": "creates a copy of the task in stage 'To do' with '(copy)' appended to the title"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-010",
+    "action_id": "pm-teamwork/ACT-008",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-008",
+     "kind": "create",
+     "record": "Comment",
+     "roles": [
+      "Member",
+      "Guest"
+     ],
+     "outcome": "creates a new 'Comment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-011",
+    "action_id": "pm-teamwork/ACT-008",
+    "role": "Guest",
+    "action": {
+     "id": "pm-teamwork/ACT-008",
+     "kind": "create",
+     "record": "Comment",
+     "roles": [
+      "Member",
+      "Guest"
+     ],
+     "outcome": "creates a new 'Comment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-012",
+    "action_id": "pm-teamwork/ACT-009",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-009",
+     "kind": "edit",
+     "record": "Comment",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "edits an existing 'Comment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-013",
+    "action_id": "pm-teamwork/ACT-010",
+    "role": "Admin",
+    "action": {
+     "id": "pm-teamwork/ACT-010",
+     "kind": "delete",
+     "record": "Comment",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Comment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-014",
+    "action_id": "pm-teamwork/ACT-010",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-010",
+     "kind": "delete",
+     "record": "Comment",
+     "roles": [
+      "Admin",
+      "Member"
+     ],
+     "outcome": "deletes a 'Comment' record"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-015",
+    "action_id": "pm-teamwork/ACT-011",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-011",
+     "kind": "transition",
+     "workflow": "Task lifecycle",
+     "from": "To do",
+     "to": "In progress",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "moves 'Task lifecycle' from 'To do' to 'In progress'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-016",
+    "action_id": "pm-teamwork/ACT-012",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-012",
+     "kind": "transition",
+     "workflow": "Task lifecycle",
+     "from": "In progress",
+     "to": "Done",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "moves 'Task lifecycle' from 'In progress' to 'Done'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-017",
+    "action_id": "pm-teamwork/ACT-013",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-013",
+     "kind": "transition",
+     "workflow": "Task lifecycle",
+     "from": "Done",
+     "to": "In progress",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "moves 'Task lifecycle' from 'Done' to 'In progress'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-018",
+    "action_id": "pm-teamwork/ACT-014",
+    "role": "Member",
+    "action": {
+     "id": "pm-teamwork/ACT-014",
+     "kind": "transition",
+     "workflow": "Task lifecycle",
+     "from": "In progress",
+     "to": "To do",
+     "mover": "roles",
+     "roles": [
+      "Member"
+     ],
+     "outcome": "moves 'Task lifecycle' from 'In progress' to 'To do'"
+    },
+    "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+   },
+   {
+    "id": "pm-teamwork/QA-019",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-001",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-020",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-002",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-021",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-003",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-022",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-004",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-023",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-005",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-024",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-006",
+    "role": "Admin",
+    "expect": "blocked (403 or absent from navigation)"
+   },
+   {
+    "id": "pm-teamwork/QA-025",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-007",
+    "role": "Admin",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-026",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-008",
+    "role": "Admin",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-027",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-001",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-028",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-002",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-029",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-003",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-030",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-004",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-031",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-005",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-032",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-006",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-033",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-007",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-034",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-008",
+    "role": "Member",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-035",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-001",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-036",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-002",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-037",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-003",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-038",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-004",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-039",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-005",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-040",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-006",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-041",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-007",
+    "role": "Guest",
+    "expect": "reachable"
+   },
+   {
+    "id": "pm-teamwork/QA-042",
+    "kind": "screen_access",
+    "screen_id": "pm-teamwork/SCR-008",
+    "role": "Guest",
+    "expect": "reachable"
+   }
+  ],
+  "locked": true,
+  "locked_at_graph_version": "3.0"
+ },
+ "front_door": {
+  "answers": {
+   "does": "Run my small team's projects: tasks, who's doing what, and whether it's actually done.",
+   "cards": [
+    "work"
+   ],
+   "who": "small_team",
+   "look": "console",
+   "density": "balanced",
+   "mark": "grid",
+   "name": "Teamwork Desk"
+  },
+  "filled_without_asking": [
+   [
+    "0.01",
+    "You decide the product; the plumbing is proposed and shown to you at the end."
+   ],
+   [
+    "A.02",
+    "Taken from what you said the app should do."
+   ],
+   [
+    "A.03",
+    "Taken from who you said uses it."
+   ],
+   [
+    "A.04",
+    "Taken from what you said the app should do."
+   ],
+   [
+    "A.12",
+    "Nothing is being imported from an old system. Say so and this changes."
+   ],
+   [
+    "A.13",
+    "Dates, money and times use Australian English."
+   ],
+   [
+    "A.14",
+    "Nothing about this app works differently from the normal way."
+   ],
+   [
+    "C.01",
+    "No other app's look is being copied."
+   ],
+   [
+    "C.02",
+    "Taken from the look you picked."
+   ],
+   [
+    "C.07",
+    "The menu is the order the screens were built in."
+   ],
+   [
+    "Z.01",
+    "What the app does on its own is listed in your summary."
+   ],
+   [
+    "Z.02",
+    "Every button and where its result lands is listed in your summary."
+   ],
+   [
+    "Z.03",
+    "Every screen and who can open it is listed in your summary."
+   ]
+  ],
+  "note": "Built by packages/frontdoor/intake.py from eight answers."
+ }
+}

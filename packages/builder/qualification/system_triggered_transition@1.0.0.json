@@ -1,0 +1,437 @@
+{
+ "part_id": "system_triggered_transition",
+ "version": "1.0.0",
+ "revision": "da71c672cb598389",
+ "qualified_at": "2026-09-06T00:45:36+00:00",
+ "base_url": "http://127.0.0.1:38847",
+ "journeys": [
+  {
+   "journey": "gated_system_move_is_visible_on_the_screen",
+   "subject": "command-desk/TRN-001",
+   "parts": [
+    "system_triggered_transition",
+    "stage_approval_gate"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/agents",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'the agent stops and reports that it stopped, why, and what it could be doing instead' ('running' -> 'stopped-and-reported')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "running",
+       "to": "stopped-and-reported",
+       "effects": [],
+       "notified": [
+        {
+         "notification": "Agent stopped",
+         "id": "command-desk/NOTIF-001",
+         "to": [
+          "Sam"
+         ],
+         "declared_channels": [
+          "in_app",
+          "email"
+         ],
+         "delivered_by": "in_app only \u2014 no mail or SMS provider is connected"
+        }
+       ]
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'the agent is switched back on (On = yes)' ('stopped-and-reported' -> 'running')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "stopped-and-reported",
+       "to": "running",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'the agent stops and reports that it stopped, why, and what it could be doing instead' ('running' -> 'stopped-and-reported')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "running",
+       "to": "stopped-and-reported",
+       "effects": [],
+       "notified": [
+        {
+         "notification": "Agent stopped",
+         "id": "command-desk/NOTIF-001",
+         "to": [
+          "Sam"
+         ],
+         "declared_channels": [
+          "in_app",
+          "email"
+         ],
+         "delivered_by": "in_app only \u2014 no mail or SMS provider is connected"
+        }
+       ]
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "open detail command-desk/SCR-002",
+     "observed": "stage shown as 'stopped-and-reported'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "gated_system_move_is_visible_on_the_screen",
+   "subject": "command-desk/TRN-004",
+   "parts": [
+    "system_triggered_transition",
+    "stage_approval_gate"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/conversations",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'the thread carries something Sam has not read that Hub judges he needs to see' ('open' -> 'needs attention')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "open",
+       "to": "needs attention",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'Sam has read it and nothing on it is outstanding' ('needs attention' -> 'closed')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "needs attention",
+       "to": "closed",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "open detail command-desk/SCR-004",
+     "observed": "stage shown as 'closed'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "gated_system_move_is_visible_on_the_screen",
+   "subject": "command-desk/TRN-007",
+   "parts": [
+    "system_triggered_transition",
+    "stage_approval_gate"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/jobs",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'the agent picks the job up' ('queued' -> 'running')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "queued",
+       "to": "running",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'the agent finishes and writes a real result' ('running' -> 'done')",
+     "observed": {
+      "status": 409,
+      "body": {
+       "error": "jobs 38a15cc6-e3c9-4b74-a363-0e2fe1d57777 is waiting in 'running' for ['Sam'] to approve",
+       "waiting_for_approval": true
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "declared approver 'Sam' presses Approve on command-desk/SCR-006 at gated stage 'running'",
+     "observed": "Done."
+    },
+    {
+     "channel": "api",
+     "action": "system event 'the agent finishes and writes a real result' again",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "running",
+       "to": "done",
+       "effects": [],
+       "notified": [
+        {
+         "notification": "Job done",
+         "id": "command-desk/NOTIF-003",
+         "to": [
+          "Sam"
+         ],
+         "declared_channels": [
+          "in_app",
+          "email"
+         ],
+         "delivered_by": "in_app only \u2014 no mail or SMS provider is connected"
+        }
+       ]
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "open detail command-desk/SCR-006",
+     "observed": "stage shown as 'done'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "gated_system_move_is_visible_on_the_screen",
+   "subject": "command-desk/TRN-012",
+   "parts": [
+    "system_triggered_transition",
+    "stage_approval_gate"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/projects",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'Sam marks the goal met and no job under the project is queued or running' ('active' -> 'finished')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "active",
+       "to": "finished",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "open detail command-desk/SCR-008",
+     "observed": "stage shown as 'finished'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "gated_system_move_is_visible_on_the_screen",
+   "subject": "command-desk/TRN-013",
+   "parts": [
+    "system_triggered_transition",
+    "stage_approval_gate"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/linked_services",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'a real call to the service is refused because its token or key is no longer valid' ('connected' -> 'expired')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "connected",
+       "to": "expired",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'the service is reconnected and a real call to it succeeds' ('expired' -> 'connected')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "expired",
+       "to": "connected",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'a real call to the service is refused because its token or key is no longer valid' ('connected' -> 'expired')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "connected",
+       "to": "expired",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'the service is reconnected and a real call to it succeeds' ('expired' -> 'connected')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "expired",
+       "to": "connected",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "open detail command-desk/SCR-012",
+     "observed": "stage shown as 'connected'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "gated_system_move_is_visible_on_the_screen",
+   "subject": "command-desk/TRN-017",
+   "parts": [
+    "system_triggered_transition",
+    "stage_approval_gate"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/documents",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'Hands fills the fields it can' ('received' -> 'filled')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "received",
+       "to": "filled",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'Sam approves at the Trust Gate' ('filled' -> 'signed')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "filled",
+       "to": "signed",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "system event 'the completed copy is written and attested' ('signed' -> 'done')",
+     "observed": {
+      "status": 200,
+      "body": {
+       "from": "signed",
+       "to": "done",
+       "effects": [],
+       "notified": []
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "open detail command-desk/SCR-014",
+     "observed": "stage shown as 'done'"
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

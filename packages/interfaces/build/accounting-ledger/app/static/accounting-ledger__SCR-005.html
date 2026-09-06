@@ -1,0 +1,34 @@
+<!doctype html>
+<title>Invoice lines</title>
+<style>body{font-family:system-ui,sans-serif;max-width:800px;margin:40px auto}
+table{border-collapse:collapse;width:100%} td,th{border:1px solid #ccc;padding:6px}body{margin:0}.app-header{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid #ddd;font-family:system-ui,sans-serif}.app-mark{width:28px;height:28px}.app-name{font-weight:600}</style>
+<header class="app-header"><span class="app-name">Ledger</span></header><h1>Invoice lines</h1>
+<div id="state">Loading…</div>
+<table id="rows" hidden><thead><tr><th>Invoice</th><th>Description</th><th>Quantity</th><th>Unit amount</th></tr></thead><tbody></tbody></table>
+<script>
+const FIELD_KEYS = ["invoice", "description", "quantity", "unit_amount"];
+async function load() {
+  const state = document.getElementById('state');
+  const table = document.getElementById('rows');
+  try {
+    const res = await fetch('/api/invoice_lines');
+    if (!res.ok) throw new Error('bad status');
+    const rows = await res.json();
+    if (!rows.length) { state.textContent = 'No invoice lines yet.'; return; }
+    const body = table.querySelector('tbody');
+    for (const r of rows) {
+      const tr = document.createElement('tr');
+      for (const key of FIELD_KEYS) {
+        const td = document.createElement('td');
+        td.textContent = r[key] ?? '';
+        tr.appendChild(td);
+      }
+      body.appendChild(tr);
+    }
+    state.hidden = true; table.hidden = false;
+  } catch (e) {
+    state.textContent = 'Cannot reach server';
+  }
+}
+load();
+</script>

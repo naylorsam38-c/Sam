@@ -1,0 +1,124 @@
+BINDING CHECK: BOUND-COMMAND-DESK (customer_complete=False)
+PASS command-desk/SCR-001 (screen/list): crud_list_detail
+PASS command-desk/SCR-002 (screen/detail): crud_list_detail
+PASS command-desk/SCR-003 (screen/list): crud_list_detail
+PASS command-desk/SCR-004 (screen/detail): crud_list_detail
+PASS command-desk/SCR-005 (screen/list): crud_list_detail
+PASS command-desk/SCR-006 (screen/detail): crud_list_detail
+PASS command-desk/SCR-007 (screen/list): crud_list_detail
+PASS command-desk/SCR-008 (screen/detail): crud_list_detail
+PASS command-desk/SCR-009 (screen/list): crud_list_detail
+PASS command-desk/SCR-010 (screen/detail): crud_list_detail
+PASS command-desk/SCR-011 (screen/list): crud_list_detail
+PASS command-desk/SCR-012 (screen/detail): crud_list_detail
+PASS command-desk/SCR-013 (screen/list): crud_list_detail
+PASS command-desk/SCR-014 (screen/detail): crud_list_detail
+PASS command-desk/SCR-015 (screen/form): form_render_submit
+PASS command-desk/SCR-016 (screen/form): form_render_submit
+PASS command-desk/SCR-017 (screen/form): form_render_submit
+PASS command-desk/SCR-018 (screen/report): reporting_engine
+PASS command-desk/SCR-019 (screen/report): reporting_engine
+PASS command-desk/SCR-020 (screen/integration_status): oauth_connect
+PASS command-desk/SCR-021 (screen/integration_status): oauth_connect
+PASS command-desk/SCR-022 (screen/integration_status): api_key_connect
+PASS command-desk/SCR-023 (screen/integration_status): api_key_connect
+PASS command-desk/ACT-001 (action/create): crud_list_detail
+PASS command-desk/ACT-002 (action/edit): crud_list_detail
+PASS command-desk/ACT-003 (action/delete): crud_list_detail
+PASS command-desk/ACT-004 (action/custom): custom_action_execution
+PASS command-desk/ACT-005 (action/create): crud_list_detail
+PASS command-desk/ACT-006 (action/edit): crud_list_detail
+PASS command-desk/ACT-007 (action/delete): crud_list_detail
+PASS command-desk/ACT-008 (action/create): crud_list_detail
+PASS command-desk/ACT-009 (action/edit): crud_list_detail
+PASS command-desk/ACT-010 (action/delete): crud_list_detail
+PASS command-desk/ACT-011 (action/custom): custom_action_execution
+PASS command-desk/ACT-012 (action/create): crud_list_detail
+PASS command-desk/ACT-013 (action/edit): crud_list_detail
+PASS command-desk/ACT-014 (action/delete): crud_list_detail
+PASS command-desk/ACT-015 (action/create): crud_list_detail
+PASS command-desk/ACT-016 (action/edit): crud_list_detail
+PASS command-desk/ACT-017 (action/delete): crud_list_detail
+PASS command-desk/ACT-018 (action/create): crud_list_detail
+PASS command-desk/ACT-019 (action/edit): crud_list_detail
+PASS command-desk/ACT-020 (action/delete): crud_list_detail
+PASS command-desk/ACT-021 (action/create): crud_list_detail
+PASS command-desk/ACT-022 (action/edit): crud_list_detail
+PASS command-desk/ACT-023 (action/delete): crud_list_detail
+PASS command-desk/ACT-024 (action/custom): preserved_original_document_store
+PASS command-desk/ACT-025 (action/transition): system_triggered_transition
+PASS command-desk/ACT-026 (action/transition): system_triggered_transition
+PASS command-desk/ACT-027 (action/transition): system_triggered_transition
+PASS command-desk/ACT-028 (action/transition): system_triggered_transition
+PASS command-desk/ACT-029 (action/transition): system_triggered_transition
+PASS command-desk/ACT-030 (action/transition): system_triggered_transition
+PASS command-desk/ACT-031 (action/transition): system_triggered_transition
+PASS command-desk/ACT-032 (action/transition): system_triggered_transition
+PASS command-desk/ACT-033 (action/transition): system_triggered_transition
+PASS command-desk/ACT-034 (action/approve): stage_approval_gate
+PASS command-desk/ACT-035 (action/transition): workflow_executor
+PASS command-desk/ACT-036 (action/transition): workflow_executor
+PASS command-desk/ACT-037 (action/transition): system_triggered_transition
+PASS command-desk/ACT-038 (action/transition): system_triggered_transition
+PASS command-desk/ACT-039 (action/transition): system_triggered_transition
+PASS command-desk/ACT-040 (action/transition): workflow_executor
+PASS command-desk/ACT-041 (action/transition): workflow_executor
+PASS command-desk/ACT-042 (action/transition): document_field_detection, value_provenance
+PASS command-desk/ACT-043 (action/transition): trust_gate_approval
+PASS command-desk/ACT-044 (action/transition): preserved_original_document_store
+PASS command-desk/ACT-045 (action/submit): form_render_submit
+PASS command-desk/ACT-046 (action/submit): form_render_submit
+PASS command-desk/ACT-047 (action/submit): form_render_submit
+PASS NTF:Agent stopped (notification): notification_delivery
+PASS NTF:Job failed (notification): notification_delivery
+PASS NTF:Job done (notification): notification_delivery
+PASS NTF:Approval needed (notification): notification_delivery
+PASS RPT:Activity per agent (report): reporting_engine
+PASS RPT:Cost (report): reporting_engine
+PASS command-desk/OPS-001 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-002 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-003 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-004 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-005 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-006 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-007 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-008 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-009 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-010 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-011 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-012 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-013 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-014 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-015 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-016 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-017 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-018 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-019 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-020 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-021 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-022 (recurring_op): scheduled_jobs
+PASS command-desk/OPS-023 (recurring_op): scheduled_jobs
+FAIL command-desk/IFC-001 (interface): no interface chosen yet -- the front door has not run for this instance
+---
+99/100 PASS, 1 FAIL
+NOT CLEAN -- 1 item(s) unbound
+
+QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
+QUALIFIED api_key_connect@1.0.0 (PRODUCT_QUALIFIED) at 7b5afa7a951e53ee
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b
+QUALIFIED custom_action_execution@1.1.0 (PRODUCT_QUALIFIED) at 177cfc2d6d4d4a01
+UNQUALIFIED document_field_detection@1.0.0: status TESTED
+QUALIFIED form_render_submit@1.0.0 (PRODUCT_QUALIFIED) at cfb66ed4a56c85df
+UNQUALIFIED notification_delivery@1.0.0: status TESTED
+QUALIFIED oauth_connect@1.0.0 (PRODUCT_QUALIFIED) at deb7b65f11d7715d
+UNQUALIFIED preserved_original_document_store@1.0.0: status TESTED
+QUALIFIED reporting_engine@1.0.0 (PRODUCT_QUALIFIED) at a0de07a247bf355b
+UNQUALIFIED scheduled_jobs@1.0.0: status TESTED
+QUALIFIED stage_approval_gate@1.0.0 (PRODUCT_QUALIFIED) at e05ac2be0b3c4cc8
+QUALIFIED system_triggered_transition@1.0.0 (PRODUCT_QUALIFIED) at da71c672cb598389
+UNQUALIFIED trust_gate_approval@1.0.0: status TESTED
+UNQUALIFIED value_provenance@1.0.0: status TESTED
+QUALIFIED workflow_executor@1.0.0 (PRODUCT_QUALIFIED) at e1e8908c90f7f1fb
+---
+9/15 parts qualified at their pinned revision, 6 problem(s)
+QUALIFICATION NOT CLEAN -- 6 part(s) unqualified, drifted or missing

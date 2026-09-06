@@ -1,0 +1,390 @@
+{
+ "family": "booking-frontdesk",
+ "spec_id": "SPEC-BOOKING-FRONTDESK-REF",
+ "app_name": "Front Desk",
+ "roles": [
+  "Owner",
+  "Staff"
+ ],
+ "role_admin": {
+  "Owner": true,
+  "Staff": false
+ },
+ "super_role": "Owner",
+ "records": {
+  "Service": {
+   "table": "services",
+   "title_field": "Name",
+   "fields": [
+    {
+     "name": "Name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "name"
+    },
+    {
+     "name": "Description",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "description"
+    },
+    {
+     "name": "Duration minutes",
+     "type": "whole_number",
+     "required": "yes",
+     "unique": "no",
+     "slug": "duration_minutes"
+    },
+    {
+     "name": "Price",
+     "type": "money",
+     "required": "yes",
+     "unique": "no",
+     "slug": "price"
+    },
+    {
+     "name": "Deposit required",
+     "type": "yes_no",
+     "required": "yes",
+     "unique": "no",
+     "slug": "deposit_required"
+    },
+    {
+     "name": "Deposit amount",
+     "type": "money",
+     "required": "no",
+     "unique": "no",
+     "slug": "deposit_amount"
+    }
+   ],
+   "access": {
+    "view": [
+     "Staff",
+     "public"
+    ],
+    "create": [
+     "Owner"
+    ],
+    "edit": [
+     "Owner"
+    ],
+    "delete": [
+     "Owner"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Customer": {
+   "table": "customers",
+   "title_field": "Full name",
+   "fields": [
+    {
+     "name": "Full name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "full_name"
+    },
+    {
+     "name": "Email",
+     "type": "email",
+     "required": "yes",
+     "unique": "yes",
+     "slug": "email"
+    },
+    {
+     "name": "Phone",
+     "type": "phone",
+     "required": "yes",
+     "unique": "no",
+     "slug": "phone"
+    },
+    {
+     "name": "Notes",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "notes"
+    }
+   ],
+   "access": {
+    "view": [
+     "Staff"
+    ],
+    "create": [
+     "Staff",
+     "public"
+    ],
+    "edit": [
+     "Staff"
+    ],
+    "delete": [
+     "Owner"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Appointment": {
+   "table": "appointments",
+   "title_field": "Start",
+   "fields": [
+    {
+     "name": "Service",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Service",
+     "slug": "service"
+    },
+    {
+     "name": "Customer",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Customer",
+     "slug": "customer"
+    },
+    {
+     "name": "Staff member",
+     "type": "other",
+     "required": "yes",
+     "unique": "no",
+     "custom_rule": "reference to a user account (pick-a-person field)",
+     "slug": "staff_member"
+    },
+    {
+     "name": "Start",
+     "type": "date_time",
+     "required": "yes",
+     "unique": "no",
+     "slug": "start"
+    },
+    {
+     "name": "Notes",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "notes"
+    },
+    {
+     "name": "Deposit paid",
+     "type": "yes_no",
+     "required": "no",
+     "unique": "no",
+     "slug": "deposit_paid"
+    }
+   ],
+   "access": {
+    "view": [
+     "Staff"
+    ],
+    "create": [
+     "Staff",
+     "public"
+    ],
+    "edit": [
+     "Staff"
+    ],
+    "delete": [
+     "Owner"
+    ]
+   },
+   "has_stage": true,
+   "workflow": "Appointment lifecycle",
+   "custom_actions": [],
+   "on_create": []
+  }
+ },
+ "workflows": {
+  "Appointment lifecycle": {
+   "stages": [
+    "Booked",
+    "Confirmed",
+    "Completed",
+    "Cancelled",
+    "No-show"
+   ],
+   "initial": "Booked",
+   "terminal": [
+    "Completed",
+    "Cancelled",
+    "No-show"
+   ],
+   "transitions": [
+    {
+     "from": "Booked",
+     "to": "Confirmed",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ]
+    },
+    {
+     "from": "Confirmed",
+     "to": "Completed",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ]
+    },
+    {
+     "from": "Confirmed",
+     "to": "No-show",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ]
+    },
+    {
+     "from": "Booked",
+     "to": "Cancelled",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ]
+    },
+    {
+     "from": "Confirmed",
+     "to": "Cancelled",
+     "mover": "roles",
+     "roles": [
+      "Staff"
+     ]
+    }
+   ],
+   "approvals": [],
+   "on_reject": null,
+   "effects": []
+  }
+ },
+ "forms": {
+  "Public booking form": {
+   "record": "Appointment",
+   "slug": "public_booking_form",
+   "fields": [
+    "service",
+    "customer",
+    "staff_member",
+    "start",
+    "notes",
+    "deposit_paid"
+   ]
+  }
+ },
+ "reports": {
+  "Upcoming appointments": {
+   "slug": "upcoming_appointments",
+   "question": "What's booked for the coming days, per staff member?",
+   "metrics": [
+    "count of Appointments in stage Booked or Confirmed"
+   ],
+   "specs": [
+    {
+     "metric": "count of Appointments in stage Booked or Confirmed",
+     "spec": {
+      "table": "appointments",
+      "aggregation": "count",
+      "filters": [
+       {
+        "field": "stage",
+        "op": "in",
+        "value": [
+         "Booked",
+         "Confirmed"
+        ]
+       },
+       {
+        "field": "start",
+        "op": "within_next_days",
+        "value": 7
+       }
+      ]
+     }
+    }
+   ]
+  },
+  "No-show rate": {
+   "slug": "no_show_rate",
+   "question": "How often do customers fail to turn up?",
+   "metrics": [
+    "no-show rate"
+   ],
+   "specs": [
+    {
+     "metric": "no-show rate",
+     "spec": {
+      "engine": "stage_history",
+      "kind": "rate_over_last_days",
+      "table": "appointments",
+      "numerator_stage": "No-show",
+      "denominator_stages": [
+       "Completed",
+       "No-show"
+      ],
+      "days": 30
+     }
+    }
+   ]
+  }
+ },
+ "landing_per_role": {
+  "Owner": "Calendar",
+  "Staff": "Calendar"
+ },
+ "screens": [
+  {
+   "id": "booking-frontdesk/SCR-001",
+   "kind": "list",
+   "record": "Service"
+  },
+  {
+   "id": "booking-frontdesk/SCR-002",
+   "kind": "detail",
+   "record": "Service"
+  },
+  {
+   "id": "booking-frontdesk/SCR-003",
+   "kind": "list",
+   "record": "Customer"
+  },
+  {
+   "id": "booking-frontdesk/SCR-004",
+   "kind": "detail",
+   "record": "Customer"
+  },
+  {
+   "id": "booking-frontdesk/SCR-005",
+   "kind": "list",
+   "record": "Appointment"
+  },
+  {
+   "id": "booking-frontdesk/SCR-006",
+   "kind": "detail",
+   "record": "Appointment"
+  },
+  {
+   "id": "booking-frontdesk/SCR-007",
+   "kind": "form",
+   "record": "Appointment",
+   "form": "Public booking form"
+  },
+  {
+   "id": "booking-frontdesk/SCR-008",
+   "kind": "report",
+   "report": "Upcoming appointments"
+  },
+  {
+   "id": "booking-frontdesk/SCR-009",
+   "kind": "report",
+   "report": "No-show rate"
+  }
+ ]
+}

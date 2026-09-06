@@ -1,0 +1,40 @@
+<!doctype html>
+<title>Projects</title>
+<style>body{font-family:system-ui,sans-serif;max-width:800px;margin:40px auto}
+table{border-collapse:collapse;width:100%} td,th{border:1px solid #ccc;padding:6px}body{margin:0}.app-header{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid #ddd;font-family:system-ui,sans-serif}.app-mark{width:28px;height:28px}.app-name{font-weight:600}</style>
+<header class="app-header"><svg class="app-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect x="8" y="8" width="20" height="20" rx="3" fill="#2F6B4F"/>
+  <rect x="36" y="8" width="20" height="20" rx="3" fill="#2F6B4F" opacity="0.55"/>
+  <rect x="8" y="36" width="20" height="20" rx="3" fill="#2F6B4F" opacity="0.55"/>
+  <rect x="36" y="36" width="20" height="20" rx="3" fill="#2F6B4F"/>
+</svg>
+<span class="app-name">Teamwork Desk (Grid mark)</span></header><h1>Projects</h1>
+<div id="state">Loading…</div>
+<table id="rows" hidden><thead><tr><th>Name</th><th>Description</th><th>Owner</th><th>Due date</th><th>Colour</th></tr></thead><tbody></tbody></table>
+<script>
+const FIELD_KEYS = ["name", "description", "owner", "due_date", "colour"];
+async function load() {
+  const state = document.getElementById('state');
+  const table = document.getElementById('rows');
+  try {
+    const res = await fetch('/api/projects');
+    if (!res.ok) throw new Error('bad status');
+    const rows = await res.json();
+    if (!rows.length) { state.textContent = 'No projects yet.'; return; }
+    const body = table.querySelector('tbody');
+    for (const r of rows) {
+      const tr = document.createElement('tr');
+      for (const key of FIELD_KEYS) {
+        const td = document.createElement('td');
+        td.textContent = r[key] ?? '';
+        tr.appendChild(td);
+      }
+      body.appendChild(tr);
+    }
+    state.hidden = true; table.hidden = false;
+  } catch (e) {
+    state.textContent = 'Cannot reach server';
+  }
+}
+load();
+</script>

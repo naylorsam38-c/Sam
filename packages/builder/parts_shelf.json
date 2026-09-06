@@ -1,0 +1,929 @@
+{
+ "schema_version": "1.0",
+ "policy": {
+  "a_part_is_runnable_code": true,
+  "no_stubs_no_placeholders": true,
+  "reuse_before_rewrite": true,
+  "builder_never_writes_a_part_during_a_job": true
+ },
+ "parts": [
+  {
+   "part_id": "crud_list_detail",
+   "kind": [
+    "screen/list",
+    "screen/detail",
+    "action/create",
+    "action/edit",
+    "action/delete"
+   ],
+   "what_it_does": "Real record CRUD: sqlite table + /api/<record>s routes (list/get/create/update/delete), plus one real list HTML page and one real detail HTML page per record, gated by the record's own real access grants.",
+   "location": [
+    "packages/builder/builder.py::build_schema",
+    "packages/builder/builder.py::crud_routes",
+    "packages/builder/builder.py::render_crud_handler",
+    "packages/builder/builder.py::_render_list_screen",
+    "packages/builder/builder.py::_render_detail_screen"
+   ],
+   "reused_from": "already the Builder's own real generation rule -- exercised by every 'PASS ... existing Builder rule' item; not written for this task",
+   "evidence": "tests/test_builder.py::test_builder_builds_real_crud_and_it_works_against_a_live_server (real sqlite3 + real HTTP against a live server)",
+   "version": "1.1.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "389773506209779b",
+   "provenance": {
+    "read_from": [
+     "Asana",
+     "Pipedrive",
+     "Acuity Scheduling",
+     "Odoo core",
+     "Xero core"
+    ],
+    "implementation": "the Builder's own generation rule; original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "form_submit_lands_in_list_and_detail"
+   ]
+  },
+  {
+   "part_id": "oauth_connect",
+   "kind": [
+    "screen/integration_status",
+    "action/connect"
+   ],
+   "what_it_does": "Real OAuth start/callback/status routes and one real integration-status HTML page, for any integration whose provider resolves to a real, publicly documented endpoint (OAUTH_PROVIDERS).",
+   "location": [
+    "packages/builder/builder.py::oauth_routes",
+    "packages/builder/builder.py::render_oauth_handler",
+    "packages/builder/builder.py::_render_integration_screen",
+    "packages/builder/builder.py::_resolve_provider"
+   ],
+   "reused_from": "already the Builder's own real generation rule; not written for this task",
+   "evidence": "tests/test_builder.py::test_builder_builds_the_real_command_desk_oauth_feature (real 302 to accounts.google.com)",
+   "version": "1.0.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "deb7b65f11d7715d",
+   "provenance": {
+    "read_from": [
+     "Acuity Scheduling",
+     "Xero core"
+    ],
+    "implementation": "the Builder's own generation rule; original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "oauth_connect_click_reaches_provider"
+   ]
+  },
+  {
+   "part_id": "api_key_connect",
+   "kind": [
+    "screen/integration_status (auth: api_key)",
+    "action/connect (auth: api_key)"
+   ],
+   "what_it_does": "A linked service that authenticates with a pasted key: a real key field on a real screen, a real POST that stores the key, and a status route that reports connected without ever echoing the key back.",
+   "location": [
+    "packages/builder/builder.py::api_key_routes",
+    "packages/builder/builder.py::render_api_key_handler",
+    "packages/builder/builder.py::_render_api_key_screen"
+   ],
+   "reused_from": "already the Builder's own real generation rule (written for Command Desk's Tavily and model-provider connections); registered here because it was generating real screens and routes while absent from the shelf, so the manifest of a built app could not name it",
+   "evidence": "tests/test_command_desk_app_live.py::test_a_pasted_api_key_is_stored_and_never_echoed (real HTTP against the live app)",
+   "version": "1.0.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "7b5afa7a951e53ee",
+   "provenance": {
+    "read_from": [
+     "Command Desk interview answers (Tavily, model providers)"
+    ],
+    "implementation": "the Builder's own generation rule; original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "api_key_screen_connects_never_echoes"
+   ]
+  },
+  {
+   "part_id": "record_cloning",
+   "kind": [
+    "action/custom:Duplicate"
+   ],
+   "what_it_does": "Copies a real sqlite row into a new row with named columns overridden and a title suffixed.",
+   "location": [
+    "packages/builder/engines/record_cloning.py::clone"
+   ],
+   "reused_from": "built and proven earlier in this session; not rewritten",
+   "evidence": "packages/builder/PROOFS.md#record_cloning",
+   "version": "1.0.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "c9f8c783994f80c1",
+   "provenance": {
+    "read_from": [
+     "Asana"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "clone_appears_in_the_list_screen"
+   ]
+  },
+  {
+   "part_id": "stage_history",
+   "kind": [
+    "report:Win rate",
+    "report:No-show rate",
+    "report:Sales by month"
+   ],
+   "what_it_does": "Records the real timestamp a record entered a stage; computes rate-over-a-period metrics from that history.",
+   "location": [
+    "packages/builder/engines/stage_history.py::record_transition",
+    "packages/builder/engines/stage_history.py::entered_at",
+    "packages/builder/engines/stage_history.py::rate_between",
+    "packages/builder/engines/stage_history.py::rate_over_last_days",
+    "packages/builder/engines/stage_history.py::line_value_by_month"
+   ],
+   "reused_from": "built and proven earlier in this session; not rewritten",
+   "evidence": "packages/builder/PROOFS.md#stage_history",
+   "version": "1.1.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "a2820dad41d0c83c",
+   "provenance": {
+    "read_from": [
+     "Pipedrive",
+     "Odoo core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "rate_report_reflects_the_moves_made_on_the_screen"
+   ]
+  },
+  {
+   "part_id": "stage_conditional_requiredness",
+   "kind": [
+    "validation:Lost reason"
+   ],
+   "what_it_does": "Enforces 'field X required only once stage Y' at write time.",
+   "location": [
+    "packages/builder/engines/stage_conditional_requiredness.py::validate"
+   ],
+   "reused_from": "built and proven earlier in this session; not rewritten",
+   "evidence": "packages/builder/PROOFS.md#stage_conditional_requiredness",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Pipedrive"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "stock_ledger",
+   "kind": [
+    "action/transition:Purchase order lifecycle:Confirmed:Received",
+    "action/transition:Sales order lifecycle:Confirmed:Shipped",
+    "report:Stock on hand"
+   ],
+   "what_it_does": "Atomic stock-quantity adjustment on order-line fulfilment, plus reorder-point condition evaluation.",
+   "location": [
+    "packages/builder/engines/stock_ledger.py::apply_order_line",
+    "packages/builder/engines/stock_ledger.py::needs_reorder",
+    "packages/builder/engines/stock_ledger.py::apply_order_lines",
+    "packages/builder/engines/stock_ledger.py::count_at_or_below_reorder"
+   ],
+   "reused_from": "built and proven earlier in this session; not rewritten",
+   "evidence": "packages/builder/PROOFS.md#stock_ledger",
+   "version": "1.1.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "094c3be30a31bf03",
+   "provenance": {
+    "read_from": [
+     "Odoo core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "stock_moves_on_the_screen_when_an_order_enters_its_stage"
+   ]
+  },
+  {
+   "part_id": "ledger_balancing",
+   "kind": [
+    "action/transition:Invoice lifecycle:Awaiting payment:Paid",
+    "action/transition:Bill lifecycle:Awaiting payment:Paid"
+   ],
+   "what_it_does": "Sums real Payment rows applied against a real Invoice/Bill and compares to its total.",
+   "location": [
+    "packages/builder/engines/ledger_balancing.py::applied_total",
+    "packages/builder/engines/ledger_balancing.py::is_paid",
+    "packages/builder/engines/ledger_balancing.py::line_total",
+    "packages/builder/engines/ledger_balancing.py::settles"
+   ],
+   "reused_from": "built and proven earlier in this session; not rewritten",
+   "evidence": "packages/builder/PROOFS.md#ledger_balancing",
+   "version": "1.1.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "8e4c702f78f51238",
+   "provenance": {
+    "read_from": [
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "payment_settles_its_target_on_the_screen"
+   ]
+  },
+  {
+   "part_id": "scheduled_jobs",
+   "kind": [
+    "ops",
+    "notification_timing:relative_to_date",
+    "notification_timing:schedule"
+   ],
+   "what_it_does": "Runs a real function on a real background thread after a real delay.",
+   "location": [
+    "packages/builder/engines/scheduled_jobs.py::run_after"
+   ],
+   "reused_from": "built and proven earlier in this session; not rewritten",
+   "evidence": "packages/builder/PROOFS.md#scheduled_jobs",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Acuity Scheduling"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "document_generation",
+   "kind": [
+    "action/custom:Send (document half)"
+   ],
+   "what_it_does": "Renders real HTML, and a real minimal single-page PDF.",
+   "location": [
+    "packages/builder/engines/document_generation.py::render_html",
+    "packages/builder/engines/document_generation.py::render_pdf"
+   ],
+   "reused_from": "built and proven earlier in this session; not rewritten",
+   "evidence": "packages/builder/PROOFS.md#document_generation",
+   "version": "1.0.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "6ad6f6c2187e4435",
+   "provenance": {
+    "read_from": [
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "sent_document_is_stamped_on_the_screen"
+   ]
+  },
+  {
+   "part_id": "email_parsing",
+   "kind": [
+    "action/custom:Send (message half)"
+   ],
+   "what_it_does": "Parses a real RFC 5322/MIME message via Python's stdlib email module.",
+   "location": [
+    "packages/builder/engines/email_parsing.py::parse"
+   ],
+   "reused_from": "built and proven earlier in this session; not rewritten",
+   "evidence": "packages/builder/PROOFS.md#email_parsing",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "audit_trail",
+   "kind": [
+    "not bound to a numbered item in the five templates yet"
+   ],
+   "what_it_does": "Logs create/edit/delete mutations against a real table, queryable back.",
+   "location": [
+    "packages/builder/engines/audit_trail.py::record",
+    "packages/builder/engines/audit_trail.py::history_for"
+   ],
+   "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+   "evidence": "packages/builder/PROOFS.md#audit_trail",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Asana",
+     "Pipedrive",
+     "Acuity Scheduling",
+     "Odoo core",
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "scheduling_availability",
+   "kind": [
+    "not bound to a numbered item in the five templates yet"
+   ],
+   "what_it_does": "Real interval-overlap conflict detection for a resource over a time range.",
+   "location": [
+    "packages/builder/engines/scheduling_availability.py::has_conflict"
+   ],
+   "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+   "evidence": "packages/builder/PROOFS.md#scheduling_availability",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Acuity Scheduling"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "search_fts",
+   "kind": [
+    "not bound to a numbered item in the five templates yet"
+   ],
+   "what_it_does": "Real full-text search/ranking via sqlite's built-in FTS5.",
+   "location": [
+    "packages/builder/engines/search_fts.py::search"
+   ],
+   "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+   "evidence": "packages/builder/PROOFS.md#search_fts",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Asana",
+     "Pipedrive",
+     "Odoo core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "import_export",
+   "kind": [
+    "not bound to a numbered item in the five templates yet"
+   ],
+   "what_it_does": "Real CSV export/import round-trip against a real sqlite table.",
+   "location": [
+    "packages/builder/engines/import_export.py::export_csv",
+    "packages/builder/engines/import_export.py::import_csv"
+   ],
+   "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+   "evidence": "packages/builder/PROOFS.md#import_export",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Pipedrive",
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "file_conversion",
+   "kind": [
+    "not bound to a numbered item in the five templates yet"
+   ],
+   "what_it_does": "CSV <-> JSON conversion.",
+   "location": [
+    "packages/builder/engines/file_conversion.py::csv_to_json",
+    "packages/builder/engines/file_conversion.py::json_to_csv"
+   ],
+   "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+   "evidence": "packages/builder/PROOFS.md#file_conversion",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "bank_feed_ofx",
+   "kind": [
+    "not bound to a numbered item in the five templates yet"
+   ],
+   "what_it_does": "Parses a real OFX 2.x bank statement into real transactions.",
+   "location": [
+    "packages/builder/engines/bank_feed_ofx.py::parse_ofx"
+   ],
+   "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+   "evidence": "packages/builder/PROOFS.md#bank_feed_ofx",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "calendar_ics",
+   "kind": [
+    "not bound to a numbered item in the five templates yet"
+   ],
+   "what_it_does": "Generates/parses real RFC 5545 iCalendar text.",
+   "location": [
+    "packages/builder/engines/calendar_ics.py::generate_ics",
+    "packages/builder/engines/calendar_ics.py::parse_ics"
+   ],
+   "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+   "evidence": "packages/builder/PROOFS.md#calendar_ics",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Acuity Scheduling"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "document_signing",
+   "kind": [
+    "not bound to a numbered item in the five templates yet"
+   ],
+   "what_it_does": "Real HMAC-SHA256 signing and constant-time verification of a document's real bytes.",
+   "location": [
+    "packages/builder/engines/document_signing.py::sign",
+    "packages/builder/engines/document_signing.py::verify"
+   ],
+   "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+   "evidence": "packages/builder/PROOFS.md#document_signing",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Acuity Scheduling",
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "pdf_form_filling",
+   "kind": [
+    "not bound to a numbered item in the five templates yet"
+   ],
+   "what_it_does": "Real AcroForm PDF generation and field-value filling.",
+   "location": [
+    "packages/builder/engines/pdf_form_filling.py::render_pdf_with_form",
+    "packages/builder/engines/pdf_form_filling.py::fill_field"
+   ],
+   "reused_from": "built and proven earlier in this session; on the shelf, unused by current bindings",
+   "evidence": "packages/builder/PROOFS.md#pdf_form_filling",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "document_field_detection",
+   "kind": [
+    "document/field_detection"
+   ],
+   "what_it_does": "Reads every real text field out of a real PDF -- name, current value AND /Rect geometry -- and classifies each one's provenance, so a field that is missing is asked for rather than guessed and a field that declares something in a person's name is never auto-filled. No model is involved: a field exists because it is in the document's bytes.",
+   "location": [
+    "packages/hands/hands/fields.py::detect",
+    "packages/hands/hands/fields.py::classify"
+   ],
+   "reused_from": "written for Hands because the shelf's pdf_form_filling reader returns name/value but not geometry, which the completed copy needs; cross-checked against that reader rather than replacing it",
+   "evidence": "packages/hands/PROOFS.md#1-document_field_detectionprove -- and packages/hands/tests/test_hands_live.py::test_field_detection_proves_itself_against_a_real_pdf (a real PDF on disk, parsed by two independently written readers)",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Hands (airexploit paperwork)"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "paperwork_session_lifecycle",
+   "kind": [
+    "workflow/lifecycle",
+    "action/transition:paperwork session"
+   ],
+   "what_it_does": "A real sqlite-backed session state machine -- CREATED, INTAKE, WAITING_FOR_INFORMATION, READY, EXECUTING, ACTION_REQUIRED, REVIEW, and the terminal COMPLETED/DECLINED/CANCELLED/FAILED -- where a single function is the only writer of state and refuses any move the transition table does not allow, including any move at all out of a terminal state.",
+   "location": [
+    "packages/hands/hands/session.py::TRANSITIONS",
+    "packages/hands/hands/session.py::transition",
+    "packages/hands/hands/session.py::trail"
+   ],
+   "reused_from": "written for Hands; the generic workflow-transition gap PARTS_SHELF.md names is still open -- this part is the paperwork lifecycle specifically, not a generic executor",
+   "evidence": "packages/hands/tests/test_hands_live.py::test_illegal_lifecycle_moves_are_refused and ::test_declining_is_a_real_outcome_not_an_error (a real sqlite database, over real HTTP)",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Hands (airexploit paperwork)"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "trust_gate_approval",
+   "kind": [
+    "action/approval_gate"
+   ],
+   "what_it_does": "Backend-enforced approval. An action runs only when an APPROVED decision exists for this session and action, carrying the SHA-256 of exactly the payload about to execute, unexpired and unused -- so changing a value after approval re-opens the gate, one approval authorises exactly one execution under concurrent requests, and a payload the engine never showed the customer cannot be approved at all.",
+   "location": [
+    "packages/hands/hands/trust_gate.py::request",
+    "packages/hands/hands/trust_gate.py::decide",
+    "packages/hands/hands/trust_gate.py::check"
+   ],
+   "reused_from": "written for Hands; the approve/cancel gap PARTS_SHELF.md names was a missing runtime capability, and this is the real one",
+   "evidence": "packages/hands/tests/test_hands_live.py::test_an_approval_does_not_authorise_a_different_payload, ::test_an_approval_is_single_use, ::test_two_concurrent_executions_spend_one_approval_once, ::test_a_customer_cannot_approve_something_they_were_never_shown -- plus packages/hands/tests/test_hands_browser.py::test_nothing_is_written_until_the_customer_clicks_approve (real Chromium)",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Hands (airexploit paperwork)"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "value_provenance",
+   "kind": [
+    "validation/provenance"
+   ],
+   "what_it_does": "Records and validates where every value came from -- KNOWN, SUPPLIED_BY_CUSTOMER, DERIVED, MISSING, REQUIRES_APPROVAL -- and refuses to store one it cannot account for: a DERIVED value with no stated source, or a MISSING value that somehow has content. There is no 'assumed' or 'default' provenance, which is what makes 'never guessed' checkable.",
+   "location": [
+    "packages/hands/hands/provenance.py::check",
+    "packages/hands/hands/provenance.py::blocks_execution"
+   ],
+   "reused_from": "written for Hands",
+   "evidence": "packages/hands/tests/test_hands_live.py::test_a_value_without_a_source_cannot_be_stored and ::test_document_completion_end_to_end_over_real_http",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Hands (airexploit paperwork)"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "defined_workflow_containment",
+   "kind": [
+    "policy/workflow_definition"
+   ],
+   "what_it_does": "Turns 'the engine receives a defined workflow, never an unrestricted command' into a checked object: permitted and prohibited actions, approval gates, completion conditions. Refuses at definition time a workflow permitting an action no code performs, permitting and prohibiting the same action, or having no completion conditions -- and refuses at execution time any action the workflow does not permit.",
+   "location": [
+    "packages/hands/hands/workflow.py::Workflow",
+    "packages/hands/hands/workflow.py::get",
+    "packages/hands/hands/engine.py::_require_permitted"
+   ],
+   "reused_from": "written for Hands",
+   "evidence": "packages/hands/tests/test_hands_live.py::test_an_inconsistent_workflow_is_refused_at_definition_time (3 cases), ::test_a_read_only_workflow_cannot_fill_anything, ::test_the_engine_refuses_a_workflow_that_is_not_defined",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Hands (airexploit paperwork)"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "preserved_original_document_store",
+   "kind": [
+    "document/storage"
+   ],
+   "what_it_does": "Write-once storage for a customer's uploaded document with its SHA-256 recorded at intake and re-checked before completion, a completed copy written as a separate file in a separate directory, an HMAC attestation over the completed copy's real bytes, and customer-supplied filenames refused outright when they contain a path.",
+   "location": [
+    "packages/hands/hands/documents.py::store_original",
+    "packages/hands/hands/documents.py::write_completed",
+    "packages/hands/hands/documents.py::attest",
+    "packages/hands/hands/documents.py::original_intact",
+    "packages/hands/hands/documents.py::safe_filename"
+   ],
+   "reused_from": "written for Hands on top of the shelf's pdf_form_filling and document_signing, which it calls at their real locations",
+   "evidence": "packages/hands/tests/test_hands_live.py::test_an_original_is_write_once, ::test_a_filename_cannot_escape_the_session_directory (4 cases), ::test_an_oversized_document_is_refused_before_it_is_stored, ::test_document_completion_end_to_end_over_real_http (asserts the original's bytes are unchanged and the completed copy is a different file)",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Hands (airexploit paperwork)"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "workflow_executor",
+   "kind": [
+    "action/transition (person-triggered)"
+   ],
+   "what_it_does": "Moves a real record from one real stage to the next when a person triggers it: refuses any move that is not one of the workflow's own declared (from, to, role) transitions, and logs who/when via the real audit_trail part.",
+   "location": [
+    "packages/builder/engines/workflow_executor.py::transition"
+   ],
+   "reused_from": "new generic runtime capability; reuses audit_trail for logging rather than a second logging mechanism",
+   "evidence": "packages/builder/PROOFS.md#workflow_executor",
+   "version": "1.0.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "e1e8908c90f7f1fb",
+   "provenance": {
+    "read_from": [
+     "Asana",
+     "Pipedrive",
+     "Acuity Scheduling",
+     "Odoo core",
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "person_move_is_visible_on_the_screen"
+   ]
+  },
+  {
+   "part_id": "reporting_engine",
+   "kind": [
+    "report (single-table count/sum/avg/min/max, filtered, grouped)"
+   ],
+   "what_it_does": "Runs one generic, parameterised SQL aggregation (count/sum/avg/min/max, optional filters, optional group-by) driven entirely by a structured ReportSpec -- no per-report Python.",
+   "location": [
+    "packages/builder/engines/reporting_engine.py::run_report"
+   ],
+   "reused_from": "new generic runtime capability",
+   "evidence": "packages/builder/PROOFS.md#reporting_engine",
+   "scope_limit": "single table only -- a report needing a cross-table join, a computed value, an arithmetic combination of other metrics, or range bucketing is genuinely outside this part's real capability and stays unbound",
+   "version": "1.0.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "a0de07a247bf355b",
+   "provenance": {
+    "read_from": [
+     "Asana",
+     "Pipedrive",
+     "Acuity Scheduling",
+     "Odoo core",
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "report_screen_reflects_written_rows"
+   ]
+  },
+  {
+   "part_id": "notification_delivery",
+   "kind": [
+    "notification (delivery)"
+   ],
+   "what_it_does": "Actually delivers a notification: inserts a real in-app record and sends a real email over a real SMTP connection.",
+   "location": [
+    "packages/builder/engines/notification_delivery.py::deliver"
+   ],
+   "reused_from": "new generic runtime capability",
+   "evidence": "packages/builder/PROOFS.md#notification_delivery",
+   "scope_limit": "proven against a real, self-hosted SMTP server (genuine protocol, real socket) since no live external mail provider is reachable/credentialed in this sandbox -- delivering to a real third-party mailbox needs real credentials this session does not have",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "qualified_revision": null,
+   "provenance": {
+    "read_from": [
+     "Asana",
+     "Pipedrive",
+     "Acuity Scheduling",
+     "Odoo core",
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": []
+  },
+  {
+   "part_id": "system_triggered_transition",
+   "kind": [
+    "action/transition:automatic"
+   ],
+   "what_it_does": "Moves a real record along a `mover: automatic` edge when the system's own declared event fires -- the half of every lifecycle workflow_executor explicitly does not cover. Refuses an event no declared edge leaving the row's current stage listens for, refuses to fire an edge a person owns, and refuses an ambiguous workflow rather than choosing. Every move is logged through the real audit_trail engine.",
+   "location": [
+    "packages/builder/engines/system_triggered_transition.py::fire",
+    "packages/builder/engines/system_triggered_transition.py::edges_from"
+   ],
+   "reused_from": "written for Command Desk's Job lifecycle, whose three transitions are all system-triggered; generic over any locked template's declared automatic edges",
+   "evidence": "packages/builder/PROOFS.md#system_triggered_transition -- and tests/test_plumbing_parts.py::{test_the_job_lifecycle_runs_on_its_own_declared_events, test_the_system_cannot_fire_an_edge_a_person_owns, test_an_ambiguous_workflow_is_refused_rather_than_guessed} (real sqlite file on disk)",
+   "version": "1.0.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "da71c672cb598389",
+   "provenance": {
+    "read_from": [
+     "Command Desk interview answers"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "gated_system_move_is_visible_on_the_screen"
+   ]
+  },
+  {
+   "part_id": "custom_action_execution",
+   "kind": [
+    "action/custom"
+   ],
+   "what_it_does": "Runs a record's own declared extra button as a real, named operation on a real row: set_fields, clear_fields, or reset_to_stage. Refuses an actor whose role the action does not name, an operation it has no code for, a column the real table does not have, and a row that does not exist. Every run is logged through the real audit_trail engine as custom:<name>.",
+   "location": [
+    "packages/builder/engines/custom_action_execution.py::run",
+    "packages/builder/engines/custom_action_execution.py::OPERATIONS"
+   ],
+   "reused_from": "written for Command Desk's Pause and Retry; the Builder previously had no custom-action execution rule at all, which left every action/custom item in every template unbound",
+   "evidence": "packages/builder/PROOFS.md#custom_action_execution -- and tests/test_plumbing_parts.py::{test_pause_really_stops_a_running_agent, test_retry_puts_a_failed_job_back_and_clears_what_it_declares, test_a_role_the_action_does_not_name_cannot_press_it, test_an_effect_with_no_code_is_refused_not_approximated}",
+   "version": "1.1.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "177cfc2d6d4d4a01",
+   "provenance": {
+    "read_from": [
+     "Command Desk interview answers"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "custom_action_is_pressable_and_visible"
+   ]
+  },
+  {
+   "part_id": "form_render_submit",
+   "kind": [
+    "screen/form",
+    "action/submit"
+   ],
+   "what_it_does": "Renders a real HTML form from a record's own declared R.02 fields -- the right control per field type, `required` where the record says required -- and turns a real submission into a real row, validating required/number/email, enforcing declared uniqueness against the real table, and refusing a value for a field the record does not declare.",
+   "location": [
+    "packages/builder/engines/form_render_submit.py::render_form",
+    "packages/builder/engines/form_render_submit.py::validate",
+    "packages/builder/engines/form_render_submit.py::submit",
+    "packages/builder/engines/form_render_submit.py::read_back"
+   ],
+   "reused_from": "written for Command Desk's three forms; the Builder had list and detail screen rules but no form rule, which left every screen/form and action/submit item in every template unbound",
+   "evidence": "packages/builder/PROOFS.md#form_render_submit -- and tests/test_plumbing_parts.py::{test_a_person_can_really_fill_the_generated_form_in_a_real_browser, test_the_browser_itself_blocks_a_required_field_left_empty, test_the_server_refuses_a_field_the_record_does_not_declare} (real Chromium typing into a real form served by a real HTTP server, writing to a real sqlite file)",
+   "version": "1.0.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "cfb66ed4a56c85df",
+   "provenance": {
+    "read_from": [
+     "Command Desk interview answers"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "form_submit_lands_in_list_and_detail"
+   ]
+  },
+  {
+   "part_id": "stage_approval_gate",
+   "kind": [
+    "action/approve",
+    "workflow/approval"
+   ],
+   "what_it_does": "A stage that will not move on until a declared approver has really decided. A record in a gated stage cannot leave it without a real approval row for that exact row and stage; a decline is honoured as a real outcome and sends the record to the workflow's own declared back_to stage. Refuses an approver the gate does not name and a decision that is neither APPROVED nor DECLINED.",
+   "location": [
+    "packages/builder/engines/stage_approval_gate.py::decide",
+    "packages/builder/engines/stage_approval_gate.py::check_may_leave",
+    "packages/builder/engines/stage_approval_gate.py::decision_for"
+   ],
+   "reused_from": "written for Command Desk's FL.05 rule (only irreversible actions wait for Sam); generic over any workflow's declared approvals",
+   "evidence": "packages/builder/PROOFS.md#stage_approval_gate -- and tests/test_command_desk_app_live.py::{test_the_job_lifecycle_moves_on_its_own_events_and_stops_at_the_gate, test_a_declined_approval_sends_the_job_where_the_workflow_says} (the real generated app, over real HTTP)",
+   "version": "1.0.0",
+   "status": "PRODUCT_QUALIFIED",
+   "qualified_revision": "e05ac2be0b3c4cc8",
+   "provenance": {
+    "read_from": [
+     "Command Desk interview answers (FL.05)"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "gated_system_move_is_visible_on_the_screen"
+   ]
+  },
+  {
+   "part_id": "interface_picker",
+   "kind": [
+    "interface"
+   ],
+   "what_it_does": "Builds all three real interface designs (Console/Board/Pocket) for a template and serves the one the customer picked at '/' -- the other two stay reachable at their own paths. Refuses to build if no interface has been chosen.",
+   "location": [
+    "packages/interfaces/make_interfaces.py",
+    "packages/builder/builder.py::build_app_py"
+   ],
+   "reused_from": "new generic runtime capability; the three designs were already built and proven (packages/interfaces/evidence/INTERFACES.md, 1244 checks) -- this part is what makes the customer's pick the one actually served",
+   "evidence": "packages/interfaces/evidence/INTERFACES.md",
+   "version": "1.0.0",
+   "status": "TESTED",
+   "provenance": {
+    "read_from": [
+     "Asana",
+     "Pipedrive",
+     "Acuity Scheduling",
+     "Odoo core",
+     "Xero core"
+    ],
+    "implementation": "original code written for this shelf; no third-party source copied",
+    "licence": "All rights reserved — the owner's original code; no licence granted"
+   },
+   "seam_journeys": [
+    "chosen_interface_is_served_at_root"
+   ]
+  }
+ ],
+ "lifecycle": {
+  "states": [
+   "IMPLEMENTED",
+   "TESTED",
+   "PRODUCT_QUALIFIED",
+   "FROZEN",
+   "DEPRECATED"
+  ],
+  "required_for_deployable": "PRODUCT_QUALIFIED",
+  "receipts": "qualification/<part_id>@<version>.json",
+  "rule": "status is granted by receipts from the live tester and by freeze; never typed in by hand",
+  "seam_journeys": "packages/playwright-tester/seams.py JOURNEYS — a part is qualified only through the journeys listed on it; no journey, no qualification"
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "base_url": "http://127.0.0.1:8903",
+ "journeys": [
+  {
+   "journey": "form_submit_lands_in_list_and_detail",
+   "subject": "booking-frontdesk/SCR-007",
+   "parts": [
+    "form_render_submit",
+    "crud_list_detail"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [
+    "FRESH_INSTALL_GAP: required field 'Service' links to 'Service'; with no Service rows yet, this form cannot be completed from the screen",
+    "FRESH_INSTALL_GAP: required field 'Customer' links to 'Customer'; with no Customer rows yet, this form cannot be completed from the screen"
+   ],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open form booking-frontdesk/SCR-007",
+     "observed": "Public booking form"
+    },
+    {
+     "channel": "api",
+     "action": "seed one 'Service' so required link 'Service' has something to pick",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "seed one 'Customer' so required link 'Customer' has something to pick",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "fill every declared control",
+     "observed": "6 controls, carrier=staff_member=seam-1a070e03587"
+    },
+    {
+     "channel": "browser",
+     "action": "click Save",
+     "observed": "saved e87607e3-0501-4fa4-8db1-9608ce777ea8"
+    },
+    {
+     "channel": "browser",
+     "action": "open list booking-frontdesk/SCR-005",
+     "observed": "2 cell(s) carry seam-1a070e03587"
+    },
+    {
+     "channel": "browser",
+     "action": "open detail booking-frontdesk/SCR-006?id=e87607e3-0501-4fa4-8db1-9608ce777ea8",
+     "observed": "staff_member='seam-1a070e03587'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "booking-frontdesk/SCR-008",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "BLOCKED",
+   "reason": "metric 'count of Appointments in stage Booked or Confirmed' counts rows at stage ['Booked', 'Confirmed']; a new row starts at 'Booked' and no screen offers a control to move it",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report booking-frontdesk/SCR-008",
+     "observed": {
+      "count of Appointments in stage Booked or Confirmed": 1
+     }
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "booking-frontdesk/SCR-009",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "BLOCKED",
+   "reason": "metric 'no-show rate' is computed by the stage_history part, not by writing one row",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report booking-frontdesk/SCR-009",
+     "observed": {
+      "no-show rate": {
+       "rate": null,
+       "percentage": null,
+       "numerator": 0,
+       "denominator": 0,
+       "window_days": 30
+      }
+     }
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "person_move_is_visible_on_the_screen",
+   "subject": "booking-frontdesk/ACT-010",
+   "parts": [
+    "workflow_executor"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/appointments",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a control on booking-frontdesk/SCR-006 that moves to 'Confirmed'",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "browser",
+     "action": "press the control on booking-frontdesk/SCR-006 that moves to 'Confirmed'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open detail booking-frontdesk/SCR-006",
+     "observed": "stage shown as 'Confirmed'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "rate_report_reflects_the_moves_made_on_the_screen",
+   "subject": "booking-frontdesk/SCR-009:no-show rate",
+   "parts": [
+    "stage_history"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/appointments",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Confirmed' on booking-frontdesk/SCR-006",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to No-show' on booking-frontdesk/SCR-006",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open report booking-frontdesk/SCR-009 and read 'no-show rate'",
+     "observed": {
+      "rate": 1,
+      "percentage": 100,
+      "numerator": 1,
+      "denominator": 1,
+      "window_days": 30
+     }
+    }
+   ],
+   "page_errors": []
+  }
+ ],
+ "parts": {
+  "form_render_submit": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "crud_list_detail": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "reporting_engine": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 2,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "workflow_executor": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "stage_history": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  }
+ },
+ "receipts_written": [
+  {
+   "part_id": "form_render_submit",
+   "version": "1.0.0",
+   "revision": "cfb66ed4a56c85df"
+  },
+  {
+   "part_id": "crud_list_detail",
+   "version": "1.1.0",
+   "revision": "143bf3e98f4fd428"
+  },
+  {
+   "part_id": "workflow_executor",
+   "version": "1.0.0",
+   "revision": "e1e8908c90f7f1fb"
+  },
+  {
+   "part_id": "stage_history",
+   "version": "1.1.0",
+   "revision": "a2820dad41d0c83c"
+  }
+ ],
+ "receipts_refused": []
+}

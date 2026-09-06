@@ -1,0 +1,52 @@
+BINDING CHECK: BOUND-PM-TEAMWORK (customer_complete=False)
+PASS pm-teamwork/SCR-001 (screen/list): crud_list_detail
+PASS pm-teamwork/SCR-002 (screen/detail): crud_list_detail
+PASS pm-teamwork/SCR-003 (screen/list): crud_list_detail
+PASS pm-teamwork/SCR-004 (screen/detail): crud_list_detail
+PASS pm-teamwork/SCR-005 (screen/list): crud_list_detail
+PASS pm-teamwork/SCR-006 (screen/detail): crud_list_detail
+PASS pm-teamwork/SCR-007 (screen/report): reporting_engine
+PASS pm-teamwork/SCR-008 (screen/report): reporting_engine
+PASS pm-teamwork/ACT-001 (action/create): crud_list_detail
+PASS pm-teamwork/ACT-002 (action/edit): crud_list_detail
+PASS pm-teamwork/ACT-003 (action/delete): crud_list_detail
+PASS pm-teamwork/ACT-004 (action/create): crud_list_detail
+PASS pm-teamwork/ACT-005 (action/edit): crud_list_detail
+PASS pm-teamwork/ACT-006 (action/delete): crud_list_detail
+PASS pm-teamwork/ACT-007 (action/custom): record_cloning
+PASS pm-teamwork/ACT-008 (action/create): crud_list_detail
+PASS pm-teamwork/ACT-009 (action/edit): crud_list_detail
+PASS pm-teamwork/ACT-010 (action/delete): crud_list_detail
+PASS pm-teamwork/ACT-011 (action/transition): workflow_executor
+PASS pm-teamwork/ACT-012 (action/transition): workflow_executor
+PASS pm-teamwork/ACT-013 (action/transition): workflow_executor
+PASS pm-teamwork/ACT-014 (action/transition): workflow_executor
+PASS NTF:Task assigned (notification): notification_delivery
+PASS NTF:Task due reminder (notification): scheduled_jobs, notification_delivery
+PASS NTF:New comment (notification): notification_delivery
+PASS RPT:Open tasks by person (report): reporting_engine
+PASS RPT:Overdue tasks (report): reporting_engine
+PASS pm-teamwork/OPS-001 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-002 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-003 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-004 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-005 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-006 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-007 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-008 (recurring_op): scheduled_jobs
+PASS pm-teamwork/OPS-009 (recurring_op): scheduled_jobs
+FAIL pm-teamwork/IFC-001 (interface): no interface chosen yet -- the front door has not run for this instance
+---
+36/37 PASS, 1 FAIL
+NOT CLEAN -- 1 item(s) unbound
+
+QUALIFICATION CHECK (required status for a deployable build: PRODUCT_QUALIFIED)
+QUALIFIED crud_list_detail@1.1.0 (PRODUCT_QUALIFIED) at 389773506209779b
+UNQUALIFIED notification_delivery@1.0.0: status TESTED
+QUALIFIED record_cloning@1.0.0 (PRODUCT_QUALIFIED) at c9f8c783994f80c1
+QUALIFIED reporting_engine@1.0.0 (PRODUCT_QUALIFIED) at a0de07a247bf355b
+UNQUALIFIED scheduled_jobs@1.0.0: status TESTED
+QUALIFIED workflow_executor@1.0.0 (PRODUCT_QUALIFIED) at e1e8908c90f7f1fb
+---
+4/6 parts qualified at their pinned revision, 2 problem(s)
+QUALIFICATION NOT CLEAN -- 2 part(s) unqualified, drifted or missing

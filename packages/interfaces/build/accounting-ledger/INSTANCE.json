@@ -1,0 +1,2849 @@
+{
+  "template": "accounting-ledger",
+  "source_app": "Xero (invoicing core)",
+  "category": "accounting",
+  "modules": [
+    "people_directory",
+    "invoicing",
+    "payments"
+  ],
+  "inventory": {
+    "records": [
+      "Contact",
+      "Invoice",
+      "Invoice line",
+      "Bill",
+      "Payment"
+    ],
+    "roles": [
+      "Admin",
+      "Accountant",
+      "Advisor"
+    ],
+    "forms": [],
+    "notifications": [
+      "Invoice sent",
+      "Payment reminder",
+      "Payment received"
+    ],
+    "reports": [],
+    "workflows": [
+      "Invoice lifecycle",
+      "Bill lifecycle"
+    ],
+    "file_types": [],
+    "integrations": [],
+    "screens": []
+  },
+  "super_role": "Admin",
+  "answers": {
+    "A.06": [
+      "web"
+    ],
+    "A.07": "yes",
+    "A.08": "single",
+    "A.09": "no",
+    "A.10": [],
+    "A.11": "no",
+    "A.16": "Admin",
+    "P.00": "no",
+    "C.05": {
+      "mode": "simplified"
+    },
+    "C.06": {
+      "Admin": "Invoices list",
+      "Accountant": "Invoices list",
+      "Advisor": "Invoices list"
+    },
+    "AU.01": [
+      "invited"
+    ],
+    "AU.02": [
+      {
+        "name": "Full name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Email address",
+        "type": "email",
+        "required": "yes",
+        "unique": "yes"
+      }
+    ],
+    "AU.03": "yes",
+    "AU.04": [
+      "password",
+      "google"
+    ],
+    "AU.07": {
+      "scope": "nobody",
+      "method": "n/a"
+    },
+    "AU.08": {
+      "attempts": 5,
+      "duration": "15 minutes"
+    },
+    "AU.09": "yes",
+    "AU.10": "30 days",
+    "AU.11": {
+      "allowed": "yes",
+      "by": [
+        "super"
+      ],
+      "auto_triggers": []
+    },
+    "AU.12": {
+      "allowed": "yes",
+      "by": "both",
+      "data": "anonymised"
+    },
+    "AU.13": [
+      "super"
+    ],
+    "AU.14": {
+      "required": "yes",
+      "status": "need_drafting"
+    },
+    "AU.06": {
+      "inviters": [
+        "Admin"
+      ],
+      "default_role": "Accountant"
+    },
+    "0.01": "guided",
+    "A.01": "The books: contacts, invoices with lines, bills, and the payments applied to them; invoices move from Draft through approval to Awaiting payment and settle to Paid.",
+    "A.02": "Raise invoices, record bills and payments, and know what is owed.",
+    "A.03": "A small business's accountant, its admin, and an outside advisor with read-only access.",
+    "A.04": "Every invoice is sent, every payment is applied, and nothing is paid twice.",
+    "A.05": "Ledger",
+    "A.12": {
+      "required": "no"
+    },
+    "A.13": {
+      "region": "Australia",
+      "languages": [
+        "English"
+      ]
+    },
+    "A.14": [],
+    "C.01": "none",
+    "C.02": [
+      "trustworthy",
+      "quiet",
+      "exact"
+    ],
+    "C.03": "balanced",
+    "C.04": {
+      "mode": "design_for_me"
+    },
+    "C.07": "confirmed",
+    "Z.01": "confirmed",
+    "Z.02": "confirmed",
+    "Z.03": "confirmed"
+  },
+  "per_instance": {
+    "R.01:Contact": "A customer or supplier the business invoices or is billed by.",
+    "R.02:Contact": [
+      {
+        "name": "Name",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Email",
+        "type": "email",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Phone",
+        "type": "phone",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Type",
+        "type": "one_choice",
+        "required": "yes",
+        "unique": "no",
+        "options": [
+          "customer",
+          "supplier",
+          "both"
+        ]
+      },
+      {
+        "name": "Payment terms days",
+        "type": "whole_number",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Contact": "Name",
+    "R.04:Contact": {
+      "needed": "no"
+    },
+    "R.05:Contact": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      },
+      {
+        "role": "Advisor",
+        "scope": "all"
+      }
+    ],
+    "R.06:Contact": [
+      "Accountant"
+    ],
+    "R.07:Contact": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.08:Contact": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.10:Contact": {
+      "has": "no"
+    },
+    "R.11:Contact": [],
+    "R.13:Contact": "yes",
+    "R.14:Contact": "forever",
+    "R.15:Contact": [],
+    "R.01:Invoice": "Money owed TO the business by a customer.",
+    "R.02:Invoice": [
+      {
+        "name": "Contact",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Contact"
+      },
+      {
+        "name": "Issue date",
+        "type": "date",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Due date",
+        "type": "date",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Reference",
+        "type": "short_text",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Notes",
+        "type": "long_text",
+        "required": "no",
+        "unique": "no"
+      },
+      {
+        "name": "Sent at",
+        "type": "date_time",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Invoice": "Contact",
+    "R.04:Invoice": {
+      "needed": "yes",
+      "format": "INV-#### (sequential, never reused)"
+    },
+    "R.05:Invoice": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      },
+      {
+        "role": "Advisor",
+        "scope": "all"
+      }
+    ],
+    "R.06:Invoice": [
+      "Accountant"
+    ],
+    "R.07:Invoice": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.08:Invoice": "nobody",
+    "R.10:Invoice": {
+      "has": "yes",
+      "stages": [
+        "Draft",
+        "Awaiting approval",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ]
+    },
+    "R.11:Invoice": [
+      {
+        "target": "Contact",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Invoice": "yes",
+    "R.14:Invoice": "forever",
+    "R.15:Invoice": [
+      {
+        "name": "Send",
+        "who": [
+          "Accountant"
+        ],
+        "effect": "emails the invoice document to the Contact and stamps the sent time",
+        "result_location": "the invoice page's activity trail",
+        "execution": {
+          "op": "generate_document",
+          "stamp_column": "sent_at",
+          "title_columns": [
+            "reference"
+          ],
+          "line_table": "invoice_lines",
+          "line_fk": "invoice",
+          "line_columns": [
+            "description",
+            "quantity",
+            "unit_amount"
+          ],
+          "body_columns": [
+            "contact",
+            "issue_date",
+            "due_date",
+            "notes"
+          ],
+          "dispatch": "none"
+        }
+      }
+    ],
+    "R.12:Invoice": "block",
+    "R.01:Invoice line": "One charged item on an invoice.",
+    "R.02:Invoice line": [
+      {
+        "name": "Invoice",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Invoice"
+      },
+      {
+        "name": "Description",
+        "type": "short_text",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Quantity",
+        "type": "decimal_number",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Unit amount",
+        "type": "money",
+        "required": "yes",
+        "unique": "no"
+      }
+    ],
+    "R.03:Invoice line": "Description",
+    "R.04:Invoice line": {
+      "needed": "no"
+    },
+    "R.05:Invoice line": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      },
+      {
+        "role": "Advisor",
+        "scope": "all"
+      }
+    ],
+    "R.06:Invoice line": [
+      "Accountant"
+    ],
+    "R.07:Invoice line": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.08:Invoice line": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.10:Invoice line": {
+      "has": "no"
+    },
+    "R.11:Invoice line": [
+      {
+        "target": "Invoice",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Invoice line": "no",
+    "R.14:Invoice line": "forever",
+    "R.15:Invoice line": [],
+    "R.12:Invoice line": "delete_too",
+    "R.01:Bill": "Money owed BY the business to a supplier.",
+    "R.02:Bill": [
+      {
+        "name": "Contact",
+        "type": "link",
+        "required": "yes",
+        "unique": "no",
+        "target_record": "Contact"
+      },
+      {
+        "name": "Issue date",
+        "type": "date",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Due date",
+        "type": "date",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Amount",
+        "type": "money",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Reference",
+        "type": "short_text",
+        "required": "no",
+        "unique": "no"
+      }
+    ],
+    "R.03:Bill": "Contact",
+    "R.04:Bill": {
+      "needed": "yes",
+      "format": "BILL-#### (sequential)"
+    },
+    "R.05:Bill": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      },
+      {
+        "role": "Advisor",
+        "scope": "all"
+      }
+    ],
+    "R.06:Bill": [
+      "Accountant"
+    ],
+    "R.07:Bill": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.08:Bill": "nobody",
+    "R.10:Bill": {
+      "has": "yes",
+      "stages": [
+        "Draft",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ]
+    },
+    "R.11:Bill": [
+      {
+        "target": "Contact",
+        "cardinality": "one_to_many",
+        "required": "yes"
+      }
+    ],
+    "R.13:Bill": "yes",
+    "R.14:Bill": "forever",
+    "R.15:Bill": [],
+    "R.12:Bill": "block",
+    "R.01:Payment": "A received or made payment applied against an invoice or bill.",
+    "R.02:Payment": [
+      {
+        "name": "Invoice",
+        "type": "link",
+        "required": "no",
+        "unique": "no",
+        "target_record": "Invoice"
+      },
+      {
+        "name": "Bill",
+        "type": "link",
+        "required": "no",
+        "unique": "no",
+        "target_record": "Bill"
+      },
+      {
+        "name": "Amount",
+        "type": "money",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Date",
+        "type": "date",
+        "required": "yes",
+        "unique": "no"
+      },
+      {
+        "name": "Method",
+        "type": "one_choice",
+        "required": "yes",
+        "unique": "no",
+        "options": [
+          "bank transfer",
+          "card",
+          "cash",
+          "other"
+        ]
+      }
+    ],
+    "R.03:Payment": "Amount",
+    "R.04:Payment": {
+      "needed": "no"
+    },
+    "R.05:Payment": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      },
+      {
+        "role": "Advisor",
+        "scope": "all"
+      }
+    ],
+    "R.06:Payment": [
+      "Accountant"
+    ],
+    "R.07:Payment": [
+      {
+        "role": "Accountant",
+        "scope": "all"
+      }
+    ],
+    "R.08:Payment": "nobody",
+    "R.10:Payment": {
+      "has": "no"
+    },
+    "R.11:Payment": [
+      {
+        "target": "Invoice",
+        "cardinality": "one_to_many",
+        "required": "no"
+      },
+      {
+        "target": "Bill",
+        "cardinality": "one_to_many",
+        "required": "no"
+      }
+    ],
+    "R.13:Payment": "no",
+    "R.14:Payment": "forever",
+    "R.15:Payment": [],
+    "R.12:Payment": "block",
+    "FL.01:Invoice lifecycle": {
+      "kind": "person",
+      "who": [
+        "Accountant"
+      ],
+      "action": "creating an invoice (starts in Draft)"
+    },
+    "FL.02:Invoice lifecycle": {
+      "stages": [
+        "Draft",
+        "Awaiting approval",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ],
+      "initial": "Draft",
+      "terminal": [
+        "Paid",
+        "Voided"
+      ]
+    },
+    "FL.03:Invoice lifecycle": [
+      {
+        "from": "Draft",
+        "to": "Awaiting approval",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ]
+      },
+      {
+        "from": "Awaiting approval",
+        "to": "Awaiting payment",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ]
+      },
+      {
+        "from": "Awaiting payment",
+        "to": "Paid",
+        "mover": "automatic",
+        "event": "Payments applied to the invoice reach its total"
+      },
+      {
+        "from": "Awaiting payment",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ]
+      },
+      {
+        "from": "Draft",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ]
+      }
+    ],
+    "FL.04:Invoice lifecycle": [],
+    "FL.05:Invoice lifecycle": [
+      {
+        "stage": "Awaiting approval",
+        "approvers": [
+          "Admin"
+        ]
+      }
+    ],
+    "FL.07:Invoice lifecycle": {
+      "allowed": "no"
+    },
+    "FL.08:Invoice lifecycle": "Paid invoices lock permanently and feed Profit & loss; Voided invoices keep their number and show struck through.",
+    "FL.09:Invoice lifecycle": "Awaiting payment",
+    "FL.10:Invoice lifecycle": [],
+    "FL.11:Invoice lifecycle": [],
+    "FL.06:Invoice lifecycle": {
+      "back_to": "Draft",
+      "resubmit": "yes"
+    },
+    "FL.01:Bill lifecycle": {
+      "kind": "person",
+      "who": [
+        "Accountant"
+      ],
+      "action": "creating a bill (starts in Draft)"
+    },
+    "FL.02:Bill lifecycle": {
+      "stages": [
+        "Draft",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ],
+      "initial": "Draft",
+      "terminal": [
+        "Paid",
+        "Voided"
+      ]
+    },
+    "FL.03:Bill lifecycle": [
+      {
+        "from": "Draft",
+        "to": "Awaiting payment",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ]
+      },
+      {
+        "from": "Awaiting payment",
+        "to": "Paid",
+        "mover": "automatic",
+        "event": "Payments applied to the bill reach its total"
+      },
+      {
+        "from": "Awaiting payment",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ]
+      },
+      {
+        "from": "Draft",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ]
+      }
+    ],
+    "FL.04:Bill lifecycle": [],
+    "FL.05:Bill lifecycle": [],
+    "FL.07:Bill lifecycle": {
+      "allowed": "no"
+    },
+    "FL.08:Bill lifecycle": "Paid bills lock and feed Profit & loss as expenses.",
+    "FL.09:Bill lifecycle": "Awaiting payment",
+    "FL.10:Bill lifecycle": [],
+    "FL.11:Bill lifecycle": [],
+    "N.01:Invoice sent": {
+      "kind": "event",
+      "event": "the Send action runs on an invoice"
+    },
+    "N.02:Invoice sent": [
+      {
+        "kind": "custom",
+        "who": "the invoice's Contact, at their email address"
+      }
+    ],
+    "N.03:Invoice sent": [
+      "email"
+    ],
+    "N.04:Invoice sent": "Here is your invoice: what it's for, the total, the due date and how to pay.",
+    "N.05:Invoice sent": "no",
+    "N.01:Payment reminder": {
+      "kind": "relative_to_date",
+      "record": "Invoice",
+      "date_field": "Due date",
+      "offset": "+3 days"
+    },
+    "N.02:Payment reminder": [
+      {
+        "kind": "custom",
+        "who": "the invoice's Contact \u2014 only while the invoice is in Awaiting payment"
+      }
+    ],
+    "N.03:Payment reminder": [
+      "email"
+    ],
+    "N.04:Payment reminder": "This invoice is past due \u2014 pay it or tell us why not.",
+    "N.05:Payment reminder": "no",
+    "N.01:Payment received": {
+      "kind": "event",
+      "event": "an invoice moves to Paid"
+    },
+    "N.02:Payment received": [
+      {
+        "kind": "roles",
+        "roles": [
+          "Accountant"
+        ]
+      }
+    ],
+    "N.03:Payment received": [
+      "in_app"
+    ],
+    "N.04:Payment received": "An invoice just got paid in full.",
+    "N.05:Payment received": "yes",
+    "P.01:Accountant": "Does the books: raises invoices, records bills and payments.",
+    "P.02:Accountant": "no",
+    "P.04:Accountant": [
+      "Admin"
+    ],
+    "P.01:Advisor": "An external accountant/bookkeeper with read-only access to everything financial.",
+    "P.02:Advisor": "no",
+    "P.04:Advisor": [
+      "Admin"
+    ]
+  },
+  "ask_customer": [],
+  "features": [
+    {
+      "feature": "Invoice approval step",
+      "controlled_by": "FL.05:Invoice lifecycle",
+      "rule": "empty the approvals list -> Draft goes straight to Awaiting payment (sole traders)"
+    },
+    {
+      "feature": "Bills side",
+      "controlled_by": "A.15 records list",
+      "rule": "remove Bill and its lifecycle -> invoicing-only app"
+    },
+    {
+      "feature": "Overdue chasing",
+      "controlled_by": "N.01:Payment reminder",
+      "rule": "change the +3 days offset, or remove the notification to stop chasing"
+    },
+    {
+      "feature": "Advisor access",
+      "controlled_by": "A.15 roles list",
+      "rule": "remove Advisor -> external-accountant access disappears"
+    }
+  ],
+  "specialist_engines": [
+    {
+      "kind": "workflow",
+      "name": "Invoice lifecycle",
+      "stages": [
+        "Draft",
+        "Awaiting approval",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ],
+      "initial": "Draft",
+      "terminal": [
+        "Paid",
+        "Voided"
+      ],
+      "transitions": 5,
+      "person_moved_by": [
+        "Accountant",
+        "Admin"
+      ],
+      "automatic_transitions": [
+        "Payments applied to the invoice reach its total"
+      ],
+      "has_approvals": true,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "workflow",
+      "name": "Bill lifecycle",
+      "stages": [
+        "Draft",
+        "Awaiting payment",
+        "Paid",
+        "Voided"
+      ],
+      "initial": "Draft",
+      "terminal": [
+        "Paid",
+        "Voided"
+      ],
+      "transitions": 4,
+      "person_moved_by": [
+        "Accountant",
+        "Admin"
+      ],
+      "automatic_transitions": [
+        "Payments applied to the bill reach its total"
+      ],
+      "has_approvals": false,
+      "has_timeouts": false,
+      "cancellable": false
+    },
+    {
+      "kind": "notification",
+      "name": "Invoice sent",
+      "trigger_kind": "event",
+      "channels": [
+        "email"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Payment reminder",
+      "trigger_kind": "relative_to_date",
+      "channels": [
+        "email"
+      ]
+    },
+    {
+      "kind": "notification",
+      "name": "Payment received",
+      "trigger_kind": "event",
+      "channels": [
+        "in_app"
+      ]
+    },
+    {
+      "kind": "custom_action",
+      "name": "Send",
+      "record": "Invoice",
+      "effect": "emails the invoice document to the Contact and stamps the sent time"
+    }
+  ],
+  "create_effects": {
+    "Payment": [
+      {
+        "op": "ledger_balance",
+        "link_column": "invoice",
+        "table": "invoices",
+        "total": {
+          "kind": "lines",
+          "line_table": "invoice_lines",
+          "line_fk": "invoice",
+          "quantity_column": "quantity",
+          "amount_column": "unit_amount"
+        },
+        "payments_table": "payments",
+        "amount_column": "amount",
+        "event": "Payments applied to the invoice reach its total"
+      },
+      {
+        "op": "ledger_balance",
+        "link_column": "bill",
+        "table": "bills",
+        "total": {
+          "kind": "column",
+          "column": "amount"
+        },
+        "payments_table": "payments",
+        "amount_column": "amount",
+        "event": "Payments applied to the bill reach its total"
+      }
+    ]
+  },
+  "structure": {
+    "records": {
+      "Contact": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Email": {
+            "name": "Email",
+            "type": "email",
+            "required": "no",
+            "unique": "no"
+          },
+          "Phone": {
+            "name": "Phone",
+            "type": "phone",
+            "required": "no",
+            "unique": "no"
+          },
+          "Type": {
+            "name": "Type",
+            "type": "one_choice",
+            "required": "yes",
+            "unique": "no",
+            "options": [
+              "customer",
+              "supplier",
+              "both"
+            ]
+          },
+          "Payment terms days": {
+            "name": "Payment terms days",
+            "type": "whole_number",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Email": "VARCHAR(255)",
+          "Phone": "VARCHAR(40)",
+          "Type": "ENUM",
+          "Payment terms days": "INTEGER"
+        },
+        "enums": {
+          "Type": [
+            "customer",
+            "supplier",
+            "both"
+          ]
+        },
+        "access": {
+          "view": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            },
+            {
+              "role": "Advisor",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Accountant"
+          ],
+          "edit": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "accounting-ledger/REC-001"
+      },
+      "Invoice": {
+        "fields": {
+          "Contact": {
+            "name": "Contact",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Contact"
+          },
+          "Issue date": {
+            "name": "Issue date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Due date": {
+            "name": "Due date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Reference": {
+            "name": "Reference",
+            "type": "short_text",
+            "required": "no",
+            "unique": "no"
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          },
+          "Sent at": {
+            "name": "Sent at",
+            "type": "date_time",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Contact": "FOREIGN_KEY",
+          "Issue date": "DATE",
+          "Due date": "DATE",
+          "Reference": "VARCHAR(255)",
+          "Notes": "TEXT",
+          "Sent at": "DATETIME"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            },
+            {
+              "role": "Advisor",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Accountant"
+          ],
+          "edit": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ],
+          "delete": "nobody"
+        },
+        "title_field": "Contact",
+        "id_style": {
+          "needed": "yes",
+          "format": "INV-#### (sequential, never reused)"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "Draft",
+            "Awaiting approval",
+            "Awaiting payment",
+            "Paid",
+            "Voided"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [
+          {
+            "name": "Send",
+            "who": [
+              "Accountant"
+            ],
+            "effect": "emails the invoice document to the Contact and stamps the sent time",
+            "result_location": "the invoice page's activity trail",
+            "execution": {
+              "op": "generate_document",
+              "stamp_column": "sent_at",
+              "title_columns": [
+                "reference"
+              ],
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "line_columns": [
+                "description",
+                "quantity",
+                "unit_amount"
+              ],
+              "body_columns": [
+                "contact",
+                "issue_date",
+                "due_date",
+                "notes"
+              ],
+              "dispatch": "none"
+            }
+          }
+        ],
+        "on_create": [],
+        "id": "accounting-ledger/REC-002"
+      },
+      "Invoice line": {
+        "fields": {
+          "Invoice": {
+            "name": "Invoice",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Invoice"
+          },
+          "Description": {
+            "name": "Description",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Quantity": {
+            "name": "Quantity",
+            "type": "decimal_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Unit amount": {
+            "name": "Unit amount",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Invoice": "FOREIGN_KEY",
+          "Description": "VARCHAR(255)",
+          "Quantity": "DECIMAL(18,4)",
+          "Unit amount": "DECIMAL(18,2)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            },
+            {
+              "role": "Advisor",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Accountant"
+          ],
+          "edit": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Description",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "accounting-ledger/REC-003"
+      },
+      "Bill": {
+        "fields": {
+          "Contact": {
+            "name": "Contact",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Contact"
+          },
+          "Issue date": {
+            "name": "Issue date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Due date": {
+            "name": "Due date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Amount": {
+            "name": "Amount",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Reference": {
+            "name": "Reference",
+            "type": "short_text",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Contact": "FOREIGN_KEY",
+          "Issue date": "DATE",
+          "Due date": "DATE",
+          "Amount": "DECIMAL(18,2)",
+          "Reference": "VARCHAR(255)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            },
+            {
+              "role": "Advisor",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Accountant"
+          ],
+          "edit": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ],
+          "delete": "nobody"
+        },
+        "title_field": "Contact",
+        "id_style": {
+          "needed": "yes",
+          "format": "BILL-#### (sequential)"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "Draft",
+            "Awaiting payment",
+            "Paid",
+            "Voided"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "accounting-ledger/REC-004"
+      },
+      "Payment": {
+        "fields": {
+          "Invoice": {
+            "name": "Invoice",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Invoice"
+          },
+          "Bill": {
+            "name": "Bill",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Bill"
+          },
+          "Amount": {
+            "name": "Amount",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Date": {
+            "name": "Date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Method": {
+            "name": "Method",
+            "type": "one_choice",
+            "required": "yes",
+            "unique": "no",
+            "options": [
+              "bank transfer",
+              "card",
+              "cash",
+              "other"
+            ]
+          }
+        },
+        "storage": {
+          "Invoice": "FOREIGN_KEY",
+          "Bill": "FOREIGN_KEY",
+          "Amount": "DECIMAL(18,2)",
+          "Date": "DATE",
+          "Method": "ENUM"
+        },
+        "enums": {
+          "Method": [
+            "bank transfer",
+            "card",
+            "cash",
+            "other"
+          ]
+        },
+        "access": {
+          "view": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            },
+            {
+              "role": "Advisor",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Accountant"
+          ],
+          "edit": [
+            {
+              "role": "Accountant",
+              "scope": "all"
+            }
+          ],
+          "delete": "nobody"
+        },
+        "title_field": "Amount",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [
+          {
+            "op": "ledger_balance",
+            "link_column": "invoice",
+            "table": "invoices",
+            "total": {
+              "kind": "lines",
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "quantity_column": "quantity",
+              "amount_column": "unit_amount"
+            },
+            "payments_table": "payments",
+            "amount_column": "amount",
+            "event": "Payments applied to the invoice reach its total"
+          },
+          {
+            "op": "ledger_balance",
+            "link_column": "bill",
+            "table": "bills",
+            "total": {
+              "kind": "column",
+              "column": "amount"
+            },
+            "payments_table": "payments",
+            "amount_column": "amount",
+            "event": "Payments applied to the bill reach its total"
+          }
+        ],
+        "id": "accounting-ledger/REC-005"
+      }
+    },
+    "roles": {
+      "Admin": {
+        "permitted": [],
+        "is_admin": true
+      },
+      "Accountant": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Invoice",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Invoice",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Invoice",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Invoice line",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Invoice line",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Invoice line",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Invoice line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Bill",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Bill",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Bill",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Payment",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Payment",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Payment",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      },
+      "Advisor": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Invoice",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Invoice line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Bill",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Payment",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      }
+    },
+    "super_role": "Admin",
+    "workflows": {
+      "Invoice lifecycle": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Accountant"
+          ],
+          "action": "creating an invoice (starts in Draft)"
+        },
+        "stages": [
+          {
+            "id": "accounting-ledger/STG-001",
+            "name": "Draft"
+          },
+          {
+            "id": "accounting-ledger/STG-002",
+            "name": "Awaiting approval"
+          },
+          {
+            "id": "accounting-ledger/STG-003",
+            "name": "Awaiting payment"
+          },
+          {
+            "id": "accounting-ledger/STG-004",
+            "name": "Paid"
+          },
+          {
+            "id": "accounting-ledger/STG-005",
+            "name": "Voided"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "Draft",
+            "to": "Awaiting approval",
+            "mover": "roles",
+            "roles": [
+              "Accountant"
+            ],
+            "id": "accounting-ledger/TRN-001"
+          },
+          {
+            "from": "Awaiting approval",
+            "to": "Awaiting payment",
+            "mover": "roles",
+            "roles": [
+              "Admin"
+            ],
+            "id": "accounting-ledger/TRN-002"
+          },
+          {
+            "from": "Awaiting payment",
+            "to": "Paid",
+            "mover": "automatic",
+            "event": "Payments applied to the invoice reach its total",
+            "id": "accounting-ledger/TRN-003"
+          },
+          {
+            "from": "Awaiting payment",
+            "to": "Voided",
+            "mover": "roles",
+            "roles": [
+              "Admin"
+            ],
+            "id": "accounting-ledger/TRN-004"
+          },
+          {
+            "from": "Draft",
+            "to": "Voided",
+            "mover": "roles",
+            "roles": [
+              "Accountant"
+            ],
+            "id": "accounting-ledger/TRN-005"
+          }
+        ],
+        "approvals": [
+          {
+            "stage": "Awaiting approval",
+            "approvers": [
+              "Admin"
+            ]
+          }
+        ],
+        "on_reject": {
+          "back_to": "Draft",
+          "resubmit": "yes"
+        },
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "effects": [],
+        "initial": "Draft",
+        "terminal": [
+          "Paid",
+          "Voided"
+        ]
+      },
+      "Bill lifecycle": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Accountant"
+          ],
+          "action": "creating a bill (starts in Draft)"
+        },
+        "stages": [
+          {
+            "id": "accounting-ledger/STG-006",
+            "name": "Draft"
+          },
+          {
+            "id": "accounting-ledger/STG-007",
+            "name": "Awaiting payment"
+          },
+          {
+            "id": "accounting-ledger/STG-008",
+            "name": "Paid"
+          },
+          {
+            "id": "accounting-ledger/STG-009",
+            "name": "Voided"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "Draft",
+            "to": "Awaiting payment",
+            "mover": "roles",
+            "roles": [
+              "Accountant"
+            ],
+            "id": "accounting-ledger/TRN-006"
+          },
+          {
+            "from": "Awaiting payment",
+            "to": "Paid",
+            "mover": "automatic",
+            "event": "Payments applied to the bill reach its total",
+            "id": "accounting-ledger/TRN-007"
+          },
+          {
+            "from": "Awaiting payment",
+            "to": "Voided",
+            "mover": "roles",
+            "roles": [
+              "Admin"
+            ],
+            "id": "accounting-ledger/TRN-008"
+          },
+          {
+            "from": "Draft",
+            "to": "Voided",
+            "mover": "roles",
+            "roles": [
+              "Accountant"
+            ],
+            "id": "accounting-ledger/TRN-009"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "effects": [],
+        "initial": "Draft",
+        "terminal": [
+          "Paid",
+          "Voided"
+        ]
+      }
+    },
+    "notifications": {
+      "Invoice sent": {
+        "trigger": {
+          "kind": "event",
+          "event": "the Send action runs on an invoice"
+        },
+        "recipients": [
+          {
+            "kind": "custom",
+            "who": "the invoice's Contact, at their email address"
+          }
+        ],
+        "channels": [
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "accounting-ledger/NOTIF-001"
+      },
+      "Payment reminder": {
+        "trigger": {
+          "kind": "relative_to_date",
+          "record": "Invoice",
+          "date_field": "Due date",
+          "offset": "+3 days"
+        },
+        "recipients": [
+          {
+            "kind": "custom",
+            "who": "the invoice's Contact \u2014 only while the invoice is in Awaiting payment"
+          }
+        ],
+        "channels": [
+          "email"
+        ],
+        "timing": "offset:+3 days",
+        "id": "accounting-ledger/NOTIF-002"
+      },
+      "Payment received": {
+        "trigger": {
+          "kind": "event",
+          "event": "an invoice moves to Paid"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Accountant"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app"
+        ],
+        "timing": "immediate",
+        "id": "accounting-ledger/NOTIF-003"
+      }
+    },
+    "reports": {},
+    "forms": {},
+    "integrations": {},
+    "auth": {
+      "AU.01": [
+        "invited"
+      ],
+      "AU.02": [
+        {
+          "name": "Full name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Email address",
+          "type": "email",
+          "required": "yes",
+          "unique": "yes"
+        }
+      ],
+      "AU.03": "yes",
+      "AU.04": [
+        "password",
+        "google"
+      ],
+      "AU.07": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "AU.08": {
+        "attempts": 5,
+        "duration": "15 minutes"
+      },
+      "AU.09": "yes",
+      "AU.10": "30 days",
+      "AU.11": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "AU.12": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "AU.13": [
+        "super"
+      ],
+      "AU.14": {
+        "required": "yes",
+        "status": "need_drafting"
+      },
+      "AU.06": {
+        "inviters": [
+          "Admin"
+        ],
+        "default_role": "Accountant"
+      }
+    },
+    "brand": {
+      "app_name": null,
+      "assets": null
+    },
+    "screens_inventory": [
+      {
+        "id": "accounting-ledger/SCR-001",
+        "kind": "list",
+        "record": "Contact"
+      },
+      {
+        "id": "accounting-ledger/SCR-002",
+        "kind": "detail",
+        "record": "Contact"
+      },
+      {
+        "id": "accounting-ledger/SCR-003",
+        "kind": "list",
+        "record": "Invoice"
+      },
+      {
+        "id": "accounting-ledger/SCR-004",
+        "kind": "detail",
+        "record": "Invoice"
+      },
+      {
+        "id": "accounting-ledger/SCR-005",
+        "kind": "list",
+        "record": "Invoice line"
+      },
+      {
+        "id": "accounting-ledger/SCR-006",
+        "kind": "detail",
+        "record": "Invoice line"
+      },
+      {
+        "id": "accounting-ledger/SCR-007",
+        "kind": "list",
+        "record": "Bill"
+      },
+      {
+        "id": "accounting-ledger/SCR-008",
+        "kind": "detail",
+        "record": "Bill"
+      },
+      {
+        "id": "accounting-ledger/SCR-009",
+        "kind": "list",
+        "record": "Payment"
+      },
+      {
+        "id": "accounting-ledger/SCR-010",
+        "kind": "detail",
+        "record": "Payment"
+      }
+    ],
+    "navigation": [
+      "accounting-ledger/SCR-001",
+      "accounting-ledger/SCR-002",
+      "accounting-ledger/SCR-003",
+      "accounting-ledger/SCR-004",
+      "accounting-ledger/SCR-005",
+      "accounting-ledger/SCR-006",
+      "accounting-ledger/SCR-007",
+      "accounting-ledger/SCR-008",
+      "accounting-ledger/SCR-009",
+      "accounting-ledger/SCR-010"
+    ],
+    "landing_per_role": {
+      "Admin": "Invoices list",
+      "Accountant": "Invoices list",
+      "Advisor": "Invoices list"
+    },
+    "actions_inventory": [
+      {
+        "id": "accounting-ledger/ACT-001",
+        "kind": "create",
+        "record": "Contact",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "creates a new 'Contact' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-002",
+        "kind": "edit",
+        "record": "Contact",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "edits an existing 'Contact' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-003",
+        "kind": "delete",
+        "record": "Contact",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "deletes a 'Contact' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-004",
+        "kind": "create",
+        "record": "Invoice",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "creates a new 'Invoice' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-005",
+        "kind": "edit",
+        "record": "Invoice",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "edits an existing 'Invoice' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-006",
+        "kind": "custom",
+        "record": "Invoice",
+        "detail": {
+          "name": "Send",
+          "who": [
+            "Accountant"
+          ],
+          "effect": "emails the invoice document to the Contact and stamps the sent time",
+          "result_location": "the invoice page's activity trail",
+          "execution": {
+            "op": "generate_document",
+            "stamp_column": "sent_at",
+            "title_columns": [
+              "reference"
+            ],
+            "line_table": "invoice_lines",
+            "line_fk": "invoice",
+            "line_columns": [
+              "description",
+              "quantity",
+              "unit_amount"
+            ],
+            "body_columns": [
+              "contact",
+              "issue_date",
+              "due_date",
+              "notes"
+            ],
+            "dispatch": "none"
+          }
+        },
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "emails the invoice document to the Contact and stamps the sent time"
+      },
+      {
+        "id": "accounting-ledger/ACT-007",
+        "kind": "create",
+        "record": "Invoice line",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "creates a new 'Invoice line' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-008",
+        "kind": "edit",
+        "record": "Invoice line",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "edits an existing 'Invoice line' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-009",
+        "kind": "delete",
+        "record": "Invoice line",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "deletes a 'Invoice line' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-010",
+        "kind": "create",
+        "record": "Bill",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "creates a new 'Bill' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-011",
+        "kind": "edit",
+        "record": "Bill",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "edits an existing 'Bill' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-012",
+        "kind": "create",
+        "record": "Payment",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "creates a new 'Payment' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-013",
+        "kind": "edit",
+        "record": "Payment",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "edits an existing 'Payment' record"
+      },
+      {
+        "id": "accounting-ledger/ACT-014",
+        "kind": "transition",
+        "workflow": "Invoice lifecycle",
+        "from": "Draft",
+        "to": "Awaiting approval",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Awaiting approval'"
+      },
+      {
+        "id": "accounting-ledger/ACT-015",
+        "kind": "transition",
+        "workflow": "Invoice lifecycle",
+        "from": "Awaiting approval",
+        "to": "Awaiting payment",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ],
+        "outcome": "moves 'Invoice lifecycle' from 'Awaiting approval' to 'Awaiting payment'"
+      },
+      {
+        "id": "accounting-ledger/ACT-016",
+        "kind": "transition",
+        "workflow": "Invoice lifecycle",
+        "from": "Awaiting payment",
+        "to": "Paid",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Paid'"
+      },
+      {
+        "id": "accounting-ledger/ACT-017",
+        "kind": "transition",
+        "workflow": "Invoice lifecycle",
+        "from": "Awaiting payment",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ],
+        "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Voided'"
+      },
+      {
+        "id": "accounting-ledger/ACT-018",
+        "kind": "transition",
+        "workflow": "Invoice lifecycle",
+        "from": "Draft",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Voided'"
+      },
+      {
+        "id": "accounting-ledger/ACT-019",
+        "kind": "approve",
+        "workflow": "Invoice lifecycle",
+        "stage": "Awaiting approval",
+        "roles": [
+          "Admin"
+        ],
+        "outcome": "approves 'Invoice lifecycle' at stage 'Awaiting approval'"
+      },
+      {
+        "id": "accounting-ledger/ACT-020",
+        "kind": "transition",
+        "workflow": "Bill lifecycle",
+        "from": "Draft",
+        "to": "Awaiting payment",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Awaiting payment'"
+      },
+      {
+        "id": "accounting-ledger/ACT-021",
+        "kind": "transition",
+        "workflow": "Bill lifecycle",
+        "from": "Awaiting payment",
+        "to": "Paid",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Paid'"
+      },
+      {
+        "id": "accounting-ledger/ACT-022",
+        "kind": "transition",
+        "workflow": "Bill lifecycle",
+        "from": "Awaiting payment",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Admin"
+        ],
+        "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Voided'"
+      },
+      {
+        "id": "accounting-ledger/ACT-023",
+        "kind": "transition",
+        "workflow": "Bill lifecycle",
+        "from": "Draft",
+        "to": "Voided",
+        "mover": "roles",
+        "roles": [
+          "Accountant"
+        ],
+        "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Voided'"
+      }
+    ],
+    "recurring_ops": [
+      {
+        "id": "accounting-ledger/OPS-001",
+        "source": "R.14:Contact",
+        "detail": "forever"
+      },
+      {
+        "id": "accounting-ledger/OPS-002",
+        "source": "R.14:Invoice",
+        "detail": "forever"
+      },
+      {
+        "id": "accounting-ledger/OPS-003",
+        "source": "R.14:Invoice line",
+        "detail": "forever"
+      },
+      {
+        "id": "accounting-ledger/OPS-004",
+        "source": "R.14:Bill",
+        "detail": "forever"
+      },
+      {
+        "id": "accounting-ledger/OPS-005",
+        "source": "R.14:Payment",
+        "detail": "forever"
+      },
+      {
+        "id": "accounting-ledger/OPS-006",
+        "source": "FL.01:Invoice lifecycle",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Accountant"
+          ],
+          "action": "creating an invoice (starts in Draft)"
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-007",
+        "source": "FL.01:Bill lifecycle",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Accountant"
+          ],
+          "action": "creating a bill (starts in Draft)"
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-008",
+        "source": "N.01:Invoice sent",
+        "detail": {
+          "kind": "event",
+          "event": "the Send action runs on an invoice"
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-009",
+        "source": "N.01:Payment reminder",
+        "detail": {
+          "kind": "relative_to_date",
+          "record": "Invoice",
+          "date_field": "Due date",
+          "offset": "+3 days"
+        }
+      },
+      {
+        "id": "accounting-ledger/OPS-010",
+        "source": "N.01:Payment received",
+        "detail": {
+          "kind": "event",
+          "event": "an invoice moves to Paid"
+        }
+      }
+    ],
+    "qa_generated_tests": [
+      {
+        "id": "accounting-ledger/QA-001",
+        "action_id": "accounting-ledger/ACT-001",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-001",
+          "kind": "create",
+          "record": "Contact",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "creates a new 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-002",
+        "action_id": "accounting-ledger/ACT-002",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-002",
+          "kind": "edit",
+          "record": "Contact",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "edits an existing 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-003",
+        "action_id": "accounting-ledger/ACT-003",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-003",
+          "kind": "delete",
+          "record": "Contact",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "deletes a 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-004",
+        "action_id": "accounting-ledger/ACT-004",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-004",
+          "kind": "create",
+          "record": "Invoice",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "creates a new 'Invoice' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-005",
+        "action_id": "accounting-ledger/ACT-005",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-005",
+          "kind": "edit",
+          "record": "Invoice",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "edits an existing 'Invoice' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-006",
+        "action_id": "accounting-ledger/ACT-006",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-006",
+          "kind": "custom",
+          "record": "Invoice",
+          "detail": {
+            "name": "Send",
+            "who": [
+              "Accountant"
+            ],
+            "effect": "emails the invoice document to the Contact and stamps the sent time",
+            "result_location": "the invoice page's activity trail",
+            "execution": {
+              "op": "generate_document",
+              "stamp_column": "sent_at",
+              "title_columns": [
+                "reference"
+              ],
+              "line_table": "invoice_lines",
+              "line_fk": "invoice",
+              "line_columns": [
+                "description",
+                "quantity",
+                "unit_amount"
+              ],
+              "body_columns": [
+                "contact",
+                "issue_date",
+                "due_date",
+                "notes"
+              ],
+              "dispatch": "none"
+            }
+          },
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "emails the invoice document to the Contact and stamps the sent time"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-007",
+        "action_id": "accounting-ledger/ACT-007",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-007",
+          "kind": "create",
+          "record": "Invoice line",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "creates a new 'Invoice line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-008",
+        "action_id": "accounting-ledger/ACT-008",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-008",
+          "kind": "edit",
+          "record": "Invoice line",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "edits an existing 'Invoice line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-009",
+        "action_id": "accounting-ledger/ACT-009",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-009",
+          "kind": "delete",
+          "record": "Invoice line",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "deletes a 'Invoice line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-010",
+        "action_id": "accounting-ledger/ACT-010",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-010",
+          "kind": "create",
+          "record": "Bill",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "creates a new 'Bill' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-011",
+        "action_id": "accounting-ledger/ACT-011",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-011",
+          "kind": "edit",
+          "record": "Bill",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "edits an existing 'Bill' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-012",
+        "action_id": "accounting-ledger/ACT-012",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-012",
+          "kind": "create",
+          "record": "Payment",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "creates a new 'Payment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-013",
+        "action_id": "accounting-ledger/ACT-013",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-013",
+          "kind": "edit",
+          "record": "Payment",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "edits an existing 'Payment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-014",
+        "action_id": "accounting-ledger/ACT-014",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-014",
+          "kind": "transition",
+          "workflow": "Invoice lifecycle",
+          "from": "Draft",
+          "to": "Awaiting approval",
+          "mover": "roles",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Awaiting approval'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-015",
+        "action_id": "accounting-ledger/ACT-015",
+        "role": "Admin",
+        "action": {
+          "id": "accounting-ledger/ACT-015",
+          "kind": "transition",
+          "workflow": "Invoice lifecycle",
+          "from": "Awaiting approval",
+          "to": "Awaiting payment",
+          "mover": "roles",
+          "roles": [
+            "Admin"
+          ],
+          "outcome": "moves 'Invoice lifecycle' from 'Awaiting approval' to 'Awaiting payment'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-016",
+        "action_id": "accounting-ledger/ACT-016",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "accounting-ledger/ACT-016",
+          "kind": "transition",
+          "workflow": "Invoice lifecycle",
+          "from": "Awaiting payment",
+          "to": "Paid",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Paid'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-017",
+        "action_id": "accounting-ledger/ACT-017",
+        "role": "Admin",
+        "action": {
+          "id": "accounting-ledger/ACT-017",
+          "kind": "transition",
+          "workflow": "Invoice lifecycle",
+          "from": "Awaiting payment",
+          "to": "Voided",
+          "mover": "roles",
+          "roles": [
+            "Admin"
+          ],
+          "outcome": "moves 'Invoice lifecycle' from 'Awaiting payment' to 'Voided'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-018",
+        "action_id": "accounting-ledger/ACT-018",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-018",
+          "kind": "transition",
+          "workflow": "Invoice lifecycle",
+          "from": "Draft",
+          "to": "Voided",
+          "mover": "roles",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "moves 'Invoice lifecycle' from 'Draft' to 'Voided'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-019",
+        "action_id": "accounting-ledger/ACT-019",
+        "role": "Admin",
+        "action": {
+          "id": "accounting-ledger/ACT-019",
+          "kind": "approve",
+          "workflow": "Invoice lifecycle",
+          "stage": "Awaiting approval",
+          "roles": [
+            "Admin"
+          ],
+          "outcome": "approves 'Invoice lifecycle' at stage 'Awaiting approval'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-020",
+        "action_id": "accounting-ledger/ACT-020",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-020",
+          "kind": "transition",
+          "workflow": "Bill lifecycle",
+          "from": "Draft",
+          "to": "Awaiting payment",
+          "mover": "roles",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Awaiting payment'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-021",
+        "action_id": "accounting-ledger/ACT-021",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "accounting-ledger/ACT-021",
+          "kind": "transition",
+          "workflow": "Bill lifecycle",
+          "from": "Awaiting payment",
+          "to": "Paid",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Paid'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-022",
+        "action_id": "accounting-ledger/ACT-022",
+        "role": "Admin",
+        "action": {
+          "id": "accounting-ledger/ACT-022",
+          "kind": "transition",
+          "workflow": "Bill lifecycle",
+          "from": "Awaiting payment",
+          "to": "Voided",
+          "mover": "roles",
+          "roles": [
+            "Admin"
+          ],
+          "outcome": "moves 'Bill lifecycle' from 'Awaiting payment' to 'Voided'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-023",
+        "action_id": "accounting-ledger/ACT-023",
+        "role": "Accountant",
+        "action": {
+          "id": "accounting-ledger/ACT-023",
+          "kind": "transition",
+          "workflow": "Bill lifecycle",
+          "from": "Draft",
+          "to": "Voided",
+          "mover": "roles",
+          "roles": [
+            "Accountant"
+          ],
+          "outcome": "moves 'Bill lifecycle' from 'Draft' to 'Voided'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "accounting-ledger/QA-024",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-001",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-025",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-002",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-026",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-003",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-027",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-004",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-028",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-005",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-029",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-006",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-030",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-007",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-031",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-008",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-032",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-009",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-033",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-010",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "accounting-ledger/QA-034",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-001",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-035",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-002",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-036",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-003",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-037",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-004",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-038",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-005",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-039",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-006",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-040",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-007",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-041",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-008",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-042",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-009",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-043",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-010",
+        "role": "Accountant",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-044",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-001",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-045",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-002",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-046",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-003",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-047",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-004",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-048",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-005",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-049",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-006",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-050",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-007",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-051",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-008",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-052",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-009",
+        "role": "Advisor",
+        "expect": "reachable"
+      },
+      {
+        "id": "accounting-ledger/QA-053",
+        "kind": "screen_access",
+        "screen_id": "accounting-ledger/SCR-010",
+        "role": "Advisor",
+        "expect": "reachable"
+      }
+    ],
+    "locked": true,
+    "locked_at_graph_version": "3.0"
+  },
+  "reference_instance": {
+    "note": "reference answers from packages/interfaces/build_families.py; not a real customer's answers"
+  }
+}

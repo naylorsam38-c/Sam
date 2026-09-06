@@ -1,0 +1,81 @@
+{
+ "part_id": "api_key_connect",
+ "version": "1.0.0",
+ "revision": "7b5afa7a951e53ee",
+ "qualified_at": "2026-09-06T00:45:36+00:00",
+ "base_url": "http://127.0.0.1:38847",
+ "journeys": [
+  {
+   "journey": "api_key_screen_connects_never_echoes",
+   "subject": "command-desk/SCR-022",
+   "parts": [
+    "api_key_connect"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "paste a key on command-desk/SCR-022 and press Save key",
+     "observed": "connected"
+    },
+    {
+     "channel": "api",
+     "action": "GET /api/connections/status (read-back)",
+     "observed": {
+      "provider": "Tavily search",
+      "state": "connected",
+      "expires_at": null,
+      "scopes": null
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "reload the screen",
+     "observed": "key not in page"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "api_key_screen_connects_never_echoes",
+   "subject": "command-desk/SCR-023",
+   "parts": [
+    "api_key_connect"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "paste a key on command-desk/SCR-023 and press Save key",
+     "observed": "connected"
+    },
+    {
+     "channel": "api",
+     "action": "GET /api/connections/status (read-back)",
+     "observed": {
+      "provider": "Model providers",
+      "state": "connected",
+      "expires_at": null,
+      "scopes": null
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "reload the screen",
+     "observed": "key not in page"
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

@@ -1,0 +1,4 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Upcoming appointments</title></head><body><header class="app-header"><svg class="app-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <path d="M6 40 Q 20 16, 32 34 T 58 26" fill="none" stroke="#8A6A1F" stroke-width="5" stroke-linecap="round"/>
+</svg>
+<span class="app-name">Front Room (Wave mark)</span></header><h1>Upcoming appointments</h1><table id='numbers'></table><script>fetch('/api/reports/upcoming_appointments').then(r => r.json()).then(d => {document.getElementById('numbers').innerHTML = Object.entries(d).map(([metric, value]) => '<tr><td>' + metric + '</td><td class=\'value\'>' + JSON.stringify(value) + '</td></tr>').join('');});</script></body></html>

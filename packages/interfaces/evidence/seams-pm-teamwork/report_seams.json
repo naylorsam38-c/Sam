@@ -1,0 +1,134 @@
+{
+ "base_url": "http://127.0.0.1:8833",
+ "journeys": [
+  {
+   "journey": "form_submit_lands_in_list_and_detail",
+   "subject": "-",
+   "parts": [
+    "form_render_submit",
+    "crud_list_detail"
+   ],
+   "result": "N/A",
+   "reason": "the spec declares no form screen",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "pm-teamwork/SCR-007",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "FAIL",
+   "reason": "the report screen rendered no numbers",
+   "failed_part": "reporting_engine",
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "pm-teamwork/SCR-008",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "FAIL",
+   "reason": "the report screen rendered no numbers",
+   "failed_part": "reporting_engine",
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  },
+  {
+   "journey": "person_move_is_visible_on_the_screen",
+   "subject": "pm-teamwork/ACT-011",
+   "parts": [
+    "workflow_executor"
+   ],
+   "result": "FAIL",
+   "reason": "could not create a Task: 404 {'error': 'no route'}",
+   "failed_part": "workflow_executor",
+   "notes": [],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/tasks",
+     "observed": 404,
+     "user_facing": false
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "custom_action_is_pressable_and_visible",
+   "subject": "pm-teamwork/ACT-007",
+   "parts": [
+    "custom_action_execution"
+   ],
+   "result": "FAIL",
+   "reason": "could not create a Task: 404 {'error': 'no route'}",
+   "failed_part": "custom_action_execution",
+   "notes": [],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/tasks",
+     "observed": 404,
+     "user_facing": false
+    }
+   ],
+   "page_errors": []
+  }
+ ],
+ "parts": {
+  "form_render_submit": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "crud_list_detail": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "reporting_engine": {
+   "PASS": 0,
+   "FAIL": 2,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "workflow_executor": {
+   "PASS": 0,
+   "FAIL": 1,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "custom_action_execution": {
+   "PASS": 0,
+   "FAIL": 1,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  }
+ },
+ "receipts_written": [],
+ "receipts_refused": []
+}

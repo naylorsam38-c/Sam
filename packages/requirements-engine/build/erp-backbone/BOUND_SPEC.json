@@ -1,0 +1,4579 @@
+{
+  "spec_id": "BOUND-ERP-BACKBONE",
+  "customer_complete": false,
+  "ask_customer_open": [
+    "0.01",
+    "A.01",
+    "A.02",
+    "A.03",
+    "A.04",
+    "A.05",
+    "A.12",
+    "A.13",
+    "A.14",
+    "C.01",
+    "C.02",
+    "C.03",
+    "C.04",
+    "C.07",
+    "Z.01",
+    "Z.02",
+    "Z.03"
+  ],
+  "source_template": "erp-backbone",
+  "graph_version": "3.0",
+  "build_model": {
+    "records": {
+      "Product": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "SKU": {
+            "name": "SKU",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "yes"
+          },
+          "Sale price": {
+            "name": "Sale price",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Cost": {
+            "name": "Cost",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Stock on hand": {
+            "name": "Stock on hand",
+            "type": "whole_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Reorder point": {
+            "name": "Reorder point",
+            "type": "whole_number",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "SKU": "VARCHAR(255)",
+          "Sale price": "DECIMAL(18,2)",
+          "Cost": "DECIMAL(18,2)",
+          "Stock on hand": "INTEGER",
+          "Reorder point": "INTEGER"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Operations"
+          ],
+          "edit": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-001"
+      },
+      "Supplier": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "yes"
+          },
+          "Email": {
+            "name": "Email",
+            "type": "email",
+            "required": "no",
+            "unique": "no"
+          },
+          "Phone": {
+            "name": "Phone",
+            "type": "phone",
+            "required": "no",
+            "unique": "no"
+          },
+          "Payment terms": {
+            "name": "Payment terms",
+            "type": "one_choice",
+            "required": "no",
+            "unique": "no",
+            "options": [
+              "prepaid",
+              "net 7",
+              "net 30",
+              "net 60"
+            ]
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Email": "VARCHAR(255)",
+          "Phone": "VARCHAR(40)",
+          "Payment terms": "ENUM"
+        },
+        "enums": {
+          "Payment terms": [
+            "prepaid",
+            "net 7",
+            "net 30",
+            "net 60"
+          ]
+        },
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Purchasing",
+            "Operations"
+          ],
+          "edit": [
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-002"
+      },
+      "Customer account": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Email": {
+            "name": "Email",
+            "type": "email",
+            "required": "no",
+            "unique": "no"
+          },
+          "Phone": {
+            "name": "Phone",
+            "type": "phone",
+            "required": "no",
+            "unique": "no"
+          },
+          "Delivery address": {
+            "name": "Delivery address",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Email": "VARCHAR(255)",
+          "Phone": "VARCHAR(40)",
+          "Delivery address": "TEXT"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sales",
+            "Operations"
+          ],
+          "edit": [
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-003"
+      },
+      "Purchase order": {
+        "fields": {
+          "Supplier": {
+            "name": "Supplier",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Supplier"
+          },
+          "Order date": {
+            "name": "Order date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Expected date": {
+            "name": "Expected date",
+            "type": "date",
+            "required": "no",
+            "unique": "no"
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Supplier": "FOREIGN_KEY",
+          "Order date": "DATE",
+          "Expected date": "DATE",
+          "Notes": "TEXT"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Purchasing"
+          ],
+          "edit": [
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Supplier",
+        "id_style": {
+          "needed": "yes",
+          "format": "PO-#### (sequential)"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "Draft",
+            "Confirmed",
+            "Received",
+            "Closed",
+            "Cancelled"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-004"
+      },
+      "Purchase order line": {
+        "fields": {
+          "Purchase order": {
+            "name": "Purchase order",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Purchase order"
+          },
+          "Product": {
+            "name": "Product",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Product"
+          },
+          "Quantity": {
+            "name": "Quantity",
+            "type": "whole_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Unit cost": {
+            "name": "Unit cost",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Purchase order": "FOREIGN_KEY",
+          "Product": "FOREIGN_KEY",
+          "Quantity": "INTEGER",
+          "Unit cost": "DECIMAL(18,2)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Purchasing"
+          ],
+          "edit": [
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Product",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-005"
+      },
+      "Sales order": {
+        "fields": {
+          "Customer account": {
+            "name": "Customer account",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Customer account"
+          },
+          "Order date": {
+            "name": "Order date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Customer account": "FOREIGN_KEY",
+          "Order date": "DATE",
+          "Notes": "TEXT"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sales"
+          ],
+          "edit": [
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Customer account",
+        "id_style": {
+          "needed": "yes",
+          "format": "SO-#### (sequential)"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "Draft",
+            "Confirmed",
+            "Shipped",
+            "Closed",
+            "Cancelled"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-006"
+      },
+      "Sales order line": {
+        "fields": {
+          "Sales order": {
+            "name": "Sales order",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Sales order"
+          },
+          "Product": {
+            "name": "Product",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Product"
+          },
+          "Quantity": {
+            "name": "Quantity",
+            "type": "whole_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Unit price": {
+            "name": "Unit price",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Sales order": "FOREIGN_KEY",
+          "Product": "FOREIGN_KEY",
+          "Quantity": "INTEGER",
+          "Unit price": "DECIMAL(18,2)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sales"
+          ],
+          "edit": [
+            {
+              "role": "Sales",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sales",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Product",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-007"
+      },
+      "Stock adjustment": {
+        "fields": {
+          "Product": {
+            "name": "Product",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Product"
+          },
+          "Change": {
+            "name": "Change",
+            "type": "whole_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Reason": {
+            "name": "Reason",
+            "type": "one_choice",
+            "required": "yes",
+            "unique": "no",
+            "options": [
+              "stocktake",
+              "damage",
+              "loss",
+              "correction"
+            ]
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Product": "FOREIGN_KEY",
+          "Change": "INTEGER",
+          "Reason": "ENUM",
+          "Notes": "TEXT"
+        },
+        "enums": {
+          "Reason": [
+            "stocktake",
+            "damage",
+            "loss",
+            "correction"
+          ]
+        },
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Warehouse",
+            "Operations"
+          ],
+          "edit": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Product",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-008"
+      }
+    },
+    "roles": {
+      "Admin": {
+        "permitted": [],
+        "is_admin": true
+      },
+      "Operations": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Stock adjustment",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Stock adjustment",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Stock adjustment",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Stock adjustment",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      },
+      "Sales": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order line",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Sales order line",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Sales order line",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Sales order line",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      },
+      "Purchasing": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order line",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Purchase order line",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Purchase order line",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Purchase order line",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      },
+      "Warehouse": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Stock adjustment",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Stock adjustment",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      }
+    },
+    "super_role": "Admin",
+    "workflows": {
+      "Purchase order lifecycle": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Purchasing"
+          ],
+          "action": "creating a purchase order (starts in Draft)"
+        },
+        "stages": [
+          {
+            "id": "erp-backbone/STG-001",
+            "name": "Draft"
+          },
+          {
+            "id": "erp-backbone/STG-002",
+            "name": "Confirmed"
+          },
+          {
+            "id": "erp-backbone/STG-003",
+            "name": "Received"
+          },
+          {
+            "id": "erp-backbone/STG-004",
+            "name": "Closed"
+          },
+          {
+            "id": "erp-backbone/STG-005",
+            "name": "Cancelled"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "Draft",
+            "to": "Confirmed",
+            "mover": "roles",
+            "roles": [
+              "Purchasing"
+            ],
+            "id": "erp-backbone/TRN-001"
+          },
+          {
+            "from": "Confirmed",
+            "to": "Received",
+            "mover": "roles",
+            "roles": [
+              "Warehouse"
+            ],
+            "id": "erp-backbone/TRN-002"
+          },
+          {
+            "from": "Received",
+            "to": "Closed",
+            "mover": "roles",
+            "roles": [
+              "Operations"
+            ],
+            "id": "erp-backbone/TRN-003"
+          }
+        ],
+        "approvals": [
+          {
+            "stage": "Draft",
+            "approvers": [
+              "Operations"
+            ]
+          }
+        ],
+        "on_reject": {
+          "back_to": "Draft",
+          "resubmit": "yes"
+        },
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "effects": [
+          {
+            "on_enter": "Received",
+            "op": "apply_order_lines",
+            "line_table": "purchase_order_lines",
+            "line_fk": "purchase_order",
+            "product_table": "products",
+            "product_fk": "product",
+            "quantity_column": "quantity",
+            "direction": "receive"
+          }
+        ],
+        "initial": "Draft",
+        "terminal": [
+          "Closed",
+          "Cancelled"
+        ]
+      },
+      "Sales order lifecycle": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Sales"
+          ],
+          "action": "creating a sales order (starts in Draft)"
+        },
+        "stages": [
+          {
+            "id": "erp-backbone/STG-006",
+            "name": "Draft"
+          },
+          {
+            "id": "erp-backbone/STG-007",
+            "name": "Confirmed"
+          },
+          {
+            "id": "erp-backbone/STG-008",
+            "name": "Shipped"
+          },
+          {
+            "id": "erp-backbone/STG-009",
+            "name": "Closed"
+          },
+          {
+            "id": "erp-backbone/STG-010",
+            "name": "Cancelled"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "Draft",
+            "to": "Confirmed",
+            "mover": "roles",
+            "roles": [
+              "Sales"
+            ],
+            "id": "erp-backbone/TRN-004"
+          },
+          {
+            "from": "Confirmed",
+            "to": "Shipped",
+            "mover": "roles",
+            "roles": [
+              "Warehouse"
+            ],
+            "id": "erp-backbone/TRN-005"
+          },
+          {
+            "from": "Shipped",
+            "to": "Closed",
+            "mover": "roles",
+            "roles": [
+              "Operations"
+            ],
+            "id": "erp-backbone/TRN-006"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "effects": [
+          {
+            "on_enter": "Shipped",
+            "op": "apply_order_lines",
+            "line_table": "sales_order_lines",
+            "line_fk": "sales_order",
+            "product_table": "products",
+            "product_fk": "product",
+            "quantity_column": "quantity",
+            "direction": "ship"
+          }
+        ],
+        "initial": "Draft",
+        "terminal": [
+          "Closed",
+          "Cancelled"
+        ]
+      }
+    },
+    "notifications": {
+      "Low stock alert": {
+        "trigger": {
+          "kind": "event",
+          "event": "a Product's Stock on hand falls to or below its Reorder point"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Purchasing",
+              "Operations"
+            ]
+          }
+        ],
+        "channels": [
+          "email",
+          "in_app"
+        ],
+        "timing": "immediate",
+        "id": "erp-backbone/NOTIF-001",
+        "part_bindings": {
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      "Order shipped": {
+        "trigger": {
+          "kind": "event",
+          "event": "a sales order moves to Shipped"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sales"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app"
+        ],
+        "timing": "immediate",
+        "id": "erp-backbone/NOTIF-002",
+        "part_bindings": {
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
+        }
+      }
+    },
+    "reports": {
+      "Stock on hand": {
+        "data_source": "What do we hold right now, and what is at or below its reorder point?",
+        "metrics": {
+          "sum of Product Stock on hand": "auto: count/sum of 'sum of Product Stock on hand'",
+          "count of Products at or below Reorder point": "auto: count/sum of 'count of Products at or below Reorder point'"
+        },
+        "spec": [
+          {
+            "metric": "sum of Product Stock on hand",
+            "spec": {
+              "table": "products",
+              "aggregation": "sum",
+              "value_field": "stock_on_hand"
+            }
+          },
+          {
+            "metric": "count of Products at or below Reorder point",
+            "spec": {
+              "engine": "stock_ledger",
+              "kind": "count_at_or_below_reorder",
+              "table": "products",
+              "stock_column": "stock_on_hand",
+              "reorder_column": "reorder_point"
+            }
+          }
+        ],
+        "id": "erp-backbone/RPT-001",
+        "part_bindings": {
+          "parts": [
+            "stock_ledger"
+          ],
+          "locations": [
+            "packages/builder/engines/stock_ledger.py::apply_order_line",
+            "packages/builder/engines/stock_ledger.py::needs_reorder",
+            "packages/builder/engines/stock_ledger.py::apply_order_lines",
+            "packages/builder/engines/stock_ledger.py::count_at_or_below_reorder"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stock_ledger",
+              "version": "1.1.0",
+              "revision": "094c3be30a31bf03",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      "Sales by month": {
+        "data_source": "What did we sell, month by month?",
+        "metrics": {
+          "sales value": "auto: count/sum of 'sales value'"
+        },
+        "spec": [
+          {
+            "metric": "sales value",
+            "spec": {
+              "engine": "stage_history",
+              "kind": "line_value_by_month",
+              "table": "sales_orders",
+              "stage": "Shipped",
+              "line_table": "sales_order_lines",
+              "line_fk": "sales_order",
+              "quantity_column": "quantity",
+              "price_column": "unit_price",
+              "months": 12
+            }
+          }
+        ],
+        "id": "erp-backbone/RPT-002",
+        "part_bindings": {
+          "parts": [
+            "stage_history"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_history.py::record_transition",
+            "packages/builder/engines/stage_history.py::entered_at",
+            "packages/builder/engines/stage_history.py::rate_between",
+            "packages/builder/engines/stage_history.py::rate_over_last_days",
+            "packages/builder/engines/stage_history.py::line_value_by_month"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_history",
+              "version": "1.1.0",
+              "revision": "a2820dad41d0c83c",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      "Open orders": {
+        "data_source": "What is confirmed but not yet fulfilled, on both sides?",
+        "metrics": {
+          "count of Sales orders in Confirmed": "auto: count/sum of 'count of Sales orders in Confirmed'",
+          "count of Purchase orders in Confirmed": "auto: count/sum of 'count of Purchase orders in Confirmed'"
+        },
+        "spec": [
+          {
+            "metric": "count of Sales orders in Confirmed",
+            "spec": {
+              "table": "sales_orders",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "=",
+                  "value": "Confirmed"
+                }
+              ]
+            }
+          },
+          {
+            "metric": "count of Purchase orders in Confirmed",
+            "spec": {
+              "table": "purchase_orders",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "=",
+                  "value": "Confirmed"
+                }
+              ]
+            }
+          }
+        ],
+        "id": "erp-backbone/RPT-003",
+        "part_bindings": {
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      }
+    },
+    "forms": {},
+    "integrations": {},
+    "auth": {
+      "AU.01": [
+        "admin_created"
+      ],
+      "AU.02": [
+        {
+          "name": "Full name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Email address",
+          "type": "email",
+          "required": "yes",
+          "unique": "yes"
+        }
+      ],
+      "AU.03": "yes",
+      "AU.04": [
+        "password",
+        "google"
+      ],
+      "AU.07": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "AU.08": {
+        "attempts": 5,
+        "duration": "15 minutes"
+      },
+      "AU.09": "yes",
+      "AU.10": "30 days",
+      "AU.11": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "AU.12": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "AU.13": [
+        "super"
+      ],
+      "AU.14": {
+        "required": "yes",
+        "status": "need_drafting"
+      }
+    },
+    "brand": {
+      "app_name": null,
+      "assets": null
+    },
+    "screens_inventory": [
+      {
+        "id": "erp-backbone/SCR-001",
+        "kind": "list",
+        "record": "Product",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-002",
+        "kind": "detail",
+        "record": "Product",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-003",
+        "kind": "list",
+        "record": "Supplier",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-004",
+        "kind": "detail",
+        "record": "Supplier",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-005",
+        "kind": "list",
+        "record": "Customer account",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-006",
+        "kind": "detail",
+        "record": "Customer account",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-007",
+        "kind": "list",
+        "record": "Purchase order",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-008",
+        "kind": "detail",
+        "record": "Purchase order",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-009",
+        "kind": "list",
+        "record": "Purchase order line",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-010",
+        "kind": "detail",
+        "record": "Purchase order line",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-011",
+        "kind": "list",
+        "record": "Sales order",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-012",
+        "kind": "detail",
+        "record": "Sales order",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-013",
+        "kind": "list",
+        "record": "Sales order line",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-014",
+        "kind": "detail",
+        "record": "Sales order line",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-015",
+        "kind": "list",
+        "record": "Stock adjustment",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-016",
+        "kind": "detail",
+        "record": "Stock adjustment",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-017",
+        "kind": "report",
+        "report": "Stock on hand",
+        "part_bindings": {
+          "parts": [
+            "stock_ledger"
+          ],
+          "locations": [
+            "packages/builder/engines/stock_ledger.py::apply_order_line",
+            "packages/builder/engines/stock_ledger.py::needs_reorder",
+            "packages/builder/engines/stock_ledger.py::apply_order_lines",
+            "packages/builder/engines/stock_ledger.py::count_at_or_below_reorder"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stock_ledger",
+              "version": "1.1.0",
+              "revision": "094c3be30a31bf03",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-018",
+        "kind": "report",
+        "report": "Sales by month",
+        "part_bindings": {
+          "parts": [
+            "stage_history"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_history.py::record_transition",
+            "packages/builder/engines/stage_history.py::entered_at",
+            "packages/builder/engines/stage_history.py::rate_between",
+            "packages/builder/engines/stage_history.py::rate_over_last_days",
+            "packages/builder/engines/stage_history.py::line_value_by_month"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_history",
+              "version": "1.1.0",
+              "revision": "a2820dad41d0c83c",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/SCR-019",
+        "kind": "report",
+        "report": "Open orders",
+        "part_bindings": {
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      }
+    ],
+    "navigation": [
+      "erp-backbone/SCR-001",
+      "erp-backbone/SCR-002",
+      "erp-backbone/SCR-003",
+      "erp-backbone/SCR-004",
+      "erp-backbone/SCR-005",
+      "erp-backbone/SCR-006",
+      "erp-backbone/SCR-007",
+      "erp-backbone/SCR-008",
+      "erp-backbone/SCR-009",
+      "erp-backbone/SCR-010",
+      "erp-backbone/SCR-011",
+      "erp-backbone/SCR-012",
+      "erp-backbone/SCR-013",
+      "erp-backbone/SCR-014",
+      "erp-backbone/SCR-015",
+      "erp-backbone/SCR-016",
+      "erp-backbone/SCR-017",
+      "erp-backbone/SCR-018",
+      "erp-backbone/SCR-019"
+    ],
+    "landing_per_role": {
+      "Admin": "Stock on hand",
+      "Operations": "Stock on hand",
+      "Sales": "Sales orders",
+      "Purchasing": "Purchase orders",
+      "Warehouse": "Open orders"
+    },
+    "actions_inventory": [
+      {
+        "id": "erp-backbone/ACT-001",
+        "kind": "create",
+        "record": "Product",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "creates a new 'Product' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-002",
+        "kind": "edit",
+        "record": "Product",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "edits an existing 'Product' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-003",
+        "kind": "delete",
+        "record": "Product",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Product' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-004",
+        "kind": "create",
+        "record": "Supplier",
+        "roles": [
+          "Operations",
+          "Purchasing"
+        ],
+        "outcome": "creates a new 'Supplier' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-005",
+        "kind": "edit",
+        "record": "Supplier",
+        "roles": [
+          "Operations",
+          "Purchasing"
+        ],
+        "outcome": "edits an existing 'Supplier' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-006",
+        "kind": "delete",
+        "record": "Supplier",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Supplier' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-007",
+        "kind": "create",
+        "record": "Customer account",
+        "roles": [
+          "Operations",
+          "Sales"
+        ],
+        "outcome": "creates a new 'Customer account' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-008",
+        "kind": "edit",
+        "record": "Customer account",
+        "roles": [
+          "Operations",
+          "Sales"
+        ],
+        "outcome": "edits an existing 'Customer account' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-009",
+        "kind": "delete",
+        "record": "Customer account",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Customer account' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-010",
+        "kind": "create",
+        "record": "Purchase order",
+        "roles": [
+          "Purchasing"
+        ],
+        "outcome": "creates a new 'Purchase order' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-011",
+        "kind": "edit",
+        "record": "Purchase order",
+        "roles": [
+          "Operations",
+          "Purchasing"
+        ],
+        "outcome": "edits an existing 'Purchase order' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-012",
+        "kind": "delete",
+        "record": "Purchase order",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Purchase order' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-013",
+        "kind": "create",
+        "record": "Purchase order line",
+        "roles": [
+          "Purchasing"
+        ],
+        "outcome": "creates a new 'Purchase order line' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-014",
+        "kind": "edit",
+        "record": "Purchase order line",
+        "roles": [
+          "Purchasing"
+        ],
+        "outcome": "edits an existing 'Purchase order line' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-015",
+        "kind": "delete",
+        "record": "Purchase order line",
+        "roles": [
+          "Purchasing"
+        ],
+        "outcome": "deletes a 'Purchase order line' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-016",
+        "kind": "create",
+        "record": "Sales order",
+        "roles": [
+          "Sales"
+        ],
+        "outcome": "creates a new 'Sales order' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-017",
+        "kind": "edit",
+        "record": "Sales order",
+        "roles": [
+          "Operations",
+          "Sales"
+        ],
+        "outcome": "edits an existing 'Sales order' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-018",
+        "kind": "delete",
+        "record": "Sales order",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Sales order' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-019",
+        "kind": "create",
+        "record": "Sales order line",
+        "roles": [
+          "Sales"
+        ],
+        "outcome": "creates a new 'Sales order line' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-020",
+        "kind": "edit",
+        "record": "Sales order line",
+        "roles": [
+          "Sales"
+        ],
+        "outcome": "edits an existing 'Sales order line' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-021",
+        "kind": "delete",
+        "record": "Sales order line",
+        "roles": [
+          "Sales"
+        ],
+        "outcome": "deletes a 'Sales order line' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-022",
+        "kind": "create",
+        "record": "Stock adjustment",
+        "roles": [
+          "Operations",
+          "Warehouse"
+        ],
+        "outcome": "creates a new 'Stock adjustment' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-023",
+        "kind": "edit",
+        "record": "Stock adjustment",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "edits an existing 'Stock adjustment' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-024",
+        "kind": "delete",
+        "record": "Stock adjustment",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Stock adjustment' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-025",
+        "kind": "transition",
+        "workflow": "Purchase order lifecycle",
+        "from": "Draft",
+        "to": "Confirmed",
+        "mover": "roles",
+        "roles": [
+          "Purchasing"
+        ],
+        "outcome": "moves 'Purchase order lifecycle' from 'Draft' to 'Confirmed'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-026",
+        "kind": "transition",
+        "workflow": "Purchase order lifecycle",
+        "from": "Confirmed",
+        "to": "Received",
+        "mover": "roles",
+        "roles": [
+          "Warehouse"
+        ],
+        "outcome": "moves 'Purchase order lifecycle' from 'Confirmed' to 'Received'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-027",
+        "kind": "transition",
+        "workflow": "Purchase order lifecycle",
+        "from": "Received",
+        "to": "Closed",
+        "mover": "roles",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "moves 'Purchase order lifecycle' from 'Received' to 'Closed'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-028",
+        "kind": "approve",
+        "workflow": "Purchase order lifecycle",
+        "stage": "Draft",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "approves 'Purchase order lifecycle' at stage 'Draft'",
+        "part_bindings": {
+          "parts": [
+            "stage_approval_gate"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_approval_gate.py::decide",
+            "packages/builder/engines/stage_approval_gate.py::check_may_leave",
+            "packages/builder/engines/stage_approval_gate.py::decision_for"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_approval_gate",
+              "version": "1.0.0",
+              "revision": "e05ac2be0b3c4cc8",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-029",
+        "kind": "transition",
+        "workflow": "Sales order lifecycle",
+        "from": "Draft",
+        "to": "Confirmed",
+        "mover": "roles",
+        "roles": [
+          "Sales"
+        ],
+        "outcome": "moves 'Sales order lifecycle' from 'Draft' to 'Confirmed'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-030",
+        "kind": "transition",
+        "workflow": "Sales order lifecycle",
+        "from": "Confirmed",
+        "to": "Shipped",
+        "mover": "roles",
+        "roles": [
+          "Warehouse"
+        ],
+        "outcome": "moves 'Sales order lifecycle' from 'Confirmed' to 'Shipped'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/ACT-031",
+        "kind": "transition",
+        "workflow": "Sales order lifecycle",
+        "from": "Shipped",
+        "to": "Closed",
+        "mover": "roles",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "moves 'Sales order lifecycle' from 'Shipped' to 'Closed'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      }
+    ],
+    "recurring_ops": [
+      {
+        "id": "erp-backbone/OPS-001",
+        "source": "R.14:Product",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-002",
+        "source": "R.14:Supplier",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-003",
+        "source": "R.14:Customer account",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-004",
+        "source": "R.14:Purchase order",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-005",
+        "source": "R.14:Purchase order line",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-006",
+        "source": "R.14:Sales order",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-007",
+        "source": "R.14:Sales order line",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-008",
+        "source": "R.14:Stock adjustment",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-009",
+        "source": "FL.01:Purchase order lifecycle",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Purchasing"
+          ],
+          "action": "creating a purchase order (starts in Draft)"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-010",
+        "source": "FL.01:Sales order lifecycle",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Sales"
+          ],
+          "action": "creating a sales order (starts in Draft)"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-011",
+        "source": "N.01:Low stock alert",
+        "detail": {
+          "kind": "event",
+          "event": "a Product's Stock on hand falls to or below its Reorder point"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-012",
+        "source": "N.01:Order shipped",
+        "detail": {
+          "kind": "event",
+          "event": "a sales order moves to Shipped"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-013",
+        "source": "RP.08:Stock on hand",
+        "detail": {
+          "enabled": "no"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-014",
+        "source": "RP.08:Sales by month",
+        "detail": {
+          "enabled": "no"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-015",
+        "source": "RP.08:Open orders",
+        "detail": {
+          "enabled": "no"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      }
+    ],
+    "qa_generated_tests": [
+      {
+        "id": "erp-backbone/QA-001",
+        "action_id": "erp-backbone/ACT-001",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-001",
+          "kind": "create",
+          "record": "Product",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "creates a new 'Product' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-002",
+        "action_id": "erp-backbone/ACT-002",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-002",
+          "kind": "edit",
+          "record": "Product",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "edits an existing 'Product' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-003",
+        "action_id": "erp-backbone/ACT-003",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-003",
+          "kind": "delete",
+          "record": "Product",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Product' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-004",
+        "action_id": "erp-backbone/ACT-004",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-004",
+          "kind": "create",
+          "record": "Supplier",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "creates a new 'Supplier' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-005",
+        "action_id": "erp-backbone/ACT-004",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-004",
+          "kind": "create",
+          "record": "Supplier",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "creates a new 'Supplier' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-006",
+        "action_id": "erp-backbone/ACT-005",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-005",
+          "kind": "edit",
+          "record": "Supplier",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "edits an existing 'Supplier' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-007",
+        "action_id": "erp-backbone/ACT-005",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-005",
+          "kind": "edit",
+          "record": "Supplier",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "edits an existing 'Supplier' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-008",
+        "action_id": "erp-backbone/ACT-006",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-006",
+          "kind": "delete",
+          "record": "Supplier",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Supplier' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-009",
+        "action_id": "erp-backbone/ACT-007",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-007",
+          "kind": "create",
+          "record": "Customer account",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "creates a new 'Customer account' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-010",
+        "action_id": "erp-backbone/ACT-007",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-007",
+          "kind": "create",
+          "record": "Customer account",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "creates a new 'Customer account' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-011",
+        "action_id": "erp-backbone/ACT-008",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-008",
+          "kind": "edit",
+          "record": "Customer account",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "edits an existing 'Customer account' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-012",
+        "action_id": "erp-backbone/ACT-008",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-008",
+          "kind": "edit",
+          "record": "Customer account",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "edits an existing 'Customer account' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-013",
+        "action_id": "erp-backbone/ACT-009",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-009",
+          "kind": "delete",
+          "record": "Customer account",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Customer account' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-014",
+        "action_id": "erp-backbone/ACT-010",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-010",
+          "kind": "create",
+          "record": "Purchase order",
+          "roles": [
+            "Purchasing"
+          ],
+          "outcome": "creates a new 'Purchase order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-015",
+        "action_id": "erp-backbone/ACT-011",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-011",
+          "kind": "edit",
+          "record": "Purchase order",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "edits an existing 'Purchase order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-016",
+        "action_id": "erp-backbone/ACT-011",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-011",
+          "kind": "edit",
+          "record": "Purchase order",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "edits an existing 'Purchase order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-017",
+        "action_id": "erp-backbone/ACT-012",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-012",
+          "kind": "delete",
+          "record": "Purchase order",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Purchase order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-018",
+        "action_id": "erp-backbone/ACT-013",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-013",
+          "kind": "create",
+          "record": "Purchase order line",
+          "roles": [
+            "Purchasing"
+          ],
+          "outcome": "creates a new 'Purchase order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-019",
+        "action_id": "erp-backbone/ACT-014",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-014",
+          "kind": "edit",
+          "record": "Purchase order line",
+          "roles": [
+            "Purchasing"
+          ],
+          "outcome": "edits an existing 'Purchase order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-020",
+        "action_id": "erp-backbone/ACT-015",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-015",
+          "kind": "delete",
+          "record": "Purchase order line",
+          "roles": [
+            "Purchasing"
+          ],
+          "outcome": "deletes a 'Purchase order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-021",
+        "action_id": "erp-backbone/ACT-016",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-016",
+          "kind": "create",
+          "record": "Sales order",
+          "roles": [
+            "Sales"
+          ],
+          "outcome": "creates a new 'Sales order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-022",
+        "action_id": "erp-backbone/ACT-017",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-017",
+          "kind": "edit",
+          "record": "Sales order",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "edits an existing 'Sales order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-023",
+        "action_id": "erp-backbone/ACT-017",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-017",
+          "kind": "edit",
+          "record": "Sales order",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "edits an existing 'Sales order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-024",
+        "action_id": "erp-backbone/ACT-018",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-018",
+          "kind": "delete",
+          "record": "Sales order",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Sales order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-025",
+        "action_id": "erp-backbone/ACT-019",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-019",
+          "kind": "create",
+          "record": "Sales order line",
+          "roles": [
+            "Sales"
+          ],
+          "outcome": "creates a new 'Sales order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-026",
+        "action_id": "erp-backbone/ACT-020",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-020",
+          "kind": "edit",
+          "record": "Sales order line",
+          "roles": [
+            "Sales"
+          ],
+          "outcome": "edits an existing 'Sales order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-027",
+        "action_id": "erp-backbone/ACT-021",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-021",
+          "kind": "delete",
+          "record": "Sales order line",
+          "roles": [
+            "Sales"
+          ],
+          "outcome": "deletes a 'Sales order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-028",
+        "action_id": "erp-backbone/ACT-022",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-022",
+          "kind": "create",
+          "record": "Stock adjustment",
+          "roles": [
+            "Operations",
+            "Warehouse"
+          ],
+          "outcome": "creates a new 'Stock adjustment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-029",
+        "action_id": "erp-backbone/ACT-022",
+        "role": "Warehouse",
+        "action": {
+          "id": "erp-backbone/ACT-022",
+          "kind": "create",
+          "record": "Stock adjustment",
+          "roles": [
+            "Operations",
+            "Warehouse"
+          ],
+          "outcome": "creates a new 'Stock adjustment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-030",
+        "action_id": "erp-backbone/ACT-023",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-023",
+          "kind": "edit",
+          "record": "Stock adjustment",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "edits an existing 'Stock adjustment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-031",
+        "action_id": "erp-backbone/ACT-024",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-024",
+          "kind": "delete",
+          "record": "Stock adjustment",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Stock adjustment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-032",
+        "action_id": "erp-backbone/ACT-025",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-025",
+          "kind": "transition",
+          "workflow": "Purchase order lifecycle",
+          "from": "Draft",
+          "to": "Confirmed",
+          "mover": "roles",
+          "roles": [
+            "Purchasing"
+          ],
+          "outcome": "moves 'Purchase order lifecycle' from 'Draft' to 'Confirmed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-033",
+        "action_id": "erp-backbone/ACT-026",
+        "role": "Warehouse",
+        "action": {
+          "id": "erp-backbone/ACT-026",
+          "kind": "transition",
+          "workflow": "Purchase order lifecycle",
+          "from": "Confirmed",
+          "to": "Received",
+          "mover": "roles",
+          "roles": [
+            "Warehouse"
+          ],
+          "outcome": "moves 'Purchase order lifecycle' from 'Confirmed' to 'Received'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-034",
+        "action_id": "erp-backbone/ACT-027",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-027",
+          "kind": "transition",
+          "workflow": "Purchase order lifecycle",
+          "from": "Received",
+          "to": "Closed",
+          "mover": "roles",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "moves 'Purchase order lifecycle' from 'Received' to 'Closed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-035",
+        "action_id": "erp-backbone/ACT-028",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-028",
+          "kind": "approve",
+          "workflow": "Purchase order lifecycle",
+          "stage": "Draft",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "approves 'Purchase order lifecycle' at stage 'Draft'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-036",
+        "action_id": "erp-backbone/ACT-029",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-029",
+          "kind": "transition",
+          "workflow": "Sales order lifecycle",
+          "from": "Draft",
+          "to": "Confirmed",
+          "mover": "roles",
+          "roles": [
+            "Sales"
+          ],
+          "outcome": "moves 'Sales order lifecycle' from 'Draft' to 'Confirmed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-037",
+        "action_id": "erp-backbone/ACT-030",
+        "role": "Warehouse",
+        "action": {
+          "id": "erp-backbone/ACT-030",
+          "kind": "transition",
+          "workflow": "Sales order lifecycle",
+          "from": "Confirmed",
+          "to": "Shipped",
+          "mover": "roles",
+          "roles": [
+            "Warehouse"
+          ],
+          "outcome": "moves 'Sales order lifecycle' from 'Confirmed' to 'Shipped'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-038",
+        "action_id": "erp-backbone/ACT-031",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-031",
+          "kind": "transition",
+          "workflow": "Sales order lifecycle",
+          "from": "Shipped",
+          "to": "Closed",
+          "mover": "roles",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "moves 'Sales order lifecycle' from 'Shipped' to 'Closed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-039",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-040",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-041",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-042",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-043",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-044",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-045",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-046",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-008",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-047",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-009",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-048",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-010",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-049",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-011",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-050",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-051",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-052",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-053",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-054",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-055",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
+        "role": "Admin",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-056",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-018",
+        "role": "Admin",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-057",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-019",
+        "role": "Admin",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-058",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-059",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-060",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-061",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-062",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-063",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-064",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-065",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-008",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-066",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-009",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-067",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-010",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-068",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-011",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-069",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-070",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-071",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-072",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-073",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-074",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-075",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-018",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-076",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-019",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-077",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-078",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-079",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-080",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-081",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-082",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-083",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-084",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-008",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-085",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-009",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-086",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-010",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-087",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-011",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-088",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-089",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-090",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-091",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-092",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-093",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-094",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-018",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-095",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-019",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-096",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-097",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-098",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-099",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-100",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-101",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-102",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-103",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-008",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-104",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-009",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-105",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-010",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-106",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-011",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-107",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-108",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-109",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-110",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-111",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-112",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-113",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-018",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-114",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-019",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-115",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-116",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-117",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-118",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-119",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-120",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-121",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-122",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-008",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-123",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-009",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-124",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-010",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-125",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-011",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-126",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-127",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-128",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-129",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-130",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-131",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-132",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-018",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-133",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-019",
+        "role": "Warehouse",
+        "expect": "reachable"
+      }
+    ],
+    "locked": true,
+    "locked_at_graph_version": "3.0",
+    "interface": {
+      "id": "erp-backbone/IFC-001",
+      "kind": "interface",
+      "options": [
+        "console",
+        "board",
+        "pocket"
+      ],
+      "chosen": null,
+      "part_bindings": {
+        "parts": [],
+        "locations": [],
+        "note": "no interface chosen yet -- the front door has not run for this instance",
+        "pins": []
+      }
+    }
+  }
+}

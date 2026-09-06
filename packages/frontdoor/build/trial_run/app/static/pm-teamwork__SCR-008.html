@@ -1,0 +1,7 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Overdue tasks</title></head><body><header class="app-header"><svg class="app-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect x="8" y="8" width="20" height="20" rx="3" fill="#2F6B4F"/>
+  <rect x="36" y="8" width="20" height="20" rx="3" fill="#2F6B4F" opacity="0.55"/>
+  <rect x="8" y="36" width="20" height="20" rx="3" fill="#2F6B4F" opacity="0.55"/>
+  <rect x="36" y="36" width="20" height="20" rx="3" fill="#2F6B4F"/>
+</svg>
+<span class="app-name">Teamwork Desk (Grid mark)</span></header><h1>Overdue tasks</h1><table id='numbers'></table><script>fetch('/api/reports/overdue_tasks').then(r => r.json()).then(d => {document.getElementById('numbers').innerHTML = Object.entries(d).map(([metric, value]) => '<tr><td>' + metric + '</td><td class=\'value\'>' + JSON.stringify(value) + '</td></tr>').join('');});</script></body></html>

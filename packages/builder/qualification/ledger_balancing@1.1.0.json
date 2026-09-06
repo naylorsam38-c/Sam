@@ -1,0 +1,131 @@
+{
+ "part_id": "ledger_balancing",
+ "version": "1.1.0",
+ "revision": "8e4c702f78f51238",
+ "qualified_at": "2026-09-05T09:23:01+00:00",
+ "base_url": "http://127.0.0.1:8905",
+ "journeys": [
+  {
+   "journey": "payment_settles_its_target_on_the_screen",
+   "subject": "Payment->Invoice",
+   "parts": [
+    "ledger_balancing"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/invoices",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/invoice_lines 2 x 50",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Awaiting approval' on accounting-ledger/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press Approve on accounting-ledger/SCR-004 at gated stage 'Awaiting approval'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Awaiting payment' on accounting-ledger/SCR-004",
+     "observed": "Done."
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/payments for the full 100 (no screen creates a payment)",
+     "observed": {
+      "status": 201,
+      "effects": [
+       {
+        "op": "ledger_balance",
+        "target": "invoices",
+        "target_id": "fb809b41-d9ce-4579-86a5-58cb586ca8c3",
+        "total": 100,
+        "applied": 100,
+        "settled": true,
+        "moved": {
+         "from": "Awaiting payment",
+         "to": "Paid"
+        }
+       }
+      ]
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "open accounting-ledger/SCR-004",
+     "observed": "stage shown as 'Paid'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "payment_settles_its_target_on_the_screen",
+   "subject": "Payment->Bill",
+   "parts": [
+    "ledger_balancing"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/bills",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Awaiting payment' on accounting-ledger/SCR-008",
+     "observed": "Done."
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/payments for the full 1.25 (no screen creates a payment)",
+     "observed": {
+      "status": 201,
+      "effects": [
+       {
+        "op": "ledger_balance",
+        "target": "bills",
+        "target_id": "c426ed3c-7efd-476a-b362-cb09995cb498",
+        "total": 1.25,
+        "applied": 1.25,
+        "settled": true,
+        "moved": {
+         "from": "Awaiting payment",
+         "to": "Paid"
+        }
+       }
+      ]
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "open accounting-ledger/SCR-008",
+     "observed": "stage shown as 'Paid'"
+    }
+   ],
+   "page_errors": []
+  }
+ ]
+}

@@ -1,0 +1,293 @@
+{
+ "base_url": "http://127.0.0.1:8902",
+ "journeys": [
+  {
+   "journey": "form_submit_lands_in_list_and_detail",
+   "subject": "-",
+   "parts": [
+    "form_render_submit",
+    "crud_list_detail"
+   ],
+   "result": "N/A",
+   "reason": "the spec declares no form screen",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "crm-pipeline/SCR-009",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report crm-pipeline/SCR-009",
+     "observed": {
+      "sum of open Deal Value grouped by stage": {},
+      "count of Deals grouped by stage": {}
+     }
+    },
+    {
+     "channel": "api",
+     "action": "POST /api/deals (no screen creates this record)",
+     "observed": {
+      "status": 201,
+      "body": {
+       "Title": "seam-1a070e018dd",
+       "Value": 1.25,
+       "Owner": "seam-1a070e018dd",
+       "Contact": "seam-1a070e018dd"
+      }
+     },
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "reload the report screen",
+     "observed": {
+      "Lead in": 1
+     }
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "report_screen_reflects_written_rows",
+   "subject": "crm-pipeline/SCR-010",
+   "parts": [
+    "reporting_engine"
+   ],
+   "result": "BLOCKED",
+   "reason": "metric 'win rate' is computed by the stage_history part, not by writing one row",
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": false,
+   "steps": [
+    {
+     "channel": "browser",
+     "action": "open report crm-pipeline/SCR-010",
+     "observed": {
+      "win rate": {
+       "rate": null,
+       "percentage": null,
+       "numerator": 0,
+       "denominator": 0,
+       "window_days": 90
+      }
+     }
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "person_move_is_visible_on_the_screen",
+   "subject": "crm-pipeline/ACT-014",
+   "parts": [
+    "workflow_executor"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/deals",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a control on crm-pipeline/SCR-006 that moves to 'Contacted'",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "browser",
+     "action": "press the control on crm-pipeline/SCR-006 that moves to 'Contacted'",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open detail crm-pipeline/SCR-006",
+     "observed": "stage shown as 'Contacted'"
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "custom_action_is_pressable_and_visible",
+   "subject": "crm-pipeline/ACT-010",
+   "parts": [
+    "custom_action_execution"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/deals",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "look for a 'Reassign' control on crm-pipeline/SCR-006",
+     "observed": "1 control(s)"
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Reassign' on crm-pipeline/SCR-006",
+     "observed": "Done."
+    },
+    {
+     "channel": "api",
+     "action": "GET /api/history/deals/ac7e5960-5bfc-42f3-973a-8f6ee8196ad7",
+     "observed": {
+      "status": 200,
+      "entries": 1
+     },
+     "user_facing": false
+    }
+   ],
+   "page_errors": []
+  },
+  {
+   "journey": "rate_report_reflects_the_moves_made_on_the_screen",
+   "subject": "crm-pipeline/SCR-010:win rate",
+   "parts": [
+    "stage_history"
+   ],
+   "result": "PASS",
+   "reason": null,
+   "failed_part": null,
+   "notes": [],
+   "browser_verified": true,
+   "steps": [
+    {
+     "channel": "api",
+     "action": "POST /api/deals",
+     "observed": 201,
+     "user_facing": false
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Contacted' on crm-pipeline/SCR-006",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Proposal sent' on crm-pipeline/SCR-006",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Negotiation' on crm-pipeline/SCR-006",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "press 'Move to Won' on crm-pipeline/SCR-006",
+     "observed": "Done."
+    },
+    {
+     "channel": "browser",
+     "action": "open report crm-pipeline/SCR-010 and read 'win rate'",
+     "observed": {
+      "rate": 1,
+      "percentage": 100,
+      "numerator": 1,
+      "denominator": 1,
+      "window_days": 90
+     }
+    }
+   ],
+   "page_errors": []
+  }
+ ],
+ "parts": {
+  "form_render_submit": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "crud_list_detail": {
+   "PASS": 0,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 1,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 0
+  },
+  "reporting_engine": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 1,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "workflow_executor": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "custom_action_execution": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  },
+  "stage_history": {
+   "PASS": 1,
+   "FAIL": 0,
+   "BLOCKED": 0,
+   "N/A": 0,
+   "NOT_REACHED": 0,
+   "browser_verified_passes": 1
+  }
+ },
+ "receipts_written": [
+  {
+   "part_id": "reporting_engine",
+   "version": "1.0.0",
+   "revision": "a0de07a247bf355b"
+  },
+  {
+   "part_id": "workflow_executor",
+   "version": "1.0.0",
+   "revision": "e1e8908c90f7f1fb"
+  },
+  {
+   "part_id": "custom_action_execution",
+   "version": "1.1.0",
+   "revision": "177cfc2d6d4d4a01"
+  },
+  {
+   "part_id": "stage_history",
+   "version": "1.1.0",
+   "revision": "a2820dad41d0c83c"
+  }
+ ],
+ "receipts_refused": []
+}

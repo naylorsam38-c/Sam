@@ -1,0 +1,116 @@
+{
+ "spec_id": "SPEC-FRONTDOOR",
+ "required_status_for_deployable": "PRODUCT_QUALIFIED",
+ "parts": [
+  {
+   "part_id": "crud_list_detail",
+   "version": "1.1.0",
+   "revision": "143bf3e98f4fd428",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "reporting_engine",
+   "version": "1.0.0",
+   "revision": "a0de07a247bf355b",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "workflow_executor",
+   "version": "1.0.0",
+   "revision": "e1e8908c90f7f1fb",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "custom_action_execution",
+   "version": "1.1.0",
+   "revision": "177cfc2d6d4d4a01",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "audit_trail",
+   "version": "1.0.0",
+   "revision": "44f0b16364c41d85",
+   "status": "TESTED"
+  },
+  {
+   "part_id": "stage_history",
+   "version": "1.1.0",
+   "revision": "a2820dad41d0c83c",
+   "status": "PRODUCT_QUALIFIED"
+  }
+ ],
+ "vendored": [
+  {
+   "part_id": "audit_trail",
+   "version": "1.0.0",
+   "revision": "44f0b16364c41d85",
+   "status": "TESTED"
+  },
+  {
+   "part_id": "workflow_executor",
+   "version": "1.0.0",
+   "revision": "e1e8908c90f7f1fb",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "system_triggered_transition",
+   "version": "1.0.0",
+   "revision": "da71c672cb598389",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "custom_action_execution",
+   "version": "1.1.0",
+   "revision": "177cfc2d6d4d4a01",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "form_render_submit",
+   "version": "1.0.0",
+   "revision": "cfb66ed4a56c85df",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "reporting_engine",
+   "version": "1.0.0",
+   "revision": "a0de07a247bf355b",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "stage_approval_gate",
+   "version": "1.0.0",
+   "revision": "e05ac2be0b3c4cc8",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "stage_history",
+   "version": "1.1.0",
+   "revision": "a2820dad41d0c83c",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "stock_ledger",
+   "version": "1.1.0",
+   "revision": "094c3be30a31bf03",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "record_cloning",
+   "version": "1.0.0",
+   "revision": "c9f8c783994f80c1",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "ledger_balancing",
+   "version": "1.1.0",
+   "revision": "8e4c702f78f51238",
+   "status": "PRODUCT_QUALIFIED"
+  },
+  {
+   "part_id": "document_generation",
+   "version": "1.0.0",
+   "revision": "6ad6f6c2187e4435",
+   "status": "PRODUCT_QUALIFIED"
+  }
+ ]
+}

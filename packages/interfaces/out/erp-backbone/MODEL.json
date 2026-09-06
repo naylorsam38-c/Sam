@@ -1,0 +1,803 @@
+{
+ "family": "erp-backbone",
+ "spec_id": "SPEC-ERP-BACKBONE-REF",
+ "app_name": "Backbone",
+ "roles": [
+  "Admin",
+  "Operations",
+  "Sales",
+  "Purchasing",
+  "Warehouse"
+ ],
+ "role_admin": {
+  "Admin": true,
+  "Operations": false,
+  "Sales": false,
+  "Purchasing": false,
+  "Warehouse": false
+ },
+ "super_role": "Admin",
+ "records": {
+  "Product": {
+   "table": "products",
+   "title_field": "Name",
+   "fields": [
+    {
+     "name": "Name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "name"
+    },
+    {
+     "name": "SKU",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "yes",
+     "slug": "sku"
+    },
+    {
+     "name": "Sale price",
+     "type": "money",
+     "required": "yes",
+     "unique": "no",
+     "slug": "sale_price"
+    },
+    {
+     "name": "Cost",
+     "type": "money",
+     "required": "yes",
+     "unique": "no",
+     "slug": "cost"
+    },
+    {
+     "name": "Stock on hand",
+     "type": "whole_number",
+     "required": "yes",
+     "unique": "no",
+     "slug": "stock_on_hand"
+    },
+    {
+     "name": "Reorder point",
+     "type": "whole_number",
+     "required": "no",
+     "unique": "no",
+     "slug": "reorder_point"
+    }
+   ],
+   "access": {
+    "view": [
+     "Operations",
+     "Sales",
+     "Purchasing",
+     "Warehouse"
+    ],
+    "create": [
+     "Operations"
+    ],
+    "edit": [
+     "Operations"
+    ],
+    "delete": [
+     "Operations"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Supplier": {
+   "table": "suppliers",
+   "title_field": "Name",
+   "fields": [
+    {
+     "name": "Name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "yes",
+     "slug": "name"
+    },
+    {
+     "name": "Email",
+     "type": "email",
+     "required": "no",
+     "unique": "no",
+     "slug": "email"
+    },
+    {
+     "name": "Phone",
+     "type": "phone",
+     "required": "no",
+     "unique": "no",
+     "slug": "phone"
+    },
+    {
+     "name": "Payment terms",
+     "type": "one_choice",
+     "required": "no",
+     "unique": "no",
+     "options": [
+      "prepaid",
+      "net 7",
+      "net 30",
+      "net 60"
+     ],
+     "slug": "payment_terms"
+    }
+   ],
+   "access": {
+    "view": [
+     "Operations",
+     "Purchasing",
+     "Warehouse"
+    ],
+    "create": [
+     "Purchasing",
+     "Operations"
+    ],
+    "edit": [
+     "Purchasing",
+     "Operations"
+    ],
+    "delete": [
+     "Operations"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Customer account": {
+   "table": "customer_accounts",
+   "title_field": "Name",
+   "fields": [
+    {
+     "name": "Name",
+     "type": "short_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "name"
+    },
+    {
+     "name": "Email",
+     "type": "email",
+     "required": "no",
+     "unique": "no",
+     "slug": "email"
+    },
+    {
+     "name": "Phone",
+     "type": "phone",
+     "required": "no",
+     "unique": "no",
+     "slug": "phone"
+    },
+    {
+     "name": "Delivery address",
+     "type": "long_text",
+     "required": "yes",
+     "unique": "no",
+     "slug": "delivery_address"
+    }
+   ],
+   "access": {
+    "view": [
+     "Operations",
+     "Sales",
+     "Warehouse"
+    ],
+    "create": [
+     "Sales",
+     "Operations"
+    ],
+    "edit": [
+     "Sales",
+     "Operations"
+    ],
+    "delete": [
+     "Operations"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Purchase order": {
+   "table": "purchase_orders",
+   "title_field": "Supplier",
+   "fields": [
+    {
+     "name": "Supplier",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Supplier",
+     "slug": "supplier"
+    },
+    {
+     "name": "Order date",
+     "type": "date",
+     "required": "yes",
+     "unique": "no",
+     "slug": "order_date"
+    },
+    {
+     "name": "Expected date",
+     "type": "date",
+     "required": "no",
+     "unique": "no",
+     "slug": "expected_date"
+    },
+    {
+     "name": "Notes",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "notes"
+    }
+   ],
+   "access": {
+    "view": [
+     "Operations",
+     "Purchasing",
+     "Warehouse"
+    ],
+    "create": [
+     "Purchasing"
+    ],
+    "edit": [
+     "Purchasing",
+     "Operations"
+    ],
+    "delete": [
+     "Operations"
+    ]
+   },
+   "has_stage": true,
+   "workflow": "Purchase order lifecycle",
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Purchase order line": {
+   "table": "purchase_order_lines",
+   "title_field": "Product",
+   "fields": [
+    {
+     "name": "Purchase order",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Purchase order",
+     "slug": "purchase_order"
+    },
+    {
+     "name": "Product",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Product",
+     "slug": "product"
+    },
+    {
+     "name": "Quantity",
+     "type": "whole_number",
+     "required": "yes",
+     "unique": "no",
+     "slug": "quantity"
+    },
+    {
+     "name": "Unit cost",
+     "type": "money",
+     "required": "yes",
+     "unique": "no",
+     "slug": "unit_cost"
+    }
+   ],
+   "access": {
+    "view": [
+     "Operations",
+     "Purchasing",
+     "Warehouse"
+    ],
+    "create": [
+     "Purchasing"
+    ],
+    "edit": [
+     "Purchasing"
+    ],
+    "delete": [
+     "Purchasing"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Sales order": {
+   "table": "sales_orders",
+   "title_field": "Customer account",
+   "fields": [
+    {
+     "name": "Customer account",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Customer account",
+     "slug": "customer_account"
+    },
+    {
+     "name": "Order date",
+     "type": "date",
+     "required": "yes",
+     "unique": "no",
+     "slug": "order_date"
+    },
+    {
+     "name": "Notes",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "notes"
+    }
+   ],
+   "access": {
+    "view": [
+     "Operations",
+     "Sales",
+     "Warehouse"
+    ],
+    "create": [
+     "Sales"
+    ],
+    "edit": [
+     "Sales",
+     "Operations"
+    ],
+    "delete": [
+     "Operations"
+    ]
+   },
+   "has_stage": true,
+   "workflow": "Sales order lifecycle",
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Sales order line": {
+   "table": "sales_order_lines",
+   "title_field": "Product",
+   "fields": [
+    {
+     "name": "Sales order",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Sales order",
+     "slug": "sales_order"
+    },
+    {
+     "name": "Product",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Product",
+     "slug": "product"
+    },
+    {
+     "name": "Quantity",
+     "type": "whole_number",
+     "required": "yes",
+     "unique": "no",
+     "slug": "quantity"
+    },
+    {
+     "name": "Unit price",
+     "type": "money",
+     "required": "yes",
+     "unique": "no",
+     "slug": "unit_price"
+    }
+   ],
+   "access": {
+    "view": [
+     "Operations",
+     "Sales",
+     "Warehouse"
+    ],
+    "create": [
+     "Sales"
+    ],
+    "edit": [
+     "Sales"
+    ],
+    "delete": [
+     "Sales"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  },
+  "Stock adjustment": {
+   "table": "stock_adjustments",
+   "title_field": "Product",
+   "fields": [
+    {
+     "name": "Product",
+     "type": "link",
+     "required": "yes",
+     "unique": "no",
+     "target_record": "Product",
+     "slug": "product"
+    },
+    {
+     "name": "Change",
+     "type": "whole_number",
+     "required": "yes",
+     "unique": "no",
+     "slug": "change"
+    },
+    {
+     "name": "Reason",
+     "type": "one_choice",
+     "required": "yes",
+     "unique": "no",
+     "options": [
+      "stocktake",
+      "damage",
+      "loss",
+      "correction"
+     ],
+     "slug": "reason"
+    },
+    {
+     "name": "Notes",
+     "type": "long_text",
+     "required": "no",
+     "unique": "no",
+     "slug": "notes"
+    }
+   ],
+   "access": {
+    "view": [
+     "Operations",
+     "Warehouse"
+    ],
+    "create": [
+     "Warehouse",
+     "Operations"
+    ],
+    "edit": [
+     "Operations"
+    ],
+    "delete": [
+     "Operations"
+    ]
+   },
+   "has_stage": false,
+   "workflow": null,
+   "custom_actions": [],
+   "on_create": []
+  }
+ },
+ "workflows": {
+  "Purchase order lifecycle": {
+   "stages": [
+    "Draft",
+    "Confirmed",
+    "Received",
+    "Closed",
+    "Cancelled"
+   ],
+   "initial": "Draft",
+   "terminal": [
+    "Closed",
+    "Cancelled"
+   ],
+   "transitions": [
+    {
+     "from": "Draft",
+     "to": "Confirmed",
+     "mover": "roles",
+     "roles": [
+      "Purchasing"
+     ]
+    },
+    {
+     "from": "Confirmed",
+     "to": "Received",
+     "mover": "roles",
+     "roles": [
+      "Warehouse"
+     ]
+    },
+    {
+     "from": "Received",
+     "to": "Closed",
+     "mover": "roles",
+     "roles": [
+      "Operations"
+     ]
+    }
+   ],
+   "approvals": [
+    {
+     "stage": "Draft",
+     "approvers": [
+      "Operations"
+     ]
+    }
+   ],
+   "on_reject": {
+    "back_to": "Draft",
+    "resubmit": "yes"
+   },
+   "effects": [
+    {
+     "on_enter": "Received",
+     "op": "apply_order_lines",
+     "line_table": "purchase_order_lines",
+     "line_fk": "purchase_order",
+     "product_table": "products",
+     "product_fk": "product",
+     "quantity_column": "quantity",
+     "direction": "receive"
+    }
+   ]
+  },
+  "Sales order lifecycle": {
+   "stages": [
+    "Draft",
+    "Confirmed",
+    "Shipped",
+    "Closed",
+    "Cancelled"
+   ],
+   "initial": "Draft",
+   "terminal": [
+    "Closed",
+    "Cancelled"
+   ],
+   "transitions": [
+    {
+     "from": "Draft",
+     "to": "Confirmed",
+     "mover": "roles",
+     "roles": [
+      "Sales"
+     ]
+    },
+    {
+     "from": "Confirmed",
+     "to": "Shipped",
+     "mover": "roles",
+     "roles": [
+      "Warehouse"
+     ]
+    },
+    {
+     "from": "Shipped",
+     "to": "Closed",
+     "mover": "roles",
+     "roles": [
+      "Operations"
+     ]
+    }
+   ],
+   "approvals": [],
+   "on_reject": null,
+   "effects": [
+    {
+     "on_enter": "Shipped",
+     "op": "apply_order_lines",
+     "line_table": "sales_order_lines",
+     "line_fk": "sales_order",
+     "product_table": "products",
+     "product_fk": "product",
+     "quantity_column": "quantity",
+     "direction": "ship"
+    }
+   ]
+  }
+ },
+ "forms": {},
+ "reports": {
+  "Stock on hand": {
+   "slug": "stock_on_hand",
+   "question": "What do we hold right now, and what is at or below its reorder point?",
+   "metrics": [
+    "sum of Product Stock on hand",
+    "count of Products at or below Reorder point"
+   ],
+   "specs": [
+    {
+     "metric": "sum of Product Stock on hand",
+     "spec": {
+      "table": "products",
+      "aggregation": "sum",
+      "value_field": "stock_on_hand"
+     }
+    },
+    {
+     "metric": "count of Products at or below Reorder point",
+     "spec": {
+      "engine": "stock_ledger",
+      "kind": "count_at_or_below_reorder",
+      "table": "products",
+      "stock_column": "stock_on_hand",
+      "reorder_column": "reorder_point"
+     }
+    }
+   ]
+  },
+  "Sales by month": {
+   "slug": "sales_by_month",
+   "question": "What did we sell, month by month?",
+   "metrics": [
+    "sales value"
+   ],
+   "specs": [
+    {
+     "metric": "sales value",
+     "spec": {
+      "engine": "stage_history",
+      "kind": "line_value_by_month",
+      "table": "sales_orders",
+      "stage": "Shipped",
+      "line_table": "sales_order_lines",
+      "line_fk": "sales_order",
+      "quantity_column": "quantity",
+      "price_column": "unit_price",
+      "months": 12
+     }
+    }
+   ]
+  },
+  "Open orders": {
+   "slug": "open_orders",
+   "question": "What is confirmed but not yet fulfilled, on both sides?",
+   "metrics": [
+    "count of Sales orders in Confirmed",
+    "count of Purchase orders in Confirmed"
+   ],
+   "specs": [
+    {
+     "metric": "count of Sales orders in Confirmed",
+     "spec": {
+      "table": "sales_orders",
+      "aggregation": "count",
+      "filters": [
+       {
+        "field": "stage",
+        "op": "=",
+        "value": "Confirmed"
+       }
+      ]
+     }
+    },
+    {
+     "metric": "count of Purchase orders in Confirmed",
+     "spec": {
+      "table": "purchase_orders",
+      "aggregation": "count",
+      "filters": [
+       {
+        "field": "stage",
+        "op": "=",
+        "value": "Confirmed"
+       }
+      ]
+     }
+    }
+   ]
+  }
+ },
+ "landing_per_role": {
+  "Admin": "Stock on hand",
+  "Operations": "Stock on hand",
+  "Sales": "Sales orders",
+  "Purchasing": "Purchase orders",
+  "Warehouse": "Open orders"
+ },
+ "screens": [
+  {
+   "id": "erp-backbone/SCR-001",
+   "kind": "list",
+   "record": "Product"
+  },
+  {
+   "id": "erp-backbone/SCR-002",
+   "kind": "detail",
+   "record": "Product"
+  },
+  {
+   "id": "erp-backbone/SCR-003",
+   "kind": "list",
+   "record": "Supplier"
+  },
+  {
+   "id": "erp-backbone/SCR-004",
+   "kind": "detail",
+   "record": "Supplier"
+  },
+  {
+   "id": "erp-backbone/SCR-005",
+   "kind": "list",
+   "record": "Customer account"
+  },
+  {
+   "id": "erp-backbone/SCR-006",
+   "kind": "detail",
+   "record": "Customer account"
+  },
+  {
+   "id": "erp-backbone/SCR-007",
+   "kind": "list",
+   "record": "Purchase order"
+  },
+  {
+   "id": "erp-backbone/SCR-008",
+   "kind": "detail",
+   "record": "Purchase order"
+  },
+  {
+   "id": "erp-backbone/SCR-009",
+   "kind": "list",
+   "record": "Purchase order line"
+  },
+  {
+   "id": "erp-backbone/SCR-010",
+   "kind": "detail",
+   "record": "Purchase order line"
+  },
+  {
+   "id": "erp-backbone/SCR-011",
+   "kind": "list",
+   "record": "Sales order"
+  },
+  {
+   "id": "erp-backbone/SCR-012",
+   "kind": "detail",
+   "record": "Sales order"
+  },
+  {
+   "id": "erp-backbone/SCR-013",
+   "kind": "list",
+   "record": "Sales order line"
+  },
+  {
+   "id": "erp-backbone/SCR-014",
+   "kind": "detail",
+   "record": "Sales order line"
+  },
+  {
+   "id": "erp-backbone/SCR-015",
+   "kind": "list",
+   "record": "Stock adjustment"
+  },
+  {
+   "id": "erp-backbone/SCR-016",
+   "kind": "detail",
+   "record": "Stock adjustment"
+  },
+  {
+   "id": "erp-backbone/SCR-017",
+   "kind": "report",
+   "report": "Stock on hand"
+  },
+  {
+   "id": "erp-backbone/SCR-018",
+   "kind": "report",
+   "report": "Sales by month"
+  },
+  {
+   "id": "erp-backbone/SCR-019",
+   "kind": "report",
+   "report": "Open orders"
+  }
+ ]
+}

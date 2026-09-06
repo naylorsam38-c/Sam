@@ -1,0 +1,4357 @@
+{
+  "spec_id": "SPEC-CRM-PIPELINE-REF",
+  "version": 1,
+  "title": "Pipeline (crm-pipeline)",
+  "graph_version": "3.0",
+  "source_template": "crm-pipeline",
+  "numbered_fields": [
+    {
+      "number": "Z.02",
+      "spec_field": "actions.inventory",
+      "value": "confirmed",
+      "source_kind": "question"
+    },
+    {
+      "number": "D12",
+      "spec_field": "actions.inventory.items",
+      "value": "see build_model.D12",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_api_convention",
+      "spec_field": "api.*",
+      "value": "One fixed REST convention for every endpoint, verb and envelope.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_first_admin",
+      "spec_field": "auth.bootstrap_admin",
+      "value": "The first super-role account is seeded from the deploy inputs, not created through the app.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.05",
+      "spec_field": "auth.default_role",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.12",
+      "spec_field": "auth.deletion_allowed",
+      "value": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.12",
+      "spec_field": "auth.deletion_by",
+      "value": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.12",
+      "spec_field": "auth.deletion_data_policy",
+      "value": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.03",
+      "spec_field": "auth.email_verification",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_account_identity",
+      "spec_field": "auth.identity_field",
+      "value": "The email address is the account identity; changing it requires re-verification.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.06",
+      "spec_field": "auth.invite_authority",
+      "value": {
+        "inviters": [
+          "Admin",
+          "Sales manager"
+        ],
+        "default_role": "Sales rep"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.06",
+      "spec_field": "auth.invite_default_role",
+      "value": {
+        "inviters": [
+          "Admin",
+          "Sales manager"
+        ],
+        "default_role": "Sales rep"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_invite_expiry",
+      "spec_field": "auth.invite_expiry",
+      "value": "Invitations expire after 7 days and can be re-sent.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.08",
+      "spec_field": "auth.lockout_attempts",
+      "value": {
+        "attempts": 5,
+        "duration": "15 minutes"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.08",
+      "spec_field": "auth.lockout_duration",
+      "value": {
+        "attempts": 5,
+        "duration": "15 minutes"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.04",
+      "spec_field": "auth.methods",
+      "value": [
+        "password",
+        "google"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.07",
+      "spec_field": "auth.mfa_method",
+      "value": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_mfa_recovery",
+      "spec_field": "auth.mfa_recovery",
+      "value": "One-time recovery codes issued at MFA enrolment.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.07",
+      "spec_field": "auth.mfa_scope",
+      "value": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.09",
+      "spec_field": "auth.multi_device",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_profile_self_edit",
+      "spec_field": "auth.profile_self_service",
+      "value": "Every user can edit their own name, email, password and notification preferences.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.02",
+      "spec_field": "auth.registration_fields",
+      "value": [
+        {
+          "name": "Full name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Email address",
+          "type": "email",
+          "required": "yes",
+          "unique": "yes"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.01",
+      "spec_field": "auth.registration_modes",
+      "value": [
+        "invited"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.07",
+      "spec_field": "auth.required",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.13",
+      "spec_field": "auth.reset_others_by",
+      "value": [
+        "super"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_password_reset",
+      "spec_field": "auth.self_reset_flow",
+      "value": "Self-service reset by emailed link, valid 1 hour.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.10",
+      "spec_field": "auth.session_length",
+      "value": "30 days",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_suspended_experience",
+      "spec_field": "auth.suspended_screen",
+      "value": "A suspended user sees a fixed 'account suspended \u2014 contact <support contact>' screen and nothing else.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.11",
+      "spec_field": "auth.suspension_allowed",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.11",
+      "spec_field": "auth.suspension_auto_triggers",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.11",
+      "spec_field": "auth.suspension_by",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "B.10",
+      "spec_field": "billing.cancellation",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.02",
+      "spec_field": "billing.charged_party",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.04",
+      "spec_field": "billing.currency",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_billing_details",
+      "spec_field": "billing.details_collection",
+      "value": "Card, billing address and tax IDs are collected by the gateway's hosted form; invoices/receipts are the gateway's.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_billing_details",
+      "spec_field": "billing.invoices",
+      "value": "Card, billing address and tax IDs are collected by the gateway's hosted form; invoices/receipts are the gateway's.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "B.01",
+      "spec_field": "billing.model",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.08",
+      "spec_field": "billing.on_failure",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_limit_reached",
+      "spec_field": "billing.on_limit_reached",
+      "value": "Hitting a plan limit shows an upgrade prompt, then blocks the action.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "B.07",
+      "spec_field": "billing.payment_methods",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.09",
+      "spec_field": "billing.plan_change",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "D10",
+      "spec_field": "billing.plan_linkage",
+      "value": "see build_model.D10",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "B.03",
+      "spec_field": "billing.plans",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_proration",
+      "spec_field": "billing.proration_rule",
+      "value": "Mid-cycle plan changes are prorated by the gateway.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "B.11",
+      "spec_field": "billing.refunds",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "A.09",
+      "spec_field": "billing.required",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_tax_calculation",
+      "spec_field": "billing.tax_calculation",
+      "value": "Tax computed by the payment gateway from the billing address.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "B.05",
+      "spec_field": "billing.trial",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.06",
+      "spec_field": "billing.usage_charge_timing",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.06",
+      "spec_field": "billing.usage_unit",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_idempotency_webhook",
+      "spec_field": "billing.webhook_handling",
+      "value": "Payment webhooks signature-verified and processed exactly once.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "C.06",
+      "spec_field": "client.landing_screen_per_role",
+      "value": {
+        "Admin": "Pipeline board",
+        "Sales manager": "Pipeline board",
+        "Sales rep": "My pipeline"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "C.05",
+      "spec_field": "client.mobile_behaviour",
+      "value": {
+        "mode": "simplified"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "C.07",
+      "spec_field": "client.navigation",
+      "value": "confirmed",
+      "source_kind": "question"
+    },
+    {
+      "number": "D13",
+      "spec_field": "client.navigation.derived",
+      "value": "see build_model.D13",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "A.06",
+      "spec_field": "client.platforms",
+      "value": [
+        "web"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.10",
+      "spec_field": "client.public_surfaces",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.12",
+      "spec_field": "data.import_required",
+      "value": {
+        "required": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "A.12",
+      "spec_field": "data.import_sources",
+      "value": {
+        "required": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "DI.10",
+      "spec_field": "deploy.app_store_accounts",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.01",
+      "spec_field": "deploy.domain",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.02",
+      "spec_field": "deploy.email_sender",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.04",
+      "spec_field": "deploy.first_admin_email",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.06",
+      "spec_field": "deploy.gateway_credentials",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.09",
+      "spec_field": "deploy.integration_credentials",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.11",
+      "spec_field": "deploy.legal_documents",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.08",
+      "spec_field": "deploy.oauth_credentials",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.05",
+      "spec_field": "deploy.region",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.07",
+      "spec_field": "deploy.sms_credentials",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.03",
+      "spec_field": "deploy.support_contact",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "A.14",
+      "spec_field": "deviation.flags",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "0.01",
+      "spec_field": "engine.involvement",
+      "value": "guided",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_file_type_inference",
+      "spec_field": "file.*.allowed_mimes",
+      "value": "Allowed formats come from a fixed allow-list per file category.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_image_handling",
+      "spec_field": "file.*.image_handling",
+      "value": "Images get thumbnails; downloads are served by signed URL.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_file_security_scanning",
+      "spec_field": "file.*.malware_scanning",
+      "value": "Async malware scan before a file is marked active.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D06",
+      "spec_field": "file.*.retention",
+      "value": "see build_model.D06",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_file_storage",
+      "spec_field": "file.*.storage_backend",
+      "value": "Private object storage for uploads.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D02",
+      "spec_field": "form.*.fields",
+      "value": "see build_model.D02",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_form_failure",
+      "spec_field": "form.*.layout",
+      "value": "A failed submit shows inline errors and keeps what was typed; forms are single-page; public forms get spam protection.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_form_failure",
+      "spec_field": "form.*.on_failure",
+      "value": "A failed submit shows inline errors and keeps what was typed; forms are single-page; public forms get spam protection.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_form_failure",
+      "spec_field": "form.*.spam_protection",
+      "value": "A failed submit shows inline errors and keeps what was typed; forms are single-page; public forms get spam protection.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_retry_policy",
+      "spec_field": "integration.*.retry_policy",
+      "value": "Failed external calls retry 3\u00d7 with exponential backoff + jitter.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "A.11",
+      "spec_field": "integration.public_api_required",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.file_types",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.forms",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.integrations",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.notifications",
+      "value": [
+        "Activity due",
+        "Deal won"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.records",
+      "value": [
+        "Organisation",
+        "Contact",
+        "Deal",
+        "Activity"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.reports",
+      "value": [
+        "Pipeline by stage",
+        "Win rate"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.roles",
+      "value": [
+        "Admin",
+        "Sales manager",
+        "Sales rep"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.screens",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.workflows",
+      "value": [
+        "Deal pipeline"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.14",
+      "spec_field": "legal.terms_required",
+      "value": {
+        "required": "yes",
+        "status": "need_drafting"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.14",
+      "spec_field": "legal.terms_status",
+      "value": {
+        "required": "yes",
+        "status": "need_drafting"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_locale_formatting",
+      "spec_field": "locale.formatting",
+      "value": "Dates, numbers and currency display in the format of A.13's region; stored in UTC; shown in the viewer's timezone.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "A.13",
+      "spec_field": "locale.languages",
+      "value": {
+        "region": "Australia",
+        "languages": [
+          "English"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "A.13",
+      "spec_field": "locale.primary_region",
+      "value": {
+        "region": "Australia",
+        "languages": [
+          "English"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_locale_formatting",
+      "spec_field": "locale.timezone_handling",
+      "value": "Dates, numbers and currency display in the format of A.13's region; stored in UTC; shown in the viewer's timezone.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_notification_copywriting",
+      "spec_field": "notification.*.copy_final",
+      "value": "Message wording drafted at build time and approved by the owner before launch; never shipped unseen.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_notification_retry",
+      "spec_field": "notification.*.retry_policy",
+      "value": "3 delivery retries then dead-letter.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D05",
+      "spec_field": "notification.*.timing",
+      "value": "see build_model.D05",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "N.03:Activity due",
+      "spec_field": "notification.Activity due.channels",
+      "value": [
+        "email",
+        "push",
+        "in_app"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "N.03:Deal won",
+      "spec_field": "notification.Deal won.channels",
+      "value": [
+        "in_app"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "N.04:Activity due",
+      "spec_field": "notification.Activity due.intent",
+      "value": "This call/meeting/to-do is coming up \u2014 be ready or move it.",
+      "source_kind": "question"
+    },
+    {
+      "number": "N.04:Deal won",
+      "spec_field": "notification.Deal won.intent",
+      "value": "A deal just closed \u2014 see who won it and its value.",
+      "source_kind": "question"
+    },
+    {
+      "number": "N.05:Activity due",
+      "spec_field": "notification.Activity due.opt_out",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "N.05:Deal won",
+      "spec_field": "notification.Deal won.opt_out",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "N.02:Activity due",
+      "spec_field": "notification.Activity due.recipients",
+      "value": [
+        {
+          "kind": "field",
+          "record": "Activity",
+          "field": "Owner"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "N.02:Deal won",
+      "spec_field": "notification.Deal won.recipients",
+      "value": [
+        {
+          "kind": "roles",
+          "roles": [
+            "Sales manager"
+          ]
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "N.01:Activity due",
+      "spec_field": "notification.Activity due.trigger",
+      "value": {
+        "kind": "relative_to_date",
+        "record": "Activity",
+        "date_field": "Due",
+        "offset": "-1 hour"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "N.01:Deal won",
+      "spec_field": "notification.Deal won.trigger",
+      "value": {
+        "kind": "event",
+        "event": "a deal moves to stage Won"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_inapp_inbox",
+      "spec_field": "notify.inbox",
+      "value": "If any notification uses in-app, the app has one notification inbox with read/unread state.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "Z.01",
+      "spec_field": "ops.recurring_operations",
+      "value": "confirmed",
+      "source_kind": "question"
+    },
+    {
+      "number": "D11",
+      "spec_field": "ops.recurring_operations.items",
+      "value": "see build_model.D11",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "A.03",
+      "spec_field": "product.audience",
+      "value": "A sales team: reps who own deals and a manager who sees everything.",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.01",
+      "spec_field": "product.description",
+      "value": "A sales pipeline: organisations and contacts, deals moving through stages from Lead in to Won or Lost, and the activities that move them.",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.02",
+      "spec_field": "product.goals",
+      "value": "Track every deal from first contact to close, know the pipeline value by stage, and see the win rate.",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.05",
+      "spec_field": "product.name",
+      "value": "Pipeline",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.04",
+      "spec_field": "product.success_definition",
+      "value": "The pipeline is honest -- every deal is in the stage it is really in -- and the win rate is known.",
+      "source_kind": "question"
+    },
+    {
+      "number": "D15",
+      "spec_field": "qa.generated_tests",
+      "value": "see build_model.D15",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_qa_pass_conditions",
+      "spec_field": "qa.pass_condition.*",
+      "value": "Every node's pass/fail check is generated from that node's own answers.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_audit_fields",
+      "spec_field": "record.*.audit_fields",
+      "value": "created_at/updated_at/created_by/updated_by on every table.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_concurrent_edit",
+      "spec_field": "record.*.concurrency",
+      "value": "Last save wins; a user saving over a newer version is warned and shown the newer version.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_list_behaviour",
+      "spec_field": "record.*.exportable",
+      "value": "Every record list is searchable and filterable on its visible fields, sorted newest first, exportable by anyone who can view it.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D01",
+      "spec_field": "record.*.field.*.storage_type",
+      "value": "see build_model.D01",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D14",
+      "spec_field": "record.*.field.*.storage_type_for_options",
+      "value": "see build_model.D14",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_field_type_defaults",
+      "spec_field": "record.*.field.*.validation",
+      "value": "Each field type carries one standard validation rule and error message.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_database_identifiers",
+      "spec_field": "record.*.id_strategy",
+      "value": "UUIDv4 primary keys on every table.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_list_behaviour",
+      "spec_field": "record.*.list_behaviour",
+      "value": "Every record list is searchable and filterable on its visible fields, sorted newest first, exportable by anyone who can view it.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "R.06:Organisation",
+      "spec_field": "record.Organisation.access.create",
+      "value": [
+        "Sales rep",
+        "Sales manager"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.06:Contact",
+      "spec_field": "record.Contact.access.create",
+      "value": [
+        "Sales rep",
+        "Sales manager"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.06:Deal",
+      "spec_field": "record.Deal.access.create",
+      "value": [
+        "Sales rep",
+        "Sales manager"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.06:Activity",
+      "spec_field": "record.Activity.access.create",
+      "value": [
+        "Sales rep",
+        "Sales manager"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Organisation",
+      "spec_field": "record.Organisation.access.delete",
+      "value": [
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Contact",
+      "spec_field": "record.Contact.access.delete",
+      "value": [
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Deal",
+      "spec_field": "record.Deal.access.delete",
+      "value": [
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Activity",
+      "spec_field": "record.Activity.access.delete",
+      "value": [
+        {
+          "role": "Sales rep",
+          "scope": "own"
+        },
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Organisation",
+      "spec_field": "record.Organisation.access.edit",
+      "value": [
+        {
+          "role": "Sales rep",
+          "scope": "all"
+        },
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Contact",
+      "spec_field": "record.Contact.access.edit",
+      "value": [
+        {
+          "role": "Sales rep",
+          "scope": "all"
+        },
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Deal",
+      "spec_field": "record.Deal.access.edit",
+      "value": [
+        {
+          "role": "Sales rep",
+          "scope": "own"
+        },
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Activity",
+      "spec_field": "record.Activity.access.edit",
+      "value": [
+        {
+          "role": "Sales rep",
+          "scope": "own"
+        },
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Organisation",
+      "spec_field": "record.Organisation.access.view",
+      "value": [
+        {
+          "role": "Sales rep",
+          "scope": "all"
+        },
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Contact",
+      "spec_field": "record.Contact.access.view",
+      "value": [
+        {
+          "role": "Sales rep",
+          "scope": "all"
+        },
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Deal",
+      "spec_field": "record.Deal.access.view",
+      "value": [
+        {
+          "role": "Sales rep",
+          "scope": "own"
+        },
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Activity",
+      "spec_field": "record.Activity.access.view",
+      "value": [
+        {
+          "role": "Sales rep",
+          "scope": "own"
+        },
+        {
+          "role": "Sales manager",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Organisation",
+      "spec_field": "record.Organisation.archivable",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Contact",
+      "spec_field": "record.Contact.archivable",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Deal",
+      "spec_field": "record.Deal.archivable",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Activity",
+      "spec_field": "record.Activity.archivable",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Organisation",
+      "spec_field": "record.Organisation.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Contact",
+      "spec_field": "record.Contact.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Deal",
+      "spec_field": "record.Deal.custom_actions",
+      "value": [
+        {
+          "name": "Reassign",
+          "who": [
+            "Sales manager"
+          ],
+          "effect": "changes the deal's Owner to another person",
+          "result_location": "the deal page; the new owner's pipeline view",
+          "execution": {
+            "op": "set_fields_from_input",
+            "fields": [
+              "owner"
+            ]
+          }
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Activity",
+      "spec_field": "record.Activity.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Organisation",
+      "spec_field": "record.Organisation.fields",
+      "value": [
+        {
+          "name": "Name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "yes"
+        },
+        {
+          "name": "Website",
+          "type": "url",
+          "required": "no",
+          "unique": "no"
+        },
+        {
+          "name": "Phone",
+          "type": "phone",
+          "required": "no",
+          "unique": "no"
+        },
+        {
+          "name": "Notes",
+          "type": "long_text",
+          "required": "no",
+          "unique": "no"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Contact",
+      "spec_field": "record.Contact.fields",
+      "value": [
+        {
+          "name": "Full name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Email",
+          "type": "email",
+          "required": "no",
+          "unique": "yes"
+        },
+        {
+          "name": "Phone",
+          "type": "phone",
+          "required": "no",
+          "unique": "no"
+        },
+        {
+          "name": "Organisation",
+          "type": "link",
+          "required": "no",
+          "unique": "no",
+          "target_record": "Organisation"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Deal",
+      "spec_field": "record.Deal.fields",
+      "value": [
+        {
+          "name": "Title",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Value",
+          "type": "money",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Owner",
+          "type": "other",
+          "required": "yes",
+          "unique": "no",
+          "custom_rule": "reference to a user account (pick-a-person field)"
+        },
+        {
+          "name": "Contact",
+          "type": "link",
+          "required": "yes",
+          "unique": "no",
+          "target_record": "Contact"
+        },
+        {
+          "name": "Organisation",
+          "type": "link",
+          "required": "no",
+          "unique": "no",
+          "target_record": "Organisation"
+        },
+        {
+          "name": "Expected close date",
+          "type": "date",
+          "required": "no",
+          "unique": "no"
+        },
+        {
+          "name": "Lost reason",
+          "type": "one_choice",
+          "required": "no",
+          "unique": "no",
+          "options": [
+            "price",
+            "timing",
+            "competitor",
+            "no response",
+            "other"
+          ]
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Activity",
+      "spec_field": "record.Activity.fields",
+      "value": [
+        {
+          "name": "Subject",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Type",
+          "type": "one_choice",
+          "required": "yes",
+          "unique": "no",
+          "options": [
+            "call",
+            "meeting",
+            "email",
+            "task"
+          ]
+        },
+        {
+          "name": "Due",
+          "type": "date_time",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Done",
+          "type": "yes_no",
+          "required": "no",
+          "unique": "no"
+        },
+        {
+          "name": "Owner",
+          "type": "other",
+          "required": "yes",
+          "unique": "no",
+          "custom_rule": "reference to a user account (pick-a-person field)"
+        },
+        {
+          "name": "Deal",
+          "type": "link",
+          "required": "yes",
+          "unique": "no",
+          "target_record": "Deal"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Organisation",
+      "spec_field": "record.Organisation.has_lifecycle",
+      "value": {
+        "has": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Contact",
+      "spec_field": "record.Contact.has_lifecycle",
+      "value": {
+        "has": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Deal",
+      "spec_field": "record.Deal.has_lifecycle",
+      "value": {
+        "has": "yes",
+        "stages": [
+          "Lead in",
+          "Contacted",
+          "Proposal sent",
+          "Negotiation",
+          "Won",
+          "Lost"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Activity",
+      "spec_field": "record.Activity.has_lifecycle",
+      "value": {
+        "has": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Organisation",
+      "spec_field": "record.Organisation.human_id",
+      "value": {
+        "needed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Contact",
+      "spec_field": "record.Contact.human_id",
+      "value": {
+        "needed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Deal",
+      "spec_field": "record.Deal.human_id",
+      "value": {
+        "needed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Activity",
+      "spec_field": "record.Activity.human_id",
+      "value": {
+        "needed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Organisation",
+      "spec_field": "record.Organisation.on_delete",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Contact",
+      "spec_field": "record.Contact.on_delete",
+      "value": "keep_unlinked",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Deal",
+      "spec_field": "record.Deal.on_delete",
+      "value": "block",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Activity",
+      "spec_field": "record.Activity.on_delete",
+      "value": "delete_too",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Organisation",
+      "spec_field": "record.Organisation.ownership_rule",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Contact",
+      "spec_field": "record.Contact.ownership_rule",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Deal",
+      "spec_field": "record.Deal.ownership_rule",
+      "value": {
+        "basis": "field",
+        "field": "Owner"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Activity",
+      "spec_field": "record.Activity.ownership_rule",
+      "value": {
+        "basis": "field",
+        "field": "Owner"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Organisation",
+      "spec_field": "record.Organisation.purpose",
+      "value": "A company the business sells to.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Contact",
+      "spec_field": "record.Contact.purpose",
+      "value": "A person at an organisation the business talks to.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Deal",
+      "spec_field": "record.Deal.purpose",
+      "value": "A potential sale being worked through the pipeline.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Activity",
+      "spec_field": "record.Activity.purpose",
+      "value": "A scheduled call, meeting or to-do attached to a deal.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Organisation",
+      "spec_field": "record.Organisation.relations",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Contact",
+      "spec_field": "record.Contact.relations",
+      "value": [
+        {
+          "target": "Organisation",
+          "cardinality": "one_to_many",
+          "required": "no"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Deal",
+      "spec_field": "record.Deal.relations",
+      "value": [
+        {
+          "target": "Contact",
+          "cardinality": "one_to_many",
+          "required": "yes"
+        },
+        {
+          "target": "Organisation",
+          "cardinality": "one_to_many",
+          "required": "no"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Activity",
+      "spec_field": "record.Activity.relations",
+      "value": [
+        {
+          "target": "Deal",
+          "cardinality": "one_to_many",
+          "required": "yes"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Organisation",
+      "spec_field": "record.Organisation.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Contact",
+      "spec_field": "record.Contact.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Deal",
+      "spec_field": "record.Deal.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Activity",
+      "spec_field": "record.Activity.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Organisation",
+      "spec_field": "record.Organisation.title_field",
+      "value": "Name",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Contact",
+      "spec_field": "record.Contact.title_field",
+      "value": "Full name",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Deal",
+      "spec_field": "record.Deal.title_field",
+      "value": "Title",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Activity",
+      "spec_field": "record.Activity.title_field",
+      "value": "Subject",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_report_caching",
+      "spec_field": "report.*.cache_policy",
+      "value": "Reports regenerate on demand, cached 5 min.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D07",
+      "spec_field": "report.*.data_source",
+      "value": "see build_model.D07",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D07",
+      "spec_field": "report.*.metric.*.derived_definition",
+      "value": "see build_model.D07",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "RP.06:Pipeline by stage",
+      "spec_field": "report.Pipeline by stage.default_range",
+      "value": {
+        "filters": [
+          "Owner",
+          "Expected close date"
+        ],
+        "default_range": "all open deals"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.06:Win rate",
+      "spec_field": "report.Win rate.default_range",
+      "value": {
+        "filters": [
+          "Owner"
+        ],
+        "default_range": "last 90 days"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.07:Pipeline by stage",
+      "spec_field": "report.Pipeline by stage.export",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "Sales manager"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.07:Win rate",
+      "spec_field": "report.Win rate.export",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "Sales manager"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.06:Pipeline by stage",
+      "spec_field": "report.Pipeline by stage.filters",
+      "value": {
+        "filters": [
+          "Owner",
+          "Expected close date"
+        ],
+        "default_range": "all open deals"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.06:Win rate",
+      "spec_field": "report.Win rate.filters",
+      "value": {
+        "filters": [
+          "Owner"
+        ],
+        "default_range": "last 90 days"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.03:Pipeline by stage",
+      "spec_field": "report.Pipeline by stage.form",
+      "value": {
+        "delivery": "screen",
+        "shape": "both"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.03:Win rate",
+      "spec_field": "report.Win rate.form",
+      "value": {
+        "delivery": "screen",
+        "shape": "both"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.05:Win rate:win rate",
+      "spec_field": "report.Win rate.metric.win rate.definition",
+      "value": "deals that entered Won divided by deals that entered Won or Lost, in the selected period, attributed to the date the deal reached that stage; expressed as a percentage",
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.04:Pipeline by stage",
+      "spec_field": "report.Pipeline by stage.metrics",
+      "value": [
+        "sum of open Deal Value grouped by stage",
+        "count of Deals grouped by stage"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.04:Win rate",
+      "spec_field": "report.Win rate.metrics",
+      "value": [
+        "win rate"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.01:Pipeline by stage",
+      "spec_field": "report.Pipeline by stage.question",
+      "value": "How much potential value sits in each stage of the pipeline?",
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.01:Win rate",
+      "spec_field": "report.Win rate.question",
+      "value": "Of the deals we finish, what share do we win?",
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.08:Pipeline by stage",
+      "spec_field": "report.Pipeline by stage.scheduled_delivery",
+      "value": {
+        "enabled": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.08:Win rate",
+      "spec_field": "report.Win rate.scheduled_delivery",
+      "value": {
+        "enabled": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.02:Pipeline by stage",
+      "spec_field": "report.Pipeline by stage.viewers",
+      "value": [
+        "Sales rep",
+        "Sales manager"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.02:Win rate",
+      "spec_field": "report.Win rate.viewers",
+      "value": [
+        "Sales manager"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "D04",
+      "spec_field": "role.*.forbidden_actions",
+      "value": "see build_model.D04",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D04",
+      "spec_field": "role.*.is_admin",
+      "value": "see build_model.D04",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D04",
+      "spec_field": "role.*.permitted_actions",
+      "value": "see build_model.D04",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D03",
+      "spec_field": "role.*.visible_screens",
+      "value": "see build_model.D03",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "P.04:Admin",
+      "spec_field": "role.Admin.assignable_by",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.04:Sales manager",
+      "spec_field": "role.Sales manager.assignable_by",
+      "value": [
+        "Admin"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "P.04:Sales rep",
+      "spec_field": "role.Sales rep.assignable_by",
+      "value": [
+        "Admin",
+        "Sales manager"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "P.03:Admin",
+      "spec_field": "role.Admin.billing_access",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.03:Sales manager",
+      "spec_field": "role.Sales manager.billing_access",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.03:Sales rep",
+      "spec_field": "role.Sales rep.billing_access",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.01:Admin",
+      "spec_field": "role.Admin.description",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.01:Sales manager",
+      "spec_field": "role.Sales manager.description",
+      "value": "Runs the sales team; sees and edits every deal.",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.01:Sales rep",
+      "spec_field": "role.Sales rep.description",
+      "value": "Works their own deals and activities.",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.02:Admin",
+      "spec_field": "role.Admin.sees_private_data",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.02:Sales manager",
+      "spec_field": "role.Sales manager.sees_private_data",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.02:Sales rep",
+      "spec_field": "role.Sales rep.sees_private_data",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.00",
+      "spec_field": "roles.multi_role_per_person",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.16",
+      "spec_field": "roles.super_role",
+      "value": "Admin",
+      "source_kind": "question"
+    },
+    {
+      "number": "D03",
+      "spec_field": "screen.*.access",
+      "value": "see build_model.D03",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D03",
+      "spec_field": "screen.*.contents",
+      "value": "see build_model.D03",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_screen_interaction_pattern",
+      "spec_field": "screen.*.interaction_states",
+      "value": "Standard loading / empty / error / success / back / leave-and-return behaviour on every screen.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "Z.03",
+      "spec_field": "screens.inventory",
+      "value": "confirmed",
+      "source_kind": "question"
+    },
+    {
+      "number": "D13",
+      "spec_field": "screens.inventory.items",
+      "value": "see build_model.D13",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "T.07",
+      "spec_field": "tenancy.branding",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "T.02",
+      "spec_field": "tenancy.creation",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "T.06",
+      "spec_field": "tenancy.isolation",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_client_isolation",
+      "spec_field": "tenancy.isolation_mechanism",
+      "value": "Row-level security enforces organisation isolation in the database.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "A.08",
+      "spec_field": "tenancy.mode",
+      "value": "single",
+      "source_kind": "question"
+    },
+    {
+      "number": "T.01",
+      "spec_field": "tenancy.multi_membership",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "T.05",
+      "spec_field": "tenancy.operator_role",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "T.03",
+      "spec_field": "tenancy.org_admin_role",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_org_switcher",
+      "spec_field": "tenancy.org_settings",
+      "value": "A person in several organisations switches with a standard switcher; each organisation has its own timezone setting defaulting to A.13.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D09",
+      "spec_field": "tenancy.role_visibility",
+      "value": "see build_model.D09",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "T.04",
+      "spec_field": "tenancy.roles_scope",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "T.08",
+      "spec_field": "tenancy.suspend_delete",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_org_switcher",
+      "spec_field": "tenancy.switcher",
+      "value": "A person in several organisations switches with a standard switcher; each organisation has its own timezone setting defaulting to A.13.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_theme",
+      "spec_field": "visual.accessibility",
+      "value": "Light theme only; WCAG 2.1 AA contrast and keyboard access.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "C.04",
+      "spec_field": "visual.brand_assets",
+      "value": {
+        "mode": "design_for_me"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "C.03",
+      "spec_field": "visual.density",
+      "value": "balanced",
+      "source_kind": "question"
+    },
+    {
+      "number": "C.01",
+      "spec_field": "visual.references",
+      "value": "none",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_theme",
+      "spec_field": "visual.theme",
+      "value": "Light theme only; WCAG 2.1 AA contrast and keyboard access.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "C.02",
+      "spec_field": "visual.tone",
+      "value": [
+        "focused",
+        "energetic",
+        "confident"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "D08",
+      "spec_field": "workflow.*.transition_graph",
+      "value": "see build_model.D08",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "FL.05:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.approvals",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.07:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.cancel",
+      "value": {
+        "allowed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.08:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.on_complete",
+      "value": "Won: the deal locks and counts toward revenue reporting. Lost: Lost reason becomes required.",
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.06:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.on_reject",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.04:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.preconditions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.09:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.readonly_from",
+      "value": "Won",
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.11:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.stage_notifications",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.02:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.stages",
+      "value": {
+        "stages": [
+          "Lead in",
+          "Contacted",
+          "Proposal sent",
+          "Negotiation",
+          "Won",
+          "Lost"
+        ],
+        "initial": "Lead in",
+        "terminal": [
+          "Won",
+          "Lost"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.10:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.timeouts",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.03:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.transitions",
+      "value": [
+        {
+          "from": "Lead in",
+          "to": "Contacted",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ]
+        },
+        {
+          "from": "Contacted",
+          "to": "Proposal sent",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ]
+        },
+        {
+          "from": "Proposal sent",
+          "to": "Negotiation",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ]
+        },
+        {
+          "from": "Negotiation",
+          "to": "Won",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ]
+        },
+        {
+          "from": "Lead in",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ]
+        },
+        {
+          "from": "Contacted",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ]
+        },
+        {
+          "from": "Proposal sent",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ]
+        },
+        {
+          "from": "Negotiation",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ]
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.01:Deal pipeline",
+      "spec_field": "workflow.Deal pipeline.trigger",
+      "value": {
+        "kind": "person",
+        "who": [
+          "Sales rep",
+          "Sales manager"
+        ],
+        "action": "creating a deal (starts in 'Lead in')"
+      },
+      "source_kind": "question"
+    }
+  ],
+  "build_model": {
+    "records": {
+      "Organisation": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "yes"
+          },
+          "Website": {
+            "name": "Website",
+            "type": "url",
+            "required": "no",
+            "unique": "no"
+          },
+          "Phone": {
+            "name": "Phone",
+            "type": "phone",
+            "required": "no",
+            "unique": "no"
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Website": "VARCHAR(2048)",
+          "Phone": "VARCHAR(40)",
+          "Notes": "TEXT"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sales rep",
+              "scope": "all"
+            },
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "edit": [
+            {
+              "role": "Sales rep",
+              "scope": "all"
+            },
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "crm-pipeline/REC-001"
+      },
+      "Contact": {
+        "fields": {
+          "Full name": {
+            "name": "Full name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Email": {
+            "name": "Email",
+            "type": "email",
+            "required": "no",
+            "unique": "yes"
+          },
+          "Phone": {
+            "name": "Phone",
+            "type": "phone",
+            "required": "no",
+            "unique": "no"
+          },
+          "Organisation": {
+            "name": "Organisation",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Organisation"
+          }
+        },
+        "storage": {
+          "Full name": "VARCHAR(255)",
+          "Email": "VARCHAR(255)",
+          "Phone": "VARCHAR(40)",
+          "Organisation": "FOREIGN_KEY"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sales rep",
+              "scope": "all"
+            },
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "edit": [
+            {
+              "role": "Sales rep",
+              "scope": "all"
+            },
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Full name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "crm-pipeline/REC-002"
+      },
+      "Deal": {
+        "fields": {
+          "Title": {
+            "name": "Title",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Value": {
+            "name": "Value",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Owner": {
+            "name": "Owner",
+            "type": "other",
+            "required": "yes",
+            "unique": "no",
+            "custom_rule": "reference to a user account (pick-a-person field)"
+          },
+          "Contact": {
+            "name": "Contact",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Contact"
+          },
+          "Organisation": {
+            "name": "Organisation",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Organisation"
+          },
+          "Expected close date": {
+            "name": "Expected close date",
+            "type": "date",
+            "required": "no",
+            "unique": "no"
+          },
+          "Lost reason": {
+            "name": "Lost reason",
+            "type": "one_choice",
+            "required": "no",
+            "unique": "no",
+            "options": [
+              "price",
+              "timing",
+              "competitor",
+              "no response",
+              "other"
+            ]
+          }
+        },
+        "storage": {
+          "Title": "VARCHAR(255)",
+          "Value": "DECIMAL(18,2)",
+          "Owner": "FOREIGN_KEY_ROLE",
+          "Contact": "FOREIGN_KEY",
+          "Organisation": "FOREIGN_KEY",
+          "Expected close date": "DATE",
+          "Lost reason": "ENUM"
+        },
+        "enums": {
+          "Lost reason": [
+            "price",
+            "timing",
+            "competitor",
+            "no response",
+            "other"
+          ]
+        },
+        "access": {
+          "view": [
+            {
+              "role": "Sales rep",
+              "scope": "own"
+            },
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "edit": [
+            {
+              "role": "Sales rep",
+              "scope": "own"
+            },
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Title",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "Lead in",
+            "Contacted",
+            "Proposal sent",
+            "Negotiation",
+            "Won",
+            "Lost"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [
+          {
+            "name": "Reassign",
+            "who": [
+              "Sales manager"
+            ],
+            "effect": "changes the deal's Owner to another person",
+            "result_location": "the deal page; the new owner's pipeline view",
+            "execution": {
+              "op": "set_fields_from_input",
+              "fields": [
+                "owner"
+              ]
+            }
+          }
+        ],
+        "on_create": [],
+        "id": "crm-pipeline/REC-003"
+      },
+      "Activity": {
+        "fields": {
+          "Subject": {
+            "name": "Subject",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Type": {
+            "name": "Type",
+            "type": "one_choice",
+            "required": "yes",
+            "unique": "no",
+            "options": [
+              "call",
+              "meeting",
+              "email",
+              "task"
+            ]
+          },
+          "Due": {
+            "name": "Due",
+            "type": "date_time",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Done": {
+            "name": "Done",
+            "type": "yes_no",
+            "required": "no",
+            "unique": "no"
+          },
+          "Owner": {
+            "name": "Owner",
+            "type": "other",
+            "required": "yes",
+            "unique": "no",
+            "custom_rule": "reference to a user account (pick-a-person field)"
+          },
+          "Deal": {
+            "name": "Deal",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Deal"
+          }
+        },
+        "storage": {
+          "Subject": "VARCHAR(255)",
+          "Type": "ENUM",
+          "Due": "DATETIME",
+          "Done": "BOOLEAN",
+          "Owner": "FOREIGN_KEY_ROLE",
+          "Deal": "FOREIGN_KEY"
+        },
+        "enums": {
+          "Type": [
+            "call",
+            "meeting",
+            "email",
+            "task"
+          ]
+        },
+        "access": {
+          "view": [
+            {
+              "role": "Sales rep",
+              "scope": "own"
+            },
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "edit": [
+            {
+              "role": "Sales rep",
+              "scope": "own"
+            },
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sales rep",
+              "scope": "own"
+            },
+            {
+              "role": "Sales manager",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Subject",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "crm-pipeline/REC-004"
+      }
+    },
+    "roles": {
+      "Admin": {
+        "permitted": [],
+        "is_admin": true
+      },
+      "Sales manager": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Organisation",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Organisation",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Organisation",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Organisation",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Deal",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Deal",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Deal",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Deal",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Activity",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Activity",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Activity",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Activity",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      },
+      "Sales rep": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Organisation",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Organisation",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Organisation",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Contact",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Deal",
+            "scope": "own"
+          },
+          {
+            "action": "create",
+            "record": "Deal",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Deal",
+            "scope": "own"
+          },
+          {
+            "action": "view",
+            "record": "Activity",
+            "scope": "own"
+          },
+          {
+            "action": "create",
+            "record": "Activity",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Activity",
+            "scope": "own"
+          },
+          {
+            "action": "delete",
+            "record": "Activity",
+            "scope": "own"
+          }
+        ],
+        "is_admin": false
+      }
+    },
+    "super_role": "Admin",
+    "workflows": {
+      "Deal pipeline": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "action": "creating a deal (starts in 'Lead in')"
+        },
+        "stages": [
+          {
+            "id": "crm-pipeline/STG-001",
+            "name": "Lead in"
+          },
+          {
+            "id": "crm-pipeline/STG-002",
+            "name": "Contacted"
+          },
+          {
+            "id": "crm-pipeline/STG-003",
+            "name": "Proposal sent"
+          },
+          {
+            "id": "crm-pipeline/STG-004",
+            "name": "Negotiation"
+          },
+          {
+            "id": "crm-pipeline/STG-005",
+            "name": "Won"
+          },
+          {
+            "id": "crm-pipeline/STG-006",
+            "name": "Lost"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "Lead in",
+            "to": "Contacted",
+            "mover": "roles",
+            "roles": [
+              "Sales rep",
+              "Sales manager"
+            ],
+            "id": "crm-pipeline/TRN-001"
+          },
+          {
+            "from": "Contacted",
+            "to": "Proposal sent",
+            "mover": "roles",
+            "roles": [
+              "Sales rep",
+              "Sales manager"
+            ],
+            "id": "crm-pipeline/TRN-002"
+          },
+          {
+            "from": "Proposal sent",
+            "to": "Negotiation",
+            "mover": "roles",
+            "roles": [
+              "Sales rep",
+              "Sales manager"
+            ],
+            "id": "crm-pipeline/TRN-003"
+          },
+          {
+            "from": "Negotiation",
+            "to": "Won",
+            "mover": "roles",
+            "roles": [
+              "Sales rep",
+              "Sales manager"
+            ],
+            "id": "crm-pipeline/TRN-004"
+          },
+          {
+            "from": "Lead in",
+            "to": "Lost",
+            "mover": "roles",
+            "roles": [
+              "Sales rep",
+              "Sales manager"
+            ],
+            "id": "crm-pipeline/TRN-005"
+          },
+          {
+            "from": "Contacted",
+            "to": "Lost",
+            "mover": "roles",
+            "roles": [
+              "Sales rep",
+              "Sales manager"
+            ],
+            "id": "crm-pipeline/TRN-006"
+          },
+          {
+            "from": "Proposal sent",
+            "to": "Lost",
+            "mover": "roles",
+            "roles": [
+              "Sales rep",
+              "Sales manager"
+            ],
+            "id": "crm-pipeline/TRN-007"
+          },
+          {
+            "from": "Negotiation",
+            "to": "Lost",
+            "mover": "roles",
+            "roles": [
+              "Sales rep",
+              "Sales manager"
+            ],
+            "id": "crm-pipeline/TRN-008"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "effects": [],
+        "initial": "Lead in",
+        "terminal": [
+          "Won",
+          "Lost"
+        ]
+      }
+    },
+    "notifications": {
+      "Activity due": {
+        "trigger": {
+          "kind": "relative_to_date",
+          "record": "Activity",
+          "date_field": "Due",
+          "offset": "-1 hour"
+        },
+        "recipients": [
+          {
+            "kind": "field",
+            "record": "Activity",
+            "field": "Owner"
+          }
+        ],
+        "channels": [
+          "email",
+          "push",
+          "in_app"
+        ],
+        "timing": "offset:-1 hour",
+        "id": "crm-pipeline/NOTIF-001"
+      },
+      "Deal won": {
+        "trigger": {
+          "kind": "event",
+          "event": "a deal moves to stage Won"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sales manager"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app"
+        ],
+        "timing": "immediate",
+        "id": "crm-pipeline/NOTIF-002"
+      }
+    },
+    "reports": {
+      "Pipeline by stage": {
+        "data_source": "How much potential value sits in each stage of the pipeline?",
+        "metrics": {
+          "sum of open Deal Value grouped by stage": "auto: count/sum of 'sum of open Deal Value grouped by stage'",
+          "count of Deals grouped by stage": "auto: count/sum of 'count of Deals grouped by stage'"
+        },
+        "spec": [
+          {
+            "metric": "sum of open Deal Value grouped by stage",
+            "spec": {
+              "table": "deals",
+              "aggregation": "sum",
+              "value_field": "value",
+              "group_by": "stage",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "not_in",
+                  "value": [
+                    "Won",
+                    "Lost"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "metric": "count of Deals grouped by stage",
+            "spec": {
+              "table": "deals",
+              "aggregation": "count",
+              "group_by": "stage"
+            }
+          }
+        ],
+        "id": "crm-pipeline/RPT-001"
+      },
+      "Win rate": {
+        "data_source": "Of the deals we finish, what share do we win?",
+        "metrics": {
+          "win rate": "deals that entered Won divided by deals that entered Won or Lost, in the selected period, attributed to the date the deal reached that stage; expressed as a percentage"
+        },
+        "spec": [
+          {
+            "metric": "win rate",
+            "spec": {
+              "engine": "stage_history",
+              "kind": "rate_over_last_days",
+              "table": "deals",
+              "numerator_stage": "Won",
+              "denominator_stages": [
+                "Won",
+                "Lost"
+              ],
+              "days": 90
+            }
+          }
+        ],
+        "id": "crm-pipeline/RPT-002"
+      }
+    },
+    "forms": {},
+    "integrations": {},
+    "auth": {
+      "AU.01": [
+        "invited"
+      ],
+      "AU.02": [
+        {
+          "name": "Full name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Email address",
+          "type": "email",
+          "required": "yes",
+          "unique": "yes"
+        }
+      ],
+      "AU.03": "yes",
+      "AU.04": [
+        "password",
+        "google"
+      ],
+      "AU.07": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "AU.08": {
+        "attempts": 5,
+        "duration": "15 minutes"
+      },
+      "AU.09": "yes",
+      "AU.10": "30 days",
+      "AU.11": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "AU.12": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "AU.13": [
+        "super"
+      ],
+      "AU.14": {
+        "required": "yes",
+        "status": "need_drafting"
+      },
+      "AU.06": {
+        "inviters": [
+          "Admin",
+          "Sales manager"
+        ],
+        "default_role": "Sales rep"
+      }
+    },
+    "brand": {
+      "app_name": "Pipeline",
+      "assets": {
+        "mode": "design_for_me"
+      }
+    },
+    "screens_inventory": [
+      {
+        "id": "crm-pipeline/SCR-001",
+        "kind": "list",
+        "record": "Organisation"
+      },
+      {
+        "id": "crm-pipeline/SCR-002",
+        "kind": "detail",
+        "record": "Organisation"
+      },
+      {
+        "id": "crm-pipeline/SCR-003",
+        "kind": "list",
+        "record": "Contact"
+      },
+      {
+        "id": "crm-pipeline/SCR-004",
+        "kind": "detail",
+        "record": "Contact"
+      },
+      {
+        "id": "crm-pipeline/SCR-005",
+        "kind": "list",
+        "record": "Deal"
+      },
+      {
+        "id": "crm-pipeline/SCR-006",
+        "kind": "detail",
+        "record": "Deal"
+      },
+      {
+        "id": "crm-pipeline/SCR-007",
+        "kind": "list",
+        "record": "Activity"
+      },
+      {
+        "id": "crm-pipeline/SCR-008",
+        "kind": "detail",
+        "record": "Activity"
+      },
+      {
+        "id": "crm-pipeline/SCR-009",
+        "kind": "report",
+        "report": "Pipeline by stage"
+      },
+      {
+        "id": "crm-pipeline/SCR-010",
+        "kind": "report",
+        "report": "Win rate"
+      }
+    ],
+    "navigation": [
+      "crm-pipeline/SCR-001",
+      "crm-pipeline/SCR-002",
+      "crm-pipeline/SCR-003",
+      "crm-pipeline/SCR-004",
+      "crm-pipeline/SCR-005",
+      "crm-pipeline/SCR-006",
+      "crm-pipeline/SCR-007",
+      "crm-pipeline/SCR-008",
+      "crm-pipeline/SCR-009",
+      "crm-pipeline/SCR-010"
+    ],
+    "landing_per_role": {
+      "Admin": "Pipeline board",
+      "Sales manager": "Pipeline board",
+      "Sales rep": "My pipeline"
+    },
+    "actions_inventory": [
+      {
+        "id": "crm-pipeline/ACT-001",
+        "kind": "create",
+        "record": "Organisation",
+        "roles": [
+          "Sales manager",
+          "Sales rep"
+        ],
+        "outcome": "creates a new 'Organisation' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-002",
+        "kind": "edit",
+        "record": "Organisation",
+        "roles": [
+          "Sales manager",
+          "Sales rep"
+        ],
+        "outcome": "edits an existing 'Organisation' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-003",
+        "kind": "delete",
+        "record": "Organisation",
+        "roles": [
+          "Sales manager"
+        ],
+        "outcome": "deletes a 'Organisation' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-004",
+        "kind": "create",
+        "record": "Contact",
+        "roles": [
+          "Sales manager",
+          "Sales rep"
+        ],
+        "outcome": "creates a new 'Contact' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-005",
+        "kind": "edit",
+        "record": "Contact",
+        "roles": [
+          "Sales manager",
+          "Sales rep"
+        ],
+        "outcome": "edits an existing 'Contact' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-006",
+        "kind": "delete",
+        "record": "Contact",
+        "roles": [
+          "Sales manager"
+        ],
+        "outcome": "deletes a 'Contact' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-007",
+        "kind": "create",
+        "record": "Deal",
+        "roles": [
+          "Sales manager",
+          "Sales rep"
+        ],
+        "outcome": "creates a new 'Deal' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-008",
+        "kind": "edit",
+        "record": "Deal",
+        "roles": [
+          "Sales manager",
+          "Sales rep"
+        ],
+        "outcome": "edits an existing 'Deal' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-009",
+        "kind": "delete",
+        "record": "Deal",
+        "roles": [
+          "Sales manager"
+        ],
+        "outcome": "deletes a 'Deal' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-010",
+        "kind": "custom",
+        "record": "Deal",
+        "detail": {
+          "name": "Reassign",
+          "who": [
+            "Sales manager"
+          ],
+          "effect": "changes the deal's Owner to another person",
+          "result_location": "the deal page; the new owner's pipeline view",
+          "execution": {
+            "op": "set_fields_from_input",
+            "fields": [
+              "owner"
+            ]
+          }
+        },
+        "roles": [
+          "Sales manager"
+        ],
+        "outcome": "changes the deal's Owner to another person"
+      },
+      {
+        "id": "crm-pipeline/ACT-011",
+        "kind": "create",
+        "record": "Activity",
+        "roles": [
+          "Sales manager",
+          "Sales rep"
+        ],
+        "outcome": "creates a new 'Activity' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-012",
+        "kind": "edit",
+        "record": "Activity",
+        "roles": [
+          "Sales manager",
+          "Sales rep"
+        ],
+        "outcome": "edits an existing 'Activity' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-013",
+        "kind": "delete",
+        "record": "Activity",
+        "roles": [
+          "Sales manager",
+          "Sales rep"
+        ],
+        "outcome": "deletes a 'Activity' record"
+      },
+      {
+        "id": "crm-pipeline/ACT-014",
+        "kind": "transition",
+        "workflow": "Deal pipeline",
+        "from": "Lead in",
+        "to": "Contacted",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ],
+        "outcome": "moves 'Deal pipeline' from 'Lead in' to 'Contacted'"
+      },
+      {
+        "id": "crm-pipeline/ACT-015",
+        "kind": "transition",
+        "workflow": "Deal pipeline",
+        "from": "Contacted",
+        "to": "Proposal sent",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ],
+        "outcome": "moves 'Deal pipeline' from 'Contacted' to 'Proposal sent'"
+      },
+      {
+        "id": "crm-pipeline/ACT-016",
+        "kind": "transition",
+        "workflow": "Deal pipeline",
+        "from": "Proposal sent",
+        "to": "Negotiation",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ],
+        "outcome": "moves 'Deal pipeline' from 'Proposal sent' to 'Negotiation'"
+      },
+      {
+        "id": "crm-pipeline/ACT-017",
+        "kind": "transition",
+        "workflow": "Deal pipeline",
+        "from": "Negotiation",
+        "to": "Won",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ],
+        "outcome": "moves 'Deal pipeline' from 'Negotiation' to 'Won'"
+      },
+      {
+        "id": "crm-pipeline/ACT-018",
+        "kind": "transition",
+        "workflow": "Deal pipeline",
+        "from": "Lead in",
+        "to": "Lost",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ],
+        "outcome": "moves 'Deal pipeline' from 'Lead in' to 'Lost'"
+      },
+      {
+        "id": "crm-pipeline/ACT-019",
+        "kind": "transition",
+        "workflow": "Deal pipeline",
+        "from": "Contacted",
+        "to": "Lost",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ],
+        "outcome": "moves 'Deal pipeline' from 'Contacted' to 'Lost'"
+      },
+      {
+        "id": "crm-pipeline/ACT-020",
+        "kind": "transition",
+        "workflow": "Deal pipeline",
+        "from": "Proposal sent",
+        "to": "Lost",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ],
+        "outcome": "moves 'Deal pipeline' from 'Proposal sent' to 'Lost'"
+      },
+      {
+        "id": "crm-pipeline/ACT-021",
+        "kind": "transition",
+        "workflow": "Deal pipeline",
+        "from": "Negotiation",
+        "to": "Lost",
+        "mover": "roles",
+        "roles": [
+          "Sales rep",
+          "Sales manager"
+        ],
+        "outcome": "moves 'Deal pipeline' from 'Negotiation' to 'Lost'"
+      }
+    ],
+    "recurring_ops": [
+      {
+        "id": "crm-pipeline/OPS-001",
+        "source": "R.14:Organisation",
+        "detail": "forever"
+      },
+      {
+        "id": "crm-pipeline/OPS-002",
+        "source": "R.14:Contact",
+        "detail": "forever"
+      },
+      {
+        "id": "crm-pipeline/OPS-003",
+        "source": "R.14:Deal",
+        "detail": "forever"
+      },
+      {
+        "id": "crm-pipeline/OPS-004",
+        "source": "R.14:Activity",
+        "detail": "forever"
+      },
+      {
+        "id": "crm-pipeline/OPS-005",
+        "source": "FL.01:Deal pipeline",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "action": "creating a deal (starts in 'Lead in')"
+        }
+      },
+      {
+        "id": "crm-pipeline/OPS-006",
+        "source": "N.01:Activity due",
+        "detail": {
+          "kind": "relative_to_date",
+          "record": "Activity",
+          "date_field": "Due",
+          "offset": "-1 hour"
+        }
+      },
+      {
+        "id": "crm-pipeline/OPS-007",
+        "source": "N.01:Deal won",
+        "detail": {
+          "kind": "event",
+          "event": "a deal moves to stage Won"
+        }
+      },
+      {
+        "id": "crm-pipeline/OPS-008",
+        "source": "RP.08:Pipeline by stage",
+        "detail": {
+          "enabled": "no"
+        }
+      },
+      {
+        "id": "crm-pipeline/OPS-009",
+        "source": "RP.08:Win rate",
+        "detail": {
+          "enabled": "no"
+        }
+      }
+    ],
+    "qa_generated_tests": [
+      {
+        "id": "crm-pipeline/QA-001",
+        "action_id": "crm-pipeline/ACT-001",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-001",
+          "kind": "create",
+          "record": "Organisation",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "creates a new 'Organisation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-002",
+        "action_id": "crm-pipeline/ACT-001",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-001",
+          "kind": "create",
+          "record": "Organisation",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "creates a new 'Organisation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-003",
+        "action_id": "crm-pipeline/ACT-002",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-002",
+          "kind": "edit",
+          "record": "Organisation",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "edits an existing 'Organisation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-004",
+        "action_id": "crm-pipeline/ACT-002",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-002",
+          "kind": "edit",
+          "record": "Organisation",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "edits an existing 'Organisation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-005",
+        "action_id": "crm-pipeline/ACT-003",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-003",
+          "kind": "delete",
+          "record": "Organisation",
+          "roles": [
+            "Sales manager"
+          ],
+          "outcome": "deletes a 'Organisation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-006",
+        "action_id": "crm-pipeline/ACT-004",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-004",
+          "kind": "create",
+          "record": "Contact",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "creates a new 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-007",
+        "action_id": "crm-pipeline/ACT-004",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-004",
+          "kind": "create",
+          "record": "Contact",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "creates a new 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-008",
+        "action_id": "crm-pipeline/ACT-005",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-005",
+          "kind": "edit",
+          "record": "Contact",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "edits an existing 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-009",
+        "action_id": "crm-pipeline/ACT-005",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-005",
+          "kind": "edit",
+          "record": "Contact",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "edits an existing 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-010",
+        "action_id": "crm-pipeline/ACT-006",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-006",
+          "kind": "delete",
+          "record": "Contact",
+          "roles": [
+            "Sales manager"
+          ],
+          "outcome": "deletes a 'Contact' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-011",
+        "action_id": "crm-pipeline/ACT-007",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-007",
+          "kind": "create",
+          "record": "Deal",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "creates a new 'Deal' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-012",
+        "action_id": "crm-pipeline/ACT-007",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-007",
+          "kind": "create",
+          "record": "Deal",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "creates a new 'Deal' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-013",
+        "action_id": "crm-pipeline/ACT-008",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-008",
+          "kind": "edit",
+          "record": "Deal",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "edits an existing 'Deal' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-014",
+        "action_id": "crm-pipeline/ACT-008",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-008",
+          "kind": "edit",
+          "record": "Deal",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "edits an existing 'Deal' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-015",
+        "action_id": "crm-pipeline/ACT-009",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-009",
+          "kind": "delete",
+          "record": "Deal",
+          "roles": [
+            "Sales manager"
+          ],
+          "outcome": "deletes a 'Deal' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-016",
+        "action_id": "crm-pipeline/ACT-010",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-010",
+          "kind": "custom",
+          "record": "Deal",
+          "detail": {
+            "name": "Reassign",
+            "who": [
+              "Sales manager"
+            ],
+            "effect": "changes the deal's Owner to another person",
+            "result_location": "the deal page; the new owner's pipeline view",
+            "execution": {
+              "op": "set_fields_from_input",
+              "fields": [
+                "owner"
+              ]
+            }
+          },
+          "roles": [
+            "Sales manager"
+          ],
+          "outcome": "changes the deal's Owner to another person"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-017",
+        "action_id": "crm-pipeline/ACT-011",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-011",
+          "kind": "create",
+          "record": "Activity",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "creates a new 'Activity' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-018",
+        "action_id": "crm-pipeline/ACT-011",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-011",
+          "kind": "create",
+          "record": "Activity",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "creates a new 'Activity' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-019",
+        "action_id": "crm-pipeline/ACT-012",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-012",
+          "kind": "edit",
+          "record": "Activity",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "edits an existing 'Activity' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-020",
+        "action_id": "crm-pipeline/ACT-012",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-012",
+          "kind": "edit",
+          "record": "Activity",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "edits an existing 'Activity' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-021",
+        "action_id": "crm-pipeline/ACT-013",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-013",
+          "kind": "delete",
+          "record": "Activity",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "deletes a 'Activity' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-022",
+        "action_id": "crm-pipeline/ACT-013",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-013",
+          "kind": "delete",
+          "record": "Activity",
+          "roles": [
+            "Sales manager",
+            "Sales rep"
+          ],
+          "outcome": "deletes a 'Activity' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-023",
+        "action_id": "crm-pipeline/ACT-014",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-014",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Lead in",
+          "to": "Contacted",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Lead in' to 'Contacted'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-024",
+        "action_id": "crm-pipeline/ACT-014",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-014",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Lead in",
+          "to": "Contacted",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Lead in' to 'Contacted'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-025",
+        "action_id": "crm-pipeline/ACT-015",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-015",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Contacted",
+          "to": "Proposal sent",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Contacted' to 'Proposal sent'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-026",
+        "action_id": "crm-pipeline/ACT-015",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-015",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Contacted",
+          "to": "Proposal sent",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Contacted' to 'Proposal sent'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-027",
+        "action_id": "crm-pipeline/ACT-016",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-016",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Proposal sent",
+          "to": "Negotiation",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Proposal sent' to 'Negotiation'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-028",
+        "action_id": "crm-pipeline/ACT-016",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-016",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Proposal sent",
+          "to": "Negotiation",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Proposal sent' to 'Negotiation'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-029",
+        "action_id": "crm-pipeline/ACT-017",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-017",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Negotiation",
+          "to": "Won",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Negotiation' to 'Won'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-030",
+        "action_id": "crm-pipeline/ACT-017",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-017",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Negotiation",
+          "to": "Won",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Negotiation' to 'Won'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-031",
+        "action_id": "crm-pipeline/ACT-018",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-018",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Lead in",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Lead in' to 'Lost'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-032",
+        "action_id": "crm-pipeline/ACT-018",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-018",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Lead in",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Lead in' to 'Lost'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-033",
+        "action_id": "crm-pipeline/ACT-019",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-019",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Contacted",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Contacted' to 'Lost'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-034",
+        "action_id": "crm-pipeline/ACT-019",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-019",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Contacted",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Contacted' to 'Lost'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-035",
+        "action_id": "crm-pipeline/ACT-020",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-020",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Proposal sent",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Proposal sent' to 'Lost'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-036",
+        "action_id": "crm-pipeline/ACT-020",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-020",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Proposal sent",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Proposal sent' to 'Lost'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-037",
+        "action_id": "crm-pipeline/ACT-021",
+        "role": "Sales rep",
+        "action": {
+          "id": "crm-pipeline/ACT-021",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Negotiation",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Negotiation' to 'Lost'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-038",
+        "action_id": "crm-pipeline/ACT-021",
+        "role": "Sales manager",
+        "action": {
+          "id": "crm-pipeline/ACT-021",
+          "kind": "transition",
+          "workflow": "Deal pipeline",
+          "from": "Negotiation",
+          "to": "Lost",
+          "mover": "roles",
+          "roles": [
+            "Sales rep",
+            "Sales manager"
+          ],
+          "outcome": "moves 'Deal pipeline' from 'Negotiation' to 'Lost'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "crm-pipeline/QA-039",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-001",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "crm-pipeline/QA-040",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-002",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "crm-pipeline/QA-041",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-003",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "crm-pipeline/QA-042",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-004",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "crm-pipeline/QA-043",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-005",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "crm-pipeline/QA-044",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-006",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "crm-pipeline/QA-045",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-007",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "crm-pipeline/QA-046",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-008",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "crm-pipeline/QA-047",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-009",
+        "role": "Admin",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-048",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-010",
+        "role": "Admin",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-049",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-001",
+        "role": "Sales manager",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-050",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-002",
+        "role": "Sales manager",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-051",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-003",
+        "role": "Sales manager",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-052",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-004",
+        "role": "Sales manager",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-053",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-005",
+        "role": "Sales manager",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-054",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-006",
+        "role": "Sales manager",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-055",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-007",
+        "role": "Sales manager",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-056",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-008",
+        "role": "Sales manager",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-057",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-009",
+        "role": "Sales manager",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-058",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-010",
+        "role": "Sales manager",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-059",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-001",
+        "role": "Sales rep",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-060",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-002",
+        "role": "Sales rep",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-061",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-003",
+        "role": "Sales rep",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-062",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-004",
+        "role": "Sales rep",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-063",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-005",
+        "role": "Sales rep",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-064",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-006",
+        "role": "Sales rep",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-065",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-007",
+        "role": "Sales rep",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-066",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-008",
+        "role": "Sales rep",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-067",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-009",
+        "role": "Sales rep",
+        "expect": "reachable"
+      },
+      {
+        "id": "crm-pipeline/QA-068",
+        "kind": "screen_access",
+        "screen_id": "crm-pipeline/SCR-010",
+        "role": "Sales rep",
+        "expect": "reachable"
+      }
+    ],
+    "locked": true,
+    "locked_at_graph_version": "3.0"
+  }
+}

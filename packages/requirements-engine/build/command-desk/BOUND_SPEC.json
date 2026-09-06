@@ -1,0 +1,5005 @@
+{
+  "spec_id": "BOUND-COMMAND-DESK",
+  "customer_complete": false,
+  "ask_customer_open": [],
+  "source_template": "command-desk",
+  "graph_version": "3.0",
+  "build_model": {
+    "records": {
+      "Agent": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "yes"
+          },
+          "Role": {
+            "name": "Role",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Model": {
+            "name": "Model",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Instructions": {
+            "name": "Instructions",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Tools it may use": {
+            "name": "Tools it may use",
+            "type": "other",
+            "required": "no",
+            "unique": "no",
+            "custom_rule": "the names of the tools this agent is allowed to call"
+          },
+          "Is on": {
+            "name": "Is on",
+            "type": "yes_no",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Reports to": {
+            "name": "Reports to",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Agent"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Role": "VARCHAR(255)",
+          "Model": "VARCHAR(255)",
+          "Instructions": "TEXT",
+          "Tools it may use": "FOREIGN_KEY_ROLE",
+          "Is on": "BOOLEAN",
+          "Reports to": "FOREIGN_KEY"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "running",
+            "stopped-and-reported",
+            "offline"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [
+          {
+            "name": "Pause",
+            "who": [
+              "Sam"
+            ],
+            "effect": "stops the agent running and records that Sam paused it",
+            "result_location": "the agent's own screen, and by voice through Nova",
+            "execution": {
+              "op": "set_fields",
+              "fields": {
+                "is_on": 0,
+                "stage": "stopped-and-reported"
+              }
+            }
+          }
+        ],
+        "id": "command-desk/REC-001"
+      },
+      "Conversation": {
+        "fields": {
+          "Topic": {
+            "name": "Topic",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Agent": {
+            "name": "Agent",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Agent"
+          },
+          "When": {
+            "name": "When",
+            "type": "date_time",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Messages": {
+            "name": "Messages",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "What came of it": {
+            "name": "What came of it",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          },
+          "Read": {
+            "name": "Read",
+            "type": "yes_no",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Topic": "VARCHAR(255)",
+          "Agent": "FOREIGN_KEY",
+          "When": "DATETIME",
+          "Messages": "TEXT",
+          "What came of it": "TEXT",
+          "Read": "BOOLEAN"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Topic",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "open",
+            "needs attention",
+            "closed"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "id": "command-desk/REC-002"
+      },
+      "Job": {
+        "fields": {
+          "What was asked": {
+            "name": "What was asked",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Agent": {
+            "name": "Agent",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Agent"
+          },
+          "Result": {
+            "name": "Result",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          },
+          "Started at": {
+            "name": "Started at",
+            "type": "date_time",
+            "required": "no",
+            "unique": "no"
+          },
+          "Finished at": {
+            "name": "Finished at",
+            "type": "date_time",
+            "required": "no",
+            "unique": "no"
+          },
+          "Cost": {
+            "name": "Cost",
+            "type": "money",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "What was asked": "TEXT",
+          "Agent": "FOREIGN_KEY",
+          "Result": "TEXT",
+          "Started at": "DATETIME",
+          "Finished at": "DATETIME",
+          "Cost": "DECIMAL(18,2)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "What was asked",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "queued",
+            "running",
+            "done",
+            "failed"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [
+          {
+            "name": "Retry",
+            "who": [
+              "Sam"
+            ],
+            "effect": "runs the same job again from the start",
+            "result_location": "the job's own screen, and by voice through Nova",
+            "execution": {
+              "op": "reset_to_stage",
+              "stage_column": "stage",
+              "stage": "queued",
+              "clear": [
+                "result",
+                "finished_at"
+              ]
+            }
+          }
+        ],
+        "id": "command-desk/REC-003"
+      },
+      "Project": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "yes"
+          },
+          "Goal": {
+            "name": "Goal",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Goal": "TEXT"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "active",
+            "paused",
+            "finished"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "id": "command-desk/REC-004"
+      },
+      "Memory entry": {
+        "fields": {
+          "Content": {
+            "name": "Content",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "When": {
+            "name": "When",
+            "type": "date_time",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Project": {
+            "name": "Project",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Project"
+          },
+          "Agent": {
+            "name": "Agent",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Agent"
+          }
+        },
+        "storage": {
+          "Content": "TEXT",
+          "When": "DATETIME",
+          "Project": "FOREIGN_KEY",
+          "Agent": "FOREIGN_KEY"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Content",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "id": "command-desk/REC-005"
+      },
+      "Linked service": {
+        "fields": {
+          "Service": {
+            "name": "Service",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Token or key": {
+            "name": "Token or key",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Used by": {
+            "name": "Used by",
+            "type": "link",
+            "required": "no",
+            "unique": "no",
+            "target_record": "Agent"
+          },
+          "Live": {
+            "name": "Live",
+            "type": "yes_no",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Service": "VARCHAR(255)",
+          "Token or key": "VARCHAR(255)",
+          "Used by": "FOREIGN_KEY",
+          "Live": "BOOLEAN"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Service",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "connected",
+            "expired",
+            "disconnected"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "id": "command-desk/REC-006"
+      },
+      "Document": {
+        "fields": {
+          "File": {
+            "name": "File",
+            "type": "file",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Type": {
+            "name": "Type",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Job": {
+            "name": "Job",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Job"
+          }
+        },
+        "storage": {
+          "File": "FILE_REF",
+          "Type": "VARCHAR(255)",
+          "Job": "FOREIGN_KEY"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sam"
+          ],
+          "edit": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sam",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Type",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "received",
+            "filled",
+            "signed",
+            "done"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [
+          {
+            "name": "Open source document",
+            "who": [
+              "Sam"
+            ],
+            "effect": "opens the original uploaded file",
+            "result_location": "the document's own screen, and by voice through Nova",
+            "execution": {
+              "op": "clear_fields",
+              "fields": []
+            }
+          }
+        ],
+        "id": "command-desk/REC-007"
+      }
+    },
+    "roles": {
+      "Sam": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Agent",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Agent",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Agent",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Agent",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Conversation",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Conversation",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Conversation",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Conversation",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Job",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Job",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Job",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Job",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Project",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Project",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Project",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Project",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Memory entry",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Memory entry",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Memory entry",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Memory entry",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Linked service",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Linked service",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Linked service",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Linked service",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Document",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Document",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Document",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Document",
+            "scope": "all"
+          }
+        ],
+        "is_admin": true
+      }
+    },
+    "super_role": "Sam",
+    "workflows": {
+      "Agent lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "an agent is created and switched on; it starts in 'running'"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-001",
+            "name": "running"
+          },
+          {
+            "id": "command-desk/STG-002",
+            "name": "stopped-and-reported"
+          },
+          {
+            "id": "command-desk/STG-003",
+            "name": "offline"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "running",
+            "to": "stopped-and-reported",
+            "mover": "automatic",
+            "event": "the agent stops and reports that it stopped, why, and what it could be doing instead",
+            "id": "command-desk/TRN-001"
+          },
+          {
+            "from": "stopped-and-reported",
+            "to": "running",
+            "mover": "automatic",
+            "event": "the agent is switched back on (On = yes)",
+            "id": "command-desk/TRN-002"
+          },
+          {
+            "from": "stopped-and-reported",
+            "to": "offline",
+            "mover": "automatic",
+            "event": "the agent is switched off (On = no)",
+            "id": "command-desk/TRN-003"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "running",
+        "terminal": [
+          "offline"
+        ]
+      },
+      "Conversation lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "an agent writes the first message of a thread; it starts in 'open'"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-004",
+            "name": "open"
+          },
+          {
+            "id": "command-desk/STG-005",
+            "name": "needs attention"
+          },
+          {
+            "id": "command-desk/STG-006",
+            "name": "closed"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "open",
+            "to": "needs attention",
+            "mover": "automatic",
+            "event": "the thread carries something Sam has not read that Hub judges he needs to see",
+            "id": "command-desk/TRN-004"
+          },
+          {
+            "from": "needs attention",
+            "to": "closed",
+            "mover": "automatic",
+            "event": "Sam has read it and nothing on it is outstanding",
+            "id": "command-desk/TRN-005"
+          },
+          {
+            "from": "open",
+            "to": "closed",
+            "mover": "automatic",
+            "event": "the job it belongs to reaches done or failed and nothing on it is outstanding",
+            "id": "command-desk/TRN-006"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "open",
+        "terminal": [
+          "closed"
+        ]
+      },
+      "Job lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "an agent is given a job; it starts in 'queued'"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-007",
+            "name": "queued"
+          },
+          {
+            "id": "command-desk/STG-008",
+            "name": "running"
+          },
+          {
+            "id": "command-desk/STG-009",
+            "name": "done"
+          },
+          {
+            "id": "command-desk/STG-010",
+            "name": "failed"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "queued",
+            "to": "running",
+            "mover": "automatic",
+            "event": "the agent picks the job up",
+            "id": "command-desk/TRN-007"
+          },
+          {
+            "from": "running",
+            "to": "done",
+            "mover": "automatic",
+            "event": "the agent finishes and writes a real result",
+            "id": "command-desk/TRN-008"
+          },
+          {
+            "from": "running",
+            "to": "failed",
+            "mover": "automatic",
+            "event": "the agent errors or stops before finishing",
+            "id": "command-desk/TRN-009"
+          }
+        ],
+        "approvals": [
+          {
+            "stage": "running",
+            "approvers": [
+              "Sam"
+            ]
+          }
+        ],
+        "on_reject": {
+          "back_to": "failed",
+          "resubmit": "yes"
+        },
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "queued",
+        "terminal": [
+          "done",
+          "failed"
+        ]
+      },
+      "Project lifecycle": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Sam"
+          ],
+          "action": "creates a project and sets its goal"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-011",
+            "name": "active"
+          },
+          {
+            "id": "command-desk/STG-012",
+            "name": "paused"
+          },
+          {
+            "id": "command-desk/STG-013",
+            "name": "finished"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "active",
+            "to": "paused",
+            "mover": "roles",
+            "roles": [
+              "Sam"
+            ],
+            "id": "command-desk/TRN-010"
+          },
+          {
+            "from": "paused",
+            "to": "active",
+            "mover": "roles",
+            "roles": [
+              "Sam"
+            ],
+            "id": "command-desk/TRN-011"
+          },
+          {
+            "from": "active",
+            "to": "finished",
+            "mover": "automatic",
+            "event": "Sam marks the goal met and no job under the project is queued or running",
+            "id": "command-desk/TRN-012"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "active",
+        "terminal": [
+          "finished"
+        ]
+      },
+      "Linked service lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "a service is connected through the Connect a service form; it starts in 'connected'"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-014",
+            "name": "connected"
+          },
+          {
+            "id": "command-desk/STG-015",
+            "name": "expired"
+          },
+          {
+            "id": "command-desk/STG-016",
+            "name": "disconnected"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "connected",
+            "to": "expired",
+            "mover": "automatic",
+            "event": "a real call to the service is refused because its token or key is no longer valid",
+            "id": "command-desk/TRN-013"
+          },
+          {
+            "from": "expired",
+            "to": "connected",
+            "mover": "automatic",
+            "event": "the service is reconnected and a real call to it succeeds",
+            "id": "command-desk/TRN-014"
+          },
+          {
+            "from": "expired",
+            "to": "disconnected",
+            "mover": "roles",
+            "roles": [
+              "Sam"
+            ],
+            "id": "command-desk/TRN-015"
+          },
+          {
+            "from": "connected",
+            "to": "disconnected",
+            "mover": "roles",
+            "roles": [
+              "Sam"
+            ],
+            "id": "command-desk/TRN-016"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "connected",
+        "terminal": [
+          "disconnected"
+        ]
+      },
+      "Document lifecycle": {
+        "trigger": {
+          "kind": "event",
+          "event": "a document is uploaded; it starts in 'received'"
+        },
+        "stages": [
+          {
+            "id": "command-desk/STG-017",
+            "name": "received"
+          },
+          {
+            "id": "command-desk/STG-018",
+            "name": "filled"
+          },
+          {
+            "id": "command-desk/STG-019",
+            "name": "signed"
+          },
+          {
+            "id": "command-desk/STG-020",
+            "name": "done"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "received",
+            "to": "filled",
+            "mover": "automatic",
+            "event": "Hands fills the fields it can",
+            "id": "command-desk/TRN-017"
+          },
+          {
+            "from": "filled",
+            "to": "signed",
+            "mover": "automatic",
+            "event": "Sam approves at the Trust Gate",
+            "id": "command-desk/TRN-018"
+          },
+          {
+            "from": "signed",
+            "to": "done",
+            "mover": "automatic",
+            "event": "the completed copy is written and attested",
+            "id": "command-desk/TRN-019"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "initial": "received",
+        "terminal": [
+          "done"
+        ]
+      }
+    },
+    "notifications": {
+      "Agent stopped": {
+        "trigger": {
+          "kind": "event",
+          "event": "an agent moves to stopped-and-reported"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sam"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "command-desk/NOTIF-001",
+        "part_bindings": {
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      "Job failed": {
+        "trigger": {
+          "kind": "event",
+          "event": "a job moves to failed"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sam"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "command-desk/NOTIF-002",
+        "part_bindings": {
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      "Job done": {
+        "trigger": {
+          "kind": "event",
+          "event": "a job moves to done"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sam"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "command-desk/NOTIF-003",
+        "part_bindings": {
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      "Approval needed": {
+        "trigger": {
+          "kind": "event",
+          "event": "an agent reaches an irreversible action — sending an email, paying for something"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sam"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app",
+          "email"
+        ],
+        "timing": "immediate",
+        "id": "command-desk/NOTIF-004",
+        "part_bindings": {
+          "parts": [
+            "notification_delivery"
+          ],
+          "locations": [
+            "packages/builder/engines/notification_delivery.py::deliver"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "notification_delivery",
+              "version": "1.0.0",
+              "revision": "370402bc71661f09",
+              "status": "TESTED"
+            }
+          ]
+        }
+      }
+    },
+    "reports": {
+      "Activity per agent": {
+        "data_source": "What got done, per agent, this week?",
+        "metrics": {
+          "jobs done per agent per week": "auto: count/sum of 'jobs done per agent per week'",
+          "jobs failed per agent per week": "auto: count/sum of 'jobs failed per agent per week'"
+        },
+        "spec": [
+          {
+            "metric": "jobs done per agent per week",
+            "spec": {
+              "table": "jobs",
+              "aggregation": "count",
+              "group_by": "agent",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "=",
+                  "value": "done"
+                }
+              ]
+            }
+          },
+          {
+            "metric": "jobs failed per agent per week",
+            "spec": {
+              "table": "jobs",
+              "aggregation": "count",
+              "group_by": "agent",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "=",
+                  "value": "failed"
+                }
+              ]
+            }
+          }
+        ],
+        "id": "command-desk/RPT-001",
+        "part_bindings": {
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      "Cost": {
+        "data_source": "What did the hosted model calls cost?",
+        "metrics": {
+          "spend on hosted model calls": "auto: count/sum of 'spend on hosted model calls'"
+        },
+        "spec": [
+          {
+            "metric": "spend on hosted model calls",
+            "spec": {
+              "table": "jobs",
+              "aggregation": "sum",
+              "value_field": "cost",
+              "group_by": "agent"
+            }
+          }
+        ],
+        "id": "command-desk/RPT-002",
+        "part_bindings": {
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      }
+    },
+    "forms": {
+      "Add an agent": [
+        "Name",
+        "Role",
+        "Model",
+        "Instructions",
+        "Tools it may use",
+        "Is on",
+        "Reports to"
+      ],
+      "Connect a service": [
+        "Service",
+        "Token or key",
+        "Used by",
+        "Live"
+      ],
+      "Upload a document": [
+        "File",
+        "Type",
+        "Job"
+      ]
+    },
+    "integrations": {
+      "Gmail": {
+        "purpose": "Sam's real email — the email agent reads it and drafts replies into it.",
+        "sends": "draft replies and labels",
+        "receives": "threads and messages",
+        "timing": {
+          "kind": "event",
+          "event": "a message arrives, or Sam commands the agent from inside the thread"
+        },
+        "connection_scope": "per_user",
+        "on_unavailable": "continue_without",
+        "auth": "oauth"
+      },
+      "Google Calendar": {
+        "purpose": "what is coming up, so the desk can plan around it.",
+        "sends": "events it is asked to create",
+        "receives": "the calendar's events",
+        "timing": {
+          "kind": "event",
+          "event": "the calendar surface is opened, or an agent needs the day's shape"
+        },
+        "connection_scope": "per_user",
+        "on_unavailable": "continue_without",
+        "auth": "oauth"
+      },
+      "Tavily search": {
+        "purpose": "web search for the agents that need to look something up.",
+        "sends": "a search query",
+        "receives": "results with sources",
+        "timing": {
+          "kind": "event",
+          "event": "an agent runs a job that needs the web"
+        },
+        "connection_scope": "per_user",
+        "on_unavailable": "continue_without",
+        "auth": "api_key"
+      },
+      "Model providers": {
+        "purpose": "the LLMs the agents run on — Ollama locally, hosted only where speed forces it.",
+        "sends": "prompts",
+        "receives": "completions",
+        "timing": {
+          "kind": "event",
+          "event": "any agent takes a turn"
+        },
+        "connection_scope": "per_user",
+        "on_unavailable": "continue_without",
+        "auth": "api_key"
+      }
+    },
+    "auth": {
+      "AU.01": [
+        "admin_created"
+      ],
+      "AU.02": [],
+      "AU.03": "no",
+      "AU.04": [
+        "password"
+      ],
+      "AU.07": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "AU.08": "never",
+      "AU.09": "yes",
+      "AU.10": "never",
+      "AU.11": {
+        "allowed": "no"
+      },
+      "AU.12": {
+        "allowed": "no"
+      },
+      "AU.13": [],
+      "AU.14": {
+        "required": "no"
+      }
+    },
+    "brand": {
+      "app_name": "Command Desk",
+      "assets": {
+        "mode": "provided",
+        "path": "orb-glyph.png + orb-rotor.png (gold; Sam's own mark, cut from the reference screenshot)"
+      }
+    },
+    "screens_inventory": [
+      {
+        "id": "command-desk/SCR-001",
+        "kind": "list",
+        "record": "Agent",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-002",
+        "kind": "detail",
+        "record": "Agent",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-003",
+        "kind": "list",
+        "record": "Conversation",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-004",
+        "kind": "detail",
+        "record": "Conversation",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-005",
+        "kind": "list",
+        "record": "Job",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-006",
+        "kind": "detail",
+        "record": "Job",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-007",
+        "kind": "list",
+        "record": "Project",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-008",
+        "kind": "detail",
+        "record": "Project",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-009",
+        "kind": "list",
+        "record": "Memory entry",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-010",
+        "kind": "detail",
+        "record": "Memory entry",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-011",
+        "kind": "list",
+        "record": "Linked service",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-012",
+        "kind": "detail",
+        "record": "Linked service",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-013",
+        "kind": "list",
+        "record": "Document",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-014",
+        "kind": "detail",
+        "record": "Document",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-015",
+        "kind": "form",
+        "form": "Add an agent",
+        "record": "Agent",
+        "part_bindings": {
+          "parts": [
+            "form_render_submit"
+          ],
+          "locations": [
+            "packages/builder/engines/form_render_submit.py::render_form",
+            "packages/builder/engines/form_render_submit.py::validate",
+            "packages/builder/engines/form_render_submit.py::submit",
+            "packages/builder/engines/form_render_submit.py::read_back"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "form_render_submit",
+              "version": "1.0.0",
+              "revision": "cfb66ed4a56c85df",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-016",
+        "kind": "form",
+        "form": "Connect a service",
+        "record": "Linked service",
+        "part_bindings": {
+          "parts": [
+            "form_render_submit"
+          ],
+          "locations": [
+            "packages/builder/engines/form_render_submit.py::render_form",
+            "packages/builder/engines/form_render_submit.py::validate",
+            "packages/builder/engines/form_render_submit.py::submit",
+            "packages/builder/engines/form_render_submit.py::read_back"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "form_render_submit",
+              "version": "1.0.0",
+              "revision": "cfb66ed4a56c85df",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-017",
+        "kind": "form",
+        "form": "Upload a document",
+        "record": "Document",
+        "part_bindings": {
+          "parts": [
+            "form_render_submit"
+          ],
+          "locations": [
+            "packages/builder/engines/form_render_submit.py::render_form",
+            "packages/builder/engines/form_render_submit.py::validate",
+            "packages/builder/engines/form_render_submit.py::submit",
+            "packages/builder/engines/form_render_submit.py::read_back"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "form_render_submit",
+              "version": "1.0.0",
+              "revision": "cfb66ed4a56c85df",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-018",
+        "kind": "report",
+        "report": "Activity per agent",
+        "part_bindings": {
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-019",
+        "kind": "report",
+        "report": "Cost",
+        "part_bindings": {
+          "parts": [
+            "reporting_engine"
+          ],
+          "locations": [
+            "packages/builder/engines/reporting_engine.py::run_report"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "reporting_engine",
+              "version": "1.0.0",
+              "revision": "a0de07a247bf355b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-020",
+        "kind": "integration_status",
+        "integration": "Gmail",
+        "part_bindings": {
+          "parts": [
+            "oauth_connect"
+          ],
+          "locations": [
+            "packages/builder/builder.py::oauth_routes",
+            "packages/builder/builder.py::render_oauth_handler",
+            "packages/builder/builder.py::_render_integration_screen",
+            "packages/builder/builder.py::_resolve_provider"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "oauth_connect",
+              "version": "1.0.0",
+              "revision": "deb7b65f11d7715d",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-021",
+        "kind": "integration_status",
+        "integration": "Google Calendar",
+        "part_bindings": {
+          "parts": [
+            "oauth_connect"
+          ],
+          "locations": [
+            "packages/builder/builder.py::oauth_routes",
+            "packages/builder/builder.py::render_oauth_handler",
+            "packages/builder/builder.py::_render_integration_screen",
+            "packages/builder/builder.py::_resolve_provider"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "oauth_connect",
+              "version": "1.0.0",
+              "revision": "deb7b65f11d7715d",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-022",
+        "kind": "integration_status",
+        "integration": "Tavily search",
+        "part_bindings": {
+          "parts": [
+            "api_key_connect"
+          ],
+          "locations": [
+            "packages/builder/builder.py::api_key_routes",
+            "packages/builder/builder.py::render_api_key_handler",
+            "packages/builder/builder.py::_render_api_key_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "api_key_connect",
+              "version": "1.0.0",
+              "revision": "7b5afa7a951e53ee",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/SCR-023",
+        "kind": "integration_status",
+        "integration": "Model providers",
+        "part_bindings": {
+          "parts": [
+            "api_key_connect"
+          ],
+          "locations": [
+            "packages/builder/builder.py::api_key_routes",
+            "packages/builder/builder.py::render_api_key_handler",
+            "packages/builder/builder.py::_render_api_key_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "api_key_connect",
+              "version": "1.0.0",
+              "revision": "7b5afa7a951e53ee",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      }
+    ],
+    "navigation": [
+      "command-desk/SCR-001",
+      "command-desk/SCR-002",
+      "command-desk/SCR-003",
+      "command-desk/SCR-004",
+      "command-desk/SCR-005",
+      "command-desk/SCR-006",
+      "command-desk/SCR-007",
+      "command-desk/SCR-008",
+      "command-desk/SCR-009",
+      "command-desk/SCR-010",
+      "command-desk/SCR-011",
+      "command-desk/SCR-012",
+      "command-desk/SCR-013",
+      "command-desk/SCR-014",
+      "command-desk/SCR-015",
+      "command-desk/SCR-016",
+      "command-desk/SCR-017",
+      "command-desk/SCR-018",
+      "command-desk/SCR-019",
+      "command-desk/SCR-020",
+      "command-desk/SCR-021",
+      "command-desk/SCR-022",
+      "command-desk/SCR-023"
+    ],
+    "landing_per_role": {
+      "Sam": "Home"
+    },
+    "actions_inventory": [
+      {
+        "id": "command-desk/ACT-001",
+        "kind": "create",
+        "record": "Agent",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Agent' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-002",
+        "kind": "edit",
+        "record": "Agent",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Agent' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-003",
+        "kind": "delete",
+        "record": "Agent",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Agent' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-004",
+        "kind": "custom",
+        "record": "Agent",
+        "detail": {
+          "name": "Pause",
+          "who": [
+            "Sam"
+          ],
+          "effect": "stops the agent running and records that Sam paused it",
+          "result_location": "the agent's own screen, and by voice through Nova",
+          "execution": {
+            "op": "set_fields",
+            "fields": {
+              "is_on": 0,
+              "stage": "stopped-and-reported"
+            }
+          }
+        },
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "stops the agent running and records that Sam paused it",
+        "part_bindings": {
+          "parts": [
+            "custom_action_execution"
+          ],
+          "locations": [
+            "packages/builder/engines/custom_action_execution.py::run",
+            "packages/builder/engines/custom_action_execution.py::OPERATIONS"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "custom_action_execution",
+              "version": "1.1.0",
+              "revision": "177cfc2d6d4d4a01",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-005",
+        "kind": "create",
+        "record": "Conversation",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Conversation' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-006",
+        "kind": "edit",
+        "record": "Conversation",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Conversation' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-007",
+        "kind": "delete",
+        "record": "Conversation",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Conversation' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-008",
+        "kind": "create",
+        "record": "Job",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Job' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-009",
+        "kind": "edit",
+        "record": "Job",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Job' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-010",
+        "kind": "delete",
+        "record": "Job",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Job' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-011",
+        "kind": "custom",
+        "record": "Job",
+        "detail": {
+          "name": "Retry",
+          "who": [
+            "Sam"
+          ],
+          "effect": "runs the same job again from the start",
+          "result_location": "the job's own screen, and by voice through Nova",
+          "execution": {
+            "op": "reset_to_stage",
+            "stage_column": "stage",
+            "stage": "queued",
+            "clear": [
+              "result",
+              "finished_at"
+            ]
+          }
+        },
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "runs the same job again from the start",
+        "part_bindings": {
+          "parts": [
+            "custom_action_execution"
+          ],
+          "locations": [
+            "packages/builder/engines/custom_action_execution.py::run",
+            "packages/builder/engines/custom_action_execution.py::OPERATIONS"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "custom_action_execution",
+              "version": "1.1.0",
+              "revision": "177cfc2d6d4d4a01",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-012",
+        "kind": "create",
+        "record": "Project",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Project' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-013",
+        "kind": "edit",
+        "record": "Project",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Project' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-014",
+        "kind": "delete",
+        "record": "Project",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Project' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-015",
+        "kind": "create",
+        "record": "Memory entry",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Memory entry' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-016",
+        "kind": "edit",
+        "record": "Memory entry",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Memory entry' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-017",
+        "kind": "delete",
+        "record": "Memory entry",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Memory entry' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-018",
+        "kind": "create",
+        "record": "Linked service",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Linked service' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-019",
+        "kind": "edit",
+        "record": "Linked service",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Linked service' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-020",
+        "kind": "delete",
+        "record": "Linked service",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Linked service' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-021",
+        "kind": "create",
+        "record": "Document",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "creates a new 'Document' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-022",
+        "kind": "edit",
+        "record": "Document",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "edits an existing 'Document' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-023",
+        "kind": "delete",
+        "record": "Document",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "deletes a 'Document' record",
+        "part_bindings": {
+          "parts": [
+            "crud_list_detail"
+          ],
+          "locations": [
+            "packages/builder/builder.py::build_schema",
+            "packages/builder/builder.py::crud_routes",
+            "packages/builder/builder.py::render_crud_handler",
+            "packages/builder/builder.py::_render_list_screen",
+            "packages/builder/builder.py::_render_detail_screen"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "crud_list_detail",
+              "version": "1.1.0",
+              "revision": "389773506209779b",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-024",
+        "kind": "custom",
+        "record": "Document",
+        "detail": {
+          "name": "Open source document",
+          "who": [
+            "Sam"
+          ],
+          "effect": "opens the original uploaded file",
+          "result_location": "the document's own screen, and by voice through Nova",
+          "execution": {
+            "op": "clear_fields",
+            "fields": []
+          }
+        },
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "opens the original uploaded file",
+        "part_bindings": {
+          "parts": [
+            "preserved_original_document_store"
+          ],
+          "locations": [
+            "packages/hands/hands/documents.py::store_original",
+            "packages/hands/hands/documents.py::write_completed",
+            "packages/hands/hands/documents.py::attest",
+            "packages/hands/hands/documents.py::original_intact",
+            "packages/hands/hands/documents.py::safe_filename"
+          ],
+          "note": "the part serves the stored original by its recorded path and re-checks its hash; the screen that opens it is a plain detail screen",
+          "pins": [
+            {
+              "part_id": "preserved_original_document_store",
+              "version": "1.0.0",
+              "revision": "099cc9b503cc7b41",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-025",
+        "kind": "transition",
+        "workflow": "Agent lifecycle",
+        "from": "running",
+        "to": "stopped-and-reported",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Agent lifecycle' from 'running' to 'stopped-and-reported'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-026",
+        "kind": "transition",
+        "workflow": "Agent lifecycle",
+        "from": "stopped-and-reported",
+        "to": "running",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Agent lifecycle' from 'stopped-and-reported' to 'running'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-027",
+        "kind": "transition",
+        "workflow": "Agent lifecycle",
+        "from": "stopped-and-reported",
+        "to": "offline",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Agent lifecycle' from 'stopped-and-reported' to 'offline'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-028",
+        "kind": "transition",
+        "workflow": "Conversation lifecycle",
+        "from": "open",
+        "to": "needs attention",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Conversation lifecycle' from 'open' to 'needs attention'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-029",
+        "kind": "transition",
+        "workflow": "Conversation lifecycle",
+        "from": "needs attention",
+        "to": "closed",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Conversation lifecycle' from 'needs attention' to 'closed'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-030",
+        "kind": "transition",
+        "workflow": "Conversation lifecycle",
+        "from": "open",
+        "to": "closed",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Conversation lifecycle' from 'open' to 'closed'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-031",
+        "kind": "transition",
+        "workflow": "Job lifecycle",
+        "from": "queued",
+        "to": "running",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Job lifecycle' from 'queued' to 'running'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-032",
+        "kind": "transition",
+        "workflow": "Job lifecycle",
+        "from": "running",
+        "to": "done",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Job lifecycle' from 'running' to 'done'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-033",
+        "kind": "transition",
+        "workflow": "Job lifecycle",
+        "from": "running",
+        "to": "failed",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Job lifecycle' from 'running' to 'failed'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-034",
+        "kind": "approve",
+        "workflow": "Job lifecycle",
+        "stage": "running",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "approves 'Job lifecycle' at stage 'running'",
+        "part_bindings": {
+          "parts": [
+            "stage_approval_gate"
+          ],
+          "locations": [
+            "packages/builder/engines/stage_approval_gate.py::decide",
+            "packages/builder/engines/stage_approval_gate.py::check_may_leave",
+            "packages/builder/engines/stage_approval_gate.py::decision_for"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "stage_approval_gate",
+              "version": "1.0.0",
+              "revision": "e05ac2be0b3c4cc8",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-035",
+        "kind": "transition",
+        "workflow": "Project lifecycle",
+        "from": "active",
+        "to": "paused",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "moves 'Project lifecycle' from 'active' to 'paused'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-036",
+        "kind": "transition",
+        "workflow": "Project lifecycle",
+        "from": "paused",
+        "to": "active",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "moves 'Project lifecycle' from 'paused' to 'active'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-037",
+        "kind": "transition",
+        "workflow": "Project lifecycle",
+        "from": "active",
+        "to": "finished",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Project lifecycle' from 'active' to 'finished'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-038",
+        "kind": "transition",
+        "workflow": "Linked service lifecycle",
+        "from": "connected",
+        "to": "expired",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Linked service lifecycle' from 'connected' to 'expired'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-039",
+        "kind": "transition",
+        "workflow": "Linked service lifecycle",
+        "from": "expired",
+        "to": "connected",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Linked service lifecycle' from 'expired' to 'connected'",
+        "part_bindings": {
+          "parts": [
+            "system_triggered_transition"
+          ],
+          "locations": [
+            "packages/builder/engines/system_triggered_transition.py::fire",
+            "packages/builder/engines/system_triggered_transition.py::edges_from"
+          ],
+          "note": "the move itself is real and refuses anything not declared; whatever the declared event implies beyond moving the record needs its own part, and gets one where it exists",
+          "pins": [
+            {
+              "part_id": "system_triggered_transition",
+              "version": "1.0.0",
+              "revision": "da71c672cb598389",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-040",
+        "kind": "transition",
+        "workflow": "Linked service lifecycle",
+        "from": "expired",
+        "to": "disconnected",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "moves 'Linked service lifecycle' from 'expired' to 'disconnected'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-041",
+        "kind": "transition",
+        "workflow": "Linked service lifecycle",
+        "from": "connected",
+        "to": "disconnected",
+        "mover": "roles",
+        "roles": [
+          "Sam"
+        ],
+        "outcome": "moves 'Linked service lifecycle' from 'connected' to 'disconnected'",
+        "part_bindings": {
+          "parts": [
+            "workflow_executor"
+          ],
+          "locations": [
+            "packages/builder/engines/workflow_executor.py::transition"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "workflow_executor",
+              "version": "1.0.0",
+              "revision": "e1e8908c90f7f1fb",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-042",
+        "kind": "transition",
+        "workflow": "Document lifecycle",
+        "from": "received",
+        "to": "filled",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Document lifecycle' from 'received' to 'filled'",
+        "part_bindings": {
+          "parts": [
+            "document_field_detection",
+            "value_provenance"
+          ],
+          "locations": [
+            "packages/hands/hands/fields.py::detect",
+            "packages/hands/hands/fields.py::classify",
+            "packages/hands/hands/provenance.py::check",
+            "packages/hands/hands/provenance.py::blocks_execution"
+          ],
+          "note": "detection and provenance are real; a field whose value is MISSING stops here rather than moving on, which is the part's own behaviour",
+          "pins": [
+            {
+              "part_id": "document_field_detection",
+              "version": "1.0.0",
+              "revision": "46c6be7e4c6da19d",
+              "status": "TESTED"
+            },
+            {
+              "part_id": "value_provenance",
+              "version": "1.0.0",
+              "revision": "5842c77a5300ac82",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-043",
+        "kind": "transition",
+        "workflow": "Document lifecycle",
+        "from": "filled",
+        "to": "signed",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Document lifecycle' from 'filled' to 'signed'",
+        "part_bindings": {
+          "parts": [
+            "trust_gate_approval"
+          ],
+          "locations": [
+            "packages/hands/hands/trust_gate.py::request",
+            "packages/hands/hands/trust_gate.py::decide",
+            "packages/hands/hands/trust_gate.py::check"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "trust_gate_approval",
+              "version": "1.0.0",
+              "revision": "55d7215df987ad25",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-044",
+        "kind": "transition",
+        "workflow": "Document lifecycle",
+        "from": "signed",
+        "to": "done",
+        "mover": "automatic",
+        "roles": null,
+        "outcome": "moves 'Document lifecycle' from 'signed' to 'done'",
+        "part_bindings": {
+          "parts": [
+            "preserved_original_document_store"
+          ],
+          "locations": [
+            "packages/hands/hands/documents.py::store_original",
+            "packages/hands/hands/documents.py::write_completed",
+            "packages/hands/hands/documents.py::attest",
+            "packages/hands/hands/documents.py::original_intact",
+            "packages/hands/hands/documents.py::safe_filename"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "preserved_original_document_store",
+              "version": "1.0.0",
+              "revision": "099cc9b503cc7b41",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-045",
+        "kind": "submit",
+        "form": "Add an agent",
+        "record": "Agent",
+        "roles": null,
+        "outcome": "submits the 'Add an agent' form, creating/editing its target record 'Agent'",
+        "part_bindings": {
+          "parts": [
+            "form_render_submit"
+          ],
+          "locations": [
+            "packages/builder/engines/form_render_submit.py::render_form",
+            "packages/builder/engines/form_render_submit.py::validate",
+            "packages/builder/engines/form_render_submit.py::submit",
+            "packages/builder/engines/form_render_submit.py::read_back"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "form_render_submit",
+              "version": "1.0.0",
+              "revision": "cfb66ed4a56c85df",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-046",
+        "kind": "submit",
+        "form": "Connect a service",
+        "record": "Linked service",
+        "roles": null,
+        "outcome": "submits the 'Connect a service' form, creating/editing its target record 'Linked service'",
+        "part_bindings": {
+          "parts": [
+            "form_render_submit"
+          ],
+          "locations": [
+            "packages/builder/engines/form_render_submit.py::render_form",
+            "packages/builder/engines/form_render_submit.py::validate",
+            "packages/builder/engines/form_render_submit.py::submit",
+            "packages/builder/engines/form_render_submit.py::read_back"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "form_render_submit",
+              "version": "1.0.0",
+              "revision": "cfb66ed4a56c85df",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/ACT-047",
+        "kind": "submit",
+        "form": "Upload a document",
+        "record": "Document",
+        "roles": null,
+        "outcome": "submits the 'Upload a document' form, creating/editing its target record 'Document'",
+        "part_bindings": {
+          "parts": [
+            "form_render_submit"
+          ],
+          "locations": [
+            "packages/builder/engines/form_render_submit.py::render_form",
+            "packages/builder/engines/form_render_submit.py::validate",
+            "packages/builder/engines/form_render_submit.py::submit",
+            "packages/builder/engines/form_render_submit.py::read_back"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "form_render_submit",
+              "version": "1.0.0",
+              "revision": "cfb66ed4a56c85df",
+              "status": "PRODUCT_QUALIFIED"
+            }
+          ]
+        }
+      }
+    ],
+    "recurring_ops": [
+      {
+        "id": "command-desk/OPS-001",
+        "source": "R.14:Agent",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-002",
+        "source": "R.14:Conversation",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-003",
+        "source": "R.14:Job",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-004",
+        "source": "R.14:Project",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-005",
+        "source": "R.14:Memory entry",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-006",
+        "source": "R.14:Linked service",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-007",
+        "source": "R.14:Document",
+        "detail": "forever",
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-008",
+        "source": "FL.01:Agent lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "an agent is created and switched on; it starts in 'running'"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-009",
+        "source": "FL.01:Conversation lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "an agent writes the first message of a thread; it starts in 'open'"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-010",
+        "source": "FL.01:Job lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "an agent is given a job; it starts in 'queued'"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-011",
+        "source": "FL.01:Project lifecycle",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Sam"
+          ],
+          "action": "creates a project and sets its goal"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-012",
+        "source": "FL.01:Linked service lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "a service is connected through the Connect a service form; it starts in 'connected'"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-013",
+        "source": "FL.01:Document lifecycle",
+        "detail": {
+          "kind": "event",
+          "event": "a document is uploaded; it starts in 'received'"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-014",
+        "source": "FLX.03:Gmail",
+        "detail": {
+          "kind": "event",
+          "event": "a message arrives, or Sam commands the agent from inside the thread"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-015",
+        "source": "FLX.03:Google Calendar",
+        "detail": {
+          "kind": "event",
+          "event": "the calendar surface is opened, or an agent needs the day's shape"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-016",
+        "source": "FLX.03:Tavily search",
+        "detail": {
+          "kind": "event",
+          "event": "an agent runs a job that needs the web"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-017",
+        "source": "FLX.03:Model providers",
+        "detail": {
+          "kind": "event",
+          "event": "any agent takes a turn"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-018",
+        "source": "N.01:Agent stopped",
+        "detail": {
+          "kind": "event",
+          "event": "an agent moves to stopped-and-reported"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-019",
+        "source": "N.01:Job failed",
+        "detail": {
+          "kind": "event",
+          "event": "a job moves to failed"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-020",
+        "source": "N.01:Job done",
+        "detail": {
+          "kind": "event",
+          "event": "a job moves to done"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-021",
+        "source": "N.01:Approval needed",
+        "detail": {
+          "kind": "event",
+          "event": "an agent reaches an irreversible action — sending an email, paying for something"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-022",
+        "source": "RP.08:Activity per agent",
+        "detail": {
+          "enabled": "no"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      },
+      {
+        "id": "command-desk/OPS-023",
+        "source": "RP.08:Cost",
+        "detail": {
+          "enabled": "no"
+        },
+        "part_bindings": {
+          "parts": [
+            "scheduled_jobs"
+          ],
+          "locations": [
+            "packages/builder/engines/scheduled_jobs.py::run_after"
+          ],
+          "note": null,
+          "pins": [
+            {
+              "part_id": "scheduled_jobs",
+              "version": "1.0.0",
+              "revision": "c9d1d7cbcc1aff6a",
+              "status": "TESTED"
+            }
+          ]
+        }
+      }
+    ],
+    "qa_generated_tests": [
+      {
+        "id": "command-desk/QA-001",
+        "action_id": "command-desk/ACT-001",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-001",
+          "kind": "create",
+          "record": "Agent",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Agent' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-002",
+        "action_id": "command-desk/ACT-002",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-002",
+          "kind": "edit",
+          "record": "Agent",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Agent' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-003",
+        "action_id": "command-desk/ACT-003",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-003",
+          "kind": "delete",
+          "record": "Agent",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Agent' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-004",
+        "action_id": "command-desk/ACT-004",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-004",
+          "kind": "custom",
+          "record": "Agent",
+          "detail": {
+            "name": "Pause",
+            "who": [
+              "Sam"
+            ],
+            "effect": "stops the agent running and records that Sam paused it",
+            "result_location": "the agent's own screen, and by voice through Nova",
+            "execution": {
+              "op": "set_fields",
+              "fields": {
+                "is_on": 0,
+                "stage": "stopped-and-reported"
+              }
+            }
+          },
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "stops the agent running and records that Sam paused it"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-005",
+        "action_id": "command-desk/ACT-005",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-005",
+          "kind": "create",
+          "record": "Conversation",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Conversation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-006",
+        "action_id": "command-desk/ACT-006",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-006",
+          "kind": "edit",
+          "record": "Conversation",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Conversation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-007",
+        "action_id": "command-desk/ACT-007",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-007",
+          "kind": "delete",
+          "record": "Conversation",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Conversation' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-008",
+        "action_id": "command-desk/ACT-008",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-008",
+          "kind": "create",
+          "record": "Job",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Job' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-009",
+        "action_id": "command-desk/ACT-009",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-009",
+          "kind": "edit",
+          "record": "Job",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Job' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-010",
+        "action_id": "command-desk/ACT-010",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-010",
+          "kind": "delete",
+          "record": "Job",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Job' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-011",
+        "action_id": "command-desk/ACT-011",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-011",
+          "kind": "custom",
+          "record": "Job",
+          "detail": {
+            "name": "Retry",
+            "who": [
+              "Sam"
+            ],
+            "effect": "runs the same job again from the start",
+            "result_location": "the job's own screen, and by voice through Nova",
+            "execution": {
+              "op": "reset_to_stage",
+              "stage_column": "stage",
+              "stage": "queued",
+              "clear": [
+                "result",
+                "finished_at"
+              ]
+            }
+          },
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "runs the same job again from the start"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-012",
+        "action_id": "command-desk/ACT-012",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-012",
+          "kind": "create",
+          "record": "Project",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Project' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-013",
+        "action_id": "command-desk/ACT-013",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-013",
+          "kind": "edit",
+          "record": "Project",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Project' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-014",
+        "action_id": "command-desk/ACT-014",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-014",
+          "kind": "delete",
+          "record": "Project",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Project' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-015",
+        "action_id": "command-desk/ACT-015",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-015",
+          "kind": "create",
+          "record": "Memory entry",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Memory entry' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-016",
+        "action_id": "command-desk/ACT-016",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-016",
+          "kind": "edit",
+          "record": "Memory entry",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Memory entry' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-017",
+        "action_id": "command-desk/ACT-017",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-017",
+          "kind": "delete",
+          "record": "Memory entry",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Memory entry' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-018",
+        "action_id": "command-desk/ACT-018",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-018",
+          "kind": "create",
+          "record": "Linked service",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Linked service' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-019",
+        "action_id": "command-desk/ACT-019",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-019",
+          "kind": "edit",
+          "record": "Linked service",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Linked service' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-020",
+        "action_id": "command-desk/ACT-020",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-020",
+          "kind": "delete",
+          "record": "Linked service",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Linked service' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-021",
+        "action_id": "command-desk/ACT-021",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-021",
+          "kind": "create",
+          "record": "Document",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "creates a new 'Document' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-022",
+        "action_id": "command-desk/ACT-022",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-022",
+          "kind": "edit",
+          "record": "Document",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "edits an existing 'Document' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-023",
+        "action_id": "command-desk/ACT-023",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-023",
+          "kind": "delete",
+          "record": "Document",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "deletes a 'Document' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-024",
+        "action_id": "command-desk/ACT-024",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-024",
+          "kind": "custom",
+          "record": "Document",
+          "detail": {
+            "name": "Open source document",
+            "who": [
+              "Sam"
+            ],
+            "effect": "opens the original uploaded file",
+            "result_location": "the document's own screen, and by voice through Nova",
+            "execution": {
+              "op": "clear_fields",
+              "fields": []
+            }
+          },
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "opens the original uploaded file"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-025",
+        "action_id": "command-desk/ACT-025",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-025",
+          "kind": "transition",
+          "workflow": "Agent lifecycle",
+          "from": "running",
+          "to": "stopped-and-reported",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Agent lifecycle' from 'running' to 'stopped-and-reported'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-026",
+        "action_id": "command-desk/ACT-026",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-026",
+          "kind": "transition",
+          "workflow": "Agent lifecycle",
+          "from": "stopped-and-reported",
+          "to": "running",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Agent lifecycle' from 'stopped-and-reported' to 'running'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-027",
+        "action_id": "command-desk/ACT-027",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-027",
+          "kind": "transition",
+          "workflow": "Agent lifecycle",
+          "from": "stopped-and-reported",
+          "to": "offline",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Agent lifecycle' from 'stopped-and-reported' to 'offline'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-028",
+        "action_id": "command-desk/ACT-028",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-028",
+          "kind": "transition",
+          "workflow": "Conversation lifecycle",
+          "from": "open",
+          "to": "needs attention",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Conversation lifecycle' from 'open' to 'needs attention'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-029",
+        "action_id": "command-desk/ACT-029",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-029",
+          "kind": "transition",
+          "workflow": "Conversation lifecycle",
+          "from": "needs attention",
+          "to": "closed",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Conversation lifecycle' from 'needs attention' to 'closed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-030",
+        "action_id": "command-desk/ACT-030",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-030",
+          "kind": "transition",
+          "workflow": "Conversation lifecycle",
+          "from": "open",
+          "to": "closed",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Conversation lifecycle' from 'open' to 'closed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-031",
+        "action_id": "command-desk/ACT-031",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-031",
+          "kind": "transition",
+          "workflow": "Job lifecycle",
+          "from": "queued",
+          "to": "running",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Job lifecycle' from 'queued' to 'running'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-032",
+        "action_id": "command-desk/ACT-032",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-032",
+          "kind": "transition",
+          "workflow": "Job lifecycle",
+          "from": "running",
+          "to": "done",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Job lifecycle' from 'running' to 'done'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-033",
+        "action_id": "command-desk/ACT-033",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-033",
+          "kind": "transition",
+          "workflow": "Job lifecycle",
+          "from": "running",
+          "to": "failed",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Job lifecycle' from 'running' to 'failed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-034",
+        "action_id": "command-desk/ACT-034",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-034",
+          "kind": "approve",
+          "workflow": "Job lifecycle",
+          "stage": "running",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "approves 'Job lifecycle' at stage 'running'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-035",
+        "action_id": "command-desk/ACT-035",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-035",
+          "kind": "transition",
+          "workflow": "Project lifecycle",
+          "from": "active",
+          "to": "paused",
+          "mover": "roles",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "moves 'Project lifecycle' from 'active' to 'paused'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-036",
+        "action_id": "command-desk/ACT-036",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-036",
+          "kind": "transition",
+          "workflow": "Project lifecycle",
+          "from": "paused",
+          "to": "active",
+          "mover": "roles",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "moves 'Project lifecycle' from 'paused' to 'active'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-037",
+        "action_id": "command-desk/ACT-037",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-037",
+          "kind": "transition",
+          "workflow": "Project lifecycle",
+          "from": "active",
+          "to": "finished",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Project lifecycle' from 'active' to 'finished'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-038",
+        "action_id": "command-desk/ACT-038",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-038",
+          "kind": "transition",
+          "workflow": "Linked service lifecycle",
+          "from": "connected",
+          "to": "expired",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Linked service lifecycle' from 'connected' to 'expired'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-039",
+        "action_id": "command-desk/ACT-039",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-039",
+          "kind": "transition",
+          "workflow": "Linked service lifecycle",
+          "from": "expired",
+          "to": "connected",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Linked service lifecycle' from 'expired' to 'connected'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-040",
+        "action_id": "command-desk/ACT-040",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-040",
+          "kind": "transition",
+          "workflow": "Linked service lifecycle",
+          "from": "expired",
+          "to": "disconnected",
+          "mover": "roles",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "moves 'Linked service lifecycle' from 'expired' to 'disconnected'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-041",
+        "action_id": "command-desk/ACT-041",
+        "role": "Sam",
+        "action": {
+          "id": "command-desk/ACT-041",
+          "kind": "transition",
+          "workflow": "Linked service lifecycle",
+          "from": "connected",
+          "to": "disconnected",
+          "mover": "roles",
+          "roles": [
+            "Sam"
+          ],
+          "outcome": "moves 'Linked service lifecycle' from 'connected' to 'disconnected'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-042",
+        "action_id": "command-desk/ACT-042",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-042",
+          "kind": "transition",
+          "workflow": "Document lifecycle",
+          "from": "received",
+          "to": "filled",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Document lifecycle' from 'received' to 'filled'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-043",
+        "action_id": "command-desk/ACT-043",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-043",
+          "kind": "transition",
+          "workflow": "Document lifecycle",
+          "from": "filled",
+          "to": "signed",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Document lifecycle' from 'filled' to 'signed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-044",
+        "action_id": "command-desk/ACT-044",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-044",
+          "kind": "transition",
+          "workflow": "Document lifecycle",
+          "from": "signed",
+          "to": "done",
+          "mover": "automatic",
+          "roles": null,
+          "outcome": "moves 'Document lifecycle' from 'signed' to 'done'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-045",
+        "action_id": "command-desk/ACT-045",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-045",
+          "kind": "submit",
+          "form": "Add an agent",
+          "record": "Agent",
+          "roles": null,
+          "outcome": "submits the 'Add an agent' form, creating/editing its target record 'Agent'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-046",
+        "action_id": "command-desk/ACT-046",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-046",
+          "kind": "submit",
+          "form": "Connect a service",
+          "record": "Linked service",
+          "roles": null,
+          "outcome": "submits the 'Connect a service' form, creating/editing its target record 'Linked service'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-047",
+        "action_id": "command-desk/ACT-047",
+        "role": "<any authenticated role>",
+        "action": {
+          "id": "command-desk/ACT-047",
+          "kind": "submit",
+          "form": "Upload a document",
+          "record": "Document",
+          "roles": null,
+          "outcome": "submits the 'Upload a document' form, creating/editing its target record 'Document'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "command-desk/QA-048",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-001",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-049",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-002",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-050",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-003",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-051",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-004",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-052",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-005",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-053",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-006",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-054",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-007",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-055",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-008",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-056",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-009",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-057",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-010",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-058",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-011",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-059",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-012",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-060",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-013",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-061",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-014",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-062",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-015",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-063",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-016",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-064",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-017",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-065",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-018",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-066",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-019",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-067",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-020",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-068",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-021",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-069",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-022",
+        "role": "Sam",
+        "expect": "reachable"
+      },
+      {
+        "id": "command-desk/QA-070",
+        "kind": "screen_access",
+        "screen_id": "command-desk/SCR-023",
+        "role": "Sam",
+        "expect": "reachable"
+      }
+    ],
+    "locked": true,
+    "locked_at_graph_version": "3.0",
+    "interface": {
+      "id": "command-desk/IFC-001",
+      "kind": "interface",
+      "options": [
+        "console",
+        "board",
+        "pocket"
+      ],
+      "chosen": null,
+      "part_bindings": {
+        "parts": [],
+        "locations": [],
+        "note": "no interface chosen yet -- the front door has not run for this instance",
+        "pins": []
+      }
+    }
+  }
+}

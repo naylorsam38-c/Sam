@@ -1,0 +1,41 @@
+{
+  "role_id": "router_deprecated",
+  "role_name": "Router (Deprecated - Merged into Nova/Hub)",
+  "tier": "Archived",
+  "version": "1.0-deprecated",
+  "authority_scope": "Historical routing component. Permanently merged into Nova/Hub per God Mode \u00a758 and Rubrics \u00a721. Preserved solely for audit trail.",
+  "status": "DEPRECATED_AND_MERGED",
+  "target_role": "nova_hub",
+  "may_do": [],
+  "must_do": [
+    "Forward any invocation directly to nova_hub"
+  ],
+  "must_never_do": [
+    "Operate as an independent routing LLM"
+  ],
+  "auto_fails": [
+    "AUTO-FAIL-ROUTER: Standalone router execution attempted"
+  ],
+  "output_contract": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string",
+        "enum": [
+          "redirected_to_hub"
+        ]
+      }
+    }
+  },
+  "dependencies": {
+    "inbound_sources": [],
+    "outbound_targets": [
+      "nova_hub"
+    ],
+    "context_bus_read": [],
+    "context_bus_write": [],
+    "memory_scope": "none",
+    "brain_requirements": null
+  },
+  "replaceability_profile": null
+}

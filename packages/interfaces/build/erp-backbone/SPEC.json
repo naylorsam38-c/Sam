@@ -1,0 +1,6153 @@
+{
+  "spec_id": "SPEC-ERP-BACKBONE-REF",
+  "version": 1,
+  "title": "Backbone (erp-backbone)",
+  "graph_version": "3.0",
+  "source_template": "erp-backbone",
+  "numbered_fields": [
+    {
+      "number": "Z.02",
+      "spec_field": "actions.inventory",
+      "value": "confirmed",
+      "source_kind": "question"
+    },
+    {
+      "number": "D12",
+      "spec_field": "actions.inventory.items",
+      "value": "see build_model.D12",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_api_convention",
+      "spec_field": "api.*",
+      "value": "One fixed REST convention for every endpoint, verb and envelope.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_first_admin",
+      "spec_field": "auth.bootstrap_admin",
+      "value": "The first super-role account is seeded from the deploy inputs, not created through the app.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.05",
+      "spec_field": "auth.default_role",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.12",
+      "spec_field": "auth.deletion_allowed",
+      "value": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.12",
+      "spec_field": "auth.deletion_by",
+      "value": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.12",
+      "spec_field": "auth.deletion_data_policy",
+      "value": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.03",
+      "spec_field": "auth.email_verification",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_account_identity",
+      "spec_field": "auth.identity_field",
+      "value": "The email address is the account identity; changing it requires re-verification.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.06",
+      "spec_field": "auth.invite_authority",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.06",
+      "spec_field": "auth.invite_default_role",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_invite_expiry",
+      "spec_field": "auth.invite_expiry",
+      "value": "Invitations expire after 7 days and can be re-sent.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.08",
+      "spec_field": "auth.lockout_attempts",
+      "value": {
+        "attempts": 5,
+        "duration": "15 minutes"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.08",
+      "spec_field": "auth.lockout_duration",
+      "value": {
+        "attempts": 5,
+        "duration": "15 minutes"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.04",
+      "spec_field": "auth.methods",
+      "value": [
+        "password",
+        "google"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.07",
+      "spec_field": "auth.mfa_method",
+      "value": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_mfa_recovery",
+      "spec_field": "auth.mfa_recovery",
+      "value": "One-time recovery codes issued at MFA enrolment.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.07",
+      "spec_field": "auth.mfa_scope",
+      "value": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.09",
+      "spec_field": "auth.multi_device",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_profile_self_edit",
+      "spec_field": "auth.profile_self_service",
+      "value": "Every user can edit their own name, email, password and notification preferences.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.02",
+      "spec_field": "auth.registration_fields",
+      "value": [
+        {
+          "name": "Full name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Email address",
+          "type": "email",
+          "required": "yes",
+          "unique": "yes"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.01",
+      "spec_field": "auth.registration_modes",
+      "value": [
+        "admin_created"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.07",
+      "spec_field": "auth.required",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.13",
+      "spec_field": "auth.reset_others_by",
+      "value": [
+        "super"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_password_reset",
+      "spec_field": "auth.self_reset_flow",
+      "value": "Self-service reset by emailed link, valid 1 hour.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.10",
+      "spec_field": "auth.session_length",
+      "value": "30 days",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_suspended_experience",
+      "spec_field": "auth.suspended_screen",
+      "value": "A suspended user sees a fixed 'account suspended \u2014 contact <support contact>' screen and nothing else.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "AU.11",
+      "spec_field": "auth.suspension_allowed",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.11",
+      "spec_field": "auth.suspension_auto_triggers",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.11",
+      "spec_field": "auth.suspension_by",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "B.10",
+      "spec_field": "billing.cancellation",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.02",
+      "spec_field": "billing.charged_party",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.04",
+      "spec_field": "billing.currency",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_billing_details",
+      "spec_field": "billing.details_collection",
+      "value": "Card, billing address and tax IDs are collected by the gateway's hosted form; invoices/receipts are the gateway's.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_billing_details",
+      "spec_field": "billing.invoices",
+      "value": "Card, billing address and tax IDs are collected by the gateway's hosted form; invoices/receipts are the gateway's.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "B.01",
+      "spec_field": "billing.model",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.08",
+      "spec_field": "billing.on_failure",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_limit_reached",
+      "spec_field": "billing.on_limit_reached",
+      "value": "Hitting a plan limit shows an upgrade prompt, then blocks the action.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "B.07",
+      "spec_field": "billing.payment_methods",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.09",
+      "spec_field": "billing.plan_change",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "D10",
+      "spec_field": "billing.plan_linkage",
+      "value": "see build_model.D10",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "B.03",
+      "spec_field": "billing.plans",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_proration",
+      "spec_field": "billing.proration_rule",
+      "value": "Mid-cycle plan changes are prorated by the gateway.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "B.11",
+      "spec_field": "billing.refunds",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "A.09",
+      "spec_field": "billing.required",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_tax_calculation",
+      "spec_field": "billing.tax_calculation",
+      "value": "Tax computed by the payment gateway from the billing address.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "B.05",
+      "spec_field": "billing.trial",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.06",
+      "spec_field": "billing.usage_charge_timing",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "B.06",
+      "spec_field": "billing.usage_unit",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_idempotency_webhook",
+      "spec_field": "billing.webhook_handling",
+      "value": "Payment webhooks signature-verified and processed exactly once.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "C.06",
+      "spec_field": "client.landing_screen_per_role",
+      "value": {
+        "Admin": "Stock on hand",
+        "Operations": "Stock on hand",
+        "Sales": "Sales orders",
+        "Purchasing": "Purchase orders",
+        "Warehouse": "Open orders"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "C.05",
+      "spec_field": "client.mobile_behaviour",
+      "value": {
+        "mode": "simplified"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "C.07",
+      "spec_field": "client.navigation",
+      "value": "confirmed",
+      "source_kind": "question"
+    },
+    {
+      "number": "D13",
+      "spec_field": "client.navigation.derived",
+      "value": "see build_model.D13",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "A.06",
+      "spec_field": "client.platforms",
+      "value": [
+        "web"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.10",
+      "spec_field": "client.public_surfaces",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.12",
+      "spec_field": "data.import_required",
+      "value": {
+        "required": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "A.12",
+      "spec_field": "data.import_sources",
+      "value": {
+        "required": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "DI.10",
+      "spec_field": "deploy.app_store_accounts",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.01",
+      "spec_field": "deploy.domain",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.02",
+      "spec_field": "deploy.email_sender",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.04",
+      "spec_field": "deploy.first_admin_email",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.06",
+      "spec_field": "deploy.gateway_credentials",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.09",
+      "spec_field": "deploy.integration_credentials",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.11",
+      "spec_field": "deploy.legal_documents",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.08",
+      "spec_field": "deploy.oauth_credentials",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.05",
+      "spec_field": "deploy.region",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.07",
+      "spec_field": "deploy.sms_credentials",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "DI.03",
+      "spec_field": "deploy.support_contact",
+      "value": "[PENDING \u2014 collected at deploy time, not at requirements time]",
+      "source_kind": "deploy_input"
+    },
+    {
+      "number": "A.14",
+      "spec_field": "deviation.flags",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "0.01",
+      "spec_field": "engine.involvement",
+      "value": "guided",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_file_type_inference",
+      "spec_field": "file.*.allowed_mimes",
+      "value": "Allowed formats come from a fixed allow-list per file category.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_image_handling",
+      "spec_field": "file.*.image_handling",
+      "value": "Images get thumbnails; downloads are served by signed URL.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_file_security_scanning",
+      "spec_field": "file.*.malware_scanning",
+      "value": "Async malware scan before a file is marked active.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D06",
+      "spec_field": "file.*.retention",
+      "value": "see build_model.D06",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_file_storage",
+      "spec_field": "file.*.storage_backend",
+      "value": "Private object storage for uploads.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D02",
+      "spec_field": "form.*.fields",
+      "value": "see build_model.D02",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_form_failure",
+      "spec_field": "form.*.layout",
+      "value": "A failed submit shows inline errors and keeps what was typed; forms are single-page; public forms get spam protection.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_form_failure",
+      "spec_field": "form.*.on_failure",
+      "value": "A failed submit shows inline errors and keeps what was typed; forms are single-page; public forms get spam protection.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_form_failure",
+      "spec_field": "form.*.spam_protection",
+      "value": "A failed submit shows inline errors and keeps what was typed; forms are single-page; public forms get spam protection.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_retry_policy",
+      "spec_field": "integration.*.retry_policy",
+      "value": "Failed external calls retry 3\u00d7 with exponential backoff + jitter.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "A.11",
+      "spec_field": "integration.public_api_required",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.file_types",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.forms",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.integrations",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.notifications",
+      "value": [
+        "Low stock alert",
+        "Order shipped"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.records",
+      "value": [
+        "Product",
+        "Supplier",
+        "Customer account",
+        "Purchase order",
+        "Purchase order line",
+        "Sales order",
+        "Sales order line",
+        "Stock adjustment"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.reports",
+      "value": [
+        "Stock on hand",
+        "Sales by month",
+        "Open orders"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.roles",
+      "value": [
+        "Admin",
+        "Operations",
+        "Sales",
+        "Purchasing",
+        "Warehouse"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.screens",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "A.15",
+      "spec_field": "inventory.workflows",
+      "value": [
+        "Purchase order lifecycle",
+        "Sales order lifecycle"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.14",
+      "spec_field": "legal.terms_required",
+      "value": {
+        "required": "yes",
+        "status": "need_drafting"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "AU.14",
+      "spec_field": "legal.terms_status",
+      "value": {
+        "required": "yes",
+        "status": "need_drafting"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_locale_formatting",
+      "spec_field": "locale.formatting",
+      "value": "Dates, numbers and currency display in the format of A.13's region; stored in UTC; shown in the viewer's timezone.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "A.13",
+      "spec_field": "locale.languages",
+      "value": {
+        "region": "Australia",
+        "languages": [
+          "English"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "A.13",
+      "spec_field": "locale.primary_region",
+      "value": {
+        "region": "Australia",
+        "languages": [
+          "English"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_locale_formatting",
+      "spec_field": "locale.timezone_handling",
+      "value": "Dates, numbers and currency display in the format of A.13's region; stored in UTC; shown in the viewer's timezone.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_notification_copywriting",
+      "spec_field": "notification.*.copy_final",
+      "value": "Message wording drafted at build time and approved by the owner before launch; never shipped unseen.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_notification_retry",
+      "spec_field": "notification.*.retry_policy",
+      "value": "3 delivery retries then dead-letter.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D05",
+      "spec_field": "notification.*.timing",
+      "value": "see build_model.D05",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "N.03:Low stock alert",
+      "spec_field": "notification.Low stock alert.channels",
+      "value": [
+        "email",
+        "in_app"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "N.03:Order shipped",
+      "spec_field": "notification.Order shipped.channels",
+      "value": [
+        "in_app"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "N.04:Low stock alert",
+      "spec_field": "notification.Low stock alert.intent",
+      "value": "This product is running out \u2014 raise a purchase order.",
+      "source_kind": "question"
+    },
+    {
+      "number": "N.04:Order shipped",
+      "spec_field": "notification.Order shipped.intent",
+      "value": "The customer's order has left \u2014 tell them if they ask.",
+      "source_kind": "question"
+    },
+    {
+      "number": "N.05:Low stock alert",
+      "spec_field": "notification.Low stock alert.opt_out",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "N.05:Order shipped",
+      "spec_field": "notification.Order shipped.opt_out",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "N.02:Low stock alert",
+      "spec_field": "notification.Low stock alert.recipients",
+      "value": [
+        {
+          "kind": "roles",
+          "roles": [
+            "Purchasing",
+            "Operations"
+          ]
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "N.02:Order shipped",
+      "spec_field": "notification.Order shipped.recipients",
+      "value": [
+        {
+          "kind": "roles",
+          "roles": [
+            "Sales"
+          ]
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "N.01:Low stock alert",
+      "spec_field": "notification.Low stock alert.trigger",
+      "value": {
+        "kind": "event",
+        "event": "a Product's Stock on hand falls to or below its Reorder point"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "N.01:Order shipped",
+      "spec_field": "notification.Order shipped.trigger",
+      "value": {
+        "kind": "event",
+        "event": "a sales order moves to Shipped"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_inapp_inbox",
+      "spec_field": "notify.inbox",
+      "value": "If any notification uses in-app, the app has one notification inbox with read/unread state.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "Z.01",
+      "spec_field": "ops.recurring_operations",
+      "value": "confirmed",
+      "source_kind": "question"
+    },
+    {
+      "number": "D11",
+      "spec_field": "ops.recurring_operations.items",
+      "value": "see build_model.D11",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "A.03",
+      "spec_field": "product.audience",
+      "value": "A trading business: sales, purchasing, warehouse and operations staff.",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.01",
+      "spec_field": "product.description",
+      "value": "The operations core: products with stock on hand, suppliers and customer accounts, purchase orders that add stock when received and sales orders that subtract it when shipped.",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.02",
+      "spec_field": "product.goals",
+      "value": "Buy, sell and hold stock with every movement accounted for, and never run out unnoticed.",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.05",
+      "spec_field": "product.name",
+      "value": "Backbone",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.04",
+      "spec_field": "product.success_definition",
+      "value": "Stock on hand is always right and every open order is visible.",
+      "source_kind": "question"
+    },
+    {
+      "number": "D15",
+      "spec_field": "qa.generated_tests",
+      "value": "see build_model.D15",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_qa_pass_conditions",
+      "spec_field": "qa.pass_condition.*",
+      "value": "Every node's pass/fail check is generated from that node's own answers.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_audit_fields",
+      "spec_field": "record.*.audit_fields",
+      "value": "created_at/updated_at/created_by/updated_by on every table.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_concurrent_edit",
+      "spec_field": "record.*.concurrency",
+      "value": "Last save wins; a user saving over a newer version is warned and shown the newer version.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_list_behaviour",
+      "spec_field": "record.*.exportable",
+      "value": "Every record list is searchable and filterable on its visible fields, sorted newest first, exportable by anyone who can view it.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D01",
+      "spec_field": "record.*.field.*.storage_type",
+      "value": "see build_model.D01",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D14",
+      "spec_field": "record.*.field.*.storage_type_for_options",
+      "value": "see build_model.D14",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_field_type_defaults",
+      "spec_field": "record.*.field.*.validation",
+      "value": "Each field type carries one standard validation rule and error message.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_database_identifiers",
+      "spec_field": "record.*.id_strategy",
+      "value": "UUIDv4 primary keys on every table.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_list_behaviour",
+      "spec_field": "record.*.list_behaviour",
+      "value": "Every record list is searchable and filterable on its visible fields, sorted newest first, exportable by anyone who can view it.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "R.06:Product",
+      "spec_field": "record.Product.access.create",
+      "value": [
+        "Operations"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.06:Supplier",
+      "spec_field": "record.Supplier.access.create",
+      "value": [
+        "Purchasing",
+        "Operations"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.06:Customer account",
+      "spec_field": "record.Customer account.access.create",
+      "value": [
+        "Sales",
+        "Operations"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.06:Purchase order",
+      "spec_field": "record.Purchase order.access.create",
+      "value": [
+        "Purchasing"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.06:Purchase order line",
+      "spec_field": "record.Purchase order line.access.create",
+      "value": [
+        "Purchasing"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.06:Sales order",
+      "spec_field": "record.Sales order.access.create",
+      "value": [
+        "Sales"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.06:Sales order line",
+      "spec_field": "record.Sales order line.access.create",
+      "value": [
+        "Sales"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.06:Stock adjustment",
+      "spec_field": "record.Stock adjustment.access.create",
+      "value": [
+        "Warehouse",
+        "Operations"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Product",
+      "spec_field": "record.Product.access.delete",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Supplier",
+      "spec_field": "record.Supplier.access.delete",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Customer account",
+      "spec_field": "record.Customer account.access.delete",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Purchase order",
+      "spec_field": "record.Purchase order.access.delete",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Purchase order line",
+      "spec_field": "record.Purchase order line.access.delete",
+      "value": [
+        {
+          "role": "Purchasing",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Sales order",
+      "spec_field": "record.Sales order.access.delete",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Sales order line",
+      "spec_field": "record.Sales order line.access.delete",
+      "value": [
+        {
+          "role": "Sales",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.08:Stock adjustment",
+      "spec_field": "record.Stock adjustment.access.delete",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Product",
+      "spec_field": "record.Product.access.edit",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Supplier",
+      "spec_field": "record.Supplier.access.edit",
+      "value": [
+        {
+          "role": "Purchasing",
+          "scope": "all"
+        },
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Customer account",
+      "spec_field": "record.Customer account.access.edit",
+      "value": [
+        {
+          "role": "Sales",
+          "scope": "all"
+        },
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Purchase order",
+      "spec_field": "record.Purchase order.access.edit",
+      "value": [
+        {
+          "role": "Purchasing",
+          "scope": "all"
+        },
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Purchase order line",
+      "spec_field": "record.Purchase order line.access.edit",
+      "value": [
+        {
+          "role": "Purchasing",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Sales order",
+      "spec_field": "record.Sales order.access.edit",
+      "value": [
+        {
+          "role": "Sales",
+          "scope": "all"
+        },
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Sales order line",
+      "spec_field": "record.Sales order line.access.edit",
+      "value": [
+        {
+          "role": "Sales",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.07:Stock adjustment",
+      "spec_field": "record.Stock adjustment.access.edit",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Product",
+      "spec_field": "record.Product.access.view",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        },
+        {
+          "role": "Sales",
+          "scope": "all"
+        },
+        {
+          "role": "Purchasing",
+          "scope": "all"
+        },
+        {
+          "role": "Warehouse",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Supplier",
+      "spec_field": "record.Supplier.access.view",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        },
+        {
+          "role": "Purchasing",
+          "scope": "all"
+        },
+        {
+          "role": "Warehouse",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Customer account",
+      "spec_field": "record.Customer account.access.view",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        },
+        {
+          "role": "Sales",
+          "scope": "all"
+        },
+        {
+          "role": "Warehouse",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Purchase order",
+      "spec_field": "record.Purchase order.access.view",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        },
+        {
+          "role": "Purchasing",
+          "scope": "all"
+        },
+        {
+          "role": "Warehouse",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Purchase order line",
+      "spec_field": "record.Purchase order line.access.view",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        },
+        {
+          "role": "Purchasing",
+          "scope": "all"
+        },
+        {
+          "role": "Warehouse",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Sales order",
+      "spec_field": "record.Sales order.access.view",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        },
+        {
+          "role": "Sales",
+          "scope": "all"
+        },
+        {
+          "role": "Warehouse",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Sales order line",
+      "spec_field": "record.Sales order line.access.view",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        },
+        {
+          "role": "Sales",
+          "scope": "all"
+        },
+        {
+          "role": "Warehouse",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.05:Stock adjustment",
+      "spec_field": "record.Stock adjustment.access.view",
+      "value": [
+        {
+          "role": "Operations",
+          "scope": "all"
+        },
+        {
+          "role": "Warehouse",
+          "scope": "all"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Product",
+      "spec_field": "record.Product.archivable",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Supplier",
+      "spec_field": "record.Supplier.archivable",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Customer account",
+      "spec_field": "record.Customer account.archivable",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Purchase order",
+      "spec_field": "record.Purchase order.archivable",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Purchase order line",
+      "spec_field": "record.Purchase order line.archivable",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Sales order",
+      "spec_field": "record.Sales order.archivable",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Sales order line",
+      "spec_field": "record.Sales order line.archivable",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.13:Stock adjustment",
+      "spec_field": "record.Stock adjustment.archivable",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Product",
+      "spec_field": "record.Product.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Supplier",
+      "spec_field": "record.Supplier.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Customer account",
+      "spec_field": "record.Customer account.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Purchase order",
+      "spec_field": "record.Purchase order.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Purchase order line",
+      "spec_field": "record.Purchase order line.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Sales order",
+      "spec_field": "record.Sales order.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Sales order line",
+      "spec_field": "record.Sales order line.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.15:Stock adjustment",
+      "spec_field": "record.Stock adjustment.custom_actions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Product",
+      "spec_field": "record.Product.fields",
+      "value": [
+        {
+          "name": "Name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "SKU",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "yes"
+        },
+        {
+          "name": "Sale price",
+          "type": "money",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Cost",
+          "type": "money",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Stock on hand",
+          "type": "whole_number",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Reorder point",
+          "type": "whole_number",
+          "required": "no",
+          "unique": "no"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Supplier",
+      "spec_field": "record.Supplier.fields",
+      "value": [
+        {
+          "name": "Name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "yes"
+        },
+        {
+          "name": "Email",
+          "type": "email",
+          "required": "no",
+          "unique": "no"
+        },
+        {
+          "name": "Phone",
+          "type": "phone",
+          "required": "no",
+          "unique": "no"
+        },
+        {
+          "name": "Payment terms",
+          "type": "one_choice",
+          "required": "no",
+          "unique": "no",
+          "options": [
+            "prepaid",
+            "net 7",
+            "net 30",
+            "net 60"
+          ]
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Customer account",
+      "spec_field": "record.Customer account.fields",
+      "value": [
+        {
+          "name": "Name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Email",
+          "type": "email",
+          "required": "no",
+          "unique": "no"
+        },
+        {
+          "name": "Phone",
+          "type": "phone",
+          "required": "no",
+          "unique": "no"
+        },
+        {
+          "name": "Delivery address",
+          "type": "long_text",
+          "required": "yes",
+          "unique": "no"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Purchase order",
+      "spec_field": "record.Purchase order.fields",
+      "value": [
+        {
+          "name": "Supplier",
+          "type": "link",
+          "required": "yes",
+          "unique": "no",
+          "target_record": "Supplier"
+        },
+        {
+          "name": "Order date",
+          "type": "date",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Expected date",
+          "type": "date",
+          "required": "no",
+          "unique": "no"
+        },
+        {
+          "name": "Notes",
+          "type": "long_text",
+          "required": "no",
+          "unique": "no"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Purchase order line",
+      "spec_field": "record.Purchase order line.fields",
+      "value": [
+        {
+          "name": "Purchase order",
+          "type": "link",
+          "required": "yes",
+          "unique": "no",
+          "target_record": "Purchase order"
+        },
+        {
+          "name": "Product",
+          "type": "link",
+          "required": "yes",
+          "unique": "no",
+          "target_record": "Product"
+        },
+        {
+          "name": "Quantity",
+          "type": "whole_number",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Unit cost",
+          "type": "money",
+          "required": "yes",
+          "unique": "no"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Sales order",
+      "spec_field": "record.Sales order.fields",
+      "value": [
+        {
+          "name": "Customer account",
+          "type": "link",
+          "required": "yes",
+          "unique": "no",
+          "target_record": "Customer account"
+        },
+        {
+          "name": "Order date",
+          "type": "date",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Notes",
+          "type": "long_text",
+          "required": "no",
+          "unique": "no"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Sales order line",
+      "spec_field": "record.Sales order line.fields",
+      "value": [
+        {
+          "name": "Sales order",
+          "type": "link",
+          "required": "yes",
+          "unique": "no",
+          "target_record": "Sales order"
+        },
+        {
+          "name": "Product",
+          "type": "link",
+          "required": "yes",
+          "unique": "no",
+          "target_record": "Product"
+        },
+        {
+          "name": "Quantity",
+          "type": "whole_number",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Unit price",
+          "type": "money",
+          "required": "yes",
+          "unique": "no"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.02:Stock adjustment",
+      "spec_field": "record.Stock adjustment.fields",
+      "value": [
+        {
+          "name": "Product",
+          "type": "link",
+          "required": "yes",
+          "unique": "no",
+          "target_record": "Product"
+        },
+        {
+          "name": "Change",
+          "type": "whole_number",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Reason",
+          "type": "one_choice",
+          "required": "yes",
+          "unique": "no",
+          "options": [
+            "stocktake",
+            "damage",
+            "loss",
+            "correction"
+          ]
+        },
+        {
+          "name": "Notes",
+          "type": "long_text",
+          "required": "no",
+          "unique": "no"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Product",
+      "spec_field": "record.Product.has_lifecycle",
+      "value": {
+        "has": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Supplier",
+      "spec_field": "record.Supplier.has_lifecycle",
+      "value": {
+        "has": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Customer account",
+      "spec_field": "record.Customer account.has_lifecycle",
+      "value": {
+        "has": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Purchase order",
+      "spec_field": "record.Purchase order.has_lifecycle",
+      "value": {
+        "has": "yes",
+        "stages": [
+          "Draft",
+          "Confirmed",
+          "Received",
+          "Closed",
+          "Cancelled"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Purchase order line",
+      "spec_field": "record.Purchase order line.has_lifecycle",
+      "value": {
+        "has": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Sales order",
+      "spec_field": "record.Sales order.has_lifecycle",
+      "value": {
+        "has": "yes",
+        "stages": [
+          "Draft",
+          "Confirmed",
+          "Shipped",
+          "Closed",
+          "Cancelled"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Sales order line",
+      "spec_field": "record.Sales order line.has_lifecycle",
+      "value": {
+        "has": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.10:Stock adjustment",
+      "spec_field": "record.Stock adjustment.has_lifecycle",
+      "value": {
+        "has": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Product",
+      "spec_field": "record.Product.human_id",
+      "value": {
+        "needed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Supplier",
+      "spec_field": "record.Supplier.human_id",
+      "value": {
+        "needed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Customer account",
+      "spec_field": "record.Customer account.human_id",
+      "value": {
+        "needed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Purchase order",
+      "spec_field": "record.Purchase order.human_id",
+      "value": {
+        "needed": "yes",
+        "format": "PO-#### (sequential)"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Purchase order line",
+      "spec_field": "record.Purchase order line.human_id",
+      "value": {
+        "needed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Sales order",
+      "spec_field": "record.Sales order.human_id",
+      "value": {
+        "needed": "yes",
+        "format": "SO-#### (sequential)"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Sales order line",
+      "spec_field": "record.Sales order line.human_id",
+      "value": {
+        "needed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.04:Stock adjustment",
+      "spec_field": "record.Stock adjustment.human_id",
+      "value": {
+        "needed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Product",
+      "spec_field": "record.Product.on_delete",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Supplier",
+      "spec_field": "record.Supplier.on_delete",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Customer account",
+      "spec_field": "record.Customer account.on_delete",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Purchase order",
+      "spec_field": "record.Purchase order.on_delete",
+      "value": "block",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Purchase order line",
+      "spec_field": "record.Purchase order line.on_delete",
+      "value": "delete_too",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Sales order",
+      "spec_field": "record.Sales order.on_delete",
+      "value": "block",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Sales order line",
+      "spec_field": "record.Sales order line.on_delete",
+      "value": "delete_too",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.12:Stock adjustment",
+      "spec_field": "record.Stock adjustment.on_delete",
+      "value": "block",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Product",
+      "spec_field": "record.Product.ownership_rule",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Supplier",
+      "spec_field": "record.Supplier.ownership_rule",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Customer account",
+      "spec_field": "record.Customer account.ownership_rule",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Purchase order",
+      "spec_field": "record.Purchase order.ownership_rule",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Purchase order line",
+      "spec_field": "record.Purchase order line.ownership_rule",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Sales order",
+      "spec_field": "record.Sales order.ownership_rule",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Sales order line",
+      "spec_field": "record.Sales order line.ownership_rule",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.09:Stock adjustment",
+      "spec_field": "record.Stock adjustment.ownership_rule",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Product",
+      "spec_field": "record.Product.purpose",
+      "value": "An item the business buys, stocks and sells.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Supplier",
+      "spec_field": "record.Supplier.purpose",
+      "value": "A company the business buys from.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Customer account",
+      "spec_field": "record.Customer account.purpose",
+      "value": "A company or person the business sells to.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Purchase order",
+      "spec_field": "record.Purchase order.purpose",
+      "value": "An order placed with a supplier to buy stock.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Purchase order line",
+      "spec_field": "record.Purchase order line.purpose",
+      "value": "One product and quantity on a purchase order.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Sales order",
+      "spec_field": "record.Sales order.purpose",
+      "value": "An order from a customer to be picked, shipped and invoiced.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Sales order line",
+      "spec_field": "record.Sales order line.purpose",
+      "value": "One product and quantity on a sales order.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.01:Stock adjustment",
+      "spec_field": "record.Stock adjustment.purpose",
+      "value": "A manual correction to a product's stock level, with a reason.",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Product",
+      "spec_field": "record.Product.relations",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Supplier",
+      "spec_field": "record.Supplier.relations",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Customer account",
+      "spec_field": "record.Customer account.relations",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Purchase order",
+      "spec_field": "record.Purchase order.relations",
+      "value": [
+        {
+          "target": "Supplier",
+          "cardinality": "one_to_many",
+          "required": "yes"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Purchase order line",
+      "spec_field": "record.Purchase order line.relations",
+      "value": [
+        {
+          "target": "Purchase order",
+          "cardinality": "one_to_many",
+          "required": "yes"
+        },
+        {
+          "target": "Product",
+          "cardinality": "one_to_many",
+          "required": "yes"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Sales order",
+      "spec_field": "record.Sales order.relations",
+      "value": [
+        {
+          "target": "Customer account",
+          "cardinality": "one_to_many",
+          "required": "yes"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Sales order line",
+      "spec_field": "record.Sales order line.relations",
+      "value": [
+        {
+          "target": "Sales order",
+          "cardinality": "one_to_many",
+          "required": "yes"
+        },
+        {
+          "target": "Product",
+          "cardinality": "one_to_many",
+          "required": "yes"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.11:Stock adjustment",
+      "spec_field": "record.Stock adjustment.relations",
+      "value": [
+        {
+          "target": "Product",
+          "cardinality": "one_to_many",
+          "required": "yes"
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Product",
+      "spec_field": "record.Product.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Supplier",
+      "spec_field": "record.Supplier.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Customer account",
+      "spec_field": "record.Customer account.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Purchase order",
+      "spec_field": "record.Purchase order.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Purchase order line",
+      "spec_field": "record.Purchase order line.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Sales order",
+      "spec_field": "record.Sales order.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Sales order line",
+      "spec_field": "record.Sales order line.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.14:Stock adjustment",
+      "spec_field": "record.Stock adjustment.retention",
+      "value": "forever",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Product",
+      "spec_field": "record.Product.title_field",
+      "value": "Name",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Supplier",
+      "spec_field": "record.Supplier.title_field",
+      "value": "Name",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Customer account",
+      "spec_field": "record.Customer account.title_field",
+      "value": "Name",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Purchase order",
+      "spec_field": "record.Purchase order.title_field",
+      "value": "Supplier",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Purchase order line",
+      "spec_field": "record.Purchase order line.title_field",
+      "value": "Product",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Sales order",
+      "spec_field": "record.Sales order.title_field",
+      "value": "Customer account",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Sales order line",
+      "spec_field": "record.Sales order line.title_field",
+      "value": "Product",
+      "source_kind": "question"
+    },
+    {
+      "number": "R.03:Stock adjustment",
+      "spec_field": "record.Stock adjustment.title_field",
+      "value": "Product",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_report_caching",
+      "spec_field": "report.*.cache_policy",
+      "value": "Reports regenerate on demand, cached 5 min.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D07",
+      "spec_field": "report.*.data_source",
+      "value": "see build_model.D07",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D07",
+      "spec_field": "report.*.metric.*.derived_definition",
+      "value": "see build_model.D07",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "RP.06:Stock on hand",
+      "spec_field": "report.Stock on hand.default_range",
+      "value": {
+        "filters": [
+          "Product"
+        ],
+        "default_range": "as at now"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.06:Sales by month",
+      "spec_field": "report.Sales by month.default_range",
+      "value": {
+        "filters": [
+          "Product",
+          "Customer account"
+        ],
+        "default_range": "last 12 months"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.06:Open orders",
+      "spec_field": "report.Open orders.default_range",
+      "value": {
+        "filters": [
+          "Supplier",
+          "Customer account"
+        ],
+        "default_range": "as at now"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.07:Stock on hand",
+      "spec_field": "report.Stock on hand.export",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "Operations"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.07:Sales by month",
+      "spec_field": "report.Sales by month.export",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "Operations"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.07:Open orders",
+      "spec_field": "report.Open orders.export",
+      "value": {
+        "allowed": "yes",
+        "by": [
+          "Operations"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.06:Stock on hand",
+      "spec_field": "report.Stock on hand.filters",
+      "value": {
+        "filters": [
+          "Product"
+        ],
+        "default_range": "as at now"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.06:Sales by month",
+      "spec_field": "report.Sales by month.filters",
+      "value": {
+        "filters": [
+          "Product",
+          "Customer account"
+        ],
+        "default_range": "last 12 months"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.06:Open orders",
+      "spec_field": "report.Open orders.filters",
+      "value": {
+        "filters": [
+          "Supplier",
+          "Customer account"
+        ],
+        "default_range": "as at now"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.03:Stock on hand",
+      "spec_field": "report.Stock on hand.form",
+      "value": {
+        "delivery": "screen",
+        "shape": "table"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.03:Sales by month",
+      "spec_field": "report.Sales by month.form",
+      "value": {
+        "delivery": "both",
+        "shape": "both"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.03:Open orders",
+      "spec_field": "report.Open orders.form",
+      "value": {
+        "delivery": "screen",
+        "shape": "table"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.04:Stock on hand",
+      "spec_field": "report.Stock on hand.metrics",
+      "value": [
+        "sum of Product Stock on hand",
+        "count of Products at or below Reorder point"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.04:Sales by month",
+      "spec_field": "report.Sales by month.metrics",
+      "value": [
+        "sales value"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.04:Open orders",
+      "spec_field": "report.Open orders.metrics",
+      "value": [
+        "count of Sales orders in Confirmed",
+        "count of Purchase orders in Confirmed"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.01:Stock on hand",
+      "spec_field": "report.Stock on hand.question",
+      "value": "What do we hold right now, and what is at or below its reorder point?",
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.01:Sales by month",
+      "spec_field": "report.Sales by month.question",
+      "value": "What did we sell, month by month?",
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.01:Open orders",
+      "spec_field": "report.Open orders.question",
+      "value": "What is confirmed but not yet fulfilled, on both sides?",
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.08:Stock on hand",
+      "spec_field": "report.Stock on hand.scheduled_delivery",
+      "value": {
+        "enabled": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.08:Sales by month",
+      "spec_field": "report.Sales by month.scheduled_delivery",
+      "value": {
+        "enabled": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.08:Open orders",
+      "spec_field": "report.Open orders.scheduled_delivery",
+      "value": {
+        "enabled": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.02:Stock on hand",
+      "spec_field": "report.Stock on hand.viewers",
+      "value": [
+        "Operations",
+        "Sales",
+        "Purchasing",
+        "Warehouse"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.02:Sales by month",
+      "spec_field": "report.Sales by month.viewers",
+      "value": [
+        "Operations",
+        "Sales"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "RP.02:Open orders",
+      "spec_field": "report.Open orders.viewers",
+      "value": [
+        "Operations",
+        "Sales",
+        "Purchasing",
+        "Warehouse"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "D04",
+      "spec_field": "role.*.forbidden_actions",
+      "value": "see build_model.D04",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D04",
+      "spec_field": "role.*.is_admin",
+      "value": "see build_model.D04",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D04",
+      "spec_field": "role.*.permitted_actions",
+      "value": "see build_model.D04",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D03",
+      "spec_field": "role.*.visible_screens",
+      "value": "see build_model.D03",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "P.04:Admin",
+      "spec_field": "role.Admin.assignable_by",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.04:Operations",
+      "spec_field": "role.Operations.assignable_by",
+      "value": [
+        "Admin"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "P.04:Sales",
+      "spec_field": "role.Sales.assignable_by",
+      "value": [
+        "Admin"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "P.04:Purchasing",
+      "spec_field": "role.Purchasing.assignable_by",
+      "value": [
+        "Admin"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "P.04:Warehouse",
+      "spec_field": "role.Warehouse.assignable_by",
+      "value": [
+        "Admin"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "P.03:Admin",
+      "spec_field": "role.Admin.billing_access",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.03:Operations",
+      "spec_field": "role.Operations.billing_access",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.03:Sales",
+      "spec_field": "role.Sales.billing_access",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.03:Purchasing",
+      "spec_field": "role.Purchasing.billing_access",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.03:Warehouse",
+      "spec_field": "role.Warehouse.billing_access",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.01:Admin",
+      "spec_field": "role.Admin.description",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.01:Operations",
+      "spec_field": "role.Operations.description",
+      "value": "Oversees the whole flow; approves purchases and closes orders.",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.01:Sales",
+      "spec_field": "role.Sales.description",
+      "value": "Takes customer orders and manages customer accounts.",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.01:Purchasing",
+      "spec_field": "role.Purchasing.description",
+      "value": "Buys stock and manages suppliers.",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.01:Warehouse",
+      "spec_field": "role.Warehouse.description",
+      "value": "Receives, ships and corrects stock.",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.02:Admin",
+      "spec_field": "role.Admin.sees_private_data",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "P.02:Operations",
+      "spec_field": "role.Operations.sees_private_data",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.02:Sales",
+      "spec_field": "role.Sales.sees_private_data",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.02:Purchasing",
+      "spec_field": "role.Purchasing.sees_private_data",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.02:Warehouse",
+      "spec_field": "role.Warehouse.sees_private_data",
+      "value": "no",
+      "source_kind": "question"
+    },
+    {
+      "number": "P.00",
+      "spec_field": "roles.multi_role_per_person",
+      "value": "yes",
+      "source_kind": "question"
+    },
+    {
+      "number": "A.16",
+      "spec_field": "roles.super_role",
+      "value": "Admin",
+      "source_kind": "question"
+    },
+    {
+      "number": "D03",
+      "spec_field": "screen.*.access",
+      "value": "see build_model.D03",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "D03",
+      "spec_field": "screen.*.contents",
+      "value": "see build_model.D03",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "sys_screen_interaction_pattern",
+      "spec_field": "screen.*.interaction_states",
+      "value": "Standard loading / empty / error / success / back / leave-and-return behaviour on every screen.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "Z.03",
+      "spec_field": "screens.inventory",
+      "value": "confirmed",
+      "source_kind": "question"
+    },
+    {
+      "number": "D13",
+      "spec_field": "screens.inventory.items",
+      "value": "see build_model.D13",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "T.07",
+      "spec_field": "tenancy.branding",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "T.02",
+      "spec_field": "tenancy.creation",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "T.06",
+      "spec_field": "tenancy.isolation",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_client_isolation",
+      "spec_field": "tenancy.isolation_mechanism",
+      "value": "Row-level security enforces organisation isolation in the database.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "A.08",
+      "spec_field": "tenancy.mode",
+      "value": "single",
+      "source_kind": "question"
+    },
+    {
+      "number": "T.01",
+      "spec_field": "tenancy.multi_membership",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "T.05",
+      "spec_field": "tenancy.operator_role",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "T.03",
+      "spec_field": "tenancy.org_admin_role",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_org_switcher",
+      "spec_field": "tenancy.org_settings",
+      "value": "A person in several organisations switches with a standard switcher; each organisation has its own timezone setting defaulting to A.13.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "D09",
+      "spec_field": "tenancy.role_visibility",
+      "value": "see build_model.D09",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "T.04",
+      "spec_field": "tenancy.roles_scope",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "T.08",
+      "spec_field": "tenancy.suspend_delete",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_org_switcher",
+      "spec_field": "tenancy.switcher",
+      "value": "A person in several organisations switches with a standard switcher; each organisation has its own timezone setting defaulting to A.13.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "sys_theme",
+      "spec_field": "visual.accessibility",
+      "value": "Light theme only; WCAG 2.1 AA contrast and keyboard access.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "C.04",
+      "spec_field": "visual.brand_assets",
+      "value": {
+        "mode": "design_for_me"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "C.03",
+      "spec_field": "visual.density",
+      "value": "balanced",
+      "source_kind": "question"
+    },
+    {
+      "number": "C.01",
+      "spec_field": "visual.references",
+      "value": "none",
+      "source_kind": "question"
+    },
+    {
+      "number": "sys_theme",
+      "spec_field": "visual.theme",
+      "value": "Light theme only; WCAG 2.1 AA contrast and keyboard access.",
+      "source_kind": "system_default"
+    },
+    {
+      "number": "C.02",
+      "spec_field": "visual.tone",
+      "value": [
+        "dense",
+        "precise",
+        "serious"
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "D08",
+      "spec_field": "workflow.*.transition_graph",
+      "value": "see build_model.D08",
+      "source_kind": "derivation"
+    },
+    {
+      "number": "FL.05:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.approvals",
+      "value": [
+        {
+          "stage": "Draft",
+          "approvers": [
+            "Operations"
+          ]
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.05:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.approvals",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.07:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.cancel",
+      "value": {
+        "allowed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.07:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.cancel",
+      "value": {
+        "allowed": "no"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.08:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.on_complete",
+      "value": "On Received, each line's Quantity is added to its Product's Stock on hand.",
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.08:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.on_complete",
+      "value": "On Shipped, each line's Quantity is subtracted from its Product's Stock on hand.",
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.06:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.on_reject",
+      "value": {
+        "back_to": "Draft",
+        "resubmit": "yes"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.06:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.on_reject",
+      "value": null,
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.04:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.preconditions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.04:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.preconditions",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.09:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.readonly_from",
+      "value": "Received",
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.09:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.readonly_from",
+      "value": "Shipped",
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.11:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.stage_notifications",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.11:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.stage_notifications",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.02:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.stages",
+      "value": {
+        "stages": [
+          "Draft",
+          "Confirmed",
+          "Received",
+          "Closed",
+          "Cancelled"
+        ],
+        "initial": "Draft",
+        "terminal": [
+          "Closed",
+          "Cancelled"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.02:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.stages",
+      "value": {
+        "stages": [
+          "Draft",
+          "Confirmed",
+          "Shipped",
+          "Closed",
+          "Cancelled"
+        ],
+        "initial": "Draft",
+        "terminal": [
+          "Closed",
+          "Cancelled"
+        ]
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.10:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.timeouts",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.10:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.timeouts",
+      "value": [],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.03:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.transitions",
+      "value": [
+        {
+          "from": "Draft",
+          "to": "Confirmed",
+          "mover": "roles",
+          "roles": [
+            "Purchasing"
+          ]
+        },
+        {
+          "from": "Confirmed",
+          "to": "Received",
+          "mover": "roles",
+          "roles": [
+            "Warehouse"
+          ]
+        },
+        {
+          "from": "Received",
+          "to": "Closed",
+          "mover": "roles",
+          "roles": [
+            "Operations"
+          ]
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.03:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.transitions",
+      "value": [
+        {
+          "from": "Draft",
+          "to": "Confirmed",
+          "mover": "roles",
+          "roles": [
+            "Sales"
+          ]
+        },
+        {
+          "from": "Confirmed",
+          "to": "Shipped",
+          "mover": "roles",
+          "roles": [
+            "Warehouse"
+          ]
+        },
+        {
+          "from": "Shipped",
+          "to": "Closed",
+          "mover": "roles",
+          "roles": [
+            "Operations"
+          ]
+        }
+      ],
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.01:Purchase order lifecycle",
+      "spec_field": "workflow.Purchase order lifecycle.trigger",
+      "value": {
+        "kind": "person",
+        "who": [
+          "Purchasing"
+        ],
+        "action": "creating a purchase order (starts in Draft)"
+      },
+      "source_kind": "question"
+    },
+    {
+      "number": "FL.01:Sales order lifecycle",
+      "spec_field": "workflow.Sales order lifecycle.trigger",
+      "value": {
+        "kind": "person",
+        "who": [
+          "Sales"
+        ],
+        "action": "creating a sales order (starts in Draft)"
+      },
+      "source_kind": "question"
+    }
+  ],
+  "build_model": {
+    "records": {
+      "Product": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "SKU": {
+            "name": "SKU",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "yes"
+          },
+          "Sale price": {
+            "name": "Sale price",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Cost": {
+            "name": "Cost",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Stock on hand": {
+            "name": "Stock on hand",
+            "type": "whole_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Reorder point": {
+            "name": "Reorder point",
+            "type": "whole_number",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "SKU": "VARCHAR(255)",
+          "Sale price": "DECIMAL(18,2)",
+          "Cost": "DECIMAL(18,2)",
+          "Stock on hand": "INTEGER",
+          "Reorder point": "INTEGER"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Operations"
+          ],
+          "edit": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-001"
+      },
+      "Supplier": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "yes"
+          },
+          "Email": {
+            "name": "Email",
+            "type": "email",
+            "required": "no",
+            "unique": "no"
+          },
+          "Phone": {
+            "name": "Phone",
+            "type": "phone",
+            "required": "no",
+            "unique": "no"
+          },
+          "Payment terms": {
+            "name": "Payment terms",
+            "type": "one_choice",
+            "required": "no",
+            "unique": "no",
+            "options": [
+              "prepaid",
+              "net 7",
+              "net 30",
+              "net 60"
+            ]
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Email": "VARCHAR(255)",
+          "Phone": "VARCHAR(40)",
+          "Payment terms": "ENUM"
+        },
+        "enums": {
+          "Payment terms": [
+            "prepaid",
+            "net 7",
+            "net 30",
+            "net 60"
+          ]
+        },
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Purchasing",
+            "Operations"
+          ],
+          "edit": [
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-002"
+      },
+      "Customer account": {
+        "fields": {
+          "Name": {
+            "name": "Name",
+            "type": "short_text",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Email": {
+            "name": "Email",
+            "type": "email",
+            "required": "no",
+            "unique": "no"
+          },
+          "Phone": {
+            "name": "Phone",
+            "type": "phone",
+            "required": "no",
+            "unique": "no"
+          },
+          "Delivery address": {
+            "name": "Delivery address",
+            "type": "long_text",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Name": "VARCHAR(255)",
+          "Email": "VARCHAR(255)",
+          "Phone": "VARCHAR(40)",
+          "Delivery address": "TEXT"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sales",
+            "Operations"
+          ],
+          "edit": [
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Name",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-003"
+      },
+      "Purchase order": {
+        "fields": {
+          "Supplier": {
+            "name": "Supplier",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Supplier"
+          },
+          "Order date": {
+            "name": "Order date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Expected date": {
+            "name": "Expected date",
+            "type": "date",
+            "required": "no",
+            "unique": "no"
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Supplier": "FOREIGN_KEY",
+          "Order date": "DATE",
+          "Expected date": "DATE",
+          "Notes": "TEXT"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Purchasing"
+          ],
+          "edit": [
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Supplier",
+        "id_style": {
+          "needed": "yes",
+          "format": "PO-#### (sequential)"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "Draft",
+            "Confirmed",
+            "Received",
+            "Closed",
+            "Cancelled"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-004"
+      },
+      "Purchase order line": {
+        "fields": {
+          "Purchase order": {
+            "name": "Purchase order",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Purchase order"
+          },
+          "Product": {
+            "name": "Product",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Product"
+          },
+          "Quantity": {
+            "name": "Quantity",
+            "type": "whole_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Unit cost": {
+            "name": "Unit cost",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Purchase order": "FOREIGN_KEY",
+          "Product": "FOREIGN_KEY",
+          "Quantity": "INTEGER",
+          "Unit cost": "DECIMAL(18,2)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Purchasing"
+          ],
+          "edit": [
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Purchasing",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Product",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-005"
+      },
+      "Sales order": {
+        "fields": {
+          "Customer account": {
+            "name": "Customer account",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Customer account"
+          },
+          "Order date": {
+            "name": "Order date",
+            "type": "date",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Customer account": "FOREIGN_KEY",
+          "Order date": "DATE",
+          "Notes": "TEXT"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sales"
+          ],
+          "edit": [
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Customer account",
+        "id_style": {
+          "needed": "yes",
+          "format": "SO-#### (sequential)"
+        },
+        "lifecycle": {
+          "has": "yes",
+          "stages": [
+            "Draft",
+            "Confirmed",
+            "Shipped",
+            "Closed",
+            "Cancelled"
+          ]
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-006"
+      },
+      "Sales order line": {
+        "fields": {
+          "Sales order": {
+            "name": "Sales order",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Sales order"
+          },
+          "Product": {
+            "name": "Product",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Product"
+          },
+          "Quantity": {
+            "name": "Quantity",
+            "type": "whole_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Unit price": {
+            "name": "Unit price",
+            "type": "money",
+            "required": "yes",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Sales order": "FOREIGN_KEY",
+          "Product": "FOREIGN_KEY",
+          "Quantity": "INTEGER",
+          "Unit price": "DECIMAL(18,2)"
+        },
+        "enums": {},
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Sales",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Sales"
+          ],
+          "edit": [
+            {
+              "role": "Sales",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Sales",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Product",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-007"
+      },
+      "Stock adjustment": {
+        "fields": {
+          "Product": {
+            "name": "Product",
+            "type": "link",
+            "required": "yes",
+            "unique": "no",
+            "target_record": "Product"
+          },
+          "Change": {
+            "name": "Change",
+            "type": "whole_number",
+            "required": "yes",
+            "unique": "no"
+          },
+          "Reason": {
+            "name": "Reason",
+            "type": "one_choice",
+            "required": "yes",
+            "unique": "no",
+            "options": [
+              "stocktake",
+              "damage",
+              "loss",
+              "correction"
+            ]
+          },
+          "Notes": {
+            "name": "Notes",
+            "type": "long_text",
+            "required": "no",
+            "unique": "no"
+          }
+        },
+        "storage": {
+          "Product": "FOREIGN_KEY",
+          "Change": "INTEGER",
+          "Reason": "ENUM",
+          "Notes": "TEXT"
+        },
+        "enums": {
+          "Reason": [
+            "stocktake",
+            "damage",
+            "loss",
+            "correction"
+          ]
+        },
+        "access": {
+          "view": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            },
+            {
+              "role": "Warehouse",
+              "scope": "all"
+            }
+          ],
+          "create": [
+            "Warehouse",
+            "Operations"
+          ],
+          "edit": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ],
+          "delete": [
+            {
+              "role": "Operations",
+              "scope": "all"
+            }
+          ]
+        },
+        "title_field": "Product",
+        "id_style": {
+          "needed": "no"
+        },
+        "lifecycle": {
+          "has": "no"
+        },
+        "retention": "forever",
+        "custom_actions": [],
+        "on_create": [],
+        "id": "erp-backbone/REC-008"
+      }
+    },
+    "roles": {
+      "Admin": {
+        "permitted": [],
+        "is_admin": true
+      },
+      "Operations": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Stock adjustment",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Stock adjustment",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Stock adjustment",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Stock adjustment",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      },
+      "Sales": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order line",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Sales order line",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Sales order line",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Sales order line",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      },
+      "Purchasing": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order line",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Purchase order line",
+            "scope": "all"
+          },
+          {
+            "action": "edit",
+            "record": "Purchase order line",
+            "scope": "all"
+          },
+          {
+            "action": "delete",
+            "record": "Purchase order line",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      },
+      "Warehouse": {
+        "permitted": [
+          {
+            "action": "view",
+            "record": "Product",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Supplier",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Customer account",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Purchase order line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Sales order line",
+            "scope": "all"
+          },
+          {
+            "action": "view",
+            "record": "Stock adjustment",
+            "scope": "all"
+          },
+          {
+            "action": "create",
+            "record": "Stock adjustment",
+            "scope": "all"
+          }
+        ],
+        "is_admin": false
+      }
+    },
+    "super_role": "Admin",
+    "workflows": {
+      "Purchase order lifecycle": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Purchasing"
+          ],
+          "action": "creating a purchase order (starts in Draft)"
+        },
+        "stages": [
+          {
+            "id": "erp-backbone/STG-001",
+            "name": "Draft"
+          },
+          {
+            "id": "erp-backbone/STG-002",
+            "name": "Confirmed"
+          },
+          {
+            "id": "erp-backbone/STG-003",
+            "name": "Received"
+          },
+          {
+            "id": "erp-backbone/STG-004",
+            "name": "Closed"
+          },
+          {
+            "id": "erp-backbone/STG-005",
+            "name": "Cancelled"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "Draft",
+            "to": "Confirmed",
+            "mover": "roles",
+            "roles": [
+              "Purchasing"
+            ],
+            "id": "erp-backbone/TRN-001"
+          },
+          {
+            "from": "Confirmed",
+            "to": "Received",
+            "mover": "roles",
+            "roles": [
+              "Warehouse"
+            ],
+            "id": "erp-backbone/TRN-002"
+          },
+          {
+            "from": "Received",
+            "to": "Closed",
+            "mover": "roles",
+            "roles": [
+              "Operations"
+            ],
+            "id": "erp-backbone/TRN-003"
+          }
+        ],
+        "approvals": [
+          {
+            "stage": "Draft",
+            "approvers": [
+              "Operations"
+            ]
+          }
+        ],
+        "on_reject": {
+          "back_to": "Draft",
+          "resubmit": "yes"
+        },
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "effects": [
+          {
+            "on_enter": "Received",
+            "op": "apply_order_lines",
+            "line_table": "purchase_order_lines",
+            "line_fk": "purchase_order",
+            "product_table": "products",
+            "product_fk": "product",
+            "quantity_column": "quantity",
+            "direction": "receive"
+          }
+        ],
+        "initial": "Draft",
+        "terminal": [
+          "Closed",
+          "Cancelled"
+        ]
+      },
+      "Sales order lifecycle": {
+        "trigger": {
+          "kind": "person",
+          "who": [
+            "Sales"
+          ],
+          "action": "creating a sales order (starts in Draft)"
+        },
+        "stages": [
+          {
+            "id": "erp-backbone/STG-006",
+            "name": "Draft"
+          },
+          {
+            "id": "erp-backbone/STG-007",
+            "name": "Confirmed"
+          },
+          {
+            "id": "erp-backbone/STG-008",
+            "name": "Shipped"
+          },
+          {
+            "id": "erp-backbone/STG-009",
+            "name": "Closed"
+          },
+          {
+            "id": "erp-backbone/STG-010",
+            "name": "Cancelled"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "Draft",
+            "to": "Confirmed",
+            "mover": "roles",
+            "roles": [
+              "Sales"
+            ],
+            "id": "erp-backbone/TRN-004"
+          },
+          {
+            "from": "Confirmed",
+            "to": "Shipped",
+            "mover": "roles",
+            "roles": [
+              "Warehouse"
+            ],
+            "id": "erp-backbone/TRN-005"
+          },
+          {
+            "from": "Shipped",
+            "to": "Closed",
+            "mover": "roles",
+            "roles": [
+              "Operations"
+            ],
+            "id": "erp-backbone/TRN-006"
+          }
+        ],
+        "approvals": [],
+        "on_reject": null,
+        "cancel": {
+          "allowed": "no"
+        },
+        "timeouts": [],
+        "effects": [
+          {
+            "on_enter": "Shipped",
+            "op": "apply_order_lines",
+            "line_table": "sales_order_lines",
+            "line_fk": "sales_order",
+            "product_table": "products",
+            "product_fk": "product",
+            "quantity_column": "quantity",
+            "direction": "ship"
+          }
+        ],
+        "initial": "Draft",
+        "terminal": [
+          "Closed",
+          "Cancelled"
+        ]
+      }
+    },
+    "notifications": {
+      "Low stock alert": {
+        "trigger": {
+          "kind": "event",
+          "event": "a Product's Stock on hand falls to or below its Reorder point"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Purchasing",
+              "Operations"
+            ]
+          }
+        ],
+        "channels": [
+          "email",
+          "in_app"
+        ],
+        "timing": "immediate",
+        "id": "erp-backbone/NOTIF-001"
+      },
+      "Order shipped": {
+        "trigger": {
+          "kind": "event",
+          "event": "a sales order moves to Shipped"
+        },
+        "recipients": [
+          {
+            "kind": "roles",
+            "roles": [
+              "Sales"
+            ]
+          }
+        ],
+        "channels": [
+          "in_app"
+        ],
+        "timing": "immediate",
+        "id": "erp-backbone/NOTIF-002"
+      }
+    },
+    "reports": {
+      "Stock on hand": {
+        "data_source": "What do we hold right now, and what is at or below its reorder point?",
+        "metrics": {
+          "sum of Product Stock on hand": "auto: count/sum of 'sum of Product Stock on hand'",
+          "count of Products at or below Reorder point": "auto: count/sum of 'count of Products at or below Reorder point'"
+        },
+        "spec": [
+          {
+            "metric": "sum of Product Stock on hand",
+            "spec": {
+              "table": "products",
+              "aggregation": "sum",
+              "value_field": "stock_on_hand"
+            }
+          },
+          {
+            "metric": "count of Products at or below Reorder point",
+            "spec": {
+              "engine": "stock_ledger",
+              "kind": "count_at_or_below_reorder",
+              "table": "products",
+              "stock_column": "stock_on_hand",
+              "reorder_column": "reorder_point"
+            }
+          }
+        ],
+        "id": "erp-backbone/RPT-001"
+      },
+      "Sales by month": {
+        "data_source": "What did we sell, month by month?",
+        "metrics": {
+          "sales value": "auto: count/sum of 'sales value'"
+        },
+        "spec": [
+          {
+            "metric": "sales value",
+            "spec": {
+              "engine": "stage_history",
+              "kind": "line_value_by_month",
+              "table": "sales_orders",
+              "stage": "Shipped",
+              "line_table": "sales_order_lines",
+              "line_fk": "sales_order",
+              "quantity_column": "quantity",
+              "price_column": "unit_price",
+              "months": 12
+            }
+          }
+        ],
+        "id": "erp-backbone/RPT-002"
+      },
+      "Open orders": {
+        "data_source": "What is confirmed but not yet fulfilled, on both sides?",
+        "metrics": {
+          "count of Sales orders in Confirmed": "auto: count/sum of 'count of Sales orders in Confirmed'",
+          "count of Purchase orders in Confirmed": "auto: count/sum of 'count of Purchase orders in Confirmed'"
+        },
+        "spec": [
+          {
+            "metric": "count of Sales orders in Confirmed",
+            "spec": {
+              "table": "sales_orders",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "=",
+                  "value": "Confirmed"
+                }
+              ]
+            }
+          },
+          {
+            "metric": "count of Purchase orders in Confirmed",
+            "spec": {
+              "table": "purchase_orders",
+              "aggregation": "count",
+              "filters": [
+                {
+                  "field": "stage",
+                  "op": "=",
+                  "value": "Confirmed"
+                }
+              ]
+            }
+          }
+        ],
+        "id": "erp-backbone/RPT-003"
+      }
+    },
+    "forms": {},
+    "integrations": {},
+    "auth": {
+      "AU.01": [
+        "admin_created"
+      ],
+      "AU.02": [
+        {
+          "name": "Full name",
+          "type": "short_text",
+          "required": "yes",
+          "unique": "no"
+        },
+        {
+          "name": "Email address",
+          "type": "email",
+          "required": "yes",
+          "unique": "yes"
+        }
+      ],
+      "AU.03": "yes",
+      "AU.04": [
+        "password",
+        "google"
+      ],
+      "AU.07": {
+        "scope": "nobody",
+        "method": "n/a"
+      },
+      "AU.08": {
+        "attempts": 5,
+        "duration": "15 minutes"
+      },
+      "AU.09": "yes",
+      "AU.10": "30 days",
+      "AU.11": {
+        "allowed": "yes",
+        "by": [
+          "super"
+        ],
+        "auto_triggers": []
+      },
+      "AU.12": {
+        "allowed": "yes",
+        "by": "both",
+        "data": "anonymised"
+      },
+      "AU.13": [
+        "super"
+      ],
+      "AU.14": {
+        "required": "yes",
+        "status": "need_drafting"
+      }
+    },
+    "brand": {
+      "app_name": "Backbone",
+      "assets": {
+        "mode": "design_for_me"
+      }
+    },
+    "screens_inventory": [
+      {
+        "id": "erp-backbone/SCR-001",
+        "kind": "list",
+        "record": "Product"
+      },
+      {
+        "id": "erp-backbone/SCR-002",
+        "kind": "detail",
+        "record": "Product"
+      },
+      {
+        "id": "erp-backbone/SCR-003",
+        "kind": "list",
+        "record": "Supplier"
+      },
+      {
+        "id": "erp-backbone/SCR-004",
+        "kind": "detail",
+        "record": "Supplier"
+      },
+      {
+        "id": "erp-backbone/SCR-005",
+        "kind": "list",
+        "record": "Customer account"
+      },
+      {
+        "id": "erp-backbone/SCR-006",
+        "kind": "detail",
+        "record": "Customer account"
+      },
+      {
+        "id": "erp-backbone/SCR-007",
+        "kind": "list",
+        "record": "Purchase order"
+      },
+      {
+        "id": "erp-backbone/SCR-008",
+        "kind": "detail",
+        "record": "Purchase order"
+      },
+      {
+        "id": "erp-backbone/SCR-009",
+        "kind": "list",
+        "record": "Purchase order line"
+      },
+      {
+        "id": "erp-backbone/SCR-010",
+        "kind": "detail",
+        "record": "Purchase order line"
+      },
+      {
+        "id": "erp-backbone/SCR-011",
+        "kind": "list",
+        "record": "Sales order"
+      },
+      {
+        "id": "erp-backbone/SCR-012",
+        "kind": "detail",
+        "record": "Sales order"
+      },
+      {
+        "id": "erp-backbone/SCR-013",
+        "kind": "list",
+        "record": "Sales order line"
+      },
+      {
+        "id": "erp-backbone/SCR-014",
+        "kind": "detail",
+        "record": "Sales order line"
+      },
+      {
+        "id": "erp-backbone/SCR-015",
+        "kind": "list",
+        "record": "Stock adjustment"
+      },
+      {
+        "id": "erp-backbone/SCR-016",
+        "kind": "detail",
+        "record": "Stock adjustment"
+      },
+      {
+        "id": "erp-backbone/SCR-017",
+        "kind": "report",
+        "report": "Stock on hand"
+      },
+      {
+        "id": "erp-backbone/SCR-018",
+        "kind": "report",
+        "report": "Sales by month"
+      },
+      {
+        "id": "erp-backbone/SCR-019",
+        "kind": "report",
+        "report": "Open orders"
+      }
+    ],
+    "navigation": [
+      "erp-backbone/SCR-001",
+      "erp-backbone/SCR-002",
+      "erp-backbone/SCR-003",
+      "erp-backbone/SCR-004",
+      "erp-backbone/SCR-005",
+      "erp-backbone/SCR-006",
+      "erp-backbone/SCR-007",
+      "erp-backbone/SCR-008",
+      "erp-backbone/SCR-009",
+      "erp-backbone/SCR-010",
+      "erp-backbone/SCR-011",
+      "erp-backbone/SCR-012",
+      "erp-backbone/SCR-013",
+      "erp-backbone/SCR-014",
+      "erp-backbone/SCR-015",
+      "erp-backbone/SCR-016",
+      "erp-backbone/SCR-017",
+      "erp-backbone/SCR-018",
+      "erp-backbone/SCR-019"
+    ],
+    "landing_per_role": {
+      "Admin": "Stock on hand",
+      "Operations": "Stock on hand",
+      "Sales": "Sales orders",
+      "Purchasing": "Purchase orders",
+      "Warehouse": "Open orders"
+    },
+    "actions_inventory": [
+      {
+        "id": "erp-backbone/ACT-001",
+        "kind": "create",
+        "record": "Product",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "creates a new 'Product' record"
+      },
+      {
+        "id": "erp-backbone/ACT-002",
+        "kind": "edit",
+        "record": "Product",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "edits an existing 'Product' record"
+      },
+      {
+        "id": "erp-backbone/ACT-003",
+        "kind": "delete",
+        "record": "Product",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Product' record"
+      },
+      {
+        "id": "erp-backbone/ACT-004",
+        "kind": "create",
+        "record": "Supplier",
+        "roles": [
+          "Operations",
+          "Purchasing"
+        ],
+        "outcome": "creates a new 'Supplier' record"
+      },
+      {
+        "id": "erp-backbone/ACT-005",
+        "kind": "edit",
+        "record": "Supplier",
+        "roles": [
+          "Operations",
+          "Purchasing"
+        ],
+        "outcome": "edits an existing 'Supplier' record"
+      },
+      {
+        "id": "erp-backbone/ACT-006",
+        "kind": "delete",
+        "record": "Supplier",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Supplier' record"
+      },
+      {
+        "id": "erp-backbone/ACT-007",
+        "kind": "create",
+        "record": "Customer account",
+        "roles": [
+          "Operations",
+          "Sales"
+        ],
+        "outcome": "creates a new 'Customer account' record"
+      },
+      {
+        "id": "erp-backbone/ACT-008",
+        "kind": "edit",
+        "record": "Customer account",
+        "roles": [
+          "Operations",
+          "Sales"
+        ],
+        "outcome": "edits an existing 'Customer account' record"
+      },
+      {
+        "id": "erp-backbone/ACT-009",
+        "kind": "delete",
+        "record": "Customer account",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Customer account' record"
+      },
+      {
+        "id": "erp-backbone/ACT-010",
+        "kind": "create",
+        "record": "Purchase order",
+        "roles": [
+          "Purchasing"
+        ],
+        "outcome": "creates a new 'Purchase order' record"
+      },
+      {
+        "id": "erp-backbone/ACT-011",
+        "kind": "edit",
+        "record": "Purchase order",
+        "roles": [
+          "Operations",
+          "Purchasing"
+        ],
+        "outcome": "edits an existing 'Purchase order' record"
+      },
+      {
+        "id": "erp-backbone/ACT-012",
+        "kind": "delete",
+        "record": "Purchase order",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Purchase order' record"
+      },
+      {
+        "id": "erp-backbone/ACT-013",
+        "kind": "create",
+        "record": "Purchase order line",
+        "roles": [
+          "Purchasing"
+        ],
+        "outcome": "creates a new 'Purchase order line' record"
+      },
+      {
+        "id": "erp-backbone/ACT-014",
+        "kind": "edit",
+        "record": "Purchase order line",
+        "roles": [
+          "Purchasing"
+        ],
+        "outcome": "edits an existing 'Purchase order line' record"
+      },
+      {
+        "id": "erp-backbone/ACT-015",
+        "kind": "delete",
+        "record": "Purchase order line",
+        "roles": [
+          "Purchasing"
+        ],
+        "outcome": "deletes a 'Purchase order line' record"
+      },
+      {
+        "id": "erp-backbone/ACT-016",
+        "kind": "create",
+        "record": "Sales order",
+        "roles": [
+          "Sales"
+        ],
+        "outcome": "creates a new 'Sales order' record"
+      },
+      {
+        "id": "erp-backbone/ACT-017",
+        "kind": "edit",
+        "record": "Sales order",
+        "roles": [
+          "Operations",
+          "Sales"
+        ],
+        "outcome": "edits an existing 'Sales order' record"
+      },
+      {
+        "id": "erp-backbone/ACT-018",
+        "kind": "delete",
+        "record": "Sales order",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Sales order' record"
+      },
+      {
+        "id": "erp-backbone/ACT-019",
+        "kind": "create",
+        "record": "Sales order line",
+        "roles": [
+          "Sales"
+        ],
+        "outcome": "creates a new 'Sales order line' record"
+      },
+      {
+        "id": "erp-backbone/ACT-020",
+        "kind": "edit",
+        "record": "Sales order line",
+        "roles": [
+          "Sales"
+        ],
+        "outcome": "edits an existing 'Sales order line' record"
+      },
+      {
+        "id": "erp-backbone/ACT-021",
+        "kind": "delete",
+        "record": "Sales order line",
+        "roles": [
+          "Sales"
+        ],
+        "outcome": "deletes a 'Sales order line' record"
+      },
+      {
+        "id": "erp-backbone/ACT-022",
+        "kind": "create",
+        "record": "Stock adjustment",
+        "roles": [
+          "Operations",
+          "Warehouse"
+        ],
+        "outcome": "creates a new 'Stock adjustment' record"
+      },
+      {
+        "id": "erp-backbone/ACT-023",
+        "kind": "edit",
+        "record": "Stock adjustment",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "edits an existing 'Stock adjustment' record"
+      },
+      {
+        "id": "erp-backbone/ACT-024",
+        "kind": "delete",
+        "record": "Stock adjustment",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "deletes a 'Stock adjustment' record"
+      },
+      {
+        "id": "erp-backbone/ACT-025",
+        "kind": "transition",
+        "workflow": "Purchase order lifecycle",
+        "from": "Draft",
+        "to": "Confirmed",
+        "mover": "roles",
+        "roles": [
+          "Purchasing"
+        ],
+        "outcome": "moves 'Purchase order lifecycle' from 'Draft' to 'Confirmed'"
+      },
+      {
+        "id": "erp-backbone/ACT-026",
+        "kind": "transition",
+        "workflow": "Purchase order lifecycle",
+        "from": "Confirmed",
+        "to": "Received",
+        "mover": "roles",
+        "roles": [
+          "Warehouse"
+        ],
+        "outcome": "moves 'Purchase order lifecycle' from 'Confirmed' to 'Received'"
+      },
+      {
+        "id": "erp-backbone/ACT-027",
+        "kind": "transition",
+        "workflow": "Purchase order lifecycle",
+        "from": "Received",
+        "to": "Closed",
+        "mover": "roles",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "moves 'Purchase order lifecycle' from 'Received' to 'Closed'"
+      },
+      {
+        "id": "erp-backbone/ACT-028",
+        "kind": "approve",
+        "workflow": "Purchase order lifecycle",
+        "stage": "Draft",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "approves 'Purchase order lifecycle' at stage 'Draft'"
+      },
+      {
+        "id": "erp-backbone/ACT-029",
+        "kind": "transition",
+        "workflow": "Sales order lifecycle",
+        "from": "Draft",
+        "to": "Confirmed",
+        "mover": "roles",
+        "roles": [
+          "Sales"
+        ],
+        "outcome": "moves 'Sales order lifecycle' from 'Draft' to 'Confirmed'"
+      },
+      {
+        "id": "erp-backbone/ACT-030",
+        "kind": "transition",
+        "workflow": "Sales order lifecycle",
+        "from": "Confirmed",
+        "to": "Shipped",
+        "mover": "roles",
+        "roles": [
+          "Warehouse"
+        ],
+        "outcome": "moves 'Sales order lifecycle' from 'Confirmed' to 'Shipped'"
+      },
+      {
+        "id": "erp-backbone/ACT-031",
+        "kind": "transition",
+        "workflow": "Sales order lifecycle",
+        "from": "Shipped",
+        "to": "Closed",
+        "mover": "roles",
+        "roles": [
+          "Operations"
+        ],
+        "outcome": "moves 'Sales order lifecycle' from 'Shipped' to 'Closed'"
+      }
+    ],
+    "recurring_ops": [
+      {
+        "id": "erp-backbone/OPS-001",
+        "source": "R.14:Product",
+        "detail": "forever"
+      },
+      {
+        "id": "erp-backbone/OPS-002",
+        "source": "R.14:Supplier",
+        "detail": "forever"
+      },
+      {
+        "id": "erp-backbone/OPS-003",
+        "source": "R.14:Customer account",
+        "detail": "forever"
+      },
+      {
+        "id": "erp-backbone/OPS-004",
+        "source": "R.14:Purchase order",
+        "detail": "forever"
+      },
+      {
+        "id": "erp-backbone/OPS-005",
+        "source": "R.14:Purchase order line",
+        "detail": "forever"
+      },
+      {
+        "id": "erp-backbone/OPS-006",
+        "source": "R.14:Sales order",
+        "detail": "forever"
+      },
+      {
+        "id": "erp-backbone/OPS-007",
+        "source": "R.14:Sales order line",
+        "detail": "forever"
+      },
+      {
+        "id": "erp-backbone/OPS-008",
+        "source": "R.14:Stock adjustment",
+        "detail": "forever"
+      },
+      {
+        "id": "erp-backbone/OPS-009",
+        "source": "FL.01:Purchase order lifecycle",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Purchasing"
+          ],
+          "action": "creating a purchase order (starts in Draft)"
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-010",
+        "source": "FL.01:Sales order lifecycle",
+        "detail": {
+          "kind": "person",
+          "who": [
+            "Sales"
+          ],
+          "action": "creating a sales order (starts in Draft)"
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-011",
+        "source": "N.01:Low stock alert",
+        "detail": {
+          "kind": "event",
+          "event": "a Product's Stock on hand falls to or below its Reorder point"
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-012",
+        "source": "N.01:Order shipped",
+        "detail": {
+          "kind": "event",
+          "event": "a sales order moves to Shipped"
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-013",
+        "source": "RP.08:Stock on hand",
+        "detail": {
+          "enabled": "no"
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-014",
+        "source": "RP.08:Sales by month",
+        "detail": {
+          "enabled": "no"
+        }
+      },
+      {
+        "id": "erp-backbone/OPS-015",
+        "source": "RP.08:Open orders",
+        "detail": {
+          "enabled": "no"
+        }
+      }
+    ],
+    "qa_generated_tests": [
+      {
+        "id": "erp-backbone/QA-001",
+        "action_id": "erp-backbone/ACT-001",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-001",
+          "kind": "create",
+          "record": "Product",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "creates a new 'Product' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-002",
+        "action_id": "erp-backbone/ACT-002",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-002",
+          "kind": "edit",
+          "record": "Product",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "edits an existing 'Product' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-003",
+        "action_id": "erp-backbone/ACT-003",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-003",
+          "kind": "delete",
+          "record": "Product",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Product' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-004",
+        "action_id": "erp-backbone/ACT-004",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-004",
+          "kind": "create",
+          "record": "Supplier",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "creates a new 'Supplier' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-005",
+        "action_id": "erp-backbone/ACT-004",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-004",
+          "kind": "create",
+          "record": "Supplier",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "creates a new 'Supplier' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-006",
+        "action_id": "erp-backbone/ACT-005",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-005",
+          "kind": "edit",
+          "record": "Supplier",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "edits an existing 'Supplier' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-007",
+        "action_id": "erp-backbone/ACT-005",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-005",
+          "kind": "edit",
+          "record": "Supplier",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "edits an existing 'Supplier' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-008",
+        "action_id": "erp-backbone/ACT-006",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-006",
+          "kind": "delete",
+          "record": "Supplier",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Supplier' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-009",
+        "action_id": "erp-backbone/ACT-007",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-007",
+          "kind": "create",
+          "record": "Customer account",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "creates a new 'Customer account' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-010",
+        "action_id": "erp-backbone/ACT-007",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-007",
+          "kind": "create",
+          "record": "Customer account",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "creates a new 'Customer account' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-011",
+        "action_id": "erp-backbone/ACT-008",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-008",
+          "kind": "edit",
+          "record": "Customer account",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "edits an existing 'Customer account' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-012",
+        "action_id": "erp-backbone/ACT-008",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-008",
+          "kind": "edit",
+          "record": "Customer account",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "edits an existing 'Customer account' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-013",
+        "action_id": "erp-backbone/ACT-009",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-009",
+          "kind": "delete",
+          "record": "Customer account",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Customer account' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-014",
+        "action_id": "erp-backbone/ACT-010",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-010",
+          "kind": "create",
+          "record": "Purchase order",
+          "roles": [
+            "Purchasing"
+          ],
+          "outcome": "creates a new 'Purchase order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-015",
+        "action_id": "erp-backbone/ACT-011",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-011",
+          "kind": "edit",
+          "record": "Purchase order",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "edits an existing 'Purchase order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-016",
+        "action_id": "erp-backbone/ACT-011",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-011",
+          "kind": "edit",
+          "record": "Purchase order",
+          "roles": [
+            "Operations",
+            "Purchasing"
+          ],
+          "outcome": "edits an existing 'Purchase order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-017",
+        "action_id": "erp-backbone/ACT-012",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-012",
+          "kind": "delete",
+          "record": "Purchase order",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Purchase order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-018",
+        "action_id": "erp-backbone/ACT-013",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-013",
+          "kind": "create",
+          "record": "Purchase order line",
+          "roles": [
+            "Purchasing"
+          ],
+          "outcome": "creates a new 'Purchase order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-019",
+        "action_id": "erp-backbone/ACT-014",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-014",
+          "kind": "edit",
+          "record": "Purchase order line",
+          "roles": [
+            "Purchasing"
+          ],
+          "outcome": "edits an existing 'Purchase order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-020",
+        "action_id": "erp-backbone/ACT-015",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-015",
+          "kind": "delete",
+          "record": "Purchase order line",
+          "roles": [
+            "Purchasing"
+          ],
+          "outcome": "deletes a 'Purchase order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-021",
+        "action_id": "erp-backbone/ACT-016",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-016",
+          "kind": "create",
+          "record": "Sales order",
+          "roles": [
+            "Sales"
+          ],
+          "outcome": "creates a new 'Sales order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-022",
+        "action_id": "erp-backbone/ACT-017",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-017",
+          "kind": "edit",
+          "record": "Sales order",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "edits an existing 'Sales order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-023",
+        "action_id": "erp-backbone/ACT-017",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-017",
+          "kind": "edit",
+          "record": "Sales order",
+          "roles": [
+            "Operations",
+            "Sales"
+          ],
+          "outcome": "edits an existing 'Sales order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-024",
+        "action_id": "erp-backbone/ACT-018",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-018",
+          "kind": "delete",
+          "record": "Sales order",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Sales order' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-025",
+        "action_id": "erp-backbone/ACT-019",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-019",
+          "kind": "create",
+          "record": "Sales order line",
+          "roles": [
+            "Sales"
+          ],
+          "outcome": "creates a new 'Sales order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-026",
+        "action_id": "erp-backbone/ACT-020",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-020",
+          "kind": "edit",
+          "record": "Sales order line",
+          "roles": [
+            "Sales"
+          ],
+          "outcome": "edits an existing 'Sales order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-027",
+        "action_id": "erp-backbone/ACT-021",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-021",
+          "kind": "delete",
+          "record": "Sales order line",
+          "roles": [
+            "Sales"
+          ],
+          "outcome": "deletes a 'Sales order line' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-028",
+        "action_id": "erp-backbone/ACT-022",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-022",
+          "kind": "create",
+          "record": "Stock adjustment",
+          "roles": [
+            "Operations",
+            "Warehouse"
+          ],
+          "outcome": "creates a new 'Stock adjustment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-029",
+        "action_id": "erp-backbone/ACT-022",
+        "role": "Warehouse",
+        "action": {
+          "id": "erp-backbone/ACT-022",
+          "kind": "create",
+          "record": "Stock adjustment",
+          "roles": [
+            "Operations",
+            "Warehouse"
+          ],
+          "outcome": "creates a new 'Stock adjustment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-030",
+        "action_id": "erp-backbone/ACT-023",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-023",
+          "kind": "edit",
+          "record": "Stock adjustment",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "edits an existing 'Stock adjustment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-031",
+        "action_id": "erp-backbone/ACT-024",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-024",
+          "kind": "delete",
+          "record": "Stock adjustment",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "deletes a 'Stock adjustment' record"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-032",
+        "action_id": "erp-backbone/ACT-025",
+        "role": "Purchasing",
+        "action": {
+          "id": "erp-backbone/ACT-025",
+          "kind": "transition",
+          "workflow": "Purchase order lifecycle",
+          "from": "Draft",
+          "to": "Confirmed",
+          "mover": "roles",
+          "roles": [
+            "Purchasing"
+          ],
+          "outcome": "moves 'Purchase order lifecycle' from 'Draft' to 'Confirmed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-033",
+        "action_id": "erp-backbone/ACT-026",
+        "role": "Warehouse",
+        "action": {
+          "id": "erp-backbone/ACT-026",
+          "kind": "transition",
+          "workflow": "Purchase order lifecycle",
+          "from": "Confirmed",
+          "to": "Received",
+          "mover": "roles",
+          "roles": [
+            "Warehouse"
+          ],
+          "outcome": "moves 'Purchase order lifecycle' from 'Confirmed' to 'Received'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-034",
+        "action_id": "erp-backbone/ACT-027",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-027",
+          "kind": "transition",
+          "workflow": "Purchase order lifecycle",
+          "from": "Received",
+          "to": "Closed",
+          "mover": "roles",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "moves 'Purchase order lifecycle' from 'Received' to 'Closed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-035",
+        "action_id": "erp-backbone/ACT-028",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-028",
+          "kind": "approve",
+          "workflow": "Purchase order lifecycle",
+          "stage": "Draft",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "approves 'Purchase order lifecycle' at stage 'Draft'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-036",
+        "action_id": "erp-backbone/ACT-029",
+        "role": "Sales",
+        "action": {
+          "id": "erp-backbone/ACT-029",
+          "kind": "transition",
+          "workflow": "Sales order lifecycle",
+          "from": "Draft",
+          "to": "Confirmed",
+          "mover": "roles",
+          "roles": [
+            "Sales"
+          ],
+          "outcome": "moves 'Sales order lifecycle' from 'Draft' to 'Confirmed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-037",
+        "action_id": "erp-backbone/ACT-030",
+        "role": "Warehouse",
+        "action": {
+          "id": "erp-backbone/ACT-030",
+          "kind": "transition",
+          "workflow": "Sales order lifecycle",
+          "from": "Confirmed",
+          "to": "Shipped",
+          "mover": "roles",
+          "roles": [
+            "Warehouse"
+          ],
+          "outcome": "moves 'Sales order lifecycle' from 'Confirmed' to 'Shipped'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-038",
+        "action_id": "erp-backbone/ACT-031",
+        "role": "Operations",
+        "action": {
+          "id": "erp-backbone/ACT-031",
+          "kind": "transition",
+          "workflow": "Sales order lifecycle",
+          "from": "Shipped",
+          "to": "Closed",
+          "mover": "roles",
+          "roles": [
+            "Operations"
+          ],
+          "outcome": "moves 'Sales order lifecycle' from 'Shipped' to 'Closed'"
+        },
+        "expect": "the action's declared effect is observable and the response location matches the record/workflow it acted on"
+      },
+      {
+        "id": "erp-backbone/QA-039",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-040",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-041",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-042",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-043",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-044",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-045",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-046",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-008",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-047",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-009",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-048",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-010",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-049",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-011",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-050",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-051",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-052",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-053",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-054",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Admin",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-055",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
+        "role": "Admin",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-056",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-018",
+        "role": "Admin",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-057",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-019",
+        "role": "Admin",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-058",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-059",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-060",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-061",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-062",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-063",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-064",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-065",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-008",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-066",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-009",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-067",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-010",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-068",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-011",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-069",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-070",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-071",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-072",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-073",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-074",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-075",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-018",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-076",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-019",
+        "role": "Operations",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-077",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-078",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-079",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-080",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-081",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-082",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-083",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-084",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-008",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-085",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-009",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-086",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-010",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-087",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-011",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-088",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-089",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-090",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-091",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-092",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Sales",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-093",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-094",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-018",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-095",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-019",
+        "role": "Sales",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-096",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-097",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-098",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-099",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-100",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-101",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-102",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-103",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-008",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-104",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-009",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-105",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-010",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-106",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-011",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-107",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-108",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-109",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-110",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-111",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Purchasing",
+        "expect": "blocked (403 or absent from navigation)"
+      },
+      {
+        "id": "erp-backbone/QA-112",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-113",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-018",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-114",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-019",
+        "role": "Purchasing",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-115",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-001",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-116",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-002",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-117",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-003",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-118",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-004",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-119",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-005",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-120",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-006",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-121",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-007",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-122",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-008",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-123",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-009",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-124",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-010",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-125",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-011",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-126",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-012",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-127",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-013",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-128",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-014",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-129",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-015",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-130",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-016",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-131",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-017",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-132",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-018",
+        "role": "Warehouse",
+        "expect": "reachable"
+      },
+      {
+        "id": "erp-backbone/QA-133",
+        "kind": "screen_access",
+        "screen_id": "erp-backbone/SCR-019",
+        "role": "Warehouse",
+        "expect": "reachable"
+      }
+    ],
+    "locked": true,
+    "locked_at_graph_version": "3.0"
+  }
+}
