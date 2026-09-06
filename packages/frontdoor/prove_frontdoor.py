@@ -2,20 +2,27 @@
 """
 prove_frontdoor.py — the front door, driven by a real browser, end to end.
 
-Three jobs in one run:
+Four jobs in one run:
 
   1. SHOTS   Real screenshots of the three looks, taken from real running apps
              with real rows in them, for the "which of these looks right?"
              question. The person is choosing from photographs of the thing
              they will get, not from drawings of it.
 
-  2. DRIVE   A person who has never seen this answers the eight questions in a
-             real browser -- types their words, taps the cards, taps a look --
-             presses Build it, and gets an app.
+  2. DRIVE   A person who has never seen this types one free-text description in
+             a real browser, is shown catalogue cards (and any NOT_ON_THE_SHELF
+             gaps) matched against it, answers the open items themselves (no
+             defaults), gets a real provisional app rendered in all three
+             looks, cycles between them, and locks the one they want.
 
   3. VERIFY  That app is then opened and used: a row is created through its own
              interface and read back from its own data. If the front door hands
              someone an app whose buttons do not work, this fails.
+
+  4. MEDIAN  questions_shown is measured across real /api/match calls against
+             the two answer sheets already checked into intake.EXAMPLES (this
+             script does not invent its own test prose) and reported against
+             the ≤3 pass bar.
 
 Usage:  python prove_frontdoor.py            (writes evidence/FRONTDOOR.md)
 """
@@ -23,6 +30,7 @@ Usage:  python prove_frontdoor.py            (writes evidence/FRONTDOOR.md)
 import asyncio
 import json
 import os
+import statistics
 import subprocess
 import sys
 import time
@@ -30,6 +38,9 @@ import urllib.error
 import urllib.request
 
 from playwright.async_api import async_playwright
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import intake  # noqa: E402  (EXAMPLES is the only sanctioned source of test prose)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
@@ -127,7 +138,7 @@ async def take_shots(pw, log):
 
 async def drive_front_door(pw, log):
     proc = start(HERE, 8700, "serve.py", extra=("--port", "8700", "--apps-from", "8961"))
-    result = {}
+    result = {"front_door_proc": proc}
     try:
         browser = await pw.chromium.launch()
         page = await browser.new_page(viewport={"width": 900, "height": 900})
@@ -135,75 +146,106 @@ async def drive_front_door(pw, log):
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
         await page.goto("http://127.0.0.1:8700/")
-        await page.wait_for_selector("#stage h1")
+        await page.wait_for_selector("#text")
         os.makedirs(EVID, exist_ok=True)
 
-        # 1 — their own words, including something this system cannot do
-        words = ("Something for connecting people — keep everyone's details, see who is at what stage "
-                 "of joining, and log every time we talk to them. I'd also like them to chat to each other.")
-        await page.fill("#w", words)
-        await page.screenshot(path=os.path.join(EVID, "01-what-do-you-want.png"))
-        await page.click("#next")
-        await page.wait_for_timeout(300)
+        # 1 — one open question, their own words. This is the checked-in
+        # connecting-people example, extended with the same "also chat to
+        # each other" clause the old eight-question harness used, so a single
+        # real run exercises a real match AND a real NOT_ON_THE_SHELF gap.
+        ex = intake.EXAMPLES["connecting-people"]
+        words = ex["does"] + " I'd also like them to chat to each other."
+        await page.fill("#text", words)
+        await page.screenshot(path=os.path.join(EVID, "01-what-are-you-building.png"))
+        await page.click("#go")
+        await page.wait_for_selector(".cards", timeout=10000)
 
-        # 2 — the cards. The impossible ask must be named here, before they choose.
-        body = await page.locator("#stage").inner_text()
-        log.append((("chat" in body.lower() and "not something this can build" in body.lower()),
-                    "the chat request is named as impossible on the card screen, with what is offered instead"))
-        ticked = await page.locator(".opt.on b").all_inner_texts()
-        log.append((any("People" in t for t in ticked),
-                    f"their words pre-ticked the right card: {ticked}"))
-        await page.screenshot(path=os.path.join(EVID, "02-which-does-it-need.png"))
-        await page.click("#next"); await page.wait_for_timeout(250)
+        # 2 — cards + gaps + open items, with nothing pre-selected. No default
+        # for who, density or mark, ever: verify none is shown as already chosen
+        # before the person has clicked anything.
+        preselected = await page.locator(".pill.on").count()
+        log.append((preselected == 0, f"no pill arrives pre-selected -- who/density/mark carry no default ({preselected} found on)"))
+        flags = await page.locator(".flag").all_inner_texts()
+        log.append((any("chat" in f.lower() or "messag" in f.lower() for f in flags),
+                    f"the chat request is named as not on the shelf, with what is offered instead ({len(flags)} flag(s))"))
+        matched = await page.locator(".card.on h3").all_inner_texts()
+        log.append((any("people" in m.lower() for m in matched), f"their words matched the right catalogue card: {matched}"))
+        questions_shown = await page.evaluate("() => proposal.open_items.length")
+        log.append((True, f"questions_shown for this run: {questions_shown} (who/density/mark/must_not, no boss -- single template)"))
+        await page.screenshot(path=os.path.join(EVID, "02-here-is-what-i-think-you-mean.png"))
 
-        # 3 — who uses it
-        await page.click('[data-v="small_team"]'); await page.screenshot(path=os.path.join(EVID, "03-who-uses-it.png"))
-        await page.click("#next"); await page.wait_for_timeout(250)
+        # 3 — answer the open items themselves; nothing here is filled in for them
+        await page.click(f'#who .pill[data-v="{ex["who"]}"]')
+        await page.click(f'#density .pill[data-v="{ex["density"]}"]')
+        await page.click(f'#mark .pill[data-v="{ex["mark"]}"]')
+        await page.fill("#must_not", ex["must_not"])
+        await page.screenshot(path=os.path.join(EVID, "03-answered.png"))
 
-        # 4 — the look, from real photographs
-        shots = await page.locator(".shot img").count()
-        log.append((shots == 3, f"three real screenshots offered for the look ({shots} found)"))
-        await page.click('[data-v="board"]'); await page.screenshot(path=os.path.join(EVID, "04-which-look.png"))
-        await page.click("#next"); await page.wait_for_timeout(250)
-
-        # 5, 6, 7
-        await page.click('[data-v="balanced"]'); await page.click("#next"); await page.wait_for_timeout(200)
-        await page.click('[data-v="orbit"]'); await page.screenshot(path=os.path.join(EVID, "05-your-mark.png"))
-        await page.click("#next"); await page.wait_for_timeout(200)
-        await page.fill("#w", "Connector"); await page.click("#next"); await page.wait_for_timeout(300)
-
-        # review, then build
-        review = await page.locator("#stage").inner_text()
-        log.append(("Here is what you will get" in review, "a plain-English review before anything is built"))
-        log.append(("chat" in review.lower() or "messaging" in review.lower(),
-                    "the review repeats what will NOT be in the app"))
-        await page.screenshot(path=os.path.join(EVID, "06-here-is-what-you-get.png"), full_page=True)
-        await page.click("#next")
-        await page.wait_for_selector(".built .big, .err", timeout=180000)
+        # 4 — build a real provisional app, shown in all three looks, nothing locked
+        await page.click("#build")
+        await page.wait_for_selector(".iframe, .err", timeout=180000)
         if await page.locator(".err").count():
             log.append((False, "the build refused: " + await page.locator(".err").inner_text()))
             await browser.close()
             return result
-        headline = await page.locator(".built .big").inner_text()
-        stats = await page.locator(".built .help").inner_text()
-        log.append((True, f"built from eight answers — {headline.strip()} · {stats.strip()}"))
-        await page.screenshot(path=os.path.join(EVID, "07-built.png"))
-        result["app_url"] = await page.locator('a.card[target="_blank"]').first.get_attribute("href")
-        summary_href = await page.locator("a.card").nth(1).get_attribute("href")
-        # the summary is a page of plain English, not JSON -- fetched as text
-        with urllib.request.urlopen("http://127.0.0.1:8700" + summary_href, timeout=10) as r:
-            result["summary_text"] = r.read().decode()
+        built = await page.evaluate("() => built")
+        log.append((True, f"built a real provisional app -- {built['records']} records, {built['screens']} screens, "
+                          f"{built['actions']} actions -> {built['dir']}"))
+        await page.screenshot(path=os.path.join(EVID, "04-built-provisional.png"))
+
+        # 5 — the iframe is a real running app, not a mock
+        frame_el = await page.query_selector("#frame")
+        frame = await frame_el.content_frame()
+        design0 = await frame.eval_on_selector("#app", "el => el.getAttribute('data-design')")
+        src0 = frame.url
+        st, _ = 200, None
+        try:
+            with urllib.request.urlopen(src0, timeout=10) as r:
+                st = r.status
+        except urllib.error.HTTPError as e:
+            st = e.code
+        log.append((st == 200 and design0 == "console", f"the first look is served for real (HTTP {st}, data-design={design0!r})"))
+
+        # 6 — cycle looks twice, asserting the served design actually changes each time
+        seen = [design0]
+        for _ in range(2):
+            await page.click("#another")
+            await page.wait_for_timeout(300)
+            frame_el = await page.query_selector("#frame")
+            frame = await frame_el.content_frame()
+            design = await frame.eval_on_selector("#app", "el => el.getAttribute('data-design')")
+            seen.append(design)
+        await page.screenshot(path=os.path.join(EVID, "05-cycled-looks.png"))
+        log.append((seen == ["console", "board", "pocket"], f"cycling 'Show me another version' visited all three designs in order: {seen}"))
+
+        # 7 — lock the one on screen now (pocket, after two cycles), and prove
+        # it was really written to disk, not just held in a JS variable
+        final_look = seen[-1]
+        await page.click("#right")
+        await page.wait_for_selector("h1:has-text('Locked')", timeout=10000)
+        locked_text = await page.locator("#app").inner_text()
+        log.append((final_look in locked_text, f"the lock screen names the locked interface ({final_look!r})"))
+        spec_path = os.path.join(built["out"], "SPEC.json")
+        on_disk = json.load(open(spec_path, encoding="utf-8"))
+        log.append((on_disk["build_model"]["interface"]["chosen"] == final_look,
+                    f"IFC-001.chosen is {final_look!r} in the real SPEC.json on disk, not just on screen"))
+        await page.screenshot(path=os.path.join(EVID, "06-locked.png"))
+
+        result["app_url"] = built["open"]
+        result["locked_look"] = final_look
+        summary_path = os.path.join(built["out"], "YOUR_APP.md")
+        result["summary_text"] = open(summary_path, encoding="utf-8").read()
         log.append(("What this does NOT do" in result["summary_text"],
                     "the plain-English summary is there, and it states what the app does NOT do"))
         log.append((not errors, "no browser errors in the front door" + (": " + "; ".join(errors[:2]) if errors else "")))
         await browser.close()
     finally:
         pass  # the front door keeps the built app alive; both are stopped by the caller
-    result["front_door_proc"] = proc
+    result["questions_shown"] = questions_shown
     return result
 
 
-async def verify_built_app(pw, url, log):
+async def verify_built_app(pw, url, log, expected_look):
     """The person opens what they were handed and uses it. A row is created
     through the interface and read back from the app's own data."""
     port = int(url.rstrip("/").rsplit(":", 1)[1])
@@ -212,7 +254,8 @@ async def verify_built_app(pw, url, log):
     errors = []
     page.on("pageerror", lambda e: errors.append(str(e)))
     await page.goto(url)
-    log.append((await page.locator("a.c").count() == 3, "the app opens on a chooser offering all three looks"))
+    design = await page.eval_on_selector("#app", "el => el.getAttribute('data-design')")
+    log.append((design == expected_look, f"the locked app opens directly on its '{expected_look}' design, not a chooser (got {design!r})"))
     await page.goto(url + "ui-board.html")
     await page.wait_for_timeout(600)
     st, before = api(port, "GET", "/api/organisations")
@@ -232,14 +275,55 @@ async def verify_built_app(pw, url, log):
     await browser.close()
 
 
+def measure_questions_shown(log):
+    """questions_shown, measured against real /api/match calls on the running
+    front door, for the two answer sheets already checked into
+    intake.EXAMPLES -- this script does not author its own test prose."""
+    samples = []
+    for label, ex in intake.EXAMPLES.items():
+        st, r = api(8700, "POST", "/api/match", {"text": ex["does"]})
+        n = len(r["open_items"])
+        samples.append(n)
+        log.append((True, f"questions_shown for EXAMPLES[{label!r}]: {n} ({[o['id'] for o in r['open_items']]})"))
+    median = statistics.median(samples)
+    met = median <= 3
+    log.append((met, f"median questions_shown across {len(samples)} real runs = {median} (pass bar: <= 3) -- "
+                     + ("MET" if met else "NOT MET: who/density/mark/must_not carry no default, ever (F1), "
+                                          "which puts the floor at 4 open items whenever a template is matched")))
+    return samples, median
+
+
+def check_must_not_wiring(log):
+    """F2: must_not must reach YOUR_APP.md when answered, and refuse (not
+    default) when the key is truly absent -- checked directly against
+    intake.run()/build_instance(), no browser needed for data plumbing."""
+    import tempfile
+    ans = dict(intake.EXAMPLES["connecting-people"])
+    ans["must_not"] = "never delete a company record, only archive it"
+    out = tempfile.mkdtemp(prefix="prove-mustnot-with-")
+    spec, app_dir, result, filled = intake.run(ans, out, port=8975)
+    your_app = open(os.path.join(out, "YOUR_APP.md"), encoding="utf-8").read()
+    log.append((ans["must_not"] in your_app, "a real (non-'nothing') must_not answer is written into YOUR_APP.md"))
+
+    ans_missing = {k: v for k, v in ans.items() if k != "must_not"}
+    refused = False
+    try:
+        intake.run(ans_missing, tempfile.mkdtemp(prefix="prove-mustnot-absent-"), port=8976)
+    except intake.IntakeRefused:
+        refused = True
+    log.append((refused, "a build with must_not truly absent (key missing, not just empty) refuses rather than defaulting"))
+
+
 async def main():
     log = []
     async with async_playwright() as pw:
         await take_shots(pw, log)
         res = await drive_front_door(pw, log)
         try:
+            measure_questions_shown(log)
+            check_must_not_wiring(log)
             if res.get("app_url"):
-                await verify_built_app(pw, res["app_url"], log)
+                await verify_built_app(pw, res["app_url"], log, res["locked_look"])
         finally:
             if res.get("front_door_proc"):
                 res["front_door_proc"].terminate()
@@ -247,8 +331,10 @@ async def main():
     passed = sum(1 for ok, _ in log if ok)
     lines = ["# The front door, driven end to end", "",
              f"Run {time.strftime('%Y-%m-%d %H:%M:%S UTC', time.gmtime())}. **{passed}/{len(log)} checks passed.**", "",
-             "Someone who has never seen this system answered eight questions in a real browser and was "
-             "handed a working app. Every line below was produced by doing it, not by describing it.", ""]
+             "Someone who has never seen this system typed one free-text description in a real browser, was "
+             "shown matched catalogue cards and any NOT_ON_THE_SHELF gaps, answered the open items themselves, "
+             "was handed a real running provisional app in all three looks, and locked one. Every line below "
+             "was produced by doing it, not by describing it.", ""]
     for ok, text in log:
         lines.append(f"- {'PASS' if ok else 'FAIL'} {text}")
     if res.get("summary_text"):

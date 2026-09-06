@@ -1,35 +1,30 @@
 #!/usr/bin/env python3
 """
-intake.py — eight questions to a built, tested app.
+intake.py — the answer-sheet -> a built, tested app. The plumbing behind the
+front door, not the front door itself.
 
-The person answers eight things. Everything else the interview would normally
-ask (122 questions in the graph; 17 left open by every template) is filled in
-from the templates, and every fill is recorded with the reason it was safe, so
-nothing is quietly decided on their behalf without it being visible.
+The one front door is Design 3 ("Show Me"): one open question, matched
+against the real catalogue (matcher.py) to propose which templates fit, a
+handful of genuinely open items for whatever the match can't resolve, a
+provisional app built and shown in all three interfaces before anything is
+locked, and an explicit lock step that records the interface choice. Run it
+with `python serve.py`, or drive it in a real browser with
+`prove_frontdoor.py`.
 
-  THE EIGHT
-    1  words   What do you want the app to do?            -> proposes cards
-    2  tap     Which of these does it need?               -> which templates
-    3  tap     Who uses it?                               -> roles, public form
-    4  tap     Which of these looks right?                -> the interface
-    5  tap     How much on screen at once?                -> C.03
-    6  tap     Your mark                                  -> C.04
-    7  words   What is it called?                         -> A.05
-    8  tap     Who is in charge?   (only when two families merge and both had a boss)
+Of the 122 questions in the graph, every template already answers all but
+17; this module fills all but a handful of those 17 itself (AUTO, below,
+with the real reason recorded, never hidden) so a person only ever answers
+what nothing else can resolve: which pieces, who uses it, how dense, the
+mark, the name, what it must not do, and -- once they've seen it running --
+which interface. It never guesses any of them.
 
-  THEN, with no further questions: pick the templates, combine them, fill the
-  rest, run the real checker, assemble the numbered spec, build the real app,
-  generate the three interfaces, and write the person a plain-English summary
-  that includes what was NOT built.
+Nothing here designs anything. It selects from templates that already exist
+and combines them with the assembly engine's own `combine`, which refuses
+rather than reconciling a clash silently.
 
-Nothing here designs anything. It selects from templates that already exist and
-combines them with the assembly engine's own `combine`, which refuses rather
-than reconciling a clash silently.
-
-Usage:
-  python intake.py answers.json -o out/           # build from a filled answer sheet
-  python intake.py --example connecting-people    # a worked example, end to end
-  python intake.py --questions                    # print the eight questions
+Usage (direct, for scripts that already have a filled answer sheet -- the
+front door itself is serve.py, not this):
+  python intake.py answers.json -o out/ [--lock console|board|pocket]
 """
 
 import argparse
@@ -86,6 +81,21 @@ LOOKS = {
                 "shot": "pocket.png"},
 }
 
+#: How dense a screen should be -- a real open item (F1: no default, ever),
+#: never assumed.
+DENSITY_OPTIONS = [
+    {"value": "spacious", "label": "Roomy", "sub": "Fewer things, more space around them."},
+    {"value": "balanced", "label": "Balanced", "sub": "The middle."},
+    {"value": "dense", "label": "Packed", "sub": "As much as will fit."},
+]
+#: The person's mark, from the real logo generator's own catalogue, plus the
+#: one explicit "decide later" choice -- itself an answer the person picks,
+#: not a value filled in for them.
+MARK_OPTIONS = [
+    {"value": lid, "label": l["name"], "sub": l["description"], "colour": l["colour"]}
+    for lid, l in sorted(bl.LOGOS.items())
+] + [{"value": "design_for_me", "label": "Decide later", "sub": "Your app's name in plain type for now."}]
+
 #: Answers the person is never asked for, and why each is safe to fill. Printed
 #: to them at the end, so an unasked question is visible, not hidden.
 AUTO = {
@@ -136,43 +146,6 @@ class IntakeRefused(Exception):
 
 
 # ---------------------------------------------------------------- the questions
-def questions(answers=None):
-    """The eight, as data — so the page, the printout and the model asking them
-    out loud are all reading the same list. Question 8 appears only when it is
-    really needed."""
-    answers = answers or {}
-    cat.verify()
-    qs = [
-        {"id": "does", "kind": "words", "ask": "What do you want the app to do?",
-         "help": "Say it however you like. A sentence is plenty.",
-         "why": "Everything else starts from this."},
-        {"id": "cards", "kind": "tap_many", "ask": "Which of these does your app need?",
-         "help": "Pick as many as fit. Each one is a whole working piece.",
-         "options": [{"value": c["id"], "label": c["name"], "sub": c["one_line"], "detail": c["you_get"]}
-                     for c in cat.CAPABILITIES]},
-        {"id": "who", "kind": "tap_one", "ask": "Who uses it?",
-         "options": [{"value": k, "label": v["label"], "sub": v["means"]} for k, v in WHO_USES.items()]},
-        {"id": "look", "kind": "tap_one", "ask": "Which of these looks right?",
-         "help": "Same app underneath. Pick the one you would rather look at — you can see all three at the end.",
-         "options": [{"value": k, "label": v["label"], "sub": v["for"], "image": v["shot"]} for k, v in LOOKS.items()]},
-        {"id": "density", "kind": "tap_one", "ask": "How much on screen at once?",
-         "options": [{"value": "spacious", "label": "Roomy", "sub": "Fewer things, more space around them."},
-                     {"value": "balanced", "label": "Balanced", "sub": "The middle."},
-                     {"value": "dense", "label": "Packed", "sub": "As much as will fit."}]},
-        {"id": "mark", "kind": "tap_one", "ask": "Your mark",
-         "help": "Goes in the top corner of every screen.",
-         "options": [{"value": lid, "label": l["name"], "sub": l["description"], "colour": l["colour"]}
-                     for lid, l in sorted(bl.LOGOS.items())]
-                    + [{"value": "design_for_me", "label": "Decide later", "sub": "Your app's name in plain type for now."}]},
-        {"id": "name", "kind": "words", "ask": "What is it called?",
-         "help": "It goes on every screen.", "why": "Two builders would invent two different names."},
-    ]
-    boss = _boss_question(answers)
-    if boss:
-        qs.append(boss)
-    return qs
-
-
 def _templates_for(cards):
     picked = [c for c in cat.CAPABILITIES if c["id"] in (cards or [])]
     if not picked:
@@ -244,9 +217,16 @@ def build_instance(answers):
     never asked for, with the reason -- shown to them, never hidden."""
     cat.verify()
     picked = _templates_for(answers.get("cards"))
-    for required in ("who", "look", "density", "mark", "name"):
+    # 'look' is deliberately not required here: Design 3's provisional build
+    # renders all three interfaces before anything is locked, and no default
+    # look is ever guessed. It becomes required at lock time instead (see
+    # finalize_look() below).
+    for required in ("who", "density", "mark", "name"):
         if not answers.get(required):
             raise IntakeRefused(f"{required!r} has no answer; the front door does not fill it in for you.")
+    if answers.get("must_not") is None:
+        raise IntakeRefused("'must_not' has no answer; say 'nothing' if there are no exclusions, "
+                            "but it must be answered.")
     filled = []
     graph = graph_lib.load_graph(GRAPH)
     graph["_q"] = {q["id"]: q for q in graph["questions"]}
@@ -285,7 +265,11 @@ def build_instance(answers):
     a["C.03"] = answers["density"]
     a["C.04"] = ({"mode": "design_for_me"} if answers["mark"] == "design_for_me"
                  else {"mode": "premade", "logo_id": answers["mark"]})
-    a["C.02"] = TONE_FOR_LOOK[answers["look"]]
+    # Real tone if a look has already been chosen; an honestly-labelled
+    # placeholder otherwise (C.02 is a free 3-word list, min_items:3 -- this
+    # satisfies the graph without claiming a real aesthetic decision was
+    # made). Real words are written at lock time by finalize_look().
+    a["C.02"] = TONE_FOR_LOOK[answers["look"]] if answers.get("look") else ["not", "yet", "locked"]
     who = WHO_USES[answers["who"]]
     a["A.03"] = who["means"]
     a["A.02"] = f"Use it to {answers['does'].strip().rstrip('.').lower()}."
@@ -317,10 +301,10 @@ def build_instance(answers):
                        "so it is built but only your people can reach it."))
 
     if inst["structure"].get("interface"):
-        inst["structure"]["interface"]["chosen"] = answers["look"]
+        inst["structure"]["interface"]["chosen"] = answers.get("look")
     inst["template"] = "+".join(c["template"] for c in picked)
-    inst["front_door"] = {"answers": answers, "filled_without_asking": filled,
-                          "note": "Built by packages/frontdoor/intake.py from eight answers."}
+    inst["front_door"] = {"answers": answers, "filled_without_asking": filled, "must_not": answers.get("must_not"),
+                          "note": "Built by packages/frontdoor/intake.py."}
     errors = check_template.check(graph, inst)
     if errors:
         raise IntakeRefused("the answers do not make a buildable app:\n  - " + "\n  - ".join(errors))
@@ -348,14 +332,46 @@ def run(answers, out_dir, port=8900):
     for design in mi.DESIGNS:
         html = mi.page(model, design, accent_family)
         open(os.path.join(static, f"ui-{design}.html"), "w", encoding="utf-8").write(html)
-    # '/' serves the picked design directly -- the front door already asked
-    # "which does it look like", so landing on a second picker here would
-    # undo that answer. The other two stay reachable at their own ui-*.html
-    # paths for "show me another version".
-    open(os.path.join(static, "index.html"), "w", encoding="utf-8").write(mi.page(model, chosen, accent_family))
+    # '/' serves the picked design directly once one is chosen -- landing on
+    # a second picker there would undo the answer just given. Before a
+    # choice exists (Design 3's provisional build, shown via /ui-*.html in
+    # an iframe, never via '/'), '/' falls back to the three-way chooser
+    # rather than guessing a design.
+    open(os.path.join(static, "index.html"), "w", encoding="utf-8").write(
+        mi.page(model, chosen, accent_family) if chosen else mi.chooser(model, accent_family))
     json.dump(model, open(os.path.join(out_dir, "MODEL.json"), "w", encoding="utf-8"), indent=1)
     open(os.path.join(out_dir, "YOUR_APP.md"), "w", encoding="utf-8").write(summary(answers, spec, filled))
     return spec, app_dir, result, filled
+
+
+def finalize_look(out_dir, look):
+    """The person has seen the three real interfaces (run() built all of
+    them) and confirmed which one is right. Writes that choice through the
+    same real path as everything else -- reassembles from the instance
+    build_instance() already produced, rather than hand-patching JSON files
+    -- so SPEC.json, C.02, and the page actually served all agree. Refuses
+    a look that isn't one of the three real ones; never defaults."""
+    if look not in ("console", "board", "pocket"):
+        raise IntakeRefused(f"{look!r} is not one of the three real interfaces (console, board, pocket)")
+    inst_path = os.path.join(out_dir, "INSTANCE.json")
+    if not os.path.exists(inst_path):
+        raise IntakeRefused(f"no provisional build at {out_dir} -- run() must build one before it can be locked")
+    prior = json.load(open(inst_path, encoding="utf-8"))
+    answers = dict(prior["front_door"]["answers"], look=look)
+    inst, filled = build_instance(answers)
+    graph = graph_lib.load_graph(GRAPH)
+    graph["_q"] = {q["id"]: q for q in graph["questions"]}
+    spec = ae.assemble(graph, inst, spec_id="SPEC-FRONTDOOR", title=answers["name"])
+    json.dump(inst, open(inst_path, "w", encoding="utf-8"), indent=1, default=str)
+    json.dump(spec, open(os.path.join(out_dir, "SPEC.json"), "w", encoding="utf-8"), indent=1, default=str)
+    open(os.path.join(out_dir, "SPEC.md"), "w", encoding="utf-8").write(ae.render_markdown(spec))
+    model = mi.model_from_spec(spec)
+    accent_family = _templates_for(answers["cards"])[0]["template"]
+    static = os.path.join(out_dir, "app", "static")
+    open(os.path.join(static, "index.html"), "w", encoding="utf-8").write(mi.page(model, look, accent_family))
+    json.dump(model, open(os.path.join(out_dir, "MODEL.json"), "w", encoding="utf-8"), indent=1)
+    open(os.path.join(out_dir, "YOUR_APP.md"), "w", encoding="utf-8").write(summary(answers, spec, filled))
+    return spec
 
 
 def summary(answers, spec, filled):
@@ -396,13 +412,19 @@ def summary(answers, spec, filled):
           "- `app/static/ui-console.html` — sidebar and tables, for a desk",
           "- `app/static/ui-board.html` — a column per stage, for seeing the flow",
           "- `app/static/ui-pocket.html` — built for a phone",
-          "", f"You picked **{LOOKS[answers['look']]['label']}**. The other two are there anyway.", ""]
+          "",
+          (f"You picked **{LOOKS[answers['look']]['label']}**. The other two are there anyway."
+           if answers.get("look") else
+           "**Not locked yet** — try all three, then say which one is right."), ""]
     L += ["## What you were not asked, and what was assumed", "",
           "Every one of these can be changed — they were filled in so you did not have to answer them.", ""]
     for what, why in filled:
         L.append(f"- **{what}** — {why}")
     L += ["", "## What this does NOT do", "",
           "Said plainly, so it is not a surprise later.", ""]
+    must_not = (answers.get("must_not") or "").strip()
+    if must_not and must_not.lower() != "nothing":
+        L.append(f"- **What you said to exclude:** {must_not}")
     for g in cat.NOT_ON_THE_SHELF:
         L.append(f"- **{g['plain']}** {g['why']} {('_' + g['instead'] + '_') if g['instead'] else ''}")
     L += ["", "## Is it actually working?", "",
@@ -418,52 +440,41 @@ EXAMPLES = {
         "does": "Something for connecting people — I want to keep everyone's details, see who is at "
                 "what stage of joining, and log every time we talk to them.",
         "cards": ["people"], "who": "small_team", "look": "board", "density": "balanced",
-        "mark": "orbit", "name": "Connector",
+        "mark": "orbit", "name": "Connector", "must_not": "nothing",
     },
     "clinic": {
         "does": "Take bookings for my clinic and invoice people afterwards.",
         "cards": ["bookings", "money"], "who": "team_public", "look": "pocket", "density": "spacious",
-        "mark": "wave", "name": "Front Room", "boss": "Owner",
+        "mark": "wave", "name": "Front Room", "boss": "Owner", "must_not": "nothing",
     },
 }
 
 
 def main(argv=None):
+    """The one front door is the matcher-driven flow serve.py/web/ runs
+    (`python serve.py`) or the Chromium-driven prove_frontdoor.py. This CLI
+    is for driving run()/finalize_look() directly against a filled answer
+    sheet (a dict shaped like build_instance() expects), e.g. for a script
+    that already knows every answer -- it does not ask anything itself."""
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("answers", nargs="?", help="a filled answer sheet (JSON)")
-    ap.add_argument("--example", choices=sorted(EXAMPLES), help="build one of the worked examples")
-    ap.add_argument("--questions", action="store_true", help="print the eight questions and stop")
+    ap.add_argument("answers", help="a filled answer sheet (JSON)")
     ap.add_argument("-o", "--out", default=os.path.join(HERE, "build"))
     ap.add_argument("--port", type=int, default=8900)
+    ap.add_argument("--lock", help="also call finalize_look() with this look (console/board/pocket)")
     args = ap.parse_args(argv)
 
-    if args.questions:
-        for i, q in enumerate(questions(EXAMPLES["clinic"]), 1):
-            print(f"{i}. [{q['kind']}] {q['ask']}")
-            if q.get("help"):
-                print(f"     {q['help']}")
-            for o in q.get("options") or []:
-                print(f"       ({o['value']}) {o['label']} — {o.get('sub','')}")
-        print("\n(question 8 shows only when two pieces each came with someone in charge)")
-        return 0
-
-    if args.example:
-        answers = EXAMPLES[args.example]
-        out = os.path.join(args.out, args.example)
-    elif args.answers:
-        answers = json.load(open(args.answers, encoding="utf-8"))
-        out = args.out
-    else:
-        ap.error("give an answer sheet, or --example, or --questions")
-
+    answers = json.load(open(args.answers, encoding="utf-8"))
     try:
-        spec, app_dir, result, filled = run(answers, out, args.port)
+        spec, app_dir, result, filled = run(answers, args.out, args.port)
+        if args.lock:
+            spec = finalize_look(args.out, args.lock)
     except (IntakeRefused, ae.Refused, bl.BuildRefused) as e:
         print("REFUSED —", e, file=sys.stderr)
         return 2
     print(f"{answers['name']}: {len(result['records_built'])} records, {result['screens_built']} screens, "
           f"3 interfaces -> {app_dir}")
-    print(f"  answers given: 8   ·   filled in without asking: {len(filled)}   ·   summary: {out}/YOUR_APP.md")
+    print(f"  filled in without asking: {len(filled)}   ·   summary: {args.out}/YOUR_APP.md   ·   "
+          f"look: {spec['build_model']['interface'].get('chosen') or 'not locked'}")
     return 0
 
 

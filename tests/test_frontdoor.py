@@ -14,6 +14,7 @@ FD = ROOT / "packages" / "frontdoor"
 sys.path.insert(0, str(FD))
 import catalogue as cat   # noqa: E402
 import intake             # noqa: E402
+import matcher            # noqa: E402
 
 
 def test_the_catalogue_only_promises_what_a_template_really_declares():
@@ -42,13 +43,15 @@ def test_their_own_words_find_the_right_card_and_name_the_impossible_ask():
     assert "messaging" in [g["id"] for g in gaps], "asking for chat must be caught before they choose"
 
 
-def test_the_eight_questions_are_eight_and_the_ninth_only_when_it_is_real():
-    one_family = {"cards": ["people"], "who": "small_team"}
-    assert len(intake.questions(one_family)) == 7, "seven, until a second person-in-charge appears"
-    two_bosses = {"cards": ["bookings", "money"], "who": "small_team"}
-    qs = intake.questions(two_bosses)
-    assert [q["id"] for q in qs][-1] == "boss"
-    assert {o["value"] for o in qs[-1]["options"]} == {"Owner", "Admin"}
+def test_open_items_are_four_and_the_boss_tie_break_only_when_two_supers_appear():
+    """Design 3 replaced the eight-question flow's own boss logic with
+    matcher.match()'s open_items: still no default for who/density/mark/
+    must_not, and the boss tie-break only appears when the matched cards
+    bring two different people-in-charge."""
+    p1 = matcher.match(intake.EXAMPLES["connecting-people"]["does"])
+    assert [o["id"] for o in p1.open_items] == ["who", "density", "mark", "must_not"]
+    p2 = matcher.match(intake.EXAMPLES["clinic"]["does"])
+    assert [o["id"] for o in p2.open_items] == ["who", "boss", "density", "mark", "must_not"]
 
 
 def test_nothing_picked_is_refused_not_guessed_at():
@@ -59,7 +62,7 @@ def test_nothing_picked_is_refused_not_guessed_at():
 
 def test_two_families_with_two_bosses_refuse_until_the_person_says_who_is_in_charge():
     answers = {"does": "bookings and invoices", "cards": ["bookings", "money"], "who": "small_team",
-               "look": "board", "density": "balanced", "mark": "wave", "name": "Clinic"}
+               "look": "board", "density": "balanced", "mark": "wave", "name": "Clinic", "must_not": "nothing"}
     with pytest.raises(intake.IntakeRefused) as e:
         intake.build_instance(answers)
     assert "in charge" in str(e.value)
