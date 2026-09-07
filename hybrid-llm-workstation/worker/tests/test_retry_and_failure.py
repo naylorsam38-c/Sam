@@ -21,7 +21,6 @@ async def test_unreachable_ollama_retries_then_fails(app_env, db, owner_user, mo
     db.add(task)
     db.commit()
     db.refresh(task)
-    task_id = task.id
 
     runner = WorkerRunner(app_env, get_sessionmaker())
 

@@ -12,7 +12,7 @@ os.environ.setdefault("GPU_MONITOR_INTERVAL_SECONDS", "3600")  # tests trigger t
 
 from workstation_core.config import get_settings  # noqa: E402
 from workstation_core.db import init_db, session_scope  # noqa: E402
-from workstation_core.models_orm import Base, User  # noqa: E402
+from workstation_core.models_orm import User  # noqa: E402
 from workstation_core.security import hash_password  # noqa: E402
 
 

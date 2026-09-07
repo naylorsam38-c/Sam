@@ -39,7 +39,6 @@ def test_mark_notification_read(client, auth_headers):
 
 def test_cannot_read_other_users_notification(client, auth_headers, db):
     from workstation_core.models_orm import Notification, User
-    from workstation_core.security import create_access_token
 
     other = User(username="eve", password_hash="x")
     db.add(other)
