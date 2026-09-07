@@ -1,0 +1,23 @@
+# Which events generate an in-app notification (spec section 19).
+# All notifications are always persisted to the `notifications` table
+# regardless of these flags; this file only controls which event types are
+# generated in the first place. Future channels (webhook/email/push) can be
+# added under `channels` without changing the notification schema.
+
+enabled: true
+
+events:
+  task_completed: true
+  task_failed: true
+  task_requires_approval: true
+  gpu_started: true
+  gpu_stopped: true
+  gpu_error: true
+  worker_unavailable: true
+  cost_limit_reached: true
+
+channels:
+  in_app: true
+  webhook:
+    enabled: false
+    url: ""

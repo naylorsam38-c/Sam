@@ -1,0 +1,72 @@
+# Local execution agent policy (spec section 17).
+#
+# Default posture is RESTRICTIVE: every operation requires explicit user
+# approval. Nothing ships as TRUSTED out of the box — "no unrestricted mode
+# should be enabled by default" is enforced by this file's contents, not by
+# code you have to trust. Promote an operation to TRUSTED yourself, after
+# you've reviewed what it can do, by editing this file on the laptop that
+# runs local-agent.
+#
+# IMPORTANT: edit `allowed_paths` below before first use. It defaults to a
+# single sandboxed workspace directory; the agent will refuse (RESTRICTED,
+# HIGH risk) any file/command operation whose target path is not inside one
+# of these directories, regardless of the level configured, because the
+# path check runs unconditionally in workstation_core.policy_engine and its
+# independent counterpart in local-agent/src/agent/policy/engine.py.
+#
+# `level`:
+#   RESTRICTED — never runs automatically, and only within allowed_paths /
+#                allowed_commands; a request outside those bounds is denied
+#                before it ever reaches an approval prompt.
+#   APPROVAL   — requires the user to explicitly approve (via the control
+#                API or the agent's own local approval endpoint) before it runs.
+#   TRUSTED    — runs immediately, no per-call approval. Use sparingly.
+
+operations:
+  - operation: read_file
+    level: APPROVAL
+    risk: LOW
+    allowed_paths:
+      - "~/workstation-workspace"
+
+  - operation: list_directory
+    level: APPROVAL
+    risk: LOW
+    allowed_paths:
+      - "~/workstation-workspace"
+
+  - operation: write_file
+    level: APPROVAL
+    risk: MEDIUM
+    allowed_paths:
+      - "~/workstation-workspace"
+
+  - operation: run_command
+    level: APPROVAL
+    risk: MEDIUM
+    allowed_paths:
+      - "~/workstation-workspace"
+    allowed_commands:
+      - "git"
+      - "npm"
+      - "pytest"
+      - "python3"
+      - "make"
+      - "ls"
+      - "cat"
+
+  - operation: run_script
+    level: APPROVAL
+    risk: HIGH
+    allowed_paths:
+      - "~/workstation-workspace"
+
+  - operation: run_tests
+    level: APPROVAL
+    risk: LOW
+    allowed_paths:
+      - "~/workstation-workspace"
+    allowed_commands:
+      - "pytest"
+      - "npm"
+      - "make"

@@ -1,0 +1,14 @@
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = [
+    "libs/core",
+    ".",
+    "apps/control/src",
+    "worker/src",
+    "local-agent/src",
+]
+testpaths = ["apps/control/tests", "worker/tests", "local-agent/tests", "tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

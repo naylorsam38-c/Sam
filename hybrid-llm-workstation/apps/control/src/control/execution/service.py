@@ -1,0 +1,174 @@
+"""Execution-request + approval orchestration (spec sections 16/17).
+
+Flow:
+  submit_request()  -> classify risk -> either DENIED (out of policy bounds),
+                        auto-approved (TRUSTED) and executed immediately, or
+                        AWAITING_APPROVAL (a human must act).
+  approve()/deny()  -> resolves the Approval; approve() triggers execution.
+
+The local agent re-checks policy independently on every call regardless of
+what happened here — this service's classification only controls the
+control-plane UX (does the user see a prompt), never bypasses the agent's
+own enforcement (spec: "the agent must enforce policy locally even if the
+cloud service requests otherwise").
+"""
+
+from __future__ import annotations
+
+from datetime import datetime, timezone
+from typing import Any
+
+from sqlalchemy.orm import Session
+
+from control.audit.service import record as audit_record
+from control.execution.agent_client import AgentClient, AgentUnavailableError
+from control.notifications.service import notify
+from workstation_core.config import Settings
+from workstation_core.enums import ApprovalStatus, ExecutionStatus, NotificationType, PolicyLevel
+from workstation_core.models_orm import Approval, ExecutionRequest, User
+from workstation_core.policy_engine import PolicyEngine
+
+
+class ExecutionRequestNotFoundError(Exception):
+    pass
+
+
+class ApprovalNotFoundError(Exception):
+    pass
+
+
+def _now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def _owner_user_id(db: Session) -> str:
+    user = db.query(User).order_by(User.created_at.asc()).first()
+    return user.id if user else "unknown"
+
+
+def submit_request(
+    db: Session, settings: Settings, *, task_id: str | None, operation: str,
+    parameters: dict[str, Any], working_directory: str | None, actor: str,
+) -> ExecutionRequest:
+    engine = PolicyEngine.load(settings.policies_config_path)
+    level, risk = engine.classify(operation, parameters)
+
+    exec_req = ExecutionRequest(
+        task_id=task_id, command=operation, working_directory=working_directory,
+        arguments=parameters, status=ExecutionStatus.PENDING.value,
+    )
+    db.add(exec_req)
+    db.flush()
+    audit_record(db, actor=actor, event_type="execution.requested", resource_type="execution_request",
+                 resource_id=exec_req.id, action="submit", metadata={"operation": operation, "level": level.value})
+
+    if level == PolicyLevel.RESTRICTED:
+        exec_req.status = ExecutionStatus.DENIED.value
+        db.flush()
+        audit_record(db, actor="system:policy", event_type="execution.denied", resource_type="execution_request",
+                     resource_id=exec_req.id, action="deny", metadata={"reason": "outside policy bounds"})
+        db.commit()
+        db.refresh(exec_req)
+        return exec_req
+
+    approval = Approval(
+        task_id=task_id, action=f"{operation}({parameters})", risk_level=risk.value,
+        status=ApprovalStatus.APPROVED.value if level == PolicyLevel.TRUSTED else ApprovalStatus.PENDING.value,
+    )
+    if level == PolicyLevel.TRUSTED:
+        approval.resolved_at = _now()
+        approval.resolved_by = "system:trusted-policy"
+    db.add(approval)
+    db.flush()
+    exec_req.approval_id = approval.id
+    exec_req.status = (
+        ExecutionStatus.PENDING.value if level == PolicyLevel.TRUSTED else ExecutionStatus.AWAITING_APPROVAL.value
+    )
+    db.flush()
+
+    if level == PolicyLevel.APPROVAL:
+        notify(db, user_id=_owner_user_id(db), type_=NotificationType.TASK_REQUIRES_APPROVAL,
+               title="Laptop action needs approval", body=f"{operation} — risk {risk.value}")
+    db.commit()
+    db.refresh(exec_req)
+
+    if level == PolicyLevel.TRUSTED:
+        return execute_now(db, settings, exec_req)
+    return exec_req
+
+
+async def execute_now(db: Session, settings: Settings, exec_req: ExecutionRequest) -> ExecutionRequest:
+    client = AgentClient(settings.execution_agent_url, settings.execution_agent_token)
+    exec_req.status = ExecutionStatus.RUNNING.value
+    db.commit()
+    try:
+        result = await client.execute(
+            operation=exec_req.command, parameters=exec_req.arguments,
+            working_directory=exec_req.working_directory, task_id=exec_req.task_id,
+            requested_by="control-plane", approval_token=exec_req.approval_id,
+        )
+    except AgentUnavailableError as exc:
+        exec_req.status = ExecutionStatus.FAILED.value
+        exec_req.result = {"error": str(exc)}
+        exec_req.completed_at = _now()
+        audit_record(db, actor="system:agent-client", event_type="execution.failed", resource_type="execution_request",
+                     resource_id=exec_req.id, action="execute", metadata={"error": str(exc)})
+        db.commit()
+        db.refresh(exec_req)
+        return exec_req
+
+    exec_req.status = ExecutionStatus.COMPLETED.value if result.get("status") == "COMPLETED" else ExecutionStatus.FAILED.value
+    exec_req.result = result
+    exec_req.completed_at = _now()
+    audit_record(db, actor="system:agent-client", event_type="execution.completed", resource_type="execution_request",
+                 resource_id=exec_req.id, action="execute", metadata={"exit_code": result.get("exit_code")})
+    db.commit()
+    db.refresh(exec_req)
+    return exec_req
+
+
+def get_request(db: Session, request_id: str) -> ExecutionRequest:
+    req = db.get(ExecutionRequest, request_id)
+    if req is None:
+        raise ExecutionRequestNotFoundError(request_id)
+    return req
+
+
+def list_approvals(db: Session, *, status: str | None = None) -> list[Approval]:
+    query = db.query(Approval)
+    if status:
+        query = query.filter(Approval.status == status)
+    return query.order_by(Approval.requested_at.desc()).all()
+
+
+def get_approval(db: Session, approval_id: str) -> Approval:
+    approval = db.get(Approval, approval_id)
+    if approval is None:
+        raise ApprovalNotFoundError(approval_id)
+    return approval
+
+
+async def resolve_approval(
+    db: Session, settings: Settings, approval: Approval, *, approve: bool, actor: str,
+) -> Approval:
+    if approval.status != ApprovalStatus.PENDING.value:
+        return approval  # already resolved; idempotent no-op
+
+    approval.status = ApprovalStatus.APPROVED.value if approve else ApprovalStatus.DENIED.value
+    approval.resolved_at = _now()
+    approval.resolved_by = actor
+    db.flush()
+    audit_record(db, actor=actor, event_type=f"approval.{approval.status.lower()}", resource_type="approval",
+                 resource_id=approval.id, action="resolve")
+    db.commit()
+    db.refresh(approval)
+
+    exec_req = db.query(ExecutionRequest).filter(ExecutionRequest.approval_id == approval.id).one_or_none()
+    if exec_req is not None:
+        if approve:
+            await execute_now(db, settings, exec_req)
+        else:
+            exec_req.status = ExecutionStatus.DENIED.value
+            exec_req.completed_at = _now()
+            db.commit()
+    return approval

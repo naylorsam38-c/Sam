@@ -1,0 +1,38 @@
+# Descriptive metadata used to ENRICH models the system has actually
+# discovered (via the Ollama /api/tags endpoint or the cloud engine's model
+# list) — this file is never itself treated as proof a model is available.
+# Match is by exact name, then by prefix (before ':'), falling back to
+# generic defaults if nothing matches.
+#
+# capabilities: free-form tags used by automatic routing (spec section 10).
+# cost_class: "free" (local) | "low" | "medium" | "high" (cloud, informational only).
+
+defaults:
+  local:
+    capabilities: ["chat"]
+    cost_class: "free"
+  cloud:
+    capabilities: ["chat"]
+    cost_class: "medium"
+
+overrides:
+  - match: "llama3.2"
+    capabilities: ["chat", "reasoning"]
+    context_length: 128000
+  - match: "qwen2.5"
+    capabilities: ["chat", "coding", "reasoning"]
+    context_length: 32000
+  - match: "qwen2.5-coder"
+    capabilities: ["coding"]
+    context_length: 32000
+  - match: "deepseek-coder"
+    capabilities: ["coding"]
+    context_length: 16000
+  - match: "large-qwen"
+    capabilities: ["chat", "coding", "reasoning"]
+    context_length: 32000
+    cost_class: "high"
+  - match: "large-llama"
+    capabilities: ["chat", "reasoning"]
+    context_length: 128000
+    cost_class: "high"

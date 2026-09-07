@@ -1,0 +1,37 @@
+# GPU provider catalogue. GPU_PROVIDER (.env) selects which one is active.
+# This file documents implementation status; it does not change behavior —
+# see gpu/registry.py for the actual dispatch.
+
+providers:
+  mock:
+    implemented: true
+    production_ready: false
+    description: >
+      Local, in-process, Ollama-protocol-compatible HTTP server. Used for
+      local development and this repository's own automated tests. Never
+      select this in a production deployment.
+
+  runpod:
+    implemented: true
+    production_ready: true
+    description: >
+      RunPod GraphQL API (https://api.runpod.io/graphql). Requires
+      GPU_PROVIDER_API_KEY, GPU_TEMPLATE_ID, GPU_VOLUME_ID. Has not been
+      exercised against a live RunPod account in this build environment —
+      verify with `make gpu-smoke-test` during install Phase B before
+      relying on it (see docs/OPERATIONS.md).
+
+  vast:
+    implemented: false
+    production_ready: false
+    description: >
+      Interface stub only (gpu/providers/vast/provider.py). Selecting this
+      provider raises NotImplementedError rather than silently doing nothing.
+
+  lambdalabs:
+    implemented: false
+    production_ready: false
+    description: >
+      Interface stub only (gpu/providers/lambdalabs/provider.py). Selecting
+      this provider raises NotImplementedError rather than silently doing
+      nothing.
