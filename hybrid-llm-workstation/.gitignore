@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Env / secrets
+.env
+*.pem
+*.key
+
+# Data
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Local agent workspace + audit db (laptop-local, never shared)
+local-agent/data/
+
+# Node (Open WebUI dev tooling, if any)
+node_modules/
+
+# OS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
