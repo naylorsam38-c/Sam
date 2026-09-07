@@ -140,9 +140,14 @@ class WorkerRunner:
             model = db.get(ModelRecord, task.model_id)
             if model is None:
                 raise TaskExecutionError(f"model '{task.model_id}' no longer exists")
-            if model.status != "available":
+            # A cloud model marked unavailable just means the GPU isn't up
+            # right now — _ensure_gpu_ready() is exactly what fixes that.
+            # A local model marked unavailable means Ollama doesn't have it,
+            # which nothing here can fix.
+            if model.environment == Environment.LOCAL.value and model.status != "available":
                 raise TaskExecutionError(
-                    f"model '{model.name}' is no longer available (status={model.status}); resubmit once it is"
+                    f"local model '{model.name}' is no longer available (status={model.status}); "
+                    "refresh the registry or check Ollama"
                 )
             return model
         return resolve(db, model_id=None, environment=task.environment, input_=task.input)

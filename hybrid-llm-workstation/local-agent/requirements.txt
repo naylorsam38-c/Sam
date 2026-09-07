@@ -1,0 +1,8 @@
+# Deliberately minimal and independent of the root requirements.txt — the
+# agent is designed to run standalone on a machine with nothing else from
+# this repo installed (see local-agent/src/agent/config.py).
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.27
+pydantic>=2.6,<3.0
+pydantic-settings>=2.2,<3.0
+PyYAML>=6.0,<7.0

@@ -10,6 +10,37 @@ def _make_local_model(db, name="llama3.2:latest"):
     return model
 
 
+def _make_cloud_model(db, name="large-qwen", status="unavailable"):
+    model = ModelRecord(name=name, environment="cloud", provider="mock", engine="ollama",
+                        status=status, capabilities=["chat"])
+    db.add(model)
+    db.commit()
+    db.refresh(model)
+    return model
+
+
+def test_create_task_against_offline_cloud_model_succeeds(client, auth_headers, db):
+    """A cloud model discovered on a previous session is 'unavailable' now
+    because the GPU is off — selecting it is what should trigger a GPU
+    start (via the worker), so task creation must not reject it."""
+    model = _make_cloud_model(db)
+    resp = client.post("/api/tasks", json={"type": "chat", "model_id": model.id, "input": {"messages": []}},
+                       headers=auth_headers)
+    assert resp.status_code == 201, resp.text
+    assert resp.json()["environment"] == "cloud"
+
+
+def test_create_task_against_offline_local_model_is_rejected(client, auth_headers, db):
+    """Unlike cloud, a local model being unavailable means Ollama doesn't
+    have it — nothing will make that spontaneously true."""
+    model = _make_local_model(db)
+    model.status = "unavailable"
+    db.commit()
+    resp = client.post("/api/tasks", json={"type": "chat", "model_id": model.id, "input": {"messages": []}},
+                       headers=auth_headers)
+    assert resp.status_code == 400
+
+
 def test_create_task_requires_explicit_model_or_environment(client, auth_headers):
     resp = client.post("/api/tasks", json={"type": "chat", "input": {"messages": []}}, headers=auth_headers)
     assert resp.status_code == 400

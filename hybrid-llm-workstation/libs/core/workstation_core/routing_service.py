@@ -41,10 +41,16 @@ def resolve(
         model = db.get(ModelRecord, model_id)
         if model is None:
             raise RoutingError(f"model '{model_id}' does not exist in the registry")
-        if model.status != ModelStatus.AVAILABLE.value:
+        # A cloud model previously discovered (its row exists) is
+        # selectable even while currently "unavailable" — selecting it is
+        # precisely what should trigger the GPU to start (spec: "select a
+        # cloud model" -> "GPU automatically starts"). A local model has no
+        # such boot process; if Ollama doesn't have it right now, waiting
+        # won't change that, so it stays a hard requirement.
+        if model.environment == Environment.LOCAL.value and model.status != ModelStatus.AVAILABLE.value:
             raise RoutingError(
-                f"model '{model.name}' ({model.environment}) is not currently available "
-                "(refresh the registry or check GPU status)"
+                f"model '{model.name}' (local) is not currently available "
+                "(refresh the registry or check Ollama)"
             )
         if environment and model.environment != environment:
             raise RoutingError(

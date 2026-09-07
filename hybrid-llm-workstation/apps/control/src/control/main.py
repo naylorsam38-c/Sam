@@ -14,7 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from workstation_core.config import get_settings
 from workstation_core.db import get_sessionmaker, init_db
 
-from control.api import approvals, auth, execution, gpu, health, models, notifications, tasks
+from control.api import approvals, auth, execution, gpu, health, models, notifications, proxy, tasks
 from control.gpu.lifecycle import GPULifecycleManager
 
 
@@ -50,6 +50,7 @@ def create_app() -> FastAPI:
     app.include_router(notifications.router)
     app.include_router(approvals.router)
     app.include_router(execution.router)
+    app.include_router(proxy.router)
 
     return app
 

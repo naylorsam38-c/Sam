@@ -64,6 +64,15 @@ class Settings(BaseSettings):
 
     notification_enabled: bool = True
 
+    # Lets Open WebUI point at ONE stable Ollama connection
+    # (http://<control-host>:8000/proxy/cloud) instead of having to be
+    # manually reconfigured with a new IP every time the cloud GPU
+    # restarts (spec section 5: "expose both environments without
+    # requiring the user to understand their infrastructure"). This token
+    # only guards against other devices on the local network riding along
+    # on metered cloud GPU time — it is not a substitute for AUTH_SECRET.
+    open_webui_proxy_token: str = ""
+
     config_dir: Path = REPO_ROOT / "config"
 
     @property

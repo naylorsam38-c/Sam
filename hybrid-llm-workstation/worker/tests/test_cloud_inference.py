@@ -83,3 +83,29 @@ async def test_cloud_task_starts_gpu_and_completes(app_env, db, owner_user, runn
 
     gpu_session = db.query(GPUSession).order_by(GPUSession.created_at.desc()).first()
     assert gpu_session.status == "READY"  # released back to READY after inference, GPU left running
+
+
+async def test_cloud_task_works_from_a_cold_start(app_env, db, owner_user, running_control_api):
+    """The cloud model was discovered on some earlier session and is now
+    marked unavailable because the GPU has been off since — this is the
+    normal state between sessions, and picking that model to start a new
+    task is exactly what should boot the GPU back up (spec: 'select a
+    cloud model' -> 'GPU automatically starts'), not be rejected outright."""
+    app_env.control_api_url = running_control_api
+    model = _make_cloud_model(db)
+    model.status = "unavailable"
+    db.commit()
+
+    task = Task(user_id=owner_user.id, type="chat", model_id=model.id, environment="cloud",
+                status="QUEUED", input={"messages": [{"role": "user", "content": "cold start"}]})
+    db.add(task)
+    db.commit()
+    db.refresh(task)
+    task_id = task.id
+
+    runner = WorkerRunner(app_env, get_sessionmaker())
+    await runner.run_once()
+
+    db.commit()
+    task = db.get(Task, task_id)
+    assert task.status == "COMPLETED", (task.status, task.error)

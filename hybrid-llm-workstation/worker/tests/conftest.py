@@ -12,6 +12,18 @@ from workstation_core.security import hash_password
 
 @pytest.fixture()
 def app_env(tmp_path, monkeypatch):
+    # See apps/control/tests/conftest.py's app_env for why: pin every
+    # externally-reachable setting so a developer's real .env file can
+    # never make this suite flaky.
+    monkeypatch.setenv("OLLAMA_LOCAL_URL", "http://127.0.0.1:1")
+    monkeypatch.setenv("CLOUD_LLM_BASE_URL", "")
+    monkeypatch.setenv("EXECUTION_AGENT_URL", "http://127.0.0.1:1")
+    monkeypatch.setenv("EXECUTION_AGENT_TOKEN", "test-execution-agent-token")
+    monkeypatch.setenv("GPU_PROVIDER_API_KEY", "")
+    monkeypatch.setenv("GPU_TEMPLATE_ID", "")
+    monkeypatch.setenv("GPU_VOLUME_ID", "")
+    monkeypatch.setenv("CONTROL_API_URL", "http://127.0.0.1:1")
+
     db_path = tmp_path / f"test-{uuid.uuid4().hex}.db"
     monkeypatch.setenv("DATABASE_URL", f"sqlite:///{db_path}")
     monkeypatch.setenv("GPU_PROVIDER", "mock")

@@ -18,6 +18,20 @@ from workstation_core.security import hash_password  # noqa: E402
 
 @pytest.fixture()
 def app_env(tmp_path, monkeypatch):
+    # Settings reads a real .env file relative to the process CWD if one
+    # exists there (e.g. a developer's own local dev config). Explicitly
+    # pin every externally-reachable setting to a safe, deterministic test
+    # value so the suite can never accidentally pass (or fail) because of
+    # whatever happens to be running on the machine outside the tests.
+    monkeypatch.setenv("OLLAMA_LOCAL_URL", "http://127.0.0.1:1")  # nothing listens here
+    monkeypatch.setenv("CLOUD_LLM_BASE_URL", "")
+    monkeypatch.setenv("EXECUTION_AGENT_URL", "http://127.0.0.1:1")
+    monkeypatch.setenv("EXECUTION_AGENT_TOKEN", "test-execution-agent-token")
+    monkeypatch.setenv("GPU_PROVIDER_API_KEY", "")
+    monkeypatch.setenv("GPU_TEMPLATE_ID", "")
+    monkeypatch.setenv("GPU_VOLUME_ID", "")
+    monkeypatch.setenv("OPEN_WEBUI_PROXY_TOKEN", "")
+
     db_path = tmp_path / f"test-{uuid.uuid4().hex}.db"
     monkeypatch.setenv("DATABASE_URL", f"sqlite:///{db_path}")
     get_settings.cache_clear()

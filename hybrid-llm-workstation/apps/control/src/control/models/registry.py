@@ -17,8 +17,8 @@ import yaml
 from sqlalchemy.orm import Session
 from workstation_core.cloud_client import CloudInferenceClient, CloudInferenceUnavailableError
 from workstation_core.config import Settings
-from workstation_core.enums import Environment, ModelStatus
-from workstation_core.models_orm import ModelRecord
+from workstation_core.enums import Environment, GPUStatus, ModelStatus
+from workstation_core.models_orm import GPUSession, ModelRecord
 from workstation_core.ollama_client import OllamaClient, OllamaUnavailableError
 
 
@@ -66,7 +66,14 @@ async def refresh_registry(db: Session, settings: Settings) -> dict[str, Any]:
     # --- Cloud (only meaningful once the GPU is up; if not configured/ready
     #     we mark existing cloud models unavailable rather than fabricating
     #     a health state) ---
-    cloud = CloudInferenceClient(settings.cloud_llm_base_url, settings.cloud_llm_api_key, settings.cloud_llm_engine)
+    # CLOUD_LLM_BASE_URL is a static override for a fixed cloud endpoint;
+    # normally (RunPod et al. hand out a new IP every session) there is
+    # none, so fall back to whatever the GPU lifecycle manager currently
+    # has on record as the live endpoint (spec section 9: the registry
+    # "must reflect actual health/availability", which for a dynamic
+    # provider means asking the current session, not a stale static URL).
+    cloud_base_url = settings.cloud_llm_base_url or current_cloud_endpoint(db)
+    cloud = CloudInferenceClient(cloud_base_url, settings.cloud_llm_api_key, settings.cloud_llm_engine)
     if cloud.configured:
         try:
             cloud_models = await cloud.list_models()
@@ -80,7 +87,7 @@ async def refresh_registry(db: Session, settings: Settings) -> dict[str, Any]:
         except CloudInferenceUnavailableError as exc:
             report["cloud"]["detail"] = str(exc)
     else:
-        report["cloud"]["detail"] = "CLOUD_LLM_BASE_URL not configured (GPU likely OFF)"
+        report["cloud"]["detail"] = "no cloud endpoint available (GPU is off, or CLOUD_LLM_BASE_URL is unset)"
 
     # Anything previously recorded but not seen this refresh is unavailable
     # now — never leave a stale "available" model in the catalogue.
@@ -91,6 +98,15 @@ async def refresh_registry(db: Session, settings: Settings) -> dict[str, Any]:
 
     db.flush()
     return report
+
+
+def current_cloud_endpoint(db: Session) -> str:
+    session = db.query(GPUSession).order_by(GPUSession.created_at.desc()).first()
+    if session is None or session.status not in (
+        GPUStatus.READY.value, GPUStatus.BUSY.value, GPUStatus.IDLE.value,
+    ):
+        return ""
+    return (session.session_metadata or {}).get("endpoint") or ""
 
 
 def _upsert(

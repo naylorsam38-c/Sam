@@ -11,6 +11,7 @@ from workstation_core.ollama_client import OllamaClient
 from workstation_core.schemas import HealthOut
 
 from control.deps import get_db, get_settings_dep
+from control.models.registry import current_cloud_endpoint
 from workstation_core.agent_client import AgentClient
 
 router = APIRouter(prefix="/health", tags=["health"])
@@ -32,8 +33,12 @@ async def health_local_ollama(settings: Settings = Depends(get_settings_dep)) ->
 
 
 @router.get("/cloud", response_model=HealthOut)
-async def health_cloud(settings: Settings = Depends(get_settings_dep)) -> HealthOut:
-    client = CloudInferenceClient(settings.cloud_llm_base_url, settings.cloud_llm_api_key, settings.cloud_llm_engine)
+async def health_cloud(db: Session = Depends(get_db), settings: Settings = Depends(get_settings_dep)) -> HealthOut:
+    base_url = settings.cloud_llm_base_url or current_cloud_endpoint(db)
+    if not base_url:
+        return HealthOut(component="cloud-inference", healthy=False,
+                         detail="cloud GPU is off (or CLOUD_LLM_BASE_URL is unset)", checked_at=_now())
+    client = CloudInferenceClient(base_url, settings.cloud_llm_api_key, settings.cloud_llm_engine)
     healthy, detail = await client.health()
     return HealthOut(component="cloud-inference", healthy=healthy, detail=detail, checked_at=_now())
 

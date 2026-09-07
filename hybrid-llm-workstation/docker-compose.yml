@@ -1,0 +1,99 @@
+# Personal LLM workstation — local service orchestration (spec section 24).
+#
+# The local execution agent is intentionally NOT a service here — see
+# local-agent/Dockerfile's header comment and docs/OPERATIONS.md. Run it as
+# a native process on the laptop (scripts/install/phase_a_laptop.sh sets it
+# up) so it has direct, correctly-scoped access to the real filesystem.
+#
+# Ollama itself is also not a service here by default: this workstation is
+# built to talk to Ollama already installed and running natively on the
+# laptop (spec section 6), reached at OLLAMA_LOCAL_URL. If you'd rather run
+# Ollama in a container too, uncomment the `ollama` service below and point
+# OLLAMA_LOCAL_URL at http://ollama:11434 in your .env.
+
+services:
+  control:
+    build:
+      context: .
+      dockerfile: apps/control/Dockerfile
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    env_file: .env
+    environment:
+      DATABASE_URL: sqlite:////data/workstation.db
+      # host.docker.internal resolves on Docker Desktop (Mac/Windows) and,
+      # via extra_hosts below, on Linux — reaches Ollama/the agent running
+      # natively on the laptop.
+      OLLAMA_LOCAL_URL: ${OLLAMA_LOCAL_URL:-http://host.docker.internal:11434}
+      EXECUTION_AGENT_URL: ${EXECUTION_AGENT_URL:-http://host.docker.internal:8787}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - workstation-data:/data
+      - ./config:/app/config:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  worker:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    env_file: .env
+    environment:
+      DATABASE_URL: sqlite:////data/workstation.db
+      OLLAMA_LOCAL_URL: ${OLLAMA_LOCAL_URL:-http://host.docker.internal:11434}
+      CONTROL_API_URL: http://control:8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - workstation-data:/data
+      - ./config:/app/config:ro
+    depends_on:
+      control:
+        condition: service_healthy
+    restart: unless-stopped
+    # Scale with: docker compose up --scale worker=3
+    deploy:
+      replicas: 1
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "3000:8080"
+    environment:
+      # Primary (local) Ollama connection.
+      OLLAMA_BASE_URL: ${OLLAMA_LOCAL_URL:-http://host.docker.internal:11434}
+      WEBUI_AUTH: "true"
+      WEBUI_SECRET_KEY: ${AUTH_SECRET}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - open-webui-data:/app/backend/data
+    restart: unless-stopped
+    # After first boot, add the cloud connection once in Open WebUI's
+    # Admin Settings -> Connections -> "Ollama API":
+    #   URL:     http://control:8000/proxy/cloud
+    #   API key: ${OPEN_WEBUI_PROXY_TOKEN}
+    # It then keeps working across GPU restarts without further changes
+    # (apps/control/src/control/api/proxy.py forwards to whatever the
+    # cloud GPU's current endpoint is).
+
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama-data:/root/.ollama
+  #   # Uncomment the `deploy.resources.reservations.devices` block for GPU
+  #   # passthrough if this host has an NVIDIA GPU and nvidia-container-toolkit
+  #   # installed.
+  #   restart: unless-stopped
+
+volumes:
+  workstation-data:
+  open-webui-data:
+  # ollama-data:
