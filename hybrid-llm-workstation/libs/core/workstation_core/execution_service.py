@@ -164,7 +164,17 @@ async def execute_now(db: Session, settings: Settings, exec_req: ExecutionReques
         db.refresh(exec_req)
         return exec_req
 
-    exec_req.status = ExecutionStatus.COMPLETED.value if result.get("status") == "COMPLETED" else ExecutionStatus.FAILED.value
+    agent_status = result.get("status")
+    if agent_status == "COMPLETED":
+        exec_req.status = ExecutionStatus.COMPLETED.value
+    elif agent_status == "DENIED":
+        # The agent independently refused it (its own policy check, or the
+        # signature didn't verify) even though this control plane thought
+        # it was approved — exactly the defense-in-depth case spec section
+        # 17 requires; surface it distinctly rather than as a generic FAILED.
+        exec_req.status = ExecutionStatus.DENIED.value
+    else:
+        exec_req.status = ExecutionStatus.FAILED.value
     exec_req.result = result
     exec_req.completed_at = _now()
     audit_record(db, actor="system:agent-client", event_type="execution.completed", resource_type="execution_request",
