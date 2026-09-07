@@ -82,7 +82,7 @@ reachable host by this build. Once you deploy:
 
 Given none of the above was actually deployed, there is no live
 verification report to give beyond what `BUILD_REPORT.md` and
-`TEST_REPORT.md` already state: 146/151 automated tests passing (5
+`TEST_REPORT.md` already state: 151/156 automated tests passing (5
 honestly skipped, all naming what they'd need — real hardware/browser —
 and where the same behavior is verified another way), plus a manual pass
 against a real four-process stack (control API + worker + local agent +

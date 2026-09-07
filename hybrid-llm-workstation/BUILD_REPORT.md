@@ -23,7 +23,7 @@ wherever the build environment allowed it:
 | Approval system | `workstation_core/execution_service.py` + agent-side re-check | Done |
 | Notifications | `workstation_core/notification_service.py` | Done |
 | Audit logging | `audit_events` table (control plane) + separate SQLite (agent) | Done |
-| Automated tests | `tests/`, plus per-app test dirs | 151 tests (146 pass, 5 explicitly skipped) |
+| Automated tests | `tests/`, plus per-app test dirs | 156 tests (151 pass, 5 explicitly skipped) |
 | Installation scripts | `scripts/install/phase_{a,b,c,d}_*` | Done, phases A/C/D run for real in this environment; phase B's cloud-cost-incurring steps deliberately require explicit confirmation and were not run against a real account |
 | Health checks | `scripts/health/` | Done, run for real against a live stack in this environment |
 | Operations documentation | `docs/OPERATIONS.md`, `docs/RUNBOOK.md` | Done |

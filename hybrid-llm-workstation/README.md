@@ -68,7 +68,7 @@ docs/             architecture, security, API, operations, runbook
 
 ## Status
 
-Build-ready and covered by 151 automated tests (146 passing, 5 explicitly
+Build-ready and covered by 156 automated tests (151 passing, 5 explicitly
 skipped where they require hardware this build couldn't provide — see
 [`TEST_REPORT.md`](TEST_REPORT.md)). See
 [`BUILD_REPORT.md`](BUILD_REPORT.md) for what's been verified against a

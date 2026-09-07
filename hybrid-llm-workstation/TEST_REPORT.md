@@ -3,7 +3,7 @@
 ## Results
 
 ```
-apps/control/tests/   41 tests
+apps/control/tests/   46 tests
 worker/tests/         11 tests
 local-agent/tests/    16 tests
 tests/unit/           37 tests
@@ -12,14 +12,14 @@ tests/integration/     2 tests
 tests/e2e/              1 test
 tests/acceptance/     35 tests
 -----------------------------
-Total                151 tests — 146 passed, 5 skipped, 0 failed
+Total                156 tests — 151 passed, 5 skipped, 0 failed
 ```
 
 Run with: `make test`, or
 `pytest apps/control/tests worker/tests local-agent/tests tests -q`.
 
-Last run in this build environment: 146 passed, 5 skipped, 0 failed, in
-~109 seconds.
+Last run in this build environment: 151 passed, 5 skipped, 0 failed, in
+~108 seconds.
 
 ## What "skipped" means here
 
@@ -130,6 +130,19 @@ actually caught, in the order found:
     row's own id, so the second call with the same id crashed with a
     `UNIQUE constraint failed` instead of just logging a second row. Fixed
     by generating a fresh id per audit row.
+15. **`reconcile_on_startup` would crash the control API on boot** if it
+    found a `GPUSession` row left in a non-OFF state with no recorded
+    instance id (e.g. after a crash while `READY`) — it tried to reach
+    `OFF` through the strictly-validated `_transition()` helper, which
+    correctly rejects `READY → OFF` as illegal under normal operating
+    rules. Reconciliation is explicitly about recovering from whatever
+    state a crash left behind, which is exactly a case normal transition
+    rules don't anticipate; fixed by assigning the status directly in that
+    branch, matching how the rest of the same method already handles a
+    verified-live-endpoint recovery. This directly serves spec section 28
+    item 19 ("restart the system without losing persistent state") and had
+    no existing test coverage at all before being added specifically to
+    probe it — caught on the first run of the new test.
 
 Items 6/9 illustrate the value of the manual, real-process pass beyond the
 pytest suite: pytest never exercised a genuine cold start (GPU off, model

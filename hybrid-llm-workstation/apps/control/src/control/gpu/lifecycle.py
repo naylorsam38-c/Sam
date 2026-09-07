@@ -102,7 +102,13 @@ class GPULifecycleManager:
                 return
 
             if not session.instance_id:
-                self._transition(session, GPUStatus.OFF, db)
+                # Direct assignment, not self._transition(): reconciliation
+                # is explicitly about recovering from whatever state a
+                # crash/restart left behind, which may not be a legal
+                # transition under normal operating rules (e.g. a prior
+                # READY session with no instance ever recorded).
+                session.status = GPUStatus.OFF.value
+                db.flush()
                 db.commit()
                 return
 
