@@ -15,7 +15,6 @@ from typing import Any
 
 import yaml
 from sqlalchemy.orm import Session
-
 from workstation_core.cloud_client import CloudInferenceClient, CloudInferenceUnavailableError
 from workstation_core.config import Settings
 from workstation_core.enums import Environment, ModelStatus

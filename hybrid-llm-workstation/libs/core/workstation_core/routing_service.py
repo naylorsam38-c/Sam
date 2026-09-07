@@ -24,7 +24,6 @@ from __future__ import annotations
 from typing import Any
 
 from sqlalchemy.orm import Session
-
 from workstation_core.enums import Environment, ModelStatus
 from workstation_core.models_orm import ModelRecord
 

@@ -17,14 +17,20 @@ import logging
 from datetime import datetime, timedelta, timezone
 
 from sqlalchemy.orm import Session
+from workstation_core.audit_service import record as audit_record
+from workstation_core.config import Settings
+from workstation_core.enums import (
+    GPU_PROTECTED_STATES,
+    GPU_TRANSITIONS,
+    GPUStatus,
+    NotificationType,
+)
+from workstation_core.gpu_activity import mark_gpu_activity
+from workstation_core.models_orm import GPUSession
+from workstation_core.notification_service import notify
 
-from control.audit.service import record as audit_record
-from control.notifications.service import notify
 from gpu.provider_interface.base import GPUProvider, GPUProviderError
 from gpu.registry import get_provider
-from workstation_core.config import Settings
-from workstation_core.enums import GPU_PROTECTED_STATES, GPU_TRANSITIONS, GPUStatus, NotificationType
-from workstation_core.models_orm import GPUSession
 
 logger = logging.getLogger("control.gpu")
 
@@ -274,17 +280,11 @@ class GPULifecycleManager:
         }
 
     def mark_activity(self, db: Session, *, busy: bool) -> None:
-        """Called by the worker (same DB, different process) when it starts
-        or finishes using the GPU for inference."""
-        session = self._current_session(db)
-        current = GPUStatus(session.status)
-        if current not in (GPUStatus.READY, GPUStatus.BUSY, GPUStatus.IDLE):
-            return
-        session.last_activity_at = datetime.now(timezone.utc)
-        target = GPUStatus.BUSY if busy else GPUStatus.READY
-        if target != current:
-            self._transition(session, target, db)
-        db.flush()
+        """Thin wrapper around the shared helper, kept on the manager for
+        tests/callers that already hold a manager instance. The worker
+        process (no manager of its own) calls
+        workstation_core.gpu_activity.mark_gpu_activity directly."""
+        mark_gpu_activity(db, busy=busy)
 
     # --- background monitor: idle timeout, max session, cost cap --------
 

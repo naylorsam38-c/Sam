@@ -2,22 +2,22 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
-from control.deps import get_current_user, get_db, get_settings_dep
-from control.execution import service as execution_service
 from workstation_core.config import Settings
 from workstation_core.models_orm import User
 from workstation_core.schemas import ExecutionRequestCreate, ExecutionRequestOut
+
+from control.deps import get_current_user, get_db, get_settings_dep
+from workstation_core import execution_service
 
 router = APIRouter(prefix="/api/execution", tags=["execution"])
 
 
 @router.post("/requests", response_model=ExecutionRequestOut, status_code=status.HTTP_201_CREATED)
-def create_execution_request(
+async def create_execution_request(
     payload: ExecutionRequestCreate, db: Session = Depends(get_db), settings: Settings = Depends(get_settings_dep),
     user: User = Depends(get_current_user),
 ):
-    return execution_service.submit_request(
+    return await execution_service.submit_request(
         db, settings, task_id=payload.task_id, operation=payload.operation, parameters=payload.parameters,
         working_directory=payload.working_directory, actor=user.id,
     )

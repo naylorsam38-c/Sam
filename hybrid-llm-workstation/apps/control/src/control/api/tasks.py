@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
-from control.deps import get_current_user, get_db, get_settings_dep
-from control.routing.service import RoutingError, resolve
-from control.tasks import service as task_service
+from workstation_core import task_service
 from workstation_core.config import Settings
-from workstation_core.enums import TaskStatus
+from workstation_core.enums import TaskStatus, TaskType
 from workstation_core.models_orm import User
 from workstation_core.schemas import TaskCreateRequest, TaskOut
+
+from control.deps import get_current_user, get_db, get_settings_dep
+from workstation_core.routing_service import RoutingError, resolve
 
 router = APIRouter(prefix="/api/tasks", tags=["tasks"])
 
@@ -27,15 +27,18 @@ def create_task(
     model_id = payload.model_id
     environment = payload.environment
 
-    # Resolve now for immediate, explicit routing errors; background tasks
-    # (routing_mode == "automatic" with no model yet available) are allowed
-    # through and re-resolved by the worker at claim time.
-    if model_id or environment or payload.input.get("routing_mode") != "automatic":
-        try:
-            model = resolve(db, model_id=model_id, environment=environment, input_=payload.input)
-            model_id, environment = model.id, model.environment
-        except RoutingError as exc:
-            raise HTTPException(status.HTTP_400_BAD_REQUEST, str(exc)) from exc
+    # Execution tasks (laptop actions via the local agent) have no model or
+    # environment to route — routing only applies to inference tasks.
+    if payload.type != TaskType.EXECUTION.value:
+        # Resolve now for immediate, explicit routing errors; background
+        # tasks (routing_mode == "automatic" with no model yet available)
+        # are allowed through and re-resolved by the worker at claim time.
+        if model_id or environment or payload.input.get("routing_mode") != "automatic":
+            try:
+                model = resolve(db, model_id=model_id, environment=environment, input_=payload.input)
+                model_id, environment = model.id, model.environment
+            except RoutingError as exc:
+                raise HTTPException(status.HTTP_400_BAD_REQUEST, str(exc)) from exc
 
     task = task_service.create_task(
         db, user_id=user.id, type_=payload.type, model_id=model_id, environment=environment, input_=payload.input,

@@ -4,14 +4,14 @@ from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-
-from control.deps import get_db, get_settings_dep
-from control.execution.agent_client import AgentClient
 from workstation_core.cloud_client import CloudInferenceClient
 from workstation_core.config import Settings
 from workstation_core.models_orm import Worker
 from workstation_core.ollama_client import OllamaClient
 from workstation_core.schemas import HealthOut
+
+from control.deps import get_db, get_settings_dep
+from workstation_core.agent_client import AgentClient
 
 router = APIRouter(prefix="/health", tags=["health"])
 

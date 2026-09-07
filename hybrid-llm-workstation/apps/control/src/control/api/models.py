@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
-from control.deps import get_current_user, get_db, get_settings_dep
-from control.models.registry import refresh_registry
 from workstation_core.config import Settings
 from workstation_core.models_orm import ModelRecord, User
 from workstation_core.schemas import ModelOut
+
+from control.deps import get_current_user, get_db, get_settings_dep
+from control.models.registry import refresh_registry
 
 router = APIRouter(prefix="/api/models", tags=["models"])
 

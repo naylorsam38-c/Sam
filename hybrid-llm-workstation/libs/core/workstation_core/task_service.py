@@ -11,7 +11,7 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
-from control.audit.service import record as audit_record
+from workstation_core.audit_service import record as audit_record
 from workstation_core.enums import TASK_TERMINAL_STATES, TASK_TRANSITIONS, TaskStatus
 from workstation_core.models_orm import Task
 

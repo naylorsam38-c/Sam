@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from workstation_core.models_orm import User
+from workstation_core.schemas import GPUCostOut, GPUStatusOut
 
 from control.deps import get_current_user, get_db, get_gpu_manager
 from control.gpu.lifecycle import GPULifecycleError, GPULifecycleManager
-from workstation_core.models_orm import User
-from workstation_core.schemas import GPUCostOut, GPUStatusOut
 
 router = APIRouter(prefix="/api/gpu", tags=["gpu"])
 

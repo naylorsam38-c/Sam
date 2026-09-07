@@ -47,6 +47,12 @@ class Settings(BaseSettings):
     gpu_auto_start: bool = True
     gpu_estimated_hourly_cost: float = 0.50  # used when a provider can't report live cost
 
+    # Not one of spec section 4's literal env vars, but required by the
+    # architecture: the worker process talks to the control API over HTTP
+    # only for GPU start/stop (the control API is the sole owner of the
+    # live provider connection — see apps/control/src/control/gpu/lifecycle.py).
+    control_api_url: str = "http://localhost:8000"
+
     task_max_retries: int = 3
     task_timeout_seconds: int = 900
     worker_poll_interval_seconds: float = 2.0

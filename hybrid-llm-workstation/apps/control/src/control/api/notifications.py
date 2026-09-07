@@ -4,10 +4,10 @@ from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
-from control.deps import get_current_user, get_db
 from workstation_core.models_orm import Notification, User
 from workstation_core.schemas import NotificationOut
+
+from control.deps import get_current_user, get_db
 
 router = APIRouter(prefix="/api/notifications", tags=["notifications"])
 

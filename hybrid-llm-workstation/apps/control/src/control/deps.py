@@ -5,7 +5,6 @@ from typing import TYPE_CHECKING
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.orm import Session
-
 from workstation_core.config import Settings
 from workstation_core.db import get_db
 from workstation_core.models_orm import User

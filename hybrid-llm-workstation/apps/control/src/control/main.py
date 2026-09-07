@@ -11,11 +11,11 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from workstation_core.config import get_settings
+from workstation_core.db import get_sessionmaker, init_db
 
 from control.api import approvals, auth, execution, gpu, health, models, notifications, tasks
 from control.gpu.lifecycle import GPULifecycleManager
-from workstation_core.config import get_settings
-from workstation_core.db import get_sessionmaker, init_db
 
 
 @asynccontextmanager

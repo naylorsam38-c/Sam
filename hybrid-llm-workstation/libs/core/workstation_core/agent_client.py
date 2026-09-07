@@ -14,7 +14,6 @@ import uuid
 from typing import Any
 
 import httpx
-
 from workstation_core.security import sign_agent_request
 
 

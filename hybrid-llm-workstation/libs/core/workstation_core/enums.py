@@ -73,7 +73,10 @@ TASK_TRANSITIONS: dict[TaskStatus, set[TaskStatus]] = {
     },
     TaskStatus.WAITING: {TaskStatus.RUNNING, TaskStatus.FAILED, TaskStatus.CANCELLED, TaskStatus.RETRYING},
     TaskStatus.PAUSED: {TaskStatus.QUEUED, TaskStatus.CANCELLED},
-    TaskStatus.REQUIRES_APPROVAL: {TaskStatus.RUNNING, TaskStatus.CANCELLED, TaskStatus.FAILED},
+    # COMPLETED here covers a Task auto-resolving the moment its
+    # execution-request approval is granted, without passing back through
+    # RUNNING (see workstation_core.execution_service._sync_task).
+    TaskStatus.REQUIRES_APPROVAL: {TaskStatus.RUNNING, TaskStatus.CANCELLED, TaskStatus.FAILED, TaskStatus.COMPLETED},
     TaskStatus.RETRYING: {TaskStatus.QUEUED, TaskStatus.CANCELLED},
     TaskStatus.COMPLETED: set(),
     TaskStatus.FAILED: set(),

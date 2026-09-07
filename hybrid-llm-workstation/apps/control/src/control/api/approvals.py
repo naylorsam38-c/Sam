@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
-from control.deps import get_current_user, get_db, get_settings_dep
-from control.execution import service as execution_service
 from workstation_core.config import Settings
 from workstation_core.models_orm import User
 from workstation_core.schemas import ApprovalOut
+
+from control.deps import get_current_user, get_db, get_settings_dep
+from workstation_core import execution_service
 
 router = APIRouter(prefix="/api/approvals", tags=["approvals"])
 

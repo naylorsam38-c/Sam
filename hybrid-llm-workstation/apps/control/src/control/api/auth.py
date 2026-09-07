@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
-from control.audit.service import record as audit_record
-from control.deps import get_db
+from workstation_core.audit_service import record as audit_record
 from workstation_core.models_orm import User
 from workstation_core.schemas import LoginRequest, TokenResponse
 from workstation_core.security import create_access_token, verify_password
+
+from control.deps import get_db
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
