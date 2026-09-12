@@ -1,5 +1,12 @@
 # Full-library stress test — every capability, one real running system
 
+**Status: fixed.** The collision this test found is now architecturally impossible, not merely
+documented. See "The fix" near the end for what changed and the rerun that proves it: **0 collisions,
+0 shadowed capabilities, 165/165 pass** — up from the original 142/165 with 23 shadowed. The section
+below this notice is the original finding, left exactly as first written (per this project's own rule:
+document what works, what fails, and why — not edit the tricky part out) because the fix only makes
+sense in light of the problem it fixes.
+
 This answers a different, harder question than `audit_dependency_graph.py` answers. That script
 checks whether each capability's *declared* contract is internally consistent — real static source
 scanned against its own declared `data_access`, per app. It is a real, automated check, but it
@@ -118,10 +125,70 @@ dependencies, 0 permanent exceptions" — is about each app's own declared contr
 own real source, and remains true: `audit_dependency_graph.py` still reports 0 violations across all
 266 capability records, confirmed again after this test, unchanged.
 
-What this test adds, and what was never previously claimed or tested: **the 46 apps are compatible as
+What this test adds, and what was never previously claimed or tested: **the 46 apps were compatible as
 46 separate deployments sharing a common contract and a shared capability (`CAP-0000`), not as one
 merged, flat-namespace system.** Merging the whole library into a single running product, as opposed
 to composing a *chosen subset* into a new app (as the three `NEW_APPS_FROM_LIBRARY` apps do, each
-picking non-colliding routes deliberately), would require namespacing every app's routes (e.g. by
-slug prefix) before assembly — a real, buildable fix, not attempted here because this test's purpose
-was to measure the gap honestly, not to close it silently.
+picking non-colliding routes deliberately), needed namespacing every app's routes before assembly.
+That fix is now built, below.
+
+## The fix: every ROUTE is namespaced by its owning app, at the source
+
+The real cause was structural, not a naming-convention slip: nothing prevented two independently
+generated apps from picking the same public path for their own feature, because nothing made that
+impossible — it just hadn't happened to collide badly until 46 apps existed. The fix makes it
+impossible by construction, in exactly one place:
+
+**`gen_common.py`'s `AppBuilder._namespace_route()`** — called from the single choke point every
+capability's `ROUTE` is written through (`add_capability()`, which every generic engine —
+`add_exceeds_threshold_capability`, `add_bounded_counter_capability`, `add_notification_capabilities`,
+`add_calendar_event_capabilities`, `add_symmetric_relationship_capability` — already calls internally).
+It rewrites every declared route from `/api/<resource>` to `/api/<app-slug>/<resource>`. An app's slug
+is already guaranteed globally unique (it's the real `OUTPUT_LIBRARY`/`NEW_APPS_FROM_LIBRARY` directory
+name), so this makes cross-app URL collision structurally impossible, not merely unlikely — no
+capability author has to remember to avoid a clash, because there is no shared namespace left to clash
+in. `reuse_capability_verbatim()` needed no change at all: a capability copied byte-for-byte into a
+second app correctly keeps its *origin* app's namespace, since it is still, honestly, that origin
+app's real, single-sourced implementation and data file, just mounted a second time.
+
+This is the only backend code change. Everything else was keeping each app's own frontend JS in sync
+with its own now-namespaced backend, so every one of the 46 apps keeps working exactly as before in
+isolation, not just when merged:
+
+- **43 canonical apps** (`app_defs.py`): every `fetch("/api/...")` call was mechanically rewritten to
+  `fetch("/api/<own-slug>/...")` — safe to do mechanically because none of these 43 apps reference
+  another app's capability. Verified: 0 of 263 `/api/` occurrences left unprefixed or wrongly prefixed
+  afterward, checked programmatically, not by eye.
+- **3 composed apps** (`new_app_*.py`): edited by hand, because each mixes its *own* new capabilities
+  (get the app's own slug) with capabilities *reused verbatim* from another app (get that other app's
+  slug) — e.g. `community_event_board`'s own `/api/events` calls stay
+  `/api/community_event_board/events`, but its reused-from-`team_chat` announcements call
+  `/api/team_chat/messages`, matching exactly what `team_chat`'s own, now-namespaced capability
+  actually serves.
+- **`functional_tests.py`** and **`prove_generalization.py`**: hardcoded test paths updated the same
+  way; `prove_generalization.py`'s regression harness additionally needed its comparison function
+  changed to build two different paths (original app's slug vs. its disposable `_v2` harness's slug)
+  instead of assuming both sides shared one literal path, since they are two different apps now.
+- **`verify_build.py`/`test_readiness.py`** needed no change — confirmed they never touch
+  `gen_common.py` or `app_defs.py`; they test `build.py`'s own internal proving-table fixtures, which
+  don't go through `AppBuilder` at all.
+
+### Proof this didn't just move the bug
+
+Every existing verification step was rerun, unmodified, after the fix — the real Playwright browser
+journey for all 43+3 apps clicking through the real frontend JS against the real, now-prefixed
+backend is exactly the check that would catch a JS/backend path mismatch immediately:
+
+```
+proving_table:              29/29 pass, readiness 20/20 (unaffected -- confirmed unrelated to this code path)
+canonical_apps:              43/43 READY
+new_composed_apps:            3/3 READY
+generalization_regression:  ALL MATCH (auction, event_ticketing, dating -- original vs. generic engine)
+dependency_graph_audit:     CLEAN -- 0 missing targets, 0 cycles, 0 contract violations, 0 hidden access
+                             across 266 capabilities in 46 projects
+functional_tests:           19/19 passed
+full_library_stress_test:   165/165 passed, 0 collisions, 0 shadowed, 0 other failures
+```
+
+`run_full_verification.py` now runs the full-library stress test as its own section (7/7) on every
+invocation, so this guarantee is checked every time the suite runs, not just once by hand.

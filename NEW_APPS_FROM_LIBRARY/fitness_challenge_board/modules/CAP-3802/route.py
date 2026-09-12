@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/workouts'
+ROUTE = '/api/fitness_tracking/workouts'
 METHOD = 'POST'
 
 

@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/bookings'
+ROUTE = '/api/property_rental/bookings'
 METHOD = 'GET'
 
 

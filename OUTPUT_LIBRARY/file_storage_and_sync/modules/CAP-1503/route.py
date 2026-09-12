@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/files/delete'
+ROUTE = '/api/file_storage_and_sync/files/delete'
 METHOD = 'POST'
 
 

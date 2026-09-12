@@ -82,14 +82,14 @@ def build(root: Path):
     script = '''
 const ME = "learner@example.com";
 function refreshCourses() {
-  fetch("/api/courses").then(r => r.json()).then(data => {
+  fetch("/api/online_course_lms/courses").then(r => r.json()).then(data => {
     const list = document.getElementById("course-list");
     list.innerHTML = "";
     (data.courses || []).forEach(c => { const li = document.createElement("li"); li.textContent = c.title; list.appendChild(li); });
   });
 }
 function refreshSessions() {
-  fetch("/api/events").then(r => r.json()).then(data => {
+  fetch("/api/course_enrollment_hub/events").then(r => r.json()).then(data => {
     const list = document.getElementById("session-list");
     list.innerHTML = "";
     (data.events || []).forEach(e => {
@@ -97,10 +97,10 @@ function refreshSessions() {
       li.textContent = e.title + " -- " + e.enrolled + "/" + e.seats + " enrolled";
       const enroll = document.createElement("button"); enroll.textContent = "Enroll"; enroll.style.marginLeft = "8px";
       enroll.addEventListener("click", () => {
-        fetch("/api/events/enroll", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/course_enrollment_hub/events/enroll", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: e.id})}).then(r => r.json()).then(result => {
             const msg = result.error ? ("Enrollment failed: " + JSON.stringify(result.error)) : ("Enrolled in " + e.title);
-            fetch("/api/notifications", {method: "POST", headers: {"Content-Type": "application/json"},
+            fetch("/api/course_enrollment_hub/notifications", {method: "POST", headers: {"Content-Type": "application/json"},
               body: JSON.stringify({recipient: ME, message: msg})});
             refreshSessions();
           });
@@ -111,7 +111,7 @@ function refreshSessions() {
   });
 }
 function refreshFeedback() {
-  fetch("/api/cards").then(r => r.json()).then(data => {
+  fetch("/api/quiz_and_flashcards/cards").then(r => r.json()).then(data => {
     const list = document.getElementById("fb-list");
     list.innerHTML = "";
     (data.cards || []).forEach(c => { const li = document.createElement("li"); li.textContent = c.question; list.appendChild(li); });
@@ -120,7 +120,7 @@ function refreshFeedback() {
 document.getElementById("add-course-btn").addEventListener("click", () => {
   const title = document.getElementById("course-title").value;
   if (!title.trim()) return;
-  fetch("/api/courses", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/online_course_lms/courses", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title})}).then(() => { document.getElementById("course-title").value = ""; refreshCourses(); });
 });
 document.getElementById("add-session-btn").addEventListener("click", () => {
@@ -128,13 +128,13 @@ document.getElementById("add-session-btn").addEventListener("click", () => {
   const start = document.getElementById("sess-start").value;
   const seats = document.getElementById("sess-seats").value;
   if (!title.trim()) return;
-  fetch("/api/events", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/course_enrollment_hub/events", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title, start: start, seats: seats})}).then(() => { document.getElementById("sess-title").value = ""; refreshSessions(); });
 });
 document.getElementById("add-fb-btn").addEventListener("click", () => {
   const question = document.getElementById("fb-question").value;
   if (!question.trim()) return;
-  fetch("/api/cards", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/quiz_and_flashcards/cards", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({question: question})}).then(() => { document.getElementById("fb-question").value = ""; refreshFeedback(); });
 });
 refreshCourses(); refreshSessions(); refreshFeedback();

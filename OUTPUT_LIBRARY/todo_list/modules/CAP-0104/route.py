@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/todos/edit'
+ROUTE = '/api/todo_list/todos/edit'
 METHOD = 'POST'
 
 

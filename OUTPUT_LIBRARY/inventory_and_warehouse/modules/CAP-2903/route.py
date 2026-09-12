@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/items/adjust'
+ROUTE = '/api/inventory_and_warehouse/items/adjust'
 METHOD = 'POST'
 
 

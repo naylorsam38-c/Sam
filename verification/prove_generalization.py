@@ -168,18 +168,24 @@ def build_dating_v2(root: Path):
                      "confirm_selector": "#x", "confirm_contains": "x"}, "Dating v2", port=5902)
 
 
-def prove(name, orig_app_dir, v2_project_root, v2_slug, port_a, port_b, sequence):
-    """sequence: list of (label, method, path, body) tuples replayed against
-    both real running apps; asserts every (status, body) pair matches."""
+def prove(name, orig_app_dir, orig_slug, v2_project_root, v2_slug, port_a, port_b, sequence):
+    """sequence: list of (label, method, path_suffix, body) tuples replayed
+    against both real running apps; asserts every (status, body) pair
+    matches. path_suffix (e.g. "/items", "/items/bid") is combined with each
+    side's own real, now-namespaced ROUTE prefix ("/api/<slug>/...") since
+    the original app and its "_v2" harness are two different apps with two
+    different slugs, not the same app twice -- their real routes only ever
+    agreed on the literal path before every capability's ROUTE was
+    namespaced by owning app (see AppBuilder._namespace_route)."""
     print(f"\n{'=' * 70}\n{name}\n{'=' * 70}")
     proc_a = start_app(orig_app_dir, port_a, ROOT)
     v2_app_dir = v2_project_root / v2_slug / "builds" / "APP-001"
     proc_b = start_app(v2_app_dir, port_b, ROOT)
     try:
         all_match = True
-        for label, method, path, body in sequence:
-            ra = http(port_a, method, path, body)
-            rb = http(port_b, method, path, body)
+        for label, method, path_suffix, body in sequence:
+            ra = http(port_a, method, f"/api/{orig_slug}{path_suffix}", body)
+            rb = http(port_b, method, f"/api/{v2_slug}{path_suffix}", body)
             match = ra == rb
             all_match = all_match and match
             marker = "MATCH" if match else "MISMATCH"
@@ -202,13 +208,13 @@ def main():
     orig_auction = HERE / "library_build" / "auction" / "library" / "APP-001"
     results["auction bid"] = prove(
         "Auction: original hand-written bid vs. add_exceeds_threshold_capability",
-        orig_auction, ROOT, "auction_v2", 5910, 5911,
+        orig_auction, "auction", ROOT, "auction_v2", 5910, 5911,
         [
-            ("create item", "POST", "/api/items", {"title": "Regression Test Lamp", "starting_bid": 10}),
-            ("bid too low (5 <= 10)", "POST", "/api/items/bid", {"id": 1, "amount": 5, "bidder": "alice"}),
-            ("bid higher (20 > 10)", "POST", "/api/items/bid", {"id": 1, "amount": 20, "bidder": "bob"}),
-            ("bid not higher (20 <= 20)", "POST", "/api/items/bid", {"id": 1, "amount": 20, "bidder": "carol"}),
-            ("bid on missing item", "POST", "/api/items/bid", {"id": 999, "amount": 50, "bidder": "dave"}),
+            ("create item", "POST", "/items", {"title": "Regression Test Lamp", "starting_bid": 10}),
+            ("bid too low (5 <= 10)", "POST", "/items/bid", {"id": 1, "amount": 5, "bidder": "alice"}),
+            ("bid higher (20 > 10)", "POST", "/items/bid", {"id": 1, "amount": 20, "bidder": "bob"}),
+            ("bid not higher (20 <= 20)", "POST", "/items/bid", {"id": 1, "amount": 20, "bidder": "carol"}),
+            ("bid on missing item", "POST", "/items/bid", {"id": 999, "amount": 50, "bidder": "dave"}),
         ])
 
     # --- Event ticketing ---
@@ -218,12 +224,12 @@ def main():
     orig_event = HERE / "library_build" / "event_ticketing" / "library" / "APP-001"
     results["event_ticketing buy"] = prove(
         "Event ticketing: original hand-written buy vs. add_bounded_counter_capability",
-        orig_event, ROOT, "event_ticketing_v2", 5920, 5921,
+        orig_event, "event_ticketing", ROOT, "event_ticketing_v2", 5920, 5921,
         [
-            ("create event capacity=1", "POST", "/api/events", {"title": "Regression Test Show", "capacity": 1}),
-            ("buy first ticket (0 < 1)", "POST", "/api/events/buy", {"id": 1}),
-            ("buy second ticket (1 >= 1, sold out)", "POST", "/api/events/buy", {"id": 1}),
-            ("buy on missing event", "POST", "/api/events/buy", {"id": 999}),
+            ("create event capacity=1", "POST", "/events", {"title": "Regression Test Show", "capacity": 1}),
+            ("buy first ticket (0 < 1)", "POST", "/events/buy", {"id": 1}),
+            ("buy second ticket (1 >= 1, sold out)", "POST", "/events/buy", {"id": 1}),
+            ("buy on missing event", "POST", "/events/buy", {"id": 999}),
         ])
 
     # --- Dating ---
@@ -233,13 +239,13 @@ def main():
     orig_dating = HERE / "library_build" / "dating" / "library" / "APP-001"
     results["dating swipe"] = prove(
         "Dating: original hand-written swipe vs. add_symmetric_relationship_capability",
-        orig_dating, ROOT, "dating_v2", 5930, 5931,
+        orig_dating, "dating", ROOT, "dating_v2", 5930, 5931,
         [
-            ("create profile 1", "POST", "/api/profiles", {"name": "Regression Alice"}),
-            ("create profile 2", "POST", "/api/profiles", {"name": "Regression Bob"}),
-            ("1 likes 2 (no match yet)", "POST", "/api/swipes",
+            ("create profile 1", "POST", "/profiles", {"name": "Regression Alice"}),
+            ("create profile 2", "POST", "/profiles", {"name": "Regression Bob"}),
+            ("1 likes 2 (no match yet)", "POST", "/swipes",
              {"profile_id": 1, "target_id": 2, "liked": True}),
-            ("2 likes 1 (reciprocal -> match)", "POST", "/api/swipes",
+            ("2 likes 1 (reciprocal -> match)", "POST", "/swipes",
              {"profile_id": 2, "target_id": 1, "liked": True}),
         ])
 

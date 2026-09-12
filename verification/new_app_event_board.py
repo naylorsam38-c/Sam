@@ -94,7 +94,7 @@ def build(root: Path):
 const ME = "organizer@example.com";
 
 function refreshEvents() {
-  fetch("/api/events").then(r => r.json()).then(data => {
+  fetch("/api/community_event_board/events").then(r => r.json()).then(data => {
     const list = document.getElementById("event-list");
     list.innerHTML = "";
     (data.events || []).forEach(e => {
@@ -103,13 +103,13 @@ function refreshEvents() {
       const rsvp = document.createElement("button");
       rsvp.textContent = "RSVP"; rsvp.style.marginLeft = "8px";
       rsvp.addEventListener("click", () => {
-        fetch("/api/events/rsvp", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/community_event_board/events/rsvp", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: e.id})}).then(r => r.json()).then(result => {
             if (result.error) {
-              fetch("/api/notifications", {method: "POST", headers: {"Content-Type": "application/json"},
+              fetch("/api/community_event_board/notifications", {method: "POST", headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({recipient: ME, message: "RSVP failed for " + e.title + ": " + result.error})});
             } else {
-              fetch("/api/notifications", {method: "POST", headers: {"Content-Type": "application/json"},
+              fetch("/api/community_event_board/notifications", {method: "POST", headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({recipient: ME, message: "You are confirmed for " + e.title})});
             }
             refreshEvents(); refreshNotifications();
@@ -121,7 +121,7 @@ function refreshEvents() {
   });
 }
 function refreshNotifications() {
-  fetch("/api/notifications?recipient=" + encodeURIComponent(ME)).then(r => r.json()).then(data => {
+  fetch("/api/community_event_board/notifications?recipient=" + encodeURIComponent(ME)).then(r => r.json()).then(data => {
     const list = document.getElementById("notification-list");
     list.innerHTML = "";
     (data.notifications || []).forEach(n => {
@@ -132,7 +132,7 @@ function refreshNotifications() {
   });
 }
 function refreshAnnouncements() {
-  fetch("/api/messages").then(r => r.json()).then(data => {
+  fetch("/api/team_chat/messages").then(r => r.json()).then(data => {
     const list = document.getElementById("announcement-list");
     list.innerHTML = "";
     (data.messages || []).forEach(m => {
@@ -147,7 +147,7 @@ document.getElementById("add-event-btn").addEventListener("click", () => {
   const start = document.getElementById("ev-start").value;
   const capacity = document.getElementById("ev-capacity").value;
   if (!title.trim()) return;
-  fetch("/api/events", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/community_event_board/events", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title, start: start, capacity: capacity})}).then(() => {
       document.getElementById("ev-title").value = "";
       refreshEvents();
@@ -156,7 +156,7 @@ document.getElementById("add-event-btn").addEventListener("click", () => {
 document.getElementById("post-announce-btn").addEventListener("click", () => {
   const text = document.getElementById("announce-text").value;
   if (!text.trim()) return;
-  fetch("/api/messages", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/team_chat/messages", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({text: text, author: "Organizer"})}).then(() => {
       document.getElementById("announce-text").value = "";
       refreshAnnouncements();

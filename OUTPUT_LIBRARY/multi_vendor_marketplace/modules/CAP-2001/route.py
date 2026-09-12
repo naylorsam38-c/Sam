@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/vendors'
+ROUTE = '/api/multi_vendor_marketplace/vendors'
 METHOD = 'GET'
 
 

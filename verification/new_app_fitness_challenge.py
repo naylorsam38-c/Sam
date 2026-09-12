@@ -84,7 +84,7 @@ def build(root: Path):
 </div>'''
     script = '''
 function refreshChallenges() {
-  fetch("/api/challenges").then(r => r.json()).then(data => {
+  fetch("/api/fitness_challenge_board/challenges").then(r => r.json()).then(data => {
     const list = document.getElementById("challenge-list");
     list.innerHTML = "";
     (data.challenges || []).forEach(c => {
@@ -92,7 +92,7 @@ function refreshChallenges() {
       li.textContent = c.title + " -- " + c.participants + "/" + c.max_participants;
       const join = document.createElement("button"); join.textContent = "Join"; join.style.marginLeft = "8px";
       join.addEventListener("click", () => {
-        fetch("/api/challenges/join", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/fitness_challenge_board/challenges/join", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: c.id})}).then(refreshChallenges);
       });
       li.appendChild(join);
@@ -101,7 +101,7 @@ function refreshChallenges() {
   });
 }
 function refreshWorkouts() {
-  fetch("/api/workouts").then(r => r.json()).then(data => {
+  fetch("/api/fitness_tracking/workouts").then(r => r.json()).then(data => {
     const list = document.getElementById("workout-list");
     list.innerHTML = "";
     (data.workouts || []).forEach(w => {
@@ -115,7 +115,7 @@ document.getElementById("add-challenge-btn").addEventListener("click", () => {
   const title = document.getElementById("ch-title").value;
   const max_participants = document.getElementById("ch-max").value;
   if (!title.trim()) return;
-  fetch("/api/challenges", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/fitness_challenge_board/challenges", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title, max_participants: max_participants})}).then(() => {
       document.getElementById("ch-title").value = "";
       refreshChallenges();

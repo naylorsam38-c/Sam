@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/responses'
+ROUTE = '/api/form_builder_and_survey/responses'
 METHOD = 'POST'
 
 

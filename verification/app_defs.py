@@ -84,7 +84,7 @@ function currentFilter() {
 }
 
 function refresh() {
-  fetch("/api/todos").then(function(r) { return r.json(); }).then(function(data) {
+  fetch("/api/todo_list/todos").then(function(r) { return r.json(); }).then(function(data) {
     todos = data.todos || [];
     render();
   });
@@ -144,21 +144,21 @@ function render() {
 function addTodo(title) {
   title = title.trim();
   if (!title) return;
-  fetch("/api/todos", {
+  fetch("/api/todo_list/todos", {
     method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title})
   }).then(refresh);
 }
 
 function toggleTodo(id) {
-  fetch("/api/todos/toggle", {
+  fetch("/api/todo_list/todos/toggle", {
     method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({id: id})
   }).then(refresh);
 }
 
 function deleteTodo(id) {
-  fetch("/api/todos/delete", {
+  fetch("/api/todo_list/todos/delete", {
     method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({id: id})
   }).then(refresh);
@@ -171,21 +171,21 @@ function saveEdit(id, title) {
   editingId = null;
   title = title.trim();
   if (!title) { deleteTodo(id); return; }
-  fetch("/api/todos/edit", {
+  fetch("/api/todo_list/todos/edit", {
     method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({id: id, title: title})
   }).then(refresh);
 }
 
 function toggleAll(completed) {
-  fetch("/api/todos/toggle_all", {
+  fetch("/api/todo_list/todos/toggle_all", {
     method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({completed: completed})
   }).then(refresh);
 }
 
 function clearCompleted() {
-  fetch("/api/todos/clear_completed", {method: "POST"}).then(refresh);
+  fetch("/api/todo_list/todos/clear_completed", {method: "POST"}).then(refresh);
 }
 
 document.getElementById("new-todo").addEventListener("keydown", function(e) {
@@ -351,7 +351,7 @@ def build_note_taking(root: Path):
 </div>'''
     script = '''
 function refresh() {
-  fetch("/api/notes").then(r => r.json()).then(data => {
+  fetch("/api/note_taking/notes").then(r => r.json()).then(data => {
     const list = document.getElementById("note-list");
     list.innerHTML = "";
     (data.notes || []).forEach(n => {
@@ -364,7 +364,7 @@ function refresh() {
       const del = document.createElement("button");
       del.className = "danger"; del.textContent = "Delete";
       del.addEventListener("click", () => {
-        fetch("/api/notes/delete", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/note_taking/notes/delete", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: n.id})}).then(refresh);
       });
       li.appendChild(strong); li.appendChild(p); li.appendChild(del);
@@ -376,7 +376,7 @@ document.getElementById("add-note-btn").addEventListener("click", () => {
   const title = document.getElementById("note-title").value;
   const body = document.getElementById("note-body").value;
   if (!title.trim()) return;
-  fetch("/api/notes", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/note_taking/notes", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title, body: body})}).then(() => {
       document.getElementById("note-title").value = "";
       document.getElementById("note-body").value = "";
@@ -457,7 +457,7 @@ def build_habit_tracker(root: Path):
 </div>'''
     script = '''
 function refresh() {
-  fetch("/api/habits").then(r => r.json()).then(data => {
+  fetch("/api/habit_tracker/habits").then(r => r.json()).then(data => {
     const list = document.getElementById("habit-list");
     list.innerHTML = "";
     (data.habits || []).forEach(h => {
@@ -469,13 +469,13 @@ function refresh() {
       const chk = document.createElement("button");
       chk.textContent = "Check in";
       chk.addEventListener("click", () => {
-        fetch("/api/habits/checkin", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/habit_tracker/habits/checkin", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: h.id})}).then(refresh);
       });
       const del = document.createElement("button");
       del.className = "danger"; del.textContent = "Delete";
       del.addEventListener("click", () => {
-        fetch("/api/habits/delete", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/habit_tracker/habits/delete", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: h.id})}).then(refresh);
       });
       li.appendChild(label); li.appendChild(chk); li.appendChild(del);
@@ -486,7 +486,7 @@ function refresh() {
 document.getElementById("add-habit-btn").addEventListener("click", () => {
   const name = document.getElementById("habit-name").value;
   if (!name.trim()) return;
-  fetch("/api/habits", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/habit_tracker/habits", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name})}).then(() => {
       document.getElementById("habit-name").value = "";
       refresh();
@@ -542,7 +542,7 @@ def build_calendar(root: Path):
 <div class="card"><ul id="event-list" data-slot="event_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/events").then(r => r.json()).then(data => {
+  fetch("/api/calendar_and_scheduling/events").then(r => r.json()).then(data => {
     const list = document.getElementById("event-list");
     list.innerHTML = "";
     (data.events || []).forEach(e => {
@@ -552,7 +552,7 @@ function refresh() {
       del.className = "danger"; del.textContent = "Delete";
       del.style.marginLeft = "8px";
       del.addEventListener("click", () => {
-        fetch("/api/events/delete", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/calendar_and_scheduling/events/delete", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: e.id})}).then(refresh);
       });
       li.appendChild(del);
@@ -564,7 +564,7 @@ document.getElementById("add-event-btn").addEventListener("click", () => {
   const title = document.getElementById("ev-title").value;
   const start = document.getElementById("ev-start").value;
   if (!title.trim()) return;
-  fetch("/api/events", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/calendar_and_scheduling/events", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title, start: start})}).then(() => {
       document.getElementById("ev-title").value = "";
       refresh();
@@ -627,7 +627,7 @@ def build_expense_tracker(root: Path):
 <div class="card"><div id="exp-total"></div><ul id="expense-list" data-slot="expense_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/expenses").then(r => r.json()).then(data => {
+  fetch("/api/expense_tracker/expenses").then(r => r.json()).then(data => {
     const list = document.getElementById("expense-list");
     list.innerHTML = "";
     (data.expenses || []).forEach(x => {
@@ -636,7 +636,7 @@ function refresh() {
       list.appendChild(li);
     });
   });
-  fetch("/api/expenses/total").then(r => r.json()).then(d => {
+  fetch("/api/expense_tracker/expenses/total").then(r => r.json()).then(d => {
     document.getElementById("exp-total").textContent = "Total: $" + d.total;
   });
 }
@@ -644,7 +644,7 @@ document.getElementById("add-expense-btn").addEventListener("click", () => {
   const description = document.getElementById("exp-desc").value;
   const amount = document.getElementById("exp-amount").value;
   if (!description.trim()) return;
-  fetch("/api/expenses", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/expense_tracker/expenses", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({description: description, amount: amount})}).then(() => {
       document.getElementById("exp-desc").value = "";
       document.getElementById("exp-amount").value = "";
@@ -711,7 +711,7 @@ def build_invoicing(root: Path):
 <div class="card"><ul id="invoice-list" data-slot="invoice_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/invoices").then(r => r.json()).then(data => {
+  fetch("/api/invoicing/invoices").then(r => r.json()).then(data => {
     const list = document.getElementById("invoice-list");
     list.innerHTML = "";
     (data.invoices || []).forEach(i => {
@@ -720,7 +720,7 @@ function refresh() {
       const pay = document.createElement("button");
       pay.textContent = "Mark paid"; pay.style.marginLeft = "8px";
       pay.addEventListener("click", () => {
-        fetch("/api/invoices/pay", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/invoicing/invoices/pay", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: i.id})}).then(refresh);
       });
       li.appendChild(pay);
@@ -732,7 +732,7 @@ document.getElementById("add-invoice-btn").addEventListener("click", () => {
   const client = document.getElementById("inv-client").value;
   const amount = document.getElementById("inv-amount").value;
   if (!client.trim()) return;
-  fetch("/api/invoices", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/invoicing/invoices", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({client: client, amount: amount})}).then(() => {
       document.getElementById("inv-client").value = "";
       document.getElementById("inv-amount").value = "";
@@ -799,7 +799,7 @@ def build_accounting_ledger(root: Path):
 <div class="card"><div id="ledger-balance"></div><ul id="entry-list" data-slot="entry_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/entries").then(r => r.json()).then(data => {
+  fetch("/api/accounting_ledger/entries").then(r => r.json()).then(data => {
     const list = document.getElementById("entry-list");
     list.innerHTML = "";
     (data.entries || []).forEach(e => {
@@ -808,7 +808,7 @@ function refresh() {
       list.appendChild(li);
     });
   });
-  fetch("/api/entries/balance").then(r => r.json()).then(d => {
+  fetch("/api/accounting_ledger/entries/balance").then(r => r.json()).then(d => {
     document.getElementById("ledger-balance").textContent = "Balance: $" + d.balance;
   });
 }
@@ -817,7 +817,7 @@ document.getElementById("add-entry-btn").addEventListener("click", () => {
   const amount = document.getElementById("entry-amount").value;
   const type = document.getElementById("entry-type").value;
   if (!description.trim()) return;
-  fetch("/api/entries", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/accounting_ledger/entries", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({description: description, amount: amount, type: type})}).then(() => {
       document.getElementById("entry-desc").value = "";
       document.getElementById("entry-amount").value = "";
@@ -885,7 +885,7 @@ def build_crm(root: Path):
 <div class="card"><ul id="contact-list" data-slot="contact_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/contacts").then(r => r.json()).then(data => {
+  fetch("/api/crm/contacts").then(r => r.json()).then(data => {
     const list = document.getElementById("contact-list");
     list.innerHTML = "";
     (data.contacts || []).forEach(c => {
@@ -898,7 +898,7 @@ function refresh() {
         sel.appendChild(opt);
       });
       sel.addEventListener("change", () => {
-        fetch("/api/contacts/stage", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/crm/contacts/stage", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: c.id, stage: sel.value})}).then(refresh);
       });
       li.appendChild(sel);
@@ -910,7 +910,7 @@ document.getElementById("add-contact-btn").addEventListener("click", () => {
   const name = document.getElementById("c-name").value;
   const email = document.getElementById("c-email").value;
   if (!name.trim()) return;
-  fetch("/api/contacts", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/crm/contacts", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name, email: email})}).then(() => {
       document.getElementById("c-name").value = "";
       document.getElementById("c-email").value = "";
@@ -975,7 +975,7 @@ def build_helpdesk(root: Path):
 <div class="card"><ul id="ticket-list" data-slot="ticket_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/tickets").then(r => r.json()).then(data => {
+  fetch("/api/helpdesk_ticketing/tickets").then(r => r.json()).then(data => {
     const list = document.getElementById("ticket-list");
     list.innerHTML = "";
     (data.tickets || []).forEach(t => {
@@ -985,7 +985,7 @@ function refresh() {
         const close = document.createElement("button");
         close.textContent = "Close"; close.style.marginLeft = "8px";
         close.addEventListener("click", () => {
-          fetch("/api/tickets/close", {method: "POST", headers: {"Content-Type": "application/json"},
+          fetch("/api/helpdesk_ticketing/tickets/close", {method: "POST", headers: {"Content-Type": "application/json"},
             body: JSON.stringify({id: t.id})}).then(refresh);
         });
         li.appendChild(close);
@@ -997,7 +997,7 @@ function refresh() {
 document.getElementById("add-ticket-btn").addEventListener("click", () => {
   const subject = document.getElementById("t-subject").value;
   if (!subject.trim()) return;
-  fetch("/api/tickets", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/helpdesk_ticketing/tickets", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({subject: subject})}).then(() => {
       document.getElementById("t-subject").value = "";
       refresh();
@@ -1063,7 +1063,7 @@ def build_payroll(root: Path):
 <div class="card"><ul id="pay-records"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/employees").then(r => r.json()).then(data => {
+  fetch("/api/payroll/employees").then(r => r.json()).then(data => {
     const list = document.getElementById("employee-list");
     list.innerHTML = "";
     (data.employees || []).forEach(e => {
@@ -1072,7 +1072,7 @@ function refresh() {
       list.appendChild(li);
     });
   });
-  fetch("/api/payroll/records").then(r => r.json()).then(data => {
+  fetch("/api/payroll/payroll/records").then(r => r.json()).then(data => {
     const list = document.getElementById("pay-records");
     list.innerHTML = "";
     (data.records || []).forEach(r => {
@@ -1086,14 +1086,14 @@ document.getElementById("add-employee-btn").addEventListener("click", () => {
   const name = document.getElementById("emp-name").value;
   const salary = document.getElementById("emp-salary").value;
   if (!name.trim()) return;
-  fetch("/api/employees", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/payroll/employees", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name, salary: salary})}).then(() => {
       document.getElementById("emp-name").value = "";
       refresh();
     });
 });
 document.getElementById("run-payroll-btn").addEventListener("click", () => {
-  fetch("/api/payroll/run", {method: "POST"}).then(refresh);
+  fetch("/api/payroll/payroll/run", {method: "POST"}).then(refresh);
 });
 refresh();
 '''
@@ -1154,7 +1154,7 @@ def build_project_management(root: Path):
 <div class="card"><ul id="task-list" data-slot="task_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/tasks").then(r => r.json()).then(data => {
+  fetch("/api/project_management/tasks").then(r => r.json()).then(data => {
     const list = document.getElementById("task-list");
     list.innerHTML = "";
     (data.tasks || []).forEach(t => {
@@ -1167,7 +1167,7 @@ function refresh() {
         sel.appendChild(opt);
       });
       sel.addEventListener("change", () => {
-        fetch("/api/tasks/status", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/project_management/tasks/status", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: t.id, status: sel.value})}).then(refresh);
       });
       li.appendChild(sel);
@@ -1178,7 +1178,7 @@ function refresh() {
 document.getElementById("add-task-btn").addEventListener("click", () => {
   const title = document.getElementById("task-title").value;
   if (!title.trim()) return;
-  fetch("/api/tasks", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/project_management/tasks", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title})}).then(() => {
       document.getElementById("task-title").value = "";
       refresh();
@@ -1233,7 +1233,7 @@ def build_team_chat(root: Path):
 <div class="card"><ul id="message-list" data-slot="message_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/messages").then(r => r.json()).then(data => {
+  fetch("/api/team_chat/messages").then(r => r.json()).then(data => {
     const list = document.getElementById("message-list");
     list.innerHTML = "";
     (data.messages || []).forEach(m => {
@@ -1246,7 +1246,7 @@ function refresh() {
 document.getElementById("send-msg-btn").addEventListener("click", () => {
   const text = document.getElementById("msg-text").value;
   if (!text.trim()) return;
-  fetch("/api/messages", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/team_chat/messages", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({text: text})}).then(() => {
       document.getElementById("msg-text").value = "";
       refresh();
@@ -1296,7 +1296,7 @@ def build_spreadsheet(root: Path):
 <div class="card"><ul id="cell-list" data-slot="cell_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/cells").then(r => r.json()).then(data => {
+  fetch("/api/spreadsheet/cells").then(r => r.json()).then(data => {
     const list = document.getElementById("cell-list");
     list.innerHTML = "";
     (data.cells || []).forEach(c => {
@@ -1311,7 +1311,7 @@ document.getElementById("set-cell-btn").addEventListener("click", () => {
   const col = document.getElementById("cell-col").value;
   const value = document.getElementById("cell-value").value;
   if (row === "" || col === "") return;
-  fetch("/api/cells/set", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/spreadsheet/cells/set", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({row: row, col: col, value: value})}).then(refresh);
 });
 refresh();
@@ -1354,7 +1354,7 @@ def build_form_builder(root: Path):
 <div class="card"><ul id="response-list" data-slot="response_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/responses").then(r => r.json()).then(data => {
+  fetch("/api/form_builder_and_survey/responses").then(r => r.json()).then(data => {
     const list = document.getElementById("response-list");
     list.innerHTML = "";
     (data.responses || []).forEach(r => {
@@ -1367,7 +1367,7 @@ function refresh() {
 document.getElementById("submit-response-btn").addEventListener("click", () => {
   const answer = document.getElementById("survey-answer").value;
   if (!answer.trim()) return;
-  fetch("/api/responses", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/form_builder_and_survey/responses", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({answer: answer})}).then(() => {
       document.getElementById("survey-answer").value = "";
       refresh();
@@ -1425,7 +1425,7 @@ def build_parcel_tracking(root: Path):
 <div class="card"><ul id="parcel-list" data-slot="parcel_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/parcels").then(r => r.json()).then(data => {
+  fetch("/api/parcel_tracking/parcels").then(r => r.json()).then(data => {
     const list = document.getElementById("parcel-list");
     list.innerHTML = "";
     (data.parcels || []).forEach(p => {
@@ -1438,7 +1438,7 @@ function refresh() {
         sel.appendChild(opt);
       });
       sel.addEventListener("change", () => {
-        fetch("/api/parcels/status", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/parcel_tracking/parcels/status", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: p.id, status: sel.value})}).then(refresh);
       });
       li.appendChild(sel);
@@ -1449,7 +1449,7 @@ function refresh() {
 document.getElementById("add-parcel-btn").addEventListener("click", () => {
   const tracking_no = document.getElementById("parcel-tracking").value;
   if (!tracking_no.trim()) return;
-  fetch("/api/parcels", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/parcel_tracking/parcels", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({tracking_no: tracking_no})}).then(() => {
       document.getElementById("parcel-tracking").value = "";
       refresh();
@@ -1506,7 +1506,7 @@ def build_appointment_booking(root: Path):
 <div class="card"><ul id="appointment-list" data-slot="appointment_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/appointments").then(r => r.json()).then(data => {
+  fetch("/api/appointment_booking/appointments").then(r => r.json()).then(data => {
     const list = document.getElementById("appointment-list");
     list.innerHTML = "";
     (data.appointments || []).forEach(a => {
@@ -1516,7 +1516,7 @@ function refresh() {
         const cancel = document.createElement("button");
         cancel.className = "danger"; cancel.textContent = "Cancel"; cancel.style.marginLeft = "8px";
         cancel.addEventListener("click", () => {
-          fetch("/api/appointments/cancel", {method: "POST", headers: {"Content-Type": "application/json"},
+          fetch("/api/appointment_booking/appointments/cancel", {method: "POST", headers: {"Content-Type": "application/json"},
             body: JSON.stringify({id: a.id})}).then(refresh);
         });
         li.appendChild(cancel);
@@ -1529,7 +1529,7 @@ document.getElementById("book-appt-btn").addEventListener("click", () => {
   const name = document.getElementById("appt-name").value;
   const start = document.getElementById("appt-start").value;
   if (!name.trim()) return;
-  fetch("/api/appointments", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/appointment_booking/appointments", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name, start: start})}).then(() => {
       document.getElementById("appt-name").value = "";
       refresh();
@@ -1588,7 +1588,7 @@ def build_event_ticketing(root: Path):
 <div class="card"><ul id="event-list" data-slot="event_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/events").then(r => r.json()).then(data => {
+  fetch("/api/event_ticketing/events").then(r => r.json()).then(data => {
     const list = document.getElementById("event-list");
     list.innerHTML = "";
     (data.events || []).forEach(e => {
@@ -1597,7 +1597,7 @@ function refresh() {
       const buy = document.createElement("button");
       buy.textContent = "Buy ticket"; buy.style.marginLeft = "8px";
       buy.addEventListener("click", () => {
-        fetch("/api/events/buy", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/event_ticketing/events/buy", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: e.id})}).then(refresh);
       });
       li.appendChild(buy);
@@ -1609,7 +1609,7 @@ document.getElementById("add-event-btn").addEventListener("click", () => {
   const title = document.getElementById("ev-title").value;
   const capacity = document.getElementById("ev-capacity").value;
   if (!title.trim()) return;
-  fetch("/api/events", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/event_ticketing/events", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title, capacity: capacity})}).then(() => {
       document.getElementById("ev-title").value = "";
       refresh();
@@ -1666,7 +1666,7 @@ def build_restaurant_pos(root: Path):
 <div class="card"><ul id="order-list" data-slot="order_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/orders").then(r => r.json()).then(data => {
+  fetch("/api/restaurant_pos/orders").then(r => r.json()).then(data => {
     const list = document.getElementById("order-list");
     list.innerHTML = "";
     (data.orders || []).forEach(o => {
@@ -1676,7 +1676,7 @@ function refresh() {
         const close = document.createElement("button");
         close.textContent = "Close"; close.style.marginLeft = "8px";
         close.addEventListener("click", () => {
-          fetch("/api/orders/close", {method: "POST", headers: {"Content-Type": "application/json"},
+          fetch("/api/restaurant_pos/orders/close", {method: "POST", headers: {"Content-Type": "application/json"},
             body: JSON.stringify({id: o.id})}).then(refresh);
         });
         li.appendChild(close);
@@ -1689,7 +1689,7 @@ document.getElementById("add-order-btn").addEventListener("click", () => {
   const item = document.getElementById("order-item").value;
   const total = document.getElementById("order-total").value;
   if (!item.trim()) return;
-  fetch("/api/orders", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/restaurant_pos/orders", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({item: item, total: total})}).then(() => {
       document.getElementById("order-item").value = "";
       refresh();
@@ -1749,7 +1749,7 @@ def build_inventory(root: Path):
 <div class="card"><ul id="inv-item-list" data-slot="item_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/items").then(r => r.json()).then(data => {
+  fetch("/api/inventory_and_warehouse/items").then(r => r.json()).then(data => {
     const list = document.getElementById("inv-item-list");
     list.innerHTML = "";
     (data.items || []).forEach(i => {
@@ -1757,12 +1757,12 @@ function refresh() {
       li.textContent = i.name + " (" + i.sku + ") -- qty: " + i.qty;
       const plus = document.createElement("button"); plus.textContent = "+1"; plus.style.marginLeft = "8px";
       plus.addEventListener("click", () => {
-        fetch("/api/items/adjust", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/inventory_and_warehouse/items/adjust", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: i.id, delta: 1})}).then(refresh);
       });
       const minus = document.createElement("button"); minus.textContent = "-1"; minus.style.marginLeft = "4px";
       minus.addEventListener("click", () => {
-        fetch("/api/items/adjust", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/inventory_and_warehouse/items/adjust", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: i.id, delta: -1})}).then(refresh);
       });
       li.appendChild(plus); li.appendChild(minus);
@@ -1774,7 +1774,7 @@ document.getElementById("add-item-btn").addEventListener("click", () => {
   const name = document.getElementById("inv-name").value;
   const sku = document.getElementById("inv-sku").value;
   if (!name.trim()) return;
-  fetch("/api/items", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/inventory_and_warehouse/items", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name, sku: sku})}).then(() => {
       document.getElementById("inv-name").value = "";
       refresh();
@@ -1838,7 +1838,7 @@ def build_property_rental(root: Path):
 <div class="card"><ul id="listing-list" data-slot="listing_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/listings").then(r => r.json()).then(data => {
+  fetch("/api/property_rental/listings").then(r => r.json()).then(data => {
     const list = document.getElementById("listing-list");
     list.innerHTML = "";
     (data.listings || []).forEach(l => {
@@ -1852,7 +1852,7 @@ document.getElementById("add-listing-btn").addEventListener("click", () => {
   const title = document.getElementById("listing-title").value;
   const price = document.getElementById("listing-price").value;
   if (!title.trim()) return;
-  fetch("/api/listings", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/property_rental/listings", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title, price: price})}).then(() => {
       document.getElementById("listing-title").value = "";
       refresh();
@@ -1909,7 +1909,7 @@ def build_fleet_tracking(root: Path):
 <div class="card"><ul id="vehicle-list" data-slot="vehicle_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/vehicles").then(r => r.json()).then(data => {
+  fetch("/api/fleet_tracking/vehicles").then(r => r.json()).then(data => {
     const list = document.getElementById("vehicle-list");
     list.innerHTML = "";
     (data.vehicles || []).forEach(v => {
@@ -1922,7 +1922,7 @@ function refresh() {
 document.getElementById("add-vehicle-btn").addEventListener("click", () => {
   const name = document.getElementById("veh-name").value;
   if (!name.trim()) return;
-  fetch("/api/vehicles", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/fleet_tracking/vehicles", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name})}).then(() => {
       document.getElementById("veh-name").value = "";
       refresh();
@@ -1986,7 +1986,7 @@ def build_dating(root: Path):
 <div class="card"><ul id="profile-list" data-slot="profile_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/profiles").then(r => r.json()).then(data => {
+  fetch("/api/dating/profiles").then(r => r.json()).then(data => {
     const list = document.getElementById("profile-list");
     list.innerHTML = "";
     (data.profiles || []).forEach(p => {
@@ -2000,7 +2000,7 @@ document.getElementById("add-profile-btn").addEventListener("click", () => {
   const name = document.getElementById("profile-name").value;
   const bio = document.getElementById("profile-bio").value;
   if (!name.trim()) return;
-  fetch("/api/profiles", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/dating/profiles", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name, bio: bio})}).then(() => {
       document.getElementById("profile-name").value = "";
       refresh();
@@ -2054,7 +2054,7 @@ def build_social_feed(root: Path):
 <div class="card"><ul id="post-list" data-slot="post_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/posts").then(r => r.json()).then(data => {
+  fetch("/api/social_feed/posts").then(r => r.json()).then(data => {
     const list = document.getElementById("post-list");
     list.innerHTML = "";
     (data.posts || []).forEach(p => {
@@ -2062,7 +2062,7 @@ function refresh() {
       li.textContent = p.author + ": " + p.text + " (" + p.likes + " likes)";
       const like = document.createElement("button"); like.textContent = "Like"; like.style.marginLeft = "8px";
       like.addEventListener("click", () => {
-        fetch("/api/posts/like", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/social_feed/posts/like", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: p.id})}).then(refresh);
       });
       li.appendChild(like);
@@ -2073,7 +2073,7 @@ function refresh() {
 document.getElementById("add-post-btn").addEventListener("click", () => {
   const text = document.getElementById("post-text").value;
   if (!text.trim()) return;
-  fetch("/api/posts", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/social_feed/posts", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({text: text})}).then(() => {
       document.getElementById("post-text").value = "";
       refresh();
@@ -2140,7 +2140,7 @@ def build_photo_sharing(root: Path):
 <div class="card"><ul id="photo-list" data-slot="photo_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/photos").then(r => r.json()).then(data => {
+  fetch("/api/photo_sharing/photos").then(r => r.json()).then(data => {
     const list = document.getElementById("photo-list");
     list.innerHTML = "";
     (data.photos || []).forEach(p => {
@@ -2158,7 +2158,7 @@ function refresh() {
 document.getElementById("add-photo-btn").addEventListener("click", () => {
   const caption = document.getElementById("photo-caption").value;
   if (!caption.trim()) return;
-  fetch("/api/photos", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/photo_sharing/photos", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({caption: caption})}).then(() => {
       document.getElementById("photo-caption").value = "";
       refresh();
@@ -2217,7 +2217,7 @@ def build_quiz_and_flashcards(root: Path):
 <div class="card"><ul id="card-list" data-slot="card_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/cards").then(r => r.json()).then(data => {
+  fetch("/api/quiz_and_flashcards/cards").then(r => r.json()).then(data => {
     const list = document.getElementById("card-list");
     list.innerHTML = "";
     (data.cards || []).forEach(c => {
@@ -2225,7 +2225,7 @@ function refresh() {
       li.textContent = c.question + " -> " + c.answer + " (correct " + c.correct_count + "x)";
       const got = document.createElement("button"); got.textContent = "Got it"; got.style.marginLeft = "8px";
       got.addEventListener("click", () => {
-        fetch("/api/cards/review", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/quiz_and_flashcards/cards/review", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: c.id, correct: true})}).then(refresh);
       });
       li.appendChild(got);
@@ -2237,7 +2237,7 @@ document.getElementById("add-card-btn").addEventListener("click", () => {
   const question = document.getElementById("card-question").value;
   const answer = document.getElementById("card-answer").value;
   if (!question.trim()) return;
-  fetch("/api/cards", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/quiz_and_flashcards/cards", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({question: question, answer: answer})}).then(() => {
       document.getElementById("card-question").value = "";
       document.getElementById("card-answer").value = "";
@@ -2301,7 +2301,7 @@ def build_recipe_and_meal_planning(root: Path):
 <div class="card"><ul id="recipe-list" data-slot="recipe_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/recipes").then(r => r.json()).then(data => {
+  fetch("/api/recipe_and_meal_planning/recipes").then(r => r.json()).then(data => {
     const list = document.getElementById("recipe-list");
     list.innerHTML = "";
     (data.recipes || []).forEach(r => {
@@ -2315,7 +2315,7 @@ document.getElementById("add-recipe-btn").addEventListener("click", () => {
   const title = document.getElementById("recipe-title").value;
   const ingredients = document.getElementById("recipe-ingredients").value;
   if (!title.trim()) return;
-  fetch("/api/recipes", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/recipe_and_meal_planning/recipes", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title, ingredients: ingredients})}).then(() => {
       document.getElementById("recipe-title").value = "";
       refresh();
@@ -2375,7 +2375,7 @@ def build_language_learning(root: Path):
 <div class="card"><ul id="lang-card-list" data-slot="card_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/cards").then(r => r.json()).then(data => {
+  fetch("/api/language_learning/cards").then(r => r.json()).then(data => {
     const list = document.getElementById("lang-card-list");
     list.innerHTML = "";
     (data.cards || []).forEach(c => {
@@ -2389,7 +2389,7 @@ document.getElementById("add-lang-card-btn").addEventListener("click", () => {
   const front = document.getElementById("lang-front").value;
   const back = document.getElementById("lang-back").value;
   if (!front.trim()) return;
-  fetch("/api/cards", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/language_learning/cards", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({front: front, back: back})}).then(() => {
       document.getElementById("lang-front").value = "";
       document.getElementById("lang-back").value = "";
@@ -2452,7 +2452,7 @@ def build_online_course_lms(root: Path):
 <div class="card"><ul id="course-list" data-slot="course_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/courses").then(r => r.json()).then(data => {
+  fetch("/api/online_course_lms/courses").then(r => r.json()).then(data => {
     const list = document.getElementById("course-list");
     list.innerHTML = "";
     (data.courses || []).forEach(c => {
@@ -2465,7 +2465,7 @@ function refresh() {
 document.getElementById("add-course-btn").addEventListener("click", () => {
   const title = document.getElementById("course-title").value;
   if (!title.trim()) return;
-  fetch("/api/courses", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/online_course_lms/courses", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title})}).then(() => {
       document.getElementById("course-title").value = "";
       refresh();
@@ -2521,7 +2521,7 @@ def build_file_storage(root: Path):
 <div class="card"><ul id="file-list" data-slot="file_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/files").then(r => r.json()).then(data => {
+  fetch("/api/file_storage_and_sync/files").then(r => r.json()).then(data => {
     const list = document.getElementById("file-list");
     list.innerHTML = "";
     (data.files || []).forEach(f => {
@@ -2530,7 +2530,7 @@ function refresh() {
       const del = document.createElement("button");
       del.className = "danger"; del.textContent = "Delete"; del.style.marginLeft = "8px";
       del.addEventListener("click", () => {
-        fetch("/api/files/delete", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/file_storage_and_sync/files/delete", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: f.id})}).then(refresh);
       });
       li.appendChild(del);
@@ -2542,7 +2542,7 @@ document.getElementById("upload-file-btn").addEventListener("click", () => {
   const name = document.getElementById("file-name").value;
   const content = document.getElementById("file-content").value;
   if (!name.trim()) return;
-  fetch("/api/files", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/file_storage_and_sync/files", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name, content: content})}).then(() => {
       document.getElementById("file-name").value = "";
       refresh();
@@ -2598,7 +2598,7 @@ def build_doc_editor(root: Path):
 <div class="card"><ul id="doc-list" data-slot="doc_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/docs").then(r => r.json()).then(data => {
+  fetch("/api/collaborative_document_editor/docs").then(r => r.json()).then(data => {
     const list = document.getElementById("doc-list");
     list.innerHTML = "";
     (data.docs || []).forEach(d => {
@@ -2611,7 +2611,7 @@ function refresh() {
 document.getElementById("add-doc-btn").addEventListener("click", () => {
   const title = document.getElementById("doc-title").value;
   if (!title.trim()) return;
-  fetch("/api/docs", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/collaborative_document_editor/docs", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title})}).then(() => {
       document.getElementById("doc-title").value = "";
       refresh();
@@ -2678,7 +2678,7 @@ def build_ecommerce(root: Path):
 <div class="card"><ul id="product-list" data-slot="product_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/products").then(r => r.json()).then(data => {
+  fetch("/api/e_commerce_storefront/products").then(r => r.json()).then(data => {
     const list = document.getElementById("product-list");
     list.innerHTML = "";
     (data.products || []).forEach(p => {
@@ -2686,7 +2686,7 @@ function refresh() {
       li.textContent = p.name + " -- $" + p.price;
       const buy = document.createElement("button"); buy.textContent = "Checkout"; buy.style.marginLeft = "8px";
       buy.addEventListener("click", () => {
-        fetch("/api/checkout", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/e_commerce_storefront/checkout", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({product_id: p.id})}).then(refresh);
       });
       li.appendChild(buy);
@@ -2698,7 +2698,7 @@ document.getElementById("add-product-btn").addEventListener("click", () => {
   const name = document.getElementById("prod-name").value;
   const price = document.getElementById("prod-price").value;
   if (!name.trim()) return;
-  fetch("/api/products", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/e_commerce_storefront/products", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name, price: price})}).then(() => {
       document.getElementById("prod-name").value = "";
       refresh();
@@ -2760,7 +2760,7 @@ def build_marketplace(root: Path):
 <div class="card"><ul id="vendor-list" data-slot="vendor_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/vendors").then(r => r.json()).then(data => {
+  fetch("/api/multi_vendor_marketplace/vendors").then(r => r.json()).then(data => {
     const list = document.getElementById("vendor-list");
     list.innerHTML = "";
     (data.vendors || []).forEach(v => {
@@ -2773,7 +2773,7 @@ function refresh() {
 document.getElementById("add-vendor-btn").addEventListener("click", () => {
   const name = document.getElementById("vendor-name").value;
   if (!name.trim()) return;
-  fetch("/api/vendors", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/multi_vendor_marketplace/vendors", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name})}).then(() => {
       document.getElementById("vendor-name").value = "";
       refresh();
@@ -2835,7 +2835,7 @@ def build_auction(root: Path):
 <div class="card"><ul id="auction-item-list" data-slot="item_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/items").then(r => r.json()).then(data => {
+  fetch("/api/auction/items").then(r => r.json()).then(data => {
     const list = document.getElementById("auction-item-list");
     list.innerHTML = "";
     (data.items || []).forEach(i => {
@@ -2849,7 +2849,7 @@ document.getElementById("add-auction-item-btn").addEventListener("click", () => 
   const title = document.getElementById("auction-title").value;
   const startBid = document.getElementById("auction-start-bid").value;
   if (!title.trim()) return;
-  fetch("/api/items", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/auction/items", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title, starting_bid: startBid})}).then(() => {
       document.getElementById("auction-title").value = "";
       refresh();
@@ -2923,7 +2923,7 @@ def build_food_delivery(root: Path):
 <div class="card"><ul id="restaurant-list" data-slot="restaurant_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/restaurants").then(r => r.json()).then(data => {
+  fetch("/api/food_delivery/restaurants").then(r => r.json()).then(data => {
     const list = document.getElementById("restaurant-list");
     list.innerHTML = "";
     (data.restaurants || []).forEach(r => {
@@ -2936,7 +2936,7 @@ function refresh() {
 document.getElementById("add-restaurant-btn").addEventListener("click", () => {
   const name = document.getElementById("rest-name").value;
   if (!name.trim()) return;
-  fetch("/api/restaurants", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/food_delivery/restaurants", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name})}).then(() => {
       document.getElementById("rest-name").value = "";
       refresh();
@@ -2993,7 +2993,7 @@ def build_ride_hailing(root: Path):
 <div class="card"><ul id="ride-list" data-slot="ride_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/rides").then(r => r.json()).then(data => {
+  fetch("/api/ride_hailing/rides").then(r => r.json()).then(data => {
     const list = document.getElementById("ride-list");
     list.innerHTML = "";
     (data.rides || []).forEach(r => {
@@ -3002,7 +3002,7 @@ function refresh() {
       if (r.status === "requested") {
         const accept = document.createElement("button"); accept.textContent = "Accept"; accept.style.marginLeft = "8px";
         accept.addEventListener("click", () => {
-          fetch("/api/rides/status", {method: "POST", headers: {"Content-Type": "application/json"},
+          fetch("/api/ride_hailing/rides/status", {method: "POST", headers: {"Content-Type": "application/json"},
             body: JSON.stringify({id: r.id, status: "accepted"})}).then(refresh);
         });
         li.appendChild(accept);
@@ -3015,7 +3015,7 @@ document.getElementById("request-ride-btn").addEventListener("click", () => {
   const pickup = document.getElementById("ride-pickup").value;
   const dropoff = document.getElementById("ride-dropoff").value;
   if (!pickup.trim()) return;
-  fetch("/api/rides", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/ride_hailing/rides", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({pickup: pickup, dropoff: dropoff})}).then(() => {
       document.getElementById("ride-pickup").value = "";
       refresh();
@@ -3062,7 +3062,7 @@ def build_fitness_tracking(root: Path):
 <div class="card"><ul id="workout-list" data-slot="workout_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/workouts").then(r => r.json()).then(data => {
+  fetch("/api/fitness_tracking/workouts").then(r => r.json()).then(data => {
     const list = document.getElementById("workout-list");
     list.innerHTML = "";
     (data.workouts || []).forEach(w => {
@@ -3076,7 +3076,7 @@ document.getElementById("log-workout-btn").addEventListener("click", () => {
   const type = document.getElementById("workout-type").value;
   const duration = document.getElementById("workout-duration").value;
   if (!type.trim()) return;
-  fetch("/api/workouts", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/fitness_tracking/workouts", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({type: type, duration: duration})}).then(() => {
       document.getElementById("workout-type").value = "";
       refresh();
@@ -3123,7 +3123,7 @@ def build_meditation(root: Path):
 <div class="card"><ul id="session-list" data-slot="session_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/sessions").then(r => r.json()).then(data => {
+  fetch("/api/meditation_and_wellbeing/sessions").then(r => r.json()).then(data => {
     const list = document.getElementById("session-list");
     list.innerHTML = "";
     (data.sessions || []).forEach(s => {
@@ -3137,7 +3137,7 @@ document.getElementById("log-session-btn").addEventListener("click", () => {
   const type = document.getElementById("session-type").value;
   const duration = document.getElementById("session-duration").value;
   if (!type.trim()) return;
-  fetch("/api/sessions", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/meditation_and_wellbeing/sessions", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({type: type, duration: duration})}).then(() => {
       document.getElementById("session-type").value = "";
       refresh();
@@ -3188,7 +3188,7 @@ def build_email_client(root: Path):
 <div class="card"><ul id="inbox-list" data-slot="inbox_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/inbox").then(r => r.json()).then(data => {
+  fetch("/api/email_client/inbox").then(r => r.json()).then(data => {
     const list = document.getElementById("inbox-list");
     list.innerHTML = "";
     (data.inbox || []).forEach(e => {
@@ -3203,7 +3203,7 @@ document.getElementById("send-email-btn").addEventListener("click", () => {
   const subject = document.getElementById("mail-subject").value;
   const body = document.getElementById("mail-body").value;
   if (!to.trim() || !subject.trim()) return;
-  fetch("/api/emails/send", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/email_client/emails/send", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({to: to, subject: subject, body: body})}).then(() => {
       document.getElementById("mail-subject").value = "";
       document.getElementById("mail-body").value = "";
@@ -3264,7 +3264,7 @@ def build_video_conferencing(root: Path):
 <div class="card"><ul id="room-list" data-slot="room_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/rooms").then(r => r.json()).then(data => {
+  fetch("/api/video_conferencing/rooms").then(r => r.json()).then(data => {
     const list = document.getElementById("room-list");
     list.innerHTML = "";
     (data.rooms || []).forEach(r => {
@@ -3272,7 +3272,7 @@ function refresh() {
       li.textContent = r.name + " -- participants: " + r.participants.join(", ");
       const join = document.createElement("button"); join.textContent = "Join as Guest"; join.style.marginLeft = "8px";
       join.addEventListener("click", () => {
-        fetch("/api/rooms/join", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/video_conferencing/rooms/join", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: r.id, participant: "Guest"})}).then(refresh);
       });
       li.appendChild(join);
@@ -3283,7 +3283,7 @@ function refresh() {
 document.getElementById("create-room-btn").addEventListener("click", () => {
   const name = document.getElementById("room-name").value;
   if (!name.trim()) return;
-  fetch("/api/rooms", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/video_conferencing/rooms", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({name: name})}).then(() => {
       document.getElementById("room-name").value = "";
       refresh();
@@ -3338,7 +3338,7 @@ def build_short_video_feed(root: Path):
 <div class="card"><ul id="short-video-list" data-slot="video_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/videos").then(r => r.json()).then(data => {
+  fetch("/api/short_video_feed/videos").then(r => r.json()).then(data => {
     const list = document.getElementById("short-video-list");
     list.innerHTML = "";
     (data.videos || []).forEach(v => {
@@ -3346,7 +3346,7 @@ function refresh() {
       li.textContent = v.caption + " -- " + v.views + " views";
       const view = document.createElement("button"); view.textContent = "Watch"; view.style.marginLeft = "8px";
       view.addEventListener("click", () => {
-        fetch("/api/videos/view", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/short_video_feed/videos/view", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: v.id})}).then(refresh);
       });
       li.appendChild(view);
@@ -3357,7 +3357,7 @@ function refresh() {
 document.getElementById("upload-video-btn").addEventListener("click", () => {
   const caption = document.getElementById("sv-caption").value;
   if (!caption.trim()) return;
-  fetch("/api/videos", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/short_video_feed/videos", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({caption: caption})}).then(() => {
       document.getElementById("sv-caption").value = "";
       refresh();
@@ -3414,7 +3414,7 @@ def build_music_streaming(root: Path):
 <div class="card"><ul id="track-list" data-slot="track_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/tracks").then(r => r.json()).then(data => {
+  fetch("/api/music_streaming/tracks").then(r => r.json()).then(data => {
     const list = document.getElementById("track-list");
     list.innerHTML = "";
     (data.tracks || []).forEach(t => {
@@ -3422,7 +3422,7 @@ function refresh() {
       li.textContent = t.title + " by " + t.artist + " -- " + t.plays + " plays";
       const play = document.createElement("button"); play.textContent = "Play"; play.style.marginLeft = "8px";
       play.addEventListener("click", () => {
-        fetch("/api/tracks/play", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/music_streaming/tracks/play", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: t.id})}).then(refresh);
       });
       li.appendChild(play);
@@ -3434,7 +3434,7 @@ document.getElementById("add-track-btn").addEventListener("click", () => {
   const title = document.getElementById("track-title").value;
   const artist = document.getElementById("track-artist").value;
   if (!title.trim()) return;
-  fetch("/api/tracks", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/music_streaming/tracks", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title, artist: artist})}).then(() => {
       document.getElementById("track-title").value = "";
       refresh();
@@ -3489,7 +3489,7 @@ def build_video_streaming(root: Path):
 <div class="card"><ul id="vs-video-list" data-slot="video_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/videos").then(r => r.json()).then(data => {
+  fetch("/api/video_streaming/videos").then(r => r.json()).then(data => {
     const list = document.getElementById("vs-video-list");
     list.innerHTML = "";
     (data.videos || []).forEach(v => {
@@ -3497,7 +3497,7 @@ function refresh() {
       li.textContent = v.title + " -- " + v.views + " views";
       const watch = document.createElement("button"); watch.textContent = "Watch"; watch.style.marginLeft = "8px";
       watch.addEventListener("click", () => {
-        fetch("/api/videos/watch", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/video_streaming/videos/watch", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: v.id})}).then(refresh);
       });
       li.appendChild(watch);
@@ -3508,7 +3508,7 @@ function refresh() {
 document.getElementById("add-vs-video-btn").addEventListener("click", () => {
   const title = document.getElementById("vs-title").value;
   if (!title.trim()) return;
-  fetch("/api/videos", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/video_streaming/videos", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title})}).then(() => {
       document.getElementById("vs-title").value = "";
       refresh();
@@ -3563,7 +3563,7 @@ def build_podcast(root: Path):
 <div class="card"><ul id="episode-list" data-slot="episode_list"></ul></div>'''
     script = '''
 function refresh() {
-  fetch("/api/episodes").then(r => r.json()).then(data => {
+  fetch("/api/podcast/episodes").then(r => r.json()).then(data => {
     const list = document.getElementById("episode-list");
     list.innerHTML = "";
     (data.episodes || []).forEach(e => {
@@ -3571,7 +3571,7 @@ function refresh() {
       li.textContent = e.title + " -- " + e.plays + " plays";
       const play = document.createElement("button"); play.textContent = "Play"; play.style.marginLeft = "8px";
       play.addEventListener("click", () => {
-        fetch("/api/episodes/play", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/podcast/episodes/play", {method: "POST", headers: {"Content-Type": "application/json"},
           body: JSON.stringify({id: e.id})}).then(refresh);
       });
       li.appendChild(play);
@@ -3582,7 +3582,7 @@ function refresh() {
 document.getElementById("add-episode-btn").addEventListener("click", () => {
   const title = document.getElementById("ep-title").value;
   if (!title.trim()) return;
-  fetch("/api/episodes", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/podcast/episodes", {method: "POST", headers: {"Content-Type": "application/json"},
     body: JSON.stringify({title: title})}).then(() => {
       document.getElementById("ep-title").value = "";
       refresh();

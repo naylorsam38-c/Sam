@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/expenses/delete'
+ROUTE = '/api/expense_tracker/expenses/delete'
 METHOD = 'POST'
 
 

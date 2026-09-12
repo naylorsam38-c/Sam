@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/vehicles/location'
+ROUTE = '/api/fleet_tracking/vehicles/location'
 METHOD = 'POST'
 
 

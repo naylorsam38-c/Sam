@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/notes/delete'
+ROUTE = '/api/note_taking/notes/delete'
 METHOD = 'POST'
 
 

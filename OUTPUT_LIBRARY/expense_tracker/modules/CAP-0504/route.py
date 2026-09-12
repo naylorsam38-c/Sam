@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/expenses/total'
+ROUTE = '/api/expense_tracker/expenses/total'
 METHOD = 'GET'
 
 

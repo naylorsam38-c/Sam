@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/tickets/delete'
+ROUTE = '/api/helpdesk_ticketing/tickets/delete'
 METHOD = 'POST'
 
 

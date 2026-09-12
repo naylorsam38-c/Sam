@@ -413,6 +413,25 @@ class AppBuilder:
         host_py = HOST_APP_PY_TEMPLATE.format(host_num=self.host_num) % {"index_html": index_html}
         write(self.impls / cap_id / "IMPL-01" / cap_id / "app.py", host_py)
 
+    def _namespace_route(self, route: str) -> str:
+        """The real architectural fix for cross-app URL collisions (found by
+        full_library_stress_test.py merging the whole library into one
+        system: 15 different apps independently chose the same natural
+        path -- e.g. "/api/events" -- for their own feature, and the host's
+        loader silently let the last-loaded one win, making 23 capabilities
+        unreachable). Every app's own slug is already guaranteed globally
+        unique -- it's the actual OUTPUT_LIBRARY/NEW_APPS_FROM_LIBRARY
+        directory name -- so namespacing every ROUTE under it makes cross-app
+        collision structurally impossible, not merely unlikely, without
+        touching a single handler_body: this is the one place every route
+        string is written, so every existing and future capability gets it
+        automatically. A capability copied verbatim into another app via
+        reuse_capability_verbatim() keeps the ORIGINAL app's namespace
+        (correct: it is still, honestly, that app's real, single-sourced
+        implementation and data file, just mounted into a second app)."""
+        assert route.startswith("/api/"), f"expected a route starting with /api/, got {route!r}"
+        return f"/api/{self.slug}{route[len('/api'):]}"
+
     def add_capability(self, num: str, name: str, route: str, method: str, handler_body: str,
                         output_fields=(), required_input=(), side_effects=(), slot_id=None,
                         selector=None, data_filename=None, dependencies=(), extra_error_codes=(),
@@ -457,7 +476,8 @@ class AppBuilder:
                               data_access=data_access))
         write_json(self.impls / cap_id / "IMPL-01.json",
                    impl_record(f"{cap_id}/IMPL-01", cap_id, f"{cap_id}/route.py"))
-        body = store_helpers(df) + f'\nROUTE = {route!r}\nMETHOD = {method!r}\n\n\n' + handler_body
+        namespaced_route = self._namespace_route(route)
+        body = store_helpers(df) + f'\nROUTE = {namespaced_route!r}\nMETHOD = {method!r}\n\n\n' + handler_body
         write(self.impls / cap_id / "IMPL-01" / cap_id / "route.py", body)
         self.required_caps.append(cap_id)
         if slot_id:

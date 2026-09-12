@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/cards/review'
+ROUTE = '/api/quiz_and_flashcards/cards/review'
 METHOD = 'POST'
 
 

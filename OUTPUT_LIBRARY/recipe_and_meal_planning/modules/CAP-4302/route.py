@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/recipes'
+ROUTE = '/api/recipe_and_meal_planning/recipes'
 METHOD = 'POST'
 
 

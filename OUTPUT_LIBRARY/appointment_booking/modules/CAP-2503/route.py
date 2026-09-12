@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/appointments/cancel'
+ROUTE = '/api/appointment_booking/appointments/cancel'
 METHOD = 'POST'
 
 

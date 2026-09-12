@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/videos/watch'
+ROUTE = '/api/video_streaming/videos/watch'
 METHOD = 'POST'
 
 

@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/emails/send'
+ROUTE = '/api/email_client/emails/send'
 METHOD = 'POST'
 
 

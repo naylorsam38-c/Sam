@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/notifications'
+ROUTE = '/api/course_enrollment_hub/notifications'
 METHOD = 'POST'
 
 

@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/events/delete'
+ROUTE = '/api/community_event_board/events/delete'
 METHOD = 'POST'
 
 

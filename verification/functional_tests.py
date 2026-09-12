@@ -74,11 +74,11 @@ def test_todo_list(port, results):
     app_dir = fresh_copy("todo_list")
     proc = start(app_dir, port)
     try:
-        check("create todo", call(port, "POST", "/api/todos", {"title": "Buy milk"}),
+        check("create todo", call(port, "POST", "/api/todo_list/todos", {"title": "Buy milk"}),
               lambda r: r[0] == 201 and r[1]["title"] == "Buy milk", results)
-        check("toggle todo", call(port, "POST", "/api/todos/toggle", {"id": 1}),
+        check("toggle todo", call(port, "POST", "/api/todo_list/todos/toggle", {"id": 1}),
               lambda r: r[0] == 200 and r[1]["completed"] is True, results)
-        check("standard error shape on 404", call(port, "POST", "/api/todos/delete", {"id": 999}),
+        check("standard error shape on 404", call(port, "POST", "/api/todo_list/todos/delete", {"id": 999}),
               lambda r: r[0] == 404 and r[1]["error"]["code"] == "NOT_FOUND", results)
     finally:
         proc.terminate(); proc.wait(timeout=5)
@@ -89,11 +89,11 @@ def test_payroll(port, results):
     app_dir = fresh_copy("payroll")
     proc = start(app_dir, port)
     try:
-        call(port, "POST", "/api/employees", {"name": "Alex", "salary": 1000})
-        call(port, "POST", "/api/employees", {"name": "Sam", "salary": 2000})
-        check("run payroll for 2 employees", call(port, "POST", "/api/payroll/run"),
+        call(port, "POST", "/api/payroll/employees", {"name": "Alex", "salary": 1000})
+        call(port, "POST", "/api/payroll/employees", {"name": "Sam", "salary": 2000})
+        check("run payroll for 2 employees", call(port, "POST", "/api/payroll/payroll/run"),
               lambda r: r[0] == 200 and r[1]["created"] == 2, results)
-        check("pay records have correct 80% net", call(port, "GET", "/api/payroll/records"),
+        check("pay records have correct 80% net", call(port, "GET", "/api/payroll/payroll/records"),
               lambda r: r[0] == 200 and {rec["net"] for rec in r[1]["records"]} == {800.0, 1600.0}, results)
     finally:
         proc.terminate(); proc.wait(timeout=5)
@@ -104,12 +104,12 @@ def test_dating(port, results):
     app_dir = fresh_copy("dating")
     proc = start(app_dir, port)
     try:
-        call(port, "POST", "/api/profiles", {"name": "Alice"})
-        call(port, "POST", "/api/profiles", {"name": "Bob"})
-        check("one-way like is not yet a match", call(port, "POST", "/api/swipes",
+        call(port, "POST", "/api/dating/profiles", {"name": "Alice"})
+        call(port, "POST", "/api/dating/profiles", {"name": "Bob"})
+        check("one-way like is not yet a match", call(port, "POST", "/api/dating/swipes",
               {"profile_id": 1, "target_id": 2, "liked": True}),
               lambda r: r[0] == 200 and r[1]["match"] is False, results)
-        check("reciprocal like is a real match", call(port, "POST", "/api/swipes",
+        check("reciprocal like is a real match", call(port, "POST", "/api/dating/swipes",
               {"profile_id": 2, "target_id": 1, "liked": True}),
               lambda r: r[0] == 200 and r[1]["match"] is True, results)
     finally:
@@ -121,15 +121,18 @@ def test_community_event_board(port, results):
     app_dir = fresh_copy("community_event_board")
     proc = start(app_dir, port)
     try:
-        call(port, "POST", "/api/events", {"title": "Tiny Picnic", "start": "2026-12-05T12:00:00", "capacity": 1})
-        check("first RSVP succeeds", call(port, "POST", "/api/events/rsvp", {"id": 1}),
+        call(port, "POST", "/api/community_event_board/events",
+             {"title": "Tiny Picnic", "start": "2026-12-05T12:00:00", "capacity": 1})
+        check("first RSVP succeeds", call(port, "POST", "/api/community_event_board/events/rsvp", {"id": 1}),
               lambda r: r[0] == 200 and r[1]["attendees"] == 1, results)
-        check("second RSVP correctly rejected (full)", call(port, "POST", "/api/events/rsvp", {"id": 1}),
+        check("second RSVP correctly rejected (full)",
+              call(port, "POST", "/api/community_event_board/events/rsvp", {"id": 1}),
               lambda r: r[0] == 400 and r[1]["error"]["message"] == "event is full", results)
-        check("announcement reused verbatim from team_chat", call(port, "POST", "/api/messages",
+        check("announcement reused verbatim from team_chat", call(port, "POST", "/api/team_chat/messages",
               {"text": "Moved indoors", "author": "Organizer"}),
               lambda r: r[0] == 201 and r[1]["text"] == "Moved indoors", results)
-        check("invalid date rejected by real ISO-8601 validation", call(port, "POST", "/api/events",
+        check("invalid date rejected by real ISO-8601 validation",
+              call(port, "POST", "/api/community_event_board/events",
               {"title": "Bad", "start": "not-a-date"}),
               lambda r: r[0] == 400 and "ISO-8601" in r[1]["error"]["message"], results)
     finally:
@@ -141,16 +144,20 @@ def test_fitness_challenge_board(port, results):
     app_dir = fresh_copy("fitness_challenge_board")
     proc = start(app_dir, port)
     try:
-        check("workout logged via reused fitness_tracking capability", call(port, "POST", "/api/workouts",
-              {"type": "Run", "duration": 30}),
+        check("workout logged via reused fitness_tracking capability",
+              call(port, "POST", "/api/fitness_tracking/workouts", {"type": "Run", "duration": 30}),
               lambda r: r[0] == 201 and r[1]["type"] == "Run", results)
-        call(port, "POST", "/api/challenges", {"title": "Plank Challenge", "max_participants": 1})
-        check("first join succeeds", call(port, "POST", "/api/challenges/join", {"id": 1}),
+        call(port, "POST", "/api/fitness_challenge_board/challenges",
+             {"title": "Plank Challenge", "max_participants": 1})
+        check("first join succeeds",
+              call(port, "POST", "/api/fitness_challenge_board/challenges/join", {"id": 1}),
               lambda r: r[0] == 200 and r[1]["participants"] == 1, results)
-        check("second join correctly rejected (full)", call(port, "POST", "/api/challenges/join", {"id": 1}),
+        check("second join correctly rejected (full)",
+              call(port, "POST", "/api/fitness_challenge_board/challenges/join", {"id": 1}),
               lambda r: r[0] == 400 and r[1]["error"]["message"] == "challenge is full", results)
-        call(port, "POST", "/api/buddy_requests", {"requester_id": 1, "target_id": 2, "interested": True})
-        check("reciprocal buddy request pairs", call(port, "POST", "/api/buddy_requests",
+        call(port, "POST", "/api/fitness_challenge_board/buddy_requests",
+             {"requester_id": 1, "target_id": 2, "interested": True})
+        check("reciprocal buddy request pairs", call(port, "POST", "/api/fitness_challenge_board/buddy_requests",
               {"requester_id": 2, "target_id": 1, "interested": True}),
               lambda r: r[0] == 200 and r[1]["paired"] is True, results)
     finally:
@@ -162,15 +169,19 @@ def test_course_enrollment_hub(port, results):
     app_dir = fresh_copy("course_enrollment_hub")
     proc = start(app_dir, port)
     try:
-        check("course reused verbatim from online_course_lms", call(port, "POST", "/api/courses",
-              {"title": "Composable Systems 101"}),
+        check("course reused verbatim from online_course_lms",
+              call(port, "POST", "/api/online_course_lms/courses", {"title": "Composable Systems 101"}),
               lambda r: r[0] == 201 and r[1]["title"] == "Composable Systems 101", results)
-        call(port, "POST", "/api/events", {"title": "Live Q&A", "start": "2026-12-10T14:00:00", "seats": 1})
-        check("first enrollment succeeds", call(port, "POST", "/api/events/enroll", {"id": 1}),
+        call(port, "POST", "/api/course_enrollment_hub/events",
+             {"title": "Live Q&A", "start": "2026-12-10T14:00:00", "seats": 1})
+        check("first enrollment succeeds",
+              call(port, "POST", "/api/course_enrollment_hub/events/enroll", {"id": 1}),
               lambda r: r[0] == 200 and r[1]["enrolled"] == 1, results)
-        check("second enrollment correctly rejected (full)", call(port, "POST", "/api/events/enroll", {"id": 1}),
+        check("second enrollment correctly rejected (full)",
+              call(port, "POST", "/api/course_enrollment_hub/events/enroll", {"id": 1}),
               lambda r: r[0] == 400 and r[1]["error"]["message"] == "session is full", results)
-        check("quiz card reused verbatim, repurposed as feedback prompt", call(port, "POST", "/api/cards",
+        check("quiz card reused verbatim, repurposed as feedback prompt",
+              call(port, "POST", "/api/quiz_and_flashcards/cards",
               {"question": "How was the session?"}),
               lambda r: r[0] == 201 and r[1]["question"] == "How was the session?", results)
     finally:

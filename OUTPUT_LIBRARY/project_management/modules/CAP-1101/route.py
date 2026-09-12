@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/tasks'
+ROUTE = '/api/project_management/tasks'
 METHOD = 'GET'
 
 

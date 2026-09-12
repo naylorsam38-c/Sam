@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/docs/update'
+ROUTE = '/api/collaborative_document_editor/docs/update'
 METHOD = 'POST'
 
 

@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/messages/delete'
+ROUTE = '/api/team_chat/messages/delete'
 METHOD = 'POST'
 
 

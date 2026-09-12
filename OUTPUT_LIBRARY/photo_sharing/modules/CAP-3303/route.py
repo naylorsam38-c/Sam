@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/photos/like'
+ROUTE = '/api/photo_sharing/photos/like'
 METHOD = 'POST'
 
 

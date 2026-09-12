@@ -17,7 +17,7 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/rides/status'
+ROUTE = '/api/ride_hailing/rides/status'
 METHOD = 'POST'
 
 
