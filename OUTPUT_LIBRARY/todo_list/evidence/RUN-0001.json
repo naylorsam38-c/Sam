@@ -1,0 +1,17 @@
+{
+  "run": "RUN-0001",
+  "checks_passed": [
+    "CHK-001",
+    "CHK-201",
+    "CHK-202",
+    "CHK-203",
+    "CHK-204",
+    "CHK-205",
+    "CHK-206",
+    "CHK-207",
+    "CHK-020"
+  ],
+  "checks_failed": [],
+  "browser_check_present": true,
+  "browser_check_passed": true
+}

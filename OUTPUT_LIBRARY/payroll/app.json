@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-1000/app.py"
+  ],
+  "port": 5010,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#emp-name",
+    "input_value": "Alex Kim",
+    "action_selector": "#add-employee-btn",
+    "confirm_selector": "text=Alex Kim",
+    "confirm_contains": "Alex Kim"
+  }
+}

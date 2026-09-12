@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-3700/app.py"
+  ],
+  "port": 5037,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#ep-title",
+    "input_value": "Episode 1: Intro",
+    "action_selector": "#add-episode-btn",
+    "confirm_selector": "text=Episode 1: Intro",
+    "confirm_contains": "Episode 1: Intro"
+  }
+}

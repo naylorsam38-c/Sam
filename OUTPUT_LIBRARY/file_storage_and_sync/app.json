@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-1500/app.py"
+  ],
+  "port": 5015,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#file-name",
+    "input_value": "notes.txt",
+    "action_selector": "#upload-file-btn",
+    "confirm_selector": "text=notes.txt",
+    "confirm_contains": "notes.txt"
+  }
+}

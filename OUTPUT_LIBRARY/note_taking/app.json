@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-0200/app.py"
+  ],
+  "port": 5001,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#note-title",
+    "input_value": "Groceries",
+    "action_selector": "#add-note-btn",
+    "confirm_selector": "text=Groceries",
+    "confirm_contains": "Groceries"
+  }
+}

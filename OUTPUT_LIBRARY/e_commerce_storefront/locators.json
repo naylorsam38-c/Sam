@@ -1,0 +1,14 @@
+{
+  "screens": {
+    "APP-001/SCR-001": {
+      "route": "/"
+    }
+  },
+  "buttons": {
+    "APP-001/SCR-001/BTN-001": {
+      "selector": "#product-list",
+      "slot": "product_list",
+      "position": "center"
+    }
+  }
+}

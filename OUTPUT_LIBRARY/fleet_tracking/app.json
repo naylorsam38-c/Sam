@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-3000/app.py"
+  ],
+  "port": 5030,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#veh-name",
+    "input_value": "Truck 7",
+    "action_selector": "#add-vehicle-btn",
+    "confirm_selector": "text=Truck 7",
+    "confirm_contains": "Truck 7"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-2200/app.py"
+  ],
+  "port": 5022,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#rest-name",
+    "input_value": "Pizza Palace",
+    "action_selector": "#add-restaurant-btn",
+    "confirm_selector": "text=Pizza Palace",
+    "confirm_contains": "Pizza Palace"
+  }
+}

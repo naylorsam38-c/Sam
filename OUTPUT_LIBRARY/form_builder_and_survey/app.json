@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-1800/app.py"
+  ],
+  "port": 5018,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#survey-answer",
+    "input_value": "Faster loading",
+    "action_selector": "#submit-response-btn",
+    "confirm_selector": "text=Faster loading",
+    "confirm_contains": "Faster loading"
+  }
+}

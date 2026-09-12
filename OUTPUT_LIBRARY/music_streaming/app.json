@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-3500/app.py"
+  ],
+  "port": 5035,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#track-title",
+    "input_value": "Sunrise",
+    "action_selector": "#add-track-btn",
+    "confirm_selector": "text=Sunrise",
+    "confirm_contains": "Sunrise"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-0800/app.py"
+  ],
+  "port": 5007,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#c-name",
+    "input_value": "Jane Doe",
+    "action_selector": "#add-contact-btn",
+    "confirm_selector": "text=Jane Doe",
+    "confirm_contains": "Jane Doe"
+  }
+}

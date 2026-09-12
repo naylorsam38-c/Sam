@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-0500/app.py"
+  ],
+  "port": 5004,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#exp-desc",
+    "input_value": "Coffee",
+    "action_selector": "#add-expense-btn",
+    "confirm_selector": "text=Coffee",
+    "confirm_contains": "Coffee"
+  }
+}

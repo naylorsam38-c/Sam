@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-1200/app.py"
+  ],
+  "port": 5012,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#msg-text",
+    "input_value": "Hello team",
+    "action_selector": "#send-msg-btn",
+    "confirm_selector": "text=Hello team",
+    "confirm_contains": "Hello team"
+  }
+}

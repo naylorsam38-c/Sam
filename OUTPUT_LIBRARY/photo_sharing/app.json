@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-3300/app.py"
+  ],
+  "port": 5033,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#photo-caption",
+    "input_value": "Sunset",
+    "action_selector": "#add-photo-btn",
+    "confirm_selector": "text=Sunset",
+    "confirm_contains": "Sunset"
+  }
+}

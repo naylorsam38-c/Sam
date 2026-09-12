@@ -1,0 +1,290 @@
+{
+  "applications": [
+    {
+      "id": "APP-001",
+      "name": "Real Language Learning",
+      "status": "active",
+      "owner": "builder",
+      "created_at": "2026-09-12T19:07:32Z",
+      "screens": [
+        "APP-001/SCR-001"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "id": "APP-001/SCR-001",
+      "app_id": "APP-001",
+      "name": "Home",
+      "status": "active",
+      "buttons": [
+        "APP-001/SCR-001/BTN-001"
+      ]
+    }
+  ],
+  "buttons": [
+    {
+      "id": "APP-001/SCR-001/BTN-001",
+      "screen_id": "APP-001/SCR-001",
+      "name": "Add Card",
+      "expected_contract": {
+        "required_input_fields": [],
+        "input_types": {},
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "dependencies": [],
+        "handled_errors": [],
+        "security_constraints": {},
+        "side_effects": [
+          "creates_record"
+        ],
+        "min_version": "1.0.0"
+      },
+      "capability_id": "CAP-4002",
+      "status": "active"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "CAP-4000",
+      "name": "Language Learning Host",
+      "category": "ui",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-4000/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-4001",
+      "name": "List Cards",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "cards"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-4001/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-4002",
+      "name": "Add Card",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "front"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "front",
+            "back",
+            "correct",
+            "incorrect"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-4002/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-4003",
+      "name": "Review Card",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "correct",
+            "incorrect"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [
+        "updates_record"
+      ],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-4003/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    }
+  ],
+  "implementations": [
+    {
+      "id": "CAP-4000/IMPL-01",
+      "capability_id": "CAP-4000",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-4000/IMPL-01",
+        "entrypoint": "CAP-4000/app.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-4001/IMPL-01",
+      "capability_id": "CAP-4001",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-4001/IMPL-01",
+        "entrypoint": "CAP-4001/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-4002/IMPL-01",
+      "capability_id": "CAP-4002",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-4002/IMPL-01",
+        "entrypoint": "CAP-4002/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-4003/IMPL-01",
+      "capability_id": "CAP-4003",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-4003/IMPL-01",
+        "entrypoint": "CAP-4003/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    }
+  ]
+}

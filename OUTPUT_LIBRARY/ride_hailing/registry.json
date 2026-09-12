@@ -1,0 +1,288 @@
+{
+  "applications": [
+    {
+      "id": "APP-001",
+      "name": "Real Ride Hailing",
+      "status": "active",
+      "owner": "builder",
+      "created_at": "2026-09-12T19:07:51Z",
+      "screens": [
+        "APP-001/SCR-001"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "id": "APP-001/SCR-001",
+      "app_id": "APP-001",
+      "name": "Home",
+      "status": "active",
+      "buttons": [
+        "APP-001/SCR-001/BTN-001"
+      ]
+    }
+  ],
+  "buttons": [
+    {
+      "id": "APP-001/SCR-001/BTN-001",
+      "screen_id": "APP-001/SCR-001",
+      "name": "Request Ride",
+      "expected_contract": {
+        "required_input_fields": [],
+        "input_types": {},
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "dependencies": [],
+        "handled_errors": [],
+        "security_constraints": {},
+        "side_effects": [
+          "creates_record"
+        ],
+        "min_version": "1.0.0"
+      },
+      "capability_id": "CAP-2302",
+      "status": "active"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "CAP-2300",
+      "name": "Ride Hailing Host",
+      "category": "ui",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-2300/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-2301",
+      "name": "List Rides",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "rides"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-2301/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-2302",
+      "name": "Request Ride",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "pickup"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "pickup",
+            "dropoff",
+            "status"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-2302/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-2303",
+      "name": "Update Ride Status",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "status"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [
+        "updates_record"
+      ],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-2303/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    }
+  ],
+  "implementations": [
+    {
+      "id": "CAP-2300/IMPL-01",
+      "capability_id": "CAP-2300",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-2300/IMPL-01",
+        "entrypoint": "CAP-2300/app.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-2301/IMPL-01",
+      "capability_id": "CAP-2301",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-2301/IMPL-01",
+        "entrypoint": "CAP-2301/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-2302/IMPL-01",
+      "capability_id": "CAP-2302",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-2302/IMPL-01",
+        "entrypoint": "CAP-2302/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-2303/IMPL-01",
+      "capability_id": "CAP-2303",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-2303/IMPL-01",
+        "entrypoint": "CAP-2303/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "applications": [
+    {
+      "id": "APP-001",
+      "name": "Real Short Video Feed",
+      "status": "active",
+      "owner": "builder",
+      "created_at": "2026-09-12T19:07:52Z",
+      "screens": [
+        "APP-001/SCR-001"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "id": "APP-001/SCR-001",
+      "app_id": "APP-001",
+      "name": "Home",
+      "status": "active",
+      "buttons": [
+        "APP-001/SCR-001/BTN-001"
+      ]
+    }
+  ],
+  "buttons": [
+    {
+      "id": "APP-001/SCR-001/BTN-001",
+      "screen_id": "APP-001/SCR-001",
+      "name": "Upload Video",
+      "expected_contract": {
+        "required_input_fields": [],
+        "input_types": {},
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "dependencies": [],
+        "handled_errors": [],
+        "security_constraints": {},
+        "side_effects": [
+          "creates_record"
+        ],
+        "min_version": "1.0.0"
+      },
+      "capability_id": "CAP-3402",
+      "status": "active"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "CAP-3400",
+      "name": "Short Video Feed Host",
+      "category": "ui",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-3400/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-3401",
+      "name": "List Videos",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "videos"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-3401/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-3402",
+      "name": "Upload Video",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "caption"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "caption",
+            "views",
+            "likes"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-3402/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-3403",
+      "name": "View Video",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "views"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [
+        "updates_record"
+      ],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-3403/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    }
+  ],
+  "implementations": [
+    {
+      "id": "CAP-3400/IMPL-01",
+      "capability_id": "CAP-3400",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-3400/IMPL-01",
+        "entrypoint": "CAP-3400/app.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-3401/IMPL-01",
+      "capability_id": "CAP-3401",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-3401/IMPL-01",
+        "entrypoint": "CAP-3401/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-3402/IMPL-01",
+      "capability_id": "CAP-3402",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-3402/IMPL-01",
+        "entrypoint": "CAP-3402/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-3403/IMPL-01",
+      "capability_id": "CAP-3403",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-3403/IMPL-01",
+        "entrypoint": "CAP-3403/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    }
+  ]
+}

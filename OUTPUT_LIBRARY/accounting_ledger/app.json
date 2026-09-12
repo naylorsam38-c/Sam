@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-0700/app.py"
+  ],
+  "port": 5006,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#entry-desc",
+    "input_value": "Client Payment",
+    "action_selector": "#add-entry-btn",
+    "confirm_selector": "text=Client Payment",
+    "confirm_contains": "Client Payment"
+  }
+}

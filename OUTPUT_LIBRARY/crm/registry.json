@@ -1,0 +1,351 @@
+{
+  "applications": [
+    {
+      "id": "APP-001",
+      "name": "Real CRM",
+      "status": "active",
+      "owner": "builder",
+      "created_at": "2026-09-12T19:07:13Z",
+      "screens": [
+        "APP-001/SCR-001"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "id": "APP-001/SCR-001",
+      "app_id": "APP-001",
+      "name": "Home",
+      "status": "active",
+      "buttons": [
+        "APP-001/SCR-001/BTN-001"
+      ]
+    }
+  ],
+  "buttons": [
+    {
+      "id": "APP-001/SCR-001/BTN-001",
+      "screen_id": "APP-001/SCR-001",
+      "name": "Create Contact",
+      "expected_contract": {
+        "required_input_fields": [],
+        "input_types": {},
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "dependencies": [],
+        "handled_errors": [],
+        "security_constraints": {},
+        "side_effects": [
+          "creates_record"
+        ],
+        "min_version": "1.0.0"
+      },
+      "capability_id": "CAP-0802",
+      "status": "active"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "CAP-0800",
+      "name": "Crm Host",
+      "category": "ui",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-0800/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0801",
+      "name": "List Contacts",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "contacts"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-0801/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0802",
+      "name": "Create Contact",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "name"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "name",
+            "email",
+            "stage"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-0802/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0803",
+      "name": "Update Contact Stage",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "name",
+            "email",
+            "stage"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [
+        "updates_record"
+      ],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-0803/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0804",
+      "name": "Delete Contact",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "deleted"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [
+        "deletes_record"
+      ],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-0804/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    }
+  ],
+  "implementations": [
+    {
+      "id": "CAP-0800/IMPL-01",
+      "capability_id": "CAP-0800",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0800/IMPL-01",
+        "entrypoint": "CAP-0800/app.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0801/IMPL-01",
+      "capability_id": "CAP-0801",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0801/IMPL-01",
+        "entrypoint": "CAP-0801/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0802/IMPL-01",
+      "capability_id": "CAP-0802",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0802/IMPL-01",
+        "entrypoint": "CAP-0802/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0803/IMPL-01",
+      "capability_id": "CAP-0803",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0803/IMPL-01",
+        "entrypoint": "CAP-0803/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0804/IMPL-01",
+      "capability_id": "CAP-0804",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0804/IMPL-01",
+        "entrypoint": "CAP-0804/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    }
+  ]
+}

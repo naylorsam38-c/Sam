@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-1100/app.py"
+  ],
+  "port": 5011,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#task-title",
+    "input_value": "Design homepage",
+    "action_selector": "#add-task-btn",
+    "confirm_selector": "text=Design homepage",
+    "confirm_contains": "Design homepage"
+  }
+}

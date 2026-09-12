@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-3400/app.py"
+  ],
+  "port": 5034,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#sv-caption",
+    "input_value": "Dance clip",
+    "action_selector": "#upload-video-btn",
+    "confirm_selector": "text=Dance clip",
+    "confirm_contains": "Dance clip"
+  }
+}

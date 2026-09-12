@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+
+# Regeneratable build/test scratch (rerun via verification/*.py to recreate) --
+# the durable, reviewable output is OUTPUT_LIBRARY/, not these working dirs.
+verification/work/
+verification/fixtures/
+verification/library_build/
+verification/real_todo_proof/

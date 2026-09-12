@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-2100/app.py"
+  ],
+  "port": 5021,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#auction-title",
+    "input_value": "Vintage Clock",
+    "action_selector": "#add-auction-item-btn",
+    "confirm_selector": "text=Vintage Clock",
+    "confirm_contains": "Vintage Clock"
+  }
+}

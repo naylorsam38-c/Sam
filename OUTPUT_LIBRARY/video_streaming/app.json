@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-3600/app.py"
+  ],
+  "port": 5036,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#vs-title",
+    "input_value": "Documentary Pilot",
+    "action_selector": "#add-vs-video-btn",
+    "confirm_selector": "text=Documentary Pilot",
+    "confirm_contains": "Documentary Pilot"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-1600/app.py"
+  ],
+  "port": 5016,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#doc-title",
+    "input_value": "Project Plan",
+    "action_selector": "#add-doc-btn",
+    "confirm_selector": "text=Project Plan",
+    "confirm_contains": "Project Plan"
+  }
+}
