@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
 """
+SUPERSEDED as the library's canonical todo_list generator: it now lives at
+app_defs.py's build_todo_list(), on the shared AppBuilder/gen_common.py
+machinery (Common Capability Contract v2, the shared CAP-0000 library) like
+every other app in the library -- "0 incompatible capabilities" can't be
+true library-wide while one app's capabilities are generated standalone,
+outside the shared generator. This file is kept only as the exact,
+unmodified record of the real round-7 proof (see REAL_APP_PROOF.md,
+END_TO_END_PROOF.md) and still runs standalone if you want to reproduce
+that specific historical proof; it is no longer part of build_batch.py's
+own app set. Run `python3 build_batch.py todo_list` for the current,
+contract-v2 build.
+
 gen_real_todo_app.py — builds a REAL, non-fixture project for "todo list",
 item #1 of Sam's real 43-app canonical list (canonical_app_types.py), to
 prove build.py against a genuinely different real app -- not the CAP-0001

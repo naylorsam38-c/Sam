@@ -3,15 +3,15 @@
   "skin_version": "1.0.0",
   "branding": {
     "name": "Real Todo List",
-    "color": "#af2f2f"
+    "color": "#2f6f9f"
   },
   "arrangement": [
     {
-      "slot": "new_todo",
-      "position": "top"
+      "slot": "todo_list",
+      "position": "center"
     },
     {
-      "slot": "todo_list",
+      "slot": "new_todo",
       "position": "center"
     },
     {
@@ -32,7 +32,7 @@
     },
     {
       "slot": "clear_completed",
-      "position": "bottom"
+      "position": "center"
     }
   ]
 }

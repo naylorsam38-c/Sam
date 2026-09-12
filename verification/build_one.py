@@ -16,6 +16,7 @@ ROOT = HERE / "library_build"
 ROOT.mkdir(exist_ok=True)
 
 BUILDERS = {
+    "todo_list": app_defs.build_todo_list,
     "note_taking": app_defs.build_note_taking,
     "habit_tracker": app_defs.build_habit_tracker,
     "calendar_and_scheduling": app_defs.build_calendar,

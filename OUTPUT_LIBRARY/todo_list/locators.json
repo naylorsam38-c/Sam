@@ -6,13 +6,13 @@
   },
   "buttons": {
     "APP-001/SCR-001/BTN-001": {
-      "selector": "#new-todo",
-      "slot": "new_todo",
-      "position": "top"
-    },
-    "APP-001/SCR-001/BTN-002": {
       "selector": "#todo-list",
       "slot": "todo_list",
+      "position": "center"
+    },
+    "APP-001/SCR-001/BTN-002": {
+      "selector": "#new-todo",
+      "slot": "new_todo",
       "position": "center"
     },
     "APP-001/SCR-001/BTN-003": {
@@ -38,7 +38,7 @@
     "APP-001/SCR-001/BTN-007": {
       "selector": "#clear-completed",
       "slot": "clear_completed",
-      "position": "bottom"
+      "position": "center"
     }
   }
 }

@@ -1,35 +1,34 @@
 
-import json
-from pathlib import Path
+import importlib.util as _importlib_util
+from pathlib import Path as _Path
 
-DATA_FILE = Path(__file__).resolve().parents[2] / "data" / "todos.json"
+_shared_lib_path = _Path(__file__).resolve().parents[1] / "CAP-0000" / "shared_lib.py"
+_spec = _importlib_util.spec_from_file_location("cap0000_shared_lib", _shared_lib_path)
+_shared = _importlib_util.module_from_spec(_spec)
+_spec.loader.exec_module(_shared)
+
+DATA_FILE_NAME = "todo_list.json"
 
 
 def _load():
-    if not DATA_FILE.is_file():
-        return []
-    try:
-        return json.loads(DATA_FILE.read_text(encoding="utf-8"))
-    except Exception:
-        return []
+    return _shared.load(DATA_FILE_NAME)
 
 
-def _save(todos):
-    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
-    DATA_FILE.write_text(json.dumps(todos), encoding="utf-8")
+def _save(rows):
+    _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = "/api/todos"
-METHOD = "POST"
+ROUTE = '/api/todos'
+METHOD = 'POST'
 
 
 def handle(request):
     body = request.get_json(force=True, silent=True) or {}
-    title = (body.get("title") or "").strip()
+    title = (body.get('title') or '').strip()
     if not title:
-        return 400, {"error": "title is required"}
+        return 400, {'error': 'title is required'}
     todos = _load()
-    next_id = (max([t["id"] for t in todos], default=0)) + 1
-    todo = {"id": next_id, "title": title, "completed": False}
+    next_id = (max([t['id'] for t in todos], default=0)) + 1
+    todo = {'id': next_id, 'title': title, 'completed': False}
     todos.append(todo)
     _save(todos)
     return 201, todo

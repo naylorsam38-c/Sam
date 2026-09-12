@@ -1,0 +1,860 @@
+{
+  "applications": [
+    {
+      "id": "APP-001",
+      "name": "Fitness Challenge Board",
+      "status": "active",
+      "owner": "builder",
+      "created_at": "2026-09-12T20:43:59Z",
+      "screens": [
+        "APP-001/SCR-001"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "id": "APP-001/SCR-001",
+      "app_id": "APP-001",
+      "name": "Home",
+      "status": "active",
+      "buttons": [
+        "APP-001/SCR-001/BTN-001",
+        "APP-001/SCR-001/BTN-002"
+      ]
+    }
+  ],
+  "buttons": [
+    {
+      "id": "APP-001/SCR-001/BTN-001",
+      "screen_id": "APP-001/SCR-001",
+      "name": "Log Workout",
+      "expected_contract": {
+        "required_input_fields": [],
+        "input_types": {},
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "dependencies": [],
+        "handled_errors": [],
+        "security_constraints": {},
+        "side_effects": [
+          "creates_record"
+        ],
+        "min_version": "1.0.0"
+      },
+      "capability_id": "CAP-3802",
+      "status": "active"
+    },
+    {
+      "id": "APP-001/SCR-001/BTN-002",
+      "screen_id": "APP-001/SCR-001",
+      "name": "Create Challenge",
+      "expected_contract": {
+        "required_input_fields": [],
+        "input_types": {},
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "dependencies": [],
+        "handled_errors": [],
+        "security_constraints": {},
+        "side_effects": [
+          "creates_record"
+        ],
+        "min_version": "1.0.0"
+      },
+      "capability_id": "CAP-9802",
+      "status": "active"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "CAP-9800",
+      "name": "Fitness Challenge Board Host",
+      "category": "ui",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "NOT_FOUND",
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9800/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0000",
+      "name": "Shared Capability Library",
+      "category": "library",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": []
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-0000/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-3801",
+      "name": "List Workouts",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "workouts"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "fitness_tracking.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-3801/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-3802",
+      "name": "Log Workout",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "type"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "type",
+            "duration"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "fitness_tracking.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-3802/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9801",
+      "name": "List Challenges",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "challenges"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "challenges.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9801/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9802",
+      "name": "Create Challenge",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "title"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "title",
+            "max_participants",
+            "participants"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "challenges.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9802/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9803",
+      "name": "Join Challenge",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "participants",
+            "title"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "challenges.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "updates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
+      },
+      "implementations": [
+        "CAP-9803/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9804",
+      "name": "Propose Workout Buddy",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "requester_id",
+            "target_id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "requester_id",
+            "target_id",
+            "interested",
+            "paired"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "fitness_challenge_board.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
+      },
+      "implementations": [
+        "CAP-9804/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9805",
+      "name": "List Notifications",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "notifications"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "notifications.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9805/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9806",
+      "name": "Create Notification",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "recipient",
+            "message"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "recipient",
+            "message",
+            "read"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "notifications.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9806/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9807",
+      "name": "Mark Notification Read",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "read"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "notifications.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "updates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
+      },
+      "implementations": [
+        "CAP-9807/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    }
+  ],
+  "implementations": [
+    {
+      "id": "CAP-9800/IMPL-01",
+      "capability_id": "CAP-9800",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9800/IMPL-01",
+        "entrypoint": "CAP-9800/app.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0000/IMPL-01",
+      "capability_id": "CAP-0000",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0000/IMPL-01",
+        "entrypoint": "CAP-0000/shared_lib.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-3801/IMPL-01",
+      "capability_id": "CAP-3801",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-3801/IMPL-01",
+        "entrypoint": "CAP-3801/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-3802/IMPL-01",
+      "capability_id": "CAP-3802",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-3802/IMPL-01",
+        "entrypoint": "CAP-3802/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9801/IMPL-01",
+      "capability_id": "CAP-9801",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9801/IMPL-01",
+        "entrypoint": "CAP-9801/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9802/IMPL-01",
+      "capability_id": "CAP-9802",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9802/IMPL-01",
+        "entrypoint": "CAP-9802/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9803/IMPL-01",
+      "capability_id": "CAP-9803",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9803/IMPL-01",
+        "entrypoint": "CAP-9803/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9804/IMPL-01",
+      "capability_id": "CAP-9804",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9804/IMPL-01",
+        "entrypoint": "CAP-9804/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9805/IMPL-01",
+      "capability_id": "CAP-9805",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9805/IMPL-01",
+        "entrypoint": "CAP-9805/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9806/IMPL-01",
+      "capability_id": "CAP-9806",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9806/IMPL-01",
+        "entrypoint": "CAP-9806/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9807/IMPL-01",
+      "capability_id": "CAP-9807",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9807/IMPL-01",
+        "entrypoint": "CAP-9807/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    }
+  ]
+}

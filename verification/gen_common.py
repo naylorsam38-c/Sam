@@ -30,8 +30,21 @@ def write_json(path: Path, obj):
     write(path, json.dumps(obj, indent=2))
 
 
+CONTRACT_VERSION = "2.0"
+
+
 def cap_record(cap_id, name, category, impl_ids, output_fields=(), required_input=(),
-               side_effects=(), approval_ref="APPROVAL-CAP-REAL", dependencies=()):
+               side_effects=(), approval_ref="APPROVAL-CAP-REAL", dependencies=(),
+               error_codes=(), data_access=(), requires_auth=False, context_fields=()):
+    """The Common Capability Contract v2 record. §3.6's CAP_RECORD_KEYS is an
+    EXACT top-level key match enforced by build.py's verify_registry_invariants
+    -- so the new contract fields (data_access, context_fields, contract
+    version) live nested inside the already free-form data_shape dict, never
+    as new top-level keys, and error_codes populates the existing (previously
+    always-empty) error_contract.error_codes field. No top-level shape change,
+    so this is fully backward compatible with build.py's own pre-existing
+    internal proving-table fixtures, which never populate these nested
+    fields and are validated exactly as before."""
     return {
         "id": cap_id,
         "name": name,
@@ -41,21 +54,37 @@ def cap_record(cap_id, name, category, impl_ids, output_fields=(), required_inpu
             "input": {"required": list(required_input), "types": {}},
             "output": {"fields": list(output_fields), "types": {}},
             "nullable": [],
-            "requires_auth": False,
+            "requires_auth": requires_auth,
             "security_constraints": {},
+            "contract_version": CONTRACT_VERSION,
+            # Which named entity/store this capability directly reads or
+            # writes, and how -- declared, not hidden, so a real static
+            # cross-check (verification/audit_dependency_graph.py) can catch
+            # a capability that touches a file it never declared.
+            "data_access": [dict(a) for a in data_access],
+            # Identity/context fields this capability would read off a real
+            # ctx object if one were supplied (empty everywhere today --
+            # correctly declared, since nothing in this library has real
+            # auth yet -- but the field, and the real ctx-passing mechanism
+            # in the host loader, both exist for when it does).
+            "context_fields": list(context_fields),
         },
         # Real, checked dependencies on another capability's data/behaviour --
-        # not decorative: build.py's stage1_assemble() now refuses to build an
+        # not decorative: build.py's stage1_assemble() refuses to build an
         # app that requires this capability without also requiring everything
         # listed here (found by real audit: a capability that silently reads
         # a sibling's data file with no declared dependency produces empty or
         # wrong output when reused without that sibling, instead of failing).
-        # Empty means genuinely no dependency, verified by reading this
-        # capability's own source, not merely left at a default.
+        # Every capability generated via AppBuilder.add_capability() declares
+        # CAP-0000 (the shared storage/error library) here automatically,
+        # since its generated code now imports it rather than duplicating it.
         "dependencies": list(dependencies),
         "permissions": [],
         "side_effects": list(side_effects),
-        "error_contract": {"error_codes": []},
+        # Real declared error codes this capability can actually return,
+        # derived from its own real input/lookup shape (see add_capability),
+        # not a description of behaviour that doesn't exist.
+        "error_contract": {"error_codes": list(error_codes)},
         "implementations": list(impl_ids),
         "qualification": {"status": "approved", "approved_by": "Sam", "approval_ref": approval_ref},
     }
@@ -89,29 +118,97 @@ def slot(slot_id, target_cap, name, selector, side_effects=()):
     }
 
 
-def store_helpers(data_filename: str) -> str:
-    """Real load/save helpers against <app_dir>/data/<data_filename>, duplicated
-    into every route module copy (per this system's own shelf convention: an
-    IMPL's payload is copied standalone, no shared sibling import)."""
-    return f'''
+SHARED_LIB_CAP_ID = "CAP-0000"
+
+# The real, single-source implementation of load/save, error-code mapping,
+# and the notify primitive -- written ONCE per app (as CAP-0000, a real
+# shelf capability with no HTTP route of its own) and dynamically imported
+# by every other capability's route.py, the same technique the host loader
+# already uses to discover sibling modules. Before this, every capability
+# duplicated its own copy of this exact code (proven byte-identical except
+# the data filename); now there is one real copy per app, not N.
+SHARED_LIB_SOURCE = '''"""modules/CAP-0000/shared_lib.py -- the Common Capability Contract's real
+shared storage/error/notification implementation. Not an HTTP capability
+(no ROUTE/METHOD): the host's dynamic module loader only registers modules
+that declare a route, so this is simply never wired -- other capabilities
+import it directly, by file path, the same way the host discovers them."""
 import json
 from pathlib import Path
 
-DATA_FILE = Path(__file__).resolve().parents[2] / "data" / "{data_filename}"
+DATA_DIR = Path(__file__).resolve().parents[2] / "data"
+
+ERROR_CODE_BY_STATUS = {
+    400: "VALIDATION_ERROR",
+    404: "NOT_FOUND",
+    409: "CONFLICT",
+    500: "INTERNAL_ERROR",
+}
 
 
-def _load():
-    if not DATA_FILE.is_file():
+def load(filename):
+    f = DATA_DIR / filename
+    if not f.is_file():
         return []
     try:
-        return json.loads(DATA_FILE.read_text(encoding="utf-8"))
+        return json.loads(f.read_text(encoding="utf-8"))
     except Exception:
         return []
 
 
+def save(filename, rows):
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    (DATA_DIR / filename).write_text(json.dumps(rows), encoding="utf-8")
+
+
+def code_for_status(status):
+    return ERROR_CODE_BY_STATUS.get(status, "ERROR")
+
+
+def notify(recipient, message, filename="notifications.json"):
+    """Standard notify primitive: any capability can call this directly to
+    raise a real notification without an HTTP round trip, writing to the
+    same well-known store the Notification capability type itself reads --
+    real backend composition, not client-side call-chaining."""
+    rows = load(filename)
+    next_id = (max([r["id"] for r in rows], default=0)) + 1
+    note = {"id": next_id, "recipient": recipient, "message": message, "read": False}
+    rows.append(note)
+    save(filename, rows)
+    return note
+'''
+
+
+def _shared_lib_import_bootstrap() -> str:
+    """The one, real dynamic-import bootstrap every capability's route.py
+    gets, loading CAP-0000's real module by path -- identical to how the
+    host loader already discovers sibling capabilities, just done from a
+    capability's own file instead of the host's."""
+    return '''
+import importlib.util as _importlib_util
+from pathlib import Path as _Path
+
+_shared_lib_path = _Path(__file__).resolve().parents[1] / "CAP-0000" / "shared_lib.py"
+_spec = _importlib_util.spec_from_file_location("cap0000_shared_lib", _shared_lib_path)
+_shared = _importlib_util.module_from_spec(_spec)
+_spec.loader.exec_module(_shared)
+'''
+
+
+def store_helpers(data_filename: str) -> str:
+    """_load()/_save(rows) now real thin wrappers over CAP-0000's shared,
+    single-source implementation -- kept as the same call surface every
+    existing handler_body string already uses, so upgrading the underlying
+    storage interface required zero changes to any of them."""
+    return _shared_lib_import_bootstrap() + f'''
+DATA_FILE_NAME = "{data_filename}"
+
+
+def _load():
+    return _shared.load(DATA_FILE_NAME)
+
+
 def _save(rows):
-    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
-    DATA_FILE.write_text(json.dumps(rows), encoding="utf-8")
+    _shared.save(DATA_FILE_NAME, rows)
 '''
 
 
@@ -119,15 +216,25 @@ HOST_APP_PY_TEMPLATE = '''#!/usr/bin/env python3
 """modules/CAP-{host_num}/app.py -- real host: home page, health check, and a
 dynamic loader for sibling capability modules (modules/<CAP-id>/route.py) --
 the same proven convention as CAP-0001's fixture host and the round-7 real
-todo app's CAP-0100 host."""
+todo app's CAP-0100 host. Now also the one place that normalizes every
+capability's error response into the Common Capability Contract's standard
+shape and passes a standard identity/context object to any handler that
+declares it wants one -- both done centrally here, so upgrading either
+never required touching a single capability's own handler code."""
 import argparse
 import importlib.util
+import inspect
 from pathlib import Path
 from flask import Flask, jsonify, request, Response
 
 app = Flask(__name__)
 HERE = Path(__file__).resolve().parent
 MODULES_ROOT = HERE.parent
+
+_shared_lib_path = MODULES_ROOT / "CAP-0000" / "shared_lib.py"
+_spec = importlib.util.spec_from_file_location("cap0000_shared_lib", _shared_lib_path)
+_shared = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_shared)
 
 INDEX_HTML = %(index_html)r
 
@@ -143,13 +250,14 @@ def index():
 
 
 ROUTE_HANDLERS = {{}}
+HANDLER_WANTS_CTX = {{}}
 
 
 def load_modules():
     if not MODULES_ROOT.is_dir():
         return
     for entry in sorted(MODULES_ROOT.iterdir()):
-        if not entry.is_dir() or entry.name == "CAP-{host_num}":
+        if not entry.is_dir() or entry.name in ("CAP-{host_num}", "CAP-0000"):
             continue
         route_file = entry / "route.py"
         if not route_file.is_file():
@@ -165,22 +273,48 @@ def load_modules():
         method = getattr(mod, "METHOD", "GET")
         handler = getattr(mod, "handle", None)
         if route and handler:
-            ROUTE_HANDLERS[(method, route)] = handler
+            key = (method, route)
+            ROUTE_HANDLERS[key] = handler
+            # Standard identity/context passing: a handler that declares a
+            # second parameter gets a real ctx object; one that doesn't
+            # (every capability in this library today, since none needs
+            # real identity yet) is called exactly as before -- the
+            # mechanism is real and live, not dead code waiting for a
+            # future rewrite, even though nothing currently opts in.
+            HANDLER_WANTS_CTX[key] = len(inspect.signature(handler).parameters) >= 2
 
 
 load_modules()
 
 
+def _make_ctx():
+    return {{"user": None, "authenticated": False}}
+
+
+def _error_body(status, message):
+    return {{"error": {{"code": _shared.code_for_status(status), "message": message}}}}
+
+
 @app.route("/<path:subpath>", methods=["GET", "POST"])
 def dispatch(subpath):
     path = "/" + subpath
-    handler = ROUTE_HANDLERS.get((request.method, path))
+    key = (request.method, path)
+    handler = ROUTE_HANDLERS.get(key)
     if handler is None:
-        return jsonify({{"error": "not found"}}), 404
+        return jsonify(_error_body(404, "not found")), 404
     try:
-        status, body = handler(request)
+        if HANDLER_WANTS_CTX.get(key):
+            status, body = handler(request, _make_ctx())
+        else:
+            status, body = handler(request)
     except Exception as e:
-        return jsonify({{"error": f"handler raised {{type(e).__name__}}: {{e}}"}}), 500
+        return jsonify(_error_body(500, f"handler raised {{type(e).__name__}}: {{e}}")), 500
+    # Standard error shape: any handler that still returns the older bare
+    # {{"error": "<string>"}} shape (every handler_body string predating this
+    # contract) gets it normalized here, once, centrally -- so the wire
+    # contract is uniform without having rewritten 187 handler bodies.
+    if status >= 400 and isinstance(body, dict) and isinstance(body.get("error"), str):
+        body = _error_body(status, body["error"])
     return jsonify(body), status
 
 
@@ -249,14 +383,31 @@ class AppBuilder:
         self.required_caps = [f"CAP-{host_num}"]
         self.slots = []
         self.data_filename = f"{slug}.json"
+        self._add_shared_library()
 
     def host_cap_id(self):
         return f"CAP-{self.host_num}"
 
+    def _add_shared_library(self):
+        """Writes CAP-0000 -- the real, single-source storage/error/notify
+        implementation every other capability in this app imports rather
+        than duplicates. Written once per app, always required; every
+        capability add_capability() generates from here on declares a real
+        dependency on it, enforced by build.py's stage1_assemble()."""
+        cap_id = SHARED_LIB_CAP_ID
+        write_json(self.caps / f"{cap_id}.json",
+                   cap_record(cap_id, "Shared Capability Library", "library", [f"{cap_id}/IMPL-01"],
+                              error_codes=("INTERNAL_ERROR",)))
+        write_json(self.impls / cap_id / "IMPL-01.json",
+                   impl_record(f"{cap_id}/IMPL-01", cap_id, f"{cap_id}/shared_lib.py"))
+        write(self.impls / cap_id / "IMPL-01" / cap_id / "shared_lib.py", SHARED_LIB_SOURCE)
+        self.required_caps.append(cap_id)
+
     def add_host(self, index_html: str):
         cap_id = self.host_cap_id()
         write_json(self.caps / f"{cap_id}.json",
-                   cap_record(cap_id, f"{self.app_type.title()} Host", "ui", [f"{cap_id}/IMPL-01"]))
+                   cap_record(cap_id, f"{self.app_type.title()} Host", "ui", [f"{cap_id}/IMPL-01"],
+                              dependencies=(SHARED_LIB_CAP_ID,), error_codes=("NOT_FOUND", "INTERNAL_ERROR")))
         write_json(self.impls / cap_id / "IMPL-01.json",
                    impl_record(f"{cap_id}/IMPL-01", cap_id, f"{cap_id}/app.py"))
         host_py = HOST_APP_PY_TEMPLATE.format(host_num=self.host_num) % {"index_html": index_html}
@@ -264,22 +415,48 @@ class AppBuilder:
 
     def add_capability(self, num: str, name: str, route: str, method: str, handler_body: str,
                         output_fields=(), required_input=(), side_effects=(), slot_id=None,
-                        selector=None, data_filename=None, dependencies=()):
+                        selector=None, data_filename=None, dependencies=(), extra_error_codes=(),
+                        extra_data_access=()):
         """num is the 4-digit suffix, e.g. '0201' -> CAP-0201. handler_body is
         the real Python source of the route module's own logic (ROUTE/METHOD
         already added); data_filename defaults to this app's single JSON
         store, overridable per-capability for apps with more than one entity.
         dependencies: real capability ids this one's handler_body reads/writes
-        via a sibling data file rather than its own -- must also be required
-        by this app (build.py now enforces this at assembly time)."""
+        via a sibling data file rather than its own (besides CAP-0000, which
+        every capability depends on automatically) -- must also be required
+        by this app (build.py enforces this at assembly time).
+
+        extra_data_access: additional {"entity", "access"} entries for a
+        capability that -- like payroll's "Run Payroll" -- reads or writes a
+        SECOND entity beyond its own data_filename, always via the shared
+        library's own _shared.load()/_shared.save() (already in scope from
+        store_helpers()'s bootstrap), never a hand-rolled path -- that second
+        entity must be declared here or build.py's compatibility gate
+        rejects the capability for undeclared data access.
+
+        error_codes and data_access are derived here, automatically, from
+        real facts already passed in (required_input's shape, side_effects,
+        data_filename) -- not hand-typed per capability, so they can't drift
+        from what the generated code actually does."""
         cap_id = f"CAP-{num}"
+        df = data_filename or self.data_filename
+        error_codes = ["INTERNAL_ERROR"]
+        if required_input:
+            error_codes.append("VALIDATION_ERROR")
+        if any(f.lower() == "id" or f.lower().endswith("_id") for f in required_input):
+            error_codes.append("NOT_FOUND")
+        error_codes.extend(extra_error_codes)
+        access = "read_write" if side_effects else "read"
+        data_access = [{"entity": df, "access": access}] + [dict(a) for a in extra_data_access]
         write_json(self.caps / f"{cap_id}.json",
                    cap_record(cap_id, name, "compute", [f"{cap_id}/IMPL-01"],
                               output_fields=output_fields, required_input=required_input,
-                              side_effects=side_effects, dependencies=dependencies))
+                              side_effects=side_effects,
+                              dependencies=(SHARED_LIB_CAP_ID, *dependencies),
+                              error_codes=error_codes,
+                              data_access=data_access))
         write_json(self.impls / cap_id / "IMPL-01.json",
                    impl_record(f"{cap_id}/IMPL-01", cap_id, f"{cap_id}/route.py"))
-        df = data_filename or self.data_filename
         body = store_helpers(df) + f'\nROUTE = {route!r}\nMETHOD = {method!r}\n\n\n' + handler_body
         write(self.impls / cap_id / "IMPL-01" / cap_id / "route.py", body)
         self.required_caps.append(cap_id)

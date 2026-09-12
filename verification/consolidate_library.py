@@ -20,11 +20,10 @@ OUT.mkdir()
 
 rows = []
 
-# todo list built via gen_real_todo_app.py's own project, not build_one.py
-special = {"todo_list": HERE / "real_todo_proof"}
-all_projects = dict(special)
-for slug in BUILDERS:
-    all_projects[slug] = HERE / "library_build" / slug
+# Every app, including todo_list, is now generated uniformly via
+# app_defs.py/build_one.py's BUILDERS on the shared AppBuilder machinery --
+# no more special-casing a standalone project directory for it.
+all_projects = {slug: HERE / "library_build" / slug for slug in BUILDERS}
 
 for slug, project in sorted(all_projects.items()):
     lib_app = project / "library" / "APP-001"

@@ -5,7 +5,7 @@
       "name": "Community Event Board",
       "status": "active",
       "owner": "builder",
-      "created_at": "2026-09-12T20:02:52Z",
+      "created_at": "2026-09-12T20:43:58Z",
       "screens": [
         "APP-001/SCR-001"
       ]
@@ -88,16 +88,62 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "NOT_FOUND",
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9900/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0000",
+      "name": "Shared Capability Library",
+      "category": "library",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": []
       },
       "dependencies": [],
       "permissions": [],
       "side_effects": [],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
       },
       "implementations": [
-        "CAP-9900/IMPL-01"
+        "CAP-0000/IMPL-01"
       ],
       "qualification": {
         "status": "approved",
@@ -123,13 +169,25 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "events.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
       },
       "implementations": [
         "CAP-9901/IMPL-01"
@@ -166,15 +224,28 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "events.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "creates_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR"
+        ]
       },
       "implementations": [
         "CAP-9902/IMPL-01"
@@ -206,15 +277,29 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "events.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "deletes_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
       },
       "implementations": [
         "CAP-9903/IMPL-01"
@@ -246,15 +331,29 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "events.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "updates_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
       },
       "implementations": [
         "CAP-9904/IMPL-01"
@@ -283,13 +382,25 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "notifications.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
       },
       "implementations": [
         "CAP-9905/IMPL-01"
@@ -324,15 +435,28 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "notifications.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "creates_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR"
+        ]
       },
       "implementations": [
         "CAP-9906/IMPL-01"
@@ -364,15 +488,29 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "notifications.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "updates_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
       },
       "implementations": [
         "CAP-9907/IMPL-01"
@@ -401,13 +539,25 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "team_chat.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
       },
       "implementations": [
         "CAP-1201/IMPL-01"
@@ -440,15 +590,28 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "team_chat.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "creates_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR"
+        ]
       },
       "implementations": [
         "CAP-1202/IMPL-01"
@@ -480,15 +643,29 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "team_chat.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "deletes_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
       },
       "implementations": [
         "CAP-1203/IMPL-01"
@@ -515,6 +692,27 @@
         "repository": "shelf",
         "path": "CAP-9900/IMPL-01",
         "entrypoint": "CAP-9900/app.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0000/IMPL-01",
+      "capability_id": "CAP-0000",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0000/IMPL-01",
+        "entrypoint": "CAP-0000/shared_lib.py"
       },
       "dependencies": [],
       "tests": [],

@@ -1,22 +1,21 @@
 
-import json
-from pathlib import Path
+import importlib.util as _importlib_util
+from pathlib import Path as _Path
 
-DATA_FILE = Path(__file__).resolve().parents[2] / "data" / "event_ticketing.json"
+_shared_lib_path = _Path(__file__).resolve().parents[1] / "CAP-0000" / "shared_lib.py"
+_spec = _importlib_util.spec_from_file_location("cap0000_shared_lib", _shared_lib_path)
+_shared = _importlib_util.module_from_spec(_spec)
+_spec.loader.exec_module(_shared)
+
+DATA_FILE_NAME = "event_ticketing.json"
 
 
 def _load():
-    if not DATA_FILE.is_file():
-        return []
-    try:
-        return json.loads(DATA_FILE.read_text(encoding="utf-8"))
-    except Exception:
-        return []
+    return _shared.load(DATA_FILE_NAME)
 
 
 def _save(rows):
-    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
-    DATA_FILE.write_text(json.dumps(rows), encoding="utf-8")
+    _shared.save(DATA_FILE_NAME, rows)
 
 ROUTE = '/api/events'
 METHOD = 'POST'

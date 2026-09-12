@@ -2,15 +2,25 @@
 """modules/CAP-1300/app.py -- real host: home page, health check, and a
 dynamic loader for sibling capability modules (modules/<CAP-id>/route.py) --
 the same proven convention as CAP-0001's fixture host and the round-7 real
-todo app's CAP-0100 host."""
+todo app's CAP-0100 host. Now also the one place that normalizes every
+capability's error response into the Common Capability Contract's standard
+shape and passes a standard identity/context object to any handler that
+declares it wants one -- both done centrally here, so upgrading either
+never required touching a single capability's own handler code."""
 import argparse
 import importlib.util
+import inspect
 from pathlib import Path
 from flask import Flask, jsonify, request, Response
 
 app = Flask(__name__)
 HERE = Path(__file__).resolve().parent
 MODULES_ROOT = HERE.parent
+
+_shared_lib_path = MODULES_ROOT / "CAP-0000" / "shared_lib.py"
+_spec = importlib.util.spec_from_file_location("cap0000_shared_lib", _shared_lib_path)
+_shared = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_shared)
 
 INDEX_HTML = '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<title>Video Conferencing</title>\n<style>\nbody { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; max-width: 700px; margin: 40px auto;\n  color: #222; background: #f7f7f7; }\n.card { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,.15); border-radius: 6px; padding: 20px; margin-bottom: 16px; }\nh1 { font-size: 22px; }\ninput, select, textarea { font-size: 15px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }\nbutton { font-size: 14px; padding: 8px 14px; border: none; border-radius: 4px; background: #2f6f9f; color: #fff;\n  cursor: pointer; }\nbutton.danger { background: #af2f2f; }\nbutton.secondary { background: #888; }\nul { list-style: none; margin: 0; padding: 0; }\nli { border-bottom: 1px solid #eee; padding: 10px 4px; }\n.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }\n\n</style>\n</head>\n<body>\n<h1>Video Conferencing</h1>\n<div class="card">\n  <div class="row">\n    <input id="room-name" placeholder="Room name" data-slot="room_name">\n    <button id="create-room-btn" data-slot="create_room">Create room</button>\n  </div>\n  <p style="color:#888;font-size:12px">Note: real room/participant session state; no real audio/video (WebRTC) media transport is wired in this sandbox.</p>\n</div>\n<div class="card"><ul id="room-list" data-slot="room_list"></ul></div>\n<script>\n\nfunction refresh() {\n  fetch("/api/rooms").then(r => r.json()).then(data => {\n    const list = document.getElementById("room-list");\n    list.innerHTML = "";\n    (data.rooms || []).forEach(r => {\n      const li = document.createElement("li");\n      li.textContent = r.name + " -- participants: " + r.participants.join(", ");\n      const join = document.createElement("button"); join.textContent = "Join as Guest"; join.style.marginLeft = "8px";\n      join.addEventListener("click", () => {\n        fetch("/api/rooms/join", {method: "POST", headers: {"Content-Type": "application/json"},\n          body: JSON.stringify({id: r.id, participant: "Guest"})}).then(refresh);\n      });\n      li.appendChild(join);\n      list.appendChild(li);\n    });\n  });\n}\ndocument.getElementById("create-room-btn").addEventListener("click", () => {\n  const name = document.getElementById("room-name").value;\n  if (!name.trim()) return;\n  fetch("/api/rooms", {method: "POST", headers: {"Content-Type": "application/json"},\n    body: JSON.stringify({name: name})}).then(() => {\n      document.getElementById("room-name").value = "";\n      refresh();\n    });\n});\nrefresh();\n\n</script>\n</body>\n</html>\n'
 
@@ -26,13 +36,14 @@ def index():
 
 
 ROUTE_HANDLERS = {}
+HANDLER_WANTS_CTX = {}
 
 
 def load_modules():
     if not MODULES_ROOT.is_dir():
         return
     for entry in sorted(MODULES_ROOT.iterdir()):
-        if not entry.is_dir() or entry.name == "CAP-1300":
+        if not entry.is_dir() or entry.name in ("CAP-1300", "CAP-0000"):
             continue
         route_file = entry / "route.py"
         if not route_file.is_file():
@@ -48,22 +59,48 @@ def load_modules():
         method = getattr(mod, "METHOD", "GET")
         handler = getattr(mod, "handle", None)
         if route and handler:
-            ROUTE_HANDLERS[(method, route)] = handler
+            key = (method, route)
+            ROUTE_HANDLERS[key] = handler
+            # Standard identity/context passing: a handler that declares a
+            # second parameter gets a real ctx object; one that doesn't
+            # (every capability in this library today, since none needs
+            # real identity yet) is called exactly as before -- the
+            # mechanism is real and live, not dead code waiting for a
+            # future rewrite, even though nothing currently opts in.
+            HANDLER_WANTS_CTX[key] = len(inspect.signature(handler).parameters) >= 2
 
 
 load_modules()
 
 
+def _make_ctx():
+    return {"user": None, "authenticated": False}
+
+
+def _error_body(status, message):
+    return {"error": {"code": _shared.code_for_status(status), "message": message}}
+
+
 @app.route("/<path:subpath>", methods=["GET", "POST"])
 def dispatch(subpath):
     path = "/" + subpath
-    handler = ROUTE_HANDLERS.get((request.method, path))
+    key = (request.method, path)
+    handler = ROUTE_HANDLERS.get(key)
     if handler is None:
-        return jsonify({"error": "not found"}), 404
+        return jsonify(_error_body(404, "not found")), 404
     try:
-        status, body = handler(request)
+        if HANDLER_WANTS_CTX.get(key):
+            status, body = handler(request, _make_ctx())
+        else:
+            status, body = handler(request)
     except Exception as e:
-        return jsonify({"error": f"handler raised {type(e).__name__}: {e}"}), 500
+        return jsonify(_error_body(500, f"handler raised {type(e).__name__}: {e}")), 500
+    # Standard error shape: any handler that still returns the older bare
+    # {"error": "<string>"} shape (every handler_body string predating this
+    # contract) gets it normalized here, once, centrally -- so the wire
+    # contract is uniform without having rewritten 187 handler bodies.
+    if status >= 400 and isinstance(body, dict) and isinstance(body.get("error"), str):
+        body = _error_body(status, body["error"])
     return jsonify(body), status
 
 

@@ -25,6 +25,275 @@ from pathlib import Path
 from gen_common import AppBuilder, page_skeleton
 
 
+TODO_INDEX_HTML = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Todos</title>
+<style>
+body { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; max-width: 550px; margin: 40px auto; }
+.todoapp { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,.2); }
+.header input#new-todo { width: 100%; box-sizing: border-box; font-size: 20px; padding: 12px; border: none;
+  border-bottom: 1px solid #ededed; }
+ul#todo-list { list-style: none; margin: 0; padding: 0; }
+ul#todo-list li { position: relative; border-bottom: 1px solid #ededed; padding: 12px 12px 12px 40px; }
+ul#todo-list li .toggle { position: absolute; left: 10px; top: 14px; }
+ul#todo-list li label { margin-left: 6px; }
+ul#todo-list li.completed label { text-decoration: line-through; color: #949494; }
+ul#todo-list li .destroy { display: none; float: right; cursor: pointer; border: none; background: none; }
+ul#todo-list li:hover .destroy { display: inline; }
+ul#todo-list li .edit { display: none; width: 90%; font-size: 16px; }
+ul#todo-list li.editing .edit { display: inline; }
+ul#todo-list li.editing .view { display: none; }
+.footer { padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; }
+.footer .filters { list-style: none; display: inline-flex; gap: 8px; margin: 0; padding: 0; }
+.footer .filters a { text-decoration: none; color: #777; padding: 2px 6px; border: 1px solid transparent; }
+.footer .filters a.selected { border-color: rgba(175,47,47,.2); border-radius: 3px; }
+#clear-completed { border: none; background: none; cursor: pointer; color: #777; }
+</style>
+</head>
+<body>
+<section class="todoapp">
+  <header class="header">
+    <input id="new-todo" data-slot="new_todo" placeholder="What needs to be done?" autofocus>
+  </header>
+  <section class="main">
+    <input id="toggle-all" data-slot="toggle_all" type="checkbox">
+    <label for="toggle-all">Mark all as complete</label>
+    <ul id="todo-list" data-slot="todo_list"></ul>
+  </section>
+  <footer class="footer">
+    <span id="todo-count"></span>
+    <ul class="filters">
+      <li><a href="#/" data-filter="all">All</a></li>
+      <li><a href="#/active" data-filter="active">Active</a></li>
+      <li><a href="#/completed" data-filter="completed">Completed</a></li>
+    </ul>
+    <button id="clear-completed" data-slot="clear_completed">Clear completed</button>
+  </footer>
+</section>
+<script>
+var todos = [];
+var editingId = null;
+
+function currentFilter() {
+  var h = location.hash;
+  if (h === "#/active") return "active";
+  if (h === "#/completed" || h === "#!/") return "completed";
+  return "all";
+}
+
+function refresh() {
+  fetch("/api/todos").then(function(r) { return r.json(); }).then(function(data) {
+    todos = data.todos || [];
+    render();
+  });
+}
+
+function render() {
+  var filter = currentFilter();
+  var list = document.getElementById("todo-list");
+  list.innerHTML = "";
+  todos.forEach(function(t) {
+    if (filter === "active" && t.completed) return;
+    if (filter === "completed" && !t.completed) return;
+    var li = document.createElement("li");
+    li.className = (t.completed ? "completed " : "") + (editingId === t.id ? "editing" : "");
+    li.dataset.id = t.id;
+
+    var view = document.createElement("div");
+    view.className = "view";
+    var toggle = document.createElement("input");
+    toggle.type = "checkbox"; toggle.className = "toggle"; toggle.checked = !!t.completed;
+    toggle.addEventListener("change", function() { toggleTodo(t.id); });
+    var label = document.createElement("label");
+    label.textContent = t.title;
+    label.addEventListener("dblclick", function() { startEdit(t.id); });
+    var destroy = document.createElement("button");
+    destroy.className = "destroy"; destroy.textContent = "x";
+    destroy.addEventListener("click", function() { deleteTodo(t.id); });
+    view.appendChild(toggle); view.appendChild(label); view.appendChild(destroy);
+
+    var editInput = document.createElement("input");
+    editInput.className = "edit"; editInput.value = t.title;
+    editInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") editInput.blur();
+      if (e.key === "Escape") { editingId = null; render(); }
+    });
+    editInput.addEventListener("blur", function() { saveEdit(t.id, editInput.value); });
+
+    li.appendChild(view); li.appendChild(editInput);
+    list.appendChild(li);
+    if (editingId === t.id) { editInput.focus(); }
+  });
+
+  var activeCount = todos.filter(function(t) { return !t.completed; }).length;
+  var word = activeCount === 1 ? "item" : "items";
+  document.getElementById("todo-count").innerHTML = "<strong>" + activeCount + "</strong> " + word + " left";
+
+  var completedCount = todos.filter(function(t) { return t.completed; }).length;
+  document.getElementById("clear-completed").style.display = completedCount > 0 ? "inline" : "none";
+
+  document.querySelectorAll(".filters a").forEach(function(a) {
+    a.className = a.dataset.filter === filter ? "selected" : "";
+  });
+
+  document.getElementById("toggle-all").checked = todos.length > 0 && activeCount === 0;
+}
+
+function addTodo(title) {
+  title = title.trim();
+  if (!title) return;
+  fetch("/api/todos", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({title: title})
+  }).then(refresh);
+}
+
+function toggleTodo(id) {
+  fetch("/api/todos/toggle", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({id: id})
+  }).then(refresh);
+}
+
+function deleteTodo(id) {
+  fetch("/api/todos/delete", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({id: id})
+  }).then(refresh);
+}
+
+function startEdit(id) { editingId = id; render(); }
+
+function saveEdit(id, title) {
+  if (editingId !== id) return;
+  editingId = null;
+  title = title.trim();
+  if (!title) { deleteTodo(id); return; }
+  fetch("/api/todos/edit", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({id: id, title: title})
+  }).then(refresh);
+}
+
+function toggleAll(completed) {
+  fetch("/api/todos/toggle_all", {
+    method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({completed: completed})
+  }).then(refresh);
+}
+
+function clearCompleted() {
+  fetch("/api/todos/clear_completed", {method: "POST"}).then(refresh);
+}
+
+document.getElementById("new-todo").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") { addTodo(e.target.value); e.target.value = ""; }
+});
+document.getElementById("toggle-all").addEventListener("change", function(e) {
+  toggleAll(e.target.checked);
+});
+document.getElementById("clear-completed").addEventListener("click", clearCompleted);
+window.addEventListener("hashchange", render);
+
+refresh();
+</script>
+</body>
+</html>
+"""
+
+
+def build_todo_list(root: Path):
+    """Ported onto the shared AppBuilder/gen_common.py machinery (was
+    previously generated by the standalone, pre-gen_common.py
+    gen_real_todo_app.py script) so it gets the Common Capability Contract
+    v2 and the shared CAP-0000 library like every other app in the library
+    -- "0 incompatible capabilities" can't be true library-wide while one
+    app's capabilities sit outside the shared generator. The real,
+    TodoMVC-spec-sourced HTML/CSS/JS (round 7) is preserved verbatim: it's
+    independently justified by the real published spec it was built from,
+    not something this upgrade has any reason to change."""
+    b = AppBuilder(root, "todo_list", "todo list", "0100")
+
+    b.add_capability("0101", "List Todos", "/api/todos", "GET",
+        "def handle(request):\n    return 200, {'todos': _load()}\n",
+        output_fields=("todos",), slot_id="todo_list", selector="#todo-list")
+
+    b.add_capability("0102", "Create Todo", "/api/todos", "POST",
+        "def handle(request):\n"
+        "    body = request.get_json(force=True, silent=True) or {}\n"
+        "    title = (body.get('title') or '').strip()\n"
+        "    if not title:\n        return 400, {'error': 'title is required'}\n"
+        "    todos = _load()\n"
+        "    next_id = (max([t['id'] for t in todos], default=0)) + 1\n"
+        "    todo = {'id': next_id, 'title': title, 'completed': False}\n"
+        "    todos.append(todo)\n    _save(todos)\n    return 201, todo\n",
+        output_fields=("id", "title", "completed"), required_input=("title",),
+        side_effects=("creates_record",), slot_id="new_todo", selector="#new-todo")
+
+    b.add_capability("0103", "Toggle Todo", "/api/todos/toggle", "POST",
+        "def handle(request):\n"
+        "    body = request.get_json(force=True, silent=True) or {}\n"
+        "    todo_id = body.get('id')\n    todos = _load()\n"
+        "    for t in todos:\n"
+        "        if t['id'] == todo_id:\n"
+        "            t['completed'] = not t['completed']\n            _save(todos)\n            return 200, t\n"
+        "    return 404, {'error': f'no todo with id {todo_id!r}'}\n",
+        output_fields=("id", "title", "completed"), required_input=("id",),
+        side_effects=("updates_record",), slot_id="toggle_todo", selector=".toggle")
+
+    b.add_capability("0104", "Edit Todo", "/api/todos/edit", "POST",
+        "def handle(request):\n"
+        "    body = request.get_json(force=True, silent=True) or {}\n"
+        "    todo_id = body.get('id')\n    title = (body.get('title') or '').strip()\n"
+        "    if not title:\n        return 400, {'error': 'title is required'}\n"
+        "    todos = _load()\n"
+        "    for t in todos:\n"
+        "        if t['id'] == todo_id:\n"
+        "            t['title'] = title\n            _save(todos)\n            return 200, t\n"
+        "    return 404, {'error': f'no todo with id {todo_id!r}'}\n",
+        output_fields=("id", "title", "completed"), required_input=("id", "title"),
+        side_effects=("updates_record",), slot_id="edit_todo", selector=".edit")
+
+    b.add_capability("0105", "Delete Todo", "/api/todos/delete", "POST",
+        "def handle(request):\n"
+        "    body = request.get_json(force=True, silent=True) or {}\n"
+        "    todo_id = body.get('id')\n    todos = _load()\n"
+        "    remaining = [t for t in todos if t['id'] != todo_id]\n"
+        "    if len(remaining) == len(todos):\n        return 404, {'error': f'no todo with id {todo_id!r}'}\n"
+        "    _save(remaining)\n    return 200, {'id': todo_id, 'deleted': True}\n",
+        output_fields=("id", "deleted"), required_input=("id",),
+        side_effects=("deletes_record",), slot_id="delete_todo", selector=".destroy")
+
+    b.add_capability("0106", "Toggle All Todos", "/api/todos/toggle_all", "POST",
+        "def handle(request):\n"
+        "    body = request.get_json(force=True, silent=True) or {}\n"
+        "    completed = bool(body.get('completed', True))\n"
+        "    todos = _load()\n    updated = 0\n"
+        "    for t in todos:\n"
+        "        if t['completed'] != completed:\n            t['completed'] = completed\n            updated += 1\n"
+        "    _save(todos)\n    return 200, {'updated': updated}\n",
+        output_fields=("updated",), side_effects=("updates_record",),
+        slot_id="toggle_all", selector="#toggle-all")
+
+    b.add_capability("0107", "Clear Completed Todos", "/api/todos/clear_completed", "POST",
+        "def handle(request):\n"
+        "    todos = _load()\n"
+        "    remaining = [t for t in todos if not t['completed']]\n"
+        "    removed = len(todos) - len(remaining)\n"
+        "    _save(remaining)\n    return 200, {'removed': removed}\n",
+        output_fields=("removed",), side_effects=("deletes_record",),
+        slot_id="clear_completed", selector="#clear-completed")
+
+    journey = {
+        "input_selector": "#new-todo", "input_value": "Buy real milk from the real store",
+        "action_key": "Enter",
+        "confirm_selector": "#todo-list", "confirm_contains": "Buy real milk from the real store",
+    }
+    b.finish(TODO_INDEX_HTML, journey, "Real Todo List", port=5000)
+
+
 def build_note_taking(root: Path):
     b = AppBuilder(root, "note_taking", "note taking", "0200")
 
@@ -767,13 +1036,8 @@ def build_payroll(root: Path):
         data_filename="employees.json")
 
     b.add_capability("1003", "Run Payroll", "/api/payroll/run", "POST",
-        "import json\nfrom pathlib import Path\n"
-        "EMP_FILE = Path(__file__).resolve().parents[2] / 'data' / 'employees.json'\n"
-        "def _load_employees():\n"
-        "    if not EMP_FILE.is_file():\n        return []\n"
-        "    try:\n        return json.loads(EMP_FILE.read_text(encoding='utf-8'))\n    except Exception:\n        return []\n"
         "def handle(request):\n"
-        "    employees = _load_employees()\n    records = _load()\n"
+        "    employees = _shared.load('employees.json')\n    records = _load()\n"
         "    next_id = (max([r['id'] for r in records], default=0))\n    created = 0\n"
         "    for e in employees:\n"
         "        next_id += 1\n        gross = e.get('salary', 0)\n        net = round(gross * 0.8, 2)\n"
@@ -781,7 +1045,7 @@ def build_payroll(root: Path):
         "        created += 1\n"
         "    _save(records)\n    return 200, {'created': created}\n",
         output_fields=("created",), data_filename="pay_records.json",
-        dependencies=("CAP-1002",))
+        dependencies=("CAP-1002",), extra_data_access=[{"entity": "employees.json", "access": "read"}])
 
     b.add_capability("1004", "List Pay Records", "/api/payroll/records", "GET",
         "def handle(request):\n    return 200, {'records': _load()}\n",

@@ -11,7 +11,7 @@ and replays an identical real HTTP sequence against both real running apps
 to compare actual responses -- not code similarity, not contract shape,
 real behaviour.
 
-Does not touch or modify the original 43 apps' committed OUTPUT_LIBRARY.
+Compares against the freshly rebuilt library_build/<slug>/library/APP-001 (both sides go through the same v2 host/contract machinery -- an apples-to-apples comparison of hand-written vs. generic business logic, not an artifact of different generation pipelines). Does not touch OUTPUT_LIBRARY.
 Everything here runs under verification/gen_prove/, disposable.
 """
 import json
@@ -199,7 +199,7 @@ def main():
     build_auction_v2(ROOT)
     r = build_and_run(ROOT / "auction_v2", 0)
     assert "12  APP-001  assembled" in r.stdout, f"auction_v2 failed to assemble:\n{r.stdout}\n{r.stderr}"
-    orig_auction = HERE.parent / "OUTPUT_LIBRARY" / "auction"
+    orig_auction = HERE / "library_build" / "auction" / "library" / "APP-001"
     results["auction bid"] = prove(
         "Auction: original hand-written bid vs. add_exceeds_threshold_capability",
         orig_auction, ROOT, "auction_v2", 5910, 5911,
@@ -215,7 +215,7 @@ def main():
     build_event_ticketing_v2(ROOT)
     r = build_and_run(ROOT / "event_ticketing_v2", 0)
     assert "12  APP-001  assembled" in r.stdout, f"event_ticketing_v2 failed to assemble:\n{r.stdout}\n{r.stderr}"
-    orig_event = HERE.parent / "OUTPUT_LIBRARY" / "event_ticketing"
+    orig_event = HERE / "library_build" / "event_ticketing" / "library" / "APP-001"
     results["event_ticketing buy"] = prove(
         "Event ticketing: original hand-written buy vs. add_bounded_counter_capability",
         orig_event, ROOT, "event_ticketing_v2", 5920, 5921,
@@ -230,7 +230,7 @@ def main():
     build_dating_v2(ROOT)
     r = build_and_run(ROOT / "dating_v2", 0)
     assert "12  APP-001  assembled" in r.stdout, f"dating_v2 failed to assemble:\n{r.stdout}\n{r.stderr}"
-    orig_dating = HERE.parent / "OUTPUT_LIBRARY" / "dating"
+    orig_dating = HERE / "library_build" / "dating" / "library" / "APP-001"
     results["dating swipe"] = prove(
         "Dating: original hand-written swipe vs. add_symmetric_relationship_capability",
         orig_dating, ROOT, "dating_v2", 5930, 5931,

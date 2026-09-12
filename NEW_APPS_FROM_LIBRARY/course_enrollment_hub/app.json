@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-9700/app.py"
+  ],
+  "port": 5997,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#course-title",
+    "input_value": "Intro to Composability",
+    "action_selector": "#add-course-btn",
+    "confirm_selector": "text=Intro to Composability",
+    "confirm_contains": "Intro to Composability"
+  }
+}

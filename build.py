@@ -582,6 +582,65 @@ def match_contract(expected: Dict[str, Any], cap: Dict[str, Any], impl: Dict[str
 
 
 # ------------------------------------------------------------------------------
+# COMMON CAPABILITY CONTRACT v2 — compatibility gate
+# ------------------------------------------------------------------------------
+# Real, enforced admission control: a capability that opts into contract v2
+# (data_shape.contract_version == "2.0" -- never true for build.py's own
+# pre-existing internal proving-table fixtures, which predate this schema
+# and are deliberately malformed in places to prove OTHER parts of this file
+# correctly reject bad input; this gate leaves them alone entirely) must
+# have a complete, well-formed contract AND its real, already-copied source
+# must not silently touch data it never declared. Failing either is BROKEN,
+# not a warning -- there is no "usable with caveats" outcome here (Master
+# Spec's own rule, extended: a capability is either compatible and admitted,
+# or it is rejected).
+_DATA_ACCESS_KINDS = ("read", "write", "read_write")
+_SHARED_CALL_RE = re.compile(r"_shared\.(?:load|save)\(\s*[\"']([^\"']+)[\"']")
+_DATA_FILE_NAME_RE = re.compile(r'^DATA_FILE_NAME\s*=\s*[\"\']([^\"\']+)[\"\']', re.M)
+_RAW_PATH_BYPASS_RE = re.compile(r'parents\[2\]\s*/\s*[\"\']data[\"\']')
+
+
+def validate_v2_contract(cap_id: str, cap: Dict[str, Any], app_dir: Path) -> None:
+    shape = cap.get("data_shape", {})
+    if shape.get("contract_version") != "2.0":
+        return  # not opted in -- e.g. a pre-existing internal proving-table fixture; untouched
+    data_access = shape.get("data_access")
+    if not isinstance(data_access, list):
+        raise Broken(f"contract violation  {cap_id}  data_access is not a list")
+    declared_entities = set()
+    for entry in data_access:
+        if not isinstance(entry, dict) or not entry.get("entity") or entry.get("access") not in _DATA_ACCESS_KINDS:
+            raise Broken(f"contract violation  {cap_id}  malformed data_access entry: {entry!r}")
+        declared_entities.add(entry["entity"])
+    if not isinstance(shape.get("context_fields"), list):
+        raise Broken(f"contract violation  {cap_id}  context_fields is not a list")
+    error_codes = cap.get("error_contract", {}).get("error_codes")
+    if not isinstance(error_codes, list) or not error_codes:
+        raise Broken(f"contract violation  {cap_id}  error_contract.error_codes must be a non-empty list")
+
+    # Real static cross-check against the source this capability was JUST
+    # copied to (stage 5, above) -- not the shelf's own claim about itself.
+    # A "library" category capability (CAP-0000 itself) has no fixed entity
+    # of its own to check against.
+    if cap.get("category") == "library":
+        return
+    cap_dir = app_dir / "modules" / cap_id
+    if not cap_dir.is_dir():
+        return  # nothing copied for this cap id (e.g. a UI-only host with no route.py) -- nothing to scan
+    referenced: set = set()
+    for py_file in cap_dir.rglob("*.py"):
+        src = py_file.read_text(encoding="utf-8")
+        referenced.update(_SHARED_CALL_RE.findall(src))
+        referenced.update(_DATA_FILE_NAME_RE.findall(src))
+        if _RAW_PATH_BYPASS_RE.search(src) and "shared_lib.py" not in py_file.name:
+            raise Broken(f"contract violation  {cap_id}  bypasses the shared storage interface "
+                         f"(constructs its own data path instead of using CAP-0000)")
+    hidden = referenced - declared_entities
+    if hidden:
+        raise Broken(f"contract violation  {cap_id}  touches undeclared data: {sorted(hidden)}")
+
+
+# ------------------------------------------------------------------------------
 # STAGE 1 — ASSEMBLE
 # ------------------------------------------------------------------------------
 def stage1_assemble() -> Tuple[str, Path, Dict[str, Any], Dict[str, Any]]:
@@ -669,6 +728,14 @@ def stage1_assemble() -> Tuple[str, Path, Dict[str, Any], Dict[str, Any]]:
             for dep_id in cap.get("dependencies", []):
                 if dep_id not in loaded_caps:
                     raise Broken(f"missing declared dependency  {cid} requires {dep_id}")
+
+        # 5c. Common Capability Contract v2 compatibility gate -- see
+        # validate_v2_contract()'s own docstring-comment above. Runs after
+        # every part is copied (5) and every dependency is confirmed present
+        # (5b), so it can cross-check declared data_access against the real,
+        # already-copied source, not the shelf's own unverified claim.
+        for cid, cap in loaded_caps.items():
+            validate_v2_contract(cid, cap, app_dir)
 
         # 6. Lay the skin
         skin_json = {

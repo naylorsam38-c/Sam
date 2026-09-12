@@ -5,7 +5,7 @@
       "name": "Real Todo List",
       "status": "active",
       "owner": "builder",
-      "created_at": "2026-09-12T19:06:59Z",
+      "created_at": "2026-09-12T20:42:08Z",
       "screens": [
         "APP-001/SCR-001"
       ]
@@ -32,7 +32,28 @@
     {
       "id": "APP-001/SCR-001/BTN-001",
       "screen_id": "APP-001/SCR-001",
-      "name": "Add a new todo",
+      "name": "List Todos",
+      "expected_contract": {
+        "required_input_fields": [],
+        "input_types": {},
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "dependencies": [],
+        "handled_errors": [],
+        "security_constraints": {},
+        "side_effects": [],
+        "min_version": "1.0.0"
+      },
+      "capability_id": "CAP-0101",
+      "status": "active"
+    },
+    {
+      "id": "APP-001/SCR-001/BTN-002",
+      "screen_id": "APP-001/SCR-001",
+      "name": "Create Todo",
       "expected_contract": {
         "required_input_fields": [],
         "input_types": {},
@@ -53,30 +74,9 @@
       "status": "active"
     },
     {
-      "id": "APP-001/SCR-001/BTN-002",
-      "screen_id": "APP-001/SCR-001",
-      "name": "See the todo list",
-      "expected_contract": {
-        "required_input_fields": [],
-        "input_types": {},
-        "output_fields": [],
-        "output_types": {},
-        "nullable_fields": [],
-        "permissions": [],
-        "requires_auth": false,
-        "dependencies": [],
-        "handled_errors": [],
-        "security_constraints": {},
-        "side_effects": [],
-        "min_version": "1.0.0"
-      },
-      "capability_id": "CAP-0101",
-      "status": "active"
-    },
-    {
       "id": "APP-001/SCR-001/BTN-003",
       "screen_id": "APP-001/SCR-001",
-      "name": "Mark a todo complete/incomplete",
+      "name": "Toggle Todo",
       "expected_contract": {
         "required_input_fields": [],
         "input_types": {},
@@ -99,7 +99,7 @@
     {
       "id": "APP-001/SCR-001/BTN-004",
       "screen_id": "APP-001/SCR-001",
-      "name": "Edit a todo's title",
+      "name": "Edit Todo",
       "expected_contract": {
         "required_input_fields": [],
         "input_types": {},
@@ -122,7 +122,7 @@
     {
       "id": "APP-001/SCR-001/BTN-005",
       "screen_id": "APP-001/SCR-001",
-      "name": "Delete a todo",
+      "name": "Delete Todo",
       "expected_contract": {
         "required_input_fields": [],
         "input_types": {},
@@ -145,7 +145,7 @@
     {
       "id": "APP-001/SCR-001/BTN-006",
       "screen_id": "APP-001/SCR-001",
-      "name": "Mark all todos complete/incomplete",
+      "name": "Toggle All Todos",
       "expected_contract": {
         "required_input_fields": [],
         "input_types": {},
@@ -168,7 +168,7 @@
     {
       "id": "APP-001/SCR-001/BTN-007",
       "screen_id": "APP-001/SCR-001",
-      "name": "Clear completed todos",
+      "name": "Clear Completed Todos",
       "expected_contract": {
         "required_input_fields": [],
         "input_types": {},
@@ -192,7 +192,7 @@
   "capabilities": [
     {
       "id": "CAP-0100",
-      "name": "Todo App Host",
+      "name": "Todo List Host",
       "category": "ui",
       "status": "active",
       "data_shape": {
@@ -206,16 +206,62 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "NOT_FOUND",
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-0100/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0000",
+      "name": "Shared Capability Library",
+      "category": "library",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": []
       },
       "dependencies": [],
       "permissions": [],
       "side_effects": [],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
       },
       "implementations": [
-        "CAP-0100/IMPL-01"
+        "CAP-0000/IMPL-01"
       ],
       "qualification": {
         "status": "approved",
@@ -241,13 +287,25 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "todo_list.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
       },
       "implementations": [
         "CAP-0101/IMPL-01"
@@ -280,15 +338,28 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "todo_list.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "creates_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR"
+        ]
       },
       "implementations": [
         "CAP-0102/IMPL-01"
@@ -321,15 +392,29 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "todo_list.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "updates_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
       },
       "implementations": [
         "CAP-0103/IMPL-01"
@@ -363,15 +448,29 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "todo_list.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "updates_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
       },
       "implementations": [
         "CAP-0104/IMPL-01"
@@ -403,15 +502,29 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "todo_list.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "deletes_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
       },
       "implementations": [
         "CAP-0105/IMPL-01"
@@ -440,15 +553,27 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "todo_list.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "updates_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
       },
       "implementations": [
         "CAP-0106/IMPL-01"
@@ -477,15 +602,27 @@
         },
         "nullable": [],
         "requires_auth": false,
-        "security_constraints": {}
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "todo_list.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
       },
-      "dependencies": [],
+      "dependencies": [
+        "CAP-0000"
+      ],
       "permissions": [],
       "side_effects": [
         "deletes_record"
       ],
       "error_contract": {
-        "error_codes": []
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
       },
       "implementations": [
         "CAP-0107/IMPL-01"
@@ -504,7 +641,7 @@
       "status": "active",
       "release": {
         "version": "1.0.0",
-        "commit": "gen_real_todo_app.py",
+        "commit": "gen_common.py",
         "approved": true,
         "approval_ref": "APPROVAL-IMPL-REAL"
       },
@@ -520,12 +657,33 @@
       }
     },
     {
+      "id": "CAP-0000/IMPL-01",
+      "capability_id": "CAP-0000",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0000/IMPL-01",
+        "entrypoint": "CAP-0000/shared_lib.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
       "id": "CAP-0101/IMPL-01",
       "capability_id": "CAP-0101",
       "status": "active",
       "release": {
         "version": "1.0.0",
-        "commit": "gen_real_todo_app.py",
+        "commit": "gen_common.py",
         "approved": true,
         "approval_ref": "APPROVAL-IMPL-REAL"
       },
@@ -546,7 +704,7 @@
       "status": "active",
       "release": {
         "version": "1.0.0",
-        "commit": "gen_real_todo_app.py",
+        "commit": "gen_common.py",
         "approved": true,
         "approval_ref": "APPROVAL-IMPL-REAL"
       },
@@ -567,7 +725,7 @@
       "status": "active",
       "release": {
         "version": "1.0.0",
-        "commit": "gen_real_todo_app.py",
+        "commit": "gen_common.py",
         "approved": true,
         "approval_ref": "APPROVAL-IMPL-REAL"
       },
@@ -588,7 +746,7 @@
       "status": "active",
       "release": {
         "version": "1.0.0",
-        "commit": "gen_real_todo_app.py",
+        "commit": "gen_common.py",
         "approved": true,
         "approval_ref": "APPROVAL-IMPL-REAL"
       },
@@ -609,7 +767,7 @@
       "status": "active",
       "release": {
         "version": "1.0.0",
-        "commit": "gen_real_todo_app.py",
+        "commit": "gen_common.py",
         "approved": true,
         "approval_ref": "APPROVAL-IMPL-REAL"
       },
@@ -630,7 +788,7 @@
       "status": "active",
       "release": {
         "version": "1.0.0",
-        "commit": "gen_real_todo_app.py",
+        "commit": "gen_common.py",
         "approved": true,
         "approval_ref": "APPROVAL-IMPL-REAL"
       },
@@ -651,7 +809,7 @@
       "status": "active",
       "release": {
         "version": "1.0.0",
-        "commit": "gen_real_todo_app.py",
+        "commit": "gen_common.py",
         "approved": true,
         "approval_ref": "APPROVAL-IMPL-REAL"
       },
