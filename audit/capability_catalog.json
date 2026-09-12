@@ -1,0 +1,4681 @@
+[
+  {
+    "app_slug": "accounting_ledger",
+    "app_type": "accounting ledger",
+    "cap_id": "CAP-0700",
+    "name": "Accounting Ledger Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/accounting_ledger/shelf/implementations/CAP-0700/IMPL-01/CAP-0700/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "accounting_ledger",
+    "app_type": "accounting ledger",
+    "cap_id": "CAP-0701",
+    "name": "List Entries",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "entries"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/accounting_ledger/shelf/implementations/CAP-0701/IMPL-01/CAP-0701/route.py",
+    "data_filename": "accounting_ledger.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/entries",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "accounting_ledger",
+    "app_type": "accounting ledger",
+    "cap_id": "CAP-0702",
+    "name": "Create Entry",
+    "category": "compute",
+    "required_input": [
+      "description"
+    ],
+    "output_fields": [
+      "id",
+      "description",
+      "amount",
+      "type"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/accounting_ledger/shelf/implementations/CAP-0702/IMPL-01/CAP-0702/route.py",
+    "data_filename": "accounting_ledger.json",
+    "is_host": false,
+    "loc": 40,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/entries",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "accounting_ledger",
+    "app_type": "accounting ledger",
+    "cap_id": "CAP-0703",
+    "name": "Delete Entry",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/accounting_ledger/shelf/implementations/CAP-0703/IMPL-01/CAP-0703/route.py",
+    "data_filename": "accounting_ledger.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/entries/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "accounting_ledger",
+    "app_type": "accounting ledger",
+    "cap_id": "CAP-0704",
+    "name": "Ledger Balance",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "balance"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/accounting_ledger/shelf/implementations/CAP-0704/IMPL-01/CAP-0704/route.py",
+    "data_filename": "accounting_ledger.json",
+    "is_host": false,
+    "loc": 29,
+    "shape": "AGGREGATE/READ",
+    "method": "GET",
+    "route": "/api/entries/balance",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "appointment_booking",
+    "app_type": "appointment booking",
+    "cap_id": "CAP-2500",
+    "name": "Appointment Booking Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/appointment_booking/shelf/implementations/CAP-2500/IMPL-01/CAP-2500/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "appointment_booking",
+    "app_type": "appointment booking",
+    "cap_id": "CAP-2501",
+    "name": "List Appointments",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "appointments"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/appointment_booking/shelf/implementations/CAP-2501/IMPL-01/CAP-2501/route.py",
+    "data_filename": "appointment_booking.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/appointments",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "appointment_booking",
+    "app_type": "appointment booking",
+    "cap_id": "CAP-2502",
+    "name": "Book Appointment",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "start",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/appointment_booking/shelf/implementations/CAP-2502/IMPL-01/CAP-2502/route.py",
+    "data_filename": "appointment_booking.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/appointments",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "appointment_booking",
+    "app_type": "appointment booking",
+    "cap_id": "CAP-2503",
+    "name": "Cancel Appointment",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/appointment_booking/shelf/implementations/CAP-2503/IMPL-01/CAP-2503/route.py",
+    "data_filename": "appointment_booking.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/appointments/cancel",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "auction",
+    "app_type": "auction",
+    "cap_id": "CAP-2100",
+    "name": "Auction Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/auction/shelf/implementations/CAP-2100/IMPL-01/CAP-2100/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "auction",
+    "app_type": "auction",
+    "cap_id": "CAP-2101",
+    "name": "List Items",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "items"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/auction/shelf/implementations/CAP-2101/IMPL-01/CAP-2101/route.py",
+    "data_filename": "auction.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/items",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "auction",
+    "app_type": "auction",
+    "cap_id": "CAP-2102",
+    "name": "Create Item",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "current_bid",
+      "highest_bidder"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/auction/shelf/implementations/CAP-2102/IMPL-01/CAP-2102/route.py",
+    "data_filename": "auction.json",
+    "is_host": false,
+    "loc": 39,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/items",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "auction",
+    "app_type": "auction",
+    "cap_id": "CAP-2103",
+    "name": "Place Bid",
+    "category": "compute",
+    "required_input": [
+      "id",
+      "amount"
+    ],
+    "output_fields": [
+      "id",
+      "current_bid",
+      "highest_bidder"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/auction/shelf/implementations/CAP-2103/IMPL-01/CAP-2103/route.py",
+    "data_filename": "auction.json",
+    "is_host": false,
+    "loc": 42,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/items/bid",
+    "if_count": 2,
+    "for_count": 1,
+    "final_class": "RED"
+  },
+  {
+    "app_slug": "calendar_and_scheduling",
+    "app_type": "calendar and scheduling",
+    "cap_id": "CAP-0400",
+    "name": "Calendar And Scheduling Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/calendar_and_scheduling/shelf/implementations/CAP-0400/IMPL-01/CAP-0400/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "calendar_and_scheduling",
+    "app_type": "calendar and scheduling",
+    "cap_id": "CAP-0401",
+    "name": "List Events",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "events"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/calendar_and_scheduling/shelf/implementations/CAP-0401/IMPL-01/CAP-0401/route.py",
+    "data_filename": "calendar_and_scheduling.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/events",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "calendar_and_scheduling",
+    "app_type": "calendar and scheduling",
+    "cap_id": "CAP-0402",
+    "name": "Create Event",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "start",
+      "end"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/calendar_and_scheduling/shelf/implementations/CAP-0402/IMPL-01/CAP-0402/route.py",
+    "data_filename": "calendar_and_scheduling.json",
+    "is_host": false,
+    "loc": 37,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/events",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "calendar_and_scheduling",
+    "app_type": "calendar and scheduling",
+    "cap_id": "CAP-0403",
+    "name": "Delete Event",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/calendar_and_scheduling/shelf/implementations/CAP-0403/IMPL-01/CAP-0403/route.py",
+    "data_filename": "calendar_and_scheduling.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/events/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "collaborative_document_editor",
+    "app_type": "collaborative document editor",
+    "cap_id": "CAP-1600",
+    "name": "Collaborative Document Editor Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/collaborative_document_editor/shelf/implementations/CAP-1600/IMPL-01/CAP-1600/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "collaborative_document_editor",
+    "app_type": "collaborative document editor",
+    "cap_id": "CAP-1601",
+    "name": "List Docs",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "docs"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/collaborative_document_editor/shelf/implementations/CAP-1601/IMPL-01/CAP-1601/route.py",
+    "data_filename": "collaborative_document_editor.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/docs",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "collaborative_document_editor",
+    "app_type": "collaborative document editor",
+    "cap_id": "CAP-1602",
+    "name": "Create Doc",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "content"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/collaborative_document_editor/shelf/implementations/CAP-1602/IMPL-01/CAP-1602/route.py",
+    "data_filename": "collaborative_document_editor.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/docs",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "collaborative_document_editor",
+    "app_type": "collaborative document editor",
+    "cap_id": "CAP-1603",
+    "name": "Update Doc Content",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "content"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/collaborative_document_editor/shelf/implementations/CAP-1603/IMPL-01/CAP-1603/route.py",
+    "data_filename": "collaborative_document_editor.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/docs/update",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "crm",
+    "app_type": "CRM",
+    "cap_id": "CAP-0800",
+    "name": "Crm Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/crm/shelf/implementations/CAP-0800/IMPL-01/CAP-0800/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "crm",
+    "app_type": "CRM",
+    "cap_id": "CAP-0801",
+    "name": "List Contacts",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "contacts"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/crm/shelf/implementations/CAP-0801/IMPL-01/CAP-0801/route.py",
+    "data_filename": "crm.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/contacts",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "crm",
+    "app_type": "CRM",
+    "cap_id": "CAP-0802",
+    "name": "Create Contact",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "email",
+      "stage"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/crm/shelf/implementations/CAP-0802/IMPL-01/CAP-0802/route.py",
+    "data_filename": "crm.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/contacts",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "crm",
+    "app_type": "CRM",
+    "cap_id": "CAP-0803",
+    "name": "Update Contact Stage",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "email",
+      "stage"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/crm/shelf/implementations/CAP-0803/IMPL-01/CAP-0803/route.py",
+    "data_filename": "crm.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/contacts/stage",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "crm",
+    "app_type": "CRM",
+    "cap_id": "CAP-0804",
+    "name": "Delete Contact",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/crm/shelf/implementations/CAP-0804/IMPL-01/CAP-0804/route.py",
+    "data_filename": "crm.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/contacts/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "dating",
+    "app_type": "dating",
+    "cap_id": "CAP-3100",
+    "name": "Dating Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/dating/shelf/implementations/CAP-3100/IMPL-01/CAP-3100/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "dating",
+    "app_type": "dating",
+    "cap_id": "CAP-3101",
+    "name": "List Profiles",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "profiles"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/dating/shelf/implementations/CAP-3101/IMPL-01/CAP-3101/route.py",
+    "data_filename": "profiles.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/profiles",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "dating",
+    "app_type": "dating",
+    "cap_id": "CAP-3102",
+    "name": "Create Profile",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "bio"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/dating/shelf/implementations/CAP-3102/IMPL-01/CAP-3102/route.py",
+    "data_filename": "profiles.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/profiles",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "dating",
+    "app_type": "dating",
+    "cap_id": "CAP-3103",
+    "name": "Swipe",
+    "category": "compute",
+    "required_input": [
+      "profile_id",
+      "target_id"
+    ],
+    "output_fields": [
+      "profile_id",
+      "target_id",
+      "liked",
+      "match"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/dating/shelf/implementations/CAP-3103/IMPL-01/CAP-3103/route.py",
+    "data_filename": "swipes.json",
+    "is_host": false,
+    "loc": 37,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/swipes",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "RED"
+  },
+  {
+    "app_slug": "e_commerce_storefront",
+    "app_type": "e-commerce storefront",
+    "cap_id": "CAP-1900",
+    "name": "E-Commerce Storefront Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/e_commerce_storefront/shelf/implementations/CAP-1900/IMPL-01/CAP-1900/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "e_commerce_storefront",
+    "app_type": "e-commerce storefront",
+    "cap_id": "CAP-1901",
+    "name": "List Products",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "products"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/e_commerce_storefront/shelf/implementations/CAP-1901/IMPL-01/CAP-1901/route.py",
+    "data_filename": "products.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/products",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "e_commerce_storefront",
+    "app_type": "e-commerce storefront",
+    "cap_id": "CAP-1902",
+    "name": "Add Product",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "price"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/e_commerce_storefront/shelf/implementations/CAP-1902/IMPL-01/CAP-1902/route.py",
+    "data_filename": "products.json",
+    "is_host": false,
+    "loc": 39,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/products",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "e_commerce_storefront",
+    "app_type": "e-commerce storefront",
+    "cap_id": "CAP-1903",
+    "name": "List Orders",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "orders"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/e_commerce_storefront/shelf/implementations/CAP-1903/IMPL-01/CAP-1903/route.py",
+    "data_filename": "orders.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/orders",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "e_commerce_storefront",
+    "app_type": "e-commerce storefront",
+    "cap_id": "CAP-1904",
+    "name": "Checkout",
+    "category": "compute",
+    "required_input": [
+      "product_id"
+    ],
+    "output_fields": [
+      "id",
+      "product_id",
+      "status",
+      "payment"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/e_commerce_storefront/shelf/implementations/CAP-1904/IMPL-01/CAP-1904/route.py",
+    "data_filename": "orders.json",
+    "is_host": false,
+    "loc": 37,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/checkout",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "email_client",
+    "app_type": "email client",
+    "cap_id": "CAP-1400",
+    "name": "Email Client Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/email_client/shelf/implementations/CAP-1400/IMPL-01/CAP-1400/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "email_client",
+    "app_type": "email client",
+    "cap_id": "CAP-1401",
+    "name": "List Inbox",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "inbox"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/email_client/shelf/implementations/CAP-1401/IMPL-01/CAP-1401/route.py",
+    "data_filename": "email_client.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/inbox",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "email_client",
+    "app_type": "email client",
+    "cap_id": "CAP-1402",
+    "name": "Send Email",
+    "category": "compute",
+    "required_input": [
+      "to",
+      "subject"
+    ],
+    "output_fields": [
+      "id",
+      "to",
+      "subject",
+      "body",
+      "folder"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/email_client/shelf/implementations/CAP-1402/IMPL-01/CAP-1402/route.py",
+    "data_filename": "email_client.json",
+    "is_host": false,
+    "loc": 39,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/emails/send",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "event_ticketing",
+    "app_type": "event ticketing",
+    "cap_id": "CAP-2700",
+    "name": "Event Ticketing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/event_ticketing/shelf/implementations/CAP-2700/IMPL-01/CAP-2700/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "event_ticketing",
+    "app_type": "event ticketing",
+    "cap_id": "CAP-2701",
+    "name": "List Events",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "events"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/event_ticketing/shelf/implementations/CAP-2701/IMPL-01/CAP-2701/route.py",
+    "data_filename": "event_ticketing.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/events",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "event_ticketing",
+    "app_type": "event ticketing",
+    "cap_id": "CAP-2702",
+    "name": "Create Event",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "capacity",
+      "sold"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/event_ticketing/shelf/implementations/CAP-2702/IMPL-01/CAP-2702/route.py",
+    "data_filename": "event_ticketing.json",
+    "is_host": false,
+    "loc": 39,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/events",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "event_ticketing",
+    "app_type": "event ticketing",
+    "cap_id": "CAP-2703",
+    "name": "Buy Ticket",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "sold"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/event_ticketing/shelf/implementations/CAP-2703/IMPL-01/CAP-2703/route.py",
+    "data_filename": "event_ticketing.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/events/buy",
+    "if_count": 2,
+    "for_count": 1,
+    "final_class": "RED"
+  },
+  {
+    "app_slug": "expense_tracker",
+    "app_type": "expense tracker",
+    "cap_id": "CAP-0500",
+    "name": "Expense Tracker Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/expense_tracker/shelf/implementations/CAP-0500/IMPL-01/CAP-0500/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "expense_tracker",
+    "app_type": "expense tracker",
+    "cap_id": "CAP-0501",
+    "name": "List Expenses",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "expenses"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/expense_tracker/shelf/implementations/CAP-0501/IMPL-01/CAP-0501/route.py",
+    "data_filename": "expense_tracker.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/expenses",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "expense_tracker",
+    "app_type": "expense tracker",
+    "cap_id": "CAP-0502",
+    "name": "Create Expense",
+    "category": "compute",
+    "required_input": [
+      "description"
+    ],
+    "output_fields": [
+      "id",
+      "description",
+      "amount",
+      "category"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/expense_tracker/shelf/implementations/CAP-0502/IMPL-01/CAP-0502/route.py",
+    "data_filename": "expense_tracker.json",
+    "is_host": false,
+    "loc": 40,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/expenses",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "expense_tracker",
+    "app_type": "expense tracker",
+    "cap_id": "CAP-0503",
+    "name": "Delete Expense",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/expense_tracker/shelf/implementations/CAP-0503/IMPL-01/CAP-0503/route.py",
+    "data_filename": "expense_tracker.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/expenses/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "expense_tracker",
+    "app_type": "expense tracker",
+    "cap_id": "CAP-0504",
+    "name": "Total Expenses",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "total"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/expense_tracker/shelf/implementations/CAP-0504/IMPL-01/CAP-0504/route.py",
+    "data_filename": "expense_tracker.json",
+    "is_host": false,
+    "loc": 28,
+    "shape": "AGGREGATE/READ",
+    "method": "GET",
+    "route": "/api/expenses/total",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "file_storage_and_sync",
+    "app_type": "file storage and sync",
+    "cap_id": "CAP-1500",
+    "name": "File Storage And Sync Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/file_storage_and_sync/shelf/implementations/CAP-1500/IMPL-01/CAP-1500/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "file_storage_and_sync",
+    "app_type": "file storage and sync",
+    "cap_id": "CAP-1501",
+    "name": "List Files",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "files"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/file_storage_and_sync/shelf/implementations/CAP-1501/IMPL-01/CAP-1501/route.py",
+    "data_filename": "file_storage_and_sync.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/files",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "file_storage_and_sync",
+    "app_type": "file storage and sync",
+    "cap_id": "CAP-1502",
+    "name": "Upload File",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "content"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/file_storage_and_sync/shelf/implementations/CAP-1502/IMPL-01/CAP-1502/route.py",
+    "data_filename": "file_storage_and_sync.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/files",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "file_storage_and_sync",
+    "app_type": "file storage and sync",
+    "cap_id": "CAP-1503",
+    "name": "Delete File",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/file_storage_and_sync/shelf/implementations/CAP-1503/IMPL-01/CAP-1503/route.py",
+    "data_filename": "file_storage_and_sync.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/files/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "fitness_tracking",
+    "app_type": "fitness tracking",
+    "cap_id": "CAP-3800",
+    "name": "Fitness Tracking Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/fitness_tracking/shelf/implementations/CAP-3800/IMPL-01/CAP-3800/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "fitness_tracking",
+    "app_type": "fitness tracking",
+    "cap_id": "CAP-3801",
+    "name": "List Workouts",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "workouts"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/fitness_tracking/shelf/implementations/CAP-3801/IMPL-01/CAP-3801/route.py",
+    "data_filename": "fitness_tracking.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/workouts",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "fitness_tracking",
+    "app_type": "fitness tracking",
+    "cap_id": "CAP-3802",
+    "name": "Log Workout",
+    "category": "compute",
+    "required_input": [
+      "type"
+    ],
+    "output_fields": [
+      "id",
+      "type",
+      "duration"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/fitness_tracking/shelf/implementations/CAP-3802/IMPL-01/CAP-3802/route.py",
+    "data_filename": "fitness_tracking.json",
+    "is_host": false,
+    "loc": 39,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/workouts",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "fleet_tracking",
+    "app_type": "fleet tracking",
+    "cap_id": "CAP-3000",
+    "name": "Fleet Tracking Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/fleet_tracking/shelf/implementations/CAP-3000/IMPL-01/CAP-3000/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "fleet_tracking",
+    "app_type": "fleet tracking",
+    "cap_id": "CAP-3001",
+    "name": "List Vehicles",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "vehicles"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/fleet_tracking/shelf/implementations/CAP-3001/IMPL-01/CAP-3001/route.py",
+    "data_filename": "fleet_tracking.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/vehicles",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "fleet_tracking",
+    "app_type": "fleet tracking",
+    "cap_id": "CAP-3002",
+    "name": "Add Vehicle",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "status",
+      "location"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/fleet_tracking/shelf/implementations/CAP-3002/IMPL-01/CAP-3002/route.py",
+    "data_filename": "fleet_tracking.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/vehicles",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "fleet_tracking",
+    "app_type": "fleet tracking",
+    "cap_id": "CAP-3003",
+    "name": "Update Vehicle Location",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "location",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/fleet_tracking/shelf/implementations/CAP-3003/IMPL-01/CAP-3003/route.py",
+    "data_filename": "fleet_tracking.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/vehicles/location",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2200",
+    "name": "Food Delivery Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2200/IMPL-01/CAP-2200/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2201",
+    "name": "List Restaurants",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "restaurants"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2201/IMPL-01/CAP-2201/route.py",
+    "data_filename": "restaurants.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/restaurants",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2202",
+    "name": "Add Restaurant",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2202/IMPL-01/CAP-2202/route.py",
+    "data_filename": "restaurants.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/restaurants",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2203",
+    "name": "List Menu",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "menu"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2203/IMPL-01/CAP-2203/route.py",
+    "data_filename": "menu.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/menu",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2204",
+    "name": "Add Menu Item",
+    "category": "compute",
+    "required_input": [
+      "restaurant_id",
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "restaurant_id",
+      "name"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2204/IMPL-01/CAP-2204/route.py",
+    "data_filename": "menu.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/menu",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2205",
+    "name": "Place Order",
+    "category": "compute",
+    "required_input": [
+      "item_id"
+    ],
+    "output_fields": [
+      "id",
+      "item_id",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2205/IMPL-01/CAP-2205/route.py",
+    "data_filename": "food_orders.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/orders",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "form_builder_and_survey",
+    "app_type": "form builder and survey",
+    "cap_id": "CAP-1800",
+    "name": "Form Builder And Survey Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/form_builder_and_survey/shelf/implementations/CAP-1800/IMPL-01/CAP-1800/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "form_builder_and_survey",
+    "app_type": "form builder and survey",
+    "cap_id": "CAP-1801",
+    "name": "List Responses",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "responses"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/form_builder_and_survey/shelf/implementations/CAP-1801/IMPL-01/CAP-1801/route.py",
+    "data_filename": "form_builder_and_survey.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/responses",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "form_builder_and_survey",
+    "app_type": "form builder and survey",
+    "cap_id": "CAP-1802",
+    "name": "Submit Response",
+    "category": "compute",
+    "required_input": [
+      "answer"
+    ],
+    "output_fields": [
+      "id",
+      "answer"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/form_builder_and_survey/shelf/implementations/CAP-1802/IMPL-01/CAP-1802/route.py",
+    "data_filename": "form_builder_and_survey.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/responses",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "habit_tracker",
+    "app_type": "habit tracker",
+    "cap_id": "CAP-0300",
+    "name": "Habit Tracker Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/habit_tracker/shelf/implementations/CAP-0300/IMPL-01/CAP-0300/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "habit_tracker",
+    "app_type": "habit tracker",
+    "cap_id": "CAP-0301",
+    "name": "List Habits",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "habits"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/habit_tracker/shelf/implementations/CAP-0301/IMPL-01/CAP-0301/route.py",
+    "data_filename": "habit_tracker.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/habits",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "habit_tracker",
+    "app_type": "habit tracker",
+    "cap_id": "CAP-0302",
+    "name": "Create Habit",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "streak"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/habit_tracker/shelf/implementations/CAP-0302/IMPL-01/CAP-0302/route.py",
+    "data_filename": "habit_tracker.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/habits",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "habit_tracker",
+    "app_type": "habit tracker",
+    "cap_id": "CAP-0303",
+    "name": "Check In Habit",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "streak"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/habit_tracker/shelf/implementations/CAP-0303/IMPL-01/CAP-0303/route.py",
+    "data_filename": "habit_tracker.json",
+    "is_host": false,
+    "loc": 38,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/habits/checkin",
+    "if_count": 2,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "habit_tracker",
+    "app_type": "habit tracker",
+    "cap_id": "CAP-0304",
+    "name": "Delete Habit",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/habit_tracker/shelf/implementations/CAP-0304/IMPL-01/CAP-0304/route.py",
+    "data_filename": "habit_tracker.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/habits/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "helpdesk_ticketing",
+    "app_type": "helpdesk ticketing",
+    "cap_id": "CAP-0900",
+    "name": "Helpdesk Ticketing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/helpdesk_ticketing/shelf/implementations/CAP-0900/IMPL-01/CAP-0900/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "helpdesk_ticketing",
+    "app_type": "helpdesk ticketing",
+    "cap_id": "CAP-0901",
+    "name": "List Tickets",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "tickets"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/helpdesk_ticketing/shelf/implementations/CAP-0901/IMPL-01/CAP-0901/route.py",
+    "data_filename": "helpdesk_ticketing.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/tickets",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "helpdesk_ticketing",
+    "app_type": "helpdesk ticketing",
+    "cap_id": "CAP-0902",
+    "name": "Create Ticket",
+    "category": "compute",
+    "required_input": [
+      "subject"
+    ],
+    "output_fields": [
+      "id",
+      "subject",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/helpdesk_ticketing/shelf/implementations/CAP-0902/IMPL-01/CAP-0902/route.py",
+    "data_filename": "helpdesk_ticketing.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/tickets",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "helpdesk_ticketing",
+    "app_type": "helpdesk ticketing",
+    "cap_id": "CAP-0903",
+    "name": "Close Ticket",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "subject",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/helpdesk_ticketing/shelf/implementations/CAP-0903/IMPL-01/CAP-0903/route.py",
+    "data_filename": "helpdesk_ticketing.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/tickets/close",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "helpdesk_ticketing",
+    "app_type": "helpdesk ticketing",
+    "cap_id": "CAP-0904",
+    "name": "Delete Ticket",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/helpdesk_ticketing/shelf/implementations/CAP-0904/IMPL-01/CAP-0904/route.py",
+    "data_filename": "helpdesk_ticketing.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/tickets/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "inventory_and_warehouse",
+    "app_type": "inventory and warehouse",
+    "cap_id": "CAP-2900",
+    "name": "Inventory And Warehouse Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/inventory_and_warehouse/shelf/implementations/CAP-2900/IMPL-01/CAP-2900/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "inventory_and_warehouse",
+    "app_type": "inventory and warehouse",
+    "cap_id": "CAP-2901",
+    "name": "List Items",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "items"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/inventory_and_warehouse/shelf/implementations/CAP-2901/IMPL-01/CAP-2901/route.py",
+    "data_filename": "inventory_and_warehouse.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/items",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "inventory_and_warehouse",
+    "app_type": "inventory and warehouse",
+    "cap_id": "CAP-2902",
+    "name": "Add Item",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "sku",
+      "qty"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/inventory_and_warehouse/shelf/implementations/CAP-2902/IMPL-01/CAP-2902/route.py",
+    "data_filename": "inventory_and_warehouse.json",
+    "is_host": false,
+    "loc": 40,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/items",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "inventory_and_warehouse",
+    "app_type": "inventory and warehouse",
+    "cap_id": "CAP-2903",
+    "name": "Adjust Quantity",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "qty"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/inventory_and_warehouse/shelf/implementations/CAP-2903/IMPL-01/CAP-2903/route.py",
+    "data_filename": "inventory_and_warehouse.json",
+    "is_host": false,
+    "loc": 38,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/items/adjust",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "invoicing",
+    "app_type": "invoicing",
+    "cap_id": "CAP-0600",
+    "name": "Invoicing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/invoicing/shelf/implementations/CAP-0600/IMPL-01/CAP-0600/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "invoicing",
+    "app_type": "invoicing",
+    "cap_id": "CAP-0601",
+    "name": "List Invoices",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "invoices"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/invoicing/shelf/implementations/CAP-0601/IMPL-01/CAP-0601/route.py",
+    "data_filename": "invoicing.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/invoices",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "invoicing",
+    "app_type": "invoicing",
+    "cap_id": "CAP-0602",
+    "name": "Create Invoice",
+    "category": "compute",
+    "required_input": [
+      "client"
+    ],
+    "output_fields": [
+      "id",
+      "client",
+      "amount",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/invoicing/shelf/implementations/CAP-0602/IMPL-01/CAP-0602/route.py",
+    "data_filename": "invoicing.json",
+    "is_host": false,
+    "loc": 39,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/invoices",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "invoicing",
+    "app_type": "invoicing",
+    "cap_id": "CAP-0603",
+    "name": "Mark Invoice Paid",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "client",
+      "amount",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/invoicing/shelf/implementations/CAP-0603/IMPL-01/CAP-0603/route.py",
+    "data_filename": "invoicing.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/invoices/pay",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "invoicing",
+    "app_type": "invoicing",
+    "cap_id": "CAP-0604",
+    "name": "Delete Invoice",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/invoicing/shelf/implementations/CAP-0604/IMPL-01/CAP-0604/route.py",
+    "data_filename": "invoicing.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/invoices/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "language_learning",
+    "app_type": "language learning",
+    "cap_id": "CAP-4000",
+    "name": "Language Learning Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/language_learning/shelf/implementations/CAP-4000/IMPL-01/CAP-4000/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "language_learning",
+    "app_type": "language learning",
+    "cap_id": "CAP-4001",
+    "name": "List Cards",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "cards"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/language_learning/shelf/implementations/CAP-4001/IMPL-01/CAP-4001/route.py",
+    "data_filename": "language_learning.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/cards",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "language_learning",
+    "app_type": "language learning",
+    "cap_id": "CAP-4002",
+    "name": "Add Card",
+    "category": "compute",
+    "required_input": [
+      "front"
+    ],
+    "output_fields": [
+      "id",
+      "front",
+      "back",
+      "correct",
+      "incorrect"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/language_learning/shelf/implementations/CAP-4002/IMPL-01/CAP-4002/route.py",
+    "data_filename": "language_learning.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/cards",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "language_learning",
+    "app_type": "language learning",
+    "cap_id": "CAP-4003",
+    "name": "Review Card",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "correct",
+      "incorrect"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/language_learning/shelf/implementations/CAP-4003/IMPL-01/CAP-4003/route.py",
+    "data_filename": "language_learning.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/cards/review",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "meditation_and_wellbeing",
+    "app_type": "meditation and wellbeing",
+    "cap_id": "CAP-3900",
+    "name": "Meditation And Wellbeing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/meditation_and_wellbeing/shelf/implementations/CAP-3900/IMPL-01/CAP-3900/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "meditation_and_wellbeing",
+    "app_type": "meditation and wellbeing",
+    "cap_id": "CAP-3901",
+    "name": "List Sessions",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "sessions"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/meditation_and_wellbeing/shelf/implementations/CAP-3901/IMPL-01/CAP-3901/route.py",
+    "data_filename": "meditation_and_wellbeing.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/sessions",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "meditation_and_wellbeing",
+    "app_type": "meditation and wellbeing",
+    "cap_id": "CAP-3902",
+    "name": "Log Session",
+    "category": "compute",
+    "required_input": [
+      "type"
+    ],
+    "output_fields": [
+      "id",
+      "type",
+      "duration"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/meditation_and_wellbeing/shelf/implementations/CAP-3902/IMPL-01/CAP-3902/route.py",
+    "data_filename": "meditation_and_wellbeing.json",
+    "is_host": false,
+    "loc": 39,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/sessions",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "multi_vendor_marketplace",
+    "app_type": "multi-vendor marketplace",
+    "cap_id": "CAP-2000",
+    "name": "Multi-Vendor Marketplace Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/multi_vendor_marketplace/shelf/implementations/CAP-2000/IMPL-01/CAP-2000/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "multi_vendor_marketplace",
+    "app_type": "multi-vendor marketplace",
+    "cap_id": "CAP-2001",
+    "name": "List Vendors",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "vendors"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/multi_vendor_marketplace/shelf/implementations/CAP-2001/IMPL-01/CAP-2001/route.py",
+    "data_filename": "vendors.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/vendors",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "multi_vendor_marketplace",
+    "app_type": "multi-vendor marketplace",
+    "cap_id": "CAP-2002",
+    "name": "Add Vendor",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/multi_vendor_marketplace/shelf/implementations/CAP-2002/IMPL-01/CAP-2002/route.py",
+    "data_filename": "vendors.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/vendors",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "multi_vendor_marketplace",
+    "app_type": "multi-vendor marketplace",
+    "cap_id": "CAP-2003",
+    "name": "List Vendor Products",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "products"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/multi_vendor_marketplace/shelf/implementations/CAP-2003/IMPL-01/CAP-2003/route.py",
+    "data_filename": "vendor_products.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/vendor_products",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "multi_vendor_marketplace",
+    "app_type": "multi-vendor marketplace",
+    "cap_id": "CAP-2004",
+    "name": "Add Vendor Product",
+    "category": "compute",
+    "required_input": [
+      "vendor_id",
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "vendor_id",
+      "name"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/multi_vendor_marketplace/shelf/implementations/CAP-2004/IMPL-01/CAP-2004/route.py",
+    "data_filename": "vendor_products.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/vendor_products",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "music_streaming",
+    "app_type": "music streaming",
+    "cap_id": "CAP-3500",
+    "name": "Music Streaming Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/music_streaming/shelf/implementations/CAP-3500/IMPL-01/CAP-3500/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "music_streaming",
+    "app_type": "music streaming",
+    "cap_id": "CAP-3501",
+    "name": "List Tracks",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "tracks"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/music_streaming/shelf/implementations/CAP-3501/IMPL-01/CAP-3501/route.py",
+    "data_filename": "music_streaming.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/tracks",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "music_streaming",
+    "app_type": "music streaming",
+    "cap_id": "CAP-3502",
+    "name": "Add Track",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "artist",
+      "plays"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/music_streaming/shelf/implementations/CAP-3502/IMPL-01/CAP-3502/route.py",
+    "data_filename": "music_streaming.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/tracks",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "music_streaming",
+    "app_type": "music streaming",
+    "cap_id": "CAP-3503",
+    "name": "Play Track",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "plays"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/music_streaming/shelf/implementations/CAP-3503/IMPL-01/CAP-3503/route.py",
+    "data_filename": "music_streaming.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/tracks/play",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "note_taking",
+    "app_type": "note taking",
+    "cap_id": "CAP-0200",
+    "name": "Note Taking Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/note_taking/shelf/implementations/CAP-0200/IMPL-01/CAP-0200/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "note_taking",
+    "app_type": "note taking",
+    "cap_id": "CAP-0201",
+    "name": "List Notes",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "notes"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/note_taking/shelf/implementations/CAP-0201/IMPL-01/CAP-0201/route.py",
+    "data_filename": "note_taking.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/notes",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "note_taking",
+    "app_type": "note taking",
+    "cap_id": "CAP-0202",
+    "name": "Create Note",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "body"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/note_taking/shelf/implementations/CAP-0202/IMPL-01/CAP-0202/route.py",
+    "data_filename": "note_taking.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/notes",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "note_taking",
+    "app_type": "note taking",
+    "cap_id": "CAP-0203",
+    "name": "Update Note",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "body"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/note_taking/shelf/implementations/CAP-0203/IMPL-01/CAP-0203/route.py",
+    "data_filename": "note_taking.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/notes/update",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "note_taking",
+    "app_type": "note taking",
+    "cap_id": "CAP-0204",
+    "name": "Delete Note",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/note_taking/shelf/implementations/CAP-0204/IMPL-01/CAP-0204/route.py",
+    "data_filename": "note_taking.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/notes/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "online_course_lms",
+    "app_type": "online course LMS",
+    "cap_id": "CAP-4100",
+    "name": "Online Course Lms Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/online_course_lms/shelf/implementations/CAP-4100/IMPL-01/CAP-4100/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "online_course_lms",
+    "app_type": "online course LMS",
+    "cap_id": "CAP-4101",
+    "name": "List Courses",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "courses"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/online_course_lms/shelf/implementations/CAP-4101/IMPL-01/CAP-4101/route.py",
+    "data_filename": "courses.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/courses",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "online_course_lms",
+    "app_type": "online course LMS",
+    "cap_id": "CAP-4102",
+    "name": "Create Course",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/online_course_lms/shelf/implementations/CAP-4102/IMPL-01/CAP-4102/route.py",
+    "data_filename": "courses.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/courses",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "online_course_lms",
+    "app_type": "online course LMS",
+    "cap_id": "CAP-4103",
+    "name": "List Lessons",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "lessons"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/online_course_lms/shelf/implementations/CAP-4103/IMPL-01/CAP-4103/route.py",
+    "data_filename": "lessons.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/lessons",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "online_course_lms",
+    "app_type": "online course LMS",
+    "cap_id": "CAP-4104",
+    "name": "Add Lesson",
+    "category": "compute",
+    "required_input": [
+      "course_id",
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "course_id",
+      "title"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/online_course_lms/shelf/implementations/CAP-4104/IMPL-01/CAP-4104/route.py",
+    "data_filename": "lessons.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/lessons",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "parcel_tracking",
+    "app_type": "parcel tracking",
+    "cap_id": "CAP-2400",
+    "name": "Parcel Tracking Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/parcel_tracking/shelf/implementations/CAP-2400/IMPL-01/CAP-2400/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "parcel_tracking",
+    "app_type": "parcel tracking",
+    "cap_id": "CAP-2401",
+    "name": "List Parcels",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "parcels"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/parcel_tracking/shelf/implementations/CAP-2401/IMPL-01/CAP-2401/route.py",
+    "data_filename": "parcel_tracking.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/parcels",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "parcel_tracking",
+    "app_type": "parcel tracking",
+    "cap_id": "CAP-2402",
+    "name": "Create Parcel",
+    "category": "compute",
+    "required_input": [
+      "tracking_no"
+    ],
+    "output_fields": [
+      "id",
+      "tracking_no",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/parcel_tracking/shelf/implementations/CAP-2402/IMPL-01/CAP-2402/route.py",
+    "data_filename": "parcel_tracking.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/parcels",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "parcel_tracking",
+    "app_type": "parcel tracking",
+    "cap_id": "CAP-2403",
+    "name": "Update Parcel Status",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "tracking_no",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/parcel_tracking/shelf/implementations/CAP-2403/IMPL-01/CAP-2403/route.py",
+    "data_filename": "parcel_tracking.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/parcels/status",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "payroll",
+    "app_type": "payroll",
+    "cap_id": "CAP-1000",
+    "name": "Payroll Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/payroll/shelf/implementations/CAP-1000/IMPL-01/CAP-1000/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "payroll",
+    "app_type": "payroll",
+    "cap_id": "CAP-1001",
+    "name": "List Employees",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "employees"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/payroll/shelf/implementations/CAP-1001/IMPL-01/CAP-1001/route.py",
+    "data_filename": "employees.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/employees",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "payroll",
+    "app_type": "payroll",
+    "cap_id": "CAP-1002",
+    "name": "Add Employee",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "salary"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/payroll/shelf/implementations/CAP-1002/IMPL-01/CAP-1002/route.py",
+    "data_filename": "employees.json",
+    "is_host": false,
+    "loc": 39,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/employees",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "payroll",
+    "app_type": "payroll",
+    "cap_id": "CAP-1003",
+    "name": "Run Payroll",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "created"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/payroll/shelf/implementations/CAP-1003/IMPL-01/CAP-1003/route.py",
+    "data_filename": "pay_records.json",
+    "is_host": false,
+    "loc": 47,
+    "shape": "OTHER-COMPUTE",
+    "method": "POST",
+    "route": "/api/payroll/run",
+    "if_count": 0,
+    "for_count": 1,
+    "final_class": "ORANGE"
+  },
+  {
+    "app_slug": "payroll",
+    "app_type": "payroll",
+    "cap_id": "CAP-1004",
+    "name": "List Pay Records",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "records"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/payroll/shelf/implementations/CAP-1004/IMPL-01/CAP-1004/route.py",
+    "data_filename": "pay_records.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/payroll/records",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "photo_sharing",
+    "app_type": "photo sharing",
+    "cap_id": "CAP-3300",
+    "name": "Photo Sharing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/photo_sharing/shelf/implementations/CAP-3300/IMPL-01/CAP-3300/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "photo_sharing",
+    "app_type": "photo sharing",
+    "cap_id": "CAP-3301",
+    "name": "List Photos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "photos"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/photo_sharing/shelf/implementations/CAP-3301/IMPL-01/CAP-3301/route.py",
+    "data_filename": "photo_sharing.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/photos",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "photo_sharing",
+    "app_type": "photo sharing",
+    "cap_id": "CAP-3302",
+    "name": "Upload Photo",
+    "category": "compute",
+    "required_input": [
+      "caption"
+    ],
+    "output_fields": [
+      "id",
+      "caption",
+      "image_b64",
+      "likes"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/photo_sharing/shelf/implementations/CAP-3302/IMPL-01/CAP-3302/route.py",
+    "data_filename": "photo_sharing.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/photos",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "photo_sharing",
+    "app_type": "photo sharing",
+    "cap_id": "CAP-3303",
+    "name": "Like Photo",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "likes"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/photo_sharing/shelf/implementations/CAP-3303/IMPL-01/CAP-3303/route.py",
+    "data_filename": "photo_sharing.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/photos/like",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "podcast",
+    "app_type": "podcast",
+    "cap_id": "CAP-3700",
+    "name": "Podcast Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/podcast/shelf/implementations/CAP-3700/IMPL-01/CAP-3700/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "podcast",
+    "app_type": "podcast",
+    "cap_id": "CAP-3701",
+    "name": "List Episodes",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "episodes"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/podcast/shelf/implementations/CAP-3701/IMPL-01/CAP-3701/route.py",
+    "data_filename": "podcast.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/episodes",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "podcast",
+    "app_type": "podcast",
+    "cap_id": "CAP-3702",
+    "name": "Add Episode",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "plays"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/podcast/shelf/implementations/CAP-3702/IMPL-01/CAP-3702/route.py",
+    "data_filename": "podcast.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/episodes",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "podcast",
+    "app_type": "podcast",
+    "cap_id": "CAP-3703",
+    "name": "Play Episode",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "plays"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/podcast/shelf/implementations/CAP-3703/IMPL-01/CAP-3703/route.py",
+    "data_filename": "podcast.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/episodes/play",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "project_management",
+    "app_type": "project management",
+    "cap_id": "CAP-1100",
+    "name": "Project Management Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/project_management/shelf/implementations/CAP-1100/IMPL-01/CAP-1100/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "project_management",
+    "app_type": "project management",
+    "cap_id": "CAP-1101",
+    "name": "List Tasks",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "tasks"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/project_management/shelf/implementations/CAP-1101/IMPL-01/CAP-1101/route.py",
+    "data_filename": "project_management.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/tasks",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "project_management",
+    "app_type": "project management",
+    "cap_id": "CAP-1102",
+    "name": "Create Task",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/project_management/shelf/implementations/CAP-1102/IMPL-01/CAP-1102/route.py",
+    "data_filename": "project_management.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/tasks",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "project_management",
+    "app_type": "project management",
+    "cap_id": "CAP-1103",
+    "name": "Update Task Status",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/project_management/shelf/implementations/CAP-1103/IMPL-01/CAP-1103/route.py",
+    "data_filename": "project_management.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/tasks/status",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "project_management",
+    "app_type": "project management",
+    "cap_id": "CAP-1104",
+    "name": "Delete Task",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/project_management/shelf/implementations/CAP-1104/IMPL-01/CAP-1104/route.py",
+    "data_filename": "project_management.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/tasks/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "property_rental",
+    "app_type": "property rental",
+    "cap_id": "CAP-2600",
+    "name": "Property Rental Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/property_rental/shelf/implementations/CAP-2600/IMPL-01/CAP-2600/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "property_rental",
+    "app_type": "property rental",
+    "cap_id": "CAP-2601",
+    "name": "List Listings",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "listings"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/property_rental/shelf/implementations/CAP-2601/IMPL-01/CAP-2601/route.py",
+    "data_filename": "listings.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/listings",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "property_rental",
+    "app_type": "property rental",
+    "cap_id": "CAP-2602",
+    "name": "Create Listing",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "price"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/property_rental/shelf/implementations/CAP-2602/IMPL-01/CAP-2602/route.py",
+    "data_filename": "listings.json",
+    "is_host": false,
+    "loc": 39,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/listings",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "property_rental",
+    "app_type": "property rental",
+    "cap_id": "CAP-2603",
+    "name": "List Bookings",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "bookings"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/property_rental/shelf/implementations/CAP-2603/IMPL-01/CAP-2603/route.py",
+    "data_filename": "bookings.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/bookings",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "property_rental",
+    "app_type": "property rental",
+    "cap_id": "CAP-2604",
+    "name": "Book Listing",
+    "category": "compute",
+    "required_input": [
+      "listing_id",
+      "guest"
+    ],
+    "output_fields": [
+      "id",
+      "listing_id",
+      "guest"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/property_rental/shelf/implementations/CAP-2604/IMPL-01/CAP-2604/route.py",
+    "data_filename": "bookings.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/bookings",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "quiz_and_flashcards",
+    "app_type": "quiz and flashcards",
+    "cap_id": "CAP-4200",
+    "name": "Quiz And Flashcards Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/quiz_and_flashcards/shelf/implementations/CAP-4200/IMPL-01/CAP-4200/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "quiz_and_flashcards",
+    "app_type": "quiz and flashcards",
+    "cap_id": "CAP-4201",
+    "name": "List Cards",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "cards"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/quiz_and_flashcards/shelf/implementations/CAP-4201/IMPL-01/CAP-4201/route.py",
+    "data_filename": "quiz_and_flashcards.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/cards",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "quiz_and_flashcards",
+    "app_type": "quiz and flashcards",
+    "cap_id": "CAP-4202",
+    "name": "Create Card",
+    "category": "compute",
+    "required_input": [
+      "question"
+    ],
+    "output_fields": [
+      "id",
+      "question",
+      "answer",
+      "correct_count"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/quiz_and_flashcards/shelf/implementations/CAP-4202/IMPL-01/CAP-4202/route.py",
+    "data_filename": "quiz_and_flashcards.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/cards",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "quiz_and_flashcards",
+    "app_type": "quiz and flashcards",
+    "cap_id": "CAP-4203",
+    "name": "Review Card",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "correct_count"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/quiz_and_flashcards/shelf/implementations/CAP-4203/IMPL-01/CAP-4203/route.py",
+    "data_filename": "quiz_and_flashcards.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/cards/review",
+    "if_count": 2,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "recipe_and_meal_planning",
+    "app_type": "recipe and meal planning",
+    "cap_id": "CAP-4300",
+    "name": "Recipe And Meal Planning Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/recipe_and_meal_planning/shelf/implementations/CAP-4300/IMPL-01/CAP-4300/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "recipe_and_meal_planning",
+    "app_type": "recipe and meal planning",
+    "cap_id": "CAP-4301",
+    "name": "List Recipes",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "recipes"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/recipe_and_meal_planning/shelf/implementations/CAP-4301/IMPL-01/CAP-4301/route.py",
+    "data_filename": "recipes.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/recipes",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "recipe_and_meal_planning",
+    "app_type": "recipe and meal planning",
+    "cap_id": "CAP-4302",
+    "name": "Create Recipe",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "ingredients"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/recipe_and_meal_planning/shelf/implementations/CAP-4302/IMPL-01/CAP-4302/route.py",
+    "data_filename": "recipes.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/recipes",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "recipe_and_meal_planning",
+    "app_type": "recipe and meal planning",
+    "cap_id": "CAP-4303",
+    "name": "List Meal Plan",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "plan"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/recipe_and_meal_planning/shelf/implementations/CAP-4303/IMPL-01/CAP-4303/route.py",
+    "data_filename": "meal_plan.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/meal_plan",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "recipe_and_meal_planning",
+    "app_type": "recipe and meal planning",
+    "cap_id": "CAP-4304",
+    "name": "Plan Meal",
+    "category": "compute",
+    "required_input": [
+      "day",
+      "recipe_id"
+    ],
+    "output_fields": [
+      "day",
+      "recipe_id"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/recipe_and_meal_planning/shelf/implementations/CAP-4304/IMPL-01/CAP-4304/route.py",
+    "data_filename": "meal_plan.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/meal_plan",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "restaurant_pos",
+    "app_type": "restaurant POS",
+    "cap_id": "CAP-2800",
+    "name": "Restaurant Pos Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/restaurant_pos/shelf/implementations/CAP-2800/IMPL-01/CAP-2800/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "restaurant_pos",
+    "app_type": "restaurant POS",
+    "cap_id": "CAP-2801",
+    "name": "List Orders",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "orders"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/restaurant_pos/shelf/implementations/CAP-2801/IMPL-01/CAP-2801/route.py",
+    "data_filename": "restaurant_pos.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/orders",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "restaurant_pos",
+    "app_type": "restaurant POS",
+    "cap_id": "CAP-2802",
+    "name": "Create Order",
+    "category": "compute",
+    "required_input": [
+      "item"
+    ],
+    "output_fields": [
+      "id",
+      "item",
+      "total",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/restaurant_pos/shelf/implementations/CAP-2802/IMPL-01/CAP-2802/route.py",
+    "data_filename": "restaurant_pos.json",
+    "is_host": false,
+    "loc": 39,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/orders",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "restaurant_pos",
+    "app_type": "restaurant POS",
+    "cap_id": "CAP-2803",
+    "name": "Close Order",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "item",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/restaurant_pos/shelf/implementations/CAP-2803/IMPL-01/CAP-2803/route.py",
+    "data_filename": "restaurant_pos.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/orders/close",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "ride_hailing",
+    "app_type": "ride hailing",
+    "cap_id": "CAP-2300",
+    "name": "Ride Hailing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/ride_hailing/shelf/implementations/CAP-2300/IMPL-01/CAP-2300/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "ride_hailing",
+    "app_type": "ride hailing",
+    "cap_id": "CAP-2301",
+    "name": "List Rides",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "rides"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/ride_hailing/shelf/implementations/CAP-2301/IMPL-01/CAP-2301/route.py",
+    "data_filename": "ride_hailing.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/rides",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "ride_hailing",
+    "app_type": "ride hailing",
+    "cap_id": "CAP-2302",
+    "name": "Request Ride",
+    "category": "compute",
+    "required_input": [
+      "pickup"
+    ],
+    "output_fields": [
+      "id",
+      "pickup",
+      "dropoff",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/ride_hailing/shelf/implementations/CAP-2302/IMPL-01/CAP-2302/route.py",
+    "data_filename": "ride_hailing.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/rides",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "ride_hailing",
+    "app_type": "ride hailing",
+    "cap_id": "CAP-2303",
+    "name": "Update Ride Status",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/ride_hailing/shelf/implementations/CAP-2303/IMPL-01/CAP-2303/route.py",
+    "data_filename": "ride_hailing.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/rides/status",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "short_video_feed",
+    "app_type": "short video feed",
+    "cap_id": "CAP-3400",
+    "name": "Short Video Feed Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/short_video_feed/shelf/implementations/CAP-3400/IMPL-01/CAP-3400/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "short_video_feed",
+    "app_type": "short video feed",
+    "cap_id": "CAP-3401",
+    "name": "List Videos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "videos"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/short_video_feed/shelf/implementations/CAP-3401/IMPL-01/CAP-3401/route.py",
+    "data_filename": "short_video_feed.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/videos",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "short_video_feed",
+    "app_type": "short video feed",
+    "cap_id": "CAP-3402",
+    "name": "Upload Video",
+    "category": "compute",
+    "required_input": [
+      "caption"
+    ],
+    "output_fields": [
+      "id",
+      "caption",
+      "views",
+      "likes"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/short_video_feed/shelf/implementations/CAP-3402/IMPL-01/CAP-3402/route.py",
+    "data_filename": "short_video_feed.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/videos",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "short_video_feed",
+    "app_type": "short video feed",
+    "cap_id": "CAP-3403",
+    "name": "View Video",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "views"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/short_video_feed/shelf/implementations/CAP-3403/IMPL-01/CAP-3403/route.py",
+    "data_filename": "short_video_feed.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/videos/view",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "social_feed",
+    "app_type": "social feed",
+    "cap_id": "CAP-3200",
+    "name": "Social Feed Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/social_feed/shelf/implementations/CAP-3200/IMPL-01/CAP-3200/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "social_feed",
+    "app_type": "social feed",
+    "cap_id": "CAP-3201",
+    "name": "List Feed",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "posts"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/social_feed/shelf/implementations/CAP-3201/IMPL-01/CAP-3201/route.py",
+    "data_filename": "social_feed.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/posts",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "social_feed",
+    "app_type": "social feed",
+    "cap_id": "CAP-3202",
+    "name": "Create Post",
+    "category": "compute",
+    "required_input": [
+      "text"
+    ],
+    "output_fields": [
+      "id",
+      "author",
+      "text",
+      "likes"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/social_feed/shelf/implementations/CAP-3202/IMPL-01/CAP-3202/route.py",
+    "data_filename": "social_feed.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/posts",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "social_feed",
+    "app_type": "social feed",
+    "cap_id": "CAP-3203",
+    "name": "Like Post",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "likes"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/social_feed/shelf/implementations/CAP-3203/IMPL-01/CAP-3203/route.py",
+    "data_filename": "social_feed.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/posts/like",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "spreadsheet",
+    "app_type": "spreadsheet",
+    "cap_id": "CAP-1700",
+    "name": "Spreadsheet Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/spreadsheet/shelf/implementations/CAP-1700/IMPL-01/CAP-1700/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "spreadsheet",
+    "app_type": "spreadsheet",
+    "cap_id": "CAP-1701",
+    "name": "List Cells",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "cells"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/spreadsheet/shelf/implementations/CAP-1701/IMPL-01/CAP-1701/route.py",
+    "data_filename": "spreadsheet.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/cells",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "spreadsheet",
+    "app_type": "spreadsheet",
+    "cap_id": "CAP-1702",
+    "name": "Set Cell",
+    "category": "compute",
+    "required_input": [
+      "row",
+      "col"
+    ],
+    "output_fields": [
+      "row",
+      "col",
+      "value"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/spreadsheet/shelf/implementations/CAP-1702/IMPL-01/CAP-1702/route.py",
+    "data_filename": "spreadsheet.json",
+    "is_host": false,
+    "loc": 41,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/cells/set",
+    "if_count": 2,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "team_chat",
+    "app_type": "team chat",
+    "cap_id": "CAP-1200",
+    "name": "Team Chat Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/team_chat/shelf/implementations/CAP-1200/IMPL-01/CAP-1200/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "team_chat",
+    "app_type": "team chat",
+    "cap_id": "CAP-1201",
+    "name": "List Messages",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "messages"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/team_chat/shelf/implementations/CAP-1201/IMPL-01/CAP-1201/route.py",
+    "data_filename": "team_chat.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/messages",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "team_chat",
+    "app_type": "team chat",
+    "cap_id": "CAP-1202",
+    "name": "Post Message",
+    "category": "compute",
+    "required_input": [
+      "text"
+    ],
+    "output_fields": [
+      "id",
+      "author",
+      "text"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/team_chat/shelf/implementations/CAP-1202/IMPL-01/CAP-1202/route.py",
+    "data_filename": "team_chat.json",
+    "is_host": false,
+    "loc": 36,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/messages",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "team_chat",
+    "app_type": "team chat",
+    "cap_id": "CAP-1203",
+    "name": "Delete Message",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/team_chat/shelf/implementations/CAP-1203/IMPL-01/CAP-1203/route.py",
+    "data_filename": "team_chat.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/messages/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0100",
+    "name": "Todo App Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0100/IMPL-01/CAP-0100/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 76,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0101",
+    "name": "List Todos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "todos"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0101/IMPL-01/CAP-0101/route.py",
+    "data_filename": "todos.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/todos",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0102",
+    "name": "Create Todo",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "completed"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0102/IMPL-01/CAP-0102/route.py",
+    "data_filename": "todos.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/todos",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0103",
+    "name": "Toggle Todo",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "completed"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0103/IMPL-01/CAP-0103/route.py",
+    "data_filename": "todos.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/todos/toggle",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0104",
+    "name": "Edit Todo",
+    "category": "compute",
+    "required_input": [
+      "id",
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "completed"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0104/IMPL-01/CAP-0104/route.py",
+    "data_filename": "todos.json",
+    "is_host": false,
+    "loc": 37,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/todos/edit",
+    "if_count": 2,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0105",
+    "name": "Delete Todo",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0105/IMPL-01/CAP-0105/route.py",
+    "data_filename": "todos.json",
+    "is_host": false,
+    "loc": 33,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/todos/delete",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0106",
+    "name": "Toggle All Todos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "updated"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0106/IMPL-01/CAP-0106/route.py",
+    "data_filename": "todos.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/todos/toggle_all",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0107",
+    "name": "Clear Completed Todos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "removed"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0107/IMPL-01/CAP-0107/route.py",
+    "data_filename": "todos.json",
+    "is_host": false,
+    "loc": 30,
+    "shape": "DELETE",
+    "method": "POST",
+    "route": "/api/todos/clear_completed",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "video_conferencing",
+    "app_type": "video conferencing",
+    "cap_id": "CAP-1300",
+    "name": "Video Conferencing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/video_conferencing/shelf/implementations/CAP-1300/IMPL-01/CAP-1300/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "video_conferencing",
+    "app_type": "video conferencing",
+    "cap_id": "CAP-1301",
+    "name": "List Rooms",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "rooms"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/video_conferencing/shelf/implementations/CAP-1301/IMPL-01/CAP-1301/route.py",
+    "data_filename": "video_conferencing.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/rooms",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "video_conferencing",
+    "app_type": "video conferencing",
+    "cap_id": "CAP-1302",
+    "name": "Create Room",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "participants"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/video_conferencing/shelf/implementations/CAP-1302/IMPL-01/CAP-1302/route.py",
+    "data_filename": "video_conferencing.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/rooms",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "video_conferencing",
+    "app_type": "video conferencing",
+    "cap_id": "CAP-1303",
+    "name": "Join Room",
+    "category": "compute",
+    "required_input": [
+      "id",
+      "participant"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "participants"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/video_conferencing/shelf/implementations/CAP-1303/IMPL-01/CAP-1303/route.py",
+    "data_filename": "video_conferencing.json",
+    "is_host": false,
+    "loc": 38,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/rooms/join",
+    "if_count": 3,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "video_streaming",
+    "app_type": "video streaming",
+    "cap_id": "CAP-3600",
+    "name": "Video Streaming Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/video_streaming/shelf/implementations/CAP-3600/IMPL-01/CAP-3600/app.py",
+    "data_filename": null,
+    "is_host": true,
+    "loc": 74,
+    "shape": "HOST/UI-LOADER",
+    "method": null,
+    "route": null,
+    "final_class": "GREEN (runtime) / RED (UI content)"
+  },
+  {
+    "app_slug": "video_streaming",
+    "app_type": "video streaming",
+    "cap_id": "CAP-3601",
+    "name": "List Videos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "videos"
+    ],
+    "side_effects": [],
+    "requires_auth": false,
+    "route_file": "verification/library_build/video_streaming/shelf/implementations/CAP-3601/IMPL-01/CAP-3601/route.py",
+    "data_filename": "video_streaming.json",
+    "is_host": false,
+    "loc": 26,
+    "shape": "LIST/READ",
+    "method": "GET",
+    "route": "/api/videos",
+    "if_count": 0,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "video_streaming",
+    "app_type": "video streaming",
+    "cap_id": "CAP-3602",
+    "name": "Add Video",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "views"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/video_streaming/shelf/implementations/CAP-3602/IMPL-01/CAP-3602/route.py",
+    "data_filename": "video_streaming.json",
+    "is_host": false,
+    "loc": 35,
+    "shape": "CREATE",
+    "method": "POST",
+    "route": "/api/videos",
+    "if_count": 1,
+    "for_count": 0,
+    "final_class": "YELLOW"
+  },
+  {
+    "app_slug": "video_streaming",
+    "app_type": "video streaming",
+    "cap_id": "CAP-3603",
+    "name": "Watch Video",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "views"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "requires_auth": false,
+    "route_file": "verification/library_build/video_streaming/shelf/implementations/CAP-3603/IMPL-01/CAP-3603/route.py",
+    "data_filename": "video_streaming.json",
+    "is_host": false,
+    "loc": 34,
+    "shape": "UPDATE",
+    "method": "POST",
+    "route": "/api/videos/watch",
+    "if_count": 1,
+    "for_count": 1,
+    "final_class": "YELLOW"
+  }
+]
