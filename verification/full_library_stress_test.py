@@ -51,6 +51,31 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 LIBRARY_BUILD = HERE / "library_build"
+# Optional, additive-only: colon-separated extra library_build-shaped roots
+# to include in this one run (e.g. a disposable coverage-expansion
+# workspace), so "every capability from every project" can mean literally
+# every project under test, not just the canonical library_build/. Empty
+# by default -- this NEVER changes the standard single-root behaviour
+# run_full_verification.py relies on; it only widens what one, explicit,
+# opt-in invocation looks at.
+import os  # noqa: E402
+EXTRA_ROOTS = [Path(p) for p in os.environ.get("STRESS_TEST_EXTRA_ROOTS", "").split(":") if p]
+ALL_ROOTS = [LIBRARY_BUILD] + EXTRA_ROOTS
+PROJECT_ROOT = {}  # project name -> the root it was found under
+
+
+def _iter_capability_files():
+    for root in ALL_ROOTS:
+        for capfile in sorted(root.glob("*/shelf/capabilities/CAP-*.json")):
+            project = capfile.relative_to(root).parts[0]
+            PROJECT_ROOT[project] = root
+            yield capfile, project
+
+
+def _root_for(project):
+    return PROJECT_ROOT[project]
+
+
 STRESS_DIR = HERE / "full_stress_test"
 SYSTEM = STRESS_DIR / "system"
 MODULES = SYSTEM / "modules"
@@ -71,8 +96,7 @@ def collect_unique_capabilities():
     -- verified separately below, not assumed)."""
     caps = {}
     origin_project = {}
-    for capfile in sorted(LIBRARY_BUILD.glob("*/shelf/capabilities/CAP-*.json")):
-        project = capfile.parts[-3] if False else capfile.relative_to(LIBRARY_BUILD).parts[0]
+    for capfile, project in _iter_capability_files():
         cap = json.loads(capfile.read_text())
         cid = cap["id"]
         if cid in caps:
@@ -89,8 +113,7 @@ def verify_duplicate_ids_are_byte_identical(origin_project):
     mismatch is a real finding, not something to paper over by picking one
     arbitrarily."""
     by_id = {}
-    for capfile in sorted(LIBRARY_BUILD.glob("*/shelf/capabilities/CAP-*.json")):
-        project = capfile.relative_to(LIBRARY_BUILD).parts[0]
+    for capfile, project in _iter_capability_files():
         cid = json.loads(capfile.read_text())["id"]
         by_id.setdefault(cid, []).append((project, capfile))
 
@@ -103,7 +126,7 @@ def verify_duplicate_ids_are_byte_identical(origin_project):
         impl_hashes_by_file = {}
         for project, capfile in entries:
             record_hashes.add(hashlib.md5(capfile.read_bytes()).hexdigest())
-            impl_dir = LIBRARY_BUILD / project / "shelf" / "implementations" / cid / "IMPL-01" / cid
+            impl_dir = _root_for(project) / project / "shelf" / "implementations" / cid / "IMPL-01" / cid
             for src in sorted(impl_dir.glob("*.py")):
                 impl_hashes_by_file.setdefault(src.name, set()).add(hashlib.md5(src.read_bytes()).hexdigest())
         bad = record_hashes if len(record_hashes) > 1 else None
@@ -125,7 +148,7 @@ def build_merged_system(caps, origin_project):
 
     for cid, cap in caps.items():
         project = origin_project[cid]
-        impl_dir = LIBRARY_BUILD / project / "shelf" / "implementations" / cid / "IMPL-01" / cid
+        impl_dir = _root_for(project) / project / "shelf" / "implementations" / cid / "IMPL-01" / cid
         if cid == gen_common.SHARED_LIB_CAP_ID:
             dest = MODULES / cid
             dest.mkdir(parents=True)
@@ -251,8 +274,9 @@ def main():
     print("=" * 78)
 
     caps, origin_project = collect_unique_capabilities()
-    print(f"\nTotal capability records across the library: "
-          f"{sum(1 for _ in LIBRARY_BUILD.glob('*/shelf/capabilities/CAP-*.json'))}")
+    total_records = sum(1 for _ in _iter_capability_files())
+    print(f"\nRoots included: {[str(r) for r in ALL_ROOTS]}")
+    print(f"Total capability records across the library: {total_records}")
     print(f"Unique capability ids: {len(caps)}")
 
     mismatches = verify_duplicate_ids_are_byte_identical(origin_project)

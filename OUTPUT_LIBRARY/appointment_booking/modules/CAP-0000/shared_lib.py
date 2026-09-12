@@ -46,3 +46,27 @@ def notify(recipient, message, filename="notifications.json"):
     rows.append(note)
     save(filename, rows)
     return note
+
+
+def audit(actor, action, entity, entity_id, details="", filename="audit_log.json"):
+    """Standard audit primitive, the same real-composition pattern as
+    notify(): any capability can call this directly to record a real,
+    timestamped activity entry -- actor/action/entity/entity_id/timestamp,
+    the same shape real audit-log implementations use (server-generated
+    timestamp, not client-supplied; a human-and-machine-readable entity
+    reference, not a raw blob). This is an ACTIVITY LOG, not a security or
+    compliance control: it records that an action happened and who a
+    caller SAID performed it -- there is no real identity/auth behind
+    "actor" anywhere in this library (see CAP-0000's ctx object, always
+    {"user": None, "authenticated": False}), so this must never be
+    described as tamper-proof, verified, or a substitute for real
+    authentication."""
+    import datetime
+    rows = load(filename)
+    next_id = (max([r["id"] for r in rows], default=0)) + 1
+    entry = {"id": next_id, "timestamp": datetime.datetime.now().isoformat(),
+              "actor": actor, "action": action, "entity": entity, "entity_id": entity_id,
+              "details": details}
+    rows.append(entry)
+    save(filename, rows)
+    return entry

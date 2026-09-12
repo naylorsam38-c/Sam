@@ -175,6 +175,30 @@ def notify(recipient, message, filename="notifications.json"):
     rows.append(note)
     save(filename, rows)
     return note
+
+
+def audit(actor, action, entity, entity_id, details="", filename="audit_log.json"):
+    """Standard audit primitive, the same real-composition pattern as
+    notify(): any capability can call this directly to record a real,
+    timestamped activity entry -- actor/action/entity/entity_id/timestamp,
+    the same shape real audit-log implementations use (server-generated
+    timestamp, not client-supplied; a human-and-machine-readable entity
+    reference, not a raw blob). This is an ACTIVITY LOG, not a security or
+    compliance control: it records that an action happened and who a
+    caller SAID performed it -- there is no real identity/auth behind
+    "actor" anywhere in this library (see CAP-0000's ctx object, always
+    {"user": None, "authenticated": False}), so this must never be
+    described as tamper-proof, verified, or a substitute for real
+    authentication."""
+    import datetime
+    rows = load(filename)
+    next_id = (max([r["id"] for r in rows], default=0)) + 1
+    entry = {"id": next_id, "timestamp": datetime.datetime.now().isoformat(),
+              "actor": actor, "action": action, "entity": entity, "entity_id": entity_id,
+              "details": details}
+    rows.append(entry)
+    save(filename, rows)
+    return entry
 '''
 
 
@@ -622,6 +646,140 @@ class AppBuilder:
         self.add_capability(num, name, route, "POST", body, output_fields=output_fields,
                              required_input=(id_field,), side_effects=("updates_record",),
                              slot_id=slot_id, selector=selector, data_filename=data_filename)
+
+    def add_bounded_decrement_capability(self, num: str, name: str, route: str, id_field: str,
+                                          balance_field: str, amount_input: str,
+                                          fail_message: str = "insufficient balance",
+                                          entity_noun: str = "record", extra_output_fields=(),
+                                          slot_id=None, selector=None, data_filename=None):
+        """Generic capability: decrements `balance_field` on a matched record
+        by a caller-supplied amount, rejecting if that would take the balance
+        below zero -- the mirror image of add_bounded_counter_capability
+        (which increments toward a cap), for the equally real and equally
+        common "spend down a pool" shape (a budget envelope, a stock count
+        sold from, a benefit balance drawn down). This is the simple,
+        single-step form of the widely-used inventory-reservation pattern
+        (reject a debit when it would exceed the available balance; see
+        COVERAGE_EXPANSION_REPORT.md for the real references compared before
+        building this) -- deliberately not the full reserve/confirm/release
+        lifecycle real high-concurrency inventory systems use, which is a
+        different, larger problem (concurrent reservations across
+        in-flight, uncommitted orders) this single-process, single-request
+        library has no real concurrency story for anyway. No existing
+        hand-written precedent in this library to regression-test against;
+        proven by real build + browser + functional test instead."""
+        body = (
+            "def handle(request):\n"
+            "    body = request.get_json(force=True, silent=True) or {}\n"
+            f"    rid = body.get('{id_field}')\n"
+            f"    try:\n        amount = float(body.get('{amount_input}', 0) or 0)\n"
+            "    except (TypeError, ValueError):\n        amount = 0.0\n"
+            "    rows = _load()\n"
+            "    for rec in rows:\n"
+            f"        if rec['{id_field}'] == rid:\n"
+            f"            if amount > rec['{balance_field}']:\n"
+            f"                return 400, {{'error': {fail_message!r}}}\n"
+            f"            rec['{balance_field}'] -= amount\n"
+            "            _save(rows)\n"
+            "            return 200, rec\n"
+            f"    return 404, {{'error': f'no {entity_noun} with {id_field} ' + repr(rid)}}\n"
+        )
+        output_fields = (id_field, balance_field) + tuple(extra_output_fields)
+        self.add_capability(num, name, route, "POST", body, output_fields=output_fields,
+                             required_input=(id_field, amount_input), side_effects=("updates_record",),
+                             slot_id=slot_id, selector=selector, data_filename=data_filename)
+
+    def add_validated_status_transition_capability(self, num: str, name: str, route: str,
+                                                     id_field: str, status_field: str, status_input: str,
+                                                     allowed_transitions: dict, extra_output_fields=(),
+                                                     entity_noun: str = "record", slot_id=None,
+                                                     selector=None, data_filename=None):
+        """Generic capability: the validated sibling of add_status_transition_
+        capability. That engine faithfully reproduced its five real
+        precedents' behaviour, all of which accept ANY string as the new
+        status. Real workflow requests (a purchase-order approval chain, an
+        editorial review pipeline, a government case's approval gates) need
+        the opposite: an explicit allow-list of legal source -> destination
+        transitions, rejecting anything else -- the standard state-machine
+        pattern (see COVERAGE_EXPANSION_REPORT.md for the real references
+        compared before building this: an explicit table of legal
+        transitions, checked before the state changes, not after).
+        `allowed_transitions` is a real dict, e.g.
+        {"draft": ["submitted"], "submitted": ["approved", "rejected"]} --
+        a status with no entry, or a destination not listed for the current
+        status, is rejected with a 400, not silently allowed. No existing
+        hand-written precedent to regression-test against (every existing
+        status-setting capability in this library is deliberately
+        unvalidated); proven by real build + browser + functional test,
+        including a real, asserted-rejected illegal transition."""
+        body = (
+            "def handle(request):\n"
+            "    body = request.get_json(force=True, silent=True) or {}\n"
+            f"    rid = body.get('{id_field}')\n"
+            f"    new_status = body.get('{status_input}')\n"
+            f"    allowed = {allowed_transitions!r}\n"
+            "    rows = _load()\n"
+            "    for rec in rows:\n"
+            f"        if rec['{id_field}'] == rid:\n"
+            f"            current = rec.get('{status_field}')\n"
+            "            legal = allowed.get(current, [])\n"
+            "            if new_status not in legal:\n"
+            "                return 400, {'error': f'cannot transition from ' + repr(current)"
+            " + ' to ' + repr(new_status)}\n"
+            f"            rec['{status_field}'] = new_status\n"
+            "            _save(rows)\n"
+            "            return 200, rec\n"
+            f"    return 404, {{'error': f'no {entity_noun} with {id_field} ' + repr(rid)}}\n"
+        )
+        output_fields = (id_field, status_field) + tuple(extra_output_fields)
+        self.add_capability(num, name, route, "POST", body, output_fields=output_fields,
+                             required_input=(id_field, status_input), side_effects=("updates_record",),
+                             slot_id=slot_id, selector=selector, data_filename=data_filename)
+
+    def add_search_capability(self, num: str, name: str, route: str, search_field: str,
+                               match: str = "substring", data_filename=None):
+        """Generic capability: a real GET-with-query-param search/filter,
+        the standard REST pattern (a query parameter per filterable field,
+        matched against the resource's own records -- see
+        COVERAGE_EXPANSION_REPORT.md for the real references compared
+        before building this). `match` is "substring" (case-insensitive
+        contains, for free-text fields like a title) or "exact" (for
+        category/status-like fields). An empty or missing query returns
+        every record, matching every existing "List X" capability's
+        behaviour when no filter is requested -- this is a strict addition,
+        not a change to any existing capability. No existing hand-written
+        precedent to regression-test against (nothing in the pre-existing
+        library filters at all -- every "List" capability returns
+        everything, unconditionally); proven by real build + browser +
+        functional test."""
+        if match == "exact":
+            cond = f"str(rec.get({search_field!r}, '')) == q"
+        else:
+            cond = f"q.lower() in str(rec.get({search_field!r}, '')).lower()"
+        body = (
+            "def handle(request):\n"
+            "    q = (request.args.get('q') or '').strip()\n"
+            "    rows = _load()\n"
+            "    if not q:\n        return 200, {'results': rows}\n"
+            f"    matches = [rec for rec in rows if {cond}]\n"
+            "    return 200, {'results': matches}\n"
+        )
+        self.add_capability(num, name, route, "GET", body, output_fields=("results",),
+                             data_filename=data_filename)
+
+    def add_audit_log_capability(self, num: str, route: str = "/api/audit_log"):
+        """A real "List Audit Log" viewer capability, through the same
+        add_capability() choke point every other capability uses -- reading
+        the same audit_log.json file CAP-0000's real audit() primitive (see
+        SHARED_LIB_SOURCE) writes to. Any OTHER capability that needs to
+        record a real audit entry calls `_shared.audit(...)` directly in its
+        own handler body -- the same real-composition pattern already
+        established for notify(), not a new mechanism. This capability
+        itself only ever reads; it never writes an entry on its own, so its
+        side_effects are deliberately empty and its access is read-only."""
+        self.add_capability(num, "List Audit Log", route, "GET",
+            "def handle(request):\n    return 200, {'entries': _load()}\n",
+            output_fields=("entries",), data_filename="audit_log.json")
 
     def reuse_capability_verbatim(self, source_shelf_dir: Path, cap_id: str, slot_id=None,
                                     selector=None, side_effects=()):
