@@ -83,10 +83,12 @@ def main():
         "result_line": ready_line, "ok": r4["ok"], "expected_count": len(BUILDERS),
     }
 
-    # 3. The 3 new composed apps.
-    section("3/7  3 new composed apps")
+    # 3. The 6 composed apps (3 from the original interoperability round, 3
+    # from the coverage-testing round).
+    section("3/7  6 new composed apps")
     new_apps = {}
-    for script in ("new_app_event_board.py", "new_app_fitness_challenge.py", "new_app_course_enrollment.py"):
+    for script in ("new_app_event_board.py", "new_app_fitness_challenge.py", "new_app_course_enrollment.py",
+                    "new_app_recipe_box.py", "new_app_bug_tracker.py", "new_app_volunteer_shift_signup.py"):
         r = run([script], timeout=180)
         print(r["stdout"][-1000:])
         new_apps[script] = "READY" in r["stdout"] and r["ok"]

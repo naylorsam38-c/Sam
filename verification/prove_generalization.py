@@ -168,6 +168,59 @@ def build_dating_v2(root: Path):
                      "confirm_selector": "#x", "confirm_contains": "x"}, "Dating v2", port=5902)
 
 
+# ==============================================================================
+# 4. Social feed "Like Post": original vs. add_unbounded_counter_capability
+# ==============================================================================
+def build_social_feed_v2(root: Path):
+    b = AppBuilder(root, "social_feed_v2", "social feed", "9400")
+    b.add_capability("9401", "List Feed", "/api/posts", "GET",
+        "def handle(request):\n    return 200, {'posts': _load()}\n", output_fields=("posts",))
+    b.add_capability("9402", "Create Post", "/api/posts", "POST",
+        "def handle(request):\n"
+        "    body = request.get_json(force=True, silent=True) or {}\n"
+        "    text = (body.get('text') or '').strip()\n"
+        "    if not text:\n        return 400, {'error': 'text is required'}\n"
+        "    posts = _load()\n"
+        "    next_id = (max([p['id'] for p in posts], default=0)) + 1\n"
+        "    post = {'id': next_id, 'author': 'You', 'text': text, 'likes': 0}\n"
+        "    posts.append(post)\n    _save(posts)\n    return 201, post\n",
+        output_fields=("id", "author", "text", "likes"), required_input=("text",),
+        side_effects=("creates_record",))
+    # THE ONE DIFFERENCE: generic generator instead of hand-written body
+    b.add_unbounded_counter_capability("9403", "Like Post", "/api/posts/like", id_field="id",
+        counter_field="likes", entity_noun="post")
+    html = page_skeleton("Social Feed v2", "", "<div id='x'></div>", "")
+    b.finish(html, {"input_selector": "#x", "input_value": "x", "action_selector": "#x",
+                     "confirm_selector": "#x", "confirm_contains": "x"}, "Social Feed v2", port=5903)
+
+
+# ==============================================================================
+# 5. CRM "Update Contact Stage": original vs. add_status_transition_capability
+# ==============================================================================
+def build_crm_v2(root: Path):
+    b = AppBuilder(root, "crm_v2", "crm", "9500")
+    b.add_capability("9501", "List Contacts", "/api/contacts", "GET",
+        "def handle(request):\n    return 200, {'contacts': _load()}\n", output_fields=("contacts",))
+    b.add_capability("9502", "Create Contact", "/api/contacts", "POST",
+        "def handle(request):\n"
+        "    body = request.get_json(force=True, silent=True) or {}\n"
+        "    name = (body.get('name') or '').strip()\n"
+        "    if not name:\n        return 400, {'error': 'name is required'}\n"
+        "    contacts = _load()\n"
+        "    next_id = (max([c['id'] for c in contacts], default=0)) + 1\n"
+        "    contact = {'id': next_id, 'name': name, 'email': body.get('email') or '', 'stage': 'lead'}\n"
+        "    contacts.append(contact)\n    _save(contacts)\n    return 201, contact\n",
+        output_fields=("id", "name", "email", "stage"), required_input=("name",),
+        side_effects=("creates_record",))
+    # THE ONE DIFFERENCE: generic generator instead of hand-written body
+    b.add_status_transition_capability("9503", "Update Contact Stage", "/api/contacts/stage",
+        id_field="id", status_field="stage", status_input="stage", default_status="lead",
+        extra_output_fields=("name", "email"), entity_noun="contact")
+    html = page_skeleton("CRM v2", "", "<div id='x'></div>", "")
+    b.finish(html, {"input_selector": "#x", "input_value": "x", "action_selector": "#x",
+                     "confirm_selector": "#x", "confirm_contains": "x"}, "CRM v2", port=5904)
+
+
 def prove(name, orig_app_dir, orig_slug, v2_project_root, v2_slug, port_a, port_b, sequence):
     """sequence: list of (label, method, path_suffix, body) tuples replayed
     against both real running apps; asserts every (status, body) pair
@@ -247,6 +300,37 @@ def main():
              {"profile_id": 1, "target_id": 2, "liked": True}),
             ("2 likes 1 (reciprocal -> match)", "POST", "/swipes",
              {"profile_id": 2, "target_id": 1, "liked": True}),
+        ])
+
+    # --- Social feed (coverage-testing round: unbounded-counter engine) ---
+    build_social_feed_v2(ROOT)
+    r = build_and_run(ROOT / "social_feed_v2", 0)
+    assert "12  APP-001  assembled" in r.stdout, f"social_feed_v2 failed to assemble:\n{r.stdout}\n{r.stderr}"
+    orig_social_feed = HERE / "library_build" / "social_feed" / "library" / "APP-001"
+    results["social_feed like"] = prove(
+        "Social feed: original hand-written 'Like Post' vs. add_unbounded_counter_capability",
+        orig_social_feed, "social_feed", ROOT, "social_feed_v2", 5940, 5941,
+        [
+            ("create post", "POST", "/posts", {"text": "Regression test post"}),
+            ("like once (0 -> 1)", "POST", "/posts/like", {"id": 1}),
+            ("like again (1 -> 2, no upper bound)", "POST", "/posts/like", {"id": 1}),
+            ("like missing post", "POST", "/posts/like", {"id": 999}),
+        ])
+
+    # --- CRM (coverage-testing round: status-transition engine) ---
+    build_crm_v2(ROOT)
+    r = build_and_run(ROOT / "crm_v2", 0)
+    assert "12  APP-001  assembled" in r.stdout, f"crm_v2 failed to assemble:\n{r.stdout}\n{r.stderr}"
+    orig_crm = HERE / "library_build" / "crm" / "library" / "APP-001"
+    results["crm stage transition"] = prove(
+        "CRM: original hand-written 'Update Contact Stage' vs. add_status_transition_capability",
+        orig_crm, "crm", ROOT, "crm_v2", 5950, 5951,
+        [
+            ("create contact", "POST", "/contacts", {"name": "Regression Contact", "email": "r@example.com"}),
+            ("advance to qualified", "POST", "/contacts/stage", {"id": 1, "stage": "qualified"}),
+            ("advance to won", "POST", "/contacts/stage", {"id": 1, "stage": "won"}),
+            ("missing stage falls back to default", "POST", "/contacts/stage", {"id": 1}),
+            ("transition on missing contact", "POST", "/contacts/stage", {"id": 999, "stage": "won"}),
         ])
 
     print(f"\n{'=' * 70}\nSUMMARY\n{'=' * 70}")

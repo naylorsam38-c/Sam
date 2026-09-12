@@ -188,6 +188,62 @@ def test_course_enrollment_hub(port, results):
         proc.terminate(); proc.wait(timeout=5)
 
 
+def test_recipe_box(port, results):
+    print("\n=== recipe_box (coverage-testing round: new add_unbounded_counter_capability engine) ===")
+    app_dir = fresh_copy("recipe_box")
+    proc = start(app_dir, port)
+    try:
+        check("create recipe", call(port, "POST", "/api/recipe_box/recipes", {"title": "Chili"}),
+              lambda r: r[0] == 201 and r[1]["likes"] == 0, results)
+        check("like once", call(port, "POST", "/api/recipe_box/recipes/like", {"id": 1}),
+              lambda r: r[0] == 200 and r[1]["likes"] == 1, results)
+        check("like again (unbounded, no cap)", call(port, "POST", "/api/recipe_box/recipes/like", {"id": 1}),
+              lambda r: r[0] == 200 and r[1]["likes"] == 2, results)
+        check("like missing recipe", call(port, "POST", "/api/recipe_box/recipes/like", {"id": 999}),
+              lambda r: r[0] == 404 and r[1]["error"]["code"] == "NOT_FOUND", results)
+    finally:
+        proc.terminate(); proc.wait(timeout=5)
+
+
+def test_bug_tracker(port, results):
+    print("\n=== bug_tracker (coverage-testing round: new add_status_transition_capability engine) ===")
+    app_dir = fresh_copy("bug_tracker")
+    proc = start(app_dir, port)
+    try:
+        check("create bug", call(port, "POST", "/api/bug_tracker/bugs", {"title": "Login broken"}),
+              lambda r: r[0] == 201 and r[1]["status"] == "open", results)
+        check("advance to in_progress",
+              call(port, "POST", "/api/bug_tracker/bugs/status", {"id": 1, "status": "in_progress"}),
+              lambda r: r[0] == 200 and r[1]["status"] == "in_progress", results)
+        check("advance to resolved",
+              call(port, "POST", "/api/bug_tracker/bugs/status", {"id": 1, "status": "resolved"}),
+              lambda r: r[0] == 200 and r[1]["status"] == "resolved", results)
+        check("transition on missing bug", call(port, "POST", "/api/bug_tracker/bugs/status", {"id": 999}),
+              lambda r: r[0] == 404 and r[1]["error"]["code"] == "NOT_FOUND", results)
+    finally:
+        proc.terminate(); proc.wait(timeout=5)
+
+
+def test_volunteer_shift_signup(port, results):
+    print("\n=== volunteer_shift_signup (coverage-testing round: fully composed from the pre-existing library) ===")
+    app_dir = fresh_copy("volunteer_shift_signup")
+    proc = start(app_dir, port)
+    try:
+        call(port, "POST", "/api/volunteer_shift_signup/events",
+             {"title": "Food Bank", "start": "2026-12-05T09:00:00", "capacity": 1})
+        check("first sign-up succeeds",
+              call(port, "POST", "/api/volunteer_shift_signup/shifts/signup", {"id": 1}),
+              lambda r: r[0] == 200 and r[1]["volunteers"] == 1, results)
+        check("second sign-up correctly rejected (full)",
+              call(port, "POST", "/api/volunteer_shift_signup/shifts/signup", {"id": 1}),
+              lambda r: r[0] == 400 and r[1]["error"]["message"] == "shift is full", results)
+        check("discussion board reused verbatim from team_chat (2nd independent reuse)",
+              call(port, "POST", "/api/team_chat/messages", {"text": "Bring gloves", "author": "Volunteer"}),
+              lambda r: r[0] == 201 and r[1]["text"] == "Bring gloves", results)
+    finally:
+        proc.terminate(); proc.wait(timeout=5)
+
+
 def main():
     if SCRATCH.exists():
         shutil.rmtree(SCRATCH)
@@ -199,6 +255,9 @@ def main():
     test_community_event_board(7913, results)
     test_fitness_challenge_board(7914, results)
     test_course_enrollment_hub(7915, results)
+    test_recipe_box(7916, results)
+    test_bug_tracker(7917, results)
+    test_volunteer_shift_signup(7918, results)
 
     passed = sum(1 for _, ok, _ in results if ok)
     total = len(results)

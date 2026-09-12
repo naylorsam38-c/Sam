@@ -1,0 +1,934 @@
+{
+  "applications": [
+    {
+      "id": "APP-001",
+      "name": "Volunteer Shift Signup",
+      "status": "active",
+      "owner": "builder",
+      "created_at": "2026-09-12T22:35:18Z",
+      "screens": [
+        "APP-001/SCR-001"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "id": "APP-001/SCR-001",
+      "app_id": "APP-001",
+      "name": "Home",
+      "status": "active",
+      "buttons": [
+        "APP-001/SCR-001/BTN-001",
+        "APP-001/SCR-001/BTN-002"
+      ]
+    }
+  ],
+  "buttons": [
+    {
+      "id": "APP-001/SCR-001/BTN-001",
+      "screen_id": "APP-001/SCR-001",
+      "name": "Create Event",
+      "expected_contract": {
+        "required_input_fields": [],
+        "input_types": {},
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "dependencies": [],
+        "handled_errors": [],
+        "security_constraints": {},
+        "side_effects": [
+          "creates_record"
+        ],
+        "min_version": "1.0.0"
+      },
+      "capability_id": "CAP-9622",
+      "status": "active"
+    },
+    {
+      "id": "APP-001/SCR-001/BTN-002",
+      "screen_id": "APP-001/SCR-001",
+      "name": "Post Message",
+      "expected_contract": {
+        "required_input_fields": [],
+        "input_types": {},
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "dependencies": [],
+        "handled_errors": [],
+        "security_constraints": {},
+        "side_effects": [
+          "creates_record"
+        ],
+        "min_version": "1.0.0"
+      },
+      "capability_id": "CAP-1202",
+      "status": "active"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "CAP-9620",
+      "name": "Volunteer Shift Signup Host",
+      "category": "ui",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "NOT_FOUND",
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9620/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0000",
+      "name": "Shared Capability Library",
+      "category": "library",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": []
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-0000/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9621",
+      "name": "List Events",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "events"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "shifts.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9621/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9622",
+      "name": "Create Event",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "title",
+            "start"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "title",
+            "start",
+            "end",
+            "capacity",
+            "volunteers"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "shifts.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9622/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9623",
+      "name": "Delete Event",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "deleted"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "shifts.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "deletes_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
+      },
+      "implementations": [
+        "CAP-9623/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9624",
+      "name": "Sign Up For Shift",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "volunteers"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "shifts.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "updates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
+      },
+      "implementations": [
+        "CAP-9624/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9625",
+      "name": "List Notifications",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "notifications"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "notifications.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9625/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9626",
+      "name": "Create Notification",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "recipient",
+            "message"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "recipient",
+            "message",
+            "read"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "notifications.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-9626/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-9627",
+      "name": "Mark Notification Read",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "read"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "notifications.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "updates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
+      },
+      "implementations": [
+        "CAP-9627/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-1201",
+      "name": "List Messages",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "messages"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "team_chat.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-1201/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-1202",
+      "name": "Post Message",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "text"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "author",
+            "text"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "team_chat.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR"
+        ]
+      },
+      "implementations": [
+        "CAP-1202/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-1203",
+      "name": "Delete Message",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "id"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "deleted"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "team_chat.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "deletes_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "NOT_FOUND"
+        ]
+      },
+      "implementations": [
+        "CAP-1203/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    }
+  ],
+  "implementations": [
+    {
+      "id": "CAP-9620/IMPL-01",
+      "capability_id": "CAP-9620",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9620/IMPL-01",
+        "entrypoint": "CAP-9620/app.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0000/IMPL-01",
+      "capability_id": "CAP-0000",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0000/IMPL-01",
+        "entrypoint": "CAP-0000/shared_lib.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9621/IMPL-01",
+      "capability_id": "CAP-9621",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9621/IMPL-01",
+        "entrypoint": "CAP-9621/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9622/IMPL-01",
+      "capability_id": "CAP-9622",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9622/IMPL-01",
+        "entrypoint": "CAP-9622/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9623/IMPL-01",
+      "capability_id": "CAP-9623",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9623/IMPL-01",
+        "entrypoint": "CAP-9623/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9624/IMPL-01",
+      "capability_id": "CAP-9624",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9624/IMPL-01",
+        "entrypoint": "CAP-9624/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9625/IMPL-01",
+      "capability_id": "CAP-9625",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9625/IMPL-01",
+        "entrypoint": "CAP-9625/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9626/IMPL-01",
+      "capability_id": "CAP-9626",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9626/IMPL-01",
+        "entrypoint": "CAP-9626/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-9627/IMPL-01",
+      "capability_id": "CAP-9627",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-9627/IMPL-01",
+        "entrypoint": "CAP-9627/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-1201/IMPL-01",
+      "capability_id": "CAP-1201",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-1201/IMPL-01",
+        "entrypoint": "CAP-1201/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-1202/IMPL-01",
+      "capability_id": "CAP-1202",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-1202/IMPL-01",
+        "entrypoint": "CAP-1202/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-1203/IMPL-01",
+      "capability_id": "CAP-1203",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-1203/IMPL-01",
+        "entrypoint": "CAP-1203/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    }
+  ]
+}

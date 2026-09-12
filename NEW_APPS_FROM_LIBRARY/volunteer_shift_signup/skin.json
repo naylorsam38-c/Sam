@@ -1,0 +1,18 @@
+{
+  "skin_id": "skin-001",
+  "skin_version": "1.0.0",
+  "branding": {
+    "name": "Volunteer Shift Signup",
+    "color": "#2f6f9f"
+  },
+  "arrangement": [
+    {
+      "slot": "shift_list",
+      "position": "center"
+    },
+    {
+      "slot": "discussion_list",
+      "position": "center"
+    }
+  ]
+}
