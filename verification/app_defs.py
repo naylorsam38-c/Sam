@@ -780,7 +780,8 @@ def build_payroll(root: Path):
         "        records.append({'id': next_id, 'employee_id': e['id'], 'gross': gross, 'net': net})\n"
         "        created += 1\n"
         "    _save(records)\n    return 200, {'created': created}\n",
-        output_fields=("created",), data_filename="pay_records.json")
+        output_fields=("created",), data_filename="pay_records.json",
+        dependencies=("CAP-1002",))
 
     b.add_capability("1004", "List Pay Records", "/api/payroll/records", "GET",
         "def handle(request):\n    return 200, {'records': _load()}\n",

@@ -31,7 +31,7 @@ def write_json(path: Path, obj):
 
 
 def cap_record(cap_id, name, category, impl_ids, output_fields=(), required_input=(),
-               side_effects=(), approval_ref="APPROVAL-CAP-REAL"):
+               side_effects=(), approval_ref="APPROVAL-CAP-REAL", dependencies=()):
     return {
         "id": cap_id,
         "name": name,
@@ -44,7 +44,15 @@ def cap_record(cap_id, name, category, impl_ids, output_fields=(), required_inpu
             "requires_auth": False,
             "security_constraints": {},
         },
-        "dependencies": [],
+        # Real, checked dependencies on another capability's data/behaviour --
+        # not decorative: build.py's stage1_assemble() now refuses to build an
+        # app that requires this capability without also requiring everything
+        # listed here (found by real audit: a capability that silently reads
+        # a sibling's data file with no declared dependency produces empty or
+        # wrong output when reused without that sibling, instead of failing).
+        # Empty means genuinely no dependency, verified by reading this
+        # capability's own source, not merely left at a default.
+        "dependencies": list(dependencies),
         "permissions": [],
         "side_effects": list(side_effects),
         "error_contract": {"error_codes": []},
@@ -256,16 +264,19 @@ class AppBuilder:
 
     def add_capability(self, num: str, name: str, route: str, method: str, handler_body: str,
                         output_fields=(), required_input=(), side_effects=(), slot_id=None,
-                        selector=None, data_filename=None):
+                        selector=None, data_filename=None, dependencies=()):
         """num is the 4-digit suffix, e.g. '0201' -> CAP-0201. handler_body is
         the real Python source of the route module's own logic (ROUTE/METHOD
         already added); data_filename defaults to this app's single JSON
-        store, overridable per-capability for apps with more than one entity."""
+        store, overridable per-capability for apps with more than one entity.
+        dependencies: real capability ids this one's handler_body reads/writes
+        via a sibling data file rather than its own -- must also be required
+        by this app (build.py now enforces this at assembly time)."""
         cap_id = f"CAP-{num}"
         write_json(self.caps / f"{cap_id}.json",
                    cap_record(cap_id, name, "compute", [f"{cap_id}/IMPL-01"],
                               output_fields=output_fields, required_input=required_input,
-                              side_effects=side_effects))
+                              side_effects=side_effects, dependencies=dependencies))
         write_json(self.impls / cap_id / "IMPL-01.json",
                    impl_record(f"{cap_id}/IMPL-01", cap_id, f"{cap_id}/route.py"))
         df = data_filename or self.data_filename
@@ -275,6 +286,251 @@ class AppBuilder:
         if slot_id:
             self.slots.append(slot(slot_id, cap_id, name, selector or f"#{slot_id}",
                                     side_effects=side_effects))
+
+    def add_exceeds_threshold_capability(self, num: str, name: str, route: str, id_field: str,
+                                          value_field: str, value_input: str, holder_field=None,
+                                          holder_input=None, fail_message="proposed value does not exceed the current value",
+                                          entity_noun="record", slot_id=None, selector=None):
+        """Generic capability: a proposed value only takes effect if it exceeds
+        the matched record's current value in `value_field`, optionally also
+        recording who proposed it (`holder_field`/`holder_input`). This is the
+        real shape behind auction's 'place a higher bid' rule, generalized so
+        any domain with the same rule (a raise that must exceed current pay, a
+        score that must beat a high score, a reservation deposit that must
+        exceed the current one) reuses this generator instead of a fresh
+        hand-written comparison. Proven behaviourally identical to the
+        original hand-written auction capability by direct regression test
+        (see verification/prove_generalization.py)."""
+        holder_line = ""
+        if holder_field and holder_input:
+            holder_line = f"            rec['{holder_field}'] = body.get('{holder_input}') or 'anonymous'\n"
+        body = (
+            "def handle(request):\n"
+            "    body = request.get_json(force=True, silent=True) or {}\n"
+            f"    rid = body.get('{id_field}')\n"
+            f"    try:\n        proposed = float(body.get('{value_input}', 0) or 0)\n"
+            "    except (TypeError, ValueError):\n        proposed = 0.0\n"
+            "    rows = _load()\n"
+            "    for rec in rows:\n"
+            f"        if rec['{id_field}'] == rid:\n"
+            f"            if proposed <= rec.get('{value_field}', 0):\n"
+            f"                return 400, {{'error': {fail_message!r}}}\n"
+            f"            rec['{value_field}'] = proposed\n"
+            f"{holder_line}"
+            "            _save(rows)\n"
+            "            return 200, rec\n"
+            f"    return 404, {{'error': f'no {entity_noun} with {id_field} ' + repr(rid)}}\n"
+        )
+        output_fields = (id_field, value_field) + ((holder_field,) if holder_field else ())
+        self.add_capability(num, name, route, "POST", body, output_fields=output_fields,
+                             required_input=(id_field, value_input), side_effects=("updates_record",),
+                             slot_id=slot_id, selector=selector)
+
+    def add_bounded_counter_capability(self, num: str, name: str, route: str, id_field: str,
+                                        counter_field: str, limit_field: str, fail_message: str,
+                                        increment: int = 1, extra_output_fields=(),
+                                        entity_noun="record", slot_id=None, selector=None,
+                                        data_filename=None):
+        """Generic capability: increments `counter_field` on a matched record
+        only while it stays below `limit_field` on the SAME record. This is
+        the real shape behind event_ticketing's capacity check, generalized
+        so any bounded-counter rule (seats left, stock on hand, a rate limit)
+        reuses this generator. Proven behaviourally identical to the original
+        hand-written event_ticketing capability by direct regression test."""
+        body = (
+            "def handle(request):\n"
+            "    body = request.get_json(force=True, silent=True) or {}\n"
+            f"    rid = body.get('{id_field}')\n"
+            "    rows = _load()\n"
+            "    for rec in rows:\n"
+            f"        if rec['{id_field}'] == rid:\n"
+            f"            if rec['{counter_field}'] >= rec['{limit_field}']:\n"
+            f"                return 400, {{'error': {fail_message!r}}}\n"
+            f"            rec['{counter_field}'] += {increment}\n"
+            "            _save(rows)\n"
+            "            return 200, rec\n"
+            f"    return 404, {{'error': f'no {entity_noun} with {id_field} ' + repr(rid)}}\n"
+        )
+        output_fields = (id_field, counter_field) + tuple(extra_output_fields)
+        self.add_capability(num, name, route, "POST", body, output_fields=output_fields,
+                             required_input=(id_field,), side_effects=("updates_record",),
+                             slot_id=slot_id, selector=selector, data_filename=data_filename)
+
+    def reuse_capability_verbatim(self, source_shelf_dir: Path, cap_id: str, slot_id=None,
+                                    selector=None, side_effects=()):
+        """Copies another app's real capability -- its shelf record AND its
+        real implementation payload -- byte-for-byte unmodified into this
+        app's own shelf, same capability id. This is exactly the mechanism
+        the compatibility audit's Test A proved works live (a foreign
+        capability file, dropped unmodified into a different app's modules/
+        folder, runs correctly through the same host loader); this method
+        does it for real, at generation time, for a capability this app
+        actually ships with, not a disposable experiment."""
+        src_cap_json = source_shelf_dir / "capabilities" / f"{cap_id}.json"
+        src_impl_dir = source_shelf_dir / "implementations" / cap_id
+        dst_cap_json = self.caps / f"{cap_id}.json"
+        dst_impl_dir = self.impls / cap_id
+        shutil.copy2(src_cap_json, dst_cap_json)
+        if dst_impl_dir.exists():
+            shutil.rmtree(dst_impl_dir)
+        shutil.copytree(src_impl_dir, dst_impl_dir)
+        self.required_caps.append(cap_id)
+        if slot_id:
+            cap = json.loads(src_cap_json.read_text())
+            self.slots.append(slot(slot_id, cap_id, cap["name"], selector or f"#{slot_id}",
+                                    side_effects=side_effects))
+
+    def add_notification_capabilities(self, list_num: str, create_num: str, mark_read_num: str,
+                                       list_route="/api/notifications",
+                                       create_route="/api/notifications",
+                                       mark_read_route="/api/notifications/read",
+                                       data_filename="notifications.json"):
+        """Generic Notification capability pair -- create + list + mark-read --
+        that does not exist ANYWHERE in the original 43-app library (real
+        audit finding). Any other capability that wants to notify someone
+        appends to the same data file and MUST declare a dependency on
+        `create_num`'s capability id (build.py now enforces this, see
+        stage1_assemble's dependency check). Returns the create capability's
+        id so callers can declare it as a dependency."""
+        self.add_capability(list_num, "List Notifications", list_route, "GET",
+            "def handle(request):\n"
+            "    recipient = request.args.get('recipient')\n"
+            "    rows = _load()\n"
+            "    if recipient:\n        rows = [r for r in rows if r['recipient'] == recipient]\n"
+            "    return 200, {'notifications': rows}\n",
+            output_fields=("notifications",), data_filename=data_filename)
+
+        self.add_capability(create_num, "Create Notification", create_route, "POST",
+            "def handle(request):\n"
+            "    body = request.get_json(force=True, silent=True) or {}\n"
+            "    recipient = (body.get('recipient') or '').strip()\n"
+            "    message = (body.get('message') or '').strip()\n"
+            "    if not recipient or not message:\n        return 400, {'error': 'recipient and message are required'}\n"
+            "    rows = _load()\n"
+            "    next_id = (max([r['id'] for r in rows], default=0)) + 1\n"
+            "    note = {'id': next_id, 'recipient': recipient, 'message': message, 'read': False}\n"
+            "    rows.append(note)\n    _save(rows)\n    return 201, note\n",
+            output_fields=("id", "recipient", "message", "read"),
+            required_input=("recipient", "message"), side_effects=("creates_record",),
+            data_filename=data_filename)
+
+        self.add_capability(mark_read_num, "Mark Notification Read", mark_read_route, "POST",
+            "def handle(request):\n"
+            "    body = request.get_json(force=True, silent=True) or {}\n"
+            "    nid = body.get('id')\n    rows = _load()\n"
+            "    for r in rows:\n"
+            "        if r['id'] == nid:\n            r['read'] = True\n            _save(rows)\n            return 200, r\n"
+            "    return 404, {'error': f'no notification with id ' + repr(nid)}\n",
+            output_fields=("id", "read"), required_input=("id",), side_effects=("updates_record",),
+            data_filename=data_filename)
+        return f"CAP-{create_num}"
+
+    def add_calendar_event_capabilities(self, list_num: str, create_num: str, delete_num: str,
+                                         list_route="/api/events", create_route="/api/events",
+                                         delete_route="/api/events/delete",
+                                         data_filename=None, slot_id=None, selector=None,
+                                         extra_fields=()):
+        """Generic Calendar/Event capability -- does not exist anywhere in the
+        original 43-app library either (real audit finding): both
+        calendar_and_scheduling and appointment_booking store a raw,
+        unvalidated date string with no shared date-handling logic. This
+        engine actually validates real ISO-8601 timestamps (rejecting
+        garbage with a 400, not silently storing it) -- a genuine
+        capability upgrade, not just a rename. Returns the create
+        capability's id.
+
+        extra_fields: additional record fields beyond title/start/end, each
+        a dict {"name", "input_key" (None = not read from the request body,
+        just a literal default), "default", "cast" ("int"/"float"/None)} --
+        e.g. a capacity field an RSVP capability elsewhere will read/adjust,
+        or an "attendees" counter that always starts at its default."""
+        df = data_filename or self.data_filename
+        self.add_capability(list_num, "List Events", list_route, "GET",
+            "def handle(request):\n    return 200, {'events': _load()}\n",
+            output_fields=("events",), data_filename=df)
+
+        extra_lines = []
+        for f in extra_fields:
+            if f.get("input_key"):
+                cast = {"int": "int", "float": "float"}.get(f.get("cast"), "")
+                if cast:
+                    extra_lines.append(
+                        f"    try:\n        {f['name']}_val = {cast}(body.get('{f['input_key']}', {f['default']!r}) or {f['default']!r})\n"
+                        f"    except (TypeError, ValueError):\n        {f['name']}_val = {f['default']!r}\n")
+                else:
+                    extra_lines.append(f"    {f['name']}_val = body.get('{f['input_key']}', {f['default']!r})\n")
+            else:
+                extra_lines.append(f"    {f['name']}_val = {f['default']!r}\n")
+        extra_assigns = "".join(f"    ev[{f['name']!r}] = {f['name']}_val\n" for f in extra_fields)
+        extra_output = tuple(f["name"] for f in extra_fields)
+
+        self.add_capability(create_num, "Create Event", create_route, "POST",
+            "import datetime\n"
+            "def handle(request):\n"
+            "    body = request.get_json(force=True, silent=True) or {}\n"
+            "    title = (body.get('title') or '').strip()\n"
+            "    if not title:\n        return 400, {'error': 'title is required'}\n"
+            "    start_raw = body.get('start') or ''\n"
+            "    try:\n        start_dt = datetime.datetime.fromisoformat(start_raw)\n"
+            "    except (TypeError, ValueError):\n        return 400, {'error': f'start is not a valid ISO-8601 timestamp: {start_raw!r}'}\n"
+            "    end_raw = body.get('end') or ''\n"
+            "    end_dt = None\n"
+            "    if end_raw:\n"
+            "        try:\n            end_dt = datetime.datetime.fromisoformat(end_raw)\n"
+            "        except (TypeError, ValueError):\n            return 400, {'error': f'end is not a valid ISO-8601 timestamp: {end_raw!r}'}\n"
+            "        if end_dt < start_dt:\n            return 400, {'error': 'end must not be before start'}\n"
+            + "".join(extra_lines) +
+            "    events = _load()\n"
+            "    next_id = (max([e['id'] for e in events], default=0)) + 1\n"
+            "    ev = {'id': next_id, 'title': title, 'start': start_dt.isoformat(),\n"
+            "          'end': end_dt.isoformat() if end_dt else None}\n"
+            + extra_assigns +
+            "    events.append(ev)\n    _save(events)\n    return 201, ev\n",
+            output_fields=("id", "title", "start", "end") + extra_output,
+            required_input=("title", "start"),
+            side_effects=("creates_record",), data_filename=df, slot_id=slot_id, selector=selector)
+
+        self.add_capability(delete_num, "Delete Event", delete_route, "POST",
+            "def handle(request):\n"
+            "    body = request.get_json(force=True, silent=True) or {}\n"
+            "    eid = body.get('id')\n    events = _load()\n"
+            "    remaining = [e for e in events if e['id'] != eid]\n"
+            "    if len(remaining) == len(events):\n        return 404, {'error': f'no event with id ' + repr(eid)}\n"
+            "    _save(remaining)\n    return 200, {'id': eid, 'deleted': True}\n",
+            output_fields=("id", "deleted"), required_input=("id",),
+            side_effects=("deletes_record",), data_filename=df)
+        return f"CAP-{create_num}"
+
+    def add_symmetric_relationship_capability(self, num: str, name: str, route: str,
+                                               from_field: str, to_field: str, positive_field: str,
+                                               match_field: str = "match", slot_id=None, selector=None):
+        """Generic capability: records a one-way proposal (from -> to, positive
+        or not) and reports whether the reverse proposal (to -> from, positive)
+        already exists -- a mutual-interest/reciprocity check. This is the
+        real shape behind dating's swipe/match rule, generalized so any
+        mutual-connection domain (a follow-back, a connection request, a
+        trade offer both sides must accept) reuses this generator instead of
+        a fresh reciprocity search. Proven behaviourally identical to the
+        original hand-written dating capability by direct regression test."""
+        body = (
+            "def handle(request):\n"
+            "    body = request.get_json(force=True, silent=True) or {}\n"
+            f"    from_id = body.get('{from_field}')\n    to_id = body.get('{to_field}')\n"
+            f"    if from_id is None or to_id is None:\n"
+            f"        return 400, {{'error': '{from_field} and {to_field} are required'}}\n"
+            f"    positive = bool(body.get('{positive_field}', True))\n"
+            "    rows = _load()\n"
+            f"    rows.append({{'{from_field}': from_id, '{to_field}': to_id, '{positive_field}': positive}})\n"
+            "    _save(rows)\n"
+            f"    mutual = any(r['{from_field}'] == to_id and r['{to_field}'] == from_id and r['{positive_field}']\n"
+            "                 for r in rows) and positive\n"
+            f"    return 200, {{'{from_field}': from_id, '{to_field}': to_id, '{positive_field}': positive, "
+            f"'{match_field}': mutual}}\n"
+        )
+        output_fields = (from_field, to_field, positive_field, match_field)
+        self.add_capability(num, name, route, "POST", body, output_fields=output_fields,
+                             required_input=(from_field, to_field), side_effects=("creates_record",),
+                             slot_id=slot_id, selector=selector)
 
     def build_py_slug(self) -> str:
         """Exactly build.py's own choice.json/app_type -> template-filename

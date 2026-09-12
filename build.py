@@ -653,6 +653,23 @@ def stage1_assemble() -> Tuple[str, Path, Dict[str, Any], Dict[str, Any]]:
             loaded_impls[impl["id"]] = impl
         print(f"5  parts copied  {', '.join(required_caps) if required_caps else '(none required)'}")
 
+        # 5b. Declared-dependency enforcement. A capability's own §3.6
+        # "dependencies" field is not decorative: if it declares that it
+        # needs another capability's data or behaviour, that capability
+        # must also be required by this template -- and therefore already
+        # copied in above -- or this is exactly the same class of silent,
+        # undeclared coupling this field exists to prevent (found by real
+        # audit: a capability that reads a sibling's data file by a
+        # hardcoded path with no declared dependency silently produces
+        # empty/wrong output when reused without that sibling, instead of
+        # failing). Checked here, once, after every required capability's
+        # own record is loaded, so a missing dependency is caught before
+        # any code from either capability ever runs.
+        for cid, cap in loaded_caps.items():
+            for dep_id in cap.get("dependencies", []):
+                if dep_id not in loaded_caps:
+                    raise Broken(f"missing declared dependency  {cid} requires {dep_id}")
+
         # 6. Lay the skin
         skin_json = {
             "skin_id": choice["skin_id"],
@@ -1030,10 +1047,26 @@ def build_checks(base_url: str, registry: Dict[str, Any], locators: Dict[str, An
         # same kind of arbitrary-but-real example value the original,
         # Sam-approved fixture used ("milk") -- real data sent to a real
         # endpoint, not a fabricated capability or requirement.
+        #
+        # Interoperability-upgrade addition: a capability that does real
+        # semantic validation on a field (found by real audit: the new
+        # Calendar/Event capability genuinely rejects a non-ISO-8601 "start"
+        # with a 400, correctly) would otherwise fail this generic check for
+        # doing its job right, not for being broken -- the generic string
+        # probe is a real value for a generic field, but not for a
+        # timestamp. A field recognizably date/time-shaped by name gets a
+        # real, valid ISO-8601 probe instead, the same class of targeted
+        # fix as the "id" special case above, not a workaround for this one
+        # capability.
         required_fields = list(cap.get("data_shape", {}).get("input", {}).get("required", []))
 
         def _probe_value(field_name: str):
-            return 1 if "id" in field_name.lower() else f"probe value for {field_name}"
+            lname = field_name.lower()
+            if "id" in lname:
+                return 1
+            if lname in ("start", "end", "date", "timestamp") or lname.endswith(("_at", "_date", "_time")):
+                return "2026-01-01T00:00:00"
+            return f"probe value for {field_name}"
 
         probe_body = {f: _probe_value(f) for f in required_fields} if required_fields else None
 

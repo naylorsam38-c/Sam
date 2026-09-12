@@ -8,15 +8,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/accounting_ledger/shelf/implementations/CAP-0700/IMPL-01/CAP-0700/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "accounting_ledger",
@@ -29,17 +24,10 @@
       "entries"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/accounting_ledger/shelf/implementations/CAP-0701/IMPL-01/CAP-0701/route.py",
-    "data_filename": "accounting_ledger.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/entries",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/entries"
   },
   {
     "app_slug": "accounting_ledger",
@@ -59,17 +47,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/accounting_ledger/shelf/implementations/CAP-0702/IMPL-01/CAP-0702/route.py",
-    "data_filename": "accounting_ledger.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 40,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/entries",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/entries"
   },
   {
     "app_slug": "accounting_ledger",
@@ -87,17 +68,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/accounting_ledger/shelf/implementations/CAP-0703/IMPL-01/CAP-0703/route.py",
-    "data_filename": "accounting_ledger.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/entries/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/entries/delete"
   },
   {
     "app_slug": "accounting_ledger",
@@ -110,17 +84,10 @@
       "balance"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/accounting_ledger/shelf/implementations/CAP-0704/IMPL-01/CAP-0704/route.py",
-    "data_filename": "accounting_ledger.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 29,
-    "shape": "AGGREGATE/READ",
     "method": "GET",
-    "route": "/api/entries/balance",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/entries/balance"
   },
   {
     "app_slug": "appointment_booking",
@@ -131,15 +98,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/appointment_booking/shelf/implementations/CAP-2500/IMPL-01/CAP-2500/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "appointment_booking",
@@ -152,17 +114,10 @@
       "appointments"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/appointment_booking/shelf/implementations/CAP-2501/IMPL-01/CAP-2501/route.py",
-    "data_filename": "appointment_booking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/appointments",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/appointments"
   },
   {
     "app_slug": "appointment_booking",
@@ -182,17 +137,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/appointment_booking/shelf/implementations/CAP-2502/IMPL-01/CAP-2502/route.py",
-    "data_filename": "appointment_booking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/appointments",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/appointments"
   },
   {
     "app_slug": "appointment_booking",
@@ -211,17 +159,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/appointment_booking/shelf/implementations/CAP-2503/IMPL-01/CAP-2503/route.py",
-    "data_filename": "appointment_booking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/appointments/cancel",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/appointments/cancel"
   },
   {
     "app_slug": "auction",
@@ -232,15 +173,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/auction/shelf/implementations/CAP-2100/IMPL-01/CAP-2100/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "auction",
@@ -253,17 +189,10 @@
       "items"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/auction/shelf/implementations/CAP-2101/IMPL-01/CAP-2101/route.py",
-    "data_filename": "auction.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/items",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/items"
   },
   {
     "app_slug": "auction",
@@ -283,17 +212,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/auction/shelf/implementations/CAP-2102/IMPL-01/CAP-2102/route.py",
-    "data_filename": "auction.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 39,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/items",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/items"
   },
   {
     "app_slug": "auction",
@@ -313,17 +235,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/auction/shelf/implementations/CAP-2103/IMPL-01/CAP-2103/route.py",
-    "data_filename": "auction.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 42,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/items/bid",
-    "if_count": 2,
-    "for_count": 1,
-    "final_class": "RED"
+    "route": "/api/items/bid"
   },
   {
     "app_slug": "calendar_and_scheduling",
@@ -334,15 +249,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/calendar_and_scheduling/shelf/implementations/CAP-0400/IMPL-01/CAP-0400/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "calendar_and_scheduling",
@@ -355,17 +265,10 @@
       "events"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/calendar_and_scheduling/shelf/implementations/CAP-0401/IMPL-01/CAP-0401/route.py",
-    "data_filename": "calendar_and_scheduling.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/events",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/events"
   },
   {
     "app_slug": "calendar_and_scheduling",
@@ -385,17 +288,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/calendar_and_scheduling/shelf/implementations/CAP-0402/IMPL-01/CAP-0402/route.py",
-    "data_filename": "calendar_and_scheduling.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 37,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/events",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/events"
   },
   {
     "app_slug": "calendar_and_scheduling",
@@ -413,17 +309,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/calendar_and_scheduling/shelf/implementations/CAP-0403/IMPL-01/CAP-0403/route.py",
-    "data_filename": "calendar_and_scheduling.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/events/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/events/delete"
   },
   {
     "app_slug": "collaborative_document_editor",
@@ -434,15 +323,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/collaborative_document_editor/shelf/implementations/CAP-1600/IMPL-01/CAP-1600/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "collaborative_document_editor",
@@ -455,17 +339,10 @@
       "docs"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/collaborative_document_editor/shelf/implementations/CAP-1601/IMPL-01/CAP-1601/route.py",
-    "data_filename": "collaborative_document_editor.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/docs",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/docs"
   },
   {
     "app_slug": "collaborative_document_editor",
@@ -484,17 +361,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/collaborative_document_editor/shelf/implementations/CAP-1602/IMPL-01/CAP-1602/route.py",
-    "data_filename": "collaborative_document_editor.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/docs",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/docs"
   },
   {
     "app_slug": "collaborative_document_editor",
@@ -513,17 +383,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/collaborative_document_editor/shelf/implementations/CAP-1603/IMPL-01/CAP-1603/route.py",
-    "data_filename": "collaborative_document_editor.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/docs/update",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/docs/update"
   },
   {
     "app_slug": "crm",
@@ -534,15 +397,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/crm/shelf/implementations/CAP-0800/IMPL-01/CAP-0800/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "crm",
@@ -555,17 +413,10 @@
       "contacts"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/crm/shelf/implementations/CAP-0801/IMPL-01/CAP-0801/route.py",
-    "data_filename": "crm.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/contacts",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/contacts"
   },
   {
     "app_slug": "crm",
@@ -585,17 +436,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/crm/shelf/implementations/CAP-0802/IMPL-01/CAP-0802/route.py",
-    "data_filename": "crm.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/contacts",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/contacts"
   },
   {
     "app_slug": "crm",
@@ -615,17 +459,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/crm/shelf/implementations/CAP-0803/IMPL-01/CAP-0803/route.py",
-    "data_filename": "crm.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/contacts/stage",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/contacts/stage"
   },
   {
     "app_slug": "crm",
@@ -643,17 +480,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/crm/shelf/implementations/CAP-0804/IMPL-01/CAP-0804/route.py",
-    "data_filename": "crm.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/contacts/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/contacts/delete"
   },
   {
     "app_slug": "dating",
@@ -664,15 +494,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/dating/shelf/implementations/CAP-3100/IMPL-01/CAP-3100/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "dating",
@@ -685,17 +510,10 @@
       "profiles"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/dating/shelf/implementations/CAP-3101/IMPL-01/CAP-3101/route.py",
-    "data_filename": "profiles.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/profiles",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/profiles"
   },
   {
     "app_slug": "dating",
@@ -714,17 +532,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/dating/shelf/implementations/CAP-3102/IMPL-01/CAP-3102/route.py",
-    "data_filename": "profiles.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/profiles",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/profiles"
   },
   {
     "app_slug": "dating",
@@ -745,17 +556,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/dating/shelf/implementations/CAP-3103/IMPL-01/CAP-3103/route.py",
-    "data_filename": "swipes.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 37,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/swipes",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "RED"
+    "route": "/api/swipes"
   },
   {
     "app_slug": "e_commerce_storefront",
@@ -766,15 +570,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/e_commerce_storefront/shelf/implementations/CAP-1900/IMPL-01/CAP-1900/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "e_commerce_storefront",
@@ -787,17 +586,10 @@
       "products"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/e_commerce_storefront/shelf/implementations/CAP-1901/IMPL-01/CAP-1901/route.py",
-    "data_filename": "products.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/products",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/products"
   },
   {
     "app_slug": "e_commerce_storefront",
@@ -816,17 +608,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/e_commerce_storefront/shelf/implementations/CAP-1902/IMPL-01/CAP-1902/route.py",
-    "data_filename": "products.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 39,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/products",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/products"
   },
   {
     "app_slug": "e_commerce_storefront",
@@ -839,17 +624,10 @@
       "orders"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/e_commerce_storefront/shelf/implementations/CAP-1903/IMPL-01/CAP-1903/route.py",
-    "data_filename": "orders.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/orders",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/orders"
   },
   {
     "app_slug": "e_commerce_storefront",
@@ -869,17 +647,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/e_commerce_storefront/shelf/implementations/CAP-1904/IMPL-01/CAP-1904/route.py",
-    "data_filename": "orders.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 37,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/checkout",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/checkout"
   },
   {
     "app_slug": "email_client",
@@ -890,15 +661,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/email_client/shelf/implementations/CAP-1400/IMPL-01/CAP-1400/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "email_client",
@@ -911,17 +677,10 @@
       "inbox"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/email_client/shelf/implementations/CAP-1401/IMPL-01/CAP-1401/route.py",
-    "data_filename": "email_client.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/inbox",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/inbox"
   },
   {
     "app_slug": "email_client",
@@ -943,17 +702,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/email_client/shelf/implementations/CAP-1402/IMPL-01/CAP-1402/route.py",
-    "data_filename": "email_client.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 39,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/emails/send",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/emails/send"
   },
   {
     "app_slug": "event_ticketing",
@@ -964,15 +716,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/event_ticketing/shelf/implementations/CAP-2700/IMPL-01/CAP-2700/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "event_ticketing",
@@ -985,17 +732,10 @@
       "events"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/event_ticketing/shelf/implementations/CAP-2701/IMPL-01/CAP-2701/route.py",
-    "data_filename": "event_ticketing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/events",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/events"
   },
   {
     "app_slug": "event_ticketing",
@@ -1015,17 +755,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/event_ticketing/shelf/implementations/CAP-2702/IMPL-01/CAP-2702/route.py",
-    "data_filename": "event_ticketing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 39,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/events",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/events"
   },
   {
     "app_slug": "event_ticketing",
@@ -1044,17 +777,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/event_ticketing/shelf/implementations/CAP-2703/IMPL-01/CAP-2703/route.py",
-    "data_filename": "event_ticketing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/events/buy",
-    "if_count": 2,
-    "for_count": 1,
-    "final_class": "RED"
+    "route": "/api/events/buy"
   },
   {
     "app_slug": "expense_tracker",
@@ -1065,15 +791,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/expense_tracker/shelf/implementations/CAP-0500/IMPL-01/CAP-0500/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "expense_tracker",
@@ -1086,17 +807,10 @@
       "expenses"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/expense_tracker/shelf/implementations/CAP-0501/IMPL-01/CAP-0501/route.py",
-    "data_filename": "expense_tracker.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/expenses",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/expenses"
   },
   {
     "app_slug": "expense_tracker",
@@ -1116,17 +830,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/expense_tracker/shelf/implementations/CAP-0502/IMPL-01/CAP-0502/route.py",
-    "data_filename": "expense_tracker.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 40,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/expenses",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/expenses"
   },
   {
     "app_slug": "expense_tracker",
@@ -1144,17 +851,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/expense_tracker/shelf/implementations/CAP-0503/IMPL-01/CAP-0503/route.py",
-    "data_filename": "expense_tracker.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/expenses/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/expenses/delete"
   },
   {
     "app_slug": "expense_tracker",
@@ -1167,17 +867,10 @@
       "total"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/expense_tracker/shelf/implementations/CAP-0504/IMPL-01/CAP-0504/route.py",
-    "data_filename": "expense_tracker.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 28,
-    "shape": "AGGREGATE/READ",
     "method": "GET",
-    "route": "/api/expenses/total",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/expenses/total"
   },
   {
     "app_slug": "file_storage_and_sync",
@@ -1188,15 +881,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/file_storage_and_sync/shelf/implementations/CAP-1500/IMPL-01/CAP-1500/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "file_storage_and_sync",
@@ -1209,17 +897,10 @@
       "files"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/file_storage_and_sync/shelf/implementations/CAP-1501/IMPL-01/CAP-1501/route.py",
-    "data_filename": "file_storage_and_sync.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/files",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/files"
   },
   {
     "app_slug": "file_storage_and_sync",
@@ -1238,17 +919,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/file_storage_and_sync/shelf/implementations/CAP-1502/IMPL-01/CAP-1502/route.py",
-    "data_filename": "file_storage_and_sync.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/files",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/files"
   },
   {
     "app_slug": "file_storage_and_sync",
@@ -1266,17 +940,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/file_storage_and_sync/shelf/implementations/CAP-1503/IMPL-01/CAP-1503/route.py",
-    "data_filename": "file_storage_and_sync.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/files/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/files/delete"
   },
   {
     "app_slug": "fitness_tracking",
@@ -1287,15 +954,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/fitness_tracking/shelf/implementations/CAP-3800/IMPL-01/CAP-3800/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "fitness_tracking",
@@ -1308,17 +970,10 @@
       "workouts"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/fitness_tracking/shelf/implementations/CAP-3801/IMPL-01/CAP-3801/route.py",
-    "data_filename": "fitness_tracking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/workouts",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/workouts"
   },
   {
     "app_slug": "fitness_tracking",
@@ -1337,17 +992,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/fitness_tracking/shelf/implementations/CAP-3802/IMPL-01/CAP-3802/route.py",
-    "data_filename": "fitness_tracking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 39,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/workouts",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/workouts"
   },
   {
     "app_slug": "fleet_tracking",
@@ -1358,15 +1006,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/fleet_tracking/shelf/implementations/CAP-3000/IMPL-01/CAP-3000/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "fleet_tracking",
@@ -1379,17 +1022,10 @@
       "vehicles"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/fleet_tracking/shelf/implementations/CAP-3001/IMPL-01/CAP-3001/route.py",
-    "data_filename": "fleet_tracking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/vehicles",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/vehicles"
   },
   {
     "app_slug": "fleet_tracking",
@@ -1409,17 +1045,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/fleet_tracking/shelf/implementations/CAP-3002/IMPL-01/CAP-3002/route.py",
-    "data_filename": "fleet_tracking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/vehicles",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/vehicles"
   },
   {
     "app_slug": "fleet_tracking",
@@ -1439,17 +1068,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/fleet_tracking/shelf/implementations/CAP-3003/IMPL-01/CAP-3003/route.py",
-    "data_filename": "fleet_tracking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/vehicles/location",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/vehicles/location"
   },
   {
     "app_slug": "food_delivery",
@@ -1460,15 +1082,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2200/IMPL-01/CAP-2200/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "food_delivery",
@@ -1481,17 +1098,10 @@
       "restaurants"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2201/IMPL-01/CAP-2201/route.py",
-    "data_filename": "restaurants.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/restaurants",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/restaurants"
   },
   {
     "app_slug": "food_delivery",
@@ -1509,17 +1119,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2202/IMPL-01/CAP-2202/route.py",
-    "data_filename": "restaurants.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/restaurants",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/restaurants"
   },
   {
     "app_slug": "food_delivery",
@@ -1532,17 +1135,10 @@
       "menu"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2203/IMPL-01/CAP-2203/route.py",
-    "data_filename": "menu.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/menu",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/menu"
   },
   {
     "app_slug": "food_delivery",
@@ -1562,17 +1158,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2204/IMPL-01/CAP-2204/route.py",
-    "data_filename": "menu.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/menu",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/menu"
   },
   {
     "app_slug": "food_delivery",
@@ -1591,17 +1180,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/food_delivery/shelf/implementations/CAP-2205/IMPL-01/CAP-2205/route.py",
-    "data_filename": "food_orders.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/orders",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/orders"
   },
   {
     "app_slug": "form_builder_and_survey",
@@ -1612,15 +1194,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/form_builder_and_survey/shelf/implementations/CAP-1800/IMPL-01/CAP-1800/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "form_builder_and_survey",
@@ -1633,17 +1210,10 @@
       "responses"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/form_builder_and_survey/shelf/implementations/CAP-1801/IMPL-01/CAP-1801/route.py",
-    "data_filename": "form_builder_and_survey.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/responses",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/responses"
   },
   {
     "app_slug": "form_builder_and_survey",
@@ -1661,17 +1231,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/form_builder_and_survey/shelf/implementations/CAP-1802/IMPL-01/CAP-1802/route.py",
-    "data_filename": "form_builder_and_survey.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/responses",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/responses"
   },
   {
     "app_slug": "habit_tracker",
@@ -1682,15 +1245,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/habit_tracker/shelf/implementations/CAP-0300/IMPL-01/CAP-0300/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "habit_tracker",
@@ -1703,17 +1261,10 @@
       "habits"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/habit_tracker/shelf/implementations/CAP-0301/IMPL-01/CAP-0301/route.py",
-    "data_filename": "habit_tracker.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/habits",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/habits"
   },
   {
     "app_slug": "habit_tracker",
@@ -1732,17 +1283,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/habit_tracker/shelf/implementations/CAP-0302/IMPL-01/CAP-0302/route.py",
-    "data_filename": "habit_tracker.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/habits",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/habits"
   },
   {
     "app_slug": "habit_tracker",
@@ -1761,17 +1305,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/habit_tracker/shelf/implementations/CAP-0303/IMPL-01/CAP-0303/route.py",
-    "data_filename": "habit_tracker.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 38,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/habits/checkin",
-    "if_count": 2,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/habits/checkin"
   },
   {
     "app_slug": "habit_tracker",
@@ -1789,17 +1326,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/habit_tracker/shelf/implementations/CAP-0304/IMPL-01/CAP-0304/route.py",
-    "data_filename": "habit_tracker.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/habits/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/habits/delete"
   },
   {
     "app_slug": "helpdesk_ticketing",
@@ -1810,15 +1340,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/helpdesk_ticketing/shelf/implementations/CAP-0900/IMPL-01/CAP-0900/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "helpdesk_ticketing",
@@ -1831,17 +1356,10 @@
       "tickets"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/helpdesk_ticketing/shelf/implementations/CAP-0901/IMPL-01/CAP-0901/route.py",
-    "data_filename": "helpdesk_ticketing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/tickets",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/tickets"
   },
   {
     "app_slug": "helpdesk_ticketing",
@@ -1860,17 +1378,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/helpdesk_ticketing/shelf/implementations/CAP-0902/IMPL-01/CAP-0902/route.py",
-    "data_filename": "helpdesk_ticketing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/tickets",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/tickets"
   },
   {
     "app_slug": "helpdesk_ticketing",
@@ -1889,17 +1400,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/helpdesk_ticketing/shelf/implementations/CAP-0903/IMPL-01/CAP-0903/route.py",
-    "data_filename": "helpdesk_ticketing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/tickets/close",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/tickets/close"
   },
   {
     "app_slug": "helpdesk_ticketing",
@@ -1917,17 +1421,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/helpdesk_ticketing/shelf/implementations/CAP-0904/IMPL-01/CAP-0904/route.py",
-    "data_filename": "helpdesk_ticketing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/tickets/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/tickets/delete"
   },
   {
     "app_slug": "inventory_and_warehouse",
@@ -1938,15 +1435,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/inventory_and_warehouse/shelf/implementations/CAP-2900/IMPL-01/CAP-2900/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "inventory_and_warehouse",
@@ -1959,17 +1451,10 @@
       "items"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/inventory_and_warehouse/shelf/implementations/CAP-2901/IMPL-01/CAP-2901/route.py",
-    "data_filename": "inventory_and_warehouse.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/items",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/items"
   },
   {
     "app_slug": "inventory_and_warehouse",
@@ -1989,17 +1474,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/inventory_and_warehouse/shelf/implementations/CAP-2902/IMPL-01/CAP-2902/route.py",
-    "data_filename": "inventory_and_warehouse.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 40,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/items",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/items"
   },
   {
     "app_slug": "inventory_and_warehouse",
@@ -2018,17 +1496,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/inventory_and_warehouse/shelf/implementations/CAP-2903/IMPL-01/CAP-2903/route.py",
-    "data_filename": "inventory_and_warehouse.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 38,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/items/adjust",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/items/adjust"
   },
   {
     "app_slug": "invoicing",
@@ -2039,15 +1510,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/invoicing/shelf/implementations/CAP-0600/IMPL-01/CAP-0600/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "invoicing",
@@ -2060,17 +1526,10 @@
       "invoices"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/invoicing/shelf/implementations/CAP-0601/IMPL-01/CAP-0601/route.py",
-    "data_filename": "invoicing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/invoices",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/invoices"
   },
   {
     "app_slug": "invoicing",
@@ -2090,17 +1549,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/invoicing/shelf/implementations/CAP-0602/IMPL-01/CAP-0602/route.py",
-    "data_filename": "invoicing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 39,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/invoices",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/invoices"
   },
   {
     "app_slug": "invoicing",
@@ -2120,17 +1572,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/invoicing/shelf/implementations/CAP-0603/IMPL-01/CAP-0603/route.py",
-    "data_filename": "invoicing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/invoices/pay",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/invoices/pay"
   },
   {
     "app_slug": "invoicing",
@@ -2148,17 +1593,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/invoicing/shelf/implementations/CAP-0604/IMPL-01/CAP-0604/route.py",
-    "data_filename": "invoicing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/invoices/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/invoices/delete"
   },
   {
     "app_slug": "language_learning",
@@ -2169,15 +1607,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/language_learning/shelf/implementations/CAP-4000/IMPL-01/CAP-4000/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "language_learning",
@@ -2190,17 +1623,10 @@
       "cards"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/language_learning/shelf/implementations/CAP-4001/IMPL-01/CAP-4001/route.py",
-    "data_filename": "language_learning.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/cards",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/cards"
   },
   {
     "app_slug": "language_learning",
@@ -2221,17 +1647,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/language_learning/shelf/implementations/CAP-4002/IMPL-01/CAP-4002/route.py",
-    "data_filename": "language_learning.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/cards",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/cards"
   },
   {
     "app_slug": "language_learning",
@@ -2250,17 +1669,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/language_learning/shelf/implementations/CAP-4003/IMPL-01/CAP-4003/route.py",
-    "data_filename": "language_learning.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/cards/review",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/cards/review"
   },
   {
     "app_slug": "meditation_and_wellbeing",
@@ -2271,15 +1683,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/meditation_and_wellbeing/shelf/implementations/CAP-3900/IMPL-01/CAP-3900/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "meditation_and_wellbeing",
@@ -2292,17 +1699,10 @@
       "sessions"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/meditation_and_wellbeing/shelf/implementations/CAP-3901/IMPL-01/CAP-3901/route.py",
-    "data_filename": "meditation_and_wellbeing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/sessions",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/sessions"
   },
   {
     "app_slug": "meditation_and_wellbeing",
@@ -2321,17 +1721,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/meditation_and_wellbeing/shelf/implementations/CAP-3902/IMPL-01/CAP-3902/route.py",
-    "data_filename": "meditation_and_wellbeing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 39,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/sessions",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/sessions"
   },
   {
     "app_slug": "multi_vendor_marketplace",
@@ -2342,15 +1735,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/multi_vendor_marketplace/shelf/implementations/CAP-2000/IMPL-01/CAP-2000/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "multi_vendor_marketplace",
@@ -2363,17 +1751,10 @@
       "vendors"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/multi_vendor_marketplace/shelf/implementations/CAP-2001/IMPL-01/CAP-2001/route.py",
-    "data_filename": "vendors.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/vendors",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/vendors"
   },
   {
     "app_slug": "multi_vendor_marketplace",
@@ -2391,17 +1772,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/multi_vendor_marketplace/shelf/implementations/CAP-2002/IMPL-01/CAP-2002/route.py",
-    "data_filename": "vendors.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/vendors",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/vendors"
   },
   {
     "app_slug": "multi_vendor_marketplace",
@@ -2414,17 +1788,10 @@
       "products"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/multi_vendor_marketplace/shelf/implementations/CAP-2003/IMPL-01/CAP-2003/route.py",
-    "data_filename": "vendor_products.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/vendor_products",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/vendor_products"
   },
   {
     "app_slug": "multi_vendor_marketplace",
@@ -2444,17 +1811,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/multi_vendor_marketplace/shelf/implementations/CAP-2004/IMPL-01/CAP-2004/route.py",
-    "data_filename": "vendor_products.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/vendor_products",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/vendor_products"
   },
   {
     "app_slug": "music_streaming",
@@ -2465,15 +1825,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/music_streaming/shelf/implementations/CAP-3500/IMPL-01/CAP-3500/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "music_streaming",
@@ -2486,17 +1841,10 @@
       "tracks"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/music_streaming/shelf/implementations/CAP-3501/IMPL-01/CAP-3501/route.py",
-    "data_filename": "music_streaming.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/tracks",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/tracks"
   },
   {
     "app_slug": "music_streaming",
@@ -2516,17 +1864,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/music_streaming/shelf/implementations/CAP-3502/IMPL-01/CAP-3502/route.py",
-    "data_filename": "music_streaming.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/tracks",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/tracks"
   },
   {
     "app_slug": "music_streaming",
@@ -2544,17 +1885,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/music_streaming/shelf/implementations/CAP-3503/IMPL-01/CAP-3503/route.py",
-    "data_filename": "music_streaming.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/tracks/play",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/tracks/play"
   },
   {
     "app_slug": "note_taking",
@@ -2565,15 +1899,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/note_taking/shelf/implementations/CAP-0200/IMPL-01/CAP-0200/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "note_taking",
@@ -2586,17 +1915,10 @@
       "notes"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/note_taking/shelf/implementations/CAP-0201/IMPL-01/CAP-0201/route.py",
-    "data_filename": "note_taking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/notes",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/notes"
   },
   {
     "app_slug": "note_taking",
@@ -2615,17 +1937,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/note_taking/shelf/implementations/CAP-0202/IMPL-01/CAP-0202/route.py",
-    "data_filename": "note_taking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/notes",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/notes"
   },
   {
     "app_slug": "note_taking",
@@ -2644,17 +1959,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/note_taking/shelf/implementations/CAP-0203/IMPL-01/CAP-0203/route.py",
-    "data_filename": "note_taking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/notes/update",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/notes/update"
   },
   {
     "app_slug": "note_taking",
@@ -2672,17 +1980,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/note_taking/shelf/implementations/CAP-0204/IMPL-01/CAP-0204/route.py",
-    "data_filename": "note_taking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/notes/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/notes/delete"
   },
   {
     "app_slug": "online_course_lms",
@@ -2693,15 +1994,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/online_course_lms/shelf/implementations/CAP-4100/IMPL-01/CAP-4100/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "online_course_lms",
@@ -2714,17 +2010,10 @@
       "courses"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/online_course_lms/shelf/implementations/CAP-4101/IMPL-01/CAP-4101/route.py",
-    "data_filename": "courses.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/courses",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/courses"
   },
   {
     "app_slug": "online_course_lms",
@@ -2742,17 +2031,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/online_course_lms/shelf/implementations/CAP-4102/IMPL-01/CAP-4102/route.py",
-    "data_filename": "courses.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/courses",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/courses"
   },
   {
     "app_slug": "online_course_lms",
@@ -2765,17 +2047,10 @@
       "lessons"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/online_course_lms/shelf/implementations/CAP-4103/IMPL-01/CAP-4103/route.py",
-    "data_filename": "lessons.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/lessons",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/lessons"
   },
   {
     "app_slug": "online_course_lms",
@@ -2795,17 +2070,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/online_course_lms/shelf/implementations/CAP-4104/IMPL-01/CAP-4104/route.py",
-    "data_filename": "lessons.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/lessons",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/lessons"
   },
   {
     "app_slug": "parcel_tracking",
@@ -2816,15 +2084,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/parcel_tracking/shelf/implementations/CAP-2400/IMPL-01/CAP-2400/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "parcel_tracking",
@@ -2837,17 +2100,10 @@
       "parcels"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/parcel_tracking/shelf/implementations/CAP-2401/IMPL-01/CAP-2401/route.py",
-    "data_filename": "parcel_tracking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/parcels",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/parcels"
   },
   {
     "app_slug": "parcel_tracking",
@@ -2866,17 +2122,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/parcel_tracking/shelf/implementations/CAP-2402/IMPL-01/CAP-2402/route.py",
-    "data_filename": "parcel_tracking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/parcels",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/parcels"
   },
   {
     "app_slug": "parcel_tracking",
@@ -2895,17 +2144,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/parcel_tracking/shelf/implementations/CAP-2403/IMPL-01/CAP-2403/route.py",
-    "data_filename": "parcel_tracking.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/parcels/status",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/parcels/status"
   },
   {
     "app_slug": "payroll",
@@ -2916,15 +2158,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/payroll/shelf/implementations/CAP-1000/IMPL-01/CAP-1000/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "payroll",
@@ -2937,17 +2174,10 @@
       "employees"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/payroll/shelf/implementations/CAP-1001/IMPL-01/CAP-1001/route.py",
-    "data_filename": "employees.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/employees",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/employees"
   },
   {
     "app_slug": "payroll",
@@ -2966,17 +2196,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/payroll/shelf/implementations/CAP-1002/IMPL-01/CAP-1002/route.py",
-    "data_filename": "employees.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 39,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/employees",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/employees"
   },
   {
     "app_slug": "payroll",
@@ -2989,17 +2212,12 @@
       "created"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/payroll/shelf/implementations/CAP-1003/IMPL-01/CAP-1003/route.py",
-    "data_filename": "pay_records.json",
+    "dependencies": [
+      "CAP-1002"
+    ],
     "is_host": false,
-    "loc": 47,
-    "shape": "OTHER-COMPUTE",
     "method": "POST",
-    "route": "/api/payroll/run",
-    "if_count": 0,
-    "for_count": 1,
-    "final_class": "ORANGE"
+    "route": "/api/payroll/run"
   },
   {
     "app_slug": "payroll",
@@ -3012,17 +2230,10 @@
       "records"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/payroll/shelf/implementations/CAP-1004/IMPL-01/CAP-1004/route.py",
-    "data_filename": "pay_records.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/payroll/records",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/payroll/records"
   },
   {
     "app_slug": "photo_sharing",
@@ -3033,15 +2244,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/photo_sharing/shelf/implementations/CAP-3300/IMPL-01/CAP-3300/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "photo_sharing",
@@ -3054,17 +2260,10 @@
       "photos"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/photo_sharing/shelf/implementations/CAP-3301/IMPL-01/CAP-3301/route.py",
-    "data_filename": "photo_sharing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/photos",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/photos"
   },
   {
     "app_slug": "photo_sharing",
@@ -3084,17 +2283,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/photo_sharing/shelf/implementations/CAP-3302/IMPL-01/CAP-3302/route.py",
-    "data_filename": "photo_sharing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/photos",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/photos"
   },
   {
     "app_slug": "photo_sharing",
@@ -3112,17 +2304,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/photo_sharing/shelf/implementations/CAP-3303/IMPL-01/CAP-3303/route.py",
-    "data_filename": "photo_sharing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/photos/like",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/photos/like"
   },
   {
     "app_slug": "podcast",
@@ -3133,15 +2318,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/podcast/shelf/implementations/CAP-3700/IMPL-01/CAP-3700/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "podcast",
@@ -3154,17 +2334,10 @@
       "episodes"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/podcast/shelf/implementations/CAP-3701/IMPL-01/CAP-3701/route.py",
-    "data_filename": "podcast.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/episodes",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/episodes"
   },
   {
     "app_slug": "podcast",
@@ -3183,17 +2356,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/podcast/shelf/implementations/CAP-3702/IMPL-01/CAP-3702/route.py",
-    "data_filename": "podcast.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/episodes",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/episodes"
   },
   {
     "app_slug": "podcast",
@@ -3211,17 +2377,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/podcast/shelf/implementations/CAP-3703/IMPL-01/CAP-3703/route.py",
-    "data_filename": "podcast.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/episodes/play",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/episodes/play"
   },
   {
     "app_slug": "project_management",
@@ -3232,15 +2391,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/project_management/shelf/implementations/CAP-1100/IMPL-01/CAP-1100/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "project_management",
@@ -3253,17 +2407,10 @@
       "tasks"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/project_management/shelf/implementations/CAP-1101/IMPL-01/CAP-1101/route.py",
-    "data_filename": "project_management.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/tasks",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/tasks"
   },
   {
     "app_slug": "project_management",
@@ -3282,17 +2429,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/project_management/shelf/implementations/CAP-1102/IMPL-01/CAP-1102/route.py",
-    "data_filename": "project_management.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/tasks",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/tasks"
   },
   {
     "app_slug": "project_management",
@@ -3311,17 +2451,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/project_management/shelf/implementations/CAP-1103/IMPL-01/CAP-1103/route.py",
-    "data_filename": "project_management.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/tasks/status",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/tasks/status"
   },
   {
     "app_slug": "project_management",
@@ -3339,17 +2472,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/project_management/shelf/implementations/CAP-1104/IMPL-01/CAP-1104/route.py",
-    "data_filename": "project_management.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/tasks/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/tasks/delete"
   },
   {
     "app_slug": "property_rental",
@@ -3360,15 +2486,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/property_rental/shelf/implementations/CAP-2600/IMPL-01/CAP-2600/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "property_rental",
@@ -3381,17 +2502,10 @@
       "listings"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/property_rental/shelf/implementations/CAP-2601/IMPL-01/CAP-2601/route.py",
-    "data_filename": "listings.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/listings",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/listings"
   },
   {
     "app_slug": "property_rental",
@@ -3410,17 +2524,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/property_rental/shelf/implementations/CAP-2602/IMPL-01/CAP-2602/route.py",
-    "data_filename": "listings.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 39,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/listings",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/listings"
   },
   {
     "app_slug": "property_rental",
@@ -3433,17 +2540,10 @@
       "bookings"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/property_rental/shelf/implementations/CAP-2603/IMPL-01/CAP-2603/route.py",
-    "data_filename": "bookings.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/bookings",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/bookings"
   },
   {
     "app_slug": "property_rental",
@@ -3463,17 +2563,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/property_rental/shelf/implementations/CAP-2604/IMPL-01/CAP-2604/route.py",
-    "data_filename": "bookings.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/bookings",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/bookings"
   },
   {
     "app_slug": "quiz_and_flashcards",
@@ -3484,15 +2577,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/quiz_and_flashcards/shelf/implementations/CAP-4200/IMPL-01/CAP-4200/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "quiz_and_flashcards",
@@ -3505,17 +2593,10 @@
       "cards"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/quiz_and_flashcards/shelf/implementations/CAP-4201/IMPL-01/CAP-4201/route.py",
-    "data_filename": "quiz_and_flashcards.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/cards",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/cards"
   },
   {
     "app_slug": "quiz_and_flashcards",
@@ -3535,17 +2616,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/quiz_and_flashcards/shelf/implementations/CAP-4202/IMPL-01/CAP-4202/route.py",
-    "data_filename": "quiz_and_flashcards.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/cards",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/cards"
   },
   {
     "app_slug": "quiz_and_flashcards",
@@ -3563,17 +2637,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/quiz_and_flashcards/shelf/implementations/CAP-4203/IMPL-01/CAP-4203/route.py",
-    "data_filename": "quiz_and_flashcards.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/cards/review",
-    "if_count": 2,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/cards/review"
   },
   {
     "app_slug": "recipe_and_meal_planning",
@@ -3584,15 +2651,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/recipe_and_meal_planning/shelf/implementations/CAP-4300/IMPL-01/CAP-4300/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "recipe_and_meal_planning",
@@ -3605,17 +2667,10 @@
       "recipes"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/recipe_and_meal_planning/shelf/implementations/CAP-4301/IMPL-01/CAP-4301/route.py",
-    "data_filename": "recipes.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/recipes",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/recipes"
   },
   {
     "app_slug": "recipe_and_meal_planning",
@@ -3634,17 +2689,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/recipe_and_meal_planning/shelf/implementations/CAP-4302/IMPL-01/CAP-4302/route.py",
-    "data_filename": "recipes.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/recipes",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/recipes"
   },
   {
     "app_slug": "recipe_and_meal_planning",
@@ -3657,17 +2705,10 @@
       "plan"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/recipe_and_meal_planning/shelf/implementations/CAP-4303/IMPL-01/CAP-4303/route.py",
-    "data_filename": "meal_plan.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/meal_plan",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/meal_plan"
   },
   {
     "app_slug": "recipe_and_meal_planning",
@@ -3686,17 +2727,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/recipe_and_meal_planning/shelf/implementations/CAP-4304/IMPL-01/CAP-4304/route.py",
-    "data_filename": "meal_plan.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/meal_plan",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/meal_plan"
   },
   {
     "app_slug": "restaurant_pos",
@@ -3707,15 +2741,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/restaurant_pos/shelf/implementations/CAP-2800/IMPL-01/CAP-2800/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "restaurant_pos",
@@ -3728,17 +2757,10 @@
       "orders"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/restaurant_pos/shelf/implementations/CAP-2801/IMPL-01/CAP-2801/route.py",
-    "data_filename": "restaurant_pos.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/orders",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/orders"
   },
   {
     "app_slug": "restaurant_pos",
@@ -3758,17 +2780,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/restaurant_pos/shelf/implementations/CAP-2802/IMPL-01/CAP-2802/route.py",
-    "data_filename": "restaurant_pos.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 39,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/orders",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/orders"
   },
   {
     "app_slug": "restaurant_pos",
@@ -3787,17 +2802,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/restaurant_pos/shelf/implementations/CAP-2803/IMPL-01/CAP-2803/route.py",
-    "data_filename": "restaurant_pos.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/orders/close",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/orders/close"
   },
   {
     "app_slug": "ride_hailing",
@@ -3808,15 +2816,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/ride_hailing/shelf/implementations/CAP-2300/IMPL-01/CAP-2300/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "ride_hailing",
@@ -3829,17 +2832,10 @@
       "rides"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/ride_hailing/shelf/implementations/CAP-2301/IMPL-01/CAP-2301/route.py",
-    "data_filename": "ride_hailing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/rides",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/rides"
   },
   {
     "app_slug": "ride_hailing",
@@ -3859,17 +2855,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/ride_hailing/shelf/implementations/CAP-2302/IMPL-01/CAP-2302/route.py",
-    "data_filename": "ride_hailing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/rides",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/rides"
   },
   {
     "app_slug": "ride_hailing",
@@ -3887,17 +2876,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/ride_hailing/shelf/implementations/CAP-2303/IMPL-01/CAP-2303/route.py",
-    "data_filename": "ride_hailing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/rides/status",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/rides/status"
   },
   {
     "app_slug": "short_video_feed",
@@ -3908,15 +2890,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/short_video_feed/shelf/implementations/CAP-3400/IMPL-01/CAP-3400/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "short_video_feed",
@@ -3929,17 +2906,10 @@
       "videos"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/short_video_feed/shelf/implementations/CAP-3401/IMPL-01/CAP-3401/route.py",
-    "data_filename": "short_video_feed.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/videos",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/videos"
   },
   {
     "app_slug": "short_video_feed",
@@ -3959,17 +2929,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/short_video_feed/shelf/implementations/CAP-3402/IMPL-01/CAP-3402/route.py",
-    "data_filename": "short_video_feed.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/videos",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/videos"
   },
   {
     "app_slug": "short_video_feed",
@@ -3987,17 +2950,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/short_video_feed/shelf/implementations/CAP-3403/IMPL-01/CAP-3403/route.py",
-    "data_filename": "short_video_feed.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/videos/view",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/videos/view"
   },
   {
     "app_slug": "social_feed",
@@ -4008,15 +2964,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/social_feed/shelf/implementations/CAP-3200/IMPL-01/CAP-3200/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "social_feed",
@@ -4029,17 +2980,10 @@
       "posts"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/social_feed/shelf/implementations/CAP-3201/IMPL-01/CAP-3201/route.py",
-    "data_filename": "social_feed.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/posts",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/posts"
   },
   {
     "app_slug": "social_feed",
@@ -4059,17 +3003,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/social_feed/shelf/implementations/CAP-3202/IMPL-01/CAP-3202/route.py",
-    "data_filename": "social_feed.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/posts",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/posts"
   },
   {
     "app_slug": "social_feed",
@@ -4087,17 +3024,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/social_feed/shelf/implementations/CAP-3203/IMPL-01/CAP-3203/route.py",
-    "data_filename": "social_feed.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/posts/like",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/posts/like"
   },
   {
     "app_slug": "spreadsheet",
@@ -4108,15 +3038,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/spreadsheet/shelf/implementations/CAP-1700/IMPL-01/CAP-1700/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "spreadsheet",
@@ -4129,17 +3054,10 @@
       "cells"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/spreadsheet/shelf/implementations/CAP-1701/IMPL-01/CAP-1701/route.py",
-    "data_filename": "spreadsheet.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/cells",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/cells"
   },
   {
     "app_slug": "spreadsheet",
@@ -4159,17 +3077,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/spreadsheet/shelf/implementations/CAP-1702/IMPL-01/CAP-1702/route.py",
-    "data_filename": "spreadsheet.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 41,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/cells/set",
-    "if_count": 2,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/cells/set"
   },
   {
     "app_slug": "team_chat",
@@ -4180,15 +3091,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/team_chat/shelf/implementations/CAP-1200/IMPL-01/CAP-1200/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "team_chat",
@@ -4201,17 +3107,10 @@
       "messages"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/team_chat/shelf/implementations/CAP-1201/IMPL-01/CAP-1201/route.py",
-    "data_filename": "team_chat.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/messages",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/messages"
   },
   {
     "app_slug": "team_chat",
@@ -4230,17 +3129,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/team_chat/shelf/implementations/CAP-1202/IMPL-01/CAP-1202/route.py",
-    "data_filename": "team_chat.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 36,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/messages",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/messages"
   },
   {
     "app_slug": "team_chat",
@@ -4258,17 +3150,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/team_chat/shelf/implementations/CAP-1203/IMPL-01/CAP-1203/route.py",
-    "data_filename": "team_chat.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/messages/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/messages/delete"
   },
   {
     "app_slug": "todo_list",
@@ -4279,15 +3164,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0100/IMPL-01/CAP-0100/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 76,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "todo_list",
@@ -4300,17 +3180,10 @@
       "todos"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0101/IMPL-01/CAP-0101/route.py",
-    "data_filename": "todos.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/todos",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/todos"
   },
   {
     "app_slug": "todo_list",
@@ -4329,17 +3202,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0102/IMPL-01/CAP-0102/route.py",
-    "data_filename": "todos.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/todos",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/todos"
   },
   {
     "app_slug": "todo_list",
@@ -4358,17 +3224,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0103/IMPL-01/CAP-0103/route.py",
-    "data_filename": "todos.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/todos/toggle",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/todos/toggle"
   },
   {
     "app_slug": "todo_list",
@@ -4388,17 +3247,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0104/IMPL-01/CAP-0104/route.py",
-    "data_filename": "todos.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 37,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/todos/edit",
-    "if_count": 2,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/todos/edit"
   },
   {
     "app_slug": "todo_list",
@@ -4416,17 +3268,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0105/IMPL-01/CAP-0105/route.py",
-    "data_filename": "todos.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 33,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/todos/delete",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/todos/delete"
   },
   {
     "app_slug": "todo_list",
@@ -4441,17 +3286,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0106/IMPL-01/CAP-0106/route.py",
-    "data_filename": "todos.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/todos/toggle_all",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/todos/toggle_all"
   },
   {
     "app_slug": "todo_list",
@@ -4466,17 +3304,10 @@
     "side_effects": [
       "deletes_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/real_todo_proof/shelf/implementations/CAP-0107/IMPL-01/CAP-0107/route.py",
-    "data_filename": "todos.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 30,
-    "shape": "DELETE",
     "method": "POST",
-    "route": "/api/todos/clear_completed",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/todos/clear_completed"
   },
   {
     "app_slug": "video_conferencing",
@@ -4487,15 +3318,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/video_conferencing/shelf/implementations/CAP-1300/IMPL-01/CAP-1300/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "video_conferencing",
@@ -4508,17 +3334,10 @@
       "rooms"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/video_conferencing/shelf/implementations/CAP-1301/IMPL-01/CAP-1301/route.py",
-    "data_filename": "video_conferencing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/rooms",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/rooms"
   },
   {
     "app_slug": "video_conferencing",
@@ -4537,17 +3356,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/video_conferencing/shelf/implementations/CAP-1302/IMPL-01/CAP-1302/route.py",
-    "data_filename": "video_conferencing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/rooms",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/rooms"
   },
   {
     "app_slug": "video_conferencing",
@@ -4567,17 +3379,10 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/video_conferencing/shelf/implementations/CAP-1303/IMPL-01/CAP-1303/route.py",
-    "data_filename": "video_conferencing.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 38,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/rooms/join",
-    "if_count": 3,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/rooms/join"
   },
   {
     "app_slug": "video_streaming",
@@ -4588,15 +3393,10 @@
     "required_input": [],
     "output_fields": [],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/video_streaming/shelf/implementations/CAP-3600/IMPL-01/CAP-3600/app.py",
-    "data_filename": null,
+    "dependencies": [],
     "is_host": true,
-    "loc": 74,
-    "shape": "HOST/UI-LOADER",
     "method": null,
-    "route": null,
-    "final_class": "GREEN (runtime) / RED (UI content)"
+    "route": null
   },
   {
     "app_slug": "video_streaming",
@@ -4609,17 +3409,10 @@
       "videos"
     ],
     "side_effects": [],
-    "requires_auth": false,
-    "route_file": "verification/library_build/video_streaming/shelf/implementations/CAP-3601/IMPL-01/CAP-3601/route.py",
-    "data_filename": "video_streaming.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 26,
-    "shape": "LIST/READ",
     "method": "GET",
-    "route": "/api/videos",
-    "if_count": 0,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/videos"
   },
   {
     "app_slug": "video_streaming",
@@ -4638,17 +3431,10 @@
     "side_effects": [
       "creates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/video_streaming/shelf/implementations/CAP-3602/IMPL-01/CAP-3602/route.py",
-    "data_filename": "video_streaming.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 35,
-    "shape": "CREATE",
     "method": "POST",
-    "route": "/api/videos",
-    "if_count": 1,
-    "for_count": 0,
-    "final_class": "YELLOW"
+    "route": "/api/videos"
   },
   {
     "app_slug": "video_streaming",
@@ -4666,16 +3452,9 @@
     "side_effects": [
       "updates_record"
     ],
-    "requires_auth": false,
-    "route_file": "verification/library_build/video_streaming/shelf/implementations/CAP-3603/IMPL-01/CAP-3603/route.py",
-    "data_filename": "video_streaming.json",
+    "dependencies": [],
     "is_host": false,
-    "loc": 34,
-    "shape": "UPDATE",
     "method": "POST",
-    "route": "/api/videos/watch",
-    "if_count": 1,
-    "for_count": 1,
-    "final_class": "YELLOW"
+    "route": "/api/videos/watch"
   }
 ]
