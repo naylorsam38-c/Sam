@@ -145,18 +145,45 @@ dependency is identified.
 
 ---
 
+## Resolution — Sam's confirmed answers
+
+Sam provided the following provisional decisions for items 2, 3, 6, and 7 (accepted as stated,
+not re-litigated here), and directly answered the three remaining blockers:
+
+- Tester access: admin-provisioned individual accounts. No public self-registration. No email
+  verification. No shared tester login.
+- Password reset: owner/admin reset during the private pilot.
+- Session timeout: 12 hours maximum, with logout available.
+- Logs: server-side only, redacted, owner/admin access only. Retention: 14 days.
+- Backups: daily, encrypted, retained for 7 days.
+- Monitoring: basic health check and service-status monitoring.
+- No external API keys unless the actual first product requires one.
+
+**The three remaining blockers are now resolved:**
+
+1. **Tester access method** — **Confirmed**: admin-provisioned individual accounts, as proposed.
+2. **Log retention location and duration** — **Confirmed**: AWS CloudWatch Logs, 14-day
+   retention.
+3. **AWS deployment target and current URL** — **Answered, and it changes item 5's scope**: no
+   AWS endpoint currently exists. Nothing has been provisioned in AWS for this pilot yet. Item 5
+   in `PRIVATE_PILOT_SAFETY_MILESTONE.md` is therefore not "configure HTTPS on an existing
+   deployment" — it is "provision a new AWS environment from nothing," a larger, more consequential
+   step (creating real cloud resources) that requires Sam's direct AWS access and explicit
+   authorization at each irreversible step, not something this session can do unilaterally.
+
 ## Summary — what blocks implementation right now
 
 | # | Decision | Blocks implementation? |
 |---|---|---|
-| 1 | Tester access method | Yes |
-| 2 | Password-reset policy | No |
-| 3 | Session timeout | No |
-| 4 | Log retention location and duration | Yes |
-| 5 | AWS deployment target and current URL | Yes |
-| 6 | Backup storage and retention | No (resolve before go-live) |
-| 7 | Monitoring service | No (resolve before go-live) |
+| 1 | Tester access method | **Resolved** — admin-provisioned accounts |
+| 2 | Password-reset policy | Resolved — owner/admin manual reset |
+| 3 | Session timeout | Resolved — 12 hours maximum |
+| 4 | Log retention location and duration | **Resolved** — CloudWatch Logs, 14 days |
+| 5 | AWS deployment target and current URL | **Resolved as "not yet provisioned"** — a new AWS environment must be stood up; this is now a provisioning task, not a configuration task |
+| 6 | Backup storage and retention | Resolved — daily, encrypted, 7-day retention |
+| 7 | Monitoring service | Resolved — basic health check + service-status monitoring |
 
-Items 1, 4, and 5 are the three genuine blockers. Items 2 and 3 already have safe, accepted-by-
-default answers unless Sam overrides them. Items 6 and 7 can be decided in parallel with early
-implementation but must be resolved before real tester data exists on the deployed pilot.
+All seven items now have a confirmed answer or an accepted default. The genuinely open work is no
+longer "which decision," but the provisioning step implied by item 5 — a new AWS environment does
+not exist yet and must be created before HTTPS/deployment (`PRIVATE_PILOT_SAFETY_MILESTONE.md`
+item 5) can be implemented against it.
