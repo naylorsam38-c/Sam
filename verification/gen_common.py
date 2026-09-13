@@ -120,6 +120,24 @@ def slot(slot_id, target_cap, name, selector, side_effects=()):
 
 SHARED_LIB_CAP_ID = "CAP-0000"
 
+# Cross-App Isolation Contract (CANONICAL_SPEC.md Part C.4): filenames that
+# are exclusively internal state for CAP-0000's own primitive functions --
+# create_session()/validate_session()/invalidate_session() ("auth_sessions.json")
+# and save_blob()/load_blob()'s own default index ("blobs.json") -- and are
+# NEVER passed as any capability's own data_filename by any generic engine
+# in this file today (verified: zero occurrences). A domain capability that
+# declares its own data_filename equal to one of these would silently share
+# physical storage with a CAP-0000 primitive whose row shape it doesn't
+# control, exactly the real, historical bug this project found the hard way
+# (see B.8/C.4): a plain capability's "sessions.json" collided with the auth
+# engine's own session store once "auth_sessions.json" existed, invisible
+# until the full-library merge test forced them into one shared data/
+# directory. This does NOT include "api_keys.json"/"share_tokens.json" --
+# those ARE legitimately a capability's own data_filename, declared by their
+# own owning engine (add_api_key_capability/add_share_token_capability) --
+# blocking those would break real, working capabilities.
+RESERVED_SHARED_LIB_FILENAMES = frozenset({"auth_sessions.json", "blobs.json"})
+
 # The real, single-source implementation of load/save, error-code mapping,
 # and the notify primitive -- written ONCE per app (as CAP-0000, a real
 # shelf capability with no HTTP route of its own) and dynamically imported
@@ -884,6 +902,14 @@ class AppBuilder:
         from what the generated code actually does."""
         cap_id = f"CAP-{num}"
         df = data_filename or self.data_filename
+        if df in RESERVED_SHARED_LIB_FILENAMES:
+            raise AssertionError(
+                f"{cap_id} in app {self.slug!r} declares data_filename={df!r}, which is reserved "
+                f"for CAP-0000's own internal primitive state (see RESERVED_SHARED_LIB_FILENAMES) "
+                f"-- a domain capability must never share physical storage with a shared-library "
+                f"primitive whose row shape it doesn't control. This is the generation-time guard "
+                f"for the Cross-App Isolation Contract (CANONICAL_SPEC.md Part C.4): pick a "
+                f"different data_filename for this capability's own entity.")
         error_codes = ["INTERNAL_ERROR"]
         if required_input:
             error_codes.append("VALIDATION_ERROR")
