@@ -843,3 +843,49 @@ included in a genuine end-to-end proof, the source files need to be supplied, or
 real GitHub/Gemini credentials to build and test against for real — no mocked harvest, ever. Until
 then, this canonical spec's real, provable scope is stages 1–3 (assemble → prove → readiness/
 library), which `STAGE_CROSS_REFERENCE.md` and the clean-room run below cover completely.
+
+## B.8 — real identity/auth + five foundational capabilities (round 7): implemented, proven, additive to the Locked Goal
+
+Layered on top of B.1–B.7 without touching Part A or narrowing the Locked Goal (still exactly
+"convert the 43-app reference catalogue into 43 complete, independently working, browser-tested
+applications and place the proven applications into the app library" — this round adds shared
+library capability, not a new goal). Full reasoning and evidence for each item below lives in
+`AUTHENTICATION_AND_FOUNDATIONAL_CAPABILITIES_REPORT.md` and `IDENTITY_AND_LOGIN_TYPES_SPEC.md`;
+this section states the resolution, the same convention B.2/B.3/B.5 already use for
+`RULINGS_ROUND5.md`.
+
+- **`ctx` is no longer a stub.** Every previous canonical-spec section that touched `CAP-0000`
+  assumed `{"user": None, "authenticated": False}` was permanent (the single most-recurring gap
+  named across the coverage-expansion round, `COVERAGE_EXPANSION_REPORT.md` §5.1). It is now real:
+  `_make_ctx()` in `HOST_APP_PY_TEMPLATE` resolves a real, validated session or API key from the
+  request. This is additive — no canonical app's existing behavior changed (reconfirmed by the full
+  regression below), because none of the 43+6 previously called anything auth-related.
+- **Five identity/login types**, designed evidence-first (no spec for these existed anywhere in
+  this project — searched exhaustively, same discipline as B.1's Constitution/Harvest-Spec finding
+  — so the user explicitly authorized designing five from real recurring need rather than guessing
+  or defaulting to generic providers), each with a written purpose/capabilities/security-requirement
+  spec: see `IDENTITY_AND_LOGIN_TYPES_SPEC.md`.
+- **Two real defects found and fixed by this round's own testing, not by inspection**: a same-app
+  route collision in `add_auth_capabilities()` (fixed with `route_prefix` + a new same-app
+  `(route, method)` collision assertion in `add_capability()`), and a cross-capability data-file
+  collision (`sessions.json`, renamed to `auth_sessions.json`). Both are architecture-level findings
+  the merged stress test exists to catch — see B.6's "one script for stages 1-3" framing: this is
+  the same "prove the whole system, not just each part in isolation" discipline, extended from
+  routes to data files.
+- **Four honest, still-open gaps** (none closed, reinterpreted, or hidden by this section):
+  encryption-at-rest key management is real but minimal (one local key, no rotation/KMS);
+  `secure_vault` does not use any of the five identity types itself; no login rate-limiting/lockout
+  exists anywhere in this library; the demo app's admin-registration endpoint is a demo convenience,
+  not a production pattern. Restated verbatim from `IDENTITY_AND_LOGIN_TYPES_SPEC.md`'s own "Honest
+  limitations" section — not narrowed here.
+- **Regression proof, reconfirmed live**: canonical apps 43/43 READY, composed apps 6/6, proving
+  table 29/29, functional tests 30/30, isolated stress test 184/184, full merged stress test
+  (canonical + all coverage-expansion apps) 323/323 with 0 collisions / 0 shadowed / 0 other
+  failures, and the new `security_tests.py` suite at 45/45 — all identical to the pre-existing
+  baseline on every canonical-app number, confirming this round is additive, not a rewrite.
+
+**Slots 5 (Harvest Specification) and 6 (Constitution and Governance Files) in B.1's authority-order
+table are unchanged by this round: still "no document on record."** This was searched for again,
+independently, before this section was written (not assumed from B.1's prior finding) and the
+result is the same. They remain open exactly as B.1 describes, pending Sam either supplying them or
+formally marking them N/A — this section does not decide that either way.
