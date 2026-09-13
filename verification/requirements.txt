@@ -1,0 +1,43 @@
+# Exact, pinned dependency manifest for the verification/build runtime.
+# build.py itself has NO dependencies beyond the Python standard library
+# (Python 3.9+; developed and proven against 3.11.15) -- everything below
+# is needed only to (a) run the real Flask apps the builder assembles and
+# (b) run the real Playwright browser check.
+#
+# Install offline, from the vendored wheels in this directory (no network
+# required for the Python side):
+#   python3 -m pip install --no-index --find-links=verification/vendor/wheels -r verification/requirements.txt
+#
+# Or online, from PyPI (works on any platform/Python version, not just the
+# one the vendored wheels were built for):
+#   python3 -m pip install -r verification/requirements.txt
+#
+# Either way, one further step is unavoidable and is NOT satisfied by this
+# file: Playwright's Python package (below) does not include an actual
+# browser binary. See verification/README.md for that step and for the
+# fully-offline "bring your own Chromium" alternative.
+
+flask==3.1.3
+werkzeug==3.1.8
+jinja2==3.1.6
+markupsafe==3.0.3
+itsdangerous==2.2.0
+click==8.5.0
+blinker==1.9.0
+
+playwright==1.62.0
+pyee==13.0.1
+greenlet==3.5.5
+typing_extensions==4.16.0
+
+# Real, vetted authenticated encryption for CAP-0000's encrypt_value()/
+# decrypt_value() (AES-256-GCM via cryptography.hazmat) -- added for the
+# encryption-at-rest capability. This is a real new dependency, not
+# stdlib-only like the auth work: Python's standard library has no
+# authenticated symmetric cipher, and hand-rolling one would be exactly
+# the "fake security" this project's standard forbids. Vendored the same
+# way as flask/playwright above (see verification/vendor/wheels/), with
+# the same offline-install guarantee.
+cryptography==50.0.1
+cffi==2.1.1
+pycparser==3.0

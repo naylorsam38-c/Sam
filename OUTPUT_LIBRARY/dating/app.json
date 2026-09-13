@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-3100/app.py"
+  ],
+  "port": 5031,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#profile-name",
+    "input_value": "Sam",
+    "action_selector": "#add-profile-btn",
+    "confirm_selector": "text=Sam",
+    "confirm_contains": "Sam"
+  }
+}

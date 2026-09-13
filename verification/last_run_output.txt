@@ -1,0 +1,1019 @@
+fixtures written under /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/fixtures/common
+
+==============================================================================
+Row 1: LAYER3_MODEL empty  (exit=2, 0.1s)
+==============================================================================
+BROKEN  missing setting  LAYER3_MODEL
+
+==============================================================================
+Row 1b: LAYER3_ENDPOINT empty  (exit=2, 0.1s)
+==============================================================================
+BROKEN  missing setting  LAYER3_ENDPOINT
+
+PASS  row 1  LAYER3_MODEL / LAYER3_ENDPOINT empty -> BROKEN before stage1, no side effects
+
+==============================================================================
+Row 2: LAYER3_CREDENTIAL must never leak  (exit=1, 1.0s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row02_credential_secrecy/builds/APP-001
+5  parts copied  CAP-0001, CAP-0006
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 2 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row02_credential_secrecy/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Feature Gamma responds and returns its declared output fields  Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+      gap classified  GAP-0001  CHK-106 needs behaviour the shelf does not have: Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration
+HELD  GAP-0001  CHK-106 needs behaviour the shelf does not have: Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration (3 candidates tried)  model unreachable: URLError: <urlopen error [Errno 111] Connection refused>
+readiness  RUNTIME_FAILED  --  the latest recorded run (RUN-0001, from reports/ -- no ledger outcome was ever written for it) has unresolved check failure(s) that no repair resolved: ['CHK-106']
+
+PASS  row 2  LAYER3_CREDENTIAL never appears in stdout/stderr/reports/ledger; endpoint really refused; HELD app stays candidate
+
+==============================================================================
+Row 3a: choice.json missing  (exit=2, 0.1s)
+==============================================================================
+BROKEN  choice  file
+  -> PASS
+
+==============================================================================
+Row 3b: choice.json unreadable  (exit=2, 0.1s)
+==============================================================================
+BROKEN  choice  unreadable
+  -> PASS
+
+==============================================================================
+Row 3c: choice.json branding.name missing  (exit=2, 0.1s)
+==============================================================================
+BROKEN  choice  name
+  -> PASS
+
+PASS  row 3  choice.json missing/unreadable/no-name -> BROKEN choice <field>, exit 2, no traceback
+
+==============================================================================
+Row 4: app_type not in APPS_LIST.md  (exit=2, 0.1s)
+==============================================================================
+2  choice read  app_type='Not A Real App'
+BROKEN  choice  app_type
+
+PASS  row 4  unknown app_type -> BROKEN choice app_type
+
+==============================================================================
+Row 5: template not accepted  (exit=2, 0.1s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+BROKEN  template not accepted  todo_list_app
+
+PASS  row 5  template.accepted=false -> BROKEN template not accepted
+
+==============================================================================
+Row 6: CAP-0001 missing from shelf  (exit=2, 0.1s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row06_missing_shelf_cap/builds/APP-001
+BROKEN  no approved IMPL  CAP-0001
+
+PASS  row 6  required CAP absent from shelf -> BROKEN no approved IMPL
+
+==============================================================================
+Row 7: contract mismatch -> HELD  (exit=1, 0.1s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row07_contract_mismatch/builds/APP-001
+5  parts copied  CAP-0001
+6  skin laid  skin-001@1.0.0
+HELD  CAP candidate  APP-001/SCR-001/BTN-001 -> CAP-0001: missing required input fields: {'due_date'}  awaiting approval
+
+PASS  row 7  contract mismatch -> HELD CAP candidate, exit 1, nothing patched/wrapped, APP voided
+
+==============================================================================
+Row 8/9/10 run #1  (exit=0, 1.0s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row08_09_10_run_twice/builds/APP-001
+5  parts copied  CAP-0001
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 1 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row08_09_10_run_twice/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+PASS  a person clicks add item and sees it appear in the list
+3/3 checks passed — PASS
+RUN-0001   build finished
+BUILT
+promoted  promoted APP-001 to library/APP-001 with 1 evidence run(s)
+readiness  READY  --  promoted, with registry/app/locators and at least one evidence run report present
+
+==============================================================================
+Row 8/9/10 run #2  (exit=0, 0.9s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-002  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row08_09_10_run_twice/builds/APP-002
+5  parts copied  CAP-0001
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 1 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-002  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row08_09_10_run_twice/builds/APP-002
+
+RUN-0002
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+PASS  a person clicks add item and sees it appear in the list
+3/3 checks passed — PASS
+RUN-0002   build finished
+BUILT
+promoted  promoted APP-002 to library/APP-002 with 1 evidence run(s)
+readiness  READY  --  promoted, with registry/app/locators and at least one evidence run report present
+
+PASS  row 8  run twice -> APP-002/RUN-0002, never repeat/reuse
+
+-- builds/APP-002/registry.json --
+{
+  "applications": [
+    {
+      "id": "APP-002",
+      "name": "Sam's Todo",
+      "status": "active",
+      "owner": "builder",
+      "created_at": "2026-09-12T17:45:39Z",
+      "screens": [
+        "APP-002/SCR-001"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "id": "APP-002/SCR-001",
+      "app_id": "APP-002",
+      "name": "Home",
+      "status": "active",
+      "buttons": [
+        "APP-002/SCR-001/BTN-001"
+      ]
+    }
+  ],
+  "buttons": [
+    {
+      "id": "APP-002/SCR-001/BTN-001",
+      "screen_id": "APP-002/SCR-001",
+      "name": "Main List",
+      "expected_contract": {
+        "required_input_fields": [],
+        "input_types": {},
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "dependencies": [],
+        "handled_errors": [],
+        "security_constraints": {},
+        "side_effects": [],
+        "min_version": "1.0.0"
+      },
+      "capability_id": "CAP-0001",
+      "status": "active"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "CAP-0001",
+      "name": "Todo item list",
+      "category": "ui",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {}
+      },
+      "dependencies": [],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": []
+      },
+      "implementations": [
+        "CAP-0001/IMPL-01",
+        "CAP-0001/IMPL-02",
+        "CAP-0001/IMPL-03"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP"
+      }
+    }
+  ],
+  "implementations": [
+    {
+      "id": "CAP-0001/IMPL-01",
+      "capability_id": "CAP-0001",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_fixtures.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0001/IMPL-01",
+        "entrypoint": "CAP-0001/app.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    }
+  ]
+}
+
+-- canonical registry.json --
+{
+  "applications": [
+    {
+      "id": "APP-001",
+      "name": "Sam's Todo",
+      "status": "active",
+      "owner": "builder",
+      "created_at": "2026-09-12T17:45:38Z",
+      "screens": [
+        "APP-001/SCR-001"
+      ]
+    },
+    {
+      "id": "APP-002",
+      "name": "Sam's Todo",
+      "status": "active",
+      "owner": "builder",
+      "created_at": "2026-09-12T17:45:39Z",
+      "screens": [
+        "APP-002/SCR-001"
+      ]
+    }
+  ]
+}
+  ok   §3.2 entities
+  ok   §3.3 app keys
+  ok   §3.3 app id
+  ok   §3.3 app screens
+  ok   §6.2 app status after BUILT = active
+  ok   §3.4 screen keys
+  ok   §3.4 screen ids
+  ok   §6.2 screen status
+  ok   §3.5 button keys
+  ok   §3.5 button ids
+  ok   §6.2 button status
+  ok   §3.6 capability keys
+  ok   §3.6 qualification keys
+  ok   §6.2 capability status
+  ok   §3.7 implementation keys
+  ok   §3.7 release keys
+  ok   §3.7 source keys
+  ok   §2.1 impl id scoped to its CAP
+  ok   §6.2 implementation status
+  ok   canonical: §3.2 entity name
+  ok   canonical: §3.3 keys on every record
+  ok   canonical: both BUILT apps active
+
+PASS  row 9  registry records are the standard's own §3.3-3.7 shapes, §6.2 statuses, 13/13 invariants
+
+-- builds/APP-002/app.json --
+{
+  "start": [
+    "python3",
+    "modules/CAP-0001/app.py"
+  ],
+  "port": 5000,
+  "health": "/health"
+}
+
+PASS  row 10  app.json contains exactly start/port/health
+
+==============================================================================
+Row 11: template has no tests  (exit=2, 0.1s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row11_no_tests/builds/APP-001
+5  parts copied  CAP-0001
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 1 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+BROKEN  template has no tests
+
+PASS  row 11  template with no test_command -> BROKEN template has no tests
+
+==============================================================================
+Row 12: template tests fail  (exit=2, 0.1s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row12_failing_tests/builds/APP-001
+5  parts copied  CAP-0001
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 1 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests failing on purpose
+BROKEN  template tests failed  code 1
+
+PASS  row 12  failing template tests -> BROKEN template tests failed, real output pasted
+
+==============================================================================
+Row 13: app never answers health  (exit=2, 3.1s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row13_bad_health/builds/APP-001
+5  parts copied  CAP-0001
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 1 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row13_bad_health/builds/APP-001
+
+RUN-0001
+BROKEN  app did not start
+readiness  START_FAILED  --  the app was assembled (app.json exists) but no run ever produced a checks report -- consistent with the health check never returning 200 before this script's own report-writing point
+lingering processes after exit: []
+
+PASS  row 13  app never answers health -> BROKEN app did not start, no checks claimed, process killed
+
+==============================================================================
+Row 14: no shelf part, layer three disabled -> HELD gap  (exit=1, 0.9s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row14_gap_no_repair/builds/APP-001
+5  parts copied  CAP-0001, CAP-0006
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 2 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row14_gap_no_repair/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Feature Gamma responds and returns its declared output fields  Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+      gap classified  GAP-0001  CHK-106 needs behaviour the shelf does not have: Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration
+HELD  GAP-0001  CHK-106 needs behaviour the shelf does not have: Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration  layer three disabled
+readiness  RUNTIME_FAILED  --  the latest recorded run (RUN-0001, from reports/ -- no ledger outcome was ever written for it) has unresolved check failure(s) that no repair resolved: ['CHK-106']
+
+PASS  row 14  no repair available, ALLOW_LAYER3=False -> HELD GAP-0001 ... layer three disabled; app stays candidate
+
+==============================================================================
+Row 15: pattern-mapped repair  (exit=0, 1.8s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row15_pattern_repair/builds/APP-001
+5  parts copied  CAP-0001, CAP-0002
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 2 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row15_pattern_repair/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Feature Alpha responds and returns its declared output fields  Feature Alpha (CAP-0002) returned an error: alpha stub not implemented
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+      repaired by shelf part feature_alpha_fix@1.0.0 -> CAP-0002/IMPL-02 (layer 2, pattern)
+
+RUN-0002
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+PASS  Feature Alpha responds and returns its declared output fields
+PASS  a person clicks add item and sees it appear in the list
+4/4 checks passed — PASS
+RUN-0002   build finished
+BUILT
+promoted  promoted APP-001 to library/APP-001 with 1 evidence run(s)
+readiness  READY  --  promoted, with registry/app/locators and at least one evidence run report present
+
+PASS  row 15  pattern-mapped repair -> repair, RUN-0002, then BUILT; matched_by pattern in ledger
+
+==============================================================================
+Row 16: structural-match-only repair  (exit=0, 1.9s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row16_structural_repair/builds/APP-001
+5  parts copied  CAP-0001, CAP-0003
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 2 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row16_structural_repair/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Feature Beta responds and returns its declared output fields  Feature Beta (CAP-0003) returned an error: beta broken, unmapped failure xyz123
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+      repaired by shelf part feature_beta_alt@1.0.0 -> CAP-0005/IMPL-01 (layer 2, structural)
+
+RUN-0002
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+PASS  Feature Beta responds and returns its declared output fields
+PASS  a person clicks add item and sees it appear in the list
+4/4 checks passed — PASS
+RUN-0002   build finished
+BUILT
+promoted  promoted APP-001 to library/APP-001 with 1 evidence run(s)
+readiness  READY  --  promoted, with registry/app/locators and at least one evidence run report present
+
+PASS  row 16  structural-match-only repair -> repair, restart, BUILT; matched_by structure in ledger
+
+==============================================================================
+Row 17: repair that doesn't fix its failure -> loop guard  (exit=2, 1.8s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row17_loop_guard/builds/APP-001
+5  parts copied  CAP-0001, CAP-0006
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 2 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row17_loop_guard/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Feature Gamma responds and returns its declared output fields  Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+      repaired by shelf part feature_gamma_fix@1.0.0 -> CAP-0006/IMPL-02 (layer 2, pattern)
+
+RUN-0002
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Feature Gamma responds and returns its declared output fields  Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+      repaired by shelf part feature_gamma_fix@1.0.0 -> CAP-0006/IMPL-02 (layer 2, pattern)
+BROKEN  loop guard  CHK-106 still fails after feature_gamma_fix@1.0.0 (applied RUN-0001)
+readiness  RUNTIME_FAILED  --  the latest recorded run (RUN-0002, from reports/ -- no ledger outcome was ever written for it) has unresolved check failure(s) that no repair resolved: ['CHK-106']
+lingering processes after exit: []
+
+PASS  row 17  part that doesn't fix its failure -> BROKEN loop guard, both numbers named
+
+==============================================================================
+Row 18: repair that breaks a passing check -> regression  (exit=2, 1.8s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row18_regression/builds/APP-001
+5  parts copied  CAP-0001, CAP-0004
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 2 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row18_regression/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Regression Trap responds and returns its declared output fields  Regression Trap (CAP-0004) returned an error: regression trap not wired, needs patch
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+      repaired by shelf part regression_trap_fix@1.0.0 -> CAP-0004/IMPL-02 (layer 2, pattern)
+
+RUN-0002
+PASS  a person arrives and sees the entry screen
+FAIL  adding an item through the API returns the created record  adding an item did not return the declared field 'created': {'id': 1, 'text': 'milk'}
+PASS  Regression Trap responds and returns its declared output fields
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+BROKEN  regression  CHK-002
+readiness  RUNTIME_FAILED  --  the most recent run (RUN-0002) has unresolved check failure(s) that no repair resolved: ['CHK-002']
+lingering processes after exit: []
+
+PASS  row 18  repair that breaks a passing check -> BROKEN regression, immediately
+
+==============================================================================
+Row 19: MAX_RESTARTS=2, three fixable failures -> restart ceiling  (exit=2, 2.6s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row19_restart_ceiling/builds/APP-001
+5  parts copied  CAP-0001, CAP-0002, CAP-0008, CAP-0009
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 4 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row19_restart_ceiling/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Feature Alpha responds and returns its declared output fields  Feature Alpha (CAP-0002) returned an error: alpha stub not implemented
+FAIL  Feature Delta responds and returns its declared output fields  Feature Delta (CAP-0008) returned an error: delta broken, config missing
+FAIL  Feature Epsilon responds and returns its declared output fields  Feature Epsilon (CAP-0009) returned an error: epsilon broken, timeout stub
+PASS  a person clicks add item and sees it appear in the list
+3/6 checks passed — FAIL
+      repaired by shelf part feature_alpha_fix@1.0.0 -> CAP-0002/IMPL-02 (layer 2, pattern)
+
+RUN-0002
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+PASS  Feature Alpha responds and returns its declared output fields
+FAIL  Feature Delta responds and returns its declared output fields  Feature Delta (CAP-0008) returned an error: delta broken, config missing
+FAIL  Feature Epsilon responds and returns its declared output fields  Feature Epsilon (CAP-0009) returned an error: epsilon broken, timeout stub
+PASS  a person clicks add item and sees it appear in the list
+4/6 checks passed — FAIL
+      repaired by shelf part feature_delta_fix@1.0.0 -> CAP-0008/IMPL-02 (layer 2, pattern)
+
+RUN-0003
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+PASS  Feature Alpha responds and returns its declared output fields
+PASS  Feature Delta responds and returns its declared output fields
+FAIL  Feature Epsilon responds and returns its declared output fields  Feature Epsilon (CAP-0009) returned an error: epsilon broken, timeout stub
+PASS  a person clicks add item and sees it appear in the list
+5/6 checks passed — FAIL
+BROKEN  restart ceiling  CHK-102 via feature_alpha_fix@1.0.0 (RUN-0001), CHK-108 via feature_delta_fix@1.0.0 (RUN-0002)
+readiness  RUNTIME_FAILED  --  the most recent run (RUN-0003) has unresolved check failure(s) that no repair resolved: ['CHK-109']
+
+PASS  row 19  MAX_RESTARTS=2, fails every run -> exactly two repairs in ledger, then BROKEN restart ceiling
+
+==============================================================================
+Row 20 invocation #1  (exit=1, 1.0s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row20_repeated_gap/builds/APP-001
+5  parts copied  CAP-0001, CAP-0006
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 2 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row20_repeated_gap/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Feature Gamma responds and returns its declared output fields  Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+      gap classified  GAP-0001  CHK-106 needs behaviour the shelf does not have: Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration
+HELD  GAP-0001  CHK-106 needs behaviour the shelf does not have: Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration  layer three disabled
+readiness  RUNTIME_FAILED  --  the latest recorded run (RUN-0001, from reports/ -- no ledger outcome was ever written for it) has unresolved check failure(s) that no repair resolved: ['CHK-106']
+
+==============================================================================
+Row 20 invocation #2 (same directory, same ledger)  (exit=2, 1.0s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-002  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row20_repeated_gap/builds/APP-002
+5  parts copied  CAP-0001, CAP-0006
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 2 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-002  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row20_repeated_gap/builds/APP-002
+
+RUN-0002
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Feature Gamma responds and returns its declared output fields  Feature Gamma (CAP-0006) returned an error: gamma broken, needs recalibration
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+BROKEN  repeated gap  GAP-0001 was raised twice
+readiness  RUNTIME_FAILED  --  the latest recorded run (RUN-0002, from reports/ -- no ledger outcome was ever written for it) has unresolved check failure(s) that no repair resolved: ['CHK-106']
+
+PASS  row 20  same gap across two invocations -> BROKEN repeated gap, guard read the ledger
+
+==============================================================================
+Row 21a: suite has no browser check at all -> never BUILT  (exit=2, 0.3s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row21a_no_browser_check/builds/APP-001
+5  parts copied  CAP-0001, CAP-0002
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 1 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row21a_no_browser_check/builds/APP-001
+
+RUN-0001
+PASS  Feature Alpha responds and returns its declared output fields
+1/1 checks passed — PASS
+BROKEN  no browser check present in the suite
+readiness  BROWSER_TEST_FAILED  --  the most recent run (RUN-0001) had no failing checks but the browser check was absent or unverified
+
+PASS  row 21  no browser check present, or it fails -> never BUILT (21a: absent)
+
+==============================================================================
+Row 21b: browser check present but fails -> never BUILT  (exit=1, 5.9s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row21b_browser_check_fails/builds/APP-001
+5  parts copied  CAP-0001
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 1 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row21b_browser_check_fails/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  a person clicks add item and sees it appear in the list  check raised TimeoutError: Page.wait_for_selector: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("#item-list li") to be visible
+
+2/3 checks passed — FAIL
+      gap classified  GAP-0001  CHK-020 needs behaviour the shelf does not have: check raised TimeoutError: Page.wait_for_selector: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("#item-list li") to be visible
+
+HELD  GAP-0001  CHK-020 needs behaviour the shelf does not have: check raised TimeoutError: Page.wait_for_selector: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("#item-list li") to be visible
+  layer three disabled
+readiness  BROWSER_TEST_FAILED  --  the latest recorded run (RUN-0001, from reports/ -- no ledger outcome was ever written for it) has a failing browser-driven check that no repair resolved: ['CHK-020']
+
+PASS  row 21  no browser check present, or it fails -> never BUILT (21b: fails)
+
+PASS  row 22  app process gone after every exit path (checked after BUILT + 3 BROKEN paths above)
+
+==============================================================================
+Row 23: whole thing, real shelf + real choice  (exit=0, 1.0s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row23_full_real_journey/builds/APP-001
+5  parts copied  CAP-0001
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 1 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/row23_full_real_journey/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+PASS  a person clicks add item and sees it appear in the list
+3/3 checks passed — PASS
+RUN-0001   build finished
+BUILT
+promoted  promoted APP-001 to library/APP-001 with 1 evidence run(s)
+readiness  READY  --  promoted, with registry/app/locators and at least one evidence run report present
+
+-- GET / (first 300 chars, what a person would see) --
+<!doctype html>
+<html><head><title>Todo</title></head>
+<body>
+<h1>Todo List</h1>
+<button id="add-item-btn" data-slot="main_list" onclick="addItem()">Add milk</button>
+<ul id="item-list"></ul>
+<script>
+function addItem(){
+  fetch('/api/items', {method:'POST', headers:{'Content-Type':'application/json
+
+-- POST /api/items {text: milk} (what clicking the button does) --
+{
+  "created": true,
+  "id": 1,
+  "text": "milk"
+}
+
+-- GET /api/items (what the list now shows) --
+[
+  {
+    "created": true,
+    "id": 1,
+    "text": "milk"
+  }
+]
+
+PASS  row 23  real shelf + real choice -> BUILT; real browser journey (CHK-020) plus a hand-equivalent HTTP replay both confirm a person can complete it (I drove this with curl/Playwright, not literally by hand -- honest caveat, not a claim of human testing)
+
+==============================================================================
+Row X: child ignores SIGTERM -> must still be reaped via SIGKILL  (exit=0, 6.0s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/rowX_sigterm_ignored/builds/APP-001
+5  parts copied  CAP-0001
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 1 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/rowX_sigterm_ignored/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+PASS  a person clicks add item and sees it appear in the list
+3/3 checks passed — PASS
+RUN-0001   build finished
+BUILT
+promoted  promoted APP-001 to library/APP-001 with 1 evidence run(s)
+readiness  READY  --  promoted, with registry/app/locators and at least one evidence run report present
+lingering processes after exit: []
+
+PASS  row X-sigterm  child ignores SIGTERM -> still reaped via SIGKILL, no lingering process
+
+==============================================================================
+Row X: two shelf capabilities structurally tie for the same repair  (exit=1, 1.0s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/rowX_ambiguous_structural_match/builds/APP-001
+5  parts copied  CAP-0001, CAP-0003
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 2 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/rowX_ambiguous_structural_match/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+FAIL  Feature Beta responds and returns its declared output fields  Feature Beta (CAP-0003) returned an error: beta broken, unmapped failure xyz123
+PASS  a person clicks add item and sees it appear in the list
+3/4 checks passed — FAIL
+HELD  CHK-103: ambiguous structural repair -- 2 shelf parts match equally (feature_beta_alt@1.0.0 -> CAP-0005/IMPL-01, feature_beta_second_alt@1.0.0 -> CAP-0007/IMPL-01)  awaiting approval
+readiness  RUNTIME_FAILED  --  the latest recorded run (RUN-0001, from reports/ -- no ledger outcome was ever written for it) has unresolved check failure(s) that no repair resolved: ['CHK-103']
+
+PASS  row X-ambiguous  ambiguous structural match -> HELD, names both candidates, neither silently applied
+
+==============================================================================
+Row G1: generic compute-check generation (CAP-0010/0011 unseen by any hardcoded branch; CAP-0012 undeclared route skipped)  (exit=0, 1.0s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/rowG1_generic_checks/builds/APP-001
+5  parts copied  CAP-0001, CAP-0010, CAP-0011, CAP-0012
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 4 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/rowG1_generic_checks/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+PASS  Feature Zeta responds and returns its declared output fields
+PASS  Feature Eta responds and returns its declared output fields
+PASS  a person clicks add item and sees it appear in the list
+5/5 checks passed — PASS
+RUN-0001   build finished
+BUILT
+promoted  promoted APP-001 to library/APP-001 with 1 evidence run(s)
+readiness  READY  --  promoted, with registry/app/locators and at least one evidence run report present
+
+PASS  row G1  generic compute-check generator: correct checks for two capabilities it has never seen by id, correct skip (not a guess) for one with no declared route
+
+==============================================================================
+Row G2: capability declares MORE nullable/security than the slot requires -> must still bind (H-T3 subset match)  (exit=0, 1.0s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/rowG2_subset_match_ok/builds/APP-001
+5  parts copied  CAP-0001, CAP-0013
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 2 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+template tests ok
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/rowG2_subset_match_ok/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  adding an item through the API returns the created record
+PASS  Feature Iota responds and returns its declared output fields
+PASS  a person clicks add item and sees it appear in the list
+4/4 checks passed — PASS
+RUN-0001   build finished
+BUILT
+promoted  promoted APP-001 to library/APP-001 with 1 evidence run(s)
+readiness  READY  --  promoted, with registry/app/locators and at least one evidence run report present
+
+PASS  row G2  H-T3: capability stricter/broader than required (extra nullable field, extra security constraint) binds cleanly under the directional subset match
+
+==============================================================================
+Row G3: slot requires a security constraint the capability does not declare -> must still HELD  (exit=1, 0.1s)
+==============================================================================
+2  choice read  app_type='Todo List App'
+3  template resolved  todo_list_app
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/work/rowG3_subset_match_reject/builds/APP-001
+5  parts copied  CAP-0001, CAP-0014
+6  skin laid  skin-001@1.0.0
+HELD  CAP candidate  APP-001/SCR-001/BTN-002 -> CAP-0014: security constraints not met by capability: {'encrypted_at_rest': True}  awaiting approval
+
+PASS  row G3  H-T3: a genuinely unmet security constraint still HELDs — loosening is directional, not 'anything goes'
+
+==============================================================================
+SUMMARY (partial batch)
+==============================================================================
+  PASS  row  1  LAYER3_MODEL / LAYER3_ENDPOINT empty -> BROKEN before stage1, no side effects
+  PASS  row  2  LAYER3_CREDENTIAL never appears in stdout/stderr/reports/ledger; endpoint really refused; HELD app stays candidate
+  PASS  row  3  choice.json missing/unreadable/no-name -> BROKEN choice <field>, exit 2, no traceback
+  PASS  row  4  unknown app_type -> BROKEN choice app_type
+  PASS  row  5  template.accepted=false -> BROKEN template not accepted
+  PASS  row  6  required CAP absent from shelf -> BROKEN no approved IMPL
+  PASS  row  7  contract mismatch -> HELD CAP candidate, exit 1, nothing patched/wrapped, APP voided
+  PASS  row  8  run twice -> APP-002/RUN-0002, never repeat/reuse
+  PASS  row  9  registry records are the standard's own §3.3-3.7 shapes, §6.2 statuses, 13/13 invariants
+  PASS  row 10  app.json contains exactly start/port/health
+  PASS  row 11  template with no test_command -> BROKEN template has no tests
+  PASS  row 12  failing template tests -> BROKEN template tests failed, real output pasted
+  PASS  row 13  app never answers health -> BROKEN app did not start, no checks claimed, process killed
+  PASS  row 14  no repair available, ALLOW_LAYER3=False -> HELD GAP-0001 ... layer three disabled; app stays candidate
+  PASS  row 15  pattern-mapped repair -> repair, RUN-0002, then BUILT; matched_by pattern in ledger
+  PASS  row 16  structural-match-only repair -> repair, restart, BUILT; matched_by structure in ledger
+  PASS  row 17  part that doesn't fix its failure -> BROKEN loop guard, both numbers named
+  PASS  row 18  repair that breaks a passing check -> BROKEN regression, immediately
+  PASS  row 19  MAX_RESTARTS=2, fails every run -> exactly two repairs in ledger, then BROKEN restart ceiling
+  PASS  row 20  same gap across two invocations -> BROKEN repeated gap, guard read the ledger
+  PASS  row 21  no browser check present, or it fails -> never BUILT (21a: absent)
+  PASS  row 21  no browser check present, or it fails -> never BUILT (21b: fails)
+  PASS  row 22  app process gone after every exit path (checked after BUILT + 3 BROKEN paths above)
+  PASS  row 23  real shelf + real choice -> BUILT; real browser journey (CHK-020) plus a hand-equivalent HTTP replay both confirm a person can complete it (I drove this with curl/Playwright, not literally by hand -- honest caveat, not a claim of human testing)
+  PASS  row X-sigterm  child ignores SIGTERM -> still reaped via SIGKILL, no lingering process
+  PASS  row X-ambiguous  ambiguous structural match -> HELD, names both candidates, neither silently applied
+  PASS  row G1  generic compute-check generator: correct checks for two capabilities it has never seen by id, correct skip (not a guess) for one with no declared route
+  PASS  row G2  H-T3: capability stricter/broader than required (extra nullable field, extra security constraint) binds cleanly under the directional subset match
+  PASS  row G3  H-T3: a genuinely unmet security constraint still HELDs — loosening is directional, not 'anything goes'
+
+29/29 pass
+== `build.py --readiness` (real subprocess, real cwd) against real build.py output ==
+
+PASS  row06_missing_shelf_cap          expected CAPABILITIES_UNBOUND got CAPABILITIES_UNBOUND  required capabilities not bound to an approved active implementation: ['CAP-0001']
+PASS  row07_contract_mismatch          expected BUILD_FAILED         got BUILD_FAILED          canonical registry marks this allocation void -- assembly failed or its contract match was rejected before an app ever started
+PASS  row08_09_10_run_twice            expected READY                got READY                 promoted, with registry/app/locators and at least one evidence run report present
+PASS  row13_bad_health                 expected START_FAILED         got START_FAILED          the app was assembled (app.json exists) but no run ever produced a checks report -- consistent with the health check never returning 200 before this script's own report-writing point
+PASS  row14_gap_no_repair              expected RUNTIME_FAILED       got RUNTIME_FAILED        the latest recorded run (RUN-0001, from reports/ -- no ledger outcome was ever written for it) has unresolved check failure(s) that no repair resolved: ['CHK-106']
+PASS  row17_loop_guard                 expected RUNTIME_FAILED       got RUNTIME_FAILED        the latest recorded run (RUN-0002, from reports/ -- no ledger outcome was ever written for it) has unresolved check failure(s) that no repair resolved: ['CHK-106']
+PASS  row18_regression                 expected RUNTIME_FAILED       got RUNTIME_FAILED        the most recent run (RUN-0002) has unresolved check failure(s) that no repair resolved: ['CHK-002']
+PASS  row19_restart_ceiling            expected RUNTIME_FAILED       got RUNTIME_FAILED        the most recent run (RUN-0003) has unresolved check failure(s) that no repair resolved: ['CHK-109']
+PASS  row20_repeated_gap               expected RUNTIME_FAILED       got RUNTIME_FAILED        the latest recorded run (RUN-0002, from reports/ -- no ledger outcome was ever written for it) has unresolved check failure(s) that no repair resolved: ['CHK-106']
+PASS  row21a_no_browser_check          expected BROWSER_TEST_FAILED  got BROWSER_TEST_FAILED   the most recent run (RUN-0001) had no failing checks but the browser check was absent or unverified
+PASS  row21b_browser_check_fails       expected BROWSER_TEST_FAILED  got BROWSER_TEST_FAILED   the latest recorded run (RUN-0001, from reports/ -- no ledger outcome was ever written for it) has a failing browser-driven check that no repair resolved: ['CHK-020']
+PASS  row23_full_real_journey          expected READY                got READY                 promoted, with registry/app/locators and at least one evidence run report present
+PASS  rowG1_generic_checks             expected READY                got READY                 promoted, with registry/app/locators and at least one evidence run report present
+
+== `build.py --promote` (real subprocess, real cwd) ==
+
+PASS  refuses to promote a candidate app (exit=1)            REFUSED  APP-001 is 'candidate', not active -- only a proven (BUILT) app may be promoted
+PASS  refuses to promote an app_id not in the registry (exit=1)  REFUSED  APP-999 is not in the canonical registry
+PASS  proven-but-unpromoted reports PROVEN                       proven but not yet promoted to the library
+PASS  promotes a real BUILT (active) app (exit=0)             PROMOTED  promoted APP-001 to library/APP-001 with 1 evidence run(s)
+PASS  library copy contains registry/app/locators + marker       missing=[]
+PASS  at least one real evidence run report copied                ['RUN-0001.json']
+PASS  promoted app now reports READY                             promoted, with registry/app/locators and at least one evidence run report present
+
+all readiness/library checks passed
+=== REAL TODO LIST APP (round 7) ===
+real todo list app fixtures written under /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/real_todo_proof
+2  choice read  app_type='todo list'
+3  template resolved  todo_list
+4  APP-001  allocated
+1  fresh directory  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/real_todo_proof/builds/APP-001
+5  parts copied  CAP-0100, CAP-0101, CAP-0102, CAP-0103, CAP-0104, CAP-0105, CAP-0106, CAP-0107
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 7 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+real todo list app -- no template-level tests declared beyond build.py's own proving run
+11  template tests passed
+12  APP-001  assembled  /tmp/claude-0/-home-claude/8237fbae-4351-54d6-a2e0-cc12b5faa081/scratchpad/audit/round4/verification/real_todo_proof/builds/APP-001
+
+RUN-0001
+PASS  a person arrives and sees the entry screen
+PASS  List Todos responds and returns its declared output fields
+PASS  Create Todo responds and returns its declared output fields
+PASS  Toggle Todo responds and returns its declared output fields
+PASS  Edit Todo responds and returns its declared output fields
+PASS  Delete Todo responds and returns its declared output fields
+PASS  Toggle All Todos responds and returns its declared output fields
+PASS  Clear Completed Todos responds and returns its declared output fields
+PASS  a person completes the declared primary journey and sees the result
+9/9 checks passed — PASS
+RUN-0001   build finished
+BUILT
+promoted  promoted APP-001 to library/APP-001 with 1 evidence run(s)
+readiness  READY  --  promoted, with registry/app/locators and at least one evidence run report present
+=== MISSING-DEPENDENCY DIAGNOSTIC PROOF (round 7 follow-up) ===
+2  choice read  app_type='todo list'
+3  template resolved  todo_list
+4  APP-001  allocated
+1  fresh directory  /tmp/dep_test/builds/APP-001
+5  parts copied  CAP-0100, CAP-0101, CAP-0102, CAP-0103, CAP-0104, CAP-0105, CAP-0106, CAP-0107
+6  skin laid  skin-001@1.0.0
+7  wired  1 screen, 7 button(s)
+9  registry written  13/13 invariants passed
+10  app.json + locators.json written
+real todo list app -- no template-level tests declared beyond build.py's own proving run
+11  template tests passed
+12  APP-001  assembled  /tmp/dep_test/builds/APP-001
+
+RUN-0001
+BROKEN  app did not start
+real process output:
+Traceback (most recent call last):
+  File "/tmp/dep_test/builds/APP-001/modules/CAP-0100/app.py", line 11, in <module>
+    from flask_totally_not_installed import Flask, jsonify, request, Response
+ModuleNotFoundError: No module named 'flask_totally_not_installed'
+readiness  START_FAILED  --  the app was assembled (app.json exists) but no run ever produced a checks report -- consistent with the health check never returning 200 before this script's own report-writing point

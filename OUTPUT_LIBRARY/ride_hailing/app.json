@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-2300/app.py"
+  ],
+  "port": 5023,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#ride-pickup",
+    "input_value": "Main St",
+    "action_selector": "#request-ride-btn",
+    "confirm_selector": "text=Main St",
+    "confirm_contains": "Main St"
+  }
+}

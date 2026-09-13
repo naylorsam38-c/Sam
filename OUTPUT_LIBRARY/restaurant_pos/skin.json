@@ -1,0 +1,14 @@
+{
+  "skin_id": "skin-001",
+  "skin_version": "1.0.0",
+  "branding": {
+    "name": "Real Restaurant POS",
+    "color": "#2f6f9f"
+  },
+  "arrangement": [
+    {
+      "slot": "order_list",
+      "position": "center"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "skin_id": "skin-001",
+  "skin_version": "1.0.0",
+  "branding": {
+    "name": "Fitness Challenge Board",
+    "color": "#2f6f9f"
+  },
+  "arrangement": [
+    {
+      "slot": "workout_list",
+      "position": "center"
+    },
+    {
+      "slot": "challenge_list",
+      "position": "center"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-2800/app.py"
+  ],
+  "port": 5028,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#order-item",
+    "input_value": "Table 5 - Burger",
+    "action_selector": "#add-order-btn",
+    "confirm_selector": "text=Table 5 - Burger",
+    "confirm_contains": "Table 5 - Burger"
+  }
+}

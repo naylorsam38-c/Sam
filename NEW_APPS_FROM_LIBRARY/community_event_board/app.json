@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-9900/app.py"
+  ],
+  "port": 5999,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#ev-title",
+    "input_value": "Neighborhood Picnic",
+    "action_selector": "#add-event-btn",
+    "confirm_selector": "text=Neighborhood Picnic",
+    "confirm_contains": "Neighborhood Picnic"
+  }
+}

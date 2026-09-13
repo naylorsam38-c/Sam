@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-0600/app.py"
+  ],
+  "port": 5005,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#inv-client",
+    "input_value": "Acme Corp",
+    "action_selector": "#add-invoice-btn",
+    "confirm_selector": "text=Acme Corp",
+    "confirm_contains": "Acme Corp"
+  }
+}

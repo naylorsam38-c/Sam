@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-1300/app.py"
+  ],
+  "port": 5013,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#room-name",
+    "input_value": "Standup",
+    "action_selector": "#create-room-btn",
+    "confirm_selector": "text=Standup",
+    "confirm_contains": "Standup"
+  }
+}

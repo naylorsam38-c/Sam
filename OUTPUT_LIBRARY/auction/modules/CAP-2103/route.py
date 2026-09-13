@@ -1,0 +1,41 @@
+
+import importlib.util as _importlib_util
+from pathlib import Path as _Path
+
+_shared_lib_path = _Path(__file__).resolve().parents[1] / "CAP-0000" / "shared_lib.py"
+_spec = _importlib_util.spec_from_file_location("cap0000_shared_lib", _shared_lib_path)
+_shared = _importlib_util.module_from_spec(_spec)
+_spec.loader.exec_module(_shared)
+
+DATA_FILE_NAME = "auction.json"
+
+
+def _load():
+    return _shared.load(DATA_FILE_NAME)
+
+
+def _save(rows):
+    _shared.save(DATA_FILE_NAME, rows)
+
+ROUTE = '/api/auction/items/bid'
+METHOD = 'POST'
+
+
+def handle(request):
+    body = request.get_json(force=True, silent=True) or {}
+    iid = body.get('id')
+    bidder = body.get('bidder') or 'anonymous'
+    try:
+        amount = float(body.get('amount', 0) or 0)
+    except (TypeError, ValueError):
+        amount = 0.0
+    items = _load()
+    for i in items:
+        if i['id'] == iid:
+            if amount <= i.get('current_bid', 0):
+                return 400, {'error': 'bid too low'}
+            i['current_bid'] = amount
+            i['highest_bidder'] = bidder
+            _save(items)
+            return 200, i
+    return 404, {'error': f'no item with id {iid!r}'}

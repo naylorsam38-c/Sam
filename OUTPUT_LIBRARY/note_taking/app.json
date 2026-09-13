@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-0200/app.py"
+  ],
+  "port": 5001,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#bootstrap-email",
+    "input_value": "sam@example.com",
+    "action_selector": "#bootstrap-btn",
+    "confirm_selector": "text=Admin created: sam@example.com",
+    "confirm_contains": "sam@example.com"
+  }
+}

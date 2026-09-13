@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-0400/app.py"
+  ],
+  "port": 5003,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#ev-title",
+    "input_value": "Team Standup",
+    "action_selector": "#add-event-btn",
+    "confirm_selector": "text=Team Standup",
+    "confirm_contains": "Team Standup"
+  }
+}

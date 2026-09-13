@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-0900/app.py"
+  ],
+  "port": 5008,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#t-subject",
+    "input_value": "Login broken",
+    "action_selector": "#add-ticket-btn",
+    "confirm_selector": "text=Login broken",
+    "confirm_contains": "Login broken"
+  }
+}

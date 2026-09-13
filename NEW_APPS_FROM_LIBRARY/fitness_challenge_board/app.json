@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-9800/app.py"
+  ],
+  "port": 5998,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#ch-title",
+    "input_value": "5K Steps Challenge",
+    "action_selector": "#add-challenge-btn",
+    "confirm_selector": "text=5K Steps Challenge",
+    "confirm_contains": "5K Steps Challenge"
+  }
+}

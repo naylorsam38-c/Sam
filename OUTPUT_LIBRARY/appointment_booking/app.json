@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-2500/app.py"
+  ],
+  "port": 5025,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#appt-name",
+    "input_value": "Alex Kim",
+    "action_selector": "#book-appt-btn",
+    "confirm_selector": "text=Alex Kim",
+    "confirm_contains": "Alex Kim"
+  }
+}

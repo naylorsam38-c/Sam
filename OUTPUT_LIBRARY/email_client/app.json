@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-1400/app.py"
+  ],
+  "port": 5014,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#mail-subject",
+    "input_value": "Meeting notes",
+    "action_selector": "#send-email-btn",
+    "confirm_selector": "text=Meeting notes",
+    "confirm_contains": "Meeting notes"
+  }
+}

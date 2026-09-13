@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-1900/app.py"
+  ],
+  "port": 5019,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#prod-name",
+    "input_value": "Blue Mug",
+    "action_selector": "#add-product-btn",
+    "confirm_selector": "text=Blue Mug",
+    "confirm_contains": "Blue Mug"
+  }
+}

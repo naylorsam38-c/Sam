@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-2900/app.py"
+  ],
+  "port": 5029,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#inv-name",
+    "input_value": "Widget",
+    "action_selector": "#add-item-btn",
+    "confirm_selector": "text=Widget",
+    "confirm_contains": "Widget"
+  }
+}

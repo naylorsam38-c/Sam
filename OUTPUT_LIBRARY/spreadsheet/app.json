@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-1700/app.py"
+  ],
+  "port": 5017,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#cell-value",
+    "input_value": "42",
+    "action_selector": "#set-cell-btn",
+    "confirm_selector": "text=42",
+    "confirm_contains": "42"
+  }
+}

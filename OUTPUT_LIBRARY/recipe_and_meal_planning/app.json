@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-4300/app.py"
+  ],
+  "port": 5043,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#recipe-title",
+    "input_value": "Pasta Bake",
+    "action_selector": "#add-recipe-btn",
+    "confirm_selector": "text=Pasta Bake",
+    "confirm_contains": "Pasta Bake"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-3900/app.py"
+  ],
+  "port": 5039,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#session-type",
+    "input_value": "Breathing",
+    "action_selector": "#log-session-btn",
+    "confirm_selector": "text=Breathing",
+    "confirm_contains": "Breathing"
+  }
+}

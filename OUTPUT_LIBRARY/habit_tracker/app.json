@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-0300/app.py"
+  ],
+  "port": 5002,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#habit-name",
+    "input_value": "Drink water",
+    "action_selector": "#add-habit-btn",
+    "confirm_selector": "text=Drink water",
+    "confirm_contains": "Drink water"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-9600/app.py"
+  ],
+  "port": 5996,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#recipe-title",
+    "input_value": "Grandma's Chili",
+    "action_selector": "#add-recipe-btn",
+    "confirm_selector": "text=Grandma's Chili",
+    "confirm_contains": "Grandma's Chili"
+  }
+}

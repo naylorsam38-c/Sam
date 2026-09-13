@@ -1,0 +1,3460 @@
+[
+  {
+    "app_slug": "accounting_ledger",
+    "app_type": "accounting ledger",
+    "cap_id": "CAP-0700",
+    "name": "Accounting Ledger Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "accounting_ledger",
+    "app_type": "accounting ledger",
+    "cap_id": "CAP-0701",
+    "name": "List Entries",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "entries"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/entries"
+  },
+  {
+    "app_slug": "accounting_ledger",
+    "app_type": "accounting ledger",
+    "cap_id": "CAP-0702",
+    "name": "Create Entry",
+    "category": "compute",
+    "required_input": [
+      "description"
+    ],
+    "output_fields": [
+      "id",
+      "description",
+      "amount",
+      "type"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/entries"
+  },
+  {
+    "app_slug": "accounting_ledger",
+    "app_type": "accounting ledger",
+    "cap_id": "CAP-0703",
+    "name": "Delete Entry",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/entries/delete"
+  },
+  {
+    "app_slug": "accounting_ledger",
+    "app_type": "accounting ledger",
+    "cap_id": "CAP-0704",
+    "name": "Ledger Balance",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "balance"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/entries/balance"
+  },
+  {
+    "app_slug": "appointment_booking",
+    "app_type": "appointment booking",
+    "cap_id": "CAP-2500",
+    "name": "Appointment Booking Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "appointment_booking",
+    "app_type": "appointment booking",
+    "cap_id": "CAP-2501",
+    "name": "List Appointments",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "appointments"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/appointments"
+  },
+  {
+    "app_slug": "appointment_booking",
+    "app_type": "appointment booking",
+    "cap_id": "CAP-2502",
+    "name": "Book Appointment",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "start",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/appointments"
+  },
+  {
+    "app_slug": "appointment_booking",
+    "app_type": "appointment booking",
+    "cap_id": "CAP-2503",
+    "name": "Cancel Appointment",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/appointments/cancel"
+  },
+  {
+    "app_slug": "auction",
+    "app_type": "auction",
+    "cap_id": "CAP-2100",
+    "name": "Auction Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "auction",
+    "app_type": "auction",
+    "cap_id": "CAP-2101",
+    "name": "List Items",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "items"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/items"
+  },
+  {
+    "app_slug": "auction",
+    "app_type": "auction",
+    "cap_id": "CAP-2102",
+    "name": "Create Item",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "current_bid",
+      "highest_bidder"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/items"
+  },
+  {
+    "app_slug": "auction",
+    "app_type": "auction",
+    "cap_id": "CAP-2103",
+    "name": "Place Bid",
+    "category": "compute",
+    "required_input": [
+      "id",
+      "amount"
+    ],
+    "output_fields": [
+      "id",
+      "current_bid",
+      "highest_bidder"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/items/bid"
+  },
+  {
+    "app_slug": "calendar_and_scheduling",
+    "app_type": "calendar and scheduling",
+    "cap_id": "CAP-0400",
+    "name": "Calendar And Scheduling Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "calendar_and_scheduling",
+    "app_type": "calendar and scheduling",
+    "cap_id": "CAP-0401",
+    "name": "List Events",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "events"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/events"
+  },
+  {
+    "app_slug": "calendar_and_scheduling",
+    "app_type": "calendar and scheduling",
+    "cap_id": "CAP-0402",
+    "name": "Create Event",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "start",
+      "end"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/events"
+  },
+  {
+    "app_slug": "calendar_and_scheduling",
+    "app_type": "calendar and scheduling",
+    "cap_id": "CAP-0403",
+    "name": "Delete Event",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/events/delete"
+  },
+  {
+    "app_slug": "collaborative_document_editor",
+    "app_type": "collaborative document editor",
+    "cap_id": "CAP-1600",
+    "name": "Collaborative Document Editor Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "collaborative_document_editor",
+    "app_type": "collaborative document editor",
+    "cap_id": "CAP-1601",
+    "name": "List Docs",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "docs"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/docs"
+  },
+  {
+    "app_slug": "collaborative_document_editor",
+    "app_type": "collaborative document editor",
+    "cap_id": "CAP-1602",
+    "name": "Create Doc",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "content"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/docs"
+  },
+  {
+    "app_slug": "collaborative_document_editor",
+    "app_type": "collaborative document editor",
+    "cap_id": "CAP-1603",
+    "name": "Update Doc Content",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "content"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/docs/update"
+  },
+  {
+    "app_slug": "crm",
+    "app_type": "CRM",
+    "cap_id": "CAP-0800",
+    "name": "Crm Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "crm",
+    "app_type": "CRM",
+    "cap_id": "CAP-0801",
+    "name": "List Contacts",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "contacts"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/contacts"
+  },
+  {
+    "app_slug": "crm",
+    "app_type": "CRM",
+    "cap_id": "CAP-0802",
+    "name": "Create Contact",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "email",
+      "stage"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/contacts"
+  },
+  {
+    "app_slug": "crm",
+    "app_type": "CRM",
+    "cap_id": "CAP-0803",
+    "name": "Update Contact Stage",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "email",
+      "stage"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/contacts/stage"
+  },
+  {
+    "app_slug": "crm",
+    "app_type": "CRM",
+    "cap_id": "CAP-0804",
+    "name": "Delete Contact",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/contacts/delete"
+  },
+  {
+    "app_slug": "dating",
+    "app_type": "dating",
+    "cap_id": "CAP-3100",
+    "name": "Dating Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "dating",
+    "app_type": "dating",
+    "cap_id": "CAP-3101",
+    "name": "List Profiles",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "profiles"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/profiles"
+  },
+  {
+    "app_slug": "dating",
+    "app_type": "dating",
+    "cap_id": "CAP-3102",
+    "name": "Create Profile",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "bio"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/profiles"
+  },
+  {
+    "app_slug": "dating",
+    "app_type": "dating",
+    "cap_id": "CAP-3103",
+    "name": "Swipe",
+    "category": "compute",
+    "required_input": [
+      "profile_id",
+      "target_id"
+    ],
+    "output_fields": [
+      "profile_id",
+      "target_id",
+      "liked",
+      "match"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/swipes"
+  },
+  {
+    "app_slug": "e_commerce_storefront",
+    "app_type": "e-commerce storefront",
+    "cap_id": "CAP-1900",
+    "name": "E-Commerce Storefront Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "e_commerce_storefront",
+    "app_type": "e-commerce storefront",
+    "cap_id": "CAP-1901",
+    "name": "List Products",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "products"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/products"
+  },
+  {
+    "app_slug": "e_commerce_storefront",
+    "app_type": "e-commerce storefront",
+    "cap_id": "CAP-1902",
+    "name": "Add Product",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "price"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/products"
+  },
+  {
+    "app_slug": "e_commerce_storefront",
+    "app_type": "e-commerce storefront",
+    "cap_id": "CAP-1903",
+    "name": "List Orders",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "orders"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/orders"
+  },
+  {
+    "app_slug": "e_commerce_storefront",
+    "app_type": "e-commerce storefront",
+    "cap_id": "CAP-1904",
+    "name": "Checkout",
+    "category": "compute",
+    "required_input": [
+      "product_id"
+    ],
+    "output_fields": [
+      "id",
+      "product_id",
+      "status",
+      "payment"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/checkout"
+  },
+  {
+    "app_slug": "email_client",
+    "app_type": "email client",
+    "cap_id": "CAP-1400",
+    "name": "Email Client Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "email_client",
+    "app_type": "email client",
+    "cap_id": "CAP-1401",
+    "name": "List Inbox",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "inbox"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/inbox"
+  },
+  {
+    "app_slug": "email_client",
+    "app_type": "email client",
+    "cap_id": "CAP-1402",
+    "name": "Send Email",
+    "category": "compute",
+    "required_input": [
+      "to",
+      "subject"
+    ],
+    "output_fields": [
+      "id",
+      "to",
+      "subject",
+      "body",
+      "folder"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/emails/send"
+  },
+  {
+    "app_slug": "event_ticketing",
+    "app_type": "event ticketing",
+    "cap_id": "CAP-2700",
+    "name": "Event Ticketing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "event_ticketing",
+    "app_type": "event ticketing",
+    "cap_id": "CAP-2701",
+    "name": "List Events",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "events"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/events"
+  },
+  {
+    "app_slug": "event_ticketing",
+    "app_type": "event ticketing",
+    "cap_id": "CAP-2702",
+    "name": "Create Event",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "capacity",
+      "sold"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/events"
+  },
+  {
+    "app_slug": "event_ticketing",
+    "app_type": "event ticketing",
+    "cap_id": "CAP-2703",
+    "name": "Buy Ticket",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "sold"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/events/buy"
+  },
+  {
+    "app_slug": "expense_tracker",
+    "app_type": "expense tracker",
+    "cap_id": "CAP-0500",
+    "name": "Expense Tracker Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "expense_tracker",
+    "app_type": "expense tracker",
+    "cap_id": "CAP-0501",
+    "name": "List Expenses",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "expenses"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/expenses"
+  },
+  {
+    "app_slug": "expense_tracker",
+    "app_type": "expense tracker",
+    "cap_id": "CAP-0502",
+    "name": "Create Expense",
+    "category": "compute",
+    "required_input": [
+      "description"
+    ],
+    "output_fields": [
+      "id",
+      "description",
+      "amount",
+      "category"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/expenses"
+  },
+  {
+    "app_slug": "expense_tracker",
+    "app_type": "expense tracker",
+    "cap_id": "CAP-0503",
+    "name": "Delete Expense",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/expenses/delete"
+  },
+  {
+    "app_slug": "expense_tracker",
+    "app_type": "expense tracker",
+    "cap_id": "CAP-0504",
+    "name": "Total Expenses",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "total"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/expenses/total"
+  },
+  {
+    "app_slug": "file_storage_and_sync",
+    "app_type": "file storage and sync",
+    "cap_id": "CAP-1500",
+    "name": "File Storage And Sync Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "file_storage_and_sync",
+    "app_type": "file storage and sync",
+    "cap_id": "CAP-1501",
+    "name": "List Files",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "files"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/files"
+  },
+  {
+    "app_slug": "file_storage_and_sync",
+    "app_type": "file storage and sync",
+    "cap_id": "CAP-1502",
+    "name": "Upload File",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "content"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/files"
+  },
+  {
+    "app_slug": "file_storage_and_sync",
+    "app_type": "file storage and sync",
+    "cap_id": "CAP-1503",
+    "name": "Delete File",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/files/delete"
+  },
+  {
+    "app_slug": "fitness_tracking",
+    "app_type": "fitness tracking",
+    "cap_id": "CAP-3800",
+    "name": "Fitness Tracking Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "fitness_tracking",
+    "app_type": "fitness tracking",
+    "cap_id": "CAP-3801",
+    "name": "List Workouts",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "workouts"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/workouts"
+  },
+  {
+    "app_slug": "fitness_tracking",
+    "app_type": "fitness tracking",
+    "cap_id": "CAP-3802",
+    "name": "Log Workout",
+    "category": "compute",
+    "required_input": [
+      "type"
+    ],
+    "output_fields": [
+      "id",
+      "type",
+      "duration"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/workouts"
+  },
+  {
+    "app_slug": "fleet_tracking",
+    "app_type": "fleet tracking",
+    "cap_id": "CAP-3000",
+    "name": "Fleet Tracking Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "fleet_tracking",
+    "app_type": "fleet tracking",
+    "cap_id": "CAP-3001",
+    "name": "List Vehicles",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "vehicles"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/vehicles"
+  },
+  {
+    "app_slug": "fleet_tracking",
+    "app_type": "fleet tracking",
+    "cap_id": "CAP-3002",
+    "name": "Add Vehicle",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "status",
+      "location"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/vehicles"
+  },
+  {
+    "app_slug": "fleet_tracking",
+    "app_type": "fleet tracking",
+    "cap_id": "CAP-3003",
+    "name": "Update Vehicle Location",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "location",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/vehicles/location"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2200",
+    "name": "Food Delivery Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2201",
+    "name": "List Restaurants",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "restaurants"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/restaurants"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2202",
+    "name": "Add Restaurant",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/restaurants"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2203",
+    "name": "List Menu",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "menu"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/menu"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2204",
+    "name": "Add Menu Item",
+    "category": "compute",
+    "required_input": [
+      "restaurant_id",
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "restaurant_id",
+      "name"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/menu"
+  },
+  {
+    "app_slug": "food_delivery",
+    "app_type": "food delivery",
+    "cap_id": "CAP-2205",
+    "name": "Place Order",
+    "category": "compute",
+    "required_input": [
+      "item_id"
+    ],
+    "output_fields": [
+      "id",
+      "item_id",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/orders"
+  },
+  {
+    "app_slug": "form_builder_and_survey",
+    "app_type": "form builder and survey",
+    "cap_id": "CAP-1800",
+    "name": "Form Builder And Survey Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "form_builder_and_survey",
+    "app_type": "form builder and survey",
+    "cap_id": "CAP-1801",
+    "name": "List Responses",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "responses"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/responses"
+  },
+  {
+    "app_slug": "form_builder_and_survey",
+    "app_type": "form builder and survey",
+    "cap_id": "CAP-1802",
+    "name": "Submit Response",
+    "category": "compute",
+    "required_input": [
+      "answer"
+    ],
+    "output_fields": [
+      "id",
+      "answer"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/responses"
+  },
+  {
+    "app_slug": "habit_tracker",
+    "app_type": "habit tracker",
+    "cap_id": "CAP-0300",
+    "name": "Habit Tracker Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "habit_tracker",
+    "app_type": "habit tracker",
+    "cap_id": "CAP-0301",
+    "name": "List Habits",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "habits"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/habits"
+  },
+  {
+    "app_slug": "habit_tracker",
+    "app_type": "habit tracker",
+    "cap_id": "CAP-0302",
+    "name": "Create Habit",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "streak"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/habits"
+  },
+  {
+    "app_slug": "habit_tracker",
+    "app_type": "habit tracker",
+    "cap_id": "CAP-0303",
+    "name": "Check In Habit",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "streak"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/habits/checkin"
+  },
+  {
+    "app_slug": "habit_tracker",
+    "app_type": "habit tracker",
+    "cap_id": "CAP-0304",
+    "name": "Delete Habit",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/habits/delete"
+  },
+  {
+    "app_slug": "helpdesk_ticketing",
+    "app_type": "helpdesk ticketing",
+    "cap_id": "CAP-0900",
+    "name": "Helpdesk Ticketing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "helpdesk_ticketing",
+    "app_type": "helpdesk ticketing",
+    "cap_id": "CAP-0901",
+    "name": "List Tickets",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "tickets"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/tickets"
+  },
+  {
+    "app_slug": "helpdesk_ticketing",
+    "app_type": "helpdesk ticketing",
+    "cap_id": "CAP-0902",
+    "name": "Create Ticket",
+    "category": "compute",
+    "required_input": [
+      "subject"
+    ],
+    "output_fields": [
+      "id",
+      "subject",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/tickets"
+  },
+  {
+    "app_slug": "helpdesk_ticketing",
+    "app_type": "helpdesk ticketing",
+    "cap_id": "CAP-0903",
+    "name": "Close Ticket",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "subject",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/tickets/close"
+  },
+  {
+    "app_slug": "helpdesk_ticketing",
+    "app_type": "helpdesk ticketing",
+    "cap_id": "CAP-0904",
+    "name": "Delete Ticket",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/tickets/delete"
+  },
+  {
+    "app_slug": "inventory_and_warehouse",
+    "app_type": "inventory and warehouse",
+    "cap_id": "CAP-2900",
+    "name": "Inventory And Warehouse Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "inventory_and_warehouse",
+    "app_type": "inventory and warehouse",
+    "cap_id": "CAP-2901",
+    "name": "List Items",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "items"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/items"
+  },
+  {
+    "app_slug": "inventory_and_warehouse",
+    "app_type": "inventory and warehouse",
+    "cap_id": "CAP-2902",
+    "name": "Add Item",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "sku",
+      "qty"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/items"
+  },
+  {
+    "app_slug": "inventory_and_warehouse",
+    "app_type": "inventory and warehouse",
+    "cap_id": "CAP-2903",
+    "name": "Adjust Quantity",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "qty"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/items/adjust"
+  },
+  {
+    "app_slug": "invoicing",
+    "app_type": "invoicing",
+    "cap_id": "CAP-0600",
+    "name": "Invoicing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "invoicing",
+    "app_type": "invoicing",
+    "cap_id": "CAP-0601",
+    "name": "List Invoices",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "invoices"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/invoices"
+  },
+  {
+    "app_slug": "invoicing",
+    "app_type": "invoicing",
+    "cap_id": "CAP-0602",
+    "name": "Create Invoice",
+    "category": "compute",
+    "required_input": [
+      "client"
+    ],
+    "output_fields": [
+      "id",
+      "client",
+      "amount",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/invoices"
+  },
+  {
+    "app_slug": "invoicing",
+    "app_type": "invoicing",
+    "cap_id": "CAP-0603",
+    "name": "Mark Invoice Paid",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "client",
+      "amount",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/invoices/pay"
+  },
+  {
+    "app_slug": "invoicing",
+    "app_type": "invoicing",
+    "cap_id": "CAP-0604",
+    "name": "Delete Invoice",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/invoices/delete"
+  },
+  {
+    "app_slug": "language_learning",
+    "app_type": "language learning",
+    "cap_id": "CAP-4000",
+    "name": "Language Learning Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "language_learning",
+    "app_type": "language learning",
+    "cap_id": "CAP-4001",
+    "name": "List Cards",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "cards"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/cards"
+  },
+  {
+    "app_slug": "language_learning",
+    "app_type": "language learning",
+    "cap_id": "CAP-4002",
+    "name": "Add Card",
+    "category": "compute",
+    "required_input": [
+      "front"
+    ],
+    "output_fields": [
+      "id",
+      "front",
+      "back",
+      "correct",
+      "incorrect"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/cards"
+  },
+  {
+    "app_slug": "language_learning",
+    "app_type": "language learning",
+    "cap_id": "CAP-4003",
+    "name": "Review Card",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "correct",
+      "incorrect"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/cards/review"
+  },
+  {
+    "app_slug": "meditation_and_wellbeing",
+    "app_type": "meditation and wellbeing",
+    "cap_id": "CAP-3900",
+    "name": "Meditation And Wellbeing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "meditation_and_wellbeing",
+    "app_type": "meditation and wellbeing",
+    "cap_id": "CAP-3901",
+    "name": "List Sessions",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "sessions"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/sessions"
+  },
+  {
+    "app_slug": "meditation_and_wellbeing",
+    "app_type": "meditation and wellbeing",
+    "cap_id": "CAP-3902",
+    "name": "Log Session",
+    "category": "compute",
+    "required_input": [
+      "type"
+    ],
+    "output_fields": [
+      "id",
+      "type",
+      "duration"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/sessions"
+  },
+  {
+    "app_slug": "multi_vendor_marketplace",
+    "app_type": "multi-vendor marketplace",
+    "cap_id": "CAP-2000",
+    "name": "Multi-Vendor Marketplace Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "multi_vendor_marketplace",
+    "app_type": "multi-vendor marketplace",
+    "cap_id": "CAP-2001",
+    "name": "List Vendors",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "vendors"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/vendors"
+  },
+  {
+    "app_slug": "multi_vendor_marketplace",
+    "app_type": "multi-vendor marketplace",
+    "cap_id": "CAP-2002",
+    "name": "Add Vendor",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/vendors"
+  },
+  {
+    "app_slug": "multi_vendor_marketplace",
+    "app_type": "multi-vendor marketplace",
+    "cap_id": "CAP-2003",
+    "name": "List Vendor Products",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "products"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/vendor_products"
+  },
+  {
+    "app_slug": "multi_vendor_marketplace",
+    "app_type": "multi-vendor marketplace",
+    "cap_id": "CAP-2004",
+    "name": "Add Vendor Product",
+    "category": "compute",
+    "required_input": [
+      "vendor_id",
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "vendor_id",
+      "name"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/vendor_products"
+  },
+  {
+    "app_slug": "music_streaming",
+    "app_type": "music streaming",
+    "cap_id": "CAP-3500",
+    "name": "Music Streaming Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "music_streaming",
+    "app_type": "music streaming",
+    "cap_id": "CAP-3501",
+    "name": "List Tracks",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "tracks"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/tracks"
+  },
+  {
+    "app_slug": "music_streaming",
+    "app_type": "music streaming",
+    "cap_id": "CAP-3502",
+    "name": "Add Track",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "artist",
+      "plays"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/tracks"
+  },
+  {
+    "app_slug": "music_streaming",
+    "app_type": "music streaming",
+    "cap_id": "CAP-3503",
+    "name": "Play Track",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "plays"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/tracks/play"
+  },
+  {
+    "app_slug": "note_taking",
+    "app_type": "note taking",
+    "cap_id": "CAP-0200",
+    "name": "Note Taking Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "note_taking",
+    "app_type": "note taking",
+    "cap_id": "CAP-0201",
+    "name": "List Notes",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "notes"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/notes"
+  },
+  {
+    "app_slug": "note_taking",
+    "app_type": "note taking",
+    "cap_id": "CAP-0202",
+    "name": "Create Note",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "body"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/notes"
+  },
+  {
+    "app_slug": "note_taking",
+    "app_type": "note taking",
+    "cap_id": "CAP-0203",
+    "name": "Update Note",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "body"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/notes/update"
+  },
+  {
+    "app_slug": "note_taking",
+    "app_type": "note taking",
+    "cap_id": "CAP-0204",
+    "name": "Delete Note",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/notes/delete"
+  },
+  {
+    "app_slug": "online_course_lms",
+    "app_type": "online course LMS",
+    "cap_id": "CAP-4100",
+    "name": "Online Course Lms Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "online_course_lms",
+    "app_type": "online course LMS",
+    "cap_id": "CAP-4101",
+    "name": "List Courses",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "courses"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/courses"
+  },
+  {
+    "app_slug": "online_course_lms",
+    "app_type": "online course LMS",
+    "cap_id": "CAP-4102",
+    "name": "Create Course",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/courses"
+  },
+  {
+    "app_slug": "online_course_lms",
+    "app_type": "online course LMS",
+    "cap_id": "CAP-4103",
+    "name": "List Lessons",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "lessons"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/lessons"
+  },
+  {
+    "app_slug": "online_course_lms",
+    "app_type": "online course LMS",
+    "cap_id": "CAP-4104",
+    "name": "Add Lesson",
+    "category": "compute",
+    "required_input": [
+      "course_id",
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "course_id",
+      "title"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/lessons"
+  },
+  {
+    "app_slug": "parcel_tracking",
+    "app_type": "parcel tracking",
+    "cap_id": "CAP-2400",
+    "name": "Parcel Tracking Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "parcel_tracking",
+    "app_type": "parcel tracking",
+    "cap_id": "CAP-2401",
+    "name": "List Parcels",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "parcels"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/parcels"
+  },
+  {
+    "app_slug": "parcel_tracking",
+    "app_type": "parcel tracking",
+    "cap_id": "CAP-2402",
+    "name": "Create Parcel",
+    "category": "compute",
+    "required_input": [
+      "tracking_no"
+    ],
+    "output_fields": [
+      "id",
+      "tracking_no",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/parcels"
+  },
+  {
+    "app_slug": "parcel_tracking",
+    "app_type": "parcel tracking",
+    "cap_id": "CAP-2403",
+    "name": "Update Parcel Status",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "tracking_no",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/parcels/status"
+  },
+  {
+    "app_slug": "payroll",
+    "app_type": "payroll",
+    "cap_id": "CAP-1000",
+    "name": "Payroll Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "payroll",
+    "app_type": "payroll",
+    "cap_id": "CAP-1001",
+    "name": "List Employees",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "employees"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/employees"
+  },
+  {
+    "app_slug": "payroll",
+    "app_type": "payroll",
+    "cap_id": "CAP-1002",
+    "name": "Add Employee",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "salary"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/employees"
+  },
+  {
+    "app_slug": "payroll",
+    "app_type": "payroll",
+    "cap_id": "CAP-1003",
+    "name": "Run Payroll",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "created"
+    ],
+    "side_effects": [],
+    "dependencies": [
+      "CAP-1002"
+    ],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/payroll/run"
+  },
+  {
+    "app_slug": "payroll",
+    "app_type": "payroll",
+    "cap_id": "CAP-1004",
+    "name": "List Pay Records",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "records"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/payroll/records"
+  },
+  {
+    "app_slug": "photo_sharing",
+    "app_type": "photo sharing",
+    "cap_id": "CAP-3300",
+    "name": "Photo Sharing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "photo_sharing",
+    "app_type": "photo sharing",
+    "cap_id": "CAP-3301",
+    "name": "List Photos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "photos"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/photos"
+  },
+  {
+    "app_slug": "photo_sharing",
+    "app_type": "photo sharing",
+    "cap_id": "CAP-3302",
+    "name": "Upload Photo",
+    "category": "compute",
+    "required_input": [
+      "caption"
+    ],
+    "output_fields": [
+      "id",
+      "caption",
+      "image_b64",
+      "likes"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/photos"
+  },
+  {
+    "app_slug": "photo_sharing",
+    "app_type": "photo sharing",
+    "cap_id": "CAP-3303",
+    "name": "Like Photo",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "likes"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/photos/like"
+  },
+  {
+    "app_slug": "podcast",
+    "app_type": "podcast",
+    "cap_id": "CAP-3700",
+    "name": "Podcast Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "podcast",
+    "app_type": "podcast",
+    "cap_id": "CAP-3701",
+    "name": "List Episodes",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "episodes"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/episodes"
+  },
+  {
+    "app_slug": "podcast",
+    "app_type": "podcast",
+    "cap_id": "CAP-3702",
+    "name": "Add Episode",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "plays"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/episodes"
+  },
+  {
+    "app_slug": "podcast",
+    "app_type": "podcast",
+    "cap_id": "CAP-3703",
+    "name": "Play Episode",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "plays"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/episodes/play"
+  },
+  {
+    "app_slug": "project_management",
+    "app_type": "project management",
+    "cap_id": "CAP-1100",
+    "name": "Project Management Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "project_management",
+    "app_type": "project management",
+    "cap_id": "CAP-1101",
+    "name": "List Tasks",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "tasks"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/tasks"
+  },
+  {
+    "app_slug": "project_management",
+    "app_type": "project management",
+    "cap_id": "CAP-1102",
+    "name": "Create Task",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/tasks"
+  },
+  {
+    "app_slug": "project_management",
+    "app_type": "project management",
+    "cap_id": "CAP-1103",
+    "name": "Update Task Status",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/tasks/status"
+  },
+  {
+    "app_slug": "project_management",
+    "app_type": "project management",
+    "cap_id": "CAP-1104",
+    "name": "Delete Task",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/tasks/delete"
+  },
+  {
+    "app_slug": "property_rental",
+    "app_type": "property rental",
+    "cap_id": "CAP-2600",
+    "name": "Property Rental Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "property_rental",
+    "app_type": "property rental",
+    "cap_id": "CAP-2601",
+    "name": "List Listings",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "listings"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/listings"
+  },
+  {
+    "app_slug": "property_rental",
+    "app_type": "property rental",
+    "cap_id": "CAP-2602",
+    "name": "Create Listing",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "price"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/listings"
+  },
+  {
+    "app_slug": "property_rental",
+    "app_type": "property rental",
+    "cap_id": "CAP-2603",
+    "name": "List Bookings",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "bookings"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/bookings"
+  },
+  {
+    "app_slug": "property_rental",
+    "app_type": "property rental",
+    "cap_id": "CAP-2604",
+    "name": "Book Listing",
+    "category": "compute",
+    "required_input": [
+      "listing_id",
+      "guest"
+    ],
+    "output_fields": [
+      "id",
+      "listing_id",
+      "guest"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/bookings"
+  },
+  {
+    "app_slug": "quiz_and_flashcards",
+    "app_type": "quiz and flashcards",
+    "cap_id": "CAP-4200",
+    "name": "Quiz And Flashcards Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "quiz_and_flashcards",
+    "app_type": "quiz and flashcards",
+    "cap_id": "CAP-4201",
+    "name": "List Cards",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "cards"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/cards"
+  },
+  {
+    "app_slug": "quiz_and_flashcards",
+    "app_type": "quiz and flashcards",
+    "cap_id": "CAP-4202",
+    "name": "Create Card",
+    "category": "compute",
+    "required_input": [
+      "question"
+    ],
+    "output_fields": [
+      "id",
+      "question",
+      "answer",
+      "correct_count"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/cards"
+  },
+  {
+    "app_slug": "quiz_and_flashcards",
+    "app_type": "quiz and flashcards",
+    "cap_id": "CAP-4203",
+    "name": "Review Card",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "correct_count"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/cards/review"
+  },
+  {
+    "app_slug": "recipe_and_meal_planning",
+    "app_type": "recipe and meal planning",
+    "cap_id": "CAP-4300",
+    "name": "Recipe And Meal Planning Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "recipe_and_meal_planning",
+    "app_type": "recipe and meal planning",
+    "cap_id": "CAP-4301",
+    "name": "List Recipes",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "recipes"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/recipes"
+  },
+  {
+    "app_slug": "recipe_and_meal_planning",
+    "app_type": "recipe and meal planning",
+    "cap_id": "CAP-4302",
+    "name": "Create Recipe",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "ingredients"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/recipes"
+  },
+  {
+    "app_slug": "recipe_and_meal_planning",
+    "app_type": "recipe and meal planning",
+    "cap_id": "CAP-4303",
+    "name": "List Meal Plan",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "plan"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/meal_plan"
+  },
+  {
+    "app_slug": "recipe_and_meal_planning",
+    "app_type": "recipe and meal planning",
+    "cap_id": "CAP-4304",
+    "name": "Plan Meal",
+    "category": "compute",
+    "required_input": [
+      "day",
+      "recipe_id"
+    ],
+    "output_fields": [
+      "day",
+      "recipe_id"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/meal_plan"
+  },
+  {
+    "app_slug": "restaurant_pos",
+    "app_type": "restaurant POS",
+    "cap_id": "CAP-2800",
+    "name": "Restaurant Pos Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "restaurant_pos",
+    "app_type": "restaurant POS",
+    "cap_id": "CAP-2801",
+    "name": "List Orders",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "orders"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/orders"
+  },
+  {
+    "app_slug": "restaurant_pos",
+    "app_type": "restaurant POS",
+    "cap_id": "CAP-2802",
+    "name": "Create Order",
+    "category": "compute",
+    "required_input": [
+      "item"
+    ],
+    "output_fields": [
+      "id",
+      "item",
+      "total",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/orders"
+  },
+  {
+    "app_slug": "restaurant_pos",
+    "app_type": "restaurant POS",
+    "cap_id": "CAP-2803",
+    "name": "Close Order",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "item",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/orders/close"
+  },
+  {
+    "app_slug": "ride_hailing",
+    "app_type": "ride hailing",
+    "cap_id": "CAP-2300",
+    "name": "Ride Hailing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "ride_hailing",
+    "app_type": "ride hailing",
+    "cap_id": "CAP-2301",
+    "name": "List Rides",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "rides"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/rides"
+  },
+  {
+    "app_slug": "ride_hailing",
+    "app_type": "ride hailing",
+    "cap_id": "CAP-2302",
+    "name": "Request Ride",
+    "category": "compute",
+    "required_input": [
+      "pickup"
+    ],
+    "output_fields": [
+      "id",
+      "pickup",
+      "dropoff",
+      "status"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/rides"
+  },
+  {
+    "app_slug": "ride_hailing",
+    "app_type": "ride hailing",
+    "cap_id": "CAP-2303",
+    "name": "Update Ride Status",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "status"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/rides/status"
+  },
+  {
+    "app_slug": "short_video_feed",
+    "app_type": "short video feed",
+    "cap_id": "CAP-3400",
+    "name": "Short Video Feed Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "short_video_feed",
+    "app_type": "short video feed",
+    "cap_id": "CAP-3401",
+    "name": "List Videos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "videos"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/videos"
+  },
+  {
+    "app_slug": "short_video_feed",
+    "app_type": "short video feed",
+    "cap_id": "CAP-3402",
+    "name": "Upload Video",
+    "category": "compute",
+    "required_input": [
+      "caption"
+    ],
+    "output_fields": [
+      "id",
+      "caption",
+      "views",
+      "likes"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/videos"
+  },
+  {
+    "app_slug": "short_video_feed",
+    "app_type": "short video feed",
+    "cap_id": "CAP-3403",
+    "name": "View Video",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "views"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/videos/view"
+  },
+  {
+    "app_slug": "social_feed",
+    "app_type": "social feed",
+    "cap_id": "CAP-3200",
+    "name": "Social Feed Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "social_feed",
+    "app_type": "social feed",
+    "cap_id": "CAP-3201",
+    "name": "List Feed",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "posts"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/posts"
+  },
+  {
+    "app_slug": "social_feed",
+    "app_type": "social feed",
+    "cap_id": "CAP-3202",
+    "name": "Create Post",
+    "category": "compute",
+    "required_input": [
+      "text"
+    ],
+    "output_fields": [
+      "id",
+      "author",
+      "text",
+      "likes"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/posts"
+  },
+  {
+    "app_slug": "social_feed",
+    "app_type": "social feed",
+    "cap_id": "CAP-3203",
+    "name": "Like Post",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "likes"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/posts/like"
+  },
+  {
+    "app_slug": "spreadsheet",
+    "app_type": "spreadsheet",
+    "cap_id": "CAP-1700",
+    "name": "Spreadsheet Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "spreadsheet",
+    "app_type": "spreadsheet",
+    "cap_id": "CAP-1701",
+    "name": "List Cells",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "cells"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/cells"
+  },
+  {
+    "app_slug": "spreadsheet",
+    "app_type": "spreadsheet",
+    "cap_id": "CAP-1702",
+    "name": "Set Cell",
+    "category": "compute",
+    "required_input": [
+      "row",
+      "col"
+    ],
+    "output_fields": [
+      "row",
+      "col",
+      "value"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/cells/set"
+  },
+  {
+    "app_slug": "team_chat",
+    "app_type": "team chat",
+    "cap_id": "CAP-1200",
+    "name": "Team Chat Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "team_chat",
+    "app_type": "team chat",
+    "cap_id": "CAP-1201",
+    "name": "List Messages",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "messages"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/messages"
+  },
+  {
+    "app_slug": "team_chat",
+    "app_type": "team chat",
+    "cap_id": "CAP-1202",
+    "name": "Post Message",
+    "category": "compute",
+    "required_input": [
+      "text"
+    ],
+    "output_fields": [
+      "id",
+      "author",
+      "text"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/messages"
+  },
+  {
+    "app_slug": "team_chat",
+    "app_type": "team chat",
+    "cap_id": "CAP-1203",
+    "name": "Delete Message",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/messages/delete"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0100",
+    "name": "Todo App Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0101",
+    "name": "List Todos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "todos"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/todos"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0102",
+    "name": "Create Todo",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "completed"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/todos"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0103",
+    "name": "Toggle Todo",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "completed"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/todos/toggle"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0104",
+    "name": "Edit Todo",
+    "category": "compute",
+    "required_input": [
+      "id",
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "completed"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/todos/edit"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0105",
+    "name": "Delete Todo",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "deleted"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/todos/delete"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0106",
+    "name": "Toggle All Todos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "updated"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/todos/toggle_all"
+  },
+  {
+    "app_slug": "todo_list",
+    "app_type": "todo list",
+    "cap_id": "CAP-0107",
+    "name": "Clear Completed Todos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "removed"
+    ],
+    "side_effects": [
+      "deletes_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/todos/clear_completed"
+  },
+  {
+    "app_slug": "video_conferencing",
+    "app_type": "video conferencing",
+    "cap_id": "CAP-1300",
+    "name": "Video Conferencing Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "video_conferencing",
+    "app_type": "video conferencing",
+    "cap_id": "CAP-1301",
+    "name": "List Rooms",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "rooms"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/rooms"
+  },
+  {
+    "app_slug": "video_conferencing",
+    "app_type": "video conferencing",
+    "cap_id": "CAP-1302",
+    "name": "Create Room",
+    "category": "compute",
+    "required_input": [
+      "name"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "participants"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/rooms"
+  },
+  {
+    "app_slug": "video_conferencing",
+    "app_type": "video conferencing",
+    "cap_id": "CAP-1303",
+    "name": "Join Room",
+    "category": "compute",
+    "required_input": [
+      "id",
+      "participant"
+    ],
+    "output_fields": [
+      "id",
+      "name",
+      "participants"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/rooms/join"
+  },
+  {
+    "app_slug": "video_streaming",
+    "app_type": "video streaming",
+    "cap_id": "CAP-3600",
+    "name": "Video Streaming Host",
+    "category": "ui",
+    "required_input": [],
+    "output_fields": [],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": true,
+    "method": null,
+    "route": null
+  },
+  {
+    "app_slug": "video_streaming",
+    "app_type": "video streaming",
+    "cap_id": "CAP-3601",
+    "name": "List Videos",
+    "category": "compute",
+    "required_input": [],
+    "output_fields": [
+      "videos"
+    ],
+    "side_effects": [],
+    "dependencies": [],
+    "is_host": false,
+    "method": "GET",
+    "route": "/api/videos"
+  },
+  {
+    "app_slug": "video_streaming",
+    "app_type": "video streaming",
+    "cap_id": "CAP-3602",
+    "name": "Add Video",
+    "category": "compute",
+    "required_input": [
+      "title"
+    ],
+    "output_fields": [
+      "id",
+      "title",
+      "views"
+    ],
+    "side_effects": [
+      "creates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/videos"
+  },
+  {
+    "app_slug": "video_streaming",
+    "app_type": "video streaming",
+    "cap_id": "CAP-3603",
+    "name": "Watch Video",
+    "category": "compute",
+    "required_input": [
+      "id"
+    ],
+    "output_fields": [
+      "id",
+      "views"
+    ],
+    "side_effects": [
+      "updates_record"
+    ],
+    "dependencies": [],
+    "is_host": false,
+    "method": "POST",
+    "route": "/api/videos/watch"
+  }
+]

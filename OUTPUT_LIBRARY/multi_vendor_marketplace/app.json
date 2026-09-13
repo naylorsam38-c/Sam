@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-2000/app.py"
+  ],
+  "port": 5020,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#vendor-name",
+    "input_value": "Acme Vendor",
+    "action_selector": "#add-vendor-btn",
+    "confirm_selector": "text=Acme Vendor",
+    "confirm_contains": "Acme Vendor"
+  }
+}

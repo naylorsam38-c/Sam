@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-9620/app.py"
+  ],
+  "port": 5994,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#shift-title",
+    "input_value": "Saturday Food Bank",
+    "action_selector": "#add-shift-btn",
+    "confirm_selector": "text=Saturday Food Bank",
+    "confirm_contains": "Saturday Food Bank"
+  }
+}

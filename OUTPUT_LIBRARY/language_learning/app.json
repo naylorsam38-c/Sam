@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-4000/app.py"
+  ],
+  "port": 5040,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#lang-front",
+    "input_value": "Hola",
+    "action_selector": "#add-lang-card-btn",
+    "confirm_selector": "text=Hola",
+    "confirm_contains": "Hola"
+  }
+}

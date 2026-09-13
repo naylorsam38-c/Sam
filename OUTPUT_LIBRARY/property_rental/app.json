@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-2600/app.py"
+  ],
+  "port": 5026,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#listing-title",
+    "input_value": "Cozy Cabin",
+    "action_selector": "#add-listing-btn",
+    "confirm_selector": "text=Cozy Cabin",
+    "confirm_contains": "Cozy Cabin"
+  }
+}

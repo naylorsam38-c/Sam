@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-0100/app.py"
+  ],
+  "port": 5000,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#new-todo",
+    "input_value": "Buy real milk from the real store",
+    "action_key": "Enter",
+    "confirm_selector": "#todo-list",
+    "confirm_contains": "Buy real milk from the real store"
+  }
+}

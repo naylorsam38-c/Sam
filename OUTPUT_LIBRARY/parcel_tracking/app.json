@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-2400/app.py"
+  ],
+  "port": 5024,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#parcel-tracking",
+    "input_value": "PKG123456",
+    "action_selector": "#add-parcel-btn",
+    "confirm_selector": "text=PKG123456",
+    "confirm_contains": "PKG123456"
+  }
+}

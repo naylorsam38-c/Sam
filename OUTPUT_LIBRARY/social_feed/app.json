@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-3200/app.py"
+  ],
+  "port": 5032,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#post-text",
+    "input_value": "Hello world",
+    "action_selector": "#add-post-btn",
+    "confirm_selector": "text=Hello world",
+    "confirm_contains": "Hello world"
+  }
+}

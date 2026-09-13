@@ -1,0 +1,15 @@
+{
+  "start": [
+    "python3",
+    "modules/CAP-3800/app.py"
+  ],
+  "port": 5038,
+  "health": "/health",
+  "primary_journey": {
+    "input_selector": "#workout-type",
+    "input_value": "Running",
+    "action_selector": "#log-workout-btn",
+    "confirm_selector": "text=Running",
+    "confirm_contains": "Running"
+  }
+}
