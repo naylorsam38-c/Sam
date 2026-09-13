@@ -344,8 +344,9 @@ reading the code):
 
 ## 9. Final commit hash
 
-`e9e67f4` — "Real authentication + 5 foundational capabilities, evidence-based"
-(this report's own commit follows immediately after).
+`c959985` — "Add identity-types spec + close two real gaps it surfaced"
+(the last commit of this work package; `e9e67f4` and `f34f944` preceded it —
+see git log for the full sequence).
 
 ## 10. This report
 
