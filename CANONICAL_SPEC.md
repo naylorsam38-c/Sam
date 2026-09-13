@@ -769,13 +769,12 @@ positions:
 | 2. BUILD CHAIN SPECIFICATION | `BUILD_PY_SPEC_v1.md` |
 | 3. NUMBERING.md | `NUMBERING.md` |
 | 4. TEMPLATE BUILD GUIDE | `TEMPLATE_STANDARD.md` |
-| 5. HARVEST SPECIFICATION | **no document on record** |
-| 6. CONSTITUTION AND GOVERNANCE FILES | **no document on record** |
+| 5. HARVEST SPECIFICATION | **N/A — see B.9** |
+| 6. CONSTITUTION AND GOVERNANCE FILES | **N/A — see B.9** |
 | 7. THIS MASTER SPECIFICATION | Part A itself (correctly last already) |
 
-Slots 5 and 6 stay open until Sam either supplies those documents or formally marks them N/A —
-this is a document-existence question, not an ordering question, and nothing about execution order
-is blocked by it.
+Slots 5 and 6 were formally closed as N/A in B.9 below, on Sam's explicit instruction, after a third
+independent search confirmed the same result this table originally recorded.
 
 ## B.2 — Section 18 (App Readiness States): resolved, implemented, proven
 
@@ -887,5 +886,37 @@ this section states the resolution, the same convention B.2/B.3/B.5 already use 
 **Slots 5 (Harvest Specification) and 6 (Constitution and Governance Files) in B.1's authority-order
 table are unchanged by this round: still "no document on record."** This was searched for again,
 independently, before this section was written (not assumed from B.1's prior finding) and the
-result is the same. They remain open exactly as B.1 describes, pending Sam either supplying them or
-formally marking them N/A — this section does not decide that either way.
+result is the same. See B.9 for the formal closure of this question.
+
+## B.9 — Slots 5 and 6 (Harvest Specification; Constitution and Governance Files): formally closed as N/A, with evidence trail
+
+Closed on Sam's explicit instruction (2026-09-13), given as a direct response to this section's own
+audit finding, after confirming three independent searches — not one — found the same result:
+
+1. **2026-09-12, `RULINGS_ROUND5.md`** (round 5's own audit): *"Do Constitution/Governance files
+   exist? ... nothing under this name has been seen in this engagement. Flagged, not guessed."*
+   Same treatment given to the Harvest Specification.
+2. **2026-09-12, `CANONICAL_SPEC.md` B.1** (this document, same round): restates the identical
+   finding when mapping Part A's seven-slot authority order onto Sam's real four-document order.
+3. **2026-09-13, this audit** (round 7, independent re-search before B.8/B.9 were written): a fresh,
+   repository-wide search — not a re-read of B.1's prior conclusion — for "Constitution",
+   "Harvest Specification", "Master Build", "Bible", `BUILD_PY_SPEC_v1.md`, `NUMBERING.md`,
+   `TEMPLATE_STANDARD.md` across every file in the repository (`find`/`grep`, unrestricted). Result:
+   `Constitution`/`Harvest Specification` still absent by name and content; `BUILD_PY_SPEC_v1.md`,
+   `NUMBERING.md`, `TEMPLATE_STANDARD.md`, and a file literally named "the Bible" are **also absent
+   as files on disk today**, despite B.1 recording them as "Exact match" — flagged here as a
+   separate, narrower finding (those three-plus-the-Bible were evidently supplied as content in an
+   earlier conversation and never persisted as repository files, not proof they never existed) that
+   does **not** change slots 5/6's determination, which was independently negative all three times.
+
+**Determination**: slots 5 (HARVEST SPECIFICATION) and 6 (CONSTITUTION AND GOVERNANCE FILES) are
+**N/A** in Part A §2's authority order. This is a closure of a document-existence question, not an
+invention of the missing documents and not a reduction of Part A's own authority-order rule (Part A
+§2 itself remains unedited above; this section only supplies the factual answer to the "does the
+document exist" question Part A's own rule depends on, exactly as B.1 said the question would be
+resolved). If Sam later supplies genuine Harvest Specification or Constitution/Governance content,
+it re-opens these slots and is reconciled against the proven working system through this same B.n
+amendment process — not by retroactively editing this section.
+
+**No part of this closure touches or narrows the Locked Goal (Part A §3), and no working code,
+test, or proven capability changed as a result of it.**
