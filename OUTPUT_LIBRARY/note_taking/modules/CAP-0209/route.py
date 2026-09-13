@@ -7,7 +7,7 @@ _spec = _importlib_util.spec_from_file_location("cap0000_shared_lib", _shared_li
 _shared = _importlib_util.module_from_spec(_spec)
 _spec.loader.exec_module(_shared)
 
-DATA_FILE_NAME = "note_taking.json"
+DATA_FILE_NAME = "users.json"
 
 
 def _load():
@@ -17,21 +17,11 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/note_taking/notes'
-METHOD = 'POST'
+ROUTE = '/api/note_taking/auth/me'
+METHOD = 'GET'
 
 
 def handle(request, ctx):
     if not ctx.get('authenticated'):
         return 401, {'error': 'not authenticated'}
-    body = request.get_json(force=True, silent=True) or {}
-    title = (body.get('title') or '').strip()
-    text = (body.get('body') or '').strip()
-    if not title:
-        return 400, {'error': 'title is required'}
-    notes = _load()
-    next_id = (max([n['id'] for n in notes], default=0)) + 1
-    note = {'id': next_id, 'title': title, 'body': text, 'owner_id': ctx['user']}
-    notes.append(note)
-    _save(notes)
-    return 201, note
+    return 200, {'user_id': ctx.get('user'), 'role': ctx.get('role')}

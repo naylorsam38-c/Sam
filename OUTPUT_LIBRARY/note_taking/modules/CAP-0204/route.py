@@ -21,12 +21,17 @@ ROUTE = '/api/note_taking/notes/delete'
 METHOD = 'POST'
 
 
-def handle(request):
+def handle(request, ctx):
+    if not ctx.get('authenticated'):
+        return 401, {'error': 'not authenticated'}
     body = request.get_json(force=True, silent=True) or {}
     nid = body.get('id')
     notes = _load()
-    remaining = [n for n in notes if n['id'] != nid]
-    if len(remaining) == len(notes):
+    target = next((n for n in notes if n['id'] == nid), None)
+    if target is None:
         return 404, {'error': f'no note with id {nid!r}'}
+    if target.get('owner_id') != ctx['user']:
+        return 403, {'error': 'not authorized to delete this note'}
+    remaining = [n for n in notes if n['id'] != nid]
     _save(remaining)
     return 200, {'id': nid, 'deleted': True}

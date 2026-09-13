@@ -5,7 +5,7 @@
       "name": "Real Notes",
       "status": "active",
       "owner": "builder",
-      "created_at": "2026-09-12T23:24:06Z",
+      "created_at": "2026-09-13T02:40:07Z",
       "screens": [
         "APP-001/SCR-001"
       ]
@@ -17,36 +17,10 @@
       "app_id": "APP-001",
       "name": "Home",
       "status": "active",
-      "buttons": [
-        "APP-001/SCR-001/BTN-001"
-      ]
+      "buttons": []
     }
   ],
-  "buttons": [
-    {
-      "id": "APP-001/SCR-001/BTN-001",
-      "screen_id": "APP-001/SCR-001",
-      "name": "Create Note",
-      "expected_contract": {
-        "required_input_fields": [],
-        "input_types": {},
-        "output_fields": [],
-        "output_types": {},
-        "nullable_fields": [],
-        "permissions": [],
-        "requires_auth": false,
-        "dependencies": [],
-        "handled_errors": [],
-        "security_constraints": {},
-        "side_effects": [
-          "creates_record"
-        ],
-        "min_version": "1.0.0"
-      },
-      "capability_id": "CAP-0202",
-      "status": "active"
-    }
-  ],
+  "buttons": [],
   "capabilities": [
     {
       "id": "CAP-0200",
@@ -144,7 +118,7 @@
           "types": {}
         },
         "nullable": [],
-        "requires_auth": false,
+        "requires_auth": true,
         "security_constraints": {},
         "contract_version": "2.0",
         "data_access": [
@@ -153,7 +127,10 @@
             "access": "read"
           }
         ],
-        "context_fields": []
+        "context_fields": [
+          "authenticated",
+          "user"
+        ]
       },
       "dependencies": [
         "CAP-0000"
@@ -162,7 +139,8 @@
       "side_effects": [],
       "error_contract": {
         "error_codes": [
-          "INTERNAL_ERROR"
+          "INTERNAL_ERROR",
+          "UNAUTHORIZED"
         ]
       },
       "implementations": [
@@ -190,12 +168,13 @@
           "fields": [
             "id",
             "title",
-            "body"
+            "body",
+            "owner_id"
           ],
           "types": {}
         },
         "nullable": [],
-        "requires_auth": false,
+        "requires_auth": true,
         "security_constraints": {},
         "contract_version": "2.0",
         "data_access": [
@@ -204,7 +183,10 @@
             "access": "read_write"
           }
         ],
-        "context_fields": []
+        "context_fields": [
+          "authenticated",
+          "user"
+        ]
       },
       "dependencies": [
         "CAP-0000"
@@ -216,7 +198,8 @@
       "error_contract": {
         "error_codes": [
           "INTERNAL_ERROR",
-          "VALIDATION_ERROR"
+          "VALIDATION_ERROR",
+          "UNAUTHORIZED"
         ]
       },
       "implementations": [
@@ -244,12 +227,13 @@
           "fields": [
             "id",
             "title",
-            "body"
+            "body",
+            "owner_id"
           ],
           "types": {}
         },
         "nullable": [],
-        "requires_auth": false,
+        "requires_auth": true,
         "security_constraints": {},
         "contract_version": "2.0",
         "data_access": [
@@ -258,7 +242,10 @@
             "access": "read_write"
           }
         ],
-        "context_fields": []
+        "context_fields": [
+          "authenticated",
+          "user"
+        ]
       },
       "dependencies": [
         "CAP-0000"
@@ -271,7 +258,9 @@
         "error_codes": [
           "INTERNAL_ERROR",
           "VALIDATION_ERROR",
-          "NOT_FOUND"
+          "NOT_FOUND",
+          "UNAUTHORIZED",
+          "FORBIDDEN"
         ]
       },
       "implementations": [
@@ -303,7 +292,7 @@
           "types": {}
         },
         "nullable": [],
-        "requires_auth": false,
+        "requires_auth": true,
         "security_constraints": {},
         "contract_version": "2.0",
         "data_access": [
@@ -312,7 +301,10 @@
             "access": "read_write"
           }
         ],
-        "context_fields": []
+        "context_fields": [
+          "authenticated",
+          "user"
+        ]
       },
       "dependencies": [
         "CAP-0000"
@@ -325,11 +317,310 @@
         "error_codes": [
           "INTERNAL_ERROR",
           "VALIDATION_ERROR",
-          "NOT_FOUND"
+          "NOT_FOUND",
+          "UNAUTHORIZED",
+          "FORBIDDEN"
         ]
       },
       "implementations": [
         "CAP-0204/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0205",
+      "name": "Bootstrap Admin",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "email",
+            "password"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "email",
+            "role"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "users.json",
+            "access": "read_write"
+          },
+          {
+            "entity": "audit_log.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "FORBIDDEN"
+        ]
+      },
+      "implementations": [
+        "CAP-0205/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0206",
+      "name": "Register",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "email",
+            "password"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "id",
+            "email",
+            "role"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": true,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "users.json",
+            "access": "read_write"
+          },
+          {
+            "entity": "audit_log.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": [
+          "role"
+        ]
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [
+        "creates_record"
+      ],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "FORBIDDEN"
+        ]
+      },
+      "implementations": [
+        "CAP-0206/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0207",
+      "name": "Login",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [
+            "email",
+            "password"
+          ],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "token",
+            "user_id",
+            "role"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": false,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "users.json",
+            "access": "read"
+          },
+          {
+            "entity": "auth_sessions.json",
+            "access": "read_write"
+          },
+          {
+            "entity": "audit_log.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": []
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "VALIDATION_ERROR",
+          "UNAUTHORIZED"
+        ]
+      },
+      "implementations": [
+        "CAP-0207/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0208",
+      "name": "Logout",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "logged_out"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": true,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "users.json",
+            "access": "read"
+          },
+          {
+            "entity": "auth_sessions.json",
+            "access": "read_write"
+          },
+          {
+            "entity": "audit_log.json",
+            "access": "read_write"
+          }
+        ],
+        "context_fields": [
+          "authenticated",
+          "token",
+          "user"
+        ]
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "UNAUTHORIZED"
+        ]
+      },
+      "implementations": [
+        "CAP-0208/IMPL-01"
+      ],
+      "qualification": {
+        "status": "approved",
+        "approved_by": "Sam",
+        "approval_ref": "APPROVAL-CAP-REAL"
+      }
+    },
+    {
+      "id": "CAP-0209",
+      "name": "Who Am I",
+      "category": "compute",
+      "status": "active",
+      "data_shape": {
+        "input": {
+          "required": [],
+          "types": {}
+        },
+        "output": {
+          "fields": [
+            "user_id",
+            "role"
+          ],
+          "types": {}
+        },
+        "nullable": [],
+        "requires_auth": true,
+        "security_constraints": {},
+        "contract_version": "2.0",
+        "data_access": [
+          {
+            "entity": "users.json",
+            "access": "read"
+          }
+        ],
+        "context_fields": [
+          "authenticated",
+          "user",
+          "role"
+        ]
+      },
+      "dependencies": [
+        "CAP-0000"
+      ],
+      "permissions": [],
+      "side_effects": [],
+      "error_contract": {
+        "error_codes": [
+          "INTERNAL_ERROR",
+          "UNAUTHORIZED"
+        ]
+      },
+      "implementations": [
+        "CAP-0209/IMPL-01"
       ],
       "qualification": {
         "status": "approved",
@@ -458,6 +749,111 @@
         "repository": "shelf",
         "path": "CAP-0204/IMPL-01",
         "entrypoint": "CAP-0204/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0205/IMPL-01",
+      "capability_id": "CAP-0205",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0205/IMPL-01",
+        "entrypoint": "CAP-0205/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0206/IMPL-01",
+      "capability_id": "CAP-0206",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0206/IMPL-01",
+        "entrypoint": "CAP-0206/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0207/IMPL-01",
+      "capability_id": "CAP-0207",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0207/IMPL-01",
+        "entrypoint": "CAP-0207/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0208/IMPL-01",
+      "capability_id": "CAP-0208",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0208/IMPL-01",
+        "entrypoint": "CAP-0208/route.py"
+      },
+      "dependencies": [],
+      "tests": [],
+      "rollback": {
+        "previous_version": null
+      }
+    },
+    {
+      "id": "CAP-0209/IMPL-01",
+      "capability_id": "CAP-0209",
+      "status": "active",
+      "release": {
+        "version": "1.0.0",
+        "commit": "gen_common.py",
+        "approved": true,
+        "approval_ref": "APPROVAL-IMPL-REAL"
+      },
+      "source": {
+        "repository": "shelf",
+        "path": "CAP-0209/IMPL-01",
+        "entrypoint": "CAP-0209/route.py"
       },
       "dependencies": [],
       "tests": [],

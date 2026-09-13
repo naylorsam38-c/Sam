@@ -295,63 +295,190 @@ def build_todo_list(root: Path):
 
 
 def build_note_taking(root: Path):
+    # PRIVATE_PILOT_SAFETY_MILESTONE.md items 1-3: real per-user isolation,
+    # login/session, and admin-provisioned accounts, promoted for the
+    # private pilot (PILOT_OWNER_DECISION_SHEET.md, resolved 2026-09-13).
+    # Reuses the exact, already-proven identity/session/isolation pattern
+    # from identity_and_access_demo (owner_id from a real, server-resolved
+    # ctx['user'], never a client-supplied field) -- no new authentication
+    # architecture invented for this app.
     b = AppBuilder(root, "note_taking", "note taking", "0200")
 
     b.add_capability("0201", "List Notes", "/api/notes", "GET",
-        "def handle(request):\n    return 200, {'notes': _load()}\n",
-        output_fields=("notes",))
+        "def handle(request, ctx):\n"
+        "    if not ctx.get('authenticated'):\n        return 401, {'error': 'not authenticated'}\n"
+        "    notes = _load()\n"
+        "    mine = [n for n in notes if n.get('owner_id') == ctx['user']]\n"
+        "    return 200, {'notes': mine}\n",
+        output_fields=("notes",), extra_error_codes=("UNAUTHORIZED",),
+        context_fields_override=("authenticated", "user"))
 
     b.add_capability("0202", "Create Note", "/api/notes", "POST",
-        "def handle(request):\n"
+        "def handle(request, ctx):\n"
+        "    if not ctx.get('authenticated'):\n        return 401, {'error': 'not authenticated'}\n"
         "    body = request.get_json(force=True, silent=True) or {}\n"
         "    title = (body.get('title') or '').strip()\n"
         "    text = (body.get('body') or '').strip()\n"
         "    if not title:\n        return 400, {'error': 'title is required'}\n"
         "    notes = _load()\n"
         "    next_id = (max([n['id'] for n in notes], default=0)) + 1\n"
-        "    note = {'id': next_id, 'title': title, 'body': text}\n"
+        "    note = {'id': next_id, 'title': title, 'body': text, 'owner_id': ctx['user']}\n"
         "    notes.append(note)\n    _save(notes)\n    return 201, note\n",
-        output_fields=("id", "title", "body"), required_input=("title",),
-        side_effects=("creates_record",), slot_id="note_list", selector="#note-list")
+        output_fields=("id", "title", "body", "owner_id"), required_input=("title",),
+        side_effects=("creates_record",),
+        extra_error_codes=("UNAUTHORIZED",), context_fields_override=("authenticated", "user"))
 
     b.add_capability("0203", "Update Note", "/api/notes/update", "POST",
-        "def handle(request):\n"
+        "def handle(request, ctx):\n"
+        "    if not ctx.get('authenticated'):\n        return 401, {'error': 'not authenticated'}\n"
         "    body = request.get_json(force=True, silent=True) or {}\n"
         "    nid = body.get('id')\n"
         "    notes = _load()\n"
         "    for n in notes:\n"
         "        if n['id'] == nid:\n"
+        "            if n.get('owner_id') != ctx['user']:\n"
+        "                return 403, {'error': 'not authorized to modify this note'}\n"
         "            n['title'] = (body.get('title') or n['title']).strip()\n"
         "            n['body'] = body.get('body', n['body'])\n"
         "            _save(notes)\n            return 200, n\n"
         "    return 404, {'error': f'no note with id {nid!r}'}\n",
-        output_fields=("id", "title", "body"), required_input=("id",),
-        side_effects=("updates_record",))
+        output_fields=("id", "title", "body", "owner_id"), required_input=("id",),
+        side_effects=("updates_record",), extra_error_codes=("UNAUTHORIZED", "FORBIDDEN"),
+        context_fields_override=("authenticated", "user"))
 
     b.add_capability("0204", "Delete Note", "/api/notes/delete", "POST",
-        "def handle(request):\n"
+        "def handle(request, ctx):\n"
+        "    if not ctx.get('authenticated'):\n        return 401, {'error': 'not authenticated'}\n"
         "    body = request.get_json(force=True, silent=True) or {}\n"
         "    nid = body.get('id')\n"
         "    notes = _load()\n"
+        "    target = next((n for n in notes if n['id'] == nid), None)\n"
+        "    if target is None:\n        return 404, {'error': f'no note with id {nid!r}'}\n"
+        "    if target.get('owner_id') != ctx['user']:\n"
+        "        return 403, {'error': 'not authorized to delete this note'}\n"
         "    remaining = [n for n in notes if n['id'] != nid]\n"
-        "    if len(remaining) == len(notes):\n        return 404, {'error': f'no note with id {nid!r}'}\n"
         "    _save(remaining)\n    return 200, {'id': nid, 'deleted': True}\n",
         output_fields=("id", "deleted"), required_input=("id",),
-        side_effects=("deletes_record",))
+        side_effects=("deletes_record",), extra_error_codes=("UNAUTHORIZED", "FORBIDDEN"),
+        context_fields_override=("authenticated", "user"))
 
-    body_inner = '''<div class="card">
+    # Self-limiting, one-time first-admin bootstrap (see
+    # add_bootstrap_admin_capability()'s own docstring): succeeds exactly
+    # once against a fresh users.json, permanently refuses after that. Also
+    # serves as this app's real browser-journey target now that every note
+    # capability requires authentication (CANONICAL_SPEC.md C.6 forbids an
+    # authenticated capability from being the journey target).
+    # Deliberately NOT wired via slot_id: a slot_id would also earn this
+    # capability a generic build-time smoke check (build.py's per-capability
+    # compute check), which would consume this capability's one-and-only
+    # successful call with a probe account before the real browser journey
+    # (which also targets this same capability) ever got to run -- a real
+    # collision found by this exact build, not hypothesized. The journey
+    # itself needs no slot_id (app.json's primary_journey is independent of
+    # wired slots), so leaving this capability unwired is the correct fix,
+    # not a workaround.
+    b.add_bootstrap_admin_capability("0205", data_filename="users.json")
+
+    # Admin-provisioned tester accounts: Register itself is now callable
+    # only by an authenticated admin (register_required_role="admin"), so
+    # this is real "Create User", not open self-registration -- Login/
+    # Logout/Me are the standard, unchanged, already-proven behavior.
+    b.add_auth_capabilities("0206", "0207", "0208", "0209", data_filename="users.json",
+                             register_required_role="admin", session_ttl_minutes=720)
+
+    body_inner = '''<div class="card" id="login-card">
+  <h2 style="font-size:16px;margin:0 0 8px">Log in</h2>
+  <div class="row" id="login-fields">
+    <input id="login-email" placeholder="Email" data-slot="login_email">
+    <input id="login-password" type="password" placeholder="Password" data-slot="login_password">
+    <button id="login-btn" data-slot="login">Log in</button>
+  </div>
+  <button id="logout-btn" data-slot="logout" class="secondary" style="display:none">Log out</button>
+  <div id="login-result"></div>
+</div>
+<div class="card" id="notes-card" style="display:none">
   <div class="row">
     <input id="note-title" placeholder="Title" data-slot="note_title">
     <textarea id="note-body" placeholder="Write your note..." data-slot="note_body" rows="3" style="flex:1"></textarea>
     <button id="add-note-btn" data-slot="add_note">Add note</button>
   </div>
 </div>
-<div class="card">
+<div class="card" id="notes-list-card" style="display:none">
   <ul id="note-list" data-slot="note_list"></ul>
+</div>
+<div class="card">
+  <h2 style="font-size:16px;margin:0 0 8px">Admin setup (first run only)</h2>
+  <div class="row">
+    <input id="bootstrap-email" placeholder="Admin email" data-slot="bootstrap_email">
+    <input id="bootstrap-password" type="password" placeholder="Password (min 8 chars)" value="correcthorse" data-slot="bootstrap_password">
+    <button id="bootstrap-btn" data-slot="bootstrap_admin">Create first admin account</button>
+  </div>
+  <div id="bootstrap-result"></div>
 </div>'''
     script = '''
+let authToken = null;
+
+function showLoggedIn(email) {
+  document.getElementById("login-fields").style.display = "none";
+  document.getElementById("logout-btn").style.display = "inline-block";
+  document.getElementById("login-result").textContent = "Logged in as " + email;
+  document.getElementById("notes-card").style.display = "block";
+  document.getElementById("notes-list-card").style.display = "block";
+  refresh();
+}
+
+function showLoggedOut() {
+  authToken = null;
+  document.getElementById("login-fields").style.display = "flex";
+  document.getElementById("logout-btn").style.display = "none";
+  document.getElementById("login-result").textContent = "";
+  document.getElementById("notes-card").style.display = "none";
+  document.getElementById("notes-list-card").style.display = "none";
+  document.getElementById("note-list").innerHTML = "";
+}
+
+document.getElementById("login-btn").addEventListener("click", () => {
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+  fetch("/api/note_taking/auth/login", {method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({email: email, password: password})})
+    .then(r => r.json().then(data => ({status: r.status, data: data})))
+    .then(res => {
+      if (res.status === 200) {
+        authToken = res.data.token;
+        showLoggedIn(email);
+      } else {
+        document.getElementById("login-result").textContent = "Login failed";
+      }
+    });
+});
+
+document.getElementById("logout-btn").addEventListener("click", () => {
+  fetch("/api/note_taking/auth/logout", {method: "POST",
+    headers: {"Authorization": "Bearer " + authToken}}).then(showLoggedOut);
+});
+
+document.getElementById("bootstrap-btn").addEventListener("click", () => {
+  const email = document.getElementById("bootstrap-email").value;
+  const password = document.getElementById("bootstrap-password").value;
+  if (!email.trim()) return;
+  fetch("/api/note_taking/auth/bootstrap-admin", {method: "POST", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({email: email, password: password})})
+    .then(r => r.json().then(data => ({status: r.status, data: data})))
+    .then(res => {
+      const resultEl = document.getElementById("bootstrap-result");
+      if (res.status === 201) {
+        resultEl.textContent = "Admin created: " + res.data.email;
+      } else {
+        const msg = (res.data.error && res.data.error.message) || JSON.stringify(res.data);
+        resultEl.textContent = "Bootstrap failed: " + msg;
+      }
+    });
+});
+
 function refresh() {
-  fetch("/api/note_taking/notes").then(r => r.json()).then(data => {
+  if (!authToken) return;
+  fetch("/api/note_taking/notes", {headers: {"Authorization": "Bearer " + authToken}}).then(r => r.json()).then(data => {
     const list = document.getElementById("note-list");
     list.innerHTML = "";
     (data.notes || []).forEach(n => {
@@ -364,7 +491,8 @@ function refresh() {
       const del = document.createElement("button");
       del.className = "danger"; del.textContent = "Delete";
       del.addEventListener("click", () => {
-        fetch("/api/note_taking/notes/delete", {method: "POST", headers: {"Content-Type": "application/json"},
+        fetch("/api/note_taking/notes/delete", {method: "POST",
+          headers: {"Content-Type": "application/json", "Authorization": "Bearer " + authToken},
           body: JSON.stringify({id: n.id})}).then(refresh);
       });
       li.appendChild(strong); li.appendChild(p); li.appendChild(del);
@@ -376,26 +504,29 @@ document.getElementById("add-note-btn").addEventListener("click", () => {
   const title = document.getElementById("note-title").value;
   const body = document.getElementById("note-body").value;
   if (!title.trim()) return;
-  fetch("/api/note_taking/notes", {method: "POST", headers: {"Content-Type": "application/json"},
+  fetch("/api/note_taking/notes", {method: "POST",
+    headers: {"Content-Type": "application/json", "Authorization": "Bearer " + authToken},
     body: JSON.stringify({title: title, body: body})}).then(() => {
       document.getElementById("note-title").value = "";
       document.getElementById("note-body").value = "";
       refresh();
     });
 });
-refresh();
 '''
     html = page_skeleton("Notes", "", body_inner, script)
     journey = {
-        "input_selector": "#note-title", "input_value": "Groceries",
-        "action_selector": "#add-note-btn",
-        # "text=" is Playwright's own text-matching selector engine: unlike
-        # "#note-list" (which already exists, empty, before any note is
-        # created and so would resolve wait_for_selector() instantly without
-        # actually waiting for the async create+refresh round trip to
-        # finish), this only matches once an element with this text exists,
-        # so the wait is real synchronization, not a race.
-        "confirm_selector": "text=Groceries", "confirm_contains": "Groceries",
+        # Bootstrap Admin, not Create Note, is the journey target now: every
+        # note capability requires real authentication (C.6 forbids an
+        # authenticated capability from being the journey target), and this
+        # is the one capability guaranteed to succeed, unauthenticated, on
+        # the fresh instance every build/prove run starts from. The
+        # password field's pre-filled value is a non-secret placeholder for
+        # this one-time bootstrap convenience only (the same convention
+        # already proven in identity_and_access_demo) -- a real deployment
+        # uses whatever password Sam actually types into this same field.
+        "input_selector": "#bootstrap-email", "input_value": "sam@example.com",
+        "action_selector": "#bootstrap-btn",
+        "confirm_selector": "text=Admin created: sam@example.com", "confirm_contains": "sam@example.com",
     }
     b.finish(html, journey, "Real Notes", port=5001)
 

@@ -105,12 +105,21 @@ def impl_record(impl_id, cap_id, entrypoint, status="active", version="1.0.0",
     }
 
 
-def slot(slot_id, target_cap, name, selector, side_effects=()):
+def slot(slot_id, target_cap, name, selector, side_effects=(), requires_auth=False):
+    """requires_auth defaults to False, matching every capability ever bound
+    to a UI slot before this session -- but it MUST reflect the real target
+    capability's own requires_auth (see add_capability()'s call site), not
+    stay hardcoded, once a slot's target can be an authenticated capability
+    (PRIVATE_PILOT_SAFETY_MILESTONE.md item 1: note_taking's own Create
+    Note). A hardcoded False here would make match_contract()'s real §4.4
+    auth-mismatch check fail every single time a slotted capability
+    legitimately requires authentication -- found for real by this exact
+    build, not hypothesized."""
     return {
         "slot_id": slot_id, "name": name, "target_capability": target_cap, "selector": selector,
         "expected_contract": {
             "required_input_fields": [], "input_types": {}, "output_fields": [],
-            "output_types": {}, "nullable_fields": [], "permissions": [], "requires_auth": False,
+            "output_types": {}, "nullable_fields": [], "permissions": [], "requires_auth": requires_auth,
             "dependencies": [], "handled_errors": [], "security_constraints": {},
             "side_effects": list(side_effects),
             "min_version": "1.0.0",
@@ -607,6 +616,14 @@ def _save(rows):
 '''
 
 
+# PRIVATE_PILOT_SAFETY_MILESTONE.md item 4/5: this template's stdout-based
+# logging is "designed for AWS CloudWatch Logs" in the sense
+# PILOT_OWNER_DECISION_SHEET.md's confirmed answer (CloudWatch Logs, 14-day
+# retention) actually requires of application code today -- write
+# structured, credential-free diagnostics to stdout so a log-shipping agent
+# can pick them up. No AWS shipping configuration is added here; that is a
+# genuinely separate deployment task, not something application code can
+# do without real AWS access.
 HOST_APP_PY_TEMPLATE = '''#!/usr/bin/env python3
 """modules/CAP-{host_num}/app.py -- real host: home page, health check, and a
 dynamic loader for sibling capability modules (modules/<CAP-id>/route.py) --
@@ -619,12 +636,24 @@ never required touching a single capability's own handler code."""
 import argparse
 import importlib.util
 import inspect
+import logging
+import sys
 from pathlib import Path
 from flask import Flask, jsonify, request, Response
 
 app = Flask(__name__)
 HERE = Path(__file__).resolve().parent
 MODULES_ROOT = HERE.parent
+
+# Real server-side diagnostic logging, deliberately stdout-based -- the
+# standard idiom a log-shipping agent (CloudWatch, an ECS awslogs driver, a
+# systemd journal) already knows how to pick up with no application-level
+# credential or SDK call. Deliberately logs no request body and no header
+# anywhere in this file -- nothing sensitive (a password, a token) is ever
+# captured in the first place, so there is nothing here that needs
+# field-level redaction.
+logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+_diagnostic_log = logging.getLogger("pilot.host")
 
 _shared_lib_path = MODULES_ROOT / "CAP-0000" / "shared_lib.py"
 _spec = importlib.util.spec_from_file_location("cap0000_shared_lib", _shared_lib_path)
@@ -725,7 +754,16 @@ def dispatch(subpath):
         else:
             status, body = handler(request)
     except Exception as e:
-        return jsonify(_error_body(500, f"handler raised {{type(e).__name__}}: {{e}}")), 500
+        # Real fix (PRIVATE_PILOT_SAFETY_MILESTONE.md item 4): the exception
+        # detail goes to the server-side log only, never to the client --
+        # closing a genuine information-disclosure gap this project's own
+        # planning documents found (a caught exception's message used to be
+        # echoed straight back in the HTTP response body). Deliberately
+        # logs only method/path/exception type/message -- never the request
+        # body or headers, so no credential this app might one day handle
+        # can ever reach this log line to begin with.
+        _diagnostic_log.exception("handler error  %%s %%s  %%s", request.method, path, type(e).__name__)
+        return jsonify(_error_body(500, "internal error")), 500
     # Real binary responses (CAP-0000's save_blob()/load_blob(), the real
     # document-storage primitive): a handler that wants to serve raw bytes
     # with a real Content-Type returns {{"__binary__": True, "data": <bytes>,
@@ -959,7 +997,8 @@ class AppBuilder:
         self.required_caps.append(cap_id)
         if slot_id:
             self.slots.append(slot(slot_id, cap_id, name, selector or f"#{slot_id}",
-                                    side_effects=side_effects))
+                                    side_effects=side_effects,
+                                    requires_auth=bool(required_role or context_fields_override)))
 
     def add_exceeds_threshold_capability(self, num: str, name: str, route: str, id_field: str,
                                           value_field: str, value_input: str, holder_field=None,
@@ -1236,7 +1275,8 @@ class AppBuilder:
 
     def add_auth_capabilities(self, register_num: str, login_num: str, logout_num: str, me_num: str,
                                data_filename="users.json", default_role=None, extra_fields=(),
-                               register_slot_id=None, register_selector=None, route_prefix=""):
+                               register_slot_id=None, register_selector=None, route_prefix="",
+                               register_required_role=None, session_ttl_minutes=60):
         """Generic capability set: real register/login/logout/who-am-i --
         the STANDARD INDIVIDUAL ACCOUNT identity type, and (reused a second
         time with a different data_filename/default_role in the same app)
@@ -1301,7 +1341,32 @@ class AppBuilder:
         answer with the THIRD (client) call's data_filename/role instead:
         a real, reproduced collision, not a hypothetical one. Pass e.g.
         route_prefix="admin" for a second call so it lands at
-        /api/<slug>/admin/auth/register instead."""
+        /api/<slug>/admin/auth/register instead.
+
+        register_required_role: None (the default) preserves the exact
+        original behavior -- an open, unauthenticated Register endpoint,
+        the only mode any existing caller of this method uses. Passing a
+        role string (e.g. "admin") reuses add_capability()'s own existing
+        required_role wrapping (already proven for role-gated capabilities
+        like "Delete Any Task") to make Register itself callable only by
+        an already-authenticated holder of that role -- turning open
+        self-service registration into real ADMIN-PROVISIONED ACCOUNT
+        CREATION with zero new wrapping logic. This closes, for real, the
+        exact limitation identity_and_access_demo's own docstring already
+        named: "a real deployment would provision its first admin
+        out-of-band... never through a public self-service route." Pairs
+        with add_bootstrap_admin_capability() below for the one-time
+        first-admin problem this creates: if Register requires a role
+        nobody can hold yet, something else has to mint the very first
+        holder of it.
+
+        session_ttl_minutes: passed straight through to create_session()'s
+        own ttl_minutes -- 60 (its existing default) preserves the exact
+        original behavior for every caller that doesn't override it; pass
+        a different value (e.g. 720 for a 12-hour pilot session) to change
+        only this app's own session lifetime, with zero new expiry logic
+        (is_expired()/validate_session() already enforce whatever value is
+        set here, unchanged)."""
         prefix = f"/{route_prefix}" if route_prefix else ""
         extra_lines = "".join(f"    {f}_val = body.get({f!r}) or ''\n" for f in extra_fields)
         extra_assign = "".join(f"    user[{f!r}] = {f}_val\n" for f in extra_fields)
@@ -1335,7 +1400,8 @@ class AppBuilder:
                              required_input=("email", "password"), side_effects=("creates_record",),
                              data_filename=data_filename,
                              extra_data_access=[{"entity": "audit_log.json", "access": "read_write"}],
-                             slot_id=register_slot_id, selector=register_selector)
+                             slot_id=register_slot_id, selector=register_selector,
+                             required_role=register_required_role)
 
         login_body = (
             "def handle(request):\n"
@@ -1346,7 +1412,7 @@ class AppBuilder:
             "    for user in users:\n"
             "        if user['email'] == email and _shared.verify_password(password, user['password_hash']):\n"
             f"            token = _shared.create_session(user['id'], extra={{'role': user.get('role')}}, "
-            f"role_source=({data_filename!r}, 'id'))\n"
+            f"ttl_minutes={session_ttl_minutes!r}, role_source=({data_filename!r}, 'id'))\n"
             f"            _shared.audit(email, 'login_success', {data_filename!r}, user['id'])\n"
             "            return 200, {'token': token, 'user_id': user['id'], 'role': user.get('role')}\n"
             f"    _shared.audit(email, 'login_failure', {data_filename!r}, None, "
@@ -1385,6 +1451,70 @@ class AppBuilder:
                              output_fields=("user_id", "role"), data_filename=data_filename,
                              extra_error_codes=("UNAUTHORIZED",),
                              context_fields_override=("authenticated", "user", "role"))
+
+    def add_bootstrap_admin_capability(self, num: str, data_filename="users.json", admin_role="admin",
+                                        route="/api/auth/bootstrap-admin", slot_id=None, selector=None):
+        """The real answer to the chicken-and-egg problem
+        add_auth_capabilities(..., register_required_role=...) creates: if
+        account creation requires an already-authenticated holder of that
+        role, nobody can ever become the first one through the API alone.
+        This is a SELF-LIMITING, one-time exception, not a reopening of
+        public self-registration: it succeeds exactly once, the first time
+        it is ever called against a fresh data store, and unconditionally
+        refuses (403) every call after that -- checked by re-reading the
+        real data on every request, not by a flag that could drift from
+        the real row count.
+
+        Reuses the exact same primitives register_body already proves
+        (hash_password() -- never plaintext -- , the NIST SP 800-63B
+        length + common-password blocklist screen, a real audit() entry),
+        the only change being the guard clause up front and the role being
+        fixed to admin_role rather than caller-supplied. Real deployment
+        use: Sam calls this once, immediately after standing up the pilot,
+        before sharing the URL with any tester -- from that moment on this
+        endpoint is permanently dead, and every further account must go
+        through the admin-gated Register/"Create User" capability instead.
+
+        Also solves a real, structural build/test-harness constraint: this
+        library's own proving mechanism (build.py's Playwright browser
+        journey) has no mechanism to log a session in before running the
+        journey, and CANONICAL_SPEC.md's own C.6 contract already forbids
+        an authenticated capability from being the journey target. A
+        fresh build starts with zero users, so this capability -- and only
+        this one -- can serve as an app's journey target once every other
+        capability requires real authentication, exactly mirroring how
+        identity_and_access_demo's own (openly public) Register already
+        serves as its journey target today."""
+        body = (
+            "def handle(request):\n"
+            "    body = request.get_json(force=True, silent=True) or {}\n"
+            "    email = (body.get('email') or '').strip().lower()\n"
+            "    password = body.get('password') or ''\n"
+            "    if not email or not password:\n"
+            "        return 400, {'error': 'email and password are required'}\n"
+            "    if len(password) < 8:\n"
+            "        return 400, {'error': 'password must be at least 8 characters'}\n"
+            "    if _shared.is_common_password(password):\n"
+            "        return 400, {'error': 'this password is too common; choose a less predictable one'}\n"
+            "    users = _load()\n"
+            f"    if any(u.get('role') == {admin_role!r} for u in users):\n"
+            "        return 403, {'error': 'an admin account already exists; ask an admin to create your account'}\n"
+            "    if any(u['email'] == email for u in users):\n"
+            "        return 409, {'error': 'an account with this email already exists'}\n"
+            "    next_id = (max([u['id'] for u in users], default=0)) + 1\n"
+            f"    user = {{'id': next_id, 'email': email, "
+            f"'password_hash': _shared.hash_password(password), 'role': {admin_role!r}}}\n"
+            "    users.append(user)\n    _save(users)\n"
+            f"    _shared.audit(email, 'bootstrap_admin', {data_filename!r}, next_id, "
+            "'first admin account for this instance')\n"
+            "    return 201, {k: v for k, v in user.items() if k != 'password_hash'}\n"
+        )
+        self.add_capability(num, "Bootstrap Admin", route, "POST", body,
+                             output_fields=("id", "email", "role"),
+                             required_input=("email", "password"), side_effects=("creates_record",),
+                             data_filename=data_filename, extra_error_codes=("FORBIDDEN",),
+                             extra_data_access=[{"entity": "audit_log.json", "access": "read_write"}],
+                             slot_id=slot_id, selector=selector)
 
     def add_share_token_capability(self, generate_num: str, resolve_num: str, resource_type: str,
                                     generate_route: str, resolve_route: str,
@@ -1574,7 +1704,8 @@ class AppBuilder:
         if slot_id:
             cap = json.loads(src_cap_json.read_text())
             self.slots.append(slot(slot_id, cap_id, cap["name"], selector or f"#{slot_id}",
-                                    side_effects=side_effects))
+                                    side_effects=side_effects,
+                                    requires_auth=bool(cap.get("data_shape", {}).get("requires_auth", False))))
 
     def add_notification_capabilities(self, list_num: str, create_num: str, mark_read_num: str,
                                        list_route="/api/notifications",

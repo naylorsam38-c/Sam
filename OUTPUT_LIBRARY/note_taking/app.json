@@ -6,10 +6,10 @@
   "port": 5001,
   "health": "/health",
   "primary_journey": {
-    "input_selector": "#note-title",
-    "input_value": "Groceries",
-    "action_selector": "#add-note-btn",
-    "confirm_selector": "text=Groceries",
-    "confirm_contains": "Groceries"
+    "input_selector": "#bootstrap-email",
+    "input_value": "sam@example.com",
+    "action_selector": "#bootstrap-btn",
+    "confirm_selector": "text=Admin created: sam@example.com",
+    "confirm_contains": "sam@example.com"
   }
 }

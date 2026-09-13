@@ -21,5 +21,9 @@ ROUTE = '/api/note_taking/notes'
 METHOD = 'GET'
 
 
-def handle(request):
-    return 200, {'notes': _load()}
+def handle(request, ctx):
+    if not ctx.get('authenticated'):
+        return 401, {'error': 'not authenticated'}
+    notes = _load()
+    mine = [n for n in notes if n.get('owner_id') == ctx['user']]
+    return 200, {'notes': mine}

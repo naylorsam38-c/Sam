@@ -4,11 +4,5 @@
       "route": "/"
     }
   },
-  "buttons": {
-    "APP-001/SCR-001/BTN-001": {
-      "selector": "#note-list",
-      "slot": "note_list",
-      "position": "center"
-    }
-  }
+  "buttons": {}
 }

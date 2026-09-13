@@ -7,7 +7,7 @@ _spec = _importlib_util.spec_from_file_location("cap0000_shared_lib", _shared_li
 _shared = _importlib_util.module_from_spec(_spec)
 _spec.loader.exec_module(_shared)
 
-DATA_FILE_NAME = "note_taking.json"
+DATA_FILE_NAME = "users.json"
 
 
 def _load():
@@ -17,22 +17,13 @@ def _load():
 def _save(rows):
     _shared.save(DATA_FILE_NAME, rows)
 
-ROUTE = '/api/note_taking/notes/update'
+ROUTE = '/api/note_taking/auth/logout'
 METHOD = 'POST'
 
 
 def handle(request, ctx):
     if not ctx.get('authenticated'):
         return 401, {'error': 'not authenticated'}
-    body = request.get_json(force=True, silent=True) or {}
-    nid = body.get('id')
-    notes = _load()
-    for n in notes:
-        if n['id'] == nid:
-            if n.get('owner_id') != ctx['user']:
-                return 403, {'error': 'not authorized to modify this note'}
-            n['title'] = (body.get('title') or n['title']).strip()
-            n['body'] = body.get('body', n['body'])
-            _save(notes)
-            return 200, n
-    return 404, {'error': f'no note with id {nid!r}'}
+    _shared.invalidate_session(ctx['token'])
+    _shared.audit(ctx['user'], 'logout', 'users.json', ctx['user'])
+    return 200, {'logged_out': True}
