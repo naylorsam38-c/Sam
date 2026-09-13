@@ -920,3 +920,144 @@ amendment process — not by retroactively editing this section.
 
 **No part of this closure touches or narrows the Locked Goal (Part A §3), and no working code,
 test, or proven capability changed as a result of it.**
+
+⸻
+
+# PART C — Infrastructure Contracts (new, round 7, explicitly authorized 2026-09-13)
+
+**This is not a reconciliation of an absent historical document.** Part A's authority order (§2)
+never named "capability contract," "shared library contract," "host dispatch contract," etc. as
+slots to fill, and B.9 already closed the only two genuinely missing historical documents (Harvest
+Specification, Constitution) as N/A. Part C is new: seven contracts describing, for the first time
+in writing at this level of precision, the real infrastructure `build.py` and `gen_common.py`
+already implement and this session's regression already proves. Each contract was written from
+direct inspection of the actual source (function names, line-level behavior, and exact test
+commands are cited, not paraphrased from memory) immediately before being written down.
+
+**Amendment rule for Part C, matching Part B's own discipline**: nothing here is invented ahead of
+the code — a Part C contract may only assert what the cited code and test evidence already do. A
+future round that changes the underlying code amends the matching C.n section, cited by subsection,
+the same way B.1–B.9 amend Part A. Part C never overrides Part A or Part B; where a Part C contract
+touches the same subject as a Part B section (e.g., C.7 and B.2/B.3), Part B's ruling governs and
+Part C states the contract in Part B's terms rather than re-deciding it.
+
+**Nothing in Part C requires, permits, or was written to justify changing any working, tested
+code.** Where a contract exposes a real gap, it is recorded under that contract's own "Genuine
+gaps" heading, not fixed here.
+
+## C.1 — The Capability Record Contract
+
+**Purpose.** The one shape every capability in the library — currently 294 across 49 canonical/
+composed projects, plus every coverage-expansion probe — must satisfy to be admitted into a build
+at all. This is the contract `build.py`'s own name for it ("Common Capability Contract v2") already
+describes; C.1 is its formal write-up.
+
+**Components governed.** Every `CAP-XXXX.json` record and its paired `route.py`/`app.py`
+implementation.
+
+**Existing code and interfaces.**
+- `cap_record(cap_id, name, category, impl_ids, output_fields=(), required_input=(), side_effects=(), approval_ref=..., dependencies=(), error_codes=(), data_access=(), requires_auth=False, context_fields=())` (`verification/gen_common.py:36`) — the record shape itself. New v2 fields (`data_access`, `context_fields`, `contract_version`) live nested inside the pre-existing `data_shape` dict, never as new top-level keys, so this is provably backward-compatible with build.py's own pre-v2 internal proving-table fixtures.
+- `validate_v2_contract(cap_id, cap, app_dir)` (`build.py:603`) — the real compatibility gate. Only runs for a capability that opted in (`data_shape.contract_version == "2.0"`); enforces `data_access` is a well-formed list, `context_fields` is a list, `error_contract.error_codes` is a non-empty list, and — the real teeth — a static regex scan of the capability's *actual copied source* for `_shared.load/save(...)` calls and `DATA_FILE_NAME =` assignments, raising `Broken` (a hard failure, not a warning) if the source touches any entity not declared in `data_access`, or bypasses the shared storage interface entirely (`_RAW_PATH_BYPASS_RE`).
+- `match_contract(expected, cap, impl)` (`build.py:520`) — the twelve-axis slot-to-capability compatibility check: required-input subset, input/output type equality, output-field subset, a *directional* nullable-fields subset (H-T3's ruling: a capability may be stricter than required, never looser), permissions equality, `requires_auth` equality, dependency subset, error-code subset, a directional security-constraints dict-subset, side-effects equality, and semantic-version comparison.
+
+**Test evidence.** `audit_dependency_graph.py`: CLEAN, 0 missing targets / 0 cycles / 0 contract violations / 0 hidden data access across 294 capabilities in 49 projects (re-run live during this session's audit). `verify_build.py` rows G1–G3, H-T3 (29/29 pass, live-reconfirmed): a capability stricter or broader than required binds cleanly; a genuinely unmet security constraint still HELDs.
+
+**Proposed new requirements.** None — every clause above is already enforced as a hard failure, not a recommendation.
+
+**Genuine gaps.** `_RAW_PATH_BYPASS_RE` only recognizes one bypass shape (`parents[2] / "data"`, i.e. reaching around `_shared.load()/save()` to touch `data/` directly). It predates `save_blob()`/`load_blob()` and `encrypt_value()`/`_master_key()` (this round's own additions) and does not recognize an equivalent bypass of `data/blobs/` or `secrets/` (e.g. a capability that constructs `Path(__file__).resolve().parents[2] / "secrets"` directly instead of calling `_shared.encrypt_value()`). No capability does this today — confirmed by the same audit that found 0 hidden access — but the static check does not yet structurally prevent a *future* one from doing so undetected.
+
+## C.2 — The Shared Library Contract (CAP-0000)
+
+**Purpose.** The single, shared, non-duplicated implementation every capability imports rather than reimplementing — storage, blob storage, notifications, audit logging, and the full auth/crypto primitive set.
+
+**Components governed.** `modules/CAP-0000/shared_lib.py`, byte-identical across every project in a given build (verified 0 non-identical duplicate ids in the final merged stress test).
+
+**Existing code and interfaces** — the complete public API, enumerated directly from `SHARED_LIB_SOURCE`:
+`load(filename)`, `save(filename, rows)`, `code_for_status(status)`, `save_blob(raw_bytes, content_type, filename_hint, index_filename)`, `load_blob(blob_id, index_filename)`, `notify(recipient, message, filename)`, `audit(actor, action, entity, entity_id, details, filename)`, `hash_password(password)`, `is_common_password(password)`, `verify_password(password, stored)`, `create_session(user_id, extra, ttl_minutes, filename, role_source)`, `is_expired(expires_at_iso)`, `validate_session(token, filename)`, `invalidate_session(token, filename)`, `generate_api_key(service_name, filename, ttl_minutes)`, `validate_api_key(raw_key, filename)`, `generate_share_token(resource_type, resource_id, filename, ttl_minutes)`, `validate_share_token(token, resource_type, filename)`, `_master_key(key_filename)`, `encrypt_value(plaintext, key_filename)`, `decrypt_value(token, key_filename)`.
+
+**Test evidence.** `security_tests.py` 45/45 (password hashing/blocklist, session create/validate/invalidate, live role-resolution, API keys, share tokens, all with real file inspection). `encryption_tests.py` 9/9 (real AES-256-GCM round-trip and tamper rejection). `document_tests.py` 12/12 (real blob storage, binary-safe). All live-reconfirmed this session.
+
+**Proposed new requirements.** None retroactive. A future, purely additive requirement worth recording as a design intent, not a present obligation: any new CAP-0000 primitive that writes a new top-level `data/<name>.json` or `data/<dir>/` should be checked against every existing `DATA_FILE_NAME`/blob-directory name across the library before being added, the same way C.4 now requires for capabilities generally — this generalizes the lesson `auth_sessions.json` (C.4) already had to learn once.
+
+**Genuine gaps.** `_master_key()`'s key management is real (random, never hardcoded, never committed) but minimal: one local key, no rotation, no per-tenant separation, no external KMS — stated in the key's own docstring and restated, not narrowed, here.
+
+## C.3 — The Host Dispatch Contract
+
+**Purpose.** The actual wire protocol connecting an incoming HTTP request to a capability's `handle()` function, and a capability's return value back to a real HTTP response.
+
+**Components governed.** `HOST_APP_PY_TEMPLATE`'s Flask app: `health()`, `index()`, `load_modules()`, `_make_ctx(request)`, `_error_body(status, message)`, `dispatch(subpath)`.
+
+**Existing code and interfaces.**
+- `dispatch()` is the one catch-all route (`GET`/`POST` only — see Genuine gaps), keyed by `(request.method, path)` into `ROUTE_HANDLERS`, calling `handler(request, _make_ctx(request))` when `HANDLER_WANTS_CTX` marks that route as ctx-aware, else the plain `handler(request)`.
+- `_make_ctx(request)` resolves a real `Authorization: Bearer <token>` into a validated session (via `_shared.validate_session()`) and a real `X-API-Key` header into a validated key (via `_shared.validate_api_key()`), returning `{"user", "authenticated", "role", "token", "service"}` — never a hardcoded stub (the pre-round-7 state B.8 documents).
+- The binary-response path: a handler returning `{"__binary__": True, "data": <bytes>, "content_type": <str>}` is served via `Response(...)` instead of `jsonify(...)` — a sentinel no pre-existing handler ever returns, so this is additive and does not change any prior capability's behavior.
+- The standard error shape: any handler returning the older bare `{"error": "<string>"}` form is normalized centrally to `{"error": {"code": ..., "message": ...}}`.
+
+**Test evidence.** `full_library_stress_test.py` (323/323, live-reconfirmed): every route-bearing capability across the merged system dispatches correctly. `document_tests.py`: the binary-response path serves the exact original bytes with the exact stored `Content-Type` (12/12).
+
+**Proposed new requirements.** None.
+
+**Genuine gaps.** `dispatch()`'s route is registered for `methods=["GET", "POST"]` only — there is no structural support for `PUT`/`DELETE`/`PATCH`. Every capability in the library today expresses updates and deletes as `POST` to an action-shaped sub-route (e.g. `/tasks/delete`), which works and is fully tested, but a capability author reaching for a REST-conventional verb would find it silently unsupported (a 404 from Flask's own routing, not a contract violation `build.py` would catch).
+
+## C.4 — The Cross-App Isolation Contract
+
+**Purpose.** The whole-library property that no single app's own build or test can see: that merging every capability from every project into one real running system produces zero URL-route collisions and zero data-file collisions. This is the contract this session's own work most directly tested — and broke, twice, before fixing.
+
+**Components governed.** `_namespace_route()` (route strings), the same-app `(route, method)` collision assertion in `add_capability()` (added this round), and every capability's own choice of `DATA_FILE_NAME`.
+
+**Existing code and interfaces.**
+- `_namespace_route(route)` rewrites every capability's route to `/api/<slug><rest>`, making cross-*app* route collision structurally impossible (found and fixed in an earlier round, per `FULL_LIBRARY_STRESS_TEST.md`).
+- The same-app collision assertion (added this round, in response to a real bug): `AppBuilder` tracks `(namespaced_route, method)` per app and raises `AssertionError` at generation time if two capabilities in the *same* app claim the same pair — closing the gap that let `add_auth_capabilities()`'s three same-app instances silently shadow each other before `route_prefix` existed.
+- `full_library_stress_test.py` is this contract's actual enforcement mechanism at the *whole-library* level: it merges every real capability from every real project into one process and one shared `data/` directory and reports collision groups, predicted-shadowed capabilities, and — separately — duplicate capability ids that are not byte-identical.
+
+**Test evidence.** Two real, historical violations, both found by this exact mechanism and both fixed:
+1. Same-app route collision (`add_auth_capabilities()` before `route_prefix` existed) — fixed; the assertion above now prevents recurrence at generation time, before a build even runs.
+2. Cross-capability data-file collision (`sessions.json`, shared by the new auth mechanism and two unrelated pre-existing capabilities) — fixed by renaming to `auth_sessions.json`.
+
+Final state, live-reconfirmed this session: 323/323 capabilities across the full merged library (canonical + all 15 coverage-expansion apps), 0 collisions, 0 shadowed, 0 other failures, 0 non-byte-identical duplicate ids.
+
+**Proposed new requirements.** None that would change tested behavior.
+
+**Genuine gaps — the most concrete one this audit found.** Bug #1 (routes) now has a real, structural, generation-time guard that makes recurrence impossible. **Bug #2 (data files) does not.** The fix was a rename; nothing in `add_capability()` or `AppBuilder` checks a new capability's `DATA_FILE_NAME` (or blob/secrets directory name) against every other capability's choice across the library the way the route-collision assertion now does automatically. Today, catching a repeat of bug #2 depends on someone remembering to run `full_library_stress_test.py` with the specific combination of apps involved — exactly what caught it this time, but not a structural guarantee the way C.1's static bypass check or the route-collision assertion are. This is recorded as the single most important "required future improvement" this audit identified, precisely because it is the same class of bug that already happened once, for real, in the code this contract governs.
+
+## C.5 — The Identity & Session Contract
+
+**Purpose.** The wire-level contract behind `IDENTITY_AND_LOGIN_TYPES_SPEC.md`'s five identity types — what `ctx` actually contains and how its fields are resolved, kept separate from that document's human-facing purpose/capabilities framing.
+
+**Components governed.** `ctx` as produced by `_make_ctx()` (C.3) and consumed by any two-argument `handle(request, ctx)`; the `role_source` live-resolution mechanism; TTL/expiry on sessions, API keys, and share tokens.
+
+**Existing code and interfaces.** `create_session(..., role_source=(data_filename, id_field))` stores `_role_source` on the session row; `validate_session()` re-reads the *live* record from that file on every call and returns the *current* role, or `None` (fail closed) if the account no longer exists — not the role frozen at login time. `is_expired()` is the one shared lazy-evaluation check used identically by sessions, API keys, and share tokens.
+
+**Test evidence.** `security_tests.py` 45/45, including the three checks added this round specifically for live-resolution: promoting bob's live user record grants access on his *already-issued* token with no re-login; demoting revokes it just as immediately; deleting the account invalidates the token (fail closed). Live-reconfirmed.
+
+**Proposed new requirements.** None.
+
+**Genuine gaps.** Restated verbatim from `IDENTITY_AND_LOGIN_TYPES_SPEC.md`, not narrowed: no login rate-limiting/lockout exists anywhere in this library; `secure_vault` does not use any of these five types itself; the demo app's admin-registration endpoint is a public, unauthenticated convenience, not a production pattern.
+
+## C.6 — The App Assembly Contract (AppBuilder)
+
+**Purpose.** How a new app type is composed, at generation time, from reusable capability engines rather than hand-written per app.
+
+**Components governed.** `AppBuilder`'s full method set: `add_host`, `add_capability`, `add_exceeds_threshold_capability`, `add_bounded_counter_capability`, `add_unbounded_counter_capability`, `add_status_transition_capability`, `add_bounded_decrement_capability`, `add_validated_status_transition_capability`, `add_search_capability`, `add_audit_log_capability`, `add_auth_capabilities`, `add_share_token_capability`, `add_api_key_capability`, `add_document_storage_capabilities`, `add_ranking_capability`, `reuse_capability_verbatim`, `add_notification_capabilities`, `add_calendar_event_capabilities`, `add_symmetric_relationship_capability`, `write_template`, `write_choice`, `finish`.
+
+**Existing code and interfaces.** Every `add_*` engine funnels through `add_capability()` (the one place `cap_record()`, `_namespace_route()`, and the C.4 collision assertion all run), so every engine automatically inherits the Capability Record Contract (C.1) and the Cross-App Isolation Contract (C.4) with no per-engine extra work. `reuse_capability_verbatim()` is the one exception by design: it copies another app's real, already-proven capability byte-for-byte, keeping the *original* app's namespace — real reuse, not a new capability pretending to be independent.
+
+**Test evidence.** Every one of 43 canonical + 6 composed + 15 coverage-expansion apps was built through this exact mechanism and reached BUILT/READY (live-reconfirmed this session for all 64).
+
+**Proposed new requirements.** None.
+
+**Genuine gaps.** Two structural facts about the auto-generated primary browser-journey slot, both found the hard way this round and both stated honestly in the relevant demo apps' own docstrings rather than fixed by weakening the journey mechanism: (1) an authenticated capability (`context_fields_override` or `required_role` set) cannot be the target of the primary journey slot, because the generic Playwright-driven journey has no way to carry an `Authorization` header; (2) a real multipart file-upload capability (`add_document_storage_capabilities`) cannot be either, because the journey driver only knows how to type text into an input and click a button, not attach a file. Every app built on this contract keeps its journey bound to a plain, unauthenticated, text-based capability for this reason.
+
+## C.7 — The Build-to-Library Lifecycle Contract
+
+**Purpose.** Formalizes, as a contract, what B.2 and B.3 already established as a ruling — stated here in contract terms so C.1–C.6 have a matching lifecycle-level contract, not to re-decide anything B.2/B.3 settled.
+
+**Components governed.** `stage1_assemble()`, `stage2_prove()`, `stage3_readiness_and_promote()`, `compute_readiness()`/`compute_readiness_with_library()`, `promote_to_library()`.
+
+**Existing code and interfaces.** One script, `build.py`, takes an already-populated shelf and an already-accepted template's `choice.json` through assembly → proving → readiness/promotion in one process (B.6). `promote_to_library()` copies a build's own proof (`registry.json`, `app.json`, `locators.json`, `modules/`, `skin.json`, every relevant `RUN-*.json`) into `library/<app_id>/` only when the app has genuinely reached `active` (a real BUILT run), writing a `PROMOTED.json` marker — auto-invoked at the end of every run that reaches BUILT, per B.3.
+
+**Test evidence.** `verify_build.py` 29/29, `test_readiness.py` 20/20, `run_full_verification.py`'s full 7-section suite — all live-reconfirmed this session, identical to the pre-existing baseline.
+
+**Proposed new requirements.** None.
+
+**Genuine gaps.** Unchanged from B.4: the seven named registry files and thirteen named reports an earlier document (Part A) asks for remain an export/formatting layer over real, complete underlying data (`run_ledger.jsonl`, `reports/RUN-*.json`, `registry.json`) — not yet built, correctly recorded as out of scope rather than silently dropped.
