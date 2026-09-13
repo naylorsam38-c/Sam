@@ -6,6 +6,17 @@ in this project (not invented). Every number below comes from an executable run
 whose command is given alongside it, the same standard `COVERAGE_EXPANSION_REPORT.md`
 established.
 
+**See `IDENTITY_AND_LOGIN_TYPES_SPEC.md`** for the formal specification of each
+of the five identity/login types below: what it is for, what it can do, and
+the specific, cited security requirement each one meets (NIST SP 800-63B,
+OWASP's Session Management and Authorization Cheat Sheets, and real API-key
+security practice) — produced after this report's first version, in response
+to an explicit follow-up request to define these properties clearly rather
+than leave them implicit in prose. That follow-up review also found and fixed
+two further real gaps against those cited standards, folded into §4/§6/§7
+below: password blocklist screening, and live (not session-frozen) role
+re-resolution.
+
 ## 1. The five login/identity types
 
 **No pre-existing specification of "five login types" exists anywhere in this
@@ -117,8 +128,18 @@ All in `verification/gen_common.py` (the only tracked file every generated
 app's shared infrastructure comes from):
 
 - `hash_password()`/`verify_password()` (PBKDF2-HMAC-SHA256, salted).
+- `is_common_password()` — a real (deliberately small, local) blocklist of
+  common/breached passwords, closing NIST SP 800-63B's requirement to
+  screen for these, not just enforce a length minimum. Wired into
+  Register.
 - `create_session()`/`validate_session()`/`invalidate_session()` — real,
-  expiring, unguessable session tokens.
+  expiring, unguessable session tokens. `create_session()` now accepts
+  `role_source=(data_filename, id_field)`; `validate_session()` re-resolves
+  the role from the LIVE user record on every call instead of trusting a
+  snapshot frozen at login, and fails closed if the account no longer
+  exists — closing OWASP's Authorization Cheat Sheet "Role Maintenance"
+  requirement (a role change must take effect immediately, not only once
+  the holder's existing session expires on its own).
 - `generate_api_key()`/`validate_api_key()` — hashed service credentials,
   now with optional real `ttl_minutes` expiry.
 - `generate_share_token()`/`validate_share_token()` — unguessable,
@@ -158,6 +179,9 @@ app's shared infrastructure comes from):
   (`document_storage_demo`), two extended probe apps (`secure_vault`,
   `multiplayer_game`), and four new test scripts (`security_tests.py`,
   `encryption_tests.py`, `document_tests.py`, `ranking_tests.py`).
+- `IDENTITY_AND_LOGIN_TYPES_SPEC.md` (new) — the formal per-type
+  specification (purpose/capabilities/security requirements), written and
+  committed in response to the explicit follow-up request for one.
 
 ## 6. Tests run and exact results
 
@@ -167,16 +191,18 @@ never `OUTPUT_LIBRARY`/`NEW_APPS_FROM_LIBRARY`. Exact JSON output for every
 suite is reproducible by re-running the named script.
 
 ```
-security_tests.py            41/41 passed   (identity_and_access_demo + guest_and_service_demo:
+security_tests.py            45/45 passed   (identity_and_access_demo + guest_and_service_demo:
                                               registration, login, logout, password hashing,
-                                              cross-user isolation, unauthorized access denial,
-                                              session expiry, admin authorization, TTL/expiry on
-                                              share links, real auth audit trail)
+                                              common-password blocklist, cross-user isolation,
+                                              unauthorized access denial, session expiry, admin
+                                              authorization, LIVE role re-resolution (promote/
+                                              demote/delete an existing token's account), TTL/
+                                              expiry on share links, real auth audit trail)
 encryption_tests.py           9/9  passed   (secure_vault: real AES-256-GCM at rest)
 document_tests.py            12/12 passed   (document_storage_demo: real multipart upload/download)
 ranking_tests.py               9/9  passed   (multiplayer_game: real leaderboard)
 --------------------------------------------
-Total new evidence-based checks           71/71 passed
+Total new evidence-based checks           75/75 passed
 ```
 
 Full regression (`python3 verification/run_full_verification.py`, standard
@@ -221,8 +247,9 @@ that intermediate state, not edited out.)
 
 ## 7. Security findings
 
-Two real bugs were found and fixed during this work package, both by actually
-running the code rather than reasoning about it — consistent with this
+Four real bugs/gaps were found and fixed during this work package, all by
+actually running the code or checking it against a cited external standard
+rather than reasoning about it in the abstract — consistent with this
 project's standing rule that a clean-looking result must still be verified:
 
 1. **Same-app route collision.** `add_auth_capabilities()` originally
@@ -245,9 +272,28 @@ project's standing rule that a clean-looking result must still be verified:
    genuine `KeyError` when one auth-session row (no `id` field) was read by
    an unrelated capability expecting event-shaped rows. Fixed by renaming to
    `auth_sessions.json`.
+3. **No password blocklist screening.** Register only enforced a minimum
+   length (8 characters) — `"password1"` and similar known-common passwords
+   passed cleanly despite NIST SP 800-63B requiring both. Found by checking
+   the implementation against the cited standard (`IDENTITY_AND_LOGIN_TYPES_SPEC.md`'s
+   research pass), not by a failing test — there was no test for it because
+   there was no requirement written down for it to violate. Fixed with a
+   real (if deliberately small, local) common-password blocklist,
+   `is_common_password()`, wired into Register.
+4. **Session role frozen at login time.** A session's `role` claim was a
+   static snapshot taken once at login and never re-checked — an admin
+   demoted mid-session kept acting as admin, and a deleted account's
+   existing token stayed valid, until that session happened to expire on
+   its own (up to 60 minutes later). Violates OWASP's Authorization Cheat
+   Sheet "Role Maintenance" requirement. Fixed by having `validate_session()`
+   re-resolve the role from the live user record on every call
+   (`role_source` parameter) and fail closed if the account no longer
+   exists — proven by promoting/demoting/deleting a live user record
+   mid-session and confirming the SAME, already-issued token reflects the
+   change immediately, with no re-login.
 
-Both fixes were verified: `security_tests.py` re-run clean after each, and
-the merged stress test re-run to confirm 0 other-failures.
+All four fixes were verified: `security_tests.py` re-run clean after each
+(45/45), and the merged stress test re-run to confirm 0 other-failures.
 
 Part 3's required security proofs, all with real evidence (not asserted from
 reading the code):

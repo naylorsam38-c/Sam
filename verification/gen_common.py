@@ -277,6 +277,28 @@ def hash_password(password):
     return f"{salt}${digest}"
 
 
+# NIST SP 800-63B requires rejecting known-common/breached passwords, not
+# just enforcing a minimum length -- a length gate alone still lets
+# "password1" or "12345678" through. A production system would check
+# against a real breached-password corpus (e.g. a k-anonymity lookup
+# against Have I Been Pwned's range API); this local, illustrative list
+# closes the structural requirement without taking on a new network
+# dependency this library has never needed elsewhere. All entries are
+# >= 8 characters so the check is actually reachable past the length gate.
+_COMMON_PASSWORDS = frozenset({
+    "password", "12345678", "123456789", "1234567890", "qwerty123",
+    "qwertyuiop", "letmein12", "welcome123", "welcome1234", "password1",
+    "abc123456", "iloveyou1", "admin1234", "changeme1", "trustno1x",
+    "monkey123", "dragon123", "football1", "sunshine12", "letmeinplease",
+})
+
+
+def is_common_password(password):
+    """True if `password` is on the common/breached-password blocklist
+    (case-insensitive) -- see _COMMON_PASSWORDS' docstring for scope."""
+    return password.lower() in _COMMON_PASSWORDS
+
+
 def verify_password(password, stored):
     """Constant-time comparison (hmac.compare_digest) against a hash
     produced by hash_password() -- never a plain == on the digest, which
@@ -290,7 +312,7 @@ def verify_password(password, stored):
     return _hmac.compare_digest(check, digest)
 
 
-def create_session(user_id, extra=None, ttl_minutes=60, filename="auth_sessions.json"):
+def create_session(user_id, extra=None, ttl_minutes=60, filename="auth_sessions.json", role_source=None):
     """Real session: a random, unguessable token (256 bits from
     secrets.token_urlsafe, not a predictable or sequential id), a real
     server-computed expiry (the caller cannot extend or forge it), and
@@ -306,13 +328,24 @@ def create_session(user_id, extra=None, ttl_minutes=60, filename="auth_sessions.
     enrollment_hub's class sessions, multiplayer_game's game sessions):
     a genuine cross-capability DATA-FILE collision, the same class of bug
     _namespace_route() already fixes for URLs, just not yet for filenames.
-    "auth_sessions.json" is unambiguous enough not to recur."""
+    "auth_sessions.json" is unambiguous enough not to recur.
+
+    role_source: optional (data_filename, id_field) pair naming where this
+    user's LIVE role can be re-read from on every validate_session() call,
+    instead of trusting extra['role'] as a static claim frozen at login
+    time for the session's whole lifetime. Closes a real gap named by
+    OWASP's Authorization Cheat Sheet ("Role Maintenance": when a role
+    changes, earlier access must be revoked, not left valid until the
+    holder's current session happens to expire on its own) -- see
+    validate_session()."""
     token = _secrets.token_urlsafe(32)
     sessions = load(filename)
     expires_at = (_datetime.datetime.now() + _datetime.timedelta(minutes=ttl_minutes)).isoformat()
     session = {"token": token, "user_id": user_id, "expires_at": expires_at}
     if extra:
         session.update(extra)
+    if role_source:
+        session["_role_source"] = {"data_filename": role_source[0], "id_field": role_source[1]}
     sessions.append(session)
     save(filename, sessions)
     return token
@@ -342,7 +375,14 @@ def validate_session(token, filename="auth_sessions.json"):
     """Real, server-side validation: looks the token up, and genuinely
     checks its expiry against the current time -- an expired session is
     rejected here, not just documented as something that should happen.
-    Returns the real session dict (user_id + any extra claims) or None."""
+    Returns the real session dict (user_id + any extra claims) or None.
+
+    If this session was created with a role_source, the returned role is
+    re-resolved from the LIVE user record on every call, never trusted as
+    the value frozen in at login -- a role change (or account deletion)
+    takes effect on the very next request using this token, not only
+    after it naturally expires. See create_session()'s docstring for the
+    OWASP citation behind this."""
     if not token:
         return None
     sessions = load(filename)
@@ -355,6 +395,14 @@ def validate_session(token, filename="auth_sessions.json"):
             # through to is_expired()'s "no timestamp means no expiry".
             if "expires_at" not in s or is_expired(s.get("expires_at")):
                 return None
+            role_source = s.get("_role_source")
+            if role_source:
+                live_rows = load(role_source["data_filename"])
+                id_field = role_source["id_field"]
+                live_user = next((r for r in live_rows if r.get(id_field) == s["user_id"]), None)
+                if live_user is None:
+                    return None  # the account no longer exists -- fail closed
+                s = {**s, "role": live_user.get("role")}
             return s
     return None
 
@@ -1172,12 +1220,25 @@ class AppBuilder:
         Real security, not simulated: passwords are hashed with
         CAP-0000's hash_password() (PBKDF2-HMAC-SHA256, salted) and NEVER
         stored or returned in plaintext -- Register's own response strips
-        password_hash before returning the created record. Login verifies
+        password_hash before returning the created record. Register also
+        rejects a password shorter than 8 characters (NIST SP 800-63B's
+        required minimum) or on CAP-0000's common-password blocklist (the
+        same standard's requirement to screen against known-common/
+        breached passwords, not just enforce a length floor). Login verifies
         with a constant-time comparison and issues a real, expiring,
         unguessable session token (CAP-0000's create_session()). Logout
         genuinely invalidates that exact token server-side. "Me" requires a
         real, currently-valid session and returns only what the session
         itself resolved -- never a client-supplied user id.
+
+        Login passes role_source=(data_filename, 'id') to create_session(),
+        so ctx['role'] is re-resolved from the LIVE user record on every
+        single request for the life of the session, not frozen at login
+        time -- a role change (or the account being deleted) takes effect
+        on the very next request, closing the OWASP Authorization Cheat
+        Sheet's "Role Maintenance" requirement (earlier access must be
+        revoked when a role changes, not left valid until the session
+        happens to expire naturally).
 
         Every security-relevant event is now audited via CAP-0000's real
         audit() primitive (the same one add_audit_log_capability() reads
@@ -1229,6 +1290,8 @@ class AppBuilder:
             "        return 400, {'error': 'email and password are required'}\n"
             "    if len(password) < 8:\n"
             "        return 400, {'error': 'password must be at least 8 characters'}\n"
+            "    if _shared.is_common_password(password):\n"
+            "        return 400, {'error': 'this password is too common; choose a less predictable one'}\n"
             "    users = _load()\n"
             "    if any(u['email'] == email for u in users):\n"
             "        return 409, {'error': 'an account with this email already exists'}\n"
@@ -1256,7 +1319,8 @@ class AppBuilder:
             "    users = _load()\n"
             "    for user in users:\n"
             "        if user['email'] == email and _shared.verify_password(password, user['password_hash']):\n"
-            "            token = _shared.create_session(user['id'], extra={'role': user.get('role')})\n"
+            f"            token = _shared.create_session(user['id'], extra={{'role': user.get('role')}}, "
+            f"role_source=({data_filename!r}, 'id'))\n"
             f"            _shared.audit(email, 'login_success', {data_filename!r}, user['id'])\n"
             "            return 200, {'token': token, 'user_id': user['id'], 'role': user.get('role')}\n"
             f"    _shared.audit(email, 'login_failure', {data_filename!r}, None, "
