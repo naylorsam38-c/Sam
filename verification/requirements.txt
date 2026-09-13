@@ -29,3 +29,15 @@ playwright==1.62.0
 pyee==13.0.1
 greenlet==3.5.5
 typing_extensions==4.16.0
+
+# Real, vetted authenticated encryption for CAP-0000's encrypt_value()/
+# decrypt_value() (AES-256-GCM via cryptography.hazmat) -- added for the
+# encryption-at-rest capability. This is a real new dependency, not
+# stdlib-only like the auth work: Python's standard library has no
+# authenticated symmetric cipher, and hand-rolling one would be exactly
+# the "fake security" this project's standard forbids. Vendored the same
+# way as flask/playwright above (see verification/vendor/wheels/), with
+# the same offline-install guarantee.
+cryptography==50.0.1
+cffi==2.1.1
+pycparser==3.0
