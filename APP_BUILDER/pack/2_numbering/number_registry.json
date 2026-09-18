@@ -3,6 +3,14 @@
     "event-ticketing": {
       "number": 1,
       "category": "Event Ticketing"
+    },
+    "challenge-platform": {
+      "number": 2,
+      "category": "Challenge Platform"
+    },
+    "data-dashboard": {
+      "number": 3,
+      "category": "Data Dashboard"
     }
   },
   "capabilities": {
@@ -15,6 +23,16 @@
     "book slot": 7,
     "scan barcode": 8,
     "send email notification": 9,
-    "generate report": 10
+    "generate report": 10,
+    "list challenges": 11,
+    "submit flag": 12,
+    "view scoreboard": 13,
+    "create team": 14,
+    "join team": 15,
+    "create data source": 16,
+    "run query": 17,
+    "create visualisation": 18,
+    "add to dashboard": 19,
+    "share dashboard": 20
   }
 }

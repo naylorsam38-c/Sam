@@ -1,0 +1,22 @@
+{
+  "cap_id": "CAP-0017",
+  "cap_name": "run query",
+  "app_slug": "data-dashboard",
+  "repo_name": "getredash/redash",
+  "repo_url": "https://github.com/getredash/redash",
+  "licence": "BSD-2-Clause",
+  "commit": "8f6b15d30da433ae881dd6376a38df17bb6c2663",
+  "source_file": "redash/handlers/queries.py",
+  "source_symbol": "QueryListResource",
+  "source_lines": "186-251",
+  "ranges_fetched": [
+    {
+      "path": "redash/handlers/queries.py",
+      "start": 186,
+      "end": 251
+    }
+  ],
+  "lines_written": 527,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}

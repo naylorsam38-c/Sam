@@ -4,12 +4,12 @@
   "status": "active",
   "release": {
     "version": "1.0.0",
-    "commit": "eb90264caec7d1210959c453d1f93ad88a98e6ce",
+    "commit": "8864bc0cea5b67d9ae96978b5d559e70330ff071",
     "approved": true,
     "approval_ref": "APPROVAL-IMPL-HARVEST"
   },
   "source": {
-    "repository": "indico/indico",
+    "repository": "CTFd/CTFd",
     "path": "CAP-0002/IMPL-01",
     "entrypoint": "CAP-0002/route.py"
   },

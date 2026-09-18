@@ -1,0 +1,55 @@
+{
+  "id": "CAP-0014",
+  "name": "create team",
+  "category": "Challenge Platform",
+  "status": "active",
+  "data_shape": {
+    "input": {
+      "required": [
+        "name"
+      ],
+      "types": {
+        "name": "string",
+        "password": "string"
+      }
+    },
+    "output": {
+      "fields": [],
+      "types": {}
+    },
+    "nullable": [
+      "password"
+    ],
+    "requires_auth": true,
+    "security_constraints": {
+      "decorator": "require_team_mode / authed_only (via blueprint before_request)"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [],
+  "side_effects": [
+    "creates a Teams row",
+    "adds the current user to it as captain"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "VALIDATION_ERROR",
+      "TEAM_MODE_DISABLED",
+      "ALREADY_ON_A_TEAM"
+    ]
+  },
+  "implementations": [
+    "CAP-0014/IMPL-01"
+  ],
+  "qualification": {
+    "status": "approved",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

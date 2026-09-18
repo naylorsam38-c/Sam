@@ -1,0 +1,21 @@
+{
+  "id": "CAP-0016/IMPL-01",
+  "capability_id": "CAP-0016",
+  "status": "active",
+  "release": {
+    "version": "1.0.0",
+    "commit": "8f6b15d30da433ae881dd6376a38df17bb6c2663",
+    "approved": true,
+    "approval_ref": "APPROVAL-IMPL-HARVEST"
+  },
+  "source": {
+    "repository": "getredash/redash",
+    "path": "CAP-0016/IMPL-01",
+    "entrypoint": "CAP-0016/route.py"
+  },
+  "dependencies": [],
+  "tests": [],
+  "rollback": {
+    "previous_version": null
+  }
+}

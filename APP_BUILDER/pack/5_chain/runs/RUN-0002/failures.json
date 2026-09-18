@@ -1,0 +1,50 @@
+[
+  {
+    "run": "RUN-0002",
+    "check": "CHK-001",
+    "level": 0,
+    "text": "CAP-0001 is served by its own part on the shelf",
+    "message": "part did not load: AssertionError: The setup method 'route' can no longer be called on the blueprint 'redash'. It has already been registered at least once, any changes will not be applied consistently.\nMake sure all imports, decorators, functions, etc. needed to set up the blueprint are done before registering it.",
+    "capability": "CAP-0001"
+  },
+  {
+    "run": "RUN-0002",
+    "check": "CHK-002",
+    "level": 0,
+    "text": "CAP-0002 is served by its own part on the shelf",
+    "message": "part did not load: AssertionError: The setup method 'route' can no longer be called on the blueprint 'redash'. It has already been registered at least once, any changes will not be applied consistently.\nMake sure all imports, decorators, functions, etc. needed to set up the blueprint are done before registering it.",
+    "capability": "CAP-0002"
+  },
+  {
+    "run": "RUN-0002",
+    "check": "CHK-003",
+    "level": 0,
+    "text": "CAP-0003 is served by its own part on the shelf",
+    "message": "part did not load: AssertionError: The setup method 'route' can no longer be called on the blueprint 'redash'. It has already been registered at least once, any changes will not be applied consistently.\nMake sure all imports, decorators, functions, etc. needed to set up the blueprint are done before registering it.",
+    "capability": "CAP-0003"
+  },
+  {
+    "run": "RUN-0002",
+    "check": "CHK-004",
+    "level": 0,
+    "text": "CAP-0017 is served by its own part on the shelf",
+    "message": "part did not load: AssertionError: The setup method 'route' can no longer be called on the blueprint 'redash'. It has already been registered at least once, any changes will not be applied consistently.\nMake sure all imports, decorators, functions, etc. needed to set up the blueprint are done before registering it.",
+    "capability": "CAP-0017"
+  },
+  {
+    "run": "RUN-0002",
+    "check": "CHK-012",
+    "level": 0,
+    "text": "the data sources list answers",
+    "message": "500 with no X-Shelf-Capability -- the host refused it rather than CAP-0016 serving it",
+    "capability": "CAP-0016"
+  },
+  {
+    "run": "RUN-0002",
+    "check": "CHK-016",
+    "level": 0,
+    "text": "the page a person lands on throws no javascript errors",
+    "message": "5 error(s), first: Refused to apply style from 'http://localhost:8002/static/server.css' because its MIME type ('text/html') is not a suppo",
+    "capability": null
+  }
+]

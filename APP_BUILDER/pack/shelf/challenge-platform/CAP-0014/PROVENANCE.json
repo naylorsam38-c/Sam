@@ -1,0 +1,22 @@
+{
+  "cap_id": "CAP-0014",
+  "cap_name": "create team",
+  "app_slug": "challenge-platform",
+  "repo_name": "CTFd/CTFd",
+  "repo_url": "https://github.com/CTFd/CTFd",
+  "licence": "Apache-2.0",
+  "commit": "8864bc0cea5b67d9ae96978b5d559e70330ff071",
+  "source_file": "CTFd/teams.py",
+  "source_symbol": "new",
+  "source_lines": "188-335",
+  "ranges_fetched": [
+    {
+      "path": "CTFd/teams.py",
+      "start": 188,
+      "end": 335
+    }
+  ],
+  "lines_written": 403,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}

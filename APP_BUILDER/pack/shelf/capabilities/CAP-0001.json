@@ -1,40 +1,32 @@
 {
   "id": "CAP-0001",
   "name": "register account",
-  "category": "Event Ticketing",
+  "category": "Challenge Platform",
   "status": "active",
   "data_shape": {
     "input": {
       "required": [
+        "name",
         "email",
-        "first_name",
-        "last_name",
         "password"
       ],
       "types": {
+        "name": "string",
         "email": "string",
-        "first_name": "string",
-        "last_name": "string",
-        "username": "string",
         "password": "string",
+        "website": "string",
         "affiliation": "string",
-        "phone": "string",
-        "address": "string",
-        "accept_terms": "boolean"
+        "country": "string"
       }
     },
     "output": {
-      "fields": [
-        "redirect"
-      ],
-      "types": {
-        "redirect": "string"
-      }
+      "fields": [],
+      "types": {}
     },
     "nullable": [],
     "requires_auth": false,
     "security_constraints": {
-      "rate_limited_by": "indico.core.auth.signup_rate_limiter"
+      "csrf": "auth blueprint form CSRF"
     },
     "contract_version": "2.0",
     "data_access": [],
@@ -43,15 +35,15 @@
   "dependencies": [],
   "permissions": [],
   "side_effects": [
-    "creates a User row",
-    "creates an Identity row",
-    "sends a verification email"
+    "creates a Users row",
+    "may send a confirmation email if mail is configured",
+    "creates a session for the new user"
   ],
   "error_contract": {
     "error_codes": [
-      "EMAIL_ALREADY_IN_USE",
-      "REGISTRATION_DISABLED",
-      "VALIDATION_ERROR"
+      "VALIDATION_ERROR",
+      "REGISTRATION_CODE_INVALID",
+      "REGISTRATION_DISABLED"
     ]
   },
   "implementations": [

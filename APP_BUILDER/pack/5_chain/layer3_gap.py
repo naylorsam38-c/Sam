@@ -89,11 +89,13 @@ CANDIDATE_JUDGE = "./layer1_checks.py"
 # the judge is a script driving the real system. If altered: that script
 # decides instead. It must exit 0 only on a real pass.
 
-APP_SLUG = "event-ticketing"
+APP_SLUG = "challenge-platform"
 # Which app on the shelf the built part belongs to. The running app loads a
 # capability from shelf/<APP_SLUG>/<CAP-id>/source.py, and that is where a
 # candidate must be placed to be judged at all. If altered: candidates are
 # applied to that app instead.
+# 2026-09-18: set for this app's chain run, was "challenge-platform" then
+# "event-ticketing" before that.
 
 PART_FILENAME = "source.py"
 # The filename a candidate is written as when it is applied. If altered: the

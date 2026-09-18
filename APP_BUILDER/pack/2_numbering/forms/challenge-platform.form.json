@@ -1,0 +1,664 @@
+{
+  "_form": "TEMPLATE-HARVEST-FORM v2-GODMODE",
+  "_governing_spec": "HARVEST_TWO_MORE_APPS.md",
+  "_read_this_first": "Every field below exists because a god mode contract requires it. Do not add fields. Do not remove fields. Do not invent a value. If you cannot determine something by opening a real file in the clone, leave it blank and name it in 'unresolved'. A named blank is correct. A guess is a defect.",
+  "tpl_id": "TPL-027",
+  "app_type": "Challenge Platform",
+  "app_slug": "challenge-platform",
+  "cap_block": "",
+  "exemplar": {
+    "brand_name": "TryHackMe / HackerRank",
+    "evidence_urls": [
+      "https://ctfd.io/",
+      "https://github.com/CTFd/CTFd",
+      "https://demo.ctfd.io/api/v1/swagger.json"
+    ],
+    "capability_targets": [
+      {
+        "target_name": "register account",
+        "what_it_does": "Create a new CTFd user account (competitor)",
+        "evidence_url": "https://github.com/CTFd/CTFd/blob/8864bc0cea5b67d9ae96978b5d559e70330ff071/CTFd/auth.py#L234-L439"
+      },
+      {
+        "target_name": "log in",
+        "what_it_does": "Authenticate an existing user",
+        "evidence_url": "https://github.com/CTFd/CTFd/blob/8864bc0cea5b67d9ae96978b5d559e70330ff071/CTFd/auth.py#L440-L515"
+      },
+      {
+        "target_name": "log out",
+        "what_it_does": "End the session",
+        "evidence_url": "https://github.com/CTFd/CTFd/blob/8864bc0cea5b67d9ae96978b5d559e70330ff071/CTFd/auth.py#L676-L680"
+      },
+      {
+        "target_name": "list challenges",
+        "what_it_does": "List the challenges visible to the current competitor, in bulk",
+        "evidence_url": "https://github.com/CTFd/CTFd/blob/8864bc0cea5b67d9ae96978b5d559e70330ff071/CTFd/api/v1/challenges.py#L107-L313"
+      },
+      {
+        "target_name": "submit flag",
+        "what_it_does": "Submit an answer/flag for a challenge and get graded right or wrong",
+        "evidence_url": "https://github.com/CTFd/CTFd/blob/8864bc0cea5b67d9ae96978b5d559e70330ff071/CTFd/api/v1/challenges.py#L662-L1071"
+      },
+      {
+        "target_name": "view scoreboard",
+        "what_it_does": "List standings (users or teams) ranked by score",
+        "evidence_url": "https://github.com/CTFd/CTFd/blob/8864bc0cea5b67d9ae96978b5d559e70330ff071/CTFd/api/v1/scoreboard.py#L23-L88"
+      },
+      {
+        "target_name": "create team",
+        "what_it_does": "A competitor forms a new team",
+        "evidence_url": "https://github.com/CTFd/CTFd/blob/8864bc0cea5b67d9ae96978b5d559e70330ff071/CTFd/teams.py#L188-L335"
+      },
+      {
+        "target_name": "join team",
+        "what_it_does": "A competitor joins an existing team by invite code",
+        "evidence_url": "https://github.com/CTFd/CTFd/blob/8864bc0cea5b67d9ae96978b5d559e70330ff071/CTFd/teams.py#L124-L187"
+      }
+    ],
+    "peers_considered": [],
+    "notes": "CTFd was verified against the Harvest Admission Rule directly in the cloned repository. LICENSE is the real Apache-2.0 text, matching the spec. Framework: pyproject.toml/requirements.txt pin flask==2.1.3, flask-sqlalchemy==2.5.1, flask-restx==1.3.0 -- Flask confirmed as the production framework. Datastore: this is the one place this pass found the spec's claim needed a caveat rather than an outright correction -- see harvest_source.structural_match and 'unresolved' below for what was actually found about PostgreSQL support. API docs: CTFd/api/__init__.py builds a flask_restx.Api on the '/api/v1' blueprint with 'doc' enabled, which flask_restx serves at '/api/v1/swagger.json' by default -- matches the spec exactly. Structural match verified live: CTFd/api/v1/challenges.py (ChallengeList lists challenges, ChallengeAttempt grades a flag submission correct/incorrect), CTFd/api/v1/scoreboard.py (ScoreboardList ranks standings), CTFd/teams.py (new()/join() are the real self-service create/join-a-team routes) -- the same register/attempt/score/rank shape as TryHackMe, minus TryHackMe's hosted content library."
+  },
+  "harvest_source": {
+    "repo_name": "CTFd/CTFd",
+    "repo_url": "https://github.com/CTFd/CTFd",
+    "licence": "Apache-2.0",
+    "branch": "master",
+    "commit": "8864bc0cea5b67d9ae96978b5d559e70330ff071",
+    "clone_path": "/tmp/claude-0/-home-user-Sam/02357280-7cb7-5c2c-889b-4c54ea44631e/scratchpad/ctfd-src",
+    "framework": "flask",
+    "api_docs_url": "https://demo.ctfd.io/api/v1/swagger.json",
+    "structural_match": "A competitor registers, joins or forms a team, browses challenges worth points, submits an answer which is graded right or wrong, and a leaderboard ranks teams by score over time -- the same register/attempt/score/rank shape as TryHackMe, minus the hosted content library. Verified live: auth.py (register/login/logout), teams.py (new()/join() -- self-service team creation and joining), api/v1/challenges.py (ChallengeList lists challenges, ChallengeAttempt grades a flag submission), api/v1/scoreboard.py (ScoreboardList ranks standings). PostgreSQL caveat: CTFd's config (CTFd/config.ini, docker-compose.yml) defaults to MySQL/MariaDB and its own CHANGELOG states outright 'Postgres is now considered a second class citizen in CTFd. It is tested against but not a main database backend' -- but Postgres is genuinely, not nominally, supported: config.py builds a real SQLAlchemy URL from DATABASE_PROTOCOL (documented, just not defaulted to postgres), the repo carries a dedicated .github/workflows/postgres.yml CI job that runs the real test suite against a real Postgres service container, and CTFd/utils/exports/__init__.py has real Postgres-specific branches (not stub code). Proceeding on that basis; recorded in full in 'unresolved' rather than silently treated as equivalent to Indico/Redash's first-class Postgres support.",
+    "datastore": "postgresql",
+    "app_factory": "CTFd:create_app",
+    "models_loader": "",
+    "view_adapter": ""
+  },
+  "identity_types": [
+    "standard individual"
+  ],
+  "identity_variant": "standard individual",
+  "role_source": {
+    "data_filename": "",
+    "id_field": ""
+  },
+  "journey_cap_id": "CAP-0002",
+  "journey_cap_name": "log in",
+  "capabilities": [
+    {
+      "cap_id": "CAP-0001",
+      "cap_name": "register account",
+      "engine": "Flask",
+      "exemplar_target": "register account",
+      "what_it_does": "Creates a new CTFd User from the signup form (name/email/password), applying registration code and visibility settings, then logs the new user in.",
+      "route": "/register",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [],
+        "required_input_fields": [
+          "name",
+          "email",
+          "password"
+        ],
+        "input_types": {
+          "name": "string",
+          "email": "string",
+          "password": "string",
+          "website": "string",
+          "affiliation": "string",
+          "country": "string"
+        },
+        "output_type": "redirect",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "VALIDATION_ERROR",
+            "REGISTRATION_CODE_INVALID",
+            "REGISTRATION_DISABLED"
+          ]
+        },
+        "security_constraints": {
+          "csrf": "auth blueprint form CSRF"
+        },
+        "side_effects": [
+          "creates a Users row",
+          "may send a confirmation email if mail is configured",
+          "creates a session for the new user"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "CTFd/auth.py",
+        "source_symbol": "register",
+        "source_lines": "237-439"
+      },
+      "variant": "standard individual"
+    },
+    {
+      "cap_id": "CAP-0002",
+      "cap_name": "log in",
+      "engine": "Flask",
+      "exemplar_target": "log in",
+      "what_it_does": "Authenticates a user by name/email + password (or via MajorLeagueCyber OAuth) and starts a session; on success redirects to the page that triggered the login or to /challenges.",
+      "route": "/login",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [],
+        "required_input_fields": [
+          "name",
+          "password"
+        ],
+        "input_types": {
+          "name": "string",
+          "password": "string"
+        },
+        "output_type": "redirect",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "INVALID_CREDENTIALS",
+            "ACCOUNT_BANNED",
+            "ACCOUNT_NOT_VERIFIED"
+          ]
+        },
+        "security_constraints": {
+          "csrf": "auth blueprint form CSRF"
+        },
+        "side_effects": [
+          "creates a session",
+          "logs the login in CTFd's login log"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "CTFd/auth.py",
+        "source_symbol": "login",
+        "source_lines": "440-515"
+      },
+      "variant": "standard individual"
+    },
+    {
+      "cap_id": "CAP-0003",
+      "cap_name": "log out",
+      "engine": "Flask",
+      "exemplar_target": "log out",
+      "what_it_does": "Clears the current session and redirects to the index page.",
+      "route": "/logout",
+      "method": "GET",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [],
+        "required_input_fields": [],
+        "input_types": {},
+        "output_type": "redirect",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": []
+        },
+        "security_constraints": {},
+        "side_effects": [
+          "clears session"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "CTFd/auth.py",
+        "source_symbol": "logout",
+        "source_lines": "676-680"
+      },
+      "variant": "standard individual"
+    },
+    {
+      "cap_id": "CAP-0011",
+      "cap_name": "list challenges",
+      "engine": "Flask",
+      "exemplar_target": "list challenges",
+      "what_it_does": "Returns every Challenge object visible to the current competitor (respecting visibility, ctf-time-window and email-verification gates), in bulk.",
+      "route": "/api/v1/challenges",
+      "method": "GET",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [
+          "user",
+          "authenticated"
+        ],
+        "required_input_fields": [],
+        "input_types": {
+          "category": "string",
+          "tags": "string"
+        },
+        "output_type": "json",
+        "output_fields": [
+          "success",
+          "data"
+        ],
+        "output_types": {
+          "success": "boolean",
+          "data": "array[object]"
+        },
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "FORBIDDEN"
+          ]
+        },
+        "security_constraints": {
+          "decorators": "check_challenge_visibility, during_ctf_time_only, require_verified_emails"
+        },
+        "side_effects": [],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "CTFd/api/v1/challenges.py",
+        "source_symbol": "ChallengeList",
+        "source_lines": "107-313"
+      }
+    },
+    {
+      "cap_id": "CAP-0012",
+      "cap_name": "submit flag",
+      "engine": "Flask",
+      "exemplar_target": "submit flag",
+      "what_it_does": "Grades a submitted flag/answer for a challenge (via the challenge type's own attempt() implementation), records a Solves or Fails row, and returns whether it was correct.",
+      "route": "/api/v1/challenges/attempt",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [
+          "user",
+          "authenticated"
+        ],
+        "required_input_fields": [
+          "challenge_id",
+          "submission"
+        ],
+        "input_types": {
+          "challenge_id": "integer",
+          "submission": "string"
+        },
+        "output_type": "json",
+        "output_fields": [
+          "success",
+          "data"
+        ],
+        "output_types": {
+          "success": "boolean",
+          "data": "object"
+        },
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": true,
+        "required_role": "",
+        "dependencies": [
+          "the challenge type's own attempt() implementation, e.g. CTFd/plugins/dynamic_challenges or the built-in standard type"
+        ],
+        "error_contract": {
+          "error_codes": [
+            "authentication_required",
+            "ratelimited",
+            "paused",
+            "already_solved"
+          ]
+        },
+        "security_constraints": {
+          "decorators": "check_challenge_visibility, during_ctf_time_only, require_verified_emails"
+        },
+        "side_effects": [
+          "creates a Solves row on a correct submission",
+          "creates a Fails row on an incorrect submission"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "CTFd/api/v1/challenges.py",
+        "source_symbol": "ChallengeAttempt",
+        "source_lines": "662-1071"
+      }
+    },
+    {
+      "cap_id": "CAP-0013",
+      "cap_name": "view scoreboard",
+      "engine": "Flask",
+      "exemplar_target": "view scoreboard",
+      "what_it_does": "Returns the ranked standings (users or teams, depending on the instance's user_mode) ordered by score, for the public scoreboard.",
+      "route": "/api/v1/scoreboard",
+      "method": "GET",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [],
+        "required_input_fields": [],
+        "input_types": {},
+        "output_type": "json",
+        "output_fields": [
+          "success",
+          "data"
+        ],
+        "output_types": {
+          "success": "boolean",
+          "data": "array[object]"
+        },
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "FORBIDDEN"
+          ]
+        },
+        "security_constraints": {
+          "decorators": "check_account_visibility, check_score_visibility",
+          "cache": "cached 60s, key includes request args"
+        },
+        "side_effects": [],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "CTFd/api/v1/scoreboard.py",
+        "source_symbol": "ScoreboardList",
+        "source_lines": "23-88"
+      }
+    },
+    {
+      "cap_id": "CAP-0014",
+      "cap_name": "create team",
+      "engine": "Flask",
+      "exemplar_target": "create team",
+      "what_it_does": "Self-service: a competitor (not yet on a team) creates a new Team, optionally sets a team password, and becomes its captain.",
+      "route": "/teams/new",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [
+          "user",
+          "authenticated"
+        ],
+        "required_input_fields": [
+          "name"
+        ],
+        "input_types": {
+          "name": "string",
+          "password": "string"
+        },
+        "output_type": "redirect",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [
+          "password"
+        ],
+        "permissions": [],
+        "requires_auth": true,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "VALIDATION_ERROR",
+            "TEAM_MODE_DISABLED",
+            "ALREADY_ON_A_TEAM"
+          ]
+        },
+        "security_constraints": {
+          "decorator": "require_team_mode / authed_only (via blueprint before_request)"
+        },
+        "side_effects": [
+          "creates a Teams row",
+          "adds the current user to it as captain"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "CTFd/teams.py",
+        "source_symbol": "new",
+        "source_lines": "188-335"
+      }
+    },
+    {
+      "cap_id": "CAP-0015",
+      "cap_name": "join team",
+      "engine": "Flask",
+      "exemplar_target": "join team",
+      "what_it_does": "Self-service: a competitor joins an existing team by name and the team's (optional) invite password.",
+      "route": "/teams/join",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [
+          "user",
+          "authenticated"
+        ],
+        "required_input_fields": [
+          "name"
+        ],
+        "input_types": {
+          "name": "string",
+          "password": "string"
+        },
+        "output_type": "redirect",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [
+          "password"
+        ],
+        "permissions": [],
+        "requires_auth": true,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "TEAM_NOT_FOUND",
+            "WRONG_PASSWORD",
+            "TEAM_FULL",
+            "ALREADY_ON_A_TEAM"
+          ]
+        },
+        "security_constraints": {
+          "decorator": "require_team_mode / authed_only (via blueprint before_request)"
+        },
+        "side_effects": [
+          "adds the current user to the target team's member list"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "CTFd/teams.py",
+        "source_symbol": "join",
+        "source_lines": "124-187"
+      }
+    }
+  ],
+  "screens": [
+    {
+      "screen_name": "Public: Login",
+      "slots": [
+        {
+          "slot_id": "login_submit",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "log in",
+          "requires_auth": false,
+          "selector": "input[type=password]",
+          "position": "center",
+          "control_name": "Submit",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Public: Register",
+      "slots": [
+        {
+          "slot_id": "register_submit",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "register account",
+          "requires_auth": false,
+          "selector": "",
+          "position": "center",
+          "control_name": "Submit",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Header: nav",
+      "slots": [
+        {
+          "slot_id": "logout_link",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "log out",
+          "requires_auth": true,
+          "selector": "a[href='/logout']",
+          "position": "right",
+          "control_name": "Logout",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Challenges board",
+      "slots": [
+        {
+          "slot_id": "challenge_list",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "list challenges",
+          "requires_auth": false,
+          "selector": "",
+          "position": "center",
+          "control_name": "Challenges",
+          "trigger_type": "page_load",
+          "trigger_on": ""
+        },
+        {
+          "slot_id": "flag_submit",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "submit flag",
+          "requires_auth": true,
+          "selector": "",
+          "position": "center",
+          "control_name": "Submit",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Scoreboard",
+      "slots": [
+        {
+          "slot_id": "scoreboard_list",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "view scoreboard",
+          "requires_auth": false,
+          "selector": "",
+          "position": "center",
+          "control_name": "Scoreboard",
+          "trigger_type": "page_load",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Teams",
+      "slots": [
+        {
+          "slot_id": "team_new",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "create team",
+          "requires_auth": true,
+          "selector": "",
+          "position": "center",
+          "control_name": "Create Team",
+          "trigger_type": "button",
+          "trigger_on": ""
+        },
+        {
+          "slot_id": "team_join",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "join team",
+          "requires_auth": true,
+          "selector": "",
+          "position": "center",
+          "control_name": "Join Team",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    }
+  ],
+  "run": {
+    "start_command": [
+      "python3",
+      "serve.py"
+    ],
+    "port": 8000,
+    "health_endpoint": "/"
+  },
+  "unresolved": [
+    "datastore / Rule A -- CTFd's own project stance calls Postgres 'a second class citizen... tested against but not a main database backend. If you use Postgres, you are entirely on your own' (CHANGELOG.md), and its default docker-compose/config.ini point at MySQL/MariaDB, not Postgres; psycopg2-binary is listed only in pyproject.toml's dev/test dependency group, not the production requirements.txt. Genuine PostgreSQL support was still confirmed and is not nominal: config.py builds a real SQLAlchemy URL from DATABASE_PROTOCOL (docs just don't default it to postgres), the repo carries its own .github/workflows/postgres.yml CI job running the real pytest suite against a real Postgres service container, and CTFd/utils/exports/__init__.py has real Postgres-specific code branches (not stubs). Proceeding on that basis rather than stopping the app, but recording plainly that 'PostgreSQL' for CTFd means 'supported and CI-tested' rather than 'the primary, defaulted datastore' the way it is for Indico and Redash -- this is a real difference between the three sources, not a copy-paste of the spec's claim.",
+    "view_adapter -- left blank, same finding and same reasoning as the Redash form: CTFd's own code never exposes a standalone 'class -> Flask view' bridge function. flask_restx.Api/Namespace registration (CTFd/api/__init__.py, CTFd_API_v1.add_namespace(...)) resolves each Resource class into a view internally inside the flask_restx library, not via any function CTFd itself defines and exports. No adapter symbol was found to name, so it is left blank per the spec's instruction rather than invented.",
+    "register / log in / log out / create team / join team -- all five are genuinely plain Flask blueprint functions in CTFd's own source (auth.py, teams.py), confirmed by grep across the whole repository for MethodView/.as_view( usage outside CTFd/api/ -- there is none. Every class-based view in CTFd is a flask_restx.Resource under /api/v1/*. This was not a choice among alternatives: CTFd genuinely has no class-based implementation of register/login/logout/create-team/join-team to harvest instead. Combined with the blank view_adapter above, host.py's bind_shelf_parts (which only binds a symbol that resolves to a class -- 'isinstance(obj, type)') is expected to refuse all five of these with 'part has no class named by ...'; the three class-based capabilities (list challenges, submit flag, view scoreboard) are expected to resolve to a class but, with no adapter, be bound as the raw class rather than a proper view function -- what actually happens at request time is exactly what the host run records, not assumed here.",
+    "models_loader -- left blank. CTFd:create_app itself does 'from CTFd.models import (... db)' and calls db.create_all()/upgrade() and every app.register_blueprint(...) inline before returning the built app, so there is no separate lazy model-registration step to name.",
+    "data_filename / data_shape.data_access -- left blank on every capability, same reasoning as the other two apps: CTFd's real persistence is PostgreSQL/MySQL via SQLAlchemy models (Users, Teams, Challenges, Solves, Fails -- real tables), not a flat JSON file per entity.",
+    "shared_lib_calls -- left empty on every capability. CTFd implements its own session (Flask session cookie + itsdangerous), password hashing (passlib, via Users.password) and its own scoring/ranking logic -- none of it calls CAP-0000's shared library.",
+    "run.start_command / run.port -- CTFd's own documented entry point (serve.py / 'flask run', default port 8000 in this repo's docker-compose.yml); not run live this session outside of host.py, recorded for completeness of the form's 'run' block."
+  ],
+  "state": "in_progress",
+  "app_id": "APP-002"
+}

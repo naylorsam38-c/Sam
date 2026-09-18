@@ -1,18 +1,16 @@
 {
   "id": "CAP-0002",
   "name": "log in",
-  "category": "Event Ticketing",
+  "category": "Challenge Platform",
   "status": "active",
   "data_shape": {
     "input": {
       "required": [
-        "_provider",
-        "identifier",
+        "name",
         "password"
       ],
       "types": {
-        "_provider": "string",
-        "identifier": "string",
+        "name": "string",
         "password": "string"
       }
     },
@@ -23,8 +21,7 @@
     "nullable": [],
     "requires_auth": false,
     "security_constraints": {
-      "rate_limited_by": "indico.core.auth.login_rate_limiter",
-      "csrf": "form has its own CSRF token, global CSRF disabled for this RH"
+      "csrf": "auth blueprint form CSRF"
     },
     "contract_version": "2.0",
     "data_access": [],
@@ -33,12 +30,14 @@
   "dependencies": [],
   "permissions": [],
   "side_effects": [
-    "creates indico_session cookie"
+    "creates a session",
+    "logs the login in CTFd's login log"
   ],
   "error_contract": {
     "error_codes": [
-      "RATE_LIMITED",
-      "INVALID_CREDENTIALS"
+      "INVALID_CREDENTIALS",
+      "ACCOUNT_BANNED",
+      "ACCOUNT_NOT_VERIFIED"
     ]
   },
   "implementations": [

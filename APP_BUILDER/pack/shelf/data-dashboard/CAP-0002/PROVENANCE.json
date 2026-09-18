@@ -1,0 +1,22 @@
+{
+  "cap_id": "CAP-0002",
+  "cap_name": "log in",
+  "app_slug": "data-dashboard",
+  "repo_name": "getredash/redash",
+  "repo_url": "https://github.com/getredash/redash",
+  "licence": "BSD-2-Clause",
+  "commit": "8f6b15d30da433ae881dd6376a38df17bb6c2663",
+  "source_file": "redash/handlers/authentication.py",
+  "source_symbol": "login",
+  "source_lines": "176-222",
+  "ranges_fetched": [
+    {
+      "path": "redash/handlers/authentication.py",
+      "start": 176,
+      "end": 222
+    }
+  ],
+  "lines_written": 345,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}

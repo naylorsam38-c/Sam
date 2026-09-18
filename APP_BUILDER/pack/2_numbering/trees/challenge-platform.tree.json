@@ -1,0 +1,96 @@
+{
+  "app_id": "APP-002",
+  "app_slug": "challenge-platform",
+  "category": "Challenge Platform",
+  "screens": [
+    {
+      "screen": "Public: Login",
+      "controls": [
+        {
+          "control": "Submit",
+          "trigger_type": "button",
+          "cap_ref": "CAP-0002",
+          "cap_name": "log in"
+        }
+      ]
+    },
+    {
+      "screen": "Public: Register",
+      "controls": [
+        {
+          "control": "Submit",
+          "trigger_type": "button",
+          "cap_ref": "CAP-0001",
+          "cap_name": "register account"
+        }
+      ]
+    },
+    {
+      "screen": "Header: nav",
+      "controls": [
+        {
+          "control": "Logout",
+          "trigger_type": "button",
+          "cap_ref": "CAP-0003",
+          "cap_name": "log out"
+        }
+      ]
+    },
+    {
+      "screen": "Challenges board",
+      "controls": [
+        {
+          "control": "Challenges",
+          "trigger_type": "page_load",
+          "cap_ref": "CAP-0011",
+          "cap_name": "list challenges"
+        },
+        {
+          "control": "Submit",
+          "trigger_type": "button",
+          "cap_ref": "CAP-0012",
+          "cap_name": "submit flag"
+        }
+      ]
+    },
+    {
+      "screen": "Scoreboard",
+      "controls": [
+        {
+          "control": "Scoreboard",
+          "trigger_type": "page_load",
+          "cap_ref": "CAP-0013",
+          "cap_name": "view scoreboard"
+        }
+      ]
+    },
+    {
+      "screen": "Teams",
+      "controls": [
+        {
+          "control": "Create Team",
+          "trigger_type": "button",
+          "cap_ref": "CAP-0014",
+          "cap_name": "create team"
+        },
+        {
+          "control": "Join Team",
+          "trigger_type": "button",
+          "cap_ref": "CAP-0015",
+          "cap_name": "join team"
+        }
+      ]
+    }
+  ],
+  "unbound_controls": [],
+  "referenced_caps": [
+    "CAP-0001",
+    "CAP-0002",
+    "CAP-0003",
+    "CAP-0011",
+    "CAP-0012",
+    "CAP-0013",
+    "CAP-0014",
+    "CAP-0015"
+  ]
+}

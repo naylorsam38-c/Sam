@@ -25,11 +25,16 @@ Usage:  chain.py            run to a terminal state
 # CONFIGURATION BLOCK -- one comment per setting, above all logic.
 # =====================================================================
 
-TARGET = "./host.py"
+TARGET = "../4_host/host.py"
 # The thing being built and proved. If altered: the chain runs against that
 # instead. This is not read directly -- it is what the layer-one suite drives --
 # but a chain pointed at nothing is a chain proving nothing, so it is checked
 # to exist before anything runs.
+# 2026-09-18: corrected from "./host.py" -- host.py lives in 4_host/, not
+# 5_chain/, and TARGET is resolved relative to this file's own directory
+# (HERE), so the original value could never have resolved to a real file.
+# This existence check appears to have never actually been exercised before
+# this run -- see evidence/TWO_MORE_APPS.md.
 
 LEDGER_DIR = "./runs"
 # Where run records are written, one directory per run. If altered: must match
@@ -164,8 +169,8 @@ def main():
                         ("layer three", LAYER3), ("audit", WATCH)):
             here = (HERE / p).resolve()
             print(f"{'ok  ' if here.is_file() else 'MISSING'}  {name}: {here}")
-        print(f"\nlayer three is {'allowed' if ALLOW_LAYER_THREE else 'OFF -- '
-              'the chain will HELD instead of calling a model'}")
+        print(f"\nlayer three is "
+              f"{'allowed' if ALLOW_LAYER_THREE else 'OFF -- the chain will HELD instead of calling a model'}")
         sys.exit(0)
 
     restarts = 0

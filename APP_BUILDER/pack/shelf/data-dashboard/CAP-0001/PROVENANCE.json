@@ -1,0 +1,22 @@
+{
+  "cap_id": "CAP-0001",
+  "cap_name": "register account",
+  "app_slug": "data-dashboard",
+  "repo_name": "getredash/redash",
+  "repo_url": "https://github.com/getredash/redash",
+  "licence": "BSD-2-Clause",
+  "commit": "8f6b15d30da433ae881dd6376a38df17bb6c2663",
+  "source_file": "redash/handlers/setup.py",
+  "source_symbol": "setup",
+  "source_lines": "55-75",
+  "ranges_fetched": [
+    {
+      "path": "redash/handlers/setup.py",
+      "start": 55,
+      "end": 75
+    }
+  ],
+  "lines_written": 75,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}
