@@ -1,0 +1,1610 @@
+{
+  "catalog_version": "1.2.0",
+  "status": "PROPOSED",
+  "note": "This is the authored source of truth. Edit rows here, then run organise.py. Numbers are stamped permanently on first run and never renumbered. Product names on a row are exemplars \u2014 the real app the harvest reads capabilities off, not an app type.",
+  "app_types": [
+    {
+      "slug": "todo-list",
+      "name": "Todo List",
+      "line": "Lets a user capture tasks, mark them done, and see what is outstanding.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "delete record",
+        "view record detail",
+        "filter list",
+        "search records",
+        "send reminder",
+        "send push notification",
+        "sync offline changes",
+        "export data"
+      ],
+      "extensions": [
+        "Offline Sync & Conflict Resolution",
+        "Background Execution"
+      ]
+    },
+    {
+      "slug": "note-taking",
+      "name": "Note Taking",
+      "line": "Lets a user write notes, organise them, and find them again later.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "delete record",
+        "view record detail",
+        "search records",
+        "upload image",
+        "share link",
+        "sync offline changes",
+        "export data"
+      ],
+      "extensions": [
+        "Offline Sync & Conflict Resolution"
+      ]
+    },
+    {
+      "slug": "habit-tracker",
+      "name": "Habit Tracker",
+      "line": "Lets a user commit to a repeated action and see the run of days kept.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "view record detail",
+        "track streak",
+        "award badge",
+        "send reminder",
+        "send push notification",
+        "generate report",
+        "sync offline changes"
+      ],
+      "extensions": [
+        "Progression/Gamification State",
+        "Background Execution",
+        "Offline Sync & Conflict Resolution"
+      ]
+    },
+    {
+      "slug": "calendar-scheduling",
+      "name": "Calendar & Scheduling",
+      "line": "Lets a user hold time, see conflicts, and be reminded before it starts.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "delete record",
+        "view record detail",
+        "book slot",
+        "cancel booking",
+        "send reminder",
+        "send email notification",
+        "send push notification",
+        "set permissions",
+        "sync offline changes"
+      ],
+      "extensions": [
+        "Background Execution",
+        "Offline Sync & Conflict Resolution"
+      ]
+    },
+    {
+      "slug": "expense-tracker",
+      "name": "Expense Tracker",
+      "line": "Lets a user record money spent, categorise it, and see where it went.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "delete record",
+        "view record detail",
+        "filter list",
+        "capture photo",
+        "import data",
+        "export data",
+        "generate report",
+        "calculate tax"
+      ],
+      "extensions": [
+        "Device Access"
+      ]
+    },
+    {
+      "slug": "invoicing",
+      "name": "Invoicing",
+      "line": "Lets a user bill a customer and see whether the bill was paid.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "view record detail",
+        "generate invoice",
+        "calculate tax",
+        "take payment",
+        "issue refund",
+        "send email notification",
+        "send reminder",
+        "export data",
+        "generate report"
+      ],
+      "extensions": [
+        "Security & Access"
+      ],
+      "exemplars": [
+        "Xero"
+      ]
+    },
+    {
+      "slug": "accounting-ledger",
+      "name": "Accounting Ledger",
+      "line": "Lets a user post transactions to accounts and produce a balanced set of books.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "enable two factor",
+        "create record",
+        "edit record",
+        "view record detail",
+        "import data",
+        "reconcile transaction",
+        "calculate tax",
+        "generate report",
+        "schedule report",
+        "export data",
+        "set permissions"
+      ],
+      "extensions": [
+        "Security & Access",
+        "Analytics & Tracking"
+      ],
+      "exemplars": [
+        "Xero"
+      ]
+    },
+    {
+      "slug": "payroll",
+      "name": "Payroll",
+      "line": "Lets a user pay staff on a schedule and account for what was withheld.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "enable two factor",
+        "create record",
+        "edit record",
+        "view record detail",
+        "calculate tax",
+        "take payment",
+        "approve request",
+        "send email notification",
+        "generate report",
+        "export data",
+        "set permissions"
+      ],
+      "extensions": [
+        "Multi-Step Approval",
+        "Security & Access",
+        "Background Execution"
+      ]
+    },
+    {
+      "slug": "crm",
+      "name": "CRM",
+      "line": "Lets a user track people and deals and see what needs chasing.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "delete record",
+        "view record detail",
+        "search records",
+        "filter list",
+        "paginate list",
+        "import data",
+        "export data",
+        "send email notification",
+        "send reminder",
+        "generate report",
+        "set permissions"
+      ],
+      "extensions": [
+        "Analytics & Tracking"
+      ]
+    },
+    {
+      "slug": "helpdesk-ticketing",
+      "name": "Helpdesk Ticketing",
+      "line": "Lets a user raise a problem and have it worked and closed by whoever owns it.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "view record detail",
+        "search records",
+        "filter list",
+        "send message",
+        "receive message",
+        "prioritise queue",
+        "escalate ticket",
+        "approve request",
+        "send email notification",
+        "generate report",
+        "set permissions"
+      ],
+      "extensions": [
+        "Priority Queuing / Triage",
+        "Analytics & Tracking"
+      ]
+    },
+    {
+      "slug": "project-management",
+      "name": "Project Management",
+      "line": "Lets a user break work into items, assign them, and see what is blocked.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "delete record",
+        "view record detail",
+        "filter list",
+        "search records",
+        "send message",
+        "send push notification",
+        "set permissions",
+        "generate report",
+        "export data",
+        "track event"
+      ],
+      "extensions": [
+        "Concurrency",
+        "Analytics & Tracking"
+      ]
+    },
+    {
+      "slug": "team-chat",
+      "name": "Team Chat",
+      "line": "Lets a user send a message to a group and see replies as they arrive.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "send message",
+        "receive message",
+        "show unread count",
+        "search records",
+        "upload image",
+        "share link",
+        "send push notification",
+        "block user",
+        "report content",
+        "moderate content",
+        "set permissions",
+        "show typing indicator",
+        "show presence"
+      ],
+      "extensions": [
+        "State Sync",
+        "Concurrency",
+        "Security & Access"
+      ]
+    },
+    {
+      "slug": "video-conferencing",
+      "name": "Video Conferencing",
+      "line": "Lets a user join a live call and be seen and heard by everyone else on it.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "book slot",
+        "join call",
+        "mix media streams",
+        "capture photo",
+        "send message",
+        "receive message",
+        "transcribe speech",
+        "send push notification",
+        "set permissions",
+        "share screen"
+      ],
+      "extensions": [
+        "Real-Time Media Exchange",
+        "Device Access",
+        "State Sync",
+        "Cost & Resource Load"
+      ],
+      "exemplars": [
+        "Zoom"
+      ]
+    },
+    {
+      "slug": "email-client",
+      "name": "Email Client",
+      "line": "Lets a user read incoming mail, reply to it, and find old threads.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "enable two factor",
+        "send message",
+        "receive message",
+        "show unread count",
+        "search records",
+        "filter list",
+        "paginate list",
+        "upload image",
+        "send push notification",
+        "sync offline changes",
+        "set permissions"
+      ],
+      "extensions": [
+        "Offline Sync & Conflict Resolution",
+        "Background Execution",
+        "Security & Access"
+      ],
+      "exemplars": [
+        "Outlook"
+      ]
+    },
+    {
+      "slug": "file-storage-sync",
+      "name": "File Storage & Sync",
+      "line": "Lets a user keep files in one place and have them match on every device.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "delete record",
+        "view record detail",
+        "search records",
+        "upload image",
+        "share link",
+        "set permissions",
+        "sync offline changes",
+        "resolve sync conflict",
+        "run background sync",
+        "export data"
+      ],
+      "extensions": [
+        "Offline Sync & Conflict Resolution",
+        "Background Execution",
+        "Security & Access"
+      ]
+    },
+    {
+      "slug": "collaborative-document-editor",
+      "name": "Collaborative Document Editor",
+      "line": "Lets a user edit a document at the same time as other people without losing work.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "delete record",
+        "view record detail",
+        "search records",
+        "share link",
+        "set permissions",
+        "resolve sync conflict",
+        "upload image",
+        "export data",
+        "generate text"
+      ],
+      "extensions": [
+        "State Sync",
+        "Concurrency",
+        "Inference"
+      ],
+      "exemplars": [
+        "Google Docs"
+      ]
+    },
+    {
+      "slug": "spreadsheet",
+      "name": "Spreadsheet",
+      "line": "Lets a user hold data in a grid and calculate over it with their own formulas.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "view record detail",
+        "import data",
+        "export data",
+        "run user script",
+        "generate report",
+        "share link",
+        "set permissions",
+        "resolve sync conflict"
+      ],
+      "extensions": [
+        "User-Defined Logic",
+        "Concurrency",
+        "State Sync"
+      ],
+      "exemplars": [
+        "Excel"
+      ]
+    },
+    {
+      "slug": "form-builder-survey",
+      "name": "Form Builder & Survey",
+      "line": "Lets a user publish a set of questions and see the answers that come back.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "delete record",
+        "view record detail",
+        "share link",
+        "upload image",
+        "export data",
+        "generate report",
+        "send email notification",
+        "set permissions",
+        "track event"
+      ],
+      "extensions": [
+        "Analytics & Tracking"
+      ]
+    },
+    {
+      "slug": "ecommerce-storefront",
+      "name": "E-commerce Storefront",
+      "line": "Lets a user buy a listed item and have the order recorded and fulfilled.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "search records",
+        "filter list",
+        "paginate list",
+        "view record detail",
+        "add favourite",
+        "take payment",
+        "store card",
+        "issue refund",
+        "apply discount code",
+        "manage inventory",
+        "calculate tax",
+        "rate item",
+        "write review",
+        "send email notification",
+        "generate invoice"
+      ],
+      "extensions": [
+        "Security & Access",
+        "Concurrency",
+        "Analytics & Tracking"
+      ],
+      "exemplars": [
+        "Amazon"
+      ]
+    },
+    {
+      "slug": "multi-vendor-marketplace",
+      "name": "Multi-Vendor Marketplace",
+      "line": "Lets a user buy from independent sellers who each hold their own stock and get paid separately.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "search records",
+        "filter list",
+        "paginate list",
+        "view record detail",
+        "upload image",
+        "take payment",
+        "split payout",
+        "issue refund",
+        "manage inventory",
+        "calculate tax",
+        "rate item",
+        "write review",
+        "send message",
+        "receive message",
+        "moderate content",
+        "report content",
+        "generate report"
+      ],
+      "extensions": [
+        "Multi-Tenant Ownership",
+        "Concurrency",
+        "Content Injection",
+        "Security & Access"
+      ],
+      "exemplars": [
+        "Etsy"
+      ]
+    },
+    {
+      "slug": "auction",
+      "name": "Auction",
+      "line": "Lets a user bid against other people on a clock and pay if they win.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "view record detail",
+        "search records",
+        "upload image",
+        "place bid",
+        "close auction",
+        "take payment",
+        "issue refund",
+        "send push notification",
+        "send email notification",
+        "rate item",
+        "report content"
+      ],
+      "extensions": [
+        "Live Bidding",
+        "Concurrency",
+        "State Sync",
+        "Security & Access"
+      ],
+      "exemplars": [
+        "Live Auction Platform (eBay-style)"
+      ]
+    },
+    {
+      "slug": "food-delivery",
+      "name": "Food Delivery",
+      "line": "Lets a user order from a nearby kitchen and watch the order come to them.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "search records",
+        "filter list",
+        "view record detail",
+        "take payment",
+        "store card",
+        "apply discount code",
+        "split payout",
+        "show map",
+        "track location",
+        "calculate route",
+        "send push notification",
+        "rate item",
+        "write review",
+        "issue refund",
+        "manage inventory"
+      ],
+      "extensions": [
+        "Live Location",
+        "Multi-Tenant Ownership",
+        "Device Access",
+        "State Sync"
+      ]
+    },
+    {
+      "slug": "ride-hailing",
+      "name": "Ride Hailing",
+      "line": "Lets a user request a driver nearby and be taken to a destination for a fare.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "verify phone",
+        "show map",
+        "track location",
+        "calculate route",
+        "generate recommendation",
+        "take payment",
+        "store card",
+        "split payout",
+        "send push notification",
+        "rate item",
+        "send message",
+        "receive message",
+        "issue refund"
+      ],
+      "extensions": [
+        "Live Location",
+        "Inference",
+        "Device Access",
+        "State Sync",
+        "Security & Access"
+      ],
+      "exemplars": [
+        "Uber"
+      ]
+    },
+    {
+      "slug": "parcel-tracking",
+      "name": "Parcel Tracking",
+      "line": "Lets a user see where a consignment is and when it will arrive.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "view record detail",
+        "search records",
+        "scan barcode",
+        "show map",
+        "track location",
+        "calculate route",
+        "send push notification",
+        "send email notification",
+        "generate report",
+        "export data"
+      ],
+      "extensions": [
+        "Live Location",
+        "Device Access",
+        "Background Execution"
+      ]
+    },
+    {
+      "slug": "appointment-booking",
+      "name": "Appointment Booking",
+      "line": "Lets a user take a slot in someone's diary and be reminded before it.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "search records",
+        "filter list",
+        "view record detail",
+        "book slot",
+        "cancel booking",
+        "take payment",
+        "store card",
+        "issue refund",
+        "send reminder",
+        "send email notification",
+        "send push notification",
+        "generate report"
+      ],
+      "extensions": [
+        "Concurrency",
+        "Background Execution"
+      ]
+    },
+    {
+      "slug": "property-rental",
+      "name": "Property Rental",
+      "line": "Lets a user book a place to stay for dates and pay the owner for them.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "verify email",
+        "search records",
+        "filter list",
+        "paginate list",
+        "view record detail",
+        "upload image",
+        "show map",
+        "book slot",
+        "cancel booking",
+        "take payment",
+        "split payout",
+        "issue refund",
+        "rate item",
+        "write review",
+        "send message",
+        "receive message",
+        "moderate content"
+      ],
+      "extensions": [
+        "Multi-Tenant Ownership",
+        "Concurrency",
+        "Security & Access"
+      ]
+    },
+    {
+      "slug": "event-ticketing",
+      "name": "Event Ticketing",
+      "line": "Lets a user buy entry to a dated event and prove it at the door.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "search records",
+        "filter list",
+        "view record detail",
+        "book slot",
+        "take payment",
+        "issue refund",
+        "apply discount code",
+        "scan barcode",
+        "send email notification",
+        "send push notification",
+        "manage inventory",
+        "generate report",
+        "split payout"
+      ],
+      "extensions": [
+        "Concurrency",
+        "Device Access",
+        "Multi-Tenant Ownership"
+      ]
+    },
+    {
+      "slug": "restaurant-pos",
+      "name": "Restaurant POS",
+      "line": "Lets a user take an order at a table, send it to the kitchen, and settle the bill.",
+      "capabilities": [
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "view record detail",
+        "take payment",
+        "issue refund",
+        "calculate tax",
+        "apply discount code",
+        "manage inventory",
+        "prioritise queue",
+        "generate invoice",
+        "generate report",
+        "sync offline changes",
+        "set permissions"
+      ],
+      "extensions": [
+        "Offline Sync & Conflict Resolution",
+        "Priority Queuing / Triage",
+        "Device Access"
+      ]
+    },
+    {
+      "slug": "inventory-warehouse",
+      "name": "Inventory & Warehouse",
+      "line": "Lets a user know what stock is held where and adjust it as it moves.",
+      "capabilities": [
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "view record detail",
+        "search records",
+        "filter list",
+        "scan barcode",
+        "manage inventory",
+        "import data",
+        "export data",
+        "generate report",
+        "schedule report",
+        "send push notification",
+        "set permissions",
+        "sync offline changes"
+      ],
+      "extensions": [
+        "Device Access",
+        "Offline Sync & Conflict Resolution",
+        "Analytics & Tracking"
+      ]
+    },
+    {
+      "slug": "fleet-tracking",
+      "name": "Fleet Tracking",
+      "line": "Lets a user see where every vehicle is and how it has been driven.",
+      "capabilities": [
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "view record detail",
+        "show map",
+        "track location",
+        "calculate route",
+        "read sensor stream",
+        "generate report",
+        "schedule report",
+        "send push notification",
+        "export data",
+        "set permissions"
+      ],
+      "extensions": [
+        "Live Location",
+        "Continuous Sensor Logging",
+        "Background Execution",
+        "Analytics & Tracking"
+      ]
+    },
+    {
+      "slug": "dating",
+      "name": "Dating",
+      "line": "Lets a user see candidate people, signal interest, and talk if it is mutual.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "verify phone",
+        "upload image",
+        "capture photo",
+        "generate recommendation",
+        "show map",
+        "send message",
+        "receive message",
+        "block user",
+        "report content",
+        "moderate content",
+        "start subscription",
+        "cancel subscription",
+        "take payment",
+        "send push notification"
+      ],
+      "extensions": [
+        "Inference",
+        "Concurrency",
+        "Device Access",
+        "Security & Access",
+        "Recurring Billing / Subscription Lifecycle"
+      ],
+      "exemplars": [
+        "Tinder",
+        "Hinge"
+      ]
+    },
+    {
+      "slug": "social-feed",
+      "name": "Social Feed",
+      "line": "Lets a user post to followers and read a ranked stream of other people's posts.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "upload image",
+        "create record",
+        "delete record",
+        "view record detail",
+        "paginate list",
+        "generate recommendation",
+        "follow user",
+        "block user",
+        "report content",
+        "moderate content",
+        "send message",
+        "receive message",
+        "show unread count",
+        "send push notification",
+        "track event"
+      ],
+      "extensions": [
+        "Inference",
+        "State Sync",
+        "Content Injection",
+        "Concurrency",
+        "Analytics & Tracking"
+      ],
+      "exemplars": [
+        "Facebook"
+      ]
+    },
+    {
+      "slug": "photo-sharing",
+      "name": "Photo Sharing",
+      "line": "Lets a user publish images and see what other people have published.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "capture photo",
+        "upload image",
+        "create record",
+        "delete record",
+        "view record detail",
+        "paginate list",
+        "follow user",
+        "add favourite",
+        "report content",
+        "moderate content",
+        "classify content",
+        "send push notification",
+        "share link"
+      ],
+      "extensions": [
+        "Device Access",
+        "Inference",
+        "Content Injection",
+        "Analytics & Tracking"
+      ]
+    },
+    {
+      "slug": "short-video-feed",
+      "name": "Short Video Feed",
+      "line": "Lets a user scroll an endless ranked stream of short clips and post their own.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "upload video",
+        "stream video",
+        "play video",
+        "generate recommendation",
+        "classify content",
+        "paginate list",
+        "follow user",
+        "report content",
+        "moderate content",
+        "add favourite",
+        "share link",
+        "send push notification",
+        "track event"
+      ],
+      "extensions": [
+        "Inference",
+        "State Sync",
+        "Content Injection",
+        "Cost & Resource Load",
+        "Analytics & Tracking"
+      ],
+      "exemplars": [
+        "TikTok"
+      ]
+    },
+    {
+      "slug": "music-streaming",
+      "name": "Music Streaming",
+      "line": "Lets a user play tracks on demand and keep a library of what they like.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "search records",
+        "filter list",
+        "view record detail",
+        "play audio",
+        "add favourite",
+        "generate recommendation",
+        "start subscription",
+        "cancel subscription",
+        "take payment",
+        "sync offline changes",
+        "track event"
+      ],
+      "extensions": [
+        "State Sync",
+        "Inference",
+        "Recurring Billing / Subscription Lifecycle",
+        "Offline Sync & Conflict Resolution"
+      ],
+      "exemplars": [
+        "Spotify"
+      ]
+    },
+    {
+      "slug": "video-streaming",
+      "name": "Video Streaming",
+      "line": "Lets a user watch long-form video on demand and pick up where they left off.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "search records",
+        "filter list",
+        "view record detail",
+        "stream video",
+        "play video",
+        "add favourite",
+        "generate recommendation",
+        "start subscription",
+        "cancel subscription",
+        "take payment",
+        "set permissions",
+        "track event"
+      ],
+      "extensions": [
+        "State Sync",
+        "Inference",
+        "Content Injection",
+        "Cost & Resource Load",
+        "Recurring Billing / Subscription Lifecycle"
+      ],
+      "exemplars": [
+        "YouTube"
+      ]
+    },
+    {
+      "slug": "podcast",
+      "name": "Podcast",
+      "line": "Lets a user subscribe to a show and listen to new episodes as they land.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "search records",
+        "view record detail",
+        "play audio",
+        "add favourite",
+        "transcribe speech",
+        "send push notification",
+        "sync offline changes",
+        "run background sync",
+        "generate recommendation",
+        "track event"
+      ],
+      "extensions": [
+        "Background Execution",
+        "Offline Sync & Conflict Resolution",
+        "Inference"
+      ]
+    },
+    {
+      "slug": "fitness-tracking",
+      "name": "Fitness Tracking",
+      "line": "Lets a user record activity from sensors and see it build into a history.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "log workout",
+        "read sensor stream",
+        "track streak",
+        "award badge",
+        "show leaderboard",
+        "generate report",
+        "send push notification",
+        "send reminder",
+        "export data",
+        "sync offline changes",
+        "run background sync"
+      ],
+      "extensions": [
+        "Continuous Sensor Logging",
+        "Device Access",
+        "Background Execution",
+        "Progression/Gamification State"
+      ],
+      "exemplars": [
+        "Fitness App"
+      ]
+    },
+    {
+      "slug": "meditation-wellbeing",
+      "name": "Meditation & Wellbeing",
+      "line": "Lets a user follow a guided session and keep a run of days practised.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "search records",
+        "view record detail",
+        "play audio",
+        "track streak",
+        "award badge",
+        "send reminder",
+        "send push notification",
+        "start subscription",
+        "cancel subscription",
+        "take payment",
+        "sync offline changes"
+      ],
+      "extensions": [
+        "Progression/Gamification State",
+        "Background Execution",
+        "Recurring Billing / Subscription Lifecycle"
+      ]
+    },
+    {
+      "slug": "language-learning",
+      "name": "Language Learning",
+      "line": "Lets a user drill a language in short lessons and see progress accumulate.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "view record detail",
+        "play audio",
+        "transcribe speech",
+        "synthesise speech",
+        "track streak",
+        "award badge",
+        "show leaderboard",
+        "generate recommendation",
+        "send reminder",
+        "send push notification",
+        "start subscription",
+        "take payment",
+        "sync offline changes"
+      ],
+      "extensions": [
+        "Progression/Gamification State",
+        "Natural Language Processing",
+        "Inference",
+        "Offline Sync & Conflict Resolution"
+      ],
+      "exemplars": [
+        "Duolingo"
+      ]
+    },
+    {
+      "slug": "online-course-lms",
+      "name": "Online Course LMS",
+      "line": "Lets a user work through a structured course and be marked on completion.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "search records",
+        "view record detail",
+        "stream video",
+        "play video",
+        "upload video",
+        "create record",
+        "edit record",
+        "take payment",
+        "split payout",
+        "generate report",
+        "award badge",
+        "send email notification",
+        "set permissions",
+        "track event"
+      ],
+      "extensions": [
+        "Progression/Gamification State",
+        "Multi-Tenant Ownership",
+        "Cost & Resource Load",
+        "Analytics & Tracking"
+      ],
+      "exemplars": [
+        "Coursera"
+      ]
+    },
+    {
+      "slug": "quiz-flashcards",
+      "name": "Quiz & Flashcards",
+      "line": "Lets a user test recall on a deck and be shown weak items more often.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "create record",
+        "edit record",
+        "delete record",
+        "view record detail",
+        "import data",
+        "generate recommendation",
+        "track streak",
+        "award badge",
+        "show leaderboard",
+        "share link",
+        "sync offline changes",
+        "generate report"
+      ],
+      "extensions": [
+        "Progression/Gamification State",
+        "Inference",
+        "Offline Sync & Conflict Resolution"
+      ]
+    },
+    {
+      "slug": "recipe-meal-planning",
+      "name": "Recipe & Meal Planning",
+      "line": "Lets a user pick meals for a period and get the shopping it requires.",
+      "capabilities": [
+        "register account",
+        "log in",
+        "log out",
+        "edit profile",
+        "search records",
+        "filter list",
+        "view record detail",
+        "create record",
+        "edit record",
+        "upload image",
+        "add favourite",
+        "rate item",
+        "write review",
+        "generate recommendation",
+        "export data",
+        "send reminder",
+        "share link"
+      ],
+      "extensions": [
+        "Inference",
+        "Background Execution"
+      ]
+    },
+    {
+      "slug": "banking",
+      "name": "Banking",
+      "line": "Lets a user hold money, move it between accounts, and see where it went.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Banking App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "online-multiplayer-game",
+      "name": "Online Multiplayer Game",
+      "line": "Lets a user join a shared session and play against other people in real time.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Multiplayer Game"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "smart-home-control",
+      "name": "Smart Home Control",
+      "line": "Lets a user see the state of a device in their home and change it.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Smart Home App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "ar-gaming",
+      "name": "Augmented Reality Gaming",
+      "line": "Lets a user play against objects placed in their real surroundings.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Pokemon Go"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "vr-experience",
+      "name": "Virtual Reality Experience",
+      "line": "Lets a user move inside a rendered space with their head and hands tracked.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Meta Quest"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "crypto-exchange",
+      "name": "Cryptocurrency Exchange",
+      "line": "Lets a user swap one currency for another at a live rate.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Coinbase"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "crypto-wallet",
+      "name": "Crypto Wallet",
+      "line": "Lets a user hold their own keys and sign a transaction with them.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "MetaMask"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "crypto-trading",
+      "name": "Cryptocurrency Trading",
+      "line": "Lets a user place an order on a market and watch the position move.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Crypto Trading App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "voice-assistant",
+      "name": "Voice Assistant",
+      "line": "Lets a user speak an instruction and have it carried out.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Alexa",
+        "Google Assistant"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "workspace-productivity",
+      "name": "Workspace & Productivity",
+      "line": "Lets a user keep notes, tasks, and records together in one place.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Notion"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "maps-navigation",
+      "name": "Maps & Navigation",
+      "line": "Lets a user find a place and be guided to it turn by turn.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Google Maps"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "enterprise-erp",
+      "name": "Enterprise Resource Planning",
+      "line": "Lets an organisation run finance, stock, and people off one set of records.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Enterprise ERP (SAP-style)"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "peer-to-peer-file-sharing",
+      "name": "Peer-to-Peer File Sharing",
+      "line": "Lets a user send a file straight to another user without a server holding it.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Peer-to-Peer File Sharing App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "telehealth-consultation",
+      "name": "Telehealth Consultation",
+      "line": "Lets a patient see a clinician over video and leave with a record of it.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Telehealth App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "public-transport-sharing",
+      "name": "Public Transport & Vehicle Sharing",
+      "line": "Lets a user find the nearest vehicle, unlock it, and pay for the trip.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Public Transit / Bike-Share App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "offline-first-field-operations",
+      "name": "Offline-First Field Operations",
+      "line": "Lets a worker record jobs with no signal and have them land when signal returns.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Offline-First Field App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "civic-services-portal",
+      "name": "Government & Civic Services",
+      "line": "Lets a citizen prove who they are and complete an official process.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Government / Civic Services Portal"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "sports-betting",
+      "name": "Live Sports Betting",
+      "line": "Lets a user stake money on an event while the odds are still moving.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Live Sports Betting App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "lab-result-analysis",
+      "name": "Genomics & Lab-Result Analysis",
+      "line": "Lets a user run a large dataset through an analysis and read the result.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Genomics / Lab-Result Analysis App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "cad-3d-design",
+      "name": "CAD & 3D Design",
+      "line": "Lets a user draw an object to exact dimensions and change it without redrawing.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "CAD / 3D Design Software"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "subscription-management",
+      "name": "Subscription Management",
+      "line": "Lets a user see what they pay for monthly and stop paying for it.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Subscription Bundle App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "emergency-dispatch",
+      "name": "Emergency Dispatch",
+      "line": "Lets a controller take a call, assign the nearest unit, and track it to the scene.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Emergency Dispatch App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "realtime-translation",
+      "name": "Real-Time Translation",
+      "line": "Lets two people who share no language hold a conversation.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Real-Time Translation App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "insurance-claims",
+      "name": "Insurance & Warranty Claims",
+      "line": "Lets a customer report a loss, prove it, and be paid or refused.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Insurance / Warranty Claims App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "iot-firmware",
+      "name": "Embedded IoT Firmware",
+      "line": "Lets a device read its sensors, report them, and accept an update.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Embedded IoT Firmware"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "legacy-batch-banking",
+      "name": "Legacy Batch Banking",
+      "line": "Lets an institution post a day's transactions in one scheduled run.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Legacy Mainframe Batch Banking System"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    },
+    {
+      "slug": "anonymous-network",
+      "name": "Anonymous Networking",
+      "line": "Lets a user reach a service without revealing who or where they are.",
+      "capabilities": [],
+      "extensions": [],
+      "exemplars": [
+        "Anonymous / Tor-Style App"
+      ],
+      "capabilities_source": "harvest \u2014 capabilities not yet read off the exemplar"
+    }
+  ],
+  "capability_classes": {
+    "note": "Two classes. 'button' is the default: one control, one POST or GET, one rendered response. 'non_button' capabilities cannot work that way -- they hold a connection open, move a media stream, read device hardware, or run without a user present. They are still harvested from real code like any other capability and are still Flask-compatible. The difference is how they are triggered and where they may not be used.",
+    "non_button": {
+      "kinds": {
+        "live connection": [
+          "join call",
+          "receive message",
+          "show unread count",
+          "show typing indicator",
+          "show presence",
+          "share screen"
+        ],
+        "streaming media": [
+          "mix media streams",
+          "stream video"
+        ],
+        "device hardware": [
+          "capture photo",
+          "scan barcode",
+          "show map",
+          "play audio",
+          "play video"
+        ],
+        "background worker": [
+          "run background sync",
+          "read sensor stream"
+        ]
+      },
+      "all": [
+        "capture photo",
+        "join call",
+        "mix media streams",
+        "play audio",
+        "play video",
+        "read sensor stream",
+        "receive message",
+        "run background sync",
+        "scan barcode",
+        "share screen",
+        "show map",
+        "show presence",
+        "show typing indicator",
+        "show unread count",
+        "stream video"
+      ],
+      "count": 15,
+      "rules": [
+        "A slot bound to one of these must carry a real trigger_type. trigger_type 'button' is rejected by the form validator.",
+        "None of these may be the journey_cap_id. God mode section 7 requires the Playwright journey target to be a plain, unauthenticated, text-based, non-upload capability.",
+        "A streaming or binary response must set binary_response true and return the god mode binary envelope, not a bare body.",
+        "Device hardware capabilities are harvested as the server half only. The browser or device half is front-door wiring and is out of scope here."
+      ]
+    },
+    "needs_decision": {
+      "note": "Not classified. These behave like button capabilities in some real apps and like non-button ones in others. Named here rather than guessed. Decide per capability, then move it into the class above.",
+      "capabilities": [
+        "track location",
+        "sync offline changes",
+        "transcribe speech",
+        "synthesise speech"
+      ]
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "CAP-0002",
+  "name": "log in",
+  "category": "Event Ticketing",
+  "status": "active",
+  "data_shape": {
+    "input": {
+      "required": [
+        "_provider",
+        "identifier",
+        "password"
+      ],
+      "types": {
+        "_provider": "string",
+        "identifier": "string",
+        "password": "string"
+      }
+    },
+    "output": {
+      "fields": [],
+      "types": {}
+    },
+    "nullable": [],
+    "requires_auth": false,
+    "security_constraints": {
+      "rate_limited_by": "indico.core.auth.login_rate_limiter",
+      "csrf": "form has its own CSRF token, global CSRF disabled for this RH"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": []
+  },
+  "dependencies": [],
+  "permissions": [],
+  "side_effects": [
+    "creates indico_session cookie"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "RATE_LIMITED",
+      "INVALID_CREDENTIALS"
+    ]
+  },
+  "implementations": [
+    "CAP-0002/IMPL-01"
+  ],
+  "qualification": {
+    "status": "approved",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

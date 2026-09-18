@@ -1,0 +1,65 @@
+{
+  "id": "CAP-0001",
+  "name": "register account",
+  "category": "Event Ticketing",
+  "status": "active",
+  "data_shape": {
+    "input": {
+      "required": [
+        "email",
+        "first_name",
+        "last_name",
+        "password"
+      ],
+      "types": {
+        "email": "string",
+        "first_name": "string",
+        "last_name": "string",
+        "username": "string",
+        "password": "string",
+        "affiliation": "string",
+        "phone": "string",
+        "address": "string",
+        "accept_terms": "boolean"
+      }
+    },
+    "output": {
+      "fields": [
+        "redirect"
+      ],
+      "types": {
+        "redirect": "string"
+      }
+    },
+    "nullable": [],
+    "requires_auth": false,
+    "security_constraints": {
+      "rate_limited_by": "indico.core.auth.signup_rate_limiter"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": []
+  },
+  "dependencies": [],
+  "permissions": [],
+  "side_effects": [
+    "creates a User row",
+    "creates an Identity row",
+    "sends a verification email"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "EMAIL_ALREADY_IN_USE",
+      "REGISTRATION_DISABLED",
+      "VALIDATION_ERROR"
+    ]
+  },
+  "implementations": [
+    "CAP-0001/IMPL-01"
+  ],
+  "qualification": {
+    "status": "approved",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

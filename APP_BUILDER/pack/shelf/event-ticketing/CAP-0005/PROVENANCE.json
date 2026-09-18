@@ -1,0 +1,22 @@
+{
+  "cap_id": "CAP-0005",
+  "cap_name": "filter list",
+  "app_slug": "event-ticketing",
+  "repo_name": "indico/indico",
+  "repo_url": "https://github.com/indico/indico",
+  "licence": "MIT",
+  "commit": "eb90264caec7d1210959c453d1f93ad88a98e6ce",
+  "source_file": "indico/modules/events/registration/controllers/management/reglists.py",
+  "source_symbol": "RHRegistrationsListCustomize",
+  "source_lines": "191-211",
+  "ranges_fetched": [
+    {
+      "path": "indico/modules/events/registration/controllers/management/reglists.py",
+      "start": 191,
+      "end": 211
+    }
+  ],
+  "lines_written": 1256,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}

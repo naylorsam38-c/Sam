@@ -1,0 +1,59 @@
+{
+  "id": "CAP-0007",
+  "name": "book slot",
+  "category": "Event Ticketing",
+  "status": "active",
+  "data_shape": {
+    "input": {
+      "required": [
+        "email"
+      ],
+      "types": {
+        "email": "string",
+        "first_name": "string",
+        "last_name": "string"
+      }
+    },
+    "output": {
+      "fields": [
+        "redirect"
+      ],
+      "types": {
+        "redirect": "string"
+      }
+    },
+    "nullable": [],
+    "requires_auth": false,
+    "security_constraints": {
+      "conditionally_requires_login": "if regform.require_login is set, non-GET requests must be authenticated"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": []
+  },
+  "dependencies": [
+    "indico/modules/events/registration/fields/choices.py:_check_number_of_places (places_limit enforcement, lines 163-185)"
+  ],
+  "permissions": [],
+  "side_effects": [
+    "creates a Registration row",
+    "creates RegistrationData rows per field",
+    "sends a registration-confirmation email",
+    "may accept a matching RegistrationInvitation"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "CANNOT_REGISTER",
+      "NO_PLACES_LEFT",
+      "VALIDATION_ERROR"
+    ]
+  },
+  "implementations": [
+    "CAP-0007/IMPL-01"
+  ],
+  "qualification": {
+    "status": "approved",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

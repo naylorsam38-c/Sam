@@ -1,0 +1,20 @@
+{
+  "apps": {
+    "event-ticketing": {
+      "number": 1,
+      "category": "Event Ticketing"
+    }
+  },
+  "capabilities": {
+    "register account [standard individual]": 1,
+    "log in [standard individual]": 2,
+    "log out [standard individual]": 3,
+    "search records": 4,
+    "filter list": 5,
+    "view record detail": 6,
+    "book slot": 7,
+    "scan barcode": 8,
+    "send email notification": 9,
+    "generate report": 10
+  }
+}

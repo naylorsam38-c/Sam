@@ -1,0 +1,44 @@
+{
+  "aliases": [
+    {
+      "alias": "book slot@1.0.0",
+      "impl_id": "CAP-0007/IMPL-01"
+    },
+    {
+      "alias": "filter list@1.0.0",
+      "impl_id": "CAP-0005/IMPL-01"
+    },
+    {
+      "alias": "generate report@1.0.0",
+      "impl_id": "CAP-0010/IMPL-01"
+    },
+    {
+      "alias": "log in@1.0.0",
+      "impl_id": "CAP-0002/IMPL-01"
+    },
+    {
+      "alias": "log out@1.0.0",
+      "impl_id": "CAP-0003/IMPL-01"
+    },
+    {
+      "alias": "register account@1.0.0",
+      "impl_id": "CAP-0001/IMPL-01"
+    },
+    {
+      "alias": "scan barcode@1.0.0",
+      "impl_id": "CAP-0008/IMPL-01"
+    },
+    {
+      "alias": "search records@1.0.0",
+      "impl_id": "CAP-0004/IMPL-01"
+    },
+    {
+      "alias": "send email notification@1.0.0",
+      "impl_id": "CAP-0009/IMPL-01"
+    },
+    {
+      "alias": "view record detail@1.0.0",
+      "impl_id": "CAP-0006/IMPL-01"
+    }
+  ]
+}

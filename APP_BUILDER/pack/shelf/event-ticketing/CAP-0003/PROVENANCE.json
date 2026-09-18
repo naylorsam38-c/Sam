@@ -1,0 +1,22 @@
+{
+  "cap_id": "CAP-0003",
+  "cap_name": "log out",
+  "app_slug": "event-ticketing",
+  "repo_name": "indico/indico",
+  "repo_url": "https://github.com/indico/indico",
+  "licence": "MIT",
+  "commit": "eb90264caec7d1210959c453d1f93ad88a98e6ce",
+  "source_file": "indico/modules/auth/controllers.py",
+  "source_symbol": "RHLogout",
+  "source_lines": "140-147",
+  "ranges_fetched": [
+    {
+      "path": "indico/modules/auth/controllers.py",
+      "start": 140,
+      "end": 147
+    }
+  ],
+  "lines_written": 909,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}

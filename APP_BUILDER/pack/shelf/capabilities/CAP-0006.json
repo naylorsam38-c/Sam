@@ -1,0 +1,47 @@
+{
+  "id": "CAP-0006",
+  "name": "view record detail",
+  "category": "Event Ticketing",
+  "status": "active",
+  "data_shape": {
+    "input": {
+      "required": [],
+      "types": {}
+    },
+    "output": {
+      "fields": [],
+      "types": {}
+    },
+    "nullable": [],
+    "requires_auth": true,
+    "security_constraints": {},
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [
+    "registration",
+    "registration_moderation",
+    "registration_checkin",
+    "registration_edit"
+  ],
+  "side_effects": [],
+  "error_contract": {
+    "error_codes": [
+      "NOT_FOUND",
+      "FORBIDDEN"
+    ]
+  },
+  "implementations": [
+    "CAP-0006/IMPL-01"
+  ],
+  "qualification": {
+    "status": "approved",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}
