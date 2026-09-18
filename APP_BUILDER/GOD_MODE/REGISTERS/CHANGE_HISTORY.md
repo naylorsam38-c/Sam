@@ -325,3 +325,57 @@ it is served by its own part.
 Proved: `CAP-0002` emptied on the shelf -> log in failed, layer two found no
 part, layer three held naming `LAYER3_ENDPOINT` (RUN-0035). Restored ->
 RUN-0036 BUILT. This is what gives a repair somewhere to land.
+
+## 2026-09-18/19 — two more apps harvested; the shelf tested as a library, and found to be one at the numbering layer only
+
+Per `HARVEST_TWO_MORE_APPS.md`. Redash (`getredash/redash`, BSD-2-Clause,
+commit `8f6b15d30da4`) and CTFd (`CTFd/CTFd`, Apache-2.0, commit
+`8864bc0cea5b`) both verified directly against the Harvest Admission Rule
+and put through the unedited harvester. Neither refused; 8 capabilities each
+harvested clean (16/16 parts, all `symbol_verified`, all parsing).
+
+`assign_numbers.py` reused `CAP-0001`/`0002`/`0003` (register/log in/log
+out) across all three apps from the shared registry, exactly as N2
+specifies — the closest thing to a clean "yes" this session found.
+
+**The shelf is not yet a library at the governance layer.** `host.py --check`
+found 3/8 (CTFd) and 4/8 (Redash) capabilities bindable to their own shelf
+part — two different structural reasons, neither a defect in either source:
+CTFd's register/login/logout/team-join/team-create are plain Flask
+functions (the host's binder only accepts classes); Redash's whole-module
+harvest re-registers an already-mounted Flask blueprint when re-executed.
+Both apps' `view_adapter` had to be left blank — neither source exposes the
+kind of standalone "class → view" bridge Indico's own
+`make_view_func` is.
+
+**Emptied-part proof, both apps, `CAP-0002`:** the chain's own "served by
+its own part" check kept reporting PASS — same status, same
+`X-Shelf-Capability` stamp — with the part reduced to a single comment
+line, because the route was never bound to the shelf's copy to begin with;
+it was always being answered by the source app's own unmodified code.
+Restored, reran, unchanged. This means the `X-Shelf-Capability` stamp does
+not prove the shelf's part served a request — only that the request's route
+matched a capability's declared path. Both apps' chains reached terminal
+state HELD (challenge-platform RUN-0001/0003/0004 restore-attempts, final
+clean confirmation `pack/runs/RUN-0007`; data-dashboard RUN-0002/0004/0005)
+— no `LAYER3_ENDPOINT` configured, exactly as expected.
+
+Both apps' `host.py --app <slug>` (real serving mode, unedited) correctly
+refused to start at all — real Playwright recordings of that refusal are at
+`evidence/challenge-platform/journey.webm` and
+`evidence/data-dashboard/journey.webm`.
+
+Three pre-existing defects found and fixed along the way, none of them
+admission or binding logic, and none specific to either new app:
+`chain.py` had a genuine Python syntax error (an unterminated f-string)
+that stopped it parsing at all, for any app; `chain.py`'s `TARGET` and
+`assign_numbers.py`'s `FORMS_DIR`/`REGISTRY_PATH`/`TREE_DIR` were resolved
+relative to the wrong directory and could never have found a real file.
+Also found, not fixed (out of scope — upstream CTFd behaviour):
+a real, intermittent (~5 of 9 attempts) deadlock in CTFd's own plugin
+loader when building fresh against Postgres, and a `shelf_records.py`
+record collision — three apps sharing `CAP-0001`/`0002`/`0003` means three
+different real implementations compete for the single `IMPL-01` slot the
+script writes per number, and each app's run silently overwrote the last.
+
+Full account: `evidence/TWO_MORE_APPS.md`.

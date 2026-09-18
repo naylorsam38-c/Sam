@@ -26,7 +26,7 @@ Usage:  layer1_checks.py                run the suite
 # CONFIGURATION BLOCK -- one comment per setting, above all logic.
 # =====================================================================
 
-CHECK_SUITE = "../4_host/host_test_challenge_platform.py"
+CHECK_SUITE = "../4_host/host_test_data_dashboard.py"
 # The suite that actually drives the system. If altered: that script is run
 # instead. It must write a run record (see run_record.py) or this cannot
 # report anything and exits 2.
@@ -38,10 +38,11 @@ CHECK_SUITE = "../4_host/host_test_challenge_platform.py"
 # config block is what actually selects which app the chain drives.
 
 SUITE_ENV = {
-    "DATABASE_URL": "postgresql+psycopg2://ctfd_app:ctfd_app_pw@localhost/ctfd",
-    "REDIS_URL": "redis://localhost:6379/1",
-    "SECRET_KEY": "test-secret-key-for-harvest-eval-only-not-production",
-    "PYTHONPATH": "/tmp/claude-0/-home-user-Sam/02357280-7cb7-5c2c-889b-4c54ea44631e/scratchpad/ctfd-src",
+    "REDASH_DATABASE_URL": "postgresql://redash_app:redash_app_pw@localhost/redash",
+    "REDASH_REDIS_URL": "redis://localhost:6379/2",
+    "REDASH_COOKIE_SECRET": "test-secret-for-harvest-eval-only",
+    "REDASH_SECRET_KEY": "test-secret-for-harvest-eval-only",
+    "PYTHONPATH": "/tmp/claude-0/-home-user-Sam/02357280-7cb7-5c2c-889b-4c54ea44631e/scratchpad/redash-src",
 }
 # Environment the suite needs to reach the real system. If altered: the suite
 # runs against whatever is named here. A missing value is not substituted --

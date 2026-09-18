@@ -442,8 +442,49 @@ never having been what served the route.
 
 ### data-dashboard (Redash)
 
-*(same procedure, `CAP-0002` = `redash/handlers/authentication.py:login`,
-345 lines)* [[TO BE COMPLETED — see below]]
+Same procedure, `CAP-0002` = `redash/handlers/authentication.py:login`, 346
+lines. Redash's chain never hit any internal deadlock in this session — all
+three runs below completed cleanly through the full `chain.py` path on the
+first attempt.
+
+Baseline (`RUN-0002`, real part in place):
+```
+PASS  a person can open the log in page
+      200, served by CAP-0002
+```
+(`CAP-0002` was already `NOT BOUND` at binding time here too — but for a
+different reason than CTFd: `"part did not load: AssertionError: The setup
+method 'route' can no longer be called on the blueprint 'redash'…"`, the
+whole-module/blueprint-collision failure from Step 5, not a missing class.)
+
+`CAP-0002`'s `source.py` backed up, then overwritten with the same one-line
+comment. Chain run again (`RUN-0004`):
+```
+FAIL  CHK-002  CAP-0002 is served by its own part on the shelf
+      part has no class named by 'login'
+...
+PASS  a person can open the log in page
+      200, served by CAP-0002
+```
+
+**Identical result to CTFd, for a different structural reason underneath.**
+The response, status and `X-Shelf-Capability: CAP-0002` stamp are exactly
+unchanged by emptying the part. One incidental but telling detail: the
+binding failure's *own reason* changed — from the blueprint
+`AssertionError` (a real module, with real `@routes.route(...)` calls,
+colliding with the already-registered live blueprint) to `"part has no
+class named by 'login'"` (a one-line comment has no route registrations to
+collide with, and also no `login` class to bind). Two different failure
+mechanisms, on the very same file, depending only on how much of it exists
+— and neither one, at any point, is what serves `GET /login`. That was
+always, in both states, Redash's own original `login()` function.
+
+Part restored from backup (`diff` against the pre-harvest copy: identical,
+346 lines, re-verified `ast.parse`), chain run a third time (`RUN-0005`):
+result matches `RUN-0002` exactly, including the binding failure's reason
+reverting to the original `AssertionError` message. Restoration produced no
+regression and no improvement, for the same reason as CTFd: the part was
+never what served the route.
 
 ---
 
@@ -455,9 +496,29 @@ serving mode (`python3 host.py --app <slug>`, no `--check`, none of the
 same entry point a real deployment would use. `host.py` refuses to start
 (`FAIL_ON_UNRESOLVED = True`, unchanged) for both apps, per Step 5, so both
 recordings show that refusal from a real browser's point of view rather than
-a working login journey.
+a working login journey — a deliberate choice, not an accident: the more
+lenient `host_test_*.py` harnesses used for Steps 5–6 would have produced a
+video of a *working-looking* login page, and Step 6 already proved that
+page is served by the source application's own unmodified code, not the
+shelf's part. Using that harness for the one deliverable meant to show what
+a real person's browser experiences would have been exactly the kind of
+arranged-looking pass the spec says not to produce.
 
-[[TO BE COMPLETED]]
+**challenge-platform**: `evidence/challenge-platform/journey.webm` +
+`RUN.md`. `host.py --app challenge-platform` printed `shelf parts bound: 3`
+then `REFUSED: a capability on the shelf could not be bound to its own
+part…` and exited before binding port 8001. Playwright's `page.goto`
+against `http://127.0.0.1:8001/login` failed with
+`net::ERR_CONNECTION_REFUSED` — the video shows that real, failed
+navigation.
+
+**data-dashboard**: `evidence/data-dashboard/journey.webm` + `RUN.md`. Same
+shape: `host.py --app data-dashboard` printed `shelf parts bound: 4` then
+the same refusal, exited before binding port 8002, and Playwright's
+navigation to `http://127.0.0.1:8002/login` failed the same way.
+
+Both journeys **failed**, honestly, and both failed videos are the
+deliverable, per the spec's own instruction for exactly this case.
 
 ---
 
@@ -470,9 +531,11 @@ a working login journey.
 | Numbers reused from event-ticketing | CAP-0001/0002/0003 (register/login/logout) | CAP-0001/0002/0003 (register/login/logout) |
 | New numbers minted | CAP-0016–0020 | CAP-0011–0015 |
 | `shelf parts bound` | 4 / 8 | 3 / 8 |
-| Chain terminal state | **HELD**, RUN-0002 | **HELD**, RUN-0001 |
-| Emptied-part proof | [[TBD]] | chain still reported PASS with the part emptied — the shelf does not govern CAP-0002 for this app |
-| Video | [[TBD]] | [[TBD]] |
+| Chain terminal state (baseline) | **HELD**, RUN-0002 | **HELD**, RUN-0001 |
+| Chain terminal state (CAP-0002 emptied) | **HELD**, RUN-0004 | **HELD**, RUN-0003 |
+| Chain terminal state (restored) | **HELD**, RUN-0005 | **HELD**, `pack/runs/RUN-0007` (direct suite run — the full `chain.py` path hit CTFd's own intermittent plugin deadlock on the final retry; see Step 4) |
+| Emptied-part proof | chain still reported PASS ("served by CAP-0002") with the part reduced to one comment line — the shelf does not govern CAP-0002 for this app | chain still reported PASS ("served by CAP-0002") with the part reduced to one comment line — the shelf does not govern CAP-0002 for this app |
+| Video | `evidence/data-dashboard/journey.webm` — real, failed (`ERR_CONNECTION_REFUSED`, host.py refused to start) | `evidence/challenge-platform/journey.webm` — real, failed (`ERR_CONNECTION_REFUSED`, host.py refused to start) |
 
 ---
 

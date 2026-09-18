@@ -89,7 +89,7 @@ CANDIDATE_JUDGE = "./layer1_checks.py"
 # the judge is a script driving the real system. If altered: that script
 # decides instead. It must exit 0 only on a real pass.
 
-APP_SLUG = "challenge-platform"
+APP_SLUG = "data-dashboard"
 # Which app on the shelf the built part belongs to. The running app loads a
 # capability from shelf/<APP_SLUG>/<CAP-id>/source.py, and that is where a
 # candidate must be placed to be judged at all. If altered: candidates are

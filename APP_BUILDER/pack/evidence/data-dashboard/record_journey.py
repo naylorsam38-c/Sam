@@ -33,7 +33,7 @@ EXPECT_SELECTOR = "input[type=password]"
 TIMEOUT_MS = 20000
 CHROMIUM_EXECUTABLE = "/opt/pw-browsers/chromium"
 
-HOST_PY = "../4_host/host.py"
+HOST_PY = "../../4_host/host.py"
 HOST_ARGS = ["--app", "data-dashboard"]
 HOST_BOOT_WAIT_SECONDS = 15
 
@@ -64,7 +64,7 @@ def main():
     env["HOST_PORT"] = "8002" if False else env.get("HOST_PORT", "")
     proc = subprocess.Popen(
         [sys.executable, str(host_py), *HOST_ARGS],
-        cwd=str(host_py.parent), env=os.environ.copy(),
+        cwd=str(host_py.parent.parent), env=os.environ.copy(),
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 
     print(f"started host.py pid={proc.pid}, waiting up to "

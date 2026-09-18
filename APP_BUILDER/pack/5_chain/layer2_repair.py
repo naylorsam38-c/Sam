@@ -63,7 +63,7 @@ REQUIRE_EXACTLY_ONE_MATCH = True
 # False = the first match wins. Do not turn this off to get past a clash --
 #         fix the map.
 
-APP_SLUG = "challenge-platform"
+APP_SLUG = "data-dashboard"
 # Which app on the shelf is being repaired. A part belongs to a capability, and
 # the running app loads that capability from
 # shelf/<APP_SLUG>/<CAP-id>/source.py -- so this is what decides where a repair

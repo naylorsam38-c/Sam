@@ -52,7 +52,7 @@ CHROMIUM_EXECUTABLE = "/opt/pw-browsers/chromium"
 # Playwright resolve its pinned revision, which is not the one installed
 # here.
 
-HOST_PY = "../4_host/host.py"
+HOST_PY = "../../4_host/host.py"
 HOST_ARGS = ["--app", "challenge-platform"]
 HOST_BOOT_WAIT_SECONDS = 12
 # How long to give host.py to either start listening or refuse and exit,
@@ -82,7 +82,7 @@ def main():
     host_py = (HERE / HOST_PY).resolve()
     proc = subprocess.Popen(
         [sys.executable, str(host_py), *HOST_ARGS],
-        cwd=str(host_py.parent), env=os.environ.copy(),
+        cwd=str(host_py.parent.parent), env=os.environ.copy(),
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 
     print(f"started host.py pid={proc.pid}, waiting up to "

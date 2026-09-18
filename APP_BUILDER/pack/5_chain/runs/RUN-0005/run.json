@@ -1,0 +1,208 @@
+{
+  "run": "RUN-0005",
+  "script": "host_test_data_dashboard.py",
+  "started": "2026-09-18T23:15:17+00:00",
+  "ended": "2026-09-18T23:15:23+00:00",
+  "verdict": "FAIL",
+  "exit_code": 1,
+  "environment": {
+    "working_directory_rebuilt": true,
+    "process_started": true,
+    "process_stopped": true,
+    "port": 8002,
+    "datastores": [
+      {
+        "name": "postgresql",
+        "real": true,
+        "detail": "pg_isready answered"
+      },
+      {
+        "name": "redis",
+        "real": true,
+        "detail": "redis-cli PING answered PONG"
+      }
+    ],
+    "mocks_declared": []
+  },
+  "checks": [
+    {
+      "id": "CHK-001",
+      "level": 0,
+      "state": "FAIL",
+      "claim": "CAP-0001 is served by its own part on the shelf",
+      "detail": "part did not load: AssertionError: The setup method 'route' can no longer be called on the blueprint 'redash'. It has already been registered at least once, any changes will not be applied consistently.\nMake sure all imports, decorators, functions, etc. needed to set up the blueprint are done before registering it.",
+      "capability": "CAP-0001"
+    },
+    {
+      "id": "CHK-002",
+      "level": 0,
+      "state": "FAIL",
+      "claim": "CAP-0002 is served by its own part on the shelf",
+      "detail": "part did not load: AssertionError: The setup method 'route' can no longer be called on the blueprint 'redash'. It has already been registered at least once, any changes will not be applied consistently.\nMake sure all imports, decorators, functions, etc. needed to set up the blueprint are done before registering it.",
+      "capability": "CAP-0002"
+    },
+    {
+      "id": "CHK-003",
+      "level": 0,
+      "state": "FAIL",
+      "claim": "CAP-0003 is served by its own part on the shelf",
+      "detail": "part did not load: AssertionError: The setup method 'route' can no longer be called on the blueprint 'redash'. It has already been registered at least once, any changes will not be applied consistently.\nMake sure all imports, decorators, functions, etc. needed to set up the blueprint are done before registering it.",
+      "capability": "CAP-0003"
+    },
+    {
+      "id": "CHK-004",
+      "level": 0,
+      "state": "FAIL",
+      "claim": "CAP-0017 is served by its own part on the shelf",
+      "detail": "part did not load: AssertionError: The setup method 'route' can no longer be called on the blueprint 'redash'. It has already been registered at least once, any changes will not be applied consistently.\nMake sure all imports, decorators, functions, etc. needed to set up the blueprint are done before registering it.",
+      "capability": "CAP-0017"
+    },
+    {
+      "id": "CHK-005",
+      "level": 0,
+      "state": "PASS",
+      "claim": "CAP-0016 is served by its own part on the shelf",
+      "detail": "bound from the shelf",
+      "capability": "CAP-0016"
+    },
+    {
+      "id": "CHK-006",
+      "level": 0,
+      "state": "PASS",
+      "claim": "CAP-0018 is served by its own part on the shelf",
+      "detail": "bound from the shelf",
+      "capability": "CAP-0018"
+    },
+    {
+      "id": "CHK-007",
+      "level": 0,
+      "state": "PASS",
+      "claim": "CAP-0019 is served by its own part on the shelf",
+      "detail": "bound from the shelf",
+      "capability": "CAP-0019"
+    },
+    {
+      "id": "CHK-008",
+      "level": 0,
+      "state": "PASS",
+      "claim": "CAP-0020 is served by its own part on the shelf",
+      "detail": "bound from the shelf",
+      "capability": "CAP-0020"
+    },
+    {
+      "id": "CHK-009",
+      "level": 0,
+      "state": "PASS",
+      "claim": "every capability on the shelf reached a live route",
+      "detail": "8 of 8",
+      "capability": null
+    },
+    {
+      "id": "CHK-010",
+      "level": 0,
+      "state": "PASS",
+      "claim": "a person can open the log in page",
+      "detail": "200, served by CAP-0002",
+      "capability": "CAP-0002"
+    },
+    {
+      "id": "CHK-011",
+      "level": 0,
+      "state": "PASS",
+      "claim": "logging out sends the person onward",
+      "detail": "302, served by CAP-0003",
+      "capability": "CAP-0003"
+    },
+    {
+      "id": "CHK-012",
+      "level": 0,
+      "state": "FAIL",
+      "claim": "the data sources list answers",
+      "detail": "500 with no X-Shelf-Capability -- the host refused it rather than CAP-0016 serving it",
+      "capability": "CAP-0016"
+    },
+    {
+      "id": "CHK-013",
+      "level": 0,
+      "state": "PASS",
+      "claim": "the admin/org-settings area the shelf never admitted stays gone",
+      "detail": "404, refused",
+      "capability": null
+    },
+    {
+      "id": "CHK-014",
+      "level": 0,
+      "state": "PASS",
+      "claim": "a nonsense path stays gone",
+      "detail": "404, refused",
+      "capability": null
+    },
+    {
+      "id": "CHK-015",
+      "level": 1,
+      "state": "PASS",
+      "claim": "a person can use the app in a real browser",
+      "detail": "opened /login in chromium, page title 'Login to Redash'",
+      "capability": null
+    },
+    {
+      "id": "CHK-016",
+      "level": 0,
+      "state": "FAIL",
+      "claim": "the page a person lands on throws no javascript errors",
+      "detail": "5 error(s), first: Refused to apply style from 'http://localhost:8002/static/server.css' because its MIME type ('text/html') is not a suppo",
+      "capability": null
+    }
+  ],
+  "level1": {
+    "ran": true,
+    "passed": false,
+    "driver": "chromium",
+    "path": "/login",
+    "javascript_errors": 5
+  },
+  "layer2": [],
+  "layer3": [],
+  "parts": [
+    {
+      "id": "CAP-0001",
+      "origin": "harvested",
+      "source": "getredash/redash"
+    },
+    {
+      "id": "CAP-0002",
+      "origin": "harvested",
+      "source": "getredash/redash"
+    },
+    {
+      "id": "CAP-0003",
+      "origin": "harvested",
+      "source": "getredash/redash"
+    },
+    {
+      "id": "CAP-0016",
+      "origin": "harvested",
+      "source": "getredash/redash"
+    },
+    {
+      "id": "CAP-0017",
+      "origin": "harvested",
+      "source": "getredash/redash"
+    },
+    {
+      "id": "CAP-0018",
+      "origin": "harvested",
+      "source": "getredash/redash"
+    },
+    {
+      "id": "CAP-0019",
+      "origin": "harvested",
+      "source": "getredash/redash"
+    },
+    {
+      "id": "CAP-0020",
+      "origin": "harvested",
+      "source": "getredash/redash"
+    }
+  ]
+}
