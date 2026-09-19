@@ -23,7 +23,7 @@ real, every run:
 
 Real applications are not all shaped the same way, and this build stage
 does not bend them to fit one template -- it runs each app the way its own
-authors run it. Three runner kinds, chosen per application in
+authors run it. Runner kinds, chosen per application in
 discovery/discover_applications.py's APPLICATION_MANIFEST (`runner` field):
 
   - flask_factory       : app exposes create_app(); we call it and run().
@@ -38,6 +38,11 @@ discovery/discover_applications.py's APPLICATION_MANIFEST (`runner` field):
                            we run the entry script directly as a subprocess
                            rather than importing it, and accept whatever
                            host/port it itself hardcodes.
+  - django_manage        : a Django app; equivalent to its own real
+                           `manage.py runserver`, invoked programmatically
+                           (`execute_from_command_line`) so this pipeline's
+                           own env-var overrides apply the same way
+                           flask_factory's do.
 
 Run:
     python3 build.py start --cap CAP-0001
@@ -94,6 +99,12 @@ PYTHON_BY_VERSION = {
     # pinned set than .venv-legacy-flask's Flask 2.2.2, so it gets its own
     # dedicated venv rather than reusing or further overloading that one.
     "3.11-mini-amazon": config.PROJECT_ROOT / ".venv-mini-amazon" / "bin" / "python3",
+    # Django_and_Folium's own real dependency set (Django 4.2, allauth,
+    # graphene-django, django-jazzmin, django-import-export, folium, ...)
+    # is large enough, and different enough from any Flask app's, that it
+    # gets its own dedicated venv rather than risking any of it leaking
+    # into the shared one.
+    "3.11-django-folium": config.PROJECT_ROOT / ".venv-django-folium" / "bin" / "python3",
 }
 BUILD_DB_PATH = config.OUTPUT_ROOT / "build_run.db"  # used only by flask_factory apps with a DATABASE_URL env var
 # A real PostgreSQL 16 server is already running in this sandbox (confirmed
@@ -195,6 +206,18 @@ if __name__ == "__main__":
     application.run(host={host!r}, port={port}, debug=False, use_reloader=False)
 """
 
+DJANGO_MANAGE_LAUNCHER = """
+import os
+import sys
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", {settings_module!r})
+{env_lines}
+sys.path.insert(0, {app_dir!r})
+os.chdir({app_dir!r})
+from django.core.management import execute_from_command_line
+if __name__ == "__main__":
+    execute_from_command_line(["manage.py", "runserver", "{host}:{port}", "--noreload"])
+"""
+
 FLASK_FACTORY_LAUNCHER = """
 import os
 import sys
@@ -247,13 +270,21 @@ def _resolve_env(runner: dict) -> dict:
 
 def _reset_postgres(cloned_path: Path, needs_postgres: dict):
     """Drop and recreate the one fixed build database, then apply the
-    app's own real, unmodified schema file -- the Postgres analogue of
-    _reset_files for a SQLite app's stale .db file."""
+    app's own real, unmodified schema file if it has one (a raw SQL file
+    like Mini-Amazon's create.sql) -- the Postgres analogue of
+    _reset_files for a SQLite app's stale .db file. An app whose schema
+    comes from real migrations instead (e.g. a Django app's own `manage.py
+    migrate`) omits schema_relpath and applies its own schema via a
+    setup_script instead, against the now-empty database this leaves it."""
     pg_env = {**os.environ, "PGPASSWORD": POSTGRES_PASSWORD}
     common = ["-h", POSTGRES_HOST, "-p", POSTGRES_PORT, "-U", POSTGRES_USER]
     subprocess.run(["dropdb", *common, "--if-exists", POSTGRES_DB_NAME], env=pg_env, check=True)
     subprocess.run(["createdb", *common, POSTGRES_DB_NAME], env=pg_env, check=True)
-    schema_path = cloned_path / needs_postgres["schema_relpath"]
+    schema_relpath = needs_postgres.get("schema_relpath")
+    if schema_relpath is None:
+        print(f"  reset: recreated empty postgres database {POSTGRES_DB_NAME!r} (schema applied by setup_scripts)")
+        return
+    schema_path = cloned_path / schema_relpath
     result = subprocess.run(
         ["psql", "-h", POSTGRES_HOST, "-p", POSTGRES_PORT, "-U", POSTGRES_USER, "-v", "ON_ERROR_STOP=1",
          "-f", str(schema_path), POSTGRES_DB_NAME],
@@ -326,6 +357,15 @@ def _prepare_launch(runner: dict, cloned_path: Path, host: str, port: int, pytho
         actual_host = runner.get("known_host", host)
         actual_port = runner.get("known_port", port)
         return [str(python_exe), str(entry)], str(cloned_path), actual_host, actual_port
+
+    if kind == "django_manage":
+        env_lines = "\n".join(f'os.environ[{k!r}] = {v!r}' for k, v in _resolve_env(runner).items())
+        launcher = DJANGO_MANAGE_LAUNCHER.format(
+            app_dir=str(cloned_path), env_lines=env_lines, settings_module=runner["settings_module"],
+            host=host, port=port,
+        )
+        LAUNCHER_PATH.write_text(launcher, encoding="utf-8")
+        return [str(python_exe), str(LAUNCHER_PATH)], str(cloned_path), host, port
 
     raise SystemExit(f"ABORT: unknown runner kind {kind!r}")
 

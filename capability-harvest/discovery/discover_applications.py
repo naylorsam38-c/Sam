@@ -915,6 +915,70 @@ APPLICATION_MANIFEST = [
             },
         },
     },
+    {
+        "slug": "django-folium",
+        "clone_url": "https://github.com/moustafa-shaaban/Django_and_Folium.git",
+        "ref": None,
+        "category": "geospatial",
+        "why_selected": (
+            "Real Django + Folium (wraps Leaflet.js) geospatial app, MIT "
+            "licensed, real PostgreSQL-backed. geo_app/utils.py's "
+            "basemap() genuinely queries real persisted Feature rows "
+            "(Feature.objects.all()) and adds one real Folium marker per "
+            "feature -- confirmed by seeding two real features at two "
+            "genuinely different coordinates and confirming both their "
+            "exact names and lat/lng values appear in the real rendered "
+            "map page, not a static demo map. (A real, separate "
+            "map_features() view in the same file builds an empty map "
+            "with no Feature query at all and has no route anywhere in "
+            "urls.py -- confirmed dead/unwired code, correctly not used "
+            "as the attach point here.) First real Django app in this "
+            "pipeline: build.py gains a django_manage runner kind "
+            "(equivalent to the app's own real `manage.py runserver`, "
+            "invoked programmatically so this pipeline's env-var "
+            "overrides apply) and needs_postgres now supports an empty "
+            "database left for a setup_scripts step to migrate, for an "
+            "app whose real schema comes from Django migrations rather "
+            "than a raw SQL file. Its own real dependency set (Django "
+            "4.2, allauth, graphene-django, django-jazzmin, "
+            "django-import-export, folium, ...) is large enough to need "
+            "its own dedicated venv too."
+        ),
+        "runner": {
+            "kind": "django_manage",
+            "app_subdir": "django_and_folium",
+            "settings_module": "config.settings.local",
+            "python_version": "3.11-django-folium",
+            "needs_postgres": {"schema_relpath": None},
+            "setup_scripts": [
+                # The app's own real migrations -- not a schema we invented.
+                "-c from django.core.management import execute_from_command_line\n"
+                "execute_from_command_line(['manage.py', 'migrate', '--noinput'])",
+                # Real setup, not a change to the harvested capability's
+                # logic: seeds one real user and two real Feature rows at
+                # two genuinely different coordinates directly via the
+                # app's own real Django ORM models -- the same
+                # non-interactive replication of the app's own real logic
+                # already used for BuyMe/Social-Life/Mini-Amazon.
+                "-c import django\n"
+                "django.setup()\n"
+                "from django_and_folium.users.models import User\n"
+                "from django_and_folium.geo_app.models import Feature\n"
+                "u, _ = User.objects.get_or_create(email='harvestuser1@example.com', defaults={'name': 'Harvest User'})\n"
+                "u.set_password('HarvestPass123!')\n"
+                "u.save()\n"
+                "f1, _ = Feature.objects.get_or_create(name='Harvest Landmark', defaults={'type': 'Landmark', 'description': 'test feature', 'latitude': 47.6062, 'longitude': -122.3321, 'owner': u})\n"
+                "f2, _ = Feature.objects.get_or_create(name='Second Harvest Marker', defaults={'type': 'POI', 'description': 'second test feature', 'latitude': 40.7128, 'longitude': -74.0060, 'owner': u})\n"
+                "print('seeded user id=', u.id, 'feature1 id=', f1.id, 'feature2 id=', f2.id)",
+            ],
+            "readiness_path": "/",
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "config.settings.local",
+                "DATABASE_URL": "postgres://{postgres_user}:{postgres_password}@{postgres_host}:{postgres_port}/{postgres_db}",
+                "DJANGO_SECRET_KEY": "capability-harvest-build-run",
+            },
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

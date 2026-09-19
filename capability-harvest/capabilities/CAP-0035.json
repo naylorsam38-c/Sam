@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0035",
+  "category": "geospatial",
+  "generated_at": "2026-09-19T14:59:01.096237+00:00",
+  "implementations": [
+    {
+      "app_slug": "django-folium",
+      "commit": "1f6833904db1375e9326cabd76e19372610bdf60",
+      "harvested_at": "2026-09-19T14:59:01.051093+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/django-folium/CAP-0035/PROVENANCE.json",
+      "shelf_path": "shelf/django-folium/CAP-0035"
+    }
+  ],
+  "name": "show map"
+}

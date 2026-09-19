@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0029",
-  "captured_filename": "img_2026_09_19_14_48_22.png",
+  "captured_filename": "img_2026_09_19_14_59_52.png",
   "result": "PASS",
   "steps": [
     {
@@ -11,12 +11,12 @@
       "url": "http://127.0.0.1:5057/capture"
     },
     {
-      "filename": "img_2026_09_19_14_48_22.png",
+      "filename": "img_2026_09_19_14_59_52.png",
       "method": "GET",
       "status_code": 200,
       "step": "fetch_captured_image_bytes",
-      "url": "http://127.0.0.1:5057/capturedimage/img_2026_09_19_14_48_22.png"
+      "url": "http://127.0.0.1:5057/capturedimage/img_2026_09_19_14_59_52.png"
     }
   ],
-  "verified_at": "2026-09-19T14:48:22.180004+00:00"
+  "verified_at": "2026-09-19T14:59:52.319857+00:00"
 }

@@ -2,12 +2,12 @@
   "aliases": [],
   "cap_id": "CAP-0026",
   "category": "billing",
-  "generated_at": "2026-09-19T14:47:31.544099+00:00",
+  "generated_at": "2026-09-19T14:59:01.095303+00:00",
   "implementations": [
     {
       "app_slug": "invoice-generator",
       "commit": "14f0b74b979604e970dc1b14e803581c42e78b2d",
-      "harvested_at": "2026-09-19T14:47:31.071353+00:00",
+      "harvested_at": "2026-09-19T14:59:00.548940+00:00",
       "licence": "MIT",
       "provenance_path": "shelf/invoice-generator/CAP-0026/PROVENANCE.json",
       "shelf_path": "shelf/invoice-generator/CAP-0026"

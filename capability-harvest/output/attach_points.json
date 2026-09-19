@@ -655,6 +655,23 @@
       "route_path": null,
       "source_file_relative": "app/cart.py",
       "symbol": "apply_coupon"
+    },
+    {
+      "app_slug": "django-folium",
+      "cap_id": "CAP-0035",
+      "category": "geospatial",
+      "decorators": [],
+      "end_lineno": 22,
+      "evidence_calls_matched": [
+        "basemap",
+        "render"
+      ],
+      "found": true,
+      "lineno": 20,
+      "name": "show map",
+      "route_path": null,
+      "source_file_relative": "django_and_folium/django_and_folium/geo_app/views.py",
+      "symbol": "index"
     }
   ]
 }

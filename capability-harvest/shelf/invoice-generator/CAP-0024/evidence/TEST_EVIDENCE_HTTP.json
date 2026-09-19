@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0024",
-  "created_invoice_id": 1081,
+  "created_invoice_id": 1117,
   "result": "PASS",
   "steps": [
     {
@@ -23,7 +23,7 @@
       "url": "http://127.0.0.1:5057/api/items"
     },
     {
-      "invoice_no": "HARVEST-PROOF-1789829295",
+      "invoice_no": "HARVEST-PROOF-1789829986",
       "method": "POST",
       "status_code": 201,
       "step": "create_real_invoice",
@@ -33,8 +33,8 @@
       "method": "GET",
       "status_code": 200,
       "step": "fetch_created_invoice",
-      "url": "http://127.0.0.1:5057/api/invoices/1081"
+      "url": "http://127.0.0.1:5057/api/invoices/1117"
     }
   ],
-  "verified_at": "2026-09-19T14:48:15.940730+00:00"
+  "verified_at": "2026-09-19T14:59:46.012071+00:00"
 }

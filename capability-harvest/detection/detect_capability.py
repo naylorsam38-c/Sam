@@ -347,6 +347,15 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "apply_coupon",
         "evidence_call_names": {"apply_coupon", "flash"},
     },
+    {
+        "cap_id": "CAP-0035",
+        "name": "show map",
+        "category": "geospatial",
+        "app_slug": "django-folium",
+        "source_file_relative": "django_and_folium/django_and_folium/geo_app/views.py",
+        "symbol_hint": "index",
+        "evidence_call_names": {"basemap", "render"},
+    },
 ]
 # ----------------------------------------------------------------------------
 
