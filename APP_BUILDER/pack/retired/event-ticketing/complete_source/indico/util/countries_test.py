@@ -1,0 +1,105 @@
+# This file is part of Indico.
+# Copyright (C) 2002 - 2026 CERN
+#
+# Indico is free software; you can redistribute it and/or
+# modify it under the terms of the MIT License; see the
+# LICENSE file for more details.
+
+import pytest
+from babel import Locale
+
+from indico.util.countries import _get_countries, _get_country, get_countries, get_country
+
+
+class MockConfig:
+    CUSTOM_COUNTRIES = {
+        'XK': 'Kosovo',  # does not exist
+        'TW': 'Taiwan, China',  # different name
+    }
+
+
+class MockConfigDeleteCountry:
+    CUSTOM_COUNTRIES = {
+        **MockConfig.CUSTOM_COUNTRIES,
+        'AQ': None  # remove country
+    }
+
+
+class MockConfigMixed:
+    CUSTOM_COUNTRIES = {
+        'XK': 'Kosovo',  # does not exist
+        'US': {
+            'en_GB': 'United States of America',
+            'es': 'Estados Unidos de América'
+        },  # different name based on locale
+        'AQ': None  # remove country
+    }
+
+
+@pytest.fixture(autouse=True)
+def _clear_country_cache():
+    # those utils are memoized and other test code may call them before/after the tests
+    # in here and we need to use our custom mocked data instead of old cached data
+    _get_country.cache_clear()
+    _get_countries.cache_clear()
+    yield
+    _get_country.cache_clear()
+    _get_countries.cache_clear()
+
+
+@pytest.mark.parametrize('country', list(MockConfig.CUSTOM_COUNTRIES))
+def test_get_countries(mocker, country):
+    mocker.patch('indico.util.countries.config', MockConfig())
+    countries = get_countries()
+    assert countries[country] == MockConfig.CUSTOM_COUNTRIES[country]
+
+
+@pytest.mark.parametrize('country', list(MockConfig.CUSTOM_COUNTRIES))
+def test_get_country(mocker, country):
+    mocker.patch('indico.util.countries.config', MockConfig())
+    assert get_country(country) == MockConfig.CUSTOM_COUNTRIES[country]
+
+
+def test_get_countries_deleted(mocker):
+    mocker.patch('indico.util.countries.config', MockConfigDeleteCountry())
+    countries = get_countries()
+    assert 'AQ' not in countries
+
+
+def test_get_country_deleted(mocker):
+    mocker.patch('indico.util.countries.config', MockConfigDeleteCountry())
+    assert get_country('AQ') is None
+    assert get_country('AQ', use_fallback=True) == 'AQ'
+
+
+def test_get_countries_mixed_types(mocker):
+    mocker.patch('indico.util.countries.config', MockConfigMixed())
+
+    countries_en_gb = get_countries(Locale('en_GB'))
+    assert countries_en_gb['XK'] == 'Kosovo'
+    assert countries_en_gb['US'] == 'United States of America'
+    assert 'AQ' not in countries_en_gb
+
+    countries_es = get_countries(Locale('es'))
+    assert countries_es['XK'] == 'Kosovo'
+    assert countries_es['US'] == 'Estados Unidos de América'
+    assert 'AQ' not in countries_es
+
+    countries_en_us = get_countries(Locale('en_US'))
+    assert countries_en_us['XK'] == 'Kosovo'
+    assert countries_en_us['US'] == 'United States'
+
+    countries_es_mx = get_countries(Locale('es_MX'))
+    assert countries_es_mx['XK'] == 'Kosovo'
+    assert countries_es_mx['US'] == 'Estados Unidos de América'
+
+
+def test_get_countries_mixed_fallback_warning(mocker):
+    """Test that warning is issued when locale is not found in custom country dict."""
+    mocker.patch('indico.util.countries.config', MockConfigMixed())
+
+    # Locale 'pl' (Polish) is not defined in MockConfigMixed
+    with pytest.warns(UserWarning, match="Locale 'pl' not found for country"):
+        countries = get_countries(Locale('pl'))
+
+    assert countries['US'] == 'Stany Zjednoczone'  # fallback to ISO name

@@ -1,0 +1,18 @@
+{
+  "repo_name": "SalahEddine-Ghannouch/GetTicket_Events_Django",
+  "repo_url": "https://github.com/SalahEddine-Ghannouch/GetTicket_Events_Django",
+  "branch": "main",
+  "commit": "30ff0da00881f6db1882fa599ca46ee29db447e4",
+  "licence": "MIT",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "A genuine Eventbrite-style match -- events/models.py has a real Ticket model with price (DecimalField) and nbr_ticket (quantity), tied to Event/EventCategory with admin/organizer/customer role separation and an online-purchase flow described in the README, closer to Eventbrite's ticketed-event model than meethub's free-RSVP model.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": false,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": false,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected (commit above). MIT LICENSE verified verbatim. Django==5.2.16, manage.py present at gestion_even/. No djangorestframework anywhere -- fully server-rendered, no API surface at all. Datastore mismatch: requirements.txt lists djongo/pymongo/bson (suggesting intended MongoDB use) but the actual settings.py DATABASES block is hardcoded to django.db.backends.sqlite3, with a db.sqlite3 file committed -- the Mongo dependencies are dead/unused and there is no Postgres evidence at all. Expected admission result: REJECTED on Rule A datastore (sqlite3 in actual use, no postgres path) and Rule B (no API at all)."
+}

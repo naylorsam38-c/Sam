@@ -1,0 +1,15 @@
+{
+  "extension": 3,
+  "hook": 4,
+  "hooks": 1,
+  "webhook": 4,
+  "signal": 1,
+  "signals": 1,
+  "event": 1,
+  "subscriber": 1,
+  "dispatcher": 1,
+  "middleware": 2,
+  "contrib": 11,
+  "django.dispatch": 1,
+  "receiver": 2
+}

@@ -1,0 +1,22 @@
+{
+  "cap_id": "CAP-0004",
+  "cap_name": "search records",
+  "app_slug": "event-ticketing",
+  "repo_name": "indico/indico",
+  "repo_url": "https://github.com/indico/indico",
+  "licence": "MIT",
+  "commit": "eb90264caec7d1210959c453d1f93ad88a98e6ce",
+  "source_file": "indico/modules/search/controllers.py",
+  "source_symbol": "RHAPISearch",
+  "source_lines": "37-61",
+  "ranges_fetched": [
+    {
+      "path": "indico/modules/search/controllers.py",
+      "start": 37,
+      "end": 61
+    }
+  ],
+  "lines_written": 68,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}

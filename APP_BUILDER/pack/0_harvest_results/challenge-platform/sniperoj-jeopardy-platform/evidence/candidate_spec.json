@@ -1,0 +1,18 @@
+{
+  "repo_name": "SniperOJ/Jeopardy-Platform",
+  "repo_url": "https://github.com/SniperOJ/Jeopardy-Platform",
+  "branch": "main",
+  "commit": "bfcfee060dd405258a605d9dfb0da523a39e7857",
+  "licence": "",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "Jeopardy-style CTF challenge/scoring platform -- correct domain.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": null,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": null,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected. No LICENSE file in the repository and no licence statement in README.md. Last commit 2018-06-15 -- abandoned. Expected admission result: REJECTED on Rule C (no licence recorded) and activity/quality grounds."
+}

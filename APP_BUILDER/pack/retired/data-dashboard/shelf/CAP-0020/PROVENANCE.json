@@ -1,0 +1,22 @@
+{
+  "cap_id": "CAP-0020",
+  "cap_name": "share dashboard",
+  "app_slug": "data-dashboard",
+  "repo_name": "getredash/redash",
+  "repo_url": "https://github.com/getredash/redash",
+  "licence": "BSD-2-Clause",
+  "commit": "8f6b15d30da433ae881dd6376a38df17bb6c2663",
+  "source_file": "redash/handlers/dashboards.py",
+  "source_symbol": "DashboardShareResource",
+  "source_lines": "297-352",
+  "ranges_fetched": [
+    {
+      "path": "redash/handlers/dashboards.py",
+      "start": 297,
+      "end": 352
+    }
+  ],
+  "lines_written": 415,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}

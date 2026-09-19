@@ -1,0 +1,58 @@
+{
+  "id": "CAP-0009",
+  "name": "send email notification",
+  "category": "Event Ticketing",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [
+        "registration_id",
+        "subject",
+        "body"
+      ],
+      "types": {
+        "registration_id": "array[integer]",
+        "subject": "string",
+        "body": "string",
+        "sender_address": "string",
+        "cc_addresses": "array[string]",
+        "copy_for_sender": "boolean",
+        "attach_ticket": "boolean"
+      }
+    },
+    "output": {
+      "fields": [],
+      "types": {}
+    },
+    "nullable": [],
+    "requires_auth": true,
+    "security_constraints": {},
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [
+    "registration"
+  ],
+  "side_effects": [
+    "sends one real email per selected registrant via indico.core.notifications.send_email",
+    "logs 'Participants emailed' on the registration form"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "VALIDATION_ERROR"
+    ]
+  },
+  "implementations": [
+    "CAP-0009/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

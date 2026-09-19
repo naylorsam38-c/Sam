@@ -1,0 +1,120 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2026 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+import {$T} from 'indico/utils/i18n';
+
+/* global countWords */
+
+(function(global) {
+  function getLimitClass(remaining, max) {
+    if (remaining < 0) {
+      return 'limit-exceeded';
+    } else if (remaining <= max * 0.2) {
+      return 'limit-close';
+    } else {
+      return '';
+    }
+  }
+
+  function updateLimits($field, options) {
+    const $maxLengthInfo = $('#{0}-max-length-info'.format(options.fieldId));
+    const value = $field.val().trim();
+    $maxLengthInfo.empty();
+    if (options.maxLength) {
+      const charsLeft = options.maxLength - value.length;
+      $('<span>', {
+        html: $T
+          .ngettext('<strong>1</strong> char left', '<strong>{0}</strong> chars left', charsLeft)
+          .format(charsLeft),
+        class: getLimitClass(charsLeft, options.maxLength),
+      }).appendTo($maxLengthInfo);
+    }
+    if (options.maxWords) {
+      const wordCount = countWords(value);
+      const wordsLeft = options.maxWords - wordCount;
+      $('<span>', {
+        html: $T
+          .ngettext('<strong>1</strong> word left', '<strong>{0}</strong> words left', wordsLeft)
+          .format(wordsLeft),
+        class: getLimitClass(wordsLeft, options.maxWords),
+      }).appendTo($maxLengthInfo);
+    }
+  }
+
+  function setupHelpTooltips($field) {
+    const $container = $field.closest('[data-field-id]');
+    ['markdown-info', 'latex-info', 'wmd-help-button'].forEach(name => {
+      const content = $container.find('.{0}-text'.format(name));
+      $container
+        .find(`.${name}`)
+        .qtip({
+          content: content.html(),
+          hide: {
+            event: 'unfocus',
+          },
+          show: {
+            solo: true,
+          },
+          style: {
+            classes: 'informational markdown-help-qtip',
+          },
+        })
+        .on('click', evt => {
+          evt.preventDefault();
+        });
+    });
+  }
+
+  global.setupMarkdownWidget = function setupMarkdownWidget(options) {
+    options = $.extend(
+      true,
+      {
+        fieldId: null,
+        useMarkdownEditor: false,
+        maxLength: 0,
+        maxWords: 0,
+      },
+      options
+    );
+
+    if (options.useMarkdownEditor) {
+      const $field = $(`#${options.fieldId}`);
+      $field.pagedown();
+
+      // The editor doesn't trigger any input/change events when applying changes via keyboard
+      // shortcuts or the button bar, so we need to manually take care of this to enable submit
+      // buttons etc.
+      const $container = $field.closest('[data-field-id]');
+      const textarea = $container.find('textarea.wmd-input')[0];
+      $container.find('.wmd-button-bar').on('click', () => {
+        textarea.dispatchEvent(new Event('change', {bubbles: true}));
+      });
+      textarea.addEventListener('keydown', evt => {
+        if (evt.ctrlKey) {
+          textarea.dispatchEvent(new Event('change', {bubbles: true}));
+        }
+      });
+
+      if (options.maxLength || options.maxWords) {
+        updateLimits($field, options);
+        $field.on('change input', function() {
+          updateLimits($(this), options);
+        });
+      }
+
+      $field
+        .on('focusin', () => {
+          $field.parent().addClass('focused');
+        })
+        .on('focusout', () => {
+          $field.parent().removeClass('focused');
+        });
+
+      setupHelpTooltips($field);
+    }
+  };
+})(window);

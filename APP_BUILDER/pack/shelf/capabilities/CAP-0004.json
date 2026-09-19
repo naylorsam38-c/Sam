@@ -1,0 +1,57 @@
+{
+  "id": "CAP-0004",
+  "name": "search records",
+  "category": "Event Ticketing",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [
+        "q",
+        "type"
+      ],
+      "types": {
+        "q": "string",
+        "type": "array[string]",
+        "page": "integer",
+        "admin_override_enabled": "boolean"
+      }
+    },
+    "output": {
+      "fields": [
+        "total",
+        "pages",
+        "results"
+      ],
+      "types": {
+        "total": "integer",
+        "pages": "integer",
+        "results": "array[object]"
+      }
+    },
+    "nullable": [],
+    "requires_auth": false,
+    "security_constraints": {
+      "admin_override_enabled": "restricted to admins, enforced in the query schema itself"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": []
+  },
+  "dependencies": [],
+  "permissions": [],
+  "side_effects": [],
+  "error_contract": {
+    "error_codes": [
+      "VALIDATION_ERROR",
+      "FORBIDDEN"
+    ]
+  },
+  "implementations": [
+    "CAP-0004/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

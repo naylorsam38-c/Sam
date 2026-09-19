@@ -1,0 +1,18 @@
+{
+  "repo_name": "shacker/django-todo",
+  "repo_url": "https://github.com/shacker/django-todo",
+  "branch": "main",
+  "commit": "95e3a022d239ebaa8771376c838a4d36590ab9b1",
+  "licence": "BSD-3-Clause",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "django-todo is a group/ticket-oriented task tracker (TaskList<->Task tied to Django auth Groups, CSV import, mail-tracking merge) closer to a lightweight helpdesk ticketing tool than to Todoist's personal-first task manager -- no kanban board, no personal due-date reminders, explicitly multi-user/multi-group rather than individual-first.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": false,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": false,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected (commit above). BSD-3-Clause LICENSE verified verbatim ('Copyright (c) 2010, Scot Hacker, Birdhouse Arts and individual contributors'). No manage.py anywhere -- this is a reusable/pluggable Django app meant to be installed into a host project (mkdocs.yml is a bare 2-line stub, no real docs/ directory), not a standalone deployable application. No djangorestframework dependency anywhere; the one non-admin urlconf entry (ticket/add/ for external ticket filing) is a plain view, not documented API. No postgres/psycopg evidence anywhere -- test_settings.py uses sqlite3; as a pluggable app it is DB-agnostic and does not itself declare Postgres. Expected admission result: REJECTED on Rule A datastore (not recorded) and Rule B (no published API docs)."
+}

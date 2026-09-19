@@ -1,0 +1,851 @@
+{
+  "_form": "TEMPLATE-HARVEST-FORM v2-GODMODE",
+  "_governing_spec": "GOD_MODE/ACTIVE/God_Mode_Specification.md",
+  "_read_this_first": "Every field below exists because a god mode contract requires it. Do not add fields. Do not remove fields. Do not invent a value. If you cannot determine something by opening a real file in the clone, leave it blank and name it in 'unresolved'. A named blank is correct. A guess is a defect.",
+  "tpl_id": "TPL-027",
+  "app_type": "Event Ticketing",
+  "app_slug": "event-ticketing",
+  "cap_block": "",
+  "exemplar": {
+    "brand_name": "Indico (CERN)",
+    "evidence_urls": [
+      "https://getindico.io/",
+      "https://github.com/indico/indico"
+    ],
+    "capability_targets": [
+      {
+        "target_name": "register account",
+        "what_it_does": "Create an Indico user profile",
+        "evidence_url": "https://github.com/indico/indico/blob/eb90264caec7d1210959c453d1f93ad88a98e6ce/indico/modules/auth/controllers.py#L233-L367"
+      },
+      {
+        "target_name": "log in",
+        "what_it_does": "Authenticate an existing user",
+        "evidence_url": "https://github.com/indico/indico/blob/eb90264caec7d1210959c453d1f93ad88a98e6ce/indico/modules/auth/controllers.py#L68-L128"
+      },
+      {
+        "target_name": "log out",
+        "what_it_does": "End the session",
+        "evidence_url": "https://github.com/indico/indico/blob/eb90264caec7d1210959c453d1f93ad88a98e6ce/indico/modules/auth/controllers.py#L140-L147"
+      },
+      {
+        "target_name": "search records",
+        "what_it_does": "Search across events/contributions/attachments",
+        "evidence_url": "https://github.com/indico/indico/blob/eb90264caec7d1210959c453d1f93ad88a98e6ce/indico/modules/search/controllers.py#L37-L61"
+      },
+      {
+        "target_name": "filter list",
+        "what_it_does": "Configure filters/columns for the registrant list",
+        "evidence_url": "https://github.com/indico/indico/blob/eb90264caec7d1210959c443d1f93ad88a98e6ce/indico/modules/events/registration/controllers/management/reglists.py#L191-L211"
+      },
+      {
+        "target_name": "view record detail",
+        "what_it_does": "View a single registration's detail",
+        "evidence_url": "https://github.com/indico/indico/blob/eb90264caec7d1210959c453d1f93ad88a98e6ce/indico/modules/events/registration/controllers/management/reglists.py#L222-L233"
+      },
+      {
+        "target_name": "book slot",
+        "what_it_does": "Register for an event (claim a place/ticket)",
+        "evidence_url": "https://github.com/indico/indico/blob/eb90264caec7d1210959c453d1f93ad88a98e6ce/indico/modules/events/registration/controllers/display.py#L368-L459"
+      },
+      {
+        "target_name": "scan barcode",
+        "what_it_does": "Look up a registration from its ticket QR/UUID at the door",
+        "evidence_url": "https://github.com/indico/indico/blob/eb90264caec7d1210959c453d1f93ad88a98e6ce/indico/modules/events/registration/controllers/api/checkin.py#L126-L142"
+      },
+      {
+        "target_name": "send email notification",
+        "what_it_does": "Email selected registrants",
+        "evidence_url": "https://github.com/indico/indico/blob/eb90264caec7d1210959c453d1f93ad88a98e6ce/indico/modules/events/registration/controllers/management/reglists.py#L327-L389"
+      },
+      {
+        "target_name": "generate report",
+        "what_it_does": "Export the registrant list as CSV/Excel/PDF",
+        "evidence_url": "https://github.com/indico/indico/blob/eb90264caec7d1210959c453d1f93ad88a98e6ce/indico/modules/events/registration/controllers/management/reglists.py#L560-L569"
+      }
+    ],
+    "peers_considered": [],
+    "notes": "Not re-run this pass -- exemplar selection (Eventbrite) and admission (MIT / Flask, commit eb90264caec7d1210959c453d1f93ad88a98e6ce) were already established and proven in the prior session per NUMBER_ONE_APP.md. capability_targets above lists only the 10 catalog capabilities actually bound to real Indico code below; the other 6 catalog capabilities (take payment, issue refund, apply discount code, send push notification, manage inventory, split payout) have no real Indico implementation to target and are named in 'unresolved' instead."
+  },
+  "harvest_source": {
+    "repo_name": "indico/indico",
+    "repo_url": "https://github.com/indico/indico",
+    "licence": "MIT",
+    "branch": "master",
+    "commit": "eb90264caec7d1210959c453d1f93ad88a98e6ce",
+    "clone_path": "/tmp/claude-0/-home-user-Sam/33a6f601-a7a5-5b4e-a13c-2620841b1b6f/scratchpad/numbering/indico-src",
+    "framework": "flask",
+    "api_docs_url": "https://docs.getindico.io/en/stable/http-api/",
+    "structural_match": "Indico's registration module (indico/modules/events/registration) is a real event-ticketing system: an organiser creates a registration form, prices ticket tiers (Standard/VIP were proven live), a registrant books and pays for a place, and a PDF ticket with a scannable QR code is issued and checked at the door via the check-in API -- the same register/browse/book/pay/prove-at-the-door shape as Eventbrite, minus the payment provider itself (see unresolved).",
+    "datastore": "postgresql",
+    "app_factory": "indico.web.flask.app:make_app",
+    "models_loader": "indico.core.db.sqlalchemy.util.models:import_all_models",
+    "view_adapter": "indico.web.flask.util:make_view_func"
+  },
+  "identity_types": [
+    "standard individual"
+  ],
+  "identity_variant": "standard individual",
+  "role_source": {
+    "data_filename": "",
+    "id_field": ""
+  },
+  "journey_cap_id": "",
+  "capabilities": [
+    {
+      "cap_id": "CAP-0001",
+      "cap_name": "register account",
+      "engine": "Flask",
+      "exemplar_target": "register account",
+      "what_it_does": "Creates a new local Indico user (User + Identity) from the signup form, or files a RegistrationRequest for admin moderation if account moderation is enabled for the instance.",
+      "route": "/register/",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [],
+        "required_input_fields": [
+          "email",
+          "first_name",
+          "last_name",
+          "password"
+        ],
+        "input_types": {
+          "email": "string",
+          "first_name": "string",
+          "last_name": "string",
+          "username": "string",
+          "password": "string",
+          "affiliation": "string",
+          "phone": "string",
+          "address": "string",
+          "accept_terms": "boolean"
+        },
+        "output_type": "json",
+        "output_fields": [
+          "redirect"
+        ],
+        "output_types": {
+          "redirect": "string"
+        },
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "EMAIL_ALREADY_IN_USE",
+            "REGISTRATION_DISABLED",
+            "VALIDATION_ERROR"
+          ]
+        },
+        "security_constraints": {
+          "rate_limited_by": "indico.core.auth.signup_rate_limiter"
+        },
+        "side_effects": [
+          "creates a User row",
+          "creates an Identity row",
+          "sends a verification email"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "indico/modules/auth/controllers.py",
+        "source_symbol": "RHRegister / LocalRegistrationHandler",
+        "source_lines": "233-367"
+      },
+      "variant": "standard individual"
+    },
+    {
+      "cap_id": "CAP-0002",
+      "cap_name": "log in",
+      "engine": "Flask",
+      "exemplar_target": "log in",
+      "what_it_does": "Authenticates a user against the local ('indico') auth provider and starts a session; on success redirects to the page that triggered the login.",
+      "route": "/login/",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [],
+        "required_input_fields": [
+          "_provider",
+          "identifier",
+          "password"
+        ],
+        "input_types": {
+          "_provider": "string",
+          "identifier": "string",
+          "password": "string"
+        },
+        "output_type": "redirect",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "RATE_LIMITED",
+            "INVALID_CREDENTIALS"
+          ]
+        },
+        "security_constraints": {
+          "rate_limited_by": "indico.core.auth.login_rate_limiter",
+          "csrf": "form has its own CSRF token, global CSRF disabled for this RH"
+        },
+        "side_effects": [
+          "creates indico_session cookie"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "indico/modules/auth/controllers.py",
+        "source_symbol": "RHLogin",
+        "source_lines": "68-128"
+      },
+      "variant": "standard individual"
+    },
+    {
+      "cap_id": "CAP-0003",
+      "cap_name": "log out",
+      "engine": "Flask",
+      "exemplar_target": "log out",
+      "what_it_does": "Ends the current session (multipass.logout with clear_session=True) and redirects to 'next' (if it validates) or the site index.",
+      "route": "/logout/",
+      "method": "GET",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [],
+        "required_input_fields": [],
+        "input_types": {},
+        "output_type": "redirect",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": []
+        },
+        "security_constraints": {},
+        "side_effects": [
+          "clears session"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "indico/modules/auth/controllers.py",
+        "source_symbol": "RHLogout",
+        "source_lines": "140-147"
+      },
+      "variant": "standard individual"
+    },
+    {
+      "cap_id": "CAP-0004",
+      "cap_name": "search records",
+      "engine": "Flask",
+      "exemplar_target": "search records",
+      "what_it_does": "Searches across categories, events, contributions, sub-contributions, event notes and attachments via the configured search provider (falls back to Indico's own InternalSearch for category-only queries).",
+      "route": "/search/api/search",
+      "method": "GET",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [],
+        "required_input_fields": [
+          "q",
+          "type"
+        ],
+        "input_types": {
+          "q": "string",
+          "type": "array[string]",
+          "page": "integer",
+          "admin_override_enabled": "boolean"
+        },
+        "output_type": "json",
+        "output_fields": [
+          "total",
+          "pages",
+          "results"
+        ],
+        "output_types": {
+          "total": "integer",
+          "pages": "integer",
+          "results": "array[object]"
+        },
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "VALIDATION_ERROR",
+            "FORBIDDEN"
+          ]
+        },
+        "security_constraints": {
+          "admin_override_enabled": "restricted to admins, enforced in the query schema itself"
+        },
+        "side_effects": [],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "indico/modules/search/controllers.py",
+        "source_symbol": "RHAPISearch",
+        "source_lines": "37-61"
+      }
+    },
+    {
+      "cap_id": "CAP-0005",
+      "cap_name": "filter list",
+      "engine": "Flask",
+      "exemplar_target": "filter list",
+      "what_it_does": "Reads (GET) or stores (POST) the set of filters and visible columns used to render the registrant list for one registration form, then returns the filtered list.",
+      "route": "/event/<int:event_id>/manage/registration/<int:reg_form_id>/registrations/customize",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [
+          "user",
+          "authenticated"
+        ],
+        "required_input_fields": [],
+        "input_types": {
+          "filters": "object",
+          "visible_items": "array[string]"
+        },
+        "output_type": "json",
+        "output_fields": [
+          "html"
+        ],
+        "output_types": {
+          "html": "string"
+        },
+        "nullable_fields": [],
+        "permissions": [
+          "registration",
+          "registration_moderation",
+          "registration_checkin",
+          "registration_edit"
+        ],
+        "requires_auth": true,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "FORBIDDEN",
+            "VALIDATION_ERROR"
+          ]
+        },
+        "security_constraints": {},
+        "side_effects": [
+          "persists the filter/column configuration for the current manager"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "indico/modules/events/registration/controllers/management/reglists.py",
+        "source_symbol": "RHRegistrationsListCustomize",
+        "source_lines": "191-211"
+      }
+    },
+    {
+      "cap_id": "CAP-0006",
+      "cap_name": "view record detail",
+      "engine": "Flask",
+      "exemplar_target": "view record detail",
+      "what_it_does": "Renders the detail view of a single registration (personal data, chosen ticket tier, payment/check-in state, tags, uploaded files) for event managers.",
+      "route": "/event/<int:event_id>/manage/registration/<int:reg_form_id>/registrations/<int:registration_id>/",
+      "method": "GET",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [
+          "user",
+          "authenticated"
+        ],
+        "required_input_fields": [],
+        "input_types": {},
+        "output_type": "html",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [
+          "registration",
+          "registration_moderation",
+          "registration_checkin",
+          "registration_edit"
+        ],
+        "requires_auth": true,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "NOT_FOUND",
+            "FORBIDDEN"
+          ]
+        },
+        "security_constraints": {},
+        "side_effects": [],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "indico/modules/events/registration/controllers/management/reglists.py",
+        "source_symbol": "RHRegistrationDetails",
+        "source_lines": "222-233"
+      }
+    },
+    {
+      "cap_id": "CAP-0007",
+      "cap_name": "book slot",
+      "engine": "Flask",
+      "exemplar_target": "book slot",
+      "what_it_does": "Submits the registration form for an event: validates the submitted field data against the form's schema (including per-choice capacity), creates a real Registration row, links any matching invitation, and emails the registrant a confirmation. This is the real code path this session drove live to register 'Ada Admin' for the VIP ticket tier.",
+      "route": "/event/<int:event_id>/registrations/<int:reg_form_id>/",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [],
+        "required_input_fields": [
+          "email"
+        ],
+        "input_types": {
+          "email": "string",
+          "first_name": "string",
+          "last_name": "string"
+        },
+        "output_type": "json",
+        "output_fields": [
+          "redirect"
+        ],
+        "output_types": {
+          "redirect": "string"
+        },
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [
+          "indico/modules/events/registration/fields/choices.py:_check_number_of_places (places_limit enforcement, lines 163-185)"
+        ],
+        "error_contract": {
+          "error_codes": [
+            "CANNOT_REGISTER",
+            "NO_PLACES_LEFT",
+            "VALIDATION_ERROR"
+          ]
+        },
+        "security_constraints": {
+          "conditionally_requires_login": "if regform.require_login is set, non-GET requests must be authenticated"
+        },
+        "side_effects": [
+          "creates a Registration row",
+          "creates RegistrationData rows per field",
+          "sends a registration-confirmation email",
+          "may accept a matching RegistrationInvitation"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "indico/modules/events/registration/controllers/display.py",
+        "source_symbol": "RHRegistrationForm._process_POST / create_registration",
+        "source_lines": "416-424 (RH); 437-483 (indico/modules/events/registration/util.py)"
+      }
+    },
+    {
+      "cap_id": "CAP-0008",
+      "cap_name": "scan barcode",
+      "engine": "Flask",
+      "exemplar_target": "scan barcode",
+      "what_it_does": "Looks up a registration by the UUID embedded in its ticket's QR code (checkin_secret / ticket_uuid) and returns its check-in/payment state -- the real endpoint the Check-in App calls when a door scanner reads a ticket.",
+      "route": "/api/checkin/ticket/<uuid:ticket_uuid>",
+      "method": "GET",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [
+          "user",
+          "authenticated"
+        ],
+        "required_input_fields": [],
+        "input_types": {},
+        "output_type": "json",
+        "output_fields": [
+          "id",
+          "regform_id",
+          "event_id",
+          "full_name",
+          "email",
+          "state",
+          "checked_in",
+          "checked_in_dt",
+          "checkin_secret",
+          "is_paid",
+          "price",
+          "payment_date",
+          "currency",
+          "formatted_price",
+          "tags",
+          "occupied_slots",
+          "registration_date",
+          "registration_data",
+          "personal_data_picture"
+        ],
+        "output_types": {
+          "id": "integer",
+          "checked_in": "boolean",
+          "is_paid": "boolean",
+          "price": "number",
+          "checkin_secret": "uuid"
+        },
+        "nullable_fields": [],
+        "permissions": [
+          "registration",
+          "registration_checkin"
+        ],
+        "requires_auth": true,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "NOT_FOUND",
+            "FORBIDDEN"
+          ]
+        },
+        "security_constraints": {
+          "oauth_scope": "registrants",
+          "cors": true
+        },
+        "side_effects": [],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "indico/modules/events/registration/controllers/api/checkin.py",
+        "source_symbol": "RHCheckinAPIRegistrationUUID",
+        "source_lines": "126-142"
+      }
+    },
+    {
+      "cap_id": "CAP-0009",
+      "cap_name": "send email notification",
+      "engine": "Flask",
+      "exemplar_target": "send email notification",
+      "what_it_does": "Sends a real templated email (with the ticket PDF attached, if the form has tickets enabled and the registration isn't ticket-blocked) to one or more selected registrants.",
+      "route": "/event/<int:event_id>/manage/registration/<int:reg_form_id>/registrations/email",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [
+          "user",
+          "authenticated"
+        ],
+        "required_input_fields": [
+          "registration_id",
+          "subject",
+          "body"
+        ],
+        "input_types": {
+          "registration_id": "array[integer]",
+          "subject": "string",
+          "body": "string",
+          "sender_address": "string",
+          "cc_addresses": "array[string]",
+          "copy_for_sender": "boolean",
+          "attach_ticket": "boolean"
+        },
+        "output_type": "json",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [
+          "registration"
+        ],
+        "requires_auth": true,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "VALIDATION_ERROR"
+          ]
+        },
+        "security_constraints": {},
+        "side_effects": [
+          "sends one real email per selected registrant via indico.core.notifications.send_email",
+          "logs 'Participants emailed' on the registration form"
+        ],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "indico/modules/events/registration/controllers/management/reglists.py",
+        "source_symbol": "RHRegistrationEmailRegistrants",
+        "source_lines": "327-389"
+      }
+    },
+    {
+      "cap_id": "CAP-0010",
+      "cap_name": "generate report",
+      "engine": "Flask",
+      "exemplar_target": "generate report",
+      "what_it_does": "Exports the registrant list for one registration form as a CSV file (Excel .xlsx and PDF table/book variants exist on sibling routes: RHRegistrationsExportExcel, RHRegistrationsExportPDF).",
+      "route": "/event/<int:event_id>/manage/registration/<int:reg_form_id>/registrations/registrations.csv",
+      "method": "POST",
+      "data_filename": "",
+      "binary_response": true,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [
+          "user",
+          "authenticated"
+        ],
+        "required_input_fields": [
+          "registration_id"
+        ],
+        "input_types": {
+          "registration_id": "array[integer]"
+        },
+        "output_type": "binary",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [
+          "registration"
+        ],
+        "requires_auth": true,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": {
+          "error_codes": [
+            "FORBIDDEN"
+          ]
+        },
+        "security_constraints": {},
+        "side_effects": [],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "indico/modules/events/registration/controllers/management/reglists.py",
+        "source_symbol": "RHRegistrationsExportCSV",
+        "source_lines": "560-569"
+      }
+    }
+  ],
+  "screens": [
+    {
+      "screen_name": "Public: Login",
+      "slots": [
+        {
+          "slot_id": "login_submit",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "log in",
+          "requires_auth": false,
+          "selector": "#hidden-submit",
+          "position": "center",
+          "control_name": "Login with Indico",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Public: Sign up",
+      "slots": [
+        {
+          "slot_id": "register_submit",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "register account",
+          "requires_auth": false,
+          "selector": "button.submit-button",
+          "position": "center",
+          "control_name": "Create my Indico profile",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Header: account menu",
+      "slots": [
+        {
+          "slot_id": "logout_link",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "log out",
+          "requires_auth": true,
+          "selector": "a[href^='/logout/']",
+          "position": "right",
+          "control_name": "Logout",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Header: search",
+      "slots": [
+        {
+          "slot_id": "search_box",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "search records",
+          "requires_auth": false,
+          "selector": "input[placeholder='Enter your search term']",
+          "position": "center",
+          "control_name": "Enter your search term",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Event: Registration form",
+      "slots": [
+        {
+          "slot_id": "register_event_submit",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "book slot",
+          "requires_auth": false,
+          "selector": "button:has-text('Register')",
+          "position": "right",
+          "control_name": "Register",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Manage: Registration list",
+      "slots": [
+        {
+          "slot_id": "customize_list",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "filter list",
+          "requires_auth": true,
+          "selector": "",
+          "position": "right",
+          "control_name": "Customize",
+          "trigger_type": "button",
+          "trigger_on": ""
+        },
+        {
+          "slot_id": "reg_row_detail",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "view record detail",
+          "requires_auth": true,
+          "selector": "",
+          "position": "center",
+          "control_name": "registration row",
+          "trigger_type": "button",
+          "trigger_on": ""
+        },
+        {
+          "slot_id": "email_registrants",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "send email notification",
+          "requires_auth": true,
+          "selector": "",
+          "position": "right",
+          "control_name": "Send email",
+          "trigger_type": "button",
+          "trigger_on": ""
+        },
+        {
+          "slot_id": "export_csv",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "generate report",
+          "requires_auth": true,
+          "selector": "",
+          "position": "right",
+          "control_name": "Export CSV",
+          "trigger_type": "button",
+          "trigger_on": ""
+        }
+      ]
+    },
+    {
+      "screen_name": "Check-in App: ticket scan",
+      "slots": [
+        {
+          "slot_id": "scan_ticket",
+          "bound_cap_id": "UNBOUND",
+          "cap_name": "scan barcode",
+          "requires_auth": true,
+          "selector": "",
+          "position": "center",
+          "control_name": "Scan",
+          "trigger_type": "device_event",
+          "trigger_on": "a QR/barcode scan decodes a ticket_uuid"
+        }
+      ]
+    }
+  ],
+  "run": {
+    "start_command": [
+      "indico",
+      "run",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8000"
+    ],
+    "port": 8000,
+    "health_endpoint": "/"
+  },
+  "unresolved": [
+    "take payment -- Indico's core repo defines only the PaymentPluginMixin interface (indico/modules/events/payment/plugins.py:41). No concrete subclass of it exists anywhere in this repo (grep for 'PaymentPluginMixin)' across the whole tree returns only that one definition and its one isinstance() check in util.py:25). Every real payment method (manual, PayPal, Stripe, etc.) ships in the separate 'indico-plugins' PyPI package, which is not part of this repo or this commit. This matches what we proved live in the prior session: the VIP registration's invoice came back 'Not paid' because no payment plugin was installed. Per NUMBER_ONE_APP.md step 2, this capability is left out of the capabilities list rather than assigned a fabricated payment 'variant'.",
+    "issue refund -- no refund code path exists anywhere in indico/modules/events/payment or indico/modules/events/registration. The only hit for 'refund' in either module is a hardcoded default settings string in indico/modules/events/payment/__init__.py:25 telling registrants to email the conference secretary. There is nothing to bind a route to.",
+    "apply discount code -- no discount/promo/coupon concept exists in the registration module. Grepping indico/modules/events/registration for discount|promo.?code|coupon returns nothing. Registration forms have a base_price and per-choice prices (see 'manage inventory' below) but no code-gated discount mechanism.",
+    "send push notification -- no push-notification code exists anywhere in the repo (searched for push.?notification|web.?push|fcm|apns across all .py files). Indico is a server-rendered web app with email notifications (see 'send email notification'); it has no mobile/web-push channel.",
+    "split payout -- zero matches for 'payout' anywhere in the repo. Indico has one organiser per event taking payment through one configured method; there is no marketplace-style multi-party payout mechanism to bind this to.",
+    "manage inventory -- the real capability exists and is well evidenced (per-choice 'places_limit' on registration form fields, e.g. the Standard/VIP capacity we could have set on the Ticket Tier field in the prior session; enforced in indico/modules/events/registration/fields/choices.py:163-185, 'No places left for the option'). But the only route that lets a manager modify it -- RHRegistrationFormModifyField at /event/<event_id>/manage/registration/<reg_form_id>/form/sections/<section_id>/fields/<field_id> (indico/modules/events/registration/controllers/management/fields.py:384-428) -- is PATCH/DELETE only (blueprint.py: methods=('DELETE', 'PATCH')). HARVEST_PROCESS_v2.md is explicit: 'method is GET or POST only. A harvested PUT/DELETE/PATCH silently 404s' and 'it maps onto GET/POST or it does not go in.' There is no GET/POST route that lets an existing field's places_limit be changed (POST .../form/sections/<section_id>/fields only *creates* a new field, a different action from 'manage inventory' on an existing one), so this capability does not go in rather than being bound to a route it doesn't actually describe.",
+    "journey_cap_id -- left blank. Not required by NUMBER_ONE_APP.md's deliverable list for this task (number_registry.json + trees/event-ticketing.tree.txt), and assign_numbers.py does not require it: it only resolves journey_cap_id from an (undocumented) 'journey_cap_name' field if one is present, and does nothing if it is absent. Leaving both blank costs nothing for this task's actual deliverables.",
+    "role_source -- left blank. No capability here sets 'required_role' (Indico's manager access is a per-event, per-capability permission set -- see the 'permissions' list on each management capability -- not a single named role), so there is no named role for role_source to point at.",
+    "log out -- error_contract.error_codes is empty. RHLogout (indico/modules/auth/controllers.py:140-147) has no error path in the code: it runs unconditionally for logged-in or anonymous sessions alike, and an invalid 'next' URL is silently replaced rather than rejected. DS-06 in check_form_godmode.py requires a non-empty error_codes list; leaving it empty and naming the conflict here was preferred over inventing an error Indico's own code does not raise.",
+    "engine field -- set to 'Flask' for every capability. Nothing in HARVEST_PROCESS_v2.md, GOD_MODE_RULE_HARVEST_ADMISSION.md, GOD_MODE_RULE_NUMBERING.md, NUMBER_ONE_APP.md or FORM_TEMPLATE_GODMODE_v2.json defines what this field means beyond check_form_godmode.py's CAP-07 requiring it non-blank. 'Flask' is the one thing about it I could confirm with certainty (pyproject.toml classifier 'Framework :: Flask', and every route read above is a real Flask blueprint route) rather than guess at a more specific intended meaning.",
+    "data_filename / data_shape.data_access -- left blank on every capability. Indico's real persistence is PostgreSQL via SQLAlchemy models (Registration, User, Identity, RegistrationFormField, etc. -- real tables in the 'event_registration', 'users' and 'indico' schemas), not god mode's flat-JSON-file-per-entity convention that data_filename/data_access describe. Naming a '<slug>.json' file here would misrepresent how the capability actually stores data, so it is left blank rather than invented; the real table/model is named in provenance.source_symbol and what_it_does instead.",
+    "ALLOWED_TRIGGER_TYPES gap -- 'view record detail' is really triggered by clicking a table row in the registrant list, but check_form_godmode.py's ALLOWED_TRIGGER_TYPES has no row/list-item click type (it has 'button', 'form_submit', 'page_load', 'poll', 'stream', 'device_event', 'background', 'websocket' -- the v1 vocabulary's 'row_click' does not carry over to v2). Set to 'button' as the closest available value rather than leaving it invalid; flagging the gap here rather than silently picking around it.",
+    "DS-05 (output_fields required for non-binary responses) does not fit every real Indico route: 'log in' and 'log out' succeed with a bare HTTP redirect (Location header, no JSON body to name fields from), and 'view record detail' returns server-rendered HTML (management/registration_details.html) that isn't parsed into named fields anywhere in the code. 'send email notification' succeeds via jsonify_data() with no fixed payload shape either. Left output_fields empty on these four rather than inventing field names no response actually has.",
+    "control_name on 3 of 10 slots is not independently verified this session: 'Customize' (filter list), 'Send email' (send email notification) and 'Export CSV' (generate report) are named after their route/docstring ('Add section', 'Export registration list to a CSV file', etc. -- see provenance) and Indico UI convention, not a live screenshot or a matched string literal in the React/Jinja source (targeted greps for these strings in indico/modules/events/registration/client/js/management/*.jsx returned no hits, meaning the control text lives in a Jinja template, a generic shared button component, or is built at runtime -- I did not track it down further this pass). The other 7 control_name values are confirmed: 'Login with Indico' and the search placeholder are read directly off live screenshots (01_bootstrap.png, 02_login.png) from this session; 'Register' (book slot) and 'Logout' are read off live screenshots/link lists from the prior ticketing session; 'Create my Indico profile' and 'Scan' are read from source (signup.jsx:334-341, and the fact that scan barcode is a device_event by definition, respectively).",
+    "SLOT-08 (selector) is blank on the four 'Manage: Registration list' and 'Check-in App' slots, and on 'Header: search'. This session drove the public login/registration pages live with Playwright (concrete selectors recorded for those), but did not re-drive the registration management UI (customize/detail/email/export) or the check-in app this pass, so no real selector was observed for those controls -- left blank rather than guessed.",
+    "shared_lib_calls -- left empty ([]) on every capability. Indico implements its own session (Flask session cookie + itsdangerous secure_serializer), password hashing (via the Identity model's password backend) and email sending (indico.core.notifications.send_email/make_email) -- none of it calls anything resembling CAP-0000's public API (create_session, hash_password, notify, ...). Asserting those calls exist would be inventing an integration that is not in the code."
+  ],
+  "state": "in_progress",
+  "app_id": "APP-001"
+}

@@ -1,0 +1,39 @@
+{
+  "run": "RUN-0003",
+  "script": "host_test_challenge_platform.py",
+  "started": "2026-09-18T22:47:47+00:00",
+  "ended": "2026-09-18T22:47:50+00:00",
+  "verdict": "COULD_NOT_START",
+  "exit_code": 2,
+  "environment": {
+    "working_directory_rebuilt": null,
+    "process_started": null,
+    "process_stopped": null,
+    "port": null,
+    "datastores": [
+      {
+        "name": "postgresql",
+        "real": true,
+        "detail": "pg_isready answered"
+      },
+      {
+        "name": "redis",
+        "real": true,
+        "detail": "redis-cli PING answered PONG"
+      }
+    ],
+    "mocks_declared": [],
+    "could_not_start": "CTFd /setup bootstrap failed: HTTP 403"
+  },
+  "checks": [],
+  "level1": {
+    "ran": false,
+    "passed": null,
+    "driver": null,
+    "path": null,
+    "javascript_errors": null
+  },
+  "layer2": [],
+  "layer3": [],
+  "parts": []
+}

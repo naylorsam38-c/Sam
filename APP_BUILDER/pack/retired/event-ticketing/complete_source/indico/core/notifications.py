@@ -1,0 +1,263 @@
+# This file is part of Indico.
+# Copyright (C) 2002 - 2026 CERN
+#
+# Indico is free software; you can redistribute it and/or
+# modify it under the terms of the MIT License; see the
+# LICENSE file for more details.
+
+import mimetypes
+import re
+import time
+from email.mime.base import MIMEBase
+from functools import wraps
+from types import GeneratorType
+from uuid import uuid4
+
+from flask import g
+
+from indico.core.config import config
+from indico.core.db import db
+from indico.core.logger import Logger
+from indico.core.storage.backend import StorageError, get_storage
+from indico.util.fs import secure_filename
+from indico.util.i18n import _
+from indico.util.signals import make_interceptable
+from indico.util.string import crc32, truncate
+
+
+logger = Logger.get('emails')
+
+
+# XXX: Please don't use this in new code. Call `send_email()` directly.
+def email_sender(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        mails = fn(*args, **kwargs)
+        if mails is None:
+            return
+        if isinstance(mails, GeneratorType):
+            mails = list(mails)
+        elif not isinstance(mails, list):
+            mails = [mails]
+        for mail in [_f for _f in mails if _f]:
+            send_email(mail)
+    return wrapper
+
+
+def send_email(email, obj=None, module=None, user=None, log_metadata=None, log_summary=None):
+    """Send an email created by :func:`make_email`.
+
+    When called while inside a RH, the email will be queued and only
+    sent or passed on to celery once the database commit succeeded.
+
+    :param email: The email object returned by :func:`make_email`
+    :param obj: If specified, the email will be saved in that object's log. The
+                object must have a ``log`` method and an ``id`` attribute.
+    :param module: The module name to show in the email log
+    :param user: The user to show in the email log
+    :param log_metadata: A metadata dictionary to be saved in the event's log
+    """
+    from indico.core.emails import do_send_email, send_email_task
+    fn = send_email_task.delay if config.SMTP_USE_CELERY else do_send_email
+    # we log the email immediately (as pending).  if we don't commit,
+    # the log message will simply be thrown away later
+    log_entry = _log_email(email, obj, module, user, log_metadata, log_summary)
+    if 'email_queue' in g:
+        g.email_queue.append((fn, email, log_entry))
+    else:
+        fn(email, log_entry)
+
+
+def _log_email(email, obj, module, user, meta=None, summary=None):
+    from indico.modules.events import Event
+    from indico.modules.logs import AppLogRealm, EventLogRealm, LogKind
+    if not obj:
+        return None
+    log_data = {
+        'content_type': 'text/html' if email['html'] else 'text/plain',
+        'from': email['from'],
+        'to': sorted(email['to']),
+        'cc': sorted(email['cc']),
+        'bcc': sorted(email['bcc']),
+        'reply_to': sorted(email['reply_to']),
+        'subject': email['subject'],
+        'body': email['body'].strip(),
+        'state': 'pending',
+        'sent_dt': None,
+        'alternatives': email['alternatives'],
+        'attachments': sorted(
+            a.get_filename('unnamed') if isinstance(a, MIMEBase) else a[0]
+            for a in email['attachments']
+        ),
+    }
+    # Optionally persist email attachments
+    if config.EMAIL_LOG_STORAGE and (attachments := email['attachments']):
+        stored_attachments = g.setdefault('stored_email_attachments', {})
+        unique_id = g.setdefault('stored_email_attachments_uuid', uuid4().hex)
+        storage = get_storage(config.EMAIL_LOG_STORAGE)
+        stored = []
+        obj_type = type(obj).__name__.lower()
+        obj_id = getattr(obj, 'id', None) or 'unknown'
+        base_path = f'emails/{obj_type}/{obj_id}'
+
+        for att in attachments:
+            match att:
+                case MIMEBase():
+                    filename = att.get_filename('unnamed')
+                    content = att.get_payload(decode=True)
+                    ctype = (att.get_content_type() or mimetypes.guess_type(filename or '')[0]
+                             or 'application/octet-stream')
+                case (filename, content, *rest):
+                    if isinstance(content, str):
+                        content = content.encode('utf-8')
+                    if rest and rest[0]:
+                        ctype = rest[0]
+                    else:
+                        ctype = mimetypes.guess_type(filename or '')[0] or 'application/octet-stream'
+                case _:
+                    logger.error('Unexpected email attachment: %s', att)
+
+            safe_name = secure_filename(filename or 'attachment', 'file')
+            contenthash = crc32(content)
+            name = f'{base_path}/{contenthash}-{unique_id}-{safe_name}'
+            if not (file_id := stored_attachments.get(name)):
+                try:
+                    file_id, _checksum = storage.save(name, ctype, filename or safe_name, content)
+                except StorageError:
+                    # Do not fail email logging if storage is unavailable; simply skip storing
+                    logger.exception('Could not store email attachment')
+                    continue
+                stored_attachments[name] = file_id
+            stored_item = {
+                'storage_backend': config.EMAIL_LOG_STORAGE,
+                'storage_file_id': file_id,
+                'filename': filename,
+                'content_type': ctype,
+            }
+            if isinstance(att, MIMEBase):
+                content_id = att.get('Content-ID')
+                if content_id:
+                    stored_item['content_id'] = content_id.strip('<>')
+            stored.append(stored_item)
+        if stored:
+            log_data['stored_attachments'] = stored
+    log_realm = EventLogRealm.emails if isinstance(obj, Event) else AppLogRealm.emails
+    return obj.log(log_realm, LogKind.other, module or 'Unknown', summary or log_data['subject'], user,
+                   type_='email', data=log_data, meta=meta)
+
+
+def init_email_queue():
+    """Enable email queueing for the current context."""
+    g.setdefault('email_queue', [])
+
+
+def flush_email_queue():
+    """Send all the emails in the queue.
+
+    Note: This function does a database commit to update states
+    in case of failures or immediately-sent emails.  It should only
+    be called if the session is in a state safe to commit or after
+    doing a commit/rollback of any other changes that might have
+    been pending.
+    """
+    from indico.core.emails import store_failed_email, update_email_log_state
+    queue = g.get('email_queue', [])
+    if not queue:
+        return
+    logger.debug('Sending %d queued emails', len(queue))
+    for fn, email, log_entry in queue:
+        try:
+            fn(email, log_entry)
+        except Exception:
+            # Flushing the email queue happens after a commit.
+            # If anything goes wrong here we keep going and just log
+            # it to avoid losing (more) emails in case celery is not
+            # used for email sending or there is a temporary issue
+            # with celery.
+            if log_entry:
+                update_email_log_state(log_entry, failed=True)
+            path = store_failed_email(email, log_entry)
+            logger.exception('Flushing queued email "%s" failed; stored data in %s',
+                             truncate(email['subject'], 100), path)
+            # Wait for a short moment in case it's a very temporary issue
+            time.sleep(0.25)
+    del queue[:]
+    db.session.commit()
+
+
+def _attachment_size(att):
+    if isinstance(att, MIMEBase):
+        return len(att.get_payload(decode=True) or b'')
+    content = att[1]
+    return len(content.encode() if isinstance(content, str) else content)
+
+
+@make_interceptable
+def make_email(to_list=None, cc_list=None, bcc_list=None, *, sender_address=None, reply_address=None, attachments=None,
+               subject=None, body=None, template=None, html=False, alternatives=None):
+    """Create an email.
+
+    The preferred way to specify the email content is using the
+    `template` argument. To do so, use :func:`.get_template_module` on
+    a template inheriting from ``emails/base.txt`` for text emails or
+    ``emails/base.html`` for HTML emails.
+
+    :param to_list: The recipient email or a collection of emails
+    :param cc_list: The CC email or a collection of emails
+    :param bcc_list: The BCC email or a collection of emails
+    :param sender_address: The sender address, used to populate either From or Reply-to
+    :param reply_address: The Reply-to address or a collection of addresses.
+                          Defaults to empty, but depending on the sender address it may
+                          be used as a default value for Reply-to. If this argument is
+                          provided, it is always prioritized over the sender_address which
+                          may not be used at all in that case.
+    :param attachments: A list of attachments. Each attachment can be
+                        a `MIMEBase` subclass, a 3-tuple of the form
+                        ``(filename, content, mimetype)``, or a 2-tuple
+                        ``(filename, content)`` in which case the mime
+                        type will be guessed from the file name.
+    :param subject: The subject of the email.
+    :param body: The body of the email:
+    :param template: A template module containing ``get_subject`` and
+                     ``get_body`` macros.
+    :param html: ``True`` if the email body is HTML
+    :param alternatives: List of ``(content, mimetype)`` tuples of alternative
+                         representations of the message
+    """
+    from indico.core.emails import get_actual_sender_address
+    if template is not None and (subject is not None or body is not None):
+        raise ValueError('Only subject/body or template can be passed')
+
+    if template:
+        subject = template.get_subject()
+        body = template.get_body()
+    if config.DEBUG and '\n' in subject:
+        raise ValueError('Email subject contains linebreaks')
+    subject = re.sub(r'\s+', ' ', subject)
+    if to_list is None:
+        to_list = set()
+    if cc_list is None:
+        cc_list = set()
+    if bcc_list is None:
+        bcc_list = set()
+    to_list = {to_list} if isinstance(to_list, str) and to_list else (to_list or set())
+    cc_list = {cc_list} if isinstance(cc_list, str) and cc_list else (cc_list or set())
+    bcc_list = {bcc_list} if isinstance(bcc_list, str) and bcc_list else (bcc_list or set())
+    reply_address = {reply_address} if (isinstance(reply_address, str) and reply_address) else (reply_address or set())
+    from_address, reply_address = get_actual_sender_address(sender_address, reply_address)
+    if config.MAX_EMAIL_ATTACHMENT_SIZE is not None and attachments:
+        total = sum(_attachment_size(a) for a in attachments)
+        if total > config.MAX_EMAIL_ATTACHMENT_SIZE * 1024 * 1024:
+            raise ValueError(_('Total attachment size too large (max. {} MB)').format(config.MAX_EMAIL_ATTACHMENT_SIZE))
+    return {
+        'to': set(to_list),
+        'cc': set(cc_list),
+        'bcc': set(bcc_list),
+        'from': from_address,
+        'reply_to': set(reply_address),
+        'attachments': attachments or [],
+        'subject': subject.strip(),
+        'body': body.strip(),
+        'html': html,
+        'alternatives': alternatives,
+    }

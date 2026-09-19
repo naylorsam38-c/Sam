@@ -1,0 +1,1071 @@
+{
+  "usable_events": [],
+  "usable_slots": [
+    {
+      "name": "iyanuashiri__meethub.notifications.content",
+      "kind": "SLOT",
+      "source_file": "meethub/actions/templates/actions/notifications.html",
+      "rendering_context": "meethub/actions/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/actions/templates/actions/notifications.html:5, meethub/actions/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.profile_detail.content",
+      "kind": "SLOT",
+      "source_file": "meethub/profile/templates/profile/profile_detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/templates/profile/profile_detail.html:5, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.update_form.content",
+      "kind": "SLOT",
+      "source_file": "meethub/profile/templates/profile/update_form.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/templates/profile/update_form.html:6, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.create_form.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/create_form.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/create_form.html:5, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.create_form.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/create_form.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/create_form.html:7, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.update_form.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/update_form.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/update_form.html:5, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.update_form.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/update_form.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/update_form.html:7, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.delete.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/delete.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/delete.html:3, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.delete.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/delete.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/delete.html:5, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.list_of_events.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/list_of_events.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/list_of_events.html:4, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.list_of_events.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/list_of_events.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/list_of_events.html:6, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.detail.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/detail.html:7, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.detail.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/detail.html:9, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/base.html:17",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/base.html:289",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.delete.content",
+      "kind": "SLOT",
+      "source_file": "meethub/comments/templates/comments/delete.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/templates/comments/delete.html:3, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.detail.content",
+      "kind": "SLOT",
+      "source_file": "meethub/comments/templates/comments/detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/templates/comments/detail.html:5, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base1.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/base1.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/base1.html:15",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base1.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/base1.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/base1.html:262",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.signup.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/signup.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/signup.html:4, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.signup.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/signup.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/signup.html:6, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.homepage.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/homepage.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/homepage.html:3, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.homepage.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/homepage.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/homepage.html:5, meethub/accounts/views.py",
+      "status": "USABLE"
+    }
+  ],
+  "usable_data": [
+    {
+      "name": "actions.Action",
+      "kind": "DATA",
+      "source_file": "meethub/actions/models.py",
+      "source_symbol": "Action",
+      "operations": "READ, WRITE",
+      "payload": "user, verb, created, target_ct, target_id",
+      "implementation": "NATIVE",
+      "evidence": "meethub/actions/models.py:11, meethub/actions/tests/test_models.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "profile.Profile",
+      "kind": "DATA",
+      "source_file": "meethub/profile/models.py",
+      "source_symbol": "Profile",
+      "operations": "READ, WRITE",
+      "payload": "user, date_of_birth, photo",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/models.py:12, meethub/profile/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "events.Category",
+      "kind": "DATA",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Category",
+      "operations": "READ, WRITE",
+      "payload": "name, description",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:14, meethub/events/tests/test_forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "events.Event",
+      "kind": "DATA",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Event",
+      "operations": "READ, WRITE",
+      "payload": "name, details, venue, date, time, category, creator, attendees, num_of_attendees",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:26, meethub/events/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "comments.Comment",
+      "kind": "DATA",
+      "source_file": "meethub/comments/models.py",
+      "source_symbol": "Comment",
+      "operations": "READ, WRITE",
+      "payload": "comment, created_date, created_time, event, created_by, parent",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/models.py:10, meethub/events/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "usable_total": [
+    {
+      "name": "iyanuashiri__meethub.notifications.content",
+      "kind": "SLOT",
+      "source_file": "meethub/actions/templates/actions/notifications.html",
+      "rendering_context": "meethub/actions/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/actions/templates/actions/notifications.html:5, meethub/actions/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.profile_detail.content",
+      "kind": "SLOT",
+      "source_file": "meethub/profile/templates/profile/profile_detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/templates/profile/profile_detail.html:5, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.update_form.content",
+      "kind": "SLOT",
+      "source_file": "meethub/profile/templates/profile/update_form.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/templates/profile/update_form.html:6, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.create_form.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/create_form.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/create_form.html:5, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.create_form.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/create_form.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/create_form.html:7, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.update_form.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/update_form.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/update_form.html:5, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.update_form.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/update_form.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/update_form.html:7, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.delete.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/delete.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/delete.html:3, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.delete.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/delete.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/delete.html:5, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.list_of_events.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/list_of_events.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/list_of_events.html:4, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.list_of_events.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/list_of_events.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/list_of_events.html:6, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.detail.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/detail.html:7, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.detail.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/detail.html:9, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/base.html:17",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/base.html:289",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.delete.content",
+      "kind": "SLOT",
+      "source_file": "meethub/comments/templates/comments/delete.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/templates/comments/delete.html:3, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.detail.content",
+      "kind": "SLOT",
+      "source_file": "meethub/comments/templates/comments/detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/templates/comments/detail.html:5, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base1.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/base1.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/base1.html:15",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base1.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/base1.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/base1.html:262",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.signup.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/signup.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/signup.html:4, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.signup.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/signup.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/signup.html:6, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.homepage.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/homepage.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/homepage.html:3, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.homepage.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/homepage.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/homepage.html:5, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "actions.Action",
+      "kind": "DATA",
+      "source_file": "meethub/actions/models.py",
+      "source_symbol": "Action",
+      "operations": "READ, WRITE",
+      "payload": "user, verb, created, target_ct, target_id",
+      "implementation": "NATIVE",
+      "evidence": "meethub/actions/models.py:11, meethub/actions/tests/test_models.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "profile.Profile",
+      "kind": "DATA",
+      "source_file": "meethub/profile/models.py",
+      "source_symbol": "Profile",
+      "operations": "READ, WRITE",
+      "payload": "user, date_of_birth, photo",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/models.py:12, meethub/profile/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "events.Category",
+      "kind": "DATA",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Category",
+      "operations": "READ, WRITE",
+      "payload": "name, description",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:14, meethub/events/tests/test_forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "events.Event",
+      "kind": "DATA",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Event",
+      "operations": "READ, WRITE",
+      "payload": "name, details, venue, date, time, category, creator, attendees, num_of_attendees",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:26, meethub/events/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "comments.Comment",
+      "kind": "DATA",
+      "source_file": "meethub/comments/models.py",
+      "source_symbol": "Comment",
+      "operations": "READ, WRITE",
+      "payload": "comment, created_date, created_time, event, created_by, parent",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/models.py:10, meethub/events/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "all_measured": [
+    {
+      "name": "actions.Action.post_delete",
+      "kind": "EVENT",
+      "source_file": "meethub/actions/models.py",
+      "source_symbol": "Action",
+      "payload": "user, verb, created, target_ct, target_id",
+      "implementation": "NATIVE",
+      "evidence": "meethub/actions/models.py:11 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "actions.Action.post_save",
+      "kind": "EVENT",
+      "source_file": "meethub/actions/models.py",
+      "source_symbol": "Action",
+      "payload": "user, verb, created, target_ct, target_id",
+      "implementation": "NATIVE",
+      "evidence": "meethub/actions/models.py:11 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "actions.Action.pre_delete",
+      "kind": "EVENT",
+      "source_file": "meethub/actions/models.py",
+      "source_symbol": "Action",
+      "payload": "user, verb, created, target_ct, target_id",
+      "implementation": "NATIVE",
+      "evidence": "meethub/actions/models.py:11 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "actions.Action.pre_save",
+      "kind": "EVENT",
+      "source_file": "meethub/actions/models.py",
+      "source_symbol": "Action",
+      "payload": "user, verb, created, target_ct, target_id",
+      "implementation": "NATIVE",
+      "evidence": "meethub/actions/models.py:11 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "profile.Profile.post_delete",
+      "kind": "EVENT",
+      "source_file": "meethub/profile/models.py",
+      "source_symbol": "Profile",
+      "payload": "user, date_of_birth, photo",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/models.py:12 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "profile.Profile.post_save",
+      "kind": "EVENT",
+      "source_file": "meethub/profile/models.py",
+      "source_symbol": "Profile",
+      "payload": "user, date_of_birth, photo",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/models.py:12 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "profile.Profile.pre_delete",
+      "kind": "EVENT",
+      "source_file": "meethub/profile/models.py",
+      "source_symbol": "Profile",
+      "payload": "user, date_of_birth, photo",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/models.py:12 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "profile.Profile.pre_save",
+      "kind": "EVENT",
+      "source_file": "meethub/profile/models.py",
+      "source_symbol": "Profile",
+      "payload": "user, date_of_birth, photo",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/models.py:12 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "events.Category.post_delete",
+      "kind": "EVENT",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Category",
+      "payload": "name, description",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:14 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "events.Category.post_save",
+      "kind": "EVENT",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Category",
+      "payload": "name, description",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:14 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "events.Category.pre_delete",
+      "kind": "EVENT",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Category",
+      "payload": "name, description",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:14 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "events.Category.pre_save",
+      "kind": "EVENT",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Category",
+      "payload": "name, description",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:14 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "events.Event.post_delete",
+      "kind": "EVENT",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Event",
+      "payload": "name, details, venue, date, time, category, creator, attendees, num_of_attendees",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:26 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "events.Event.post_save",
+      "kind": "EVENT",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Event",
+      "payload": "name, details, venue, date, time, category, creator, attendees, num_of_attendees",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:26 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "events.Event.pre_delete",
+      "kind": "EVENT",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Event",
+      "payload": "name, details, venue, date, time, category, creator, attendees, num_of_attendees",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:26 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "events.Event.pre_save",
+      "kind": "EVENT",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Event",
+      "payload": "name, details, venue, date, time, category, creator, attendees, num_of_attendees",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:26 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "comments.Comment.post_delete",
+      "kind": "EVENT",
+      "source_file": "meethub/comments/models.py",
+      "source_symbol": "Comment",
+      "payload": "comment, created_date, created_time, event, created_by, parent",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/models.py:10 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "comments.Comment.post_save",
+      "kind": "EVENT",
+      "source_file": "meethub/comments/models.py",
+      "source_symbol": "Comment",
+      "payload": "comment, created_date, created_time, event, created_by, parent",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/models.py:10 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "comments.Comment.pre_delete",
+      "kind": "EVENT",
+      "source_file": "meethub/comments/models.py",
+      "source_symbol": "Comment",
+      "payload": "comment, created_date, created_time, event, created_by, parent",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/models.py:10 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "comments.Comment.pre_save",
+      "kind": "EVENT",
+      "source_file": "meethub/comments/models.py",
+      "source_symbol": "Comment",
+      "payload": "comment, created_date, created_time, event, created_by, parent",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/models.py:10 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "iyanuashiri__meethub.notifications.content",
+      "kind": "SLOT",
+      "source_file": "meethub/actions/templates/actions/notifications.html",
+      "rendering_context": "meethub/actions/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/actions/templates/actions/notifications.html:5, meethub/actions/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.profile_detail.content",
+      "kind": "SLOT",
+      "source_file": "meethub/profile/templates/profile/profile_detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/templates/profile/profile_detail.html:5, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.update_form.content",
+      "kind": "SLOT",
+      "source_file": "meethub/profile/templates/profile/update_form.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/templates/profile/update_form.html:6, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.create_form.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/create_form.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/create_form.html:5, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.create_form.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/create_form.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/create_form.html:7, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.update_form.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/update_form.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/update_form.html:5, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.update_form.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/update_form.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/update_form.html:7, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.delete.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/delete.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/delete.html:3, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.delete.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/delete.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/delete.html:5, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.comment_reply.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/comment_reply.html",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/comment_reply.html:3 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.list_of_events.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/list_of_events.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/list_of_events.html:4, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.list_of_events.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/list_of_events.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/list_of_events.html:6, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.detail.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/detail.html:7, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.detail.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/detail.html:9, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base.title",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/base.html:17",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base.content",
+      "kind": "SLOT",
+      "source_file": "meethub/events/templates/events/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/templates/events/base.html:289",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.delete.content",
+      "kind": "SLOT",
+      "source_file": "meethub/comments/templates/comments/delete.html",
+      "rendering_context": "meethub/events/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/templates/comments/delete.html:3, meethub/events/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.detail.content",
+      "kind": "SLOT",
+      "source_file": "meethub/comments/templates/comments/detail.html",
+      "rendering_context": "meethub/profile/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/templates/comments/detail.html:5, meethub/profile/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.reply_form.content",
+      "kind": "SLOT",
+      "source_file": "meethub/comments/templates/comments/reply_form.html",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/templates/comments/reply_form.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base1.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/base1.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/base1.html:15",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.base1.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/base1.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/base1.html:262",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.login.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/login.html",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/login.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.login.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/login.html",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/login.html:6 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.signup.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/signup.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/signup.html:4, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.signup.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/signup.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/signup.html:6, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.logged_out.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/logged_out.html",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/logged_out.html:3 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.logged_out.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/logged_out.html",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/logged_out.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.homepage.title",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/homepage.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/homepage.html:3, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "iyanuashiri__meethub.homepage.content",
+      "kind": "SLOT",
+      "source_file": "meethub/accounts/templates/registration/homepage.html",
+      "rendering_context": "meethub/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "meethub/accounts/templates/registration/homepage.html:5, meethub/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "actions.Action",
+      "kind": "DATA",
+      "source_file": "meethub/actions/models.py",
+      "source_symbol": "Action",
+      "operations": "READ, WRITE",
+      "payload": "user, verb, created, target_ct, target_id",
+      "implementation": "NATIVE",
+      "evidence": "meethub/actions/models.py:11, meethub/actions/tests/test_models.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "profile.Profile",
+      "kind": "DATA",
+      "source_file": "meethub/profile/models.py",
+      "source_symbol": "Profile",
+      "operations": "READ, WRITE",
+      "payload": "user, date_of_birth, photo",
+      "implementation": "NATIVE",
+      "evidence": "meethub/profile/models.py:12, meethub/profile/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "events.Category",
+      "kind": "DATA",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Category",
+      "operations": "READ, WRITE",
+      "payload": "name, description",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:14, meethub/events/tests/test_forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "events.Event",
+      "kind": "DATA",
+      "source_file": "meethub/events/models.py",
+      "source_symbol": "Event",
+      "operations": "READ, WRITE",
+      "payload": "name, details, venue, date, time, category, creator, attendees, num_of_attendees",
+      "implementation": "NATIVE",
+      "evidence": "meethub/events/models.py:26, meethub/events/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "comments.Comment",
+      "kind": "DATA",
+      "source_file": "meethub/comments/models.py",
+      "source_symbol": "Comment",
+      "operations": "READ, WRITE",
+      "payload": "comment, created_date, created_time, event, created_by, parent",
+      "implementation": "NATIVE",
+      "evidence": "meethub/comments/models.py:10, meethub/events/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "counts": {
+    "usable_events": 0,
+    "usable_slots": 23,
+    "usable_data": 5,
+    "usable_total": 28
+  },
+  "extension_system": {
+    "evidence": [],
+    "plugin_authoring_docs_present": false,
+    "plugin_authoring_docs_location": ""
+  }
+}

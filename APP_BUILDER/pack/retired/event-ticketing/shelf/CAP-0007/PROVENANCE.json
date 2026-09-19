@@ -1,0 +1,27 @@
+{
+  "cap_id": "CAP-0007",
+  "cap_name": "book slot",
+  "app_slug": "event-ticketing",
+  "repo_name": "indico/indico",
+  "repo_url": "https://github.com/indico/indico",
+  "licence": "MIT",
+  "commit": "eb90264caec7d1210959c453d1f93ad88a98e6ce",
+  "source_file": "indico/modules/events/registration/controllers/display.py",
+  "source_symbol": "RHRegistrationForm._process_POST / create_registration",
+  "source_lines": "416-424 (RH); 437-483 (indico/modules/events/registration/util.py)",
+  "ranges_fetched": [
+    {
+      "path": "indico/modules/events/registration/controllers/display.py",
+      "start": 416,
+      "end": 424
+    },
+    {
+      "path": "indico/modules/events/registration/util.py",
+      "start": 437,
+      "end": 483
+    }
+  ],
+  "lines_written": 2086,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}

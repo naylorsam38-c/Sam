@@ -1,0 +1,947 @@
+{
+  "usable_events": [],
+  "usable_slots": [
+    {
+      "name": "shacker__django-todo.import_csv.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/import_csv.html",
+      "rendering_context": "todo/views/import_csv.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/import_csv.html:4, todo/views/import_csv.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.import_csv.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/import_csv.html",
+      "rendering_context": "todo/views/import_csv.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/import_csv.html:6, todo/views/import_csv.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_list.page_heading",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_list.html",
+      "rendering_context": "todo/views/add_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_list.html:2, todo/views/add_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_list.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_list.html",
+      "rendering_context": "todo/views/add_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_list.html:3, todo/views/add_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_list.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_list.html",
+      "rendering_context": "todo/views/add_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_list.html:4, todo/views/add_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:3, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.extrahead",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:5, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:21, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.extra_js",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:211, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_detail.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_detail.html",
+      "rendering_context": "todo/views/list_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_detail.html:4, todo/views/list_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_detail.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_detail.html",
+      "rendering_context": "todo/views/list_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_detail.html:6, todo/views/list_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_detail.extra_js",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_detail.html",
+      "rendering_context": "todo/views/list_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_detail.html:89, todo/views/list_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.search_results.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/search_results.html",
+      "rendering_context": "todo/views/search.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/search_results.html:3, todo/views/search.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.search_results.content_title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/search_results.html",
+      "rendering_context": "todo/views/search.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/search_results.html:4, todo/views/search.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.search_results.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/search_results.html",
+      "rendering_context": "todo/views/search.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/search_results.html:6, todo/views/search.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.base.extrahead",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_task_external.page_heading",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_task_external.html",
+      "rendering_context": "todo/views/external_add.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_task_external.html:2, todo/views/external_add.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_task_external.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_task_external.html",
+      "rendering_context": "todo/views/external_add.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_task_external.html:3, todo/views/external_add.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_task_external.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_task_external.html",
+      "rendering_context": "todo/views/external_add.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_task_external.html:5, todo/views/external_add.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_lists.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_lists.html",
+      "rendering_context": "todo/views/list_lists.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_lists.html:3, todo/views/list_lists.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_lists.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_lists.html",
+      "rendering_context": "todo/views/list_lists.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_lists.html:5, todo/views/list_lists.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.del_list.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/del_list.html",
+      "rendering_context": "todo/views/del_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/del_list.html:2, todo/views/del_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.del_list.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/del_list.html",
+      "rendering_context": "todo/views/del_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/del_list.html:4, todo/views/del_list.py",
+      "status": "USABLE"
+    }
+  ],
+  "usable_data": [
+    {
+      "name": "todo.TaskList",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "TaskList",
+      "operations": "READ, WRITE",
+      "payload": "name, slug, group",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:55, todo/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "todo.Task",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "Task",
+      "operations": "READ, WRITE",
+      "payload": "title, task_list, created_date, due_date, completed, completed_date, created_by, assigned_to, note, priority",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:71, todo/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "todo.Comment",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "Comment",
+      "operations": "READ, WRITE",
+      "payload": "author, task, date, email_from, email_message_id, body",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:127, todo/views/task_detail.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "todo.Attachment",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "Attachment",
+      "operations": "READ, WRITE",
+      "payload": "task, added_by, timestamp, file",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:166, todo/views/task_detail.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "usable_total": [
+    {
+      "name": "shacker__django-todo.import_csv.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/import_csv.html",
+      "rendering_context": "todo/views/import_csv.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/import_csv.html:4, todo/views/import_csv.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.import_csv.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/import_csv.html",
+      "rendering_context": "todo/views/import_csv.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/import_csv.html:6, todo/views/import_csv.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_list.page_heading",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_list.html",
+      "rendering_context": "todo/views/add_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_list.html:2, todo/views/add_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_list.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_list.html",
+      "rendering_context": "todo/views/add_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_list.html:3, todo/views/add_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_list.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_list.html",
+      "rendering_context": "todo/views/add_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_list.html:4, todo/views/add_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:3, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.extrahead",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:5, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:21, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.extra_js",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:211, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_detail.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_detail.html",
+      "rendering_context": "todo/views/list_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_detail.html:4, todo/views/list_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_detail.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_detail.html",
+      "rendering_context": "todo/views/list_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_detail.html:6, todo/views/list_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_detail.extra_js",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_detail.html",
+      "rendering_context": "todo/views/list_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_detail.html:89, todo/views/list_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.search_results.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/search_results.html",
+      "rendering_context": "todo/views/search.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/search_results.html:3, todo/views/search.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.search_results.content_title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/search_results.html",
+      "rendering_context": "todo/views/search.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/search_results.html:4, todo/views/search.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.search_results.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/search_results.html",
+      "rendering_context": "todo/views/search.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/search_results.html:6, todo/views/search.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.base.extrahead",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_task_external.page_heading",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_task_external.html",
+      "rendering_context": "todo/views/external_add.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_task_external.html:2, todo/views/external_add.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_task_external.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_task_external.html",
+      "rendering_context": "todo/views/external_add.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_task_external.html:3, todo/views/external_add.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_task_external.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_task_external.html",
+      "rendering_context": "todo/views/external_add.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_task_external.html:5, todo/views/external_add.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_lists.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_lists.html",
+      "rendering_context": "todo/views/list_lists.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_lists.html:3, todo/views/list_lists.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_lists.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_lists.html",
+      "rendering_context": "todo/views/list_lists.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_lists.html:5, todo/views/list_lists.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.del_list.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/del_list.html",
+      "rendering_context": "todo/views/del_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/del_list.html:2, todo/views/del_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.del_list.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/del_list.html",
+      "rendering_context": "todo/views/del_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/del_list.html:4, todo/views/del_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "todo.TaskList",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "TaskList",
+      "operations": "READ, WRITE",
+      "payload": "name, slug, group",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:55, todo/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "todo.Task",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "Task",
+      "operations": "READ, WRITE",
+      "payload": "title, task_list, created_date, due_date, completed, completed_date, created_by, assigned_to, note, priority",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:71, todo/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "todo.Comment",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "Comment",
+      "operations": "READ, WRITE",
+      "payload": "author, task, date, email_from, email_message_id, body",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:127, todo/views/task_detail.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "todo.Attachment",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "Attachment",
+      "operations": "READ, WRITE",
+      "payload": "task, added_by, timestamp, file",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:166, todo/views/task_detail.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "all_measured": [
+    {
+      "name": "todo.TaskList.post_delete",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "TaskList",
+      "payload": "name, slug, group",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:55 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.TaskList.post_save",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "TaskList",
+      "payload": "name, slug, group",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:55 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.TaskList.pre_delete",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "TaskList",
+      "payload": "name, slug, group",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:55 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.TaskList.pre_save",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "TaskList",
+      "payload": "name, slug, group",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:55 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Task.post_delete",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Task",
+      "payload": "title, task_list, created_date, due_date, completed, completed_date, created_by, assigned_to, note, priority",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:71 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Task.post_save",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Task",
+      "payload": "title, task_list, created_date, due_date, completed, completed_date, created_by, assigned_to, note, priority",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:71 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Task.pre_delete",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Task",
+      "payload": "title, task_list, created_date, due_date, completed, completed_date, created_by, assigned_to, note, priority",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:71 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Task.pre_save",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Task",
+      "payload": "title, task_list, created_date, due_date, completed, completed_date, created_by, assigned_to, note, priority",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:71 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Comment.post_delete",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Comment",
+      "payload": "author, task, date, email_from, email_message_id, body",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:127 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Comment.post_save",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Comment",
+      "payload": "author, task, date, email_from, email_message_id, body",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:127 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Comment.pre_delete",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Comment",
+      "payload": "author, task, date, email_from, email_message_id, body",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:127 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Comment.pre_save",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Comment",
+      "payload": "author, task, date, email_from, email_message_id, body",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:127 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Attachment.post_delete",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Attachment",
+      "payload": "task, added_by, timestamp, file",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:166 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Attachment.post_save",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Attachment",
+      "payload": "task, added_by, timestamp, file",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:166 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Attachment.pre_delete",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Attachment",
+      "payload": "task, added_by, timestamp, file",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:166 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "todo.Attachment.pre_save",
+      "kind": "EVENT",
+      "source_file": "todo/models.py",
+      "source_symbol": "Attachment",
+      "payload": "task, added_by, timestamp, file",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:166 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "shacker__django-todo.import_csv.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/import_csv.html",
+      "rendering_context": "todo/views/import_csv.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/import_csv.html:4, todo/views/import_csv.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.import_csv.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/import_csv.html",
+      "rendering_context": "todo/views/import_csv.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/import_csv.html:6, todo/views/import_csv.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_list.page_heading",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_list.html",
+      "rendering_context": "todo/views/add_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_list.html:2, todo/views/add_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_list.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_list.html",
+      "rendering_context": "todo/views/add_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_list.html:3, todo/views/add_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_list.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_list.html",
+      "rendering_context": "todo/views/add_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_list.html:4, todo/views/add_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:3, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.extrahead",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:5, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:21, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.task_detail.extra_js",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/task_detail.html",
+      "rendering_context": "todo/views/task_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/task_detail.html:211, todo/views/task_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_detail.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_detail.html",
+      "rendering_context": "todo/views/list_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_detail.html:4, todo/views/list_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_detail.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_detail.html",
+      "rendering_context": "todo/views/list_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_detail.html:6, todo/views/list_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_detail.extra_js",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_detail.html",
+      "rendering_context": "todo/views/list_detail.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_detail.html:89, todo/views/list_detail.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.search_results.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/search_results.html",
+      "rendering_context": "todo/views/search.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/search_results.html:3, todo/views/search.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.search_results.content_title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/search_results.html",
+      "rendering_context": "todo/views/search.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/search_results.html:4, todo/views/search.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.search_results.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/search_results.html",
+      "rendering_context": "todo/views/search.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/search_results.html:6, todo/views/search.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.base.extrahead",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_task_external.page_heading",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_task_external.html",
+      "rendering_context": "todo/views/external_add.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_task_external.html:2, todo/views/external_add.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_task_external.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_task_external.html",
+      "rendering_context": "todo/views/external_add.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_task_external.html:3, todo/views/external_add.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.add_task_external.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/add_task_external.html",
+      "rendering_context": "todo/views/external_add.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/add_task_external.html:5, todo/views/external_add.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_lists.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_lists.html",
+      "rendering_context": "todo/views/list_lists.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_lists.html:3, todo/views/list_lists.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.list_lists.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/list_lists.html",
+      "rendering_context": "todo/views/list_lists.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/list_lists.html:5, todo/views/list_lists.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.del_list.title",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/del_list.html",
+      "rendering_context": "todo/views/del_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/del_list.html:2, todo/views/del_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "shacker__django-todo.del_list.content",
+      "kind": "SLOT",
+      "source_file": "todo/templates/todo/del_list.html",
+      "rendering_context": "todo/views/del_list.py",
+      "implementation": "NATIVE",
+      "evidence": "todo/templates/todo/del_list.html:4, todo/views/del_list.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "todo.TaskList",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "TaskList",
+      "operations": "READ, WRITE",
+      "payload": "name, slug, group",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:55, todo/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "todo.Task",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "Task",
+      "operations": "READ, WRITE",
+      "payload": "title, task_list, created_date, due_date, completed, completed_date, created_by, assigned_to, note, priority",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:71, todo/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "todo.Comment",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "Comment",
+      "operations": "READ, WRITE",
+      "payload": "author, task, date, email_from, email_message_id, body",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:127, todo/views/task_detail.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "todo.Attachment",
+      "kind": "DATA",
+      "source_file": "todo/models.py",
+      "source_symbol": "Attachment",
+      "operations": "READ, WRITE",
+      "payload": "task, added_by, timestamp, file",
+      "implementation": "NATIVE",
+      "evidence": "todo/models.py:166, todo/views/task_detail.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "counts": {
+    "usable_events": 0,
+    "usable_slots": 23,
+    "usable_data": 4,
+    "usable_total": 27
+  },
+  "extension_system": {
+    "evidence": [],
+    "plugin_authoring_docs_present": false,
+    "plugin_authoring_docs_location": ""
+  }
+}

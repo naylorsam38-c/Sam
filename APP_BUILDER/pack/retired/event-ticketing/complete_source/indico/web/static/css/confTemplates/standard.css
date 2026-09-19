@@ -1,0 +1,47 @@
+/*
+    Use this stylesheet to modify the layout of your
+    conference.
+*/
+
+:root {
+  /* Header */
+  --conf-theme-header-bg: #1a64a0;
+  --conf-theme-header-border-bottom: #0f4c80;
+  --conf-theme-header-text: white;
+
+  /* Subtitle area */
+  --conf-theme-subtitle-bg: #f5faff;
+  --conf-theme-subtitle-border: #d5e4f1;
+  --conf-theme-subtitle-text: #24425a;
+
+  /* Menu colors */
+  --conf-theme-menu-bg: #f6f6f6;
+  --conf-theme-menu-border: #ccc;
+  --conf-theme-menu-link: #275c86;
+  --conf-theme-menu-selected: #bd891a;
+  --conf-theme-menu-selected-bg: #dadada;
+  --conf-theme-menu-selected-border: #d0d0d0;
+  --conf-theme-hover-bg: #e0e0e0;
+  --conf-theme-hover-color: var(--conf-theme-menu-link);
+  --conf-theme-title-sprite-bg: transparent;
+  --conf-theme-announcement-sprite-bg: transparent;
+  --conf-theme-announcement-border-top: 1px solid var(--conf-theme-announcement-border);
+  --conf-theme-announcement-border-bottom: none;
+
+  /* Support box */
+  --conf-theme-support-bg: #f6f6f6;
+  --conf-theme-support-border: #ccc;
+  --conf-theme-support-header-bg: #1a64a0;
+  --conf-theme-support-header-text: #f3f3f3;
+  --conf-theme-support-text: #aaa;
+
+  /* Background images */
+  --conf-theme-sprite-image: url('/images/conf/sprites_blue.png');
+
+  /* Announcement colors */
+  --conf-theme-announcement-bg: #f5faff;
+  --conf-theme-announcement-border: #c2d6e7;
+  --conf-theme-announcement-text: #0f283d;
+}
+
+/* Other CSS as needed */

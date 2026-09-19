@@ -1,0 +1,22 @@
+{
+  "cap_id": "CAP-0018",
+  "cap_name": "create visualisation",
+  "app_slug": "data-dashboard",
+  "repo_name": "getredash/redash",
+  "repo_url": "https://github.com/getredash/redash",
+  "licence": "BSD-2-Clause",
+  "commit": "8f6b15d30da433ae881dd6376a38df17bb6c2663",
+  "source_file": "redash/handlers/visualizations.py",
+  "source_symbol": "VisualizationListResource",
+  "source_lines": "12-27",
+  "ranges_fetched": [
+    {
+      "path": "redash/handlers/visualizations.py",
+      "start": 12,
+      "end": 27
+    }
+  ],
+  "lines_written": 56,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}

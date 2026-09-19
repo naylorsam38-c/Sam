@@ -1,0 +1,15 @@
+APP-002  Challenge Platform  (challenge-platform)
+  screen: Public: Login
+    button   "Submit"                     -> CAP-0002  log in
+  screen: Public: Register
+    button   "Submit"                     -> CAP-0001  register account
+  screen: Header: nav
+    button   "Logout"                     -> CAP-0003  log out
+  screen: Challenges board
+    page_load "Challenges"                 -> CAP-0011  list challenges
+    button   "Submit"                     -> CAP-0012  submit flag
+  screen: Scoreboard
+    page_load "Scoreboard"                 -> CAP-0013  view scoreboard
+  screen: Teams
+    button   "Create Team"                -> CAP-0014  create team
+    button   "Join Team"                  -> CAP-0015  join team

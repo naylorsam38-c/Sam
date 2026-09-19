@@ -1,0 +1,7 @@
+{
+  "admission_result": "REJECTED",
+  "rejection_reasons": [
+    "Rule A datastore: needs postgresql, source says (not recorded)",
+    "Rule B: source publishes no REST API documentation"
+  ]
+}

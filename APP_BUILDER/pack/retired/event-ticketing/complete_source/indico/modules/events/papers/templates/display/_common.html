@@ -1,0 +1,18 @@
+{% from 'message_box.html' import message_box %}
+
+{% macro render_cfp_infoline(event, cfp, contributions) %}
+    {%- call message_box('info') %}
+        {% set is_authorized = cfp.is_authorized_submitter(session.user) %}
+        <div class="text">
+            <div class="label">
+                {%- if cfp.is_open %}
+                    {%- trans %}The call for papers is open{% endtrans -%}
+                {% elif is_authorized %}
+                    {%- trans %}You have been authorized to submit papers{% endtrans -%}
+                {% else %}
+                    <div class="label">{% trans %}The call for papers is closed.{% endtrans %}</div>
+                {% endif -%}
+            </div>
+        </div>
+    {%- endcall %}
+{% endmacro %}

@@ -1,0 +1,18 @@
+{
+  "repo_name": "fossasia/eventyay",
+  "repo_url": "https://github.com/fossasia/eventyay",
+  "branch": "main",
+  "commit": "786bd095c63b8cf2bbacfdc05f39d132816035f6",
+  "licence": "UNRESOLVED -- see researcher_notes",
+  "framework": "django",
+  "datastore": "postgresql",
+  "api_docs_url": "",
+  "structural_match": "Full event management, ticketing, checkins, talks/schedules, badges -- a strong structural match to Eventbrite, actively maintained by FOSSASIA.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": true,
+  "plugin_authoring_docs_location": "doc/ (inherited from pretix's docs.pretix.eu references still present in-tree)",
+  "third_party_plugins_present": null,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Re-recorded from the pre-registry pilot's own real, first-hand clone inspection (not re-cloned this pass -- see this file's module docstring). LICENCE PROVENANCE CONFLICT, surfaced not guessed: the repo's top-level LICENSE file declares Apache-2.0, but its own NOTICE file states substantial portions are derived from Pretix (AGPL-3.0-only) with no independent relicensing consent recorded anywhere. Licence recorded as UNRESOLVED so the mechanical Rule C gate reflects that same unresolved state honestly rather than trusting the self-declared Apache-2.0 string. Expected admission result: REJECTED on Rule C, for the reason recorded, not a plain copyleft rejection."
+}

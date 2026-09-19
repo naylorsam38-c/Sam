@@ -1,0 +1,368 @@
+# This file is part of Indico.
+# Copyright (C) 2002 - 2026 CERN
+#
+# Indico is free software; you can redistribute it and/or
+# modify it under the terms of the MIT License; see the
+# LICENSE file for more details.
+
+from email.mime.image import MIMEImage
+
+from babel.dates import get_timezone
+from flask import flash, jsonify, request, session
+from markupsafe import Markup
+from marshmallow import fields
+from werkzeug.exceptions import BadRequest, Forbidden, NotFound
+
+from indico.core.config import config
+from indico.core.db import db
+from indico.core.db.sqlalchemy.util.queries import preprocess_ts_string
+from indico.core.notifications import make_email, send_email
+from indico.core.storage.backend import get_storage
+from indico.modules.admin import RHAdminBase
+from indico.modules.categories.controllers.base import RHManageCategoryBase
+from indico.modules.events.management.controllers import RHManageEventBase
+from indico.modules.logs.forms import ResendEmailPrefaceForm
+from indico.modules.logs.models.entries import (AppLogEntry, AppLogRealm, CategoryLogEntry, CategoryLogRealm,
+                                                EventLogEntry, EventLogRealm, UserLogEntry, UserLogRealm)
+from indico.modules.logs.util import replace_cid_links, serialize_log_entry
+from indico.modules.logs.views import WPAppLogs, WPCategoryLogs, WPEventLogs, WPUserLogs
+from indico.modules.users.controllers import RHUserBase
+from indico.util.i18n import _
+from indico.util.string import html_to_markdown
+from indico.web.args import use_kwargs
+from indico.web.flask.util import url_for
+from indico.web.util import jsonify_data, jsonify_template
+
+
+LOG_PAGE_SIZE = 15
+
+
+def _contains(field, text):
+    return (db.func.to_tsvector('simple', db.func.indico.indico_unaccent(field))
+            .match(db.func.indico.indico_unaccent(preprocess_ts_string(text)), postgresql_regconfig='simple'))
+
+
+def _get_metadata_query():
+    return {k[len('meta.'):]: int(v) if v.isdigit() else v
+            for k, v in request.args.items()
+            if k.startswith('meta.')}
+
+
+class RHAppLogs(RHAdminBase):
+    """Show app logs."""
+
+    def _process(self):
+        metadata_query = _get_metadata_query()
+        realms = {realm.name: realm.title for realm in AppLogRealm}
+        return WPAppLogs.render_template('logs.html', 'logs',
+                                         realms=realms, metadata_query=metadata_query,
+                                         logs_api_url=url_for('.api_app_logs'), timezone=session.tzinfo.zone)
+
+
+class RHCategoryLogs(RHManageCategoryBase):
+    """Show the modification/action log for the category."""
+
+    def _process(self):
+        metadata_query = _get_metadata_query()
+        realms = {realm.name: realm.title for realm in CategoryLogRealm}
+        return WPCategoryLogs.render_template('logs.html', self.category, 'logs',
+                                              realms=realms, metadata_query=metadata_query,
+                                              timezone=self.category.timezone,
+                                              logs_api_url=url_for('.api_category_logs', self.category))
+
+
+class RHEventLogs(RHManageEventBase):
+    """Show the modification/action log for the event."""
+
+    PERMISSION = 'registration'
+
+    def _process(self):
+        metadata_query = _get_metadata_query()
+        realms = {realm.name: realm.title for realm in EventLogRealm}
+        require_filter = not self.event.can_manage(session.user)
+        return WPEventLogs.render_template('logs.html', self.event, realms=realms, metadata_query=metadata_query,
+                                           logs_api_url=url_for('.api_event_logs', self.event),
+                                           require_filter=require_filter, timezone=self.event.timezone)
+
+
+class RHUserLogsBase(RHUserBase):
+    def _check_access(self):
+        RHUserBase._check_access(self)
+        if not session.user.is_admin:
+            raise Forbidden
+
+
+class RHUserLogs(RHUserLogsBase):
+    """Show the modification/action log for the user."""
+
+    def _process(self):
+        metadata_query = _get_metadata_query()
+        realms = {realm.name: realm.title for realm in UserLogRealm}
+        return WPUserLogs.render_template('logs.html', 'logs', user=self.user,
+                                          realms=realms, metadata_query=metadata_query, timezone=session.tzinfo.zone,
+                                          logs_api_url=url_for('.api_user_logs', self.user))
+
+
+class LogsAPIMixin:
+    model = None
+    realm_enum = None
+
+    @property
+    def object(self):
+        raise NotImplementedError
+
+    @property
+    def object_tzinfo(self):
+        raise NotImplementedError
+
+    def _process(self):
+        page = int(request.args.get('page', 1))
+        filters = request.args.getlist('filters')
+        metadata_query = _get_metadata_query()
+        text = request.args.get('q')
+
+        if not filters and not metadata_query:
+            return jsonify(current_page=1, pages=[], entries=[], total_page_count=0)
+
+        query = self.object.log_entries if self.object else self.model.query
+        query = query.order_by(self.model.logged_dt.desc())
+        realms = {self.realm_enum.get(f) for f in filters if self.realm_enum.get(f)}
+        if realms:
+            query = query.filter(self.model.realm.in_(realms))
+
+        if text:
+            query = query.filter(
+                db.or_(_contains(self.model.module, text),
+                       _contains(self.model.type, text),
+                       _contains(self.model.summary, text),
+                       _contains(db.m.User.first_name + ' ' + db.m.User.last_name, text),
+                       _contains(self.model.data['body'].astext, text),
+                       _contains(self.model.data['subject'].astext, text),
+                       _contains(self.model.data['from'].astext, text),
+                       _contains(self.model.data['to'].astext, text),
+                       _contains(self.model.data['cc'].astext, text))
+            ).outerjoin(db.m.User, db.m.User.id == self.model.user_id)
+
+        if metadata_query:
+            query = query.filter(self.model.meta.contains(metadata_query))
+
+        query = query.paginate(page=page, per_page=LOG_PAGE_SIZE)
+        tzinfo = self.object_tzinfo
+        entries = [dict(serialize_log_entry(entry, tzinfo), index=index, html=entry.render())
+                   for index, entry in enumerate(query.items)]
+        return jsonify(current_page=page, pages=list(query.iter_pages()), total_page_count=query.pages, entries=entries)
+
+
+class RHAppLogsJSON(LogsAPIMixin, RHAdminBase):
+    model = AppLogEntry
+    realm_enum = AppLogRealm
+
+    @property
+    def object(self):
+        return None
+
+    @property
+    def object_tzinfo(self):
+        return get_timezone(config.DEFAULT_TIMEZONE)
+
+
+class RHCategoryLogsJSON(LogsAPIMixin, RHManageCategoryBase):
+    model = CategoryLogEntry
+    realm_enum = CategoryLogRealm
+
+    @property
+    def object(self):
+        return self.category
+
+    @property
+    def object_tzinfo(self):
+        return self.category.tzinfo
+
+
+class RHEventLogsJSON(LogsAPIMixin, RHManageEventBase):
+    model = EventLogEntry
+    realm_enum = EventLogRealm
+
+    PERMISSION = 'registration'
+
+    def _check_access(self):
+        RHManageEventBase._check_access(self)
+        if not request.args.get('meta.registration_id'):
+            # Logs not related to registration can be seen only by users with event management permission
+            if not self.event.can_manage(session.user):
+                raise Forbidden
+
+    @property
+    def object(self):
+        return self.event
+
+    @property
+    def object_tzinfo(self):
+        return self.event.tzinfo
+
+
+class RHUserLogsJSON(LogsAPIMixin, RHUserLogsBase):
+    model = UserLogEntry
+    realm_enum = UserLogRealm
+
+    @property
+    def object(self):
+        return self.user
+
+    @property
+    def object_tzinfo(self):
+        return get_timezone(config.DEFAULT_TIMEZONE)
+
+
+class RHResendEmail(RHManageEventBase):
+    """Resend an email log entry."""
+
+    normalize_url_spec = {
+        'locators': {
+            lambda self: self.entry
+        }
+    }
+
+    def _process_args(self):
+        RHManageEventBase._process_args(self)
+        self.entry = (EventLogEntry.query
+                      .with_parent(self.event)
+                      .filter_by(id=request.view_args['log_entry_id'])
+                      .first_or_404())
+
+    def _process(self):
+        if self.entry.type != 'email':
+            raise BadRequest('Invalid log entry type')
+        elif self.entry.data.get('attachments') and not self.entry.data.get('stored_attachments'):
+            raise BadRequest('Cannot re-send email with attachments')
+        elif self.entry.data.get('state') == 'pending':
+            raise BadRequest('Cannot re-send pending emails')
+
+        is_html_email = self.entry.data['content_type'] == 'text/html'
+        original_subject = self.entry.data['subject']
+        form = ResendEmailPrefaceForm(subject=original_subject, is_html_email=is_html_email)
+        if form.validate_on_submit():
+            email = self._build_email(form.data, is_html_email)
+            send_email(email, obj=self.event, module=self.entry.module, user=self.entry.user,
+                       log_metadata=self.entry.meta, log_summary=f'Resent email: {original_subject}')
+            flash(_('The email has been re-sent.'), 'success')
+            return jsonify_data()
+
+        html_preview_body = None
+        if self.entry.data['content_type'] == 'text/html':
+            html_preview_body = replace_cid_links(self.entry)
+
+        return jsonify_template('logs/resend_email_dialog.html', form=form, entry=self.entry,
+                                html_preview_body=Markup(html_preview_body))
+
+    def _build_email(self, form_data, is_html_email):
+        email_data = self.entry.data
+        body = email_data['body']
+        alternatives = email_data.get('alternatives') or []
+        if preface := form_data['preface']:
+            text_separator = '\n\n-------------\n\n'
+            if is_html_email:
+                if '<body>' in body:
+                    body = body.replace('<body>', f'<body>{preface}<hr>', 1)
+                else:
+                    body = f'{preface}<hr>{body}'
+                text_preface = html_to_markdown(preface, inline_links=False).strip()
+                alternatives = [
+                    (f'{text_preface}{text_separator}{alt_body}', mimetype)
+                    for alt_body, mimetype in alternatives if mimetype == 'text/plain'
+                ]
+            else:
+                body = f'{preface}{text_separator}{body}'
+                alternatives = []
+
+        # Rebuild attachments from storage if available
+        attachments = []
+        for att in email_data.get('stored_attachments', []):
+            storage = get_storage(att['storage_backend'])
+            with storage.open(att['storage_file_id']) as fd:
+                content = fd.read()
+            if (cid := att.get('content_id')) and att['content_type'].startswith('image/'):
+                subtype = att['content_type'].split('/')[1]
+                mime_att = MIMEImage(content, subtype)
+                mime_att.add_header('Content-ID', f'<{cid}>')
+                attachments.append(mime_att)
+            else:
+                attachments.append((att['filename'], content, att['content_type']))
+
+        return make_email(
+            to_list=email_data['to'],
+            cc_list=email_data['cc'],
+            bcc_list=email_data['bcc'],
+            sender_address=email_data['from'],
+            reply_address=email_data.get('reply_to', []),
+            subject=form_data['subject'],
+            body=body,
+            html=is_html_email,
+            alternatives=alternatives,
+            attachments=attachments,
+        )
+
+
+class EmailLogAttachmentMixin:
+    model = None
+
+    @property
+    def object(self):
+        raise NotImplementedError
+
+    @use_kwargs({
+        'log_entry_id': fields.Int(required=True),
+        'attachment_id': fields.Int(required=True)
+    }, location='view_args')
+    def _process(self, log_entry_id, attachment_id):
+        query = self.object.log_entries if self.object else self.model.query
+        entry = query.filter_by(id=log_entry_id, type='email').first_or_404()
+
+        stored_attachments = entry.data.get('stored_attachments', [])
+        try:
+            attachment = stored_attachments[attachment_id]
+        except IndexError:
+            raise NotFound
+        storage = get_storage(attachment['storage_backend'])
+        content_type = attachment['content_type']
+        if not content_type.startswith('image/'):
+            raise NotFound
+        filename = attachment['filename']
+        return storage.send_file(attachment['storage_file_id'], content_type, filename, inline=True)
+
+
+class RHAppEmailAttachment(EmailLogAttachmentMixin, RHAdminBase):
+    model = AppLogEntry
+
+    @property
+    def object(self):
+        return None
+
+
+class RHCategoryEmailAttachment(EmailLogAttachmentMixin, RHManageCategoryBase):
+    model = CategoryLogEntry
+
+    @property
+    def object(self):
+        return self.category
+
+
+class RHEventEmailAttachment(EmailLogAttachmentMixin, RHManageEventBase):
+    model = EventLogEntry
+
+    @property
+    def object(self):
+        return self.event
+
+
+class RHUserEmailAttachment(EmailLogAttachmentMixin, RHUserBase):
+    model = UserLogEntry
+
+    def _check_access(self):
+        RHUserBase._check_access(self)
+        if not session.user.is_admin:
+            raise Forbidden
+
+    @property
+    def object(self):
+        return self.user

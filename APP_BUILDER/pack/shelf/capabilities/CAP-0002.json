@@ -1,0 +1,51 @@
+{
+  "id": "CAP-0002",
+  "name": "log in",
+  "category": "Challenge Platform",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [
+        "name",
+        "password"
+      ],
+      "types": {
+        "name": "string",
+        "password": "string"
+      }
+    },
+    "output": {
+      "fields": [],
+      "types": {}
+    },
+    "nullable": [],
+    "requires_auth": false,
+    "security_constraints": {
+      "csrf": "auth blueprint form CSRF"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": []
+  },
+  "dependencies": [],
+  "permissions": [],
+  "side_effects": [
+    "creates a session",
+    "logs the login in CTFd's login log"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "INVALID_CREDENTIALS",
+      "ACCOUNT_BANNED",
+      "ACCOUNT_NOT_VERIFIED"
+    ]
+  },
+  "implementations": [
+    "CAP-0002/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

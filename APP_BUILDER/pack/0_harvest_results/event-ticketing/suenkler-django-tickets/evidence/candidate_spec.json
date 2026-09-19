@@ -1,0 +1,18 @@
+{
+  "repo_name": "suenkler/django-tickets",
+  "repo_url": "https://github.com/suenkler/django-tickets",
+  "branch": "main",
+  "commit": "6394e234e5909dd8c0f5f6e4cdd8827e0c25c06a",
+  "licence": "MIT",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "This is a generic IT/support helpdesk ticket tracker (create ticket via web or email, followups, assignment, file attachments) -- a completely different domain from event ticket sales. Its own README describes it as 'a simple ticketing application' in the help-desk sense, not event admission. Rule D structural match fails on domain grounds alone, independent of any other rule.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": null,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": null,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected; README read in full. Last commit 2017-01-29 -- abandoned. Included in this pilot's record for completeness of the real search performed, not because it was ever a plausible admit."
+}

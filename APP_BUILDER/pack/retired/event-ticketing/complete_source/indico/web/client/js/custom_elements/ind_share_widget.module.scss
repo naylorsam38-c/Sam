@@ -1,0 +1,120 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2026 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@use 'base/palette' as *;
+
+.share-widget {
+  cursor: pointer;
+  filter: opacity(0.6);
+
+  &:hover {
+    filter: none;
+  }
+}
+
+.show {
+  filter: none;
+}
+
+.share-header-title {
+  font-size: 1.6em;
+  text-align: center;
+  margin: 5px 0 5px 0;
+
+  .icon {
+    margin-right: 5px;
+  }
+}
+
+.share-section-header {
+  margin: 10px 0 10px 0 !important;
+  font-size: 1.15em !important;
+
+  .icon {
+    font-size: inherit !important;
+  }
+
+  .title {
+    padding-left: 5px !important;
+  }
+}
+
+.share-button-column {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+
+  .share-button {
+    margin-right: 0;
+
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+      vertical-align: middle;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    span {
+      vertical-align: middle;
+    }
+  }
+}
+
+.mastodon-button {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.empty-mastodon-server-notice :global(.icon.star) {
+  font-size: 1.5em !important;
+}
+
+.saved-mastodon-server-notice :global(.icon.check.circle.outline) {
+  font-size: 1.5em !important;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: $dark-red;
+}
+
+.copy-to-clipboard-container {
+  width: 100%;
+
+  .input-copy-qr-container {
+    display: flex;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+
+    :global(.ui.input) {
+      flex: 1;
+    }
+
+    input {
+      text-overflow: ellipsis;
+    }
+  }
+
+  .download-dropdown-menu {
+    background-color: $dark-blue;
+    color: $light-blue;
+  }
+
+  .qr-wrapper {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+
+    .qr-code-img {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+}

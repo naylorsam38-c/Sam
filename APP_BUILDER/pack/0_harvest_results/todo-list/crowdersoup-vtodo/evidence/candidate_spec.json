@@ -1,0 +1,18 @@
+{
+  "repo_name": "CrowderSoup/vTodo",
+  "repo_url": "https://github.com/CrowderSoup/vTodo",
+  "branch": "main",
+  "commit": "56745365951cda11f9958bc0e9e6c9941985ea78",
+  "licence": "MIT",
+  "framework": "django",
+  "datastore": "postgresql",
+  "api_docs_url": "/api/docs/ (in-app Swagger UI via drf-spectacular; also /api/schema/ and /api/redoc/ -- config/urls.py lines 31-33 wire SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView; settings.py registers drf_spectacular and sets DEFAULT_SCHEMA_CLASS)",
+  "structural_match": "vTodo implements a genuine Trello-style kanban board -- apps/boards/models.py has Board->Column->Task with per-column filter_config (status/tag/due-date filters) and drag-and-drop ordering, plus Teams for shared boards, matching Todoist's board view and shared-project model, though without Todoist's karma/gamification or natural-language quick-add.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": false,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": false,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected directly (commit above). Django>=6.0, manage.py present -- a real deployable project, not a pluggable library. psycopg2-binary>=2.9 in pyproject.toml; config/settings.py reads DATABASE_URL via django-environ, defaulting to sqlite only when unset -- README documents PostgreSQL under Requirements and the Docker/production path is Postgres-driven. MIT LICENSE file present and verified verbatim. Very active: last commit 2026-09-18 (day before this run). No CONTRIBUTING.md / plugin-authoring docs found; no third-party dependents found via WebSearch."
+}

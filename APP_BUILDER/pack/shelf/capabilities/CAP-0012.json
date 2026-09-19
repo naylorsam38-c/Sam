@@ -1,0 +1,63 @@
+{
+  "id": "CAP-0012",
+  "name": "submit flag",
+  "category": "Challenge Platform",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [
+        "challenge_id",
+        "submission"
+      ],
+      "types": {
+        "challenge_id": "integer",
+        "submission": "string"
+      }
+    },
+    "output": {
+      "fields": [
+        "success",
+        "data"
+      ],
+      "types": {
+        "success": "boolean",
+        "data": "object"
+      }
+    },
+    "nullable": [],
+    "requires_auth": true,
+    "security_constraints": {
+      "decorators": "check_challenge_visibility, during_ctf_time_only, require_verified_emails"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [
+    "the challenge type's own attempt() implementation, e.g. CTFd/plugins/dynamic_challenges or the built-in standard type"
+  ],
+  "permissions": [],
+  "side_effects": [
+    "creates a Solves row on a correct submission",
+    "creates a Fails row on an incorrect submission"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "authentication_required",
+      "ratelimited",
+      "paused",
+      "already_solved"
+    ]
+  },
+  "implementations": [
+    "CAP-0012/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

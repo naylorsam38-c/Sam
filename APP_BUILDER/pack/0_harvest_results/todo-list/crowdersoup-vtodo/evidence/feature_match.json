@@ -1,0 +1,100 @@
+{
+  "exemplar": "Todoist",
+  "features_checked": 15,
+  "features_matched": 8,
+  "docs_only": 0,
+  "not_found": 7,
+  "feature_match": 0.5333,
+  "per_feature": [
+    {
+      "name": "recurring tasks",
+      "verdict": "MATCHED",
+      "keyword_matched": "recurrence",
+      "evidence": "apps/tasks/models.py:129 ('spawn_recurrence')"
+    },
+    {
+      "name": "labels",
+      "verdict": "MATCHED",
+      "keyword_matched": "label",
+      "evidence": "apps/users/views.py:88 ('_saved_filters_with_labels')"
+    },
+    {
+      "name": "custom filters",
+      "verdict": "MATCHED",
+      "keyword_matched": "filter",
+      "evidence": "apps/teams/admin.py:21 ('list_filter')"
+    },
+    {
+      "name": "reminders",
+      "verdict": "NOT_FOUND",
+      "keyword_matched": "",
+      "evidence": ""
+    },
+    {
+      "name": "sub-tasks",
+      "verdict": "NOT_FOUND",
+      "keyword_matched": "",
+      "evidence": ""
+    },
+    {
+      "name": "sections",
+      "verdict": "NOT_FOUND",
+      "keyword_matched": "",
+      "evidence": ""
+    },
+    {
+      "name": "karma productivity tracking",
+      "verdict": "NOT_FOUND",
+      "keyword_matched": "",
+      "evidence": ""
+    },
+    {
+      "name": "shared projects",
+      "verdict": "MATCHED",
+      "keyword_matched": "share",
+      "evidence": "apps/teams/tests/test_views.py:40 ('test_team_create_creates_shared_team_board')"
+    },
+    {
+      "name": "task assignment",
+      "verdict": "MATCHED",
+      "keyword_matched": "assign",
+      "evidence": "apps/teams/tests/test_views.py:227 ('test_member_remove_unassigns_the_removed_user_from_team_tasks')"
+    },
+    {
+      "name": "task priorities",
+      "verdict": "NOT_FOUND",
+      "keyword_matched": "",
+      "evidence": ""
+    },
+    {
+      "name": "board (kanban) view",
+      "verdict": "MATCHED",
+      "keyword_matched": "board",
+      "evidence": "config/urls.py:13 ('board/')"
+    },
+    {
+      "name": "project templates",
+      "verdict": "NOT_FOUND",
+      "keyword_matched": "",
+      "evidence": ""
+    },
+    {
+      "name": "natural language quick add",
+      "verdict": "NOT_FOUND",
+      "keyword_matched": "",
+      "evidence": ""
+    },
+    {
+      "name": "calendar integration",
+      "verdict": "MATCHED",
+      "keyword_matched": "calendar",
+      "evidence": "config/urls.py:14 ('calendar/')"
+    },
+    {
+      "name": "task comments and file attachments",
+      "verdict": "MATCHED",
+      "keyword_matched": "comment",
+      "evidence": "apps/tasks/models.py:155 ('TaskComment')"
+    }
+  ]
+}

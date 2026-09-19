@@ -1,0 +1,1729 @@
+{
+  "usable_events": [],
+  "usable_slots": [],
+  "usable_data": [
+    {
+      "name": "appointment.Service",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Service",
+      "operations": "READ, WRITE",
+      "payload": "name, description, duration, price, down_payment, image, currency, background_color, reschedule_limit, allow_rescheduling, use_service_duration_as_slot, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:64, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.StaffMember",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "StaffMember",
+      "operations": "READ, WRITE",
+      "payload": "user, services_offered, slot_duration, lead_time, finish_time, appointment_buffer_time, slot_gap_time, work_on_saturday, work_on_sunday, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:230, appointment/services.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.AppointmentRequest",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRequest",
+      "operations": "READ, WRITE",
+      "payload": "date, start_time, end_time, service, staff_member, payment_type, id_request, reschedule_attempts, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:392, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.AppointmentRescheduleHistory",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRescheduleHistory",
+      "operations": "READ, WRITE",
+      "payload": "appointment_request, date, start_time, end_time, staff_member, reason_for_rescheduling, reschedule_status, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:509, appointment/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.Appointment",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Appointment",
+      "operations": "READ, WRITE",
+      "payload": "client, appointment_request, phone, address, want_reminder, additional_info, paid, amount_to_pay, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:587, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.Config",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Config",
+      "operations": "READ, WRITE",
+      "payload": "slot_duration, lead_time, finish_time, appointment_buffer_time, website_name, app_offered_by_label, default_reschedule_limit, allow_staff_change_on_reschedule, default_to_service_duration, slot_gap_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:830, appointment/tests/test_services.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.PaymentInfo",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PaymentInfo",
+      "operations": "READ, WRITE",
+      "payload": "appointment, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:946, appointment/tests/models/test_payment_info.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.EmailVerificationCode",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "EmailVerificationCode",
+      "operations": "READ",
+      "payload": "user, code, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:996, appointment/services.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.PasswordResetToken",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PasswordResetToken",
+      "operations": "READ, WRITE",
+      "payload": "user, token, expires_at, status, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1034, appointment/tests/models/test_password_reset_token.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.DayOff",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "DayOff",
+      "operations": "READ, WRITE",
+      "payload": "staff_member, start_date, end_date, description, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1127, appointment/tests/test_services.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.WorkingHours",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "WorkingHours",
+      "operations": "READ, WRITE",
+      "payload": "staff_member, day_of_week, start_time, end_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1154, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "usable_total": [
+    {
+      "name": "appointment.Service",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Service",
+      "operations": "READ, WRITE",
+      "payload": "name, description, duration, price, down_payment, image, currency, background_color, reschedule_limit, allow_rescheduling, use_service_duration_as_slot, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:64, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.StaffMember",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "StaffMember",
+      "operations": "READ, WRITE",
+      "payload": "user, services_offered, slot_duration, lead_time, finish_time, appointment_buffer_time, slot_gap_time, work_on_saturday, work_on_sunday, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:230, appointment/services.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.AppointmentRequest",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRequest",
+      "operations": "READ, WRITE",
+      "payload": "date, start_time, end_time, service, staff_member, payment_type, id_request, reschedule_attempts, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:392, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.AppointmentRescheduleHistory",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRescheduleHistory",
+      "operations": "READ, WRITE",
+      "payload": "appointment_request, date, start_time, end_time, staff_member, reason_for_rescheduling, reschedule_status, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:509, appointment/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.Appointment",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Appointment",
+      "operations": "READ, WRITE",
+      "payload": "client, appointment_request, phone, address, want_reminder, additional_info, paid, amount_to_pay, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:587, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.Config",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Config",
+      "operations": "READ, WRITE",
+      "payload": "slot_duration, lead_time, finish_time, appointment_buffer_time, website_name, app_offered_by_label, default_reschedule_limit, allow_staff_change_on_reschedule, default_to_service_duration, slot_gap_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:830, appointment/tests/test_services.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.PaymentInfo",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PaymentInfo",
+      "operations": "READ, WRITE",
+      "payload": "appointment, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:946, appointment/tests/models/test_payment_info.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.EmailVerificationCode",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "EmailVerificationCode",
+      "operations": "READ",
+      "payload": "user, code, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:996, appointment/services.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.PasswordResetToken",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PasswordResetToken",
+      "operations": "READ, WRITE",
+      "payload": "user, token, expires_at, status, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1034, appointment/tests/models/test_password_reset_token.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.DayOff",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "DayOff",
+      "operations": "READ, WRITE",
+      "payload": "staff_member, start_date, end_date, description, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1127, appointment/tests/test_services.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.WorkingHours",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "WorkingHours",
+      "operations": "READ, WRITE",
+      "payload": "staff_member, day_of_week, start_time, end_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1154, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "all_measured": [
+    {
+      "name": "appointment.Service.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Service",
+      "payload": "name, description, duration, price, down_payment, image, currency, background_color, reschedule_limit, allow_rescheduling, use_service_duration_as_slot, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:64 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Service.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Service",
+      "payload": "name, description, duration, price, down_payment, image, currency, background_color, reschedule_limit, allow_rescheduling, use_service_duration_as_slot, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:64 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Service.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Service",
+      "payload": "name, description, duration, price, down_payment, image, currency, background_color, reschedule_limit, allow_rescheduling, use_service_duration_as_slot, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:64 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Service.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Service",
+      "payload": "name, description, duration, price, down_payment, image, currency, background_color, reschedule_limit, allow_rescheduling, use_service_duration_as_slot, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:64 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.StaffMember.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "StaffMember",
+      "payload": "user, services_offered, slot_duration, lead_time, finish_time, appointment_buffer_time, slot_gap_time, work_on_saturday, work_on_sunday, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:230 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.StaffMember.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "StaffMember",
+      "payload": "user, services_offered, slot_duration, lead_time, finish_time, appointment_buffer_time, slot_gap_time, work_on_saturday, work_on_sunday, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:230 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.StaffMember.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "StaffMember",
+      "payload": "user, services_offered, slot_duration, lead_time, finish_time, appointment_buffer_time, slot_gap_time, work_on_saturday, work_on_sunday, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:230 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.StaffMember.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "StaffMember",
+      "payload": "user, services_offered, slot_duration, lead_time, finish_time, appointment_buffer_time, slot_gap_time, work_on_saturday, work_on_sunday, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:230 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.AppointmentRequest.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRequest",
+      "payload": "date, start_time, end_time, service, staff_member, payment_type, id_request, reschedule_attempts, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:392 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.AppointmentRequest.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRequest",
+      "payload": "date, start_time, end_time, service, staff_member, payment_type, id_request, reschedule_attempts, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:392 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.AppointmentRequest.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRequest",
+      "payload": "date, start_time, end_time, service, staff_member, payment_type, id_request, reschedule_attempts, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:392 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.AppointmentRequest.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRequest",
+      "payload": "date, start_time, end_time, service, staff_member, payment_type, id_request, reschedule_attempts, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:392 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.AppointmentRescheduleHistory.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRescheduleHistory",
+      "payload": "appointment_request, date, start_time, end_time, staff_member, reason_for_rescheduling, reschedule_status, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:509 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.AppointmentRescheduleHistory.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRescheduleHistory",
+      "payload": "appointment_request, date, start_time, end_time, staff_member, reason_for_rescheduling, reschedule_status, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:509 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.AppointmentRescheduleHistory.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRescheduleHistory",
+      "payload": "appointment_request, date, start_time, end_time, staff_member, reason_for_rescheduling, reschedule_status, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:509 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.AppointmentRescheduleHistory.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRescheduleHistory",
+      "payload": "appointment_request, date, start_time, end_time, staff_member, reason_for_rescheduling, reschedule_status, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:509 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Appointment.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Appointment",
+      "payload": "client, appointment_request, phone, address, want_reminder, additional_info, paid, amount_to_pay, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:587 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Appointment.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Appointment",
+      "payload": "client, appointment_request, phone, address, want_reminder, additional_info, paid, amount_to_pay, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:587 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Appointment.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Appointment",
+      "payload": "client, appointment_request, phone, address, want_reminder, additional_info, paid, amount_to_pay, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:587 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Appointment.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Appointment",
+      "payload": "client, appointment_request, phone, address, want_reminder, additional_info, paid, amount_to_pay, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:587 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Config.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Config",
+      "payload": "slot_duration, lead_time, finish_time, appointment_buffer_time, website_name, app_offered_by_label, default_reschedule_limit, allow_staff_change_on_reschedule, default_to_service_duration, slot_gap_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:830 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Config.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Config",
+      "payload": "slot_duration, lead_time, finish_time, appointment_buffer_time, website_name, app_offered_by_label, default_reschedule_limit, allow_staff_change_on_reschedule, default_to_service_duration, slot_gap_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:830 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Config.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Config",
+      "payload": "slot_duration, lead_time, finish_time, appointment_buffer_time, website_name, app_offered_by_label, default_reschedule_limit, allow_staff_change_on_reschedule, default_to_service_duration, slot_gap_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:830 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.Config.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Config",
+      "payload": "slot_duration, lead_time, finish_time, appointment_buffer_time, website_name, app_offered_by_label, default_reschedule_limit, allow_staff_change_on_reschedule, default_to_service_duration, slot_gap_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:830 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.PaymentInfo.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PaymentInfo",
+      "payload": "appointment, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:946 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.PaymentInfo.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PaymentInfo",
+      "payload": "appointment, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:946 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.PaymentInfo.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PaymentInfo",
+      "payload": "appointment, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:946 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.PaymentInfo.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PaymentInfo",
+      "payload": "appointment, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:946 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.EmailVerificationCode.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "EmailVerificationCode",
+      "payload": "user, code, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:996 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.EmailVerificationCode.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "EmailVerificationCode",
+      "payload": "user, code, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:996 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.EmailVerificationCode.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "EmailVerificationCode",
+      "payload": "user, code, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:996 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.EmailVerificationCode.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "EmailVerificationCode",
+      "payload": "user, code, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:996 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.PasswordResetToken.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PasswordResetToken",
+      "payload": "user, token, expires_at, status, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1034 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.PasswordResetToken.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PasswordResetToken",
+      "payload": "user, token, expires_at, status, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1034 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.PasswordResetToken.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PasswordResetToken",
+      "payload": "user, token, expires_at, status, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1034 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.PasswordResetToken.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PasswordResetToken",
+      "payload": "user, token, expires_at, status, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1034 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.DayOff.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "DayOff",
+      "payload": "staff_member, start_date, end_date, description, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1127 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.DayOff.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "DayOff",
+      "payload": "staff_member, start_date, end_date, description, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1127 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.DayOff.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "DayOff",
+      "payload": "staff_member, start_date, end_date, description, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1127 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.DayOff.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "DayOff",
+      "payload": "staff_member, start_date, end_date, description, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1127 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.WorkingHours.post_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "WorkingHours",
+      "payload": "staff_member, day_of_week, start_time, end_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1154 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.WorkingHours.post_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "WorkingHours",
+      "payload": "staff_member, day_of_week, start_time, end_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1154 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.WorkingHours.pre_delete",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "WorkingHours",
+      "payload": "staff_member, day_of_week, start_time, end_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1154 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "appointment.WorkingHours.pre_save",
+      "kind": "EVENT",
+      "source_file": "appointment/models.py",
+      "source_symbol": "WorkingHours",
+      "payload": "staff_member, day_of_week, start_time, end_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1154 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_index.customMetaTag",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_index.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_index.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_index.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_index.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_index.html:7 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_index.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_index.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_index.html:256 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_index.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_index.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_index.html:259 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_index.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_index.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_index.html:262 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_index.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_index.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_index.html:293 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_day_off.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_day_off.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_day_off.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_day_off.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_day_off.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_day_off.html:13 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_day_off.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_day_off.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_day_off.html:93 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.service_list.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/service_list.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/service_list.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.service_list.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/service_list.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/service_list.html:11 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.service_list.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/service_list.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/service_list.html:14 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.service_list.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/service_list.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/service_list.html:17 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.service_list.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/service_list.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/service_list.html:82 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_staff_member.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_staff_member.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_staff_member.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_staff_member.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_staff_member.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_staff_member.html:9 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_staff_member.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_staff_member.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_staff_member.html:85 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_working_hours.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_working_hours.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_working_hours.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_working_hours.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_working_hours.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_working_hours.html:20 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_working_hours.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_working_hours.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_working_hours.html:97 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_list.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_list.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_list.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_list.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_list.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_list.html:11 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_list.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_list.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_list.html:14 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_list.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_list.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_list.html:17 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.staff_list.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/staff_list.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/staff_list.html:79 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_service.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_service.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_service.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_service.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_service.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_service.html:10 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_service.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_service.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_service.html:49 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.display_appointment.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/display_appointment.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/display_appointment.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.display_appointment.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/display_appointment.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/display_appointment.html:10 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.display_appointment.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/display_appointment.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/display_appointment.html:13 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.display_appointment.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/display_appointment.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/display_appointment.html:16 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.display_appointment.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/display_appointment.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/display_appointment.html:149 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.email_change_verification_code.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/email_change_verification_code.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/email_change_verification_code.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.email_change_verification_code.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/email_change_verification_code.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/email_change_verification_code.html:7 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.email_change_verification_code.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/email_change_verification_code.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/email_change_verification_code.html:10 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.email_change_verification_code.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/email_change_verification_code.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/email_change_verification_code.html:13 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.email_change_verification_code.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/email_change_verification_code.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/email_change_verification_code.html:39 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_staff_personal_info.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_staff_personal_info.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_staff_personal_info.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_staff_personal_info.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_staff_personal_info.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_staff_personal_info.html:9 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.manage_staff_personal_info.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/manage_staff_personal_info.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/manage_staff_personal_info.html:47 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.user_profile.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/user_profile.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/user_profile.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.user_profile.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/user_profile.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/user_profile.html:11 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.user_profile.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/user_profile.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/user_profile.html:14 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.user_profile.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/user_profile.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/user_profile.html:17 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.user_profile.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/administration/user_profile.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/administration/user_profile.html:261 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.base.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/base_templates/base.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/base_templates/base.html:7 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.base.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/base_templates/base.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/base_templates/base.html:8 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.base.keyword",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/base_templates/base.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/base_templates/base.html:9 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.base.author",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/base_templates/base.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/base_templates/base.html:11 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.base.customMetaTag",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/base_templates/base.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/base_templates/base.html:12 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.base.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/base_templates/base.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/base_templates/base.html:20 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.base.scriptHead",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/base_templates/base.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/base_templates/base.html:24 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.base.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/base_templates/base.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/base_templates/base.html:29 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.base.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/base_templates/base.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/base_templates/base.html:43 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.304_already_submitted.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/304_already_submitted.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/304_already_submitted.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.304_already_submitted.customMetaTag",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/304_already_submitted.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/304_already_submitted.html:8 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.304_already_submitted.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/304_already_submitted.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/304_already_submitted.html:11 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.304_already_submitted.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/304_already_submitted.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/304_already_submitted.html:14 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.304_already_submitted.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/304_already_submitted.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/304_already_submitted.html:17 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.403_forbidden.site_description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/403_forbidden.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/403_forbidden.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.403_forbidden.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/403_forbidden.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/403_forbidden.html:6 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.403_forbidden.customMetaTag",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/403_forbidden.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/403_forbidden.html:7 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.403_forbidden.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/403_forbidden.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/403_forbidden.html:10 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.403_forbidden.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/403_forbidden.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/403_forbidden.html:84 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.403_forbidden_rescheduling.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/403_forbidden_rescheduling.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/403_forbidden_rescheduling.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.403_forbidden_rescheduling.customMetaTag",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/403_forbidden_rescheduling.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/403_forbidden_rescheduling.html:96 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.403_forbidden_rescheduling.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/403_forbidden_rescheduling.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/403_forbidden_rescheduling.html:99 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.403_forbidden_rescheduling.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/403_forbidden_rescheduling.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/403_forbidden_rescheduling.html:102 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.403_forbidden_rescheduling.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/403_forbidden_rescheduling.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/403_forbidden_rescheduling.html:105 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.404_not_found.site_description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/404_not_found.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/404_not_found.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.404_not_found.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/404_not_found.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/404_not_found.html:6 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.404_not_found.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/404_not_found.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/404_not_found.html:7 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.404_not_found.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/error_pages/404_not_found.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/error_pages/404_not_found.html:347 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.rescheduling_thank_you.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/rescheduling_thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/rescheduling_thank_you.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.rescheduling_thank_you.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/rescheduling_thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/rescheduling_thank_you.html:54 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.rescheduling_thank_you.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/rescheduling_thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/rescheduling_thank_you.html:57 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.rescheduling_thank_you.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/rescheduling_thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/rescheduling_thank_you.html:60 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.rescheduling_thank_you.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/rescheduling_thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/rescheduling_thank_you.html:77 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.thank_you.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/thank_you.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.thank_you.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/thank_you.html:35 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.thank_you.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/thank_you.html:36 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.thank_you.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/thank_you.html:37 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.thank_you.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/thank_you.html:51 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.enter_verification_code.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/enter_verification_code.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/enter_verification_code.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.enter_verification_code.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/enter_verification_code.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/enter_verification_code.html:9 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.enter_verification_code.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/enter_verification_code.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/enter_verification_code.html:10 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.enter_verification_code.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/enter_verification_code.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/enter_verification_code.html:12 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.enter_verification_code.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/enter_verification_code.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/enter_verification_code.html:38 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.appointments.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/appointments.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/appointments.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.appointments.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/appointments.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/appointments.html:8 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.appointments.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/appointments.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/appointments.html:11 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.appointments.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/appointments.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/appointments.html:14 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.appointments.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/appointments.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/appointments.html:101 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.default_thank_you.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/default_thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/default_thank_you.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.default_thank_you.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/default_thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/default_thank_you.html:7 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.default_thank_you.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/default_thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/default_thank_you.html:10 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.default_thank_you.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/default_thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/default_thank_you.html:13 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.default_thank_you.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/default_thank_you.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/default_thank_you.html:34 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.set_password.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/set_password.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/set_password.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.set_password.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/set_password.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/set_password.html:77 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.set_password.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/set_password.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/set_password.html:80 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.set_password.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/set_password.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/set_password.html:83 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.set_password.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/set_password.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/set_password.html:103 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.appointment_client_information.customCSS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/appointment_client_information.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/appointment_client_information.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.appointment_client_information.title",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/appointment_client_information.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/appointment_client_information.html:7 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.appointment_client_information.description",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/appointment_client_information.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/appointment_client_information.html:10 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.appointment_client_information.body",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/appointment_client_information.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/appointment_client_information.html:16 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "adamspd__django-appointment.appointment_client_information.customJS",
+      "kind": "SLOT",
+      "source_file": "appointment/templates/appointment/appointment_client_information.html",
+      "implementation": "NATIVE",
+      "evidence": "appointment/templates/appointment/appointment_client_information.html:139 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "appointment.Service",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Service",
+      "operations": "READ, WRITE",
+      "payload": "name, description, duration, price, down_payment, image, currency, background_color, reschedule_limit, allow_rescheduling, use_service_duration_as_slot, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:64, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.StaffMember",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "StaffMember",
+      "operations": "READ, WRITE",
+      "payload": "user, services_offered, slot_duration, lead_time, finish_time, appointment_buffer_time, slot_gap_time, work_on_saturday, work_on_sunday, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:230, appointment/services.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.AppointmentRequest",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRequest",
+      "operations": "READ, WRITE",
+      "payload": "date, start_time, end_time, service, staff_member, payment_type, id_request, reschedule_attempts, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:392, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.AppointmentRescheduleHistory",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "AppointmentRescheduleHistory",
+      "operations": "READ, WRITE",
+      "payload": "appointment_request, date, start_time, end_time, staff_member, reason_for_rescheduling, reschedule_status, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:509, appointment/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.Appointment",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Appointment",
+      "operations": "READ, WRITE",
+      "payload": "client, appointment_request, phone, address, want_reminder, additional_info, paid, amount_to_pay, id_request, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:587, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.Config",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "Config",
+      "operations": "READ, WRITE",
+      "payload": "slot_duration, lead_time, finish_time, appointment_buffer_time, website_name, app_offered_by_label, default_reschedule_limit, allow_staff_change_on_reschedule, default_to_service_duration, slot_gap_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:830, appointment/tests/test_services.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.PaymentInfo",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PaymentInfo",
+      "operations": "READ, WRITE",
+      "payload": "appointment, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:946, appointment/tests/models/test_payment_info.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.EmailVerificationCode",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "EmailVerificationCode",
+      "operations": "READ",
+      "payload": "user, code, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:996, appointment/services.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.PasswordResetToken",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "PasswordResetToken",
+      "operations": "READ, WRITE",
+      "payload": "user, token, expires_at, status, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1034, appointment/tests/models/test_password_reset_token.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.DayOff",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "DayOff",
+      "operations": "READ, WRITE",
+      "payload": "staff_member, start_date, end_date, description, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1127, appointment/tests/test_services.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "appointment.WorkingHours",
+      "kind": "DATA",
+      "source_file": "appointment/models.py",
+      "source_symbol": "WorkingHours",
+      "operations": "READ, WRITE",
+      "payload": "staff_member, day_of_week, start_time, end_time, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "appointment/models.py:1154, appointment/forms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "counts": {
+    "usable_events": 0,
+    "usable_slots": 0,
+    "usable_data": 11,
+    "usable_total": 11
+  },
+  "extension_system": {
+    "evidence": [],
+    "plugin_authoring_docs_present": false,
+    "plugin_authoring_docs_location": ""
+  }
+}

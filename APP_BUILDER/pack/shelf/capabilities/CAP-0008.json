@@ -1,0 +1,74 @@
+{
+  "id": "CAP-0008",
+  "name": "scan barcode",
+  "category": "Event Ticketing",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [],
+      "types": {}
+    },
+    "output": {
+      "fields": [
+        "id",
+        "regform_id",
+        "event_id",
+        "full_name",
+        "email",
+        "state",
+        "checked_in",
+        "checked_in_dt",
+        "checkin_secret",
+        "is_paid",
+        "price",
+        "payment_date",
+        "currency",
+        "formatted_price",
+        "tags",
+        "occupied_slots",
+        "registration_date",
+        "registration_data",
+        "personal_data_picture"
+      ],
+      "types": {
+        "id": "integer",
+        "checked_in": "boolean",
+        "is_paid": "boolean",
+        "price": "number",
+        "checkin_secret": "uuid"
+      }
+    },
+    "nullable": [],
+    "requires_auth": true,
+    "security_constraints": {
+      "oauth_scope": "registrants",
+      "cors": true
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [
+    "registration",
+    "registration_checkin"
+  ],
+  "side_effects": [],
+  "error_contract": {
+    "error_codes": [
+      "NOT_FOUND",
+      "FORBIDDEN"
+    ]
+  },
+  "implementations": [
+    "CAP-0008/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}
