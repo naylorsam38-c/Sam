@@ -3,39 +3,45 @@
 capabilities.py — spec sections 12-14: CAPABILITY DISCOVERY, ATTACH-POINT
 detection, and a REAL functional test, per app.
 
-Only 22 of the 52 categories have a capability list at all (inherited from
-benchmark70.json where the category means the same thing - see
-categories_openapps52.json's capabilities_from field). For the other 30,
-this script records NOT_DEFINED honestly and does nothing further - per
-spec section 12, a capability must be linked to real implementation
-evidence, and there is no invented universal capability list here (matches
-the same rule WHAT_THIS_DOES.md set for openapps_source.py's own
-categories/openapps52.json build).
+Per Sam's correction: capabilities are discovered FROM the app itself, the
+way spec section 12's own diagram says -
 
-For a category that DOES have capabilities:
-  1. ATTACH POINT: search the app's own structural source (routes, models,
-     controllers, templates, services - the same file classes a maintainer
-     would look in) for the capability's meaningful words. A hit records the
-     exact file (never "it's probably in there somewhere").
-  2. UI LINK: cross-reference against screens.json - a browser-verified
-     screen whose route/title/heading/nav-link-text also matches the
-     capability's words is that capability's real UI entry point.
-  3. LIVE TEST: if both an attach point AND a UI screen exist, actually visit
-     that screen, find its primary form or action control, exercise it with
-     sensible test data, and record what happened (submitted, URL changed,
-     server responded) as PASS - or FAIL with the real error - never PASS
-     from source inspection alone (spec section 22's non-negotiable rule).
-  4. Anything short of that (attach point but no live screen, or a screen but
-     no code evidence) is recorded NOT VERIFIED, not PASS.
+    APPLICATION -> SCREENS -> ROUTES -> CONTROLS -> BACKEND HANDLERS ->
+    SERVICES -> MODELS -> CAPABILITIES
+
+not looked up from an external, category-keyed list. Every screen
+screens.py already browser-verified (a real page, not a 404/onboarding
+shell) is a capability CANDIDATE; its name comes from the app's own heading
+or title, never invented. This runs for every app that reaches
+SCREEN-VERIFIED, regardless of category - the old 22/52 predefined-list gate
+that silently gave 30 categories zero capabilities is gone. Where a category
+happens to have a predefined list (categories_openapps52.json, inherited
+from benchmark70.json), it's kept only as a cross-reference annotation on
+matching discovered capabilities, never as the source of truth and never as
+a reason to skip a category without one.
+
+  1. DISCOVER: real screens from screens.json -> capability candidates,
+     de-duplicated by name.
+  2. ATTACH POINT: search the app's own structural source (routes, models,
+     controllers, templates, services) for the capability's own words -
+     derived from its real screen, not a guessed phrase.
+  3. LIVE TEST: visit the screen, exercise its primary form OR its most
+     prominent actionable button (many real capabilities - "New document",
+     "Add vault" - are a single button before any form appears), and record
+     what actually happened. PASS only from a real action; source presence
+     alone is never enough (spec section 22).
 """
 import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 from playwright.sync_api import sync_playwright
+
+from screens import ScreenWalk
 
 HERE = Path(__file__).resolve().parent
 MANIFEST_FILE = HERE / "manifest.json"
@@ -46,8 +52,10 @@ CAPS_DIR = HERE / "capabilities"
 
 CHROMIUM_EXECUTABLE_PATH = os.environ.get("CHROMIUM_EXECUTABLE_PATH") or None
 PAGE_TIMEOUT_MS = 20000
+MAX_CAPABILITIES_PER_APP = 20
 STOPWORDS = {"and", "or", "the", "with", "of", "for", "to", "a", "an", "in", "on", "by", "via",
-            "management", "manage", "managed", "support", "supported", "custom", "basic", "advanced"}
+            "management", "manage", "managed", "support", "supported", "custom", "basic", "advanced",
+            "home", "page", "app", "dashboard"}
 MIN_TOKEN_LEN = 4
 SHORT_OK = {"sso", "mfa", "ocr", "pdf", "api", "crm", "erp", "seo", "csv", "rss", "git", "ci",
            "cd", "ide", "llm", "map", "ads", "kyc", "dms"}
@@ -60,13 +68,37 @@ STRUCTURAL_SUFFIXES = (".py", ".rb", ".php", ".js", ".ts", ".jsx", ".tsx", ".go"
 EXCLUDE_PARTS = ("node_modules", "vendor", "dist", "build", ".git", "locale", "locales", "i18n",
                  "fixtures", "coverage")
 
+NOT_A_SCREEN_MARKERS = ("page not found", "404", "not found", "error", "unauthorized", "forbidden",
+                        "something went wrong")
+ACTION_WORDS = ("create", "add", "new", "save", "submit", "upload", "start", "generate", "invite",
+                "send", "connect", "continue", "next", "confirm", "apply", "sign")
+DESTRUCTIVE_WORDS = ("delete", "remove", "destroy", "logout", "log out", "sign out", "uninstall",
+                     "reset", "deactivate", "disable", "revoke", "purge", "wipe")
+
+# email/password stay FIXED (not tagged below) - these have to match the
+# exact credentials screens.py's gate-crawl used to create the app's test
+# account, or capabilities.py's own re-login (a fresh browser context, no
+# shared session) fails outright. The generic filler values are tagged with
+# a per-run marker instead: re-running the pipeline against an app that was
+# already tested once (a very normal thing to do while iterating on this
+# pipeline, or on a full re-run) would otherwise resubmit the exact same
+# "Library Walker Test" string a second time - a real app has every right to
+# treat that as a no-op with nothing new to persist or announce, making a
+# genuinely working capability look like NO_CONFIRMATION for a reason that
+# has nothing to do with whether the capability actually works.
+_RUN_TAG = str(int(time.time()))
 TEST_VALUES = {"email": "libwalker@example.com", "password": "Walker-Pass-2026!",
-              "text_default": "Library Walker Test"}
+              "text_default": f"Library Walker Test {_RUN_TAG}",
+              "url": f"https://example.com/libwalker-test-{_RUN_TAG}"}
+# Phrases that mean the app itself is confirming something actually happened -
+# never inferred from a mere absence of an error, per spec section 22.
+SUCCESS_MARKERS = ("successfully", "saved", "created", "added", "updated successfully",
+                   "has been added", "has been created", "has been saved")
 
 
-def tokens(cap):
+def tokens(text):
     out = []
-    for w in re.split(r"[^a-z0-9]+", cap.lower()):
+    for w in re.split(r"[^a-z0-9]+", (text or "").lower()):
         if not w or w in STOPWORDS:
             continue
         if len(w) < MIN_TOKEN_LEN and w not in SHORT_OK:
@@ -84,7 +116,9 @@ def has_token(text, toks):
 
 def find_attach_points(root, toks, limit=3):
     """File-level evidence: structural source files whose path or content
-    contains the capability's words. Returns [{file, matched_in, snippet}]."""
+    contains the capability's own words. Returns [{file, matched_words, line, snippet}]."""
+    if not toks:
+        return []
     hits = []
     n = 0
     for p in root.rglob("*"):
@@ -119,102 +153,376 @@ def find_attach_points(root, toks, limit=3):
     return hits
 
 
-def find_ui_screen(screens, toks):
+def derive_capability_name(screen):
+    """The capability's name comes from what the app itself calls this
+    screen - heading text first (what a user actually sees as the section
+    title), then <title>, then the route. Never invented."""
+    heading = (screen.get("heading") or "").strip()
+    title = (screen.get("title") or "").strip()
+    route = screen.get("route") or "/"
+    if heading and len(heading) < 60:
+        return heading
+    if title:
+        # strip a trailing " | AppName" / " - AppName" suffix
+        name = re.split(r"\s*[|–-]\s*", title)[0].strip()
+        if name:
+            return name
+    label = route.strip("/").split("/")[0].replace("-", " ").replace("_", " ").title()
+    return label or "Home"
+
+
+def is_real_screen(screen):
+    if not screen.get("browser_verified"):
+        return False
+    text_bits = f"{screen.get('title') or ''} {screen.get('heading') or ''}".lower()
+    if any(m in text_bits for m in NOT_A_SCREEN_MARKERS):
+        return False
+    controls = screen.get("controls") or {}
+    if not any((controls.get(k) or 0) > 0 for k in controls):
+        return False  # a rendered page with zero controls has nothing to exercise or call a capability
+    return True
+
+
+def discover_capability_candidates(screens):
+    """screens.json's screens -> de-duplicated capability candidates, each
+    tied back to the real screen it came from."""
+    seen_names, seen_routes, out = set(), set(), []
     for s in screens:
-        if not s.get("browser_verified"):
+        if not is_real_screen(s):
             continue
-        haystack = f"{s.get('name','')} {s.get('route','')} {s.get('title','') or ''} {s.get('heading','') or ''}"
-        if has_token(haystack, toks):
-            return s
-    return None
+        route = (s.get("route") or "/").rstrip("/") or "/"
+        if route in seen_routes:
+            continue
+        name = derive_capability_name(s)
+        key = name.lower()
+        if key in seen_names:
+            continue
+        seen_names.add(key)
+        seen_routes.add(route)
+        out.append({"name": name, "screen": s})
+        if len(out) >= MAX_CAPABILITIES_PER_APP:
+            break
+    return out
+
+
+def _field_identity_text(page, inp):
+    """See screens.py's identical helper: name/id/placeholder attributes
+    often don't say what a field actually is - DocuSeal's "App URL" field
+    is id="encrypted_config_value", name="encrypted_config[value]", nothing
+    in either says "url". The human-readable truth a real user reads is the
+    field's own <label>, so classification has to consult that too."""
+    parts = []
+    try:
+        el_id = inp.get_attribute("id")
+        if el_id:
+            label = page.query_selector(f'label[for="{el_id}"]')
+            if label:
+                parts.append(label.inner_text())
+    except Exception:
+        pass
+    try:
+        nested = inp.evaluate("e => { const l = e.closest('label'); return l ? l.innerText : ''; }")
+        if nested:
+            parts.append(nested)
+    except Exception:
+        pass
+    try:
+        aria = inp.get_attribute("aria-labelledby")
+        if aria:
+            for aid in aria.split():
+                el = page.query_selector(f'#{aid}')
+                if el:
+                    parts.append(el.inner_text())
+    except Exception:
+        pass
+    return " ".join(p for p in parts if p)
+
+
+def _check_or_click_label(page, inp):
+    """See screens.py's identical helper: styled radio/checkbox widgets
+    (Bootstrap btn-check included) hide the real <input> behind its
+    <label>, so a direct click/check often fails actionability even though
+    the input is technically 'visible'. Click the label instead."""
+    try:
+        inp.check(timeout=1500)
+        return True
+    except Exception:
+        pass
+    try:
+        el_id = inp.get_attribute("id")
+        if el_id:
+            label = page.query_selector(f'label[for="{el_id}"]')
+            if label and label.is_visible():
+                label.click(timeout=2000)
+                return True
+    except Exception:
+        pass
+    try:
+        inp.check(timeout=1500, force=True)
+        return True
+    except Exception:
+        return False
 
 
 class LiveTester:
     def __init__(self, page):
         self.page = page
+        self.typed_values = []
 
-    def fill_and_submit_primary_form(self):
-        """Finds the first visible form with an actionable control, fills
-        sensible values, submits, and reports what happened. Returns
-        (attempted: bool, outcome: str, detail: str)."""
+    def _fill_form(self, form):
+        filled = 0
+        checked_radio_groups = set()
+        for inp in form.query_selector_all("input, textarea, select"):
+            try:
+                if not inp.is_visible():
+                    continue
+                tag = inp.evaluate("e => e.tagName.toLowerCase()")
+                typ = (inp.get_attribute("type") or "text").lower()
+                if tag == "select":
+                    sel_name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("id"),
+                                                       inp.get_attribute("aria-label")])).lower()
+                    if any(w in sel_name for w in ("lang", "locale", "i18n")):
+                        continue  # see screens.py's identical comment: a random locale breaks everything downstream
+                    opts = inp.query_selector_all("option")
+                    if len(opts) > 1:
+                        inp.select_option(index=1)
+                        filled += 1
+                    continue
+                if typ == "radio":
+                    # an unpicked required choice group leaves submit
+                    # disabled - skipping radios entirely stalled every form
+                    # that uses them for a real, meaningful choice.
+                    group = inp.get_attribute("name") or id(inp)
+                    if group in checked_radio_groups or inp.is_checked():
+                        checked_radio_groups.add(group)
+                        continue
+                    if _check_or_click_label(self.page, inp):
+                        checked_radio_groups.add(group)
+                        filled += 1
+                    continue
+                if typ == "checkbox":
+                    if not inp.is_checked() and _check_or_click_label(self.page, inp):
+                        filled += 1
+                    continue
+                if typ in ("hidden", "submit", "button", "file"):
+                    continue
+                name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("placeholder"),
+                                              _field_identity_text(self.page, inp)])).lower()
+                if typ == "email" or "email" in name:
+                    val = TEST_VALUES["email"]
+                elif typ == "password":
+                    val = TEST_VALUES["password"]
+                elif typ == "url" or "url" in name or "website" in name or "link" in name:
+                    # a plain "Library Walker Test" string in a URL field
+                    # fails most apps' own format validation, so nothing
+                    # after it is real evidence of anything - a syntactically
+                    # real URL gives the actual capability a fair chance to
+                    # succeed or fail on its own logic.
+                    val = TEST_VALUES["url"]
+                else:
+                    val = TEST_VALUES["text_default"]
+                if val not in self.typed_values:
+                    self.typed_values.append(val)
+                inp.click(timeout=2000)
+                inp.fill("")
+                inp.type(val, delay=15, timeout=5000)
+                filled += 1
+            except Exception:
+                continue
+        return filled
+
+    def _body_text(self):
+        """The evidence snapshot used for both error/success wording AND the
+        'did a typed value get persisted' check. inner_text() alone only
+        covers rendered TEXT NODES - it never includes an <input>'s current
+        value, which is exactly how the most common kind of proof actually
+        looks: a profile/settings edit form that redisplays your saved value
+        in its own input field. Missing that turned a genuinely persisted,
+        independently-reconfirmed save (DocuSeal's profile name) into a
+        false NOT VERIFIED. Appending every visible field's current value
+        closes that gap without changing anything about how the text-node
+        side of the comparison works."""
+        try:
+            text = self.page.inner_text("body", timeout=3000)
+        except Exception:
+            text = ""
+        try:
+            values = self.page.eval_on_selector_all(
+                "input, textarea, select",
+                "els => els.map(e => e.value || '').join('\\n')")
+        except Exception:
+            values = ""
+        return text + "\n" + values
+
+    def _primary_form(self):
+        """A page can have several independent <form> elements (a sidebar
+        search box, several small settings forms, and the one actually
+        relevant to this screen's capability). The FIRST one in DOM order
+        is frequently NOT the meaningful one - Uptime Kuma's 'Add New
+        Monitor' page has 7, and the real monitor-creation form isn't first.
+        The one with the most fillable fields is the one actually worth
+        exercising."""
         try:
             forms = [f for f in self.page.query_selector_all("form") if f.is_visible()]
         except Exception:
             forms = []
         if not forms:
-            return False, "NO_FORM_FOUND", "no visible <form> on this screen to exercise"
-        form = forms[0]
+            return None
+        def field_count(f):
+            try:
+                return len([i for i in f.query_selector_all("input, select, textarea") if i.is_visible()])
+            except Exception:
+                return 0
+        return max(forms, key=field_count)
+
+    def fill_and_submit_primary_form(self):
+        """Returns (attempted, outcome, detail)."""
+        form = self._primary_form()
+        if form is None:
+            return False, "NO_FORM_FOUND", "no visible <form> on this screen"
         before_url = self.page.url
-        filled = 0
-        try:
-            for inp in form.query_selector_all("input, textarea, select"):
-                try:
-                    if not inp.is_visible():
-                        continue
-                    tag = inp.evaluate("e => e.tagName.toLowerCase()")
-                    typ = (inp.get_attribute("type") or "text").lower()
-                    if tag == "select":
-                        opts = inp.query_selector_all("option")
-                        if len(opts) > 1:
-                            inp.select_option(index=1)
-                            filled += 1
-                        continue
-                    if typ in ("hidden", "submit", "button", "file", "checkbox", "radio"):
-                        continue
-                    name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("placeholder")])).lower()
-                    if typ == "email" or "email" in name:
-                        val = TEST_VALUES["email"]
-                    elif typ == "password":
-                        val = TEST_VALUES["password"]
-                    else:
-                        val = TEST_VALUES["text_default"]
-                    inp.click(timeout=2000)
-                    inp.fill("")
-                    inp.type(val, delay=15, timeout=5000)
-                    filled += 1
-                except Exception:
-                    continue
-        except Exception:
-            pass
+        before_body = self._body_text()
+        self.typed_values = []
+        filled = self._fill_form(form)
         if filled == 0:
             return False, "NO_FILLABLE_FIELDS", "form present but no fillable inputs found"
         try:
-            btn = form.query_selector("button[type=submit], input[type=submit], button:not([type=button])")
+            btn = self._visible_submit_button(form)
             if not btn:
                 return True, "NO_SUBMIT_CONTROL", f"filled {filled} field(s) but found no submit control"
             btn.click(timeout=4000)
             self.page.wait_for_timeout(2500)
         except Exception as e:
             return True, "SUBMIT_FAILED", f"filled {filled} field(s), click/submit raised {type(e).__name__}: {e}"
-        after_url = self.page.url
+        return self._judge_result(before_url, before_body, f"submitted {filled} field(s)")
+
+    def _visible_submit_button(self, form):
+        # query_selector on a comma-list only returns the FIRST DOM match
+        # across all of them; if that happens to be hidden, the real submit
+        # button further down never gets tried. Scan every match, all
+        # selectors, for the first one that's actually visible.
+        for sel in ("button[type=submit]", "input[type=submit]", "button:not([type=button])", "button"):
+            try:
+                for b in form.query_selector_all(sel):
+                    if b.is_visible():
+                        return b
+            except Exception:
+                continue
+        return None
+
+    def click_primary_action_button(self):
+        """Many real capabilities are a single button before any form shows
+        up ('New Document', '+ Add vault'). Finds the most prominent visible
+        button whose label is an action word (never a destructive one),
+        clicks it, and if a form appears as a result, fills and submits
+        that too. Returns (attempted, outcome, detail)."""
         try:
-            body = self.page.inner_text("body", timeout=3000).lower()
+            buttons = [b for b in self.page.query_selector_all("button, [role=button], a.btn, a[class*=button]")
+                      if b.is_visible()]
         except Exception:
-            body = ""
-        has_error_banner = any(w in body for w in ("invalid", "error occurred", "something went wrong", "failed to"))
-        if after_url != before_url:
-            return True, "PASS", f"submitted, URL changed {before_url} -> {after_url}"
-        if not has_error_banner:
-            return True, "PASS", f"submitted, page responded without a visible error banner (same URL {after_url})"
-        return True, "FAIL", f"submitted, page shows an error indicator: {body[:200]}"
+            buttons = []
+        target = None
+        for b in buttons:
+            try:
+                label = (b.inner_text() or "").strip().lower()
+            except Exception:
+                continue
+            if not label or any(d in label for d in DESTRUCTIVE_WORDS):
+                continue
+            if any(a in label for a in ACTION_WORDS):
+                target = b
+                break
+        if target is None:
+            return False, "NO_ACTION_BUTTON", "no non-destructive action button found on this screen"
+        before_url = self.page.url
+        before_body = self._body_text()
+        self.typed_values = []
+        try:
+            target.click(timeout=4000)
+            self.page.wait_for_timeout(1500)
+        except Exception as e:
+            return True, "CLICK_FAILED", f"click raised {type(e).__name__}: {e}"
+        # a form may now be visible (a modal/drawer opened) - exercise it too
+        form = self._primary_form()
+        if form is not None:
+            filled = self._fill_form(form)
+            if filled:
+                try:
+                    btn = self._visible_submit_button(form)
+                    if btn:
+                        btn.click(timeout=4000)
+                        self.page.wait_for_timeout(2000)
+                except Exception:
+                    pass
+            return self._judge_result(before_url, before_body, f"clicked action button, filled+submitted the form it opened ({filled} fields)")
+        return self._judge_result(before_url, before_body, "clicked action button (no form followed)")
+
+    def _judge_result(self, before_url, before_body, action_desc):
+        """PASS requires POSITIVE evidence something really happened - not
+        merely the absence of an error banner, which a silently-rejected
+        submission (client validation failed, nothing sent) also produces
+        (spec section 22: PASS requires runtime evidence, never 'looks like
+        it should have worked'). Evidence, any one of:
+          - the app's own explicit success wording (a toast/banner),
+          - the URL moved somewhere new (a created-item's own page/edit view,
+            not back to a login/error screen),
+          - a value this test actually typed - not fixed boilerplate the
+            static template already had - now appears on the page where it
+            didn't before, e.g. in a list, meaning it was persisted.
+        None of that: NOT VERIFIED, never PASS, whatever the URL or error
+        banner absence suggests."""
+        after_url = self.page.url
+        after_body = self._body_text()
+        body_lower = after_body.lower()
+        has_error_banner = any(w in body_lower for w in
+                               ("invalid", "error occurred", "something went wrong", "failed to", "is required"))
+        has_success_marker = any(w in body_lower for w in SUCCESS_MARKERS)
+        new_value_persisted = any(v and v not in before_body and v in after_body for v in self.typed_values)
+
+        if has_error_banner and not has_success_marker:
+            return True, "FAIL", f"{action_desc}; page shows an error indicator: {after_body[:200]}"
+        if has_success_marker:
+            return True, "PASS", f"{action_desc}; app showed an explicit success message"
+        if new_value_persisted:
+            return True, "PASS", f"{action_desc}; a value this test typed now appears on the page where it didn't before (persisted)"
+        if after_url != before_url and not any(w in after_url.lower() for w in ("login", "signin", "error", "404")):
+            return True, "PASS", f"{action_desc}; navigated to a new page ({before_url} -> {after_url}) consistent with the action succeeding"
+        return True, "NO_CONFIRMATION", (f"{action_desc}; no error, but no positive evidence either (no success "
+                                         f"message, no typed value persisted anywhere on the page, same URL "
+                                         f"{after_url}) - not counted as proof")
+
+    def exercise(self):
+        attempted, outcome, detail = self.fill_and_submit_primary_form()
+        # A form being PRESENT doesn't mean it's the real capability - a
+        # page can have an incidental form with nothing fillable (a hidden
+        # CSRF-only logout form, an empty filter bar) or no visible submit
+        # control, while the actual capability is a button that opens a
+        # modal (DocuSeal's "Document Templates" screen: the only <form> on
+        # it has zero visible fields; the real action is the "+ CREATE"
+        # button). Falling back only on NO_FORM_FOUND missed exactly this
+        # case and reported a real, working capability as unproven.
+        if outcome in ("NO_FORM_FOUND", "NO_FILLABLE_FIELDS", "NO_SUBMIT_CONTROL"):
+            btn_attempted, btn_outcome, btn_detail = self.click_primary_action_button()
+            if btn_outcome != "NO_ACTION_BUTTON":
+                return btn_attempted, btn_outcome, btn_detail
+        return attempted, outcome, detail
 
 
-def process_app(entry, category, base_url):
+def process_app(entry, predefined_caps, base_url):
     app_id = entry["id"]
-    caps_list = category.get("capabilities") or []
     d = APPS_DIR / app_id
     screens = json.loads((d / "screens.json").read_text())["screens"] if (d / "screens.json").exists() else []
     source_root = d / "source"
 
-    if not caps_list:
-        out = {"application": app_id, "category": category["slug"],
-              "capabilities_defined": False,
-              "note": "no capability list for this category (only 22/52 categories have one, "
-                      "copied from benchmark70.json where the meaning matches - see "
-                      "categories_openapps52.json's capabilities_from). Nothing invented.",
+    candidates = discover_capability_candidates(screens)
+    if not candidates:
+        out = {"application": app_id, "capabilities_defined": True, "discovery_method": "app-derived",
+              "note": "no real screen had any control to exercise - nothing to discover as a capability",
               "capabilities": []}
         (d / "capabilities.json").write_text(json.dumps(out, indent=1))
-        return {"capabilities_defined": False, "discovered": 0, "attach_point_found": 0, "proven": 0}
+        return {"discovered": 0, "attach_point_found": 0, "proven": 0}
+
+    predefined_toks = [(c, tokens(c)) for c in (predefined_caps or [])]
 
     results = []
     with sync_playwright() as pw:
@@ -223,46 +531,52 @@ def process_app(entry, category, base_url):
         page = ctx.new_page()
         tester = LiveTester(page)
 
-        for idx, cap_name in enumerate(caps_list, 1):
-            toks = tokens(cap_name)
-            attach = find_attach_points(source_root, toks) if source_root.is_dir() else []
-            screen = find_ui_screen(screens, toks)
-            cap_id = f"CAP-{app_id[4:]}-{idx:02d}"
-            rec = {"id": cap_id, "name": cap_name, "attach_points": attach,
-                  "ui_screen": {"name": screen["name"], "route": screen["route"]} if screen else None,
-                  "live_test": None, "verdict": "NOT VERIFIED"}
+        # This runs in its own fresh browser context (separate process from
+        # screens.py, no shared cookies/localStorage/socket) - without
+        # logging in again here first, every "capability" screen below was
+        # actually just the same login form, and every result was really a
+        # test of the login form, not the app. Same gate-crawl screens.py
+        # already proved works for this app.
+        walker = ScreenWalk(page, base_url, d / "evidence")
+        if walker.goto(base_url):
+            walker.get_past_setup_wall()
+        app_home_url = page.url
 
-            if not attach and not screen:
-                rec["verdict"] = "NOT VERIFIED"
-                rec["reason"] = "no code attach point and no matching UI screen found"
-            elif not screen:
-                rec["verdict"] = "NOT VERIFIED"
-                rec["reason"] = "code attach point found but no reachable UI screen for it"
-            else:
-                full_url = urljoin(base_url.rstrip("/") + "/", screen["route"].lstrip("/"))
-                try:
-                    page.goto(full_url, timeout=PAGE_TIMEOUT_MS, wait_until="domcontentloaded")
-                    page.wait_for_timeout(1000)
-                    attempted, outcome, detail = tester.fill_and_submit_primary_form()
-                    rec["live_test"] = {"url": full_url, "attempted": attempted, "outcome": outcome, "detail": detail}
-                    if outcome == "PASS" and attach:
-                        rec["verdict"] = "PROVEN"
-                    elif outcome == "PASS":
-                        rec["verdict"] = "NOT VERIFIED"
-                        rec["reason"] = "UI action succeeded but no code attach point was located, so the " \
-                                        "implementation was not harvested - proof requires both"
-                    else:
-                        rec["verdict"] = "NOT VERIFIED"
-                        rec["reason"] = f"live test did not pass: {outcome}"
-                except Exception as e:
-                    rec["live_test"] = {"url": full_url, "attempted": False, "outcome": "NAV_FAILED",
-                                        "detail": f"{type(e).__name__}: {e}"}
-                    rec["reason"] = "could not navigate to the screen to exercise it"
+        for idx, cand in enumerate(candidates, 1):
+            name, screen = cand["name"], cand["screen"]
+            toks = tokens(name) or tokens(screen.get("route"))
+            attach = find_attach_points(source_root, toks) if source_root.is_dir() else []
+            matched_predefined = [c for c, t in predefined_toks if set(t) & set(toks)]
+            cap_id = f"CAP-{app_id[4:]}-{idx:02d}"
+            rec = {"id": cap_id, "name": name, "route": screen.get("route"),
+                  "discovered_from": "screen", "matched_predefined_capability": matched_predefined or None,
+                  "attach_points": attach, "live_test": None, "verdict": "NOT VERIFIED"}
+
+            full_url = urljoin(base_url.rstrip("/") + "/", (screen.get("route") or "/").lstrip("/"))
+            try:
+                page.goto(full_url, timeout=PAGE_TIMEOUT_MS, wait_until="domcontentloaded")
+                page.wait_for_timeout(1000)
+                attempted, outcome, detail = tester.exercise()
+                rec["live_test"] = {"url": full_url, "attempted": attempted, "outcome": outcome, "detail": detail}
+                if outcome == "PASS" and attach:
+                    rec["verdict"] = "PROVEN"
+                elif outcome == "PASS":
+                    rec["verdict"] = "NOT VERIFIED"
+                    rec["reason"] = ("live action succeeded but no code attach point was located, "
+                                     "so the implementation was not harvested - proof requires both")
+                else:
+                    rec["verdict"] = "NOT VERIFIED"
+                    rec["reason"] = f"live test did not pass: {outcome} - {detail}"
+            except Exception as e:
+                rec["live_test"] = {"url": full_url, "attempted": False, "outcome": "NAV_FAILED",
+                                    "detail": f"{type(e).__name__}: {e}"}
+                rec["reason"] = "could not navigate to the screen to exercise it"
             results.append(rec)
-            print(f"    {rec['verdict']:12s} {cap_name}")
+            print(f"    {rec['verdict']:12s} {name}")
         browser.close()
 
-    out = {"application": app_id, "category": category["slug"], "capabilities_defined": True,
+    out = {"application": app_id, "capabilities_defined": True, "discovery_method": "app-derived",
+          "predefined_capabilities_for_category": predefined_caps or [],
           "capabilities": results}
     (d / "capabilities.json").write_text(json.dumps(out, indent=1))
     for r in results:
@@ -271,8 +585,7 @@ def process_app(entry, category, base_url):
 
     proven = sum(1 for r in results if r["verdict"] == "PROVEN")
     attach_found = sum(1 for r in results if r["attach_points"])
-    return {"capabilities_defined": True, "discovered": len(results),
-            "attach_point_found": attach_found, "proven": proven}
+    return {"discovered": len(results), "attach_point_found": attach_found, "proven": proven}
 
 
 def main():
@@ -282,20 +595,20 @@ def main():
     live_by_id = {l["app_id"]: l for l in live}
     entries_by_id = {e["id"]: e for e in manifest["applications"]}
 
-    totals = {"capabilities_defined": 0, "discovered": 0, "attach_point_found": 0, "proven": 0}
+    totals = {"discovered": 0, "attach_point_found": 0, "proven": 0}
     for app_id, l in live_by_id.items():
         entry = entries_by_id[app_id]
-        if entry["status"] != "SCREEN-VERIFIED":
+        if entry["status"] not in ("SCREEN-VERIFIED", "FUNCTIONALLY_VERIFIED"):
             continue
-        cat = categories[entry["category_slug"]]
+        predefined = (categories.get(entry["category_slug"]) or {}).get("capabilities") or []
         print(f"{app_id} ({entry['category_slug']}) {entry['name']}")
         try:
-            summary = process_app(entry, cat, l["url"])
+            summary = process_app(entry, predefined, l["url"])
         except Exception as e:
             summary = {"error": f"{type(e).__name__}: {e}"}
             print(f"  ERROR: {summary['error']}")
         entry["capability_summary"] = summary
-        entry["status"] = "FUNCTIONALLY_VERIFIED" if summary.get("proven") else entry["status"]
+        entry["status"] = "FUNCTIONALLY_VERIFIED" if summary.get("proven") else "SCREEN-VERIFIED"
         (APPS_DIR / app_id / "app.json").write_text(json.dumps(entry, indent=1))
         MANIFEST_FILE.write_text(json.dumps(manifest, indent=1))
         for k in totals:

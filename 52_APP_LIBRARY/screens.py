@@ -44,10 +44,24 @@ MAX_SCREENS_TO_VISIT = 14
 VIEWPORT = {"width": 1366, "height": 900}
 
 TEST_USER = {"name": "Library Walker", "username": "libwalker", "email": "libwalker@example.com",
-            "password": "Walker-Pass-2026!"}
+            "password": "Walker-Pass-2026!", "url": "https://example.com/libwalker-test"}
 GATE_WORDS = ("sign up", "signup", "register", "create account", "get started", "setup", "set up",
-             "install", "create admin", "continue", "next", "finish", "log in", "login", "sign in")
-MAX_GATE_STEPS = 5
+             "install", "create admin", "continue", "next", "finish", "log in", "login", "sign in",
+             "weiter", "next step", "proceed", "deploy", "confirm")
+MAX_GATE_STEPS = 9
+
+# A page that LOOKS rendered (has real text, a nonzero body) can still be
+# genuinely broken - a stuck websocket, a crashed client bundle, a server
+# error rendered into the DOM. Counting that as "browser_verified" is exactly
+# the false positive spec section 22 warns about ("never report PASS because
+# it looks like it should work"). These phrases, seen prominently, mean the
+# screen is not actually working, whatever else is on it.
+ERROR_STATE_MARKERS = ("cannot connect to the socket server", "cannot connect to server",
+                       "internal server error", "500 internal", "502 bad gateway",
+                       "503 service unavailable", "application error", "an error occurred",
+                       "something went wrong", "failed to fetch", "failed to load",
+                       "unexpected error", "this page could not be", "reconnecting...",
+                       "connection lost", "unable to connect")
 
 SCREEN_FILE_SUFFIXES = (".html", ".htm", ".erb", ".haml", ".ejs", ".pug", ".hbs",
                         ".njk", ".jinja", ".jinja2", ".vue", ".svelte", ".jsx", ".tsx", ".astro")
@@ -82,11 +96,76 @@ def static_route_candidates(root):
             continue
         for m in ROUTE_LINE_RE.finditer(text):
             r = m.group(1)
+            if ":" in r or "{" in r:
+                continue  # router path pattern (":id", "{id}"), not a real navigable URL
             if LIKELY_UI_ROUTE.match(r) and len(r) < 60:
                 routes.add(r)
         if len(routes) >= MAX_STATIC_ROUTES:
             break
     return sorted(routes)[:MAX_STATIC_ROUTES]
+
+
+def _field_identity_text(page, inp):
+    """name/id/placeholder attributes often don't say what a field actually
+    is - DocuSeal's "App URL" field is id="encrypted_config_value",
+    name="encrypted_config[value]", nothing in either says "url". The
+    human-readable truth a real user reads is the field's own <label>, so
+    classification has to consult that too, not just attributes. Covers
+    label[for=id], a label the input is nested inside, and aria-labelledby."""
+    parts = []
+    try:
+        el_id = inp.get_attribute("id")
+        if el_id:
+            label = page.query_selector(f'label[for="{el_id}"]')
+            if label:
+                parts.append(label.inner_text())
+    except Exception:
+        pass
+    try:
+        nested = inp.evaluate("e => { const l = e.closest('label'); return l ? l.innerText : ''; }")
+        if nested:
+            parts.append(nested)
+    except Exception:
+        pass
+    try:
+        aria = inp.get_attribute("aria-labelledby")
+        if aria:
+            for aid in aria.split():
+                el = page.query_selector(f'#{aid}')
+                if el:
+                    parts.append(el.inner_text())
+    except Exception:
+        pass
+    return " ".join(p for p in parts if p)
+
+
+def _check_or_click_label(page, inp):
+    """Many styled radio/checkbox widgets (Bootstrap's btn-check included)
+    visually hide the real <input> behind its <label>, so a direct click/
+    check on the input fails Playwright's actionability check (something
+    else is on top of it at that point) even though the input is
+    technically 'visible'. The real, working interaction a human performs
+    is clicking the label. Falls back to a force-check only as a last
+    resort, since that can silently miss a JS onChange handler."""
+    try:
+        inp.check(timeout=1500)
+        return True
+    except Exception:
+        pass
+    try:
+        el_id = inp.get_attribute("id")
+        if el_id:
+            label = page.query_selector(f'label[for="{el_id}"]')
+            if label and label.is_visible():
+                label.click(timeout=2000)
+                return True
+    except Exception:
+        pass
+    try:
+        inp.check(timeout=1500, force=True)
+        return True
+    except Exception:
+        return False
 
 
 class ScreenWalk:
@@ -114,6 +193,7 @@ class ScreenWalk:
 
     def _fill_visible_inputs(self, form):
         filled = 0
+        checked_radio_groups = set()
         for inp in form.query_selector_all("input, select"):
             try:
                 if not inp.is_visible():
@@ -121,19 +201,55 @@ class ScreenWalk:
                 tag = inp.evaluate("e => e.tagName.toLowerCase()")
                 typ = (inp.get_attribute("type") or "text").lower()
                 if tag == "select":
+                    sel_name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("id"),
+                                                       inp.get_attribute("aria-label")])).lower()
+                    if any(w in sel_name for w in ("lang", "locale", "i18n")):
+                        # picking a random language/locale (index 1 was
+                        # frequently a totally different language) put the UI
+                        # into text this crawler's English gate-word matching
+                        # can't read - leave the default alone.
+                        continue
                     opts = inp.query_selector_all("option")
                     if len(opts) > 1:
                         inp.select_option(index=1)
                         filled += 1
                     continue
-                if typ in ("hidden", "submit", "button", "file", "checkbox", "radio"):
+                if typ == "radio":
+                    # a required single-choice group (database engine, plan
+                    # tier, ...) leaves its submit button disabled until one
+                    # option is picked - skipping radios entirely, as before,
+                    # silently stalled every wizard that uses them.
+                    group = inp.get_attribute("name") or id(inp)
+                    if group in checked_radio_groups or inp.is_checked():
+                        checked_radio_groups.add(group)
+                        continue
+                    if _check_or_click_label(self.page, inp):
+                        checked_radio_groups.add(group)
+                        filled += 1
+                    continue
+                if typ == "checkbox":
+                    # commonly a required "I agree to the terms" gate on the
+                    # same disabled-until-checked pattern as the radios above.
+                    if not inp.is_checked() and _check_or_click_label(self.page, inp):
+                        filled += 1
+                    continue
+                if typ in ("hidden", "submit", "button", "file"):
                     continue
                 name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("placeholder"),
-                                              inp.get_attribute("autocomplete")])).lower()
+                                              inp.get_attribute("autocomplete"),
+                                              _field_identity_text(self.page, inp)])).lower()
                 if typ == "email" or "email" in name:
                     val = TEST_USER["email"]
                 elif typ == "password" or "pass" in name:
                     val = TEST_USER["password"]
+                elif typ == "url" or "url" in name or "website" in name or "link" in name:
+                    # a plain name string fails most apps' own URL format
+                    # validation, so a real syntactically-valid URL is needed
+                    # for anything downstream to be honest evidence (this is
+                    # what DocuSeal's "App URL" setup field needs - it's
+                    # id="encrypted_config_value" in the DOM, only its own
+                    # <label> text says what it actually is).
+                    val = TEST_USER["url"]
                 elif "user" in name or "login" in name or "handle" in name:
                     val = TEST_USER["username"]
                 elif "name" in name or "org" in name or "team" in name or "company" in name or "workspace" in name:
@@ -155,13 +271,18 @@ class ScreenWalk:
         return filled
 
     def _submit(self, form):
+        # query_selector only returns the FIRST DOM match for a selector; if
+        # that one happens to be hidden (a lot of real forms have an earlier
+        # non-visible button - a back button, a hidden template row), this
+        # gave up even though the actual submit/next button was right there.
+        # query_selector_all + scan for the first visible one fixes that.
         for sel in ("button[type=submit]", "input[type=submit]", "button:not([type=button])", "button"):
             try:
-                b = form.query_selector(sel)
-                if b and b.is_visible():
-                    b.click(timeout=4000)
-                    self.page.wait_for_timeout(2500)
-                    return True
+                for b in form.query_selector_all(sel):
+                    if b.is_visible():
+                        b.click(timeout=4000)
+                        self.page.wait_for_timeout(2500)
+                        return True
             except Exception:
                 continue
         return False
@@ -198,6 +319,105 @@ class ScreenWalk:
             pass
         return None
 
+    def _click_choice_step(self):
+        """Some setup wizards aren't a <form> at all - a single step of
+        exclusive choice cards ('Embedded MariaDB' / 'MySQL' / 'SQLite') that
+        must be clicked before a 'Continue' button does anything. Finds a
+        group of >=2 visible, similarly-sized sibling elements that look like
+        selectable options (not inside a form, not a destructive action),
+        clicks the first, then clicks a following continue/next/weiter
+        button if one is visible. Returns True if it changed anything."""
+        try:
+            candidates = [el for el in self.page.query_selector_all(
+                "button, [role=button], [role=radio], [role=option], [class*=card], [class*=option]")
+                if el.is_visible()]
+        except Exception:
+            candidates = []
+        groups = {}
+        for el in candidates:
+            try:
+                label = (el.inner_text() or "").strip().lower()
+                if not label or len(label) > 40 or any(d in label for d in ("delete", "logout", "remove")):
+                    continue
+                box = el.bounding_box()
+                if not box:
+                    continue
+                parent = el.evaluate_handle("e => e.parentElement")
+                pid = parent.evaluate("e => e ? (e.getAttribute('class')||'') + e.tagName : ''") if parent else ""
+                groups.setdefault(pid, []).append(el)
+            except Exception:
+                continue
+        group = next((g for g in groups.values() if len(g) >= 2), None)
+        if not group:
+            return False
+        try:
+            group[0].click(timeout=3000)
+            self.page.wait_for_timeout(500)
+        except Exception:
+            return False
+        for b in self.page.query_selector_all("button"):
+            try:
+                if not b.is_visible():
+                    continue
+                label = (b.inner_text() or "").strip().lower()
+                if any(w in label for w in ("continue", "next", "weiter", "proceed", "confirm")):
+                    b.click(timeout=3000)
+                    self.page.wait_for_timeout(1500)
+                    break
+            except Exception:
+                continue
+        return True
+
+    def _click_single_gate_link(self):
+        """Some apps show a marketing/landing page with a single 'Sign In' /
+        'Log In' / 'Get Started' link or button - not a <form> yet (that's
+        one more click away) and not a multi-choice card group (only one
+        option, so _click_choice_step's ">=2 siblings" rule correctly
+        ignores it, and its selector doesn't even query <a> tags). This
+        matters most on the SECOND stage of a real run: install_startup.py
+        boots one container, screens.py's gate-crawl creates the account via
+        the FIRST-TIME setup wizard, then capabilities.py opens a fresh
+        browser context against that SAME still-running app - which, since
+        the account already exists, shows exactly this 'please sign in'
+        landing page instead of the setup wizard. Clicking through to reveal
+        the real login form is required for capabilities.py to ever reach
+        the authenticated app at all. Deliberately picks the single
+        best-matching, most prominent (shortest label) candidate rather than
+        the first DOM match, since nav bars often repeat the same CTA."""
+        try:
+            els = [el for el in self.page.query_selector_all("a[href], button, [role=button]")
+                  if el.is_visible()]
+        except Exception:
+            els = []
+        best = None
+        for el in els:
+            try:
+                label = (el.inner_text() or "").strip().lower()
+            except Exception:
+                continue
+            if not label or len(label) > 30:
+                continue
+            if any(d in label for d in ("delete", "logout", "log out", "sign out", "remove")):
+                continue
+            if any(w in label for w in GATE_WORDS):
+                if best is None or len(label) < len(best[0]):
+                    best = (label, el)
+        if best is None:
+            return False
+        try:
+            best[1].click(timeout=3000)
+            self.page.wait_for_timeout(1500)
+            return True
+        except Exception:
+            return False
+
+    def _looks_like_app(self):
+        try:
+            t = (self.page.inner_text("body", timeout=3000) or "").lower()
+        except Exception:
+            return False
+        return any(w in t for w in ("logout", "log out", "sign out", "settings", "profile", "welcome"))
+
     def get_past_setup_wall(self):
         """Fills whatever setup/signup/login form stands between the homepage
         and the real app - the same problem the old walker called
@@ -206,17 +426,27 @@ class ScreenWalk:
         steps = []
         for i in range(MAX_GATE_STEPS):
             form = self._find_gate_form()
-            if form is None:
-                break
+            if form is None and self._looks_like_app():
+                break  # already past the gate - don't let choice-click fire on real UI
+            if form is not None:
+                before = self.page.url
+                filled = self._fill_visible_inputs(form)
+                submitted = self._submit(form)
+                steps.append({"step": i + 1, "kind": "form", "url_before": before,
+                             "fields_filled": filled, "submitted": submitted, "url_after": self.page.url})
+                if not submitted:
+                    break
+                continue
             before = self.page.url
-            filled = self._fill_visible_inputs(form)
-            submitted = self._submit(form)
-            steps.append({"step": i + 1, "url_before": before, "fields_filled": filled,
-                         "submitted": submitted, "url_after": self.page.url})
-            if not submitted:
-                break
-            if self._find_gate_form() is None:
-                break
+            if self._click_choice_step():
+                steps.append({"step": i + 1, "kind": "choice_click", "url_before": before,
+                             "url_after": self.page.url})
+                continue
+            if self._click_single_gate_link():
+                steps.append({"step": i + 1, "kind": "single_gate_link", "url_before": before,
+                             "url_after": self.page.url})
+                continue
+            break
         return steps
 
     def collect_nav_links(self):
@@ -236,6 +466,36 @@ class ScreenWalk:
         except Exception:
             pass
         return items
+
+    def click_link_by_href(self, href, text):
+        """Navigates by CLICKING the real link element currently in the DOM,
+        not a fresh page.goto() to the same URL. This matters for apps whose
+        session/auth lives in an active socket connection or in-memory JS
+        state rather than a cookie: a full page reload to a deep route can
+        lose that state and bounce back to a login/404 screen even though
+        the user is, in every real sense, still logged in - a full reload is
+        not what a real user does to navigate a live app. Returns True if a
+        matching, visible link was found and clicked."""
+        try:
+            candidates = self.page.query_selector_all(f'a[href="{href}"]')
+            el = next((c for c in candidates if c.is_visible()), None)
+            if el is None and text:
+                # href match failed (client router rewrote it) - fall back to
+                # the same visible text, which is what a human actually reads.
+                loc = self.page.get_by_text(text, exact=True)
+                if loc.count():
+                    for i in range(min(loc.count(), 5)):
+                        cand = loc.nth(i)
+                        if cand.is_visible():
+                            el = cand
+                            break
+            if el is None:
+                return False
+            el.click(timeout=4000)
+            self.page.wait_for_timeout(1200)
+            return True
+        except Exception:
+            return False
 
     def inventory_controls(self):
         try:
@@ -259,6 +519,12 @@ class ScreenWalk:
             return {"reachable": False, "rendered": False, "controls_detected": False,
                     "browser_verified": False, "title": None, "controls": {}, "screenshot": None,
                     "note": "navigation failed (timeout or network error)"}
+        return self.inventory_current_screen(name_hint)
+
+    def inventory_current_screen(self, name_hint):
+        """Same checks as verify_screen, but on whatever page is already
+        loaded - used after a click-based navigation, where a fresh goto()
+        would itself be the thing that breaks an SPA's live session."""
         try:
             title = self.page.title()
         except Exception:
@@ -273,12 +539,16 @@ class ScreenWalk:
         except Exception:
             body_text = ""
         rendered = bool(body_text and len(body_text.strip()) > 20)
+        body_lower = body_text.lower()
+        error_hit = next((m for m in ERROR_STATE_MARKERS if m in body_lower), None)
         controls = self.inventory_controls()
         controls_detected = any(v > 0 for v in controls.values())
         shot = self.shot(name_hint)
         return {
-            "reachable": True, "rendered": rendered, "controls_detected": controls_detected,
-            "browser_verified": rendered, "title": title, "heading": heading_text,
+            "reachable": True, "rendered": rendered, "error_state": error_hit,
+            "controls_detected": controls_detected,
+            "browser_verified": rendered and not error_hit,
+            "title": title, "heading": heading_text,
             "controls": controls, "screenshot": shot, "final_url": self.page.url,
         }
 
@@ -314,38 +584,77 @@ def process_app(entry, base_url):
         screens = []
         seen_urls = set()
 
-        # 1. wherever the gate left us is screen #1 (already navigated there)
-        home_result = w.verify_screen(w.page.url, "home")
+        # 1. wherever the gate left us is screen #1 (already navigated there
+        #    as part of get_past_setup_wall - inventory it in place, no re-nav)
+        app_home_url = w.page.url
+        home_result = w.inventory_current_screen("home")
+        # Honest gate outcome: IN means no gate form remains on the page - a
+        # screen with a login/signup form still on it is STUCK, whatever its
+        # HTTP status, and every screen "reached" from there is really just
+        # more of the gate, not proof of the app's real screens. (Requiring
+        # literal "logout"/"settings" text here too was a false negative on
+        # real dashboards that put account actions behind a collapsed avatar
+        # menu - Uptime Kuma's own dashboard has no such text visible until
+        # that menu is opened, despite being the genuine, working app.)
+        gate_state = "IN" if w._find_gate_form() is None else "STUCK"
         screens.append({"screen_id": "SCR-001", "name": "Home", "route": "/",
-                        "discovery_source": "startup_url", "gate_steps": gate_steps, **home_result})
+                        "discovery_source": "startup_url", "gate_steps": gate_steps,
+                        "gate_state": gate_state, **home_result})
         seen_urls.add(base_url.rstrip("/"))
-        seen_urls.add(w.page.url.rstrip("/"))
+        seen_urls.add(app_home_url.rstrip("/"))
 
-        # 2. live navigation: links actually present on the rendered homepage
-        nav_links = w.collect_nav_links() if home_result["reachable"] else []
-        candidates = []
+        # 2. live navigation: links actually present on the authenticated
+        #    home screen, visited by CLICKING them (not a fresh goto() to the
+        #    same URL) - many apps keep session/live state in memory or an
+        #    open socket, not just a cookie, and a full page reload to a deep
+        #    route can lose that and bounce back to a login/404 screen even
+        #    though the user is still, in every real sense, logged in.
+        #    If the gate is still STUCK, every route from here is just more
+        #    of the same gate - crawling them would manufacture screen count
+        #    without any real evidence, so this stops at the honest result.
+        nav_links = w.collect_nav_links() if (home_result["reachable"] and gate_state == "IN") else []
+        seen_hrefs = set()
+        i = 2
         for l in nav_links:
+            if i - 2 >= MAX_SCREENS_TO_VISIT:
+                break
             full = urljoin(base_url + "/", l["href"])
             if urlparse(full).netloc != urlparse(base_url).netloc:
                 continue
-            if full.rstrip("/") in seen_urls:
+            key = full.rstrip("/")
+            if key in seen_urls or l["href"] in seen_hrefs:
                 continue
-            candidates.append((full, l["text"] or screen_name_from_url(full), "nav_link"))
+            seen_urls.add(key)
+            seen_hrefs.add(l["href"])
+            label = l["text"] or screen_name_from_url(full)
+            if w.page.url.rstrip("/") != app_home_url.rstrip("/"):
+                w.goto(app_home_url)  # app_home_url is proven reachable; deep routes are not
+            if w.click_link_by_href(l["href"], l["text"]):
+                result = w.inventory_current_screen(label)
+            else:
+                result = w.verify_screen(full, label)  # fall back to direct nav if the click failed
+            screens.append({"screen_id": f"SCR-{i:03d}", "name": label[:60],
+                            "route": urlparse(w.page.url).path or urlparse(full).path,
+                            "discovery_source": "nav_link_click", **result})
+            i += 1
 
-        # 3. static route candidates found in source, not already covered by nav
-        for r in static_routes:
+        # 3. static route candidates found in source, not already covered by
+        #    live navigation - visited by direct goto() since there's no DOM
+        #    element to click for a route nothing on screen links to. These
+        #    are honestly weaker evidence for exactly the reason #2 exists.
+        #    Same STUCK-gate stop as above.
+        for r in (static_routes if gate_state == "IN" else []):
+            if i - 2 >= MAX_SCREENS_TO_VISIT:
+                break
             full = urljoin(base_url + "/", r.lstrip("/"))
-            if full.rstrip("/") in seen_urls or any(full == c[0] for c in candidates):
-                continue
-            candidates.append((full, screen_name_from_url(full), "static_route"))
-
-        for i, (full, label, source) in enumerate(candidates[:MAX_SCREENS_TO_VISIT], 2):
             if full.rstrip("/") in seen_urls:
                 continue
             seen_urls.add(full.rstrip("/"))
+            label = screen_name_from_url(full)
             result = w.verify_screen(full, label)
             screens.append({"screen_id": f"SCR-{i:03d}", "name": label[:60], "route": urlparse(full).path,
-                            "discovery_source": source, **result})
+                            "discovery_source": "static_route", **result})
+            i += 1
 
         browser.close()
 

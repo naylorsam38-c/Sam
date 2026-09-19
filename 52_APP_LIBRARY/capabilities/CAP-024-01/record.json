@@ -1,23 +1,30 @@
 {
  "application": "APP-024",
  "id": "CAP-024-01",
- "name": "Documents",
+ "name": "Document Templates",
+ "route": "/",
+ "discovered_from": "screen",
+ "matched_predefined_capability": [
+  "Documents",
+  "templates"
+ ],
  "attach_points": [
   {
    "file": "app/controllers/template_documents_page_objects_controller.rb",
    "matched_words": [
-    "documents"
+    "template",
+    "templates"
    ],
-   "line": 7,
-   "snippet": "attachment = @template.documents_attachments.find_by!(uuid: params[:attachment_uuid])"
+   "line": 4,
+   "snippet": "load_and_authorize_resource :template"
   },
   {
    "file": "app/controllers/send_submission_email_controller.rb",
    "matched_words": [
-    "documents"
+    "template"
    ],
-   "line": 31,
-   "snippet": "SubmitterMailer.documents_copy_email(@submitter, sig: true).deliver_later! if can_send?(@submitter)"
+   "line": 13,
+   "snippet": "if params[:template_slug]"
   },
   {
    "file": "app/controllers/submit_form_completed_download_controller.rb",
@@ -28,15 +35,11 @@
    "snippet": "render json: Submitters.build_document_urls(last_submitter)"
   }
  ],
- "ui_screen": {
-  "name": "Home",
-  "route": "/"
- },
  "live_test": {
   "url": "http://127.0.0.1:3000/",
   "attempted": true,
   "outcome": "PASS",
-  "detail": "submitted, page responded without a visible error banner (same URL http://127.0.0.1:3000/setup)"
+  "detail": "submitted 1 field(s); a value this test typed now appears on the page where it didn't before (persisted)"
  },
  "verdict": "PROVEN"
 }

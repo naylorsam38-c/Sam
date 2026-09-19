@@ -3411,10 +3411,9 @@
     "screens_browser_verified": 15
    },
    "capability_summary": {
-    "capabilities_defined": true,
-    "discovered": 8,
-    "attach_point_found": 7,
-    "proven": 2
+    "discovered": 3,
+    "attach_point_found": 3,
+    "proven": 3
    }
   },
   {
@@ -5301,9 +5300,8 @@
     "screens_browser_verified": 15
    },
    "capability_summary": {
-    "capabilities_defined": false,
-    "discovered": 0,
-    "attach_point_found": 0,
+    "discovered": 7,
+    "attach_point_found": 7,
     "proven": 0
    }
   },

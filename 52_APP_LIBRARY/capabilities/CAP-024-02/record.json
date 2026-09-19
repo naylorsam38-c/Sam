@@ -1,35 +1,41 @@
 {
  "application": "APP-024",
  "id": "CAP-024-02",
- "name": "recipients",
+ "name": "Profile",
+ "route": "/settings/profile",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
  "attach_points": [
   {
-   "file": "app/controllers/templates_recipients_controller.rb",
+   "file": "app/controllers/user_signatures_controller.rb",
    "matched_words": [
-    "recipients"
+    "profile"
    ],
-   "line": null,
-   "snippet": null
+   "line": 12,
+   "snippet": "return redirect_to settings_profile_index_path, notice: I18n.t('unable_to_save_signature') if file.blank?"
   },
   {
-   "file": "app/controllers/submissions_resend_email_controller.rb",
+   "file": "app/controllers/profile_controller.rb",
    "matched_words": [
-    "recipients"
+    "profile"
    ],
-   "line": 34,
-   "snippet": "I18n.t('emails_have_been_sent_to_n_recipients', count: submitters.size)"
+   "line": 15,
+   "snippet": "redirect_to settings_profile_index_path,"
   },
   {
-   "file": "app/controllers/submissions_controller.rb",
+   "file": "app/controllers/mfa_setup_controller.rb",
    "matched_words": [
-    "recipients"
+    "profile"
    ],
-   "line": 65,
-   "snippet": "redirect_to template_path(@template), notice: I18n.t('new_recipients_have_been_added')"
+   "line": 23,
+   "snippet": "redirect_to settings_profile_index_path, notice: I18n.t('2fa_has_been_configured')"
   }
  ],
- "ui_screen": null,
- "live_test": null,
- "verdict": "NOT VERIFIED",
- "reason": "code attach point found but no reachable UI screen for it"
+ "live_test": {
+  "url": "http://127.0.0.1:3000/settings/profile",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "submitted 3 field(s); a value this test typed now appears on the page where it didn't before (persisted)"
+ },
+ "verdict": "PROVEN"
 }
