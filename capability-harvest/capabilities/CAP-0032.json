@@ -2,12 +2,12 @@
   "aliases": [],
   "cap_id": "CAP-0032",
   "category": "inventory",
-  "generated_at": "2026-09-19T15:06:23.179661+00:00",
+  "generated_at": "2026-09-19T15:17:46.534787+00:00",
   "implementations": [
     {
       "app_slug": "pharma-inventory",
       "commit": "42e44bb4690a2aaff432a99631abc490569c1ce0",
-      "harvested_at": "2026-09-19T15:06:22.930723+00:00",
+      "harvested_at": "2026-09-19T15:17:46.221121+00:00",
       "licence": "Apache-2.0",
       "provenance_path": "shelf/pharma-inventory/CAP-0032/PROVENANCE.json",
       "shelf_path": "shelf/pharma-inventory/CAP-0032"

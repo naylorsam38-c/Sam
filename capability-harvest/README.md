@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 36 capabilities harvested from 23 real applications, each one
+**Status**: 37 capabilities harvested from 24 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 36 capabilities harvested so far
+## The 37 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -83,6 +83,7 @@ No script assumes a working directory.
 | CAP-0034 | apply discount code | [benjaminyan1/Mini-Amazon](https://github.com/benjaminyan1/Mini-Amazon) | MIT | `app/cart.py:113` `apply_coupon` (real expiry-checked, duplicate-guarded coupon application against a real PostgreSQL cart total, `apply_coupon`, `flash`) | HTTP |
 | CAP-0035 | show map | [moustafa-shaaban/Django_and_Folium](https://github.com/moustafa-shaaban/Django_and_Folium) | MIT | `django_and_folium/django_and_folium/geo_app/views.py:20` `index` (real Folium map genuinely driven by persisted Feature rows, `basemap`, `render`) | HTTP |
 | CAP-0036 | import data | [moustafa-shaaban/Django_and_Folium](https://github.com/moustafa-shaaban/Django_and_Folium) (same app, different attach point) | MIT | `django_and_folium/django_and_folium/geo_app/views.py:80` `import_data` (real django-import-export dry-run-then-commit CSV import, `import_data`, `load`) | HTTP |
+| CAP-0037 | verify phone | [tohid-ab/django-otp-auth](https://github.com/tohid-ab/django-otp-auth) | MIT | `otp/django_otp_auth/apps/rest/auth/views.py:52` `OTPVerifyView.post` (real 5-digit OTP, 120s expiry, one-time-use, real JWT issuance, `_handle_login`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -338,7 +339,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 36 capabilities across 23 apps (see the
+AST-based, line-accurate for all 37 capabilities across 24 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -604,6 +605,23 @@ Highlights beyond the basic "call it and check 200":
   reusable as-is here too (`needs_smtp` is kind-agnostic), and the seed
   step now creates an already-verified `EmailAddress` row the same way a
   real user who'd clicked their confirmation link would have one.)
+- CAP-0037: requests a real OTP for a real mobile number, reads the real
+  generated 5-digit code directly out of the app's own sqlite database
+  (the app's own real code only ever `print()`s it -- never sent by SMS,
+  so this is the only way to observe it, not an invented value), confirms
+  a wrong code is genuinely rejected, confirms the real code is accepted
+  and issues real signed JWT access/refresh tokens, and confirms reusing
+  the same code a second time is genuinely rejected. This harvest also
+  caught a real, previously-latent bug in `build.py` itself: its
+  re-verification step matched a harvested function by name alone, which
+  silently matched the WRONG same-named method (`OTPCreateView.post`
+  instead of the harvested `OTPVerifyView.post` -- two different DRF
+  `APIView.post()` overrides in the same file) and falsely reported
+  drift. Fixed by preferring the candidate whose current line number
+  still matches what was actually harvested, falling back to "the one
+  function with this name" only when there's no ambiguity -- every other
+  harvested capability, none of which shares a file with a same-named
+  sibling, re-verifies exactly as before.
 
 ## How to reproduce this from scratch
 
@@ -669,6 +687,13 @@ python3.11 -m venv .venv-django-folium
     django-rest-registration django-jazzmin psycopg2-binary \
     django-debug-toolbar django-extensions tablib
 
+# django-otp-auth needs only plain Django + DRF + simplejwt, on SQLite --
+# no Postgres, no heavy infra -- but still its own dedicated venv.
+python3.11 -m venv .venv-django-otp-auth
+./.venv-django-otp-auth/bin/pip install django==5.1.4 djangorestframework \
+    djangorestframework-simplejwt PyJWT asgiref sqlparse \
+    django-jalali-date jalali_core jdatetime requests
+
 python3 discovery/discover_applications.py
 python3 detection/detect_capability.py
 for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
@@ -676,7 +701,7 @@ for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
            CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019 CAP-0020 CAP-0021 \
            CAP-0022 CAP-0023 CAP-0024 CAP-0025 CAP-0026 CAP-0027 \
            CAP-0028 CAP-0029 CAP-0030 CAP-0031 CAP-0032 CAP-0033 CAP-0034 \
-           CAP-0035 CAP-0036; do
+           CAP-0035 CAP-0036 CAP-0037; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -831,12 +856,16 @@ python3 build.py stop
 python3 build.py start --cap CAP-0036 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0036_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0037 --port 5057
+./.venv/bin/python3 test/prove_CAP-0037_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs and the Postgres role/database kept) fifteen times
-now, at fifteen different capability counts, to confirm it's genuinely
+deleted first, venvs and the Postgres role/database kept) sixteen times
+now, at sixteen different capability counts, to confirm it's genuinely
 reproducible, not an artifact of an ad-hoc fixing sequence. This same
 sweep is what caught CAP-0028's real name-collision flakiness (see "Real
 applications aren't all shaped the same way" above) -- a real, previously
@@ -849,7 +878,7 @@ one-off pass, is meant to surface.
 
 **Proved, for real:**
 - Real application discovery with real licence verification from the
-  source file, across 23 different repositories and three distinct real
+  source file, across 24 different repositories and three distinct real
   licences (MIT, BSD-3-Clause, Apache-2.0).
 - Real AST-based attach-point detection that rejects name-only matches,
   across both route-handler and helper-function capability shapes,
@@ -862,7 +891,7 @@ one-off pass, is meant to surface.
   anything, across two Python versions and an app whose data path resolves
   outside its own repo entirely (`$HOME`-based, handled via an isolated,
   resettable `HOME` override rather than patching the app).
-- Thirty-six independent, real, non-mocked live proofs, including negative/
+- Thirty-seven independent, real, non-mocked live proofs, including negative/
   access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
@@ -921,7 +950,7 @@ one-off pass, is meant to surface.
   the status code.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 36.** ~44 names in the 81-name vocabulary (see
+- **Scale beyond 37.** ~43 names in the 81-name vocabulary (see
   `CAPABILITY_VOCABULARY.md` for the full recovered list and live status)
   have not been researched yet. Each one needs the same real vetting
   (license read from source, AST-confirmed evidence, live proof) — this is
@@ -934,6 +963,25 @@ one-off pass, is meant to surface.
   command, BSD-3-Clause) is a mature production project but is invoked by
   cron, not an HTTP route, and needs a heavier Django setup than this
   pipeline's other apps — deferred, not forced in.
+  **Send reminder** was researched and a genuine, non-trivial candidate
+  was found -- indrajit912/Slotify (MIT), whose
+  `app/services/email_reminder_service.py::send_reminder_emails()` does
+  real work: queries real `User`/`Booking` rows, computes a real
+  per-user configurable IST reminder window, dedupes via a real
+  `ReminderLog` row before sending, and is wired into a real (if
+  disabled-by-default) APScheduler job. It was still deferred: its email
+  send (`scripts/email_message.py::EmailMessage.send()`) hardcodes a
+  real, unconditional `server.starttls()` + `server.login(...)` against
+  `smtp.gmail.com:587` (`config.py`'s `EmailConfig.GMAIL_SERVER`, a
+  plain list literal, not an env-var lookup like every other harvested
+  app's mail config) -- this sandbox has no route to the public
+  internet's SMTP ports, and there is no override point to redirect it
+  at a local debug server without editing the harvested code itself,
+  which this pipeline's own rule against touching a harvested
+  capability's logic rules out. The simpler bare `smtpd.DebuggingServer`
+  this pipeline already runs for other apps' email capabilities
+  couldn't stand in either, since it has no STARTTLS/AUTH support at
+  all and this app's `send()` doesn't offer a way to skip either.
 - **Cross-application composition.** `build.py` verifies and mounts each
   harvested route within its *own* source application. Grafting a
   harvested capability onto a *different*, unrelated host application

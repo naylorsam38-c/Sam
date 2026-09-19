@@ -1,0 +1,33 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0037",
+  "mobile_number": "09123456789",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "request_real_otp",
+      "url": "http://127.0.0.1:5057/api/auth/otp/create/"
+    },
+    {
+      "method": "POST",
+      "status_code": 400,
+      "step": "wrong_code_rejected",
+      "url": "http://127.0.0.1:5057/api/auth/otp/verify/"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "real_code_accepted",
+      "url": "http://127.0.0.1:5057/api/auth/otp/verify/"
+    },
+    {
+      "method": "POST",
+      "status_code": 400,
+      "step": "reuse_rejected",
+      "url": "http://127.0.0.1:5057/api/auth/otp/verify/"
+    }
+  ],
+  "verified_at": "2026-09-19T15:19:03.485132+00:00"
+}

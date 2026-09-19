@@ -1,5 +1,5 @@
 {
-  "about_me": "Real about-me text written by the harvest proof at 2026-09-19T15:07:06.743802+00:00.",
+  "about_me": "Real about-me text written by the harvest proof at 2026-09-19T15:18:28.379816+00:00.",
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0023",
   "result": "PASS",
@@ -21,7 +21,7 @@
       "status_code": 200,
       "step": "register_new_account",
       "url": "http://127.0.0.1:5057/login",
-      "username": "hproof30426"
+      "username": "hproof31107"
     },
     {
       "method": "GET",
@@ -45,9 +45,9 @@
       "method": "GET",
       "status_code": 200,
       "step": "fetch_public_profile_after_edit",
-      "url": "http://127.0.0.1:5057/user/hproof30426"
+      "url": "http://127.0.0.1:5057/user/hproof31107"
     }
   ],
-  "username": "hproof30426",
-  "verified_at": "2026-09-19T15:07:06.795440+00:00"
+  "username": "hproof31107",
+  "verified_at": "2026-09-19T15:18:28.427019+00:00"
 }

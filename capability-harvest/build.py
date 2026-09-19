@@ -105,6 +105,7 @@ PYTHON_BY_VERSION = {
     # gets its own dedicated venv rather than risking any of it leaking
     # into the shared one.
     "3.11-django-folium": config.PROJECT_ROOT / ".venv-django-folium" / "bin" / "python3",
+    "3.11-django-otp-auth": config.PROJECT_ROOT / ".venv-django-otp-auth" / "bin" / "python3",
 }
 BUILD_DB_PATH = config.OUTPUT_ROOT / "build_run.db"  # used only by flask_factory apps with a DATABASE_URL env var
 # A real PostgreSQL 16 server is already running in this sandbox (confirmed
@@ -171,11 +172,22 @@ def verify(cap_id: str):
     live_source_text = live_source_path.read_text(encoding="utf-8")
     live_tree = ast.parse(live_source_text, filename=str(live_source_path))
 
-    live_node = None
-    for node in ast.walk(live_tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == provenance["source"]["symbol"]:
-            live_node = node
-            break
+    # A bare name match isn't enough: two different classes in the same
+    # file can genuinely define a same-named method (e.g. two DRF
+    # APIView.post() overrides) -- confirmed for real by CAP-0037, where
+    # this used to silently re-verify against the WRONG same-named
+    # function (the first one in the file, not the harvested one) and
+    # falsely report drift. Prefer the candidate whose current line
+    # number still matches what was harvested (real confirmation, not a
+    # guess); only fall back to "the one function with this name" when
+    # there's no ambiguity to begin with.
+    same_name_candidates = [
+        node for node in ast.walk(live_tree)
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == provenance["source"]["symbol"]
+    ]
+    live_node = next((n for n in same_name_candidates if n.lineno == provenance["source"]["lineno"]), None)
+    if live_node is None and len(same_name_candidates) == 1:
+        live_node = same_name_candidates[0]
 
     drift_detected = True
     live_matches_shelf = False

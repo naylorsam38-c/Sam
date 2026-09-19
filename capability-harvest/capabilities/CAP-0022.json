@@ -2,12 +2,12 @@
   "aliases": [],
   "cap_id": "CAP-0022",
   "category": "auth",
-  "generated_at": "2026-09-19T15:06:23.178627+00:00",
+  "generated_at": "2026-09-19T15:17:46.532839+00:00",
   "implementations": [
     {
       "app_slug": "tech-hub",
       "commit": "8d1f31982401ab0d08ff34e6f4207e10310313fd",
-      "harvested_at": "2026-09-19T15:06:22.359173+00:00",
+      "harvested_at": "2026-09-19T15:17:45.650511+00:00",
       "licence": "MIT",
       "provenance_path": "shelf/tech-hub/CAP-0022/PROVENANCE.json",
       "shelf_path": "shelf/tech-hub/CAP-0022"

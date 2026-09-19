@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0036",
-  "imported_marker": "HarvestImportedFeature1789830460",
+  "imported_marker": "HarvestImportedFeature1789831141",
   "result": "PASS",
   "steps": [
     {
@@ -29,7 +29,7 @@
       "url": "http://127.0.0.1:5057/import-data/"
     },
     {
-      "marker": "HarvestImportedFeature1789830460",
+      "marker": "HarvestImportedFeature1789831141",
       "method": "POST",
       "status_code": 200,
       "step": "upload_real_csv",
@@ -42,5 +42,5 @@
       "url": "http://127.0.0.1:5057/"
     }
   ],
-  "verified_at": "2026-09-19T15:07:40.597809+00:00"
+  "verified_at": "2026-09-19T15:19:01.849913+00:00"
 }

@@ -2,12 +2,12 @@
   "aliases": [],
   "cap_id": "CAP-0003",
   "category": "hostel-booking",
-  "generated_at": "2026-09-19T15:06:23.176524+00:00",
+  "generated_at": "2026-09-19T15:17:46.529558+00:00",
   "implementations": [
     {
       "app_slug": "hostelfix",
       "commit": "8d54ca9aebe956eb135f53fdb8aabb4e3a5a8748",
-      "harvested_at": "2026-09-19T15:06:21.350148+00:00",
+      "harvested_at": "2026-09-19T15:17:44.598333+00:00",
       "licence": "MIT",
       "provenance_path": "shelf/hostelfix/CAP-0003/PROVENANCE.json",
       "shelf_path": "shelf/hostelfix/CAP-0003"

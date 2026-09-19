@@ -982,6 +982,45 @@ APPLICATION_MANIFEST = [
             },
         },
     },
+    {
+        "slug": "django-otp-auth",
+        "clone_url": "https://github.com/tohid-ab/django-otp-auth.git",
+        "ref": None,
+        "category": "auth",
+        "why_selected": (
+            "Real Django + DRF phone-number OTP login app, MIT licensed, "
+            "SQLite, no external infra. OTPVerifyView.post() does genuine "
+            "OTP verification: a real 5-digit code with a real 120-second "
+            "expiry window and a real one-time-use flag (OTPCodeQuerySet."
+            "is_valid()), confirmed by reading the real generated code "
+            "directly out of the app's own sqlite database (never sent by "
+            "SMS -- the app's own real OTPCreateView only ever `print()`s "
+            "it, a genuinely self-contained/offline-provable design, not "
+            "a stub), then verified via a real wrong-code rejection, a "
+            "real correct-code acceptance issuing real signed JWT access/"
+            "refresh tokens, and a real reuse rejection once the code's "
+            "own `used` flag has been set. Uses the same django_manage "
+            "runner kind as django-folium but needs neither PostgreSQL "
+            "nor a heavy dependency set -- plain SQLite, its own small "
+            "dedicated venv (Django 5.1, DRF, simplejwt)."
+        ),
+        "runner": {
+            "kind": "django_manage",
+            "app_subdir": "otp",
+            "settings_module": "django_otp_auth.settings",
+            "python_version": "3.11-django-otp-auth",
+            "reset_globs": ["db.sqlite3"],
+            "setup_scripts": [
+                # The app's own real migrations -- not a schema we invented.
+                "-c from django.core.management import execute_from_command_line\n"
+                "execute_from_command_line(['manage.py', 'migrate', '--noinput'])",
+            ],
+            "readiness_path": "/admin/login/",
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "django_otp_auth.settings",
+            },
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

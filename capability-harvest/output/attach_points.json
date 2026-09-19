@@ -691,6 +691,22 @@
       "route_path": null,
       "source_file_relative": "django_and_folium/django_and_folium/geo_app/views.py",
       "symbol": "import_data"
+    },
+    {
+      "app_slug": "django-otp-auth",
+      "cap_id": "CAP-0037",
+      "category": "auth",
+      "decorators": [],
+      "end_lineno": 62,
+      "evidence_calls_matched": [
+        "_handle_login"
+      ],
+      "found": true,
+      "lineno": 52,
+      "name": "verify phone",
+      "route_path": null,
+      "source_file_relative": "otp/django_otp_auth/apps/rest/auth/views.py",
+      "symbol": "post"
     }
   ]
 }

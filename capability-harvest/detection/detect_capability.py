@@ -365,6 +365,15 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "import_data",
         "evidence_call_names": {"import_data", "load"},
     },
+    {
+        "cap_id": "CAP-0037",
+        "name": "verify phone",
+        "category": "auth",
+        "app_slug": "django-otp-auth",
+        "source_file_relative": "otp/django_otp_auth/apps/rest/auth/views.py",
+        "symbol_hint": "post",
+        "evidence_call_names": {"_handle_login"},
+    },
 ]
 # ----------------------------------------------------------------------------
 

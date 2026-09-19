@@ -2,12 +2,12 @@
   "aliases": [],
   "cap_id": "CAP-0014",
   "category": "healthcare-scheduling",
-  "generated_at": "2026-09-19T15:06:23.177763+00:00",
+  "generated_at": "2026-09-19T15:17:46.531647+00:00",
   "implementations": [
     {
       "app_slug": "hospital-management-real",
       "commit": "2ef9184f817eb880f55685ee2535d49a322e2ca8",
-      "harvested_at": "2026-09-19T15:06:21.897553+00:00",
+      "harvested_at": "2026-09-19T15:17:45.180965+00:00",
       "licence": "MIT",
       "provenance_path": "shelf/hospital-management-real/CAP-0014/PROVENANCE.json",
       "shelf_path": "shelf/hospital-management-real/CAP-0014"
