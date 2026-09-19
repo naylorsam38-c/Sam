@@ -1,0 +1,34 @@
+{
+ "application": "APP-022",
+ "id": "CAP-022-03",
+ "name": "401",
+ "route": "/mint-key",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "src/node/routes/vscode.ts",
+   "matched_words": [
+    "mint"
+   ],
+   "line": 213,
+   "snippet": "router.post(\"/mint-key\", ensureAuthenticated, async (req, res) => {"
+  },
+  {
+   "file": "test/unit/node/routes/vscode.test.ts",
+   "matched_words": [
+    "mint"
+   ],
+   "line": 41,
+   "snippet": "const resp = await codeServer.fetch(\"/mint-key\", { method: \"POST\" })"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:8090/mint-key",
+  "attempted": false,
+  "outcome": "NO_FORM_FOUND",
+  "detail": "no visible <form> on this screen"
+ },
+ "verdict": "NOT VERIFIED",
+ "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
+}

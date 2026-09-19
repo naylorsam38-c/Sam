@@ -1,0 +1,401 @@
+{
+ "application": "APP-039",
+ "capabilities_defined": true,
+ "discovery_method": "app-derived",
+ "predefined_capabilities_for_category": [],
+ "capabilities": [
+  {
+   "id": "CAP-039-01",
+   "name": "Dashboard",
+   "route": "/",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [],
+   "live_test": {
+    "url": "http://127.0.0.1:8181/",
+    "attempted": false,
+    "outcome": "NO_FORM_FOUND",
+    "detail": "no visible <form> on this screen"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
+  },
+  {
+   "id": "CAP-039-02",
+   "name": "Access Lists",
+   "route": "/access",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/router.tsx",
+     "matched_words": [
+      "access"
+     ],
+     "line": 21,
+     "snippet": "const Access = lazy(() => import(\"src/pages/Access\"));"
+    },
+    {
+     "file": "frontend/src/modules/validations.tsx",
+     "matched_words": [
+      "list"
+     ],
+     "line": 89,
+     "snippet": "// Deny if the list of domains is hit"
+    },
+    {
+     "file": "frontend/src/modules/permissions.ts",
+     "matched_words": [
+      "access",
+      "lists"
+     ],
+     "line": 10,
+     "snippet": "export const ACCESS_LISTS = \"accessLists\";"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:8181/access",
+    "attempted": true,
+    "outcome": "FAIL",
+    "detail": "clicked action button, filled+submitted the form it opened (3 fields); page shows an error indicator: Nginx Proxy Manager\nLibrary\nAdministrator\nDashboard\nHosts\nAccess Lists\nCertificates\nUsers\nAudit Logs\nSettings\nAccess Lists\nThere are no Access Lists\n\nWhy don't you create one?\n\nAdd Access List\nFork me"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: FAIL - clicked action button, filled+submitted the form it opened (3 fields); page shows an error indicator: Nginx Proxy Manager\nLibrary\nAdministrator\nDashboard\nHosts\nAccess Lists\nCertificates\nUsers\nAudit Logs\nSettings\nAccess Lists\nThere are no Access Lists\n\nWhy don't you create one?\n\nAdd Access List\nFork me"
+  },
+  {
+   "id": "CAP-039-03",
+   "name": "Certificates",
+   "route": "/certificates",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/router.tsx",
+     "matched_words": [
+      "certificates"
+     ],
+     "line": 20,
+     "snippet": "const Certificates = lazy(() => import(\"src/pages/Certificates\"));"
+    },
+    {
+     "file": "frontend/src/modules/permissions.ts",
+     "matched_words": [
+      "certificates"
+     ],
+     "line": 9,
+     "snippet": "export const CERTIFICATES = \"certificates\";"
+    },
+    {
+     "file": "frontend/src/components/sitemenu.tsx",
+     "matched_words": [
+      "certificates"
+     ],
+     "line": 17,
+     "snippet": "CERTIFICATES,"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:8181/certificates",
+    "attempted": true,
+    "outcome": "NO_CONFIRMATION",
+    "detail": "clicked action button (no form followed); no error, but no positive evidence either (no success message, no typed value persisted anywhere on the page, same URL http://127.0.0.1:8181/certificates) - not counted as proof"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: NO_CONFIRMATION - clicked action button (no form followed); no error, but no positive evidence either (no success message, no typed value persisted anywhere on the page, same URL http://127.0.0.1:8181/certificates) - not counted as proof"
+  },
+  {
+   "id": "CAP-039-04",
+   "name": "Users",
+   "route": "/users",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/router.tsx",
+     "matched_words": [
+      "users"
+     ],
+     "line": 23,
+     "snippet": "const Users = lazy(() => import(\"src/pages/Users\"));"
+    },
+    {
+     "file": "frontend/src/modules/permissions.ts",
+     "matched_words": [
+      "user"
+     ],
+     "line": 17,
+     "snippet": "export const USER = \"user\";"
+    },
+    {
+     "file": "frontend/src/components/sitemenu.tsx",
+     "matched_words": [
+      "users"
+     ],
+     "line": 87,
+     "snippet": "to: \"/users\","
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:8181/users",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button, filled+submitted the form it opened (5 fields); app showed an explicit success message"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-039-05",
+   "name": "Audit Logs",
+   "route": "/audit-log",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/router.tsx",
+     "matched_words": [
+      "audit"
+     ],
+     "line": 66,
+     "snippet": "<Route path=\"/audit-log\" element={<AuditLog />} />"
+    },
+    {
+     "file": "frontend/src/components/sitemenu.tsx",
+     "matched_words": [
+      "audit"
+     ],
+     "line": 93,
+     "snippet": "to: \"/audit-log\","
+    },
+    {
+     "file": "frontend/src/hooks/usesetting.ts",
+     "matched_words": [
+      "audit",
+      "logs"
+     ],
+     "line": 35,
+     "snippet": "queryClient.invalidateQueries({ queryKey: [\"audit-logs\"] });"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:8181/audit-log",
+    "attempted": false,
+    "outcome": "NO_FORM_FOUND",
+    "detail": "no visible <form> on this screen"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
+  },
+  {
+   "id": "CAP-039-06",
+   "name": "Settings",
+   "route": "/settings",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/router.tsx",
+     "matched_words": [
+      "settings"
+     ],
+     "line": 19,
+     "snippet": "const Settings = lazy(() => import(\"src/pages/Settings\"));"
+    },
+    {
+     "file": "frontend/src/components/sitemenu.tsx",
+     "matched_words": [
+      "settings"
+     ],
+     "line": 99,
+     "snippet": "to: \"/settings\","
+    },
+    {
+     "file": "frontend/src/modals/redirectionhostmodal.tsx",
+     "matched_words": [
+      "settings"
+     ],
+     "line": 133,
+     "snippet": "title=\"Settings\""
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:8181/settings",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button, filled+submitted the form it opened (0 fields); app showed an explicit success message"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-039-07",
+   "name": "Proxy Hosts",
+   "route": "/nginx/proxy",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/router.tsx",
+     "matched_words": [
+      "proxy"
+     ],
+     "line": 69,
+     "snippet": "<Route path=\"/nginx/proxy\" element={<ProxyHosts />} />"
+    },
+    {
+     "file": "frontend/src/modules/permissions.ts",
+     "matched_words": [
+      "hosts",
+      "proxy"
+     ],
+     "line": 5,
+     "snippet": "export const PROXY_HOSTS = \"proxyHosts\";"
+    },
+    {
+     "file": "frontend/src/components/sitemenu.tsx",
+     "matched_words": [
+      "hosts",
+      "proxy"
+     ],
+     "line": 18,
+     "snippet": "DEAD_HOSTS,"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:8181/nginx/proxy",
+    "attempted": true,
+    "outcome": "FAIL",
+    "detail": "clicked action button, filled+submitted the form it opened (7 fields); page shows an error indicator: Nginx Proxy Manager\nLibrary\nAdministrator\nDashboard\nHosts\nAccess Lists\nCertificates\nUsers\nAudit Logs\nSettings\nProxy Hosts\nThere are no Proxy Hosts\n\nWhy don't you create one?\n\nAdd Proxy Host\nFork me on"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: FAIL - clicked action button, filled+submitted the form it opened (7 fields); page shows an error indicator: Nginx Proxy Manager\nLibrary\nAdministrator\nDashboard\nHosts\nAccess Lists\nCertificates\nUsers\nAudit Logs\nSettings\nProxy Hosts\nThere are no Proxy Hosts\n\nWhy don't you create one?\n\nAdd Proxy Host\nFork me on"
+  },
+  {
+   "id": "CAP-039-08",
+   "name": "Redirection Hosts",
+   "route": "/nginx/redirection",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/router.tsx",
+     "matched_words": [
+      "redirection"
+     ],
+     "line": 70,
+     "snippet": "<Route path=\"/nginx/redirection\" element={<RedirectionHosts />} />"
+    },
+    {
+     "file": "frontend/src/modules/permissions.ts",
+     "matched_words": [
+      "hosts",
+      "redirection"
+     ],
+     "line": 5,
+     "snippet": "export const PROXY_HOSTS = \"proxyHosts\";"
+    },
+    {
+     "file": "frontend/src/components/sitemenu.tsx",
+     "matched_words": [
+      "hosts",
+      "redirection"
+     ],
+     "line": 18,
+     "snippet": "DEAD_HOSTS,"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:8181/nginx/redirection",
+    "attempted": true,
+    "outcome": "NO_CONFIRMATION",
+    "detail": "clicked action button, filled+submitted the form it opened (5 fields); no error, but no positive evidence either (no success message, no typed value persisted anywhere on the page, same URL http://127.0.0.1:8181/nginx/redirection) - not counted as proof"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: NO_CONFIRMATION - clicked action button, filled+submitted the form it opened (5 fields); no error, but no positive evidence either (no success message, no typed value persisted anywhere on the page, same URL http://127.0.0.1:8181/nginx/redirection) - not counted as proof"
+  },
+  {
+   "id": "CAP-039-09",
+   "name": "Streams",
+   "route": "/nginx/stream",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/router.tsx",
+     "matched_words": [
+      "stream",
+      "streams"
+     ],
+     "line": 72,
+     "snippet": "<Route path=\"/nginx/stream\" element={<Streams />} />"
+    },
+    {
+     "file": "frontend/src/modules/permissions.ts",
+     "matched_words": [
+      "streams"
+     ],
+     "line": 8,
+     "snippet": "export const STREAMS = \"streams\";"
+    },
+    {
+     "file": "frontend/src/components/sitemenu.tsx",
+     "matched_words": [
+      "stream",
+      "streams"
+     ],
+     "line": 59,
+     "snippet": "to: \"/nginx/stream\","
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:8181/nginx/stream",
+    "attempted": true,
+    "outcome": "FAIL",
+    "detail": "clicked action button, filled+submitted the form it opened (2 fields); page shows an error indicator: Nginx Proxy Manager\nLibrary\nAdministrator\nDashboard\nHosts\nAccess Lists\nCertificates\nUsers\nAudit Logs\nSettings\nStreams\nThere are no Streams\n\nWhy don't you create one?\n\nAdd Stream\nFork me on Github\n\u00a9 20"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: FAIL - clicked action button, filled+submitted the form it opened (2 fields); page shows an error indicator: Nginx Proxy Manager\nLibrary\nAdministrator\nDashboard\nHosts\nAccess Lists\nCertificates\nUsers\nAudit Logs\nSettings\nStreams\nThere are no Streams\n\nWhy don't you create one?\n\nAdd Stream\nFork me on Github\n\u00a9 20"
+  },
+  {
+   "id": "CAP-039-10",
+   "name": "Nginx Proxy Manager",
+   "route": "/certbot-plugins",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/router.tsx",
+     "matched_words": [
+      "nginx",
+      "proxy"
+     ],
+     "line": 24,
+     "snippet": "const ProxyHosts = lazy(() => import(\"src/pages/Nginx/ProxyHosts\"));"
+    },
+    {
+     "file": "frontend/src/modules/permissions.ts",
+     "matched_words": [
+      "proxy"
+     ],
+     "line": 5,
+     "snippet": "export const PROXY_HOSTS = \"proxyHosts\";"
+    },
+    {
+     "file": "frontend/src/components/sitemenu.tsx",
+     "matched_words": [
+      "nginx",
+      "proxy"
+     ],
+     "line": 47,
+     "snippet": "to: \"/nginx/proxy\","
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:8181/certbot-plugins",
+    "attempted": false,
+    "outcome": "NO_FORM_FOUND",
+    "detail": "no visible <form> on this screen"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
+  }
+ ]
+}

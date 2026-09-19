@@ -2,7 +2,7 @@
  "application": "APP-042",
  "id": "CAP-042-09",
  "name": "KMS",
- "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/kms",
+ "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/kms",
  "discovered_from": "screen",
  "matched_predefined_capability": null,
  "attach_points": [
@@ -35,7 +35,7 @@
   }
  ],
  "live_test": {
-  "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/kms",
+  "url": "http://127.0.0.1:80/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/kms",
   "attempted": true,
   "outcome": "PASS",
   "detail": "clicked action button, filled+submitted the form it opened (2 fields); app showed an explicit success message"

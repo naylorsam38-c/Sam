@@ -37,7 +37,7 @@
   "url": "http://127.0.0.1:80/",
   "attempted": true,
   "outcome": "PASS",
-  "detail": "clicked action button (no form followed); navigated to a new page (http://127.0.0.1/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects -> http://127.0.0.1/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/cert-manager/893bc97c-83c1-401d-b79b-ceb39fd0bb90/overview) consistent with the action succeeding"
+  "detail": "clicked action button (no form followed); navigated to a new page (http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects -> http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/cert-manager/36055ea8-73fa-43b8-9e7e-edf2507d0a89/overview) consistent with the action succeeding"
  },
  "verdict": "PROVEN"
 }

@@ -2,7 +2,7 @@
  "application": "APP-042",
  "id": "CAP-042-07",
  "name": "Secret Sharing",
- "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/secret-management/secret-sharing",
+ "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/secret-management/secret-sharing",
  "discovered_from": "screen",
  "matched_predefined_capability": [
   "sharing"
@@ -35,7 +35,7 @@
   }
  ],
  "live_test": {
-  "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/secret-management/secret-sharing",
+  "url": "http://127.0.0.1:80/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/secret-management/secret-sharing",
   "attempted": false,
   "outcome": "NO_FORM_FOUND",
   "detail": "no visible <form> on this screen"

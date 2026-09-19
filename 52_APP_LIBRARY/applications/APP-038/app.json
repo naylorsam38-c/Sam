@@ -9,7 +9,7 @@
  "version": null,
  "commit": "5998570a3564afa82e540b660dae4b3b2178f58c",
  "source_path": "applications/APP-038/source",
- "status": "SCREEN-VERIFIED",
+ "status": "FUNCTIONALLY_VERIFIED",
  "declared_itself": false,
  "manual_override_reason": "automated pick (Pi-hole) is primarily a DNS/ad-blocker; this is the category-defining self-hosted monitoring tool",
  "discovery_candidates": [

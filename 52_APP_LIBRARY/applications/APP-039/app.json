@@ -9,7 +9,7 @@
  "version": null,
  "commit": "568c10594517b999dbb2240d9f7a6014b1c4bb2a",
  "source_path": "applications/APP-039/source",
- "status": "SCREEN-VERIFIED",
+ "status": "FUNCTIONALLY_VERIFIED",
  "declared_itself": true,
  "manual_override_reason": "per Sam's instruction that popularity/sandbox limits are never a valid exclusion reason, re-searched GitHub directly instead of leaving this DISCOVERY_FAILED - a real, actively-maintained self-hosted networking/VPN-coordination tool with its own verified BSD-3-Clause LICENSE file",
  "discovery_candidates": [
@@ -52,5 +52,10 @@
   "screens_reached": 15,
   "screens_rendered": 15,
   "screens_browser_verified": 15
+ },
+ "capability_summary": {
+  "discovered": 10,
+  "attach_point_found": 9,
+  "proven": 2
  }
 }

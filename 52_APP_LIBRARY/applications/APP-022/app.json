@@ -9,7 +9,7 @@
  "version": null,
  "commit": "59c988c744a240b05b039f57b856a5312f19d5b1",
  "source_path": "applications/APP-022/source",
- "status": "SCREEN-VERIFIED",
+ "status": "FUNCTIONALLY_VERIFIED",
  "declared_itself": false,
  "manual_override_reason": "the earlier 'browser' category override (Neko) exists precisely because code-server is a developer tool, not a browser - it belongs here instead; verified MIT LICENSE file",
  "discovery_candidates": [
@@ -57,5 +57,10 @@
   "screens_reached": 12,
   "screens_rendered": 9,
   "screens_browser_verified": 9
+ },
+ "capability_summary": {
+  "discovered": 3,
+  "attach_point_found": 2,
+  "proven": 1
  }
 }
