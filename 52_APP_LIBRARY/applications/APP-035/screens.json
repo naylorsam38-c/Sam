@@ -1,0 +1,106 @@
+{
+ "application": "APP-035",
+ "base_url": "http://127.0.0.1:3050/",
+ "static_routes_found": 11,
+ "screens": [
+  {
+   "screen_id": "SCR-001",
+   "name": "Home",
+   "route": "/",
+   "discovery_source": "startup_url",
+   "gate_steps": [
+    {
+     "step": 1,
+     "kind": "choice_click",
+     "url_before": "http://127.0.0.1:3050/",
+     "url_after": "http://127.0.0.1:3050/login"
+    },
+    {
+     "step": 2,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3050/login",
+     "fields_filled": 2,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3050/login"
+    },
+    {
+     "step": 3,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3050/login",
+     "fields_filled": 2,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3050/login"
+    },
+    {
+     "step": 4,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3050/login",
+     "fields_filled": 2,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3050/login"
+    },
+    {
+     "step": 5,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3050/login",
+     "fields_filled": 2,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3050/login"
+    },
+    {
+     "step": 6,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3050/login",
+     "fields_filled": 2,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3050/login"
+    },
+    {
+     "step": 7,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3050/login",
+     "fields_filled": 2,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3050/login"
+    },
+    {
+     "step": 8,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3050/login",
+     "fields_filled": 2,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3050/login"
+    },
+    {
+     "step": 9,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3050/login",
+     "fields_filled": 2,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3050/login"
+    }
+   ],
+   "gate_state": "STUCK",
+   "reachable": true,
+   "rendered": true,
+   "error_state": null,
+   "controls_detected": true,
+   "browser_verified": true,
+   "title": "Sign in \u00b7 ShipTrack",
+   "heading": "Welcome back",
+   "controls": {
+    "button": 1,
+    "input": 2,
+    "textarea": 0,
+    "select": 0,
+    "checkbox": 0,
+    "link": 5,
+    "menu": 1,
+    "table": 0,
+    "form": 1
+   },
+   "screenshot": "001_home.png",
+   "final_url": "http://127.0.0.1:3050/login"
+  }
+ ]
+}
