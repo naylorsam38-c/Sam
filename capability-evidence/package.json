@@ -1,0 +1,10 @@
+{
+  "name": "capability-evidence",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone looksLikeImplementation capability-evidence matcher. Not wired into any pipeline.",
+  "main": "looksLikeImplementation.js",
+  "scripts": {
+    "test": "node test/run-tests.js"
+  }
+}
