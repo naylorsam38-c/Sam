@@ -1,0 +1,15 @@
+{
+ "application": "APP-011",
+ "category": "bookmarks-archiving",
+ "repository_url": "https://github.com/sissbruecker/linkding",
+ "commit_sha": "27b7303baf41bb28babc610ac8eaa486e1ddfab5",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T11:43:35.208136+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE.txt",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "27037abcaa9a2a164eb9b2f26013b5fa8cd97f48d6195aa13d7de2b593a12612",
+ "discovery_source": "github-search-or-directory",
+ "stargazers_count": 11200
+}

@@ -1,15 +1,15 @@
 {
  "id": "APP-028",
- "name": "Formbricks",
+ "name": "Typebot",
  "category": "Forms & Surveys",
  "category_slug": "forms-surveys",
- "repository": "https://github.com/formbricks/formbricks",
+ "repository": "https://github.com/baptisteArno/typebot.io",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "Apache-2.0",
  "version": null,
- "commit": null,
+ "commit": "61056ff9a98082485add8111e901d3148ca358ef",
  "source_path": "applications/APP-028/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -85,5 +85,19 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Formbricks",
+   "repo": "https://github.com/formbricks/formbricks",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Typebot",
+   "repo": "https://github.com/baptisteArno/typebot.io",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

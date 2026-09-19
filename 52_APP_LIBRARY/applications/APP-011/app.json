@@ -1,15 +1,15 @@
 {
  "id": "APP-011",
- "name": "linkwarden",
+ "name": "linkding",
  "category": "Bookmarks & Archiving",
  "category_slug": "bookmarks-archiving",
- "repository": "https://github.com/linkwarden/linkwarden",
+ "repository": "https://github.com/sissbruecker/linkding",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "27b7303baf41bb28babc610ac8eaa486e1ddfab5",
  "source_path": "applications/APP-011/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -30,5 +30,19 @@
    "description": "Self-hosted bookmark manager that is designed be to be minimal, fast, and easy to set up using Docker."
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "linkwarden",
+   "repo": "https://github.com/linkwarden/linkwarden",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "linkding",
+   "repo": "https://github.com/sissbruecker/linkding",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

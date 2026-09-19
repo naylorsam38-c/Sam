@@ -5,11 +5,11 @@
  "category_slug": "authentication",
  "repository": "https://github.com/firezone/firezone",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "Apache-2.0",
  "version": null,
- "commit": null,
+ "commit": "f59d5b8b1981fe49257ca9fba91418f0d9f8ac41",
  "source_path": "applications/APP-008/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -198,5 +198,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Firezone",
+   "repo": "https://github.com/firezone/firezone",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

@@ -5,11 +5,11 @@
  "category_slug": "hosting-control-panel",
  "repository": "https://github.com/Websoft9/websoft9",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "LGPL",
  "version": null,
- "commit": null,
+ "commit": "112d07a4719fb233feaf3ef3a89fc9df42c2a30c",
  "source_path": "applications/APP-030/source",
- "status": "DISCOVERED",
+ "status": "LICENCE_UNCLEAR",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -22,5 +22,13 @@
    "description": "Applications self-hosting and DevOps platform for running open source, web-based linux Panel of lite PaaS."
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "websoft9",
+   "repo": "https://github.com/Websoft9/websoft9",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says LGPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  }
+ ]
 }

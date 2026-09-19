@@ -5,11 +5,11 @@
  "category_slug": "devops",
  "repository": "https://github.com/theonedev/onedev",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "aef745b5fd5a14b32981a99e763bc75bfe0cbee5",
  "source_path": "applications/APP-023/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -56,5 +56,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "OneDev",
+   "repo": "https://github.com/theonedev/onedev",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

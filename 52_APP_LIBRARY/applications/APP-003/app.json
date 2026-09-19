@@ -1,15 +1,15 @@
 {
  "id": "APP-003",
- "name": "LobeHub",
+ "name": "Home Assistant",
  "category": "AI Assistants",
  "category_slug": "ai-assistants",
- "repository": "https://github.com/lobehub/lobehub",
+ "repository": "https://github.com/home-assistant/core",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "Apache-2.0",
  "version": null,
- "commit": null,
+ "commit": "4a6b3a2d7e7301f7e38b0c9afe0cf54063dff208",
  "source_path": "applications/APP-003/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -155,5 +155,19 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "LobeHub",
+   "repo": "https://github.com/lobehub/lobehub",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says UNRECOGNISED, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Home Assistant",
+   "repo": "https://github.com/home-assistant/core",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

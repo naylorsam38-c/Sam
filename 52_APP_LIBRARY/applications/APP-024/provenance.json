@@ -1,0 +1,15 @@
+{
+ "application": "APP-024",
+ "category": "digital-signiture",
+ "repository_url": "https://github.com/24eme/signaturepdf",
+ "commit_sha": "9e2811af332082ecbab13d21ffb24cc59e018273",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T11:45:08.571632+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "AGPL-3.0",
+ "licence_allowed": false,
+ "source_checksum_sha256": "111b40062317d187b216a472586c005e5fdd017d17bcd2f2e6874e5aa019fc98",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 831
+}

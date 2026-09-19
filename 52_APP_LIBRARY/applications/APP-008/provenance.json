@@ -1,0 +1,15 @@
+{
+ "application": "APP-008",
+ "category": "authentication",
+ "repository_url": "https://github.com/firezone/firezone",
+ "commit_sha": "f59d5b8b1981fe49257ca9fba91418f0d9f8ac41",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:42:58.450000+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "Apache-2.0",
+ "licence_allowed": true,
+ "source_checksum_sha256": "2c4bbc9ea94bd2c1ef3088500a871896fd8afcafeb3b4a638c64286e9c97328f",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 9096
+}

@@ -5,11 +5,11 @@
  "category_slug": "ai-development",
  "repository": "https://github.com/langfuse/langfuse",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "ef0add7b2598200bd44573178d9d1cc5f7cc770b",
  "source_path": "applications/APP-006/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -30,5 +30,13 @@
    "description": "Open Source AI Platform - AI Chat with advanced features that works with every LLM."
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "langfuse",
+   "repo": "https://github.com/langfuse/langfuse",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

@@ -1,0 +1,15 @@
+{
+ "application": "APP-001",
+ "category": "ab-testing-experimentation",
+ "repository_url": "https://github.com/Flagsmith/flagsmith",
+ "commit_sha": "190c645d83d11f627a241cd4e5540d0a26ad73ba",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:41:33.184207+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE.md",
+ "licence_detected": "BSD-3-Clause",
+ "licence_allowed": true,
+ "source_checksum_sha256": "a79dfe695c555a895a8da445222d7bd0e0ccfdfff9076eaa63c4df6e760f0637",
+ "discovery_source": "github-search-or-directory",
+ "stargazers_count": 6561
+}

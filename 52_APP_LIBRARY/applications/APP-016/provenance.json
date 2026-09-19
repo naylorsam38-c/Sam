@@ -1,0 +1,15 @@
+{
+ "application": "APP-016",
+ "category": "community",
+ "repository_url": "https://github.com/hoppscotch/hoppscotch",
+ "commit_sha": "d86e59f6e9574c69f01b300691b9f4396eeb38d2",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:43:59.186367+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "56eb2409faf3034af087b607f9d0a100df1d6d0ed95597d28d466457788cc08a",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 80347
+}

@@ -5,11 +5,11 @@
  "category_slug": "ab-testing-experimentation",
  "repository": "https://github.com/Flagsmith/flagsmith",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "BSD-3-Clause",
  "version": null,
- "commit": null,
+ "commit": "190c645d83d11f627a241cd4e5540d0a26ad73ba",
  "source_path": "applications/APP-001/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -44,5 +44,13 @@
    "description": "Enterprise-grade feature flag platform that you can self-host."
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "flagsmith",
+   "repo": "https://github.com/Flagsmith/flagsmith",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

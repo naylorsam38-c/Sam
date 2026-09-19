@@ -5,11 +5,11 @@
  "category_slug": "ai-design-tools",
  "repository": "https://github.com/penpot/penpot",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MPL-2.0",
  "version": null,
- "commit": null,
+ "commit": "b402637fe4c35a31eac4007356d3a750ba6187c8",
  "source_path": "applications/APP-005/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -22,5 +22,13 @@
    "description": "Penpot: The open-source design platform for Product teams that need scalable collaboration."
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "penpot",
+   "repo": "https://github.com/penpot/penpot",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

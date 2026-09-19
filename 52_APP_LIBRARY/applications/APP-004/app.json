@@ -5,11 +5,11 @@
  "category_slug": "ai-code-assistants",
  "repository": "https://github.com/TabbyML/tabby",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "Apache-2.0",
  "version": null,
- "commit": null,
+ "commit": "21b29048d7bcf6b94f9f482f2d0fd05efadfd19f",
  "source_path": "applications/APP-004/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -22,5 +22,13 @@
    "description": "Self-hosted AI coding assistant."
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "tabby",
+   "repo": "https://github.com/TabbyML/tabby",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

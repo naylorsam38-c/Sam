@@ -1,15 +1,15 @@
 {
  "id": "APP-016",
- "name": "Discourse",
+ "name": "Hoppscotch Community Edition",
  "category": "Community",
  "category_slug": "community",
- "repository": "https://github.com/discourse/discourse",
+ "repository": "https://github.com/hoppscotch/hoppscotch",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "d86e59f6e9574c69f01b300691b9f4396eeb38d2",
  "source_path": "applications/APP-016/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -227,5 +227,19 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Discourse",
+   "repo": "https://github.com/discourse/discourse",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Hoppscotch Community Edition",
+   "repo": "https://github.com/hoppscotch/hoppscotch",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

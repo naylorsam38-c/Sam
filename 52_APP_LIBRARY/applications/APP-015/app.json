@@ -5,11 +5,11 @@
  "category_slug": "collaboration",
  "repository": "https://github.com/go-gitea/gitea",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2",
  "source_path": "applications/APP-015/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -156,5 +156,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Gitea",
+   "repo": "https://github.com/go-gitea/gitea",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

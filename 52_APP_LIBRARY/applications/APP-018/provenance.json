@@ -1,0 +1,15 @@
+{
+ "application": "APP-018",
+ "category": "customer-support",
+ "repository_url": "https://github.com/chatwoot/chatwoot",
+ "commit_sha": "f7f7754511df38c33455d2a968f7541e82d15e5b",
+ "branch": "develop",
+ "download_timestamp": "2026-09-19T11:44:24.977776+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "85e916189765a58d39d08a75e14133cbdc2af2c76243465ac04be7478dffa240",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 36947
+}

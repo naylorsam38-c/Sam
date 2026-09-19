@@ -5,11 +5,11 @@
  "category_slug": "ai-agents",
  "repository": "https://github.com/Mintplex-Labs/anything-llm",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "da6685510ce691b2e1be417f739c7dffee3cfc49",
  "source_path": "applications/APP-002/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -56,5 +56,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "AnythingLLM",
+   "repo": "https://github.com/Mintplex-Labs/anything-llm",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

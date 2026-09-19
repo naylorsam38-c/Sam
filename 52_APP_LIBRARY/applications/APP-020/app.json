@@ -5,11 +5,11 @@
  "category_slug": "databases",
  "repository": "https://github.com/mindsdb/mindshub",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "780bbcbb8b9367c667e9b6af2aecc8277f24c0ad",
  "source_path": "applications/APP-020/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -126,5 +126,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "MindsDB",
+   "repo": "https://github.com/mindsdb/mindshub",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

@@ -5,11 +5,11 @@
  "category_slug": "ecommerce",
  "repository": "https://github.com/bagisto/bagisto",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "9beff85ece6fe13378a97e6f84765b50647d3327",
  "source_path": "applications/APP-025/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -228,5 +228,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Bagisto",
+   "repo": "https://github.com/bagisto/bagisto",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

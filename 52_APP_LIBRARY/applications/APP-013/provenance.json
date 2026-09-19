@@ -1,0 +1,15 @@
+{
+ "application": "APP-013",
+ "category": "cms",
+ "repository_url": "https://github.com/strapi/strapi",
+ "commit_sha": "d83af0410bf31b034b01757729f2231862ee5e87",
+ "branch": "develop",
+ "download_timestamp": "2026-09-19T11:43:40.618288+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "00b5aea10adff5da61ed950b46867a11c1011a23e85aab785a1fbda2b18a4582",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 73191
+}

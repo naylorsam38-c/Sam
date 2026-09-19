@@ -1,0 +1,15 @@
+{
+ "application": "APP-026",
+ "category": "erp",
+ "repository_url": "https://github.com/grocy/grocy",
+ "commit_sha": "41206cb90154e0d17d3e108cc1f182b94fdb465d",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T11:45:41.910510+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE.md",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "d0f73b4bb783d587e3bd25641d3a8fad5244ab8d462d0c69a40932218892b649",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 9513
+}

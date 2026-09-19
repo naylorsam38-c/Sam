@@ -1,0 +1,15 @@
+{
+ "application": "APP-030",
+ "category": "hosting-control-panel",
+ "repository_url": "https://github.com/Websoft9/websoft9",
+ "commit_sha": "112d07a4719fb233feaf3ef3a89fc9df42c2a30c",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:46:23.185182+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE.md",
+ "licence_detected": "LGPL",
+ "licence_allowed": false,
+ "source_checksum_sha256": "855351a04084afcfc4a09e61ae398d0a40b83995d7cff81449b96cbf09979556",
+ "discovery_source": "github-search-or-directory",
+ "stargazers_count": 2126
+}

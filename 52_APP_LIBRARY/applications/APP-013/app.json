@@ -5,11 +5,11 @@
  "category_slug": "cms",
  "repository": "https://github.com/strapi/strapi",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "d83af0410bf31b034b01757729f2231862ee5e87",
  "source_path": "applications/APP-013/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -224,5 +224,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Strapi",
+   "repo": "https://github.com/strapi/strapi",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

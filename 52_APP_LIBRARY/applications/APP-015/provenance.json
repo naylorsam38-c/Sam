@@ -1,0 +1,15 @@
+{
+ "application": "APP-015",
+ "category": "collaboration",
+ "repository_url": "https://github.com/go-gitea/gitea",
+ "commit_sha": "2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:43:45.511458+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "674a7615f7783e098574c2b12a53999a5ac4ecd316d5e8780248e25c9819650e",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 58066
+}

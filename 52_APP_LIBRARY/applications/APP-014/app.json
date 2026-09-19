@@ -5,11 +5,11 @@
  "category_slug": "code-editors",
  "repository": "https://github.com/ekzhang/rustpad",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "54e4a9383c84d7317af42a7ddb177ce8bcba058d",
  "source_path": "applications/APP-014/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -24,5 +24,13 @@
    "description": "Efficient and minimal collaborative code editor, self-hosted, no database required."
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "rustpad",
+   "repo": "https://github.com/ekzhang/rustpad",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

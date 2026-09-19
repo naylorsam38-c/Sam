@@ -5,11 +5,11 @@
  "category_slug": "customer-support",
  "repository": "https://github.com/chatwoot/chatwoot",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "f7f7754511df38c33455d2a968f7541e82d15e5b",
  "source_path": "applications/APP-018/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -128,5 +128,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Chatwoot",
+   "repo": "https://github.com/chatwoot/chatwoot",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

@@ -5,11 +5,11 @@
  "category_slug": "browser",
  "repository": "https://github.com/m1k1o/neko",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "Apache-2.0",
  "version": null,
- "commit": null,
+ "commit": "ddf2787c5e3891f4578da5552436694a94f1ae22",
  "source_path": "applications/APP-012/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": false,
  "manual_override_reason": "automated pick (code-server) matched 'browser' as a stray word in 'VS Code in the browser' - it's a web IDE, not a browser app",
  "discovery_candidates": [
@@ -224,5 +224,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Neko",
+   "repo": "https://github.com/m1k1o/neko",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

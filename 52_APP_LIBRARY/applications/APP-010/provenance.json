@@ -1,0 +1,15 @@
+{
+ "application": "APP-010",
+ "category": "blogging",
+ "repository_url": "https://github.com/TryGhost/Ghost",
+ "commit_sha": "8e2eb8abfccdc4c373d5d9b6192b7ca4aba5809d",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:43:32.679827+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "c9af317ad4036d7104c24f7ae6ea68a9d61fb15ad63762ddc4e4ebde7535009c",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 55352
+}

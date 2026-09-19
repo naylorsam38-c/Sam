@@ -1,0 +1,15 @@
+{
+ "application": "APP-020",
+ "category": "databases",
+ "repository_url": "https://github.com/mindsdb/mindshub",
+ "commit_sha": "780bbcbb8b9367c667e9b6af2aecc8277f24c0ad",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:44:49.166685+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "988969ab9d2de88c3f6808df52fba8e8f5489b0f12475beed552a60fb05fbfba",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 39749
+}
