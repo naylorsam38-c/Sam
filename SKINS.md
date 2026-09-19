@@ -14,14 +14,14 @@ faith later:
   is unmodified from Sam's upload. `skins-engine.js` is a byte-for-byte JS port of it,
   verified in `test_frontdoor.py` Sections A/B against every one of those 172 files *and*
   the full 360-hue x 4-look input range (1440 sets) -- not a sample.
-- **`library.json`** -- the real shelf catalog: 11 real, named, open-source self-hosted apps
+- **`library.json`** -- the real shelf catalog: 12 real, named, open-source self-hosted apps
   (Flagsmith, langfuse, Chatwoot, code-server, DocuSeal, Uptime Kuma, Nginx Proxy Manager,
-  Memos, Infisical, Super Productivity, Galene), copied verbatim from their own `app.json`
-  entries in Sam's 52_APP_LIBRARY acquisition pipeline (name, category, repository, real
-  screenshot). None of them shipped their actual page source through this pipeline -- only
+  Appsmith, Memos, Infisical, Super Productivity, Galene), copied verbatim from their own
+  `app.json` entries in Sam's 52_APP_LIBRARY acquisition pipeline (name, category, repository,
+  real screenshot). None of them shipped their actual page source through this pipeline -- only
   catalog metadata and a screenshot -- so every entry is marked `"family": ""` (no
   `render_css.py`-style CSS family) in `library.json`, per the rule below. That's a separate
-  question from whether the app itself has been proven to actually run: **9 of the 11 have
+  question from whether the app itself has been proven to actually run: **10 of the 12 have
   been** -- real source cloned, built, and driven through their real UI in a real browser.
   See `shelf-integrations/STATUS.md` for the full per-app tally, and
   `shelf-integrations/productivity/` for the one that goes further still (the skin engine's
@@ -138,9 +138,9 @@ check for itself rather than assume.
 separate from `test_frontdoor.py`'s 96 tests because it needs a live build already running
 (too heavy for every commit) and skips cleanly rather than failing when one isn't reachable.
 
-## Proven running: 9 of 11 shelf apps (`shelf-integrations/STATUS.md`)
+## Proven running: 10 of 12 shelf apps (`shelf-integrations/STATUS.md`)
 
-Beyond Super Productivity's full skin integration, 8 more apps were cloned, built with real
+Beyond Super Productivity's full skin integration, 9 more apps were cloned, built with real
 native infrastructure (no docker -- image pulls are blocked here, so this runs on
 apt-installed Postgres/Redis/pgvector, Go, Ruby, Node), and driven through a real signup or
 setup flow into their real dashboard, with mobile-viewport overflow checked and the console
@@ -151,14 +151,18 @@ silently substituted). Full per-app mechanism notes, real bugs found along the w
 own committed SQLite schema has Postgres-only SQL), and the exact fixes applied are in
 `shelf-integrations/STATUS.md`.
 
-**Flagsmith is genuinely blocked**: its `pyproject.toml` requires `flagsmith-private` from a
-non-public package index -- a real gap in the OSS repo, not something to work around by
-stripping a real dependency. **code-server is deprioritized**: a reproducible bug in its own
-npm postinstall pipeline in this sandbox, lower-value to chase than the business apps.
+**Flagsmith and Appsmith are genuinely blocked**: Flagsmith's `pyproject.toml` requires
+`flagsmith-private` from a non-public package index; Appsmith's entire config store is built
+on Spring Data reactive MongoDB with no Postgres/MySQL fallback in the CE codebase, and
+MongoDB itself is unreachable here (no apt package, official repo unreachable, generic tarball
+blocked by egress policy). Both are real gaps in the OSS repo or this sandbox's network
+policy, not something to work around by faking a datastore or stripping a real dependency.
+**code-server is deprioritized**: a reproducible bug in its own npm postinstall pipeline in
+this sandbox, lower-value to chase than the business apps.
 
 ## Not yet proven
 
-- None of the 11 shelf apps' actual page markup has a `render_css.py`-style CSS family yet --
+- None of the 12 shelf apps' actual page markup has a `render_css.py`-style CSS family yet --
   "proven running" (above) and "measured for a full stylesheet skin" are different bars. Only
   Super Productivity has gone further, via its own real theming service rather than a CSS
   family (see above).

@@ -11,20 +11,21 @@ JS errors throughout.
 | ID | App | Status | Notes |
 |---|---|---|---|
 | APP-001 | Flagsmith | **Blocked** | `pyproject.toml` requires `flagsmith-private`, a mandatory dependency on a private package index. A real gap in the public repo, not fixable here. |
-| APP-006 | langfuse | Proven running | Current main (v3/v4) needs ClickHouse + MinIO/S3, both unreachable here. Used the last Postgres-only release, tag `v2.95.12` -- a disclosed, documented version choice. |
+| APP-006 | langfuse | Proven running | Current main (v3/v4) needs ClickHouse + MinIO/S3, both unreachable here. Used the last Postgres-only release, tag `v2.95.12` -- a disclosed, documented version choice. Real signup, real 4-step org/project setup wizard, real dashboard. See `shelf-integrations/langfuse/README.md`. |
 | APP-018 | Chatwoot | Proven running | Rails + Vue/Vite + native Postgres (pgvector) + Redis. |
 | APP-022 | code-server | Deprioritized | VS Code's own postinstall pipeline has a real, reproducible bug in this sandbox (see `library.json`'s entry for the exact mechanism). Lower priority than the business/self-hosted apps. |
 | APP-024 | DocuSeal | Proven running | Rails + native Postgres. Its own committed SQLite schema has Postgres-only SQL (`::text`, `ANY(ARRAY[...])`) -- a real bug in the app, found while testing, not an environment issue. |
 | APP-038 | Uptime Kuma | Proven running | Node + bundled SQLite, no external DB. |
 | APP-039 | Nginx Proxy Manager | Proven running | Node backend (SQLite) + Vue frontend, served behind a real nginx reverse proxy configured this session (the app's own production topology). |
+| APP-040 | Appsmith | **Blocked** | Core config store is Spring Data reactive MongoDB (`ReactiveMongoRepository`/`@Document` across 7 backend files); no Postgres/MySQL fallback in CE. MongoDB itself is unreachable here three separate ways (no apt package, `repo.mongodb.org` unreachable, `fastdl.mongodb.org` tarball blocked by egress policy). See `shelf-integrations/appsmith/README.md`. |
 | APP-041 | Memos | Proven running | Self-contained Go binary; embeds its own React frontend + SQLite. |
 | APP-042 | Infisical | Proven running | Node/TS backend + React frontend + native Postgres/Redis, served behind nginx. |
 | APP-044 | Super Productivity | Proven, real skin integration | See `shelf-integrations/productivity/README.md` -- the deepest integration: our skin engine's colour was driven through the app's own real theming service, not just "it boots". |
 | APP-051 | Galene | Proven running | Self-contained Go binary; embeds its own frontend, built-in TURN server. Connected to a real room with a real op/presenter login and Chromium's fake camera/mic device. |
 
-**9 of 11 admitted apps proven running end-to-end. 1 genuinely blocked
-(external, not fixable here). 1 deprioritized (lower relevance, real but
-lower-value fix needed).**
+**10 of 12 admitted apps proven running end-to-end. 2 genuinely blocked
+(both external dependencies unreachable here, not fixable in this sandbox).
+1 deprioritized (lower relevance, real but lower-value fix needed).**
 
 ## What "proven running" means here, concretely
 
