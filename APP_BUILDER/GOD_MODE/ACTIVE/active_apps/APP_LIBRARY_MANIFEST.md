@@ -25,3 +25,11 @@ ai_creative_studio, developer_platform, digital_publishing, document_storage_dem
 ## Aggregate figures (current, live)
 
 300 capabilities across 49 projects, dependency graph CLEAN (0/0/0/0), 329/329 full-library stress test, 30/30 functional tests, `note_taking_pilot_security_tests.py` 64/64 (re-run separately, not one of the 8 orchestrated sections).
+
+## Django/PostgreSQL Attach-Point Harvest — Library Index
+
+Entries below are written only by pack/0_harvest/hunt.py's write_library_index(), one row per ADMITTED category winner (Section 25). A category recorded NONE ADMITTED gets no row.
+
+| # | Category | Exemplar | Feature match | Repository | Commit | Licence | Attach points |
+|---|----------|----------|----------------|------------|--------|---------|---------------|
+| 1 | Todo List | Todoist | 0.53 | https://github.com/CrowderSoup/vTodo | 56745365951cda11f9958bc0e9e6c9941985ea78 | MIT | 58 |

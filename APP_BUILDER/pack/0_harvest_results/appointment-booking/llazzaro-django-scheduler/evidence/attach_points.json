@@ -1,0 +1,1087 @@
+{
+  "usable_events": [],
+  "usable_slots": [
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.head_title",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.tab_id",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:5, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.extra_head",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:6, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:10, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.head_title",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:6",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.extra_head",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:12",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:29",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.footer",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:34",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_month.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_month.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_month.html:4, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.create_event.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/create_event.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/create_event.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_tri_month.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_tri_month.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_tri_month.html:3, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.delete_event.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/delete_event.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/delete_event.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar.html:5, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_year.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_year.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_year.html:3, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.occurrence.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/occurrence.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/occurrence.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_day.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_day.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_day.html:4, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.edit_occurrence.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/edit_occurrence.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/edit_occurrence.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_week.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_week.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_week.html:4, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.cancel_occurrence.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/cancel_occurrence.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/cancel_occurrence.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_compact_month.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_compact_month.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_compact_month.html:3, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.event.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/event.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/event.html:4, schedule/views.py",
+      "status": "USABLE"
+    }
+  ],
+  "usable_data": [
+    {
+      "name": "schedule.Rule",
+      "kind": "DATA",
+      "source_file": "schedule/models/rules.py",
+      "source_symbol": "Rule",
+      "operations": "READ, WRITE",
+      "payload": "name, description, frequency, params",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/rules.py:31, tests/test_periods.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.Calendar",
+      "kind": "DATA",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "Calendar",
+      "operations": "READ, WRITE",
+      "payload": "name, slug",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:106, tests/test_perms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.CalendarRelation",
+      "kind": "DATA",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "CalendarRelation",
+      "operations": "READ",
+      "payload": "calendar, content_type, object_id, distinction, inheritable",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:197, tests/test_calendar.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.Event",
+      "kind": "DATA",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Event",
+      "operations": "READ, WRITE",
+      "payload": "start, end, title, description, creator, created_on, updated_on, rule, end_recurring_period, calendar, color_event",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:47, tests/test_perms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.EventRelation",
+      "kind": "DATA",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "EventRelation",
+      "operations": "READ",
+      "payload": "event, content_type, object_id, distinction",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:544, tests/test_event.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.Occurrence",
+      "kind": "DATA",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Occurrence",
+      "operations": "READ, WRITE",
+      "payload": "event, title, description, start, end, cancelled, original_start, original_end, created_on, updated_on",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:582, tests/test_perms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "usable_total": [
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.head_title",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.tab_id",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:5, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.extra_head",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:6, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:10, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.head_title",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:6",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.extra_head",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:12",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:29",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.footer",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:34",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_month.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_month.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_month.html:4, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.create_event.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/create_event.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/create_event.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_tri_month.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_tri_month.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_tri_month.html:3, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.delete_event.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/delete_event.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/delete_event.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar.html:5, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_year.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_year.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_year.html:3, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.occurrence.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/occurrence.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/occurrence.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_day.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_day.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_day.html:4, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.edit_occurrence.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/edit_occurrence.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/edit_occurrence.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_week.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_week.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_week.html:4, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.cancel_occurrence.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/cancel_occurrence.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/cancel_occurrence.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_compact_month.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_compact_month.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_compact_month.html:3, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.event.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/event.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/event.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "schedule.Rule",
+      "kind": "DATA",
+      "source_file": "schedule/models/rules.py",
+      "source_symbol": "Rule",
+      "operations": "READ, WRITE",
+      "payload": "name, description, frequency, params",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/rules.py:31, tests/test_periods.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.Calendar",
+      "kind": "DATA",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "Calendar",
+      "operations": "READ, WRITE",
+      "payload": "name, slug",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:106, tests/test_perms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.CalendarRelation",
+      "kind": "DATA",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "CalendarRelation",
+      "operations": "READ",
+      "payload": "calendar, content_type, object_id, distinction, inheritable",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:197, tests/test_calendar.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.Event",
+      "kind": "DATA",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Event",
+      "operations": "READ, WRITE",
+      "payload": "start, end, title, description, creator, created_on, updated_on, rule, end_recurring_period, calendar, color_event",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:47, tests/test_perms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.EventRelation",
+      "kind": "DATA",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "EventRelation",
+      "operations": "READ",
+      "payload": "event, content_type, object_id, distinction",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:544, tests/test_event.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.Occurrence",
+      "kind": "DATA",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Occurrence",
+      "operations": "READ, WRITE",
+      "payload": "event, title, description, start, end, cancelled, original_start, original_end, created_on, updated_on",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:582, tests/test_perms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "all_measured": [
+    {
+      "name": "schedule.Rule.post_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/rules.py",
+      "source_symbol": "Rule",
+      "payload": "name, description, frequency, params",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/rules.py:31 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Rule.post_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/rules.py",
+      "source_symbol": "Rule",
+      "payload": "name, description, frequency, params",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/rules.py:31 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Rule.pre_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/rules.py",
+      "source_symbol": "Rule",
+      "payload": "name, description, frequency, params",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/rules.py:31 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Rule.pre_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/rules.py",
+      "source_symbol": "Rule",
+      "payload": "name, description, frequency, params",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/rules.py:31 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Calendar.post_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "Calendar",
+      "payload": "name, slug",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:106 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Calendar.post_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "Calendar",
+      "payload": "name, slug",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:106 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Calendar.pre_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "Calendar",
+      "payload": "name, slug",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:106 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Calendar.pre_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "Calendar",
+      "payload": "name, slug",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:106 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.CalendarRelation.post_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "CalendarRelation",
+      "payload": "calendar, content_type, object_id, distinction, inheritable",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:197 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.CalendarRelation.post_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "CalendarRelation",
+      "payload": "calendar, content_type, object_id, distinction, inheritable",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:197 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.CalendarRelation.pre_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "CalendarRelation",
+      "payload": "calendar, content_type, object_id, distinction, inheritable",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:197 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.CalendarRelation.pre_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "CalendarRelation",
+      "payload": "calendar, content_type, object_id, distinction, inheritable",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:197 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Event.post_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Event",
+      "payload": "start, end, title, description, creator, created_on, updated_on, rule, end_recurring_period, calendar, color_event",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:47 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Event.post_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Event",
+      "payload": "start, end, title, description, creator, created_on, updated_on, rule, end_recurring_period, calendar, color_event",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:47 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Event.pre_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Event",
+      "payload": "start, end, title, description, creator, created_on, updated_on, rule, end_recurring_period, calendar, color_event",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:47 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Event.pre_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Event",
+      "payload": "start, end, title, description, creator, created_on, updated_on, rule, end_recurring_period, calendar, color_event",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:47 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.EventRelation.post_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "EventRelation",
+      "payload": "event, content_type, object_id, distinction",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:544 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.EventRelation.post_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "EventRelation",
+      "payload": "event, content_type, object_id, distinction",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:544 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.EventRelation.pre_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "EventRelation",
+      "payload": "event, content_type, object_id, distinction",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:544 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.EventRelation.pre_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "EventRelation",
+      "payload": "event, content_type, object_id, distinction",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:544 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Occurrence.post_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Occurrence",
+      "payload": "event, title, description, start, end, cancelled, original_start, original_end, created_on, updated_on",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:582 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Occurrence.post_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Occurrence",
+      "payload": "event, title, description, start, end, cancelled, original_start, original_end, created_on, updated_on",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:582 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Occurrence.pre_delete",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Occurrence",
+      "payload": "event, title, description, start, end, cancelled, original_start, original_end, created_on, updated_on",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:582 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "schedule.Occurrence.pre_save",
+      "kind": "EVENT",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Occurrence",
+      "payload": "event, title, description, start, end, cancelled, original_start, original_end, created_on, updated_on",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:582 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.head_title",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.tab_id",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:5, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.extra_head",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:6, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.fullcalendar.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/fullcalendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/fullcalendar.html:10, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.head_title",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:6",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.extra_head",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:12",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:29",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.base.footer",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/base.html:34",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.schedule.schedule_event_controls",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/profiles/schedule.html",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/profiles/schedule.html:25 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.schedule.schedule_add_event_link_label",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/profiles/schedule.html",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/profiles/schedule.html:49 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_month.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_month.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_month.html:4, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.create_event.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/create_event.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/create_event.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_tri_month.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_tri_month.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_tri_month.html:3, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.delete_event.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/delete_event.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/delete_event.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar.html:5, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_list.head_title",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_list.html",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_list.html:3 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_list.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_list.html",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_list.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_year.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_year.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_year.html:3, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.occurrence.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/occurrence.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/occurrence.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_day.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_day.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_day.html:4, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.edit_occurrence.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/edit_occurrence.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/edit_occurrence.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_week.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_week.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_week.html:4, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.cancel_occurrence.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/cancel_occurrence.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/cancel_occurrence.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.calendar_compact_month.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/calendar_compact_month.html",
+      "rendering_context": "schedule/urls.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/calendar_compact_month.html:3, schedule/urls.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "llazzaro__django-scheduler.event.body",
+      "kind": "SLOT",
+      "source_file": "schedule/templates/schedule/event.html",
+      "rendering_context": "schedule/views.py",
+      "implementation": "NATIVE",
+      "evidence": "schedule/templates/schedule/event.html:4, schedule/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "tests.ProxyCalendar",
+      "kind": "DATA",
+      "source_file": "tests/test_calendar.py",
+      "source_symbol": "ProxyCalendar",
+      "payload": "",
+      "implementation": "NATIVE",
+      "evidence": "tests/test_calendar.py:13 (model defined, no reference found outside its own file)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "schedule.Rule",
+      "kind": "DATA",
+      "source_file": "schedule/models/rules.py",
+      "source_symbol": "Rule",
+      "operations": "READ, WRITE",
+      "payload": "name, description, frequency, params",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/rules.py:31, tests/test_periods.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.Calendar",
+      "kind": "DATA",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "Calendar",
+      "operations": "READ, WRITE",
+      "payload": "name, slug",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:106, tests/test_perms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.CalendarRelation",
+      "kind": "DATA",
+      "source_file": "schedule/models/calendars.py",
+      "source_symbol": "CalendarRelation",
+      "operations": "READ",
+      "payload": "calendar, content_type, object_id, distinction, inheritable",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/calendars.py:197, tests/test_calendar.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.Event",
+      "kind": "DATA",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Event",
+      "operations": "READ, WRITE",
+      "payload": "start, end, title, description, creator, created_on, updated_on, rule, end_recurring_period, calendar, color_event",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:47, tests/test_perms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.EventRelation",
+      "kind": "DATA",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "EventRelation",
+      "operations": "READ",
+      "payload": "event, content_type, object_id, distinction",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:544, tests/test_event.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "schedule.Occurrence",
+      "kind": "DATA",
+      "source_file": "schedule/models/events.py",
+      "source_symbol": "Occurrence",
+      "operations": "READ, WRITE",
+      "payload": "event, title, description, start, end, cancelled, original_start, original_end, created_on, updated_on",
+      "implementation": "NATIVE",
+      "evidence": "schedule/models/events.py:582, tests/test_perms.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "counts": {
+    "usable_events": 0,
+    "usable_slots": 21,
+    "usable_data": 6,
+    "usable_total": 27
+  },
+  "extension_system": {
+    "evidence": [],
+    "plugin_authoring_docs_present": false,
+    "plugin_authoring_docs_location": ""
+  }
+}

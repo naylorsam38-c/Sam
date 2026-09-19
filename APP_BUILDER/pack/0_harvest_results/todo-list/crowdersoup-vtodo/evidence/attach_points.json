@@ -1,0 +1,2347 @@
+{
+  "usable_events": [],
+  "usable_slots": [
+    {
+      "name": "CrowderSoup__vTodo.login.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/login.html",
+      "rendering_context": "apps/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/login.html:5, apps/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.login.title",
+      "kind": "SLOT",
+      "source_file": "templates/login.html",
+      "rendering_context": "apps/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/login.html:6, apps/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.login.content",
+      "kind": "SLOT",
+      "source_file": "templates/login.html",
+      "rendering_context": "apps/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/login.html:8, apps/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.title",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:7",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:26",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.content",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:118",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.extra_scripts",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:121",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.invite_accept.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/teams/invite_accept.html",
+      "rendering_context": "apps/teams/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/teams/invite_accept.html:3, apps/teams/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.invite_accept.title",
+      "kind": "SLOT",
+      "source_file": "templates/teams/invite_accept.html",
+      "rendering_context": "apps/teams/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/teams/invite_accept.html:4, apps/teams/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.invite_accept.content",
+      "kind": "SLOT",
+      "source_file": "templates/teams/invite_accept.html",
+      "rendering_context": "apps/teams/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/teams/invite_accept.html:6, apps/teams/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.general.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/general.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/general.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.general.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/general.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/general.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/board.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/board.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/board.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/calendar.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/calendar.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/calendar.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.teams.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/teams.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/teams.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.teams.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/teams.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/teams.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.teams.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/teams.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/teams.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.api.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/api.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/api.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.api.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/api.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/api.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.api.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/api.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/api.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:3",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:6",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:8",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:35",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.dashboard.admin_title",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/dashboard.html",
+      "rendering_context": "apps/siteadmin/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/dashboard.html:3, apps/siteadmin/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.dashboard.admin_content",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/dashboard.html",
+      "rendering_context": "apps/siteadmin/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/dashboard.html:5, apps/siteadmin/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:3",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.title",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.admin_title",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.content",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:6",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.admin_content",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:20",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/boards/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/boards/board.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.title",
+      "kind": "SLOT",
+      "source_file": "templates/boards/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/boards/board.html:4, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.content",
+      "kind": "SLOT",
+      "source_file": "templates/boards/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/boards/board.html:6, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/calendar/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/calendar/calendar.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.title",
+      "kind": "SLOT",
+      "source_file": "templates/calendar/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/calendar/calendar.html:4, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.content",
+      "kind": "SLOT",
+      "source_file": "templates/calendar/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/calendar/calendar.html:6, apps/users/views.py",
+      "status": "USABLE"
+    }
+  ],
+  "usable_data": [
+    {
+      "name": "teams.Team",
+      "kind": "DATA",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "Team",
+      "operations": "READ, WRITE",
+      "payload": "name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:8, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "teams.TeamMembership",
+      "kind": "DATA",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamMembership",
+      "operations": "READ, WRITE",
+      "payload": "team, user, role, joined_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:16, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "teams.TeamInvite",
+      "kind": "DATA",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamInvite",
+      "operations": "READ",
+      "payload": "team, email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:37, apps/teams/admin.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "emailauth.EmailIdentity",
+      "kind": "DATA",
+      "source_file": "apps/emailauth/models.py",
+      "source_symbol": "EmailIdentity",
+      "operations": "READ, WRITE",
+      "payload": "user, email, verified, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/emailauth/models.py:5, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "tasks.TaskStatus",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskStatus",
+      "operations": "READ, WRITE",
+      "payload": "user, team, name, slug, order, color, is_done",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:17, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "tasks.Task",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "Task",
+      "operations": "READ, WRITE",
+      "payload": "user, team, assignee, title, notes, status, previous_status, order, due_date, due_time, duration_minutes, tags, is_archived, recurrence_days, recurrence_from, created_at, updated_at, completed_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:71, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "tasks.TaskComment",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskComment",
+      "operations": "READ, WRITE",
+      "payload": "task, body, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:157, apps/boards/views.py (write path)",
+      "status": "USABLE",
+      "interface": "DRF"
+    },
+    {
+      "name": "tasks.TaskActivity",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskActivity",
+      "operations": "READ, WRITE",
+      "payload": "task, actor, field, old_value, new_value, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:169, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "siteadmin.SiteSettings",
+      "kind": "DATA",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteSettings",
+      "operations": "READ, WRITE",
+      "payload": "signup_mode",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:8, apps/siteadmin/tests/test_selectors.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "siteadmin.SiteInvite",
+      "kind": "DATA",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteInvite",
+      "operations": "READ",
+      "payload": "email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:32, apps/siteadmin/selectors.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "integrations.ExternalLink",
+      "kind": "DATA",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "ExternalLink",
+      "operations": "READ, WRITE",
+      "payload": "task, provider, external_id, external_url, synced_at, metadata",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:7, apps/integrations/google_calendar/sync.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "integrations.GoogleCalendarConnection",
+      "kind": "DATA",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "GoogleCalendarConnection",
+      "operations": "READ, WRITE",
+      "payload": "user, calendar_id, refresh_token_encrypted, is_active, created_at, last_synced_at, last_sync_error",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:37, apps/users/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "boards.Board",
+      "kind": "DATA",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Board",
+      "operations": "READ, WRITE",
+      "payload": "user, team, name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:5, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "boards.Column",
+      "kind": "DATA",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Column",
+      "operations": "READ, WRITE",
+      "payload": "board, label, filter_config, order, color",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:50, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "boards.SavedFilter",
+      "kind": "DATA",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "SavedFilter",
+      "operations": "READ, WRITE",
+      "payload": "board, name, filter_config, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:77, apps/boards/tests/test_calendar_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "usable_total": [
+    {
+      "name": "CrowderSoup__vTodo.login.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/login.html",
+      "rendering_context": "apps/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/login.html:5, apps/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.login.title",
+      "kind": "SLOT",
+      "source_file": "templates/login.html",
+      "rendering_context": "apps/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/login.html:6, apps/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.login.content",
+      "kind": "SLOT",
+      "source_file": "templates/login.html",
+      "rendering_context": "apps/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/login.html:8, apps/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.title",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:7",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:26",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.content",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:118",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.extra_scripts",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:121",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.invite_accept.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/teams/invite_accept.html",
+      "rendering_context": "apps/teams/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/teams/invite_accept.html:3, apps/teams/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.invite_accept.title",
+      "kind": "SLOT",
+      "source_file": "templates/teams/invite_accept.html",
+      "rendering_context": "apps/teams/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/teams/invite_accept.html:4, apps/teams/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.invite_accept.content",
+      "kind": "SLOT",
+      "source_file": "templates/teams/invite_accept.html",
+      "rendering_context": "apps/teams/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/teams/invite_accept.html:6, apps/teams/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.general.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/general.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/general.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.general.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/general.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/general.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/board.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/board.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/board.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/calendar.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/calendar.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/calendar.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.teams.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/teams.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/teams.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.teams.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/teams.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/teams.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.teams.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/teams.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/teams.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.api.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/api.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/api.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.api.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/api.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/api.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.api.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/api.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/api.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:3",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:6",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:8",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:35",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.dashboard.admin_title",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/dashboard.html",
+      "rendering_context": "apps/siteadmin/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/dashboard.html:3, apps/siteadmin/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.dashboard.admin_content",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/dashboard.html",
+      "rendering_context": "apps/siteadmin/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/dashboard.html:5, apps/siteadmin/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:3",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.title",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.admin_title",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.content",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:6",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.admin_content",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:20",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/boards/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/boards/board.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.title",
+      "kind": "SLOT",
+      "source_file": "templates/boards/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/boards/board.html:4, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.content",
+      "kind": "SLOT",
+      "source_file": "templates/boards/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/boards/board.html:6, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/calendar/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/calendar/calendar.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.title",
+      "kind": "SLOT",
+      "source_file": "templates/calendar/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/calendar/calendar.html:4, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.content",
+      "kind": "SLOT",
+      "source_file": "templates/calendar/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/calendar/calendar.html:6, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "teams.Team",
+      "kind": "DATA",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "Team",
+      "operations": "READ, WRITE",
+      "payload": "name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:8, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "teams.TeamMembership",
+      "kind": "DATA",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamMembership",
+      "operations": "READ, WRITE",
+      "payload": "team, user, role, joined_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:16, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "teams.TeamInvite",
+      "kind": "DATA",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamInvite",
+      "operations": "READ",
+      "payload": "team, email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:37, apps/teams/admin.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "emailauth.EmailIdentity",
+      "kind": "DATA",
+      "source_file": "apps/emailauth/models.py",
+      "source_symbol": "EmailIdentity",
+      "operations": "READ, WRITE",
+      "payload": "user, email, verified, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/emailauth/models.py:5, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "tasks.TaskStatus",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskStatus",
+      "operations": "READ, WRITE",
+      "payload": "user, team, name, slug, order, color, is_done",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:17, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "tasks.Task",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "Task",
+      "operations": "READ, WRITE",
+      "payload": "user, team, assignee, title, notes, status, previous_status, order, due_date, due_time, duration_minutes, tags, is_archived, recurrence_days, recurrence_from, created_at, updated_at, completed_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:71, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "tasks.TaskComment",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskComment",
+      "operations": "READ, WRITE",
+      "payload": "task, body, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:157, apps/boards/views.py (write path)",
+      "status": "USABLE",
+      "interface": "DRF"
+    },
+    {
+      "name": "tasks.TaskActivity",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskActivity",
+      "operations": "READ, WRITE",
+      "payload": "task, actor, field, old_value, new_value, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:169, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "siteadmin.SiteSettings",
+      "kind": "DATA",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteSettings",
+      "operations": "READ, WRITE",
+      "payload": "signup_mode",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:8, apps/siteadmin/tests/test_selectors.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "siteadmin.SiteInvite",
+      "kind": "DATA",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteInvite",
+      "operations": "READ",
+      "payload": "email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:32, apps/siteadmin/selectors.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "integrations.ExternalLink",
+      "kind": "DATA",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "ExternalLink",
+      "operations": "READ, WRITE",
+      "payload": "task, provider, external_id, external_url, synced_at, metadata",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:7, apps/integrations/google_calendar/sync.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "integrations.GoogleCalendarConnection",
+      "kind": "DATA",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "GoogleCalendarConnection",
+      "operations": "READ, WRITE",
+      "payload": "user, calendar_id, refresh_token_encrypted, is_active, created_at, last_synced_at, last_sync_error",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:37, apps/users/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "boards.Board",
+      "kind": "DATA",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Board",
+      "operations": "READ, WRITE",
+      "payload": "user, team, name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:5, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "boards.Column",
+      "kind": "DATA",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Column",
+      "operations": "READ, WRITE",
+      "payload": "board, label, filter_config, order, color",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:50, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "boards.SavedFilter",
+      "kind": "DATA",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "SavedFilter",
+      "operations": "READ, WRITE",
+      "payload": "board, name, filter_config, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:77, apps/boards/tests/test_calendar_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "all_measured": [
+    {
+      "name": "teams.Team.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "Team",
+      "payload": "name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:8 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.Team.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "Team",
+      "payload": "name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:8 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.Team.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "Team",
+      "payload": "name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:8 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.Team.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "Team",
+      "payload": "name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:8 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.TeamMembership.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamMembership",
+      "payload": "team, user, role, joined_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:16 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.TeamMembership.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamMembership",
+      "payload": "team, user, role, joined_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:16 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.TeamMembership.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamMembership",
+      "payload": "team, user, role, joined_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:16 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.TeamMembership.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamMembership",
+      "payload": "team, user, role, joined_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:16 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.TeamInvite.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamInvite",
+      "payload": "team, email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:37 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.TeamInvite.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamInvite",
+      "payload": "team, email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:37 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.TeamInvite.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamInvite",
+      "payload": "team, email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:37 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "teams.TeamInvite.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamInvite",
+      "payload": "team, email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:37 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "emailauth.EmailIdentity.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/emailauth/models.py",
+      "source_symbol": "EmailIdentity",
+      "payload": "user, email, verified, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/emailauth/models.py:5 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "emailauth.EmailIdentity.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/emailauth/models.py",
+      "source_symbol": "EmailIdentity",
+      "payload": "user, email, verified, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/emailauth/models.py:5 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "emailauth.EmailIdentity.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/emailauth/models.py",
+      "source_symbol": "EmailIdentity",
+      "payload": "user, email, verified, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/emailauth/models.py:5 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "emailauth.EmailIdentity.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/emailauth/models.py",
+      "source_symbol": "EmailIdentity",
+      "payload": "user, email, verified, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/emailauth/models.py:5 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskStatus.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskStatus",
+      "payload": "user, team, name, slug, order, color, is_done",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:17 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskStatus.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskStatus",
+      "payload": "user, team, name, slug, order, color, is_done",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:17 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskStatus.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskStatus",
+      "payload": "user, team, name, slug, order, color, is_done",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:17 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskStatus.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskStatus",
+      "payload": "user, team, name, slug, order, color, is_done",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:17 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.Task.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "Task",
+      "payload": "user, team, assignee, title, notes, status, previous_status, order, due_date, due_time, duration_minutes, tags, is_archived, recurrence_days, recurrence_from, created_at, updated_at, completed_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:71 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.Task.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "Task",
+      "payload": "user, team, assignee, title, notes, status, previous_status, order, due_date, due_time, duration_minutes, tags, is_archived, recurrence_days, recurrence_from, created_at, updated_at, completed_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:71 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.Task.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "Task",
+      "payload": "user, team, assignee, title, notes, status, previous_status, order, due_date, due_time, duration_minutes, tags, is_archived, recurrence_days, recurrence_from, created_at, updated_at, completed_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:71 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.Task.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "Task",
+      "payload": "user, team, assignee, title, notes, status, previous_status, order, due_date, due_time, duration_minutes, tags, is_archived, recurrence_days, recurrence_from, created_at, updated_at, completed_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:71 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskComment.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskComment",
+      "payload": "task, body, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:157 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskComment.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskComment",
+      "payload": "task, body, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:157 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskComment.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskComment",
+      "payload": "task, body, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:157 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskComment.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskComment",
+      "payload": "task, body, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:157 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskActivity.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskActivity",
+      "payload": "task, actor, field, old_value, new_value, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:169 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskActivity.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskActivity",
+      "payload": "task, actor, field, old_value, new_value, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:169 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskActivity.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskActivity",
+      "payload": "task, actor, field, old_value, new_value, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:169 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "tasks.TaskActivity.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskActivity",
+      "payload": "task, actor, field, old_value, new_value, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:169 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "siteadmin.SiteSettings.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteSettings",
+      "payload": "signup_mode",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:8 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "siteadmin.SiteSettings.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteSettings",
+      "payload": "signup_mode",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:8 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "siteadmin.SiteSettings.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteSettings",
+      "payload": "signup_mode",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:8 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "siteadmin.SiteSettings.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteSettings",
+      "payload": "signup_mode",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:8 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "siteadmin.SiteInvite.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteInvite",
+      "payload": "email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:32 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "siteadmin.SiteInvite.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteInvite",
+      "payload": "email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:32 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "siteadmin.SiteInvite.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteInvite",
+      "payload": "email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:32 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "siteadmin.SiteInvite.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteInvite",
+      "payload": "email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:32 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "integrations.ExternalLink.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "ExternalLink",
+      "payload": "task, provider, external_id, external_url, synced_at, metadata",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:7 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "integrations.ExternalLink.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "ExternalLink",
+      "payload": "task, provider, external_id, external_url, synced_at, metadata",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:7 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "integrations.ExternalLink.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "ExternalLink",
+      "payload": "task, provider, external_id, external_url, synced_at, metadata",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:7 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "integrations.ExternalLink.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "ExternalLink",
+      "payload": "task, provider, external_id, external_url, synced_at, metadata",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:7 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "integrations.GoogleCalendarConnection.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "GoogleCalendarConnection",
+      "payload": "user, calendar_id, refresh_token_encrypted, is_active, created_at, last_synced_at, last_sync_error",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:37 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "integrations.GoogleCalendarConnection.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "GoogleCalendarConnection",
+      "payload": "user, calendar_id, refresh_token_encrypted, is_active, created_at, last_synced_at, last_sync_error",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:37 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "integrations.GoogleCalendarConnection.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "GoogleCalendarConnection",
+      "payload": "user, calendar_id, refresh_token_encrypted, is_active, created_at, last_synced_at, last_sync_error",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:37 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "integrations.GoogleCalendarConnection.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "GoogleCalendarConnection",
+      "payload": "user, calendar_id, refresh_token_encrypted, is_active, created_at, last_synced_at, last_sync_error",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:37 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.Board.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Board",
+      "payload": "user, team, name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:5 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.Board.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Board",
+      "payload": "user, team, name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:5 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.Board.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Board",
+      "payload": "user, team, name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:5 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.Board.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Board",
+      "payload": "user, team, name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:5 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.Column.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Column",
+      "payload": "board, label, filter_config, order, color",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:50 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.Column.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Column",
+      "payload": "board, label, filter_config, order, color",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:50 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.Column.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Column",
+      "payload": "board, label, filter_config, order, color",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:50 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.Column.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Column",
+      "payload": "board, label, filter_config, order, color",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:50 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.SavedFilter.post_delete",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "SavedFilter",
+      "payload": "board, name, filter_config, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:77 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.SavedFilter.post_save",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "SavedFilter",
+      "payload": "board, name, filter_config, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:77 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.SavedFilter.pre_delete",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "SavedFilter",
+      "payload": "board, name, filter_config, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:77 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "boards.SavedFilter.pre_save",
+      "kind": "EVENT",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "SavedFilter",
+      "payload": "board, name, filter_config, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:77 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "CrowderSoup__vTodo.login.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/login.html",
+      "rendering_context": "apps/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/login.html:5, apps/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.login.title",
+      "kind": "SLOT",
+      "source_file": "templates/login.html",
+      "rendering_context": "apps/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/login.html:6, apps/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.login.content",
+      "kind": "SLOT",
+      "source_file": "templates/login.html",
+      "rendering_context": "apps/accounts/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/login.html:8, apps/accounts/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.title",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:7",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:26",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.content",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:118",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.base.extra_scripts",
+      "kind": "SLOT",
+      "source_file": "templates/base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/base.html:121",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.invite_accept.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/teams/invite_accept.html",
+      "rendering_context": "apps/teams/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/teams/invite_accept.html:3, apps/teams/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.invite_accept.title",
+      "kind": "SLOT",
+      "source_file": "templates/teams/invite_accept.html",
+      "rendering_context": "apps/teams/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/teams/invite_accept.html:4, apps/teams/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.invite_accept.content",
+      "kind": "SLOT",
+      "source_file": "templates/teams/invite_accept.html",
+      "rendering_context": "apps/teams/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/teams/invite_accept.html:6, apps/teams/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.general.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/general.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/general.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.general.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/general.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/general.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/board.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/board.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/board.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/calendar.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/calendar.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/calendar.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.teams.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/teams.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/teams.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.teams.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/teams.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/teams.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.teams.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/teams.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/teams.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.api.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/api.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/api.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.api.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/api.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/api.html:5, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.api.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/api.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/api.html:15, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:3",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.settings_title",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:6",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.settings_header",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:8",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.settings_content",
+      "kind": "SLOT",
+      "source_file": "templates/users/settings/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/users/settings/_base.html:35",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.dashboard.admin_title",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/dashboard.html",
+      "rendering_context": "apps/siteadmin/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/dashboard.html:3, apps/siteadmin/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.dashboard.admin_content",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/dashboard.html",
+      "rendering_context": "apps/siteadmin/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/dashboard.html:5, apps/siteadmin/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:3",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.title",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.admin_title",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:4",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.content",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:6",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo._base.admin_content",
+      "kind": "SLOT",
+      "source_file": "templates/siteadmin/_base.html",
+      "rendering_context": "(extended by a child template)",
+      "implementation": "NATIVE",
+      "evidence": "templates/siteadmin/_base.html:20",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.authorize.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/oauth2_provider/authorize.html",
+      "implementation": "NATIVE",
+      "evidence": "templates/oauth2_provider/authorize.html:4 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.authorize.title",
+      "kind": "SLOT",
+      "source_file": "templates/oauth2_provider/authorize.html",
+      "implementation": "NATIVE",
+      "evidence": "templates/oauth2_provider/authorize.html:5 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.authorize.content",
+      "kind": "SLOT",
+      "source_file": "templates/oauth2_provider/authorize.html",
+      "implementation": "NATIVE",
+      "evidence": "templates/oauth2_provider/authorize.html:7 (block found, template not traced to any view or extends chain)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/boards/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/boards/board.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.title",
+      "kind": "SLOT",
+      "source_file": "templates/boards/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/boards/board.html:4, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.board.content",
+      "kind": "SLOT",
+      "source_file": "templates/boards/board.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/boards/board.html:6, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.body_class",
+      "kind": "SLOT",
+      "source_file": "templates/calendar/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/calendar/calendar.html:3, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.title",
+      "kind": "SLOT",
+      "source_file": "templates/calendar/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/calendar/calendar.html:4, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "CrowderSoup__vTodo.calendar.content",
+      "kind": "SLOT",
+      "source_file": "templates/calendar/calendar.html",
+      "rendering_context": "apps/users/views.py",
+      "implementation": "NATIVE",
+      "evidence": "templates/calendar/calendar.html:6, apps/users/views.py",
+      "status": "USABLE"
+    },
+    {
+      "name": "teams.Team",
+      "kind": "DATA",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "Team",
+      "operations": "READ, WRITE",
+      "payload": "name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:8, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "teams.TeamMembership",
+      "kind": "DATA",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamMembership",
+      "operations": "READ, WRITE",
+      "payload": "team, user, role, joined_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:16, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "teams.TeamInvite",
+      "kind": "DATA",
+      "source_file": "apps/teams/models.py",
+      "source_symbol": "TeamInvite",
+      "operations": "READ",
+      "payload": "team, email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/teams/models.py:37, apps/teams/admin.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "emailauth.EmailIdentity",
+      "kind": "DATA",
+      "source_file": "apps/emailauth/models.py",
+      "source_symbol": "EmailIdentity",
+      "operations": "READ, WRITE",
+      "payload": "user, email, verified, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/emailauth/models.py:5, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "tasks.TaskStatus",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskStatus",
+      "operations": "READ, WRITE",
+      "payload": "user, team, name, slug, order, color, is_done",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:17, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "tasks.Task",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "Task",
+      "operations": "READ, WRITE",
+      "payload": "user, team, assignee, title, notes, status, previous_status, order, due_date, due_time, duration_minutes, tags, is_archived, recurrence_days, recurrence_from, created_at, updated_at, completed_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:71, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "tasks.TaskComment",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskComment",
+      "operations": "READ, WRITE",
+      "payload": "task, body, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:157, apps/boards/views.py (write path)",
+      "status": "USABLE",
+      "interface": "DRF"
+    },
+    {
+      "name": "tasks.TaskActivity",
+      "kind": "DATA",
+      "source_file": "apps/tasks/models.py",
+      "source_symbol": "TaskActivity",
+      "operations": "READ, WRITE",
+      "payload": "task, actor, field, old_value, new_value, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/tasks/models.py:169, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "siteadmin.SiteSettings",
+      "kind": "DATA",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteSettings",
+      "operations": "READ, WRITE",
+      "payload": "signup_mode",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:8, apps/siteadmin/tests/test_selectors.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "siteadmin.SiteInvite",
+      "kind": "DATA",
+      "source_file": "apps/siteadmin/models.py",
+      "source_symbol": "SiteInvite",
+      "operations": "READ",
+      "payload": "email, token, invited_by, created_at, expires_at, accepted_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/siteadmin/models.py:32, apps/siteadmin/selectors.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "integrations.ExternalLink",
+      "kind": "DATA",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "ExternalLink",
+      "operations": "READ, WRITE",
+      "payload": "task, provider, external_id, external_url, synced_at, metadata",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:7, apps/integrations/google_calendar/sync.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "integrations.GoogleCalendarConnection",
+      "kind": "DATA",
+      "source_file": "apps/integrations/models.py",
+      "source_symbol": "GoogleCalendarConnection",
+      "operations": "READ, WRITE",
+      "payload": "user, calendar_id, refresh_token_encrypted, is_active, created_at, last_synced_at, last_sync_error",
+      "implementation": "NATIVE",
+      "evidence": "apps/integrations/models.py:37, apps/users/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "boards.Board",
+      "kind": "DATA",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Board",
+      "operations": "READ, WRITE",
+      "payload": "user, team, name, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:5, apps/teams/views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "boards.Column",
+      "kind": "DATA",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "Column",
+      "operations": "READ, WRITE",
+      "payload": "board, label, filter_config, order, color",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:50, apps/teams/tests/test_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "boards.SavedFilter",
+      "kind": "DATA",
+      "source_file": "apps/boards/models.py",
+      "source_symbol": "SavedFilter",
+      "operations": "READ, WRITE",
+      "payload": "board, name, filter_config, created_at",
+      "implementation": "NATIVE",
+      "evidence": "apps/boards/models.py:77, apps/boards/tests/test_calendar_views.py (write path)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "counts": {
+    "usable_events": 0,
+    "usable_slots": 43,
+    "usable_data": 15,
+    "usable_total": 58
+  },
+  "extension_system": {
+    "evidence": [],
+    "plugin_authoring_docs_present": false,
+    "plugin_authoring_docs_location": ""
+  }
+}

@@ -1,6 +1,6 @@
 # fossasia/eventyay
 
-category: event ticketing
+category: Event Ticketing (id 27, slug event-ticketing)
 repository: fossasia/eventyay
 repository URL: https://github.com/fossasia/eventyay
 exact commit: 786bd095c63b8cf2bbacfdc05f39d132816035f6
@@ -8,28 +8,38 @@ licence: UNRESOLVED -- see researcher_notes
 framework: django
 datastore: postgresql
 
-## Attach points
+## Attach points (Section 33 -- mechanically measured from the real clone)
 hook/signal keyword-sweep hits: 26 distinct terms (discovery signal only, not proof -- see keyword_hits below)
-usable, evidenced attach-point count: 1
-  event attach points: 0
-  slot attach points: 1
-  data attach points: 0
+usable, evidenced attach-point count: 1329
+  event attach points: 34
+  slot attach points: 1151
+  data attach points: 144
+defined-but-unusable points measured (not counted): 691
 
-## Documentation and ecosystem
+## Extension system evidence
+  - PLUGINS setting: app/eventyay/config/settings.py:428
+plugin-authoring documentation (mechanically found): yes -- README.rst
+
+## Documentation and ecosystem (researcher-supplied, not computed -- no GitHub API access)
 plugin-authoring documentation: yes
   location: doc/ (inherited from pretix's docs.pretix.eu references still present in-tree)
 third-party plugins: NOT RESEARCHED
 
 ## Quality score components (see quality_score() for the weighting)
-  commits_last_6_months: 5
-  contributors: 5
-  tagged_releases: 0
-  test_suite_present: 3
-  plugin_authoring_docs: 4
-  issue_closure_ratio: 0
-  third_party_plugins: 0
-  TOTAL: 17.0
-  NOTE: issue_closure_ratio is always 0 here -- no real data source was available to this script (GitHub-wide search was out of scope for the session that wrote it); this is a stated gap, not a silent zero.
+  commits_last_6_months: 7.403061091090091
+  contributors: 6.07073772800249
+  tagged_releases: 0.0
+  test_suite_present: 1.0
+  plugin_authoring_docs: 1.0
+  issue_closure_ratio: 0.0
+  third_party_plugins: 0.0
+  TOTAL: 15.4738
+  NOTE: issue_closure_ratio is always 0 here -- no real data source was available to this script (no GitHub API access for repositories outside this session's own repo, see module docstring); this is a stated gap, not a silent zero.
+
+## Exemplar feature match (Section 26.2)
+exemplar: Eventbrite / Ticketmaster
+features checked: 0  matched(code): 0  docs-only: 0  not found: 0
+feature_match: NOT MEASURED (rejected at gate(s): Rule C licence: UNRESOLVED -- see researcher_notes is not permissive (allowed: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, MPL-2.0); Rule B: source publishes no REST API documentation)
 
 ## Git-derived metrics (real, from the clone's own history)
 {
@@ -78,4 +88,4 @@ Rejection reason(s):
   - Rule B: source publishes no REST API documentation
 
 ## Researcher notes
-LICENCE PROVENANCE CONFLICT -- surfaced, not guessed either way. The repository's own top-level LICENSE file declares Apache License 2.0. But NOTICE (read in full) states under 'UPSTREAM ATTRIBUTIONS': 'Portions of Eventyay are derived from Pretix code ... Copyright (c) Raphael Michel and contributors ... Latest incorporated upstream snapshot: April 12, 2021', plus equivalent statements for Pretalx and Venueless. Pretix is itself AGPL-3.0-only (confirmed via web search and consistent with public knowledge of the project). 885 literal occurrences of the string 'pretix' remain in app/eventyay/**/*.py, including the plugin entry-point group name 'pretix.plugin' itself, config keys, and a direct reference to docs.pretix.eu for API auth docs (app/eventyay/config/settings.py:1568). No statement anywhere in NOTICE, README.rst, CLA.md or git log messages claims explicit relicensing permission from Raphael Michel/pretix, pretalx, or venueless for the AGPL-derived portions. Relicensing AGPL-3.0 code as Apache-2.0 without the original copyright holders' consent is not something a downstream project can do unilaterally -- this is a real, evidenced gap in the repository's own licensing claim, not a suspicion. Per the standing instruction to never guess when something is genuinely unknown, this pilot does NOT assert eventyay is validly Apache-2.0, and does NOT assert it is actually AGPL -- it records the licence field as UNRESOLVED so the mechanical gate (Rule C, which only string-matches a declared licence) reflects the same unresolved state honestly, rather than passing on a self-declared string that the repository's own NOTICE file gives a specific, concrete reason to doubt. Expected admission result: REJECTED on Rule C, for a reason distinct from every other rejection in this pilot -- not 'copyleft', but 'licence claim contradicted by the project's own stated provenance and not independently resolvable without a legal opinion this pilot cannot supply.'
+Re-recorded from the pre-registry pilot's own real, first-hand clone inspection (not re-cloned this pass -- see this file's module docstring). LICENCE PROVENANCE CONFLICT, surfaced not guessed: the repo's top-level LICENSE file declares Apache-2.0, but its own NOTICE file states substantial portions are derived from Pretix (AGPL-3.0-only) with no independent relicensing consent recorded anywhere. Licence recorded as UNRESOLVED so the mechanical Rule C gate reflects that same unresolved state honestly rather than trusting the self-declared Apache-2.0 string. Expected admission result: REJECTED on Rule C, for the reason recorded, not a plain copyleft rejection.

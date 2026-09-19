@@ -1,0 +1,18 @@
+{
+  "repo_name": "adamspd/django-appointment",
+  "repo_url": "https://github.com/adamspd/django-appointment",
+  "branch": "master",
+  "commit": "55706a2bb8da75b1ee91226ac7bfaac529465eff",
+  "licence": "Apache-2.0",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "django-appointment is a strong structural match to Calendly -- Service/StaffMember/AppointmentRequest/Appointment/WorkingHours/DayOff/PaymentInfo models implement staff-specific availability windows, slot generation, booking-request-to-confirmed-appointment flow, and payment tracking, Calendly's core booking-page mechanic.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": false,
+  "plugin_authoring_docs_location": "docs/CUSTOM_TEMPLATES.md documents a real template-override mechanism, but not plugin authoring in the extension-point sense",
+  "third_party_plugins_present": false,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected (commit above). Apache-2.0 LICENSE verified verbatim. manage.py present -- a real deployable demo project. No djangorestframework dependency anywhere -- docs/views.md and docs/admin_views.md (published at django-appt-doc.adamspierredavid.com via mkdocs-material) document plain session-auth AJAX JsonResponse endpoints, not a REST API (no DRF, no OpenAPI schema, no versioning) -- does not count as Rule B API documentation. No postgres/psycopg evidence -- appointments/settings.py DATABASES defaults to sqlite3, .env.example has no DB_* vars, requirements.txt lists no postgres driver, docker-compose.yml has no postgres service. Expected admission result: REJECTED on Rule A datastore (not recorded) and Rule B (AJAX endpoint docs are not REST API documentation)."
+}

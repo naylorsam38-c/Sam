@@ -1,0 +1,117 @@
+{
+  "usable_events": [],
+  "usable_slots": [],
+  "usable_data": [
+    {
+      "name": "doctors.Doctor",
+      "kind": "DATA",
+      "source_file": "doctors/models.py",
+      "source_symbol": "Doctor",
+      "operations": "READ",
+      "payload": "user, specialization, license_number, years_of_experience, qualification, hospital_affiliation, consultation_fee, biography, profile_picture, status, is_available, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "doctors/models.py:22, accounts/models.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "usable_total": [
+    {
+      "name": "doctors.Doctor",
+      "kind": "DATA",
+      "source_file": "doctors/models.py",
+      "source_symbol": "Doctor",
+      "operations": "READ",
+      "payload": "user, specialization, license_number, years_of_experience, qualification, hospital_affiliation, consultation_fee, biography, profile_picture, status, is_available, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "doctors/models.py:22, accounts/models.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    }
+  ],
+  "all_measured": [
+    {
+      "name": "doctors.Doctor.post_delete",
+      "kind": "EVENT",
+      "source_file": "doctors/models.py",
+      "source_symbol": "Doctor",
+      "payload": "user, specialization, license_number, years_of_experience, qualification, hospital_affiliation, consultation_fee, biography, profile_picture, status, is_available, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "doctors/models.py:22 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "doctors.Doctor.post_save",
+      "kind": "EVENT",
+      "source_file": "doctors/models.py",
+      "source_symbol": "Doctor",
+      "payload": "user, specialization, license_number, years_of_experience, qualification, hospital_affiliation, consultation_fee, biography, profile_picture, status, is_available, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "doctors/models.py:22 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "doctors.Doctor.pre_delete",
+      "kind": "EVENT",
+      "source_file": "doctors/models.py",
+      "source_symbol": "Doctor",
+      "payload": "user, specialization, license_number, years_of_experience, qualification, hospital_affiliation, consultation_fee, biography, profile_picture, status, is_available, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "doctors/models.py:22 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "doctors.Doctor.pre_save",
+      "kind": "EVENT",
+      "source_file": "doctors/models.py",
+      "source_symbol": "Doctor",
+      "payload": "user, specialization, license_number, years_of_experience, qualification, hospital_affiliation, consultation_fee, biography, profile_picture, status, is_available, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "doctors/models.py:22 (Django built-in model signal, not counted -- REQUIRE_MODEL_SIGNALS_COUNT is False)",
+      "status": "MODEL_SIGNAL_EXCLUDED"
+    },
+    {
+      "name": "doctors.Specialization",
+      "kind": "DATA",
+      "source_file": "doctors/models.py",
+      "source_symbol": "Specialization",
+      "payload": "name, description, created_at",
+      "implementation": "NATIVE",
+      "evidence": "doctors/models.py:10 (model defined, no reference found outside its own file)",
+      "status": "DEFINED_NOT_REACHABLE"
+    },
+    {
+      "name": "doctors.Doctor",
+      "kind": "DATA",
+      "source_file": "doctors/models.py",
+      "source_symbol": "Doctor",
+      "operations": "READ",
+      "payload": "user, specialization, license_number, years_of_experience, qualification, hospital_affiliation, consultation_fee, biography, profile_picture, status, is_available, created_at, updated_at",
+      "implementation": "NATIVE",
+      "evidence": "doctors/models.py:22, accounts/models.py (referenced)",
+      "status": "USABLE",
+      "interface": "ORM"
+    },
+    {
+      "name": "doctors.DoctorAvailability",
+      "kind": "DATA",
+      "source_file": "doctors/models.py",
+      "source_symbol": "DoctorAvailability",
+      "payload": "doctor, day_of_week, start_time, end_time, is_available, created_at",
+      "implementation": "NATIVE",
+      "evidence": "doctors/models.py:57 (model defined, no reference found outside its own file)",
+      "status": "DEFINED_NOT_REACHABLE"
+    }
+  ],
+  "counts": {
+    "usable_events": 0,
+    "usable_slots": 0,
+    "usable_data": 1,
+    "usable_total": 1
+  },
+  "extension_system": {
+    "evidence": [],
+    "plugin_authoring_docs_present": false,
+    "plugin_authoring_docs_location": ""
+  }
+}

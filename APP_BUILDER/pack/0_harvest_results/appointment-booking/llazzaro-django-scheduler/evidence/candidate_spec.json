@@ -1,0 +1,18 @@
+{
+  "repo_name": "llazzaro/django-scheduler",
+  "repo_url": "https://github.com/llazzaro/django-scheduler",
+  "branch": "master",
+  "commit": "ab3618013b3de2f194e3d2898653bcf88d6ec163",
+  "licence": "BSD-3-Clause",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "django-scheduler is a general-purpose recurring-events calendar engine (Calendar->Event->Occurrence with iCal-style Rule recurrence, plus iCal/RSS export) matching Google Calendar's event/recurrence model, not Calendly's booking-page product -- no client-facing booking-request workflow, no staff/service/availability concept, no payment integration. A poor structural match for this category's exemplar specifically.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": false,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": false,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected (commit above). BSD-3-Clause LICENSE.txt verified verbatim ('Copyright (c) 2008-2017, Tony Hauber'). No manage.py anywhere -- a reusable pluggable Django app (ships only tests/settings.py for its own suite), not a standalone deployable application. schedule/urls.py exposes three plain JsonResponse endpoints used internally by a JS calendar widget (/api/occurrences, /api/move_or_resize/, /api/select_create/) -- no docstrings, no Swagger/OpenAPI/DRF, docs/views.txt does not document them; does not count as Rule B evidence. No postgres/psycopg evidence -- tests/settings.py uses sqlite3 in-memory; DB-agnostic pluggable app. Expected admission result: REJECTED on Rule A datastore (not recorded), Rule B (no published API docs), and Rule D (structural mismatch to the Calendly exemplar, recorded honestly above rather than the gate's mere non-empty check)."
+}

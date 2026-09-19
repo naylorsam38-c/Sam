@@ -1,14 +1,14 @@
 # HARVEST_SUMMARY
 
-## event ticketing
-candidates inspected: 5
-selected: NONE ADMITTED
+## Todo List (id 1)
+candidates inspected: 2
+selected: ADMITTED CrowderSoup/vTodo @ 56745365951cda11f9958bc0e9e6c9941985ea78 match 0.53 vs Todoist
 
-## analytics and BI
+## Appointment Booking (id 25)
 candidates inspected: 3
 selected: NONE ADMITTED
 
-## challenge platform
-candidates inspected: 4
+## Event Ticketing (id 27)
+candidates inspected: 3
 selected: NONE ADMITTED
 
