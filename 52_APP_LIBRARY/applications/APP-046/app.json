@@ -9,7 +9,7 @@
  "version": null,
  "commit": "6bc45298226f96ff79e0c070c8b2ce39727e8477",
  "source_path": "applications/APP-046/source",
- "status": "ACQUIRED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -120,5 +120,27 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs calcom.docker.scarf.sh, which this sandbox's egress policy denies: Image calcom.docker.scarf.sh/calcom/cal.diy Error failed to resolve reference \"calcom.docker.scarf.sh/calcom/cal.diy:latest\": failed to do request: Head \"https://calcom.docker.scarf.sh/v2/calcom/cal.diy/manifests/latest\": Forbidden",
+  "blocked_host": "calcom.docker.scarf.sh",
+  "runtime_hint": [
+   "node"
+  ],
+  "startup_command": "docker compose -f docker-compose.yml up -d",
+  "log": [
+   "copied .env.example -> .env",
+   "$ docker compose -p lib_app046 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-046/source/docker-compose.yml up -d\n2 0.295 Reading package lists...\n#22 0.308 E: The repository 'http://deb.debian.org/debian bookworm InRelease' is not signed.\n#22 0.308 E: Failed to fetch http://deb.debian.org/debian/dists/bookworm/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n#22 0.308 E: Failed to fetch http://deb.debian.org/debian/dists/bookworm-updates/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n#22 0.308 E: The repository 'http://deb.debian.org/debian bookworm-updates InRelease' is not signed.\n#22 0.308 E: Failed to fetch http://deb.debian.org/debian-security/dists/bookworm-security/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n#22 0.308 E: The repository 'http://deb.debian.org/debian-security bookworm-security InRelease' is not signed.\n#22 ERROR: process \"/bin/sh -c apt-get update && apt-get install -y --no-install-recommends netcat-openbsd wget && rm -rf /var/lib/apt/lists/*\" did not complete successfully: exit code: 100\n\n#15 [calcom-api 6/9] RUN yarn install\n#15 CANCELED\n------\n > [calcom runner 3/4] RUN apt-get update && apt-get install -y --no-install-recommends netcat-openbsd wget && rm -rf /var/lib/apt/lists/*:\n0.289   403  Forbidden [IP: 151.101.2.132 80]\n0.290 Err:3 http://deb.debian.org/debian-security bookworm-security InRelease\n0.290   403  Forbidden [IP: 151.101.2.132 80]\n0.295 Reading package lists...\n0.308 E: The repository 'http://deb.debian.org/debian bookworm InRelease' is not signed.\n0.308 E: Failed to fetch http://deb.debian.org/debian/dists/bookworm/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n0.308 E: Failed to fetch http://deb.debian.org/debian/dists/bookworm-updates/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n0.308 E: The repository 'http://deb.debian.org/debian bookworm-updates InRelease' is not signed.\n0.308 E: Failed to fetch http://deb.debian.org/debian-security/dists/bookworm-security/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n0.308 E: The repository 'http://deb.debian.org/debian-security bookworm-security InRelease' is not signed.\n------\n\n53ffc208 Extracting 1B\n bba753ffc208 Extracting 1B\n bba753ffc208 Extracting 1B\n bba753ffc208 Extracting 1B\n bba753ffc208 Extracting 1B\n bba753ffc208 Extracting 2B\n bba753ffc208 Extracting 2B\n bba753ffc208 Extracting 2B\n bba753ffc208 Extracting 2B\n bba753ffc208 Extracting 2B\n bba753ffc208 Extracting 2B\n bba753ffc208 Extracting 2B\n bba753ffc208 Extracting 2B\n bba753ffc208 Extracting 2B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 3B\n bba753ffc208 Extracting 4B\n bba753ffc208 Extracting 4B\n bba753ffc208 Extracting 4B\n bba753ffc208 Extracting 4B\n bba753ffc208 Extracting 4B\n bba753ffc208 Extracting 4B\n bba753ffc208 Extracting 4B\n bba753ffc208 Extracting 4B\n bba753ffc208 Extracting 4B\n bba753ffc208 Extracting 4B\n bba753ffc208 Extracting 5B\n bba753ffc208 Extracting 5B\n bba753ffc208 Extracting 5B\n bba753ffc208 Extracting 5B\n bba753ffc208 Extracting 5B\n bba753ffc208 Extracting 5B\n bba753ffc208 Extracting 5B\n bba753ffc208 Extracting 5B\n bba753ffc208 Extracting 5B\n 3b0757c8de7f Pull complete 0B\n dc5a76842a4c Pull complete 0B\n 0e422c951642 Pull complete 0B\n 5696a7190adf Pull complete 0B\n bba753ffc208 Pull complete 0B\n Image postgres Pulled \n Image calcom.docker.scarf.sh/calcom/cal.diy Building \n Image lib_app046-calcom-api Building \nDockerfile:81\n\n--------------------\n\n  79 |     WORKDIR /calcom\n\n  80 |     \n\n  81 | >>> RUN apt-get update && apt-get install -y --no-install-recommends netcat-openbsd wget && rm -rf /var/lib/apt/lists/*\n\n  82 |     \n\n  83 |     COPY --from=builder-two /calcom ./\n\n--------------------\n\ntarget calcom: failed to solve: process \"/bin/sh -c apt-get update && apt-get install -y --no-install-recommends netcat-openbsd wget && rm -rf /var/lib/apt/lists/*\" did not complete successfully: exit code: 100\n\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ }
 }

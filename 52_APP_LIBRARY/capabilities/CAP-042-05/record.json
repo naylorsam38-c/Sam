@@ -1,0 +1,35 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-05",
+ "name": "sharing",
+ "attach_points": [
+  {
+   "file": "frontend/src/routes.ts",
+   "matched_words": [
+    "sharing"
+   ],
+   "line": 412,
+   "snippet": "route(\"/projects/secret-management/secret-sharing\", ["
+  },
+  {
+   "file": "frontend/src/helpers/project.ts",
+   "matched_words": [
+    "sharing"
+   ],
+   "line": 109,
+   "snippet": "// Org-wide resource pages (KMIP servers, Secret Sharing, Product Settings, Insights) live at"
+  },
+  {
+   "file": "frontend/src/components/agent-vault/agentvaultintro/useagentvaultintro.ts",
+   "matched_words": [
+    "sharing"
+   ],
+   "line": 17,
+   "snippet": "// the layout drive one dialog between them without sharing anything else."
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}

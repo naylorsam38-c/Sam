@@ -168,7 +168,9 @@ class LiveTester:
                         val = TEST_VALUES["password"]
                     else:
                         val = TEST_VALUES["text_default"]
-                    inp.fill(val, timeout=2000)
+                    inp.click(timeout=2000)
+                    inp.fill("")
+                    inp.type(val, delay=15, timeout=5000)
                     filled += 1
                 except Exception:
                     continue

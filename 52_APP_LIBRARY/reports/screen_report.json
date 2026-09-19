@@ -1,0 +1,30 @@
+{
+ "generated_at": "2026-09-19T12:21:08.412220+00:00",
+ "apps_with_screen_data": 2,
+ "totals": {
+  "discovered": 30,
+  "reachable": 30,
+  "rendered": 29,
+  "browser_verified": 29
+ },
+ "applications": [
+  {
+   "id": "APP-038",
+   "name": "Uptime Kuma",
+   "category": "monitoring",
+   "screens_discovered": 15,
+   "screens_reached": 15,
+   "screens_rendered": 15,
+   "screens_browser_verified": 15
+  },
+  {
+   "id": "APP-042",
+   "name": "Infisical Community Edition",
+   "category": "password-manager",
+   "screens_discovered": 15,
+   "screens_reached": 15,
+   "screens_rendered": 14,
+   "screens_browser_verified": 14
+  }
+ ]
+}

@@ -9,7 +9,7 @@
  "version": null,
  "commit": "b402637fe4c35a31eac4007356d3a750ba6187c8",
  "source_path": "applications/APP-005/source",
- "status": "ACQUIRED",
+ "status": "INSTALL_FAILED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -30,5 +30,18 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "INSTALL_FAILED",
+  "reason": "no Dockerfile or compose file - no documented way to run it"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ }
 }

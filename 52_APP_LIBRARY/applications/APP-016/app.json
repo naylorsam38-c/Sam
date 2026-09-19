@@ -9,7 +9,7 @@
  "version": null,
  "commit": "d86e59f6e9574c69f01b300691b9f4396eeb38d2",
  "source_path": "applications/APP-016/source",
- "status": "ACQUIRED",
+ "status": "STARTUP_FAILED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -241,5 +241,21 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "STARTUP_FAILED",
+  "reason": "no service selected",
+  "runtime_hint": [
+   "node"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ }
 }

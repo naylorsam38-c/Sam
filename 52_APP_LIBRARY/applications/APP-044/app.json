@@ -9,7 +9,7 @@
  "version": null,
  "commit": "da69391e81013aca5b077fd6994c767863515e71",
  "source_path": "applications/APP-044/source",
- "status": "ACQUIRED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": false,
  "manual_override_reason": "automated pick (4ga Boards) is a minor kanban board; this is the well-established, higher-star fit that didn't literally contain the word 'productivity' in its description",
  "discovery_candidates": [
@@ -50,5 +50,31 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2",
+  "blocked_host": "dl-cdn.alpinelinux.org",
+  "runtime_hint": [
+   "node",
+   "ruby"
+  ],
+  "startup_command": "docker compose -f docker-compose.yaml up -d",
+  "log": [
+   "copied .env.example -> .env",
+   "$ docker compose -p lib_app044 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-044/source/docker-compose.yaml up -d\nbcf71d6db947dda5e1c59d06 42.99MB / 55.68MB 1.2s\n#5 sha256:1a3a899a8294dd12f21fb3f36579c74b05013aacbcf71d6db947dda5e1c59d06 55.68MB / 55.68MB 1.4s\n#5 sha256:1a3a899a8294dd12f21fb3f36579c74b05013aacbcf71d6db947dda5e1c59d06 55.68MB / 55.68MB 1.4s done\n#5 extracting sha256:1a3a899a8294dd12f21fb3f36579c74b05013aacbcf71d6db947dda5e1c59d06\n#5 extracting sha256:1a3a899a8294dd12f21fb3f36579c74b05013aacbcf71d6db947dda5e1c59d06 2.5s done\n#5 DONE 3.9s\n\n#5 [ 1/19] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85\n#5 extracting sha256:ec179e2ee07230312183920d42bf49c2ef18644e3d7186ffa92b02dd2e26a835 0.1s done\n#5 extracting sha256:65213f1a3de84db18197276d9be6a34fad98eec70604aeaa6821556d932c2676 done\n#5 DONE 4.0s\n\n#7 [ 2/19] WORKDIR /app\n#7 DONE 0.8s\n\n#8 [ 3/19] RUN apk add --no-cache openssl libc6-compat\n#8 0.228 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#8 0.254 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#8 0.254 ERROR: unable to select packages:\n#8 0.254   libc6-compat (no such package):\n#8 0.254     required by: world[libc6-compat]\n#8 0.254   openssl (no such package):\n#8 0.254     required by: world[openssl]\n#8 ERROR: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2\n------\n > [ 3/19] RUN apk add --no-cache openssl libc6-compat:\n0.228 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.254 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.254 ERROR: unable to select packages:\n0.254   libc6-compat (no such package):\n0.254     required by: world[libc6-compat]\n0.254   openssl (no such package):\n0.254     required by: world[openssl]\n------\n\nng 1B\n 30c85144558f Extracting 1B\n 30c85144558f Extracting 1B\n e9516be90840 Extracting 1B\n 30c85144558f Extracting 1B\n e9516be90840 Extracting 1B\n 30c85144558f Extracting 1B\n e9516be90840 Extracting 2B\n 30c85144558f Extracting 1B\n e9516be90840 Extracting 2B\n 30c85144558f Extracting 1B\n e9516be90840 Extracting 2B\n 4f4fb700ef54 Pull complete 0B\n c25fa0902848 Pull complete 0B\n 8a080d2c0454 Pull complete 0B\n 30c85144558f Pull complete 0B\n Image johannesjo/super-productivity:latest Pulled \n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 5B\n e9516be90840 Extracting 5B\n e9516be90840 Extracting 5B\n c020dab2e853 Extracting 1B\n 4f83103187f5 Pull complete 0B\n e9516be90840 Pull complete 0B\n c020dab2e853 Pull complete 0B\n 0976f43b012c Pull complete 0B\n 277e2289225f Pull complete 0B\n 6ba2251a51ae Pull complete 0B\n Image postgres:15-alpine Pulled \n Image lib_app044-supersync Building \nDockerfile.test:15\n\n--------------------\n\n  13 |     \n\n  14 |     # Install required system dependencies for Prisma\n\n  15 | >>> RUN apk add --no-cache openssl libc6-compat\n\n  16 |     \n\n  17 |     # Copy package files for workspace setup\n\n--------------------\n\nfailed to solve: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2\n\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "ruby": [
+    "Gemfile"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ }
 }

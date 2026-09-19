@@ -9,7 +9,7 @@
  "version": null,
  "commit": "bd2179cf211874925e2313664e22dae2501fe30a",
  "source_path": "applications/APP-042/source",
- "status": "ACQUIRED",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -163,5 +163,38 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:80/",
+  "http_status": 200,
+  "recipe": "docker-compose.prod.yml",
+  "recipe_kind": "compose",
+  "runtime_hint": [
+   "node"
+  ],
+  "startup_command": "docker compose -f docker-compose.prod.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 14,
+  "screens_browser_verified": 14
+ },
+ "capability_summary": {
+  "capabilities_defined": true,
+  "discovered": 8,
+  "attach_point_found": 7,
+  "proven": 0
+ }
 }

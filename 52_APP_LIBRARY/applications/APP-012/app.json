@@ -9,7 +9,7 @@
  "version": null,
  "commit": "ddf2787c5e3891f4578da5552436694a94f1ae22",
  "source_path": "applications/APP-012/source",
- "status": "ACQUIRED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": false,
  "manual_override_reason": "automated pick (code-server) matched 'browser' as a stray word in 'VS Code in the browser' - it's a web IDE, not a browser app",
  "discovery_candidates": [
@@ -232,5 +232,20 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs06/blobs/sha256:6377fb6a3f0a8c03f4ca07a3f0af7e991c32cb53983e0c638bddfcffdc9f3dc1?se=2026-09-19T12%3A15%3A00Z&sig=naj19RwG7Vb3VINn4NVUfxzzGB8cU2iW7R5%2BIpuHEfE%3D&ske=2026-09-20T02%3A20%3A05Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T02%3A20%3A05Z&sktid",
+  "blocked_host": "pkg-containers.githubusercontent.com",
+  "runtime_hint": [],
+  "startup_command": "docker compose -f docker-compose.yaml up -d",
+  "log": [
+   "$ docker compose -p lib_app012 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-012/source/docker-compose.yaml up -d\n\n Image ghcr.io/m1k1o/neko/firefox:latest Pulling \nfailed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs06/blobs/sha256:6377fb6a3f0a8c03f4ca07a3f0af7e991c32cb53983e0c638bddfcffdc9f3dc1?se=2026-09-19T12%3A15%3A00Z&sig=naj19RwG7Vb3VINn4NVUfxzzGB8cU2iW7R5%2BIpuHEfE%3D&ske=2026-09-20T02%3A20%3A05Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T02%3A20%3A05Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=b169a51e479b3e19c7d7c8b647302b0da363e3a40ba29c05d96a7ffad3fdf143\": Forbidden\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {},
+  "has_container_recipe": true,
+  "database_requirement": null
+ }
 }

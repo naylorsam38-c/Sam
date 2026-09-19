@@ -1,0 +1,35 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-01",
+ "name": "Vaults",
+ "attach_points": [
+  {
+   "file": "frontend/src/routes.ts",
+   "matched_words": [
+    "vault"
+   ],
+   "line": 75,
+   "snippet": "\"/azure-key-vault/authorize\","
+  },
+  {
+   "file": "frontend/src/helpers/project.ts",
+   "matched_words": [
+    "vault"
+   ],
+   "line": 138,
+   "snippet": "const ORG_SCOPED_PRODUCT_PATH_RE = /^\\/organizations\\/[^/]+\\/(pam|agent-vault)(?:\\/|$)/;"
+  },
+  {
+   "file": "frontend/src/helpers/pkisyncs.ts",
+   "matched_words": [
+    "vault"
+   ],
+   "line": 14,
+   "snippet": "name: \"Azure Key Vault\","
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}

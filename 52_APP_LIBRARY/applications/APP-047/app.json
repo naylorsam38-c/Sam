@@ -9,7 +9,7 @@
  "version": null,
  "commit": "12d78909d3f5247a8d40a47f0ef5c3ac771d9c5a",
  "source_path": "applications/APP-047/source",
- "status": "ACQUIRED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -245,5 +245,27 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs registry.librechat.ai, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"registry.librechat.ai/clickhouse/librechat-admin-panel:latest\": failed to do request: Head \"https://registry.librechat.ai/v2/clickhouse/librechat-admin-panel/manifests/latest\": Forbidden",
+  "blocked_host": "registry.librechat.ai",
+  "runtime_hint": [
+   "node"
+  ],
+  "startup_command": "docker compose -f docker-compose.yml up -d",
+  "log": [
+   "copied .env.example -> .env",
+   "$ docker compose -p lib_app047 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-047/source/docker-compose.yml up -d\n\ntime=\"2026-09-19T12:09:19Z\" level=warning msg=\"The \\\"UID\\\" variable is not set. Defaulting to a blank string.\"\ntime=\"2026-09-19T12:09:19Z\" level=warning msg=\"The \\\"GID\\\" variable is not set. Defaulting to a blank string.\"\ntime=\"2026-09-19T12:09:19Z\" level=warning msg=\"The \\\"UID\\\" variable is not set. Defaulting to a blank string.\"\ntime=\"2026-09-19T12:09:19Z\" level=warning msg=\"The \\\"GID\\\" variable is not set. Defaulting to a blank string.\"\ntime=\"2026-09-19T12:09:19Z\" level=warning msg=\"The \\\"UID\\\" variable is not set. Defaulting to a blank string.\"\ntime=\"2026-09-19T12:09:19Z\" level=warning msg=\"The \\\"GID\\\" variable is not set. Defaulting to a blank string.\"\n Image registry.librechat.ai/danny-avila/librechat-dev:latest Pulling \n Image getmeili/meilisearch:v1.35.1 Pulling \n Image registry.librechat.ai/clickhouse/librechat-admin-panel:latest Pulling \n Image registry.librechat.ai/danny-avila/librechat-rag-api-dev-lite:latest Pulling \n Image mongo:8.0.20 Pulling \n Image pgvector/pgvector:0.8.0-pg15-trixie Pulling \n Image registry.librechat.ai/clickhouse/librechat-admin-panel:latest Error failed to resolve reference \"registry.librechat.ai/clickhouse/librechat-admin-panel:latest\": failed to do request: Head \"https://registry.librechat.ai/v2/clickhouse/librechat-admin-panel/manifests/latest\": Forbidden\n Image registry.librechat.ai/danny-avila/librechat-rag-api-dev-lite:latest Interrupted \n Image getmeili/meilisearch:v1.35.1 Interrupted \n Image registry.librechat.ai/danny-avila/librechat-dev:latest Interrupted \n Image pgvector/pgvector:0.8.0-pg15-trixie Interrupted \n Image mongo:8.0.20 Interrupted \nError response from daemon: failed to resolve reference \"registry.librechat.ai/clickhouse/librechat-admin-panel:latest\": failed to do request: Head \"https://registry.librechat.ai/v2/clickhouse/librechat-admin-panel/manifests/latest\": Forbidden\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ }
 }

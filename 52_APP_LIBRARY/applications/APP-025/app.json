@@ -9,7 +9,7 @@
  "version": null,
  "commit": "9beff85ece6fe13378a97e6f84765b50647d3327",
  "source_path": "applications/APP-025/source",
- "status": "ACQUIRED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -236,5 +236,31 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs docker.elastic.co, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"docker.elastic.co/kibana/kibana:7.17.0\": failed to do request: Head \"https://docker.elastic.co/v2/kibana/kibana/manifests/7.17.0\": Forbidden",
+  "blocked_host": "docker.elastic.co",
+  "runtime_hint": [
+   "node",
+   "php"
+  ],
+  "startup_command": "docker compose -f docker-compose.yml up -d",
+  "log": [
+   "copied .env.example -> .env",
+   "$ docker compose -p lib_app025 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-025/source/docker-compose.yml up -d\n\ntime=\"2026-09-19T12:05:54Z\" level=warning msg=\"The \\\"WWWGROUP\\\" variable is not set. Defaulting to a blank string.\"\ntime=\"2026-09-19T12:05:54Z\" level=warning msg=\"The \\\"WWWUSER\\\" variable is not set. Defaulting to a blank string.\"\n Image mysql/mysql-server:8.0 Pulling \n Image docker.elastic.co/kibana/kibana:7.17.0 Pulling \n Image docker.elastic.co/elasticsearch/elasticsearch:7.17.0 Pulling \n Image axllent/mailpit:latest Pulling \n Image sail-8.3/app Pulling \n Image docker.elastic.co/kibana/kibana:7.17.0 Error failed to resolve reference \"docker.elastic.co/kibana/kibana:7.17.0\": failed to do request: Head \"https://docker.elastic.co/v2/kibana/kibana/manifests/7.17.0\": Forbidden\n Image sail-8.3/app Interrupted \n Image axllent/mailpit:latest Interrupted \n Image mysql/mysql-server:8.0 Interrupted \n Image docker.elastic.co/elasticsearch/elasticsearch:7.17.0 Interrupted \nError response from daemon: failed to resolve reference \"docker.elastic.co/kibana/kibana:7.17.0\": failed to do request: Head \"https://docker.elastic.co/v2/kibana/kibana/manifests/7.17.0\": Forbidden\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "php": [
+    "composer.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "mysql"
+ }
 }

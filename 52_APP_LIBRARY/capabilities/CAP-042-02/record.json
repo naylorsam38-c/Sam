@@ -1,0 +1,36 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-02",
+ "name": "credentials",
+ "attach_points": [
+  {
+   "file": "frontend/src/helpers/honeytokens.ts",
+   "matched_words": [
+    "credential"
+   ],
+   "line": 19,
+   "snippet": "export const HONEY_TOKEN_CREDENTIAL_FIELDS: Record<"
+  },
+  {
+   "file": "frontend/src/helpers/auditlogstreams.ts",
+   "matched_words": [
+    "credentials"
+   ],
+   "line": 22,
+   "snippet": "logStream: DiscriminativePick<TAuditLogStream, \"provider\" | \"credentials\">"
+  },
+  {
+   "file": "frontend/src/helpers/project.ts",
+   "matched_words": [
+    "credential",
+    "credentials"
+   ],
+   "line": 202,
+   "snippet": "\"Connect to databases and servers securely with session brokering, recording, and credential vaulting.\","
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}

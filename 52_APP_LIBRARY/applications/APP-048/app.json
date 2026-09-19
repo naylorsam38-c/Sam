@@ -9,7 +9,7 @@
  "version": null,
  "commit": "3d08bbe5201389c65f80d22ad38a7b7432c75e87",
  "source_path": "applications/APP-048/source",
- "status": "ACQUIRED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -149,5 +149,26 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c /deps/install_deps.sh\" did not complete successfully: exit code: 100",
+  "blocked_host": "pkg-containers.githubusercontent.com",
+  "runtime_hint": [
+   "python"
+  ],
+  "startup_command": "docker compose -f docker-compose.yml up -d",
+  "log": [
+   "$ docker compose -p lib_app048 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-048/source/docker-compose.yml up -d\nlly: exit code: 100\n\n#16 [base 2/2] RUN sh -c \"\"\n#16 CANCELED\n------\n > importing cache manifest from ghcr.io/blakeblackshear/frigate:cache-amd64:\n------\n------\n > [wget 1/2] RUN apt-get update     && apt-get install -y wget xz-utils     && rm -rf /var/lib/apt/lists/*:\n0.287   403  Forbidden [IP: 151.101.66.132 80]\n0.291 Err:3 http://deb.debian.org/debian-security bookworm-security InRelease\n0.291   403  Forbidden [IP: 151.101.66.132 80]\n0.296 Reading package lists...\n0.308 E: The repository 'http://deb.debian.org/debian bookworm InRelease' is not signed.\n0.308 E: Failed to fetch http://deb.debian.org/debian/dists/bookworm/InRelease  403  Forbidden [IP: 151.101.66.132 80]\n0.308 E: Failed to fetch http://deb.debian.org/debian/dists/bookworm-updates/InRelease  403  Forbidden [IP: 151.101.66.132 80]\n0.308 E: The repository 'http://deb.debian.org/debian bookworm-updates InRelease' is not signed.\n0.308 E: Failed to fetch http://deb.debian.org/debian-security/dists/bookworm-security/InRelease  403  Forbidden [IP: 151.101.66.132 80]\n0.308 E: The repository 'http://deb.debian.org/debian-security bookworm-security InRelease' is not signed.\n------\n------\n > [deps 1/6] RUN --mount=type=bind,source=docker/main/install_deps.sh,target=/deps/install_deps.sh     /deps/install_deps.sh:\n0.248 + apt-get -qq update\n0.297 E: The repository 'http://deb.debian.org/debian bookworm InRelease' is not signed.\n0.297 E: Failed to fetch http://deb.debian.org/debian/dists/bookworm/InRelease  403  Forbidden [IP: 151.101.66.132 80]\n0.297 E: Failed to fetch http://deb.debian.org/debian/dists/bookworm-updates/InRelease  403  Forbidden [IP: 151.101.66.132 80]\n0.297 E: The repository 'http://deb.debian.org/debian bookworm-updates InRelease' is not signed.\n0.297 E: Failed to fetch http://deb.debian.org/debian-security/dists/bookworm-security/InRelease  403  Forbidden [IP: 151.101.66.132 80]\n0.297 E: The repository 'http://deb.debian.org/debian-security bookworm-security InRelease' is not signed.\n------\n\n Image eclipse-mosquitto:2.0 Pulling \n 4bb6beece98e Pulling fs layer 0B\n d0c1d894c237 Pulling fs layer 0B\n 460c7cbc1598 Pulling fs layer 0B\n d0c1d894c237 Download complete 0B\n d0c1d894c237 Extracting 1B\n 4bb6beece98e Download complete 0B\n b6821fc9c07c Download complete 0B\n d0c1d894c237 Extracting 1B\n d0c1d894c237 Pull complete 0B\n 460c7cbc1598 Download complete 0B\n 460c7cbc1598 Extracting 1B\n a81c69d87130 Download complete 0B\n 460c7cbc1598 Extracting 1B\n 4bb6beece98e Pull complete 0B\n 460c7cbc1598 Pull complete 0B\n Image eclipse-mosquitto:2.0 Pulled \n Image lib_app048-devcontainer Building \nfailed to solve: process \"/bin/sh -c /deps/install_deps.sh\" did not complete successfully: exit code: 100\n\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "python": [
+    "pyproject.toml"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ }
 }

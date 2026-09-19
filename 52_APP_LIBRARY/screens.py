@@ -43,6 +43,12 @@ MAX_STATIC_ROUTES = 40
 MAX_SCREENS_TO_VISIT = 14
 VIEWPORT = {"width": 1366, "height": 900}
 
+TEST_USER = {"name": "Library Walker", "username": "libwalker", "email": "libwalker@example.com",
+            "password": "Walker-Pass-2026!"}
+GATE_WORDS = ("sign up", "signup", "register", "create account", "get started", "setup", "set up",
+             "install", "create admin", "continue", "next", "finish", "log in", "login", "sign in")
+MAX_GATE_STEPS = 5
+
 SCREEN_FILE_SUFFIXES = (".html", ".htm", ".erb", ".haml", ".ejs", ".pug", ".hbs",
                         ".njk", ".jinja", ".jinja2", ".vue", ".svelte", ".jsx", ".tsx", ".astro")
 SCREEN_EXCLUDE_PARTS = ("node_modules", "vendor", "dist", "build", ".git", "test", "tests",
@@ -105,6 +111,113 @@ class ScreenWalk:
             return True
         except Exception:
             return False
+
+    def _fill_visible_inputs(self, form):
+        filled = 0
+        for inp in form.query_selector_all("input, select"):
+            try:
+                if not inp.is_visible():
+                    continue
+                tag = inp.evaluate("e => e.tagName.toLowerCase()")
+                typ = (inp.get_attribute("type") or "text").lower()
+                if tag == "select":
+                    opts = inp.query_selector_all("option")
+                    if len(opts) > 1:
+                        inp.select_option(index=1)
+                        filled += 1
+                    continue
+                if typ in ("hidden", "submit", "button", "file", "checkbox", "radio"):
+                    continue
+                name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("placeholder"),
+                                              inp.get_attribute("autocomplete")])).lower()
+                if typ == "email" or "email" in name:
+                    val = TEST_USER["email"]
+                elif typ == "password" or "pass" in name:
+                    val = TEST_USER["password"]
+                elif "user" in name or "login" in name or "handle" in name:
+                    val = TEST_USER["username"]
+                elif "name" in name or "org" in name or "team" in name or "company" in name or "workspace" in name:
+                    val = TEST_USER["name"]
+                else:
+                    val = TEST_USER["name"]
+                # .fill() sets the DOM value directly and some React-controlled
+                # forms (confirm-password checks, live validators) never see a
+                # real input event, so their validation silently disagrees with
+                # what's on screen ("passwords do not match" when they do).
+                # click+type dispatches real keystroke events every framework
+                # picks up.
+                inp.click(timeout=2000)
+                inp.fill("")
+                inp.type(val, delay=15, timeout=5000)
+                filled += 1
+            except Exception:
+                continue
+        return filled
+
+    def _submit(self, form):
+        for sel in ("button[type=submit]", "input[type=submit]", "button:not([type=button])", "button"):
+            try:
+                b = form.query_selector(sel)
+                if b and b.is_visible():
+                    b.click(timeout=4000)
+                    self.page.wait_for_timeout(2500)
+                    return True
+            except Exception:
+                continue
+        return False
+
+    def _find_gate_form(self):
+        try:
+            forms = [f for f in self.page.query_selector_all("form") if f.is_visible()]
+        except Exception:
+            forms = []
+        pw = [f for f in forms if f.query_selector("input[type=password]")]
+        if pw:
+            return pw[0]
+        for f in forms:
+            try:
+                t = (f.inner_text() or "").lower()
+            except Exception:
+                t = ""
+            if any(w in t for w in GATE_WORDS) or f.query_selector("input[type=email]"):
+                return f
+        # some onboarding wizards (this includes real apps, not an edge case)
+        # use a plain <div> wrapper with inputs + a button instead of <form> -
+        # fall back to "the body itself" when it has a visible text input and
+        # a button whose label matches a gate word, so the multi-step wizard
+        # isn't mistaken for "no gate left".
+        try:
+            has_input = self.page.query_selector("input:not([type=hidden])") is not None
+            for b in self.page.query_selector_all("button"):
+                if not b.is_visible():
+                    continue
+                label = (b.inner_text() or "").lower()
+                if has_input and any(w in label for w in GATE_WORDS):
+                    return self.page.query_selector("body")
+        except Exception:
+            pass
+        return None
+
+    def get_past_setup_wall(self):
+        """Fills whatever setup/signup/login form stands between the homepage
+        and the real app - the same problem the old walker called
+        get_in(). Returns a log of what it did; never claims success it
+        didn't reach."""
+        steps = []
+        for i in range(MAX_GATE_STEPS):
+            form = self._find_gate_form()
+            if form is None:
+                break
+            before = self.page.url
+            filled = self._fill_visible_inputs(form)
+            submitted = self._submit(form)
+            steps.append({"step": i + 1, "url_before": before, "fields_filled": filled,
+                         "submitted": submitted, "url_after": self.page.url})
+            if not submitted:
+                break
+            if self._find_gate_form() is None:
+                break
+        return steps
 
     def collect_nav_links(self):
         items = []
@@ -189,14 +302,24 @@ def process_app(entry, base_url):
         page = ctx.new_page()
         w = ScreenWalk(page, base_url, d / "evidence")
 
+        # get past whatever setup/signup/login wizard stands in the way first -
+        # otherwise every "screen" discovered is really just the same gate
+        # (spec section 7's screens must be the app's real screens, not its
+        # onboarding wall).
+        if not w.goto(base_url):
+            gate_steps = []
+        else:
+            gate_steps = w.get_past_setup_wall()
+
         screens = []
         seen_urls = set()
 
-        # 1. the homepage itself is always screen #1
-        home_result = w.verify_screen(base_url, "home")
+        # 1. wherever the gate left us is screen #1 (already navigated there)
+        home_result = w.verify_screen(w.page.url, "home")
         screens.append({"screen_id": "SCR-001", "name": "Home", "route": "/",
-                        "discovery_source": "startup_url", **home_result})
+                        "discovery_source": "startup_url", "gate_steps": gate_steps, **home_result})
         seen_urls.add(base_url.rstrip("/"))
+        seen_urls.add(w.page.url.rstrip("/"))
 
         # 2. live navigation: links actually present on the rendered homepage
         nav_links = w.collect_nav_links() if home_result["reachable"] else []

@@ -9,7 +9,7 @@
  "version": null,
  "commit": "780bbcbb8b9367c667e9b6af2aecc8277f24c0ad",
  "source_path": "applications/APP-020/source",
- "status": "ACQUIRED",
+ "status": "STARTUP_FAILED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -134,5 +134,15 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "STARTUP_FAILED",
+  "reason": "target web: failed to solve: failed to compute cache key: failed to calculate checksum of ref qo5jhdggkcqvqetvy631nuqr1::de17e4wwivymp7m7fkozo0v1r: \"/frontend/package.json\": not found",
+  "runtime_hint": []
+ },
+ "ecosystem": {
+  "detected_ecosystems": {},
+  "has_container_recipe": true,
+  "database_requirement": null
+ }
 }

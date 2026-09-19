@@ -9,7 +9,7 @@
  "version": null,
  "commit": "f59d5b8b1981fe49257ca9fba91418f0d9f8ac41",
  "source_path": "applications/APP-008/source",
- "status": "ACQUIRED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -206,5 +206,20 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:18664310d22f348f6bab66e284f0a72e7dd7c98911fcdeab13fcb45857de30f8?se=2026-09-19T12%3A05%3A00Z&sig=c83Y%2Fx3rnayNs%2Fo88WhvU3fvPkjnDvqN6eNmiMmy%2BMQ%3D&ske=2026-09-20T04%3A28%3A47Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T04%3A28%3A47Z&sktid=3",
+  "blocked_host": "pkg-containers.githubusercontent.com",
+  "runtime_hint": [],
+  "startup_command": "docker compose -f docker-compose.yml up -d",
+  "log": [
+   "$ docker compose -p lib_app008 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-008/source/docker-compose.yml up -d\n\n Image ghcr.io/firezone/debug/client:main Pulling \n Image ghcr.io/firezone/debug/gateway:main Pulling \n Image ghcr.io/firezone/debug/client:main Pulling \n Image ghcr.io/firezone/elixir:main Pulling \n Image ghcr.io/siemens/ghostwire Pulling \n Image mlabbe/iperf3 Pulling \n Image ghcr.io/firezone/debug/http-test-server:main Pulling \n Image ghcr.io/firezone/secnetperf:v2.6.0 Pulling \n Image ghcr.io/firezone/debug/relay:main Pulling \n Image ghcr.io/firezone/portal:main Pulling \n Image postgres:18 Pulling \n Image ghcr.io/firezone/debug/relay:main Pulling \n Image kennethreitz/httpbin Pulling \n Image alpine:latest Pulling \n Image kennethreitz/httpbin Pulling \n Image ghcr.io/firezone/xdp-pass Pulling \n Image otel/opentelemetry-collector:latest Pulling \n Image ghcr.io/firezone/secnetperf:v2.6.0 Pulling \n Image ghcr.io/siemens/packetflix Pulling \nfailed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:18664310d22f348f6bab66e284f0a72e7dd7c98911fcdeab13fcb45857de30f8?se=2026-09-19T12%3A05%3A00Z&sig=c83Y%2Fx3rnayNs%2Fo88WhvU3fvPkjnDvqN6eNmiMmy%2BMQ%3D&ske=2026-09-20T04%3A28%3A47Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T04%3A28%3A47Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=c0534aced09267771dc700c164391d84c2234c174353af96c5e22a8a0152a146\": Forbidden\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {},
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ }
 }

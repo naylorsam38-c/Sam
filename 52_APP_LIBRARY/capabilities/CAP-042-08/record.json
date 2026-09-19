@@ -1,0 +1,35 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-08",
+ "name": "MFA",
+ "attach_points": [
+  {
+   "file": "frontend/src/const.ts",
+   "matched_words": [
+    "mfa"
+   ],
+   "line": 69,
+   "snippet": "MFA_TEMP_TOKEN = \"MFA_TEMP_TOKEN\""
+  },
+  {
+   "file": "frontend/src/routes.ts",
+   "matched_words": [
+    "mfa"
+   ],
+   "line": 484,
+   "snippet": "route(\"/mfa-session/$mfaSessionId\", \"MfaSessionPage/route.tsx\"),"
+  },
+  {
+   "file": "frontend/src/helpers/mfasession.ts",
+   "matched_words": [
+    "mfa"
+   ],
+   "line": 6,
+   "snippet": "name: \"SESSION_MFA_REQUIRED\";"
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}

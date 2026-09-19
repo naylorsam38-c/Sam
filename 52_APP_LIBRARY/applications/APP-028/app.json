@@ -9,7 +9,7 @@
  "version": null,
  "commit": "61056ff9a98082485add8111e901d3148ca358ef",
  "source_path": "applications/APP-028/source",
- "status": "ACQUIRED",
+ "status": "STARTUP_FAILED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -99,5 +99,21 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "STARTUP_FAILED",
+  "reason": "ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref qo5jhdggkcqvqetvy631nuqr1::wc0jo15r4o0rhr47l9g37029d: \"/scripts/-entrypoint.sh\": not found",
+  "runtime_hint": [
+   "node"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ }
 }

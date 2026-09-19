@@ -9,7 +9,7 @@
  "version": null,
  "commit": "c37bfd95797fd6da8a6da53fc13d191994b3f687",
  "source_path": "applications/APP-027/source",
- "status": "ACQUIRED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -247,5 +247,26 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk add git musl-dev mailcap\" did not complete successfully: exit code: 3",
+  "blocked_host": "dl-cdn.alpinelinux.org",
+  "runtime_hint": [
+   "go"
+  ],
+  "startup_command": "docker build -f Dockerfile .",
+  "log": [
+   "$ docker build -t localhost/lib_app027:lib --network=host -f /home/user/Sam/52_APP_LIBRARY/applications/APP-027/source/Dockerfile .\n\ne314006f231fe6e9f219cf5432ca done\n#5 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done\n#5 DONE 6.4s\n\n#6 [build 2/8] RUN apk add git musl-dev mailcap\n#6 0.196 WARNING: updating and opening https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#6 0.212 WARNING: updating and opening https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#6 0.213 ERROR: unable to select packages:\n#6 0.213   git (no such package):\n#6 0.213     required by: world[git]\n#6 0.213   mailcap (no such package):\n#6 0.213     required by: world[mailcap]\n#6 0.213   musl-dev (no such package):\n#6 0.213     required by: world[musl-dev]\n#6 ERROR: process \"/bin/sh -c apk add git musl-dev mailcap\" did not complete successfully: exit code: 3\n------\n > [build 2/8] RUN apk add git musl-dev mailcap:\n0.196 WARNING: updating and opening https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.212 WARNING: updating and opening https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.213 ERROR: unable to select packages:\n0.213   git (no such package):\n0.213     required by: world[git]\n0.213   mailcap (no such package):\n0.213     required by: world[mailcap]\n0.213   musl-dev (no such package):\n0.213     required by: world[musl-dev]\n------\n\n \u001b[33m1 warning found (use docker --debug to expand):\n\u001b[0m - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 3)\nDockerfile:6\n--------------------\n   4 |     \n   5 |     # Necessary to run 'go get' and to compile the linked binary\n   6 | >>> RUN apk add git musl-dev mailcap\n   7 |     \n   8 |     WORKDIR /go/src/github.com/dutchcoders/transfer.sh\n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk add git musl-dev mailcap\" did not complete successfully: exit code: 3\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "go": [
+    "go.mod"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ }
 }

@@ -9,7 +9,7 @@
  "version": null,
  "commit": "5998570a3564afa82e540b660dae4b3b2178f58c",
  "source_path": "applications/APP-038/source",
- "status": "ACQUIRED",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": false,
  "manual_override_reason": "automated pick (Pi-hole) is primarily a DNS/ad-blocker; this is the category-defining self-hosted monitoring tool",
  "discovery_candidates": [
@@ -102,5 +102,38 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:3001/",
+  "http_status": 200,
+  "recipe": "compose.yaml",
+  "recipe_kind": "compose",
+  "runtime_hint": [
+   "node"
+  ],
+  "startup_command": "docker compose -f compose.yaml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
+ },
+ "capability_summary": {
+  "capabilities_defined": false,
+  "discovered": 0,
+  "attach_point_found": 0,
+  "proven": 0
+ }
 }

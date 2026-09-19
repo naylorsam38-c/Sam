@@ -9,7 +9,7 @@
  "version": null,
  "commit": "2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2",
  "source_path": "applications/APP-015/source",
- "status": "ACQUIRED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -164,5 +164,34 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add     bash     ca-certificates     curl     gettext     git     linux-pam     openssh     s6     sqlite     su-exec     gnupg\" did not complete successfully: exit code: 11",
+  "blocked_host": "dl-cdn.alpinelinux.org",
+  "runtime_hint": [
+   "node",
+   "python",
+   "go"
+  ],
+  "startup_command": "docker build -f Dockerfile .",
+  "log": [
+   "$ docker build -t localhost/lib_app015:lib --network=host -f /home/user/Sam/52_APP_LIBRARY/applications/APP-015/source/Dockerfile .\n\nkage):\n#9 0.186     required by: world[linux-pam]\n#9 0.186   openssh (no such package):\n#9 0.186     required by: world[openssh]\n#9 0.186   s6 (no such package):\n#9 0.186     required by: world[s6]\n#9 0.186   sqlite (no such package):\n#9 0.186     required by: world[sqlite]\n#9 0.186   su-exec (no such package):\n#9 0.186     required by: world[su-exec]\n#9 ERROR: process \"/bin/sh -c apk --no-cache add     bash     ca-certificates     curl     gettext     git     linux-pam     openssh     s6     sqlite     su-exec     gnupg\" did not complete successfully: exit code: 11\n\n#10 [frontend-build 2/7] RUN apk --no-cache add build-base git nodejs pnpm\n#10 CANCELED\n\n#11 [internal] load build context\n#11 transferring context: 9.28MB 0.2s done\n#11 CANCELED\n\n#12 [build-env  2/10] RUN apk --no-cache add     build-base     git\n#12 CANCELED\n------\n > [gitea 2/5] RUN apk --no-cache add     bash     ca-certificates     curl     gettext     git     linux-pam     openssh     s6     sqlite     su-exec     gnupg:\n0.186   linux-pam (no such package):\n0.186     required by: world[linux-pam]\n0.186   openssh (no such package):\n0.186     required by: world[openssh]\n0.186   s6 (no such package):\n0.186     required by: world[s6]\n0.186   sqlite (no such package):\n0.186     required by: world[sqlite]\n0.186   su-exec (no such package):\n0.186     required by: world[su-exec]\n------\nDockerfile:51\n--------------------\n  50 |     \n  51 | >>> RUN apk --no-cache add \\\n  52 | >>>     bash \\\n  53 | >>>     ca-certificates \\\n  54 | >>>     curl \\\n  55 | >>>     gettext \\\n  56 | >>>     git \\\n  57 | >>>     linux-pam \\\n  58 | >>>     openssh \\\n  59 | >>>     s6 \\\n  60 | >>>     sqlite \\\n  61 | >>>     su-exec \\\n  62 | >>>     gnupg\n  63 |     \n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add     bash     ca-certificates     curl     gettext     git     linux-pam     openssh     s6     sqlite     su-exec     gnupg\" did not complete successfully: exit code: 11\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "python": [
+    "pyproject.toml"
+   ],
+   "go": [
+    "go.mod"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ }
 }

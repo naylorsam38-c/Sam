@@ -9,7 +9,7 @@
  "version": null,
  "commit": "983129bffdfb0655d8e00d8d3906ae9dbb45dcaf",
  "source_path": "applications/APP-040/source",
- "status": "ACQUIRED",
+ "status": "STARTUP_FAILED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -38,5 +38,15 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "STARTUP_FAILED",
+  "reason": "ERROR: failed to build: failed to solve: base name (${BASE}) should not be blank",
+  "runtime_hint": []
+ },
+ "ecosystem": {
+  "detected_ecosystems": {},
+  "has_container_recipe": true,
+  "database_requirement": null
+ }
 }

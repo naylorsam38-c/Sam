@@ -1,0 +1,257 @@
+{
+ "application": "APP-042",
+ "category": "password-manager",
+ "capabilities_defined": true,
+ "capabilities": [
+  {
+   "id": "CAP-042-01",
+   "name": "Vaults",
+   "attach_points": [
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "vault"
+     ],
+     "line": 75,
+     "snippet": "\"/azure-key-vault/authorize\","
+    },
+    {
+     "file": "frontend/src/helpers/project.ts",
+     "matched_words": [
+      "vault"
+     ],
+     "line": 138,
+     "snippet": "const ORG_SCOPED_PRODUCT_PATH_RE = /^\\/organizations\\/[^/]+\\/(pam|agent-vault)(?:\\/|$)/;"
+    },
+    {
+     "file": "frontend/src/helpers/pkisyncs.ts",
+     "matched_words": [
+      "vault"
+     ],
+     "line": 14,
+     "snippet": "name: \"Azure Key Vault\","
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  },
+  {
+   "id": "CAP-042-02",
+   "name": "credentials",
+   "attach_points": [
+    {
+     "file": "frontend/src/helpers/honeytokens.ts",
+     "matched_words": [
+      "credential"
+     ],
+     "line": 19,
+     "snippet": "export const HONEY_TOKEN_CREDENTIAL_FIELDS: Record<"
+    },
+    {
+     "file": "frontend/src/helpers/auditlogstreams.ts",
+     "matched_words": [
+      "credentials"
+     ],
+     "line": 22,
+     "snippet": "logStream: DiscriminativePick<TAuditLogStream, \"provider\" | \"credentials\">"
+    },
+    {
+     "file": "frontend/src/helpers/project.ts",
+     "matched_words": [
+      "credential",
+      "credentials"
+     ],
+     "line": 202,
+     "snippet": "\"Connect to databases and servers securely with session brokering, recording, and credential vaulting.\","
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  },
+  {
+   "id": "CAP-042-03",
+   "name": "password generation",
+   "attach_points": [
+    {
+     "file": "frontend/src/const.ts",
+     "matched_words": [
+      "password"
+     ],
+     "line": 23,
+     "snippet": "\"/password-reset\","
+    },
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "password"
+     ],
+     "line": 483,
+     "snippet": "route(\"/password-setup\", \"auth/PasswordSetupPage/route.tsx\"),"
+    },
+    {
+     "file": "frontend/src/helpers/project.ts",
+     "matched_words": [
+      "password"
+     ],
+     "line": 20,
+     "snippet": "secretValue: \"mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@mongodb.net\","
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  },
+  {
+   "id": "CAP-042-04",
+   "name": "autofill",
+   "attach_points": [],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "no code attach point and no matching UI screen found"
+  },
+  {
+   "id": "CAP-042-05",
+   "name": "sharing",
+   "attach_points": [
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "sharing"
+     ],
+     "line": 412,
+     "snippet": "route(\"/projects/secret-management/secret-sharing\", ["
+    },
+    {
+     "file": "frontend/src/helpers/project.ts",
+     "matched_words": [
+      "sharing"
+     ],
+     "line": 109,
+     "snippet": "// Org-wide resource pages (KMIP servers, Secret Sharing, Product Settings, Insights) live at"
+    },
+    {
+     "file": "frontend/src/components/agent-vault/agentvaultintro/useagentvaultintro.ts",
+     "matched_words": [
+      "sharing"
+     ],
+     "line": 17,
+     "snippet": "// the layout drive one dialog between them without sharing anything else."
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  },
+  {
+   "id": "CAP-042-06",
+   "name": "permissions",
+   "attach_points": [
+    {
+     "file": "frontend/src/helpers/pkisyncs.ts",
+     "matched_words": [
+      "permissions"
+     ],
+     "line": 179,
+     "snippet": "{ key: \"fileMode\", label: \"File Permissions\" },"
+    },
+    {
+     "file": "frontend/src/helpers/resourcepermissions.ts",
+     "matched_words": [
+      "permission",
+      "permissions"
+     ],
+     "line": 7,
+     "snippet": "import { conditionsMatcher } from \"@app/hooks/api/roles/permission-matcher\";"
+    },
+    {
+     "file": "frontend/src/helpers/permissions.ts",
+     "matched_words": [
+      "permission",
+      "permissions"
+     ],
+     "line": 4,
+     "snippet": "import { conditionsMatcher } from \"@app/hooks/api/roles/permission-matcher\";"
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  },
+  {
+   "id": "CAP-042-07",
+   "name": "secure notes",
+   "attach_points": [
+    {
+     "file": "frontend/src/helpers/project.ts",
+     "matched_words": [
+      "note"
+     ],
+     "line": 71,
+     "snippet": "* Note: current user should be a member of the organization"
+    },
+    {
+     "file": "frontend/src/components/projects/requestprojectaccessmodal.tsx",
+     "matched_words": [
+      "note"
+     ],
+     "line": 26,
+     "snippet": "const form = useForm<{ note: string }>();"
+    },
+    {
+     "file": "frontend/src/components/auth/signupproducts.ts",
+     "matched_words": [
+      "secure"
+     ],
+     "line": 73,
+     "snippet": "description: \"Secure and record access to servers and databases.\","
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  },
+  {
+   "id": "CAP-042-08",
+   "name": "MFA",
+   "attach_points": [
+    {
+     "file": "frontend/src/const.ts",
+     "matched_words": [
+      "mfa"
+     ],
+     "line": 69,
+     "snippet": "MFA_TEMP_TOKEN = \"MFA_TEMP_TOKEN\""
+    },
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "mfa"
+     ],
+     "line": 484,
+     "snippet": "route(\"/mfa-session/$mfaSessionId\", \"MfaSessionPage/route.tsx\"),"
+    },
+    {
+     "file": "frontend/src/helpers/mfasession.ts",
+     "matched_words": [
+      "mfa"
+     ],
+     "line": 6,
+     "snippet": "name: \"SESSION_MFA_REQUIRED\";"
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  }
+ ]
+}

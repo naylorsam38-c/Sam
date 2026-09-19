@@ -1,0 +1,29 @@
+{
+ "generated_at": "2026-09-19T12:21:08.412989+00:00",
+ "categories_with_capability_lists": "22 of 52 (copied from benchmark70.json where the category means the same thing; the rest have none - none invented)",
+ "applications": [
+  {
+   "id": "APP-038",
+   "name": "Uptime Kuma",
+   "category": "monitoring",
+   "capabilities_defined": false,
+   "discovered": 0,
+   "attach_points_found": 0,
+   "proven": 0
+  },
+  {
+   "id": "APP-042",
+   "name": "Infisical Community Edition",
+   "category": "password-manager",
+   "capabilities_defined": true,
+   "discovered": 8,
+   "attach_points_found": 7,
+   "proven": 0
+  }
+ ],
+ "totals": {
+  "discovered": 8,
+  "attach_points_found": 7,
+  "proven": 0
+ }
+}

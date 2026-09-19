@@ -1,0 +1,35 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-07",
+ "name": "secure notes",
+ "attach_points": [
+  {
+   "file": "frontend/src/helpers/project.ts",
+   "matched_words": [
+    "note"
+   ],
+   "line": 71,
+   "snippet": "* Note: current user should be a member of the organization"
+  },
+  {
+   "file": "frontend/src/components/projects/requestprojectaccessmodal.tsx",
+   "matched_words": [
+    "note"
+   ],
+   "line": 26,
+   "snippet": "const form = useForm<{ note: string }>();"
+  },
+  {
+   "file": "frontend/src/components/auth/signupproducts.ts",
+   "matched_words": [
+    "secure"
+   ],
+   "line": 73,
+   "snippet": "description: \"Secure and record access to servers and databases.\","
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}

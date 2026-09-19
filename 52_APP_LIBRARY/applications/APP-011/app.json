@@ -9,7 +9,7 @@
  "version": null,
  "commit": "27b7303baf41bb28babc610ac8eaa486e1ddfab5",
  "source_path": "applications/APP-011/source",
- "status": "ACQUIRED",
+ "status": "STARTUP_FAILED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -44,5 +44,25 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "STARTUP_FAILED",
+  "reason": "no real HTML UI within 480s (last: http://IP:9090/ui -> URLError)",
+  "runtime_hint": [
+   "node",
+   "python"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "python": [
+    "pyproject.toml"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ }
 }

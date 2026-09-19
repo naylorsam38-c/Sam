@@ -9,7 +9,7 @@
  "version": null,
  "commit": "54e4a9383c84d7317af42a7ddb177ce8bcba058d",
  "source_path": "applications/APP-014/source",
- "status": "ACQUIRED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -32,5 +32,26 @@
    "status": "ACQUIRED",
    "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add musl-dev openssl-dev\" did not complete successfully: exit code: 1",
+  "blocked_host": "dl-cdn.alpinelinux.org",
+  "runtime_hint": [
+   "node"
+  ],
+  "startup_command": "docker build -f Dockerfile .",
+  "log": [
+   "$ docker build -t localhost/lib_app014:lib --network=host -f /home/user/Sam/52_APP_LIBRARY/applications/APP-014/source/Dockerfile .\n\nain/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#12 0.303 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#12 0.303 ERROR: unable to select packages:\n#12 0.303   curl (no such package):\n#12 0.303     required by: world[curl]\n#12 ERROR: process \"/bin/sh -c apk --no-cache add curl musl-dev\" did not complete successfully: exit code: 1\n------\n > [wasm 3/6] RUN apk --no-cache add curl musl-dev:\n0.284 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.303 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.303 ERROR: unable to select packages:\n0.303   curl (no such package):\n0.303     required by: world[curl]\n------\n------\n > [backend 3/6] RUN apk --no-cache add musl-dev openssl-dev:\n0.297 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.311 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.313 ERROR: unable to select packages:\n0.313   openssl-dev (no such package):\n0.313     required by: world[openssl-dev]\n------\n\n \u001b[33m2 warnings found (use docker --debug to expand):\n\u001b[0m - FromPlatformFlagConstDisallowed: FROM --platform flag should not use constant value \"amd64\" (line 8)\n - FromPlatformFlagConstDisallowed: FROM --platform flag should not use constant value \"amd64\" (line 15)\nDockerfile:3\n--------------------\n   1 |     FROM rust:alpine AS backend\n   2 |     WORKDIR /home/rust/src\n   3 | >>> RUN apk --no-cache add musl-dev openssl-dev\n   4 |     COPY . .\n   5 |     RUN cargo test --release\n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add musl-dev openssl-dev\" did not complete successfully: exit code: 1\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ }
 }

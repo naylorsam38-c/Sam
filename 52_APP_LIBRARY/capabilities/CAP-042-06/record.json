@@ -1,0 +1,37 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-06",
+ "name": "permissions",
+ "attach_points": [
+  {
+   "file": "frontend/src/helpers/pkisyncs.ts",
+   "matched_words": [
+    "permissions"
+   ],
+   "line": 179,
+   "snippet": "{ key: \"fileMode\", label: \"File Permissions\" },"
+  },
+  {
+   "file": "frontend/src/helpers/resourcepermissions.ts",
+   "matched_words": [
+    "permission",
+    "permissions"
+   ],
+   "line": 7,
+   "snippet": "import { conditionsMatcher } from \"@app/hooks/api/roles/permission-matcher\";"
+  },
+  {
+   "file": "frontend/src/helpers/permissions.ts",
+   "matched_words": [
+    "permission",
+    "permissions"
+   ],
+   "line": 4,
+   "snippet": "import { conditionsMatcher } from \"@app/hooks/api/roles/permission-matcher\";"
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}
