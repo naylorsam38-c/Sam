@@ -4,7 +4,7 @@
  "app": "OpenCloud",
  "repo": "https://github.com/opencloud-eu/opencloud",
  "commit": "f293031e404d51a7da4a5c06d88b449dc226b9cb",
- "started": "2026-09-19T10:03:32",
+ "started": "2026-09-19T10:07:30",
  "boot": {
   "status": "BOOT FAILED",
   "reason": "image build failed: Run 'docker buildx build --help' for more information",
@@ -24,5 +24,5 @@
   "absent": 0,
   "gaps": []
  },
- "finished": "2026-09-19T10:03:42"
+ "finished": "2026-09-19T10:07:43"
 }

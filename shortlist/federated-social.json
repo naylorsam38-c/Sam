@@ -1,0 +1,517 @@
+{
+ "category": "Community/federated social",
+ "slug": "federated-social",
+ "exemplar": "Mastodon",
+ "capabilities": [
+  "Accounts",
+  "follows",
+  "timelines",
+  "posts",
+  "media",
+  "hashtags",
+  "moderation",
+  "federation",
+  "notifications"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "awesome-selfhosted:582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "fediverse",
+   "activitypub",
+   "mastodon",
+   "federated"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "Akkoma",
+   "repo": "https://akkoma.dev/AkkomaGang/akkoma",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "AsmBB",
+   "repo": "https://asm32.info/fossil/asmbb/index",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Betula",
+   "repo": "https://codeberg.org/bouncepaw/betula",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "BuddyPress",
+   "repo": "https://github.com/buddypress/BuddyPress",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Castopod",
+   "repo": "https://code.castopod.org/adaures/castopod",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "diaspora*",
+   "repo": "https://github.com/diaspora/diaspora",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Discourse",
+   "repo": "https://github.com/discourse/discourse",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Ech0",
+   "repo": "https://github.com/lin-snow/Ech0",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Elgg",
+   "repo": "https://github.com/Elgg/Elgg",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Friendica",
+   "repo": "https://github.com/friendica/friendica",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "GoToSocial",
+   "repo": "https://codeberg.org/superseriousbusiness/gotosocial",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Habitat",
+   "repo": "https://github.com/carlnewton/habitat",
+   "stage": "pre-filter",
+   "reason": "stars 149 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Hatsu",
+   "repo": "https://github.com/importantimport/hatsu",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Hubzilla",
+   "repo": "https://framagit.org/hubzilla/core",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "HumHub",
+   "repo": "https://github.com/humhub/humhub",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Iceshrimp.NET",
+   "repo": "https://iceshrimp.dev/iceshrimp/iceshrimp.net",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Lemmy",
+   "repo": "https://github.com/LemmyNet/lemmy",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Loomio",
+   "repo": "https://github.com/loomio/loomio",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mastodon",
+   "repo": "https://github.com/mastodon/mastodon",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Misago",
+   "repo": "https://github.com/rafalp/Misago",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Misskey",
+   "repo": "https://github.com/misskey-dev/misskey",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Mobilizon",
+   "repo": "https://framagit.org/framasoft/mobilizon/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Movim",
+   "repo": "https://github.com/movim/movim",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "MyBB",
+   "repo": "https://github.com/mybb/mybb",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['LGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "NodeBB",
+   "repo": "https://github.com/NodeBB/NodeBB",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "OSSN",
+   "repo": "https://github.com/opensource-socialnetwork/opensource-socialnetwork",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['CAL-1.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Pagure",
+   "repo": "https://pagure.io/pagure",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "phpBB",
+   "repo": "https://github.com/phpbb/phpbb",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "PieFed",
+   "repo": "https://codeberg.org/rimu/pyfedi",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "PixelFed",
+   "repo": "https://github.com/pixelfed/pixelfed",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Pleroma",
+   "repo": "https://git.pleroma.social/pleroma/pleroma",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "qpixel",
+   "repo": "https://github.com/codidact/qpixel",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Redlib",
+   "repo": "https://github.com/redlib-org/redlib",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Socialhome",
+   "repo": "https://github.com/jaywink/socialhome",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Talkyard",
+   "repo": "https://github.com/debiki/talkyard",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "WriteFreely",
+   "repo": "https://github.com/writefreely/writefreely",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "yarn.social",
+   "repo": "https://git.mills.io/yarnsocial/yarn",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Simple Machines Forum",
+   "repo": "https://github.com/SimpleMachines/SMF",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Enigma 1/2 BBS",
+   "repo": "https://github.com/NuSkooler/enigma-bbs",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Flarum",
+   "repo": "https://github.com/flarum/flarum",
+   "commit": "3d0a0c28b9c61a3997354938a5d582682ec96d98",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": []
+   }
+  },
+  {
+   "name": "Answer",
+   "repo": "https://github.com/apache/answer",
+   "commit": "3b9f1370612e690a0b7f230f05e688930db4c6d3",
+   "stage": "category",
+   "reason": "does not declare itself as community/federated social \u2014 none of ['fediverse', 'activitypub', 'mastodon', 'federated'] in its description or README head",
+   "licence": "Apache-2.0",
+   "found_via": "tag",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Accounts",
+     "follows",
+     "timelines"
+    ],
+    "anchors_missing": []
+   },
+   "capability_coverage_pct": 77.8
+  },
+  {
+   "name": "remark42",
+   "repo": "https://github.com/umputun/remark42",
+   "commit": "419ef4f0bd817e9217a5ce0d808fb3acc192972d",
+   "stage": "category",
+   "reason": "does not declare itself as community/federated social \u2014 none of ['fediverse', 'activitypub', 'mastodon', 'federated'] in its description or README head",
+   "licence": "MIT",
+   "found_via": "tag",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Accounts",
+     "follows",
+     "timelines"
+    ],
+    "anchors_missing": [
+     "Accounts",
+     "timelines"
+    ]
+   },
+   "capability_coverage_pct": 44.4
+  },
+  {
+   "name": "Isso",
+   "repo": "https://github.com/isso-comments/isso",
+   "commit": "413d447a46437d0e9ccf206c8525119355e291d4",
+   "stage": "screens",
+   "reason": "4 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 4,
+    "screen_files_user": 4,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "isso/templates/admin.html",
+     "isso/templates/login.html",
+     "isso/templates/disabled.html",
+     "isso/demo/index.html"
+    ],
+    "login_evidence": [
+     "isso/templates/login.html"
+    ]
+   }
+  },
+  {
+   "name": "Artalk",
+   "repo": "https://github.com/ArtalkJS/Artalk",
+   "commit": "d25beede911d59a571382c6821cb8e7a7c27850a",
+   "stage": "category",
+   "reason": "does not declare itself as community/federated social \u2014 none of ['fediverse', 'activitypub', 'mastodon', 'federated'] in its description or README head",
+   "licence": "MIT",
+   "found_via": "tag",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Accounts",
+     "follows",
+     "timelines"
+    ],
+    "anchors_missing": [
+     "timelines"
+    ]
+   },
+   "capability_coverage_pct": 66.7
+  },
+  {
+   "name": "Coral",
+   "repo": "https://github.com/coralproject/talk",
+   "commit": "8bf2ad784d65ae23a277be045819af04642ed8ce",
+   "stage": "category",
+   "reason": "does not declare itself as community/federated social \u2014 none of ['fediverse', 'activitypub', 'mastodon', 'federated'] in its description or README head",
+   "licence": "Apache-2.0",
+   "found_via": "tag",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Accounts",
+     "follows",
+     "timelines"
+    ],
+    "anchors_missing": []
+   },
+   "capability_coverage_pct": 77.8
+  },
+  {
+   "name": "Databag",
+   "repo": "https://github.com/balzack/databag",
+   "commit": "45343338582b394f4f5fdb4b7e271ea1dc8dd5fd",
+   "stage": "category",
+   "reason": "declares itself but is missing anchor capabilities ['follows', 'timelines']",
+   "licence": "Apache-2.0",
+   "found_via": "keyword",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "federated"
+    ],
+    "declaration_hits": {
+     "description": [
+      "federated"
+     ],
+     "readme": [
+      "federated"
+     ]
+    },
+    "anchors": [
+     "Accounts",
+     "follows",
+     "timelines"
+    ],
+    "anchors_missing": [
+     "follows",
+     "timelines"
+    ]
+   },
+   "capability_coverage_pct": 44.4
+  },
+  {
+   "name": "Scoold",
+   "repo": "https://github.com/Erudika/scoold",
+   "commit": "c6ac03c5c2852407396bc8942ff2d780265ae966",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "Apache-2.0",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": [
+     "src/main/java/com/erudika/scoold/controllers/signincontroller.java",
+     "src/main/resources/templates/signin.vm"
+    ]
+   }
+  }
+ ]
+}

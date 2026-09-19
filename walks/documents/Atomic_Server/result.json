@@ -4,7 +4,7 @@
  "app": "Atomic Server",
  "repo": "https://github.com/ontola/atomic-server",
  "commit": "33baaa810988403200e2f06f83d34590d1cf815f",
- "started": "2026-09-19T10:03:43",
+ "started": "2026-09-19T10:07:43",
  "boot": {
   "status": "BOOT FAILED",
   "reason": "compose up failed (rc 1): env file /tmp/walk_clones/https_github_com_ontola_atomic_server/.env not found: stat /tmp/walk_clones/https_github_com_ontola_atomic_server/.env: no such file or directory",
@@ -24,5 +24,5 @@
   "absent": 0,
   "gaps": []
  },
- "finished": "2026-09-19T10:03:46"
+ "finished": "2026-09-19T10:07:46"
 }
