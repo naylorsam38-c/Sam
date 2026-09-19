@@ -1,0 +1,24 @@
+{
+  "attach_points": [
+    {
+      "app_slug": "monthly-expenses-tracker",
+      "cap_id": "CAP-0001",
+      "category": "personal-finance",
+      "decorators": [
+        "@main.route('/export')",
+        "@login_required"
+      ],
+      "end_lineno": 381,
+      "evidence_calls_matched": [
+        "send_file",
+        "writer"
+      ],
+      "found": true,
+      "lineno": 358,
+      "name": "export data",
+      "route_path": "/export",
+      "source_file_relative": "app/routes.py",
+      "symbol": "export_csv"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "_note": "Walking-skeleton scope: one category, seeded to prove the pipeline end to end. Widening this to the real category set (the 52 openapps categories referenced in the prior handoff) is future work once this pipeline is proven — see README.md 'What this proves vs. what's next'.",
+  "categories": [
+    {
+      "slug": "personal-finance",
+      "name": "Personal Finance",
+      "description": "Budgeting, expense tracking, and personal financial reporting applications."
+    }
+  ]
+}

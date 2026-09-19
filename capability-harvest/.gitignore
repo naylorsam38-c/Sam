@@ -1,0 +1,20 @@
+# Real third-party application checkouts, fetched at runtime by
+# discovery/discover_applications.py. Never vendored into this repo --
+# the shelf/ directory holds the harvested extract + provenance instead.
+/application_pool/
+
+# Python virtualenv for running harvested applications locally.
+/.venv/
+__pycache__/
+*.pyc
+
+# Node modules, if a project-local package.json is ever added here.
+node_modules/
+
+# output/ holds per-run, ephemeral artifacts (PIDs, ports, timestamps,
+# server logs, a scratch SQLite db, a scratch downloaded CSV) that go stale
+# the moment the process they describe exits. attach_points.json is kept:
+# it is detect_capability.py's real, reproducible output and the input
+# harvest_parts.py reads from.
+/output/*
+!/output/attach_points.json

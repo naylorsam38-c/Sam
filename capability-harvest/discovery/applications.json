@@ -1,0 +1,21 @@
+{
+  "applications": [
+    {
+      "blocked": false,
+      "category": "personal-finance",
+      "clone_url": "https://github.com/NHasan143/monthly-expenses-tracker.git",
+      "cloned_path": "/home/user/Sam/capability-harvest/application_pool/monthly-expenses-tracker",
+      "discovered_at": "2026-09-19T11:49:37.093217+00:00",
+      "licence": {
+        "file_sha256": "a61bc004f3dd54ad607e2611c3ad554af39f6be379389b52740db5e9f0cc30ef",
+        "flagged": false,
+        "licence_file": "LICENSE",
+        "licence_id": "MIT",
+        "marker_matched": "MIT License"
+      },
+      "resolved_commit": "7fd04edb0756e8dda501ee01b98dc30de2d238b6",
+      "slug": "monthly-expenses-tracker",
+      "why_selected": "Real, working Flask app (flask-login auth + flask-sqlalchemy models, SQLite dev fallback so no external DB is required) with a genuine CSV export route (GET /export, app/routes.py) protected by @login_required. 13 stars, actively maintained, MIT-licensed per its own LICENSE file."
+    }
+  ]
+}
