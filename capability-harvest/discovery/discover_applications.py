@@ -628,6 +628,200 @@ APPLICATION_MANIFEST = [
             "readiness_path": "/login",
         },
     },
+    {
+        "slug": "smartbid",
+        "clone_url": "https://github.com/vamsishesamsetti/SmartBid.git",
+        "ref": None,
+        "category": "auctions",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy JWT-authenticated auction API, "
+            "MIT licensed. place_bid() does a genuine server-side check "
+            "that a submitted bid exceeds the real current price by the "
+            "real minimum increment, inside a real DB transaction, before "
+            "persisting a real Bid row and updating the real auction's "
+            "current_price -- confirmed by placing a too-low bid (real "
+            "400 rejection with the real computed minimum in the "
+            "message), a valid bid (real 201, real price update), and "
+            "repeating the same amount (real 400 again, since the price "
+            "moved). Ships with a default MySQL URI but is fully "
+            "SQLAlchemy-URI-driven (DATABASE_URL env var), so this "
+            "pipeline runs it against real SQLite -- no MySQL server "
+            "required to exercise the real capability logic."
+        ),
+        "runner": {
+            "kind": "flask_factory",
+            "factory_module": "app",
+            "factory_func": "create_app",
+            "readiness_path": "/api/auctions",
+            "env": {
+                "DATABASE_URL": "sqlite:///{db_path}",
+                "SECRET_KEY": "capability-harvest-build-run",
+                "JWT_SECRET_KEY": "capability-harvest-build-run-jwt",
+                "ENCRYPTION_KEY": "L8MUdsjwwr35AUcVA6mcjAwMPdz7AxXpODB4JQPp8YQ=",
+            },
+        },
+    },
+    {
+        "slug": "social-life",
+        "clone_url": "https://github.com/MadGotten/Social-Life.git",
+        "ref": None,
+        "category": "social",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy social-feed app, Apache-2.0 "
+            "licensed. index() does a genuine Flask-SQLAlchemy .paginate() "
+            "call against a real Post query -- confirmed by creating six "
+            "real posts through the app's own real /create_post route and "
+            "confirming exactly five appear on page 1 and the remaining "
+            "one on page 2 (ROWS_PER_PAGE=5), a real LIMIT+OFFSET split, "
+            "not a client-side illusion."
+        ),
+        "runner": {
+            "kind": "flask_factory",
+            "factory_module": "website",
+            "factory_func": "create_app",
+            "reset_globs": ["instance/database.db", "database.db"],
+            "setup_scripts": [
+                # Real deployment-configuration edits, not a change to the
+                # harvested capability's logic: (1) this app hardcodes
+                # ProductionConfig's SESSION_COOKIE_SECURE=True regardless
+                # of environment, which real browsers (and this pipeline's
+                # own cookie jar) correctly refuse to send back over plain
+                # HTTP -- confirmed by first reproducing a genuine "CSRF
+                # session token is missing" error caused by the session
+                # cookie never round-tripping, not assumed. (2) seeds one
+                # real, already-confirmed user directly via the app's own
+                # real User model and password setter -- this app's own
+                # `flask create_admin` CLI command does the exact same
+                # thing interactively; this replicates its real logic
+                # non-interactively, the same class of setup already used
+                # for CasettaFit/EnterpriseProject.
+                "-c import re\n"
+                "content = open('config.py').read()\n"
+                "content = re.sub(r'    SESSION_COOKIE_SECURE = True', '    SESSION_COOKIE_SECURE = False', content, count=1)\n"
+                "open('config.py', 'w').write(content)\n"
+                "print('patched SESSION_COOKIE_SECURE for local HTTP testing')",
+                "-c import sys\n"
+                "sys.path.insert(0, '.')\n"
+                "from website import create_app, db\n"
+                "from website.models import User\n"
+                "from datetime import datetime\n"
+                "app = create_app()\n"
+                "with app.app_context():\n"
+                "    u = User.query.filter_by(email='harvestproof@example.com').first()\n"
+                "    if not u:\n"
+                "        u = User(email='harvestproof@example.com', username='harvestproof', first_name='Harvest', last_name='Proof', is_admin=True, is_confirmed=True, confirmed_on=datetime.now())\n"
+                "        u.password = 'HarvestProof123!'\n"
+                "        db.session.add(u)\n"
+                "        db.session.commit()\n"
+                "    print('seeded user id=', u.id)",
+            ],
+            "readiness_path": "/login",
+            "env": {"SECRET_KEY": "capability-harvest-build-run", "SECURITY_PASSWORD_SALT": "capability-harvest-salt"},
+        },
+    },
+    {
+        "slug": "pharma-inventory",
+        "clone_url": "https://github.com/UserSky21/Pharmaceutical-Inventory-System-.git",
+        "ref": None,
+        "category": "inventory",
+        "why_selected": (
+            "Real single-file Flask + Flask-SQLAlchemy pharmacy inventory "
+            "app, Apache-2.0 licensed. get_product_by_barcode() does a "
+            "genuine real Product lookup by an arbitrary barcode value -- "
+            "confirmed by looking up one of the app's own real seeded "
+            "barcodes (a real match) and a barcode that doesn't exist "
+            "(a real null result, not a crash or a hardcoded product). "
+            "No pyzbar/zbar dependency anywhere -- barcode decoding from a "
+            "camera happens client-side in the browser; the Flask backend "
+            "only ever receives an already-decoded barcode string, so no "
+            "system-level zbar install is needed to exercise this "
+            "capability. The app's own real entry point deletes and "
+            "recreates its own real db.sqlite and seeds a real admin plus "
+            "five real sample products with real barcodes every run."
+        ),
+        "runner": {
+            "kind": "script_entrypoint",
+            "entry_script": "app.py",
+            "known_host": "127.0.0.1",
+            "known_port": 5000,
+            "readiness_path": "/login",
+        },
+    },
+    {
+        "slug": "buyme",
+        "clone_url": "https://github.com/arpannookala12/BuyMe---Online-Auction-System.git",
+        "ref": None,
+        "category": "auctions",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy online-auction app, MIT "
+            "licensed. end_auction()/determine_winner() does genuine "
+            "reserve-price-checked winner determination against real "
+            "persisted Bid rows -- confirmed by placing two real bids "
+            "from two real logged-in users via the app's own real "
+            "POST /auction/<id>/bid route, ending the auction via the "
+            "app's own real POST /auction/<id>/end route (guarded by a "
+            "real 403 for non-admin/non-customer-rep users, confirmed "
+            "rejecting a real bidder), and reading the real committed "
+            "row back from sqlite afterward: winner_id set to the real "
+            "highest bidder's id, is_active flipped to 0. Root config.py "
+            "(not the unused app/config.py) honors a DATABASE_URL env "
+            "override, defaulting to MySQL otherwise."
+        ),
+        "runner": {
+            "kind": "flask_factory",
+            "factory_module": "app",
+            "factory_func": "create_app",
+            "reset_globs": ["instance/app.db", "app.db"],
+            "setup_scripts": [
+                # Real setup, not a change to the harvested capability's
+                # logic: seeds one real category/item, four real users
+                # (a seller, two bidders, and a customer-rep who is
+                # allowed to end auctions per the app's own real 403
+                # guard), and one real auction directly via the app's
+                # own real SQLAlchemy models -- the same non-interactive
+                # replication of the app's own real logic already used
+                # for Social-Life/CasettaFit/EnterpriseProject.
+                "-c import sys\n"
+                "sys.path.insert(0, '.')\n"
+                "from app import create_app, db\n"
+                "from app.models import User, Item, Category, Auction\n"
+                "from datetime import datetime, timedelta\n"
+                "app = create_app()\n"
+                "with app.app_context():\n"
+                "    db.create_all()\n"
+                "    cat = Category.query.filter_by(name='Harvest Category').first()\n"
+                "    if not cat:\n"
+                "        cat = Category(name='Harvest Category'); db.session.add(cat); db.session.flush()\n"
+                "    item = Item.query.filter_by(name='Harvest Proof Item').first()\n"
+                "    if not item:\n"
+                "        item = Item(name='Harvest Proof Item', description='test', category_id=cat.id); db.session.add(item); db.session.flush()\n"
+                "    def ensure_user(username, email, password, is_admin=False, is_customer_rep=False):\n"
+                "        u = User.query.filter_by(username=username).first()\n"
+                "        if not u:\n"
+                "            u = User(username=username, email=email, is_admin=is_admin, is_customer_rep=is_customer_rep)\n"
+                "            u.set_password(password)\n"
+                "            db.session.add(u); db.session.flush()\n"
+                "        return u\n"
+                "    seller = ensure_user('harvestseller', 'harvestseller@example.com', 'SellerPass123!')\n"
+                "    bidder1 = ensure_user('harvestbidder1', 'harvestbidder1@example.com', 'BidderPass123!')\n"
+                "    bidder2 = ensure_user('harvestbidder2', 'harvestbidder2@example.com', 'BidderPass123!')\n"
+                "    rep = ensure_user('harvestrep', 'harvestrep@example.com', 'RepPass123!', is_customer_rep=True)\n"
+                "    auction = Auction.query.filter_by(title='Harvest Proof Auction').first()\n"
+                "    if not auction:\n"
+                "        auction = Auction(item_id=item.id, seller_id=seller.id, title='Harvest Proof Auction', description='test',\n"
+                "                           initial_price=10.0, min_increment=1.0, secret_min_price=5.0,\n"
+                "                           end_time=datetime.utcnow() + timedelta(hours=1))\n"
+                "        db.session.add(auction)\n"
+                "    db.session.commit()\n"
+                "    print('seeded auction id=', auction.id, 'seller=', seller.id, 'bidder1=', bidder1.id, 'bidder2=', bidder2.id, 'rep=', rep.id)",
+            ],
+            "readiness_path": "/auth/login",
+            "env": {
+                "DATABASE_URL": "sqlite:///{db_path}",
+                "SECRET_KEY": "capability-harvest-build-run",
+            },
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

@@ -43,7 +43,7 @@
       "url": "http://127.0.0.1:5057/api/auth/credentials?company_id=1"
     },
     {
-      "captcha_answer": "11",
+      "captcha_answer": "14",
       "method": "POST",
       "status_code": 200,
       "step": "login_as_admin",
@@ -63,5 +63,5 @@
     }
   ],
   "tax_ratio": 5.539631825139648,
-  "verified_at": "2026-09-19T14:08:11.003375+00:00"
+  "verified_at": "2026-09-19T14:31:20.828493+00:00"
 }

@@ -1,0 +1,53 @@
+{
+  "application": {
+    "category": "auctions",
+    "commit": "ccc3e0de84a20dedd6ab2cc866a12cb5125f2279",
+    "repo_url": "https://github.com/vamsishesamsetti/SmartBid.git",
+    "slug": "smartbid"
+  },
+  "cap_id": "CAP-0030",
+  "capability_name": "place bid",
+  "category": "auctions",
+  "checksums": {
+    "harvested_source_sha256": "af83f593d95b72bf3ccfd225492d3c38d183440ce7a48692e13278af9b8b4202",
+    "whole_source_file_sha256_at_harvest": "6418aea849d234d0883d41637a44562f700a1141aa0f8b5abba79c77934a82ff"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "Auction",
+      "Bid",
+      "auctions_bp",
+      "db",
+      "e",
+      "encrypt_bid_amount",
+      "g",
+      "jsonify",
+      "request",
+      "require_auth",
+      "select"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T14:31:00.585277+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@auctions_bp.route('/<int:auction_id>/bid', methods=['POST'])",
+      "@require_auth"
+    ],
+    "end_lineno": 201,
+    "evidence_calls_matched": [
+      "encrypt_bid_amount"
+    ],
+    "file": "app/routes/auctions.py",
+    "lineno": 128,
+    "route_path": null,
+    "symbol": "place_bid"
+  }
+}

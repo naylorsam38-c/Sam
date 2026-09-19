@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 29 capabilities harvested from 19 real applications, each one
+**Status**: 33 capabilities harvested from 21 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 29 capabilities harvested so far
+## The 33 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -76,6 +76,10 @@ No script assumes a working directory.
 | CAP-0027 | view record detail | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) (same app, different attach point) | MIT | `server.py:539` `get_invoice_details` (real multi-table `JOIN` aggregation, `execute`, `fetchall`) | HTTP |
 | CAP-0028 | filter list | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) (same app, different attach point) | MIT | `server.py:75` `get_invoices` (real dynamic `LIKE`-filtered query, `execute`, `fetchall`) | HTTP |
 | CAP-0029 | capture photo | [Mukesh-Web-Dev/imageUploadFlaskApp](https://github.com/Mukesh-Web-Dev/imageUploadFlaskApp) (same app, different attach point) | MIT | `app.py:62` `capture` (real base64 data-URL decode + PIL `save()`, `b64decode`, `save`) | HTTP |
+| CAP-0030 | place bid | [vamsishesamsetti/SmartBid](https://github.com/vamsishesamsetti/SmartBid) | MIT | `app/routes/auctions.py:128` `place_bid` (real Fernet-encrypted bid amount, minimum-increment-enforced, `encrypt_bid_amount`, `commit`) | HTTP |
+| CAP-0031 | paginate list | [MadGotten/Social-Life](https://github.com/MadGotten/Social-Life) | Apache-2.0 | `app.py:16` `index` (real Flask-SQLAlchemy `.paginate()` LIMIT+OFFSET split, `order_by`, `paginate`) | HTTP |
+| CAP-0032 | scan barcode | [UserSky21/Pharmaceutical-Inventory-System-](https://github.com/UserSky21/Pharmaceutical-Inventory-System-) | Apache-2.0 | `app.py:326` `get_product_by_barcode` (real barcode-to-product lookup, `filter_by`, `jsonify`) | HTTP |
+| CAP-0033 | close auction | [arpannookala12/BuyMe---Online-Auction-System](https://github.com/arpannookala12/BuyMe---Online-Auction-System) | MIT | `app/routes/auction.py:682` `end_auction` (real reserve-price-checked winner determination, admin/customer-rep-gated, `determine_winner`, `commit`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -240,6 +244,52 @@ code):
   by dependency-set as well as Python version — see `build.py`'s
   `PYTHON_BY_VERSION`), and nothing outside that dedicated venv is ever
   touched for an app with unusual dependency needs again.
+- SmartBid encrypts each bid amount at rest with Fernet
+  (`cryptography.fernet`) via an `ENCRYPTION_KEY` env var — the runner
+  provides a genuinely valid 32-byte urlsafe-base64 key generated with
+  `Fernet.generate_key()`, not a hand-typed placeholder (Fernet rejects a
+  malformed key at import time, so a fake key would have failed loudly
+  rather than silently).
+- Social-Life hardcodes `SESSION_COOKIE_SECURE = True` in `config.py`
+  regardless of environment (no `FLASK_ENV` escape hatch), which real
+  browsers — and this pipeline's own `requests` cookie jar — correctly
+  refuse to send back over plain HTTP; first symptom was a genuine "CSRF
+  session token is missing" error traced to the session cookie never
+  round-tripping, not assumed. A `setup_scripts` step patches that one
+  line to `False` for local testing, the same deployment-configuration
+  category as tech_hub's mail patch. Also hits the same Flask-SQLAlchemy
+  instance-path gotcha as habit-tracker/Hospital_Management_Real, and its
+  `email_validator` dependency rejects the reserved `.test` TLD in test
+  email addresses (fixed by seeding with a `.com`-style address instead,
+  consistent with the convention already used elsewhere in this pipeline).
+- Pharmaceutical-Inventory-System was suspected to need an old Flask
+  pinning like dataviva-training, based on its `requirements.txt` alone —
+  tested directly under the shared venv's modern Flask *first* this time
+  (the lesson from the dataviva-training incident, applied), and it
+  imports and runs cleanly with no downgrade needed at all. A pinned
+  `flask==2.3.3` was nonetheless briefly, mistakenly installed into the
+  shared venv while investigating and was caught immediately via
+  `importlib.metadata.version()`/`pip check` and reverted before it could
+  break anything — a second, smaller instance of the same class of
+  mistake dataviva-training made, this time caught within the same turn.
+- BuyMe's real, used `config.py` lives at the repo root (`from config
+  import Config`), not the unused, MySQL-defaulting `app/config.py` that
+  looks like the obvious candidate at first glance — it honors a
+  `DATABASE_URL` env override, so the runner supplies a SQLite URL rather
+  than standing up a real MySQL server. Forgetting to set it once
+  produced a genuine `mysql.connector.errors.InterfaceError: Can't
+  connect to MySQL server`, confirming the default is real, not a typo.
+  Also needs `flask-socketio`/`eventlet` (real-time bid broadcast),
+  `flask-apscheduler` (a scheduled auction-finalizer job — confirmed
+  dead/broken code referencing model fields that don't exist on the real
+  `Auction` model, `status`/`reserve_price` instead of the real
+  `is_active`/`secret_min_price`, ruled out as irrelevant to the
+  capability harvested here), `mysql-connector-python` (import-time
+  dependency even when unused), and `matplotlib`/`pandas` (an admin
+  analytics route) — all installed into the shared venv with a version
+  check after each confirming Flask stayed modern. Also hits the same
+  Flask-SQLAlchemy instance-path gotcha as habit-tracker/Social-Life
+  (`sqlite:///app.db` resolves under `instance/`, not the repo root).
 
 ## What each pipeline stage actually proved
 
@@ -250,7 +300,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 29 capabilities across 19 apps (see the
+AST-based, line-accurate for all 33 capabilities across 21 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -282,6 +332,16 @@ app's own `MAIL_SERVER`/`MAIL_PORT`/`MAIL_USE_TLS` env vars are pointed at
 the local server — flask-mail still performs a genuine SMTP conversation,
 just terminating locally. The received email is captured verbatim in
 `shelf/monthly-expenses-tracker/CAP-0001/evidence/welcome_email_smtp_capture.log`.
+(A real, previously-undetected bug in this evidence: an earlier `smtpd.DebuggingServer`
+process had leaked past its own `build.py stop` and was still bound to
+port 1025 from a much earlier session, silently causing every SMTP debug
+server launch since to fail with `OSError: Address already in use` — and
+the committed capture file was, unnoticed, just that failure traceback
+rather than a genuine captured email. Found during this batch's full
+reproducibility sweep by actually reading the captured file's content
+instead of trusting that its presence meant it worked; fixed by killing
+the leaked process and re-running the proof to confirm a real welcome
+email is captured now.)
 
 ### 6. Live proof
 Every capability has an independent, non-mocked HTTP proof
@@ -426,6 +486,41 @@ Highlights beyond the basic "call it and check 200":
   the multipart `/upload` route CAP-0019 already proved -- and confirms
   the saved file's real pixel data is byte-identical to what was
   submitted, not merely present.
+- CAP-0030: places a real under-minimum bid on a real seeded auction and
+  confirms the app's own real minimum-increment rejection (400, the real
+  next-valid amount echoed in the error), then places a real valid bid
+  and confirms it's genuinely Fernet-encrypted at rest and the auction's
+  real current price advances, then confirms repeating the exact same
+  amount is rejected a second time (no longer valid once the price has
+  moved), then re-fetches the auction and confirms the real persisted
+  current price matches.
+- CAP-0031: logs in as a real seeded, already-confirmed user, creates six
+  real posts through the app's own real `/create_post` route, then
+  confirms `index()`'s real Flask-SQLAlchemy `.paginate()` call genuinely
+  splits them -- exactly five (`ROWS_PER_PAGE`) on page 1, the remaining
+  one on page 2, and a real 404 on page 3 (Flask-SQLAlchemy's own
+  `error_out=True` default rejecting an out-of-range page) -- a real
+  LIMIT+OFFSET split, not a client-side illusion.
+- CAP-0032: confirms anonymous access to the barcode-lookup route is
+  genuinely rejected, then looks up one of the app's own real seeded
+  barcodes as a real logged-in admin and confirms the real matching
+  product (name, price, quantity) comes back, then looks up a barcode
+  that was never seeded and confirms a real null result -- not a crash,
+  not a fabricated match.
+- CAP-0033: places two real bids from two real logged-in bidders on a
+  real seeded auction via the app's own real `POST /auction/<id>/bid`
+  route, confirms a real bidder (not admin, not customer rep) is
+  genuinely rejected (403) attempting to end the auction, then ends it as
+  the real seeded customer-rep account and confirms -- both on the
+  rendered page and by reading the real committed row directly out of
+  the app's own sqlite database -- that `winner_id` was set to the real
+  highest bidder's id and `is_active` flipped to false, proving the
+  app's own real reserve-price-checked `determine_winner()` logic
+  actually ran. (A first pass at this proof posted bids to the wrong
+  route -- the auction's own view page rather than its real
+  `/auction/<id>/bid` submission endpoint -- and silently produced zero
+  persisted bids; caught by reading the real bids table directly rather
+  than trusting the 200 status code, not assumed away.)
 
 ## How to reproduce this from scratch
 
@@ -437,7 +532,9 @@ python3 -m venv .venv
     reportlab geopy pillow cs50 pandas openpyxl zinny-surveys \
     numpy joblib weasyprint num2words python-dateutil \
     flask-limiter pyjwt pillow apscheduler qrcode pytz \
-    flask-mailman discord-webhook bcrypt "flask-admin==1.6.1" email_validator
+    flask-mailman discord-webhook bcrypt "flask-admin==1.6.1" email_validator \
+    cryptography flask-socketio eventlet flask-apscheduler \
+    mysql-connector-python matplotlib
 
 # recipe-app and EnterpriseProject both need Python 3.12+ (see "Real
 # applications aren't all shaped the same way" below -- a multi-line
@@ -465,7 +562,7 @@ for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
            CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013 CAP-0014 \
            CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019 CAP-0020 CAP-0021 \
            CAP-0022 CAP-0023 CAP-0024 CAP-0025 CAP-0026 CAP-0027 \
-           CAP-0028 CAP-0029; do
+           CAP-0028 CAP-0029 CAP-0030 CAP-0031 CAP-0032 CAP-0033; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -592,11 +689,27 @@ python3 build.py stop
 python3 build.py start --cap CAP-0029 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0029_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0030 --port 5057
+./.venv/bin/python3 test/prove_CAP-0030_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0031 --port 5057
+./.venv/bin/python3 test/prove_CAP-0031_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0032 --port 5057
+./.venv/bin/python3 test/prove_CAP-0032_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0033 --port 5057
+./.venv/bin/python3 test/prove_CAP-0033_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) eleven times now, at eleven different capability
+deleted first, venvs kept) twelve times now, at twelve different capability
 counts, to confirm it's genuinely reproducible, not an artifact of an
 ad-hoc fixing sequence.
 
@@ -604,7 +717,7 @@ ad-hoc fixing sequence.
 
 **Proved, for real:**
 - Real application discovery with real licence verification from the
-  source file, across 19 different repositories and three distinct real
+  source file, across 21 different repositories and three distinct real
   licences (MIT, BSD-3-Clause, Apache-2.0).
 - Real AST-based attach-point detection that rejects name-only matches,
   across both route-handler and helper-function capability shapes,
@@ -617,7 +730,7 @@ ad-hoc fixing sequence.
   anything, across two Python versions and an app whose data path resolves
   outside its own repo entirely (`$HOME`-based, handled via an isolated,
   resettable `HOME` override rather than patching the app).
-- Twenty-three independent, real, non-mocked live proofs, including negative/
+- Thirty-three independent, real, non-mocked live proofs, including negative/
   access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
@@ -658,10 +771,25 @@ ad-hoc fixing sequence.
   confirm the filter genuinely narrows results rather than merely
   appearing to; and a real base64-capture proof against a second,
   genuinely distinct route in an already-harvested app, confirmed
-  pixel-identical rather than merely present.
+  pixel-identical rather than merely present. Four more of the
+  thirty-three: a real Fernet-encrypted, minimum-increment-enforced
+  bidding proof with a genuine repeat-amount rejection once the price has
+  moved; a real Flask-SQLAlchemy pagination proof against a real
+  six-post feed, split exactly five-then-one across two pages with a
+  genuine 404 on a third, out-of-range page; a real barcode-lookup proof
+  distinguishing a real seeded match from a real null result for a
+  barcode that was never seeded, with a genuine anonymous-access
+  rejection; and a real reserve-price-checked auction-close proof with
+  both a genuine non-admin/non-customer-rep 403 rejection and a direct
+  database read confirming the real highest bidder was persisted as
+  winner -- the last one caught a real bug in its own first test attempt
+  (bids posted to the auction's view route instead of its real bid
+  submission route, silently producing zero persisted bids despite a 200
+  response) by reading the real bids table directly rather than trusting
+  the status code.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 29.** ~52 names in the 81-name vocabulary (see
+- **Scale beyond 33.** ~47 names in the 81-name vocabulary (see
   `CAPABILITY_VOCABULARY.md` for the full recovered list and live status)
   have not been researched yet. Each one needs the same real vetting
   (license read from source, AST-confirmed evidence, live proof) — this is

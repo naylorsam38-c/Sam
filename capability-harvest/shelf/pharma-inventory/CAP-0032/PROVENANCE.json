@@ -1,0 +1,48 @@
+{
+  "application": {
+    "category": "inventory",
+    "commit": "42e44bb4690a2aaff432a99631abc490569c1ce0",
+    "repo_url": "https://github.com/UserSky21/Pharmaceutical-Inventory-System-.git",
+    "slug": "pharma-inventory"
+  },
+  "cap_id": "CAP-0032",
+  "capability_name": "scan barcode",
+  "category": "inventory",
+  "checksums": {
+    "harvested_source_sha256": "b04d0fdaae4e1838e2f9dee2d0774db84d91ff51e12fc9ecc69f8c96aab66e2b",
+    "whole_source_file_sha256_at_harvest": "7de545caabe6467cba0d1a3b9273f505155ba2bd6957f27ccd76ed7012071a33"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "Product",
+      "app",
+      "e",
+      "jsonify",
+      "login_required"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T14:31:00.687055+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "Apache-2.0",
+    "marker_matched": "Apache License"
+  },
+  "source": {
+    "decorators": [
+      "@app.route('/api/products/barcode/<barcode>', methods=['GET'])",
+      "@login_required"
+    ],
+    "end_lineno": 345,
+    "evidence_calls_matched": [
+      "filter_by",
+      "jsonify"
+    ],
+    "file": "app.py",
+    "lineno": 326,
+    "route_path": null,
+    "symbol": "get_product_by_barcode"
+  }
+}

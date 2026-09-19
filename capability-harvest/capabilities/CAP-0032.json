@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0032",
+  "category": "inventory",
+  "generated_at": "2026-09-19T14:31:00.796226+00:00",
+  "implementations": [
+    {
+      "app_slug": "pharma-inventory",
+      "commit": "42e44bb4690a2aaff432a99631abc490569c1ce0",
+      "harvested_at": "2026-09-19T14:31:00.687055+00:00",
+      "licence": "Apache-2.0",
+      "provenance_path": "shelf/pharma-inventory/CAP-0032/PROVENANCE.json",
+      "shelf_path": "shelf/pharma-inventory/CAP-0032"
+    }
+  ],
+  "name": "scan barcode"
+}

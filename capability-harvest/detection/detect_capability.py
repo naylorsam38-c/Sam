@@ -302,6 +302,42 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "capture",
         "evidence_call_names": {"b64decode", "save"},
     },
+    {
+        "cap_id": "CAP-0030",
+        "name": "place bid",
+        "category": "auctions",
+        "app_slug": "smartbid",
+        "source_file_relative": "app/routes/auctions.py",
+        "symbol_hint": "place_bid",
+        "evidence_call_names": {"encrypt_bid_amount", "commit"},
+    },
+    {
+        "cap_id": "CAP-0031",
+        "name": "paginate list",
+        "category": "social",
+        "app_slug": "social-life",
+        "source_file_relative": "app.py",
+        "symbol_hint": "index",
+        "evidence_call_names": {"paginate", "order_by"},
+    },
+    {
+        "cap_id": "CAP-0032",
+        "name": "scan barcode",
+        "category": "inventory",
+        "app_slug": "pharma-inventory",
+        "source_file_relative": "app.py",
+        "symbol_hint": "get_product_by_barcode",
+        "evidence_call_names": {"filter_by", "jsonify"},
+    },
+    {
+        "cap_id": "CAP-0033",
+        "name": "close auction",
+        "category": "auctions",
+        "app_slug": "buyme",
+        "source_file_relative": "app/routes/auction.py",
+        "symbol_hint": "end_auction",
+        "evidence_call_names": {"determine_winner", "commit"},
+    },
 ]
 # ----------------------------------------------------------------------------
 

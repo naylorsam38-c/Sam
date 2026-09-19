@@ -555,6 +555,86 @@
       "route_path": null,
       "source_file_relative": "app.py",
       "symbol": "capture"
+    },
+    {
+      "app_slug": "smartbid",
+      "cap_id": "CAP-0030",
+      "category": "auctions",
+      "decorators": [
+        "@auctions_bp.route('/<int:auction_id>/bid', methods=['POST'])",
+        "@require_auth"
+      ],
+      "end_lineno": 201,
+      "evidence_calls_matched": [
+        "encrypt_bid_amount"
+      ],
+      "found": true,
+      "lineno": 128,
+      "name": "place bid",
+      "route_path": null,
+      "source_file_relative": "app/routes/auctions.py",
+      "symbol": "place_bid"
+    },
+    {
+      "app_slug": "social-life",
+      "cap_id": "CAP-0031",
+      "category": "social",
+      "decorators": [
+        "@main.route('/')",
+        "@login_required",
+        "@verified_account"
+      ],
+      "end_lineno": 26,
+      "evidence_calls_matched": [
+        "order_by",
+        "paginate"
+      ],
+      "found": true,
+      "lineno": 16,
+      "name": "paginate list",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "index"
+    },
+    {
+      "app_slug": "pharma-inventory",
+      "cap_id": "CAP-0032",
+      "category": "inventory",
+      "decorators": [
+        "@app.route('/api/products/barcode/<barcode>', methods=['GET'])",
+        "@login_required"
+      ],
+      "end_lineno": 345,
+      "evidence_calls_matched": [
+        "filter_by",
+        "jsonify"
+      ],
+      "found": true,
+      "lineno": 326,
+      "name": "scan barcode",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "get_product_by_barcode"
+    },
+    {
+      "app_slug": "buyme",
+      "cap_id": "CAP-0033",
+      "category": "auctions",
+      "decorators": [
+        "@auction_bp.route('/<int:id>/end', methods=['POST'])",
+        "@login_required"
+      ],
+      "end_lineno": 716,
+      "evidence_calls_matched": [
+        "commit",
+        "determine_winner"
+      ],
+      "found": true,
+      "lineno": 682,
+      "name": "close auction",
+      "route_path": null,
+      "source_file_relative": "app/routes/auction.py",
+      "symbol": "end_auction"
     }
   ]
 }
