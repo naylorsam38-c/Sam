@@ -9,7 +9,7 @@
  "version": null,
  "commit": "f7f7754511df38c33455d2a968f7541e82d15e5b",
  "source_path": "applications/APP-018/source",
- "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -138,18 +138,14 @@
   }
  ],
  "install_startup": {
-  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-  "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk update && apk add --no-cache   build-base   openssl   tzdata   postgresql-client   imagemagick   git   vips   && gem install bundler -v \\\"$BUNDLER_VERSION\\\"\" did not complete successfully: exit code: 4",
-  "blocked_host": "dl-cdn.alpinelinux.org",
-  "runtime_hint": [
-   "node",
-   "ruby"
-  ],
-  "startup_command": "docker build -f Dockerfile .",
-  "log": [
-   "$ docker compose -p lib_app018 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-018/source/docker-compose.yaml up -d\n#1 [internal] load local bake definitions\n#1 reading from stdin 2.44kB done\n#1 DONE 0.0s\n\n#2 [vite internal] load build definition from vite.Dockerfile\n#2 transferring dockerfile: 217B done\n#2 DONE 0.0s\n\n#3 [rails internal] load build definition from rails.Dockerfile\n#3 transferring dockerfile: 249B done\n#3 DONE 0.0s\n\n#4 [base internal] load build definition from Dockerfile\n#4 transferring dockerfile: 4.59kB done\n#4 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)\n#4 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)\n#4 DONE 0.0s\n\n#5 [sidekiq internal] load metadata for docker.io/library/node:24-alpine\n#5 DONE 0.5s\n\n#6 [sidekiq internal] load metadata for docker.io/library/ruby:3.4.4-alpine3.21\n#6 CANCELED\n\n#7 [vite internal] load metadata for docker.io/library/chatwoot:development\n#7 ERROR: docker.io/library/chatwoot:development: not found\n------\n > [vite internal] load metadata for docker.io/library/chatwoot:development:\n------\n\ning 4B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 4B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 4B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 4B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 4B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 6B\n 537cf577f508 Pull complete 0B\n 03995e31cd48 Pull complete 0B\n 5471e06bfc52 Pull complete 0B\n 8654846d99fb Pull complete 0B\n f17c8f1adafb Extracting 6B\n c7449a7c51b4 Extracting 1B\n efb5baa83a6e Pull complete 0B\n e7c73af1eeb3 Pull complete 0B\n 8c8ff1de0b18 Pull complete 0B\n c7449a7c51b4 Pull complete 0B\n f17c8f1adafb Extracting 6B\n Image pgvector/pgvector:pg16 Pulled \n 03954754c53a Pull complete 0B\n 60493946972a Extracting 1B\n f17c8f1adafb Pull complete 0B\n 60493946972a Extracting 1B\n 60493946972a Extracting 1B\n 60493946972a Extracting 1B\n 368ee3bc1dbb Pull complete 0B\n 60493946972a Pull complete 0B\n Image mailhog/mailhog Pulled \n Image chatwoot:development Building \n Image chatwoot-rails:development Building \n Image chatwoot-rails:development Building \n Image chatwoot-vite:development Building \nvite.Dockerfile:1\n\n--------------------\n\n   1 | >>> FROM chatwoot:development\n\n   2 |     \n\n   3 |     ENV PNPM_HOME=\"/root/.local/share/pnpm\"\n\n--------------------\n\ntarget vite: failed to solve: chatwoot:development: failed to resolve source metadata for docker.io/library/chatwoot:development: docker.io/library/chatwoot:development: not found\n\n",
-   "$ docker build -t localhost/lib_app018:lib --network=host -f /home/user/Sam/52_APP_LIBRARY/applications/APP-018/source/docker/Dockerfile .\n\nes available\n0.248 289B9670717F0000:error:0A000086:SSL routines:tls_post_process_server_certificate:certificate verify failed:ssl/statem/statem_clnt.c:2103:\n0.248 WARNING: updating and opening https://dl-cdn.alpinelinux.org/alpine/v3.21/community: Permission denied\n------\n\n \u001b[33m10 warnings found (use docker --debug to expand):\n\u001b[0m - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 114)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 120)\n - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 20)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 107)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 111)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 117)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 13)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 17)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 23)\nDockerfile:123\n--------------------\n 122 |     \n 123 | >>> RUN apk update && apk add --no-cache \\\n 124 | >>>   build-base \\\n 125 | >>>   openssl \\\n 126 | >>>   tzdata \\\n 127 | >>>   postgresql-client \\\n 128 | >>>   imagemagick \\\n 129 | >>>   git \\\n 130 | >>>   vips \\\n 131 | >>>   && gem install bundler -v \"$BUNDLER_VERSION\"\n 132 |     \n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk update && apk add --no-cache   build-base   openssl   tzdata   postgresql-client   imagemagick   git   vips   && gem install bundler -v \\\"$BUNDLER_VERSION\\\"\" did not complete successfully: exit code: 4\n"
-  ]
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:3110/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Chatwoot's default docker-compose.yaml builds from source (needing dl-cdn.alpinelinux.org) - used the project's own documented docker-compose.production.yaml instead, which runs the officially-published chatwoot/chatwoot image directly. Generated SECRET_KEY_BASE/POSTGRES_PASSWORD/REDIS_PASSWORD locally (no external credential needed) and ran the image's own db:chatwoot_prepare rake task once before starting the app, exactly as its production docs describe.",
+  "startup_command": "docker compose up -d"
  },
  "ecosystem": {
   "detected_ecosystems": {
@@ -162,5 +158,11 @@
   },
   "has_container_recipe": true,
   "database_requirement": "postgres"
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
  }
 }

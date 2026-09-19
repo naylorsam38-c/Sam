@@ -1,0 +1,108 @@
+{
+ "application": "APP-015",
+ "base_url": "http://127.0.0.1:3100/",
+ "static_routes_found": 40,
+ "screens": [
+  {
+   "screen_id": "SCR-001",
+   "name": "Home",
+   "route": "/",
+   "discovery_source": "startup_url",
+   "gate_steps": [
+    {
+     "step": 1,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3100/",
+     "fields_filled": 9,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3100/"
+    },
+    {
+     "step": 2,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3100/",
+     "fields_filled": 9,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3100/"
+    },
+    {
+     "step": 3,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3100/",
+     "fields_filled": 9,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3100/"
+    },
+    {
+     "step": 4,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3100/",
+     "fields_filled": 9,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3100/"
+    },
+    {
+     "step": 5,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3100/",
+     "fields_filled": 9,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3100/"
+    },
+    {
+     "step": 6,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3100/",
+     "fields_filled": 9,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3100/"
+    },
+    {
+     "step": 7,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3100/",
+     "fields_filled": 9,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3100/"
+    },
+    {
+     "step": 8,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3100/",
+     "fields_filled": 9,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3100/"
+    },
+    {
+     "step": 9,
+     "kind": "form",
+     "url_before": "http://127.0.0.1:3100/",
+     "fields_filled": 9,
+     "submitted": true,
+     "url_after": "http://127.0.0.1:3100/"
+    }
+   ],
+   "gate_state": "STUCK",
+   "reachable": true,
+   "rendered": true,
+   "error_state": null,
+   "controls_detected": true,
+   "browser_verified": true,
+   "title": "Installation - Gitea: Git with a cup of tea",
+   "heading": "",
+   "controls": {
+    "button": 2,
+    "input": 37,
+    "textarea": 0,
+    "select": 0,
+    "checkbox": 12,
+    "link": 4,
+    "menu": 2,
+    "table": 0,
+    "form": 1
+   },
+   "screenshot": "001_home.png",
+   "final_url": "http://127.0.0.1:3100/"
+  }
+ ]
+}

@@ -9,7 +9,7 @@
  "version": null,
  "commit": "da69391e81013aca5b077fd6994c767863515e71",
  "source_path": "applications/APP-045/source",
- "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -234,18 +234,14 @@
   }
  ],
  "install_startup": {
-  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-  "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2",
-  "blocked_host": "dl-cdn.alpinelinux.org",
-  "runtime_hint": [
-   "node",
-   "ruby"
-  ],
-  "startup_command": "docker compose -f docker-compose.yaml up -d",
-  "log": [
-   "copied .env.example -> .env",
-   "$ docker compose -p lib_app045 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-045/source/docker-compose.yaml up -d\n#1 [internal] load local bake definitions\n#1 reading from stdin 616B done\n#1 DONE 0.0s\n\n#2 [internal] load build definition from Dockerfile.test\n#2 transferring dockerfile: 2.96kB done\n#2 DONE 0.0s\n\n#3 [internal] load metadata for docker.io/library/node:22-alpine\n#3 DONE 0.5s\n\n#4 [internal] load .dockerignore\n#4 transferring context: 1.85kB done\n#4 DONE 0.0s\n\n#5 [ 1/19] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85\n#5 resolve docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85 0.0s done\n#5 DONE 0.0s\n\n#6 [ 2/19] WORKDIR /app\n#6 CACHED\n\n#7 [internal] load build context\n#7 transferring context: 4.29MB 0.1s done\n#7 DONE 0.1s\n\n#8 [ 3/19] RUN apk add --no-cache openssl libc6-compat\n#8 0.359 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#8 0.385 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#8 0.385 ERROR: unable to select packages:\n#8 0.385   libc6-compat (no such package):\n#8 0.385     required by: world[libc6-compat]\n#8 0.385   openssl (no such package):\n#8 0.385     required by: world[openssl]\n#8 ERROR: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2\n------\n > [ 3/19] RUN apk add --no-cache openssl libc6-compat:\n0.359 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.385 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.385 ERROR: unable to select packages:\n0.385   libc6-compat (no such package):\n0.385     required by: world[libc6-compat]\n0.385   openssl (no such package):\n0.385     required by: world[openssl]\n------\n\n Image lib_app045-supersync Building \nDockerfile.test:15\n\n--------------------\n\n  13 |     \n\n  14 |     # Install required system dependencies for Prisma\n\n  15 | >>> RUN apk add --no-cache openssl libc6-compat\n\n  16 |     \n\n  17 |     # Copy package files for workspace setup\n\n--------------------\n\nfailed to solve: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2\n\n"
-  ]
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8098/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Same app as APP-044 (Super Productivity, picked independently for this category too) - same fix: the project's own officially-published Docker Hub image (johannesjo/super-productivity) instead of building from source.",
+  "startup_command": "docker compose up -d"
  },
  "ecosystem": {
   "detected_ecosystems": {
@@ -258,5 +254,11 @@
   },
   "has_container_recipe": true,
   "database_requirement": "postgres"
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
  }
 }

@@ -513,7 +513,7 @@
    "version": null,
    "commit": "128c0c159ab8a1157e1f0688b43ba16b0c034889",
    "source_path": "applications/APP-007/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -744,16 +744,14 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs deb.debian.org, which this sandbox's egress policy denies: target superset-node: failed to solve: process \"/bin/sh -c /app/docker/apt-install.sh build-essential python3 zstd\" did not complete successfully: exit code: 100",
-    "blocked_host": "deb.debian.org",
-    "runtime_hint": [
-     "python"
-    ],
-    "startup_command": "docker compose -f docker-compose.yml up -d",
-    "log": [
-     "$ docker compose -p lib_app007 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-007/source/docker-compose.yml up -d\nb.debian.org/debian trixie InRelease' is not signed.\n#25 7.847 E: Failed to fetch http://deb.debian.org/debian/dists/trixie/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n#25 7.847 E: Failed to fetch http://deb.debian.org/debian/dists/trixie-updates/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n#25 7.847 E: The repository 'http://deb.debian.org/debian trixie-updates InRelease' is not signed.\n#25 7.847 E: Failed to fetch http://deb.debian.org/debian-security/dists/trixie-security/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n#25 7.847 E: The repository 'http://deb.debian.org/debian-security trixie-security InRelease' is not signed.\n#25 ERROR: process \"/bin/sh -c /app/docker/apt-install.sh build-essential python3 zstd\" did not complete successfully: exit code: 100\n\n#27 [superset-init superset-websocket 4/6] RUN --mount=type=cache,target=/root/.npm npm ci\n#27 CANCELED\n\n#26 [superset-init python-base 5/6] RUN pip install --no-cache-dir --upgrade uv\n#26 CANCELED\n\n#20 [superset-websocket build 4/4] RUN npm ci &&   npm run build\n#20 CANCELED\n------\n > [superset-init] importing cache manifest from apache/superset-cache:3.11-slim-trixie:\n------\n------\n > [superset-worker-beat superset-node-ci 3/8] RUN /app/docker/apt-install.sh build-essential python3 zstd:\n2.888 \u001b[0;32mUpdating package lists...\u001b[0m\n7.847 E: The repository 'http://deb.debian.org/debian trixie InRelease' is not signed.\n7.847 E: Failed to fetch http://deb.debian.org/debian/dists/trixie/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n7.847 E: Failed to fetch http://deb.debian.org/debian/dists/trixie-updates/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n7.847 E: The repository 'http://deb.debian.org/debian trixie-updates InRelease' is not signed.\n7.847 E: Failed to fetch http://deb.debian.org/debian-security/dists/trixie-security/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n7.847 E: The repository 'http://deb.debian.org/debian-security trixie-security InRelease' is not signed.\n------\n\n9b20 Downloading 101.7MB\n bbe7b3469b20 Downloading 111.1MB\n bbe7b3469b20 Downloading 114.3MB\n bbe7b3469b20 Download complete 0B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 1B\n bbe7b3469b20 Extracting 2B\n bbe7b3469b20 Extracting 2B\n bbe7b3469b20 Extracting 2B\n bbe7b3469b20 Extracting 2B\n bbe7b3469b20 Extracting 2B\n bbe7b3469b20 Extracting 2B\n bbe7b3469b20 Extracting 2B\n bbe7b3469b20 Extracting 2B\n bbe7b3469b20 Extracting 2B\n bbe7b3469b20 Extracting 2B\n bbe7b3469b20 Extracting 3B\n bbe7b3469b20 Extracting 3B\n bbe7b3469b20 Extracting 3B\n bbe7b3469b20 Extracting 3B\n bbe7b3469b20 Extracting 3B\n bbe7b3469b20 Extracting 3B\n bbe7b3469b20 Extracting 3B\n bbe7b3469b20 Extracting 3B\n bbe7b3469b20 Extracting 3B\n bbe7b3469b20 Extracting 3B\n bbe7b3469b20 Extracting 4B\n bbe7b3469b20 Extracting 4B\n bbe7b3469b20 Extracting 4B\n 2f9b6cf2e417 Pull complete 0B\n 3feaebf93d15 Pull complete 0B\n 73872941ba23 Pull complete 0B\n bbe7b3469b20 Pull complete 0B\n bed9376b51dc Pull complete 0B\n 50e228e2fe6d Pull complete 0B\n Image postgres:17 Pulled \n Image lib_app007-superset-init Building \n Image lib_app007-superset-worker-beat Building \n Image lib_app007-superset-worker Building \n Image lib_app007-superset Building \n Image lib_app007-superset-node Building \n Image lib_app007-superset-websocket Building \nDockerfile:43\n\n--------------------\n\n  41 |     \n\n  42 |     # Install system dependencies required for node-gyp\n\n  43 | >>> RUN /app/docker/apt-install.sh build-essential python3 zstd\n\n  44 |     \n\n  45 |     # Define environment variables for frontend build\n\n--------------------\n\ntarget superset-node: failed to solve: process \"/bin/sh -c /app/docker/apt-install.sh build-essential python3 zstd\" did not complete successfully: exit code: 100\n\n"
-    ]
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:8088/",
+    "http_status": 200,
+    "recipe": "docker-compose.library.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "The project's own docker-compose-image-tag.yml uses apachesuperset.docker.scarf.sh/apache/superset (a pull-count analytics proxy in front of the real image) - pointed the same compose file at apache/superset directly on Docker Hub instead, the real underlying image, reached via the org's already-allowed Docker Hub route. superset-init's own dependency-resolution step (uv installing postgres requirements from PyPI) hit the same TLS-interception gap fixed for shiptrack (task #13) - added SSL_CERT_FILE/REQUESTS_CA_BUNDLE pointing at the proxy's CA, copied into the compose file's own mounted ./docker directory. Also edited the LOCAL copy of docker/docker-init.sh (bind-mounted into the container, not the published image) to create the admin account as libwalker@example.com instead of the hardcoded admin@superset.com, since the username is otherwise unconfigurable and this pipeline's own crawler had no way to know to type 'admin'.",
+    "startup_command": "docker compose up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -763,6 +761,12 @@
     },
     "has_container_recipe": true,
     "database_requirement": "postgres"
+   },
+   "screen_summary": {
+    "screens_discovered": 1,
+    "screens_reached": 1,
+    "screens_rendered": 1,
+    "screens_browser_verified": 1
    }
   },
   {
@@ -2083,7 +2087,7 @@
    "version": null,
    "commit": "54e4a9383c84d7317af42a7ddb177ce8bcba058d",
    "source_path": "applications/APP-014/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2108,16 +2112,14 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add musl-dev openssl-dev\" did not complete successfully: exit code: 1",
-    "blocked_host": "dl-cdn.alpinelinux.org",
-    "runtime_hint": [
-     "node"
-    ],
-    "startup_command": "docker build -f Dockerfile .",
-    "log": [
-     "$ docker build -t localhost/lib_app014:lib --network=host -f /home/user/Sam/52_APP_LIBRARY/applications/APP-014/source/Dockerfile .\n\nain/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#12 0.303 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#12 0.303 ERROR: unable to select packages:\n#12 0.303   curl (no such package):\n#12 0.303     required by: world[curl]\n#12 ERROR: process \"/bin/sh -c apk --no-cache add curl musl-dev\" did not complete successfully: exit code: 1\n------\n > [wasm 3/6] RUN apk --no-cache add curl musl-dev:\n0.284 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.303 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.303 ERROR: unable to select packages:\n0.303   curl (no such package):\n0.303     required by: world[curl]\n------\n------\n > [backend 3/6] RUN apk --no-cache add musl-dev openssl-dev:\n0.297 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.311 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.313 ERROR: unable to select packages:\n0.313   openssl-dev (no such package):\n0.313     required by: world[openssl-dev]\n------\n\n \u001b[33m2 warnings found (use docker --debug to expand):\n\u001b[0m - FromPlatformFlagConstDisallowed: FROM --platform flag should not use constant value \"amd64\" (line 8)\n - FromPlatformFlagConstDisallowed: FROM --platform flag should not use constant value \"amd64\" (line 15)\nDockerfile:3\n--------------------\n   1 |     FROM rust:alpine AS backend\n   2 |     WORKDIR /home/rust/src\n   3 | >>> RUN apk --no-cache add musl-dev openssl-dev\n   4 |     COPY . .\n   5 |     RUN cargo test --release\n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add musl-dev openssl-dev\" did not complete successfully: exit code: 1\n"
-    ]
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:3080/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "rustpad's own Dockerfile builds from source, needing musl-dev/openssl-dev from dl-cdn.alpinelinux.org - used the project's own officially-published Docker Hub image (ekzhang/rustpad, referenced directly in its own README) instead.",
+    "startup_command": "docker compose up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -2127,6 +2129,12 @@
     },
     "has_container_recipe": true,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 2,
+    "screens_reached": 1,
+    "screens_rendered": 1,
+    "screens_browser_verified": 1
    }
   },
   {
@@ -2140,7 +2148,7 @@
    "version": null,
    "commit": "2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2",
    "source_path": "applications/APP-015/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2297,18 +2305,14 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add     bash     ca-certificates     curl     gettext     git     linux-pam     openssh     s6     sqlite     su-exec     gnupg\" did not complete successfully: exit code: 11",
-    "blocked_host": "dl-cdn.alpinelinux.org",
-    "runtime_hint": [
-     "node",
-     "python",
-     "go"
-    ],
-    "startup_command": "docker build -f Dockerfile .",
-    "log": [
-     "$ docker build -t localhost/lib_app015:lib --network=host -f /home/user/Sam/52_APP_LIBRARY/applications/APP-015/source/Dockerfile .\n\nkage):\n#9 0.186     required by: world[linux-pam]\n#9 0.186   openssh (no such package):\n#9 0.186     required by: world[openssh]\n#9 0.186   s6 (no such package):\n#9 0.186     required by: world[s6]\n#9 0.186   sqlite (no such package):\n#9 0.186     required by: world[sqlite]\n#9 0.186   su-exec (no such package):\n#9 0.186     required by: world[su-exec]\n#9 ERROR: process \"/bin/sh -c apk --no-cache add     bash     ca-certificates     curl     gettext     git     linux-pam     openssh     s6     sqlite     su-exec     gnupg\" did not complete successfully: exit code: 11\n\n#10 [frontend-build 2/7] RUN apk --no-cache add build-base git nodejs pnpm\n#10 CANCELED\n\n#11 [internal] load build context\n#11 transferring context: 9.28MB 0.2s done\n#11 CANCELED\n\n#12 [build-env  2/10] RUN apk --no-cache add     build-base     git\n#12 CANCELED\n------\n > [gitea 2/5] RUN apk --no-cache add     bash     ca-certificates     curl     gettext     git     linux-pam     openssh     s6     sqlite     su-exec     gnupg:\n0.186   linux-pam (no such package):\n0.186     required by: world[linux-pam]\n0.186   openssh (no such package):\n0.186     required by: world[openssh]\n0.186   s6 (no such package):\n0.186     required by: world[s6]\n0.186   sqlite (no such package):\n0.186     required by: world[sqlite]\n0.186   su-exec (no such package):\n0.186     required by: world[su-exec]\n------\nDockerfile:51\n--------------------\n  50 |     \n  51 | >>> RUN apk --no-cache add \\\n  52 | >>>     bash \\\n  53 | >>>     ca-certificates \\\n  54 | >>>     curl \\\n  55 | >>>     gettext \\\n  56 | >>>     git \\\n  57 | >>>     linux-pam \\\n  58 | >>>     openssh \\\n  59 | >>>     s6 \\\n  60 | >>>     sqlite \\\n  61 | >>>     su-exec \\\n  62 | >>>     gnupg\n  63 |     \n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add     bash     ca-certificates     curl     gettext     git     linux-pam     openssh     s6     sqlite     su-exec     gnupg\" did not complete successfully: exit code: 11\n"
-    ]
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:3100/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "Gitea's own Dockerfile builds from source, needing bash/git/openssh/sqlite/etc from dl-cdn.alpinelinux.org - used the project's own officially-published Docker Hub image (gitea/gitea) instead. Its own multi-field web install wizard also didn't reliably complete under this pipeline's automated form-filling (9 fields submitted, no progress after 9 attempts) - switched to Gitea's own documented INSTALL_LOCK=true + DB_TYPE=sqlite3 env-var pattern (a standard, officially-supported way to skip the wizard for unattended deploys), landing directly on the real app with open registration enabled.",
+    "startup_command": "docker compose up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -2324,6 +2328,12 @@
     },
     "has_container_recipe": true,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 1,
+    "screens_reached": 1,
+    "screens_rendered": 1,
+    "screens_browser_verified": 1
    }
   },
   {
@@ -2814,7 +2824,7 @@
    "version": null,
    "commit": "f7f7754511df38c33455d2a968f7541e82d15e5b",
    "source_path": "applications/APP-018/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2943,18 +2953,14 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk update && apk add --no-cache   build-base   openssl   tzdata   postgresql-client   imagemagick   git   vips   && gem install bundler -v \\\"$BUNDLER_VERSION\\\"\" did not complete successfully: exit code: 4",
-    "blocked_host": "dl-cdn.alpinelinux.org",
-    "runtime_hint": [
-     "node",
-     "ruby"
-    ],
-    "startup_command": "docker build -f Dockerfile .",
-    "log": [
-     "$ docker compose -p lib_app018 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-018/source/docker-compose.yaml up -d\n#1 [internal] load local bake definitions\n#1 reading from stdin 2.44kB done\n#1 DONE 0.0s\n\n#2 [vite internal] load build definition from vite.Dockerfile\n#2 transferring dockerfile: 217B done\n#2 DONE 0.0s\n\n#3 [rails internal] load build definition from rails.Dockerfile\n#3 transferring dockerfile: 249B done\n#3 DONE 0.0s\n\n#4 [base internal] load build definition from Dockerfile\n#4 transferring dockerfile: 4.59kB done\n#4 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)\n#4 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)\n#4 DONE 0.0s\n\n#5 [sidekiq internal] load metadata for docker.io/library/node:24-alpine\n#5 DONE 0.5s\n\n#6 [sidekiq internal] load metadata for docker.io/library/ruby:3.4.4-alpine3.21\n#6 CANCELED\n\n#7 [vite internal] load metadata for docker.io/library/chatwoot:development\n#7 ERROR: docker.io/library/chatwoot:development: not found\n------\n > [vite internal] load metadata for docker.io/library/chatwoot:development:\n------\n\ning 4B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 4B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 4B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 4B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 4B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 5B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 5B\n f17c8f1adafb Extracting 6B\n e7c73af1eeb3 Extracting 6B\n 537cf577f508 Pull complete 0B\n 03995e31cd48 Pull complete 0B\n 5471e06bfc52 Pull complete 0B\n 8654846d99fb Pull complete 0B\n f17c8f1adafb Extracting 6B\n c7449a7c51b4 Extracting 1B\n efb5baa83a6e Pull complete 0B\n e7c73af1eeb3 Pull complete 0B\n 8c8ff1de0b18 Pull complete 0B\n c7449a7c51b4 Pull complete 0B\n f17c8f1adafb Extracting 6B\n Image pgvector/pgvector:pg16 Pulled \n 03954754c53a Pull complete 0B\n 60493946972a Extracting 1B\n f17c8f1adafb Pull complete 0B\n 60493946972a Extracting 1B\n 60493946972a Extracting 1B\n 60493946972a Extracting 1B\n 368ee3bc1dbb Pull complete 0B\n 60493946972a Pull complete 0B\n Image mailhog/mailhog Pulled \n Image chatwoot:development Building \n Image chatwoot-rails:development Building \n Image chatwoot-rails:development Building \n Image chatwoot-vite:development Building \nvite.Dockerfile:1\n\n--------------------\n\n   1 | >>> FROM chatwoot:development\n\n   2 |     \n\n   3 |     ENV PNPM_HOME=\"/root/.local/share/pnpm\"\n\n--------------------\n\ntarget vite: failed to solve: chatwoot:development: failed to resolve source metadata for docker.io/library/chatwoot:development: docker.io/library/chatwoot:development: not found\n\n",
-     "$ docker build -t localhost/lib_app018:lib --network=host -f /home/user/Sam/52_APP_LIBRARY/applications/APP-018/source/docker/Dockerfile .\n\nes available\n0.248 289B9670717F0000:error:0A000086:SSL routines:tls_post_process_server_certificate:certificate verify failed:ssl/statem/statem_clnt.c:2103:\n0.248 WARNING: updating and opening https://dl-cdn.alpinelinux.org/alpine/v3.21/community: Permission denied\n------\n\n \u001b[33m10 warnings found (use docker --debug to expand):\n\u001b[0m - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 114)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 120)\n - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 20)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 107)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 111)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 117)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 13)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 17)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 23)\nDockerfile:123\n--------------------\n 122 |     \n 123 | >>> RUN apk update && apk add --no-cache \\\n 124 | >>>   build-base \\\n 125 | >>>   openssl \\\n 126 | >>>   tzdata \\\n 127 | >>>   postgresql-client \\\n 128 | >>>   imagemagick \\\n 129 | >>>   git \\\n 130 | >>>   vips \\\n 131 | >>>   && gem install bundler -v \"$BUNDLER_VERSION\"\n 132 |     \n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk update && apk add --no-cache   build-base   openssl   tzdata   postgresql-client   imagemagick   git   vips   && gem install bundler -v \\\"$BUNDLER_VERSION\\\"\" did not complete successfully: exit code: 4\n"
-    ]
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:3110/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "Chatwoot's default docker-compose.yaml builds from source (needing dl-cdn.alpinelinux.org) - used the project's own documented docker-compose.production.yaml instead, which runs the officially-published chatwoot/chatwoot image directly. Generated SECRET_KEY_BASE/POSTGRES_PASSWORD/REDIS_PASSWORD locally (no external credential needed) and ran the image's own db:chatwoot_prepare rake task once before starting the app, exactly as its production docs describe.",
+    "startup_command": "docker compose up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -2967,6 +2973,12 @@
     },
     "has_container_recipe": true,
     "database_requirement": "postgres"
+   },
+   "screen_summary": {
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 15,
+    "screens_browser_verified": 15
    }
   },
   {
@@ -6033,7 +6045,7 @@
    "version": null,
    "commit": "da69391e81013aca5b077fd6994c767863515e71",
    "source_path": "applications/APP-044/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": false,
    "manual_override_reason": "automated pick (4ga Boards) is a minor kanban board; this is the well-established, higher-star fit that didn't literally contain the word 'productivity' in its description",
    "discovery_candidates": [
@@ -6076,18 +6088,14 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2",
-    "blocked_host": "dl-cdn.alpinelinux.org",
-    "runtime_hint": [
-     "node",
-     "ruby"
-    ],
-    "startup_command": "docker compose -f docker-compose.yaml up -d",
-    "log": [
-     "copied .env.example -> .env",
-     "$ docker compose -p lib_app044 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-044/source/docker-compose.yaml up -d\nbcf71d6db947dda5e1c59d06 42.99MB / 55.68MB 1.2s\n#5 sha256:1a3a899a8294dd12f21fb3f36579c74b05013aacbcf71d6db947dda5e1c59d06 55.68MB / 55.68MB 1.4s\n#5 sha256:1a3a899a8294dd12f21fb3f36579c74b05013aacbcf71d6db947dda5e1c59d06 55.68MB / 55.68MB 1.4s done\n#5 extracting sha256:1a3a899a8294dd12f21fb3f36579c74b05013aacbcf71d6db947dda5e1c59d06\n#5 extracting sha256:1a3a899a8294dd12f21fb3f36579c74b05013aacbcf71d6db947dda5e1c59d06 2.5s done\n#5 DONE 3.9s\n\n#5 [ 1/19] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85\n#5 extracting sha256:ec179e2ee07230312183920d42bf49c2ef18644e3d7186ffa92b02dd2e26a835 0.1s done\n#5 extracting sha256:65213f1a3de84db18197276d9be6a34fad98eec70604aeaa6821556d932c2676 done\n#5 DONE 4.0s\n\n#7 [ 2/19] WORKDIR /app\n#7 DONE 0.8s\n\n#8 [ 3/19] RUN apk add --no-cache openssl libc6-compat\n#8 0.228 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#8 0.254 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#8 0.254 ERROR: unable to select packages:\n#8 0.254   libc6-compat (no such package):\n#8 0.254     required by: world[libc6-compat]\n#8 0.254   openssl (no such package):\n#8 0.254     required by: world[openssl]\n#8 ERROR: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2\n------\n > [ 3/19] RUN apk add --no-cache openssl libc6-compat:\n0.228 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.254 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.254 ERROR: unable to select packages:\n0.254   libc6-compat (no such package):\n0.254     required by: world[libc6-compat]\n0.254   openssl (no such package):\n0.254     required by: world[openssl]\n------\n\nng 1B\n 30c85144558f Extracting 1B\n 30c85144558f Extracting 1B\n e9516be90840 Extracting 1B\n 30c85144558f Extracting 1B\n e9516be90840 Extracting 1B\n 30c85144558f Extracting 1B\n e9516be90840 Extracting 2B\n 30c85144558f Extracting 1B\n e9516be90840 Extracting 2B\n 30c85144558f Extracting 1B\n e9516be90840 Extracting 2B\n 4f4fb700ef54 Pull complete 0B\n c25fa0902848 Pull complete 0B\n 8a080d2c0454 Pull complete 0B\n 30c85144558f Pull complete 0B\n Image johannesjo/super-productivity:latest Pulled \n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 2B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 3B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 4B\n e9516be90840 Extracting 5B\n e9516be90840 Extracting 5B\n e9516be90840 Extracting 5B\n c020dab2e853 Extracting 1B\n 4f83103187f5 Pull complete 0B\n e9516be90840 Pull complete 0B\n c020dab2e853 Pull complete 0B\n 0976f43b012c Pull complete 0B\n 277e2289225f Pull complete 0B\n 6ba2251a51ae Pull complete 0B\n Image postgres:15-alpine Pulled \n Image lib_app044-supersync Building \nDockerfile.test:15\n\n--------------------\n\n  13 |     \n\n  14 |     # Install required system dependencies for Prisma\n\n  15 | >>> RUN apk add --no-cache openssl libc6-compat\n\n  16 |     \n\n  17 |     # Copy package files for workspace setup\n\n--------------------\n\nfailed to solve: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2\n\n"
-    ]
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:8096/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "Super Productivity's own compose recipe builds from source (needing dl-cdn.alpinelinux.org) - used the project's own officially-published Docker Hub image (johannesjo/super-productivity) instead, referenced from its own wiki's 'Run with Docker' page.",
+    "startup_command": "docker compose up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -6100,6 +6108,12 @@
     },
     "has_container_recipe": true,
     "database_requirement": "postgres"
+   },
+   "screen_summary": {
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 15,
+    "screens_browser_verified": 15
    }
   },
   {
@@ -6113,7 +6127,7 @@
    "version": null,
    "commit": "da69391e81013aca5b077fd6994c767863515e71",
    "source_path": "applications/APP-045/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -6338,18 +6352,14 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2",
-    "blocked_host": "dl-cdn.alpinelinux.org",
-    "runtime_hint": [
-     "node",
-     "ruby"
-    ],
-    "startup_command": "docker compose -f docker-compose.yaml up -d",
-    "log": [
-     "copied .env.example -> .env",
-     "$ docker compose -p lib_app045 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-045/source/docker-compose.yaml up -d\n#1 [internal] load local bake definitions\n#1 reading from stdin 616B done\n#1 DONE 0.0s\n\n#2 [internal] load build definition from Dockerfile.test\n#2 transferring dockerfile: 2.96kB done\n#2 DONE 0.0s\n\n#3 [internal] load metadata for docker.io/library/node:22-alpine\n#3 DONE 0.5s\n\n#4 [internal] load .dockerignore\n#4 transferring context: 1.85kB done\n#4 DONE 0.0s\n\n#5 [ 1/19] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85\n#5 resolve docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85 0.0s done\n#5 DONE 0.0s\n\n#6 [ 2/19] WORKDIR /app\n#6 CACHED\n\n#7 [internal] load build context\n#7 transferring context: 4.29MB 0.1s done\n#7 DONE 0.1s\n\n#8 [ 3/19] RUN apk add --no-cache openssl libc6-compat\n#8 0.359 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#8 0.385 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#8 0.385 ERROR: unable to select packages:\n#8 0.385   libc6-compat (no such package):\n#8 0.385     required by: world[libc6-compat]\n#8 0.385   openssl (no such package):\n#8 0.385     required by: world[openssl]\n#8 ERROR: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2\n------\n > [ 3/19] RUN apk add --no-cache openssl libc6-compat:\n0.359 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.385 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.385 ERROR: unable to select packages:\n0.385   libc6-compat (no such package):\n0.385     required by: world[libc6-compat]\n0.385   openssl (no such package):\n0.385     required by: world[openssl]\n------\n\n Image lib_app045-supersync Building \nDockerfile.test:15\n\n--------------------\n\n  13 |     \n\n  14 |     # Install required system dependencies for Prisma\n\n  15 | >>> RUN apk add --no-cache openssl libc6-compat\n\n  16 |     \n\n  17 |     # Copy package files for workspace setup\n\n--------------------\n\nfailed to solve: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2\n\n"
-    ]
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:8098/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "Same app as APP-044 (Super Productivity, picked independently for this category too) - same fix: the project's own officially-published Docker Hub image (johannesjo/super-productivity) instead of building from source.",
+    "startup_command": "docker compose up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -6362,6 +6372,12 @@
     },
     "has_container_recipe": true,
     "database_requirement": "postgres"
+   },
+   "screen_summary": {
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 15,
+    "screens_browser_verified": 15
    }
   },
   {
