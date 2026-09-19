@@ -1,0 +1,18 @@
+{
+  "repo_name": "angstromctf/djangoctf",
+  "repo_url": "https://github.com/angstromctf/djangoctf",
+  "branch": "main",
+  "commit": "7c6188791053b7da7b5bbbfec2fd57c004b8e5ac",
+  "licence": "GPL-3.0",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "Jeopardy-style CTF competition platform -- correct domain.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": null,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": null,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected. LICENSE.txt is the verbatim GNU GPLv3 text -- copyleft, not on the permissive list. Last commit 2018-03-17 -- abandoned. Expected admission result: REJECTED on Rule C (GPL-3.0 is copyleft) and activity grounds."
+}
