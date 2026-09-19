@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 7 capabilities harvested from 7 real applications, each one
+**Status**: 11 capabilities harvested from 9 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 7 capabilities harvested so far
+## The 11 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -54,6 +54,10 @@ No script assumes a working directory.
 | CAP-0005 | send message | [jgoney/flask-messenger](https://github.com/jgoney/flask-messenger) | MIT | `messenger.py:30` `_add_message` (`connect`, `execute`, `commit`) | HTTP |
 | CAP-0006 | write review | [ichi-saki/Recipe_app](https://github.com/ichi-saki/Recipe_app) | MIT | `routes/comments.py:18` `make_comment` (`execute`, `commit`) | HTTP |
 | CAP-0007 | generate report | [vedpatel-real-ai/Fintrack-Flask-CS50-Final-Project](https://github.com/vedpatel-real-ai/Fintrack-Flask-CS50-Final-Project) | MIT | `app/routes/reports.py:33` `generate_report` (delegates to `_build_pdf_report`/`_build_excel_report`) | HTTP |
+| CAP-0008 | award badge | [shaikayan2084/Bounty-Simulator](https://github.com/shaikayan2084/Bounty-Simulator) | MIT | `backend/main.py:36` `check_badges` (`filter_by`, `add`, `commit`, idempotent) | HTTP |
+| CAP-0009 | show leaderboard | [shaikayan2084/Bounty-Simulator](https://github.com/shaikayan2084/Bounty-Simulator) (same app, different attach point) | MIT | `backend/main.py:86` `leaderboard` (`order_by`, `desc`, `limit`) | HTTP |
+| CAP-0010 | add favourite | [pranjalco/flask-coffee-and-wifi](https://github.com/pranjalco/flask-coffee-and-wifi) | MIT | `main.py:235` `add_bookmark` (`add`, `commit`, duplicate-guarded) | HTTP |
+| CAP-0011 | log workout | [wifizak/CasettaFit](https://github.com/wifizak/CasettaFit) | MIT | `app/routes/workout.py:211` `log_set` (`add`, `commit`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -117,6 +121,32 @@ code):
   (`PYTHON_BY_VERSION`/`_resolve_python`) rather than forcing every
   harvested app onto one Python version; recipe-app runs from a separate
   `.venv-py312`.
+- Bounty-Simulator's real application root is `backend/`, not the repo
+  root — its own modules use bare relative imports (`from database import
+  db`) that only resolve with `backend/` itself on sys.path/cwd. `build.py`
+  now supports a per-app `app_subdir` runner field, applied consistently
+  across reset/setup/launch. CasettaFit looked similar at first glance
+  (a directory literally named `app/app/`) but turned out to be a false
+  lead — its real fix was the opposite: `app/run.py` and `app/wsgi.py`,
+  though they physically live inside `app/`, both do `from app import
+  create_app`, meaning they expect the **repo root** on sys.path, not
+  their own directory. Tried `app_subdir` first, watched it fail with a
+  clear "cannot import name 'create_app' from 'app' (unknown location)",
+  and traced it to the actual import statements rather than guessing again.
+- CasettaFit ships no self-service registration route (only login/logout)
+  and its own `app/seed.py` — the documented way to get a first user —
+  turned out to be unrunnable as written under *either* invocation style
+  (`python app/seed.py` or `python -m app.seed`): its `from wsgi import
+  app` and wsgi.py's own `from app import create_app` need two different,
+  mutually exclusive directories on sys.path to both resolve, a real bug
+  in the app's own script. Rather than patch their source, `build.py`
+  gained a `-c <code>` setup-script form and this app's manifest entry
+  replicates seed.py's exact logic (the real `User` model, the real
+  `set_password()`, the real `UserProfile`) with the import path fixed to
+  match how the app's actually-working entry points do it. Also uses
+  Flask-Migrate exclusively (no `db.create_all()` at import time), so the
+  same inline script calls it directly — legitimate schema creation from
+  the real models, the same thing hostelfix's own `init_db.py` does.
 
 ## What each pipeline stage actually proved
 
@@ -193,6 +223,22 @@ Highlights beyond the basic "call it and check 200":
   CSRF token, and generates both a PDF and an Excel report — verified by
   real file signatures (`%PDF-`, and the zip signature `.xlsx` files
   start with) and a minimum size, not just a 200 status.
+- CAP-0008: crosses the real 100-XP "First Blood" threshold via two real
+  correct flag submissions, confirms the badge, then submits a third
+  correct flag and confirms the badge is **not** duplicated — the real
+  idempotency check in `check_badges()`, not assumed.
+- CAP-0009: gives two real users different real XP totals and confirms
+  the real `/api/leaderboard` response ranks them accordingly — proving
+  the query actually orders by score, not just returns insertion order.
+- CAP-0010: confirms anonymous bookmarking is rejected (this app's
+  `LoginManager` has no `login_view` configured, so the real behaviour is
+  a bare 401, not a redirect — read from source, not assumed), then adds
+  a real cafe, bookmarks it, confirms it, un-bookmarks it, and confirms
+  it's gone — a genuine two-way toggle.
+- CAP-0011: confirms anonymous set-logging is rejected, then creates a
+  real exercise, starts a real workout session, and logs two real sets
+  with different reps/weight/RPE — confirming both are independently
+  retrievable, not one overwriting the other.
 
 ## How to reproduce this from scratch
 
@@ -210,15 +256,18 @@ python3.12 -m venv .venv-py312
 
 python3 discovery/discover_applications.py
 python3 detection/detect_capability.py
-for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007; do
+for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
+           CAP-0008 CAP-0009 CAP-0010 CAP-0011; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
 
-# Each capability's own app is built/tested/stopped one at a time --
-# see each capability's runner in discovery/discover_applications.py for
-# its port (flask-messenger and recipe-app both hardcode 5000; others are
-# 5057-5060).
+# Each capability's own app is built/tested/stopped one at a time -- see
+# each capability's runner in discovery/discover_applications.py for its
+# port (flask-messenger, recipe-app and CasettaFit's start don't need one
+# specified, or hardcode 5000; others take --port 5057-5060). CAP-0008 and
+# CAP-0009 share one app (Bounty-Simulator) but are still built/verified
+# separately -- each build re-verifies its OWN harvested attach point.
 python3 build.py start --cap CAP-0001 --port 5057
 ./.venv/bin/python3 test/prove_capability_http.py
 node test/prove_capability_browser.mjs   # absolute Playwright import path in the script may need adjusting for your environment
@@ -247,13 +296,29 @@ python3 build.py stop
 python3 build.py start --cap CAP-0007 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0007_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0008 --port 5057
+./.venv/bin/python3 test/prove_CAP-0008_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0009 --port 5057
+./.venv/bin/python3 test/prove_CAP-0009_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0010 --port 5057
+./.venv/bin/python3 test/prove_CAP-0010_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0011 --port 5057
+./.venv/bin/python3 test/prove_CAP-0011_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) twice now, at two different capability counts,
-to confirm it's genuinely reproducible, not an artifact of an ad-hoc fixing
-sequence.
+deleted first, venvs kept) three times now, at three different capability
+counts, to confirm it's genuinely reproducible, not an artifact of an
+ad-hoc fixing sequence.
 
 ## What this proves vs. what's next
 
@@ -276,11 +341,28 @@ sequence.
   surface, which doesn't support backdating).
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 7.** ~74 names in the 81-name vocabulary have not been
+- **Scale beyond 11.** ~70 names in the 81-name vocabulary have not been
   researched yet. Each one needs the same real vetting (license read from
   source, AST-confirmed evidence, live proof) — this is not a
   copy-paste-N-times exercise, and a name with no genuine real-app
   candidate gets recorded as blocked/empty with a reason, never forced.
+  Four further capabilities were researched and license-verified but not
+  yet harvested (queued for the next batch): **book slot**
+  (Raviraj0001/Hospital_Management_Real, MIT — real per-doctor
+  availability/conflict check before booking), **rate item**
+  (RyLaney/zinny-api, BSD-3-Clause — real upsert via SQL `ON CONFLICT`),
+  **calculate tax** (rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics,
+  Apache-2.0 — real progressive tax-bracket computation, not a flat
+  multiply), and **generate invoice** (rishabh0510rishabh/Invoice-generator,
+  MIT — real WeasyPrint PDF aggregating real line items and tax, needs
+  system `cairo`/`pango` libraries evaluated before harvesting). **Escalate
+  ticket** was researched but every small, single-file, HTTP-route
+  candidate found failed either the licence check or the "must genuinely
+  update a persisted field" check; the one fully-verified real
+  implementation found (django-helpdesk's `escalate_tickets` management
+  command, BSD-3-Clause) is a mature production project but is invoked by
+  cron, not an HTTP route, and needs a heavier Django setup than this
+  pipeline's other apps — deferred, not forced in.
 - **Cross-application composition.** `build.py` verifies and mounts each
   harvested route within its *own* source application. Grafting a
   harvested capability onto a *different*, unrelated host application

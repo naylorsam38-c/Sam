@@ -1,0 +1,46 @@
+{
+  "application": {
+    "category": "gamified-learning",
+    "commit": "53bd597ccd9d9469e6bd15618817584ec404eb06",
+    "repo_url": "https://github.com/shaikayan2084/Bounty-Simulator.git",
+    "slug": "bounty-simulator"
+  },
+  "cap_id": "CAP-0009",
+  "capability_name": "show leaderboard",
+  "category": "gamified-learning",
+  "checksums": {
+    "harvested_source_sha256": "2534be5209338b4b36d471e6014d883b6de304b18aa42b4a3771d9b68dd215ad",
+    "whole_source_file_sha256_at_harvest": "4a42980917d5599c20919d065f4a9210a8b8eed6ee05c2fe7872ce8f157d791b"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "User",
+      "app",
+      "jsonify"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T12:38:04.648698+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@app.route('/api/leaderboard')"
+    ],
+    "end_lineno": 88,
+    "evidence_calls_matched": [
+      "desc",
+      "limit",
+      "order_by"
+    ],
+    "file": "backend/main.py",
+    "lineno": 86,
+    "route_path": "/api/leaderboard",
+    "symbol": "leaderboard"
+  }
+}

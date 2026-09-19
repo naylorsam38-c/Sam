@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0011",
+  "category": "fitness",
+  "generated_at": "2026-09-19T12:38:04.793957+00:00",
+  "implementations": [
+    {
+      "app_slug": "casettafit",
+      "commit": "5c5737130c8052d7c7094ae5c45df29bcb93b635",
+      "harvested_at": "2026-09-19T12:38:04.755837+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/casettafit/CAP-0011/PROVENANCE.json",
+      "shelf_path": "shelf/casettafit/CAP-0011"
+    }
+  ],
+  "name": "log workout"
+}

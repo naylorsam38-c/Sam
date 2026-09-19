@@ -191,11 +191,36 @@ def _resolve_python(runner: dict) -> Path:
     return python_exe
 
 
-def _run_setup_scripts(cloned_path: Path, setup_scripts, python_exe: Path):
+def _resolve_env(runner: dict) -> dict:
+    """The same env overrides the launched server gets (e.g. DATABASE_URL
+    pointing at a fresh BUILD_DB_PATH), formatted once so setup scripts
+    that touch the same database agree with the server on where it is."""
+    return {
+        k: v.format(db_path=str(BUILD_DB_PATH), smtp_host="127.0.0.1", smtp_port=SMTP_DEBUG_PORT)
+        for k, v in runner.get("env", {}).items()
+    }
+
+
+def _run_setup_scripts(cloned_path: Path, setup_scripts, python_exe: Path, env_overrides: dict):
     for script in setup_scripts or []:
         print(f"  setup: running {script}")
+        # "-m package.module" runs it the way `python -m` does: sys.path[0]
+        # is the cwd, not the script's own directory. Some apps' scripts
+        # (e.g. one that does `from wsgi import app` where wsgi.py itself
+        # does `from app import create_app`, expecting the REPO ROOT on
+        # sys.path) only import correctly that way -- running them as a
+        # bare script path puts the script's own directory on sys.path[0]
+        # instead, which is a real, different Python behaviour, not a bug
+        # to work around with sys.path hacks.
+        if script.startswith("-m "):
+            argv = [str(python_exe), "-m", script[len("-m "):]]
+        elif script.startswith("-c "):
+            argv = [str(python_exe), "-c", script[len("-c "):]]
+        else:
+            argv = [str(python_exe), script]
         result = subprocess.run(
-            [str(python_exe), script], cwd=str(cloned_path), capture_output=True, text=True,
+            argv, cwd=str(cloned_path), capture_output=True, text=True,
+            env={**os.environ, **env_overrides},
         )
         if result.returncode != 0:
             raise SystemExit(
@@ -205,7 +230,14 @@ def _run_setup_scripts(cloned_path: Path, setup_scripts, python_exe: Path):
 
 
 def _prepare_launch(runner: dict, cloned_path: Path, host: str, port: int, python_exe: Path):
-    """Returns (argv, cwd, actual_host, actual_port)."""
+    """
+    Returns (argv, cwd, actual_host, actual_port). `cloned_path` here is
+    already app_subdir-adjusted by the caller (start()) -- some real apps
+    put their actual application root in a subdirectory (e.g. backend/
+    next to a separate frontend/), where the app's own modules use bare
+    relative imports (`from database import db`) that only resolve with
+    that subdirectory itself on sys.path/cwd, not the repo root.
+    """
     kind = runner["kind"]
 
     if kind == "flask_module_attr":
@@ -217,11 +249,7 @@ def _prepare_launch(runner: dict, cloned_path: Path, host: str, port: int, pytho
         return [str(python_exe), str(LAUNCHER_PATH)], str(cloned_path), host, port
 
     if kind == "flask_factory":
-        env = runner.get("env", {})
-        env_lines = "\n".join(
-            f'os.environ[{k!r}] = {v.format(db_path=str(BUILD_DB_PATH), smtp_host="127.0.0.1", smtp_port=SMTP_DEBUG_PORT)!r}'
-            for k, v in env.items()
-        )
+        env_lines = "\n".join(f'os.environ[{k!r}] = {v!r}' for k, v in _resolve_env(runner).items())
         launcher = FLASK_FACTORY_LAUNCHER.format(
             app_dir=str(cloned_path), env_lines=env_lines,
             factory_module=runner["factory_module"], factory_func=runner["factory_func"],
@@ -251,13 +279,17 @@ def start(cap_id: str, host: str, port: int):
         raise SystemExit("ABORT: verification failed -- refusing to build/start an unverified composition")
 
     runner = result["runner"]
-    cloned_path = Path(result["cloned_path"])
+    # Applied once, here: reset/setup/launch must all agree on the app's
+    # real root, which for some apps is a subdirectory (see app_subdir in
+    # _prepare_launch's docstring) -- not the repo root harvest_parts.py
+    # and detect_capability.py use for provenance.
+    cloned_path = Path(result["cloned_path"]) / runner.get("app_subdir", "")
     python_exe = _resolve_python(runner)
 
     if BUILD_DB_PATH.exists():
         BUILD_DB_PATH.unlink()
     _reset_files(cloned_path, runner.get("reset_globs"))
-    _run_setup_scripts(cloned_path, runner.get("setup_scripts"), python_exe)
+    _run_setup_scripts(cloned_path, runner.get("setup_scripts"), python_exe, _resolve_env(runner))
 
     smtp_proc = None
     if runner.get("needs_smtp"):

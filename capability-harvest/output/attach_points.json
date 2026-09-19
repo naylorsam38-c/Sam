@@ -132,6 +132,84 @@
       "route_path": "/generate_report",
       "source_file_relative": "app/routes/reports.py",
       "symbol": "generate_report"
+    },
+    {
+      "app_slug": "bounty-simulator",
+      "cap_id": "CAP-0008",
+      "category": "gamified-learning",
+      "decorators": [],
+      "end_lineno": 40,
+      "evidence_calls_matched": [
+        "add",
+        "commit",
+        "filter_by"
+      ],
+      "found": true,
+      "lineno": 36,
+      "name": "award badge",
+      "route_path": null,
+      "source_file_relative": "backend/main.py",
+      "symbol": "check_badges"
+    },
+    {
+      "app_slug": "bounty-simulator",
+      "cap_id": "CAP-0009",
+      "category": "gamified-learning",
+      "decorators": [
+        "@app.route('/api/leaderboard')"
+      ],
+      "end_lineno": 88,
+      "evidence_calls_matched": [
+        "desc",
+        "limit",
+        "order_by"
+      ],
+      "found": true,
+      "lineno": 86,
+      "name": "show leaderboard",
+      "route_path": "/api/leaderboard",
+      "source_file_relative": "backend/main.py",
+      "symbol": "leaderboard"
+    },
+    {
+      "app_slug": "flask-coffee-and-wifi",
+      "cap_id": "CAP-0010",
+      "category": "cafe-directory",
+      "decorators": [
+        "@app.route('/add_bookmark/<int:cafe_id>')",
+        "@login_required"
+      ],
+      "end_lineno": 250,
+      "evidence_calls_matched": [
+        "add",
+        "commit"
+      ],
+      "found": true,
+      "lineno": 235,
+      "name": "add favourite",
+      "route_path": "/add_bookmark/<int:cafe_id>",
+      "source_file_relative": "main.py",
+      "symbol": "add_bookmark"
+    },
+    {
+      "app_slug": "casettafit",
+      "cap_id": "CAP-0011",
+      "category": "fitness",
+      "decorators": [
+        "@bp.route('/api/session/<int:session_id>/log-set', methods=['POST'])",
+        "@login_required"
+      ],
+      "end_lineno": 272,
+      "evidence_calls_matched": [
+        "add",
+        "commit"
+      ],
+      "found": true,
+      "lineno": 211,
+      "name": "log workout",
+      "route_path": "/api/session/<int:session_id>/log-set",
+      "source_file_relative": "app/routes/workout.py",
+      "symbol": "log_set"
     }
   ]
 }

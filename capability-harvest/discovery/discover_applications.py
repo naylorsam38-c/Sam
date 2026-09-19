@@ -221,6 +221,112 @@ APPLICATION_MANIFEST = [
             },
         },
     },
+    {
+        "slug": "bounty-simulator",
+        "clone_url": "https://github.com/shaikayan2084/Bounty-Simulator.git",
+        "ref": None,
+        "category": "gamified-learning",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy 'bug bounty simulator' learning "
+            "app, MIT licensed, JWT auth (no third-party IdP), SQLite "
+            "fallback. Two genuine capabilities live in the same file: "
+            "check_badges() does real, idempotent milestone-crossing badge "
+            "persistence (checks for an existing Badge row before adding), "
+            "and leaderboard() runs a real "
+            "`User.query.order_by(User.xp.desc()).limit(50)` -- not a "
+            "hardcoded list. seed.py (the app's own script) populates real "
+            "challenges with known flags so XP can actually be earned "
+            "through the real HTTP submit-flag flow, not a direct DB write."
+        ),
+        "runner": {
+            "kind": "flask_module_attr",
+            # The app's real module root is backend/, not the repo root --
+            # its own modules use bare relative imports (`from database
+            # import db`) that only resolve with backend/ itself on
+            # sys.path/cwd.
+            "app_subdir": "backend",
+            "app_module": "main",
+            "app_attr": "app",
+            "reset_globs": ["bugbounty.db"],
+            "setup_scripts": ["seed.py"],
+            "readiness_path": "/api/challenges",
+        },
+    },
+    {
+        "slug": "flask-coffee-and-wifi",
+        "clone_url": "https://github.com/pranjalco/flask-coffee-and-wifi.git",
+        "ref": None,
+        "category": "cafe-directory",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy + Flask-Login cafe directory, "
+            "MIT licensed, SQLite. Genuine toggleable favourite: "
+            "add_bookmark()/delete_bookmark() do real INSERT/DELETE on a "
+            "real Bookmark table (FKs to users.id/cafes.id), guarded "
+            "against duplicates by a real existence check first."
+        ),
+        "runner": {
+            "kind": "flask_module_attr",
+            "app_module": "main",
+            "app_attr": "app",
+            "reset_globs": ["cafe_data.db", "instance/cafe_data.db"],
+            "readiness_path": "/",
+        },
+    },
+    {
+        "slug": "casettafit",
+        "clone_url": "https://github.com/wifizak/CasettaFit.git",
+        "ref": None,
+        "category": "fitness",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy + Flask-Login self-hosted "
+            "workout tracker, MIT licensed, SQLite fallback. Genuine "
+            "log_set() persists a real WorkoutSet row (exercise_id, reps, "
+            "weight, rpe, completed_at) against a real parent "
+            "WorkoutSession, both real SQLAlchemy models -- not a stub."
+        ),
+        "runner": {
+            # app/__init__.py IS the `app` package itself (create_app
+            # lives there); app/run.py, which lives INSIDE that package
+            # directory, still does `from app import create_app` --
+            # meaning it expects the REPO ROOT on sys.path, not app/
+            # itself (confirmed by trying app_subdir="app" first: that
+            # put the package's own directory on sys.path, shadowing the
+            # package name and breaking the import; no app_subdir at all
+            # is the fix, not a workaround).
+            "kind": "flask_factory",
+            "factory_module": "app",
+            "factory_func": "create_app",
+            "reset_globs": ["casettafit.db", "instance/casettafit.db"],
+            # The app ships no self-service registration route (auth.py
+            # has only login/logout) -- app/seed.py is the app's own
+            # documented way to get a first real user (admin/adminpass).
+            # seed.py's own `from wsgi import app` / wsgi.py's own
+            # `from app import create_app` only resolve together with the
+            # REPO ROOT on sys.path (matching run.py/wsgi.py's own real,
+            # working import style) -- but seed.py is only ever invoked as
+            # a bare script or `-m app.seed`, both of which put a
+            # DIFFERENT directory on sys.path[0], so its own import chain
+            # cannot succeed under either invocation as written (a real
+            # bug in the app's own script, not something introduced here).
+            # This replicates seed.py's exact logic (real User model, real
+            # set_password(), real UserProfile) with the import path fixed
+            # to match how the app's actually-working entry points do it.
+            "setup_scripts": [
+                "-c import sys; sys.path.insert(0, '.'); "
+                "from app import create_app, db; from app.models import User, UserProfile; "
+                "app = create_app(); ctx = app.app_context(); ctx.push(); "
+                "db.create_all(); "  # this app relies on Flask-Migrate for schema, no create_all() at import time
+                "existing = User.query.filter_by(username='admin').first(); "
+                "admin = existing or User(username='admin', is_admin=True, is_active=True); "
+                "admin.set_password('adminpass') if not existing else None; "
+                "db.session.add(admin); db.session.flush(); "
+                "db.session.add(UserProfile(user_id=admin.id)) if not UserProfile.query.filter_by(user_id=admin.id).first() else None; "
+                "db.session.commit(); print('admin ready, id=', admin.id)"
+            ],
+            "readiness_path": "/",
+            "env": {"DATABASE_URL": "sqlite:///{db_path}"},
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

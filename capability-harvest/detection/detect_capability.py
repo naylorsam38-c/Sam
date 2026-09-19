@@ -104,6 +104,42 @@ CAPABILITY_TARGETS = [
         # same file -- not just "renders a template".
         "evidence_call_names": {"_build_pdf_report", "_build_excel_report"},
     },
+    {
+        "cap_id": "CAP-0008",
+        "name": "award badge",
+        "category": "gamified-learning",
+        "app_slug": "bounty-simulator",
+        "source_file_relative": "backend/main.py",
+        "symbol_hint": "check_badges",
+        "evidence_call_names": {"filter_by", "add", "commit"},
+    },
+    {
+        "cap_id": "CAP-0009",
+        "name": "show leaderboard",
+        "category": "gamified-learning",
+        "app_slug": "bounty-simulator",
+        "source_file_relative": "backend/main.py",
+        "route_path_hint": "/api/leaderboard",
+        "evidence_call_names": {"order_by", "desc", "limit"},
+    },
+    {
+        "cap_id": "CAP-0010",
+        "name": "add favourite",
+        "category": "cafe-directory",
+        "app_slug": "flask-coffee-and-wifi",
+        "source_file_relative": "main.py",
+        "route_path_hint": "/add_bookmark/",
+        "evidence_call_names": {"add", "commit"},
+    },
+    {
+        "cap_id": "CAP-0011",
+        "name": "log workout",
+        "category": "fitness",
+        "app_slug": "casettafit",
+        "source_file_relative": "app/routes/workout.py",
+        "route_path_hint": "/log-set",
+        "evidence_call_names": {"add", "commit"},
+    },
 ]
 # ----------------------------------------------------------------------------
 
