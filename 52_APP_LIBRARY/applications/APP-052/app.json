@@ -9,7 +9,7 @@
  "version": null,
  "commit": "5f3c85e5fc223c86060bf4b12e1b4dec58e9b8a9",
  "source_path": "applications/APP-052/source",
- "status": "INSTALL_FAILED",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": false,
  "manual_override_reason": "automated pick (Dawarich) is a location/travel tracker matched on the stray keyword 'timeline'; no real video editor was in either discovery source's candidate pool for this category",
  "discovery_candidates": [
@@ -84,8 +84,14 @@
   }
  ],
  "install_startup": {
-  "status": "INSTALL_FAILED",
-  "reason": "no Dockerfile or compose file - no documented way to run it"
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:5173/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "No Dockerfile or compose file ships with this project - it's a pure Vite/pnpm monorepo, meant to be run locally with `pnpm dev` or `pnpm build && pnpm preview` per its own README. Wrote a multi-stage Dockerfile matching that: builder stage runs pnpm install (pnpm 11.7.0 via corepack, needs node 22 - the project's own pnpm version requires it) and pnpm build; final stage copies only the built apps/web/dist static output and serves it with `serve`, discarding the builder's node_modules (multi-GB - huggingface/transformers, three.js, onnxruntime, etc. - which is what exhausted this sandbox's disk when first tried as a single-stage image, no different from a normal SPA production deploy).",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
  },
  "ecosystem": {
   "detected_ecosystems": {
@@ -95,5 +101,11 @@
   },
   "has_container_recipe": false,
   "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
  }
 }
