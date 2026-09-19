@@ -1,0 +1,202 @@
+{
+ "id": "APP-008",
+ "name": "Firezone",
+ "category": "Authentication",
+ "category_slug": "authentication",
+ "repository": "https://github.com/firezone/firezone",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-008/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Firezone",
+   "source_code_url": "https://github.com/firezone/firezone",
+   "stargazers_count": 9096,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Secure remote access gateway that supports the WireGuard protocol. It offers a Web GUI, 1-line install script, multi-factor auth (MFA), and SSO.",
+   "matched_keywords": [
+    "sso"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Pomerium",
+   "source_code_url": "https://github.com/pomerium/pomerium",
+   "stargazers_count": 5010,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Identity-aware reverse proxy, successor to now obsolete oauth_proxy. It inserts an OAuth step before proxying your request to the backend, so that you can safely expose your self-hosted websites to public Internet.",
+   "matched_keywords": [
+    "oauth"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "2FAuth",
+   "source_code_url": "https://github.com/Bubka/2FAuth",
+   "stargazers_count": 4155,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-02",
+   "description": "Manage your Two-Factor Authentication (2FA) accounts and generate their security codes.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ByteStash",
+   "source_code_url": "https://github.com/jordan-dalby/ByteStash",
+   "stargazers_count": 2534,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-08",
+   "description": "Pastebin and file storage service with a simple web interface. Supports syntax highlighting, optional user authentication and public sharing.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Watcharr",
+   "source_code_url": "https://github.com/sbondCo/Watcharr",
+   "stargazers_count": 1503,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-12",
+   "description": "Add and track all the shows and movies you are watching. Comes with user authentication, modern and clean UI and a very simple setup.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Keeper.sh",
+   "source_code_url": "https://github.com/ridafkih/keeper.sh",
+   "stargazers_count": 1343,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Calendar syncing tool that pulls and pushes events between calendar sources and destinations via iCal/ICS or OAuth, with support for anonymized busy/free events.",
+   "matched_keywords": [
+    "oauth"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Ownfoil",
+   "source_code_url": "https://github.com/a1ex4/ownfoil",
+   "stargazers_count": 916,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Nintendo Switch library manager, with automated management tasks (file identification and organization, missing updates/DLC), serving your library to multiple supported clients on your Switch, with shop customization and multi user authentication.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LibreDB Studio",
+   "source_code_url": "https://github.com/libredb/libredb-studio",
+   "stargazers_count": 800,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Browser-based SQL IDE for PostgreSQL, MySQL, Oracle, SQL Server, MongoDB, Redis, ClickHouse, DuckDB and more, with SSO, audit trail, ER diagrams and optional AI assistance on your own model key (alternative to DataGrip, DBeaver, CloudBeaver).",
+   "matched_keywords": [
+    "sso"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "TimeTracker",
+   "source_code_url": "https://github.com/drytrix/TimeTracker",
+   "stargazers_count": 625,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Track time across projects and clients, with timers, kanban tasks, CRM, expense tracking, multi-currency invoicing (PDF, Peppol/ZugFerd e-invoicing), reports, OIDC/SSO, and a REST API.",
+   "matched_keywords": [
+    "oidc",
+    "sso"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Para",
+   "source_code_url": "https://github.com/erudika/para",
+   "stargazers_count": 573,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-08-25",
+   "description": "Flexible and modular backend framework/server for object persistence, API development and authentication.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "VoucherVault",
+   "source_code_url": "https://github.com/l4rm4nd/VoucherVault",
+   "stargazers_count": 512,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-31",
+   "description": "Store and manage vouchers, coupons, loyalty and gift cards digitally. Supports expiry notifications, transaction histories, file uploads and OIDC SSO.",
+   "matched_keywords": [
+    "oidc",
+    "sso"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Pingvin Share X",
+   "source_code_url": "https://github.com/smp46/pingvin-share-x",
+   "stargazers_count": 439,
+   "licenses": [
+    "BSD-2-Clause"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "File sharing platform with support for logins, reverse shares, share expiry, S3 Buckets, advanced authentication, ClamAV for security scans and more (fork of Pingvin Share).",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "socks5-proxy-server",
+   "source_code_url": "https://github.com/nskondratev/socks5-proxy-server",
+   "stargazers_count": 143,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2025-11-29",
+   "description": "SOCKS5 proxy server with built-in authentication and Telegram-bot for user management and user statistics on data spent (handy when you pay per GB of data). It is dockerised and simple to install.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

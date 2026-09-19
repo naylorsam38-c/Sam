@@ -1,0 +1,74 @@
+{
+ "id": "APP-049",
+ "name": "Postiz",
+ "category": "Social Media",
+ "category_slug": "social-media",
+ "repository": "https://github.com/gitroomhq/postiz-app",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-049/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": "automated pick (RSSHub) is an RSS feed aggregator, not a social-media app",
+ "discovery_candidates": [
+  {
+   "name": "RSSHub",
+   "source_code_url": "https://github.com/DIYgod/RSSHub",
+   "stargazers_count": 46241,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Easy to use, and extensible RSS feed aggregator capable of generating RSS feeds from pretty much everything ranging from social media to university departments.",
+   "matched_keywords": [
+    "social media"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Postiz",
+   "source_code_url": "https://github.com/gitroomhq/postiz-app",
+   "stargazers_count": 36052,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Schedule posts, track the performance of your content, and manage all your social media accounts in one place (Alternative to Buffer, Hootsuite, Sprout Social).",
+   "matched_keywords": [
+    "social media"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LinkStack",
+   "source_code_url": "https://github.com/LinkStackOrg/LinkStack",
+   "stargazers_count": 3875,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-07-06",
+   "description": "Link all your social media platforms easily accessible on one page, customizable through an intuitive, easy to use user/admin interface (alternative to Linktree and Manylink).",
+   "matched_keywords": [
+    "social media"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Socioboard",
+   "source_code_url": "https://github.com/socioboard/Socioboard-5.0",
+   "stargazers_count": 1507,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-17",
+   "description": "Social media management, analytics, and reporting platform supporting nine social media networks out-of-the-box.",
+   "matched_keywords": [
+    "social media"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

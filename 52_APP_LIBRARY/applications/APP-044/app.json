@@ -1,0 +1,46 @@
+{
+ "id": "APP-044",
+ "name": "Super Productivity",
+ "category": "Productivity",
+ "category_slug": "productivity",
+ "repository": "https://github.com/super-productivity/super-productivity",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-044/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": "automated pick (4ga Boards) is a minor kanban board; this is the well-established, higher-star fit that didn't literally contain the word 'productivity' in its description",
+ "discovery_candidates": [
+  {
+   "name": "Super Productivity",
+   "source_code_url": "https://github.com/super-productivity/super-productivity",
+   "stargazers_count": 22121,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Advanced todo list app with integrated timeboxing and time tracking capabilities. Integrates with Jira, GitHub, GitLab, Redmine and OpenProject.",
+   "matched_keywords": [
+    "productivity"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "4ga Boards",
+   "source_code_url": "https://github.com/RARgames/4gaBoards",
+   "stargazers_count": 715,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-07-16",
+   "description": "Straightforward realtime kanban boards management for intuitive task tracking. Featuring an elegant dark mode, collapsible todo lists, and multitasking tools to supercharge your team's productivity.",
+   "matched_keywords": [
+    "productivity"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

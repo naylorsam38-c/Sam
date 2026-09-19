@@ -1,0 +1,60 @@
+{
+ "id": "APP-052",
+ "name": "OpenReel Video",
+ "category": "Video Editors",
+ "category_slug": "video-editors",
+ "repository": "https://github.com/Augani/openreel-video",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-052/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": "automated pick (Dawarich) is a location/travel tracker matched on the stray keyword 'timeline'; no real video editor was in either discovery source's candidate pool for this category",
+ "discovery_candidates": [
+  {
+   "name": "Dawarich",
+   "source_code_url": "https://github.com/Freika/dawarich",
+   "stargazers_count": 10435,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-13",
+   "description": "Visualize your location history, track your movements, and analyze your travel patterns with complete privacy and control (alternative to Google Timeline a.k.a. Google Location History).",
+   "matched_keywords": [
+    "timeline"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "TimeTagger",
+   "source_code_url": "https://github.com/almarklein/timetagger",
+   "stargazers_count": 1787,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-05-17",
+   "description": "An open source time-tracker based on an interactive timeline and powerful reporting.",
+   "matched_keywords": [
+    "timeline"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Operational.co",
+   "source_code_url": "https://github.com/operational-co/operational.co",
+   "stargazers_count": 477,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-07-26",
+   "description": "Receive alerts in a live timeline from your product.",
+   "matched_keywords": [
+    "timeline"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

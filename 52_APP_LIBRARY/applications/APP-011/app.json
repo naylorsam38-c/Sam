@@ -1,0 +1,34 @@
+{
+ "id": "APP-011",
+ "name": "linkwarden",
+ "category": "Bookmarks & Archiving",
+ "category_slug": "bookmarks-archiving",
+ "repository": "https://github.com/linkwarden/linkwarden",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-011/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "linkwarden",
+   "source_code_url": "https://github.com/linkwarden/linkwarden",
+   "stargazers_count": 19800,
+   "licenses": [],
+   "archived": false,
+   "description": "Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters."
+  },
+  {
+   "name": "linkding",
+   "source_code_url": "https://github.com/sissbruecker/linkding",
+   "stargazers_count": 11200,
+   "licenses": [],
+   "archived": false,
+   "description": "Self-hosted bookmark manager that is designed be to be minimal, fast, and easy to set up using Docker."
+  }
+ ],
+ "discovery_failed_reason": null
+}

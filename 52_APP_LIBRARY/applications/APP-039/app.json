@@ -1,0 +1,60 @@
+{
+ "id": "APP-039",
+ "name": null,
+ "category": "Networking",
+ "category_slug": "networking",
+ "repository": null,
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-039/source",
+ "status": "DISCOVERY_FAILED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "diaspora*",
+   "source_code_url": "https://github.com/diaspora/diaspora",
+   "stargazers_count": 13649,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-07-28",
+   "description": "Distributed social networking server.",
+   "matched_keywords": [
+    "networking"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Elgg",
+   "source_code_url": "https://github.com/Elgg/Elgg",
+   "stargazers_count": 1675,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-10",
+   "description": "Powerful open source social networking engine.",
+   "matched_keywords": [
+    "networking"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OSSN",
+   "source_code_url": "https://github.com/opensource-socialnetwork/opensource-socialnetwork",
+   "stargazers_count": 1244,
+   "licenses": [
+    "CAL-1.0"
+   ],
+   "updated_at": "2026-09-07",
+   "description": "Social networking software that allows you to make a social networking website and helps your members build social relationships, with people who share similar professional or personal interests.",
+   "matched_keywords": [
+    "networking"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": "manually reviewed: no candidate in either discovery source is a genuine fit for this category (see MANUAL_OVERRIDES in build_manifest.py)"
+}

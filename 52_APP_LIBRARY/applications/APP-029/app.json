@@ -1,0 +1,26 @@
+{
+ "id": "APP-029",
+ "name": "gaseous-server",
+ "category": "Game Development",
+ "category_slug": "game-development",
+ "repository": "https://github.com/gaseous-project/gaseous-server",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-029/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "gaseous-server",
+   "source_code_url": "https://github.com/gaseous-project/gaseous-server",
+   "stargazers_count": 940,
+   "licenses": [],
+   "archived": false,
+   "description": "A game ROM manager, with a built in web based emulator."
+  }
+ ],
+ "discovery_failed_reason": null
+}

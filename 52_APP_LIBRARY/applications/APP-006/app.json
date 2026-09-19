@@ -1,0 +1,34 @@
+{
+ "id": "APP-006",
+ "name": "langfuse",
+ "category": "AI Development",
+ "category_slug": "ai-development",
+ "repository": "https://github.com/langfuse/langfuse",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-006/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "langfuse",
+   "source_code_url": "https://github.com/langfuse/langfuse",
+   "stargazers_count": 34804,
+   "licenses": [],
+   "archived": false,
+   "description": "Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform."
+  },
+  {
+   "name": "onyx",
+   "source_code_url": "https://github.com/onyx-dot-app/onyx",
+   "stargazers_count": 32162,
+   "licenses": [],
+   "archived": false,
+   "description": "Open Source AI Platform - AI Chat with advanced features that works with every LLM."
+  }
+ ],
+ "discovery_failed_reason": null
+}

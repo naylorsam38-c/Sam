@@ -1,0 +1,5949 @@
+{
+ "generated_at": "2026-09-19T11:40:41.426113+00:00",
+ "target_count": 52,
+ "category_source": "categories_openapps52.json (cached snapshot of openapps.pro's 52 categories; the live site is blocked by this sandbox's egress policy, so candidate apps come from awesome-selfhosted-data + GitHub search instead, per spec section 2)",
+ "applications": [
+  {
+   "id": "APP-001",
+   "name": "flagsmith",
+   "category": "A/B Testing & Experimentation",
+   "category_slug": "ab-testing-experimentation",
+   "repository": "https://github.com/Flagsmith/flagsmith",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-001/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "flagsmith",
+     "source_code_url": "https://github.com/Flagsmith/flagsmith",
+     "stargazers_count": 6561,
+     "licenses": [
+      "BSD-3-Clause"
+     ],
+     "archived": false,
+     "description": "Flagsmith is an open-source feature flag platform with remote config, experimentation, and self-hosted or cloud deployment options."
+    },
+    {
+     "name": "go-feature-flag",
+     "source_code_url": "https://github.com/thomaspoignant/go-feature-flag",
+     "stargazers_count": 2110,
+     "licenses": [
+      "MIT"
+     ],
+     "archived": false,
+     "description": "GO Feature Flag is a simple, complete and lightweight self-hosted cloud native feature flag solution."
+    },
+    {
+     "name": "featbit",
+     "source_code_url": "https://github.com/featbit/featbit",
+     "stargazers_count": 1907,
+     "licenses": [
+      "MIT"
+     ],
+     "archived": false,
+     "description": "Enterprise-grade feature flag platform that you can self-host."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-002",
+   "name": "AnythingLLM",
+   "category": "AI Agents",
+   "category_slug": "ai-agents",
+   "repository": "https://github.com/Mintplex-Labs/anything-llm",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-002/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "AnythingLLM",
+     "source_code_url": "https://github.com/Mintplex-Labs/anything-llm",
+     "stargazers_count": 66193,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "All-in-one desktop & Docker AI application with built-in RAG, AI agents, No-code agent builder, MCP compatibility, and more.",
+     "matched_keywords": [
+      "ai agents"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Langfuse",
+     "source_code_url": "https://github.com/langfuse/langfuse",
+     "stargazers_count": 34787,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "LLM engineering platform for model tracing, prompt management, and application evaluation. Langfuse helps teams collaboratively debug, analyze, and iterate on their LLM applications such as chatbots or AI agents.",
+     "matched_keywords": [
+      "ai agents"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Composio",
+     "source_code_url": "https://github.com/ComposioHQ/composio",
+     "stargazers_count": 30236,
+     "licenses": [
+      "Elastic-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Integration platform for AI agents & LLMs with support for 250+ apps and custom tools.",
+     "matched_keywords": [
+      "ai agents"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-003",
+   "name": "LobeHub",
+   "category": "AI Assistants",
+   "category_slug": "ai-assistants",
+   "repository": "https://github.com/lobehub/lobehub",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-003/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Home Assistant",
+     "source_code_url": "https://github.com/home-assistant/core",
+     "stargazers_count": 90737,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Home automation platform.",
+     "matched_keywords": [
+      "assistant"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LobeHub",
+     "source_code_url": "https://github.com/lobehub/lobehub",
+     "stargazers_count": 82607,
+     "licenses": [
+      "\u2298 Proprietary"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Modern design AI chat framework supporting multiple AI providers, one click install MCP Marketplace and Artifacts / Thinking.",
+     "matched_keywords": [
+      "ai chat"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LibreChat",
+     "source_code_url": "https://github.com/danny-avila/LibreChat",
+     "stargazers_count": 44331,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Enhanced ChatGPT-compatible AI chat interface supporting multiple AI providers, with multi-user auth, message search, and plugin support.",
+     "matched_keywords": [
+      "ai chat",
+      "chatgpt"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Leon",
+     "source_code_url": "https://github.com/leon-ai/leon",
+     "stargazers_count": 17520,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Personal assistant who can live on your server.",
+     "matched_keywords": [
+      "assistant"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Gladys",
+     "source_code_url": "https://github.com/GladysAssistant/Gladys",
+     "stargazers_count": 3196,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Privacy-first home assistant.",
+     "matched_keywords": [
+      "assistant"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Relaticle",
+     "source_code_url": "https://github.com/relaticle/relaticle",
+     "stargazers_count": 1693,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "CRM with an MCP server, an AI assistant with human-approved changes, a REST API, custom fields, and kanban boards.",
+     "matched_keywords": [
+      "assistant"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Bar Assistant",
+     "source_code_url": "https://github.com/karlomikus/bar-assistant",
+     "stargazers_count": 1092,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Manage your home bar while adding your ingredients, searching for cocktails and creating custom cocktail recipes.",
+     "matched_keywords": [
+      "assistant"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Kibitzr",
+     "source_code_url": "https://github.com/kibitzr/kibitzr",
+     "stargazers_count": 716,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-04-08",
+     "description": "Lightweight personal web assistant with powerful integrations.",
+     "matched_keywords": [
+      "assistant"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "NutriTrace",
+     "source_code_url": "https://github.com/TraceApps/nutritrace",
+     "stargazers_count": 242,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-15",
+     "description": "Nutrition and diet tracker with barcode scanning, wearable integrations (Fitbit, Withings, Garmin, Health Connect), adaptive calorie goals, multi-user sharing, and a built-in AI assistant (alternative to MyFitnessPal, Cronometer).",
+     "matched_keywords": [
+      "assistant"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OrcaQ",
+     "source_code_url": "https://github.com/cin12211/orca-q",
+     "stargazers_count": 221,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-12",
+     "description": "Modern database client and IDE for managing, querying, and exploring multiple database types with built-in AI assistant.",
+     "matched_keywords": [
+      "assistant"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-004",
+   "name": "tabby",
+   "category": "AI Code Assistants",
+   "category_slug": "ai-code-assistants",
+   "repository": "https://github.com/TabbyML/tabby",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-004/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "tabby",
+     "source_code_url": "https://github.com/TabbyML/tabby",
+     "stargazers_count": 33881,
+     "licenses": [],
+     "archived": false,
+     "description": "Self-hosted AI coding assistant."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-005",
+   "name": "penpot",
+   "category": "AI Design Tools",
+   "category_slug": "ai-design-tools",
+   "repository": "https://github.com/penpot/penpot",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-005/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "penpot",
+     "source_code_url": "https://github.com/penpot/penpot",
+     "stargazers_count": 60152,
+     "licenses": [],
+     "archived": false,
+     "description": "Penpot: The open-source design platform for Product teams that need scalable collaboration."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-006",
+   "name": "langfuse",
+   "category": "AI Development",
+   "category_slug": "ai-development",
+   "repository": "https://github.com/langfuse/langfuse",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-006/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "langfuse",
+     "source_code_url": "https://github.com/langfuse/langfuse",
+     "stargazers_count": 34804,
+     "licenses": [],
+     "archived": false,
+     "description": "Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform."
+    },
+    {
+     "name": "onyx",
+     "source_code_url": "https://github.com/onyx-dot-app/onyx",
+     "stargazers_count": 32162,
+     "licenses": [],
+     "archived": false,
+     "description": "Open Source AI Platform - AI Chat with advanced features that works with every LLM."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-007",
+   "name": "ElasticSearch",
+   "category": "Analytics",
+   "category_slug": "analytics",
+   "repository": "https://github.com/elastic/elasticsearch",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-007/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "ElasticSearch",
+     "source_code_url": "https://github.com/elastic/elasticsearch",
+     "stargazers_count": 77934,
+     "licenses": [
+      "SSPL-1.0"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Distributed, RESTful search and analytics engine.",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Superset",
+     "source_code_url": "https://github.com/apache/superset",
+     "stargazers_count": 74835,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Modern data exploration and visualization platform.",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Metabase",
+     "source_code_url": "https://github.com/metabase/metabase",
+     "stargazers_count": 49335,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Easy way for everyone in your company to ask questions and learn from data.",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "PostHog",
+     "source_code_url": "https://github.com/posthog/posthog",
+     "stargazers_count": 39853,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Product analytics, session recording, feature flagging and a/b testing that you can self-host (alternative to Mixpanel, Amplitude, Heap, HotJar, Optimizely).",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Umami",
+     "source_code_url": "https://github.com/umami-software/umami",
+     "stargazers_count": 38900,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Simple, fast, privacy-focused alternative to Google Analytics.",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Postiz",
+     "source_code_url": "https://github.com/gitroomhq/postiz-app",
+     "stargazers_count": 36052,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Schedule posts, track the performance of your content, and manage all your social media accounts in one place (Alternative to Buffer, Hootsuite, Sprout Social).",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Netron",
+     "source_code_url": "https://github.com/lutzroeder/netron",
+     "stargazers_count": 33494,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Visualizer for neural network and machine learning models.",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Plausible Analytics",
+     "source_code_url": "https://github.com/plausible/analytics/",
+     "stargazers_count": 29136,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Simple, lightweight (< 1 KB) and privacy-friendly web analytics.",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Redash",
+     "source_code_url": "https://github.com/getredash/redash",
+     "stargazers_count": 28801,
+     "licenses": [
+      "BSD-2-Clause"
+     ],
+     "updated_at": "2026-09-03",
+     "description": "Connect and query your data sources, build dashboards to visualize data and share them with your company.",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Matomo",
+     "source_code_url": "https://github.com/matomo-org/matomo",
+     "stargazers_count": 21886,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Web analytics that protects your data and your customers' privacy (alternative to Google Analytics).",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "GoAccess",
+     "source_code_url": "https://github.com/allinurl/goaccess",
+     "stargazers_count": 20935,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Real-time web log analyzer and interactive viewer that runs in a terminal.",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Druid",
+     "source_code_url": "https://github.com/apache/druid",
+     "stargazers_count": 14054,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Distributed, column-oriented, real-time analytics data store.",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Rybbit",
+     "source_code_url": "https://github.com/rybbit-io/rybbit",
+     "stargazers_count": 13026,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Web and products analytics that is easy to setup and more intuitive (alternative to Google Analytics).",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Manticore Search",
+     "source_code_url": "https://github.com/manticoresoftware/manticoresearch/",
+     "stargazers_count": 12018,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Full-text search and data analytics, with fast response time for small, medium and big data (alternative to Elasticsearch).",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Tyk",
+     "source_code_url": "https://github.com/TykTechnologies/tyk",
+     "stargazers_count": 10822,
+     "licenses": [
+      "MPL-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Fast and scalable open source API Gateway. Out of the box, Tyk offers an API Management Platform with an API Gateway, API Analytics, Developer Portal and API Management Dashboard.",
+     "matched_keywords": [
+      "analytics"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-008",
+   "name": "Firezone",
+   "category": "Authentication",
+   "category_slug": "authentication",
+   "repository": "https://github.com/firezone/firezone",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-008/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Firezone",
+     "source_code_url": "https://github.com/firezone/firezone",
+     "stargazers_count": 9096,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Secure remote access gateway that supports the WireGuard protocol. It offers a Web GUI, 1-line install script, multi-factor auth (MFA), and SSO.",
+     "matched_keywords": [
+      "sso"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Pomerium",
+     "source_code_url": "https://github.com/pomerium/pomerium",
+     "stargazers_count": 5010,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Identity-aware reverse proxy, successor to now obsolete oauth_proxy. It inserts an OAuth step before proxying your request to the backend, so that you can safely expose your self-hosted websites to public Internet.",
+     "matched_keywords": [
+      "oauth"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "2FAuth",
+     "source_code_url": "https://github.com/Bubka/2FAuth",
+     "stargazers_count": 4155,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-02",
+     "description": "Manage your Two-Factor Authentication (2FA) accounts and generate their security codes.",
+     "matched_keywords": [
+      "authentication"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "ByteStash",
+     "source_code_url": "https://github.com/jordan-dalby/ByteStash",
+     "stargazers_count": 2534,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-08-08",
+     "description": "Pastebin and file storage service with a simple web interface. Supports syntax highlighting, optional user authentication and public sharing.",
+     "matched_keywords": [
+      "authentication"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Watcharr",
+     "source_code_url": "https://github.com/sbondCo/Watcharr",
+     "stargazers_count": 1503,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-12",
+     "description": "Add and track all the shows and movies you are watching. Comes with user authentication, modern and clean UI and a very simple setup.",
+     "matched_keywords": [
+      "authentication"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Keeper.sh",
+     "source_code_url": "https://github.com/ridafkih/keeper.sh",
+     "stargazers_count": 1343,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Calendar syncing tool that pulls and pushes events between calendar sources and destinations via iCal/ICS or OAuth, with support for anonymized busy/free events.",
+     "matched_keywords": [
+      "oauth"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Ownfoil",
+     "source_code_url": "https://github.com/a1ex4/ownfoil",
+     "stargazers_count": 916,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Nintendo Switch library manager, with automated management tasks (file identification and organization, missing updates/DLC), serving your library to multiple supported clients on your Switch, with shop customization and multi user authentication.",
+     "matched_keywords": [
+      "authentication"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LibreDB Studio",
+     "source_code_url": "https://github.com/libredb/libredb-studio",
+     "stargazers_count": 800,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Browser-based SQL IDE for PostgreSQL, MySQL, Oracle, SQL Server, MongoDB, Redis, ClickHouse, DuckDB and more, with SSO, audit trail, ER diagrams and optional AI assistance on your own model key (alternative to DataGrip, DBeaver, CloudBeaver).",
+     "matched_keywords": [
+      "sso"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "TimeTracker",
+     "source_code_url": "https://github.com/drytrix/TimeTracker",
+     "stargazers_count": 625,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Track time across projects and clients, with timers, kanban tasks, CRM, expense tracking, multi-currency invoicing (PDF, Peppol/ZugFerd e-invoicing), reports, OIDC/SSO, and a REST API.",
+     "matched_keywords": [
+      "oidc",
+      "sso"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Para",
+     "source_code_url": "https://github.com/erudika/para",
+     "stargazers_count": 573,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-08-25",
+     "description": "Flexible and modular backend framework/server for object persistence, API development and authentication.",
+     "matched_keywords": [
+      "authentication"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "VoucherVault",
+     "source_code_url": "https://github.com/l4rm4nd/VoucherVault",
+     "stargazers_count": 512,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-08-31",
+     "description": "Store and manage vouchers, coupons, loyalty and gift cards digitally. Supports expiry notifications, transaction histories, file uploads and OIDC SSO.",
+     "matched_keywords": [
+      "oidc",
+      "sso"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Pingvin Share X",
+     "source_code_url": "https://github.com/smp46/pingvin-share-x",
+     "stargazers_count": 439,
+     "licenses": [
+      "BSD-2-Clause"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "File sharing platform with support for logins, reverse shares, share expiry, S3 Buckets, advanced authentication, ClamAV for security scans and more (fork of Pingvin Share).",
+     "matched_keywords": [
+      "authentication"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "socks5-proxy-server",
+     "source_code_url": "https://github.com/nskondratev/socks5-proxy-server",
+     "stargazers_count": 143,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2025-11-29",
+     "description": "SOCKS5 proxy server with built-in authentication and Telegram-bot for user management and user statistics on data spent (handy when you pay per GB of data). It is dockerised and simple to install.",
+     "matched_keywords": [
+      "authentication"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-009",
+   "name": "n8n",
+   "category": "Automation",
+   "category_slug": "automation",
+   "repository": "https://github.com/n8n-io/n8n",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-009/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "n8n",
+     "source_code_url": "https://github.com/n8n-io/n8n",
+     "stargazers_count": 205289,
+     "licenses": [
+      "Apache-2.0",
+      "Commons-Clause"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Free node based Workflow Automation Tool. Easily automate tasks across different services.",
+     "matched_keywords": [
+      "automation",
+      "n8n",
+      "workflow",
+      "workflow automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Home Assistant",
+     "source_code_url": "https://github.com/home-assistant/core",
+     "stargazers_count": 90737,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Home automation platform.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Huginn",
+     "source_code_url": "https://github.com/huginn/huginn",
+     "stargazers_count": 49970,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Build agents that monitor and act on your behalf.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Apache Airflow",
+     "source_code_url": "https://github.com/apache/airflow/",
+     "stargazers_count": 46890,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Platform to programmatically author, schedule, and monitor workflows.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "changedetection.io",
+     "source_code_url": "https://github.com/dgtlmoon/changedetection.io",
+     "stargazers_count": 34338,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Stay up-to-date with web-site content changes.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Kestra",
+     "source_code_url": "https://github.com/kestra-io/kestra",
+     "stargazers_count": 28163,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Event-driven, language-agnostic platform to create, schedule, and monitor workflows. In code. Coordinate data pipelines and tasks such as ETL and ELT.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Tasmota",
+     "source_code_url": "https://github.com/arendst/Tasmota",
+     "stargazers_count": 24763,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Open source firmware for ESP devices. Total local control with quick setup and updates. Control using MQTT, Web UI, HTTP or serial. Automate using timers, rules or scripts. Integration with home automation solutions.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Activepieces",
+     "source_code_url": "https://github.com/activepieces/activepieces",
+     "stargazers_count": 24543,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "No-code business automation tool like Zapier or Tray. For example, you can send a Slack notification for each new Trello card.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Leon",
+     "source_code_url": "https://github.com/leon-ai/leon",
+     "stargazers_count": 17520,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Personal assistant who can live on your server.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Automatisch",
+     "source_code_url": "https://github.com/automatisch/automatisch",
+     "stargazers_count": 13974,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-01-15",
+     "description": "Business automation tool that lets you connect different services like Twitter, Slack, and more to automate your business processes (alternative to Zapier).",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Gotenberg",
+     "source_code_url": "https://github.com/gotenberg/gotenberg",
+     "stargazers_count": 13120,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Developer-friendly API to interact with powerful tools like Chromium and LibreOffice for converting numerous document formats (HTML, Markdown, Word, Excel, etc.) into PDF files, and more.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Mautic",
+     "source_code_url": "https://github.com/mautic/mautic",
+     "stargazers_count": 10529,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Marketing automation software (email, social and more).",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Healthchecks",
+     "source_code_url": "https://github.com/healthchecks/healthchecks",
+     "stargazers_count": 10341,
+     "licenses": [
+      "BSD-3-Clause"
+     ],
+     "updated_at": "2026-09-14",
+     "description": "Listen for pings and sends alerts when pings are late.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "StackStorm",
+     "source_code_url": "https://github.com/StackStorm/st2",
+     "stargazers_count": 6536,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-02",
+     "description": "StackStorm (aka _IFTTT for Ops_) is event-driven automation for auto-remediation, security responses, troubleshooting, deployments, and more. Includes rules engine, workflow, 160 integration packs with 6000+ actions and ChatOps.",
+     "matched_keywords": [
+      "automation",
+      "workflow"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Cronicle",
+     "source_code_url": "https://github.com/jhuckaby/Cronicle",
+     "stargazers_count": 5844,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Simple, distributed task scheduler and runner with a web based UI.",
+     "matched_keywords": [
+      "automation"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-010",
+   "name": "Ghost",
+   "category": "Blogging",
+   "category_slug": "blogging",
+   "repository": "https://github.com/TryGhost/Ghost",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-010/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Ghost",
+     "source_code_url": "https://github.com/TryGhost/Ghost",
+     "stargazers_count": 55352,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Just a blogging platform.",
+     "matched_keywords": [
+      "blogging"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "WordPress",
+     "source_code_url": "https://github.com/WordPress/WordPress",
+     "stargazers_count": 21428,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "World's most-used blogging and CMS engine.",
+     "matched_keywords": [
+      "blogging"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "WriteFreely",
+     "source_code_url": "https://github.com/writefreely/writefreely",
+     "stargazers_count": 5252,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-08-28",
+     "description": "Writing software for starting a minimalist, federated blog \u2014 or an entire community.",
+     "matched_keywords": [
+      "blog"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Ech0",
+     "source_code_url": "https://github.com/lin-snow/Ech0",
+     "stargazers_count": 2058,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Lightweight federated publishing platform focused on personal idea sharing (documentation in Chinese).",
+     "matched_keywords": [
+      "publishing platform"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Bludit",
+     "source_code_url": "https://github.com/bludit/bludit",
+     "stargazers_count": 1466,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-09",
+     "description": "Build a site or blog in seconds. Bludit uses flat-files (text files in JSON format) to store posts and pages.",
+     "matched_keywords": [
+      "blog"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "MODX",
+     "source_code_url": "https://github.com/modxcms/revolution",
+     "stargazers_count": 1409,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-08-31",
+     "description": "Advanced content management and publishing platform. The current version is called 'Revolution'.",
+     "matched_keywords": [
+      "publishing platform"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "HTMLy",
+     "source_code_url": "https://github.com/danpros/htmly",
+     "stargazers_count": 1363,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-01-25",
+     "description": "Databaseless PHP blogging platform. A flat-file CMS that allows you to create a fast, secure, and powerful website or blog in seconds.",
+     "matched_keywords": [
+      "blog",
+      "blogging"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Known",
+     "source_code_url": "https://github.com/idno/idno",
+     "stargazers_count": 1123,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-04-12",
+     "description": "Collaborative social publishing platform.",
+     "matched_keywords": [
+      "publishing platform"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Haven",
+     "source_code_url": "https://github.com/havenweb/haven",
+     "stargazers_count": 803,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Private blogging system with markdown editing and built in RSS reader.",
+     "matched_keywords": [
+      "blogging"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Superdesk",
+     "source_code_url": "https://github.com/superdesk/superdesk",
+     "stargazers_count": 751,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "End-to-end news creation, production, curation, distribution, and publishing platform.",
+     "matched_keywords": [
+      "publishing platform"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Omeka S",
+     "source_code_url": "https://github.com/omeka/omeka-s",
+     "stargazers_count": 513,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-08",
+     "description": "Next-generation web publishing platform for institutions interested in connecting digital cultural heritage collections with other resources online.",
+     "matched_keywords": [
+      "publishing platform"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Chyrp Lite",
+     "source_code_url": "https://github.com/xenocrat/chyrp-lite",
+     "stargazers_count": 495,
+     "licenses": [
+      "BSD-3-Clause"
+     ],
+     "updated_at": "2026-08-07",
+     "description": "Extra-awesome, extra-lightweight blog engine.",
+     "matched_keywords": [
+      "blog"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Mataroa",
+     "source_code_url": "https://github.com/mataroablog/mataroa",
+     "stargazers_count": 367,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-08-05",
+     "description": "Naked blogging platform for minimalists.",
+     "matched_keywords": [
+      "blogging"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "fx",
+     "source_code_url": "https://github.com/rikhuijzer/fx",
+     "stargazers_count": 325,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-15",
+     "description": "Micro-blog tool offering built-in syntax highlighting, mobile publishing and more (alternative to Twitter, Bluesky).",
+     "matched_keywords": [
+      "blog"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "BuddyPress",
+     "source_code_url": "https://github.com/buddypress/BuddyPress",
+     "stargazers_count": 255,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-08-13",
+     "description": "Powerful plugin that takes your WordPress.org powered site beyond the blog with social-network features like user profiles, activity streams, user groups, and more.",
+     "matched_keywords": [
+      "blog"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-011",
+   "name": "linkwarden",
+   "category": "Bookmarks & Archiving",
+   "category_slug": "bookmarks-archiving",
+   "repository": "https://github.com/linkwarden/linkwarden",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-011/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "linkwarden",
+     "source_code_url": "https://github.com/linkwarden/linkwarden",
+     "stargazers_count": 19800,
+     "licenses": [],
+     "archived": false,
+     "description": "Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters."
+    },
+    {
+     "name": "linkding",
+     "source_code_url": "https://github.com/sissbruecker/linkding",
+     "stargazers_count": 11200,
+     "licenses": [],
+     "archived": false,
+     "description": "Self-hosted bookmark manager that is designed be to be minimal, fast, and easy to set up using Docker."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-012",
+   "name": "Neko",
+   "category": "Browser",
+   "category_slug": "browser",
+   "repository": "https://github.com/m1k1o/neko",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-012/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": "automated pick (code-server) matched 'browser' as a stray word in 'VS Code in the browser' - it's a web IDE, not a browser app",
+   "discovery_candidates": [
+    {
+     "name": "code-server",
+     "source_code_url": "https://github.com/coder/code-server",
+     "stargazers_count": 79352,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "VS Code in the browser, hosted on a remote server.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "CyberChef",
+     "source_code_url": "https://github.com/gchq/CyberChef",
+     "stargazers_count": 35876,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Perform all manner of operations within a web browser such as AES, DES and Blowfish encryption and decryption, creating hexdumps, calculating hashes, and much more.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Node RED",
+     "source_code_url": "https://github.com/node-red/node-red",
+     "stargazers_count": 23669,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Browser-based flow editor that helps you wiring hardware devices, APIs and online services to create IoT solutions.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Neko",
+     "source_code_url": "https://github.com/m1k1o/neko",
+     "stargazers_count": 22330,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-10",
+     "description": "Virtual browser that runs in docker and uses WebRTC.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Bitwarden",
+     "source_code_url": "https://github.com/bitwarden/server",
+     "stargazers_count": 20160,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Password manager with a webapp, browser extension, and mobile app.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "BentoPDF",
+     "source_code_url": "https://github.com/alam00000/bentopdf",
+     "stargazers_count": 15601,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Powerful, privacy-first, client-side PDF toolkit that allows you to manipulate, edit, merge, and process PDF files directly in your browser.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "PeerTube",
+     "source_code_url": "https://github.com/Chocobozzz/PeerTube",
+     "stargazers_count": 15321,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Decentralized video streaming platform using P2P (BitTorrent) directly in the web browser.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Screego",
+     "source_code_url": "https://github.com/screego/server",
+     "stargazers_count": 10551,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-08-20",
+     "description": "Screego is a simple tool to quickly share your screen to one or multiple people via web browser.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "A Dark Room",
+     "source_code_url": "https://github.com/doublespeakgames/adarkroom",
+     "stargazers_count": 8287,
+     "licenses": [
+      "MPL-2.0"
+     ],
+     "updated_at": "2025-05-23",
+     "description": "Minimalist text adventure game for your browser.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Roundcube",
+     "source_code_url": "https://github.com/roundcube/roundcubemail",
+     "stargazers_count": 7180,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-06",
+     "description": "Browser-based IMAP client with an application-like user interface.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "SimpleLogin",
+     "source_code_url": "https://github.com/simple-login/app",
+     "stargazers_count": 6992,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Open source email alias solution to protect your email address. Comes with browser extensions and mobile apps.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "WeTTY",
+     "source_code_url": "https://github.com/butlerx/wetty",
+     "stargazers_count": 5438,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-12",
+     "description": "Terminal in browser over http/https.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "RStudio Server",
+     "source_code_url": "https://github.com/rstudio/rstudio",
+     "stargazers_count": 5070,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Web browser based IDE for R.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Converse.js",
+     "source_code_url": "https://github.com/conversejs/converse.js",
+     "stargazers_count": 3293,
+     "licenses": [
+      "MPL-2.0"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "XMPP chat client in your browser.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Kyoo",
+     "source_code_url": "https://github.com/zoriya/kyoo",
+     "stargazers_count": 2525,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-15",
+     "description": "Innovative media browser designed for seamless streaming of anime, series and movies, offering advanced features like dynamic transcoding, auto watch history and intelligent metadata retrieval.",
+     "matched_keywords": [
+      "browser"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-013",
+   "name": "Strapi",
+   "category": "CMS",
+   "category_slug": "cms",
+   "repository": "https://github.com/strapi/strapi",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-013/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Strapi",
+     "source_code_url": "https://github.com/strapi/strapi",
+     "stargazers_count": 73191,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Headless CMS that lets developers build content APIs fast while giving content creators a friendly editing interface.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Payload CMS",
+     "source_code_url": "https://github.com/payloadcms/payload",
+     "stargazers_count": 44817,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Developer-first headless CMS and application framework.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "WordPress",
+     "source_code_url": "https://github.com/WordPress/WordPress",
+     "stargazers_count": 21428,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "World's most-used blogging and CMS engine.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "october",
+     "source_code_url": "https://github.com/octobercms/october",
+     "stargazers_count": 11149,
+     "licenses": [
+      "\u2298 Proprietary"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "CMS platform based on the Laravel PHP Framework.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "KeystoneJS",
+     "source_code_url": "https://github.com/keystonejs/keystone",
+     "stargazers_count": 9975,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-14",
+     "description": "CMS and web application platform.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Umbraco",
+     "source_code_url": "https://github.com/umbraco/Umbraco-CMS",
+     "stargazers_count": 5251,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "The friendly CMS. Free and open source with an amazing community.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Joomla!",
+     "source_code_url": "https://github.com/joomla/joomla-cms",
+     "stargazers_count": 5140,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Advanced Content Management System (CMS).",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "MediaCMS",
+     "source_code_url": "https://github.com/mediacms-io/mediacms",
+     "stargazers_count": 5120,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-08-25",
+     "description": "Modern, fully featured open source video and media CMS, written in Python/Django/React, featuring a REST API.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Apostrophe",
+     "source_code_url": "https://github.com/apostrophecms/apostrophe",
+     "stargazers_count": 4622,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "CMS with a focus on extensible in-context editing tools.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "CraftCMS",
+     "source_code_url": "https://github.com/craftcms/cms",
+     "stargazers_count": 3608,
+     "licenses": [
+      "\u2298 Proprietary"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Content-first CMS that aims to make life enjoyable for developers and content managers alike.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Squidex",
+     "source_code_url": "https://github.com/Squidex/squidex",
+     "stargazers_count": 2510,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Headless CMS, based on MongoDB, CQRS and Event Sourcing.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Kirby",
+     "source_code_url": "https://github.com/getkirby/kirby",
+     "stargazers_count": 1531,
+     "licenses": [
+      "\u2298 Proprietary"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "File-based CMS. Easy to setup. Easy to use. Flexible as hell.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "HTMLy",
+     "source_code_url": "https://github.com/danpros/htmly",
+     "stargazers_count": 1363,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-01-25",
+     "description": "Databaseless PHP blogging platform. A flat-file CMS that allows you to create a fast, secure, and powerful website or blog in seconds.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "TYPO3",
+     "source_code_url": "https://github.com/TYPO3/typo3",
+     "stargazers_count": 1209,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Powerful and advanced CMS with a large community.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Vvveb CMS",
+     "source_code_url": "https://github.com/givanz/Vvveb",
+     "stargazers_count": 1190,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-08-05",
+     "description": "Powerful and easy to use CMS to build websites, blogs or e-commerce stores.",
+     "matched_keywords": [
+      "cms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-014",
+   "name": "rustpad",
+   "category": "Code Editors",
+   "category_slug": "code-editors",
+   "repository": "https://github.com/ekzhang/rustpad",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-014/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "rustpad",
+     "source_code_url": "https://github.com/ekzhang/rustpad",
+     "stargazers_count": 4075,
+     "licenses": [
+      "MIT"
+     ],
+     "archived": false,
+     "description": "Efficient and minimal collaborative code editor, self-hosted, no database required."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-015",
+   "name": "Gitea",
+   "category": "Collaboration",
+   "category_slug": "collaboration",
+   "repository": "https://github.com/go-gitea/gitea",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-015/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Gitea",
+     "source_code_url": "https://github.com/go-gitea/gitea",
+     "stargazers_count": 58066,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Git with a cup of tea! Painless self-hosted all-in-one software development service, including Git hosting, code review, team collaboration, package registry and CI/CD.",
+     "matched_keywords": [
+      "collaboration"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Mattermost",
+     "source_code_url": "https://github.com/mattermost/mattermost",
+     "stargazers_count": 39099,
+     "licenses": [
+      "\u2298 Proprietary"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Platform for secure collaboration across the entire software development lifecycle, can be integrated with Gitlab (alternative to Slack).",
+     "matched_keywords": [
+      "collaboration"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "CryptPad",
+     "source_code_url": "https://github.com/cryptpad/cryptpad",
+     "stargazers_count": 7929,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-05-26",
+     "description": "Collaboration suite built to enable collaboration, synchronizing changes to documents in real time.",
+     "matched_keywords": [
+      "collaboration"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OpenCloud",
+     "source_code_url": "https://github.com/opencloud-eu/opencloud",
+     "stargazers_count": 6021,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "File Sharing and Collaboration Platform.",
+     "matched_keywords": [
+      "collaboration"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Colanode",
+     "source_code_url": "https://github.com/colanode/colanode",
+     "stargazers_count": 5142,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-04-03",
+     "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
+     "matched_keywords": [
+      "collaboration"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Openfire",
+     "source_code_url": "https://github.com/igniterealtime/Openfire",
+     "stargazers_count": 3064,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-15",
+     "description": "Real time collaboration (RTC) server.",
+     "matched_keywords": [
+      "collaboration"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Sync-in",
+     "source_code_url": "https://github.com/Sync-in/server",
+     "stargazers_count": 1771,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "File storage, syncing, sharing, and collaboration with real-time editing, permission management, and desktop/CLI clients.",
+     "matched_keywords": [
+      "collaboration"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Signature PDF",
+     "source_code_url": "https://github.com/24eme/signaturepdf",
+     "stargazers_count": 831,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-08",
+     "description": "Sign and manipulate PDFs with collaboration, organization, compression and metadata editing.",
+     "matched_keywords": [
+      "collaboration"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Ideon",
+     "source_code_url": "https://github.com/3xpyth0n/ideon",
+     "stargazers_count": 607,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-07-26",
+     "description": "Project workspace built around an infinite canvas; embed GitHub, GitLab, Gitea, and Forgejo repositories alongside notes, links, and tasks, with real-time collaboration.",
+     "matched_keywords": [
+      "collaboration"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Tracim",
+     "source_code_url": "https://github.com/tracim/tracim",
+     "stargazers_count": 275,
+     "licenses": [
+      "AGPL-3.0",
+      "LGPL-3.0",
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Collaborative Platform for team collaboration: file,threads,notes,agenda,etc.",
+     "matched_keywords": [
+      "collaboration"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-016",
+   "name": "Discourse",
+   "category": "Community",
+   "category_slug": "community",
+   "repository": "https://github.com/discourse/discourse",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-016/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Hoppscotch Community Edition",
+     "source_code_url": "https://github.com/hoppscotch/hoppscotch",
+     "stargazers_count": 80347,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-14",
+     "description": "Fast and beautiful API request builder.",
+     "matched_keywords": [
+      "community"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Discourse",
+     "source_code_url": "https://github.com/discourse/discourse",
+     "stargazers_count": 47867,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Advanced forum / community solution based on Ruby and JS.",
+     "matched_keywords": [
+      "community",
+      "forum"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Onyx Community Edition",
+     "source_code_url": "https://github.com/onyx-dot-app/onyx",
+     "stargazers_count": 32162,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Chat UI that works with any LLM. It comes loaded with advanced features like agents, web search, RAG, MCP, deep research, Connectors to 40+ knowledge sources, and more.",
+     "matched_keywords": [
+      "community"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Infisical Community Edition",
+     "source_code_url": "https://github.com/Infisical/infisical",
+     "stargazers_count": 29310,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Platform for secrets, certificates, and privileged access management.",
+     "matched_keywords": [
+      "community"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "docmost Community Edition",
+     "source_code_url": "https://github.com/docmost/docmost",
+     "stargazers_count": 21721,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-08",
+     "description": "Collaborative wiki and documentation software (alternative to Confluence, Notion).",
+     "matched_keywords": [
+      "community"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "UVDesk",
+     "source_code_url": "https://github.com/uvdesk/community-skeleton",
+     "stargazers_count": 19594,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2025-10-01",
+     "description": "UVDesk community is a service oriented, event driven extensible opensource helpdesk system that can be used by your organization to provide efficient support to your clients effortlessly whichever way you imagine.",
+     "matched_keywords": [
+      "community"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Flarum",
+     "source_code_url": "https://github.com/flarum/flarum",
+     "stargazers_count": 16402,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-08-27",
+     "description": "Delightfully simple forums. Flarum is the next-generation forum software that makes online discussion fun again.",
+     "matched_keywords": [
+      "discussion",
+      "forum"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Answer",
+     "source_code_url": "https://github.com/apache/answer",
+     "stargazers_count": 15681,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-07-17",
+     "description": "Knowledge-based community software. You can use it to quickly build your Q&A community for product technical support, customer support, user communication, and more.",
+     "matched_keywords": [
+      "community"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "NodeBB",
+     "source_code_url": "https://github.com/NodeBB/NodeBB",
+     "stargazers_count": 15221,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Forum software built for the modern web.",
+     "matched_keywords": [
+      "forum"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Lemmy",
+     "source_code_url": "https://github.com/LemmyNet/lemmy",
+     "stargazers_count": 14601,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Link aggregator for the fediverse (alternative to Reddit).",
+     "matched_keywords": [
+      "reddit"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "sftpgo Community Edition",
+     "source_code_url": "https://github.com/drakkan/sftpgo",
+     "stargazers_count": 12541,
+     "licenses": [
+      "AGPL-3.0",
+      "\u2298 Proprietary"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Flexible, fully featured and highly configurable SFTP server with optional FTP/S and WebDAV support.",
+     "matched_keywords": [
+      "community"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "PrivateBin",
+     "source_code_url": "https://github.com/PrivateBin/PrivateBin",
+     "stargazers_count": 8603,
+     "licenses": [
+      "Zlib"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Minimalist pastebin/discussion board where the server has zero knowledge of hosted data.",
+     "matched_keywords": [
+      "discussion"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Countly Community Edition",
+     "source_code_url": "https://github.com/Countly/countly-server",
+     "stargazers_count": 5905,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Real time mobile and web analytics, crash reporting and push notifications platform.",
+     "matched_keywords": [
+      "community"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "WriteFreely",
+     "source_code_url": "https://github.com/writefreely/writefreely",
+     "stargazers_count": 5252,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-08-28",
+     "description": "Writing software for starting a minimalist, federated blog \u2014 or an entire community.",
+     "matched_keywords": [
+      "community"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Umbraco",
+     "source_code_url": "https://github.com/umbraco/Umbraco-CMS",
+     "stargazers_count": 5251,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "The friendly CMS. Free and open source with an amazing community.",
+     "matched_keywords": [
+      "community"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-017",
+   "name": "Twenty",
+   "category": "CRM",
+   "category_slug": "crm",
+   "repository": "https://github.com/twentyhq/twenty",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-017/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Twenty",
+     "source_code_url": "https://github.com/twentyhq/twenty",
+     "stargazers_count": 57013,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "A modern CRM offering the flexibility of open source, advanced features, and a sleek design.",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Krayin",
+     "source_code_url": "https://github.com/krayin/laravel-crm",
+     "stargazers_count": 23899,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-14",
+     "description": "CRM solution for SMEs and Enterprises for complete customer lifecycle management.",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Ever Gauzy",
+     "source_code_url": "https://github.com/ever-co/ever-gauzy",
+     "stargazers_count": 7741,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Open business management platform for collaborative, on-demand and sharing economies (ERP/CRM/HRM/ATS/PM).",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Dolibarr",
+     "source_code_url": "https://github.com/Dolibarr/dolibarr",
+     "stargazers_count": 7630,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Modern CRM software package to manage your company or foundation activity (contacts, suppliers, invoices, orders, stocks, agenda, accounting, ...).",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "SuiteCRM",
+     "source_code_url": "https://github.com/SuiteCRM/SuiteCRM",
+     "stargazers_count": 5752,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "The award-winning, enterprise-class open source CRM.",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "EspoCRM",
+     "source_code_url": "https://github.com/espocrm/espocrm",
+     "stargazers_count": 3371,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "CRM with a frontend designed as a single page application, and a REST API.",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Corteza",
+     "source_code_url": "https://github.com/cortezaproject/corteza",
+     "stargazers_count": 2161,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-08-27",
+     "description": "CRM including a unified workspace, enterprise messaging and a low code environment for rapidly and securely delivering records-based management solutions.",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Relaticle",
+     "source_code_url": "https://github.com/relaticle/relaticle",
+     "stargazers_count": 1693,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "CRM with an MCP server, an AI assistant with human-approved changes, a REST API, custom fields, and kanban boards.",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Django-CRM",
+     "source_code_url": "https://github.com/DjangoCRM/django-crm",
+     "stargazers_count": 626,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Analytical CRM with tasks management, email marketing and many more. Django CRM is built for individual use, businesses of any size or freelancers and is designed to provide easy customization and quick development.",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "TimeTracker",
+     "source_code_url": "https://github.com/drytrix/TimeTracker",
+     "stargazers_count": 625,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Track time across projects and clients, with timers, kanban tasks, CRM, expense tracking, multi-currency invoicing (PDF, Peppol/ZugFerd e-invoicing), reports, OIDC/SSO, and a REST API.",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "egroupware",
+     "source_code_url": "https://github.com/EGroupware/egroupware",
+     "stargazers_count": 296,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Software suite including calendars, address books, notepad, project management tools, client relationship management tools (CRM), knowledge management tools, a wiki and a CMS.",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Group Office",
+     "source_code_url": "https://github.com/Intermesh/groupoffice/",
+     "stargazers_count": 278,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Enterprise CRM and groupware tool. Share projects, calendars, files and e-mail online with co-workers and clients.",
+     "matched_keywords": [
+      "crm"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-018",
+   "name": "Chatwoot",
+   "category": "Customer Support",
+   "category_slug": "customer-support",
+   "repository": "https://github.com/chatwoot/chatwoot",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-018/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Chatwoot",
+     "source_code_url": "https://github.com/chatwoot/chatwoot",
+     "stargazers_count": 36947,
+     "licenses": [
+      "\u2298 Proprietary"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Customer communication platform (alternative to Intercom and Zendesk).",
+     "matched_keywords": [
+      "zendesk"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "UVDesk",
+     "source_code_url": "https://github.com/uvdesk/community-skeleton",
+     "stargazers_count": 19594,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2025-10-01",
+     "description": "UVDesk community is a service oriented, event driven extensible opensource helpdesk system that can be used by your organization to provide efficient support to your clients effortlessly whichever way you imagine.",
+     "matched_keywords": [
+      "helpdesk"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Answer",
+     "source_code_url": "https://github.com/apache/answer",
+     "stargazers_count": 15681,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-07-17",
+     "description": "Knowledge-based community software. You can use it to quickly build your Q&A community for product technical support, customer support, user communication, and more.",
+     "matched_keywords": [
+      "customer support"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "FreeScout",
+     "source_code_url": "https://github.com/freescout-help-desk/freescout",
+     "stargazers_count": 4542,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-12",
+     "description": "Email-based customer support application, help desk and shared mailbox (alternative to Zendesk and Help Scout).",
+     "matched_keywords": [
+      "customer support",
+      "help desk",
+      "zendesk"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Frappe Helpdesk",
+     "source_code_url": "https://github.com/frappe/helpdesk",
+     "stargazers_count": 3384,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Helpdesk software which helps you streamline your company's support, offers an easy setup, clean user interface, and automation tools to resolve customer queries efficiently.",
+     "matched_keywords": [
+      "helpdesk"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Libredesk",
+     "source_code_url": "https://github.com/abhinavxd/libredesk",
+     "stargazers_count": 2942,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Modern omnichannel customer support desk. Live chat, email, and more in a single binary.",
+     "matched_keywords": [
+      "customer support"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OTOBO",
+     "source_code_url": "https://github.com/RotherOSS/otobo",
+     "stargazers_count": 337,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Flexible web-based ticketing system used for customer service, help desk, IT service management.",
+     "matched_keywords": [
+      "help desk"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Tiledesk",
+     "source_code_url": "https://github.com/Tiledesk/tiledesk",
+     "stargazers_count": 321,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-14",
+     "description": "All-in-one customer engagement platform from lead-gen to post-sales, from WhatsApp to your website. With omni-channel live agents and AI-powered chatbots (alternative to Intercom, Zendesk, Tawk.to and Tidio).",
+     "matched_keywords": [
+      "zendesk"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-019",
+   "name": "airbyte",
+   "category": "Data Engineering",
+   "category_slug": "data-engineering",
+   "repository": "https://github.com/airbytehq/airbyte",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-019/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "airbyte",
+     "source_code_url": "https://github.com/airbytehq/airbyte",
+     "stargazers_count": 22091,
+     "licenses": [],
+     "archived": false,
+     "description": "Open-source data movement for ELT pipelines and AI agents."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-020",
+   "name": "MindsDB",
+   "category": "Databases",
+   "category_slug": "databases",
+   "repository": "https://github.com/mindsdb/mindshub",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-020/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "MindsDB",
+     "source_code_url": "https://github.com/mindsdb/mindshub",
+     "stargazers_count": 39749,
+     "licenses": [
+      "Elastic-2.0"
+     ],
+     "updated_at": "2026-09-10",
+     "description": "AI layer for existing databases that allows you to effortlessly develop, train and deploy state-of-the-art machine learning models using standard queries.",
+     "matched_keywords": [
+      "databases"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "SearXNG",
+     "source_code_url": "https://github.com/searxng/searxng/",
+     "stargazers_count": 37308,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Internet metasearch engine which aggregates results from various search services and databases (Fork of Searx).",
+     "matched_keywords": [
+      "databases"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Teleport",
+     "source_code_url": "https://github.com/gravitational/teleport",
+     "stargazers_count": 20924,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-08-25",
+     "description": "Certificate authority and access plane for SSH, Kubernetes, web applications, and databases.",
+     "matched_keywords": [
+      "databases"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "CloudBeaver",
+     "source_code_url": "https://github.com/dbeaver/cloudbeaver",
+     "stargazers_count": 5150,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Manage databases, supports PostgreSQL, MySQL, SQLite and more. A web/hosted version of DBeaver.",
+     "matched_keywords": [
+      "databases"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Colanode",
+     "source_code_url": "https://github.com/colanode/colanode",
+     "stargazers_count": 5142,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-04-03",
+     "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
+     "matched_keywords": [
+      "databases"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Chartbrew",
+     "source_code_url": "https://github.com/chartbrew/chartbrew",
+     "stargazers_count": 4061,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-08-05",
+     "description": "Connect directly to databases and APIs and use the data to create beautiful charts.",
+     "matched_keywords": [
+      "databases"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Azimutt",
+     "source_code_url": "https://github.com/azimuttapp/azimutt",
+     "stargazers_count": 2181,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-08-25",
+     "description": "Visual database exploration made for real world databases (big and messy). Explore your database schema as well as data, document them, extend them and even get analysis and guidelines.",
+     "matched_keywords": [
+      "databases"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "d9",
+     "source_code_url": "https://github.com/LaWebcapsule/d9",
+     "stargazers_count": 153,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-07",
+     "description": "Turn SQL databases into secure APIs through an intuitive admin interface. Data platform and headless CMS (fork of Directus).",
+     "matched_keywords": [
+      "databases"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-021",
+   "name": "penpot",
+   "category": "Design Tools",
+   "category_slug": "design-tools",
+   "repository": "https://github.com/penpot/penpot",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-021/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "penpot",
+     "source_code_url": "https://github.com/penpot/penpot",
+     "stargazers_count": 60152,
+     "licenses": [],
+     "archived": false,
+     "description": "Penpot: The open-source design platform for Product teams that need scalable collaboration."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-022",
+   "name": null,
+   "category": "Developer Tools",
+   "category_slug": "developer-tools",
+   "repository": null,
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-022/source",
+   "status": "DISCOVERY_FAILED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [],
+   "discovery_failed_reason": "no candidate found via awesome-selfhosted-data or GitHub search (openapps.pro itself is blocked by this sandbox's egress policy, per RULES.md-equivalent provenance note)"
+  },
+  {
+   "id": "APP-023",
+   "name": "OneDev",
+   "category": "DevOps",
+   "category_slug": "devops",
+   "repository": "https://github.com/theonedev/onedev",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-023/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "OneDev",
+     "source_code_url": "https://github.com/theonedev/onedev",
+     "stargazers_count": 15256,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "All-In-One DevOps Platform. With Git Management, Issue Tracking, and CI/CD. Simple yet Powerful.",
+     "matched_keywords": [
+      "devops"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Bytebase",
+     "source_code_url": "https://github.com/bytebase/bytebase",
+     "stargazers_count": 14497,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Safe database schema change and version control for DevOps teams, supports MySQL, PostgreSQL, TiDB, ClickHouse, and Snowflake.",
+     "matched_keywords": [
+      "devops"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "FlowForge",
+     "source_code_url": "https://github.com/FlowFuse/flowfuse",
+     "stargazers_count": 400,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Deploy Node-RED applications in a reliable, scalable and secure manner. The FlowForge platform provides DevOps capabilities for Node-RED development teams.",
+     "matched_keywords": [
+      "devops"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-024",
+   "name": "Docuseal",
+   "category": "Digital Signature",
+   "category_slug": "digital-signiture",
+   "repository": "https://github.com/docusealco/docuseal",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-024/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Docuseal",
+     "source_code_url": "https://github.com/docusealco/docuseal",
+     "stargazers_count": 18566,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-14",
+     "description": "Create, fill, and sign digital documents (alternative to DocuSign).",
+     "matched_keywords": [
+      "docusign"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Documenso",
+     "source_code_url": "https://github.com/documenso/documenso",
+     "stargazers_count": 15082,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Digital document signing platform (alternative to DocuSign).",
+     "matched_keywords": [
+      "docusign",
+      "signing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OpenSign",
+     "source_code_url": "https://github.com/opensignlabs/opensign",
+     "stargazers_count": 7008,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-08-21",
+     "description": "Document signing software (alternative to DocuSign).",
+     "matched_keywords": [
+      "docusign",
+      "signing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Signature PDF",
+     "source_code_url": "https://github.com/24eme/signaturepdf",
+     "stargazers_count": 831,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-08",
+     "description": "Sign and manipulate PDFs with collaboration, organization, compression and metadata editing.",
+     "matched_keywords": [
+      "signature"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-025",
+   "name": "Bagisto",
+   "category": "E-Commerce",
+   "category_slug": "ecommerce",
+   "repository": "https://github.com/bagisto/bagisto",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-025/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "MedusaJs",
+     "source_code_url": "https://github.com/medusajs/medusa",
+     "stargazers_count": 36376,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Headless commerce engine that enables developers to create amazing digital commerce experiences.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Bagisto",
+     "source_code_url": "https://github.com/bagisto/bagisto",
+     "stargazers_count": 28132,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Leading Laravel open source e-commerce framework with multi-inventory sources, taxation, localization, dropshipping and more exciting features.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Saleor",
+     "source_code_url": "https://github.com/saleor/saleor",
+     "stargazers_count": 23350,
+     "licenses": [
+      "BSD-3-Clause"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "GraphQL native, API-only platform for scalable composable e-commerce storefront.",
+     "matched_keywords": [
+      "e-commerce",
+      "storefront"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Spree Commerce",
+     "source_code_url": "https://github.com/spree/spree",
+     "stargazers_count": 15709,
+     "licenses": [
+      "BSD-3-Clause"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Spree is a complete, modular & API-driven open source e-commerce solution for Ruby on Rails.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Magento Open Source",
+     "source_code_url": "https://github.com/magento/magento2",
+     "stargazers_count": 12198,
+     "licenses": [
+      "OSL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Leading provider of open omnichannel innovation.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "WooCommerce",
+     "source_code_url": "https://github.com/woocommerce/woocommerce",
+     "stargazers_count": 10515,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "WordPress based e-commerce solution.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "EverShop",
+     "source_code_url": "https://github.com/evershopcommerce/evershop",
+     "stargazers_count": 10476,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "E-commerce platform with essential commerce features. Modular architecture and fully customizable.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "PrestaShop",
+     "source_code_url": "https://github.com/PrestaShop/PrestaShop",
+     "stargazers_count": 9215,
+     "licenses": [
+      "OSL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Fully scalable e-commerce solution.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Sylius",
+     "source_code_url": "https://github.com/Sylius/Sylius",
+     "stargazers_count": 8537,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Symfony2 powered open source full-stack platform for eCommerce.",
+     "matched_keywords": [
+      "e-commerce",
+      "ecommerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Vendure",
+     "source_code_url": "https://github.com/vendurehq/vendure",
+     "stargazers_count": 8452,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "A headless commerce framework.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OpenCart",
+     "source_code_url": "https://github.com/opencart/opencart",
+     "stargazers_count": 8201,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Shopping cart solution.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Aimeos",
+     "source_code_url": "https://github.com/aimeos/aimeos",
+     "stargazers_count": 5454,
+     "licenses": [
+      "LGPL-3.0",
+      "MIT"
+     ],
+     "updated_at": "2026-07-29",
+     "description": "E-commerce framework for building custom online shops, market places and complex B2B applications scaling to billions of items with Laravel.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Solidus",
+     "source_code_url": "https://github.com/solidusio/solidus",
+     "stargazers_count": 5329,
+     "licenses": [
+      "BSD-3-Clause"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Ecommerce platform that gives you complete control over your store.",
+     "matched_keywords": [
+      "e-commerce",
+      "ecommerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Open Source POS",
+     "source_code_url": "https://github.com/opensourcepos/opensourcepos",
+     "stargazers_count": 4389,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-10",
+     "description": "Open Source Point of Sale is a web based point of sale system.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Hi.Events",
+     "source_code_url": "https://github.com/HiEventsDev/hi.events",
+     "stargazers_count": 4027,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-15",
+     "description": "Event management and ticketing platform for conferences, concerts, and more. Offering customizable event pages and embeddable ticket widgets.",
+     "matched_keywords": [
+      "e-commerce"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-026",
+   "name": "Odoo",
+   "category": "ERP",
+   "category_slug": "erp",
+   "repository": "https://github.com/odoo/odoo",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-026/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Odoo",
+     "source_code_url": "https://github.com/odoo/odoo",
+     "stargazers_count": 54450,
+     "licenses": [
+      "LGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Free open source ERP system.",
+     "matched_keywords": [
+      "erp"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "ERPNext",
+     "source_code_url": "https://github.com/frappe/erpnext",
+     "stargazers_count": 39358,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "ERP system to help you run your business.",
+     "matched_keywords": [
+      "erp"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "grocy",
+     "source_code_url": "https://github.com/grocy/grocy",
+     "stargazers_count": 9513,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "ERP beyond your fridge. Groceries & household management solution for your home.",
+     "matched_keywords": [
+      "erp"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Ever Gauzy",
+     "source_code_url": "https://github.com/ever-co/ever-gauzy",
+     "stargazers_count": 7741,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Open business management platform for collaborative, on-demand and sharing economies (ERP/CRM/HRM/ATS/PM).",
+     "matched_keywords": [
+      "erp"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OFBiz",
+     "source_code_url": "https://github.com/apache/ofbiz-framework",
+     "stargazers_count": 1124,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Enterprise Resource Planning system with a suite of business applications flexible enough to be used across any industry.",
+     "matched_keywords": [
+      "enterprise resource"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LedgerSMB",
+     "source_code_url": "https://github.com/ledgersmb/LedgerSMB",
+     "stargazers_count": 568,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Integrated accounting and ERP system for small and midsize businesses, with double entry accounting, budgeting, invoicing, quotations, projects, orders and inventory management, shipping and more.",
+     "matched_keywords": [
+      "erp"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-027",
+   "name": "Joplin",
+   "category": "File Storage",
+   "category_slug": "file-storage",
+   "repository": "https://github.com/laurent22/joplin",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-027/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Joplin",
+     "source_code_url": "https://github.com/laurent22/joplin",
+     "stargazers_count": 56430,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Note taking application with markdown editor and encryption support for mobile and desktop platforms. Runs client-side and syncs through a self hosted Nextcloud instance or similar (alternative to Evernote).",
+     "matched_keywords": [
+      "nextcloud"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Nextcloud",
+     "source_code_url": "https://github.com/nextcloud/server",
+     "stargazers_count": 36847,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Access and share your files, calendars, contacts, mail and [more](https://apps.nextcloud.com/) from any device, on your terms.",
+     "matched_keywords": [
+      "nextcloud"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "transfer.sh",
+     "source_code_url": "https://github.com/dutchcoders/transfer.sh",
+     "stargazers_count": 15898,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-06-13",
+     "description": "Easy file sharing from the command line.",
+     "matched_keywords": [
+      "file sharing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Seafile",
+     "source_code_url": "https://github.com/haiwen/seafile",
+     "stargazers_count": 15256,
+     "licenses": [
+      "GPL-2.0",
+      "GPL-3.0",
+      "AGPL-3.0",
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-08-26",
+     "description": "File hosting and sharing solution primary for teams and organizations.",
+     "matched_keywords": [
+      "seafile"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OpenCloud",
+     "source_code_url": "https://github.com/opencloud-eu/opencloud",
+     "stargazers_count": 6021,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "File Sharing and Collaboration Platform.",
+     "matched_keywords": [
+      "file sharing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "TagSpaces",
+     "source_code_url": "https://github.com/tagspaces/tagspaces",
+     "stargazers_count": 5286,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-07-24",
+     "description": "TagSpaces is an offline, cross-platform file manager and organiser that also can function as a note taking app. The WebDAV version of the application can be installed on top of a WebDAV servers such as Nextcloud or ownCloud.",
+     "matched_keywords": [
+      "nextcloud"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "slskd",
+     "source_code_url": "https://github.com/slskd/slskd",
+     "stargazers_count": 3936,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-14",
+     "description": "A modern client-server application for the Soulseek file sharing network.",
+     "matched_keywords": [
+      "file sharing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Nextcloud Memories",
+     "source_code_url": "https://github.com/pulsejet/memories",
+     "stargazers_count": 3840,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Fast, modern and advanced photo management suite. Runs as a Nextcloud app.",
+     "matched_keywords": [
+      "nextcloud"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Zipline",
+     "source_code_url": "https://github.com/diced/zipline",
+     "stargazers_count": 3417,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "A lightweight, fast and reliable file sharing server that is commonly used with ShareX, offering a react-based Web UI and fast API.",
+     "matched_keywords": [
+      "file sharing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "NextCloudPi",
+     "source_code_url": "https://github.com/nextcloud/nextcloudpi",
+     "stargazers_count": 2939,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-06-29",
+     "description": "Nextcloud preinstalled and preconfigured, with a text and web management interface and all the tools needed to self host private data. With installation images for Raspberry Pi, Odroid, Rock64, Docker, and a curl installer for Armbian/Debian.",
+     "matched_keywords": [
+      "nextcloud"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "ByteStash",
+     "source_code_url": "https://github.com/jordan-dalby/ByteStash",
+     "stargazers_count": 2534,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-08-08",
+     "description": "Pastebin and file storage service with a simple web interface. Supports syntax highlighting, optional user authentication and public sharing.",
+     "matched_keywords": [
+      "file storage"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Pydio",
+     "source_code_url": "https://github.com/pydio/cells",
+     "stargazers_count": 2247,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Turn any web server into a powerful file management system and an alternative to mainstream cloud storage providers.",
+     "matched_keywords": [
+      "cloud storage"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "PsiTransfer",
+     "source_code_url": "https://github.com/psi-4ward/psitransfer",
+     "stargazers_count": 1943,
+     "licenses": [
+      "BSD-2-Clause"
+     ],
+     "updated_at": "2026-05-29",
+     "description": "Simple file sharing solution with robust up-/download-resume and password protection.",
+     "matched_keywords": [
+      "file sharing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Sync-in",
+     "source_code_url": "https://github.com/Sync-in/server",
+     "stargazers_count": 1771,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "File storage, syncing, sharing, and collaboration with real-time editing, permission management, and desktop/CLI clients.",
+     "matched_keywords": [
+      "file storage"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Hoodik",
+     "source_code_url": "https://github.com/hudikhq/hoodik",
+     "stargazers_count": 1478,
+     "licenses": [
+      "CC-BY-NC-4.0"
+     ],
+     "updated_at": "2026-08-29",
+     "description": "End-to-end encrypted cloud storage server. Files are encrypted and decrypted in the browser, so the server only ever holds ciphertext. Runs on SQLite or PostgreSQL, stores chunks on local disk or any S3-compatible service.",
+     "matched_keywords": [
+      "cloud storage"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-028",
+   "name": "Formbricks",
+   "category": "Forms & Surveys",
+   "category_slug": "forms-surveys",
+   "repository": "https://github.com/formbricks/formbricks",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-028/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Formbricks",
+     "source_code_url": "https://github.com/formbricks/formbricks",
+     "stargazers_count": 12952,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Experience Management Suite built on the largest open source survey stack worldwide. Gracefully gather feedback at every step of the customer journey to know what your customers need.",
+     "matched_keywords": [
+      "survey"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Typebot",
+     "source_code_url": "https://github.com/baptisteArno/typebot.io",
+     "stargazers_count": 10335,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-14",
+     "description": "Conversational app builder (alternative to Typeform and Landbot).",
+     "matched_keywords": [
+      "typeform"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "HeyForm",
+     "source_code_url": "https://github.com/heyform/heyform",
+     "stargazers_count": 8980,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-09",
+     "description": "Form builder that allows anyone to create engaging conversational forms for surveys, questionnaires, quizzes, and polls.",
+     "matched_keywords": [
+      "form builder",
+      "forms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LimeSurvey",
+     "source_code_url": "https://github.com/LimeSurvey/LimeSurvey",
+     "stargazers_count": 3729,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Feature-rich web-based polling software. Supports extensive survey logic.",
+     "matched_keywords": [
+      "survey"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OpnForm",
+     "source_code_url": "https://github.com/OpnForm/OpnForm",
+     "stargazers_count": 3724,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Beautiful form builder.",
+     "matched_keywords": [
+      "form builder"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-029",
+   "name": "gaseous-server",
+   "category": "Game Development",
+   "category_slug": "game-development",
+   "repository": "https://github.com/gaseous-project/gaseous-server",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-029/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "gaseous-server",
+     "source_code_url": "https://github.com/gaseous-project/gaseous-server",
+     "stargazers_count": 940,
+     "licenses": [],
+     "archived": false,
+     "description": "A game ROM manager, with a built in web based emulator."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-030",
+   "name": "websoft9",
+   "category": "Hosting Control Panel",
+   "category_slug": "hosting-control-panel",
+   "repository": "https://github.com/Websoft9/websoft9",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-030/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "websoft9",
+     "source_code_url": "https://github.com/Websoft9/websoft9",
+     "stargazers_count": 2126,
+     "licenses": [],
+     "archived": false,
+     "description": "Applications self-hosting and DevOps platform for running open source, web-based linux Panel of lite PaaS."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-031",
+   "name": "hrms",
+   "category": "Human Resources",
+   "category_slug": "human-resources",
+   "repository": "https://github.com/frappe/hrms",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-031/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "hrms",
+     "source_code_url": "https://github.com/frappe/hrms",
+     "stargazers_count": 8805,
+     "licenses": [],
+     "archived": false,
+     "description": "Open Source HR and Payroll Software."
+    },
+    {
+     "name": "horilla-hr",
+     "source_code_url": "https://github.com/horilla/horilla-hr",
+     "stargazers_count": 1427,
+     "licenses": [],
+     "archived": false,
+     "description": "Horilla is a free and open source HR software."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-032",
+   "name": "Akaunting",
+   "category": "Invoicing & Finance",
+   "category_slug": "invoicing-finance",
+   "repository": "https://github.com/akaunting/akaunting",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-032/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Akaunting",
+     "source_code_url": "https://github.com/akaunting/akaunting",
+     "stargazers_count": 10126,
+     "licenses": [
+      "BUSL-1.1"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Accounting software designed for small businesses and freelancers.",
+     "matched_keywords": [
+      "accounting"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Invoice Ninja",
+     "source_code_url": "https://github.com/invoiceninja/invoiceninja",
+     "stargazers_count": 10088,
+     "licenses": [
+      "Elastic-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Powerful tool to invoice clients online.",
+     "matched_keywords": [
+      "invoice"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Dolibarr",
+     "source_code_url": "https://github.com/Dolibarr/dolibarr",
+     "stargazers_count": 7630,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Modern CRM software package to manage your company or foundation activity (contacts, suppliers, invoices, orders, stocks, agenda, accounting, ...).",
+     "matched_keywords": [
+      "accounting"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "ezbookkeeping",
+     "source_code_url": "https://github.com/mayswind/ezbookkeeping",
+     "stargazers_count": 5610,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "A lightweight personal bookkeeping app hosted by yourself.",
+     "matched_keywords": [
+      "bookkeeping"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Bigcapital",
+     "source_code_url": "https://github.com/bigcapitalhq/bigcapital",
+     "stargazers_count": 3901,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Financial accounting and inventory management software for small to medium businesses.",
+     "matched_keywords": [
+      "accounting"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Fava",
+     "source_code_url": "https://github.com/beancount/fava",
+     "stargazers_count": 2575,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-11",
+     "description": "Web frontend of Beancount, a text based double-entry accounting system.",
+     "matched_keywords": [
+      "accounting"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "ITFlow",
+     "source_code_url": "https://github.com/itflow-org/itflow",
+     "stargazers_count": 1003,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-04",
+     "description": "Client IT documentation, ticketing, invoicing and accounting for MSPs (Managed Service Providers).",
+     "matched_keywords": [
+      "accounting",
+      "invoicing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "SolidInvoice",
+     "source_code_url": "https://github.com/SolidInvoice/SolidInvoice",
+     "stargazers_count": 972,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Open source invoicing and quote application.",
+     "matched_keywords": [
+      "invoicing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "TimeTracker",
+     "source_code_url": "https://github.com/drytrix/TimeTracker",
+     "stargazers_count": 625,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Track time across projects and clients, with timers, kanban tasks, CRM, expense tracking, multi-currency invoicing (PDF, Peppol/ZugFerd e-invoicing), reports, OIDC/SSO, and a REST API.",
+     "matched_keywords": [
+      "invoicing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LedgerSMB",
+     "source_code_url": "https://github.com/ledgersmb/LedgerSMB",
+     "stargazers_count": 568,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Integrated accounting and ERP system for small and midsize businesses, with double entry accounting, budgeting, invoicing, quotations, projects, orders and inventory management, shipping and more.",
+     "matched_keywords": [
+      "accounting",
+      "invoicing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Family Accounting Tool",
+     "source_code_url": "https://github.com/nymanjens/facto",
+     "stargazers_count": 369,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-08-29",
+     "description": "Web-based finance management tool for partners with partially shared expenses.",
+     "matched_keywords": [
+      "accounting"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Foodsoft",
+     "source_code_url": "https://github.com/foodcoops/foodsoft",
+     "stargazers_count": 359,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-10",
+     "description": "Manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).",
+     "matched_keywords": [
+      "accounting"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-033",
+   "name": "AppFlowy",
+   "category": "Knowledge Management",
+   "category_slug": "knowledge-management",
+   "repository": "https://github.com/AppFlowy-IO/appflowy",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-033/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "AppFlowy",
+     "source_code_url": "https://github.com/AppFlowy-IO/appflowy",
+     "stargazers_count": 76827,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-06-26",
+     "description": "Build detailed lists of to-do\u2019s for different projects while tracking the status of each one. Open Source Notion Alternative.",
+     "matched_keywords": [
+      "notion"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Memos",
+     "source_code_url": "https://github.com/usememos/memos",
+     "stargazers_count": 63161,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Knowledge base that works with a SQLite db file.",
+     "matched_keywords": [
+      "knowledge base"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "SiYuan",
+     "source_code_url": "https://github.com/siyuan-note/siyuan",
+     "stargazers_count": 46425,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "A privacy-first personal knowledge management software, written in typescript and golang.",
+     "matched_keywords": [
+      "knowledge management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "TriliumNext Notes",
+     "source_code_url": "https://github.com/TriliumNext/Trilium",
+     "stargazers_count": 37895,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Cross-platform hierarchical note taking application with focus on building large personal knowledge bases (fork of Trilium Notes).",
+     "matched_keywords": [
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Huly",
+     "source_code_url": "https://github.com/hcengineering/platform",
+     "stargazers_count": 27713,
+     "licenses": [
+      "EPL-2.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "All-in-one project management platform (alternative to Linear, Jira, Slack, Notion, Motion).",
+     "matched_keywords": [
+      "notion"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "docmost Community Edition",
+     "source_code_url": "https://github.com/docmost/docmost",
+     "stargazers_count": 21721,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-08",
+     "description": "Collaborative wiki and documentation software (alternative to Confluence, Notion).",
+     "matched_keywords": [
+      "notion"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "HedgeDoc",
+     "source_code_url": "https://github.com/hedgedoc/hedgedoc",
+     "stargazers_count": 7432,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Realtime collaborative markdown notes on all platforms, formerly known as CodiMD and HackMD CE.",
+     "matched_keywords": [
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Eclipse Che",
+     "source_code_url": "https://github.com/eclipse-che/che",
+     "stargazers_count": 7168,
+     "licenses": [
+      "EPL-1.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Open source workspace server and cloud IDE.",
+     "matched_keywords": [
+      "workspace"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Standard Notes",
+     "source_code_url": "https://github.com/standardnotes/app",
+     "stargazers_count": 6634,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Simple and private notes app. Protect your privacy while getting more done. That's Standard Notes.",
+     "matched_keywords": [
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Colanode",
+     "source_code_url": "https://github.com/colanode/colanode",
+     "stargazers_count": 5142,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-04-03",
+     "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
+     "matched_keywords": [
+      "notion"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Personal Management System",
+     "source_code_url": "https://github.com/Volmarg/personal-management-system",
+     "stargazers_count": 4160,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-10",
+     "description": "Organize the essentials of everyday life, everything from a simple to-do list, and notes up to payments, and schedules.",
+     "matched_keywords": [
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "WBO",
+     "source_code_url": "https://github.com/lovasoa/whitebophir",
+     "stargazers_count": 2647,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-12",
+     "description": "Web Whiteboard to collaborate in real-time on schemas, drawings, and notes.",
+     "matched_keywords": [
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Corteza",
+     "source_code_url": "https://github.com/cortezaproject/corteza",
+     "stargazers_count": 2161,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-08-27",
+     "description": "CRM including a unified workspace, enterprise messaging and a low code environment for rapidly and securely delivering records-based management solutions.",
+     "matched_keywords": [
+      "workspace"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Jotty",
+     "source_code_url": "https://github.com/fccview/jotty",
+     "stargazers_count": 2005,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-05",
+     "description": "Lightweight but powerful alternative for managing your personal, file based, notes and checklists.",
+     "matched_keywords": [
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Atomic Server",
+     "source_code_url": "https://github.com/ontola/atomic-server",
+     "stargazers_count": 1604,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Knowledge graph database with documents (similar to Notion), tables, search, and a powerful linked data API. Lightweight, very fast and no runtime dependencies.",
+     "matched_keywords": [
+      "notion"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-034",
+   "name": "Canvas LMS",
+   "category": "Learning Management",
+   "category_slug": "learning-management",
+   "repository": "https://github.com/instructure/canvas-lms",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-034/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Canvas LMS",
+     "source_code_url": "https://github.com/instructure/canvas-lms",
+     "stargazers_count": 6822,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-04-30",
+     "description": "Learning management system (LMS) that is revolutionizing the way we educate.",
+     "matched_keywords": [
+      "learning management",
+      "lms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LMS",
+     "source_code_url": "https://github.com/epoupon/lms",
+     "stargazers_count": 1675,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Access your self-hosted music using a web interface.",
+     "matched_keywords": [
+      "lms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Chamilo LMS",
+     "source_code_url": "https://github.com/chamilo/chamilo-lms",
+     "stargazers_count": 1003,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Create a virtual campus for the provision of online or semi-online training.",
+     "matched_keywords": [
+      "lms"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "ILIAS",
+     "source_code_url": "https://github.com/ILIAS-eLearning/ILIAS",
+     "stargazers_count": 504,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Learning management system that can cope with anything you throw at it.",
+     "matched_keywords": [
+      "learning management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OpenOLAT",
+     "source_code_url": "https://github.com/OpenOLAT/OpenOLAT",
+     "stargazers_count": 438,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Learning management system for teaching, education, assessment and communication.",
+     "matched_keywords": [
+      "learning management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-035",
+   "name": null,
+   "category": "Logistics",
+   "category_slug": "logistics",
+   "repository": null,
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-035/source",
+   "status": "DISCOVERY_FAILED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [],
+   "discovery_failed_reason": "no candidate found via awesome-selfhosted-data or GitHub search (openapps.pro itself is blocked by this sandbox's egress policy, per RULES.md-equivalent provenance note)"
+  },
+  {
+   "id": "APP-036",
+   "name": "tooljet",
+   "category": "Low Code Platforms",
+   "category_slug": "low-code-platforms",
+   "repository": "https://github.com/ToolJet/ToolJet",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-036/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "tooljet",
+     "source_code_url": "https://github.com/ToolJet/ToolJet",
+     "stargazers_count": 40941,
+     "licenses": [],
+     "archived": false,
+     "description": "Open-source foundation of ToolJet AI - the enterprise app generation platform for internal tools, dashboards, business applications."
+    },
+    {
+     "name": "appsmith",
+     "source_code_url": "https://github.com/appsmithorg/appsmith",
+     "stargazers_count": 40903,
+     "licenses": [],
+     "archived": false,
+     "description": "Platform to build admin panels, internal tools, and dashboards."
+    },
+    {
+     "name": "nocobase",
+     "source_code_url": "https://github.com/nocobase/nocobase",
+     "stargazers_count": 24287,
+     "licenses": [],
+     "archived": false,
+     "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-037",
+   "name": "Mautic",
+   "category": "Marketing",
+   "category_slug": "marketing",
+   "repository": "https://github.com/mautic/mautic",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-037/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Mautic",
+     "source_code_url": "https://github.com/mautic/mautic",
+     "stargazers_count": 10529,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Marketing automation software (email, social and more).",
+     "matched_keywords": [
+      "marketing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "RudderStack",
+     "source_code_url": "https://github.com/rudderlabs/rudder-server/",
+     "stargazers_count": 4487,
+     "licenses": [
+      "Elastic-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Collect, unify, transform, and store your customer data, and route it to a wide range of common, popular marketing, sales, and product tools (alternative to Segment).",
+     "matched_keywords": [
+      "marketing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Erxes",
+     "source_code_url": "https://github.com/erxes/erxes",
+     "stargazers_count": 4082,
+     "licenses": [
+      "AGPL-3.0",
+      "Commons-Clause"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Marketing, sales, and customer service platform designed to help businesses attract more engaged customers.",
+     "matched_keywords": [
+      "marketing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "phpList",
+     "source_code_url": "https://github.com/phpList/phplist3",
+     "stargazers_count": 871,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Newsletter and email marketing with advanced management of subscribers, bounces, and plugins.",
+     "matched_keywords": [
+      "marketing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Django-CRM",
+     "source_code_url": "https://github.com/DjangoCRM/django-crm",
+     "stargazers_count": 626,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Analytical CRM with tasks management, email marketing and many more. Django CRM is built for individual use, businesses of any size or freelancers and is designed to provide easy customization and quick development.",
+     "matched_keywords": [
+      "marketing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-038",
+   "name": "Uptime Kuma",
+   "category": "Monitoring",
+   "category_slug": "monitoring",
+   "repository": "https://github.com/louislam/uptime-kuma",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-038/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": "automated pick (Pi-hole) is primarily a DNS/ad-blocker; this is the category-defining self-hosted monitoring tool",
+   "discovery_candidates": [
+    {
+     "name": "Pi-hole",
+     "source_code_url": "https://github.com/pi-hole/pi-hole",
+     "stargazers_count": 60977,
+     "licenses": [
+      "EUPL-1.2"
+     ],
+     "updated_at": "2026-07-06",
+     "description": "Blackhole for Internet advertisements with a GUI for management and monitoring.",
+     "matched_keywords": [
+      "monitoring"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LinkAce",
+     "source_code_url": "https://github.com/Kovah/LinkAce/",
+     "stargazers_count": 3337,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-08-28",
+     "description": "Bookmark archive with automatic backups to the Internet Archive, link monitoring, and a full REST API. Installation is done via Docker, or as a simple PHP application.",
+     "matched_keywords": [
+      "monitoring"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Pelican Panel",
+     "source_code_url": "https://github.com/pelican/panel",
+     "stargazers_count": 2324,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Web application for easy management of game servers, offering a user-friendly interface for deploying, configuring, and managing servers, server monitoring tools, and extensive customization options (fork of Pterodactyl).",
+     "matched_keywords": [
+      "monitoring"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "SIPCAPTURE Homer",
+     "source_code_url": "https://github.com/sipcapture/homer",
+     "stargazers_count": 2015,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Troubleshooting and monitoring VoIP calls.",
+     "matched_keywords": [
+      "monitoring"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-039",
+   "name": null,
+   "category": "Networking",
+   "category_slug": "networking",
+   "repository": null,
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-039/source",
+   "status": "DISCOVERY_FAILED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "diaspora*",
+     "source_code_url": "https://github.com/diaspora/diaspora",
+     "stargazers_count": 13649,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-07-28",
+     "description": "Distributed social networking server.",
+     "matched_keywords": [
+      "networking"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Elgg",
+     "source_code_url": "https://github.com/Elgg/Elgg",
+     "stargazers_count": 1675,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-10",
+     "description": "Powerful open source social networking engine.",
+     "matched_keywords": [
+      "networking"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OSSN",
+     "source_code_url": "https://github.com/opensource-socialnetwork/opensource-socialnetwork",
+     "stargazers_count": 1244,
+     "licenses": [
+      "CAL-1.0"
+     ],
+     "updated_at": "2026-09-07",
+     "description": "Social networking software that allows you to make a social networking website and helps your members build social relationships, with people who share similar professional or personal interests.",
+     "matched_keywords": [
+      "networking"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": "manually reviewed: no candidate in either discovery source is a genuine fit for this category (see MANUAL_OVERRIDES in build_manifest.py)"
+  },
+  {
+   "id": "APP-040",
+   "name": "appsmith",
+   "category": "No-Code Platforms",
+   "category_slug": "no-code-platforms",
+   "repository": "https://github.com/appsmithorg/appsmith",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-040/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "appsmith",
+     "source_code_url": "https://github.com/appsmithorg/appsmith",
+     "stargazers_count": 40903,
+     "licenses": [],
+     "archived": false,
+     "description": "Platform to build admin panels, internal tools, and dashboards."
+    },
+    {
+     "name": "nocobase",
+     "source_code_url": "https://github.com/nocobase/nocobase",
+     "stargazers_count": 24287,
+     "licenses": [],
+     "archived": false,
+     "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-041",
+   "name": "AppFlowy",
+   "category": "Note Taking",
+   "category_slug": "note-taking",
+   "repository": "https://github.com/AppFlowy-IO/appflowy",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-041/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "AppFlowy",
+     "source_code_url": "https://github.com/AppFlowy-IO/appflowy",
+     "stargazers_count": 76827,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-06-26",
+     "description": "Build detailed lists of to-do\u2019s for different projects while tracking the status of each one. Open Source Notion Alternative.",
+     "matched_keywords": [
+      "notion"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Memos",
+     "source_code_url": "https://github.com/usememos/memos",
+     "stargazers_count": 63161,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Knowledge base that works with a SQLite db file.",
+     "matched_keywords": [
+      "knowledge base"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Joplin",
+     "source_code_url": "https://github.com/laurent22/joplin",
+     "stargazers_count": 56430,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Note taking application with markdown editor and encryption support for mobile and desktop platforms. Runs client-side and syncs through a self hosted Nextcloud instance or similar (alternative to Evernote).",
+     "matched_keywords": [
+      "note taking"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "TriliumNext Notes",
+     "source_code_url": "https://github.com/TriliumNext/Trilium",
+     "stargazers_count": 37895,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Cross-platform hierarchical note taking application with focus on building large personal knowledge bases (fork of Trilium Notes).",
+     "matched_keywords": [
+      "note taking",
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Huly",
+     "source_code_url": "https://github.com/hcengineering/platform",
+     "stargazers_count": 27713,
+     "licenses": [
+      "EPL-2.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "All-in-one project management platform (alternative to Linear, Jira, Slack, Notion, Motion).",
+     "matched_keywords": [
+      "notion"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "docmost Community Edition",
+     "source_code_url": "https://github.com/docmost/docmost",
+     "stargazers_count": 21721,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-08",
+     "description": "Collaborative wiki and documentation software (alternative to Confluence, Notion).",
+     "matched_keywords": [
+      "notion"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Docs",
+     "source_code_url": "https://github.com/suitenumerique/docs",
+     "stargazers_count": 16834,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Collaborative note taking, wiki and documentation platform that scales.",
+     "matched_keywords": [
+      "note taking"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "HedgeDoc",
+     "source_code_url": "https://github.com/hedgedoc/hedgedoc",
+     "stargazers_count": 7432,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Realtime collaborative markdown notes on all platforms, formerly known as CodiMD and HackMD CE.",
+     "matched_keywords": [
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Eclipse Che",
+     "source_code_url": "https://github.com/eclipse-che/che",
+     "stargazers_count": 7168,
+     "licenses": [
+      "EPL-1.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Open source workspace server and cloud IDE.",
+     "matched_keywords": [
+      "workspace"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Standard Notes",
+     "source_code_url": "https://github.com/standardnotes/app",
+     "stargazers_count": 6634,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Simple and private notes app. Protect your privacy while getting more done. That's Standard Notes.",
+     "matched_keywords": [
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "TagSpaces",
+     "source_code_url": "https://github.com/tagspaces/tagspaces",
+     "stargazers_count": 5286,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-07-24",
+     "description": "TagSpaces is an offline, cross-platform file manager and organiser that also can function as a note taking app. The WebDAV version of the application can be installed on top of a WebDAV servers such as Nextcloud or ownCloud.",
+     "matched_keywords": [
+      "note taking"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Colanode",
+     "source_code_url": "https://github.com/colanode/colanode",
+     "stargazers_count": 5142,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-04-03",
+     "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
+     "matched_keywords": [
+      "notion"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Personal Management System",
+     "source_code_url": "https://github.com/Volmarg/personal-management-system",
+     "stargazers_count": 4160,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-10",
+     "description": "Organize the essentials of everyday life, everything from a simple to-do list, and notes up to payments, and schedules.",
+     "matched_keywords": [
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "WBO",
+     "source_code_url": "https://github.com/lovasoa/whitebophir",
+     "stargazers_count": 2647,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-12",
+     "description": "Web Whiteboard to collaborate in real-time on schemas, drawings, and notes.",
+     "matched_keywords": [
+      "notes"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Corteza",
+     "source_code_url": "https://github.com/cortezaproject/corteza",
+     "stargazers_count": 2161,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-08-27",
+     "description": "CRM including a unified workspace, enterprise messaging and a low code environment for rapidly and securely delivering records-based management solutions.",
+     "matched_keywords": [
+      "workspace"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-042",
+   "name": "Infisical Community Edition",
+   "category": "Password Manager",
+   "category_slug": "password-manager",
+   "repository": "https://github.com/Infisical/infisical",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-042/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Infisical Community Edition",
+     "source_code_url": "https://github.com/Infisical/infisical",
+     "stargazers_count": 29310,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Platform for secrets, certificates, and privileged access management.",
+     "matched_keywords": [
+      "secrets"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Bitwarden",
+     "source_code_url": "https://github.com/bitwarden/server",
+     "stargazers_count": 20160,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Password manager with a webapp, browser extension, and mobile app.",
+     "matched_keywords": [
+      "password manager"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Passbolt",
+     "source_code_url": "https://github.com/passbolt/passbolt_api",
+     "stargazers_count": 6128,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Collaborative password manager.",
+     "matched_keywords": [
+      "password manager"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Yopass",
+     "source_code_url": "https://github.com/jhaals/yopass",
+     "stargazers_count": 3140,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Secure sharing of secrets, passwords and files.",
+     "matched_keywords": [
+      "secrets"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "AliasVault",
+     "source_code_url": "https://github.com/aliasvault/aliasvault",
+     "stargazers_count": 3130,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "End-to-end encrypted password manager with a built-in email alias generator and server.",
+     "matched_keywords": [
+      "password manager"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Teampass",
+     "source_code_url": "https://github.com/nilsteampassnet/TeamPass",
+     "stargazers_count": 1826,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-12",
+     "description": "Password manager dedicated for managing passwords in a collaborative way. One symmetric key is used to encrypt all shared/team passwords and stored server side in a file and the database. works on any server Apache, MySQL and PHP.",
+     "matched_keywords": [
+      "password manager"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Hemmelig",
+     "source_code_url": "https://github.com/HemmeligOrg/Hemmelig.app",
+     "stargazers_count": 1243,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-08-27",
+     "description": "Share encrypted secrets cross organizations, or as private persons.",
+     "matched_keywords": [
+      "secrets"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Sup3rS3cretMes5age",
+     "source_code_url": "https://github.com/algolia/sup3rS3cretMes5age",
+     "stargazers_count": 569,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-15",
+     "description": "Very simple (to deploy and to use) secret message service using Hashicorp Vault as a secrets storage.",
+     "matched_keywords": [
+      "secrets",
+      "vault"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Shhh",
+     "source_code_url": "https://github.com/smallwat3r/shhh",
+     "stargazers_count": 418,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Keep secrets out of emails or chat logs, share them using secure links with passphrase and expiration dates.",
+     "matched_keywords": [
+      "secrets"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Flare",
+     "source_code_url": "https://github.com/FlintSH/Flare",
+     "stargazers_count": 136,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "A nonbloated, modern, and highly configurable file/screenshot vault server with support for ShareX, Flameshot, and Spectacle. Offers OCR search and more.",
+     "matched_keywords": [
+      "vault"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-043",
+   "name": "feedlog",
+   "category": "Product Management",
+   "category_slug": "product-management",
+   "repository": "https://github.com/linkcraftstudio/feedlog",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-043/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "feedlog",
+     "source_code_url": "https://github.com/linkcraftstudio/feedlog",
+     "stargazers_count": 153,
+     "licenses": [],
+     "archived": false,
+     "description": "Open-source feedback & roadmap tool - feedback boards, public roadmap, AI-assisted changelog."
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-044",
+   "name": "Super Productivity",
+   "category": "Productivity",
+   "category_slug": "productivity",
+   "repository": "https://github.com/super-productivity/super-productivity",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-044/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": "automated pick (4ga Boards) is a minor kanban board; this is the well-established, higher-star fit that didn't literally contain the word 'productivity' in its description",
+   "discovery_candidates": [
+    {
+     "name": "Super Productivity",
+     "source_code_url": "https://github.com/super-productivity/super-productivity",
+     "stargazers_count": 22121,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Advanced todo list app with integrated timeboxing and time tracking capabilities. Integrates with Jira, GitHub, GitLab, Redmine and OpenProject.",
+     "matched_keywords": [
+      "productivity"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "4ga Boards",
+     "source_code_url": "https://github.com/RARgames/4gaBoards",
+     "stargazers_count": 715,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-07-16",
+     "description": "Straightforward realtime kanban boards management for intuitive task tracking. Featuring an elegant dark mode, collapsible todo lists, and multitasking tools to supercharge your team's productivity.",
+     "matched_keywords": [
+      "productivity"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-045",
+   "name": "Plane",
+   "category": "Project Management",
+   "category_slug": "project-management",
+   "repository": "https://github.com/makeplane/plane",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-045/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Plane",
+     "source_code_url": "https://github.com/makeplane/plane",
+     "stargazers_count": 59601,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Track issues, epics, and product roadmaps in the simplest way possible (alternative to JIRA, Linear and Height).",
+     "matched_keywords": [
+      "jira"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Huly",
+     "source_code_url": "https://github.com/hcengineering/platform",
+     "stargazers_count": 27713,
+     "licenses": [
+      "EPL-2.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "All-in-one project management platform (alternative to Linear, Jira, Slack, Notion, Motion).",
+     "matched_keywords": [
+      "jira",
+      "project management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Super Productivity",
+     "source_code_url": "https://github.com/super-productivity/super-productivity",
+     "stargazers_count": 22121,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Advanced todo list app with integrated timeboxing and time tracking capabilities. Integrates with Jira, GitHub, GitLab, Redmine and OpenProject.",
+     "matched_keywords": [
+      "jira"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OneDev",
+     "source_code_url": "https://github.com/theonedev/onedev",
+     "stargazers_count": 15256,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "All-In-One DevOps Platform. With Git Management, Issue Tracking, and CI/CD. Simple yet Powerful.",
+     "matched_keywords": [
+      "issue tracking"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Leantime",
+     "source_code_url": "https://github.com/leantime/leantime",
+     "stargazers_count": 11609,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-07",
+     "description": "Lean project management system for small teams and startups helping to manage projects from ideation through delivery.",
+     "matched_keywords": [
+      "project management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Kaneo",
+     "source_code_url": "https://github.com/usekaneo/kaneo",
+     "stargazers_count": 9119,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Project management platform focused on simplicity and efficiency.",
+     "matched_keywords": [
+      "project management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "GitLab",
+     "source_code_url": "https://gitlab.com/gitlab-org/gitlab-foss",
+     "stargazers_count": 7175,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Self Hosted Git repository management, code reviews, issue tracking, activity feeds and wikis.",
+     "matched_keywords": [
+      "issue tracking"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "ZenTao",
+     "source_code_url": "https://github.com/easysoft/zentaopms",
+     "stargazers_count": 1690,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "An agile(scrum) project management system/tool.",
+     "matched_keywords": [
+      "project management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Gerrit",
+     "source_code_url": "https://github.com/GerritCodeReview/gerrit",
+     "stargazers_count": 1224,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Code review and project management tool for Git-based projects.",
+     "matched_keywords": [
+      "project management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Request Tracker",
+     "source_code_url": "https://github.com/bestpractical/rt",
+     "stargazers_count": 1156,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-01",
+     "description": "Enterprise-grade issue tracking system.",
+     "matched_keywords": [
+      "issue tracking"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "eigenfocus",
+     "source_code_url": "https://github.com/Eigenfocus/eigenfocus",
+     "stargazers_count": 941,
+     "licenses": [
+      "\u2298 Proprietary"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "Project Management, Planning and Time Tracking app. From solo projects to multi-member teams, Eigenfocus adapts to your workflow.",
+     "matched_keywords": [
+      "project management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "ShipShipShip",
+     "source_code_url": "https://github.com/GauthierNelkinsky/ShipShipShip",
+     "stargazers_count": 299,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-02-18",
+     "description": "Changelog and roadmap platform that bridges project management and customer communication.",
+     "matched_keywords": [
+      "project management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "egroupware",
+     "source_code_url": "https://github.com/EGroupware/egroupware",
+     "stargazers_count": 296,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Software suite including calendars, address books, notepad, project management tools, client relationship management tools (CRM), knowledge management tools, a wiki and a CMS.",
+     "matched_keywords": [
+      "project management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Traq",
+     "source_code_url": "https://github.com/nirix/traq",
+     "stargazers_count": 204,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2025-12-03",
+     "description": "Project management and issue tracking system written in PHP.",
+     "matched_keywords": [
+      "issue tracking",
+      "project management"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-046",
+   "name": "Cal.diy",
+   "category": "Scheduling",
+   "category_slug": "scheduling",
+   "repository": "https://github.com/calcom/cal.diy",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-046/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Cal.diy",
+     "source_code_url": "https://github.com/calcom/cal.diy",
+     "stargazers_count": 48543,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-14",
+     "description": "Online appointment scheduling system.",
+     "matched_keywords": [
+      "scheduling"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Donetick",
+     "source_code_url": "https://github.com/donetick/donetick",
+     "stargazers_count": 2570,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-08-18",
+     "description": "Task and chore management tool for personal and family use, with advanced scheduling, flexible assignment, and group sharing capabilities, detailed history, automation via API, simple and modern design.",
+     "matched_keywords": [
+      "scheduling"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "pretalx",
+     "source_code_url": "https://github.com/pretalx/pretalx",
+     "stargazers_count": 943,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Web-based event management, including running a Call for Papers, reviewing submissions, and scheduling talks. Exports and imports for various related tools.",
+     "matched_keywords": [
+      "scheduling"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LibreBooking",
+     "source_code_url": "https://github.com/LibreBooking/librebooking",
+     "stargazers_count": 808,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-03",
+     "description": "Resource scheduling solution offering a flexible, mobile-friendly, and extensible interface for organizations to manage resource reservations.",
+     "matched_keywords": [
+      "scheduling"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Foodsoft",
+     "source_code_url": "https://github.com/foodcoops/foodsoft",
+     "stargazers_count": 359,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-10",
+     "description": "Manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).",
+     "matched_keywords": [
+      "scheduling"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "flowctl",
+     "source_code_url": "https://github.com/cvhariharan/flowctl",
+     "stargazers_count": 340,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-11",
+     "description": "Self-service workflow execution platform with approvals, remote execution and scheduling.",
+     "matched_keywords": [
+      "scheduling"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Garlic-Hub",
+     "source_code_url": "https://github.com/garlic-signage/garlic-hub",
+     "stargazers_count": 145,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-03",
+     "description": "Digital signage device and content management system with SMIL playlist support and scheduling.",
+     "matched_keywords": [
+      "scheduling"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-047",
+   "name": "ElasticSearch",
+   "category": "Search",
+   "category_slug": "search",
+   "repository": "https://github.com/elastic/elasticsearch",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-047/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "ElasticSearch",
+     "source_code_url": "https://github.com/elastic/elasticsearch",
+     "stargazers_count": 77934,
+     "licenses": [
+      "SSPL-1.0"
+     ],
+     "updated_at": "2026-09-19",
+     "description": "Distributed, RESTful search and analytics engine.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "MeiliSearch",
+     "source_code_url": "https://github.com/meilisearch/MeiliSearch",
+     "stargazers_count": 59331,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Ultra relevant, instant and typo-tolerant full-text search API.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LibreChat",
+     "source_code_url": "https://github.com/danny-avila/LibreChat",
+     "stargazers_count": 44331,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Enhanced ChatGPT-compatible AI chat interface supporting multiple AI providers, with multi-user auth, message search, and plugin support.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "SearXNG",
+     "source_code_url": "https://github.com/searxng/searxng/",
+     "stargazers_count": 37308,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Internet metasearch engine which aggregates results from various search services and databases (Fork of Searx).",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Vane",
+     "source_code_url": "https://github.com/ItzCrazyKns/Vane",
+     "stargazers_count": 36871,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-01",
+     "description": "AI-powered search engine (alternative to Perplexity AI).",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Onyx Community Edition",
+     "source_code_url": "https://github.com/onyx-dot-app/onyx",
+     "stargazers_count": 32162,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Chat UI that works with any LLM. It comes loaded with advanced features like agents, web search, RAG, MCP, deep research, Connectors to 40+ knowledge sources, and more.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Typesense",
+     "source_code_url": "https://github.com/typesense/typesense",
+     "stargazers_count": 26572,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Blazing fast, typo-tolerant open source search engine optimized for developer happiness and ease of use.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "OpenSearch",
+     "source_code_url": "https://github.com/opensearch-project/OpenSearch",
+     "stargazers_count": 13731,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Distributed and RESTful search engine.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Manticore Search",
+     "source_code_url": "https://github.com/manticoresoftware/manticoresearch/",
+     "stargazers_count": 12018,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Full-text search and data analytics, with fast response time for small, medium and big data (alternative to Elasticsearch).",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Local Deep Research",
+     "source_code_url": "https://github.com/LearningCircuit/local-deep-research",
+     "stargazers_count": 9106,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "AI-powered deep research tool with multi-source search (arXiv, PubMed, web), PDF text extraction, and encrypted local storage.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Tandoor Recipes",
+     "source_code_url": "https://github.com/TandoorRecipes/recipes",
+     "stargazers_count": 8611,
+     "licenses": [
+      "MIT",
+      "Commons-Clause"
+     ],
+     "updated_at": "2026-09-11",
+     "description": "Django application to manage, tag and search recipes using either built-in models or external storage providers hosting PDFs, Images or other files.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Tube Archivist",
+     "source_code_url": "https://github.com/tubearchivist/tubearchivist",
+     "stargazers_count": 8455,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-08-28",
+     "description": "Organize, search, and enjoy your YouTube collection. Subscribe, download, and track viewed content with metadata indexing and a user-friendly interface.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Hister",
+     "source_code_url": "https://github.com/asciimoo/hister",
+     "stargazers_count": 4965,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Personal web search engine with automatic indexing of visited websites. Supports offline local result previews, local files, multi-user handling and optional semantic search.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "bitmagnet",
+     "source_code_url": "https://github.com/bitmagnet-io/bitmagnet",
+     "stargazers_count": 4361,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-05-21",
+     "description": "BitTorrent indexer, DHT crawler, content classifier and torrent search engine with web UI, GraphQL API and Servarr stack integration.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Yacy",
+     "source_code_url": "https://github.com/yacy/yacy_search_server",
+     "stargazers_count": 4037,
+     "licenses": [
+      "GPL-2.0"
+     ],
+     "updated_at": "2026-09-04",
+     "description": "Peer based, decentralized search engine server.",
+     "matched_keywords": [
+      "search"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-048",
+   "name": "Frigate",
+   "category": "Security",
+   "category_slug": "security",
+   "repository": "https://github.com/blakeblackshear/frigate",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-048/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Frigate",
+     "source_code_url": "https://github.com/blakeblackshear/frigate",
+     "stargazers_count": 35981,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Monitor your security cameras with locally processed AI.",
+     "matched_keywords": [
+      "security"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "StackStorm",
+     "source_code_url": "https://github.com/StackStorm/st2",
+     "stargazers_count": 6536,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-02",
+     "description": "StackStorm (aka _IFTTT for Ops_) is event-driven automation for auto-remediation, security responses, troubleshooting, deployments, and more. Includes rules engine, workflow, 160 integration packs with 6000+ actions and ChatOps.",
+     "matched_keywords": [
+      "security"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "2FAuth",
+     "source_code_url": "https://github.com/Bubka/2FAuth",
+     "stargazers_count": 4155,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-02",
+     "description": "Manage your Two-Factor Authentication (2FA) accounts and generate their security codes.",
+     "matched_keywords": [
+      "security"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "UUSEC WAF",
+     "source_code_url": "https://github.com/Safe3/uusec-waf",
+     "stargazers_count": 1713,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-09-06",
+     "description": "Industry-leading high-performance, AI and semantic technology web application firewall and API security gateway (fork of nginx).",
+     "matched_keywords": [
+      "security"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Secluso",
+     "source_code_url": "https://github.com/secluso/core",
+     "stargazers_count": 1670,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-08-08",
+     "description": "Private DIY home security camera system for Raspberry Pi, with end-to-end encrypted remote access and mobile apps for live video, alerts, and recording playback.",
+     "matched_keywords": [
+      "security"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Dovecot",
+     "source_code_url": "https://github.com/dovecot/core",
+     "stargazers_count": 1252,
+     "licenses": [
+      "MIT",
+      "LGPL-2.1"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "IMAP and POP3 server written primarily with security in mind.",
+     "matched_keywords": [
+      "security"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Websurfx",
+     "source_code_url": "https://github.com/neon-mmd/websurfx",
+     "stargazers_count": 1197,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-05-13",
+     "description": "Aggregate results from other search engines (metasearch engine) without ads while keeping privacy and security in mind. It is extremely fast and provides a high level of customization (alternative to SearX).",
+     "matched_keywords": [
+      "security"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Pingvin Share X",
+     "source_code_url": "https://github.com/smp46/pingvin-share-x",
+     "stargazers_count": 439,
+     "licenses": [
+      "BSD-2-Clause"
+     ],
+     "updated_at": "2026-09-16",
+     "description": "File sharing platform with support for logins, reverse shares, share expiry, S3 Buckets, advanced authentication, ClamAV for security scans and more (fork of Pingvin Share).",
+     "matched_keywords": [
+      "security"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "GitProxy",
+     "source_code_url": "https://github.com/finos/git-proxy",
+     "stargazers_count": 251,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-15",
+     "description": "Proxy for Git that applies rules and workflows to all outgoing git push operations and ensures they are compliant. It supports both HTTP/HTTPS and SSH protocols with security scanning and validation.",
+     "matched_keywords": [
+      "security"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-049",
+   "name": "Postiz",
+   "category": "Social Media",
+   "category_slug": "social-media",
+   "repository": "https://github.com/gitroomhq/postiz-app",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-049/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": "automated pick (RSSHub) is an RSS feed aggregator, not a social-media app",
+   "discovery_candidates": [
+    {
+     "name": "RSSHub",
+     "source_code_url": "https://github.com/DIYgod/RSSHub",
+     "stargazers_count": 46241,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Easy to use, and extensible RSS feed aggregator capable of generating RSS feeds from pretty much everything ranging from social media to university departments.",
+     "matched_keywords": [
+      "social media"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Postiz",
+     "source_code_url": "https://github.com/gitroomhq/postiz-app",
+     "stargazers_count": 36052,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Schedule posts, track the performance of your content, and manage all your social media accounts in one place (Alternative to Buffer, Hootsuite, Sprout Social).",
+     "matched_keywords": [
+      "social media"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "LinkStack",
+     "source_code_url": "https://github.com/LinkStackOrg/LinkStack",
+     "stargazers_count": 3875,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-07-06",
+     "description": "Link all your social media platforms easily accessible on one page, customizable through an intuitive, easy to use user/admin interface (alternative to Linktree and Manylink).",
+     "matched_keywords": [
+      "social media"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Socioboard",
+     "source_code_url": "https://github.com/socioboard/Socioboard-5.0",
+     "stargazers_count": 1507,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-08-17",
+     "description": "Social media management, analytics, and reporting platform supporting nine social media networks out-of-the-box.",
+     "matched_keywords": [
+      "social media"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-050",
+   "name": "Rocket.Chat",
+   "category": "Team Chat",
+   "category_slug": "team-chat",
+   "repository": "https://github.com/RocketChat/Rocket.Chat",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-050/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Rocket.Chat",
+     "source_code_url": "https://github.com/RocketChat/Rocket.Chat",
+     "stargazers_count": 46144,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Communications platform that puts data protection first (alternative to Gitter.im and Slack).",
+     "matched_keywords": [
+      "slack"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Mattermost",
+     "source_code_url": "https://github.com/mattermost/mattermost",
+     "stargazers_count": 39099,
+     "licenses": [
+      "\u2298 Proprietary"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Platform for secure collaboration across the entire software development lifecycle, can be integrated with Gitlab (alternative to Slack).",
+     "matched_keywords": [
+      "slack"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Huly",
+     "source_code_url": "https://github.com/hcengineering/platform",
+     "stargazers_count": 27713,
+     "licenses": [
+      "EPL-2.0"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "All-in-one project management platform (alternative to Linear, Jira, Slack, Notion, Motion).",
+     "matched_keywords": [
+      "slack"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Activepieces",
+     "source_code_url": "https://github.com/activepieces/activepieces",
+     "stargazers_count": 24543,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "No-code business automation tool like Zapier or Tray. For example, you can send a Slack notification for each new Trello card.",
+     "matched_keywords": [
+      "slack"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Apprise",
+     "source_code_url": "https://github.com/caronc/apprise",
+     "stargazers_count": 17350,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-17",
+     "description": "Apprise allows you to send a notification to almost all of the most popular notification services available to us today such as: Telegram, Discord, Slack, Amazon SNS, Gotify, etc.",
+     "matched_keywords": [
+      "slack"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Automatisch",
+     "source_code_url": "https://github.com/automatisch/automatisch",
+     "stargazers_count": 13974,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-01-15",
+     "description": "Business automation tool that lets you connect different services like Twitter, Slack, and more to automate your business processes (alternative to Zapier).",
+     "matched_keywords": [
+      "slack"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Colanode",
+     "source_code_url": "https://github.com/colanode/colanode",
+     "stargazers_count": 5142,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-04-03",
+     "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
+     "matched_keywords": [
+      "slack"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "tubesync",
+     "source_code_url": "https://github.com/meeb/tubesync",
+     "stargazers_count": 2794,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-14",
+     "description": "Syncs YouTube channels and playlists to a locally hosted media server.",
+     "matched_keywords": [
+      "channels"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Talkyard",
+     "source_code_url": "https://github.com/debiki/talkyard",
+     "stargazers_count": 1812,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-07-10",
+     "description": "Create a community, where your users can suggest ideas and get questions answered. And have friendly open-ended discussions and chat (Slack/StackOverflow/Discourse/Reddit/Disqus hybrid).",
+     "matched_keywords": [
+      "slack"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "CyTube",
+     "source_code_url": "https://github.com/calzoneman/sync",
+     "stargazers_count": 1588,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2025-11-07",
+     "description": "Synchronize media, chat, and more for an arbitrary number of channels.",
+     "matched_keywords": [
+      "channels"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Youtarr",
+     "source_code_url": "https://github.com/DialmasterOrg/Youtarr",
+     "stargazers_count": 1572,
+     "licenses": [
+      "ISC"
+     ],
+     "updated_at": "2026-09-15",
+     "description": "Download videos from YouTube channels on a schedule via yt-dlp, with a web UI to browse and selectively download videos. Integrates with Plex Media Server and generates NFO metadata for Jellyfin, Kodi, and Emby.",
+     "matched_keywords": [
+      "channels"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Fredy",
+     "source_code_url": "https://github.com/orangecoding/fredy",
+     "stargazers_count": 1519,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Searches for new apartments, houses, and flats in Germany on platforms like ImmoScout24, Immowelt, and others, and instantly delivers the results to you via Slack, Telegram, and more.",
+     "matched_keywords": [
+      "slack"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "ChiefOnboarding",
+     "source_code_url": "https://github.com/chiefonboarding/ChiefOnboarding",
+     "stargazers_count": 930,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-15",
+     "description": "Employee onboarding platform that allows you to provision user accounts and create sequences with todo items, resources, text/email/Slack messages, and more! Available as a web portal and Slack bot.",
+     "matched_keywords": [
+      "slack"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "vod2pod-rss",
+     "source_code_url": "https://github.com/madiele/vod2pod-rss",
+     "stargazers_count": 386,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-08-25",
+     "description": "Convert YouTube and Twitch channels to podcasts, no storage required. Transcodes VoDs to MP3 192k on the fly, generates an RSS feed to use in podcast clients.",
+     "matched_keywords": [
+      "channels"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "ChannelTube",
+     "source_code_url": "https://github.com/TheWicklowWolf/ChannelTube",
+     "stargazers_count": 324,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-08-21",
+     "description": "Download video or audio from YouTube channels on a schedule via yt-dlp.",
+     "matched_keywords": [
+      "channels"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-051",
+   "name": "Galene",
+   "category": "Video Conferencing",
+   "category_slug": "video-conferencing",
+   "repository": "https://github.com/jech/galene",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-051/source",
+   "status": "DISCOVERED",
+   "declared_itself": true,
+   "manual_override_reason": null,
+   "discovery_candidates": [
+    {
+     "name": "Galene",
+     "source_code_url": "https://github.com/jech/galene",
+     "stargazers_count": 1406,
+     "licenses": [
+      "MIT"
+     ],
+     "updated_at": "2026-09-08",
+     "description": "Video conferencing server that is easy to deploy and that requires moderate server resources.",
+     "matched_keywords": [
+      "video conferencing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Openmeetings",
+     "source_code_url": "https://github.com/apache/openmeetings",
+     "stargazers_count": 684,
+     "licenses": [
+      "Apache-2.0"
+     ],
+     "updated_at": "2026-09-18",
+     "description": "Video conferencing, instant messaging, whiteboard, collaborative document editing and other groupware tools using API functions of the Red5 Streaming Server for Remoting and Streaming.",
+     "matched_keywords": [
+      "video conferencing"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  },
+  {
+   "id": "APP-052",
+   "name": "OpenReel Video",
+   "category": "Video Editors",
+   "category_slug": "video-editors",
+   "repository": "https://github.com/Augani/openreel-video",
+   "source_platform": "github.com",
+   "licence": null,
+   "version": null,
+   "commit": null,
+   "source_path": "applications/APP-052/source",
+   "status": "DISCOVERED",
+   "declared_itself": false,
+   "manual_override_reason": "automated pick (Dawarich) is a location/travel tracker matched on the stray keyword 'timeline'; no real video editor was in either discovery source's candidate pool for this category",
+   "discovery_candidates": [
+    {
+     "name": "Dawarich",
+     "source_code_url": "https://github.com/Freika/dawarich",
+     "stargazers_count": 10435,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-09-13",
+     "description": "Visualize your location history, track your movements, and analyze your travel patterns with complete privacy and control (alternative to Google Timeline a.k.a. Google Location History).",
+     "matched_keywords": [
+      "timeline"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "TimeTagger",
+     "source_code_url": "https://github.com/almarklein/timetagger",
+     "stargazers_count": 1787,
+     "licenses": [
+      "GPL-3.0"
+     ],
+     "updated_at": "2026-05-17",
+     "description": "An open source time-tracker based on an interactive timeline and powerful reporting.",
+     "matched_keywords": [
+      "timeline"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    },
+    {
+     "name": "Operational.co",
+     "source_code_url": "https://github.com/operational-co/operational.co",
+     "stargazers_count": 477,
+     "licenses": [
+      "AGPL-3.0"
+     ],
+     "updated_at": "2026-07-26",
+     "description": "Receive alerts in a live timeline from your product.",
+     "matched_keywords": [
+      "timeline"
+     ],
+     "discovery_source": "awesome-selfhosted"
+    }
+   ],
+   "discovery_failed_reason": null
+  }
+ ]
+}

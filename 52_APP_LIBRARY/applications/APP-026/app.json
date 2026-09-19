@@ -1,0 +1,102 @@
+{
+ "id": "APP-026",
+ "name": "Odoo",
+ "category": "ERP",
+ "category_slug": "erp",
+ "repository": "https://github.com/odoo/odoo",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-026/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Odoo",
+   "source_code_url": "https://github.com/odoo/odoo",
+   "stargazers_count": 54450,
+   "licenses": [
+    "LGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Free open source ERP system.",
+   "matched_keywords": [
+    "erp"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ERPNext",
+   "source_code_url": "https://github.com/frappe/erpnext",
+   "stargazers_count": 39358,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "ERP system to help you run your business.",
+   "matched_keywords": [
+    "erp"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "grocy",
+   "source_code_url": "https://github.com/grocy/grocy",
+   "stargazers_count": 9513,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "ERP beyond your fridge. Groceries & household management solution for your home.",
+   "matched_keywords": [
+    "erp"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Ever Gauzy",
+   "source_code_url": "https://github.com/ever-co/ever-gauzy",
+   "stargazers_count": 7741,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Open business management platform for collaborative, on-demand and sharing economies (ERP/CRM/HRM/ATS/PM).",
+   "matched_keywords": [
+    "erp"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OFBiz",
+   "source_code_url": "https://github.com/apache/ofbiz-framework",
+   "stargazers_count": 1124,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Enterprise Resource Planning system with a suite of business applications flexible enough to be used across any industry.",
+   "matched_keywords": [
+    "enterprise resource"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LedgerSMB",
+   "source_code_url": "https://github.com/ledgersmb/LedgerSMB",
+   "stargazers_count": 568,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Integrated accounting and ERP system for small and midsize businesses, with double entry accounting, budgeting, invoicing, quotations, projects, orders and inventory management, shipping and more.",
+   "matched_keywords": [
+    "erp"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

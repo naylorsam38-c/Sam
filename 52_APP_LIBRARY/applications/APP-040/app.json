@@ -1,0 +1,34 @@
+{
+ "id": "APP-040",
+ "name": "appsmith",
+ "category": "No-Code Platforms",
+ "category_slug": "no-code-platforms",
+ "repository": "https://github.com/appsmithorg/appsmith",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-040/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "appsmith",
+   "source_code_url": "https://github.com/appsmithorg/appsmith",
+   "stargazers_count": 40903,
+   "licenses": [],
+   "archived": false,
+   "description": "Platform to build admin panels, internal tools, and dashboards."
+  },
+  {
+   "name": "nocobase",
+   "source_code_url": "https://github.com/nocobase/nocobase",
+   "stargazers_count": 24287,
+   "licenses": [],
+   "archived": false,
+   "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."
+  }
+ ],
+ "discovery_failed_reason": null
+}

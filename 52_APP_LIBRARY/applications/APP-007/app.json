@@ -1,0 +1,228 @@
+{
+ "id": "APP-007",
+ "name": "ElasticSearch",
+ "category": "Analytics",
+ "category_slug": "analytics",
+ "repository": "https://github.com/elastic/elasticsearch",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-007/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "ElasticSearch",
+   "source_code_url": "https://github.com/elastic/elasticsearch",
+   "stargazers_count": 77934,
+   "licenses": [
+    "SSPL-1.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Distributed, RESTful search and analytics engine.",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Superset",
+   "source_code_url": "https://github.com/apache/superset",
+   "stargazers_count": 74835,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Modern data exploration and visualization platform.",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Metabase",
+   "source_code_url": "https://github.com/metabase/metabase",
+   "stargazers_count": 49335,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Easy way for everyone in your company to ask questions and learn from data.",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "PostHog",
+   "source_code_url": "https://github.com/posthog/posthog",
+   "stargazers_count": 39853,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Product analytics, session recording, feature flagging and a/b testing that you can self-host (alternative to Mixpanel, Amplitude, Heap, HotJar, Optimizely).",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Umami",
+   "source_code_url": "https://github.com/umami-software/umami",
+   "stargazers_count": 38900,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Simple, fast, privacy-focused alternative to Google Analytics.",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Postiz",
+   "source_code_url": "https://github.com/gitroomhq/postiz-app",
+   "stargazers_count": 36052,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Schedule posts, track the performance of your content, and manage all your social media accounts in one place (Alternative to Buffer, Hootsuite, Sprout Social).",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Netron",
+   "source_code_url": "https://github.com/lutzroeder/netron",
+   "stargazers_count": 33494,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Visualizer for neural network and machine learning models.",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Plausible Analytics",
+   "source_code_url": "https://github.com/plausible/analytics/",
+   "stargazers_count": 29136,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Simple, lightweight (< 1 KB) and privacy-friendly web analytics.",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Redash",
+   "source_code_url": "https://github.com/getredash/redash",
+   "stargazers_count": 28801,
+   "licenses": [
+    "BSD-2-Clause"
+   ],
+   "updated_at": "2026-09-03",
+   "description": "Connect and query your data sources, build dashboards to visualize data and share them with your company.",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Matomo",
+   "source_code_url": "https://github.com/matomo-org/matomo",
+   "stargazers_count": 21886,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Web analytics that protects your data and your customers' privacy (alternative to Google Analytics).",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "GoAccess",
+   "source_code_url": "https://github.com/allinurl/goaccess",
+   "stargazers_count": 20935,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Real-time web log analyzer and interactive viewer that runs in a terminal.",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Druid",
+   "source_code_url": "https://github.com/apache/druid",
+   "stargazers_count": 14054,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Distributed, column-oriented, real-time analytics data store.",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Rybbit",
+   "source_code_url": "https://github.com/rybbit-io/rybbit",
+   "stargazers_count": 13026,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Web and products analytics that is easy to setup and more intuitive (alternative to Google Analytics).",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Manticore Search",
+   "source_code_url": "https://github.com/manticoresoftware/manticoresearch/",
+   "stargazers_count": 12018,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Full-text search and data analytics, with fast response time for small, medium and big data (alternative to Elasticsearch).",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Tyk",
+   "source_code_url": "https://github.com/TykTechnologies/tyk",
+   "stargazers_count": 10822,
+   "licenses": [
+    "MPL-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Fast and scalable open source API Gateway. Out of the box, Tyk offers an API Management Platform with an API Gateway, API Analytics, Developer Portal and API Management Dashboard.",
+   "matched_keywords": [
+    "analytics"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

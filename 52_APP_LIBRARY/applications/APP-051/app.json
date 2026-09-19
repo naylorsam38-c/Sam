@@ -1,0 +1,46 @@
+{
+ "id": "APP-051",
+ "name": "Galene",
+ "category": "Video Conferencing",
+ "category_slug": "video-conferencing",
+ "repository": "https://github.com/jech/galene",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-051/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Galene",
+   "source_code_url": "https://github.com/jech/galene",
+   "stargazers_count": 1406,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-08",
+   "description": "Video conferencing server that is easy to deploy and that requires moderate server resources.",
+   "matched_keywords": [
+    "video conferencing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Openmeetings",
+   "source_code_url": "https://github.com/apache/openmeetings",
+   "stargazers_count": 684,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Video conferencing, instant messaging, whiteboard, collaborative document editing and other groupware tools using API functions of the Red5 Streaming Server for Remoting and Streaming.",
+   "matched_keywords": [
+    "video conferencing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

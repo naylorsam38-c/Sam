@@ -1,0 +1,116 @@
+{
+ "id": "APP-046",
+ "name": "Cal.diy",
+ "category": "Scheduling",
+ "category_slug": "scheduling",
+ "repository": "https://github.com/calcom/cal.diy",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-046/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Cal.diy",
+   "source_code_url": "https://github.com/calcom/cal.diy",
+   "stargazers_count": 48543,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "Online appointment scheduling system.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Donetick",
+   "source_code_url": "https://github.com/donetick/donetick",
+   "stargazers_count": 2570,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-08-18",
+   "description": "Task and chore management tool for personal and family use, with advanced scheduling, flexible assignment, and group sharing capabilities, detailed history, automation via API, simple and modern design.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "pretalx",
+   "source_code_url": "https://github.com/pretalx/pretalx",
+   "stargazers_count": 943,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Web-based event management, including running a Call for Papers, reviewing submissions, and scheduling talks. Exports and imports for various related tools.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LibreBooking",
+   "source_code_url": "https://github.com/LibreBooking/librebooking",
+   "stargazers_count": 808,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-03",
+   "description": "Resource scheduling solution offering a flexible, mobile-friendly, and extensible interface for organizations to manage resource reservations.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Foodsoft",
+   "source_code_url": "https://github.com/foodcoops/foodsoft",
+   "stargazers_count": 359,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-10",
+   "description": "Manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "flowctl",
+   "source_code_url": "https://github.com/cvhariharan/flowctl",
+   "stargazers_count": 340,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-11",
+   "description": "Self-service workflow execution platform with approvals, remote execution and scheduling.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Garlic-Hub",
+   "source_code_url": "https://github.com/garlic-signage/garlic-hub",
+   "stargazers_count": 145,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-03",
+   "description": "Digital signage device and content management system with SMIL playlist support and scheduling.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

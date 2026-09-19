@@ -1,0 +1,60 @@
+{
+ "id": "APP-023",
+ "name": "OneDev",
+ "category": "DevOps",
+ "category_slug": "devops",
+ "repository": "https://github.com/theonedev/onedev",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-023/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "OneDev",
+   "source_code_url": "https://github.com/theonedev/onedev",
+   "stargazers_count": 15256,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "All-In-One DevOps Platform. With Git Management, Issue Tracking, and CI/CD. Simple yet Powerful.",
+   "matched_keywords": [
+    "devops"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Bytebase",
+   "source_code_url": "https://github.com/bytebase/bytebase",
+   "stargazers_count": 14497,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Safe database schema change and version control for DevOps teams, supports MySQL, PostgreSQL, TiDB, ClickHouse, and Snowflake.",
+   "matched_keywords": [
+    "devops"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "FlowForge",
+   "source_code_url": "https://github.com/FlowFuse/flowfuse",
+   "stargazers_count": 400,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Deploy Node-RED applications in a reliable, scalable and secure manner. The FlowForge platform provides DevOps capabilities for Node-RED development teams.",
+   "matched_keywords": [
+    "devops"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

@@ -1,0 +1,26 @@
+{
+ "id": "APP-019",
+ "name": "airbyte",
+ "category": "Data Engineering",
+ "category_slug": "data-engineering",
+ "repository": "https://github.com/airbytehq/airbyte",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-019/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "airbyte",
+   "source_code_url": "https://github.com/airbytehq/airbyte",
+   "stargazers_count": 22091,
+   "licenses": [],
+   "archived": false,
+   "description": "Open-source data movement for ELT pipelines and AI agents."
+  }
+ ],
+ "discovery_failed_reason": null
+}

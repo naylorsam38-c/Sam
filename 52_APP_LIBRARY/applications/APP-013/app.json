@@ -1,0 +1,228 @@
+{
+ "id": "APP-013",
+ "name": "Strapi",
+ "category": "CMS",
+ "category_slug": "cms",
+ "repository": "https://github.com/strapi/strapi",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-013/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Strapi",
+   "source_code_url": "https://github.com/strapi/strapi",
+   "stargazers_count": 73191,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Headless CMS that lets developers build content APIs fast while giving content creators a friendly editing interface.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Payload CMS",
+   "source_code_url": "https://github.com/payloadcms/payload",
+   "stargazers_count": 44817,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Developer-first headless CMS and application framework.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "WordPress",
+   "source_code_url": "https://github.com/WordPress/WordPress",
+   "stargazers_count": 21428,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "World's most-used blogging and CMS engine.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "october",
+   "source_code_url": "https://github.com/octobercms/october",
+   "stargazers_count": 11149,
+   "licenses": [
+    "\u2298 Proprietary"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "CMS platform based on the Laravel PHP Framework.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "KeystoneJS",
+   "source_code_url": "https://github.com/keystonejs/keystone",
+   "stargazers_count": 9975,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "CMS and web application platform.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Umbraco",
+   "source_code_url": "https://github.com/umbraco/Umbraco-CMS",
+   "stargazers_count": 5251,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "The friendly CMS. Free and open source with an amazing community.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Joomla!",
+   "source_code_url": "https://github.com/joomla/joomla-cms",
+   "stargazers_count": 5140,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Advanced Content Management System (CMS).",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "MediaCMS",
+   "source_code_url": "https://github.com/mediacms-io/mediacms",
+   "stargazers_count": 5120,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-08-25",
+   "description": "Modern, fully featured open source video and media CMS, written in Python/Django/React, featuring a REST API.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Apostrophe",
+   "source_code_url": "https://github.com/apostrophecms/apostrophe",
+   "stargazers_count": 4622,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "CMS with a focus on extensible in-context editing tools.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "CraftCMS",
+   "source_code_url": "https://github.com/craftcms/cms",
+   "stargazers_count": 3608,
+   "licenses": [
+    "\u2298 Proprietary"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Content-first CMS that aims to make life enjoyable for developers and content managers alike.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Squidex",
+   "source_code_url": "https://github.com/Squidex/squidex",
+   "stargazers_count": 2510,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Headless CMS, based on MongoDB, CQRS and Event Sourcing.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Kirby",
+   "source_code_url": "https://github.com/getkirby/kirby",
+   "stargazers_count": 1531,
+   "licenses": [
+    "\u2298 Proprietary"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "File-based CMS. Easy to setup. Easy to use. Flexible as hell.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "HTMLy",
+   "source_code_url": "https://github.com/danpros/htmly",
+   "stargazers_count": 1363,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-01-25",
+   "description": "Databaseless PHP blogging platform. A flat-file CMS that allows you to create a fast, secure, and powerful website or blog in seconds.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "TYPO3",
+   "source_code_url": "https://github.com/TYPO3/typo3",
+   "stargazers_count": 1209,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Powerful and advanced CMS with a large community.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Vvveb CMS",
+   "source_code_url": "https://github.com/givanz/Vvveb",
+   "stargazers_count": 1190,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-08-05",
+   "description": "Powerful and easy to use CMS to build websites, blogs or e-commerce stores.",
+   "matched_keywords": [
+    "cms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

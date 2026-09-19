@@ -1,0 +1,57 @@
+{
+  "source": "GitHub REST search API (mcp__github__search_repositories), live 2026-09-19 - supplements categories with weak/no awesome-selfhosted-data coverage per spec section 2 (\"search the open-source ecosystem\", not tied to any one site)",
+  "candidates": {
+    "ab-testing-experimentation": [
+      {"name": "flagsmith", "source_code_url": "https://github.com/Flagsmith/flagsmith", "stargazers_count": 6561, "licenses": ["BSD-3-Clause"], "archived": false, "description": "Flagsmith is an open-source feature flag platform with remote config, experimentation, and self-hosted or cloud deployment options."},
+      {"name": "go-feature-flag", "source_code_url": "https://github.com/thomaspoignant/go-feature-flag", "stargazers_count": 2110, "licenses": ["MIT"], "archived": false, "description": "GO Feature Flag is a simple, complete and lightweight self-hosted cloud native feature flag solution."},
+      {"name": "featbit", "source_code_url": "https://github.com/featbit/featbit", "stargazers_count": 1907, "licenses": ["MIT"], "archived": false, "description": "Enterprise-grade feature flag platform that you can self-host."}
+    ],
+    "ai-code-assistants": [
+      {"name": "tabby", "source_code_url": "https://github.com/TabbyML/tabby", "stargazers_count": 33881, "licenses": [], "archived": false, "description": "Self-hosted AI coding assistant."}
+    ],
+    "ai-design-tools": [
+      {"name": "penpot", "source_code_url": "https://github.com/penpot/penpot", "stargazers_count": 60152, "licenses": [], "archived": false, "description": "Penpot: The open-source design platform for Product teams that need scalable collaboration."}
+    ],
+    "ai-development": [
+      {"name": "langfuse", "source_code_url": "https://github.com/langfuse/langfuse", "stargazers_count": 34804, "licenses": [], "archived": false, "description": "Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform."},
+      {"name": "onyx", "source_code_url": "https://github.com/onyx-dot-app/onyx", "stargazers_count": 32162, "licenses": [], "archived": false, "description": "Open Source AI Platform - AI Chat with advanced features that works with every LLM."}
+    ],
+    "bookmarks-archiving": [
+      {"name": "linkwarden", "source_code_url": "https://github.com/linkwarden/linkwarden", "stargazers_count": 19800, "licenses": [], "archived": false, "description": "Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters."},
+      {"name": "linkding", "source_code_url": "https://github.com/sissbruecker/linkding", "stargazers_count": 11200, "licenses": [], "archived": false, "description": "Self-hosted bookmark manager that is designed be to be minimal, fast, and easy to set up using Docker."}
+    ],
+    "code-editors": [
+      {"name": "rustpad", "source_code_url": "https://github.com/ekzhang/rustpad", "stargazers_count": 4075, "licenses": ["MIT"], "archived": false, "description": "Efficient and minimal collaborative code editor, self-hosted, no database required."}
+    ],
+    "data-engineering": [
+      {"name": "airbyte", "source_code_url": "https://github.com/airbytehq/airbyte", "stargazers_count": 22091, "licenses": [], "archived": false, "description": "Open-source data movement for ELT pipelines and AI agents."}
+    ],
+    "design-tools": [
+      {"name": "penpot", "source_code_url": "https://github.com/penpot/penpot", "stargazers_count": 60152, "licenses": [], "archived": false, "description": "Penpot: The open-source design platform for Product teams that need scalable collaboration."}
+    ],
+    "game-development": [
+      {"name": "gaseous-server", "source_code_url": "https://github.com/gaseous-project/gaseous-server", "stargazers_count": 940, "licenses": [], "archived": false, "description": "A game ROM manager, with a built in web based emulator."}
+    ],
+    "hosting-control-panel": [
+      {"name": "websoft9", "source_code_url": "https://github.com/Websoft9/websoft9", "stargazers_count": 2126, "licenses": [], "archived": false, "description": "Applications self-hosting and DevOps platform for running open source, web-based linux Panel of lite PaaS."}
+    ],
+    "human-resources": [
+      {"name": "hrms", "source_code_url": "https://github.com/frappe/hrms", "stargazers_count": 8805, "licenses": [], "archived": false, "description": "Open Source HR and Payroll Software."},
+      {"name": "horilla-hr", "source_code_url": "https://github.com/horilla/horilla-hr", "stargazers_count": 1427, "licenses": [], "archived": false, "description": "Horilla is a free and open source HR software."}
+    ],
+    "low-code-platforms": [
+      {"name": "tooljet", "source_code_url": "https://github.com/ToolJet/ToolJet", "stargazers_count": 40941, "licenses": [], "archived": false, "description": "Open-source foundation of ToolJet AI - the enterprise app generation platform for internal tools, dashboards, business applications."},
+      {"name": "appsmith", "source_code_url": "https://github.com/appsmithorg/appsmith", "stargazers_count": 40903, "licenses": [], "archived": false, "description": "Platform to build admin panels, internal tools, and dashboards."},
+      {"name": "nocobase", "source_code_url": "https://github.com/nocobase/nocobase", "stargazers_count": 24287, "licenses": [], "archived": false, "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."}
+    ],
+    "no-code-platforms": [
+      {"name": "nocobase", "source_code_url": "https://github.com/nocobase/nocobase", "stargazers_count": 24287, "licenses": [], "archived": false, "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."},
+      {"name": "appsmith", "source_code_url": "https://github.com/appsmithorg/appsmith", "stargazers_count": 40903, "licenses": [], "archived": false, "description": "Platform to build admin panels, internal tools, and dashboards."}
+    ],
+    "product-management": [
+      {"name": "feedlog", "source_code_url": "https://github.com/linkcraftstudio/feedlog", "stargazers_count": 153, "licenses": [], "archived": false, "description": "Open-source feedback & roadmap tool - feedback boards, public roadmap, AI-assisted changelog."}
+    ],
+    "developer-tools": []
+  },
+  "not_found_after_search": ["developer-tools"]
+}

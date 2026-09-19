@@ -1,0 +1,232 @@
+{
+ "id": "APP-025",
+ "name": "Bagisto",
+ "category": "E-Commerce",
+ "category_slug": "ecommerce",
+ "repository": "https://github.com/bagisto/bagisto",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-025/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "MedusaJs",
+   "source_code_url": "https://github.com/medusajs/medusa",
+   "stargazers_count": 36376,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Headless commerce engine that enables developers to create amazing digital commerce experiences.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Bagisto",
+   "source_code_url": "https://github.com/bagisto/bagisto",
+   "stargazers_count": 28132,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Leading Laravel open source e-commerce framework with multi-inventory sources, taxation, localization, dropshipping and more exciting features.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Saleor",
+   "source_code_url": "https://github.com/saleor/saleor",
+   "stargazers_count": 23350,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "GraphQL native, API-only platform for scalable composable e-commerce storefront.",
+   "matched_keywords": [
+    "e-commerce",
+    "storefront"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Spree Commerce",
+   "source_code_url": "https://github.com/spree/spree",
+   "stargazers_count": 15709,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Spree is a complete, modular & API-driven open source e-commerce solution for Ruby on Rails.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Magento Open Source",
+   "source_code_url": "https://github.com/magento/magento2",
+   "stargazers_count": 12198,
+   "licenses": [
+    "OSL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Leading provider of open omnichannel innovation.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "WooCommerce",
+   "source_code_url": "https://github.com/woocommerce/woocommerce",
+   "stargazers_count": 10515,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "WordPress based e-commerce solution.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "EverShop",
+   "source_code_url": "https://github.com/evershopcommerce/evershop",
+   "stargazers_count": 10476,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "E-commerce platform with essential commerce features. Modular architecture and fully customizable.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "PrestaShop",
+   "source_code_url": "https://github.com/PrestaShop/PrestaShop",
+   "stargazers_count": 9215,
+   "licenses": [
+    "OSL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Fully scalable e-commerce solution.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Sylius",
+   "source_code_url": "https://github.com/Sylius/Sylius",
+   "stargazers_count": 8537,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Symfony2 powered open source full-stack platform for eCommerce.",
+   "matched_keywords": [
+    "e-commerce",
+    "ecommerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Vendure",
+   "source_code_url": "https://github.com/vendurehq/vendure",
+   "stargazers_count": 8452,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "A headless commerce framework.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OpenCart",
+   "source_code_url": "https://github.com/opencart/opencart",
+   "stargazers_count": 8201,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Shopping cart solution.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Aimeos",
+   "source_code_url": "https://github.com/aimeos/aimeos",
+   "stargazers_count": 5454,
+   "licenses": [
+    "LGPL-3.0",
+    "MIT"
+   ],
+   "updated_at": "2026-07-29",
+   "description": "E-commerce framework for building custom online shops, market places and complex B2B applications scaling to billions of items with Laravel.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Solidus",
+   "source_code_url": "https://github.com/solidusio/solidus",
+   "stargazers_count": 5329,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Ecommerce platform that gives you complete control over your store.",
+   "matched_keywords": [
+    "e-commerce",
+    "ecommerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Open Source POS",
+   "source_code_url": "https://github.com/opensourcepos/opensourcepos",
+   "stargazers_count": 4389,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-10",
+   "description": "Open Source Point of Sale is a web based point of sale system.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Hi.Events",
+   "source_code_url": "https://github.com/HiEventsDev/hi.events",
+   "stargazers_count": 4027,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-15",
+   "description": "Event management and ticketing platform for conferences, concerts, and more. Offering customizable event pages and embeddable ticket widgets.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

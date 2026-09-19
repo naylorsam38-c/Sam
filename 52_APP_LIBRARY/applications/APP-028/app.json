@@ -1,0 +1,89 @@
+{
+ "id": "APP-028",
+ "name": "Formbricks",
+ "category": "Forms & Surveys",
+ "category_slug": "forms-surveys",
+ "repository": "https://github.com/formbricks/formbricks",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-028/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Formbricks",
+   "source_code_url": "https://github.com/formbricks/formbricks",
+   "stargazers_count": 12952,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Experience Management Suite built on the largest open source survey stack worldwide. Gracefully gather feedback at every step of the customer journey to know what your customers need.",
+   "matched_keywords": [
+    "survey"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Typebot",
+   "source_code_url": "https://github.com/baptisteArno/typebot.io",
+   "stargazers_count": 10335,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "Conversational app builder (alternative to Typeform and Landbot).",
+   "matched_keywords": [
+    "typeform"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "HeyForm",
+   "source_code_url": "https://github.com/heyform/heyform",
+   "stargazers_count": 8980,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-09",
+   "description": "Form builder that allows anyone to create engaging conversational forms for surveys, questionnaires, quizzes, and polls.",
+   "matched_keywords": [
+    "form builder",
+    "forms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LimeSurvey",
+   "source_code_url": "https://github.com/LimeSurvey/LimeSurvey",
+   "stargazers_count": 3729,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Feature-rich web-based polling software. Supports extensive survey logic.",
+   "matched_keywords": [
+    "survey"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OpnForm",
+   "source_code_url": "https://github.com/OpnForm/OpnForm",
+   "stargazers_count": 3724,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Beautiful form builder.",
+   "matched_keywords": [
+    "form builder"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

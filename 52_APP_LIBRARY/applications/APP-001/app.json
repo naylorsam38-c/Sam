@@ -1,0 +1,48 @@
+{
+ "id": "APP-001",
+ "name": "flagsmith",
+ "category": "A/B Testing & Experimentation",
+ "category_slug": "ab-testing-experimentation",
+ "repository": "https://github.com/Flagsmith/flagsmith",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-001/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "flagsmith",
+   "source_code_url": "https://github.com/Flagsmith/flagsmith",
+   "stargazers_count": 6561,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
+   "archived": false,
+   "description": "Flagsmith is an open-source feature flag platform with remote config, experimentation, and self-hosted or cloud deployment options."
+  },
+  {
+   "name": "go-feature-flag",
+   "source_code_url": "https://github.com/thomaspoignant/go-feature-flag",
+   "stargazers_count": 2110,
+   "licenses": [
+    "MIT"
+   ],
+   "archived": false,
+   "description": "GO Feature Flag is a simple, complete and lightweight self-hosted cloud native feature flag solution."
+  },
+  {
+   "name": "featbit",
+   "source_code_url": "https://github.com/featbit/featbit",
+   "stargazers_count": 1907,
+   "licenses": [
+    "MIT"
+   ],
+   "archived": false,
+   "description": "Enterprise-grade feature flag platform that you can self-host."
+  }
+ ],
+ "discovery_failed_reason": null
+}

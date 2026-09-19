@@ -1,0 +1,17 @@
+{
+ "id": "APP-035",
+ "name": null,
+ "category": "Logistics",
+ "category_slug": "logistics",
+ "repository": null,
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-035/source",
+ "status": "DISCOVERY_FAILED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [],
+ "discovery_failed_reason": "no candidate found via awesome-selfhosted-data or GitHub search (openapps.pro itself is blocked by this sandbox's egress policy, per RULES.md-equivalent provenance note)"
+}

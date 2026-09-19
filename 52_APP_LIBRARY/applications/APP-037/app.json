@@ -1,0 +1,89 @@
+{
+ "id": "APP-037",
+ "name": "Mautic",
+ "category": "Marketing",
+ "category_slug": "marketing",
+ "repository": "https://github.com/mautic/mautic",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-037/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Mautic",
+   "source_code_url": "https://github.com/mautic/mautic",
+   "stargazers_count": 10529,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Marketing automation software (email, social and more).",
+   "matched_keywords": [
+    "marketing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "RudderStack",
+   "source_code_url": "https://github.com/rudderlabs/rudder-server/",
+   "stargazers_count": 4487,
+   "licenses": [
+    "Elastic-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Collect, unify, transform, and store your customer data, and route it to a wide range of common, popular marketing, sales, and product tools (alternative to Segment).",
+   "matched_keywords": [
+    "marketing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Erxes",
+   "source_code_url": "https://github.com/erxes/erxes",
+   "stargazers_count": 4082,
+   "licenses": [
+    "AGPL-3.0",
+    "Commons-Clause"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Marketing, sales, and customer service platform designed to help businesses attract more engaged customers.",
+   "matched_keywords": [
+    "marketing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "phpList",
+   "source_code_url": "https://github.com/phpList/phplist3",
+   "stargazers_count": 871,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Newsletter and email marketing with advanced management of subscribers, bounces, and plugins.",
+   "matched_keywords": [
+    "marketing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Django-CRM",
+   "source_code_url": "https://github.com/DjangoCRM/django-crm",
+   "stargazers_count": 626,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Analytical CRM with tasks management, email marketing and many more. Django CRM is built for individual use, businesses of any size or freelancers and is designed to provide easy customization and quick development.",
+   "matched_keywords": [
+    "marketing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

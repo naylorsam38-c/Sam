@@ -1,0 +1,159 @@
+{
+ "id": "APP-003",
+ "name": "LobeHub",
+ "category": "AI Assistants",
+ "category_slug": "ai-assistants",
+ "repository": "https://github.com/lobehub/lobehub",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-003/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Home Assistant",
+   "source_code_url": "https://github.com/home-assistant/core",
+   "stargazers_count": 90737,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Home automation platform.",
+   "matched_keywords": [
+    "assistant"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LobeHub",
+   "source_code_url": "https://github.com/lobehub/lobehub",
+   "stargazers_count": 82607,
+   "licenses": [
+    "\u2298 Proprietary"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Modern design AI chat framework supporting multiple AI providers, one click install MCP Marketplace and Artifacts / Thinking.",
+   "matched_keywords": [
+    "ai chat"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LibreChat",
+   "source_code_url": "https://github.com/danny-avila/LibreChat",
+   "stargazers_count": 44331,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Enhanced ChatGPT-compatible AI chat interface supporting multiple AI providers, with multi-user auth, message search, and plugin support.",
+   "matched_keywords": [
+    "ai chat",
+    "chatgpt"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Leon",
+   "source_code_url": "https://github.com/leon-ai/leon",
+   "stargazers_count": 17520,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Personal assistant who can live on your server.",
+   "matched_keywords": [
+    "assistant"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Gladys",
+   "source_code_url": "https://github.com/GladysAssistant/Gladys",
+   "stargazers_count": 3196,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Privacy-first home assistant.",
+   "matched_keywords": [
+    "assistant"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Relaticle",
+   "source_code_url": "https://github.com/relaticle/relaticle",
+   "stargazers_count": 1693,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "CRM with an MCP server, an AI assistant with human-approved changes, a REST API, custom fields, and kanban boards.",
+   "matched_keywords": [
+    "assistant"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Bar Assistant",
+   "source_code_url": "https://github.com/karlomikus/bar-assistant",
+   "stargazers_count": 1092,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Manage your home bar while adding your ingredients, searching for cocktails and creating custom cocktail recipes.",
+   "matched_keywords": [
+    "assistant"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Kibitzr",
+   "source_code_url": "https://github.com/kibitzr/kibitzr",
+   "stargazers_count": 716,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-04-08",
+   "description": "Lightweight personal web assistant with powerful integrations.",
+   "matched_keywords": [
+    "assistant"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "NutriTrace",
+   "source_code_url": "https://github.com/TraceApps/nutritrace",
+   "stargazers_count": 242,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-15",
+   "description": "Nutrition and diet tracker with barcode scanning, wearable integrations (Fitbit, Withings, Garmin, Health Connect), adaptive calorie goals, multi-user sharing, and a built-in AI assistant (alternative to MyFitnessPal, Cronometer).",
+   "matched_keywords": [
+    "assistant"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OrcaQ",
+   "source_code_url": "https://github.com/cin12211/orca-q",
+   "stargazers_count": 221,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-12",
+   "description": "Modern database client and IDE for managing, querying, and exploring multiple database types with built-in AI assistant.",
+   "matched_keywords": [
+    "assistant"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

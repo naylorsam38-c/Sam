@@ -1,0 +1,60 @@
+{
+ "id": "APP-002",
+ "name": "AnythingLLM",
+ "category": "AI Agents",
+ "category_slug": "ai-agents",
+ "repository": "https://github.com/Mintplex-Labs/anything-llm",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-002/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "AnythingLLM",
+   "source_code_url": "https://github.com/Mintplex-Labs/anything-llm",
+   "stargazers_count": 66193,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "All-in-one desktop & Docker AI application with built-in RAG, AI agents, No-code agent builder, MCP compatibility, and more.",
+   "matched_keywords": [
+    "ai agents"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Langfuse",
+   "source_code_url": "https://github.com/langfuse/langfuse",
+   "stargazers_count": 34787,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "LLM engineering platform for model tracing, prompt management, and application evaluation. Langfuse helps teams collaboratively debug, analyze, and iterate on their LLM applications such as chatbots or AI agents.",
+   "matched_keywords": [
+    "ai agents"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Composio",
+   "source_code_url": "https://github.com/ComposioHQ/composio",
+   "stargazers_count": 30236,
+   "licenses": [
+    "Elastic-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Integration platform for AI agents & LLMs with support for 250+ apps and custom tools.",
+   "matched_keywords": [
+    "ai agents"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

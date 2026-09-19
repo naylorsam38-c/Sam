@@ -1,0 +1,160 @@
+{
+ "id": "APP-015",
+ "name": "Gitea",
+ "category": "Collaboration",
+ "category_slug": "collaboration",
+ "repository": "https://github.com/go-gitea/gitea",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-015/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Gitea",
+   "source_code_url": "https://github.com/go-gitea/gitea",
+   "stargazers_count": 58066,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Git with a cup of tea! Painless self-hosted all-in-one software development service, including Git hosting, code review, team collaboration, package registry and CI/CD.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Mattermost",
+   "source_code_url": "https://github.com/mattermost/mattermost",
+   "stargazers_count": 39099,
+   "licenses": [
+    "\u2298 Proprietary"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Platform for secure collaboration across the entire software development lifecycle, can be integrated with Gitlab (alternative to Slack).",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "CryptPad",
+   "source_code_url": "https://github.com/cryptpad/cryptpad",
+   "stargazers_count": 7929,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-05-26",
+   "description": "Collaboration suite built to enable collaboration, synchronizing changes to documents in real time.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OpenCloud",
+   "source_code_url": "https://github.com/opencloud-eu/opencloud",
+   "stargazers_count": 6021,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "File Sharing and Collaboration Platform.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Colanode",
+   "source_code_url": "https://github.com/colanode/colanode",
+   "stargazers_count": 5142,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-04-03",
+   "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Openfire",
+   "source_code_url": "https://github.com/igniterealtime/Openfire",
+   "stargazers_count": 3064,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-15",
+   "description": "Real time collaboration (RTC) server.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Sync-in",
+   "source_code_url": "https://github.com/Sync-in/server",
+   "stargazers_count": 1771,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "File storage, syncing, sharing, and collaboration with real-time editing, permission management, and desktop/CLI clients.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Signature PDF",
+   "source_code_url": "https://github.com/24eme/signaturepdf",
+   "stargazers_count": 831,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-08",
+   "description": "Sign and manipulate PDFs with collaboration, organization, compression and metadata editing.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Ideon",
+   "source_code_url": "https://github.com/3xpyth0n/ideon",
+   "stargazers_count": 607,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-07-26",
+   "description": "Project workspace built around an infinite canvas; embed GitHub, GitLab, Gitea, and Forgejo repositories alongside notes, links, and tasks, with real-time collaboration.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Tracim",
+   "source_code_url": "https://github.com/tracim/tracim",
+   "stargazers_count": 275,
+   "licenses": [
+    "AGPL-3.0",
+    "LGPL-3.0",
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Collaborative Platform for team collaboration: file,threads,notes,agenda,etc.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

@@ -1,0 +1,74 @@
+{
+ "id": "APP-038",
+ "name": "Uptime Kuma",
+ "category": "Monitoring",
+ "category_slug": "monitoring",
+ "repository": "https://github.com/louislam/uptime-kuma",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-038/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": "automated pick (Pi-hole) is primarily a DNS/ad-blocker; this is the category-defining self-hosted monitoring tool",
+ "discovery_candidates": [
+  {
+   "name": "Pi-hole",
+   "source_code_url": "https://github.com/pi-hole/pi-hole",
+   "stargazers_count": 60977,
+   "licenses": [
+    "EUPL-1.2"
+   ],
+   "updated_at": "2026-07-06",
+   "description": "Blackhole for Internet advertisements with a GUI for management and monitoring.",
+   "matched_keywords": [
+    "monitoring"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LinkAce",
+   "source_code_url": "https://github.com/Kovah/LinkAce/",
+   "stargazers_count": 3337,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-28",
+   "description": "Bookmark archive with automatic backups to the Internet Archive, link monitoring, and a full REST API. Installation is done via Docker, or as a simple PHP application.",
+   "matched_keywords": [
+    "monitoring"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Pelican Panel",
+   "source_code_url": "https://github.com/pelican/panel",
+   "stargazers_count": 2324,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Web application for easy management of game servers, offering a user-friendly interface for deploying, configuring, and managing servers, server monitoring tools, and extensive customization options (fork of Pterodactyl).",
+   "matched_keywords": [
+    "monitoring"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "SIPCAPTURE Homer",
+   "source_code_url": "https://github.com/sipcapture/homer",
+   "stargazers_count": 2015,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Troubleshooting and monitoring VoIP calls.",
+   "matched_keywords": [
+    "monitoring"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

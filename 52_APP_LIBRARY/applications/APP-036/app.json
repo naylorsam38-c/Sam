@@ -1,0 +1,42 @@
+{
+ "id": "APP-036",
+ "name": "tooljet",
+ "category": "Low Code Platforms",
+ "category_slug": "low-code-platforms",
+ "repository": "https://github.com/ToolJet/ToolJet",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-036/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "tooljet",
+   "source_code_url": "https://github.com/ToolJet/ToolJet",
+   "stargazers_count": 40941,
+   "licenses": [],
+   "archived": false,
+   "description": "Open-source foundation of ToolJet AI - the enterprise app generation platform for internal tools, dashboards, business applications."
+  },
+  {
+   "name": "appsmith",
+   "source_code_url": "https://github.com/appsmithorg/appsmith",
+   "stargazers_count": 40903,
+   "licenses": [],
+   "archived": false,
+   "description": "Platform to build admin panels, internal tools, and dashboards."
+  },
+  {
+   "name": "nocobase",
+   "source_code_url": "https://github.com/nocobase/nocobase",
+   "stargazers_count": 24287,
+   "licenses": [],
+   "archived": false,
+   "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."
+  }
+ ],
+ "discovery_failed_reason": null
+}

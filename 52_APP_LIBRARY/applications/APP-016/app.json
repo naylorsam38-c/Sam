@@ -1,0 +1,231 @@
+{
+ "id": "APP-016",
+ "name": "Discourse",
+ "category": "Community",
+ "category_slug": "community",
+ "repository": "https://github.com/discourse/discourse",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-016/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Hoppscotch Community Edition",
+   "source_code_url": "https://github.com/hoppscotch/hoppscotch",
+   "stargazers_count": 80347,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "Fast and beautiful API request builder.",
+   "matched_keywords": [
+    "community"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Discourse",
+   "source_code_url": "https://github.com/discourse/discourse",
+   "stargazers_count": 47867,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Advanced forum / community solution based on Ruby and JS.",
+   "matched_keywords": [
+    "community",
+    "forum"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Onyx Community Edition",
+   "source_code_url": "https://github.com/onyx-dot-app/onyx",
+   "stargazers_count": 32162,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Chat UI that works with any LLM. It comes loaded with advanced features like agents, web search, RAG, MCP, deep research, Connectors to 40+ knowledge sources, and more.",
+   "matched_keywords": [
+    "community"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Infisical Community Edition",
+   "source_code_url": "https://github.com/Infisical/infisical",
+   "stargazers_count": 29310,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Platform for secrets, certificates, and privileged access management.",
+   "matched_keywords": [
+    "community"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "docmost Community Edition",
+   "source_code_url": "https://github.com/docmost/docmost",
+   "stargazers_count": 21721,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-08",
+   "description": "Collaborative wiki and documentation software (alternative to Confluence, Notion).",
+   "matched_keywords": [
+    "community"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "UVDesk",
+   "source_code_url": "https://github.com/uvdesk/community-skeleton",
+   "stargazers_count": 19594,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2025-10-01",
+   "description": "UVDesk community is a service oriented, event driven extensible opensource helpdesk system that can be used by your organization to provide efficient support to your clients effortlessly whichever way you imagine.",
+   "matched_keywords": [
+    "community"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Flarum",
+   "source_code_url": "https://github.com/flarum/flarum",
+   "stargazers_count": 16402,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-08-27",
+   "description": "Delightfully simple forums. Flarum is the next-generation forum software that makes online discussion fun again.",
+   "matched_keywords": [
+    "discussion",
+    "forum"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Answer",
+   "source_code_url": "https://github.com/apache/answer",
+   "stargazers_count": 15681,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-07-17",
+   "description": "Knowledge-based community software. You can use it to quickly build your Q&A community for product technical support, customer support, user communication, and more.",
+   "matched_keywords": [
+    "community"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "NodeBB",
+   "source_code_url": "https://github.com/NodeBB/NodeBB",
+   "stargazers_count": 15221,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Forum software built for the modern web.",
+   "matched_keywords": [
+    "forum"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Lemmy",
+   "source_code_url": "https://github.com/LemmyNet/lemmy",
+   "stargazers_count": 14601,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Link aggregator for the fediverse (alternative to Reddit).",
+   "matched_keywords": [
+    "reddit"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "sftpgo Community Edition",
+   "source_code_url": "https://github.com/drakkan/sftpgo",
+   "stargazers_count": 12541,
+   "licenses": [
+    "AGPL-3.0",
+    "\u2298 Proprietary"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Flexible, fully featured and highly configurable SFTP server with optional FTP/S and WebDAV support.",
+   "matched_keywords": [
+    "community"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "PrivateBin",
+   "source_code_url": "https://github.com/PrivateBin/PrivateBin",
+   "stargazers_count": 8603,
+   "licenses": [
+    "Zlib"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Minimalist pastebin/discussion board where the server has zero knowledge of hosted data.",
+   "matched_keywords": [
+    "discussion"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Countly Community Edition",
+   "source_code_url": "https://github.com/Countly/countly-server",
+   "stargazers_count": 5905,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Real time mobile and web analytics, crash reporting and push notifications platform.",
+   "matched_keywords": [
+    "community"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "WriteFreely",
+   "source_code_url": "https://github.com/writefreely/writefreely",
+   "stargazers_count": 5252,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-08-28",
+   "description": "Writing software for starting a minimalist, federated blog \u2014 or an entire community.",
+   "matched_keywords": [
+    "community"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Umbraco",
+   "source_code_url": "https://github.com/umbraco/Umbraco-CMS",
+   "stargazers_count": 5251,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "The friendly CMS. Free and open source with an amazing community.",
+   "matched_keywords": [
+    "community"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

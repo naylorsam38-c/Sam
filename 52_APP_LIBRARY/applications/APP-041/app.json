@@ -1,0 +1,229 @@
+{
+ "id": "APP-041",
+ "name": "AppFlowy",
+ "category": "Note Taking",
+ "category_slug": "note-taking",
+ "repository": "https://github.com/AppFlowy-IO/appflowy",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-041/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "AppFlowy",
+   "source_code_url": "https://github.com/AppFlowy-IO/appflowy",
+   "stargazers_count": 76827,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-06-26",
+   "description": "Build detailed lists of to-do\u2019s for different projects while tracking the status of each one. Open Source Notion Alternative.",
+   "matched_keywords": [
+    "notion"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Memos",
+   "source_code_url": "https://github.com/usememos/memos",
+   "stargazers_count": 63161,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Knowledge base that works with a SQLite db file.",
+   "matched_keywords": [
+    "knowledge base"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Joplin",
+   "source_code_url": "https://github.com/laurent22/joplin",
+   "stargazers_count": 56430,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Note taking application with markdown editor and encryption support for mobile and desktop platforms. Runs client-side and syncs through a self hosted Nextcloud instance or similar (alternative to Evernote).",
+   "matched_keywords": [
+    "note taking"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "TriliumNext Notes",
+   "source_code_url": "https://github.com/TriliumNext/Trilium",
+   "stargazers_count": 37895,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Cross-platform hierarchical note taking application with focus on building large personal knowledge bases (fork of Trilium Notes).",
+   "matched_keywords": [
+    "note taking",
+    "notes"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Huly",
+   "source_code_url": "https://github.com/hcengineering/platform",
+   "stargazers_count": 27713,
+   "licenses": [
+    "EPL-2.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "All-in-one project management platform (alternative to Linear, Jira, Slack, Notion, Motion).",
+   "matched_keywords": [
+    "notion"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "docmost Community Edition",
+   "source_code_url": "https://github.com/docmost/docmost",
+   "stargazers_count": 21721,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-08",
+   "description": "Collaborative wiki and documentation software (alternative to Confluence, Notion).",
+   "matched_keywords": [
+    "notion"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Docs",
+   "source_code_url": "https://github.com/suitenumerique/docs",
+   "stargazers_count": 16834,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Collaborative note taking, wiki and documentation platform that scales.",
+   "matched_keywords": [
+    "note taking"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "HedgeDoc",
+   "source_code_url": "https://github.com/hedgedoc/hedgedoc",
+   "stargazers_count": 7432,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Realtime collaborative markdown notes on all platforms, formerly known as CodiMD and HackMD CE.",
+   "matched_keywords": [
+    "notes"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Eclipse Che",
+   "source_code_url": "https://github.com/eclipse-che/che",
+   "stargazers_count": 7168,
+   "licenses": [
+    "EPL-1.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Open source workspace server and cloud IDE.",
+   "matched_keywords": [
+    "workspace"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Standard Notes",
+   "source_code_url": "https://github.com/standardnotes/app",
+   "stargazers_count": 6634,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Simple and private notes app. Protect your privacy while getting more done. That's Standard Notes.",
+   "matched_keywords": [
+    "notes"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "TagSpaces",
+   "source_code_url": "https://github.com/tagspaces/tagspaces",
+   "stargazers_count": 5286,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-07-24",
+   "description": "TagSpaces is an offline, cross-platform file manager and organiser that also can function as a note taking app. The WebDAV version of the application can be installed on top of a WebDAV servers such as Nextcloud or ownCloud.",
+   "matched_keywords": [
+    "note taking"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Colanode",
+   "source_code_url": "https://github.com/colanode/colanode",
+   "stargazers_count": 5142,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-04-03",
+   "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
+   "matched_keywords": [
+    "notion"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Personal Management System",
+   "source_code_url": "https://github.com/Volmarg/personal-management-system",
+   "stargazers_count": 4160,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-10",
+   "description": "Organize the essentials of everyday life, everything from a simple to-do list, and notes up to payments, and schedules.",
+   "matched_keywords": [
+    "notes"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "WBO",
+   "source_code_url": "https://github.com/lovasoa/whitebophir",
+   "stargazers_count": 2647,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-12",
+   "description": "Web Whiteboard to collaborate in real-time on schemas, drawings, and notes.",
+   "matched_keywords": [
+    "notes"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Corteza",
+   "source_code_url": "https://github.com/cortezaproject/corteza",
+   "stargazers_count": 2161,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-08-27",
+   "description": "CRM including a unified workspace, enterprise messaging and a low code environment for rapidly and securely delivering records-based management solutions.",
+   "matched_keywords": [
+    "workspace"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

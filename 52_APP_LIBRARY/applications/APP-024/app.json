@@ -1,0 +1,76 @@
+{
+ "id": "APP-024",
+ "name": "Docuseal",
+ "category": "Digital Signature",
+ "category_slug": "digital-signiture",
+ "repository": "https://github.com/docusealco/docuseal",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-024/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Docuseal",
+   "source_code_url": "https://github.com/docusealco/docuseal",
+   "stargazers_count": 18566,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "Create, fill, and sign digital documents (alternative to DocuSign).",
+   "matched_keywords": [
+    "docusign"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Documenso",
+   "source_code_url": "https://github.com/documenso/documenso",
+   "stargazers_count": 15082,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Digital document signing platform (alternative to DocuSign).",
+   "matched_keywords": [
+    "docusign",
+    "signing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OpenSign",
+   "source_code_url": "https://github.com/opensignlabs/opensign",
+   "stargazers_count": 7008,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-08-21",
+   "description": "Document signing software (alternative to DocuSign).",
+   "matched_keywords": [
+    "docusign",
+    "signing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Signature PDF",
+   "source_code_url": "https://github.com/24eme/signaturepdf",
+   "stargazers_count": 831,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-08",
+   "description": "Sign and manipulate PDFs with collaboration, organization, compression and metadata editing.",
+   "matched_keywords": [
+    "signature"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

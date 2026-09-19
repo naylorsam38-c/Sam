@@ -1,0 +1,228 @@
+{
+ "id": "APP-012",
+ "name": "Neko",
+ "category": "Browser",
+ "category_slug": "browser",
+ "repository": "https://github.com/m1k1o/neko",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-012/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": "automated pick (code-server) matched 'browser' as a stray word in 'VS Code in the browser' - it's a web IDE, not a browser app",
+ "discovery_candidates": [
+  {
+   "name": "code-server",
+   "source_code_url": "https://github.com/coder/code-server",
+   "stargazers_count": 79352,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "VS Code in the browser, hosted on a remote server.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "CyberChef",
+   "source_code_url": "https://github.com/gchq/CyberChef",
+   "stargazers_count": 35876,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Perform all manner of operations within a web browser such as AES, DES and Blowfish encryption and decryption, creating hexdumps, calculating hashes, and much more.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Node RED",
+   "source_code_url": "https://github.com/node-red/node-red",
+   "stargazers_count": 23669,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Browser-based flow editor that helps you wiring hardware devices, APIs and online services to create IoT solutions.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Neko",
+   "source_code_url": "https://github.com/m1k1o/neko",
+   "stargazers_count": 22330,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-10",
+   "description": "Virtual browser that runs in docker and uses WebRTC.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Bitwarden",
+   "source_code_url": "https://github.com/bitwarden/server",
+   "stargazers_count": 20160,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Password manager with a webapp, browser extension, and mobile app.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "BentoPDF",
+   "source_code_url": "https://github.com/alam00000/bentopdf",
+   "stargazers_count": 15601,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Powerful, privacy-first, client-side PDF toolkit that allows you to manipulate, edit, merge, and process PDF files directly in your browser.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "PeerTube",
+   "source_code_url": "https://github.com/Chocobozzz/PeerTube",
+   "stargazers_count": 15321,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Decentralized video streaming platform using P2P (BitTorrent) directly in the web browser.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Screego",
+   "source_code_url": "https://github.com/screego/server",
+   "stargazers_count": 10551,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-20",
+   "description": "Screego is a simple tool to quickly share your screen to one or multiple people via web browser.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "A Dark Room",
+   "source_code_url": "https://github.com/doublespeakgames/adarkroom",
+   "stargazers_count": 8287,
+   "licenses": [
+    "MPL-2.0"
+   ],
+   "updated_at": "2025-05-23",
+   "description": "Minimalist text adventure game for your browser.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Roundcube",
+   "source_code_url": "https://github.com/roundcube/roundcubemail",
+   "stargazers_count": 7180,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-06",
+   "description": "Browser-based IMAP client with an application-like user interface.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "SimpleLogin",
+   "source_code_url": "https://github.com/simple-login/app",
+   "stargazers_count": 6992,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Open source email alias solution to protect your email address. Comes with browser extensions and mobile apps.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "WeTTY",
+   "source_code_url": "https://github.com/butlerx/wetty",
+   "stargazers_count": 5438,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-12",
+   "description": "Terminal in browser over http/https.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "RStudio Server",
+   "source_code_url": "https://github.com/rstudio/rstudio",
+   "stargazers_count": 5070,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Web browser based IDE for R.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Converse.js",
+   "source_code_url": "https://github.com/conversejs/converse.js",
+   "stargazers_count": 3293,
+   "licenses": [
+    "MPL-2.0"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "XMPP chat client in your browser.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Kyoo",
+   "source_code_url": "https://github.com/zoriya/kyoo",
+   "stargazers_count": 2525,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-15",
+   "description": "Innovative media browser designed for seamless streaming of anime, series and movies, offering advanced features like dynamic transcoding, auto watch history and intelligent metadata retrieval.",
+   "matched_keywords": [
+    "browser"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

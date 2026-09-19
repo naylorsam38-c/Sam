@@ -1,0 +1,89 @@
+{
+ "id": "APP-034",
+ "name": "Canvas LMS",
+ "category": "Learning Management",
+ "category_slug": "learning-management",
+ "repository": "https://github.com/instructure/canvas-lms",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-034/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Canvas LMS",
+   "source_code_url": "https://github.com/instructure/canvas-lms",
+   "stargazers_count": 6822,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-04-30",
+   "description": "Learning management system (LMS) that is revolutionizing the way we educate.",
+   "matched_keywords": [
+    "learning management",
+    "lms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LMS",
+   "source_code_url": "https://github.com/epoupon/lms",
+   "stargazers_count": 1675,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Access your self-hosted music using a web interface.",
+   "matched_keywords": [
+    "lms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Chamilo LMS",
+   "source_code_url": "https://github.com/chamilo/chamilo-lms",
+   "stargazers_count": 1003,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Create a virtual campus for the provision of online or semi-online training.",
+   "matched_keywords": [
+    "lms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ILIAS",
+   "source_code_url": "https://github.com/ILIAS-eLearning/ILIAS",
+   "stargazers_count": 504,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Learning management system that can cope with anything you throw at it.",
+   "matched_keywords": [
+    "learning management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OpenOLAT",
+   "source_code_url": "https://github.com/OpenOLAT/OpenOLAT",
+   "stargazers_count": 438,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Learning management system for teaching, education, assessment and communication.",
+   "matched_keywords": [
+    "learning management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

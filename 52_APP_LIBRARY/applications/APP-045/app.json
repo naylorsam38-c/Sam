@@ -1,0 +1,216 @@
+{
+ "id": "APP-045",
+ "name": "Plane",
+ "category": "Project Management",
+ "category_slug": "project-management",
+ "repository": "https://github.com/makeplane/plane",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-045/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Plane",
+   "source_code_url": "https://github.com/makeplane/plane",
+   "stargazers_count": 59601,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Track issues, epics, and product roadmaps in the simplest way possible (alternative to JIRA, Linear and Height).",
+   "matched_keywords": [
+    "jira"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Huly",
+   "source_code_url": "https://github.com/hcengineering/platform",
+   "stargazers_count": 27713,
+   "licenses": [
+    "EPL-2.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "All-in-one project management platform (alternative to Linear, Jira, Slack, Notion, Motion).",
+   "matched_keywords": [
+    "jira",
+    "project management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Super Productivity",
+   "source_code_url": "https://github.com/super-productivity/super-productivity",
+   "stargazers_count": 22121,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Advanced todo list app with integrated timeboxing and time tracking capabilities. Integrates with Jira, GitHub, GitLab, Redmine and OpenProject.",
+   "matched_keywords": [
+    "jira"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OneDev",
+   "source_code_url": "https://github.com/theonedev/onedev",
+   "stargazers_count": 15256,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "All-In-One DevOps Platform. With Git Management, Issue Tracking, and CI/CD. Simple yet Powerful.",
+   "matched_keywords": [
+    "issue tracking"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Leantime",
+   "source_code_url": "https://github.com/leantime/leantime",
+   "stargazers_count": 11609,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-07",
+   "description": "Lean project management system for small teams and startups helping to manage projects from ideation through delivery.",
+   "matched_keywords": [
+    "project management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Kaneo",
+   "source_code_url": "https://github.com/usekaneo/kaneo",
+   "stargazers_count": 9119,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Project management platform focused on simplicity and efficiency.",
+   "matched_keywords": [
+    "project management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "GitLab",
+   "source_code_url": "https://gitlab.com/gitlab-org/gitlab-foss",
+   "stargazers_count": 7175,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Self Hosted Git repository management, code reviews, issue tracking, activity feeds and wikis.",
+   "matched_keywords": [
+    "issue tracking"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ZenTao",
+   "source_code_url": "https://github.com/easysoft/zentaopms",
+   "stargazers_count": 1690,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "An agile(scrum) project management system/tool.",
+   "matched_keywords": [
+    "project management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Gerrit",
+   "source_code_url": "https://github.com/GerritCodeReview/gerrit",
+   "stargazers_count": 1224,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Code review and project management tool for Git-based projects.",
+   "matched_keywords": [
+    "project management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Request Tracker",
+   "source_code_url": "https://github.com/bestpractical/rt",
+   "stargazers_count": 1156,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-01",
+   "description": "Enterprise-grade issue tracking system.",
+   "matched_keywords": [
+    "issue tracking"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "eigenfocus",
+   "source_code_url": "https://github.com/Eigenfocus/eigenfocus",
+   "stargazers_count": 941,
+   "licenses": [
+    "\u2298 Proprietary"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Project Management, Planning and Time Tracking app. From solo projects to multi-member teams, Eigenfocus adapts to your workflow.",
+   "matched_keywords": [
+    "project management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ShipShipShip",
+   "source_code_url": "https://github.com/GauthierNelkinsky/ShipShipShip",
+   "stargazers_count": 299,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-02-18",
+   "description": "Changelog and roadmap platform that bridges project management and customer communication.",
+   "matched_keywords": [
+    "project management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "egroupware",
+   "source_code_url": "https://github.com/EGroupware/egroupware",
+   "stargazers_count": 296,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Software suite including calendars, address books, notepad, project management tools, client relationship management tools (CRM), knowledge management tools, a wiki and a CMS.",
+   "matched_keywords": [
+    "project management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Traq",
+   "source_code_url": "https://github.com/nirix/traq",
+   "stargazers_count": 204,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2025-12-03",
+   "description": "Project management and issue tracking system written in PHP.",
+   "matched_keywords": [
+    "issue tracking",
+    "project management"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

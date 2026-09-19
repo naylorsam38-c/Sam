@@ -1,0 +1,130 @@
+{
+ "id": "APP-020",
+ "name": "MindsDB",
+ "category": "Databases",
+ "category_slug": "databases",
+ "repository": "https://github.com/mindsdb/mindshub",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-020/source",
+ "status": "DISCOVERED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "MindsDB",
+   "source_code_url": "https://github.com/mindsdb/mindshub",
+   "stargazers_count": 39749,
+   "licenses": [
+    "Elastic-2.0"
+   ],
+   "updated_at": "2026-09-10",
+   "description": "AI layer for existing databases that allows you to effortlessly develop, train and deploy state-of-the-art machine learning models using standard queries.",
+   "matched_keywords": [
+    "databases"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "SearXNG",
+   "source_code_url": "https://github.com/searxng/searxng/",
+   "stargazers_count": 37308,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Internet metasearch engine which aggregates results from various search services and databases (Fork of Searx).",
+   "matched_keywords": [
+    "databases"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Teleport",
+   "source_code_url": "https://github.com/gravitational/teleport",
+   "stargazers_count": 20924,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-08-25",
+   "description": "Certificate authority and access plane for SSH, Kubernetes, web applications, and databases.",
+   "matched_keywords": [
+    "databases"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "CloudBeaver",
+   "source_code_url": "https://github.com/dbeaver/cloudbeaver",
+   "stargazers_count": 5150,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Manage databases, supports PostgreSQL, MySQL, SQLite and more. A web/hosted version of DBeaver.",
+   "matched_keywords": [
+    "databases"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Colanode",
+   "source_code_url": "https://github.com/colanode/colanode",
+   "stargazers_count": 5142,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-04-03",
+   "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
+   "matched_keywords": [
+    "databases"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Chartbrew",
+   "source_code_url": "https://github.com/chartbrew/chartbrew",
+   "stargazers_count": 4061,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-08-05",
+   "description": "Connect directly to databases and APIs and use the data to create beautiful charts.",
+   "matched_keywords": [
+    "databases"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Azimutt",
+   "source_code_url": "https://github.com/azimuttapp/azimutt",
+   "stargazers_count": 2181,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-08-25",
+   "description": "Visual database exploration made for real world databases (big and messy). Explore your database schema as well as data, document them, extend them and even get analysis and guidelines.",
+   "matched_keywords": [
+    "databases"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "d9",
+   "source_code_url": "https://github.com/LaWebcapsule/d9",
+   "stargazers_count": 153,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-07",
+   "description": "Turn SQL databases into secure APIs through an intuitive admin interface. Data platform and headless CMS (fork of Directus).",
+   "matched_keywords": [
+    "databases"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null
+}

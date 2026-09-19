@@ -1,0 +1,26 @@
+{
+ "id": "APP-021",
+ "name": "penpot",
+ "category": "Design Tools",
+ "category_slug": "design-tools",
+ "repository": "https://github.com/penpot/penpot",
+ "source_platform": "github.com",
+ "licence": null,
+ "version": null,
+ "commit": null,
+ "source_path": "applications/APP-021/source",
+ "status": "DISCOVERED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "penpot",
+   "source_code_url": "https://github.com/penpot/penpot",
+   "stargazers_count": 60152,
+   "licenses": [],
+   "archived": false,
+   "description": "Penpot: The open-source design platform for Product teams that need scalable collaboration."
+  }
+ ],
+ "discovery_failed_reason": null
+}
