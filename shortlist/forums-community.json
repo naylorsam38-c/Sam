@@ -1,0 +1,523 @@
+{
+ "category": "Forums/community",
+ "slug": "forums-community",
+ "exemplar": "Reddit",
+ "capabilities": [
+  "Communities",
+  "posts",
+  "comments",
+  "voting",
+  "moderation",
+  "feeds",
+  "search",
+  "profiles",
+  "messaging",
+  "media",
+  "notifications"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "forum",
+   "forums",
+   "discussion board",
+   "discussion platform",
+   "reddit",
+   "community platform"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": false,
+ "survivors": [
+  {
+   "name": "Answer",
+   "repo": "https://github.com/apache/answer",
+   "commit": "3b9f1370612e690a0b7f230f05e688930db4c6d3",
+   "website": "https://answer.apache.org",
+   "licence": "Apache-2.0",
+   "licence_file": "LICENSE",
+   "screens": {
+    "screen_files_total": 289,
+    "screen_files_user": 247,
+    "screen_files_admin": 42,
+    "screen_languages": [
+     ".html",
+     ".tsx"
+    ],
+    "user_screen_examples": [
+     "ui/src/app.tsx",
+     "ui/src/app.test.tsx",
+     "ui/src/index.tsx",
+     "ui/src/components/welcometitle/index.tsx",
+     "ui/src/components/tabnav/index.tsx",
+     "ui/src/components/pagination/index.tsx"
+    ],
+    "login_evidence": [
+     "ui/src/stores/loginsetting.ts",
+     "ui/src/stores/logintocontinue.ts",
+     "ui/src/components/modal/login.scss",
+     "ui/src/components/modal/logintocontinuemodal.tsx",
+     "ui/src/hooks/useloginredirect/index.tsx"
+    ]
+   },
+   "run_recipes": [
+    "docker-compose.yaml",
+    "dockerfile"
+   ],
+   "robustness": {
+    "score": 60.4,
+    "parts": {
+     "stars": 19.5,
+     "commits_12m": 3.2,
+     "release": 15.0,
+     "activity": 8.3,
+     "tests": 2.4,
+     "ci": 10.0,
+     "readme": 2.0
+    },
+    "facts": {
+     "stars": 15681,
+     "commits_12m": 237,
+     "latest_release": "2026-07-21",
+     "updated_at": "2026-07-17"
+    },
+    "repo_metrics": {
+     "test_files": 36,
+     "ci_evidence": [
+      ".gitlab-ci.yml",
+      ".github/workflows/build-image-for-latest-release.yml",
+      ".github/workflows/lint.yml"
+     ],
+     "readme_chars": 2417
+    }
+   },
+   "capability": {
+    "coverage_pct": 81.8,
+    "matched": [
+     "Communities",
+     "posts",
+     "comments",
+     "voting",
+     "moderation",
+     "search",
+     "profiles",
+     "media",
+     "notifications"
+    ],
+    "missing": [
+     "feeds",
+     "messaging"
+    ],
+    "evidence_tokens": {
+     "Communities": [
+      "community"
+     ],
+     "posts": [
+      "post",
+      "posts"
+     ],
+     "comments": [
+      "comment",
+      "comments"
+     ],
+     "voting": [
+      "voting"
+     ],
+     "moderation": [
+      "moderation"
+     ],
+     "feeds": [],
+     "search": [
+      "search"
+     ],
+     "profiles": [
+      "profile"
+     ],
+     "messaging": [],
+     "media": [
+      "media"
+     ],
+     "notifications": [
+      "notification",
+      "notifications"
+     ]
+    }
+   },
+   "rank_score": 71.1,
+   "found_via": "tag",
+   "clone_path": "/tmp/library_clones/github.com_apache_answer",
+   "description": "Knowledge-based community software. You can use it to quickly build your Q&A community for product technical support, customer support, user communication, and more.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "forum"
+    ],
+    "declaration_hits": {
+     "description": [],
+     "readme": [
+      "forum"
+     ]
+    },
+    "anchors": [
+     "Communities",
+     "posts",
+     "comments"
+    ],
+    "anchors_missing": []
+   }
+  }
+ ],
+ "refused": [
+  {
+   "name": "Akkoma",
+   "repo": "https://akkoma.dev/AkkomaGang/akkoma",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "AsmBB",
+   "repo": "https://asm32.info/fossil/asmbb/index",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "BuddyPress",
+   "repo": "https://github.com/buddypress/BuddyPress",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "diaspora*",
+   "repo": "https://github.com/diaspora/diaspora",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Discourse",
+   "repo": "https://github.com/discourse/discourse",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Elgg",
+   "repo": "https://github.com/Elgg/Elgg",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Friendica",
+   "repo": "https://github.com/friendica/friendica",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "GoToSocial",
+   "repo": "https://codeberg.org/superseriousbusiness/gotosocial",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Habitat",
+   "repo": "https://github.com/carlnewton/habitat",
+   "stage": "pre-filter",
+   "reason": "stars 149 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Hatsu",
+   "repo": "https://github.com/importantimport/hatsu",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Hubzilla",
+   "repo": "https://framagit.org/hubzilla/core",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "HumHub",
+   "repo": "https://github.com/humhub/humhub",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Iceshrimp.NET",
+   "repo": "https://iceshrimp.dev/iceshrimp/iceshrimp.net",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Lemmy",
+   "repo": "https://github.com/LemmyNet/lemmy",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Loomio",
+   "repo": "https://github.com/loomio/loomio",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mailman",
+   "repo": "https://gitlab.com/mailman/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Mastodon",
+   "repo": "https://github.com/mastodon/mastodon",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Misago",
+   "repo": "https://github.com/rafalp/Misago",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Misskey",
+   "repo": "https://github.com/misskey-dev/misskey",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Movim",
+   "repo": "https://github.com/movim/movim",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "MyBB",
+   "repo": "https://github.com/mybb/mybb",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['LGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "NodeBB",
+   "repo": "https://github.com/NodeBB/NodeBB",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Noosfero",
+   "repo": "https://gitlab.com/noosfero/noosfero",
+   "stage": "pre-filter",
+   "reason": "stars 65 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "OSSN",
+   "repo": "https://github.com/opensource-socialnetwork/opensource-socialnetwork",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['CAL-1.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "phpBB",
+   "repo": "https://github.com/phpbb/phpbb",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "PieFed",
+   "repo": "https://codeberg.org/rimu/pyfedi",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "PixelFed",
+   "repo": "https://github.com/pixelfed/pixelfed",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Pleroma",
+   "repo": "https://git.pleroma.social/pleroma/pleroma",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "qpixel",
+   "repo": "https://github.com/codidact/qpixel",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Redlib",
+   "repo": "https://github.com/redlib-org/redlib",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Socialhome",
+   "repo": "https://github.com/jaywink/socialhome",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Talkyard",
+   "repo": "https://github.com/debiki/talkyard",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "yarn.social",
+   "repo": "https://git.mills.io/yarnsocial/yarn",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Simple Machines Forum",
+   "repo": "https://github.com/SimpleMachines/SMF",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Enigma 1/2 BBS",
+   "repo": "https://github.com/NuSkooler/enigma-bbs",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Upvote RSS",
+   "repo": "https://github.com/johnwarne/upvote-rss",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Flarum",
+   "repo": "https://github.com/flarum/flarum",
+   "commit": "3d0a0c28b9c61a3997354938a5d582682ec96d98",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag+keyword",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": []
+   }
+  },
+  {
+   "name": "PrivateBin",
+   "repo": "https://github.com/PrivateBin/PrivateBin",
+   "commit": "70efae924b00ff47c5442800482fcabcd79db164",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "Apache-2.0",
+   "found_via": "keyword",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": []
+   }
+  },
+  {
+   "name": "Isso",
+   "repo": "https://github.com/isso-comments/isso",
+   "commit": "413d447a46437d0e9ccf206c8525119355e291d4",
+   "stage": "screens",
+   "reason": "4 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 4,
+    "screen_files_user": 4,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "isso/templates/admin.html",
+     "isso/templates/login.html",
+     "isso/templates/disabled.html",
+     "isso/demo/index.html"
+    ],
+    "login_evidence": [
+     "isso/templates/login.html"
+    ]
+   }
+  },
+  {
+   "name": "Scoold",
+   "repo": "https://github.com/Erudika/scoold",
+   "commit": "c6ac03c5c2852407396bc8942ff2d780265ae966",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "Apache-2.0",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": [
+     "src/main/java/com/erudika/scoold/controllers/signincontroller.java",
+     "src/main/resources/templates/signin.vm"
+    ]
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

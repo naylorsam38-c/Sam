@@ -1,0 +1,28 @@
+{
+ "category": "Cloud storage",
+ "slug": "cloud-storage",
+ "app": "OpenCloud",
+ "repo": "https://github.com/opencloud-eu/opencloud",
+ "commit": "f293031e404d51a7da4a5c06d88b449dc226b9cb",
+ "started": "2026-09-19T10:03:32",
+ "boot": {
+  "status": "BOOT FAILED",
+  "reason": "image build failed: Run 'docker buildx build --help' for more information",
+  "recipe": "Dockerfile",
+  "log": [
+   "$ docker build -t localhost/walk_cloudstorageopencloud:walk --network=host --volume /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro --env SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt --env NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt -f Dockerfile .\n\nunknown flag: --volume\n\nUsage:  docker buildx build [OPTIONS] PATH | URL | -\n\nRun 'docker buildx build --help' for more information\n"
+  ]
+ },
+ "gate": {},
+ "capabilities": {},
+ "summary": {
+  "booted": false,
+  "gate": null,
+  "capabilities": 0,
+  "reached": 0,
+  "seen": 0,
+  "absent": 0,
+  "gaps": []
+ },
+ "finished": "2026-09-19T10:03:42"
+}

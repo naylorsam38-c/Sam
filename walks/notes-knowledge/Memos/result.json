@@ -1,0 +1,153 @@
+{
+ "category": "Notes/knowledge",
+ "slug": "notes-knowledge",
+ "app": "Memos",
+ "repo": "https://github.com/usememos/memos",
+ "commit": "7e3d3c63156c206209fdc8e75a4fb117b1aaf1fb",
+ "started": "2026-09-19T05:43:39",
+ "boot": {
+  "status": "BOOTED",
+  "recipe": "scripts/compose.yaml",
+  "url": "http://127.0.0.1:5230/",
+  "detail": "UI answered at http://127.0.0.1:5230/ (memos published 5230->5230)",
+  "notes": []
+ },
+ "gate": {
+  "landing_shot": "01_landing.png",
+  "landing_url": "http://127.0.0.1:5230/auth?redirect=%2F",
+  "state": "IN",
+  "steps": [
+   {
+    "action": "login as admin/admin",
+    "from": "http://127.0.0.1:5230/auth?redirect=%2F",
+    "to": "http://127.0.0.1:5230/",
+    "shot": "02_gate_step_1.png"
+   }
+  ],
+  "final_url": "http://127.0.0.1:5230/",
+  "after_shot": "03_after_gate.png"
+ },
+ "capabilities": {
+  "Pages": {
+   "verdict": "ABSENT",
+   "evidence": [],
+   "screenshot": null,
+   "tokens": [
+    "page",
+    "pages"
+   ]
+  },
+  "blocks": {
+   "verdict": "ABSENT",
+   "evidence": [],
+   "screenshot": null,
+   "tokens": [
+    "block",
+    "blocks"
+   ]
+  },
+  "rich text": {
+   "verdict": "ABSENT",
+   "evidence": [],
+   "screenshot": null,
+   "tokens": [
+    "rich",
+    "text"
+   ]
+  },
+  "databases": {
+   "verdict": "ABSENT",
+   "evidence": [],
+   "screenshot": null,
+   "tokens": [
+    "database",
+    "databases"
+   ]
+  },
+  "tables": {
+   "verdict": "ABSENT",
+   "evidence": [],
+   "screenshot": null,
+   "tokens": [
+    "table",
+    "tables"
+   ]
+  },
+  "views": {
+   "verdict": "ABSENT",
+   "evidence": [],
+   "screenshot": null,
+   "tokens": [
+    "view",
+    "views"
+   ]
+  },
+  "search": {
+   "verdict": "SEEN",
+   "evidence": [
+    "words ['search'] on visited pages; no dedicated screen reached"
+   ],
+   "screenshot": null,
+   "tokens": [
+    "search"
+   ]
+  },
+  "sharing": {
+   "verdict": "ABSENT",
+   "evidence": [],
+   "screenshot": null,
+   "tokens": [
+    "sharing"
+   ]
+  },
+  "comments": {
+   "verdict": "ABSENT",
+   "evidence": [],
+   "screenshot": null,
+   "tokens": [
+    "comment",
+    "comments"
+   ]
+  },
+  "templates": {
+   "verdict": "ABSENT",
+   "evidence": [],
+   "screenshot": null,
+   "tokens": [
+    "template",
+    "templates"
+   ]
+  },
+  "permissions": {
+   "verdict": "ABSENT",
+   "evidence": [],
+   "screenshot": null,
+   "tokens": [
+    "permission",
+    "permissions"
+   ]
+  }
+ },
+ "summary": {
+  "booted": true,
+  "gate": "IN",
+  "capabilities": 11,
+  "reached": 0,
+  "seen": 1,
+  "absent": 10,
+  "gaps": [
+   "Pages",
+   "blocks",
+   "rich text",
+   "databases",
+   "tables",
+   "views",
+   "sharing",
+   "comments",
+   "templates",
+   "permissions",
+   "search"
+  ]
+ },
+ "finished": "2026-09-19T05:44:20"
+}

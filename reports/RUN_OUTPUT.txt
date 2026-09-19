@@ -1,0 +1,231 @@
+directory: refreshing
+directory: 1347 entries with a source URL, dataset commit 582d3f235c86
+
+=== regate dating  (Dating — exemplar Tinder) ===
+  RESULT dating: NONE ADMITTED (0 struck by category gate)
+
+=== regate social-network  (Social network — exemplar Facebook) ===
+  STRIKE remark42               rank=66.0  does not declare itself as social network — none of ['social network', 'social platform', 'facebook'] in its description or README head
+  RESULT social-network: NONE ADMITTED (1 struck by category gate)
+
+=== regate short-form-video  (Short-form video — exemplar TikTok) ===
+  RESULT short-form-video: NONE ADMITTED (0 struck by category gate)
+
+=== regate photo-sharing  (Photo sharing — exemplar Instagram) ===
+  RESULT photo-sharing: NONE ADMITTED (0 struck by category gate)
+
+=== regate video-streaming  (Video streaming — exemplar YouTube) ===
+  KEEP   Youtarr                rank=89.5  declares via ['youtube']
+  STRIKE Stretto                rank=57.4  does not declare itself as video streaming — none of ['video platform', 'youtube', 'peertube'] in its description or README head
+  RESULT video-streaming: 1 survive, 1 struck — top Youtarr (rank 89.5)
+
+=== regate music-streaming  (Music streaming — exemplar Spotify) ===
+  RESULT music-streaming: NONE ADMITTED (0 struck by category gate)
+
+=== regate messaging  (Messaging — exemplar WhatsApp) ===
+  STRIKE Novu                   rank=95.0  does not declare itself as messaging — none of ['instant messaging', 'chat app', 'messenger', 'whatsapp'] in its description or README head
+  KEEP   Zulip                  rank=94.5  declares via ['chat app']
+  RESULT messaging: 1 survive, 1 struck — top Zulip (rank 94.5)
+
+=== regate team-communication  (Team communication — exemplar Slack) ===
+  KEEP   Rocket.Chat            rank=105.0  declares via ['slack']
+  KEEP   Zulip                  rank=94.5  declares via ['team chat']
+  STRIKE Novu                   rank=90.8  does not declare itself as team communication — none of ['slack', 'team chat', 'team communication'] in its description or README head
+  RESULT team-communication: 2 survive, 1 struck — top Rocket.Chat (rank 105.0)
+
+=== regate video-conferencing  (Video conferencing — exemplar Zoom) ===
+  RESULT video-conferencing: NONE ADMITTED (0 struck by category gate)
+
+=== regate professional-network  (Professional network — exemplar LinkedIn) ===
+  RESULT professional-network: NONE ADMITTED (0 struck by category gate)
+
+=== regate forums-community  (Forums/community — exemplar Reddit) ===
+  KEEP   Answer                 rank=71.1  declares via ['forum']
+  RESULT forums-community: 1 survive, 0 struck — top Answer (rank 71.1)
+
+=== regate microblogging  (Microblogging — exemplar X) ===
+  RESULT microblogging: NONE ADMITTED (0 struck by category gate)
+
+=== regate blogging  (Blogging — exemplar Medium) ===
+  KEEP   Ghost                  rank=95.0  declares via ['blogging']
+  KEEP   Chyrp Lite             rank=65.3  declares via ['blog', 'blogging', 'publishing platform']
+  RESULT blogging: 2 survive, 0 struck — top Ghost (rank 95.0)
+
+=== regate news-reader  (News reader — exemplar Google News) ===
+  RESULT news-reader: NONE ADMITTED (0 struck by category gate)
+
+=== regate email  (Email — exemplar Gmail) ===
+  KEEP   Modoboa                rank=76.7  declares via ['webmail']
+  RESULT email: 1 survive, 0 struck — top Modoboa (rank 76.7)
+
+=== regate calendar  (Calendar — exemplar Google Calendar) ===
+  RESULT calendar: NONE ADMITTED (0 struck by category gate)
+
+=== regate cloud-storage  (Cloud storage — exemplar Google Drive) ===
+  KEEP   OpenCloud              rank=102.5  declares via ['file sharing']
+  RESULT cloud-storage: 1 survive, 0 struck — top OpenCloud (rank 102.5)
+
+=== regate notes-knowledge  (Notes/knowledge — exemplar Notion) ===
+  KEEP   Memos                  rank=101.0  declares via ['knowledge base', 'notes']
+  KEEP   SilverBullet           rank=87.6  declares via ['note-taking', 'notes']
+  KEEP   Colanode               rank=86.2  declares via ['notes', 'notion']
+  RESULT notes-knowledge: 3 survive, 0 struck — top Memos (rank 101.0)
+
+=== regate documents  (Documents — exemplar Google Docs) ===
+  KEEP   Atomic Server          rank=102.5  declares via ['google docs']
+  RESULT documents: 1 survive, 0 struck — top Atomic Server (rank 102.5)
+
+=== regate spreadsheets  (Spreadsheets — exemplar Google Sheets) ===
+  KEEP   Grist                  rank=102.0  declares via ['airtable', 'sheets', 'spreadsheet']
+  KEEP   Baserow                rank=85.9  declares via ['airtable', 'spreadsheet']
+  RESULT spreadsheets: 2 survive, 0 struck — top Grist (rank 102.0)
+
+=== regate presentation  (Presentation — exemplar PowerPoint) ===
+  RESULT presentation: NONE ADMITTED (0 struck by category gate)
+
+=== regate office-suite  (Office suite — exemplar Microsoft 365) ===
+  RESULT office-suite: NONE ADMITTED (0 struck by category gate)
+
+=== regate project-management  (Project management — exemplar Jira) ===
+  STRIKE Super Productivity     rank=105.0  does not declare itself as project management — none of ['project management', 'issue tracking', 'jira', 'sprint'] in its description or README head
+  KEEP   Kaneo                  rank=100.3  declares via ['project management']
+  KEEP   Gitea                  rank=90.5  declares via ['issue tracking']
+  KEEP   OneDev                 rank=82.8  declares via ['issue tracking']
+  RESULT project-management: 3 survive, 1 struck — top Kaneo (rank 100.3)
+
+=== regate task-management  (Task management — exemplar Asana) ===
+  KEEP   Super Productivity     rank=105.0  declares via ['todo']
+  KEEP   tududi                 rank=95.4  declares via ['task management']
+  KEEP   Wekan                  rank=95.0  declares via ['todo']
+  KEEP   4ga Boards             rank=82.6  declares via ['todo']
+  RESULT task-management: 4 survive, 0 struck — top Super Productivity (rank 105.0)
+
+=== regate kanban  (Kanban — exemplar Trello) ===
+  KEEP   Wekan                  rank=105.0  declares via ['kanban', 'kanban board', 'trello']
+  KEEP   Gitea                  rank=90.0  declares via ['kanban']
+  KEEP   OneDev                 rank=77.0  declares via ['kanban']
+  RESULT kanban: 3 survive, 0 struck — top Wekan (rank 105.0)
+
+=== regate crm  (CRM — exemplar Salesforce) ===
+  KEEP   Corteza                rank=95.2  declares via ['crm']
+  RESULT crm: 1 survive, 0 struck — top Corteza (rank 95.2)
+
+=== regate erp  (ERP — exemplar SAP / ERPNext) ===
+  RESULT erp: NONE ADMITTED (0 struck by category gate)
+
+=== regate accounting  (Accounting — exemplar Xero) ===
+  KEEP   FOSSBilling            rank=91.4  declares via ['invoicing']
+  KEEP   ezbookkeeping          rank=88.8  declares via ['bookkeeping']
+  RESULT accounting: 2 survive, 0 struck — top FOSSBilling (rank 91.4)
+
+=== regate e-commerce  (E-commerce — exemplar Shopify) ===
+  KEEP   Bagisto                rank=99.9  declares via ['e-commerce']
+  KEEP   Sylius                 rank=99.6  declares via ['ecommerce']
+  KEEP   Saleor                 rank=94.3  declares via ['e-commerce', 'storefront']
+  RESULT e-commerce: 3 survive, 0 struck — top Bagisto (rank 99.9)
+
+=== regate marketplace  (Marketplace — exemplar Amazon) ===
+  RESULT marketplace: NONE ADMITTED (0 struck by category gate)
+
+=== regate food-delivery  (Food delivery — exemplar Uber Eats) ===
+  RESULT food-delivery: NONE ADMITTED (0 struck by category gate)
+
+=== regate ride-sharing  (Ride sharing — exemplar Uber) ===
+  RESULT ride-sharing: NONE ADMITTED (0 struck by category gate)
+
+=== regate travel-booking  (Travel booking — exemplar Booking.com) ===
+  RESULT travel-booking: NONE ADMITTED (0 struck by category gate)
+
+=== regate accommodation-hosting  (Accommodation hosting — exemplar Airbnb) ===
+  RESULT accommodation-hosting: NONE ADMITTED (0 struck by category gate)
+
+=== regate event-ticketing  (Event ticketing — exemplar Eventbrite) ===
+  RESULT event-ticketing: NONE ADMITTED (0 struck by category gate)
+
+=== regate learning-lms  (Learning/LMS — exemplar Moodle) ===
+  RESULT learning-lms: NONE ADMITTED (0 struck by category gate)
+
+=== regate online-courses  (Online courses — exemplar Udemy) ===
+  RESULT online-courses: NONE ADMITTED (0 struck by category gate)
+
+=== regate helpdesk  (Helpdesk — exemplar Zendesk) ===
+  RESULT helpdesk: NONE ADMITTED (0 struck by category gate)
+
+=== regate customer-chat  (Customer chat — exemplar Intercom) ===
+  RESULT customer-chat: NONE ADMITTED (0 struck by category gate)
+
+=== regate marketing-automation  (Marketing automation — exemplar HubSpot) ===
+  RESULT marketing-automation: NONE ADMITTED (0 struck by category gate)
+
+=== regate email-marketing  (Email marketing — exemplar Mailchimp) ===
+  RESULT email-marketing: NONE ADMITTED (0 struck by category gate)
+
+=== regate web-analytics  (Web analytics — exemplar Google Analytics) ===
+  KEEP   PostHog                rank=95.0  declares via ['web analytics']
+  KEEP   Umami                  rank=92.6  declares via ['google analytics']
+  STRIKE Redash                 rank=73.0  does not declare itself as web analytics — none of ['web analytics', 'website analytics', 'google analytics', 'page views', 'pageviews'] in its description or README head
+  KEEP   Litlyx                 rank=57.0  declares via ['google analytics']
+  RESULT web-analytics: 3 survive, 1 struck — top PostHog (rank 95.0)
+
+=== regate bi-analytics  (BI/analytics — exemplar Tableau) ===
+  KEEP   Superset               rank=95.0  declares via ['business intelligence', 'data exploration', 'data visualization']
+  RESULT bi-analytics: 1 survive, 0 struck — top Superset (rank 95.0)
+
+=== regate forms-surveys  (Forms/surveys — exemplar Typeform) ===
+  RESULT forms-surveys: NONE ADMITTED (0 struck by category gate)
+
+=== regate automation-ipaas  (Automation/iPaaS — exemplar Zapier) ===
+  KEEP   Huginn                 rank=78.5  declares via ['zapier']
+  RESULT automation-ipaas: 1 survive, 0 struck — top Huginn (rank 78.5)
+
+=== regate workflow-automation  (Workflow automation — exemplar n8n) ===
+  RESULT workflow-automation: NONE ADMITTED (0 struck by category gate)
+
+=== regate file-document-management  (File/document management — exemplar Dropbox) ===
+  KEEP   Papermerge             rank=66.7  declares via ['document management', 'dropbox']
+  RESULT file-document-management: 1 survive, 0 struck — top Papermerge (rank 66.7)
+
+=== regate e-signature  (E-signature — exemplar DocuSign) ===
+  RESULT e-signature: NONE ADMITTED (0 struck by category gate)
+
+=== regate document-scanning-ocr  (Document scanning/OCR — exemplar Adobe Acrobat) ===
+  KEEP   Stirling-PDF           rank=103.8  declares via ['ocr']
+  KEEP   Papermerge             rank=59.0  declares via ['ocr', 'scanned documents']
+  RESULT document-scanning-ocr: 2 survive, 0 struck — top Stirling-PDF (rank 103.8)
+
+=== regate password-manager  (Password manager — exemplar 1Password) ===
+  RESULT password-manager: NONE ADMITTED (0 struck by category gate)
+
+=== regate identity-sso  (Identity/SSO — exemplar Okta) ===
+     (README not fetched for Firezone: readme.rst: HTTP Error 404: Not Found)
+  STRIKE Firezone               rank=101.7  does not declare itself as identity/sso — none of ['identity provider', 'single sign-on', 'single sign on', 'identity and access', 'iam', 'keycloak', 'authentik', 'okta'] in its description or README head
+  STRIKE LibreDB Studio         rank=91.1  does not declare itself as identity/sso — none of ['identity provider', 'single sign-on', 'single sign on', 'identity and access', 'iam', 'keycloak', 'authentik', 'okta'] in its description or README head
+  RESULT identity-sso: NONE ADMITTED (2 struck by category gate)
+
+=== regate git-code-hosting  (Git/code hosting — exemplar GitHub) ===
+  KEEP   Gitea                  rank=105.0  declares via ['git hosting', 'gitea']
+  STRIKE Super Productivity     rank=105.0  does not declare itself as git/code hosting — none of ['git hosting', 'code hosting', 'repository hosting', 'git service', 'git server', 'gitea', 'gitlab', 'github alternative', 'forge'] in its description or README head
+  KEEP   Gogs                   rank=85.0  declares via ['git service']
+  RESULT git-code-hosting: 2 survive, 1 struck — top Gitea (rank 105.0)
+
+=== regate ci-cd  (CI/CD — exemplar GitHub Actions) ===
+  KEEP   Gitea                  rank=99.5  declares via ['ci/cd']
+  KEEP   OneDev                 rank=86.4  declares via ['ci/cd']
+  RESULT ci-cd: 2 survive, 0 struck — top Gitea (rank 99.5)
+
+=== regate developer-issue-tracking  (Developer issue tracking — exemplar Linear) ===
+  KEEP   Gitea                  rank=95.0  declares via ['issue tracking']
+  KEEP   OneDev                 rank=86.4  declares via ['issue tracking']
+  RESULT developer-issue-tracking: 2 survive, 0 struck — top Gitea (rank 95.0)
+
+=== regate cloud-ide  (Cloud IDE — exemplar GitHub Codespaces) ===
+  RESULT cloud-ide: NONE ADMITTED (0 struck by category gate)
+
+=== regate ai-assistant-chat  (AI assistant/chat — exemplar ChatGPT) ===
+  RESULT ai-assistant-chat: NONE ADMITTED (0 struck by category gate)
+
+=== regate ai-coding  (AI coding — exemplar GitHub Copilot) ===
+  RESULT ai-coding: NONE ADMITTED (0 struck by category gate)
+
+=== regate ai-image-generation  (AI image generation — exemplar Midjourney) ===
+  RESULT ai-image-generation: NONE ADMITTED (0 struck by category gate)

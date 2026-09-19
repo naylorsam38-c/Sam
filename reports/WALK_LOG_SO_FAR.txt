@@ -1,0 +1,60 @@
+
+=== video-streaming  (Video streaming — exemplar YouTube) ===
+  -> Youtarr @ 636a2b0d5aff
+     recipe docker-compose.yml services=['youtarr-db', 'youtarr'] builds=[]
+     UI answered at http://127.0.0.1:3087/ (youtarr published 3087->3011)
+     gate: STUCK after 6 step(s) -> http://127.0.0.1:3087/setup
+       ABSENT   Upload
+       ABSENT   transcoding
+       ABSENT   channels
+       ABSENT   subscriptions
+       ABSENT   recommendations
+       ABSENT   search
+       ABSENT   playlists
+       ABSENT   comments
+       ABSENT   likes
+       ABSENT   live streaming
+       ABSENT   captions
+       ABSENT   analytics
+       ABSENT   monetisation
+
+=== messaging  (Messaging — exemplar WhatsApp) ===
+  -> Zulip @ ca20338a1c3e
+
+=== team-communication  (Team communication — exemplar Slack) ===
+  -> Rocket.Chat @ a2132d777c5b
+  -> Zulip @ ca20338a1c3e
+
+=== forums-community  (Forums/community — exemplar Reddit) ===
+  -> Answer @ 3b9f1370612e
+     recipe docker-compose.yaml services=['answer'] builds=[]
+     UI answered at http://127.0.0.1:9080/ (walk_forumscommunityanswer_answer_1 published 9080->80)
+     gate: IN after 1 step(s) -> http://127.0.0.1:9080/install
+       ABSENT   Communities
+       ABSENT   posts
+       ABSENT   comments
+       ABSENT   voting
+       ABSENT   moderation
+       ABSENT   feeds
+       ABSENT   search
+       ABSENT   profiles
+       ABSENT   messaging
+       ABSENT   media
+       ABSENT   notifications
+
+=== blogging  (Blogging — exemplar Medium) ===
+  -> Ghost @ 8e2eb8abfccd
+  -> Chyrp Lite @ 3f5e0b1e4295
+     recipe docker-compose.yaml services=['chyrp-lite'] builds=['chyrp-lite']
+     BOOT FAILED: compose up failed (rc 125): ERROR:podman_compose:Prepare images failed
+     recipe Dockerfile services=['app'] builds=['app']
+     BOOT FAILED: image build failed: Error: building at STEP "COPY --chown=www-data --exclude=entrypoint.sh . /var/www/html/": COPY only supports the --chmod=<permissions> --chown=<uid:gid> and the --from=<image|stage> flags
+
+=== email  (Email — exemplar Gmail) ===
+  -> Modoboa @ 0b368d1217cd
+     recipe docker-compose.yml services=['redis', 'ldap', 'mariadb', 'rq', 'rq-scheduler', 'api', 'api-unsecured', 'front', 'amavis', 'dovecot', 'radicale', 'policyd'] builds=['rq', 'rq-scheduler', 'api', 'api-unsecured', 'front', 'amavis', 'radicale', 'policyd']
+     BOOT FAILED: compose up failed (rc 1): ERROR:podman_compose:Prepare images failed
+
+=== cloud-storage  (Cloud storage — exemplar Google Drive) ===
+  -> OpenCloud @ f293031e404d
+     recipe Dockerfile services=['app'] builds=['app']

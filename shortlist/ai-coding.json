@@ -1,0 +1,267 @@
+{
+ "category": "AI coding",
+ "slug": "ai-coding",
+ "exemplar": "GitHub Copilot",
+ "capabilities": [
+  "Code completion",
+  "chat",
+  "repository context",
+  "code generation",
+  "debugging",
+  "tests",
+  "agent workflows"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "copilot",
+   "code completion",
+   "ai coding",
+   "code generation",
+   "github copilot"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "Coder",
+   "repo": "https://github.com/coder/coder",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Eclipse Che",
+   "repo": "https://github.com/eclipse-che/che",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['EPL-1.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Hopp",
+   "repo": "https://github.com/gethopp/hopp",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Judge0 CE",
+   "repo": "https://github.com/judge0/judge0",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Khoj",
+   "repo": "https://github.com/khoj-ai/khoj",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "LobeHub",
+   "repo": "https://github.com/lobehub/lobehub",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "tag"
+  },
+  {
+   "name": "RapidForge",
+   "repo": "https://github.com/rapidforge-io/rapidforge",
+   "stage": "pre-filter",
+   "reason": "stars 44 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "RepoFlow",
+   "repo": "https://www.repoflow.io",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "RStudio Server",
+   "repo": "https://github.com/rstudio/rstudio",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Onyx Community Edition",
+   "repo": "https://github.com/onyx-dot-app/onyx",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "JupyterLab",
+   "repo": "https://github.com/jupyterlab/jupyterlab/",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Local Deep Research",
+   "repo": "https://github.com/LearningCircuit/local-deep-research",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Agenta",
+   "repo": "https://github.com/agenta-ai/agenta",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "LLM Harbor",
+   "repo": "https://github.com/av/harbor",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Lowdefy",
+   "repo": "https://github.com/lowdefy/lowdefy",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Azimutt",
+   "repo": "https://github.com/azimuttapp/azimutt",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "LiveCodes",
+   "repo": "https://github.com/live-codes/livecodes",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "GoModel",
+   "repo": "https://github.com/ENTERPILOT/GoModel",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Atheos",
+   "repo": "https://github.com/Atheos/Atheos",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "LLMKube",
+   "repo": "https://github.com/defilantech/LLMKube",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Ollama",
+   "repo": "https://github.com/ollama/ollama",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "Open-WebUI",
+   "repo": "https://github.com/open-webui/open-webui",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "code-server",
+   "repo": "https://github.com/coder/code-server",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "AnythingLLM",
+   "repo": "https://github.com/Mintplex-Labs/anything-llm",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "LocalAI",
+   "repo": "https://github.com/mudler/LocalAI",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "LibreChat",
+   "repo": "https://github.com/danny-avila/LibreChat",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "Vane",
+   "repo": "https://github.com/ItzCrazyKns/Vane",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "Langfuse",
+   "repo": "https://github.com/langfuse/langfuse",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

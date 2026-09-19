@@ -1,0 +1,727 @@
+{
+ "category": "Git/code hosting",
+ "slug": "git-code-hosting",
+ "exemplar": "GitHub",
+ "capabilities": [
+  "Repositories",
+  "Git",
+  "branches",
+  "commits",
+  "pull requests",
+  "issues",
+  "actions/CI",
+  "releases",
+  "permissions"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "git hosting",
+   "code hosting",
+   "repository hosting",
+   "git service",
+   "git server",
+   "gitea",
+   "gitlab",
+   "github alternative",
+   "forge"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": false,
+ "survivors": [
+  {
+   "name": "Gitea",
+   "repo": "https://github.com/go-gitea/gitea",
+   "commit": "2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2",
+   "website": "https://gitea.com",
+   "licence": "MIT",
+   "licence_file": "LICENSE",
+   "screens": {
+    "screen_files_total": 592,
+    "screen_files_user": 541,
+    "screen_files_admin": 51,
+    "screen_languages": [
+     ".tmpl",
+     ".vue"
+    ],
+    "user_screen_examples": [
+     "docker/manifest.rootless.tmpl",
+     "docker/manifest.tmpl",
+     "templates/post-install.tmpl",
+     "templates/install.tmpl",
+     "templates/home.tmpl",
+     "templates/webhook/new.tmpl"
+    ],
+    "login_evidence": [
+     "public/assets/img/svg/octicon-sign-in.svg",
+     "services/auth/signin.go",
+     "services/auth/signin_test.go",
+     "services/auth/source/smtp/source_authenticate.go",
+     "services/auth/source/ldap/source_authenticate.go"
+    ]
+   },
+   "run_recipes": [
+    "dockerfile",
+    "dockerfile.rootless"
+   ],
+   "robustness": {
+    "score": 90.0,
+    "parts": {
+     "stars": 20.0,
+     "commits_12m": 20.0,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 20.0,
+     "ci": 10.0,
+     "readme": 5.0
+    },
+    "facts": {
+     "stars": 58066,
+     "commits_12m": 1694,
+     "latest_release": "2026-08-29",
+     "updated_at": "2026-09-18"
+    },
+    "repo_metrics": {
+     "test_files": 2095,
+     "ci_evidence": [
+      ".github/workflows/giteabot.yml",
+      ".github/workflows/pull-labeler.yml",
+      ".github/workflows/pull-docker-dryrun.yml"
+     ],
+     "readme_chars": 10445
+    }
+   },
+   "capability": {
+    "coverage_pct": 100.0,
+    "matched": [
+     "Repositories",
+     "Git",
+     "branches",
+     "commits",
+     "pull requests",
+     "issues",
+     "actions/CI",
+     "releases",
+     "permissions"
+    ],
+    "missing": [],
+    "evidence_tokens": {
+     "Repositories": [
+      "repositories",
+      "repository"
+     ],
+     "Git": [
+      "git"
+     ],
+     "branches": [
+      "branches"
+     ],
+     "commits": [
+      "commit",
+      "commits"
+     ],
+     "pull requests": [
+      "pull",
+      "request",
+      "requests"
+     ],
+     "issues": [
+      "issue",
+      "issues"
+     ],
+     "actions/CI": [
+      "action",
+      "actions",
+      "ci"
+     ],
+     "releases": [
+      "release",
+      "releases"
+     ],
+     "permissions": [
+      "permission",
+      "permissions"
+     ]
+    }
+   },
+   "rank_score": 105.0,
+   "found_via": "tag+keyword",
+   "clone_path": "/tmp/library_clones/github.com_go-gitea_gitea",
+   "description": "Git with a cup of tea! Painless self-hosted all-in-one software development service, including Git hosting, code review, team collaboration, package registry and CI/CD.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "git hosting",
+     "gitea"
+    ],
+    "declaration_hits": {
+     "description": [
+      "git hosting"
+     ],
+     "readme": [
+      "git hosting",
+      "gitea"
+     ]
+    },
+    "anchors": [
+     "Repositories",
+     "Git",
+     "branches"
+    ],
+    "anchors_missing": []
+   }
+  },
+  {
+   "name": "Gogs",
+   "repo": "https://github.com/gogs/gogs",
+   "commit": "dbbd717e923694c36f41b0360515b4374bbe6ee0",
+   "website": "https://gogs.io/",
+   "licence": "MIT",
+   "licence_file": "LICENSE",
+   "screens": {
+    "screen_files_total": 298,
+    "screen_files_user": 283,
+    "screen_files_admin": 15,
+    "screen_languages": [
+     ".html",
+     ".tmpl",
+     ".tsx"
+    ],
+    "user_screen_examples": [
+     "public/assets/librejs/librejs.html",
+     "public/plugins/codemirror-5.17.0/mode/index.html",
+     "public/plugins/codemirror-5.17.0/mode/ecl/index.html",
+     "public/plugins/codemirror-5.17.0/mode/sql/index.html",
+     "public/plugins/codemirror-5.17.0/mode/dtd/index.html",
+     "public/plugins/codemirror-5.17.0/mode/octave/index.html"
+    ],
+    "login_evidence": [
+     "web/src/pages/user/signin.tsx",
+     "templates/user/auth/prohibit_login.tmpl",
+     "internal/database/login_sources.go",
+     "internal/database/login_source_files.go",
+     "internal/database/login_source_files_test.go"
+    ]
+   },
+   "run_recipes": [
+    "dockerfile",
+    "dockerfile.next",
+    "public/plugins/codemirror-5.17.0/mode/dockerfile/dockerfile.js"
+   ],
+   "robustness": {
+    "score": 49.9,
+    "parts": {
+     "stars": 20.0,
+     "commits_12m": 3.0,
+     "release": 6.7,
+     "activity": 0.0,
+     "tests": 5.2,
+     "ci": 10.0,
+     "readme": 5.0
+    },
+    "facts": {
+     "stars": 47818,
+     "commits_12m": 226,
+     "latest_release": "2026-01-31",
+     "updated_at": "2026-09-12"
+    },
+    "repo_metrics": {
+     "test_files": 78,
+     "ci_evidence": [
+      ".github/workflows/lock.yml",
+      ".github/workflows/shell.yml",
+      ".github/workflows/docker.yml"
+     ],
+     "readme_chars": 5999
+    }
+   },
+   "capability": {
+    "coverage_pct": 100.0,
+    "matched": [
+     "Repositories",
+     "Git",
+     "branches",
+     "commits",
+     "pull requests",
+     "issues",
+     "actions/CI",
+     "releases",
+     "permissions"
+    ],
+    "missing": [],
+    "evidence_tokens": {
+     "Repositories": [
+      "repositories",
+      "repository"
+     ],
+     "Git": [
+      "git"
+     ],
+     "branches": [
+      "branches"
+     ],
+     "commits": [
+      "commit",
+      "commits"
+     ],
+     "pull requests": [
+      "pull",
+      "request",
+      "requests"
+     ],
+     "issues": [
+      "issue",
+      "issues"
+     ],
+     "actions/CI": [
+      "action",
+      "actions"
+     ],
+     "releases": [
+      "release",
+      "releases"
+     ],
+     "permissions": [
+      "permission",
+      "permissions"
+     ]
+    }
+   },
+   "rank_score": 85.0,
+   "found_via": "tag+keyword",
+   "clone_path": "/tmp/library_clones/github.com_gogs_gogs",
+   "description": "Painless self-hosted Git Service written in Go.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "git service"
+    ],
+    "declaration_hits": {
+     "description": [
+      "git service"
+     ],
+     "readme": [
+      "git service"
+     ]
+    },
+    "anchors": [
+     "Repositories",
+     "Git",
+     "branches"
+    ],
+    "anchors_missing": []
+   }
+  }
+ ],
+ "refused": [
+  {
+   "name": "Active Collab",
+   "repo": "https://activecollab.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "BitBucket Server",
+   "repo": "https://www.atlassian.com/software/bitbucket/enterprise/data-center",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Buddy Enterprise",
+   "repo": "https://buddy.works/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Cgit",
+   "repo": "https://git.zx2c4.com/cgit/tree/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Crucible",
+   "repo": "https://www.atlassian.com/software/crucible",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "eigenfocus",
+   "repo": "https://github.com/Eigenfocus/eigenfocus",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Filestash",
+   "repo": "https://github.com/mickael-kerjean/filestash",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Forgejo",
+   "repo": "https://codeberg.org/forgejo/forgejo/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Fossil",
+   "repo": "https://www.fossil-scm.org/index.html/doc/trunk/www/index.wiki",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Git Annex",
+   "repo": "https://git.joeyh.name/index.cgi/git-annex.git/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Gitit",
+   "repo": "https://github.com/jgm/gitit",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "gobookmarks",
+   "repo": "https://github.com/arran4/gobookmarks",
+   "stage": "pre-filter",
+   "reason": "stars 19 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Huly",
+   "repo": "https://github.com/hcengineering/platform",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['EPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Ideon",
+   "repo": "https://github.com/3xpyth0n/ideon",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Kanban Tool",
+   "repo": "https://kanbantool.com/kanban-tool-on-site",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Kantree",
+   "repo": "https://kantree.io",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Leantime",
+   "repo": "https://github.com/leantime/leantime",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mattermost",
+   "repo": "https://github.com/mattermost/mattermost",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Mindwendel",
+   "repo": "https://github.com/b310-digital/mindwendel",
+   "stage": "pre-filter",
+   "reason": "stars 139 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "minimal-git-server",
+   "repo": "https://github.com/mcarbonne/minimal-git-server",
+   "stage": "pre-filter",
+   "reason": "stars 47 < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Octobox",
+   "repo": "https://github.com/octobox/octobox",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Opengist",
+   "repo": "https://github.com/thomiceli/opengist",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "OpenProject",
+   "repo": "https://github.com/opf/openproject",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Pagure",
+   "repo": "https://pagure.io/pagure",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Phorge",
+   "repo": "https://we.phorge.it/source/phorge/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Plane",
+   "repo": "https://github.com/makeplane/plane",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "ProjeQtOr",
+   "repo": "https://sourceforge.net/p/projectorria/code/HEAD/tree/branches/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Pushword",
+   "repo": "https://github.com/Pushword/Pushword",
+   "stage": "pre-filter",
+   "reason": "stars 27 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Redmine",
+   "repo": "https://svn.redmine.org/redmine/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "RhodeCode",
+   "repo": "https://code.rhodecode.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Rukovoditel",
+   "repo": "https://www.rukovoditel.net/download.php",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "SCM Manager",
+   "repo": "https://github.com/scm-manager/scm-manager",
+   "stage": "pre-filter",
+   "reason": "stars 180 < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Smederee",
+   "repo": "https://smeder.ee/~jan0sch/smederee",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Solo",
+   "repo": "https://www.getsoloapp.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Sourcehut",
+   "repo": "https://git.sr.ht/~sircmpwn/git.sr.ht/tree",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Taiga",
+   "repo": "https://github.com/kaleidos-ventures",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Titra",
+   "repo": "https://github.com/titraio/titra",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Trac",
+   "repo": "https://trac.edgewall.org/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Traq",
+   "repo": "https://github.com/nirix/traq",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Tuleap",
+   "repo": "https://tuleap.net/plugins/git/tuleap/tuleap/stable?p=tuleap%2Fstable.git&a=tree",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Wiki.js",
+   "repo": "https://github.com/Requarks/wiki",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Xandikos",
+   "repo": "https://github.com/jelmer/xandikos",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "ZenTao",
+   "repo": "https://github.com/easysoft/zentaopms",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Review Board",
+   "repo": "https://github.com/reviewboard/reviewboard",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Gerrit",
+   "repo": "https://github.com/GerritCodeReview/gerrit",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "4ga Boards",
+   "repo": "https://github.com/RARgames/4gaBoards",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "ShipShipShip",
+   "repo": "https://github.com/GauthierNelkinsky/ShipShipShip",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "GitProxy",
+   "repo": "https://github.com/finos/git-proxy",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "UVDesk",
+   "repo": "https://github.com/uvdesk/community-skeleton",
+   "commit": "6f35040f447f7fe1dcd254e259e7b7e0a9f7a79f",
+   "stage": "licence",
+   "reason": "licence file says OSL-3.0",
+   "licence": "OSL-3.0",
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "GitLab",
+   "repo": "https://gitlab.com/gitlab-org/gitlab-foss",
+   "commit": "775167b208669b0dcf234ecb901f4b61292f343e",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag+keyword",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": []
+   }
+  },
+  {
+   "name": "Super Productivity",
+   "repo": "https://github.com/super-productivity/super-productivity",
+   "commit": "679a7823a36dab59283acf55a81113d7677513ab",
+   "stage": "category",
+   "reason": "does not declare itself as git/code hosting \u2014 none of ['git hosting', 'code hosting', 'repository hosting', 'git service', 'git server', 'gitea', 'gitlab', 'github alternative', 'forge'] in its description or README head",
+   "licence": "MIT",
+   "found_via": "keyword",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Repositories",
+     "Git",
+     "branches"
+    ],
+    "anchors_missing": []
+   },
+   "capability_coverage_pct": 100.0,
+   "rank_before_category_gate": 105.0
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

@@ -1,0 +1,381 @@
+{
+ "category": "Workflow automation",
+ "slug": "workflow-automation",
+ "exemplar": "n8n",
+ "capabilities": [
+  "Nodes",
+  "triggers",
+  "actions",
+  "credentials",
+  "branching",
+  "loops",
+  "webhooks",
+  "scheduling",
+  "execution history"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "workflow automation",
+   "n8n"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "Automatisch",
+   "repo": "https://github.com/automatisch/automatisch",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Budibase",
+   "repo": "https://github.com/Budibase/budibase",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "tag"
+  },
+  {
+   "name": "ChiefOnboarding",
+   "repo": "https://github.com/chiefonboarding/ChiefOnboarding",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Cronmaster",
+   "repo": "https://github.com/fccview/cronmaster",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Ctfreak",
+   "repo": "https://ctfreak.com",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "CxReports",
+   "repo": "https://www.cx-reports.com",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Dagu",
+   "repo": "https://github.com/dagucloud/dagu",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Discount Bandit",
+   "repo": "https://github.com/Cybrarist/Discount-Bandit",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Documize",
+   "repo": "https://github.com/documize/community",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "eigenfocus",
+   "repo": "https://github.com/Eigenfocus/eigenfocus",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "EPrints",
+   "repo": "https://github.com/eprints/eprints3.4",
+   "stage": "pre-filter",
+   "reason": "stars 44 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Halo",
+   "repo": "https://github.com/halo-dev/halo",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "HandBrake Web",
+   "repo": "https://github.com/TheNickOfTime/handbrake-web",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "LazyLibrarian",
+   "repo": "https://gitlab.com/LazyLibrarian/LazyLibrarian",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Matchering",
+   "repo": "https://github.com/sergree/matchering",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mylar3",
+   "repo": "https://github.com/MylarComics/mylar3",
+   "stage": "pre-filter",
+   "reason": "stars 116 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "OliveTin",
+   "repo": "https://github.com/OliveTin/OliveTin",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "pyLoad",
+   "repo": "https://github.com/pyload/pyload",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "ToolJet",
+   "repo": "https://github.com/ToolJet/ToolJet",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "TrailBase",
+   "repo": "https://github.com/trailbaseio/trailbase",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['OSL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "UI Bakery",
+   "repo": "https://github.com/uibakery/self-hosted",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Kestra",
+   "repo": "https://github.com/kestra-io/kestra",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Activepieces",
+   "repo": "https://github.com/activepieces/activepieces",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Leon",
+   "repo": "https://github.com/leon-ai/leon",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Gotenberg",
+   "repo": "https://github.com/gotenberg/gotenberg",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Healthchecks",
+   "repo": "https://github.com/healthchecks/healthchecks",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Manifest",
+   "repo": "https://github.com/mnfst/llm-gateway",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "StackStorm",
+   "repo": "https://github.com/StackStorm/st2",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Cronicle",
+   "repo": "https://github.com/jhuckaby/Cronicle",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Dittofeed",
+   "repo": "https://github.com/dittofeed/dittofeed",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "SQLPage",
+   "repo": "https://github.com/sqlpage/SQLPage",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Saltcorn",
+   "repo": "https://github.com/saltcorn/saltcorn",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Fredy",
+   "repo": "https://github.com/orangecoding/fredy",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "\u00b5Task",
+   "repo": "https://github.com/ovh/utask",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Kibitzr",
+   "repo": "https://github.com/kibitzr/kibitzr",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "gocron",
+   "repo": "https://github.com/flohoss/gocron",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "flowctl",
+   "repo": "https://github.com/cvhariharan/flowctl",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "BookBounty",
+   "repo": "https://github.com/TheWicklowWolf/BookBounty",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "HomeButler",
+   "repo": "https://github.com/Higangssh/homebutler",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "n8n",
+   "repo": "https://github.com/n8n-io/n8n",
+   "commit": "69b0c527fa2b36f7a1b1f55d59d17271d36fabbc",
+   "stage": "licence",
+   "reason": "licence file says UNRECOGNISED",
+   "licence": "UNRECOGNISED",
+   "found_via": "tag+keyword",
+   "screens": null
+  },
+  {
+   "name": "Dify.ai",
+   "repo": "https://github.com/langgenius/dify",
+   "commit": "5568aa0ea57d3a2c1cec03bd747b975494f094e3",
+   "stage": "licence",
+   "reason": "licence file says UNRECOGNISED",
+   "licence": "UNRECOGNISED",
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "PocketBase",
+   "repo": "https://github.com/pocketbase/pocketbase",
+   "commit": "5cec579da984436a258602a46a96302fbd31f77c",
+   "stage": "screens",
+   "reason": "1 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 1,
+    "screen_files_user": 1,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "ui/index.html"
+    ],
+    "login_evidence": [
+     "ui/src/auth/pagesuperuserlogin.js"
+    ]
+   }
+  },
+  {
+   "name": "Appwrite",
+   "repo": "https://github.com/appwrite/appwrite",
+   "commit": "f61009be8c769ae705f6f08b6c0944fb97ab0a84",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "BSD-2-Clause",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": [
+     "src/appwrite/platform/modules/console/http/redirects/login/get.php"
+    ]
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

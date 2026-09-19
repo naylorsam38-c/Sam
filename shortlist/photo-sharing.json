@@ -1,0 +1,239 @@
+{
+ "category": "Photo sharing",
+ "slug": "photo-sharing",
+ "exemplar": "Instagram",
+ "capabilities": [
+  "Profiles",
+  "photo/video posts",
+  "stories",
+  "reels",
+  "feed",
+  "likes",
+  "comments",
+  "follows",
+  "DMs",
+  "search/explore",
+  "hashtags",
+  "mentions",
+  "live",
+  "creator analytics"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "photo sharing",
+   "instagram",
+   "pixelfed"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "bewCloud",
+   "repo": "https://github.com/bewcloud/bewcloud",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Chevereto",
+   "repo": "https://github.com/chevereto/chevereto",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Damselfly",
+   "repo": "https://github.com/webreaper/damselfly",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Elengrab",
+   "repo": "https://github.com/neosy/elengrab",
+   "stage": "pre-filter",
+   "reason": "stars 37 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Ente",
+   "repo": "https://github.com/ente/ente",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Immich Kiosk",
+   "repo": "https://github.com/damongolding/immich-kiosk",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Immich",
+   "repo": "https://github.com/immich-app/immich",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mediagoblin",
+   "repo": "https://git.savannah.gnu.org/cgit/mediagoblin.git/tree/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Memtly",
+   "repo": "https://github.com/Memtly/Memtly.Community",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Nextcloud Memories",
+   "repo": "https://github.com/pulsejet/memories",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "PhotoPrism",
+   "repo": "https://github.com/photoprism/photoprism",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "PhotoStructure",
+   "repo": "https://photostructure.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Photoview",
+   "repo": "https://github.com/photoview/photoview",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Piwigo",
+   "repo": "https://github.com/Piwigo/Piwigo",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "PixelFed",
+   "repo": "https://github.com/pixelfed/pixelfed",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Reservo",
+   "repo": "https://reservo.co",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Single File PHP Gallery",
+   "repo": "http://sye.dk/sfpg/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "SPIS",
+   "repo": "https://github.com/gbbirkisson/spis",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "This week in past",
+   "repo": "https://github.com/RouHim/this-week-in-past",
+   "stage": "pre-filter",
+   "reason": "stars 102 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Zenphoto",
+   "repo": "https://github.com/zenphoto/zenphoto",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Thumbor",
+   "repo": "https://github.com/thumbor/thumbor",
+   "commit": "2a486080b2da03fbcad994a02fe1df7f802aafa3",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": [
+     "thumbor/config.py (in content)"
+    ]
+   }
+  },
+  {
+   "name": "HomeGallery",
+   "repo": "https://github.com/xemle/home-gallery",
+   "commit": "268ca663bedf8481499125f731227782ec5fe79b",
+   "stage": "screens",
+   "reason": "no login found in paths or source",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 57,
+    "screen_files_user": 57,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html",
+     ".mustache",
+     ".tsx"
+    ],
+    "user_screen_examples": [
+     "packages/plugin/templates/vanilla/readme.md.mustache",
+     "packages/plugin/templates/vanilla/package.json.mustache",
+     "packages/plugin/templates/vanilla/src/index.js.mustache",
+     "packages/plugin/templates/vanilla/src/database/index.js.mustache",
+     "packages/plugin/templates/vanilla/src/query/astutils.js.mustache",
+     "packages/plugin/templates/vanilla/src/query/index.js.mustache"
+    ],
+    "login_evidence": []
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

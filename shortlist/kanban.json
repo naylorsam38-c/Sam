@@ -1,0 +1,1030 @@
+{
+ "category": "Kanban",
+ "slug": "kanban",
+ "exemplar": "Trello",
+ "capabilities": [
+  "Boards",
+  "lists",
+  "cards",
+  "labels",
+  "members",
+  "due dates",
+  "checklists",
+  "attachments",
+  "comments",
+  "automation"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "kanban",
+   "trello",
+   "kanban board"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": false,
+ "survivors": [
+  {
+   "name": "Wekan",
+   "repo": "https://github.com/wekan/wekan",
+   "commit": "e1e64e92b4fd19f1962f07f156e0b1a20ba13a83",
+   "website": "https://wekan.github.io/",
+   "licence": "MIT",
+   "licence_file": "LICENSE",
+   "screens": {
+    "screen_files_total": 136,
+    "screen_files_user": 136,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html",
+     ".jade"
+    ],
+    "user_screen_examples": [
+     "popup.jade",
+     "packages/wekan-oidc/oidc_configure.html",
+     "packages/wekan-fullcalendar/template.html",
+     "public/api/wekan.html",
+     "client/components/boardconversionprogress.jade",
+     "client/components/history/historytable.jade"
+    ],
+    "login_evidence": [
+     "readmeloginsignup.md",
+     "server/logintimingnormalization.js",
+     "server/lastactiveonlogin.js",
+     "server/logintallyonlogin.js",
+     "server/header-login.js"
+    ]
+   },
+   "run_recipes": [
+    "docker-compose.yml",
+    "dockerfile",
+    ".devcontainer/docker-compose.yml",
+    ".devcontainer/dockerfile"
+   ],
+   "robustness": {
+    "score": 90.0,
+    "parts": {
+     "stars": 20.0,
+     "commits_12m": 20.0,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 20.0,
+     "ci": 10.0,
+     "readme": 5.0
+    },
+    "facts": {
+     "stars": 21089,
+     "commits_12m": 15735,
+     "latest_release": "2026-09-18",
+     "updated_at": "2026-09-18"
+    },
+    "repo_metrics": {
+     "test_files": 1358,
+     "ci_evidence": [
+      ".travis.yml",
+      ".github/workflows/docker-publish.yml",
+      ".github/workflows/flatpak.yml"
+     ],
+     "readme_chars": 8292
+    }
+   },
+   "capability": {
+    "coverage_pct": 100.0,
+    "matched": [
+     "Boards",
+     "lists",
+     "cards",
+     "labels",
+     "members",
+     "due dates",
+     "checklists",
+     "attachments",
+     "comments",
+     "automation"
+    ],
+    "missing": [],
+    "evidence_tokens": {
+     "Boards": [
+      "board",
+      "boards"
+     ],
+     "lists": [
+      "list",
+      "lists"
+     ],
+     "cards": [
+      "card",
+      "cards"
+     ],
+     "labels": [
+      "label",
+      "labels"
+     ],
+     "members": [
+      "member",
+      "members"
+     ],
+     "due dates": [
+      "date",
+      "dates"
+     ],
+     "checklists": [
+      "checklist",
+      "checklists"
+     ],
+     "attachments": [
+      "attachment",
+      "attachments"
+     ],
+     "comments": [
+      "comment",
+      "comments"
+     ],
+     "automation": [
+      "automation"
+     ]
+    }
+   },
+   "rank_score": 105.0,
+   "found_via": "tag+keyword",
+   "clone_path": "/tmp/library_clones/github.com_wekan_wekan",
+   "description": "Trello-like kanban.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "kanban",
+     "kanban board",
+     "trello"
+    ],
+    "declaration_hits": {
+     "description": [
+      "kanban",
+      "trello"
+     ],
+     "readme": [
+      "kanban",
+      "kanban board"
+     ]
+    },
+    "anchors": [
+     "Boards",
+     "lists",
+     "cards"
+    ],
+    "anchors_missing": []
+   }
+  },
+  {
+   "name": "Gitea",
+   "repo": "https://github.com/go-gitea/gitea",
+   "commit": "2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2",
+   "website": "https://gitea.com",
+   "licence": "MIT",
+   "licence_file": "LICENSE",
+   "screens": {
+    "screen_files_total": 592,
+    "screen_files_user": 541,
+    "screen_files_admin": 51,
+    "screen_languages": [
+     ".tmpl",
+     ".vue"
+    ],
+    "user_screen_examples": [
+     "docker/manifest.rootless.tmpl",
+     "docker/manifest.tmpl",
+     "templates/post-install.tmpl",
+     "templates/install.tmpl",
+     "templates/home.tmpl",
+     "templates/webhook/new.tmpl"
+    ],
+    "login_evidence": [
+     "public/assets/img/svg/octicon-sign-in.svg",
+     "services/auth/signin.go",
+     "services/auth/signin_test.go",
+     "services/auth/source/smtp/source_authenticate.go",
+     "services/auth/source/ldap/source_authenticate.go"
+    ]
+   },
+   "run_recipes": [
+    "dockerfile",
+    "dockerfile.rootless"
+   ],
+   "robustness": {
+    "score": 90.0,
+    "parts": {
+     "stars": 20.0,
+     "commits_12m": 20.0,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 20.0,
+     "ci": 10.0,
+     "readme": 5.0
+    },
+    "facts": {
+     "stars": 58066,
+     "commits_12m": 1694,
+     "latest_release": "2026-08-29",
+     "updated_at": "2026-09-18"
+    },
+    "repo_metrics": {
+     "test_files": 2095,
+     "ci_evidence": [
+      ".github/workflows/giteabot.yml",
+      ".github/workflows/pull-labeler.yml",
+      ".github/workflows/pull-docker-dryrun.yml"
+     ],
+     "readme_chars": 10445
+    }
+   },
+   "capability": {
+    "coverage_pct": 90.0,
+    "matched": [
+     "Boards",
+     "lists",
+     "cards",
+     "labels",
+     "members",
+     "due dates",
+     "checklists",
+     "attachments",
+     "comments"
+    ],
+    "missing": [
+     "automation"
+    ],
+    "evidence_tokens": {
+     "Boards": [
+      "board",
+      "boards"
+     ],
+     "lists": [
+      "list",
+      "lists"
+     ],
+     "cards": [
+      "card",
+      "cards"
+     ],
+     "labels": [
+      "label",
+      "labels"
+     ],
+     "members": [
+      "member",
+      "members"
+     ],
+     "due dates": [
+      "date",
+      "dates"
+     ],
+     "checklists": [
+      "checklist"
+     ],
+     "attachments": [
+      "attachment",
+      "attachments"
+     ],
+     "comments": [
+      "comment",
+      "comments"
+     ],
+     "automation": []
+    }
+   },
+   "rank_score": 90.0,
+   "found_via": "tag",
+   "clone_path": "/tmp/library_clones/github.com_go-gitea_gitea",
+   "description": "Git with a cup of tea! Painless self-hosted all-in-one software development service, including Git hosting, code review, team collaboration, package registry and CI/CD.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "kanban"
+    ],
+    "declaration_hits": {
+     "description": [],
+     "readme": [
+      "kanban"
+     ]
+    },
+    "anchors": [
+     "Boards",
+     "lists",
+     "cards"
+    ],
+    "anchors_missing": []
+   }
+  },
+  {
+   "name": "OneDev",
+   "repo": "https://github.com/theonedev/onedev",
+   "commit": "aef745b5fd5a14b32981a99e763bc75bfe0cbee5",
+   "website": "https://onedev.io/",
+   "licence": "MIT",
+   "licence_file": "license.txt",
+   "screens": {
+    "screen_files_total": 554,
+    "screen_files_user": 482,
+    "screen_files_admin": 72,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "server-core/src/main/java/org/apache/wicket/extensions/markup/html/repeater/data/table/navigationtoolbar.html",
+     "server-core/src/main/java/io/onedev/server/web/page/builds/buildlistpage.html",
+     "server-core/src/main/java/io/onedev/server/web/page/user/userpage.html",
+     "server-core/src/main/java/io/onedev/server/web/page/user/basicsetting/userbasicsettingpage.html",
+     "server-core/src/main/java/io/onedev/server/web/page/user/emailaddresses/useremailaddressespage.html",
+     "server-core/src/main/java/io/onedev/server/web/page/user/querywatch/userquerywatchespage.html"
+    ],
+    "login_evidence": [
+     "server-core/src/main/java/io/onedev/server/model/support/administration/authenticator/authenticated.java",
+     "server-core/src/main/java/io/onedev/server/model/support/administration/jobexecutor/registrylogin.java",
+     "server-core/src/main/java/io/onedev/server/model/support/administration/sso/ssoauthenticated.java",
+     "server-core/src/main/java/io/onedev/server/model/support/administration/workspaceprovisioner/registrylogin.java",
+     "server-core/src/main/java/io/onedev/server/commandhandler/enableinternallogin.java"
+    ]
+   },
+   "run_recipes": [
+    "server-core/src/main/java/io/onedev/server/web/asset/codemirror/mode/dockerfile/dockerfile.js",
+    "server-plugin/server-plugin-buildspec-node/dockerfile",
+    "server-product/docker/docker-compose.yaml",
+    "server-product/docker/dockerfile.agent",
+    "server-product/docker/dockerfile.server"
+   ],
+   "robustness": {
+    "score": 63.9,
+    "parts": {
+     "stars": 19.5,
+     "commits_12m": 7.3,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 17.2,
+     "ci": 0.0,
+     "readme": 5.0
+    },
+    "facts": {
+     "stars": 15256,
+     "commits_12m": 547,
+     "latest_release": "2026-09-15",
+     "updated_at": "2026-09-18"
+    },
+    "repo_metrics": {
+     "test_files": 258,
+     "ci_evidence": [],
+     "readme_chars": 9080
+    }
+   },
+   "capability": {
+    "coverage_pct": 90.0,
+    "matched": [
+     "Boards",
+     "lists",
+     "cards",
+     "labels",
+     "members",
+     "due dates",
+     "attachments",
+     "comments",
+     "automation"
+    ],
+    "missing": [
+     "checklists"
+    ],
+    "evidence_tokens": {
+     "Boards": [
+      "board",
+      "boards"
+     ],
+     "lists": [
+      "list",
+      "lists"
+     ],
+     "cards": [
+      "card",
+      "cards"
+     ],
+     "labels": [
+      "label",
+      "labels"
+     ],
+     "members": [
+      "member",
+      "members"
+     ],
+     "due dates": [
+      "date",
+      "dates"
+     ],
+     "checklists": [],
+     "attachments": [
+      "attachment",
+      "attachments"
+     ],
+     "comments": [
+      "comment",
+      "comments"
+     ],
+     "automation": [
+      "automation"
+     ]
+    }
+   },
+   "rank_score": 77.0,
+   "found_via": "tag",
+   "clone_path": "/tmp/library_clones/github.com_theonedev_onedev",
+   "description": "All-In-One DevOps Platform. With Git Management, Issue Tracking, and CI/CD. Simple yet Powerful.",
+   "readme_file": "readme.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "kanban"
+    ],
+    "declaration_hits": {
+     "description": [],
+     "readme": [
+      "kanban"
+     ]
+    },
+    "anchors": [
+     "Boards",
+     "lists",
+     "cards"
+    ],
+    "anchors_missing": []
+   }
+  }
+ ],
+ "refused": [
+  {
+   "name": "Active Collab",
+   "repo": "https://activecollab.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "AppFlowy",
+   "repo": "https://github.com/AppFlowy-IO/appflowy",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "BitBucket Server",
+   "repo": "https://www.atlassian.com/software/bitbucket/enterprise/data-center",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Buddy Enterprise",
+   "repo": "https://buddy.works/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Budget Board",
+   "repo": "https://github.com/teelur/budget-board",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Cgit",
+   "repo": "https://git.zx2c4.com/cgit/tree/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Crucible",
+   "repo": "https://www.atlassian.com/software/crucible",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "dayGLANCE",
+   "repo": "https://github.com/krelltunez/dayGLANCE",
+   "stage": "pre-filter",
+   "reason": "stars 155 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "DietPi",
+   "repo": "https://github.com/MichaIng/DietPi",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Donetick",
+   "repo": "https://github.com/donetick/donetick",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "eigenfocus",
+   "repo": "https://github.com/Eigenfocus/eigenfocus",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Ever Gauzy",
+   "repo": "https://github.com/ever-co/ever-gauzy",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Focus Flow",
+   "repo": "https://github.com/francesco-gaglione/focus_flow_cloud",
+   "stage": "pre-filter",
+   "reason": "stars 48 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Forgejo",
+   "repo": "https://codeberg.org/forgejo/forgejo/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Fossil",
+   "repo": "https://www.fossil-scm.org/index.html/doc/trunk/www/index.wiki",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "HamsterBase Tasks",
+   "repo": "https://github.com/hamsterbase/tasks",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Huly",
+   "repo": "https://github.com/hcengineering/platform",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['EPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Ideon",
+   "repo": "https://github.com/3xpyth0n/ideon",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Jotty",
+   "repo": "https://github.com/fccview/jotty",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Kan",
+   "repo": "https://github.com/kanbn/kan",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Kanban Tool",
+   "repo": "https://kanbantool.com/kanban-tool-on-site",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Kantree",
+   "repo": "https://kantree.io",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Leantime",
+   "repo": "https://github.com/leantime/leantime",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Listaway",
+   "repo": "https://github.com/jeffrpowell/listaway",
+   "stage": "pre-filter",
+   "reason": "stars 11 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mindwendel",
+   "repo": "https://github.com/b310-digital/mindwendel",
+   "stage": "pre-filter",
+   "reason": "stars 139 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "minimal-git-server",
+   "repo": "https://github.com/mcarbonne/minimal-git-server",
+   "stage": "pre-filter",
+   "reason": "stars 47 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "moOde Audio",
+   "repo": "https://github.com/moode-player/moode",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "myTinyTodo",
+   "repo": "https://github.com/maxpozdeev/mytinytodo/",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Nullboard",
+   "repo": "https://github.com/apankrat/nullboard",
+   "stage": "pre-filter",
+   "reason": "last update 2023-11-05 older than 12 months",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Octobox",
+   "repo": "https://github.com/octobox/octobox",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "OpenHabitTracker",
+   "repo": "https://github.com/Jinjinov/OpenHabitTracker",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "OpenProject",
+   "repo": "https://github.com/opf/openproject",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Our Shopping List",
+   "repo": "https://codeberg.org/nanawel/our-shopping-list",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Pagure",
+   "repo": "https://pagure.io/pagure",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Phorge",
+   "repo": "https://we.phorge.it/source/phorge/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "phpBB",
+   "repo": "https://github.com/phpbb/phpbb",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Plane",
+   "repo": "https://github.com/makeplane/plane",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Planka",
+   "repo": "https://github.com/plankanban/planka",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "ProjeQtOr",
+   "repo": "https://sourceforge.net/p/projectorria/code/HEAD/tree/branches/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Redmine",
+   "repo": "https://svn.redmine.org/redmine/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Relaticle",
+   "repo": "https://github.com/relaticle/relaticle",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "RhodeCode",
+   "repo": "https://code.rhodecode.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Rukovoditel",
+   "repo": "https://www.rukovoditel.net/download.php",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "SCM Manager",
+   "repo": "https://github.com/scm-manager/scm-manager",
+   "stage": "pre-filter",
+   "reason": "stars 180 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Smederee",
+   "repo": "https://smeder.ee/~jan0sch/smederee",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Solo",
+   "repo": "https://www.getsoloapp.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Sourcehut",
+   "repo": "https://git.sr.ht/~sircmpwn/git.sr.ht/tree",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Taiga",
+   "repo": "https://github.com/kaleidos-ventures",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Task Keeper",
+   "repo": "https://github.com/nymanjens/piga",
+   "stage": "pre-filter",
+   "reason": "stars 110 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Taskwarrior",
+   "repo": "https://taskwarrior.org/download/#git",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Tellor",
+   "repo": "https://github.com/Voldrix/Tellor",
+   "stage": "pre-filter",
+   "reason": "stars 15 < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "TimeTracker",
+   "repo": "https://github.com/drytrix/TimeTracker",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Titra",
+   "repo": "https://github.com/titraio/titra",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Trac",
+   "repo": "https://trac.edgewall.org/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Tracks",
+   "repo": "https://github.com/TracksApp/tracks",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Traq",
+   "repo": "https://github.com/nirix/traq",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Tuleap",
+   "repo": "https://tuleap.net/plugins/git/tuleap/tuleap/stable?p=tuleap%2Fstable.git&a=tree",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Vikunja",
+   "repo": "https://github.com/go-vikunja/vikunja",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0', 'GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Virola Messenger",
+   "repo": "https://virola.io/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Will Be Done",
+   "repo": "https://github.com/will-be-done/will-be-done",
+   "stage": "pre-filter",
+   "reason": "stars 150 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "ZenTao",
+   "repo": "https://github.com/easysoft/zentaopms",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "gitbucket",
+   "repo": "https://github.com/gitbucket/gitbucket",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Kaneo",
+   "repo": "https://github.com/usekaneo/kaneo",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "PrivateBin",
+   "repo": "https://github.com/PrivateBin/PrivateBin",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "GitLab",
+   "repo": "https://gitlab.com/gitlab-org/gitlab-foss",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "tududi",
+   "repo": "https://github.com/chrisvel/tududi",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Tasks.md",
+   "repo": "https://github.com/BaldissaraMatheus/Tasks.md",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Review Board",
+   "repo": "https://github.com/reviewboard/reviewboard",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Gerrit",
+   "repo": "https://github.com/GerritCodeReview/gerrit",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "4ga Boards",
+   "repo": "https://github.com/RARgames/4gaBoards",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "ShipShipShip",
+   "repo": "https://github.com/GauthierNelkinsky/ShipShipShip",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Activepieces",
+   "repo": "https://github.com/activepieces/activepieces",
+   "commit": "7129df1976f7947d44b7367947e6b09059c3e145",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "keyword",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": [
+     "packages/server/api/src/app/database/migration/postgres/1709669091258-move-generated-by-from-signing-key-to-audit-event-postgres.ts",
+     "packages/server/api/src/app/database/migration/postgres/1698698190965-adddisplaynametosigningkey.ts",
+     "packages/server/api/src/app/database/migration/postgres/1698602417745-add-signing-key.ts",
+     "packages/server/api/src/app/database/migration/postgres/1731711188507-addauditlogindicies.ts",
+     "packages/server/api/src/app/ee/signing-key/signing-key-module.ts"
+    ]
+   }
+  },
+  {
+   "name": "UVDesk",
+   "repo": "https://github.com/uvdesk/community-skeleton",
+   "commit": "6f35040f447f7fe1dcd254e259e7b7e0a9f7a79f",
+   "stage": "licence",
+   "reason": "licence file says OSL-3.0",
+   "licence": "OSL-3.0",
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "Kanboard",
+   "repo": "https://github.com/kanboard/kanboard",
+   "commit": "cf53b54597b67b60140586c09c2fe6132ead013c",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag+keyword",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": [
+     "libs/swiftmailer/classes/swift/transport/esmtp/auth/loginauthenticator.php",
+     "app/model/lastloginmodel.php"
+    ]
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

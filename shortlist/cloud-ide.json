@@ -1,0 +1,192 @@
+{
+ "category": "Cloud IDE",
+ "slug": "cloud-ide",
+ "exemplar": "GitHub Codespaces",
+ "capabilities": [
+  "Browser IDE",
+  "containers",
+  "repositories",
+  "terminals",
+  "extensions",
+  "ports",
+  "development environments"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "ide",
+   "code editor",
+   "browser ide",
+   "cloud ide",
+   "codespaces",
+   "code-server",
+   "vs code in the browser"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "Coder",
+   "repo": "https://github.com/coder/coder",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Eclipse Che",
+   "repo": "https://github.com/eclipse-che/che",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['EPL-1.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Hopp",
+   "repo": "https://github.com/gethopp/hopp",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Judge0 CE",
+   "repo": "https://github.com/judge0/judge0",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "not-th.re",
+   "repo": "https://github.com/not-three/main",
+   "stage": "pre-filter",
+   "reason": "stars 16 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "RapidForge",
+   "repo": "https://github.com/rapidforge-io/rapidforge",
+   "stage": "pre-filter",
+   "reason": "stars 44 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "RepoFlow",
+   "repo": "https://www.repoflow.io",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "RStudio Server",
+   "repo": "https://github.com/rstudio/rstudio",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "OrcaQ",
+   "repo": "https://github.com/cin12211/orca-q",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "code-server",
+   "repo": "https://github.com/coder/code-server",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "Langfuse",
+   "repo": "https://github.com/langfuse/langfuse",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "JupyterLab",
+   "repo": "https://github.com/jupyterlab/jupyterlab/",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "Lowdefy",
+   "repo": "https://github.com/lowdefy/lowdefy",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "Azimutt",
+   "repo": "https://github.com/azimuttapp/azimutt",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "LiveCodes",
+   "repo": "https://github.com/live-codes/livecodes",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "LibreDB Studio",
+   "repo": "https://github.com/libredb/libredb-studio",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "keyword",
+   "screens": null
+  },
+  {
+   "name": "Atheos",
+   "repo": "https://github.com/Atheos/Atheos",
+   "commit": null,
+   "stage": "clone",
+   "reason": "clone failed: fatal: write error: No space left on device\nfatal: fetch-pack: invalid index-pack output",
+   "licence": null,
+   "found_via": "tag+keyword",
+   "screens": null
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

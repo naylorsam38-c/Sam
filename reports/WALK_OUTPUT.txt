@@ -1,0 +1,17 @@
+
+=== notes-knowledge  (Notes/knowledge — exemplar Notion) ===
+  -> Memos @ 7e3d3c63156c
+     recipe scripts/compose.yaml services=['memos'] builds=[]
+     UI answered at http://127.0.0.1:5230/ (memos published 5230->5230)
+     gate: IN after 1 step(s) -> http://127.0.0.1:5230/
+       ABSENT   Pages
+       ABSENT   blocks
+       ABSENT   rich text
+       ABSENT   databases
+       ABSENT   tables
+       ABSENT   views
+       SEEN     search
+       ABSENT   sharing
+       ABSENT   comments
+       ABSENT   templates
+       ABSENT   permissions

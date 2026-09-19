@@ -1,0 +1,576 @@
+{
+ "category": "Messaging",
+ "slug": "messaging",
+ "exemplar": "WhatsApp",
+ "capabilities": [
+  "Accounts",
+  "contacts",
+  "1:1 chat",
+  "groups",
+  "media",
+  "voice messages",
+  "calls",
+  "video calls",
+  "status",
+  "notifications",
+  "encryption",
+  "blocking/reporting"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "instant messaging",
+   "chat app",
+   "messenger",
+   "whatsapp"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": false,
+ "survivors": [
+  {
+   "name": "Zulip",
+   "repo": "https://github.com/zulip/zulip",
+   "commit": "ca20338a1c3ef6937274c53316b1187a7ef8b30a",
+   "website": "https://zulip.org",
+   "licence": "Apache-2.0",
+   "licence_file": "LICENSE",
+   "screens": {
+    "screen_files_total": 719,
+    "screen_files_user": 719,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".astro",
+     ".erb",
+     ".hbs",
+     ".html"
+    ],
+    "user_screen_examples": [
+     "starlight_help/src/components/zuliptip.astro",
+     "starlight_help/src/components/emoticontranslations.astro",
+     "starlight_help/src/components/settingssteps.astro",
+     "starlight_help/src/components/flattenedlist.astro",
+     "starlight_help/src/components/navigationsteps.astro",
+     "starlight_help/src/components/head.astro"
+    ],
+    "login_evidence": [
+     "starlight_help/src/content/include/_samlloginbutton.mdx",
+     "starlight_help/src/content/include/_importhowuserswilllogin.mdx",
+     "starlight_help/src/content/include/_selfhostedbillingloginstep.mdx",
+     "web/src/portico/dev-login.ts",
+     "web/src/portico/desktop-login.ts"
+    ]
+   },
+   "run_recipes": [
+    "dockerfile-postgresql",
+    "tools/ci/dockerfile",
+    "tools/ci/dockerfile.prod",
+    "tools/setup/dev-vagrant-docker/dockerfile"
+   ],
+   "robustness": {
+    "score": 89.1,
+    "parts": {
+     "stars": 20.0,
+     "commits_12m": 20.0,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 20.0,
+     "ci": 10.0,
+     "readme": 4.1
+    },
+    "facts": {
+     "stars": 25927,
+     "commits_12m": 4926,
+     "latest_release": "2026-08-10",
+     "updated_at": "2026-09-18"
+    },
+    "repo_metrics": {
+     "test_files": 2292,
+     "ci_evidence": [
+      ".github/workflows/zulip-cloud-deploy.yaml",
+      ".github/workflows/codeql-analysis.yml",
+      ".github/workflows/production-suite.yml"
+     ],
+     "readme_chars": 4867
+    }
+   },
+   "capability": {
+    "coverage_pct": 100.0,
+    "matched": [
+     "Accounts",
+     "contacts",
+     "1:1 chat",
+     "groups",
+     "media",
+     "voice messages",
+     "calls",
+     "video calls",
+     "status",
+     "notifications",
+     "encryption",
+     "blocking/reporting"
+    ],
+    "missing": [],
+    "evidence_tokens": {
+     "Accounts": [
+      "account",
+      "accounts"
+     ],
+     "contacts": [
+      "contact",
+      "contacts"
+     ],
+     "1:1 chat": [
+      "chat"
+     ],
+     "groups": [
+      "group",
+      "groups"
+     ],
+     "media": [
+      "media"
+     ],
+     "voice messages": [
+      "message",
+      "messages",
+      "voice"
+     ],
+     "calls": [
+      "call",
+      "calls"
+     ],
+     "video calls": [
+      "call",
+      "calls",
+      "video"
+     ],
+     "status": [
+      "status"
+     ],
+     "notifications": [
+      "notification",
+      "notifications"
+     ],
+     "encryption": [
+      "encryption"
+     ],
+     "blocking/reporting": [
+      "blocking",
+      "reporting"
+     ]
+    }
+   },
+   "rank_score": 94.5,
+   "found_via": "tag",
+   "clone_path": "/tmp/library_clones/github.com_zulip_zulip",
+   "description": "Zulip is a powerful, open source group chat application.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "chat app"
+    ],
+    "declaration_hits": {
+     "description": [],
+     "readme": [
+      "chat app"
+     ]
+    },
+    "anchors": [
+     "Accounts",
+     "contacts",
+     "1:1 chat"
+    ],
+    "anchors_missing": []
+   }
+  }
+ ],
+ "refused": [
+  {
+   "name": "Chatwoot",
+   "repo": "https://github.com/chatwoot/chatwoot",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Chitchatter",
+   "repo": "https://github.com/jeremyckahn/chitchatter",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Continuwuity",
+   "repo": "https://forgejo.ellis.link/continuwuation/continuwuity",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "ejabberd",
+   "repo": "https://github.com/processone/ejabberd",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "GlobaLeaks",
+   "repo": "https://github.com/globaleaks/globaleaks-whistleblowing-software",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "GNUnet",
+   "repo": "https://gnunet.org/git/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Groupboard",
+   "repo": "https://www.groupboard.com/products/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Hyphanet",
+   "repo": "https://github.com/hyphanet/fred",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Jami",
+   "repo": "https://git.jami.net/savoirfairelinux?sort=latest_activity_desc&filter=jami",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Libervia",
+   "repo": "https://repos.goffi.org/libervia-web",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mattermost",
+   "repo": "https://github.com/mattermost/mattermost",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "tag"
+  },
+  {
+   "name": "PrivMX WebMail",
+   "repo": "https://privmx.com",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "RetroShare",
+   "repo": "https://github.com/RetroShare/RetroShare",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Salut \u00e0 Toi",
+   "repo": "https://repos.goffi.org/libervia-backend",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "SAMA",
+   "repo": "https://github.com/SAMA-Communications/sama-server",
+   "stage": "pre-filter",
+   "reason": "stars 158 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Screego",
+   "repo": "https://github.com/screego/server",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "SimpleX Chat",
+   "repo": "https://github.com/simplex-chat/simplex-chat",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Spectrum 2",
+   "repo": "https://github.com/SpectrumIM/spectrum2",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Tinode",
+   "repo": "https://github.com/tinode/chat",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Tox",
+   "repo": "https://github.com/TokTok/c-toxcore",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "TrueConf",
+   "repo": "https://trueconf.com/products/tcsf/trueconf-server-free.html",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Typebot",
+   "repo": "https://github.com/baptisteArno/typebot.io",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Virola Messenger",
+   "repo": "https://virola.io/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "WBO",
+   "repo": "https://github.com/lovasoa/whitebophir",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "WorkAdventure",
+   "repo": "https://github.com/workadventure/workadventure",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0', 'Commons-Clause']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mumble",
+   "repo": "https://github.com/mumble-voip/mumble",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Synapse",
+   "repo": "https://github.com/element-hq/synapse",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Converse.js",
+   "repo": "https://github.com/conversejs/converse.js",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "One Time Secret",
+   "repo": "https://github.com/onetimesecret/onetimesecret",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Stoat",
+   "repo": "https://github.com/stoatchat/self-hosted",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Tuwunel",
+   "repo": "https://github.com/matrix-construct/tuwunel",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "AnyCable",
+   "repo": "https://github.com/anycable/anycable",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Live Helper Chat",
+   "repo": "https://github.com/LiveHelperChat/livehelperchat",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Databag",
+   "repo": "https://github.com/balzack/databag",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Conduit",
+   "repo": "https://gitlab.com/famedly/conduit",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Notifo",
+   "repo": "https://github.com/notifo-io/notifo",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "OTS",
+   "repo": "https://github.com/Luzifer/ots",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Openmeetings",
+   "repo": "https://github.com/apache/openmeetings",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Shhh",
+   "repo": "https://github.com/smallwat3r/shhh",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "PushBits",
+   "repo": "https://github.com/pushbits/server",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Tiledesk",
+   "repo": "https://github.com/Tiledesk/tiledesk",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Apprise",
+   "repo": "https://github.com/caronc/apprise",
+   "commit": "4f69f00a5b77c0e7ccc427ae00674b7166c81a44",
+   "stage": "screens",
+   "reason": "1 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "BSD-2-Clause",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 1,
+    "screen_files_user": 1,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "packaging/man/apprise.1.html"
+    ],
+    "login_evidence": [
+     "apprise/locale.py (in content)"
+    ]
+   }
+  },
+  {
+   "name": "Element",
+   "repo": "https://github.com/element-hq/element-web",
+   "commit": "736d00b263d02729a9b22909833c5b5f238a7b1b",
+   "stage": "licence",
+   "reason": "no licence file in repo root",
+   "licence": "",
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "Centrifugo",
+   "repo": "https://github.com/centrifugal/centrifugo",
+   "commit": "f2e575ffe83c62d9b277602bfcce40cf0c2dc9fb",
+   "stage": "screens",
+   "reason": "1 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "Apache-2.0",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 1,
+    "screen_files_user": 1,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "internal/cli/configdoc/template.html"
+    ],
+    "login_evidence": [
+     "internal/controllers/controller_postgres_test.go (in content)"
+    ]
+   }
+  },
+  {
+   "name": "Novu",
+   "repo": "https://github.com/novuhq/novu/",
+   "commit": "36c5c0cefa400e8edc6ec8b18ac4574288eabd03",
+   "stage": "category",
+   "reason": "does not declare itself as messaging \u2014 none of ['instant messaging', 'chat app', 'messenger', 'whatsapp'] in its description or README head",
+   "licence": "MIT",
+   "found_via": "tag",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Accounts",
+     "contacts",
+     "1:1 chat"
+    ],
+    "anchors_missing": []
+   },
+   "capability_coverage_pct": 100.0,
+   "rank_before_category_gate": 95.0
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

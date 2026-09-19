@@ -1,0 +1,364 @@
+{
+ "category": "Music streaming",
+ "slug": "music-streaming",
+ "exemplar": "Spotify",
+ "capabilities": [
+  "Catalogue",
+  "search",
+  "playback",
+  "playlists",
+  "albums",
+  "artists",
+  "recommendations",
+  "queue",
+  "downloads/offline",
+  "social sharing",
+  "podcasts",
+  "subscriptions"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "music streaming",
+   "music server",
+   "spotify"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "Ampache",
+   "repo": "https://github.com/ampache/ampache",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Audiobookshelf",
+   "repo": "https://github.com/advplyr/audiobookshelf",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "BotWave",
+   "repo": "https://github.com/dpipstudio/botwave",
+   "stage": "pre-filter",
+   "reason": "stars 144 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Downtify",
+   "repo": "https://github.com/henriquesebastiao/downtify",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Funkwhale",
+   "repo": "https://dev.funkwhale.audio/funkwhale",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "gonic",
+   "repo": "https://github.com/sentriz/gonic",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "LibreTime",
+   "repo": "https://github.com/LibreTime/libretime",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "LMS",
+   "repo": "https://github.com/epoupon/lms",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Lyrion Music Server",
+   "repo": "https://github.com/lms-community/slimserver",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Meelo",
+   "repo": "https://github.com/Arthi-chaud/Meelo",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "moOde Audio",
+   "repo": "https://github.com/moode-player/moode",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "mpd",
+   "repo": "https://github.com/MusicPlayerDaemon/MPD",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "mStream",
+   "repo": "https://github.com/IrosTheBeggar/mStream",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Navidrome Music Server",
+   "repo": "https://github.com/navidrome/navidrome",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Pinepods",
+   "repo": "https://github.com/madeofpendletonwool/PinePods",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Snapcast",
+   "repo": "https://github.com/snapcast/snapcast",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Supysonic",
+   "repo": "https://github.com/spl0k/supysonic",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "TrackWatch",
+   "repo": "https://github.com/emlopezr/trackwatch",
+   "stage": "pre-filter",
+   "reason": "stars 25 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "V\u00e4in\u00f6",
+   "repo": "https://supponexus.com/products/vaino",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "SwingMusic",
+   "repo": "https://github.com/swingmx/swingmusic",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "multi-scrobbler",
+   "repo": "https://github.com/FoxxMD/multi-scrobbler",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Audioserve",
+   "repo": "https://github.com/izderadicka/audioserve",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Stretto",
+   "repo": "https://github.com/benkaiser/stretto",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Lidify",
+   "repo": "https://github.com/TheWicklowWolf/Lidify",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "vod2pod-rss",
+   "repo": "https://github.com/madiele/vod2pod-rss",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "koel",
+   "repo": "https://github.com/koel/koel",
+   "commit": "89d513ca16526d0fe603f0e0e885348b60b2bf2d",
+   "stage": "runs",
+   "reason": "no Dockerfile or compose file \u2014 walker cannot stand it up",
+   "licence": "MIT",
+   "found_via": "tag+keyword",
+   "screens": {
+    "screen_files_total": 346,
+    "screen_files_user": 346,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".blade.php",
+     ".vue"
+    ],
+    "user_screen_examples": [
+     "resources/views/remote.blade.php",
+     "resources/views/base.blade.php",
+     "resources/views/index.blade.php",
+     "resources/views/sso-callback.blade.php",
+     "resources/views/lastfm/callback.blade.php",
+     "resources/views/errors/template.blade.php"
+    ],
+    "login_evidence": [
+     "app/exceptions/invalidlogintokenexception.php",
+     "app/http/controllers/api/auth/loginwithcredentialscontroller.php",
+     "app/http/controllers/api/auth/loginwithonetimetokencontroller.php",
+     "app/http/middleware/authenticate.php",
+     "app/http/middleware/authenticateaudiorequests.php"
+    ]
+   }
+  },
+  {
+   "name": "Beets",
+   "repo": "https://github.com/beetbox/beets",
+   "commit": "488b13edb4e3df347fa7a135817b698a7e5375ff",
+   "stage": "screens",
+   "reason": "1 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 1,
+    "screen_files_user": 1,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "beetsplug/web/templates/index.html"
+    ],
+    "login_evidence": [
+     "beetsplug/beatport.py (in content)"
+    ]
+   }
+  },
+  {
+   "name": "Mopidy",
+   "repo": "https://github.com/mopidy/mopidy",
+   "commit": "0d483a0bb33d39bbe6eb285ac4b88002ffc3f69b",
+   "stage": "screens",
+   "reason": "1 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "Apache-2.0",
+   "found_via": "tag+keyword",
+   "screens": {
+    "screen_files_total": 1,
+    "screen_files_user": 1,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "src/mopidy/_exts/http/data/clients.html"
+    ],
+    "login_evidence": [
+     "src/mopidy/config/schemas.py (in content)"
+    ]
+   }
+  },
+  {
+   "name": "musikcube",
+   "repo": "https://github.com/clangen/musikcube",
+   "commit": "9bc1234c8c36e40e255bc3878c0eba2c82b9cdeb",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "BSD-3-Clause",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": []
+   }
+  },
+  {
+   "name": "Your Spotify",
+   "repo": "https://github.com/Yooooomi/your_spotify",
+   "commit": "fdd81ef89119159eac375fa2422d83e1765cff5e",
+   "stage": "licence",
+   "reason": "licence file says GPL",
+   "licence": "GPL",
+   "found_via": "keyword",
+   "screens": null
+  },
+  {
+   "name": "AzuraCast",
+   "repo": "https://github.com/AzuraCast/AzuraCast",
+   "commit": "a1e16a990c69edad3d9d8deeea99ea81837e319b",
+   "stage": "licence",
+   "reason": "licence file says AGPL-3.0",
+   "licence": "AGPL-3.0",
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "Polaris",
+   "repo": "https://github.com/agersant/polaris",
+   "commit": "0d75a85724f43b064410c3dff7e1a78fe5aab04f",
+   "stage": "screens",
+   "reason": "1 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 1,
+    "screen_files_user": 1,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "test-data/web/index.html"
+    ],
+    "login_evidence": [
+     "src/server/doc.rs (in content)"
+    ]
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

@@ -1,0 +1,325 @@
+{
+ "category": "Documents",
+ "slug": "documents",
+ "exemplar": "Google Docs",
+ "capabilities": [
+  "Rich editing",
+  "collaboration",
+  "comments",
+  "sharing",
+  "version history",
+  "formatting",
+  "export",
+  "templates"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "collaborative editor",
+   "document editor",
+   "word processor",
+   "google docs",
+   "collaborative documents"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": false,
+ "survivors": [
+  {
+   "name": "Atomic Server",
+   "repo": "https://github.com/ontola/atomic-server",
+   "commit": "33baaa810988403200e2f06f83d34590d1cf815f",
+   "website": "https://atomicserver.eu/",
+   "licence": "MIT",
+   "licence_file": "LICENSE",
+   "screens": {
+    "screen_files_total": 720,
+    "screen_files_user": 720,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html",
+     ".svelte",
+     ".tsx"
+    ],
+    "user_screen_examples": [
+     "browser/svelte/src/app.html",
+     "browser/svelte/src/lib/components/image/image.svelte",
+     "browser/svelte/src/routes/+layout.svelte",
+     "browser/svelte/src/routes/+page.svelte",
+     "browser/data-browser/index.html",
+     "browser/data-browser/src/app.tsx"
+    ],
+    "login_evidence": [
+     "browser/data-browser/src/helpers/isdrivesigninerror.test.ts",
+     "browser/data-browser/src/helpers/isdrivesigninerror.ts",
+     "browser/data-browser/src/components/signinbutton.tsx",
+     "browser/data-browser/src/components/ai/openrouterloginbutton.tsx",
+     "browser/create-template/templates/nextjs-site/src/views/fullpage/blogindexpagefullpage.module.css"
+    ]
+   },
+   "run_recipes": [
+    "docker-compose.yml"
+   ],
+   "robustness": {
+    "score": 84.9,
+    "parts": {
+     "stars": 14.9,
+     "commits_12m": 20.0,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 20.0,
+     "ci": 10.0,
+     "readme": 5.0
+    },
+    "facts": {
+     "stars": 1604,
+     "commits_12m": 1619,
+     "latest_release": "2026-09-17",
+     "updated_at": "2026-09-18"
+    },
+    "repo_metrics": {
+     "test_files": 496,
+     "ci_evidence": [
+      ".github/workflows/notify-saas-staging.yml",
+      ".github/workflows/deploy_staging.yml",
+      ".github/workflows/main-ci.yml"
+     ],
+     "readme_chars": 7062
+    }
+   },
+   "capability": {
+    "coverage_pct": 100.0,
+    "matched": [
+     "Rich editing",
+     "collaboration",
+     "comments",
+     "sharing",
+     "version history",
+     "formatting",
+     "export",
+     "templates"
+    ],
+    "missing": [],
+    "evidence_tokens": {
+     "Rich editing": [
+      "editing",
+      "rich"
+     ],
+     "collaboration": [
+      "collaboration"
+     ],
+     "comments": [
+      "comment",
+      "comments"
+     ],
+     "sharing": [
+      "sharing"
+     ],
+     "version history": [
+      "history",
+      "version"
+     ],
+     "formatting": [
+      "formatting"
+     ],
+     "export": [
+      "export"
+     ],
+     "templates": [
+      "template",
+      "templates"
+     ]
+    }
+   },
+   "rank_score": 102.5,
+   "found_via": "keyword",
+   "clone_path": "/tmp/library_clones/github.com_ontola_atomic-server",
+   "description": "Knowledge graph database with documents (similar to Notion), tables, search, and a powerful linked data API. Lightweight, very fast and no runtime dependencies.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "google docs"
+    ],
+    "declaration_hits": {
+     "description": [],
+     "readme": [
+      "google docs"
+     ]
+    },
+    "anchors": [
+     "Rich editing",
+     "collaboration",
+     "comments"
+    ],
+    "anchors_missing": []
+   }
+  }
+ ],
+ "refused": [
+  {
+   "name": "Collabora Online Development Edition",
+   "repo": "https://gerrit.collaboraoffice.com/plugins/gitiles/online",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Compass",
+   "repo": "https://github.com/adinhodovic/compass",
+   "stage": "pre-filter",
+   "reason": "stars 62 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Cozy Cloud",
+   "repo": "https://github.com/cozy/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "CryptPad",
+   "repo": "https://github.com/cryptpad/cryptpad",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Digislides",
+   "repo": "https://codeberg.org/ladigitale/Digislides",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Documize",
+   "repo": "https://github.com/documize/community",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Docuseal",
+   "repo": "https://github.com/docusealco/docuseal",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "EveryDocs",
+   "repo": "https://github.com/jonashellmann/everydocs-core",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "I, Librarian",
+   "repo": "https://github.com/mkucej/i-librarian-free",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Khoj",
+   "repo": "https://github.com/khoj-ai/khoj",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Mayan EDMS",
+   "repo": "https://gitlab.com/mayan-edms/mayan-edms",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "ONLYOFFICE",
+   "repo": "https://github.com/ONLYOFFICE/DocumentServer",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Paperless-ngx",
+   "repo": "https://github.com/paperless-ngx/paperless-ngx",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Peergos",
+   "repo": "https://github.com/Peergos/Peergos",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "SimpleDMS",
+   "repo": "https://github.com/simpledms/simpledms",
+   "stage": "pre-filter",
+   "reason": "stars 166 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Wiznote",
+   "repo": "https://www.wiz.cn/docker",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "OpenReader",
+   "repo": "https://github.com/richardr1126/openreader",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "DOCAT",
+   "repo": "https://github.com/docat-org/docat",
+   "commit": "3059d9d42580395117eb215218bf7359eee016fe",
+   "stage": "screens",
+   "reason": "no login found in paths or source",
+   "licence": "MIT",
+   "found_via": "keyword",
+   "screens": {
+    "screen_files_total": 31,
+    "screen_files_user": 31,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html",
+     ".tsx"
+    ],
+    "user_screen_examples": [
+     "web/index.html",
+     "web/src/app.tsx",
+     "web/src/index.tsx",
+     "web/src/data-providers/statsdataprovider.tsx",
+     "web/src/data-providers/randomid.tsx",
+     "web/src/data-providers/messagebannerprovider.tsx"
+    ],
+    "login_evidence": []
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

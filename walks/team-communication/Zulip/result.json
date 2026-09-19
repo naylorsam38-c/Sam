@@ -1,0 +1,24 @@
+{
+ "category": "Team communication",
+ "slug": "team-communication",
+ "app": "Zulip",
+ "repo": "https://github.com/zulip/zulip",
+ "commit": "ca20338a1c3ef6937274c53316b1187a7ef8b30a",
+ "started": "2026-09-19T10:03:02",
+ "boot": {
+  "status": "BOOT FAILED",
+  "reason": "no usable compose file or Dockerfile found in clone"
+ },
+ "gate": {},
+ "capabilities": {},
+ "summary": {
+  "booted": false,
+  "gate": null,
+  "capabilities": 0,
+  "reached": 0,
+  "seen": 0,
+  "absent": 0,
+  "gaps": []
+ },
+ "finished": "2026-09-19T10:03:08"
+}

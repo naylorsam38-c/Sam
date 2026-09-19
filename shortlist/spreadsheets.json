@@ -1,0 +1,389 @@
+{
+ "category": "Spreadsheets",
+ "slug": "spreadsheets",
+ "exemplar": "Google Sheets",
+ "capabilities": [
+  "Cells",
+  "formulas",
+  "tables",
+  "charts",
+  "filtering",
+  "sorting",
+  "collaboration",
+  "comments",
+  "imports/exports",
+  "permissions"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "spreadsheet",
+   "sheets",
+   "airtable",
+   "google sheets"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": false,
+ "survivors": [
+  {
+   "name": "Grist",
+   "repo": "https://github.com/gristlabs/grist-core",
+   "commit": "c1f3a697120832db4622b02157996d6ac4e38a6d",
+   "website": "https://getgrist.com/",
+   "licence": "Apache-2.0",
+   "licence_file": "LICENSE.txt",
+   "screens": {
+    "screen_files_total": 9,
+    "screen_files_user": 9,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "static/custom-widget.html",
+     "static/form.html",
+     "static/app.html",
+     "static/index.html",
+     "static/error.html",
+     "static/testwebdriverjquery.html"
+    ],
+    "login_evidence": [
+     "app/server/lib/testlogin.ts",
+     "app/server/lib/loginsystemconfig.ts",
+     "app/server/lib/corelogins.ts",
+     "app/server/lib/forwardauthlogin.ts",
+     "app/server/lib/expressloginwrap.ts"
+    ]
+   },
+   "run_recipes": [
+    "dockerfile",
+    "sandbox/docker/dockerfile",
+    "docker-compose-examples/grist-with-keycloak-postgres-redis-minio/docker-compose.yml",
+    "docker-compose-examples/grist-traefik-basic-auth/docker-compose.yml",
+    "docker-compose-examples/grist-traefik-oidc-auth/docker-compose.yml",
+    "docker-compose-examples/grist-local-testing/docker-compose.yml"
+   ],
+   "robustness": {
+    "score": 84.1,
+    "parts": {
+     "stars": 18.9,
+     "commits_12m": 15.2,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 20.0,
+     "ci": 10.0,
+     "readme": 5.0
+    },
+    "facts": {
+     "stars": 11820,
+     "commits_12m": 1139,
+     "latest_release": "2026-09-06",
+     "updated_at": "2026-09-18"
+    },
+    "repo_metrics": {
+     "test_files": 952,
+     "ci_evidence": [
+      ".github/workflows/fly-destroy.yml",
+      ".github/workflows/docker.yml",
+      ".github/workflows/cla.yml"
+     ],
+     "readme_chars": 55961
+    }
+   },
+   "capability": {
+    "coverage_pct": 100.0,
+    "matched": [
+     "Cells",
+     "formulas",
+     "tables",
+     "charts",
+     "filtering",
+     "sorting",
+     "collaboration",
+     "comments",
+     "imports/exports",
+     "permissions"
+    ],
+    "missing": [],
+    "evidence_tokens": {
+     "Cells": [
+      "cell",
+      "cells"
+     ],
+     "formulas": [
+      "formula",
+      "formulas"
+     ],
+     "tables": [
+      "table",
+      "tables"
+     ],
+     "charts": [
+      "chart",
+      "charts"
+     ],
+     "filtering": [
+      "filtering"
+     ],
+     "sorting": [
+      "sorting"
+     ],
+     "collaboration": [
+      "collaboration"
+     ],
+     "comments": [
+      "comment",
+      "comments"
+     ],
+     "imports/exports": [
+      "export",
+      "exports",
+      "import",
+      "imports"
+     ],
+     "permissions": [
+      "permission",
+      "permissions"
+     ]
+    }
+   },
+   "rank_score": 102.0,
+   "found_via": "tag+keyword",
+   "clone_path": "/tmp/library_clones/github.com_gristlabs_grist-core",
+   "description": "Next-generation spreadsheet with relational structure, formula-based access control, and a portable, self-contained format (alternative to Airtable).",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "airtable",
+     "sheets",
+     "spreadsheet"
+    ],
+    "declaration_hits": {
+     "description": [
+      "spreadsheet",
+      "airtable"
+     ],
+     "readme": [
+      "spreadsheet",
+      "sheets"
+     ]
+    },
+    "anchors": [
+     "Cells",
+     "formulas",
+     "tables"
+    ],
+    "anchors_missing": []
+   }
+  },
+  {
+   "name": "Baserow",
+   "repo": "https://gitlab.com/baserow/baserow",
+   "commit": "81e094a1f4b3a62625c218d78fe319ba44098617",
+   "website": "https://baserow.io/",
+   "licence": "MIT",
+   "licence_file": "LICENSE",
+   "screens": {
+    "screen_files_total": 1223,
+    "screen_files_user": 1159,
+    "screen_files_admin": 64,
+    "screen_languages": [
+     ".html",
+     ".jsx",
+     ".vue"
+    ],
+    "user_screen_examples": [
+     "enterprise/web-frontend/modules/baserow_enterprise/components/exportworkspacemodalwarning.vue",
+     "enterprise/web-frontend/modules/baserow_enterprise/components/enterprisesettingsoverridedashboardhelp.vue",
+     "enterprise/web-frontend/modules/baserow_enterprise/components/membersrolefield.vue",
+     "enterprise/web-frontend/modules/baserow_enterprise/components/snapshotmodalwarning.vue",
+     "enterprise/web-frontend/modules/baserow_enterprise/components/authprovidericon.vue",
+     "enterprise/web-frontend/modules/baserow_enterprise/components/auditlogsidebarworkspace.vue"
+    ],
+    "login_evidence": [
+     "enterprise/web-frontend/modules/baserow_enterprise/components/admin/login/samlloginaction.vue",
+     "enterprise/web-frontend/modules/baserow_enterprise/components/admin/login/loginbutton.vue",
+     "enterprise/web-frontend/modules/baserow_enterprise/pages/login/loginerror.vue",
+     "enterprise/web-frontend/modules/baserow_enterprise/pages/login/loginwithsaml.vue",
+     "enterprise/backend/src/baserow_enterprise/migrations/0028_authformelement_login_button_label.py"
+    ]
+   },
+   "run_recipes": [
+    "docker-compose.dev.yml",
+    "docker-compose.yml",
+    "web-frontend/dockerfile",
+    "deploy/heroku/docker-compose.yml",
+    "deploy/traefik/docker-compose.yml",
+    "deploy/render/dockerfile"
+   ],
+   "robustness": {
+    "score": 51.8,
+    "parts": {
+     "stars": 15.6,
+     "commits_12m": 0.0,
+     "release": 1.7,
+     "activity": 0.0,
+     "tests": 20.0,
+     "ci": 10.0,
+     "readme": 4.5
+    },
+    "facts": {
+     "stars": 2264,
+     "commits_12m": 0,
+     "latest_release": "2025-10-08",
+     "updated_at": "2026-09-18"
+    },
+    "repo_metrics": {
+     "test_files": 1603,
+     "ci_evidence": [
+      ".gitlab-ci.yml",
+      ".github/workflows/build-backend-ci-image.yml",
+      ".github/workflows/ci.yml"
+     ],
+     "readme_chars": 5437
+    }
+   },
+   "capability": {
+    "coverage_pct": 100.0,
+    "matched": [
+     "Cells",
+     "formulas",
+     "tables",
+     "charts",
+     "filtering",
+     "sorting",
+     "collaboration",
+     "comments",
+     "imports/exports",
+     "permissions"
+    ],
+    "missing": [],
+    "evidence_tokens": {
+     "Cells": [
+      "cell",
+      "cells"
+     ],
+     "formulas": [
+      "formula",
+      "formulas"
+     ],
+     "tables": [
+      "table",
+      "tables"
+     ],
+     "charts": [
+      "chart",
+      "charts"
+     ],
+     "filtering": [
+      "filtering"
+     ],
+     "sorting": [
+      "sorting"
+     ],
+     "collaboration": [
+      "collaboration"
+     ],
+     "comments": [
+      "comment",
+      "comments"
+     ],
+     "imports/exports": [
+      "export",
+      "exports",
+      "import",
+      "imports"
+     ],
+     "permissions": [
+      "permission",
+      "permissions"
+     ]
+    }
+   },
+   "rank_score": 85.9,
+   "found_via": "keyword",
+   "clone_path": "/tmp/library_clones/gitlab.com_baserow_baserow",
+   "description": "Create your own database without technical experience (alternative to Airtable).",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "airtable",
+     "spreadsheet"
+    ],
+    "declaration_hits": {
+     "description": [
+      "airtable"
+     ],
+     "readme": [
+      "spreadsheet",
+      "airtable"
+     ]
+    },
+    "anchors": [
+     "Cells",
+     "formulas",
+     "tables"
+    ],
+    "anchors_missing": []
+   }
+  }
+ ],
+ "refused": [
+  {
+   "name": "Collabora Online Development Edition",
+   "repo": "https://gerrit.collaboraoffice.com/plugins/gitiles/online",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "CryptPad",
+   "repo": "https://github.com/cryptpad/cryptpad",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Digislides",
+   "repo": "https://codeberg.org/ladigitale/Digislides",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "NocoDB",
+   "repo": "https://github.com/nocodb/nocodb",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['SUL-1.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "ONLYOFFICE",
+   "repo": "https://github.com/ONLYOFFICE/DocumentServer",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

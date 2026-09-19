@@ -1,0 +1,231 @@
+{
+ "category": "Helpdesk",
+ "slug": "helpdesk",
+ "exemplar": "Zendesk",
+ "capabilities": [
+  "Tickets",
+  "email support",
+  "queues",
+  "assignment",
+  "SLA",
+  "automation",
+  "knowledge base",
+  "customer portal",
+  "reporting"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "helpdesk",
+   "help desk",
+   "support tickets",
+   "ticketing system",
+   "customer support",
+   "zendesk"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "BugPin",
+   "repo": "https://github.com/aranticlabs/bugpin",
+   "stage": "pre-filter",
+   "reason": "stars 38 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Bugsink",
+   "repo": "https://github.com/bugsink/bugsink/",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Chatwoot",
+   "repo": "https://github.com/chatwoot/chatwoot",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Deskpro",
+   "repo": "https://www.deskpro.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "EKSO",
+   "repo": "https://ekso.app",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Erxes",
+   "repo": "https://github.com/erxes/erxes",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0', 'Commons-Clause']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Forgejo",
+   "repo": "https://codeberg.org/forgejo/forgejo/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Frappe Helpdesk",
+   "repo": "https://github.com/frappe/helpdesk",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "FreeScout",
+   "repo": "https://github.com/freescout-help-desk/freescout",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Full Help",
+   "repo": "https://www.fullhelp.com/en/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "GlitchTip",
+   "repo": "https://gitlab.com/glitchtip/glitchtip",
+   "stage": "pre-filter",
+   "reason": "stars 164 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "ITFlow",
+   "repo": "https://github.com/itflow-org/itflow",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "JIRA",
+   "repo": "https://www.atlassian.com/software/jira",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Jitbit Helpdesk",
+   "repo": "https://www.jitbit.com/helpdesk/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Libredesk",
+   "repo": "https://github.com/abhinavxd/libredesk",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "MantisBT",
+   "repo": "https://github.com/mantisbt/mantisbt",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "OTOBO",
+   "repo": "https://github.com/RotherOSS/otobo",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Request Tracker",
+   "repo": "https://github.com/bestpractical/rt",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Roundup Issue Tracker",
+   "repo": "https://www.roundup-tracker.org/code.html",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "SupportPal",
+   "repo": "https://www.supportpal.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Telebugs",
+   "repo": "https://telebugs.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Zammad",
+   "repo": "https://github.com/zammad/zammad",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "UVDesk",
+   "repo": "https://github.com/uvdesk/community-skeleton",
+   "commit": "6f35040f447f7fe1dcd254e259e7b7e0a9f7a79f",
+   "stage": "licence",
+   "reason": "licence file says OSL-3.0",
+   "licence": "OSL-3.0",
+   "found_via": "keyword",
+   "screens": null
+  },
+  {
+   "name": "Tiledesk",
+   "repo": "https://github.com/Tiledesk/tiledesk",
+   "commit": "7509f1f7f14429e44dcebd7c0293375975e41c14",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "keyword",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": []
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

@@ -1,0 +1,101 @@
+{
+ "category": "Presentation",
+ "slug": "presentation",
+ "exemplar": "PowerPoint",
+ "capabilities": [
+  "Slides",
+  "layouts",
+  "media",
+  "animations",
+  "themes",
+  "speaker notes",
+  "collaboration",
+  "presenting",
+  "export"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "presentation",
+   "slides",
+   "slideshow",
+   "impress",
+   "powerpoint"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "BigBlueButton",
+   "repo": "https://github.com/bigbluebutton/bigbluebutton",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['LGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Collabora Online Development Edition",
+   "repo": "https://gerrit.collaboraoffice.com/plugins/gitiles/online",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Immich Kiosk",
+   "repo": "https://github.com/damongolding/immich-kiosk",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Memtly",
+   "repo": "https://github.com/Memtly/Memtly.Community",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "This week in past",
+   "repo": "https://github.com/RouHim/this-week-in-past",
+   "stage": "pre-filter",
+   "reason": "stars 102 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "OpenSlides",
+   "repo": "https://github.com/OpenSlides/OpenSlides",
+   "commit": "dc48d4469bdf0c0f973e234a60786c3f673ffa57",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "keyword",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": []
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

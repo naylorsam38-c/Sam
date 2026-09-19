@@ -1,0 +1,155 @@
+{
+ "category": "ERP",
+ "slug": "erp",
+ "exemplar": "SAP / ERPNext",
+ "capabilities": [
+  "Accounting",
+  "sales",
+  "purchasing",
+  "inventory",
+  "manufacturing",
+  "HR",
+  "projects",
+  "reporting",
+  "workflows",
+  "permissions"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "erp",
+   "enterprise resource",
+   "sap",
+   "erpnext"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "Dolibarr",
+   "repo": "https://github.com/Dolibarr/dolibarr",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "ERPNext",
+   "repo": "https://github.com/frappe/erpnext",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Ever Gauzy",
+   "repo": "https://github.com/ever-co/ever-gauzy",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "farmOS",
+   "repo": "https://github.com/farmOS/farmOS",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "LedgerSMB",
+   "repo": "https://github.com/ledgersmb/LedgerSMB",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Odoo",
+   "repo": "https://github.com/odoo/odoo",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['LGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Tryton",
+   "repo": "https://foss.heptapod.net/tryton/tryton",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "grocy",
+   "repo": "https://github.com/grocy/grocy",
+   "commit": "41206cb90154e0d17d3e108cc1f182b94fdb465d",
+   "stage": "runs",
+   "reason": "no Dockerfile or compose file \u2014 walker cannot stand it up",
+   "licence": "MIT",
+   "found_via": "tag+keyword",
+   "screens": {
+    "screen_files_total": 97,
+    "screen_files_user": 97,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".blade.php"
+    ],
+    "user_screen_examples": [
+     "views/userentityform.blade.php",
+     "views/quantityunitconversionform.blade.php",
+     "views/stockentryform.blade.php",
+     "views/userentities.blade.php",
+     "views/quantityunits.blade.php",
+     "views/batteryform.blade.php"
+    ],
+    "login_evidence": [
+     "controllers/logincontroller.php",
+     "public/viewjs/login.js",
+     "views/login.blade.php"
+    ]
+   }
+  },
+  {
+   "name": "OFBiz",
+   "repo": "https://github.com/apache/ofbiz-framework",
+   "commit": "edf8e9bc31ce245d7a472efa5105abadc2068b0c",
+   "stage": "screens",
+   "reason": "1 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "Apache-2.0",
+   "found_via": "tag+keyword",
+   "screens": {
+    "screen_files_total": 1,
+    "screen_files_user": 1,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "applications/content/webapp/content/images/notextfound.html"
+    ],
+    "login_evidence": [
+     "framework/minilang/src/main/java/org/apache/ofbiz/minilang/method/entityops/setcurrentuserlogin.java",
+     "framework/common/testdef/userlogintests.xml",
+     "framework/common/src/main/java/org/apache/ofbiz/common/login/ldapauthenticationservices.java",
+     "framework/common/src/main/java/org/apache/ofbiz/common/login/loginservices.java",
+     "framework/resources/templates/adminuserlogindata.xml"
+    ]
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

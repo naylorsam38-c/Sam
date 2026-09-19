@@ -1,0 +1,662 @@
+{
+ "category": "Accounting",
+ "slug": "accounting",
+ "exemplar": "Xero",
+ "capabilities": [
+  "Accounts",
+  "invoices",
+  "bills",
+  "payments",
+  "bank feeds",
+  "reconciliation",
+  "expenses",
+  "tax",
+  "reports",
+  "contacts"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "accounting",
+   "invoicing",
+   "invoice",
+   "bookkeeping",
+   "xero"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": false,
+ "survivors": [
+  {
+   "name": "FOSSBilling",
+   "repo": "https://github.com/FOSSBilling/FOSSBilling",
+   "commit": "748b114503e0ff25fce5a55c436f1a393336c6b9",
+   "website": "https://fossbilling.org/",
+   "licence": "Apache-2.0",
+   "licence_file": "LICENSE",
+   "screens": {
+    "screen_files_total": 218,
+    "screen_files_user": 87,
+    "screen_files_admin": 131,
+    "screen_languages": [
+     ".html",
+     ".twig"
+    ],
+    "user_screen_examples": [
+     "src/rewrite-missing.html",
+     "src/modules/index.html",
+     "src/modules/formbuilder/templates/client/mod_formbuilder_build.html.twig",
+     "src/modules/news/templates/client/mod_news_post.html.twig",
+     "src/modules/news/templates/client/mod_news_index.html.twig",
+     "src/modules/invoice/templates/client/mod_invoice_print.html.twig"
+    ],
+    "login_evidence": [
+     "src/modules/staff/templates/admin/mod_staff_login_history.html.twig",
+     "src/modules/staff/templates/admin/mod_staff_login.html.twig",
+     "src/modules/embed/templates/client/mod_embed_loginform.html.twig",
+     "src/modules/client/templates/admin/mod_client_login_history.html.twig",
+     "src/modules/page/templates/client/mod_page_login.html.twig"
+    ]
+   },
+   "run_recipes": [
+    "dockerfile"
+   ],
+   "robustness": {
+    "score": 82.8,
+    "parts": {
+     "stars": 15.0,
+     "commits_12m": 20.0,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 18.3,
+     "ci": 10.0,
+     "readme": 4.5
+    },
+    "facts": {
+     "stars": 1702,
+     "commits_12m": 1657,
+     "latest_release": "2026-09-01",
+     "updated_at": "2026-09-17"
+    },
+    "repo_metrics": {
+     "test_files": 274,
+     "ci_evidence": [
+      ".github/workflows/ghcr-cleanup.yml",
+      ".github/workflows/code-quality-check.yml",
+      ".github/workflows/ci.yml"
+     ],
+     "readme_chars": 5431
+    }
+   },
+   "capability": {
+    "coverage_pct": 100.0,
+    "matched": [
+     "Accounts",
+     "invoices",
+     "bills",
+     "payments",
+     "bank feeds",
+     "reconciliation",
+     "expenses",
+     "tax",
+     "reports",
+     "contacts"
+    ],
+    "missing": [],
+    "evidence_tokens": {
+     "Accounts": [
+      "account",
+      "accounts"
+     ],
+     "invoices": [
+      "invoice",
+      "invoices"
+     ],
+     "bills": [
+      "bill"
+     ],
+     "payments": [
+      "payment",
+      "payments"
+     ],
+     "bank feeds": [
+      "bank"
+     ],
+     "reconciliation": [
+      "reconciliation"
+     ],
+     "expenses": [
+      "expenses"
+     ],
+     "tax": [
+      "tax"
+     ],
+     "reports": [
+      "report",
+      "reports"
+     ],
+     "contacts": [
+      "contact",
+      "contacts"
+     ]
+    }
+   },
+   "rank_score": 91.4,
+   "found_via": "tag",
+   "clone_path": "(deleted after inspection)",
+   "description": "Hosting and billing automation. Integrates with WHM, CWP, cPanel and HestiaCP. Full API and easily extensible.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "invoicing"
+    ],
+    "declaration_hits": {
+     "description": [],
+     "readme": [
+      "invoicing"
+     ]
+    },
+    "anchors": [
+     "Accounts",
+     "invoices",
+     "bills"
+    ],
+    "anchors_missing": []
+   }
+  },
+  {
+   "name": "ezbookkeeping",
+   "repo": "https://github.com/mayswind/ezbookkeeping",
+   "commit": "057be38cd51bb5789439752dfa2bacd549537939",
+   "website": "https://ezbookkeeping.mayswind.net/",
+   "licence": "MIT",
+   "licence_file": "LICENSE",
+   "screens": {
+    "screen_files_total": 224,
+    "screen_files_user": 224,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html",
+     ".tmpl",
+     ".vue"
+    ],
+    "user_screen_examples": [
+     "src/mobileapp.vue",
+     "src/desktop.html",
+     "src/index.html",
+     "src/mobile.html",
+     "src/desktopapp.vue",
+     "src/components/desktop/switchtomobiledialog.vue"
+    ],
+    "login_evidence": [
+     "src/views/desktop/loginpage.vue",
+     "src/views/desktop/users/settings/dialogs/unlinkthirdpartylogindialog.vue",
+     "src/views/base/loginpagebase.ts",
+     "src/views/mobile/loginpage.vue"
+    ]
+   },
+   "run_recipes": [
+    "dockerfile"
+   ],
+   "robustness": {
+    "score": 67.7,
+    "parts": {
+     "stars": 17.4,
+     "commits_12m": 11.4,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 8.8,
+     "ci": 10.0,
+     "readme": 5.0
+    },
+    "facts": {
+     "stars": 5610,
+     "commits_12m": 858,
+     "latest_release": "2026-09-16",
+     "updated_at": "2026-09-18"
+    },
+    "repo_metrics": {
+     "test_files": 132,
+     "ci_evidence": [
+      ".github/workflows/build-snapshot.yml",
+      ".github/workflows/build-non-main-branch.yml",
+      ".github/workflows/update-i18n-progress.yml"
+     ],
+     "readme_chars": 14114
+    }
+   },
+   "capability": {
+    "coverage_pct": 90.0,
+    "matched": [
+     "Accounts",
+     "invoices",
+     "bills",
+     "payments",
+     "bank feeds",
+     "reconciliation",
+     "expenses",
+     "tax",
+     "reports"
+    ],
+    "missing": [
+     "contacts"
+    ],
+    "evidence_tokens": {
+     "Accounts": [
+      "account",
+      "accounts"
+     ],
+     "invoices": [
+      "invoice"
+     ],
+     "bills": [
+      "bill"
+     ],
+     "payments": [
+      "payment"
+     ],
+     "bank feeds": [
+      "bank"
+     ],
+     "reconciliation": [
+      "reconciliation"
+     ],
+     "expenses": [
+      "expense"
+     ],
+     "tax": [
+      "tax"
+     ],
+     "reports": [
+      "report",
+      "reports"
+     ],
+     "contacts": []
+    }
+   },
+   "rank_score": 88.8,
+   "found_via": "tag+keyword",
+   "clone_path": "(deleted after inspection)",
+   "description": "A lightweight personal bookkeeping app hosted by yourself.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "bookkeeping"
+    ],
+    "declaration_hits": {
+     "description": [
+      "bookkeeping"
+     ],
+     "readme": [
+      "bookkeeping"
+     ]
+    },
+    "anchors": [
+     "Accounts",
+     "invoices",
+     "bills"
+    ],
+    "anchors_missing": []
+   }
+  }
+ ],
+ "refused": [
+  {
+   "name": "Akaunting",
+   "repo": "https://github.com/akaunting/akaunting",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['BUSL-1.1']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Assets",
+   "repo": "https://github.com/venil7/assets",
+   "stage": "pre-filter",
+   "reason": "stars 183 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Bigcapital",
+   "repo": "https://github.com/bigcapitalhq/bigcapital",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Budget Board",
+   "repo": "https://github.com/teelur/budget-board",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "DePay",
+   "repo": "https://github.com/depayfi/widgets",
+   "stage": "pre-filter",
+   "reason": "stars 134 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Dolibarr",
+   "repo": "https://github.com/Dolibarr/dolibarr",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Econumo",
+   "repo": "https://github.com/econumo/econumo",
+   "stage": "pre-filter",
+   "reason": "stars 106 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Expensave",
+   "repo": "https://github.com/algirdasc/expensave",
+   "stage": "pre-filter",
+   "reason": "stars 52 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Firefly III",
+   "repo": "https://github.com/firefly-iii/firefly-iii",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Foodsoft",
+   "repo": "https://github.com/foodcoops/foodsoft",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Galette",
+   "repo": "https://github.com/galette/galette",
+   "stage": "pre-filter",
+   "reason": "stars 72 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Ghostfolio",
+   "repo": "https://github.com/ghostfolio/ghostfolio",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "GRR",
+   "repo": "https://github.com/JeromeDevome/GRR",
+   "stage": "pre-filter",
+   "reason": "stars 109 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Invoice Ninja",
+   "repo": "https://github.com/invoiceninja/invoiceninja",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['Elastic-2.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "InvoiceShelf",
+   "repo": "https://github.com/InvoiceShelf/InvoiceShelf",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "ITFlow",
+   "repo": "https://github.com/itflow-org/itflow",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Kresus",
+   "repo": "https://github.com/kresusapp/kresus",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Lago",
+   "repo": "https://github.com/getlago/lago",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "LedgerSMB",
+   "repo": "https://github.com/ledgersmb/LedgerSMB",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "monetr",
+   "repo": "https://github.com/monetr/monetr",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['FSL-1.1-MIT']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mybucks.online",
+   "repo": "https://github.com/mybucks-online/app",
+   "stage": "pre-filter",
+   "reason": "stars 19 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "MyFin Budget",
+   "repo": "https://github.com/afaneca/myfin",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "OctoBot",
+   "repo": "https://github.com/Drakkar-Software/OctoBot",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "OpenBudgeteer",
+   "repo": "https://github.com/TheAxelander/OpenBudgeteer",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Pancake",
+   "repo": "https://www.pancakeapp.com/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Receipt Wrangler",
+   "repo": "https://github.com/Receipt-Wrangler/receipt-wrangler",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "SHKeeper",
+   "repo": "https://github.com/vsys-host/shkeeper.io",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Sure",
+   "repo": "https://github.com/we-promise/sure",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "TimeTracker",
+   "repo": "https://github.com/drytrix/TimeTracker",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "VoucherVault",
+   "repo": "https://github.com/l4rm4nd/VoucherVault",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Wallos",
+   "repo": "https://github.com/ellite/wallos",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "WYGIWYH",
+   "repo": "https://github.com/eitchtee/WYGIWYH",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "YAFFA",
+   "repo": "https://github.com/kantorge/yaffa",
+   "stage": "pre-filter",
+   "reason": "stars 109 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "ExpenseOwl",
+   "repo": "https://github.com/tanq16/expenseowl",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "IHateMoney",
+   "repo": "https://github.com/spiral-project/ihatemoney",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Bitcart",
+   "repo": "https://github.com/bitcart/bitcart",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "SolidInvoice",
+   "repo": "https://github.com/SolidInvoice/SolidInvoice",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "REI3",
+   "repo": "https://github.com/r3-team/r3",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Ocular",
+   "repo": "https://github.com/simonwep/ocular",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Family Accounting Tool",
+   "repo": "https://github.com/nymanjens/facto",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Kill Bill",
+   "repo": "https://github.com/killbill/killbill",
+   "commit": "cb60779c171391be558cd7aebb1eafea60ad2b82",
+   "stage": "screens",
+   "reason": "6 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "Apache-2.0",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 6,
+    "screen_files_user": 6,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html",
+     ".mustache"
+    ],
+    "user_screen_examples": [
+     "util/src/main/resources/org/killbill/billing/util/invoice/templates/htmlinvoicetemplate.mustache",
+     "profiles/killpay/src/main/webapp/index.html",
+     "profiles/killpay/src/main/webapp/api.html",
+     "profiles/killbill/src/main/webapp/index.html",
+     "profiles/killbill/src/main/webapp/oauth2-redirect.html",
+     "profiles/killbill/src/main/webapp/api.html"
+    ],
+    "login_evidence": [
+     "catalog/src/main/java/org/killbill/billing/catalog/api/defaultcataloginternalapi.java",
+     "api/src/main/java/org/killbill/billing/catalog/api/cataloginternalapi.java"
+    ]
+   }
+  },
+  {
+   "name": "Fava",
+   "repo": "https://github.com/beancount/fava",
+   "commit": "7096e25c6dcc48ab0059643b5592197492ddd0dc",
+   "stage": "screens",
+   "reason": "no login found in paths or source",
+   "licence": "MIT",
+   "found_via": "tag+keyword",
+   "screens": {
+    "screen_files_total": 106,
+    "screen_files_user": 106,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html",
+     ".svelte"
+    ],
+    "user_screen_examples": [
+     "src/fava/templates/_journal_table.html",
+     "src/fava/templates/_layout.html",
+     "src/fava/templates/_query_table.html",
+     "src/fava/templates/macros/_commodity_macros.html",
+     "src/fava/templates/macros/_account_macros.html",
+     "src/fava/ext/portfolio_list/templates/portfoliolist.html"
+    ],
+    "login_evidence": []
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

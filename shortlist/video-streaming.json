@@ -1,0 +1,509 @@
+{
+ "category": "Video streaming",
+ "slug": "video-streaming",
+ "exemplar": "YouTube",
+ "capabilities": [
+  "Upload",
+  "transcoding",
+  "channels",
+  "subscriptions",
+  "recommendations",
+  "search",
+  "playlists",
+  "comments",
+  "likes",
+  "live streaming",
+  "captions",
+  "analytics",
+  "monetisation"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "video platform",
+   "youtube",
+   "peertube"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": false,
+ "survivors": [
+  {
+   "name": "Youtarr",
+   "repo": "https://github.com/DialmasterOrg/Youtarr",
+   "commit": "636a2b0d5aff157621a7c0ecddc6a9e1a8853acb",
+   "website": "https://github.com/DialmasterOrg/Youtarr",
+   "licence": "ISC",
+   "licence_file": "LICENSE.md",
+   "screens": {
+    "screen_files_total": 260,
+    "screen_files_user": 260,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html",
+     ".tsx"
+    ],
+    "user_screen_examples": [
+     "client/index.html",
+     "client/.storybook/preview.tsx",
+     "client/src/app.tsx",
+     "client/src/app.test.tsx",
+     "client/src/test-utils.tsx",
+     "client/src/index.tsx"
+    ],
+    "login_evidence": [
+     "client/src/components/locallogin.stories.tsx",
+     "client/src/components/locallogin.tsx"
+    ]
+   },
+   "run_recipes": [
+    "docker-compose.dev.yml",
+    "docker-compose.yml",
+    "dockerfile"
+   ],
+   "robustness": {
+    "score": 74.5,
+    "parts": {
+     "stars": 14.9,
+     "commits_12m": 9.6,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 20.0,
+     "ci": 10.0,
+     "readme": 5.0
+    },
+    "facts": {
+     "stars": 1572,
+     "commits_12m": 719,
+     "latest_release": "2026-09-15",
+     "updated_at": "2026-09-15"
+    },
+    "repo_metrics": {
+     "test_files": 458,
+     "ci_evidence": [
+      ".github/workflows/coverage-comment.yml",
+      ".github/workflows/ci.yml",
+      ".github/workflows/claude.yml"
+     ],
+     "readme_chars": 10889
+    }
+   },
+   "capability": {
+    "coverage_pct": 84.6,
+    "matched": [
+     "Upload",
+     "transcoding",
+     "channels",
+     "subscriptions",
+     "recommendations",
+     "search",
+     "playlists",
+     "comments",
+     "likes",
+     "live streaming",
+     "captions"
+    ],
+    "missing": [
+     "analytics",
+     "monetisation"
+    ],
+    "evidence_tokens": {
+     "Upload": [
+      "upload"
+     ],
+     "transcoding": [
+      "transcoding"
+     ],
+     "channels": [
+      "channel",
+      "channels"
+     ],
+     "subscriptions": [
+      "subscription",
+      "subscriptions"
+     ],
+     "recommendations": [
+      "recommendations"
+     ],
+     "search": [
+      "search"
+     ],
+     "playlists": [
+      "playlist",
+      "playlists"
+     ],
+     "comments": [
+      "comment",
+      "comments"
+     ],
+     "likes": [
+      "like"
+     ],
+     "live streaming": [
+      "streaming"
+     ],
+     "captions": [
+      "caption",
+      "captions"
+     ],
+     "analytics": [],
+     "monetisation": []
+    }
+   },
+   "rank_score": 89.5,
+   "found_via": "keyword",
+   "clone_path": "/tmp/library_clones/github.com_DialmasterOrg_Youtarr",
+   "description": "Download videos from YouTube channels on a schedule via yt-dlp, with a web UI to browse and selectively download videos. Integrates with Plex Media Server and generates NFO metadata for Jellyfin, Kodi, and Emby.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "youtube"
+    ],
+    "declaration_hits": {
+     "description": [],
+     "readme": [
+      "youtube"
+     ]
+    },
+    "anchors": [
+     "Upload",
+     "transcoding",
+     "channels"
+    ],
+    "anchors_missing": []
+   }
+  }
+ ],
+ "refused": [
+  {
+   "name": "Channels DVR Server",
+   "repo": "https://getchannels.com/dvr-server/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "ChannelTube",
+   "repo": "https://github.com/TheWicklowWolf/ChannelTube",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "ClipBucket",
+   "repo": "https://github.com/MacWarrior/clipbucket-v5",
+   "stage": "pre-filter",
+   "reason": "stars 180 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "ClyoCloud",
+   "repo": "https://code.weexnes.dev/ClyoCloud",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Digiview",
+   "repo": "https://codeberg.org/ladigitale/digiview",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Elengrab",
+   "repo": "https://github.com/neosy/elengrab",
+   "stage": "pre-filter",
+   "reason": "stars 37 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Emby",
+   "repo": "https://emby.media/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Invidious",
+   "repo": "https://github.com/iv-org/invidious",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "iSponsorBlockTV",
+   "repo": "https://github.com/dmunozv04/iSponsorBlockTV",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "MediaCMS",
+   "repo": "https://github.com/mediacms-io/mediacms",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mediagoblin",
+   "repo": "https://git.savannah.gnu.org/cgit/mediagoblin.git/tree/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "MeTube",
+   "repo": "https://github.com/alexta69/metube",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "OvenMediaEngine",
+   "repo": "https://github.com/OvenMediaLabs/OvenMediaEngine",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "PeerTube",
+   "repo": "https://github.com/Chocobozzz/PeerTube",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Pinchflat",
+   "repo": "https://github.com/kieraneglin/pinchflat",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Plex",
+   "repo": "https://www.plex.tv/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Subsonic",
+   "repo": "http://www.subsonic.org/pages/index.jsp",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Tiramisu",
+   "repo": "https://github.com/MrRobotoGit/tiramisu",
+   "stage": "pre-filter",
+   "reason": "stars 137 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Tube Archivist",
+   "repo": "https://github.com/tubearchivist/tubearchivist",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Tube",
+   "repo": "https://git.mills.io/prologic/tube",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "tubesync",
+   "repo": "https://github.com/meeb/tubesync",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "VideoLAN Client (VLC)",
+   "repo": "https://code.videolan.org/videolan/vlc",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "ydl_api_ng",
+   "repo": "https://github.com/Totonyus/ydl_api_ng",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "youtube-dl-nas",
+   "repo": "https://github.com/hyeonsangjeon/youtube-dl-nas",
+   "stage": "pre-filter",
+   "reason": "stars 197 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "\u00fcWave",
+   "repo": "https://github.com/u-wave",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "vod2pod-rss",
+   "repo": "https://github.com/madiele/vod2pod-rss",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "YoutubeDL-Server",
+   "repo": "https://github.com/nbr23/youtube-dl-server",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Restreamer",
+   "repo": "https://github.com/datarhei/restreamer",
+   "commit": "fd12aee2a289e9be4fbf45fc1dfa50838cfb149f",
+   "stage": "screens",
+   "reason": "1 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "Apache-2.0",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 1,
+    "screen_files_user": 1,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "ui-root/index.html"
+    ],
+    "login_evidence": []
+   }
+  },
+  {
+   "name": "CyTube",
+   "repo": "https://github.com/calzoneman/sync",
+   "commit": "589f999a9c526bf773a8b21ecf29ba30faf14739",
+   "stage": "runs",
+   "reason": "no Dockerfile or compose file \u2014 walker cannot stand it up",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 26,
+    "screen_files_user": 26,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".pug"
+    ],
+    "user_screen_examples": [
+     "templates/account-profile.pug",
+     "templates/contact.pug",
+     "templates/channeloptions.pug",
+     "templates/iframe.pug",
+     "templates/acp.pug",
+     "templates/pagefooter.pug"
+    ],
+    "login_evidence": [
+     "templates/login.pug"
+    ]
+   }
+  },
+  {
+   "name": "Rapidbay",
+   "repo": "https://github.com/hauxir/rapidbay/",
+   "commit": "ef71368b6da04c77b8e71dfde5d0456c89ea100b",
+   "stage": "screens",
+   "reason": "2 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 2,
+    "screen_files_user": 2,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "app/frontend/login.html",
+     "app/frontend/index.html"
+    ],
+    "login_evidence": [
+     "app/frontend/login.html"
+    ]
+   }
+  },
+  {
+   "name": "SyncTube",
+   "repo": "https://github.com/RblSb/SyncTube",
+   "commit": "7b0ea5877eefcfe70744683a4273b52b3e34037a",
+   "stage": "screens",
+   "reason": "2 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 2,
+    "screen_files_user": 2,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "res/index.html",
+     "res/setup.html"
+    ],
+    "login_evidence": [
+     "res/index.html (in content)"
+    ]
+   }
+  },
+  {
+   "name": "Stretto",
+   "repo": "https://github.com/benkaiser/stretto",
+   "commit": "bc37c7baed464aed14e26c60714db8a039d7d83a",
+   "stage": "category",
+   "reason": "does not declare itself as video streaming \u2014 none of ['video platform', 'youtube', 'peertube'] in its description or README head",
+   "licence": "MIT",
+   "found_via": "keyword",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Upload",
+     "transcoding",
+     "channels"
+    ],
+    "anchors_missing": []
+   },
+   "capability_coverage_pct": 61.5,
+   "rank_before_category_gate": 57.4
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

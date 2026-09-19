@@ -1,0 +1,148 @@
+{
+ "category": "Email marketing",
+ "slug": "email-marketing",
+ "exemplar": "Mailchimp",
+ "capabilities": [
+  "Contacts",
+  "lists",
+  "campaigns",
+  "templates",
+  "automation",
+  "segmentation",
+  "analytics",
+  "forms"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "newsletter",
+   "email marketing",
+   "mailchimp",
+   "mailing list"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "Courier MTA",
+   "repo": "https://www.courier-mta.org/repo.html",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Django-CRM",
+   "repo": "https://github.com/DjangoCRM/django-crm",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "HyperKitty",
+   "repo": "https://gitlab.com/mailman/hyperkitty",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Keila",
+   "repo": "https://github.com/pentacent/keila",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Listmonk",
+   "repo": "https://github.com/knadh/listmonk",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Mailman",
+   "repo": "https://gitlab.com/mailman/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Mautic",
+   "repo": "https://github.com/mautic/mautic",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "mlmmj",
+   "repo": "https://codeberg.org/mlmmj/mlmmj",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "phpList",
+   "repo": "https://github.com/phpList/phplist3",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Postorius",
+   "repo": "https://gitlab.com/mailman/postorius/",
+   "stage": "pre-filter",
+   "reason": "stars 91 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Schleuder",
+   "repo": "https://0xacab.org/schleuder/schleuder/tree/master",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Sendy",
+   "repo": "https://sendy.co",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Sympa",
+   "repo": "https://github.com/sympa-community/sympa",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Forward Email",
+   "repo": "https://github.com/forwardemail/forwardemail.net",
+   "commit": "641835c3c0c183938c545ad554bea105a172e3b3",
+   "stage": "licence",
+   "reason": "licence file says BUSL-1.1",
+   "licence": "BUSL-1.1",
+   "found_via": "keyword",
+   "screens": null
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

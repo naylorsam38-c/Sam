@@ -1,0 +1,24 @@
+{
+ "category": "Team communication",
+ "slug": "team-communication",
+ "app": "Rocket.Chat",
+ "repo": "https://github.com/RocketChat/Rocket.Chat",
+ "commit": "a2132d777c5b1ec3c181632f9d12f2085457fe27",
+ "started": "2026-09-19T10:02:53",
+ "boot": {
+  "status": "BOOT FAILED",
+  "reason": "no usable compose file or Dockerfile found in clone"
+ },
+ "gate": {},
+ "capabilities": {},
+ "summary": {
+  "booted": false,
+  "gate": null,
+  "capabilities": 0,
+  "reached": 0,
+  "seen": 0,
+  "absent": 0,
+  "gaps": []
+ },
+ "finished": "2026-09-19T10:03:02"
+}

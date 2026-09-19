@@ -1,0 +1,201 @@
+{
+ "category": "Marketing automation",
+ "slug": "marketing-automation",
+ "exemplar": "HubSpot",
+ "capabilities": [
+  "CRM",
+  "contacts",
+  "email",
+  "campaigns",
+  "forms",
+  "landing pages",
+  "automation",
+  "segmentation",
+  "analytics"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "marketing automation",
+   "hubspot",
+   "marketing platform"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "Django-CRM",
+   "repo": "https://github.com/DjangoCRM/django-crm",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Dolibarr",
+   "repo": "https://github.com/Dolibarr/dolibarr",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "EspoCRM",
+   "repo": "https://github.com/espocrm/espocrm",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Group Office",
+   "repo": "https://github.com/Intermesh/groupoffice/",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "HyperKitty",
+   "repo": "https://gitlab.com/mailman/hyperkitty",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Keila",
+   "repo": "https://github.com/pentacent/keila",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Listmonk",
+   "repo": "https://github.com/knadh/listmonk",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mailman",
+   "repo": "https://gitlab.com/mailman/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mautic",
+   "repo": "https://github.com/mautic/mautic",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "mlmmj",
+   "repo": "https://codeberg.org/mlmmj/mlmmj",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "phpList",
+   "repo": "https://github.com/phpList/phplist3",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Postorius",
+   "repo": "https://gitlab.com/mailman/postorius/",
+   "stage": "pre-filter",
+   "reason": "stars 91 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Relaticle",
+   "repo": "https://github.com/relaticle/relaticle",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Schleuder",
+   "repo": "https://0xacab.org/schleuder/schleuder/tree/master",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Sendy",
+   "repo": "https://sendy.co",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "SuiteCRM",
+   "repo": "https://github.com/SuiteCRM/SuiteCRM",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Sympa",
+   "repo": "https://github.com/sympa-community/sympa",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Twenty",
+   "repo": "https://github.com/twentyhq/twenty",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Krayin",
+   "repo": "https://github.com/krayin/laravel-crm",
+   "commit": "570a8db102607f1c191f239f06f6db06ec8b942b",
+   "stage": "runs",
+   "reason": "no Dockerfile or compose file \u2014 walker cannot stand it up",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 278,
+    "screen_files_user": 20,
+    "screen_files_admin": 258,
+    "screen_languages": [
+     ".blade.php"
+    ],
+    "user_screen_examples": [
+     "packages/webkul/installer/src/resources/views/components/form/index.blade.php",
+     "packages/webkul/installer/src/resources/views/components/form/control-group/error.blade.php",
+     "packages/webkul/installer/src/resources/views/components/form/control-group/label.blade.php",
+     "packages/webkul/installer/src/resources/views/components/form/control-group/index.blade.php",
+     "packages/webkul/installer/src/resources/views/components/form/control-group/control.blade.php",
+     "packages/webkul/installer/src/resources/views/components/button/index.blade.php"
+    ],
+    "login_evidence": [
+     "packages/webkul/admin/src/resources/views/sessions/login.blade.php"
+    ]
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}

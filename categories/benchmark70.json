@@ -1,0 +1,2280 @@
+{
+ "source": "Sam's pasted benchmark table, 2026-09-19 (capabilities verbatim). directory_tags/keywords are the search mapping.",
+ "categories": [
+  {
+   "id": 1,
+   "slug": "dating",
+   "category": "Dating",
+   "exemplar": "Tinder",
+   "capabilities": [
+    "Profiles",
+    "photos",
+    "discovery/swiping",
+    "preferences",
+    "matching",
+    "messaging",
+    "likes",
+    "super-likes",
+    "location",
+    "recommendations",
+    "blocking/reporting",
+    "verification",
+    "subscriptions",
+    "boosts",
+    "notifications"
+   ],
+   "directory_tags": [],
+   "keywords": [
+    "dating",
+    "matchmaking",
+    "swipe"
+   ],
+   "declares": [
+    "dating",
+    "matchmaking",
+    "swipe",
+    "tinder"
+   ]
+  },
+  {
+   "id": 2,
+   "slug": "social-network",
+   "category": "Social network",
+   "exemplar": "Facebook",
+   "capabilities": [
+    "Profiles",
+    "feeds",
+    "posts",
+    "comments",
+    "reactions",
+    "sharing",
+    "friends/followers",
+    "groups",
+    "pages",
+    "messaging",
+    "notifications",
+    "search",
+    "media",
+    "privacy",
+    "moderation"
+   ],
+   "directory_tags": [
+    "Communication - Social Networks and Forums"
+   ],
+   "keywords": [
+    "social network",
+    "social platform"
+   ],
+   "declares": [
+    "social network",
+    "social platform",
+    "facebook"
+   ]
+  },
+  {
+   "id": 3,
+   "slug": "short-form-video",
+   "category": "Short-form video",
+   "exemplar": "TikTok",
+   "capabilities": [
+    "Video creation/upload",
+    "feed",
+    "recommendations",
+    "likes",
+    "comments",
+    "follows",
+    "sharing",
+    "sounds/music",
+    "editing",
+    "effects",
+    "live",
+    "creator tools",
+    "moderation"
+   ],
+   "directory_tags": [],
+   "keywords": [
+    "short video",
+    "tiktok",
+    "short-form"
+   ],
+   "declares": [
+    "short video",
+    "tiktok",
+    "short-form"
+   ]
+  },
+  {
+   "id": 4,
+   "slug": "photo-sharing",
+   "category": "Photo sharing",
+   "exemplar": "Instagram",
+   "capabilities": [
+    "Profiles",
+    "photo/video posts",
+    "stories",
+    "reels",
+    "feed",
+    "likes",
+    "comments",
+    "follows",
+    "DMs",
+    "search/explore",
+    "hashtags",
+    "mentions",
+    "live",
+    "creator analytics"
+   ],
+   "directory_tags": [
+    "Photo Galleries"
+   ],
+   "keywords": [
+    "photo sharing",
+    "instagram",
+    "pixelfed"
+   ],
+   "declares": [
+    "photo sharing",
+    "instagram",
+    "pixelfed"
+   ]
+  },
+  {
+   "id": 5,
+   "slug": "video-streaming",
+   "category": "Video streaming",
+   "exemplar": "YouTube",
+   "capabilities": [
+    "Upload",
+    "transcoding",
+    "channels",
+    "subscriptions",
+    "recommendations",
+    "search",
+    "playlists",
+    "comments",
+    "likes",
+    "live streaming",
+    "captions",
+    "analytics",
+    "monetisation"
+   ],
+   "directory_tags": [
+    "Media Streaming - Video Streaming"
+   ],
+   "keywords": [
+    "video platform",
+    "youtube",
+    "peertube"
+   ],
+   "declares": [
+    "video platform",
+    "youtube",
+    "peertube"
+   ]
+  },
+  {
+   "id": 6,
+   "slug": "music-streaming",
+   "category": "Music streaming",
+   "exemplar": "Spotify",
+   "capabilities": [
+    "Catalogue",
+    "search",
+    "playback",
+    "playlists",
+    "albums",
+    "artists",
+    "recommendations",
+    "queue",
+    "downloads/offline",
+    "social sharing",
+    "podcasts",
+    "subscriptions"
+   ],
+   "directory_tags": [
+    "Media Streaming - Audio Streaming"
+   ],
+   "keywords": [
+    "music streaming",
+    "music server",
+    "spotify"
+   ],
+   "declares": [
+    "music streaming",
+    "music server",
+    "spotify"
+   ]
+  },
+  {
+   "id": 7,
+   "slug": "messaging",
+   "category": "Messaging",
+   "exemplar": "WhatsApp",
+   "capabilities": [
+    "Accounts",
+    "contacts",
+    "1:1 chat",
+    "groups",
+    "media",
+    "voice messages",
+    "calls",
+    "video calls",
+    "status",
+    "notifications",
+    "encryption",
+    "blocking/reporting"
+   ],
+   "directory_tags": [
+    "Communication - Custom Communication Systems",
+    "Communication - XMPP - Web Clients"
+   ],
+   "keywords": [
+    "instant messaging",
+    "chat app",
+    "messenger"
+   ],
+   "declares": [
+    "instant messaging",
+    "chat app",
+    "messenger",
+    "whatsapp"
+   ]
+  },
+  {
+   "id": 8,
+   "slug": "team-communication",
+   "category": "Team communication",
+   "exemplar": "Slack",
+   "capabilities": [
+    "Workspaces",
+    "channels",
+    "DMs",
+    "threads",
+    "files",
+    "search",
+    "mentions",
+    "notifications",
+    "integrations",
+    "permissions",
+    "bots",
+    "huddles"
+   ],
+   "directory_tags": [
+    "Communication - Custom Communication Systems"
+   ],
+   "keywords": [
+    "slack",
+    "team chat",
+    "team communication",
+    "channels"
+   ],
+   "declares": [
+    "slack",
+    "team chat",
+    "team communication"
+   ]
+  },
+  {
+   "id": 9,
+   "slug": "video-conferencing",
+   "category": "Video conferencing",
+   "exemplar": "Zoom",
+   "capabilities": [
+    "Meetings",
+    "video/audio",
+    "screen sharing",
+    "chat",
+    "recording",
+    "breakout rooms",
+    "scheduling",
+    "waiting rooms",
+    "host controls",
+    "participants"
+   ],
+   "directory_tags": [
+    "Communication - Video Conferencing"
+   ],
+   "keywords": [
+    "video conferencing",
+    "meetings"
+   ],
+   "declares": [
+    "video conferencing",
+    "meetings",
+    "zoom"
+   ]
+  },
+  {
+   "id": 10,
+   "slug": "professional-network",
+   "category": "Professional network",
+   "exemplar": "LinkedIn",
+   "capabilities": [
+    "Profiles",
+    "connections",
+    "feed",
+    "posts",
+    "messaging",
+    "jobs",
+    "company pages",
+    "search",
+    "recommendations",
+    "recruiting",
+    "notifications"
+   ],
+   "directory_tags": [],
+   "keywords": [
+    "linkedin",
+    "professional network",
+    "job board"
+   ],
+   "declares": [
+    "linkedin",
+    "professional network",
+    "job board"
+   ]
+  },
+  {
+   "id": 11,
+   "slug": "forums-community",
+   "category": "Forums/community",
+   "exemplar": "Reddit",
+   "capabilities": [
+    "Communities",
+    "posts",
+    "comments",
+    "voting",
+    "moderation",
+    "feeds",
+    "search",
+    "profiles",
+    "messaging",
+    "media",
+    "notifications"
+   ],
+   "directory_tags": [
+    "Communication - Social Networks and Forums"
+   ],
+   "keywords": [
+    "forum",
+    "discussion",
+    "reddit",
+    "community platform"
+   ],
+   "declares": [
+    "forum",
+    "forums",
+    "discussion board",
+    "discussion platform",
+    "reddit",
+    "community platform"
+   ]
+  },
+  {
+   "id": 12,
+   "slug": "microblogging",
+   "category": "Microblogging",
+   "exemplar": "X",
+   "capabilities": [
+    "Posts",
+    "replies",
+    "reposts",
+    "likes",
+    "follows",
+    "feeds",
+    "trends",
+    "search",
+    "DMs",
+    "media",
+    "spaces/live audio",
+    "verification"
+   ],
+   "directory_tags": [
+    "Communication - Social Networks and Forums"
+   ],
+   "keywords": [
+    "microblog",
+    "microblogging",
+    "twitter",
+    "fediverse"
+   ],
+   "declares": [
+    "microblog",
+    "microblogging",
+    "twitter",
+    "fediverse"
+   ]
+  },
+  {
+   "id": 13,
+   "slug": "blogging",
+   "category": "Blogging",
+   "exemplar": "Medium",
+   "capabilities": [
+    "Author profiles",
+    "articles",
+    "editor",
+    "publishing",
+    "images",
+    "tags",
+    "follows",
+    "recommendations",
+    "comments",
+    "reactions",
+    "memberships"
+   ],
+   "directory_tags": [
+    "Blogging Platforms"
+   ],
+   "keywords": [
+    "blog",
+    "publishing platform"
+   ],
+   "declares": [
+    "blog",
+    "blogging",
+    "publishing platform",
+    "substack"
+   ]
+  },
+  {
+   "id": 14,
+   "slug": "news-reader",
+   "category": "News reader",
+   "exemplar": "Google News",
+   "capabilities": [
+    "Source aggregation",
+    "personalised feed",
+    "topics",
+    "search",
+    "stories",
+    "subscriptions",
+    "alerts",
+    "localisation"
+   ],
+   "directory_tags": [
+    "Feed Readers"
+   ],
+   "keywords": [
+    "news reader",
+    "rss",
+    "feed reader"
+   ],
+   "declares": [
+    "news reader",
+    "rss",
+    "feed reader",
+    "google news"
+   ]
+  },
+  {
+   "id": 15,
+   "slug": "email",
+   "category": "Email",
+   "exemplar": "Gmail",
+   "capabilities": [
+    "Mailboxes",
+    "compose",
+    "attachments",
+    "search",
+    "labels",
+    "filters",
+    "threading",
+    "contacts",
+    "spam",
+    "archive",
+    "drafts",
+    "notifications"
+   ],
+   "directory_tags": [
+    "Communication - Email - Webmail Clients",
+    "Communication - Email - Complete Solutions"
+   ],
+   "keywords": [
+    "webmail",
+    "email client"
+   ],
+   "declares": [
+    "webmail",
+    "email client",
+    "gmail"
+   ]
+  },
+  {
+   "id": 16,
+   "slug": "calendar",
+   "category": "Calendar",
+   "exemplar": "Google Calendar",
+   "capabilities": [
+    "Events",
+    "recurring events",
+    "invitations",
+    "attendees",
+    "reminders",
+    "availability",
+    "shared calendars",
+    "rooms/resources",
+    "integrations"
+   ],
+   "directory_tags": [
+    "Calendar & Contacts"
+   ],
+   "keywords": [
+    "calendar"
+   ],
+   "declares": [
+    "calendar",
+    "caldav",
+    "google calendar"
+   ]
+  },
+  {
+   "id": 17,
+   "slug": "cloud-storage",
+   "category": "Cloud storage",
+   "exemplar": "Google Drive",
+   "capabilities": [
+    "Files",
+    "folders",
+    "upload/download",
+    "sharing",
+    "permissions",
+    "search",
+    "previews",
+    "versioning",
+    "sync",
+    "collaboration"
+   ],
+   "directory_tags": [
+    "File Transfer & Synchronization",
+    "File Transfer - Web-based File Managers"
+   ],
+   "keywords": [
+    "cloud storage",
+    "file sync",
+    "file sharing",
+    "nextcloud",
+    "seafile",
+    "file storage"
+   ],
+   "declares": [
+    "cloud storage",
+    "file sync",
+    "file sharing",
+    "nextcloud",
+    "seafile",
+    "file storage",
+    "google drive"
+   ]
+  },
+  {
+   "id": 18,
+   "slug": "notes-knowledge",
+   "category": "Notes/knowledge",
+   "exemplar": "Notion",
+   "capabilities": [
+    "Pages",
+    "blocks",
+    "rich text",
+    "databases",
+    "tables",
+    "views",
+    "search",
+    "sharing",
+    "comments",
+    "templates",
+    "permissions"
+   ],
+   "directory_tags": [
+    "Note-taking & Editors",
+    "Knowledge Management Tools"
+   ],
+   "keywords": [
+    "notion",
+    "notes",
+    "knowledge base",
+    "workspace"
+   ],
+   "declares": [
+    "notion",
+    "notes",
+    "note-taking",
+    "note taking",
+    "knowledge base"
+   ]
+  },
+  {
+   "id": 19,
+   "slug": "documents",
+   "category": "Documents",
+   "exemplar": "Google Docs",
+   "capabilities": [
+    "Rich editing",
+    "collaboration",
+    "comments",
+    "sharing",
+    "version history",
+    "formatting",
+    "export",
+    "templates"
+   ],
+   "directory_tags": [
+    "Office Suites"
+   ],
+   "keywords": [
+    "collaborative editor",
+    "document editor",
+    "docs",
+    "word processor",
+    "documents"
+   ],
+   "declares": [
+    "collaborative editor",
+    "document editor",
+    "word processor",
+    "google docs",
+    "collaborative documents"
+   ]
+  },
+  {
+   "id": 20,
+   "slug": "spreadsheets",
+   "category": "Spreadsheets",
+   "exemplar": "Google Sheets",
+   "capabilities": [
+    "Cells",
+    "formulas",
+    "tables",
+    "charts",
+    "filtering",
+    "sorting",
+    "collaboration",
+    "comments",
+    "imports/exports",
+    "permissions"
+   ],
+   "directory_tags": [
+    "Office Suites"
+   ],
+   "keywords": [
+    "spreadsheet",
+    "sheets",
+    "airtable"
+   ],
+   "declares": [
+    "spreadsheet",
+    "sheets",
+    "airtable",
+    "google sheets"
+   ]
+  },
+  {
+   "id": 21,
+   "slug": "presentation",
+   "category": "Presentation",
+   "exemplar": "PowerPoint",
+   "capabilities": [
+    "Slides",
+    "layouts",
+    "media",
+    "animations",
+    "themes",
+    "speaker notes",
+    "collaboration",
+    "presenting",
+    "export"
+   ],
+   "directory_tags": [],
+   "keywords": [
+    "presentation",
+    "slides",
+    "slideshow",
+    "impress"
+   ],
+   "declares": [
+    "presentation",
+    "slides",
+    "slideshow",
+    "impress",
+    "powerpoint"
+   ]
+  },
+  {
+   "id": 22,
+   "slug": "office-suite",
+   "category": "Office suite",
+   "exemplar": "Microsoft 365",
+   "capabilities": [
+    "Documents",
+    "spreadsheets",
+    "presentations",
+    "email",
+    "calendar",
+    "storage",
+    "collaboration",
+    "identity",
+    "administration"
+   ],
+   "directory_tags": [
+    "Office Suites",
+    "Groupware"
+   ],
+   "keywords": [
+    "office suite",
+    "groupware"
+   ],
+   "declares": [
+    "office suite",
+    "groupware",
+    "microsoft 365"
+   ]
+  },
+  {
+   "id": 23,
+   "slug": "project-management",
+   "category": "Project management",
+   "exemplar": "Jira",
+   "capabilities": [
+    "Projects",
+    "issues",
+    "workflows",
+    "boards",
+    "sprints",
+    "backlog",
+    "epics",
+    "dependencies",
+    "reports",
+    "dashboards",
+    "permissions"
+   ],
+   "directory_tags": [
+    "Software Development - Project Management"
+   ],
+   "keywords": [
+    "project management",
+    "issue tracking",
+    "jira",
+    "sprint"
+   ],
+   "declares": [
+    "project management",
+    "issue tracking",
+    "jira",
+    "sprint"
+   ]
+  },
+  {
+   "id": 24,
+   "slug": "task-management",
+   "category": "Task management",
+   "exemplar": "Asana",
+   "capabilities": [
+    "Tasks",
+    "projects",
+    "lists",
+    "boards",
+    "timelines",
+    "dependencies",
+    "assignments",
+    "due dates",
+    "recurring tasks",
+    "comments",
+    "notifications"
+   ],
+   "directory_tags": [
+    "Task Management & To-do Lists"
+   ],
+   "keywords": [
+    "task management",
+    "asana",
+    "todo"
+   ],
+   "declares": [
+    "task management",
+    "asana",
+    "todo"
+   ]
+  },
+  {
+   "id": 25,
+   "slug": "kanban",
+   "category": "Kanban",
+   "exemplar": "Trello",
+   "capabilities": [
+    "Boards",
+    "lists",
+    "cards",
+    "labels",
+    "members",
+    "due dates",
+    "checklists",
+    "attachments",
+    "comments",
+    "automation"
+   ],
+   "directory_tags": [
+    "Task Management & To-do Lists",
+    "Software Development - Project Management"
+   ],
+   "keywords": [
+    "kanban",
+    "trello",
+    "board"
+   ],
+   "declares": [
+    "kanban",
+    "trello",
+    "kanban board"
+   ]
+  },
+  {
+   "id": 26,
+   "slug": "crm",
+   "category": "CRM",
+   "exemplar": "Salesforce",
+   "capabilities": [
+    "Contacts",
+    "accounts",
+    "leads",
+    "opportunities",
+    "pipelines",
+    "activities",
+    "email",
+    "workflows",
+    "dashboards",
+    "reporting",
+    "permissions",
+    "APIs"
+   ],
+   "directory_tags": [
+    "Customer Relationship Management (CRM)"
+   ],
+   "keywords": [
+    "crm"
+   ],
+   "declares": [
+    "crm",
+    "salesforce"
+   ]
+  },
+  {
+   "id": 27,
+   "slug": "erp",
+   "category": "ERP",
+   "exemplar": "SAP / ERPNext",
+   "capabilities": [
+    "Accounting",
+    "sales",
+    "purchasing",
+    "inventory",
+    "manufacturing",
+    "HR",
+    "projects",
+    "reporting",
+    "workflows",
+    "permissions"
+   ],
+   "directory_tags": [
+    "Resource Planning"
+   ],
+   "keywords": [
+    "erp",
+    "enterprise resource"
+   ],
+   "declares": [
+    "erp",
+    "enterprise resource",
+    "sap",
+    "erpnext"
+   ]
+  },
+  {
+   "id": 28,
+   "slug": "accounting",
+   "category": "Accounting",
+   "exemplar": "Xero",
+   "capabilities": [
+    "Accounts",
+    "invoices",
+    "bills",
+    "payments",
+    "bank feeds",
+    "reconciliation",
+    "expenses",
+    "tax",
+    "reports",
+    "contacts"
+   ],
+   "directory_tags": [
+    "Money, Budgeting & Management"
+   ],
+   "keywords": [
+    "accounting",
+    "invoicing",
+    "invoice",
+    "bookkeeping"
+   ],
+   "declares": [
+    "accounting",
+    "invoicing",
+    "invoice",
+    "bookkeeping",
+    "xero"
+   ]
+  },
+  {
+   "id": 29,
+   "slug": "e-commerce",
+   "category": "E-commerce",
+   "exemplar": "Shopify",
+   "capabilities": [
+    "Products",
+    "variants",
+    "catalogue",
+    "cart",
+    "checkout",
+    "payments",
+    "orders",
+    "customers",
+    "discounts",
+    "shipping",
+    "tax",
+    "inventory",
+    "analytics"
+   ],
+   "directory_tags": [
+    "E-commerce"
+   ],
+   "keywords": [
+    "e-commerce",
+    "ecommerce",
+    "shop",
+    "storefront"
+   ],
+   "declares": [
+    "e-commerce",
+    "ecommerce",
+    "storefront",
+    "shopify"
+   ]
+  },
+  {
+   "id": 30,
+   "slug": "marketplace",
+   "category": "Marketplace",
+   "exemplar": "Amazon",
+   "capabilities": [
+    "Sellers",
+    "products",
+    "catalogue",
+    "search",
+    "cart",
+    "checkout",
+    "orders",
+    "reviews",
+    "payments",
+    "fulfilment",
+    "seller management"
+   ],
+   "directory_tags": [
+    "E-commerce"
+   ],
+   "keywords": [
+    "marketplace",
+    "multi-vendor",
+    "multivendor"
+   ],
+   "declares": [
+    "marketplace",
+    "multi-vendor",
+    "multivendor",
+    "multi vendor"
+   ]
+  },
+  {
+   "id": 31,
+   "slug": "food-delivery",
+   "category": "Food delivery",
+   "exemplar": "Uber Eats",
+   "capabilities": [
+    "Restaurants",
+    "menus",
+    "search",
+    "location",
+    "cart",
+    "ordering",
+    "payments",
+    "delivery tracking",
+    "ratings",
+    "promotions"
+   ],
+   "directory_tags": [],
+   "keywords": [
+    "food delivery",
+    "restaurant ordering",
+    "food ordering"
+   ],
+   "declares": [
+    "food delivery",
+    "restaurant ordering",
+    "food ordering",
+    "uber eats"
+   ]
+  },
+  {
+   "id": 32,
+   "slug": "ride-sharing",
+   "category": "Ride sharing",
+   "exemplar": "Uber",
+   "capabilities": [
+    "Riders",
+    "drivers",
+    "maps",
+    "matching",
+    "fares",
+    "booking",
+    "live tracking",
+    "payments",
+    "ratings",
+    "trip history"
+   ],
+   "directory_tags": [],
+   "keywords": [
+    "ride sharing",
+    "ride hailing",
+    "taxi"
+   ],
+   "declares": [
+    "ride sharing",
+    "ride hailing",
+    "taxi",
+    "uber"
+   ]
+  },
+  {
+   "id": 33,
+   "slug": "travel-booking",
+   "category": "Travel booking",
+   "exemplar": "Booking.com",
+   "capabilities": [
+    "Properties",
+    "search",
+    "filters",
+    "availability",
+    "booking",
+    "payments",
+    "reviews",
+    "maps",
+    "cancellations",
+    "accounts"
+   ],
+   "directory_tags": [
+    "Booking and Scheduling",
+    "Travel Organization"
+   ],
+   "keywords": [
+    "hotel booking",
+    "travel booking",
+    "reservation"
+   ],
+   "declares": [
+    "hotel booking",
+    "travel booking",
+    "hotel reservation",
+    "hotel",
+    "booking.com",
+    "booking engine"
+   ]
+  },
+  {
+   "id": 34,
+   "slug": "accommodation-hosting",
+   "category": "Accommodation hosting",
+   "exemplar": "Airbnb",
+   "capabilities": [
+    "Listings",
+    "photos",
+    "availability",
+    "search",
+    "maps",
+    "booking",
+    "messaging",
+    "payments",
+    "reviews",
+    "host management"
+   ],
+   "directory_tags": [
+    "Booking and Scheduling"
+   ],
+   "keywords": [
+    "airbnb",
+    "vacation rental",
+    "property rental",
+    "listings"
+   ],
+   "declares": [
+    "airbnb",
+    "vacation rental",
+    "property rental",
+    "holiday rental",
+    "short-term rental"
+   ]
+  },
+  {
+   "id": 35,
+   "slug": "event-ticketing",
+   "category": "Event ticketing",
+   "exemplar": "Eventbrite",
+   "capabilities": [
+    "Events",
+    "organisers",
+    "ticket types",
+    "checkout",
+    "payments",
+    "QR tickets",
+    "attendees",
+    "check-in",
+    "promotions",
+    "reporting"
+   ],
+   "directory_tags": [
+    "Polls and Events",
+    "Conference Management",
+    "Ticketing"
+   ],
+   "keywords": [
+    "ticketing",
+    "event",
+    "eventbrite",
+    "tickets"
+   ],
+   "declares": [
+    "event ticketing",
+    "event tickets",
+    "ticket sales",
+    "sell tickets",
+    "box office",
+    "eventbrite",
+    "ticketing platform"
+   ]
+  },
+  {
+   "id": 36,
+   "slug": "learning-lms",
+   "category": "Learning/LMS",
+   "exemplar": "Moodle",
+   "capabilities": [
+    "Courses",
+    "lessons",
+    "enrolment",
+    "users",
+    "assignments",
+    "quizzes",
+    "grading",
+    "certificates",
+    "forums",
+    "progress"
+   ],
+   "directory_tags": [
+    "Learning and Courses"
+   ],
+   "keywords": [
+    "lms",
+    "learning management",
+    "moodle",
+    "courses"
+   ],
+   "declares": [
+    "lms",
+    "learning management",
+    "moodle"
+   ]
+  },
+  {
+   "id": 37,
+   "slug": "online-courses",
+   "category": "Online courses",
+   "exemplar": "Udemy",
+   "capabilities": [
+    "Course catalogue",
+    "video lessons",
+    "progress",
+    "quizzes",
+    "reviews",
+    "instructors",
+    "search",
+    "payments",
+    "certificates"
+   ],
+   "directory_tags": [
+    "Learning and Courses"
+   ],
+   "keywords": [
+    "online courses",
+    "course platform",
+    "udemy"
+   ],
+   "declares": [
+    "online courses",
+    "course platform",
+    "udemy"
+   ]
+  },
+  {
+   "id": 38,
+   "slug": "helpdesk",
+   "category": "Helpdesk",
+   "exemplar": "Zendesk",
+   "capabilities": [
+    "Tickets",
+    "email support",
+    "queues",
+    "assignment",
+    "SLA",
+    "automation",
+    "knowledge base",
+    "customer portal",
+    "reporting"
+   ],
+   "directory_tags": [
+    "Ticketing"
+   ],
+   "keywords": [
+    "helpdesk",
+    "help desk",
+    "support tickets",
+    "zendesk"
+   ],
+   "declares": [
+    "helpdesk",
+    "help desk",
+    "support tickets",
+    "ticketing system",
+    "customer support",
+    "zendesk"
+   ]
+  },
+  {
+   "id": 39,
+   "slug": "customer-chat",
+   "category": "Customer chat",
+   "exemplar": "Intercom",
+   "capabilities": [
+    "Live chat",
+    "inbox",
+    "contacts",
+    "conversations",
+    "bots",
+    "campaigns",
+    "help centre",
+    "segmentation",
+    "analytics"
+   ],
+   "directory_tags": [
+    "Customer Relationship Management (CRM)",
+    "Communication - Custom Communication Systems"
+   ],
+   "keywords": [
+    "live chat",
+    "customer support chat",
+    "intercom",
+    "customer messaging"
+   ],
+   "declares": [
+    "live chat",
+    "customer support chat",
+    "intercom",
+    "customer messaging"
+   ]
+  },
+  {
+   "id": 40,
+   "slug": "marketing-automation",
+   "category": "Marketing automation",
+   "exemplar": "HubSpot",
+   "capabilities": [
+    "CRM",
+    "contacts",
+    "email",
+    "campaigns",
+    "forms",
+    "landing pages",
+    "automation",
+    "segmentation",
+    "analytics"
+   ],
+   "directory_tags": [
+    "Customer Relationship Management (CRM)",
+    "Communication - Email - Mailing Lists and Newsletters"
+   ],
+   "keywords": [
+    "marketing automation",
+    "hubspot",
+    "campaigns"
+   ],
+   "declares": [
+    "marketing automation",
+    "hubspot",
+    "marketing platform"
+   ]
+  },
+  {
+   "id": 41,
+   "slug": "email-marketing",
+   "category": "Email marketing",
+   "exemplar": "Mailchimp",
+   "capabilities": [
+    "Contacts",
+    "lists",
+    "campaigns",
+    "templates",
+    "automation",
+    "segmentation",
+    "analytics",
+    "forms"
+   ],
+   "directory_tags": [
+    "Communication - Email - Mailing Lists and Newsletters"
+   ],
+   "keywords": [
+    "newsletter",
+    "email marketing",
+    "mailchimp",
+    "mailing list"
+   ],
+   "declares": [
+    "newsletter",
+    "email marketing",
+    "mailchimp",
+    "mailing list"
+   ]
+  },
+  {
+   "id": 42,
+   "slug": "web-analytics",
+   "category": "Web analytics",
+   "exemplar": "Google Analytics",
+   "capabilities": [
+    "Events",
+    "users",
+    "sessions",
+    "funnels",
+    "attribution",
+    "dashboards",
+    "reports",
+    "segmentation"
+   ],
+   "directory_tags": [
+    "Analytics"
+   ],
+   "keywords": [
+    "web analytics",
+    "google analytics",
+    "visitor"
+   ],
+   "declares": [
+    "web analytics",
+    "website analytics",
+    "google analytics",
+    "page views",
+    "pageviews"
+   ]
+  },
+  {
+   "id": 43,
+   "slug": "bi-analytics",
+   "category": "BI/analytics",
+   "exemplar": "Tableau",
+   "capabilities": [
+    "Data connections",
+    "queries",
+    "dashboards",
+    "charts",
+    "filters",
+    "calculated fields",
+    "sharing",
+    "permissions"
+   ],
+   "directory_tags": [
+    "Analytics",
+    "Database Management"
+   ],
+   "keywords": [
+    "business intelligence",
+    "dashboards",
+    "bi ",
+    "data visualization",
+    "tableau"
+   ],
+   "declares": [
+    "business intelligence",
+    "bi",
+    "data visualization",
+    "data visualisation",
+    "tableau",
+    "data exploration"
+   ]
+  },
+  {
+   "id": 44,
+   "slug": "forms-surveys",
+   "category": "Forms/surveys",
+   "exemplar": "Typeform",
+   "capabilities": [
+    "Forms",
+    "questions",
+    "branching",
+    "validation",
+    "submissions",
+    "themes",
+    "embeds",
+    "analytics"
+   ],
+   "directory_tags": [
+    "Polls and Events"
+   ],
+   "keywords": [
+    "form builder",
+    "forms",
+    "survey",
+    "typeform"
+   ],
+   "declares": [
+    "form builder",
+    "survey",
+    "surveys",
+    "typeform",
+    "online forms"
+   ]
+  },
+  {
+   "id": 45,
+   "slug": "automation-ipaas",
+   "category": "Automation/iPaaS",
+   "exemplar": "Zapier",
+   "capabilities": [
+    "Triggers",
+    "actions",
+    "connectors",
+    "workflows",
+    "conditions",
+    "scheduling",
+    "retries",
+    "logs"
+   ],
+   "directory_tags": [
+    "Automation"
+   ],
+   "keywords": [
+    "zapier",
+    "integration platform",
+    "automation"
+   ],
+   "declares": [
+    "zapier",
+    "integration platform"
+   ]
+  },
+  {
+   "id": 46,
+   "slug": "workflow-automation",
+   "category": "Workflow automation",
+   "exemplar": "n8n",
+   "capabilities": [
+    "Nodes",
+    "triggers",
+    "actions",
+    "credentials",
+    "branching",
+    "loops",
+    "webhooks",
+    "scheduling",
+    "execution history"
+   ],
+   "directory_tags": [
+    "Automation",
+    "Software Development - Low Code"
+   ],
+   "keywords": [
+    "workflow automation",
+    "n8n",
+    "workflow"
+   ],
+   "declares": [
+    "workflow automation",
+    "n8n"
+   ]
+  },
+  {
+   "id": 47,
+   "slug": "file-document-management",
+   "category": "File/document management",
+   "exemplar": "Dropbox",
+   "capabilities": [
+    "Files",
+    "folders",
+    "sharing",
+    "permissions",
+    "sync",
+    "previews",
+    "versioning",
+    "search",
+    "collaboration"
+   ],
+   "directory_tags": [
+    "Document Management",
+    "File Transfer - Web-based File Managers"
+   ],
+   "keywords": [
+    "document management",
+    "dropbox",
+    "file manager"
+   ],
+   "declares": [
+    "document management",
+    "dropbox",
+    "file manager"
+   ]
+  },
+  {
+   "id": 48,
+   "slug": "e-signature",
+   "category": "E-signature",
+   "exemplar": "DocuSign",
+   "capabilities": [
+    "Documents",
+    "recipients",
+    "signing fields",
+    "workflows",
+    "signatures",
+    "authentication",
+    "audit trail",
+    "templates"
+   ],
+   "directory_tags": [
+    "Document Management"
+   ],
+   "keywords": [
+    "e-signature",
+    "signature",
+    "signing",
+    "docusign"
+   ],
+   "declares": [
+    "e-signature",
+    "electronic signature",
+    "docusign",
+    "document signing",
+    "sign documents",
+    "esignature"
+   ]
+  },
+  {
+   "id": 49,
+   "slug": "document-scanning-ocr",
+   "category": "Document scanning/OCR",
+   "exemplar": "Adobe Acrobat",
+   "capabilities": [
+    "PDF creation",
+    "editing",
+    "OCR",
+    "annotation",
+    "signing",
+    "conversion",
+    "forms",
+    "compression"
+   ],
+   "directory_tags": [
+    "Document Management"
+   ],
+   "keywords": [
+    "ocr",
+    "pdf",
+    "scanning",
+    "paperless"
+   ],
+   "declares": [
+    "ocr",
+    "paperless",
+    "document scanning",
+    "scanned documents",
+    "document archive"
+   ]
+  },
+  {
+   "id": 50,
+   "slug": "password-manager",
+   "category": "Password manager",
+   "exemplar": "1Password",
+   "capabilities": [
+    "Vaults",
+    "credentials",
+    "password generation",
+    "autofill",
+    "sharing",
+    "permissions",
+    "secure notes",
+    "MFA"
+   ],
+   "directory_tags": [
+    "Password Managers"
+   ],
+   "keywords": [
+    "password manager",
+    "vault",
+    "secrets"
+   ],
+   "declares": [
+    "password manager",
+    "1password",
+    "bitwarden",
+    "passwords"
+   ]
+  },
+  {
+   "id": 51,
+   "slug": "identity-sso",
+   "category": "Identity/SSO",
+   "exemplar": "Okta",
+   "capabilities": [
+    "Users",
+    "groups",
+    "authentication",
+    "MFA",
+    "SSO",
+    "policies",
+    "provisioning",
+    "audit logs"
+   ],
+   "directory_tags": [
+    "Identity Management",
+    "Federated Identity & Authentication"
+   ],
+   "keywords": [
+    "sso",
+    "identity provider",
+    "authentication",
+    "oauth",
+    "oidc"
+   ],
+   "declares": [
+    "identity provider",
+    "single sign-on",
+    "single sign on",
+    "identity and access",
+    "iam",
+    "keycloak",
+    "authentik",
+    "okta"
+   ]
+  },
+  {
+   "id": 52,
+   "slug": "git-code-hosting",
+   "category": "Git/code hosting",
+   "exemplar": "GitHub",
+   "capabilities": [
+    "Repositories",
+    "Git",
+    "branches",
+    "commits",
+    "pull requests",
+    "issues",
+    "actions/CI",
+    "releases",
+    "permissions"
+   ],
+   "directory_tags": [
+    "Software Development - Project Management",
+    "Software Development"
+   ],
+   "keywords": [
+    "git",
+    "code hosting",
+    "repository hosting",
+    "gitea",
+    "gitlab"
+   ],
+   "declares": [
+    "git hosting",
+    "code hosting",
+    "repository hosting",
+    "git service",
+    "git server",
+    "gitea",
+    "gitlab",
+    "github alternative",
+    "forge"
+   ]
+  },
+  {
+   "id": 53,
+   "slug": "ci-cd",
+   "category": "CI/CD",
+   "exemplar": "GitHub Actions",
+   "capabilities": [
+    "Workflows",
+    "triggers",
+    "runners",
+    "builds",
+    "tests",
+    "deployment",
+    "secrets",
+    "artefacts",
+    "logs"
+   ],
+   "directory_tags": [
+    "Software Development - Continuous Integration & Deployment"
+   ],
+   "keywords": [
+    "ci/cd",
+    "continuous integration",
+    "continuous delivery",
+    "build server"
+   ],
+   "declares": [
+    "ci/cd",
+    "continuous integration",
+    "continuous delivery",
+    "build server",
+    "github actions"
+   ]
+  },
+  {
+   "id": 54,
+   "slug": "developer-issue-tracking",
+   "category": "Developer issue tracking",
+   "exemplar": "Linear",
+   "capabilities": [
+    "Issues",
+    "projects",
+    "cycles",
+    "teams",
+    "labels",
+    "priorities",
+    "dependencies",
+    "roadmaps",
+    "notifications"
+   ],
+   "directory_tags": [
+    "Software Development - Project Management"
+   ],
+   "keywords": [
+    "issue tracker",
+    "issue tracking",
+    "linear",
+    "bug tracker"
+   ],
+   "declares": [
+    "issue tracker",
+    "issue tracking",
+    "linear",
+    "bug tracker"
+   ]
+  },
+  {
+   "id": 55,
+   "slug": "cloud-ide",
+   "category": "Cloud IDE",
+   "exemplar": "GitHub Codespaces",
+   "capabilities": [
+    "Browser IDE",
+    "containers",
+    "repositories",
+    "terminals",
+    "extensions",
+    "ports",
+    "development environments"
+   ],
+   "directory_tags": [
+    "Software Development - IDE & Tools"
+   ],
+   "keywords": [
+    "ide",
+    "code editor",
+    "browser ide",
+    "development environment"
+   ],
+   "declares": [
+    "ide",
+    "code editor",
+    "browser ide",
+    "cloud ide",
+    "codespaces",
+    "code-server",
+    "vs code in the browser"
+   ]
+  },
+  {
+   "id": 56,
+   "slug": "ai-assistant-chat",
+   "category": "AI assistant/chat",
+   "exemplar": "ChatGPT",
+   "capabilities": [
+    "Conversations",
+    "files",
+    "multimodal input",
+    "tools",
+    "memory/context",
+    "search",
+    "code execution",
+    "custom assistants"
+   ],
+   "directory_tags": [
+    "Generative Artificial Intelligence (GenAI)"
+   ],
+   "keywords": [
+    "chatgpt",
+    "llm chat",
+    "ai chat",
+    "assistant"
+   ],
+   "declares": [
+    "chatgpt",
+    "llm chat",
+    "ai chat",
+    "chat ui for",
+    "llm",
+    "language model"
+   ]
+  },
+  {
+   "id": 57,
+   "slug": "ai-coding",
+   "category": "AI coding",
+   "exemplar": "GitHub Copilot",
+   "capabilities": [
+    "Code completion",
+    "chat",
+    "repository context",
+    "code generation",
+    "debugging",
+    "tests",
+    "agent workflows"
+   ],
+   "directory_tags": [
+    "Generative Artificial Intelligence (GenAI)",
+    "Software Development - IDE & Tools"
+   ],
+   "keywords": [
+    "copilot",
+    "code completion",
+    "ai coding",
+    "code generation"
+   ],
+   "declares": [
+    "copilot",
+    "code completion",
+    "ai coding",
+    "code generation",
+    "github copilot"
+   ]
+  },
+  {
+   "id": 58,
+   "slug": "ai-image-generation",
+   "category": "AI image generation",
+   "exemplar": "Midjourney",
+   "capabilities": [
+    "Prompting",
+    "image generation",
+    "variations",
+    "upscaling",
+    "styles",
+    "image references",
+    "galleries"
+   ],
+   "directory_tags": [
+    "Generative Artificial Intelligence (GenAI)"
+   ],
+   "keywords": [
+    "image generation",
+    "stable diffusion",
+    "text-to-image",
+    "midjourney"
+   ],
+   "declares": [
+    "image generation",
+    "stable diffusion",
+    "text-to-image",
+    "midjourney"
+   ]
+  },
+  {
+   "id": 59,
+   "slug": "search-engine",
+   "category": "Search engine",
+   "exemplar": "Google",
+   "capabilities": [
+    "Web crawling/indexing",
+    "search",
+    "ranking",
+    "filters",
+    "images",
+    "news",
+    "maps",
+    "suggestions"
+   ],
+   "directory_tags": [
+    "Search Engines"
+   ],
+   "keywords": [
+    "search engine",
+    "metasearch",
+    "crawler"
+   ],
+   "declares": [
+    "search engine",
+    "metasearch",
+    "crawler"
+   ]
+  },
+  {
+   "id": 60,
+   "slug": "maps-navigation",
+   "category": "Maps/navigation",
+   "exemplar": "Google Maps",
+   "capabilities": [
+    "Maps",
+    "search",
+    "geocoding",
+    "routing",
+    "navigation",
+    "traffic",
+    "places",
+    "reviews",
+    "location sharing"
+   ],
+   "directory_tags": [
+    "Maps and Global Positioning System (GPS)"
+   ],
+   "keywords": [
+    "maps",
+    "routing",
+    "geocoding",
+    "navigation"
+   ],
+   "declares": [
+    "maps",
+    "openstreetmap",
+    "geocoding",
+    "navigation",
+    "map tiles",
+    "google maps"
+   ]
+  },
+  {
+   "id": 61,
+   "slug": "fitness-activity",
+   "category": "Fitness/activity",
+   "exemplar": "Strava",
+   "capabilities": [
+    "Activities",
+    "GPS",
+    "routes",
+    "workouts",
+    "segments",
+    "leaderboards",
+    "social feed",
+    "clubs",
+    "statistics"
+   ],
+   "directory_tags": [
+    "Health and Fitness"
+   ],
+   "keywords": [
+    "fitness",
+    "workout",
+    "strava",
+    "activity tracking"
+   ],
+   "declares": [
+    "fitness",
+    "workout",
+    "strava",
+    "activity tracking"
+   ]
+  },
+  {
+   "id": 62,
+   "slug": "recipe-meal-planning",
+   "category": "Recipe/meal planning",
+   "exemplar": "Paprika",
+   "capabilities": [
+    "Recipes",
+    "import",
+    "organisation",
+    "meal plans",
+    "shopping lists",
+    "scaling",
+    "notes"
+   ],
+   "directory_tags": [
+    "Recipe Management"
+   ],
+   "keywords": [
+    "recipe",
+    "meal plan",
+    "recipes"
+   ],
+   "declares": [
+    "recipe",
+    "meal plan",
+    "recipes",
+    "paprika"
+   ]
+  },
+  {
+   "id": 63,
+   "slug": "personal-finance",
+   "category": "Personal finance",
+   "exemplar": "YNAB",
+   "capabilities": [
+    "Accounts",
+    "transactions",
+    "budgets",
+    "categories",
+    "goals",
+    "reconciliation",
+    "reports"
+   ],
+   "directory_tags": [
+    "Money, Budgeting & Management"
+   ],
+   "keywords": [
+    "budget",
+    "personal finance",
+    "ynab",
+    "budgeting"
+   ],
+   "declares": [
+    "budget",
+    "personal finance",
+    "ynab",
+    "budgeting"
+   ]
+  },
+  {
+   "id": 64,
+   "slug": "job-marketplace",
+   "category": "Job marketplace",
+   "exemplar": "Upwork",
+   "capabilities": [
+    "Profiles",
+    "portfolios",
+    "job posting",
+    "search",
+    "proposals",
+    "messaging",
+    "contracts",
+    "milestones",
+    "payments",
+    "reviews"
+   ],
+   "directory_tags": [
+    "Human Resources Management (HRM)"
+   ],
+   "keywords": [
+    "job board",
+    "freelance",
+    "upwork",
+    "jobs",
+    "recruit"
+   ],
+   "declares": [
+    "job board",
+    "freelance",
+    "upwork",
+    "recruiting",
+    "recruitment",
+    "applicant tracking"
+   ]
+  },
+  {
+   "id": 65,
+   "slug": "property-marketplace",
+   "category": "Property marketplace",
+   "exemplar": "Realestate.com.au",
+   "capabilities": [
+    "Listings",
+    "search",
+    "filters",
+    "maps",
+    "photos",
+    "saved searches",
+    "alerts",
+    "agents",
+    "enquiries"
+   ],
+   "directory_tags": [],
+   "keywords": [
+    "real estate",
+    "property listing",
+    "property marketplace"
+   ],
+   "declares": [
+    "real estate",
+    "property listing",
+    "property marketplace",
+    "realestate.com.au"
+   ]
+  },
+  {
+   "id": 66,
+   "slug": "classified-marketplace",
+   "category": "Classified marketplace",
+   "exemplar": "Facebook Marketplace",
+   "capabilities": [
+    "Listings",
+    "categories",
+    "search",
+    "location",
+    "messaging",
+    "seller profiles",
+    "offers",
+    "reporting"
+   ],
+   "directory_tags": [
+    "E-commerce"
+   ],
+   "keywords": [
+    "classified",
+    "classifieds",
+    "buy and sell",
+    "listings"
+   ],
+   "declares": [
+    "classified",
+    "classifieds",
+    "buy and sell",
+    "facebook marketplace"
+   ]
+  },
+  {
+   "id": 67,
+   "slug": "social-events",
+   "category": "Dating/social events",
+   "exemplar": "Meetup",
+   "capabilities": [
+    "Groups",
+    "events",
+    "discovery",
+    "location",
+    "RSVPs",
+    "messaging",
+    "organisers",
+    "notifications"
+   ],
+   "directory_tags": [
+    "Polls and Events",
+    "Booking and Scheduling"
+   ],
+   "keywords": [
+    "meetup",
+    "events",
+    "rsvp",
+    "event management"
+   ],
+   "declares": [
+    "meetup",
+    "rsvp",
+    "event management"
+   ]
+  },
+  {
+   "id": 68,
+   "slug": "federated-social",
+   "category": "Community/federated social",
+   "exemplar": "Mastodon",
+   "capabilities": [
+    "Accounts",
+    "follows",
+    "timelines",
+    "posts",
+    "media",
+    "hashtags",
+    "moderation",
+    "federation",
+    "notifications"
+   ],
+   "directory_tags": [
+    "Communication - Social Networks and Forums"
+   ],
+   "keywords": [
+    "fediverse",
+    "activitypub",
+    "mastodon",
+    "federated"
+   ],
+   "declares": [
+    "fediverse",
+    "activitypub",
+    "mastodon",
+    "federated"
+   ]
+  },
+  {
+   "id": 69,
+   "slug": "video-editing",
+   "category": "Video creation/editing",
+   "exemplar": "CapCut",
+   "capabilities": [
+    "Timeline editing",
+    "trimming",
+    "transitions",
+    "text",
+    "audio",
+    "effects",
+    "captions",
+    "templates",
+    "export"
+   ],
+   "directory_tags": [
+    "Media Management"
+   ],
+   "keywords": [
+    "video editor",
+    "video editing",
+    "timeline"
+   ],
+   "declares": [
+    "video editor",
+    "video editing",
+    "capcut"
+   ]
+  },
+  {
+   "id": 70,
+   "slug": "media-library",
+   "category": "Media/library management",
+   "exemplar": "Plex",
+   "capabilities": [
+    "Media ingestion",
+    "metadata",
+    "libraries",
+    "search",
+    "playback",
+    "transcoding",
+    "users",
+    "watch history",
+    "streaming"
+   ],
+   "directory_tags": [
+    "Media Streaming - Multimedia Streaming",
+    "Media Management"
+   ],
+   "keywords": [
+    "media server",
+    "plex",
+    "jellyfin",
+    "media library"
+   ],
+   "declares": [
+    "media server",
+    "plex",
+    "jellyfin",
+    "media library"
+   ]
+  }
+ ]
+}

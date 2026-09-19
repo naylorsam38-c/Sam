@@ -1,0 +1,572 @@
+{
+ "category": "BI/analytics",
+ "slug": "bi-analytics",
+ "exemplar": "Tableau",
+ "capabilities": [
+  "Data connections",
+  "queries",
+  "dashboards",
+  "charts",
+  "filters",
+  "calculated fields",
+  "sharing",
+  "permissions"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "business intelligence",
+   "bi",
+   "data visualization",
+   "data visualisation",
+   "tableau",
+   "data exploration"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": false,
+ "survivors": [
+  {
+   "name": "Superset",
+   "repo": "https://github.com/apache/superset",
+   "commit": "128c0c159ab8a1157e1f0688b43ba16b0c034889",
+   "website": "http://superset.apache.org/",
+   "licence": "Apache-2.0",
+   "licence_file": "LICENSE.txt",
+   "screens": {
+    "screen_files_total": 1663,
+    "screen_files_user": 1663,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".erb",
+     ".html",
+     ".j2",
+     ".jsx",
+     ".pug",
+     ".tsx"
+    ],
+    "user_screen_examples": [
+     "superset/templates/tail_js_custom_extra.html",
+     "superset/templates/head_custom_extra.html",
+     "superset/templates/superset/spa.html",
+     "superset/templates/superset/macros.html",
+     "superset/templates/superset/oauth2.html",
+     "superset/templates/superset/partials/asset_bundle.html"
+    ],
+    "login_evidence": [
+     "superset/migrations/versions/2024-05-09_18-44_87ffc36f9842_enable_catalog_in_bigquery_presto_trino_.py",
+     "superset/migrations/versions/2024-05-08_19-33_4081be5b6b74_enable_catalog_in_databricks.py",
+     "superset-frontend/src/pages/login/login.test.tsx",
+     "superset-frontend/src/pages/login/index.tsx"
+    ]
+   },
+   "run_recipes": [
+    "docker-compose.yml",
+    "dockerfile",
+    "scripts/databases/hive/docker-compose.yml",
+    "superset-websocket/dockerfile",
+    ".devcontainer/dockerfile",
+    "releasing/dockerfile.make_docs"
+   ],
+   "robustness": {
+    "score": 90.0,
+    "parts": {
+     "stars": 20.0,
+     "commits_12m": 20.0,
+     "release": 15.0,
+     "activity": 0.0,
+     "tests": 20.0,
+     "ci": 10.0,
+     "readme": 5.0
+    },
+    "facts": {
+     "stars": 74835,
+     "commits_12m": 5307,
+     "latest_release": "2026-09-09",
+     "updated_at": "2026-09-19"
+    },
+    "repo_metrics": {
+     "test_files": 2664,
+     "ci_evidence": [
+      ".github/workflows/superset-docs-verify.yml",
+      ".github/workflows/superset-e2e.yml",
+      ".github/workflows/asf-allowlist-check.yml"
+     ],
+     "readme_chars": 24222
+    }
+   },
+   "capability": {
+    "coverage_pct": 100.0,
+    "matched": [
+     "Data connections",
+     "queries",
+     "dashboards",
+     "charts",
+     "filters",
+     "calculated fields",
+     "sharing",
+     "permissions"
+    ],
+    "missing": [],
+    "evidence_tokens": {
+     "Data connections": [
+      "connection",
+      "connections",
+      "data"
+     ],
+     "queries": [
+      "queries",
+      "query"
+     ],
+     "dashboards": [
+      "dashboard",
+      "dashboards"
+     ],
+     "charts": [
+      "chart",
+      "charts"
+     ],
+     "filters": [
+      "filter",
+      "filters"
+     ],
+     "calculated fields": [
+      "calculated",
+      "field",
+      "fields"
+     ],
+     "sharing": [
+      "sharing"
+     ],
+     "permissions": [
+      "permission",
+      "permissions"
+     ]
+    }
+   },
+   "rank_score": 95.0,
+   "found_via": "tag",
+   "clone_path": "(deleted after inspection)",
+   "description": "Modern data exploration and visualization platform.",
+   "readme_file": "README.md",
+   "category_gate": {
+    "declared": true,
+    "declaration_phrases_found": [
+     "business intelligence",
+     "data exploration",
+     "data visualization"
+    ],
+    "declaration_hits": {
+     "description": [
+      "data exploration"
+     ],
+     "readme": [
+      "business intelligence",
+      "data visualization",
+      "data exploration"
+     ]
+    },
+    "anchors": [
+     "Data connections",
+     "queries",
+     "dashboards"
+    ],
+    "anchors_missing": []
+   }
+  }
+ ],
+ "refused": [
+  {
+   "name": "ANALOG",
+   "repo": "https://github.com/orangecoloured/analog",
+   "stage": "pre-filter",
+   "reason": "stars 49 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Aptabase",
+   "repo": "https://github.com/aptabase/aptabase",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "AWStats",
+   "repo": "https://github.com/eldy/awstats",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Budibase",
+   "repo": "https://github.com/Budibase/budibase",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "ChartDB",
+   "repo": "https://github.com/chartdb/chartdb",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Cluster Control",
+   "repo": "https://severalnines.com/clustercontrol/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Compass",
+   "repo": "https://github.com/adinhodovic/compass",
+   "stage": "pre-filter",
+   "reason": "stars 62 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Countly Community Edition",
+   "repo": "https://github.com/Countly/countly-server",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "d8a.tech",
+   "repo": "https://github.com/d8a-tech/d8a",
+   "stage": "pre-filter",
+   "reason": "stars 53 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "d9",
+   "repo": "https://github.com/LaWebcapsule/d9",
+   "stage": "pre-filter",
+   "reason": "stars 153 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Directus",
+   "repo": "https://github.com/directus/directus",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['BUSL-1.1']",
+   "found_via": "tag"
+  },
+  {
+   "name": "EDA",
+   "repo": "https://github.com/jortilles/EDA",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "GoAccess",
+   "repo": "https://github.com/allinurl/goaccess",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "GoatCounter",
+   "repo": "https://github.com/arp242/goatcounter",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['EUPL-1.2']",
+   "found_via": "tag"
+  },
+  {
+   "name": "HitKeep",
+   "repo": "https://github.com/pascalebeier/hitkeep",
+   "stage": "pre-filter",
+   "reason": "stars 89 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Hubleys",
+   "repo": "https://github.com/knrdl/hubleys-dashboard",
+   "stage": "pre-filter",
+   "reason": "stars 122 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Limbas",
+   "repo": "https://github.com/limbas/limbas",
+   "stage": "pre-filter",
+   "reason": "stars 58 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Mathesar",
+   "repo": "https://github.com/mathesar-foundation/mathesar",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Matomo",
+   "repo": "https://github.com/matomo-org/matomo",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Metabase",
+   "repo": "https://github.com/metabase/metabase",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "MindsDB",
+   "repo": "https://github.com/mindsdb/mindshub",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['Elastic-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "NocoDB",
+   "repo": "https://github.com/nocodb/nocodb",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['SUL-1.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "OpenRemote",
+   "repo": "https://github.com/openremote/openremote",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Plausible Analytics",
+   "repo": "https://github.com/plausible/analytics/",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Postiz",
+   "repo": "https://github.com/gitroomhq/postiz-app",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Prisme Analytics",
+   "repo": "https://github.com/prismelabs/analytics",
+   "stage": "pre-filter",
+   "reason": "stars 131 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "RudderStack",
+   "repo": "https://github.com/rudderlabs/rudder-server/",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['Elastic-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Rybbit",
+   "repo": "https://github.com/rybbit-io/rybbit",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Socioboard",
+   "repo": "https://github.com/socioboard/Socioboard-5.0",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "StackRender",
+   "repo": "https://github.com/stackrender/stackrender",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Statistics for Strava",
+   "repo": "https://github.com/robiningelbrecht/statistics-for-strava",
+   "stage": "pre-filter",
+   "reason": "stars 9 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Swetrix",
+   "repo": "https://github.com/Swetrix/selfhosting",
+   "stage": "pre-filter",
+   "reason": "stars 72 < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Adminer",
+   "repo": "https://github.com/vrana/adminer",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Evidence",
+   "repo": "https://github.com/evidence-dev/evidence",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "CloudBeaver",
+   "repo": "https://github.com/dbeaver/cloudbeaver",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Chartbrew",
+   "repo": "https://github.com/chartbrew/chartbrew",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Lowdefy",
+   "repo": "https://github.com/lowdefy/lowdefy",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Baserow",
+   "repo": "https://gitlab.com/baserow/baserow",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Azimutt",
+   "repo": "https://github.com/azimuttapp/azimutt",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Litlyx",
+   "repo": "https://github.com/Litlyx/litlyx",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Middleware",
+   "repo": "https://github.com/middlewarehq/middleware",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Databunker",
+   "repo": "https://github.com/securitybunker/databunker",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Shaper",
+   "repo": "https://github.com/taleshape-com/shaper",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "GoModel",
+   "repo": "https://github.com/ENTERPILOT/GoModel",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Offen",
+   "repo": "https://github.com/offen/offen",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "LibreDB Studio",
+   "repo": "https://github.com/libredb/libredb-studio",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Medama Analytics",
+   "repo": "https://github.com/medama-io/medama",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Daily Stars Explorer",
+   "repo": "https://github.com/emanuelef/daily-stars-explorer",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "OrcaQ",
+   "repo": "https://github.com/cin12211/orca-q",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Liwan",
+   "repo": "https://github.com/explodingcamera/liwan",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Netron",
+   "repo": "https://github.com/lutzroeder/netron",
+   "commit": "d39383eb320973949fd081cf95f328f93632904f",
+   "stage": "screens",
+   "reason": "2 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "tag",
+   "screens": {
+    "screen_files_total": 2,
+    "screen_files_user": 2,
+    "screen_files_admin": 0,
+    "screen_languages": [
+     ".html"
+    ],
+    "user_screen_examples": [
+     "source/index.html",
+     "publish/icon.html"
+    ],
+    "login_evidence": [
+     "source/dagre.js (in content)"
+    ]
+   }
+  }
+ ],
+ "regated_at": "2026-09-19"
+}
