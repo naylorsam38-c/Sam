@@ -101,7 +101,10 @@ HERE = Path(__file__).resolve().parent
 # a hard failure there, so they are reproduced here verbatim as the target.
 CAP_RECORD_KEYS = ("id", "name", "category", "status", "data_shape", "dependencies",
                    "permissions", "side_effects", "error_contract", "implementations",
-                   "qualification")
+                   "qualification", "attaches_to")
+# "attaches_to" added 2026-09-19 -- must match build.py's CAP_RECORD_KEYS
+# exactly, same reason the comment above already gives for the rest of
+# this tuple.
 IMPL_RECORD_KEYS = ("id", "capability_id", "status", "release", "source",
                     "dependencies", "tests", "rollback")
 
@@ -168,6 +171,12 @@ def cap_record(cap, form, impl_id):
             "approved_by": APPROVED_BY,
             "approval_ref": CAP_APPROVAL_REF,
         },
+        # Section 5: attach-point names this capability needs, by name only
+        # -- never an application identity. Read straight off the form's
+        # own capability entry; empty list if the form names none (every
+        # capability harvested before this axis existed has none, and
+        # nothing about that changes how it matches).
+        "attaches_to": list(cap.get("attaches_to", [])),
     }
 
 

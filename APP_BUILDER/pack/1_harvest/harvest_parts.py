@@ -459,9 +459,19 @@ def harvest_form(form_path):
 
     if WRITE_ATTACH_POINTS_FILE and not DRY_RUN:
         os.makedirs(app_dir, exist_ok=True)
-        ap_md = render_attach_points_md(slug, src, src.get("attach_points") or [])
+        aps = src.get("attach_points") or []
+        ap_md = render_attach_points_md(slug, src, aps)
         with open(os.path.join(app_dir, "ATTACH_POINTS.md"), "w") as f:
             f.write(ap_md)
+        # A machine-readable sidecar, alongside the human-readable table.
+        # match_contract()'s attach-point axis (build.py) reads this rather
+        # than parsing ATTACH_POINTS.md's markdown tables -- one real source
+        # of attach-point data (usable_attach_points(), the same function
+        # Rule G's admission check uses), never a second one that could drift.
+        usable_names = sorted({a["name"] for a in usable_attach_points(aps)})
+        with open(os.path.join(app_dir, "ATTACH_POINTS.json"), "w") as f:
+            json.dump({"app_slug": slug, "attach_points": usable_names}, f, indent=2)
+            f.write("\n")
 
     for cap in caps:
         cap_id = cap.get("cap_id") or ""

@@ -249,7 +249,14 @@ APP_RECORD_KEYS = ("id", "name", "status", "owner", "created_at", "screens")
 SCR_RECORD_KEYS = ("id", "app_id", "name", "status", "buttons")
 BTN_RECORD_KEYS = ("id", "screen_id", "name", "expected_contract", "capability_id", "status")
 CAP_RECORD_KEYS = ("id", "name", "category", "status", "data_shape", "dependencies",
-                   "permissions", "side_effects", "error_contract", "implementations", "qualification")
+                   "permissions", "side_effects", "error_contract", "implementations",
+                   "qualification", "attaches_to")
+# "attaches_to" added 2026-09-19 (Section 5 of the Django/attach-point
+# architecture): the list of attach-point NAMES this capability needs,
+# never an application identity. Empty for every capability that predates
+# this axis -- match_contract()'s attach-point check skips entirely when a
+# CAP's attaches_to is empty, so nothing that already matched stops
+# matching.
 IMPL_RECORD_KEYS = ("id", "capability_id", "status", "release", "source", "dependencies", "tests", "rollback")
 
 
@@ -540,13 +547,30 @@ def _version_tuple(v: Any) -> Tuple[int, ...]:
         return (0,)
 
 
-def match_contract(expected: Dict[str, Any], cap: Dict[str, Any], impl: Dict[str, Any]) -> Tuple[bool, str]:
-    """§4.4's twelve axes. The CAP is a §3.6 record: the shape axes live
-    under data_shape (input / output / nullable / requires_auth /
-    security_constraints -- §3.6 defers data_shape's internals to the
-    Unified Feature Structure, which is not in the package, so that
-    sub-structure is the minimum these twelve comparisons need). Version
-    compatibility is read from the active IMPL's §3.7 release.version."""
+def match_contract(expected: Dict[str, Any], cap: Dict[str, Any], impl: Dict[str, Any],
+                    available_attach_points: Optional[set] = None) -> Tuple[bool, str]:
+    """§4.4's twelve axes, plus a thirteenth added 2026-09-19 for the
+    Django/attach-point architecture: attach-point coverage. The CAP is a
+    §3.6 record: the shape axes live under data_shape (input / output /
+    nullable / requires_auth / security_constraints -- §3.6 defers
+    data_shape's internals to the Unified Feature Structure, which is not
+    in the package, so that sub-structure is the minimum these twelve
+    comparisons need). Version compatibility is read from the active IMPL's
+    §3.7 release.version.
+
+    The thirteenth axis: a CAP record may carry `attaches_to`, a list of
+    attach-point NAMES it needs (never an application identity -- Section 5
+    is explicit that a capability "never depends on an application's
+    identity"). `available_attach_points` is the set of attach-point names
+    the TARGET application actually declares in its own ATTACH_POINTS.md
+    (read by the caller, not by this function -- match_contract stays a
+    pure comparison, the same way every other axis here is). A capability
+    with no `attaches_to` at all skips this axis entirely, so every
+    capability harvested before this axis existed keeps matching exactly as
+    it did. A capability that DOES declare attaches_to but is matched with
+    available_attach_points=None cannot be shown to be covered, and is
+    refused rather than assumed compatible -- "every required attach point
+    must be covered" (Section 5) is not provable from silence."""
     shape = cap.get("data_shape", {})
     cin = shape.get("input", {})
     cout = shape.get("output", {})
@@ -601,6 +625,16 @@ def match_contract(expected: Dict[str, Any], cap: Dict[str, Any], impl: Dict[str
         return False, "side effects mismatch"
     if _version_tuple(expected.get("min_version", "1.0.0")) > _version_tuple((impl.get("release") or {}).get("version", "0")):
         return False, "version incompatibility"
+    required_attach_points = set(cap.get("attaches_to", []) or [])
+    if required_attach_points:
+        if available_attach_points is None:
+            return False, (f"attach-point coverage unknown: {cap.get('id', '?')} "
+                           f"requires {sorted(required_attach_points)} but no "
+                           f"target application's ATTACH_POINTS.md was supplied "
+                           f"to check against")
+        missing = required_attach_points - set(available_attach_points)
+        if missing:
+            return False, f"INCOMPATIBLE: missing attach point(s) {sorted(missing)}"
     return True, ""
 
 
@@ -621,6 +655,26 @@ _DATA_ACCESS_KINDS = ("read", "write", "read_write")
 _SHARED_CALL_RE = re.compile(r"_shared\.(?:load|save)\(\s*[\"']([^\"']+)[\"']")
 _DATA_FILE_NAME_RE = re.compile(r'^DATA_FILE_NAME\s*=\s*[\"\']([^\"\']+)[\"\']', re.M)
 _RAW_PATH_BYPASS_RE = re.compile(r'parents\[2\]\s*/\s*[\"\']data[\"\']')
+
+
+def read_available_attach_points(slug: str) -> Optional[set]:
+    """The set of attach-point names the target application (identified by
+    its shelf slug) actually declares, per its own
+    shelf/<slug>/ATTACH_POINTS.json -- the machine-readable sidecar
+    harvest_parts.py writes alongside ATTACH_POINTS.md. Returns None, not
+    an empty set, when nothing was found: None means "unknown, not
+    proven empty", and match_contract()'s attach-point axis treats those
+    two cases differently on purpose -- an app that genuinely declares zero
+    usable attach points is not the same fact as an app this function
+    could not read anything about at all."""
+    p = SHELF_DIR / slug / "ATTACH_POINTS.json"
+    if not p.is_file():
+        return None
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    return set(data.get("attach_points") or [])
 
 
 def validate_v2_contract(cap_id: str, cap: Dict[str, Any], app_dir: Path) -> None:
@@ -793,7 +847,9 @@ def stage1_assemble() -> Tuple[str, Path, Dict[str, Any], Dict[str, Any]]:
             target = slot["target_capability"]
             cap = loaded_caps[target]
             impl = next(i for i in loaded_impls.values() if i.get("capability_id") == target)
-            ok, reason = match_contract(slot.get("expected_contract", {}), cap, impl)
+            available_aps = read_available_attach_points(slug)
+            ok, reason = match_contract(slot.get("expected_contract", {}), cap, impl,
+                                        available_attach_points=available_aps)
             if not ok:
                 raise Held(f"{btn_id} -> {target}: {reason}")
             # §3.5 button record, word for word. The BTN's declared expected
