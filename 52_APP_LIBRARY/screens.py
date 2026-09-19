@@ -168,6 +168,49 @@ def _check_or_click_label(page, inp):
         return False
 
 
+def _fill_text_input(page, inp, val):
+    """Typing into an EARLIER field can trigger a React re-render that
+    swaps out a LATER field's DOM node before this loop ever reaches it -
+    the ElementHandle for it, captured once at the top of the loop, then
+    silently no-ops on click/fill (nothing throws) because it's pointing at
+    a detached node. Infisical's own admin-signup form does exactly this:
+    typing a password kicks off an async breach-check that re-renders the
+    requirements panel sitting right above 'Confirm Password', so that
+    field was never actually filled despite no error anywhere - the wizard
+    then genuinely can't proceed ('Passwords do not match') and every
+    'screen' discovered afterward was really just this same signup page.
+    Verifies the value actually stuck; if not, waits for the DOM to settle
+    and retries against a freshly re-queried element."""
+    try:
+        inp.click(timeout=2000)
+        inp.fill("")
+        inp.type(val, delay=15, timeout=5000)
+        if inp.input_value() == val:
+            return True
+    except Exception:
+        pass
+    try:
+        name = inp.get_attribute("name")
+        el_id = inp.get_attribute("id")
+    except Exception:
+        name = el_id = None
+    if not name and not el_id:
+        return False
+    try:
+        page.wait_for_timeout(1500)
+        fresh = page.query_selector(f'[name="{name}"]') if name else None
+        if fresh is None and el_id:
+            fresh = page.query_selector(f'#{el_id}')
+        if fresh is None:
+            return False
+        fresh.click(timeout=3000)
+        fresh.fill("")
+        fresh.type(val, delay=15, timeout=5000)
+        return fresh.input_value() == val
+    except Exception:
+        return False
+
+
 class ScreenWalk:
     def __init__(self, page, base_url, evidence_dir):
         self.page, self.base, self.evidence_dir = page, base_url.rstrip("/"), evidence_dir
@@ -256,16 +299,13 @@ class ScreenWalk:
                     val = TEST_USER["name"]
                 else:
                     val = TEST_USER["name"]
-                # .fill() sets the DOM value directly and some React-controlled
-                # forms (confirm-password checks, live validators) never see a
-                # real input event, so their validation silently disagrees with
-                # what's on screen ("passwords do not match" when they do).
-                # click+type dispatches real keystroke events every framework
-                # picks up.
-                inp.click(timeout=2000)
-                inp.fill("")
-                inp.type(val, delay=15, timeout=5000)
-                filled += 1
+                # click+type (not .fill(), which sets the DOM value directly
+                # without a real input event) so React-controlled validators
+                # actually see it - and _fill_text_input verifies the value
+                # stuck and retries against a fresh element if an earlier
+                # field's own re-render silently detached this one.
+                if _fill_text_input(self.page, inp, val):
+                    filled += 1
             except Exception:
                 continue
         return filled

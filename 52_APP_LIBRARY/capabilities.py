@@ -264,6 +264,42 @@ def _check_or_click_label(page, inp):
         return False
 
 
+def _fill_text_input(page, inp, val):
+    """See screens.py's identical helper: typing into an EARLIER field can
+    trigger a React re-render that swaps out a LATER field's DOM node
+    before this loop ever reaches it, silently no-opping its fill (nothing
+    throws). Verifies the value actually stuck; if not, waits for the DOM
+    to settle and retries against a freshly re-queried element."""
+    try:
+        inp.click(timeout=2000)
+        inp.fill("")
+        inp.type(val, delay=15, timeout=5000)
+        if inp.input_value() == val:
+            return True
+    except Exception:
+        pass
+    try:
+        name = inp.get_attribute("name")
+        el_id = inp.get_attribute("id")
+    except Exception:
+        name = el_id = None
+    if not name and not el_id:
+        return False
+    try:
+        page.wait_for_timeout(1500)
+        fresh = page.query_selector(f'[name="{name}"]') if name else None
+        if fresh is None and el_id:
+            fresh = page.query_selector(f'#{el_id}')
+        if fresh is None:
+            return False
+        fresh.click(timeout=3000)
+        fresh.fill("")
+        fresh.type(val, delay=15, timeout=5000)
+        return fresh.input_value() == val
+    except Exception:
+        return False
+
+
 class LiveTester:
     def __init__(self, page):
         self.page = page
@@ -321,12 +357,15 @@ class LiveTester:
                     val = TEST_VALUES["url"]
                 else:
                     val = TEST_VALUES["text_default"]
-                if val not in self.typed_values:
-                    self.typed_values.append(val)
-                inp.click(timeout=2000)
-                inp.fill("")
-                inp.type(val, delay=15, timeout=5000)
-                filled += 1
+                # click+type (not .fill(), which never fires a real input
+                # event some React-controlled validators need) so an
+                # earlier field's own re-render can't silently detach this
+                # one's handle - _fill_text_input verifies the value
+                # actually stuck and retries against a fresh element if not.
+                if _fill_text_input(self.page, inp, val):
+                    if val not in self.typed_values:
+                        self.typed_values.append(val)
+                    filled += 1
             except Exception:
                 continue
         return filled
