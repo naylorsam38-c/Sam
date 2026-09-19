@@ -1,7 +1,7 @@
-# Walkthrough — Chyrp Lite for Blogging
+# Walkthrough — Gitea for Project management
 
-Repo https://github.com/xenocrat/chyrp-lite @ `3f5e0b1e4295496bfaa8fab616deeb655c7e5bf4`  
-Started 2026-09-19T10:07:24, finished 2026-09-19T10:07:28
+Repo https://github.com/go-gitea/gitea @ `2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2`  
+Started 2026-09-19T10:05:40, finished 2026-09-19T10:05:47
 
 ## Boot: **BOOT FAILED**
 

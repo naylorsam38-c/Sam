@@ -4,7 +4,7 @@
  "app": "Ghost",
  "repo": "https://github.com/TryGhost/Ghost",
  "commit": "8e2eb8abfccdc4c373d5d9b6192b7ca4aba5809d",
- "started": "2026-09-19T10:03:08",
+ "started": "2026-09-19T10:07:16",
  "boot": {
   "status": "BOOT FAILED",
   "reason": "image build failed: Run 'docker buildx build --help' for more information",
@@ -24,5 +24,5 @@
   "absent": 0,
   "gaps": []
  },
- "finished": "2026-09-19T10:03:16"
+ "finished": "2026-09-19T10:07:24"
 }

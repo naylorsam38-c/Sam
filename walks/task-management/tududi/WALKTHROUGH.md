@@ -1,7 +1,7 @@
-# Walkthrough — Chyrp Lite for Blogging
+# Walkthrough — tududi for Task management
 
-Repo https://github.com/xenocrat/chyrp-lite @ `3f5e0b1e4295496bfaa8fab616deeb655c7e5bf4`  
-Started 2026-09-19T10:07:24, finished 2026-09-19T10:07:28
+Repo https://github.com/chrisvel/tududi @ `b7135d84dba418f856176b9f25deadf487d9e1af`  
+Started 2026-09-19T10:06:09, finished 2026-09-19T10:06:29
 
 ## Boot: **BOOT FAILED**
 

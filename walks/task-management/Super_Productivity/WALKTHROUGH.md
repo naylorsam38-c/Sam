@@ -1,7 +1,7 @@
-# Walkthrough — Chyrp Lite for Blogging
+# Walkthrough — Super Productivity for Task management
 
-Repo https://github.com/xenocrat/chyrp-lite @ `3f5e0b1e4295496bfaa8fab616deeb655c7e5bf4`  
-Started 2026-09-19T10:07:24, finished 2026-09-19T10:07:28
+Repo https://github.com/super-productivity/super-productivity @ `679a7823a36dab59283acf55a81113d7677513ab`  
+Started 2026-09-19T10:05:47, finished 2026-09-19T10:06:09
 
 ## Boot: **BOOT FAILED**
 

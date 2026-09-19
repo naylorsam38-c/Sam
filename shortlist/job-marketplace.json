@@ -1,0 +1,106 @@
+{
+ "category": "Job marketplace",
+ "slug": "job-marketplace",
+ "exemplar": "Upwork",
+ "capabilities": [
+  "Profiles",
+  "portfolios",
+  "job posting",
+  "search",
+  "proposals",
+  "messaging",
+  "contracts",
+  "milestones",
+  "payments",
+  "reviews"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "awesome-selfhosted:582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "job board",
+   "freelance",
+   "upwork",
+   "recruiting",
+   "recruitment",
+   "applicant tracking"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "admidio",
+   "repo": "https://github.com/Admidio/admidio",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Frappe HR",
+   "repo": "https://github.com/frappe/hrms",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "MintHCM",
+   "repo": "https://github.com/minthcm/minthcm",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "UI Bakery",
+   "repo": "https://github.com/uibakery/self-hosted",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['\u2298 Proprietary']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "gocron",
+   "repo": "https://github.com/flohoss/gocron",
+   "commit": "e2b455c086ce46c05c815db8df3120548faab164",
+   "stage": "category",
+   "reason": "does not declare itself as job marketplace \u2014 none of ['job board', 'freelance', 'upwork', 'recruiting', 'recruitment', 'applicant tracking'] in its description or README head",
+   "licence": "MIT",
+   "found_via": "keyword",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Profiles",
+     "portfolios",
+     "job posting"
+    ],
+    "anchors_missing": [
+     "Profiles",
+     "portfolios",
+     "job posting"
+    ]
+   },
+   "capability_coverage_pct": 20.0
+  }
+ ]
+}

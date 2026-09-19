@@ -1,0 +1,448 @@
+{
+ "category": "Dating/social events",
+ "slug": "social-events",
+ "exemplar": "Meetup",
+ "capabilities": [
+  "Groups",
+  "events",
+  "discovery",
+  "location",
+  "RSVPs",
+  "messaging",
+  "organisers",
+  "notifications"
+ ],
+ "checked_at": "2026-09-19",
+ "directory_dataset_commit": "awesome-selfhosted:582d3f235c86",
+ "gates": {
+  "licence": [
+   "MIT",
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "ISC",
+   "MPL-2.0",
+   "Unlicense",
+   "0BSD",
+   "Zlib",
+   "CC0-1.0"
+  ],
+  "min_screen_files": 8,
+  "min_stars": 200,
+  "max_months_since_update": 12,
+  "category_gate": true,
+  "declares": [
+   "meetup",
+   "rsvp",
+   "event management"
+  ],
+  "anchor_count": 3
+ },
+ "none_admitted": true,
+ "survivors": [],
+ "refused": [
+  {
+   "name": "Alf.io",
+   "repo": "https://github.com/alfio-event/alf.io",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "ANALOG",
+   "repo": "https://github.com/orangecoloured/analog",
+   "stage": "pre-filter",
+   "reason": "stars 49 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Bitpoll",
+   "repo": "https://github.com/fsinfuhh/Bitpoll",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Bracket",
+   "repo": "https://github.com/evroon/bracket",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Christmas Community",
+   "repo": "https://github.com/Wingysam/Christmas-Community",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Claper",
+   "repo": "https://github.com/ClaperCo/Claper",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "ClearFlask",
+   "repo": "https://github.com/clearflask/clearflask",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Digistorm",
+   "repo": "https://codeberg.org/ladigitale/digistorm",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Easy!Appointments",
+   "repo": "https://github.com/alextselegidis/easyappointments",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "EventSchedule",
+   "repo": "https://github.com/eventschedule/eventschedule",
+   "stage": "pre-filter",
+   "reason": "stars 66 < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "FHEM",
+   "repo": "https://svn.fhem.de/trac",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Formbricks",
+   "repo": "https://github.com/formbricks/formbricks",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Framadate",
+   "repo": "https://framagit.org/framasoft/framadate?",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "Gancio",
+   "repo": "https://framagit.org/les/gancio",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag"
+  },
+  {
+   "name": "gathio",
+   "repo": "https://github.com/lowercasename/gathio",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "HeyForm",
+   "repo": "https://github.com/heyform/heyform",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Hi.Events",
+   "repo": "https://github.com/HiEventsDev/hi.events",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "hitobito",
+   "repo": "https://github.com/hitobito/hitobito",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Hook0",
+   "repo": "https://gitlab.com/hook0/hook0",
+   "stage": "pre-filter",
+   "reason": "stars 15 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "Keeper.sh",
+   "repo": "https://github.com/ridafkih/keeper.sh",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "LibreBooking",
+   "repo": "https://github.com/LibreBooking/librebooking",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "LimeSurvey",
+   "repo": "https://github.com/LimeSurvey/LimeSurvey",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-2.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Meetable",
+   "repo": "https://github.com/aaronpk/Meetable",
+   "stage": "pre-filter",
+   "reason": "stars 170 < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Mobilizon",
+   "repo": "https://framagit.org/framasoft/mobilizon/",
+   "stage": "pre-filter",
+   "reason": "stars None < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Noosfero",
+   "repo": "https://gitlab.com/noosfero/noosfero",
+   "stage": "pre-filter",
+   "reason": "stars 65 < 200",
+   "found_via": "keyword"
+  },
+  {
+   "name": "OpnForm",
+   "repo": "https://github.com/OpnForm/OpnForm",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Pretix",
+   "repo": "https://github.com/pretix/pretix",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "keyword"
+  },
+  {
+   "name": "QloApps",
+   "repo": "https://github.com/Qloapps/QloApps",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['OSL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Rallly",
+   "repo": "https://github.com/lukevella/rallly",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['AGPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "Revel",
+   "repo": "https://github.com/letsrevel/revel-backend",
+   "stage": "pre-filter",
+   "reason": "stars 107 < 200",
+   "found_via": "tag+keyword"
+  },
+  {
+   "name": "Seatsurfing",
+   "repo": "https://github.com/seatsurfing/seatsurfing",
+   "stage": "pre-filter",
+   "reason": "directory lists licence ['GPL-3.0']",
+   "found_via": "tag"
+  },
+  {
+   "name": "osem",
+   "repo": "https://github.com/openSUSE/osem",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "keyword"
+  },
+  {
+   "name": "OpenSlides",
+   "repo": "https://github.com/OpenSlides/OpenSlides",
+   "stage": "pre-filter",
+   "reason": "outside top 8 by stars",
+   "found_via": "tag"
+  },
+  {
+   "name": "Cal.diy",
+   "repo": "https://github.com/calcom/cal.diy",
+   "commit": "6bc45298226f96ff79e0c070c8b2ce39727e8477",
+   "stage": "category",
+   "reason": "does not declare itself as dating/social events \u2014 none of ['meetup', 'rsvp', 'event management'] in its description or README head",
+   "licence": "MIT",
+   "found_via": "tag",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Groups",
+     "events",
+     "discovery"
+    ],
+    "anchors_missing": [
+     "discovery"
+    ]
+   },
+   "capability_coverage_pct": 87.5
+  },
+  {
+   "name": "Hasura",
+   "repo": "https://github.com/hasura/graphql-engine",
+   "commit": "6afe2022e0f49d96c2f8b28085b23c56b2ae6106",
+   "stage": "category",
+   "reason": "does not declare itself as dating/social events \u2014 none of ['meetup', 'rsvp', 'event management'] in its description or README head",
+   "licence": "Apache-2.0",
+   "found_via": "keyword",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Groups",
+     "events",
+     "discovery"
+    ],
+    "anchors_missing": []
+   },
+   "capability_coverage_pct": 62.5
+  },
+  {
+   "name": "Fider",
+   "repo": "https://github.com/getfider/fider",
+   "commit": "7673eb15bba3e0ff1f8036d70f2d19f75b07058a",
+   "stage": "licence",
+   "reason": "licence file says AGPL-3.0",
+   "licence": "AGPL-3.0",
+   "found_via": "tag",
+   "screens": null
+  },
+  {
+   "name": "AnyCable",
+   "repo": "https://github.com/anycable/anycable",
+   "commit": "3d74756f996d657ae1ccdc6cd706fde91c80ddee",
+   "stage": "screens",
+   "reason": "0 user-facing screen files (< 8); 0 admin-only \u2014 not a live app with screens",
+   "licence": "MIT",
+   "found_via": "keyword",
+   "screens": {
+    "screen_files_total": 0,
+    "screen_files_user": 0,
+    "screen_files_admin": 0,
+    "screen_languages": [],
+    "user_screen_examples": [],
+    "login_evidence": [
+     "identity/jwt_test.go (in content)"
+    ]
+   }
+  },
+  {
+   "name": "indico",
+   "repo": "https://github.com/indico/indico",
+   "commit": "115e4a4eb4010ee5ef091b6a6fed4e5ce22f7a8c",
+   "stage": "runs",
+   "reason": "no Dockerfile or compose file \u2014 walker cannot stand it up",
+   "licence": "MIT",
+   "found_via": "keyword",
+   "screens": {
+    "screen_files_total": 914,
+    "screen_files_user": 889,
+    "screen_files_admin": 25,
+    "screen_languages": [
+     ".html",
+     ".jsx",
+     ".tsx"
+    ],
+    "user_screen_examples": [
+     "indico/modules/oauth/templates/user_apps.html",
+     "indico/modules/oauth/templates/apps_base.html",
+     "indico/modules/oauth/templates/app_details.html",
+     "indico/modules/oauth/templates/app_new.html",
+     "indico/modules/oauth/templates/user_tokens.html",
+     "indico/modules/oauth/templates/apps.html"
+    ],
+    "login_evidence": [
+     "indico/modules/users/templates/login_as_header.html",
+     "indico/modules/auth/templates/login_page.html",
+     "indico/modules/auth/templates/_login_form.html",
+     "indico/util/signing.py"
+    ]
+   }
+  },
+  {
+   "name": "Razzia",
+   "repo": "https://github.com/Ralex91/Razzia",
+   "commit": "277a33849827c0847ec85e99f2135888f72bd0c1",
+   "stage": "category",
+   "reason": "does not declare itself as dating/social events \u2014 none of ['meetup', 'rsvp', 'event management'] in its description or README head",
+   "licence": "MIT",
+   "found_via": "keyword",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Groups",
+     "events",
+     "discovery"
+    ],
+    "anchors_missing": [
+     "discovery"
+    ]
+   },
+   "capability_coverage_pct": 37.5
+  },
+  {
+   "name": "docassemble",
+   "repo": "https://github.com/jhpyle/docassemble",
+   "commit": "c6722a90b0d6bcddb85970ca7dc981abd8ceb36f",
+   "stage": "category",
+   "reason": "does not declare itself as dating/social events \u2014 none of ['meetup', 'rsvp', 'event management'] in its description or README head",
+   "licence": "MIT",
+   "found_via": "tag",
+   "category_gate": {
+    "declared": false,
+    "declaration_phrases_found": [],
+    "declaration_hits": {
+     "description": [],
+     "readme": []
+    },
+    "anchors": [
+     "Groups",
+     "events",
+     "discovery"
+    ],
+    "anchors_missing": []
+   },
+   "capability_coverage_pct": 75.0
+  },
+  {
+   "name": "pretalx",
+   "repo": "https://github.com/pretalx/pretalx",
+   "commit": "b7813cf259ad3ea5521fa165ad9131816667c4a4",
+   "stage": "licence",
+   "reason": "licence file says AGPL-3.0",
+   "licence": "AGPL-3.0",
+   "found_via": "keyword",
+   "screens": null
+  }
+ ]
+}

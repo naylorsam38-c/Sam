@@ -1,0 +1,28 @@
+{
+ "category": "Project management",
+ "slug": "project-management",
+ "app": "Gitea",
+ "repo": "https://github.com/go-gitea/gitea",
+ "commit": "2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2",
+ "started": "2026-09-19T10:05:40",
+ "boot": {
+  "status": "BOOT FAILED",
+  "reason": "image build failed: Run 'docker buildx build --help' for more information",
+  "recipe": "Dockerfile",
+  "log": [
+   "$ docker build -t localhost/walk_projectmanagementgitea:walk --network=host --volume /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro --env SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt --env NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt -f Dockerfile .\n\nunknown flag: --volume\n\nUsage:  docker buildx build [OPTIONS] PATH | URL | -\n\nRun 'docker buildx build --help' for more information\n"
+  ]
+ },
+ "gate": {},
+ "capabilities": {},
+ "summary": {
+  "booted": false,
+  "gate": null,
+  "capabilities": 0,
+  "reached": 0,
+  "seen": 0,
+  "absent": 0,
+  "gaps": []
+ },
+ "finished": "2026-09-19T10:05:47"
+}

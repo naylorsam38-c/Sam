@@ -227,6 +227,18 @@ def run(argv, cwd=None, timeout=None, env=None):
         return 127, "", str(e)
 
 
+def best_error_line(text, max_len=300):
+    """The most informative line of a failed command's stderr. buildx/compose often end
+    with a generic '<cmd> --help' hint; prefer the actual ERROR:/error: line above it."""
+    lines = [l for l in text.strip().splitlines() if l.strip()]
+    if not lines:
+        return ""
+    for l in reversed(lines):
+        if re.search(r"\berror\b", l, re.I) and "--help" not in l:
+            return l.strip()[:max_len]
+    return lines[-1].strip()[:max_len]
+
+
 # --------------------------------------------------------------------------- clone at commit
 def clone_at(repo, commit):
     d = Path(CLONE_DIR) / re.sub(r"[^a-zA-Z0-9]+", "_", repo)[-80:]
@@ -346,7 +358,7 @@ class Boot:
             rc, out, err = run(argv + ["up", "-d"], cwd=r["path"].parent, timeout=BOOT_TIMEOUT_SECONDS)
             self.log.append(f"$ {' '.join(argv)} up -d\n{out[-3000:]}\n{err[-3000:]}")
             if rc != 0:
-                return False, f"compose up failed (rc {rc}): {err.strip().splitlines()[-1][:300] if err.strip() else out.strip()[-300:]}"
+                return False, f"compose up failed (rc {rc}): {best_error_line(err) if err.strip() else out.strip()[-300:]}"
         else:
             img = f"localhost/{self.project}:walk"
             bargs = [CONTAINER_TOOL, "build", "-t", img, "--network=host"]
@@ -356,7 +368,7 @@ class Boot:
             rc, out, err = run(bargs + ["-f", str(r["path"]), "."], cwd=self.root, timeout=BOOT_TIMEOUT_SECONDS)
             self.log.append(f"$ {' '.join(bargs)} -f Dockerfile .\n{out[-2000:]}\n{err[-3000:]}")
             if rc != 0:
-                return False, f"image build failed: {err.strip().splitlines()[-1][:300] if err.strip() else ''}"
+                return False, f"image build failed: {best_error_line(err) if err.strip() else ''}"
             rc, out, err = run([CONTAINER_TOOL, "run", "-d", "--name", self.project, "--label",
                                 f"{'io.podman.compose.project' if USING_PODMAN else 'com.docker.compose.project'}={self.project}", "-P", img], timeout=120)
             self.log.append(f"$ podman run -d -P {img}\n{out}\n{err[-1000:]}")

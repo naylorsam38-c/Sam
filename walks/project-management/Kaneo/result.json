@@ -1,0 +1,29 @@
+{
+ "category": "Project management",
+ "slug": "project-management",
+ "app": "Kaneo",
+ "repo": "https://github.com/usekaneo/kaneo",
+ "commit": "d26878807d04ab952205e7b81eea1334be418d7c",
+ "started": "2026-09-19T10:05:37",
+ "boot": {
+  "status": "BOOT FAILED",
+  "reason": "compose up failed (rc 1): failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs14/blobs/sha256:6f062f4190b6e20df3955197e698cae0fb0eb4fb3a5816f8d93f5b62fa2ea973?se=2026-09-19T10%3A15%3A00Z&sig=PCsQIl5asjHVz7ferkTj63hrWB%2FCXRMGuII6zect4Ts%3D&ske=2026-09-",
+  "recipe": "compose.yml",
+  "log": [
+   "copied .env.sample -> .env",
+   "$ docker compose -p walk_projectmanagementkaneo -f /tmp/walk_clones/https_github_com_usekaneo_kaneo/compose.yml up -d\n\n Image postgres:16-alpine Pulling \n Image ghcr.io/usekaneo/kaneo:latest Pulling \n Image postgres:16-alpine Interrupted \nfailed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs14/blobs/sha256:6f062f4190b6e20df3955197e698cae0fb0eb4fb3a5816f8d93f5b62fa2ea973?se=2026-09-19T10%3A15%3A00Z&sig=PCsQIl5asjHVz7ferkTj63hrWB%2FCXRMGuII6zect4Ts%3D&ske=2026-09-19T15%3A28%3A31Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-18T15%3A28%3A31Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=4a44bd1b4c8dc9261aac905c0e07eef51ab278328fdee7f851219aa84b90b971\": Forbidden\n"
+  ]
+ },
+ "gate": {},
+ "capabilities": {},
+ "summary": {
+  "booted": false,
+  "gate": null,
+  "capabilities": 0,
+  "reached": 0,
+  "seen": 0,
+  "absent": 0,
+  "gaps": []
+ },
+ "finished": "2026-09-19T10:05:40"
+}
