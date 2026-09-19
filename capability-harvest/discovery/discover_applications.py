@@ -157,6 +157,70 @@ APPLICATION_MANIFEST = [
             "readiness_path": "/",
         },
     },
+    {
+        "slug": "recipe-app",
+        "clone_url": "https://github.com/ichi-saki/Recipe_app.git",
+        "ref": None,
+        "category": "recipe-sharing",
+        "why_selected": (
+            "Small Flask + raw sqlite3 recipe-sharing app, MIT licensed, "
+            "one real dependency (flask). Genuine review persistence: "
+            "make_comment() runs a real parameterized INSERT INTO comment, "
+            "gated by a real login_needed session decorator. Ships its own "
+            "seeded database/recipes.db (committed via insert_data.py by "
+            "the app's own author) with real sample recipes to review."
+        ),
+        "runner": {
+            # Same reasoning as flask-messenger: app.py's __main__ block is
+            # just `app.run(debug=True)`, but there's no schema-creation
+            # step to worry about gating -- database/recipes.db is
+            # committed to the repo with real schema + sample data already
+            # in it, so we deliberately do NOT reset it (that fixture data
+            # is what the review capability needs something real to review).
+            "kind": "script_entrypoint",
+            "entry_script": "app.py",
+            "known_host": "127.0.0.1",
+            "known_port": 5000,
+            "readiness_path": "/",
+            # routes/auth.py uses a single-quoted f-string containing
+            # single-quoted dict access (f'...{user['username']}...'),
+            # valid only under PEP 701's relaxed f-string quoting
+            # (Python 3.12+). Not a bug in the app -- a real interpreter
+            # requirement discovered by actually trying to run it. See
+            # build.py's PYTHON_BY_VERSION / .venv-py312.
+            "python_version": "3.12",
+        },
+    },
+    {
+        "slug": "fintrack",
+        "clone_url": "https://github.com/vedpatel-real-ai/Fintrack-Flask-CS50-Final-Project.git",
+        "ref": None,
+        "category": "personal-finance",
+        "why_selected": (
+            "Real, well-engineered Flask app (application-factory pattern, "
+            "CS50 sqlite wrapper, WTF-CSRF, a graceful-degradation currency "
+            "helper that returns {} instead of crashing when no exchange- "
+            "rate API key is configured), MIT licensed. Its /generate_report "
+            "route does genuine ReportLab PDF construction and pandas Excel "
+            "export over real aggregated expense data, and ships a one-click "
+            "/demo login (freshly reseeded each visit) needing no signup."
+        ),
+        "runner": {
+            "kind": "flask_factory",
+            "factory_module": "app",
+            "factory_func": "create_app",
+            "readiness_path": "/",
+            "env": {
+                # DEVELOPMENT config is the default when FLASK_ENV is unset,
+                # which auto-generates a throwaway SECRET_KEY -- no need to
+                # set one. No EXCHANGE_RATE_API_KEY is set either: the
+                # app's own currency helper degrades gracefully (returns
+                # {} rather than calling out) when it's absent, which is
+                # the real, intended behaviour, not a workaround.
+                "DATABASE_PATH": "{db_path}",
+            },
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

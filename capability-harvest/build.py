@@ -69,6 +69,16 @@ import config  # noqa: E402
 DEFAULT_HOST = "127.0.0.1"
 SMTP_DEBUG_PORT = 1025
 VENV_PYTHON = config.PROJECT_ROOT / ".venv" / "bin" / "python3"
+# Some harvested apps use syntax their own author only ever ran on a newer
+# CPython than this pipeline's default venv (e.g. PEP 701's relaxed
+# f-string quoting, Python 3.12+) -- not a bug in the app, a real
+# interpreter-compatibility requirement. Rather than force every app onto
+# one Python version, a runner may set "python_version" to pick one of
+# these; default is "3.11" (VENV_PYTHON) when unset.
+PYTHON_BY_VERSION = {
+    "3.11": VENV_PYTHON,
+    "3.12": config.PROJECT_ROOT / ".venv-py312" / "bin" / "python3",
+}
 BUILD_DB_PATH = config.OUTPUT_ROOT / "build_run.db"  # used only by flask_factory apps with a DATABASE_URL env var
 MANIFEST_PATH = config.OUTPUT_ROOT / "build_manifest.json"
 SERVER_LOG_PATH = config.OUTPUT_ROOT / "server.log"
@@ -171,11 +181,21 @@ def _reset_files(cloned_path: Path, reset_globs):
             print(f"  reset: removed stale {match}")
 
 
-def _run_setup_scripts(cloned_path: Path, setup_scripts):
+def _resolve_python(runner: dict) -> Path:
+    version = runner.get("python_version", "3.11")
+    python_exe = PYTHON_BY_VERSION.get(version)
+    if python_exe is None:
+        raise SystemExit(f"ABORT: unknown python_version {version!r} in runner config -- add it to PYTHON_BY_VERSION")
+    if not python_exe.exists():
+        raise SystemExit(f"ABORT: {python_exe} not found -- create that venv and install the app's deps first")
+    return python_exe
+
+
+def _run_setup_scripts(cloned_path: Path, setup_scripts, python_exe: Path):
     for script in setup_scripts or []:
         print(f"  setup: running {script}")
         result = subprocess.run(
-            [str(VENV_PYTHON), script], cwd=str(cloned_path), capture_output=True, text=True,
+            [str(python_exe), script], cwd=str(cloned_path), capture_output=True, text=True,
         )
         if result.returncode != 0:
             raise SystemExit(
@@ -184,7 +204,7 @@ def _run_setup_scripts(cloned_path: Path, setup_scripts):
             )
 
 
-def _prepare_launch(runner: dict, cloned_path: Path, host: str, port: int):
+def _prepare_launch(runner: dict, cloned_path: Path, host: str, port: int, python_exe: Path):
     """Returns (argv, cwd, actual_host, actual_port)."""
     kind = runner["kind"]
 
@@ -194,7 +214,7 @@ def _prepare_launch(runner: dict, cloned_path: Path, host: str, port: int):
             host=host, port=port,
         )
         LAUNCHER_PATH.write_text(launcher, encoding="utf-8")
-        return [str(VENV_PYTHON), str(LAUNCHER_PATH)], str(cloned_path), host, port
+        return [str(python_exe), str(LAUNCHER_PATH)], str(cloned_path), host, port
 
     if kind == "flask_factory":
         env = runner.get("env", {})
@@ -208,13 +228,13 @@ def _prepare_launch(runner: dict, cloned_path: Path, host: str, port: int):
             host=host, port=port,
         )
         LAUNCHER_PATH.write_text(launcher, encoding="utf-8")
-        return [str(VENV_PYTHON), str(LAUNCHER_PATH)], str(cloned_path), host, port
+        return [str(python_exe), str(LAUNCHER_PATH)], str(cloned_path), host, port
 
     if kind == "script_entrypoint":
         entry = cloned_path / runner["entry_script"]
         actual_host = runner.get("known_host", host)
         actual_port = runner.get("known_port", port)
-        return [str(VENV_PYTHON), str(entry)], str(cloned_path), actual_host, actual_port
+        return [str(python_exe), str(entry)], str(cloned_path), actual_host, actual_port
 
     raise SystemExit(f"ABORT: unknown runner kind {kind!r}")
 
@@ -230,16 +250,14 @@ def start(cap_id: str, host: str, port: int):
     if not result["verified"]:
         raise SystemExit("ABORT: verification failed -- refusing to build/start an unverified composition")
 
-    if not VENV_PYTHON.exists():
-        raise SystemExit(f"ABORT: {VENV_PYTHON} not found -- create the venv and install the app's deps first")
-
     runner = result["runner"]
     cloned_path = Path(result["cloned_path"])
+    python_exe = _resolve_python(runner)
 
     if BUILD_DB_PATH.exists():
         BUILD_DB_PATH.unlink()
     _reset_files(cloned_path, runner.get("reset_globs"))
-    _run_setup_scripts(cloned_path, runner.get("setup_scripts"))
+    _run_setup_scripts(cloned_path, runner.get("setup_scripts"), python_exe)
 
     smtp_proc = None
     if runner.get("needs_smtp"):
@@ -249,7 +267,7 @@ def start(cap_id: str, host: str, port: int):
         smtp_proc = subprocess.Popen([str(VENV_PYTHON), str(smtp_launcher_path)], stdout=smtp_log_fh, stderr=subprocess.STDOUT)
         time.sleep(0.5)
 
-    argv, cwd, actual_host, actual_port = _prepare_launch(runner, cloned_path, host, port)
+    argv, cwd, actual_host, actual_port = _prepare_launch(runner, cloned_path, host, port, python_exe)
 
     log_fh = open(SERVER_LOG_PATH, "w", encoding="utf-8")
     proc = subprocess.Popen(argv, stdout=log_fh, stderr=subprocess.STDOUT, cwd=cwd)

@@ -84,6 +84,26 @@ CAPABILITY_TARGETS = [
         # _add_message via symbol_hint instead of the route function body.
         "symbol_hint": "_add_message",
     },
+    {
+        "cap_id": "CAP-0006",
+        "name": "write review",
+        "category": "recipe-sharing",
+        "app_slug": "recipe-app",
+        "source_file_relative": "routes/comments.py",
+        "symbol_hint": "make_comment",
+        "evidence_call_names": {"execute", "commit"},
+    },
+    {
+        "cap_id": "CAP-0007",
+        "name": "generate report",
+        "category": "personal-finance",
+        "app_slug": "fintrack",
+        "source_file_relative": "app/routes/reports.py",
+        "route_path_hint": "/generate_report",
+        # Real delegation to the PDF/Excel builders defined lower in the
+        # same file -- not just "renders a template".
+        "evidence_call_names": {"_build_pdf_report", "_build_excel_report"},
+    },
 ]
 # ----------------------------------------------------------------------------
 

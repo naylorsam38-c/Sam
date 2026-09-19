@@ -92,6 +92,46 @@
       "route_path": null,
       "source_file_relative": "messenger.py",
       "symbol": "_add_message"
+    },
+    {
+      "app_slug": "recipe-app",
+      "cap_id": "CAP-0006",
+      "category": "recipe-sharing",
+      "decorators": [
+        "@comments_blueprint.route('/recipe/<int:recipe_id>/comment', methods=['POST'])",
+        "@login_needed"
+      ],
+      "end_lineno": 36,
+      "evidence_calls_matched": [
+        "commit",
+        "execute"
+      ],
+      "found": true,
+      "lineno": 18,
+      "name": "write review",
+      "route_path": null,
+      "source_file_relative": "routes/comments.py",
+      "symbol": "make_comment"
+    },
+    {
+      "app_slug": "fintrack",
+      "cap_id": "CAP-0007",
+      "category": "personal-finance",
+      "decorators": [
+        "@reports_bp.route('/generate_report', methods=['GET', 'POST'])",
+        "@login_required"
+      ],
+      "end_lineno": 56,
+      "evidence_calls_matched": [
+        "_build_excel_report",
+        "_build_pdf_report"
+      ],
+      "found": true,
+      "lineno": 33,
+      "name": "generate report",
+      "route_path": "/generate_report",
+      "source_file_relative": "app/routes/reports.py",
+      "symbol": "generate_report"
     }
   ]
 }

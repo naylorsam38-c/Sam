@@ -1,0 +1,32 @@
+{
+  "base_url": "http://127.0.0.1:5000",
+  "cap_id": "CAP-0006",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "POST",
+      "status_code": 302,
+      "step": "anonymous_comment_check",
+      "url": "http://127.0.0.1:5000/recipe/1/comment"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "signup",
+      "url": "http://127.0.0.1:5000/login"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login",
+      "url": "http://127.0.0.1:5000/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "write_review",
+      "url": "http://127.0.0.1:5000/recipe/1"
+    }
+  ],
+  "verified_at": "2026-09-19T12:23:59.559400+00:00"
+}

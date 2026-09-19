@@ -1,0 +1,52 @@
+{
+  "application": {
+    "category": "recipe-sharing",
+    "commit": "da7fdc8337d191228b1b1ffedffaabdb3291c7dc",
+    "repo_url": "https://github.com/ichi-saki/Recipe_app.git",
+    "slug": "recipe-app"
+  },
+  "cap_id": "CAP-0006",
+  "capability_name": "write review",
+  "category": "recipe-sharing",
+  "checksums": {
+    "harvested_source_sha256": "d69308caf2e67f1fd6a62cd9ee220334739489e8dfc5a3ee4932fac10722825f",
+    "whole_source_file_sha256_at_harvest": "c54f9e7c4467d0831b19011dce06140ea423be521d4e42709c8c3e8e68382fcb"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "comments_blueprint",
+      "db_connection",
+      "e",
+      "flash",
+      "login_needed",
+      "redirect",
+      "request",
+      "session",
+      "url_for"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T12:23:36.165966+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@comments_blueprint.route('/recipe/<int:recipe_id>/comment', methods=['POST'])",
+      "@login_needed"
+    ],
+    "end_lineno": 36,
+    "evidence_calls_matched": [
+      "commit",
+      "execute"
+    ],
+    "file": "routes/comments.py",
+    "lineno": 18,
+    "route_path": null,
+    "symbol": "make_comment"
+  }
+}

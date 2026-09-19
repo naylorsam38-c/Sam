@@ -3,8 +3,10 @@
 # the shelf/ directory holds the harvested extract + provenance instead.
 /application_pool/
 
-# Python virtualenv for running harvested applications locally.
+# Python virtualenvs for running harvested applications locally. Some
+# apps genuinely need a newer interpreter (see build.py PYTHON_BY_VERSION).
 /.venv/
+/.venv-py312/
 __pycache__/
 *.pyc
 

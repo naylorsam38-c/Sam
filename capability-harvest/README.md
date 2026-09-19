@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 6 capabilities harvested from 5 real applications, each one
+**Status**: 7 capabilities harvested from 7 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 6 capabilities harvested so far
+## The 7 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -52,6 +52,8 @@ No script assumes a working directory.
 | CAP-0003 | search records | [makona-OG/hostelFix](https://github.com/makona-OG/hostelFix) | MIT | `app.py:213` `search` (`.filter`, `.ilike`) | HTTP |
 | CAP-0004 | track streak | [batrisyiasafri/habit_tracker](https://github.com/batrisyiasafri/habit_tracker) | MIT | `app.py:215` `calculate_streaks` (`sorted`, `max`) | HTTP |
 | CAP-0005 | send message | [jgoney/flask-messenger](https://github.com/jgoney/flask-messenger) | MIT | `messenger.py:30` `_add_message` (`connect`, `execute`, `commit`) | HTTP |
+| CAP-0006 | write review | [ichi-saki/Recipe_app](https://github.com/ichi-saki/Recipe_app) | MIT | `routes/comments.py:18` `make_comment` (`execute`, `commit`) | HTTP |
+| CAP-0007 | generate report | [vedpatel-real-ai/Fintrack-Flask-CS50-Final-Project](https://github.com/vedpatel-real-ai/Fintrack-Flask-CS50-Final-Project) | MIT | `app/routes/reports.py:33` `generate_report` (delegates to `_build_pdf_report`/`_build_excel_report`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -86,16 +88,18 @@ reason encountered while harvesting:
   `.run()` itself. hostelfix additionally needs its own `init_db.py` /
   `dummy_data.py` run once first (`setup_scripts`) — running the app's own
   provided scripts, not inventing seed data ourselves.
-- **`script_entrypoint`** (flask-messenger) — this app's schema creation
-  is gated behind `if __name__ == '__main__':` in its own entry script, so
-  importing it as a module would silently skip that setup. `build.py` runs
-  the entry script directly, exactly as its own author runs it, and
-  accepts whatever host/port it hardcodes rather than forcing a uniform
-  port across every harvested app.
+- **`script_entrypoint`** (flask-messenger, recipe-app) — these apps'
+  setup is gated behind `if __name__ == '__main__':` in their own entry
+  scripts (flask-messenger's schema creation; recipe-app has no such
+  gating but its author's own `if __name__` convention is still the
+  right thing to run directly rather than replicate). `build.py` runs the
+  entry script directly, exactly as its own author runs it, and accepts
+  whatever host/port it hardcodes rather than forcing a uniform port
+  across every harvested app.
 
-Two more real gotchas found and fixed while harvesting (both are the kind
-of thing that only shows up by actually running the app, not by reading
-its code):
+Three more real gotchas found and fixed while harvesting (all the kind of
+thing that only shows up by actually running the app, not by reading its
+code):
 - Flask-SQLAlchemy resolves a relative `sqlite:///x.db` URI against the
   app's **instance path**, not the process's working directory — confirmed
   for habit-tracker by inspecting which of three candidate `.db` files
@@ -105,6 +109,14 @@ its code):
   only set as a side effect of visiting `/` first (`index()`'s own "fake
   login for testing") — the same session-establishment step a real browser
   would need, so the HTTP proof does it too rather than skipping it.
+- recipe-app's `routes/auth.py` uses `f'...{user['username']}...'`, valid
+  only under PEP 701's relaxed f-string quoting (Python 3.12+) — a real
+  interpreter-compatibility requirement, not a bug, discovered when the
+  main venv's Python 3.11 failed to even import the module. `build.py` now
+  supports a per-app `python_version` runner field
+  (`PYTHON_BY_VERSION`/`_resolve_python`) rather than forcing every
+  harvested app onto one Python version; recipe-app runs from a separate
+  `.venv-py312`.
 
 ## What each pipeline stage actually proved
 
@@ -172,6 +184,15 @@ Highlights beyond the basic "call it and check 200":
 - CAP-0005: posts through the server-rendered form, then confirms the
   message via the app's own separate JSON REST endpoint — proving a
   genuine cross-interface persisted write, not an echo of the input.
+- CAP-0006: asserts an anonymous POST redirects to `/login` and never
+  persists (checked by confirming its text is absent from the next real
+  page), then a real signed-up user's review appears on the real recipe
+  page (one of the app's own committed sample recipes).
+- CAP-0007: logs into the app's real one-click `/demo` workspace (freshly
+  reseeded with realistic data every visit), extracts the real Flask-WTF
+  CSRF token, and generates both a PDF and an Excel report — verified by
+  real file signatures (`%PDF-`, and the zip signature `.xlsx` files
+  start with) and a minimum size, not just a 200 status.
 
 ## How to reproduce this from scratch
 
@@ -180,18 +201,24 @@ cd capability-harvest
 python3 -m venv .venv
 ./.venv/bin/pip install flask flask-login flask-sqlalchemy flask-bcrypt \
     flask-mail flask-migrate flask-cors flask-wtf python-dotenv requests \
-    reportlab geopy pillow
+    reportlab geopy pillow cs50 pandas openpyxl
+
+# recipe-app needs Python 3.12+ (see "Real applications aren't all shaped
+# the same way" below) -- a separate venv, not the one above.
+python3.12 -m venv .venv-py312
+./.venv-py312/bin/pip install flask requests
 
 python3 discovery/discover_applications.py
 python3 detection/detect_capability.py
-for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005; do
+for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
 
 # Each capability's own app is built/tested/stopped one at a time --
 # see each capability's runner in discovery/discover_applications.py for
-# its port (flask-messenger hardcodes 5000; others are 5057-5060).
+# its port (flask-messenger and recipe-app both hardcode 5000; others are
+# 5057-5060).
 python3 build.py start --cap CAP-0001 --port 5057
 ./.venv/bin/python3 test/prove_capability_http.py
 node test/prove_capability_browser.mjs   # absolute Playwright import path in the script may need adjusting for your environment
@@ -212,11 +239,21 @@ python3 build.py stop
 python3 build.py start --cap CAP-0005   # flask-messenger hardcodes port 5000
 ./.venv/bin/python3 test/prove_CAP-0005_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0006   # recipe-app also hardcodes port 5000
+./.venv/bin/python3 test/prove_CAP-0006_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0007 --port 5057
+./.venv/bin/python3 test/prove_CAP-0007_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
-`.venv/`, `shelf/`, `capabilities/`, `output/*` all deleted first) to confirm
-it's genuinely reproducible, not an artifact of an ad-hoc fixing sequence.
+`shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
+deleted first, venvs kept) twice now, at two different capability counts,
+to confirm it's genuinely reproducible, not an artifact of an ad-hoc fixing
+sequence.
 
 ## What this proves vs. what's next
 
@@ -239,15 +276,11 @@ it's genuinely reproducible, not an artifact of an ad-hoc fixing sequence.
   surface, which doesn't support backdating).
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 6.** Two further capabilities were researched and
-  license-verified but not yet harvested: **"generate report"** (from
-  vedpatel-real-ai/Fintrack-Flask-CS50-Final-Project, MIT — real PDF/Excel
-  aggregation, but needs a live exchange-rate API call and session auth,
-  so it needs more care before wiring in) and **"write review"** (from
-  ichi-saki/Recipe_app, MIT — real rating+comment persistence behind a
-  simple signup/login flow). Both are documented candidates for the next
-  batch, not silently dropped. The other ~75 names in the vocabulary have
-  not been researched yet.
+- **Scale beyond 7.** ~74 names in the 81-name vocabulary have not been
+  researched yet. Each one needs the same real vetting (license read from
+  source, AST-confirmed evidence, live proof) — this is not a
+  copy-paste-N-times exercise, and a name with no genuine real-app
+  candidate gets recorded as blocked/empty with a reason, never forced.
 - **Cross-application composition.** `build.py` verifies and mounts each
   harvested route within its *own* source application. Grafting a
   harvested capability onto a *different*, unrelated host application
