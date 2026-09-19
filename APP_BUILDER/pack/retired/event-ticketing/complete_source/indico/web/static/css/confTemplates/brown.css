@@ -1,0 +1,24 @@
+:root {
+  --conf-theme-header-bg: #5a3d31;
+  --conf-theme-header-border-bottom: #300018;
+
+  --conf-theme-subtitle-bg: #e0e4cc;
+  --conf-theme-subtitle-border: #837b47;
+  --conf-theme-subtitle-text: #4a431a;
+
+  --conf-theme-menu-bg: #dfe7e7;
+  --conf-theme-menu-border: #7e8383;
+  --conf-theme-menu-link: #4e4c46;
+
+  --conf-theme-support-bg: #dfe7e7;
+  --conf-theme-support-border: #7e8383;
+  --conf-theme-support-header-bg: #5a3d31;
+
+  --conf-theme-sprite-image: url('/images/conf/sprites_brown.png');
+  --conf-theme-hover-bg: #777;
+  --conf-theme-hover-color: white;
+  --conf-theme-title-sprite-bg: var(--conf-theme-sprite-image);
+  --conf-theme-announcement-sprite-bg: var(--conf-theme-sprite-image);
+  --conf-theme-announcement-border-top: none;
+  --conf-theme-announcement-border-bottom: 1px solid #bbb;
+}

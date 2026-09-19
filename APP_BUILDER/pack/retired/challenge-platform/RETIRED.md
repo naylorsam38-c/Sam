@@ -19,6 +19,11 @@ those findings stand regardless of framework.)
 
 **What is preserved here, unchanged:**
 
+- `complete_source/` — the **complete CTFd working tree** at the pinned
+  commit (`8864bc0cea5b67d9ae96978b5d559e70330ff071`), `.git` history
+  excluded, exact commit recorded in `complete_source/COMMIT.txt`. This is
+  the whole application, not just the harvested fragments below — added
+  2026-09-19 per direct instruction.
 - `shelf/` — all eight harvested capabilities (`CAP-0001`, `CAP-0002`,
   `CAP-0003`, `CAP-0011`–`CAP-0015`), each with `source.py`,
   `PROVENANCE.json` (`symbol_verified: true`), and `LICENCE.txt`, moved

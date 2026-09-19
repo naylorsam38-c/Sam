@@ -1,0 +1,12 @@
+repo: CTFd/CTFd
+url:  https://github.com/CTFd/CTFd
+commit: 8864bc0cea5b67d9ae96978b5d559e70330ff071
+branch at clone time: master
+cloned: 2026-09-18, this session
+licence: Apache-2.0
+
+This is the complete working tree at that commit, .git history excluded.
+Only the 8 files under ../shelf/CAP-000X/source.py were individually
+harvested as capability parts; everything else here was never processed by
+harvest_parts.py -- it is the whole application, for reference and any
+future re-harvest.

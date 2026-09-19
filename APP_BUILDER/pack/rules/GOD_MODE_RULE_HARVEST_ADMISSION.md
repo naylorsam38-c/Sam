@@ -5,6 +5,14 @@
 **Supersedes:** the earlier proposed version of this file, which admitted repos
 by framework alone and left the payload question open. Both are settled here.
 
+**Superseding note, 2026-09-19:** Rule A was rewritten from Flask to Django,
+and Rule G was added, per direct instruction ("FINAL CLAUDE CODE HANDOFF —
+Django/PostgreSQL + Attach-Point Harvest Architecture"). Every capability
+admitted under the previous (Flask) Rule A — Indico, Redash, CTFd, thirty
+capabilities across three apps — was retired to `pack/retired/` as a direct
+consequence, not because any of those harvests were found defective. See
+`pack/retired/*/RETIRED.md` and `GOD_MODE/REGISTERS/CHANGE_HISTORY.md`.
+
 **Scope.** Applies to every capability that enters the shelf, whether harvested
 from an external codebase or written directly against the stack below.
 
@@ -18,7 +26,9 @@ provenance and are out of scope as stock, not exempt from it.
 
 ## Rule A — One stack, library-wide
 
-Every part on the shelf runs the **same stack: Flask and PostgreSQL.**
+Every source admitted to the library runs on **Django and PostgreSQL.** No
+"close enough": not Flask, not FastAPI, not Node, not Rails. A source on any
+other framework is not admitted, whatever else it has going for it.
 
 A capability may be harvested only from a codebase already built on that stack.
 
@@ -30,6 +40,9 @@ assembly time is a rewrite, and a rewrite is where invented code enters the
 library.
 
 Pick the stack once, and every part ever harvested fits every other part.
+Django's signals also give every admitted app a built-in attach-point system
+(see Rule G) to map against — a second, independent reason to pick it over an
+otherwise-equivalent Flask app.
 
 No exceptions for "close enough". Reject the repo.
 
@@ -58,7 +71,7 @@ All capabilities in a single app come from a single source repo.
 
 **Reason.** Rule A makes parts compatible at the stack level. Rule E keeps them
 compatible at the application level — one source means one set of models, one
-session model, one set of conventions. Mixing two Flask apps in one build is
+session model, one set of conventions. Mixing two Django apps in one build is
 still mixing two designs.
 
 Cross-app reuse of a part is governed separately, by the shelf, not by this
@@ -67,7 +80,7 @@ rule.
 ## Rule F — Where no exemplar exists, build the part
 
 If no repo on the stack provides a capability, the capability is **written
-directly against the stack** — Flask, PostgreSQL, and the Shared Library
+directly against the stack** — Django, PostgreSQL, and the Shared Library
 (`CAP-0000`).
 
 A part written this way is a first-class shelf part. It carries the same
@@ -82,40 +95,76 @@ way to fill a gap without leaving it.
 
 Rule F is a fallback, not a shortcut. If a qualifying repo exists, harvest it.
 
+## Rule G — Attach points, declared at admission
+
+Every admitted source has its attach points written down at the moment of
+admission, in a file named `ATTACH_POINTS.md` alongside its clone. Nothing is
+admitted without it.
+
+An attach point is a named place in an application where a feature can hook in
+without editing the application's core source. There are three kinds:
+
+- **EVENT** — the application announces something happened (e.g.
+  `booking.confirmed`, `user.created`, `payment.succeeded`). Django signals
+  are valid event sources.
+- **SLOT** — a named place in the UI where a capability can render (e.g.
+  `listing.actions`, `profile.sidebar`, `booking.actions`).
+- **DATA** — a named entity a capability can access through the shared
+  library contract (e.g. `bookings`, `messages`, `listings`).
+
+For every attach point, `ATTACH_POINTS.md` records: name, kind, where it lives
+in the code, source symbol where applicable, payload/data shape, evidence,
+whether it is native to the source or requires an adapter, and whether it is
+externally consumable.
+
+At least `MIN_HOOKS` usable, nameable attach points must exist, backed by real
+evidence — a keyword appearing in documentation is not evidence. Where a
+mechanism already exists (Django signals, a plugin system, entry points,
+middleware, webhooks), map it. Do not invent an attach point without evidence.
+
+**Adapters.** Where an application does not naturally expose a required
+standard attach point, a thin adapter may be written by our system. It belongs
+to our architecture, never modifies the harvested application's core source,
+must be explicitly recorded, and is marked `ADAPTER`, never represented as
+`NATIVE`.
+
+**Reason.** Rule A makes parts share a stack; Rule G makes them share a real,
+evidenced integration surface, so a capability can declare what it needs
+(`attaches_to`) without ever naming a specific application, and compatibility
+becomes a real comparison (see `match_contract` in `pack/3_assembly/build.py`)
+rather than an assumption.
+
 ---
 
-## The payload question — settled
+## The payload question — settled for Flask, reopened for Django
 
 A harvested part **runs as its source wrote it.** The host does not require
 foreign code to be rewritten into a neutral module shape before it will run.
+This remains the design intent under Rule A regardless of which single stack
+is chosen.
 
-This is the direct consequence of Rule A. Once every part on the shelf is Flask
-on PostgreSQL, the host can run Flask parts natively, because there is no second
-framework for it to stay neutral between. The cost of a non-neutral host — that
-each app inherits its source's stack — is not a cost here, because the stack is
-the same one every time by rule.
+**What was true under the Flask-era Rule A, and is not automatically true
+under this one:** `4_host/host.py` was built entirely around Flask's own
+serving model — `app.url_map`, `Blueprint`, `app.view_functions`,
+`add_url_rule` — and `3_assembly/build.py`'s `_extract_route_meta` reads
+Flask's specific route-declaration shapes (decorator form, `add_url_rule`
+call form, blueprint `url_prefix`). None of that is how Django routes a
+request (`urls.py`, `URLconf`, `path()`/`re_path()`, class-based views via
+`.as_view()`). Rewriting the host and the route reader to run Django parts
+natively is real, separate work that this rule change does not itself do —
+see `4_host/host.py`'s own admission that no application is named in it,
+which was proven true for Flask but has not yet been proven true, or even
+attempted, for Django. Until that work happens, "a harvested part runs as its
+source wrote it" is this rule's *intent* for Django, not yet a *demonstrated
+fact* the way it was for Flask (see `evidence/LIVE_RUN_EVIDENCE.md` and
+`evidence/TWO_MORE_APPS.md`, both retired-app evidence proving and then
+stress-testing the Flask case).
 
-What matters is that the capability does what it says it does. The framework
-underneath it is an implementation detail, and it is the same detail everywhere.
-
-**Route reading — settled.** `build.py`'s `_extract_route_meta` now reads how
-real Flask code declares a route, not only the `ROUTE`/`METHOD` constants a
-generated part writes. It understands the decorator form, the `add_url_rule`
-call form, and blueprint `url_prefix`, including a rule that opts out of its
-prefix. The `ROUTE`/`METHOD` path still works first, so generated parts read
-unchanged. It is still static, via the AST — no part is ever imported to find
-out where it routes.
-
-The reader was fixed rather than requiring each part to declare its route by
-hand, because two sources of truth on the same fact drift: the day the
-declaration and the decorator disagree, the app routes somewhere the code does
-not. One finite change instead of a duplicated line on every part forever.
-
-Where one handler binds to several real paths — which happens in real source,
-e.g. Indico's login binds both `/login/` and `/login/<provider>/` — the reader
-returns nothing rather than guessing. The form already records which path the
-capability is, so this is a check, not a gap: the declared route is verified to
-exist in the source at the pinned commit.
+Route reading, the stamp header, `bind_shelf_parts`' class-only binding
+requirement — every host-layer finding recorded against the three retired
+apps (see their `RETIRED.md` and `evidence/TWO_MORE_APPS.md`) was a Flask
+finding. Whether the same mechanisms, or different ones, hold for Django is
+unproven until a Django part is actually run through the host for real.
 
 ---
 
@@ -128,18 +177,25 @@ failed a rule.
 
 | Rule | What is refused | Setting |
 |---|---|---|
-| A framework | not Flask | `REQUIRED_FRAMEWORK` |
+| A framework | not Django | `REQUIRED_FRAMEWORK` |
 | A datastore | not PostgreSQL | `REQUIRED_DATASTORE`, `DATASTORE_ALIASES` |
 | B | no published REST API documentation | `REQUIRE_API_DOCS` |
 | C | licence not permissive | `ALLOWED_LICENCES` |
 | D | no structural match to the exemplar recorded | `REQUIRE_STRUCTURAL_MATCH` |
 | E | capabilities naming more than one repo | `ONE_SOURCE_PER_APP` |
+| G | no usable attach points, or fewer than `MIN_HOOKS` | `REQUIRE_ATTACH_POINTS`, `MIN_HOOKS` |
 
 All switchable in that script's config block. `ENFORCE_ADMISSION = False`
 turns the lot off, which is a decision to admit code the host cannot run.
 
 Refusal is all-or-nothing: one failed rule refuses the whole source. A
 partially admitted source is a shelf with a part on it that no rule allowed.
+
+Quality scoring (commit recency, contributors, releases, test suite,
+documentation, issue closure ratio, third-party plugin evidence) ranks
+otherwise-eligible candidates against each other. It never overrides a hard
+gate — a high-scoring Flask app is still rejected on Rule A; a Django app with
+no usable attach points is still rejected on Rule G.
 
 Rule F needs no check. A part written against the stack is written to the
 stack by definition; what it needs is an origin naming this system rather than
@@ -161,3 +217,8 @@ Recorded, not fixed:
 - `_master_key()` is one local key: no rotation, no per-tenant separation, no
   external KMS.
 - A multipart upload cannot be the Playwright journey target.
+- **The host and the route reader are Flask-shaped code, unchanged by this
+  rule.** Every Django part on the shelf, from this rule onward, is admitted
+  and evidenced correctly — but running it through `host.py` the way Flask
+  parts were run has not been built, attempted, or proven. See "The payload
+  question", above.

@@ -1,0 +1,31 @@
+<nav aria-label="{% trans %}Breadcrumb{% endtrans %}" class="main-breadcrumb {{ 'management' if management }}"
+     itemprop="breadcrumb" itemscope itemtype="http://schema.org/Breadcrumb">
+    <ol class="path" itemscope itemtype="http://schema.org/BreadcrumbList">
+        {% for item in items %}
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                {%- if not loop.first -%}
+                    <span class="sep" aria-hidden="true">»</span>
+                {%- endif -%}
+                {%- if item.url -%}
+                    <a href="{{ item.url }}" itemprop="item" class="item">
+                        <span itemprop="name">{{ item.title|truncate(40) }}</span>
+                        {%- if loop.last -%}
+                            <span class="current-page-indicator"> ({% trans %}you are here{% endtrans %})</span>
+                        {%- endif -%}
+                    </a>
+                {%- else -%}
+                    <span class="item" itemprop="name"{% if loop.last %} aria-current="page"{% endif %}>
+                        {{ item.title|truncate(40) }}
+                        {%- if loop.last -%}
+                            <span class="current-page-indicator"> ({% trans %}you are here{% endtrans %})</span>
+                        {%- endif -%}
+                    </span>
+                {%- endif -%}
+                {%- if item.icon -%}
+                    <i class="{{ item.icon }}"></i>
+                {%- endif -%}
+                <meta itemprop="position" content="{{ loop.index }}" />
+            </li>
+        {% endfor %}
+    </ol>
+</nav>

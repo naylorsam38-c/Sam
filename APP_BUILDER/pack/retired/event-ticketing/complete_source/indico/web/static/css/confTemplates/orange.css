@@ -1,0 +1,33 @@
+:root {
+  --conf-theme-header-bg: #fa6900;
+  --conf-theme-header-border-bottom: #c05000;
+
+  --conf-theme-subtitle-bg: #e0e4cc;
+  --conf-theme-subtitle-border: #bfc3ae;
+
+  --conf-theme-menu-bg: #dfe7e7;
+  --conf-theme-menu-border: #7e8383;
+  --conf-theme-menu-link: #4e4c46;
+
+  --conf-theme-support-bg: #dfe7e7;
+  --conf-theme-support-border: #7e8383;
+  --conf-theme-support-header-bg: #fa6900;
+
+  --conf-theme-sprite-image: url('/images/conf/sprites_orange.png');
+  --conf-theme-hover-bg: #777;
+  --conf-theme-hover-color: white;
+  --conf-theme-title-sprite-bg: var(--conf-theme-sprite-image);
+  --conf-theme-announcement-sprite-bg: var(--conf-theme-sprite-image);
+  --conf-theme-announcement-border-top: none;
+  --conf-theme-announcement-border-bottom: 1px solid #ccc;
+}
+
+.confSubTitleBox {
+  background: var(--conf-theme-subtitle-bg) var(--conf-theme-sprite-image) repeat-x 0 -213px;
+  border-bottom: 1px solid var(--conf-theme-subtitle-border);
+  border-top: 1px solid var(--conf-theme-subtitle-border);
+}
+
+.confSubTitle {
+  color: #5b5d53;
+}

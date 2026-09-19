@@ -1,0 +1,57 @@
+name: Translation build
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+env:
+  TZ: Europe/Zurich
+  PYTHON_VERSION: '3.12'
+  NODE_VERSION: '22.x'
+
+jobs:
+  build:
+    name: Build package 📦
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        name: Set up Python 🐍
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install uv
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        name: Setup Node
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install build deps 🔧
+        run: |
+          sudo apt-get install libpq-dev
+          uv pip install --system -e '.[dev]'
+      - name: Install npm deps ☕
+        run: npm ci
+      - name: Install Transifex client 📥
+        run: curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+      - name: Pull and compile translations 🌍
+        env:
+          TX_TOKEN: ${{ secrets.TRANSIFEX_TOKEN }}
+        run: |
+          ./tx pull --all --force
+          mv indico/translations/zh_CN.GB2312 indico/translations/zh_Hans_CN
+          indico i18n compile indico --no-check
+      - name: Enable moment locales 🕒
+        run: ./bin/maintenance/update_moment_locales.py
+      - name: Build wheel 🏗
+        run: ./bin/maintenance/build-wheel.py indico --add-version-suffix --ignore-unclean
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        name: Upload build artifacts 📦
+        with:
+          name: indico-translation-wheel
+          retention-days: 1
+          path: ./dist

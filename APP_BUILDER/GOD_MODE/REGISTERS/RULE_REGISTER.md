@@ -19,7 +19,7 @@ Every operative rule currently in force, by source section of `GOD_MODE/ACTIVE/G
 
 | Rule | File | Provenance | Status |
 |---|---|---|---|
-| Harvest Admission (A one stack Flask+PostgreSQL, B published API docs, C permissive licence, D structural match, E one source per app, F write the part where no exemplar exists; payload runs as its source wrote it) | `GOD_MODE/ACTIVE/GOD_MODE_RULE_HARVEST_ADMISSION.md` | NEW | Active — partially enforced, see that file's enforcement table |
+| Harvest Admission (A one stack Django+PostgreSQL — rewritten 2026-09-19, was Flask+PostgreSQL; B published API docs; C permissive licence; D structural match; E one source per app; F write the part where no exemplar exists; G attach points declared at admission via ATTACH_POINTS.md, MIN_HOOKS enforced; payload runs as its source wrote it, unproven for Django — see that file's "payload question" section) | `GOD_MODE/ACTIVE/GOD_MODE_RULE_HARVEST_ADMISSION.md` | NEW | Active — partially enforced, see that file's enforcement table |
 | Numbering (N1-N6; capabilities numbered once globally; the 100-block-per-app scheme is void) | `GOD_MODE_RULE_NUMBERING.md` | NEW | Active |
 
 ## Rules explicitly retired (not deleted — see `ARCHIVE_REGISTER.md`)

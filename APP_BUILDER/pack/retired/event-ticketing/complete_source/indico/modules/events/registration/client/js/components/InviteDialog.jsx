@@ -1,0 +1,404 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2026 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+import inviteImportURL from 'indico-url:event_registration.api_invitations_import';
+import inviteMetadataURL from 'indico-url:event_registration.api_invitations_metadata';
+import invitationPreviewURL from 'indico-url:event_registration.invitation_preview';
+import inviteURL from 'indico-url:event_registration.invite';
+
+import {FORM_ERROR} from 'final-form';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
+import {Button, Dimmer, Form, Icon, Loader, Message, Segment} from 'semantic-ui-react';
+
+import {EmailDialog} from 'indico/modules/events/persons/EmailDialog';
+import {RequestConfirm} from 'indico/react/components';
+import {FinalPrincipalList} from 'indico/react/components/principals/PrincipalListField';
+import {FinalCheckbox, FinalInput, handleSubmitError} from 'indico/react/forms';
+import {useFavoriteUsers, useIndicoAxios} from 'indico/react/hooks';
+import {Translate, PluralTranslate, Singular, Plural, Param} from 'indico/react/i18n';
+import {indicoAxios} from 'indico/utils/axios';
+import {getPluginObjects} from 'indico/utils/plugins';
+
+import ImportInvitationsField from './ImportInvitationsField';
+
+function ExistingInviteFields({eventId}) {
+  const favoriteUsersController = useFavoriteUsers();
+  return (
+    <FinalPrincipalList
+      name="users"
+      label={Translate.string('Users')}
+      withExternalUsers
+      eventId={eventId}
+      favoriteUsersController={favoriteUsersController}
+      required
+    />
+  );
+}
+
+ExistingInviteFields.propTypes = {
+  eventId: PropTypes.number.isRequired,
+};
+
+function NewInviteFields({allowAffiliations}) {
+  return (
+    <>
+      <Form.Group widths="equal">
+        <FinalInput name="first_name" label={Translate.string('First name')} required />
+        <FinalInput name="last_name" label={Translate.string('Last name')} required />
+      </Form.Group>
+      <FinalInput
+        name="email"
+        type="email"
+        label={Translate.string('Email')}
+        required
+        description={Translate.string('The invitation will be sent to this address.')}
+      />
+      {allowAffiliations && (
+        <FinalInput name="affiliation" label={Translate.string('Affiliation')} />
+      )}
+    </>
+  );
+}
+
+NewInviteFields.propTypes = {
+  allowAffiliations: PropTypes.bool,
+};
+
+NewInviteFields.defaultProps = {
+  allowAffiliations: true,
+};
+
+function ImportInviteFields({eventId, regformId, allowAffiliations}) {
+  return (
+    <>
+      <Message info icon>
+        <Icon name="lightbulb outline" />
+        <Message.Content>
+          <Translate as="p">
+            You should upload a CSV (comma-separated values) file with exactly 4 columns in the
+            following order:
+          </Translate>
+          <Message.List>
+            <Translate as={Message.Item}>First Name</Translate>
+            <Translate as={Message.Item}>Last Name</Translate>
+            <Translate as={Message.Item}>Affiliation</Translate>
+            <Translate as={Message.Item}>E-mail</Translate>
+          </Message.List>
+          <Translate as="p">
+            The fields "First Name", "Last Name" and "E-mail" are mandatory.
+          </Translate>
+        </Message.Content>
+      </Message>
+      <ImportInvitationsField
+        name="imported"
+        eventId={eventId}
+        regformId={regformId}
+        allowAffiliations={allowAffiliations}
+      />
+      <FinalCheckbox
+        name="skip_existing"
+        label={Translate.string('Skip existing invitations')}
+        description={Translate.string('Users with existing invitations will be ignored.')}
+      />
+    </>
+  );
+}
+
+ImportInviteFields.propTypes = {
+  eventId: PropTypes.number.isRequired,
+  regformId: PropTypes.number.isRequired,
+  allowAffiliations: PropTypes.bool,
+};
+
+ImportInviteFields.defaultProps = {
+  allowAffiliations: true,
+};
+
+const modeConfig = {
+  existing: {
+    label: Translate.string('Indico users'),
+    buttonLabel: Translate.string('Indico users'),
+    renderFields: props => <ExistingInviteFields {...props} />,
+    extraFields: ['users'],
+    getPreviewPayload: ({users: [user] = []}) => ({context: {user}, disabled: !user}),
+    getCount: ({users}) => users.length,
+  },
+  new: {
+    label: Translate.string('New user'),
+    buttonLabel: Translate.string('New user'),
+    renderFields: props => <NewInviteFields {...props} />,
+    extraFields: ['first_name', 'last_name', 'email', 'affiliation'],
+    getPreviewPayload: values => {
+      const firstName = values.first_name.trim();
+      const lastName = values.last_name.trim();
+      if (!firstName || !lastName) {
+        return {context: {}, disabled: true};
+      }
+      return {context: {first_name: firstName, last_name: lastName}, disabled: false};
+    },
+    getCount: () => 1,
+  },
+  import: {
+    label: Translate.string('Import CSV'),
+    buttonLabel: Translate.string('Import CSV'),
+    renderFields: props => <ImportInviteFields {...props} />,
+    extraFields: ['imported', 'skip_existing'],
+    getPreviewPayload: ({imported}) =>
+      imported.length
+        ? {
+            context: _.pick(imported[0], ['first_name', 'last_name']),
+            disabled: false,
+          }
+        : {context: {}, disabled: true},
+    getCount: ({imported}) => imported.length,
+  },
+};
+
+const getSkippedWarningMessage = skipped =>
+  skipped
+    ? PluralTranslate.string(
+        '{count} invitation was skipped.',
+        '{count} invitations were skipped.',
+        skipped,
+        {count: skipped}
+      )
+    : null;
+
+export default function InviteDialog({eventId, regformId, onClose, onSuccess}) {
+  const pluginModes = useMemo(() => getPluginObjects('invite-dialog-extra-modes'), []);
+  const [mode, setMode] = useState('existing');
+  const [sentEmailsCount, setSentEmailsCount] = useState(0);
+  const [sentEmailsWarning, setSentEmailsWarning] = useState(null);
+  const [pendingEmails, setPendingEmails] = useState(0);
+  const confirmationResolver = useRef(null);
+  const successTimeout = 5000;
+  const {data: metadata, loading} = useIndicoAxios(
+    inviteMetadataURL({event_id: eventId, reg_form_id: regformId}),
+    {camelize: true}
+  );
+
+  const allModes = useMemo(
+    () => ({
+      ...modeConfig,
+      ...Object.fromEntries(
+        pluginModes.map(pm => [
+          pm.key,
+          {
+            buttonLabel: pm.buttonLabel,
+            renderFields: props => <pm.Component {...props} />,
+            extraFields: pm.extraFields,
+            getCount: pm.getCount,
+            getPreviewPayload: () => ({context: {}, disabled: true}),
+            getSubmitURL: pm.getSubmitURL ?? null,
+          },
+        ])
+      ),
+    }),
+    [pluginModes]
+  );
+
+  const initialFormValues = useMemo(() => {
+    if (!metadata) {
+      return {};
+    }
+    const pluginInitialValues = pluginModes.reduce(
+      (acc, pm) => ({...acc, ...(pm.initialValues ?? {})}),
+      {}
+    );
+    return {
+      subject: metadata.defaultSubject,
+      body: metadata.defaultBody,
+      skip_access_check: false,
+      lock_email: false,
+      skip_moderation: false,
+      skip_existing: false,
+      copy_for_sender: false,
+      bcc_addresses: [],
+      users: [],
+      first_name: '',
+      last_name: '',
+      email: '',
+      affiliation: '',
+      imported: [],
+      ...pluginInitialValues,
+    };
+  }, [metadata, pluginModes]);
+
+  const requestConfirmation = useCallback(count => {
+    return new Promise(resolve => {
+      confirmationResolver.current = resolve;
+      setPendingEmails(count);
+    });
+  }, []);
+
+  const handleConfirmRequest = useCallback(async () => {
+    confirmationResolver.current?.(true);
+  }, []);
+
+  const handleCloseConfirmation = useCallback(() => {
+    setPendingEmails(0);
+    confirmationResolver.current?.(false);
+  }, []);
+
+  const handleSubmit = useCallback(
+    async values => {
+      const activeMode = allModes[mode];
+      const count = activeMode.getCount(values);
+      if (count === 0) {
+        return {[activeMode.extraFields[0]]: 'No recipients specified.'};
+      }
+      const confirmed = await requestConfirmation(count);
+      if (!confirmed) {
+        // Abort submission quietly so the form stays open without flashing an error.
+        return {[FORM_ERROR]: null};
+      }
+
+      const payload = _.pick(values, [
+        'sender_address',
+        'subject',
+        'body',
+        'bcc_addresses',
+        'copy_for_sender',
+        'skip_access_check',
+        'lock_email',
+        ...(metadata?.moderationEnabled ? ['skip_moderation'] : []),
+        ...activeMode.extraFields,
+      ]);
+
+      const submitURL =
+        mode === 'import'
+          ? inviteImportURL({event_id: eventId, reg_form_id: regformId})
+          : activeMode.getSubmitURL
+            ? activeMode.getSubmitURL({eventId, regformId})
+            : inviteURL({event_id: eventId, reg_form_id: regformId});
+      try {
+        const {data} = await indicoAxios.post(submitURL, payload);
+        onSuccess(data);
+        setSentEmailsCount(data.sent);
+        setSentEmailsWarning(getSkippedWarningMessage(data.skipped));
+      } catch (error) {
+        return handleSubmitError(error);
+      }
+      setTimeout(() => onClose(), successTimeout);
+    },
+    [
+      allModes,
+      eventId,
+      metadata?.moderationEnabled,
+      mode,
+      onClose,
+      onSuccess,
+      regformId,
+      requestConfirmation,
+      successTimeout,
+    ]
+  );
+
+  if (loading || !metadata) {
+    return (
+      <Dimmer active page inverted>
+        <Loader />
+      </Dimmer>
+    );
+  }
+
+  const ModeFields = allModes[mode]?.renderFields;
+
+  const recipientsField = (
+    <>
+      <Button.Group fluid attached="top">
+        {Object.entries(allModes).map(([key, config]) => (
+          <Button type="button" key={key} primary={mode === key} onClick={() => setMode(key)}>
+            {config.buttonLabel}
+          </Button>
+        ))}
+      </Button.Group>
+      <Segment attached="bottom">
+        {ModeFields && (
+          <ModeFields
+            eventId={eventId}
+            regformId={regformId}
+            allowAffiliations={metadata.allowAffiliations ?? true}
+          />
+        )}
+      </Segment>
+      {metadata.moderationEnabled && (
+        <FinalCheckbox
+          name="skip_moderation"
+          label={Translate.string('Skip moderation')}
+          description={Translate.string(
+            "If enabled, the user's registration will be approved automatically."
+          )}
+        />
+      )}
+      <FinalCheckbox
+        name="skip_access_check"
+        label={Translate.string('Skip access check')}
+        description={Translate.string(
+          'If enabled, the user will be able to register even if the event is access-restricted.'
+        )}
+      />
+      <FinalCheckbox
+        name="lock_email"
+        label={Translate.string('Lock email address')}
+        description={Translate.string(
+          'If enabled, the email address cannot be changed during registration.'
+        )}
+      />
+    </>
+  );
+
+  return (
+    <>
+      <EmailDialog
+        onSubmit={handleSubmit}
+        onClose={onClose}
+        senders={metadata.senders}
+        placeholders={metadata.placeholders}
+        previewURL={invitationPreviewURL({event_id: eventId, reg_form_id: regformId})}
+        getPreviewPayload={values => allModes[mode].getPreviewPayload(values)}
+        recipientsField={recipientsField}
+        initialFormValues={initialFormValues}
+        title={Translate.string('Invite people')}
+        sentEmailsCount={sentEmailsCount}
+        sentEmailsWarning={sentEmailsWarning}
+        recipientsFirst
+      />
+      <RequestConfirm
+        open={pendingEmails > 0}
+        onClose={handleCloseConfirmation}
+        requestFunc={handleConfirmRequest}
+        header={PluralTranslate.string(
+          'Send invitation email?',
+          'Send invitation emails?',
+          pendingEmails
+        )}
+        confirmText={PluralTranslate.string('Send invitation', 'Send invitations', pendingEmails)}
+      >
+        <PluralTranslate count={pendingEmails}>
+          <Singular>
+            You are about to send <Param name="count" value={pendingEmails} /> invitation. Do you
+            want to proceed?
+          </Singular>
+          <Plural>
+            You are about to send <Param name="count" value={pendingEmails} /> invitations. Do you
+            want to proceed?
+          </Plural>
+        </PluralTranslate>
+      </RequestConfirm>
+    </>
+  );
+}
+
+InviteDialog.propTypes = {
+  eventId: PropTypes.number.isRequired,
+  regformId: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func.isRequired,
+};

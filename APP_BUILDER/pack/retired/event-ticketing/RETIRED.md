@@ -12,6 +12,13 @@ change, not a finding against this app or its harvest.
 
 **What is preserved here, unchanged:**
 
+- `complete_source/` — the **complete Indico working tree** at the pinned
+  commit (`eb90264caec7d1210959c453d1f93ad88a98e6ce`), `.git` history
+  excluded, exact commit recorded in `complete_source/COMMIT.txt`. This is
+  the whole application, not just the harvested fragments below — added
+  2026-09-19 per direct instruction, re-cloned fresh since the original
+  clone (made in an earlier session, before this one) no longer existed on
+  disk anywhere.
 - `shelf/` — all ten harvested capabilities (`CAP-0001`–`CAP-0010`), each
   with `source.py`, `PROVENANCE.json` (`symbol_verified: true`), and
   `LICENCE.txt`, moved verbatim from `pack/shelf/event-ticketing/`.
