@@ -317,7 +317,14 @@ class ScreenWalk:
                 # id="encrypted_config_value"), and "url"/"website"/"link"
                 # are specific enough words that a label containing them
                 # isn't at real risk of meaning something else.
-                name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("placeholder"),
+                # id belongs alongside name/placeholder/autocomplete here -
+                # Superset's own login form has a username field with
+                # id="username" and NO name attribute at all (a React-
+                # controlled input that doesn't need one for native form
+                # submission), so classification found nothing to match on
+                # and fell through to the generic name-field default.
+                name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("id"),
+                                              inp.get_attribute("placeholder"),
                                               inp.get_attribute("autocomplete")])).lower()
                 label_text = _field_identity_text(self.page, inp).lower()
                 if "domain" in name or "domain" in label_text:

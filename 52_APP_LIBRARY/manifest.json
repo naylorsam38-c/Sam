@@ -763,10 +763,10 @@
     "database_requirement": "postgres"
    },
    "screen_summary": {
-    "screens_discovered": 1,
-    "screens_reached": 1,
-    "screens_rendered": 1,
-    "screens_browser_verified": 1
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 15,
+    "screens_browser_verified": 4
    }
   },
   {
@@ -2330,10 +2330,10 @@
     "database_requirement": null
    },
    "screen_summary": {
-    "screens_discovered": 1,
-    "screens_reached": 1,
-    "screens_rendered": 1,
-    "screens_browser_verified": 1
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 15,
+    "screens_browser_verified": 15
    }
   },
   {
@@ -3368,7 +3368,7 @@
    "version": null,
    "commit": "6e2430e5a27a809c5ca9a3e81f351339387ea11e",
    "source_path": "applications/APP-024/source",
-   "status": "FUNCTIONALLY_VERIFIED",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5790,7 +5790,7 @@
    "version": null,
    "commit": "bd2179cf211874925e2313664e22dae2501fe30a",
    "source_path": "applications/APP-042/source",
-   "status": "FUNCTIONALLY_VERIFIED",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [

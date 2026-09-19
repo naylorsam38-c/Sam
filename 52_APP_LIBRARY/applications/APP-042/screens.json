@@ -45,7 +45,7 @@
      "step": 5,
      "kind": "choice_click",
      "url_before": "http://127.0.0.1/admin/welcome",
-     "url_after": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects"
+     "url_after": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects"
     }
    ],
    "gate_state": "IN",
@@ -68,7 +68,7 @@
     "form": 0
    },
    "screenshot": "001_home.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects"
   },
   {
    "screen_id": "SCR-002",
@@ -99,7 +99,7 @@
   {
    "screen_id": "SCR-003",
    "name": "Home",
-   "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects",
+   "route": "/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects",
    "discovery_source": "nav_link_click",
    "reachable": true,
    "rendered": true,
@@ -120,12 +120,12 @@
     "form": 0
    },
    "screenshot": "003_home.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects"
   },
   {
    "screen_id": "SCR-004",
    "name": "Integrations",
-   "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/integrations",
+   "route": "/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/integrations",
    "discovery_source": "nav_link_click",
    "reachable": true,
    "rendered": true,
@@ -146,12 +146,12 @@
     "form": 0
    },
    "screenshot": "004_integrations.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/integrations?selectedTab=app-connections"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/integrations?selectedTab=app-connections"
   },
   {
    "screen_id": "SCR-005",
    "name": "Access Control",
-   "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/access-management",
+   "route": "/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/access-management",
    "discovery_source": "nav_link_click",
    "reachable": true,
    "rendered": true,
@@ -172,12 +172,12 @@
     "form": 0
    },
    "screenshot": "005_access_control.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/access-management?selectedTab=members"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/access-management?selectedTab=members"
   },
   {
    "screen_id": "SCR-006",
    "name": "Usage & Billing",
-   "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/billing",
+   "route": "/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/billing",
    "discovery_source": "nav_link_click",
    "reachable": true,
    "rendered": true,
@@ -198,12 +198,12 @@
     "form": 0
    },
    "screenshot": "006_usage_billing.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/billing"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/billing"
   },
   {
    "screen_id": "SCR-007",
    "name": "Audit Logs",
-   "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/audit-logs",
+   "route": "/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/audit-logs",
    "discovery_source": "nav_link_click",
    "reachable": true,
    "rendered": true,
@@ -224,12 +224,12 @@
     "form": 0
    },
    "screenshot": "007_audit_logs.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/audit-logs?selectedTab=audit-logs"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/audit-logs?selectedTab=audit-logs"
   },
   {
    "screen_id": "SCR-008",
    "name": "Secret Sharing",
-   "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/secret-management/secret-sharing",
+   "route": "/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects/secret-management/secret-sharing",
    "discovery_source": "nav_link_click",
    "reachable": true,
    "rendered": true,
@@ -250,12 +250,12 @@
     "form": 0
    },
    "screenshot": "008_secret_sharing.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/secret-management/secret-sharing?selectedTab=share-secret"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects/secret-management/secret-sharing?selectedTab=share-secret"
   },
   {
    "screen_id": "SCR-009",
    "name": "Secrets Management\n\nCentralize secrets across environments w",
-   "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/secret-management",
+   "route": "/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects/secret-management",
    "discovery_source": "nav_link_click",
    "reachable": true,
    "rendered": true,
@@ -276,12 +276,12 @@
     "form": 0
    },
    "screenshot": "009_secrets_management_centralize_secrets_across_environments_w.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/secret-management"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects/secret-management"
   },
   {
    "screen_id": "SCR-010",
    "name": "KMS\n\nGenerate, store, and use cryptographic keys to encrypt,",
-   "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/kms",
+   "route": "/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects/kms",
    "discovery_source": "nav_link_click",
    "reachable": true,
    "rendered": true,
@@ -302,12 +302,12 @@
     "form": 0
    },
    "screenshot": "010_kms_generate_store_and_use_cryptographic_keys_to_encrypt_.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/kms"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects/kms"
   },
   {
    "screen_id": "SCR-011",
    "name": "Secret Scanning\n\nContinuously scan repositories, builds, and",
-   "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/secret-scanning",
+   "route": "/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects/secret-scanning",
    "discovery_source": "nav_link_click",
    "reachable": true,
    "rendered": true,
@@ -328,7 +328,7 @@
     "form": 0
    },
    "screenshot": "011_secret_scanning_continuously_scan_repositories_builds_and.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/secret-scanning"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects/secret-scanning"
   },
   {
    "screen_id": "SCR-012",
@@ -432,7 +432,7 @@
     "form": 0
    },
    "screenshot": "015_account_recovery.png",
-   "final_url": "http://127.0.0.1/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects"
+   "final_url": "http://127.0.0.1/organizations/c18c736c-d46c-4fa2-9388-09d724e45835/projects"
   }
  ]
 }

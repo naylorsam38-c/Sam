@@ -349,7 +349,12 @@ class LiveTester:
                 # the one check that actually needs it (the URL check -
                 # DocuSeal's "App URL" field is id="encrypted_config_value",
                 # nothing in its attributes says "url").
-                name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("placeholder")])).lower()
+                # id belongs alongside name/placeholder here - see
+                # screens.py's identical comment: Superset's own login form
+                # has a username field with id="username" and no name
+                # attribute at all.
+                name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("id"),
+                                              inp.get_attribute("placeholder")])).lower()
                 label_text = _field_identity_text(self.page, inp).lower()
                 if "domain" in name or "domain" in label_text:
                     # see screens.py's identical comment: a narrow,

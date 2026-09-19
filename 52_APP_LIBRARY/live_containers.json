@@ -1,32 +1,12 @@
 [
  {
-  "app_id": "APP-007",
-  "url": "http://127.0.0.1:8088/",
-  "project": "lib_app007"
+  "app_id": "APP-024",
+  "url": "http://127.0.0.1:3000/",
+  "project": "lib_app024"
  },
  {
-  "app_id": "APP-014",
-  "url": "http://127.0.0.1:3080/",
-  "project": "lib_app014"
- },
- {
-  "app_id": "APP-015",
-  "url": "http://127.0.0.1:3100/",
-  "project": "lib_app015"
- },
- {
-  "app_id": "APP-018",
-  "url": "http://127.0.0.1:3110/",
-  "project": "lib_app018"
- },
- {
-  "app_id": "APP-044",
-  "url": "http://127.0.0.1:8096/",
-  "project": "lib_app044"
- },
- {
-  "app_id": "APP-045",
-  "url": "http://127.0.0.1:8098/",
-  "project": "lib_app045"
+  "app_id": "APP-042",
+  "url": "http://127.0.0.1:80/",
+  "project": "lib_app042"
  }
 ]
