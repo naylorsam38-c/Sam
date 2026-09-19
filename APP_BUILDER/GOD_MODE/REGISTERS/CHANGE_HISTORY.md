@@ -379,3 +379,55 @@ different real implementations compete for the single `IMPL-01` slot the
 script writes per number, and each app's run silently overwrote the last.
 
 Full account: `evidence/TWO_MORE_APPS.md`.
+
+## 2026-09-19 — Rule A rewritten to Django+PostgreSQL, Rule G (attach points) added; all three admitted apps retired; a three-category pilot searched for a Django replacement and found none
+
+Every app admitted so far — Indico, Redash, CTFd — was Flask, and Rule A now
+requires Django. All three retired to `pack/retired/<slug>/`, evidence and
+numbering preserved (N1/N2 hold), each with its harvested shelf parts intact
+plus a new `complete_source/` (full working tree at the pinned commit) and
+`COMMIT.txt`. Indico's original clone no longer existed on disk from an
+earlier session; re-cloned fresh and checked out to the exact previously
+recorded commit, verified via `git rev-parse HEAD`, before `.git` was
+stripped.
+
+New Rule G: attach points (EVENT/SLOT/DATA), declared at admission via
+`ATTACH_POINTS.md`/`.json`, backed by real evidence, at least `MIN_HOOKS`.
+A keyword hit alone (the Section 7 sweep) is discovery signal only, never
+proof — `harvest_parts.py`'s `check_admission()` enforces this directly, and
+`0_harvest/hunt.py` imports that same function rather than carrying its own
+copy, so the discovery stage and the real harvester can never quietly
+diverge on what counts as usable.
+
+`match_contract()` gained a 13th axis: a capability naming required attach
+points (`attaches_to`) is refused against a target application whose
+`ATTACH_POINTS.json` doesn't cover them — "coverage unknown" and "coverage
+proven zero" are two different refusal reasons, never collapsed into one
+silent skip.
+
+Section 20's 21-item test suite (`pack/1_harvest/test_admission.py`) passed
+28/28, including real clones of `django/django`, `tiangolo/fastapi`,
+`expressjs/express`, and the already-checked-in Indico clone for the Flask
+rejection case — no skips, no fabricated results.
+
+The three-category pilot (event ticketing, analytics/BI, challenge
+platform) inspected 12 real candidates, each cloned at a pinned commit and
+verified by hand (LICENSE text, `settings.py`, `requirements.txt`, git
+activity) before being run through the real gate. **None were admitted.**
+The closest call: `fossasia/eventyay` has a real, live plugin mechanism
+inherited from pretix, but its own `NOTICE` file discloses AGPL-3.0-licensed
+upstream code (pretix/pretalx/venueless) incorporated under a top-level
+Apache-2.0 claim with no stated relicensing permission — recorded as licence
+**UNRESOLVED**, not guessed clean or dirty. No Django-native production-grade
+BI application was found to exist at all; every real Django CTF platform
+found has been abandoned 6-12 years. Because nothing was admitted, the
+mandatory library-promotion step did not trigger — no `LIBRARY_INDEX.md`
+entry was written, and which library mechanism a future admitted Django app
+would promote into remains an open question, surfaced rather than guessed.
+
+The Flask-era host's route-reader (`pack/4_host/host.py`) has not been
+rewritten for Django URLconfs — stated plainly in the admission-rule
+document's own "payload question" section. This has not blocked anything
+real yet, because no Django app has reached that stage.
+
+Full account: `evidence/DJANGO_ATTACH_POINT_ARCHITECTURE.md`.

@@ -5,7 +5,7 @@ Every operative rule currently in force, by source section of `GOD_MODE/ACTIVE/G
 | § | Rule | Provenance | Status |
 |---|---|---|---|
 | 1 | App Readiness & Library Admission (12-state translation over `candidate/approved/active/deprecated/retired/void`; `promote_to_library()` auto-invoked on BUILT) | CARRIED | Active |
-| 2 | Capability Record Contract (`cap_record`, `validate_v2_contract`, `match_contract`'s twelve axes) | CARRIED | Active |
+| 2 | Capability Record Contract (`cap_record`, `validate_v2_contract`, `match_contract`'s thirteen axes — a 13th, attach-point coverage against `cap['attaches_to']`, added 2026-09-19 per Rule G below) | CARRIED, 13th axis NEW | Active |
 | 3 | Shared Library Contract (CAP-0000's full public API, byte-identical across projects) | CARRIED | Active |
 | 4 | Host Dispatch Contract (`dispatch`, `_make_ctx`, binary-response path, standard error shape) | CARRIED | Active |
 | 5 | Cross-App Isolation Contract — route namespacing, reserved-filename guard, **plus the new domain-filename namespacing + generation-time assertion** | CORRECTED | Active |
