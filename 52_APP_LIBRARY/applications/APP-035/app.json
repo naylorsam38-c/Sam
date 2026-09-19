@@ -9,7 +9,7 @@
  "version": null,
  "commit": "00e32933192e424f770f2608e19c313abc366dae",
  "source_path": "applications/APP-035/source",
- "status": "STARTABLE",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": false,
  "manual_override_reason": "self-hosted logistics/shipment-tracking software is a genuinely rare niche in open source (openapps.pro itself lists only 1 app for this whole category) - this is a real, low-star-but-legitimate fit directly matching the category's own description ('self-host ... shipment tracking'), picked deliberately despite its low star count per Sam's instruction that popularity is never a valid exclusion reason; verified MIT LICENSE file",
  "discovery_candidates": [
@@ -34,8 +34,8 @@
   }
  ],
  "install_startup": {
-  "status": "STARTABLE",
-  "reason": null,
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "App boots and serves its landing/signup/login pages (confirmed live, screens rendered), but its signup and login routes hard-require env.DB (a Cloudflare D1 database binding via the @aswincloud/auth/d1 package - not a plain SQL connection string, so it can't be swapped for a local Postgres/SQLite without rewriting the app's own auth package) AND a real RESEND_API_KEY (a third-party transactional-email account for its OTP email-verification signup flow). TOKEN_SECRET is just a random string we can generate ourselves, but a Resend account credential is a genuine external dependency this pipeline has no way to provision - not a sandbox network restriction (nothing here is being blocked by egress policy) and not fixable by a recipe change, so left honestly as BLOCKED_EXTERNAL_DEPENDENCY rather than forced by bypassing the app's own auth checks.",
   "url": "http://127.0.0.1:3050/",
   "http_status": 200,
   "recipe": "docker-compose.yml",
@@ -51,5 +51,11 @@
   },
   "has_container_recipe": false,
   "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 1,
+  "screens_reached": 1,
+  "screens_rendered": 1,
+  "screens_browser_verified": 1
  }
 }

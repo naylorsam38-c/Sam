@@ -65,6 +65,18 @@ GATE_WORDS = ("sign up", "signup", "register", "create account", "get started", 
 # pick the backward one first, in case some other step's wording isn't
 # caught by GATE_WORDS at all.
 BACKWARD_WORDS = ("back", "cancel", "skip", "previous", "prev", "close", "dismiss")
+# When a landing page offers BOTH "Sign in" and "Sign up" as parallel
+# top-level choices (shiptrack's own home page does exactly this), both are
+# equally valid GATE_WORDS matches of the same length ("sign in" / "sign
+# up", 7 chars each) - a pure shortest-label tie-break has no way to prefer
+# one over the other and can arbitrarily pick "Sign in" first, which can
+# never succeed with credentials for an account that doesn't exist yet on
+# a fresh instance. Creating the account first is the same order the rest
+# of this crawler already follows (DocuSeal's, Infisical's own setup
+# wizards both create the account before anything else), so a signup-shaped
+# word wins the tie whenever both are present in the same choice group.
+SIGNUP_WORDS = ("sign up", "signup", "register", "create account", "get started", "setup", "set up",
+               "create admin", "create")
 MAX_GATE_STEPS = 9
 
 # A page that LOOKS rendered (has real text, a nonzero body) can still be
@@ -458,7 +470,20 @@ class ScreenWalk:
         # use a plain <div> wrapper with inputs + a button instead of <form> -
         # fall back to "the body itself" when it has a visible text input and
         # a button whose label matches a gate word, so the multi-step wizard
-        # isn't mistaken for "no gate left".
+        # isn't mistaken for "no gate left". But a real, large, already-
+        # authenticated app (code-server's own VS Code UI, once logged in) is
+        # near-certain to have SOME input and SOME button somewhere on the
+        # page whose label happens to contain a generic word like "create" or
+        # "next" - that's not a gate, it's coincidence at scale. Never treat
+        # the whole body as a gate once the page already looks like the real
+        # app (logout/settings/profile/welcome visible) - code-server's own
+        # "Walkthrough: Essential Features" onboarding tab, which sits
+        # directly inside the real, already-logged-in editor UI, is exactly
+        # this: correctly reads as "in" on _looks_like_app(), and without
+        # this check the div-fallback still won, forcing this same real
+        # screen to be re-submitted as a fake gate step 7 times over.
+        if self._looks_like_app():
+            return None
         try:
             has_input = self.page.query_selector("input:not([type=hidden])") is not None
             for b in self.page.query_selector_all("button"):
@@ -549,7 +574,10 @@ class ScreenWalk:
         # forward/gate action (e.g. "Create organization") is the one to
         # click, not whichever happened to be first in DOM order.
         forward = [(label, el) for label, el, _ in group if any(w in label for w in GATE_WORDS)]
-        if forward:
+        signup_forward = [(label, el) for label, el in forward if any(w in label for w in SIGNUP_WORDS)]
+        if signup_forward:
+            pick = min(signup_forward, key=lambda x: len(x[0]))[1]
+        elif forward:
             pick = min(forward, key=lambda x: len(x[0]))[1]
         elif any(tag == "A" for _, _, tag in group):
             # an arbitrary "just click the first one" guess is fine for a
@@ -602,7 +630,7 @@ class ScreenWalk:
                   if el.is_visible()]
         except Exception:
             els = []
-        best = None
+        best, best_signup = None, None
         for el in els:
             try:
                 # first line only - see _click_choice_step's identical
@@ -620,10 +648,18 @@ class ScreenWalk:
             if any(w in label for w in GATE_WORDS):
                 if best is None or len(label) < len(best[0]):
                     best = (label, el)
-        if best is None:
+                # shiptrack's own landing page offers "Sign in" and "Sign
+                # up" side by side - see SIGNUP_WORDS' definition for why a
+                # signup-shaped match has to win the tie over a same-length
+                # "Sign in": nothing to log into yet on a fresh instance.
+                if any(w in label for w in SIGNUP_WORDS):
+                    if best_signup is None or len(label) < len(best_signup[0]):
+                        best_signup = (label, el)
+        pick = best_signup or best
+        if pick is None:
             return False
         try:
-            best[1].click(timeout=3000)
+            pick[1].click(timeout=3000)
             self.page.wait_for_timeout(1500)
             return True
         except Exception:
