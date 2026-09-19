@@ -80,6 +80,14 @@ PYTHON_BY_VERSION = {
     "3.12": config.PROJECT_ROOT / ".venv-py312" / "bin" / "python3",
 }
 BUILD_DB_PATH = config.OUTPUT_ROOT / "build_run.db"  # used only by flask_factory apps with a DATABASE_URL env var
+# Some apps resolve their own data directory from $HOME (e.g. an
+# XDG-style `~/.local/share/<app>`) rather than anything inside the
+# cloned repo -- a real, deliberate app behaviour, not something to work
+# around. A runner whose "env" references {isolated_home} gets HOME
+# pointed at this directory instead, reset fresh before every build the
+# same way BUILD_DB_PATH is, so the app's own real resolution logic still
+# runs untouched but always starts clean.
+ISOLATED_HOME = config.OUTPUT_ROOT / "isolated_home"
 MANIFEST_PATH = config.OUTPUT_ROOT / "build_manifest.json"
 SERVER_LOG_PATH = config.OUTPUT_ROOT / "server.log"
 SMTP_LOG_PATH = config.OUTPUT_ROOT / "smtp_debug.log"
@@ -196,7 +204,7 @@ def _resolve_env(runner: dict) -> dict:
     pointing at a fresh BUILD_DB_PATH), formatted once so setup scripts
     that touch the same database agree with the server on where it is."""
     return {
-        k: v.format(db_path=str(BUILD_DB_PATH), smtp_host="127.0.0.1", smtp_port=SMTP_DEBUG_PORT)
+        k: v.format(db_path=str(BUILD_DB_PATH), smtp_host="127.0.0.1", smtp_port=SMTP_DEBUG_PORT, isolated_home=str(ISOLATED_HOME))
         for k, v in runner.get("env", {}).items()
     }
 
@@ -288,6 +296,11 @@ def start(cap_id: str, host: str, port: int):
 
     if BUILD_DB_PATH.exists():
         BUILD_DB_PATH.unlink()
+    if "{isolated_home}" in str(runner.get("env", {}).values()):
+        import shutil
+        if ISOLATED_HOME.exists():
+            shutil.rmtree(ISOLATED_HOME)
+        ISOLATED_HOME.mkdir(parents=True)
     _reset_files(cloned_path, runner.get("reset_globs"))
     _run_setup_scripts(cloned_path, runner.get("setup_scripts"), python_exe, _resolve_env(runner))
 

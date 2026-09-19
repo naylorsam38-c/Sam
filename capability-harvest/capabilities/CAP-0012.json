@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0012",
+  "category": "media-rating",
+  "generated_at": "2026-09-19T12:48:00.518147+00:00",
+  "implementations": [
+    {
+      "app_slug": "zinny-api",
+      "commit": "65dbe26a4762675fb1ce031a3fc951fb0d784e78",
+      "harvested_at": "2026-09-19T12:47:57.975418+00:00",
+      "licence": "BSD-3-Clause",
+      "provenance_path": "shelf/zinny-api/CAP-0012/PROVENANCE.json",
+      "shelf_path": "shelf/zinny-api/CAP-0012"
+    }
+  ],
+  "name": "rate item"
+}

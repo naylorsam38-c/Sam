@@ -1,5 +1,5 @@
 {
-  "base_url": "http://127.0.0.1:5058",
+  "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0002",
   "quantities_observed": {
     "after_add": 10,
@@ -12,22 +12,22 @@
       "method": "GET",
       "status_code": 200,
       "step": "add_product",
-      "url": "http://127.0.0.1:5058/"
+      "url": "http://127.0.0.1:5057/"
     },
     {
       "method": "GET",
       "product_id": 1,
       "status_code": 200,
       "step": "sell_one",
-      "url": "http://127.0.0.1:5058/"
+      "url": "http://127.0.0.1:5057/"
     },
     {
       "method": "GET",
       "product_id": 1,
       "status_code": 200,
       "step": "restock_two",
-      "url": "http://127.0.0.1:5058/"
+      "url": "http://127.0.0.1:5057/"
     }
   ],
-  "verified_at": "2026-09-19T12:38:20.628963+00:00"
+  "verified_at": "2026-09-19T12:48:19.720490+00:00"
 }

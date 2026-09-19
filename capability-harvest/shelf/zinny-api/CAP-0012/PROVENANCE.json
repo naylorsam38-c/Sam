@@ -1,0 +1,49 @@
+{
+  "application": {
+    "category": "media-rating",
+    "commit": "65dbe26a4762675fb1ce031a3fc951fb0d784e78",
+    "repo_url": "https://github.com/RyLaney/zinny-api.git",
+    "slug": "zinny-api"
+  },
+  "cap_id": "CAP-0012",
+  "capability_name": "rate item",
+  "category": "media-rating",
+  "checksums": {
+    "harvested_source_sha256": "32301becdab794e57e63480642b81450e63a8dd32210004226da0011483c0893",
+    "whole_source_file_sha256_at_harvest": "76010c312bb1da4dc3094e8fa7f3ff198d587adefb6d3b1e4fbece4a9c92dc9f"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "e",
+      "get_connection",
+      "json",
+      "jsonify",
+      "ratings_bp",
+      "request",
+      "sqlite3"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T12:47:57.975418+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "BSD-3-Clause",
+    "marker_matched": "BSD 3-Clause"
+  },
+  "source": {
+    "decorators": [
+      "@ratings_bp.route('/', methods=['POST'])"
+    ],
+    "end_lineno": 161,
+    "evidence_calls_matched": [
+      "commit",
+      "execute"
+    ],
+    "file": "src/zinny_api/api/ratings.py",
+    "lineno": 96,
+    "route_path": null,
+    "symbol": "save_rating"
+  }
+}

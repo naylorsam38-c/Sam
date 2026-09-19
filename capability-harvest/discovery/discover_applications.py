@@ -327,6 +327,55 @@ APPLICATION_MANIFEST = [
             "env": {"DATABASE_URL": "sqlite:///{db_path}"},
         },
     },
+    {
+        "slug": "zinny-api",
+        "clone_url": "https://github.com/RyLaney/zinny-api.git",
+        "ref": None,
+        "category": "media-rating",
+        "why_selected": (
+            "Real Flask API for rating movies/TV titles, BSD-3-Clause "
+            "licensed, pure SQLite, no auth. save_rating() does a genuine "
+            "parameterized INSERT ... ON CONFLICT DO UPDATE upsert into a "
+            "real ratings table (numeric per-criterion scores, distinct "
+            "from a separate freeform comments column). create_app() "
+            "auto-seeds real bundled title/survey data on startup."
+        ),
+        "runner": {
+            "kind": "flask_factory",
+            "app_subdir": "src",
+            "factory_module": "zinny_api",
+            "factory_func": "create_app",
+            "readiness_path": "/api/v1/titles/",
+            # This app resolves its own sqlite path from $HOME (an
+            # XDG-style ~/.local/share/zinny/), not from anything inside
+            # its repo -- there's no DATABASE_URL-style override to hook.
+            # Pointing HOME at a build-owned, reset-every-run directory
+            # isolates it cleanly without touching the app's own logic.
+            "env": {"HOME": "{isolated_home}"},
+        },
+    },
+    {
+        "slug": "payroll-tax-calculator",
+        "clone_url": "https://github.com/rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics.git",
+        "ref": None,
+        "category": "payroll",
+        "why_selected": (
+            "Real single-file Flask + raw sqlite3 payroll/HRMS app, "
+            "Apache-2.0 licensed, only Flask as a runtime dependency, no "
+            "Postgres/Redis/Docker. calculate_payroll_details() does a "
+            "genuine progressive income-tax-bracket computation (looping "
+            "real min/max income slabs, accumulating tax per bracket), "
+            "not a flat multiply, called from a real /api/payroll/generate "
+            "route that persists the result."
+        ),
+        "runner": {
+            "kind": "flask_module_attr",
+            "app_module": "app",
+            "app_attr": "app",
+            "reset_globs": ["payroll.db"],
+            "readiness_path": "/api/auth/companies",
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

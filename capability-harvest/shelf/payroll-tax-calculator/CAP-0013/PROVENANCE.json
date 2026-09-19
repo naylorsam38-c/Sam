@@ -1,0 +1,41 @@
+{
+  "application": {
+    "category": "payroll",
+    "commit": "af699c7d3a12f66b9ff9a88a97f193743f58c04e",
+    "repo_url": "https://github.com/rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics.git",
+    "slug": "payroll-tax-calculator"
+  },
+  "cap_id": "CAP-0013",
+  "capability_name": "calculate tax",
+  "category": "payroll",
+  "checksums": {
+    "harvested_source_sha256": "28ce3dbcdbf1683780614086c998df64d690599600bb5b2d484edf87b7d43173",
+    "whole_source_file_sha256_at_harvest": "b5a23b5f558e465357203a7cb3967e35e967e8c2556d4740e0d8092a2a6349d8"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "slab"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T12:47:58.019549+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "Apache-2.0",
+    "marker_matched": "Apache License"
+  },
+  "source": {
+    "decorators": [],
+    "end_lineno": 105,
+    "evidence_calls_matched": [
+      "max",
+      "min"
+    ],
+    "file": "salary_engine.py",
+    "lineno": 3,
+    "route_path": null,
+    "symbol": "calculate_payroll_details"
+  }
+}

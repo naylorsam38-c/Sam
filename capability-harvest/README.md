@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 11 capabilities harvested from 9 real applications, each one
+**Status**: 13 capabilities harvested from 12 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 11 capabilities harvested so far
+## The 13 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -58,6 +58,8 @@ No script assumes a working directory.
 | CAP-0009 | show leaderboard | [shaikayan2084/Bounty-Simulator](https://github.com/shaikayan2084/Bounty-Simulator) (same app, different attach point) | MIT | `backend/main.py:86` `leaderboard` (`order_by`, `desc`, `limit`) | HTTP |
 | CAP-0010 | add favourite | [pranjalco/flask-coffee-and-wifi](https://github.com/pranjalco/flask-coffee-and-wifi) | MIT | `main.py:235` `add_bookmark` (`add`, `commit`, duplicate-guarded) | HTTP |
 | CAP-0011 | log workout | [wifizak/CasettaFit](https://github.com/wifizak/CasettaFit) | MIT | `app/routes/workout.py:211` `log_set` (`add`, `commit`) | HTTP |
+| CAP-0012 | rate item | [RyLaney/zinny-api](https://github.com/RyLaney/zinny-api) | BSD-3-Clause | `src/zinny_api/api/ratings.py:96` `save_rating` (real SQL `ON CONFLICT ... DO UPDATE` upsert, `execute`, `commit`) | HTTP |
+| CAP-0013 | calculate tax | [rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics](https://github.com/rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics) | Apache-2.0 | `salary_engine.py:3` `calculate_payroll_details` (real progressive bracket computation, `max`, `min`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -147,6 +149,25 @@ code):
   Flask-Migrate exclusively (no `db.create_all()` at import time), so the
   same inline script calls it directly — legitimate schema creation from
   the real models, the same thing hostelfix's own `init_db.py` does.
+- zinny-api resolves its database path via `Path.home()` (its own
+  `get_system_data_paths()`/`get_database_path()`, landing at
+  `~/.local/share/zinny/db/zinny-1.0.sqlite`), entirely outside the repo
+  and with no existing config override — read from source, not guessed.
+  Rather than patch the app or point `$HOME` at the real user's home
+  directory (which would pollute or depend on ambient state), `build.py`
+  gained an `ISOLATED_HOME` mechanism: a per-run scratch directory the
+  runner's `env` can reference as `{isolated_home}`, wiped and recreated
+  fresh (`shutil.rmtree` + `mkdir`) at the start of every `build.py start`
+  that uses it.
+- payroll-tax-calculator's own login route requires solving a real
+  arithmetic CAPTCHA (`GET /api/auth/captcha` returns a real
+  `"7 + 3"`-style question and stores the answer server-side in the
+  session) for every login, with no test-mode bypass in the app's own
+  code. The live proof solves it for real (regex-parses the question,
+  computes the real answer, submits it) rather than reading the answer
+  out of the session store directly — the same "don't shortcut what the
+  app itself requires" principle applied to an access-control mechanism
+  instead of a data assertion.
 
 ## What each pipeline stage actually proved
 
@@ -157,12 +178,14 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 5 apps (see the table above). Two search
-modes: `route_path_hint` (the capability lives directly in a Flask route
-handler) and `symbol_hint` (the capability lives in a plain function or a
-helper the route delegates to — used for `calculate_streaks`, a bare
-function with no route decorator, and `_add_message`, the real helper
-`home()` calls rather than `home()` itself).
+AST-based, line-accurate for all 13 capabilities across 12 apps (see the
+table above). Two search modes: `route_path_hint` (the capability lives
+directly in a Flask route handler) and `symbol_hint` (the capability lives
+in a plain function or a helper the route delegates to — used for
+`calculate_streaks`, a bare function with no route decorator,
+`_add_message`, the real helper `home()` calls rather than `home()`
+itself, and `calculate_payroll_details`, the plain tax-bracket function
+CAP-0013's route delegates to).
 
 ### 3. Harvest (`harvest_parts.py`)
 Deterministic input→output path documented in the script's own header.
@@ -239,6 +262,17 @@ Highlights beyond the basic "call it and check 200":
   real exercise, starts a real workout session, and logs two real sets
   with different reps/weight/RPE — confirming both are independently
   retrievable, not one overwriting the other.
+- CAP-0012: posts a real rating for a real seeded title, confirms it via
+  GET, then posts a *different* rating for the same title/survey pair and
+  confirms the real `ON CONFLICT ... DO UPDATE` upsert changed the
+  existing row (same `id`) rather than creating a second one — proving a
+  genuine upsert, not an append.
+- CAP-0013: solves the app's own real arithmetic CAPTCHA (no bypass) to
+  log in as the real seeded Admin, generates payroll for real seeded
+  employees at different real salary levels, and confirms the resulting
+  tax figures are genuinely progressive — the higher-salary employee's
+  tax-to-salary ratio differs from the lower-salary employee's, ruling out
+  a flat-percentage stub.
 
 ## How to reproduce this from scratch
 
@@ -247,7 +281,7 @@ cd capability-harvest
 python3 -m venv .venv
 ./.venv/bin/pip install flask flask-login flask-sqlalchemy flask-bcrypt \
     flask-mail flask-migrate flask-cors flask-wtf python-dotenv requests \
-    reportlab geopy pillow cs50 pandas openpyxl
+    reportlab geopy pillow cs50 pandas openpyxl zinny-surveys
 
 # recipe-app needs Python 3.12+ (see "Real applications aren't all shaped
 # the same way" below) -- a separate venv, not the one above.
@@ -257,7 +291,7 @@ python3.12 -m venv .venv-py312
 python3 discovery/discover_applications.py
 python3 detection/detect_capability.py
 for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
-           CAP-0008 CAP-0009 CAP-0010 CAP-0011; do
+           CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -312,11 +346,19 @@ python3 build.py stop
 python3 build.py start --cap CAP-0011 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0011_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0012 --port 5057
+./.venv/bin/python3 test/prove_CAP-0012_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0013 --port 5057
+./.venv/bin/python3 test/prove_CAP-0013_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) three times now, at three different capability
+deleted first, venvs kept) four times now, at four different capability
 counts, to confirm it's genuinely reproducible, not an artifact of an
 ad-hoc fixing sequence.
 
@@ -324,7 +366,8 @@ ad-hoc fixing sequence.
 
 **Proved, for real:**
 - Real application discovery with real licence verification from the
-  source file, across 5 different repositories.
+  source file, across 12 different repositories and three distinct real
+  licences (MIT, BSD-3-Clause, Apache-2.0).
 - Real AST-based attach-point detection that rejects name-only matches,
   across both route-handler and helper-function capability shapes,
   verified against a deliberately drifted line number.
@@ -333,36 +376,38 @@ ad-hoc fixing sequence.
 - A build stage that handles three genuinely different real application
   shapes without bending any of them to fit one template, verifying (not
   assuming) the harvested code is what's actually running before starting
-  anything.
-- Six independent, real, non-mocked live proofs, including negative/
-  access-control checks, cross-interface consistency checks, and a real
+  anything, across two Python versions and an app whose data path resolves
+  outside its own repo entirely (`$HOME`-based, handled via an isolated,
+  resettable `HOME` override rather than patching the app).
+- Eight independent, real, non-mocked live proofs, including negative/
+  access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
-  surface, which doesn't support backdating).
+  surface, which doesn't support backdating), a real upsert-vs-append
+  distinction confirmed by row `id` stability, and a real progressive
+  tax-bracket proof that solves the app's own arithmetic CAPTCHA rather
+  than bypassing it.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 11.** ~70 names in the 81-name vocabulary have not been
+- **Scale beyond 13.** ~68 names in the 81-name vocabulary have not been
   researched yet. Each one needs the same real vetting (license read from
   source, AST-confirmed evidence, live proof) — this is not a
   copy-paste-N-times exercise, and a name with no genuine real-app
   candidate gets recorded as blocked/empty with a reason, never forced.
-  Four further capabilities were researched and license-verified but not
+  Two further capabilities were researched and license-verified but not
   yet harvested (queued for the next batch): **book slot**
   (Raviraj0001/Hospital_Management_Real, MIT — real per-doctor
-  availability/conflict check before booking), **rate item**
-  (RyLaney/zinny-api, BSD-3-Clause — real upsert via SQL `ON CONFLICT`),
-  **calculate tax** (rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics,
-  Apache-2.0 — real progressive tax-bracket computation, not a flat
-  multiply), and **generate invoice** (rishabh0510rishabh/Invoice-generator,
-  MIT — real WeasyPrint PDF aggregating real line items and tax, needs
-  system `cairo`/`pango` libraries evaluated before harvesting). **Escalate
-  ticket** was researched but every small, single-file, HTTP-route
-  candidate found failed either the licence check or the "must genuinely
-  update a persisted field" check; the one fully-verified real
-  implementation found (django-helpdesk's `escalate_tickets` management
-  command, BSD-3-Clause) is a mature production project but is invoked by
-  cron, not an HTTP route, and needs a heavier Django setup than this
-  pipeline's other apps — deferred, not forced in.
+  availability/conflict check before booking), and **generate invoice**
+  (rishabh0510rishabh/Invoice-generator, MIT — real WeasyPrint PDF
+  aggregating real line items and tax, needs system `cairo`/`pango`
+  libraries evaluated before harvesting). **Escalate ticket** was
+  researched but every small, single-file, HTTP-route candidate found
+  failed either the licence check or the "must genuinely update a
+  persisted field" check; the one fully-verified real implementation found
+  (django-helpdesk's `escalate_tickets` management command, BSD-3-Clause)
+  is a mature production project but is invoked by cron, not an HTTP
+  route, and needs a heavier Django setup than this pipeline's other apps
+  — deferred, not forced in.
 - **Cross-application composition.** `build.py` verifies and mounts each
   harvested route within its *own* source application. Grafting a
   harvested capability onto a *different*, unrelated host application

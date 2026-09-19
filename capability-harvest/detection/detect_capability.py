@@ -140,6 +140,24 @@ CAPABILITY_TARGETS = [
         "route_path_hint": "/log-set",
         "evidence_call_names": {"add", "commit"},
     },
+    {
+        "cap_id": "CAP-0012",
+        "name": "rate item",
+        "category": "media-rating",
+        "app_slug": "zinny-api",
+        "source_file_relative": "src/zinny_api/api/ratings.py",
+        "symbol_hint": "save_rating",
+        "evidence_call_names": {"execute", "commit"},
+    },
+    {
+        "cap_id": "CAP-0013",
+        "name": "calculate tax",
+        "category": "payroll",
+        "app_slug": "payroll-tax-calculator",
+        "source_file_relative": "salary_engine.py",
+        "symbol_hint": "calculate_payroll_details",
+        "evidence_call_names": {"max", "min"},
+    },
 ]
 # ----------------------------------------------------------------------------
 

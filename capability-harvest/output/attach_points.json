@@ -210,6 +210,42 @@
       "route_path": "/api/session/<int:session_id>/log-set",
       "source_file_relative": "app/routes/workout.py",
       "symbol": "log_set"
+    },
+    {
+      "app_slug": "zinny-api",
+      "cap_id": "CAP-0012",
+      "category": "media-rating",
+      "decorators": [
+        "@ratings_bp.route('/', methods=['POST'])"
+      ],
+      "end_lineno": 161,
+      "evidence_calls_matched": [
+        "commit",
+        "execute"
+      ],
+      "found": true,
+      "lineno": 96,
+      "name": "rate item",
+      "route_path": null,
+      "source_file_relative": "src/zinny_api/api/ratings.py",
+      "symbol": "save_rating"
+    },
+    {
+      "app_slug": "payroll-tax-calculator",
+      "cap_id": "CAP-0013",
+      "category": "payroll",
+      "decorators": [],
+      "end_lineno": 105,
+      "evidence_calls_matched": [
+        "max",
+        "min"
+      ],
+      "found": true,
+      "lineno": 3,
+      "name": "calculate tax",
+      "route_path": null,
+      "source_file_relative": "salary_engine.py",
+      "symbol": "calculate_payroll_details"
     }
   ]
 }

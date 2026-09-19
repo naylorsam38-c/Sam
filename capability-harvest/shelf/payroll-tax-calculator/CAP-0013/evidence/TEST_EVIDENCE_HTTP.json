@@ -1,0 +1,67 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0013",
+  "records_excerpt": [
+    {
+      "basic_salary": 78000.0,
+      "employee_name": "Sarah HR Manager",
+      "income_tax": 8706.67,
+      "net_salary": 100583.33
+    },
+    {
+      "basic_salary": 120000.0,
+      "employee_name": "Vikram Sen",
+      "income_tax": 20736.67,
+      "net_salary": 146513.33
+    },
+    {
+      "basic_salary": 90000.0,
+      "employee_name": "Priya Sharma",
+      "income_tax": 11736.67,
+      "net_salary": 114113.33
+    },
+    {
+      "basic_salary": 55000.0,
+      "employee_name": "Rohan Das",
+      "income_tax": 3743.33,
+      "net_salary": 73806.67
+    },
+    {
+      "basic_salary": 80000.0,
+      "employee_name": "Anjali Nair",
+      "income_tax": 9156.67,
+      "net_salary": 102893.33
+    }
+  ],
+  "result": "PASS",
+  "salary_ratio": 2.1818181818181817,
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_seeded_credentials",
+      "url": "http://127.0.0.1:5057/api/auth/credentials?company_id=1"
+    },
+    {
+      "captcha_answer": "22",
+      "method": "POST",
+      "status_code": 200,
+      "step": "login_as_admin",
+      "url": "http://127.0.0.1:5057/api/auth/login"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "generate_payroll",
+      "url": "http://127.0.0.1:5057/api/payroll/generate"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_generated_payroll",
+      "url": "http://127.0.0.1:5057/api/payroll?month=9&year=2026"
+    }
+  ],
+  "tax_ratio": 5.539631825139648,
+  "verified_at": "2026-09-19T12:48:49.487756+00:00"
+}
