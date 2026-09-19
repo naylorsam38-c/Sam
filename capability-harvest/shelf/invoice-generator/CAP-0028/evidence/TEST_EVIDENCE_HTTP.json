@@ -1,8 +1,8 @@
 {
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0028",
-  "invoice_a": 1042,
-  "invoice_b": 1043,
+  "invoice_a": 1101,
+  "invoice_b": 1102,
   "result": "PASS",
   "steps": [
     {
@@ -19,10 +19,10 @@
     },
     {
       "method": "GET",
-      "search": "Aadhya Agarwal",
+      "search": "Aadhya Gupta",
       "status_code": 200,
       "step": "filter_by_customer_a_name",
-      "url": "http://127.0.0.1:5057/api/invoices?search=Aadhya+Agarwal"
+      "url": "http://127.0.0.1:5057/api/invoices?search=Aadhya+Gupta"
     },
     {
       "method": "GET",
@@ -31,5 +31,5 @@
       "url": "http://127.0.0.1:5057/api/invoices?search=zzz-no-such-customer-or-invoice-zzz"
     }
   ],
-  "verified_at": "2026-09-19T14:05:10.595226+00:00"
+  "verified_at": "2026-09-19T14:08:44.643487+00:00"
 }

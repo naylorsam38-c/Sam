@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 28 capabilities harvested from 19 real applications, each one
+**Status**: 29 capabilities harvested from 19 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 28 capabilities harvested so far
+## The 29 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -75,6 +75,7 @@ No script assumes a working directory.
 | CAP-0026 | delete record | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) (same app, different attach point) | MIT | `server.py:60` `delete_invoice` (real `DELETE`, rowcount-checked 404, `execute`, `commit`) | HTTP |
 | CAP-0027 | view record detail | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) (same app, different attach point) | MIT | `server.py:539` `get_invoice_details` (real multi-table `JOIN` aggregation, `execute`, `fetchall`) | HTTP |
 | CAP-0028 | filter list | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) (same app, different attach point) | MIT | `server.py:75` `get_invoices` (real dynamic `LIKE`-filtered query, `execute`, `fetchall`) | HTTP |
+| CAP-0029 | capture photo | [Mukesh-Web-Dev/imageUploadFlaskApp](https://github.com/Mukesh-Web-Dev/imageUploadFlaskApp) (same app, different attach point) | MIT | `app.py:62` `capture` (real base64 data-URL decode + PIL `save()`, `b64decode`, `save`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -249,7 +250,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 28 capabilities across 19 apps (see the
+AST-based, line-accurate for all 29 capabilities across 19 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -419,6 +420,12 @@ Highlights beyond the basic "call it and check 200":
   two invoices for two different real customers, confirming a search by
   one customer's name returns only their invoice and never the other's
   (filter list).
+- CAP-0029: submits a real base64 data-URL-encoded PNG (the shape a
+  browser's webcam `<canvas>` capture sends) to the same already-vetted
+  app's separate `/capture` route -- a genuinely different code path from
+  the multipart `/upload` route CAP-0019 already proved -- and confirms
+  the saved file's real pixel data is byte-identical to what was
+  submitted, not merely present.
 
 ## How to reproduce this from scratch
 
@@ -458,7 +465,7 @@ for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
            CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013 CAP-0014 \
            CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019 CAP-0020 CAP-0021 \
            CAP-0022 CAP-0023 CAP-0024 CAP-0025 CAP-0026 CAP-0027 \
-           CAP-0028; do
+           CAP-0028 CAP-0029; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -581,11 +588,15 @@ python3 build.py stop
 python3 build.py start --cap CAP-0028 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0028_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0029 --port 5057
+./.venv/bin/python3 test/prove_CAP-0029_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) ten times now, at ten different capability
+deleted first, venvs kept) eleven times now, at eleven different capability
 counts, to confirm it's genuinely reproducible, not an artifact of an
 ad-hoc fixing sequence.
 
@@ -606,7 +617,7 @@ ad-hoc fixing sequence.
   anything, across two Python versions and an app whose data path resolves
   outside its own repo entirely (`$HOME`-based, handled via an isolated,
   resettable `HOME` override rather than patching the app).
-- Twenty-two independent, real, non-mocked live proofs, including negative/
+- Twenty-three independent, real, non-mocked live proofs, including negative/
   access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
@@ -645,10 +656,12 @@ ad-hoc fixing sequence.
   confirmed by real joined names, not raw foreign keys; and a real
   search-filter proof using two different real customers' invoices to
   confirm the filter genuinely narrows results rather than merely
-  appearing to.
+  appearing to; and a real base64-capture proof against a second,
+  genuinely distinct route in an already-harvested app, confirmed
+  pixel-identical rather than merely present.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 28.** ~53 names in the 81-name vocabulary (see
+- **Scale beyond 29.** ~52 names in the 81-name vocabulary (see
   `CAPABILITY_VOCABULARY.md` for the full recovered list and live status)
   have not been researched yet. Each one needs the same real vetting
   (license read from source, AST-confirmed evidence, live proof) — this is

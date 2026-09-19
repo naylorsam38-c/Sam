@@ -536,6 +536,25 @@
       "route_path": null,
       "source_file_relative": "server.py",
       "symbol": "get_invoices"
+    },
+    {
+      "app_slug": "image-upload-app",
+      "cap_id": "CAP-0029",
+      "category": "media",
+      "decorators": [
+        "@app.route('/capture', methods=['GET', 'POST'])"
+      ],
+      "end_lineno": 81,
+      "evidence_calls_matched": [
+        "b64decode",
+        "save"
+      ],
+      "found": true,
+      "lineno": 62,
+      "name": "capture photo",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "capture"
     }
   ]
 }

@@ -293,6 +293,15 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "get_invoices",
         "evidence_call_names": {"execute", "fetchall"},
     },
+    {
+        "cap_id": "CAP-0029",
+        "name": "capture photo",
+        "category": "media",
+        "app_slug": "image-upload-app",
+        "source_file_relative": "app.py",
+        "symbol_hint": "capture",
+        "evidence_call_names": {"b64decode", "save"},
+    },
 ]
 # ----------------------------------------------------------------------------
 

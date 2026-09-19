@@ -5,28 +5,28 @@
     "repo_url": "https://github.com/Mukesh-Web-Dev/imageUploadFlaskApp.git",
     "slug": "image-upload-app"
   },
-  "cap_id": "CAP-0019",
-  "capability_name": "upload image",
+  "cap_id": "CAP-0029",
+  "capability_name": "capture photo",
   "category": "media",
   "checksums": {
-    "harvested_source_sha256": "9499d287196a871add651244bc32219b43526e02ba9196230d10be1b083f0ee3",
+    "harvested_source_sha256": "ac530db2d530bf7fb339e06f14b96f4383640b862a5fb3f62493523ab8448bd9",
     "whole_source_file_sha256_at_harvest": "82aa682599b7a436c170b076b3160e27bda01d38f5690bbde11612a64975c9c4"
   },
   "dependencies": {
     "collaborators_referenced": [
-      "allowed_images",
+      "BytesIO",
+      "Image",
       "app",
+      "base64",
+      "datetime",
       "os",
-      "redirect",
       "render_template",
-      "request",
-      "secure_filename",
-      "url_for"
+      "request"
     ],
     "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
   },
   "harvest_tool": "harvest_parts.py",
-  "harvested_at": "2026-09-19T14:07:37.449546+00:00",
+  "harvested_at": "2026-09-19T14:07:38.003030+00:00",
   "licence": {
     "file": "LICENSE",
     "flagged_for_sign_off": false,
@@ -35,16 +35,16 @@
   },
   "source": {
     "decorators": [
-      "@app.route('/upload', methods=['POST'])"
+      "@app.route('/capture', methods=['GET', 'POST'])"
     ],
-    "end_lineno": 112,
+    "end_lineno": 81,
     "evidence_calls_matched": [
-      "save",
-      "secure_filename"
+      "b64decode",
+      "save"
     ],
     "file": "app.py",
-    "lineno": 86,
+    "lineno": 62,
     "route_path": null,
-    "symbol": "upload_image"
+    "symbol": "capture"
   }
 }
