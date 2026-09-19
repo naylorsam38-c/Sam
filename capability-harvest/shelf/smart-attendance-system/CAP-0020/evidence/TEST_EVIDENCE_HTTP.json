@@ -1,0 +1,56 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0020",
+  "distance_message_on_rejection": "Attendance rejected: Too far from session location (5585233.6m > 100m)",
+  "distance_message_on_success": "Attendance marked successfully! Distance: 0.0m",
+  "real_session_location": {
+    "lat": 40.7128,
+    "lng": -74.006
+  },
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "teacher_login",
+      "url": "http://127.0.0.1:5057/teacher/dashboard"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "refresh_qr",
+      "url": "http://127.0.0.1:5057/teacher/sessions/1/refresh_qr"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "student_login",
+      "url": "http://127.0.0.1:5057/student/dashboard"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "mark_attendance_at_real_location",
+      "url": "http://127.0.0.1:5057/student/attendance/mark"
+    },
+    {
+      "method": "POST",
+      "status_code": 400,
+      "step": "attempt_duplicate_attendance",
+      "url": "http://127.0.0.1:5057/student/attendance/mark"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "second_student_login",
+      "url": "http://127.0.0.1:5057/student/dashboard"
+    },
+    {
+      "method": "POST",
+      "status_code": 400,
+      "step": "mark_attendance_far_outside_geofence",
+      "url": "http://127.0.0.1:5057/student/attendance/mark"
+    }
+  ],
+  "verified_at": "2026-09-19T13:18:45.256166+00:00"
+}

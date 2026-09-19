@@ -467,6 +467,31 @@ APPLICATION_MANIFEST = [
             "readiness_path": "/",
         },
     },
+    {
+        "slug": "smart-attendance-system",
+        "clone_url": "https://github.com/talha-siddiqui137/smart-attendance-system.git",
+        "ref": None,
+        "category": "attendance-tracking",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy QR/geofence attendance app, MIT "
+            "licensed. mark_attendance() genuinely persists a student's "
+            "real submitted lat/lng into an Attendance row and computes a "
+            "real geopy geodesic distance against the session's own real "
+            "location, rejecting check-ins beyond 100m -- confirmed by "
+            "actually submitting the exact session coordinates (accepted, "
+            "0.0m) and re-submitting for the same student (rejected as a "
+            "genuine duplicate)."
+        ),
+        "runner": {
+            "kind": "flask_factory",
+            "factory_module": "app",
+            "factory_func": "create_app",
+            "reset_globs": ["instance/attendance.db", "attendance.db"],
+            "setup_scripts": ["seed_data.py"],
+            "readiness_path": "/login",
+            "env": {"SECRET_KEY": "capability-harvest-build-run"},
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

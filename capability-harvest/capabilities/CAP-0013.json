@@ -2,12 +2,12 @@
   "aliases": [],
   "cap_id": "CAP-0013",
   "category": "payroll",
-  "generated_at": "2026-09-19T13:09:07.251572+00:00",
+  "generated_at": "2026-09-19T13:17:56.170694+00:00",
   "implementations": [
     {
       "app_slug": "payroll-tax-calculator",
       "commit": "af699c7d3a12f66b9ff9a88a97f193743f58c04e",
-      "harvested_at": "2026-09-19T13:09:06.858931+00:00",
+      "harvested_at": "2026-09-19T13:17:55.726042+00:00",
       "licence": "Apache-2.0",
       "provenance_path": "shelf/payroll-tax-calculator/CAP-0013/PROVENANCE.json",
       "shelf_path": "shelf/payroll-tax-calculator/CAP-0013"

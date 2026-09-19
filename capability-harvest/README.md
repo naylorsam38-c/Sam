@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 19 capabilities harvested from 15 real applications, each one
+**Status**: 20 capabilities harvested from 16 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 19 capabilities harvested so far
+## The 20 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -66,6 +66,7 @@ No script assumes a working directory.
 | CAP-0017 | log in | [Raviraj0001/Hospital_Management_Real](https://github.com/Raviraj0001/Hospital_Management_Real) (same app, different attach point) | MIT | `app.py:290` `login` (`check_password_hash`, `commit`) | HTTP |
 | CAP-0018 | log out | [Raviraj0001/Hospital_Management_Real](https://github.com/Raviraj0001/Hospital_Management_Real) (same app, different attach point) | MIT | `app.py:308` `logout` (`commit`, real session teardown) | HTTP |
 | CAP-0019 | upload image | [Mukesh-Web-Dev/imageUploadFlaskApp](https://github.com/Mukesh-Web-Dev/imageUploadFlaskApp) | MIT | `app.py:86` `upload_image` (`secure_filename`, real `file.save()` to disk, duplicate/extension-guarded) | HTTP |
+| CAP-0020 | track location | [talha-siddiqui137/smart-attendance-system](https://github.com/talha-siddiqui137/smart-attendance-system) | MIT | `views/student.py:41` `mark_attendance` (real geopy geodesic distance vs. a real 100m geofence, `verify_location`, `commit`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -206,7 +207,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 19 capabilities across 15 apps (see the
+AST-based, line-accurate for all 20 capabilities across 16 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -331,6 +332,19 @@ Highlights beyond the basic "call it and check 200":
   are byte-identical to what was uploaded, then confirms the app's own
   real duplicate-filename guard and extension whitelist both genuinely
   reject a second attempt rather than silently accepting anything.
+- CAP-0020: logs in solving the app's own real CAPTCHA -- not by bypassing
+  it, but by reading the real plaintext answer out of the proof's own
+  legitimately-issued, signed Flask session cookie (the server still runs
+  its own real verification; this is the same thing a real browser's
+  session would already hold) -- mints a fresh real HMAC-signed QR token
+  via the app's own `/refresh_qr` route, reads it back directly from the
+  live SQLite file the server itself writes to, then checks in at the
+  exact real session coordinates (accepted, real geopy distance 0.0m),
+  confirms a second check-in is genuinely rejected as a duplicate, and
+  confirms a check-in from London is genuinely rejected by the real 100m
+  geofence distance check (not a coincidental falsy-value short-circuit --
+  confirmed by checking the real distance appears in the rejection
+  message).
 
 ## How to reproduce this from scratch
 
@@ -351,7 +365,7 @@ python3 discovery/discover_applications.py
 python3 detection/detect_capability.py
 for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
            CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013 CAP-0014 \
-           CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019; do
+           CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019 CAP-0020; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -422,11 +436,31 @@ python3 build.py stop
 python3 build.py start --cap CAP-0015 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0015_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0016 --port 5057
+./.venv/bin/python3 test/prove_CAP-0016_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0017 --port 5057
+./.venv/bin/python3 test/prove_CAP-0017_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0018 --port 5057
+./.venv/bin/python3 test/prove_CAP-0018_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0019 --port 5057
+./.venv/bin/python3 test/prove_CAP-0019_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0020 --port 5057
+./.venv/bin/python3 test/prove_CAP-0020_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) six times now, at six different capability
+deleted first, venvs kept) seven times now, at seven different capability
 counts, to confirm it's genuinely reproducible, not an artifact of an
 ad-hoc fixing sequence.
 
@@ -434,7 +468,7 @@ ad-hoc fixing sequence.
 
 **Proved, for real:**
 - Real application discovery with real licence verification from the
-  source file, across 15 different repositories and three distinct real
+  source file, across 16 different repositories and three distinct real
   licences (MIT, BSD-3-Clause, Apache-2.0).
 - Real AST-based attach-point detection that rejects name-only matches,
   across both route-handler and helper-function capability shapes,
@@ -461,12 +495,16 @@ ad-hoc fixing sequence.
   register/login/logout triad proven against a template that never
   renders flash messages on unauthenticated pages (confirmed by reading
   the template, not assumed, so the proofs use directly observable
-  session/round-trip behaviour instead), and a real byte-identical
+  session/round-trip behaviour instead), a real byte-identical
   file-upload round trip with a genuine duplicate-name and extension
-  guard.
+  guard, and a real CAPTCHA-gated, HMAC-signed-QR-token, geopy-geofenced
+  location check-in with a genuine duplicate-attendance rejection and a
+  genuine out-of-range distance rejection (verified to actually be
+  distance-based, not a coincidental falsy-value short-circuit on a
+  literal `0.0` coordinate caught during proof development).
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 19.** ~62 names in the 81-name vocabulary (see
+- **Scale beyond 20.** ~61 names in the 81-name vocabulary (see
   `CAPABILITY_VOCABULARY.md` for the full recovered list and live status)
   have not been researched yet. Each one needs the same real vetting
   (license read from source, AST-confirmed evidence, live proof) — this is

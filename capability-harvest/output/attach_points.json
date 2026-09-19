@@ -361,6 +361,27 @@
       "route_path": null,
       "source_file_relative": "app.py",
       "symbol": "upload_image"
+    },
+    {
+      "app_slug": "smart-attendance-system",
+      "cap_id": "CAP-0020",
+      "category": "attendance-tracking",
+      "decorators": [
+        "@student_bp.route('/attendance/mark', methods=['POST'])",
+        "@csrf.exempt",
+        "@role_required('undergraduate', 'postgraduate')"
+      ],
+      "end_lineno": 190,
+      "evidence_calls_matched": [
+        "commit",
+        "verify_location"
+      ],
+      "found": true,
+      "lineno": 41,
+      "name": "track location",
+      "route_path": null,
+      "source_file_relative": "views/student.py",
+      "symbol": "mark_attendance"
     }
   ]
 }

@@ -2,12 +2,12 @@
   "aliases": [],
   "cap_id": "CAP-0005",
   "category": "messaging",
-  "generated_at": "2026-09-19T13:09:07.250026+00:00",
+  "generated_at": "2026-09-19T13:17:56.169194+00:00",
   "implementations": [
     {
       "app_slug": "flask-messenger",
       "commit": "4e9a9b31b5fc091a38f3162fb9cb9b579c11a047",
-      "harvested_at": "2026-09-19T13:09:06.484272+00:00",
+      "harvested_at": "2026-09-19T13:17:55.357616+00:00",
       "licence": "MIT",
       "provenance_path": "shelf/flask-messenger/CAP-0005/PROVENANCE.json",
       "shelf_path": "shelf/flask-messenger/CAP-0005"

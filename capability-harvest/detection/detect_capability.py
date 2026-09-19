@@ -212,6 +212,15 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "upload_image",
         "evidence_call_names": {"secure_filename", "save"},
     },
+    {
+        "cap_id": "CAP-0020",
+        "name": "track location",
+        "category": "attendance-tracking",
+        "app_slug": "smart-attendance-system",
+        "source_file_relative": "views/student.py",
+        "symbol_hint": "mark_attendance",
+        "evidence_call_names": {"verify_location", "commit"},
+    },
 ]
 # ----------------------------------------------------------------------------
 
