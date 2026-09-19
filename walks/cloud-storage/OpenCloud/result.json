@@ -4,13 +4,13 @@
  "app": "OpenCloud",
  "repo": "https://github.com/opencloud-eu/opencloud",
  "commit": "f293031e404d51a7da4a5c06d88b449dc226b9cb",
- "started": "2026-09-19T10:07:30",
+ "started": "2026-09-19T10:09:39",
  "boot": {
   "status": "BOOT FAILED",
-  "reason": "image build failed: Run 'docker buildx build --help' for more information",
+  "reason": "image build failed: ERROR: failed to build: failed to solve: quay.io/opencloudeu/nodejs-ci:24: failed to resolve source metadata for quay.io/opencloudeu/nodejs-ci:24: failed to do request: Head \"https://quay.io/v2/opencloudeu/nodejs-ci/manifests/24\": Forbidden",
   "recipe": "Dockerfile",
   "log": [
-   "$ docker build -t localhost/walk_cloudstorageopencloud:walk --network=host --volume /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro --env SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt --env NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt -f Dockerfile .\n\nunknown flag: --volume\n\nUsage:  docker buildx build [OPTIONS] PATH | URL | -\n\nRun 'docker buildx build --help' for more information\n"
+   "$ docker build -t localhost/walk_cloudstorageopencloud:walk --network=host -f Dockerfile .\n\n#0 building with \"default\" instance using docker driver\n\n#1 [internal] load build definition from Dockerfile\n#1 transferring dockerfile: 1.69kB done\n#1 DONE 0.0s\n\n#2 [internal] load metadata for quay.io/opencloudeu/nodejs-ci:24\n#2 ERROR: failed to do request: Head \"https://quay.io/v2/opencloudeu/nodejs-ci/manifests/24\": Forbidden\n\n#3 [internal] load metadata for quay.io/opencloudeu/golang-ci:1.25\n#3 CANCELED\n\n#4 [internal] load metadata for docker.io/library/alpine:3.24\n#4 CANCELED\n------\n > [internal] load metadata for quay.io/opencloudeu/nodejs-ci:24:\n------\nDockerfile:17\n--------------------\n  15 |     \n  16 |     \n  17 | >>> FROM quay.io/opencloudeu/nodejs-ci:24 AS generate\n  18 |     \n  19 |     COPY ./ /opencloud/\n--------------------\nERROR: failed to build: failed to solve: quay.io/opencloudeu/nodejs-ci:24: failed to resolve source metadata for quay.io/opencloudeu/nodejs-ci:24: failed to do request: Head \"https://quay.io/v2/opencloudeu/nodejs-ci/manifests/24\": Forbidden\n"
   ]
  },
  "gate": {},
@@ -24,5 +24,5 @@
   "absent": 0,
   "gaps": []
  },
- "finished": "2026-09-19T10:07:43"
+ "finished": "2026-09-19T10:09:49"
 }

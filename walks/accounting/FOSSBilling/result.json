@@ -1,0 +1,28 @@
+{
+ "category": "Accounting",
+ "slug": "accounting",
+ "app": "FOSSBilling",
+ "repo": "https://github.com/FOSSBilling/FOSSBilling",
+ "commit": "748b114503e0ff25fce5a55c436f1a393336c6b9",
+ "started": "2026-09-19T10:13:41",
+ "boot": {
+  "status": "BOOT FAILED",
+  "reason": "image build failed: ERROR: failed to build: failed to solve: process \"/bin/sh -c set -eux;   savedAptMark=\\\"$(apt-mark showmanual)\\\";   apt-get update;   apt-get install -y --no-install-recommends     ca-certificates     cron     curl     libbz2-dev     libfreetype6-dev     libicu-dev     libjpeg62-turbo-dev     libpng",
+  "recipe": "Dockerfile",
+  "log": [
+   "$ docker build -t localhost/walk_accountingfossbilling:walk --network=host -f Dockerfile .\n\nie-security InRelease' is no longer signed.\n------\nDockerfile:8\n--------------------\n   7 |     \n   8 | >>> RUN set -eux; \\\n   9 | >>>   savedAptMark=\"$(apt-mark showmanual)\"; \\\n  10 | >>>   apt-get update; \\\n  11 | >>>   apt-get install -y --no-install-recommends \\\n  12 | >>>     ca-certificates \\\n  13 | >>>     cron \\\n  14 | >>>     curl \\\n  15 | >>>     libbz2-dev \\\n  16 | >>>     libfreetype6-dev \\\n  17 | >>>     libicu-dev \\\n  18 | >>>     libjpeg62-turbo-dev \\\n  19 | >>>     libpng-dev \\\n  20 | >>>     libzip-dev \\\n  21 | >>>     unzip \\\n  22 | >>>     zlib1g-dev; \\\n  23 | >>>   docker-php-ext-configure gd --with-freetype --with-jpeg; \\\n  24 | >>>   docker-php-ext-install -j\"$(nproc)\" bz2 gd intl pdo_mysql zip; \\\n  25 | >>>   a2enmod rewrite; \\\n  26 | >>>   apt-mark auto '.*' > /dev/null; \\\n  27 | >>>   apt-mark manual \\\n  28 | >>>     ${savedAptMark} \\\n  29 | >>>     ca-certificates \\\n  30 | >>>     cron \\\n  31 | >>>     curl \\\n  32 | >>>     unzip; \\\n  33 | >>>   find /usr/local -type f \\( -perm /0111 -o -name '*.so' \\) -exec sh -c 'ldd \"$@\" 2>/dev/null' sh '{}' + \\\n  34 | >>>     | awk 'NF == 4 && $2 == \"=>\" { print $3 } NF == 2 && $1 ~ /^\\// { print $1 }' \\\n  35 | >>>     | sort -u \\\n  36 | >>>     | while read -r library; do \\\n  37 | >>>         library=\"$(readlink -e \"${library}\")\"; \\\n  38 | >>>         dpkg-query --search \"${library}\" 2>/dev/null | grep -v '^diversion ' | head -n1 | cut -d: -f1; \\\n  39 | >>>       done \\\n  40 | >>>     | sort -u \\\n  41 | >>>     | xargs -r apt-mark manual; \\\n  42 | >>>   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \\\n  43 | >>>   apt-get clean; \\\n  44 | >>>   rm -rf /var/lib/apt/lists/* /var/cache/apt/*\n  45 |     \n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c set -eux;   savedAptMark=\\\"$(apt-mark showmanual)\\\";   apt-get update;   apt-get install -y --no-install-recommends     ca-certificates     cron     curl     libbz2-dev     libfreetype6-dev     libicu-dev     libjpeg62-turbo-dev     libpng-dev     libzip-dev     unzip     zlib1g-dev;   docker-php-ext-configure gd --with-freetype --with-jpeg;   docker-php-ext-install -j\\\"$(nproc)\\\" bz2 gd intl pdo_mysql zip;   a2enmod rewrite;   apt-mark auto '.*' > /dev/null;   apt-mark manual     ${savedAptMark}     ca-certificates     cron     curl     unzip;   find /usr/local -type f \\\\( -perm /0111 -o -name '*.so' \\\\) -exec sh -c 'ldd \\\"$@\\\" 2>/dev/null' sh '{}' +     | awk 'NF == 4 && $2 == \\\"=>\\\" { print $3 } NF == 2 && $1 ~ /^\\\\// { print $1 }'     | sort -u     | while read -r library; do         library=\\\"$(readlink -e \\\"${library}\\\")\\\";         dpkg-query --search \\\"${library}\\\" 2>/dev/null | grep -v '^diversion ' | head -n1 | cut -d: -f1;       done     | sort -u     | xargs -r apt-mark manual;   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false;   apt-get clean;   rm -rf /var/lib/apt/lists/* /var/cache/apt/*\" did not complete successfully: exit code: 100\n"
+  ]
+ },
+ "gate": {},
+ "capabilities": {},
+ "summary": {
+  "booted": false,
+  "gate": null,
+  "capabilities": 0,
+  "reached": 0,
+  "seen": 0,
+  "absent": 0,
+  "gaps": []
+ },
+ "finished": "2026-09-19T10:14:01"
+}

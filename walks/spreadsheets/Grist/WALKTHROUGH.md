@@ -1,12 +1,12 @@
 # Walkthrough — Grist for Spreadsheets
 
 Repo https://github.com/gristlabs/grist-core @ `c1f3a697120832db4622b02157996d6ac4e38a6d`  
-Started 2026-09-19T10:07:46, finished 2026-09-19T10:08:46
+Started 2026-09-19T10:09:52, finished 2026-09-19T10:10:40
 
 ## Boot: **BOOT FAILED**
 
 - recipe: docker-compose-examples/grist-traefik-oidc-auth/docker-compose.yml
-- reason: compose up failed (rc 1): Error response from daemon: invalid mount config for type "bind": bind source path does not exist: /HMAC_SECRET
+- reason: compose up failed (rc 1): Error response from daemon: invalid mount config for type "bind": bind source path does not exist: /GRIST_CLIENT_SECRET_DIGEST
 
 ## Getting in: **—**
 

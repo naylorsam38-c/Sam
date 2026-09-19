@@ -4,13 +4,13 @@
  "app": "Super Productivity",
  "repo": "https://github.com/super-productivity/super-productivity",
  "commit": "679a7823a36dab59283acf55a81113d7677513ab",
- "started": "2026-09-19T10:05:47",
+ "started": "2026-09-19T10:11:46",
  "boot": {
   "status": "BOOT FAILED",
-  "reason": "image build failed: Run 'docker buildx build --help' for more information",
+  "reason": "image build failed: ERROR: failed to build: failed to solve: process \"/bin/sh -c apt-get update && apt-get install -y --no-install-recommends jq curl && rm -rf /var/lib/apt/lists/*\" did not complete successfully: exit code: 100",
   "recipe": "Dockerfile",
   "log": [
-   "$ docker build -t localhost/walk_taskmanagementsuperproductivity:walk --network=host --volume /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro --env SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt --env NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt -f Dockerfile .\n\nunknown flag: --volume\n\nUsage:  docker buildx build [OPTIONS] PATH | URL | -\n\nRun 'docker buildx build --help' for more information\n"
+   "$ docker build -t localhost/walk_taskmanagementsuperproductivity:walk --network=host -f Dockerfile .\n\n403  Forbidden [IP: 151.101.130.132 80]\n#8 0.108 Err:2 http://deb.debian.org/debian trixie-updates InRelease\n#8 0.108   403  Forbidden [IP: 151.101.130.132 80]\n#8 0.113 Err:3 http://deb.debian.org/debian-security trixie-security InRelease\n#8 0.113   403  Forbidden [IP: 151.101.130.132 80]\n#8 0.119 Reading package lists...\n#8 0.134 E: The repository 'http://deb.debian.org/debian trixie InRelease' is not signed.\n#8 0.134 E: Failed to fetch http://deb.debian.org/debian/dists/trixie/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n#8 0.134 E: Failed to fetch http://deb.debian.org/debian/dists/trixie-updates/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n#8 0.134 E: The repository 'http://deb.debian.org/debian trixie-updates InRelease' is not signed.\n#8 0.135 E: Failed to fetch http://deb.debian.org/debian-security/dists/trixie-security/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n#8 0.135 E: The repository 'http://deb.debian.org/debian-security trixie-security InRelease' is not signed.\n#8 ERROR: process \"/bin/sh -c apt-get update && apt-get install -y --no-install-recommends jq curl && rm -rf /var/lib/apt/lists/*\" did not complete successfully: exit code: 100\n\n#9 [build  2/25] WORKDIR /app\n#9 CANCELED\n------\n > [stage-1 2/6] RUN apt-get update && apt-get install -y --no-install-recommends jq curl && rm -rf /var/lib/apt/lists/*:\n0.108   403  Forbidden [IP: 151.101.130.132 80]\n0.113 Err:3 http://deb.debian.org/debian-security trixie-security InRelease\n0.113   403  Forbidden [IP: 151.101.130.132 80]\n0.119 Reading package lists...\n0.134 E: The repository 'http://deb.debian.org/debian trixie InRelease' is not signed.\n0.134 E: Failed to fetch http://deb.debian.org/debian/dists/trixie/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n0.134 E: Failed to fetch http://deb.debian.org/debian/dists/trixie-updates/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n0.134 E: The repository 'http://deb.debian.org/debian trixie-updates InRelease' is not signed.\n0.135 E: Failed to fetch http://deb.debian.org/debian-security/dists/trixie-security/InRelease  403  Forbidden [IP: 151.101.130.132 80]\n0.135 E: The repository 'http://deb.debian.org/debian-security trixie-security InRelease' is not signed.\n------\n\n \u001b[33m2 warnings found (use docker --debug to expand):\n\u001b[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ARG \"UNSPLASH_KEY\") (line 5)\n - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"UNSPLASH_KEY\") (line 9)\nDockerfile:57\n--------------------\n  55 |     \n  56 |     # Install runtime dependencies\n  57 | >>> RUN apt-get update && apt-get install -y --no-install-recommends jq curl && rm -rf /var/lib/apt/lists/*\n  58 |     \n  59 |     # Copy built app and configs\n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apt-get update && apt-get install -y --no-install-recommends jq curl && rm -rf /var/lib/apt/lists/*\" did not complete successfully: exit code: 100\n"
   ]
  },
  "gate": {},
@@ -24,5 +24,5 @@
   "absent": 0,
   "gaps": []
  },
- "finished": "2026-09-19T10:06:09"
+ "finished": "2026-09-19T10:12:07"
 }

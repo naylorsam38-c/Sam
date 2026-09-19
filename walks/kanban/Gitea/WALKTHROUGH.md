@@ -1,7 +1,7 @@
-# Walkthrough — Gitea for Project management
+# Walkthrough — Gitea for Kanban
 
 Repo https://github.com/go-gitea/gitea @ `2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2`  
-Started 2026-09-19T10:11:35, finished 2026-09-19T10:11:46
+Started 2026-09-19T10:12:43, finished 2026-09-19T10:12:51
 
 ## Boot: **BOOT FAILED**
 

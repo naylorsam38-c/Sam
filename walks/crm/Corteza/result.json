@@ -1,0 +1,28 @@
+{
+ "category": "CRM",
+ "slug": "crm",
+ "app": "Corteza",
+ "repo": "https://github.com/cortezaproject/corteza",
+ "commit": "3835dfc4ac8bd89381753f09042ad147a4502576",
+ "started": "2026-09-19T10:12:51",
+ "boot": {
+  "status": "BOOT FAILED",
+  "reason": "image build failed: ERROR: failed to build: failed to solve: failed to load cache key: Get \"https://releases.cortezaproject.org/files/corteza-webapp-2022.9.0.tar.gz\": Forbidden",
+  "recipe": "Dockerfile",
+  "log": [
+   "$ docker build -t localhost/walk_crmcorteza:walk --network=host -f Dockerfile .\n\nth \"default\" instance using docker driver\n\n#1 [internal] load build definition from Dockerfile\n#1 transferring dockerfile: 2.05kB done\n#1 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)\n#1 DONE 0.0s\n\n#2 [internal] load metadata for docker.io/library/ubuntu:22.04\n#2 ...\n\n#3 [internal] load metadata for docker.io/library/alpine:3\n#3 DONE 0.7s\n\n#2 [internal] load metadata for docker.io/library/ubuntu:22.04\n#2 DONE 1.8s\n\n#4 [internal] load .dockerignore\n#4 transferring context: 2B done\n#4 DONE 0.0s\n\n#5 [build-stage  1/15] FROM docker.io/library/alpine:3@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6\n#5 resolve docker.io/library/alpine:3@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6 0.0s done\n#5 CACHED\n\n#6 [build-stage  2/15] RUN mkdir /tmp/server\n#6 DONE 0.1s\n\n#7 [stage-1 1/5] FROM docker.io/library/ubuntu:22.04@sha256:b8b6ee6aa931ecd9d0d952abc34dc0e5f7c6a30c6bb71b079fe399fde0329c02\n#7 resolve docker.io/library/ubuntu:22.04@sha256:b8b6ee6aa931ecd9d0d952abc34dc0e5f7c6a30c6bb71b079fe399fde0329c02 0.0s done\n#7 ...\n\n#8 [build-stage  5/15] ADD https://releases.cortezaproject.org/files/corteza-webapp-2022.9.0.tar.gz /tmp/webapp\n#8 ERROR: Get \"https://releases.cortezaproject.org/files/corteza-webapp-2022.9.0.tar.gz\": Forbidden\n\n#9 [build-stage  4/15] ADD https://releases.cortezaproject.org/files/corteza-server-2022.9.0-linux-amd64.tar.gz /tmp/server\n#9 CANCELED\n\n#7 [stage-1 1/5] FROM docker.io/library/ubuntu:22.04@sha256:b8b6ee6aa931ecd9d0d952abc34dc0e5f7c6a30c6bb71b079fe399fde0329c02\n#7 sha256:20c3783cc497b5b0df1fc5f92bd64c3d2fbb24057c88692c8fda205b6ea8a2f2 0B / 29.75MB 0.2s\n#7 DONE 0.3s\n\n#10 [build-stage  3/15] RUN mkdir /tmp/webapp\n#10 0.150 runc run failed: container process is already dead\n#10 CANCELED\n\n#11 [stage-1 2/5] RUN apt-get -y update  && apt-get -y install     ca-certificates     curl  && rm -rf /var/lib/apt/lists/*\n#11 CANCELED\n------\n > [build-stage  5/15] ADD https://releases.cortezaproject.org/files/corteza-webapp-2022.9.0.tar.gz /tmp/webapp:\n------\n\n \u001b[33m7 warnings found (use docker --debug to expand):\n\u001b[0m - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 54)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 55)\n - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 50)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 51)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 52)\n - LegacyKeyValueFormat: \"ENV key=value\" should be used instead of legacy \"ENV key value\" format (line 53)\nERROR: failed to build: failed to solve: failed to load cache key: Get \"https://releases.cortezaproject.org/files/corteza-webapp-2022.9.0.tar.gz\": Forbidden\n"
+  ]
+ },
+ "gate": {},
+ "capabilities": {},
+ "summary": {
+  "booted": false,
+  "gate": null,
+  "capabilities": 0,
+  "reached": 0,
+  "seen": 0,
+  "absent": 0,
+  "gaps": []
+ },
+ "finished": "2026-09-19T10:13:41"
+}

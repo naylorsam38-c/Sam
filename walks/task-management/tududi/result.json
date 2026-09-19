@@ -4,13 +4,13 @@
  "app": "tududi",
  "repo": "https://github.com/chrisvel/tududi",
  "commit": "b7135d84dba418f856176b9f25deadf487d9e1af",
- "started": "2026-09-19T10:06:09",
+ "started": "2026-09-19T10:12:07",
  "boot": {
   "status": "BOOT FAILED",
-  "reason": "image build failed: Run 'docker buildx build --help' for more information",
+  "reason": "image build failed: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk add --no-cache     bash     sqlite     dumb-init     su-exec &&     rm -rf /tmp/* /var/cache/apk/*\" did not complete successfully: exit code: 4",
   "recipe": "Dockerfile",
   "log": [
-   "$ docker build -t localhost/walk_taskmanagementtududi:walk --network=host --volume /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro --env SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt --env NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt -f Dockerfile .\n\nunknown flag: --volume\n\nUsage:  docker buildx build [OPTIONS] PATH | URL | -\n\nRun 'docker buildx build --help' for more information\n"
+   "$ docker build -t localhost/walk_taskmanagementtududi:walk --network=host -f Dockerfile .\n\ne: 4\n\n#7 [builder 2/9] RUN apk add --no-cache     python3     make     g++     sqlite-dev     sqlite     bash\n#7 0.120 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#7 0.146 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#7 0.146 ERROR: unable to select packages:\n#7 0.146   bash (no such package):\n#7 0.146     required by: world[bash]\n#7 0.146   g++ (no such package):\n#7 0.146     required by: world[g++]\n#7 0.146   make (no such package):\n#7 0.146     required by: world[make]\n#7 0.146   python3 (no such package):\n#7 0.146     required by: world[python3]\n#7 0.146   sqlite (no such package):\n#7 0.146     required by: world[sqlite]\n#7 0.146   sqlite-dev (no such package):\n#7 0.146     required by: world[sqlite-dev]\n#7 ERROR: process \"/bin/sh -c apk add --no-cache     python3     make     g++     sqlite-dev     sqlite     bash\" did not complete successfully: exit code: 6\n------\n > [production  2/18] RUN apk add --no-cache     bash     sqlite     dumb-init     su-exec &&     rm -rf /tmp/* /var/cache/apk/*:\n0.129 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.130 ERROR: unable to select packages:\n0.130   bash (no such package):\n0.130     required by: world[bash]\n0.130   dumb-init (no such package):\n0.130     required by: world[dumb-init]\n0.130   sqlite (no such package):\n0.130     required by: world[sqlite]\n0.130   su-exec (no such package):\n0.130     required by: world[su-exec]\n------\n------\n > [builder 2/9] RUN apk add --no-cache     python3     make     g++     sqlite-dev     sqlite     bash:\n0.146   g++ (no such package):\n0.146     required by: world[g++]\n0.146   make (no such package):\n0.146     required by: world[make]\n0.146   python3 (no such package):\n0.146     required by: world[python3]\n0.146   sqlite (no such package):\n0.146     required by: world[sqlite]\n0.146   sqlite-dev (no such package):\n0.146     required by: world[sqlite-dev]\n------\n\n \u001b[33m3 warnings found (use docker --debug to expand):\n\u001b[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"TUDUDI_SESSION_SECRET\") (line 119)\n - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"TUDUDI_USER_PASSWORD\") (line 119)\n - NoEmptyContinuation: Empty continuation line (line 100)\nDockerfile:48\n--------------------\n  47 |     # Install minimal runtime dependencies\n  48 | >>> RUN apk add --no-cache \\\n  49 | >>>     bash \\\n  50 | >>>     sqlite \\\n  51 | >>>     dumb-init \\\n  52 | >>>     su-exec && \\\n  53 | >>>     rm -rf /tmp/* /var/cache/apk/*\n  54 |     \n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk add --no-cache     bash     sqlite     dumb-init     su-exec &&     rm -rf /tmp/* /var/cache/apk/*\" did not complete successfully: exit code: 4\n"
   ]
  },
  "gate": {},
@@ -24,5 +24,5 @@
   "absent": 0,
   "gaps": []
  },
- "finished": "2026-09-19T10:06:29"
+ "finished": "2026-09-19T10:12:25"
 }
