@@ -5193,7 +5193,7 @@
    "version": null,
    "commit": "7912edbd7ede249ddbb2721abd6def94bee52f3e",
    "source_path": "applications/APP-037/source",
-   "status": "INSTALL_FAILED",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5279,8 +5279,14 @@
     }
    ],
    "install_startup": {
-    "status": "INSTALL_FAILED",
-    "reason": "no Dockerfile or compose file - no documented way to run it"
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://localhost:8081/",
+    "http_status": 200,
+    "recipe": "docker-compose.library.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "Two real fixes were needed, both left in the recipe: (1) mysql:8.0 is explicitly rejected by Mautic's own installer ('Your database version (8.0.46) is too old for Mautic to work correctly. Supported versions are MySQL 8.4.0 (or higher) and MariaDB 10.11.0 (or higher)') - switched the db service to mysql:8.4. (2) The generic screen crawler's default form-filler blindly overwrites every detected input with placeholder text, including a pre-filled, valid numeric Database Port field on Mautic's own installer - this broke the DB-setup step ('The port must be an integer greater than 0'). Rather than patch the shared crawler under time pressure, the installer wizard (DB connection step, then admin-user creation step) was driven directly with a one-off Playwright script using the real field IDs (install_doctrine_step_host/port/name/user/password, then install_user_step_username/password/firstname/lastname/email), which completed cleanly through /installer/final to a real login screen. The admin account was then reset via Mautic's own Account Details page (/s/account) to the pipeline's standard libwalker/Walker-Pass-2026! test credentials, so the standard screens.py crawler could log in and complete a full, unmodified 15/15 screen walkthrough on its own - no crawler code changes needed.",
+    "startup_command": "docker compose -p lib_app037 -f docker-compose.library.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -5293,6 +5299,12 @@
     },
     "has_container_recipe": false,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 15,
+    "screens_browser_verified": 15
    }
   },
   {
