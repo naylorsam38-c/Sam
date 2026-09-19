@@ -9,7 +9,7 @@
  "version": null,
  "commit": "bd2179cf211874925e2313664e22dae2501fe30a",
  "source_path": "applications/APP-042/source",
- "status": "SCREEN-VERIFIED",
+ "status": "FUNCTIONALLY_VERIFIED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -188,13 +188,12 @@
  "screen_summary": {
   "screens_discovered": 15,
   "screens_reached": 15,
-  "screens_rendered": 14,
-  "screens_browser_verified": 14
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
  },
  "capability_summary": {
-  "capabilities_defined": true,
-  "discovered": 8,
-  "attach_point_found": 7,
-  "proven": 0
+  "discovered": 10,
+  "attach_point_found": 10,
+  "proven": 6
  }
 }

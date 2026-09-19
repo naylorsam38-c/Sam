@@ -1,35 +1,42 @@
 {
  "application": "APP-042",
  "id": "CAP-042-03",
- "name": "password generation",
+ "name": "Integrations",
+ "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/integrations",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
  "attach_points": [
   {
    "file": "frontend/src/const.ts",
    "matched_words": [
-    "password"
+    "integrations"
    ],
-   "line": 23,
-   "snippet": "\"/password-reset\","
+   "line": 3,
+   "snippet": "// `/integrations`,"
   },
   {
    "file": "frontend/src/routes.ts",
    "matched_words": [
-    "password"
+    "integration",
+    "integrations"
    ],
-   "line": 483,
-   "snippet": "route(\"/password-setup\", \"auth/PasswordSetupPage/route.tsx\"),"
+   "line": 148,
+   "snippet": "\"/select-integration-auth\","
   },
   {
-   "file": "frontend/src/helpers/project.ts",
+   "file": "frontend/src/types/integrations.ts",
    "matched_words": [
-    "password"
+    "integrations"
    ],
-   "line": 20,
-   "snippet": "secretValue: \"mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@mongodb.net\","
+   "line": 3,
+   "snippet": "NativeIntegrations = \"native-integrations\","
   }
  ],
- "ui_screen": null,
- "live_test": null,
- "verdict": "NOT VERIFIED",
- "reason": "code attach point found but no reachable UI screen for it"
+ "live_test": {
+  "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/integrations",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "clicked action button (no form followed); app showed an explicit success message"
+ },
+ "verdict": "PROVEN"
 }

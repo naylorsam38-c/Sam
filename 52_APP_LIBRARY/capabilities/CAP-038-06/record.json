@@ -1,0 +1,45 @@
+{
+ "application": "APP-038",
+ "id": "CAP-038-06",
+ "name": "Uptime Kuma",
+ "route": "/alerts/event/uptimekuma",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "server/model/status_page.js",
+   "matched_words": [
+    "kuma",
+    "uptime"
+   ],
+   "line": 4,
+   "snippet": "const { UptimeKumaServer } = require(\"../uptime-kuma-server\");"
+  },
+  {
+   "file": "server/model/maintenance.js",
+   "matched_words": [
+    "kuma",
+    "uptime"
+   ],
+   "line": 6,
+   "snippet": "const { UptimeKumaServer } = require(\"../uptime-kuma-server\");"
+  },
+  {
+   "file": "server/model/monitor.js",
+   "matched_words": [
+    "kuma",
+    "uptime"
+   ],
+   "line": 52,
+   "snippet": "const { UptimeKumaServer } = require(\"../uptime-kuma-server\");"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:3001/alerts/event/uptimekuma",
+  "attempted": false,
+  "outcome": "NO_FORM_FOUND",
+  "detail": "no visible <form> on this screen"
+ },
+ "verdict": "NOT VERIFIED",
+ "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
+}

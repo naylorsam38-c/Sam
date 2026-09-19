@@ -1,0 +1,41 @@
+{
+ "application": "APP-038",
+ "id": "CAP-038-03",
+ "name": "Add New Monitor",
+ "route": "/add",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "server/model/status_page.js",
+   "matched_words": [
+    "monitor"
+   ],
+   "line": 283,
+   "snippet": "for (const monitor of monitorGroup.monitorList) {"
+  },
+  {
+   "file": "server/model/domain_expiry.js",
+   "matched_words": [
+    "monitor"
+   ],
+   "line": 144,
+   "snippet": "* @param {string} domain Domain we monitor"
+  },
+  {
+   "file": "server/model/monitor.js",
+   "matched_words": [
+    "monitor"
+   ],
+   "line": 74,
+   "snippet": "class Monitor extends BeanModel {"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:3001/add",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "submitted 15 field(s); a value this test typed now appears on the page where it didn't before (persisted)"
+ },
+ "verdict": "PROVEN"
+}

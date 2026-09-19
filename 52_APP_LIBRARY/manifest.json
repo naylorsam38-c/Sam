@@ -5178,7 +5178,7 @@
    "version": null,
    "commit": "5998570a3564afa82e540b660dae4b3b2178f58c",
    "source_path": "applications/APP-038/source",
-   "status": "SCREEN-VERIFIED",
+   "status": "FUNCTIONALLY_VERIFIED",
    "declared_itself": false,
    "manual_override_reason": "automated pick (Pi-hole) is primarily a DNS/ad-blocker; this is the category-defining self-hosted monitoring tool",
    "discovery_candidates": [
@@ -5302,7 +5302,7 @@
    "capability_summary": {
     "discovered": 7,
     "attach_point_found": 7,
-    "proven": 0
+    "proven": 5
    }
   },
   {
@@ -5684,7 +5684,7 @@
    "version": null,
    "commit": "bd2179cf211874925e2313664e22dae2501fe30a",
    "source_path": "applications/APP-042/source",
-   "status": "SCREEN-VERIFIED",
+   "status": "FUNCTIONALLY_VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5863,14 +5863,13 @@
    "screen_summary": {
     "screens_discovered": 15,
     "screens_reached": 15,
-    "screens_rendered": 14,
-    "screens_browser_verified": 14
+    "screens_rendered": 15,
+    "screens_browser_verified": 15
    },
    "capability_summary": {
-    "capabilities_defined": true,
-    "discovered": 8,
-    "attach_point_found": 7,
-    "proven": 0
+    "discovered": 10,
+    "attach_point_found": 10,
+    "proven": 6
    }
   },
   {

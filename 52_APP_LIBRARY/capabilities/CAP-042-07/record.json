@@ -1,35 +1,45 @@
 {
  "application": "APP-042",
  "id": "CAP-042-07",
- "name": "secure notes",
+ "name": "Secret Sharing",
+ "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/secret-management/secret-sharing",
+ "discovered_from": "screen",
+ "matched_predefined_capability": [
+  "sharing"
+ ],
  "attach_points": [
   {
-   "file": "frontend/src/helpers/project.ts",
+   "file": "frontend/src/const.ts",
    "matched_words": [
-    "note"
+    "secret"
    ],
-   "line": 71,
-   "snippet": "* Note: current user should be a member of the organization"
+   "line": 27,
+   "snippet": "\"/shared/secret/[id]\","
   },
   {
-   "file": "frontend/src/components/projects/requestprojectaccessmodal.tsx",
+   "file": "frontend/src/routes.ts",
    "matched_words": [
-    "note"
+    "secret",
+    "sharing"
    ],
-   "line": 26,
-   "snippet": "const form = useForm<{ note: string }>();"
+   "line": 21,
+   "snippet": "const secretManagerRoutes = route(\"/organizations/$orgId/projects/secret-management/$projectId\", ["
   },
   {
-   "file": "frontend/src/components/auth/signupproducts.ts",
+   "file": "frontend/src/types/integrations.ts",
    "matched_words": [
-    "secure"
+    "secret"
    ],
-   "line": 73,
-   "snippet": "description: \"Secure and record access to servers and databases.\","
+   "line": 6,
+   "snippet": "SecretSyncs = \"secret-syncs\","
   }
  ],
- "ui_screen": null,
- "live_test": null,
+ "live_test": {
+  "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/secret-management/secret-sharing",
+  "attempted": false,
+  "outcome": "NO_FORM_FOUND",
+  "detail": "no visible <form> on this screen"
+ },
  "verdict": "NOT VERIFIED",
- "reason": "code attach point found but no reachable UI screen for it"
+ "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
 }

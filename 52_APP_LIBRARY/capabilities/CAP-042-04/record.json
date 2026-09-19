@@ -1,10 +1,43 @@
 {
  "application": "APP-042",
  "id": "CAP-042-04",
- "name": "autofill",
- "attach_points": [],
- "ui_screen": null,
- "live_test": null,
- "verdict": "NOT VERIFIED",
- "reason": "no code attach point and no matching UI screen found"
+ "name": "Organization Access Control",
+ "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/access-management",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "frontend/src/routes.ts",
+   "matched_words": [
+    "access",
+    "organization"
+   ],
+   "line": 17,
+   "snippet": "route(\"/access-management\", \"admin/AccessManagementPage/route.tsx\")"
+  },
+  {
+   "file": "frontend/src/helpers/honeytokens.ts",
+   "matched_words": [
+    "access"
+   ],
+   "line": 24,
+   "snippet": "{ key: \"accessKeyId\", label: \"Access Key ID\" },"
+  },
+  {
+   "file": "frontend/src/helpers/project.ts",
+   "matched_words": [
+    "access",
+    "organization"
+   ],
+   "line": 171,
+   "snippet": "return \"/organizations/$orgId/pam/access\" as const;"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/access-management",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "clicked action button, filled+submitted the form it opened (3 fields); app showed an explicit success message"
+ },
+ "verdict": "PROVEN"
 }

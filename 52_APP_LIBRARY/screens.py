@@ -47,7 +47,24 @@ TEST_USER = {"name": "Library Walker", "username": "libwalker", "email": "libwal
             "password": "Walker-Pass-2026!", "url": "https://example.com/libwalker-test"}
 GATE_WORDS = ("sign up", "signup", "register", "create account", "get started", "setup", "set up",
              "install", "create admin", "continue", "next", "finish", "log in", "login", "sign in",
-             "weiter", "next step", "proceed", "deploy", "confirm")
+             "weiter", "next step", "proceed", "deploy", "confirm", "create", "dashboard")
+# "dashboard": Infisical's own post-setup wizard ends on a "Your instance is
+# ready - Go to dashboard / Access server console" screen where the choice
+# is a plain JS-routed <button>, not an <a href> collect_nav_links() would
+# have picked up as ordinary in-app navigation - without this, the gate
+# crawl correctly stops (gate_state does read "IN": there's no login/setup
+# form left) but nothing ever clicks through into the actual app, so every
+# "screen" discovered afterward is this same launch-pad shell.
+# Labels that must never be the thing a gate-crawl step clicks, even when
+# they sit right next to a real forward action and look like part of the
+# "same choice group" - Infisical's own multi-step signup wizard puts
+# "Back" and "Create organization" as sibling buttons on its organization
+# step; _find_gate_form doesn't recognise a bare "create organization"
+# button as a gate (fixed above by adding "create" to GATE_WORDS) but
+# _click_choice_step's sibling-group heuristic still needs to know never to
+# pick the backward one first, in case some other step's wording isn't
+# caught by GATE_WORDS at all.
+BACKWARD_WORDS = ("back", "cancel", "skip", "previous", "prev", "close", "dismiss")
 MAX_GATE_STEPS = 9
 
 # A page that LOOKS rendered (has real text, a nonzero body) can still be
@@ -278,20 +295,40 @@ class ScreenWalk:
                     continue
                 if typ in ("hidden", "submit", "button", "file"):
                     continue
+                # attributes only for the general classification - name/id/
+                # placeholder/autocomplete are precise, narrow signals.
+                # Label TEXT is looser prose ("Limit allowed email domains"
+                # contains "email" but wants a bare domain, not an address)
+                # so it's consulted only for the one check that actually
+                # needs it: nothing in a URL field's attributes necessarily
+                # says "url" (DocuSeal's "App URL" setup field is
+                # id="encrypted_config_value"), and "url"/"website"/"link"
+                # are specific enough words that a label containing them
+                # isn't at real risk of meaning something else.
                 name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("placeholder"),
-                                              inp.get_attribute("autocomplete"),
-                                              _field_identity_text(self.page, inp)])).lower()
+                                              inp.get_attribute("autocomplete")])).lower()
+                label_text = _field_identity_text(self.page, inp).lower()
+                if "domain" in name or "domain" in label_text:
+                    # a narrow, format-strict allowlist field ("Limit
+                    # allowed email domains to...") - every filler value
+                    # this crawler has is either a full email address or
+                    # free text, neither a valid bare domain, and getting
+                    # it wrong here silently blocked Infisical's own
+                    # admin-setup wizard from ever reaching Continue. It's
+                    # an optional restriction, so leaving it at its default
+                    # (empty/unset) is the correct, safe choice - unlike
+                    # the other fields here, filling it wrong is worse than
+                    # not filling it at all.
+                    continue
                 if typ == "email" or "email" in name:
                     val = TEST_USER["email"]
                 elif typ == "password" or "pass" in name:
                     val = TEST_USER["password"]
-                elif typ == "url" or "url" in name or "website" in name or "link" in name:
+                elif (typ == "url" or "url" in name or "website" in name or "link" in name or
+                      "url" in label_text or "website" in label_text or "link" in label_text):
                     # a plain name string fails most apps' own URL format
                     # validation, so a real syntactically-valid URL is needed
-                    # for anything downstream to be honest evidence (this is
-                    # what DocuSeal's "App URL" setup field needs - it's
-                    # id="encrypted_config_value" in the DOM, only its own
-                    # <label> text says what it actually is).
+                    # for anything downstream to be honest evidence.
                     val = TEST_USER["url"]
                 elif "user" in name or "login" in name or "handle" in name:
                     val = TEST_USER["username"]
@@ -315,16 +352,91 @@ class ScreenWalk:
         # that one happens to be hidden (a lot of real forms have an earlier
         # non-visible button - a back button, a hidden template row), this
         # gave up even though the actual submit/next button was right there.
-        # query_selector_all + scan for the first visible one fixes that.
+        # query_selector_all + scan for the first visible one fixes that -
+        # but a component framework (Radix-UI style, seen on Infisical's own
+        # multi-step admin-setup wizard) commonly implements each RADIO/
+        # CHECKBOX inside a <form> as its own <button role=radio/checkbox>
+        # with no label text at all, so "the first visible button in the
+        # form" can just click one of THOSE instead of ever reaching the
+        # real advance control - which, on that same wizard, isn't even
+        # inside the <form> to begin with (the step's own fields are, but
+        # the shared Back/Continue nav sits in a wrapper around it). A step
+        # can look "submitted" 7 times over and never move.
+        # A real nav/submit button's own label is inherently short ("Continue",
+        # "Finish setup") - a GATE_WORDS substring turning up inside a much
+        # LONGER label is a coincidence, not the actual advance control.
+        # Infisical's own review step has this exactly: a "User access:
+        # Anyone can **sign up**" summary/edit-card button sits right next to
+        # the real "Finish setup" button, and "sign up" is a GATE_WORD - the
+        # first-DOM-match version of this picked the summary card every time,
+        # which just navigates back to re-edit that step, producing an
+        # infinite Review <-> Control-who-can-join loop that never finishes.
+        # Preferring the SHORTEST matching label breaks the tie correctly.
+        # Gathers BOTH in-form and page-wide matches into one pool and picks
+        # the single shortest label across all of them - NOT "in-form wins
+        # whenever one exists". Tiering in-form ahead of page-wide was itself
+        # a bug: on Infisical's review step, the real "Finish setup" button
+        # lives entirely OUTSIDE the <form> (never a candidate at the in-form
+        # tier at all), while the "User access: Anyone can **sign up**"
+        # summary/edit-card - a coincidental GATE_WORDS hit - IS inside the
+        # form, so it won every time regardless of length, and clicking it
+        # just navigates back to re-edit that step.
+        # Shortest-label-wins is a good tie-break but not the strongest
+        # signal available: a native type=submit button IS the form's real
+        # completion action; a type=button is just some other JS-handled
+        # control that happens to share a GATE_WORD. Infisical's own login
+        # form has this exactly - "Continue with LDAP/OIDC/SAML" (type=
+        # button, disabled SSO options this instance never configured) are
+        # each 1 character SHORTER than the real "Continue with Email"
+        # (type=submit, the button that actually submits the email/password
+        # just filled), so length-only picked a disabled control, the click
+        # timed out, and nothing retried the button that would have worked.
+        # Ranks by (is a real submit control, shortest label) and, if the
+        # top pick's click fails or the control is disabled, falls through
+        # to the next-best candidate instead of giving up outright.
+        labeled_matches, bare_fallback = [], None
         for sel in ("button[type=submit]", "input[type=submit]", "button:not([type=button])", "button"):
             try:
                 for b in form.query_selector_all(sel):
-                    if b.is_visible():
-                        b.click(timeout=4000)
-                        self.page.wait_for_timeout(2500)
-                        return True
+                    if not b.is_visible():
+                        continue
+                    label = (b.inner_text() or "").strip().lower()
+                    if (any(w in label for w in GATE_WORDS) and
+                            not any(w in label for w in BACKWARD_WORDS)):
+                        is_submit = (b.get_attribute("type") or "").lower() == "submit"
+                        labeled_matches.append((0 if is_submit else 1, len(label), label, b))
+                    elif bare_fallback is None:
+                        bare_fallback = b
             except Exception:
                 continue
+        try:
+            for b in self.page.query_selector_all("button, input[type=submit]"):
+                if not b.is_visible():
+                    continue
+                label = (b.inner_text() or b.get_attribute("value") or "").strip().lower()
+                if (any(w in label for w in GATE_WORDS) and
+                        not any(w in label for w in BACKWARD_WORDS)):
+                    is_submit = (b.get_attribute("type") or "").lower() == "submit"
+                    labeled_matches.append((0 if is_submit else 1, len(label), label, b))
+        except Exception:
+            pass
+        labeled_matches.sort(key=lambda x: (x[0], x[1]))
+        for _, _, _, cand in labeled_matches:
+            try:
+                if cand.is_disabled():
+                    continue
+                cand.click(timeout=4000)
+                self.page.wait_for_timeout(2500)
+                return True
+            except Exception:
+                continue
+        if bare_fallback is not None:
+            try:
+                bare_fallback.click(timeout=4000)
+                self.page.wait_for_timeout(2500)
+                return True
+            except Exception:
+                pass
         return False
 
     def _find_gate_form(self):
@@ -368,30 +480,91 @@ class ScreenWalk:
         clicks the first, then clicks a following continue/next/weiter
         button if one is visible. Returns True if it changed anything."""
         try:
+            # Genuinely interactive elements only - a bare [class*=card]/
+            # [class*=option] catch-all matches purely decorative content
+            # too (DaisyUI/Tailwind style plain <div class="card ..."> is
+            # an extremely common way to lay out a marketing page's feature
+            # highlights, not a choice control). DocuSeal's own landing
+            # page has exactly 4 such divs ("Easy to Start" / "Mobile
+            # Optimized" / "Secure" / "Open Source") that this method
+            # started wrongly treating as a 4-way choice group once the
+            # first-line-label fix (needed for real multi-line choice
+            # cards elsewhere) made their short headings pass the length
+            # filter - clicking one is a real, successful click that goes
+            # nowhere, which looked like "submitted: True" nine times over
+            # and never got anywhere near the actual "Sign In" link.
             candidates = [el for el in self.page.query_selector_all(
-                "button, [role=button], [role=radio], [role=option], [class*=card], [class*=option]")
+                "button, [role=button], [role=radio], [role=option], a[href]")
                 if el.is_visible()]
         except Exception:
             candidates = []
         groups = {}
         for el in candidates:
             try:
-                label = (el.inner_text() or "").strip().lower()
-                if not label or len(label) > 40 or any(d in label for d in ("delete", "logout", "remove")):
+                tag = el.evaluate("e => e.tagName")
+                if tag == "A":
+                    # an <a href> can navigate straight off the app entirely
+                    # (DocuSeal's own landing page has a "click" link to
+                    # https://www.docuseal.com/install in its marketing
+                    # copy) - only a same-origin link is safe to even
+                    # consider as an in-app choice.
+                    href = el.get_attribute("href") or ""
+                    dest = urljoin(self.base + "/", href)
+                    if urlparse(dest).netloc != urlparse(self.base).netloc:
+                        continue
+                # a bigger "choice CARD" (icon + heading + description, not
+                # just a short button label) has its real, human-recognised
+                # label on its FIRST line - Infisical's own post-setup
+                # launch-pad ("Go to dashboard\nCreate projects, manage
+                # secrets, and invite your team.") is exactly this shape,
+                # and matching against the WHOLE multi-line block both blew
+                # the 40-char cutoff (rejecting a real choice outright) and
+                # would have let unrelated description prose falsely
+                # trigger a destructive/backward-word match.
+                full_text = (el.inner_text() or "").strip()
+                label = full_text.split("\n", 1)[0].strip().lower()
+                # "back"/"cancel"/etc are never a valid choice-card pick -
+                # excluding them from the candidate pool entirely (not just
+                # skipping them as the pick) stops an ordinary "Back /
+                # <forward action>" button pair from ever being mistaken
+                # for a multi-choice card group in the first place, e.g.
+                # Infisical's own signup wizard puts "Back" right next to
+                # "Create organization" as siblings.
+                if (not label or len(label) > 40 or
+                        any(d in label for d in ("delete", "logout", "remove")) or
+                        any(d in label for d in BACKWARD_WORDS)):
                     continue
                 box = el.bounding_box()
                 if not box:
                     continue
                 parent = el.evaluate_handle("e => e.parentElement")
                 pid = parent.evaluate("e => e ? (e.getAttribute('class')||'') + e.tagName : ''") if parent else ""
-                groups.setdefault(pid, []).append(el)
+                groups.setdefault(pid, []).append((label, el, tag))
             except Exception:
                 continue
         group = next((g for g in groups.values() if len(g) >= 2), None)
         if not group:
             return False
+        # within a genuine choice group, a member whose own label is a
+        # forward/gate action (e.g. "Create organization") is the one to
+        # click, not whichever happened to be first in DOM order.
+        forward = [(label, el) for label, el, _ in group if any(w in label for w in GATE_WORDS)]
+        if forward:
+            pick = min(forward, key=lambda x: len(x[0]))[1]
+        elif any(tag == "A" for _, _, tag in group):
+            # an arbitrary "just click the first one" guess is fine for a
+            # real choice-card group (radio-style options, an icon toggle -
+            # nothing in the group can navigate off the app on its own),
+            # but a group of same-origin LINKS with no gate-word match at
+            # all is far more likely an unrelated nav cluster (a footer's
+            # row of links, e.g.) than a genuine choice - guessing wrong
+            # there means leaving the app on a page that isn't even part of
+            # the gate crawl's job to recover from.
+            return False
+        else:
+            pick = group[0][1]
         try:
-            group[0].click(timeout=3000)
+            pick.click(timeout=3000)
             self.page.wait_for_timeout(500)
         except Exception:
             return False
@@ -432,7 +605,12 @@ class ScreenWalk:
         best = None
         for el in els:
             try:
-                label = (el.inner_text() or "").strip().lower()
+                # first line only - see _click_choice_step's identical
+                # comment: a bigger card (icon + heading + description) has
+                # its real label on the first line, and matching the whole
+                # multi-line block both blows this cutoff and risks a
+                # description sentence containing a stray destructive word.
+                label = (el.inner_text() or "").strip().split("\n", 1)[0].strip().lower()
             except Exception:
                 continue
             if not label or len(label) > 30:

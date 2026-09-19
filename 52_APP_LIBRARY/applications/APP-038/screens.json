@@ -12,17 +12,15 @@
     {
      "step": 1,
      "kind": "form",
-     "url_before": "http://127.0.0.1:3001/setup-database",
-     "fields_filled": 3,
+     "url_before": "http://127.0.0.1:3001/dashboard",
+     "fields_filled": 2,
      "submitted": true,
-     "url_after": "http://127.0.0.1:3001/setup"
+     "url_after": "http://127.0.0.1:3001/dashboard"
     },
     {
      "step": 2,
-     "kind": "form",
-     "url_before": "http://127.0.0.1:3001/setup",
-     "fields_filled": 3,
-     "submitted": true,
+     "kind": "choice_click",
+     "url_before": "http://127.0.0.1:3001/dashboard",
      "url_after": "http://127.0.0.1:3001/dashboard"
     },
     {

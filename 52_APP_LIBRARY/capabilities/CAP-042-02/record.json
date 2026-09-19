@@ -1,36 +1,42 @@
 {
  "application": "APP-042",
  "id": "CAP-042-02",
- "name": "credentials",
+ "name": "General",
+ "route": "/admin",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
  "attach_points": [
   {
-   "file": "frontend/src/helpers/honeytokens.ts",
+   "file": "frontend/src/components/secret-rotations-v2/forms/secretrotationv2parametersfields/cloudflarer2accesskeyrotationparametersfields.tsx",
    "matched_words": [
-    "credential"
+    "general"
    ],
-   "line": 19,
-   "snippet": "export const HONEY_TOKEN_CREDENTIAL_FIELDS: Record<"
+   "line": 39,
+   "snippet": "General = \"general\","
   },
   {
-   "file": "frontend/src/helpers/auditlogstreams.ts",
+   "file": "frontend/src/components/secret-rotations-v2/forms/secretrotationv2parametersfields/litellmapikeyrotationparametersfields.tsx",
    "matched_words": [
-    "credentials"
+    "general"
    ],
-   "line": 22,
-   "snippet": "logStream: DiscriminativePick<TAuditLogStream, \"provider\" | \"credentials\">"
+   "line": 43,
+   "snippet": "General = \"general\","
   },
   {
-   "file": "frontend/src/helpers/project.ts",
+   "file": "frontend/src/components/secret-rotations-v2/forms/secretrotationv2parametersfields/cloudflareapitokenrotationparametersfields.tsx",
    "matched_words": [
-    "credential",
-    "credentials"
+    "general"
    ],
-   "line": 202,
-   "snippet": "\"Connect to databases and servers securely with session brokering, recording, and credential vaulting.\","
+   "line": 58,
+   "snippet": "General = \"general\","
   }
  ],
- "ui_screen": null,
- "live_test": null,
+ "live_test": {
+  "url": "http://127.0.0.1:80/admin",
+  "attempted": true,
+  "outcome": "SUBMIT_FAILED",
+  "detail": "filled 1 field(s), click/submit raised TimeoutError: ElementHandle.click: Timeout 4000ms exceeded.\nCall log:\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 100ms\n    8 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 500ms\n"
+ },
  "verdict": "NOT VERIFIED",
- "reason": "code attach point found but no reachable UI screen for it"
+ "reason": "live test did not pass: SUBMIT_FAILED - filled 1 field(s), click/submit raised TimeoutError: ElementHandle.click: Timeout 4000ms exceeded.\nCall log:\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 100ms\n    8 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 500ms\n"
 }

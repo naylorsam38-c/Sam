@@ -1,257 +1,436 @@
 {
  "application": "APP-042",
- "category": "password-manager",
  "capabilities_defined": true,
+ "discovery_method": "app-derived",
+ "predefined_capabilities_for_category": [
+  "Vaults",
+  "credentials",
+  "password generation",
+  "autofill",
+  "sharing",
+  "permissions",
+  "secure notes",
+  "MFA"
+ ],
  "capabilities": [
   {
    "id": "CAP-042-01",
-   "name": "Vaults",
+   "name": "Organization Overview",
+   "route": "/",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
    "attach_points": [
+    {
+     "file": "frontend/src/translation.tsx",
+     "matched_words": [
+      "overview"
+     ],
+     "line": 16,
+     "snippet": "// for all options read: https://www.i18next.com/overview/configuration-options"
+    },
     {
      "file": "frontend/src/routes.ts",
      "matched_words": [
-      "vault"
+      "organization",
+      "overview"
      ],
-     "line": 75,
-     "snippet": "\"/azure-key-vault/authorize\","
+     "line": 405,
+     "snippet": "route(\"/projects\", \"organization/ProjectsPage/route.tsx\"),"
     },
     {
      "file": "frontend/src/helpers/project.ts",
      "matched_words": [
-      "vault"
+      "organization",
+      "overview"
      ],
-     "line": 138,
-     "snippet": "const ORG_SCOPED_PRODUCT_PATH_RE = /^\\/organizations\\/[^/]+\\/(pam|agent-vault)(?:\\/|$)/;"
-    },
-    {
-     "file": "frontend/src/helpers/pkisyncs.ts",
-     "matched_words": [
-      "vault"
-     ],
-     "line": 14,
-     "snippet": "name: \"Azure Key Vault\","
+     "line": 70,
+     "snippet": "* Create and initialize a new project in organization with id [organizationId]"
     }
    ],
-   "ui_screen": null,
-   "live_test": null,
-   "verdict": "NOT VERIFIED",
-   "reason": "code attach point found but no reachable UI screen for it"
+   "live_test": {
+    "url": "http://127.0.0.1:80/",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button (no form followed); navigated to a new page (http://127.0.0.1/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects -> http://127.0.0.1/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/cert-manager/893bc97c-83c1-401d-b79b-ceb39fd0bb90/overview) consistent with the action succeeding"
+   },
+   "verdict": "PROVEN"
   },
   {
    "id": "CAP-042-02",
-   "name": "credentials",
+   "name": "General",
+   "route": "/admin",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
    "attach_points": [
+    {
+     "file": "frontend/src/components/secret-rotations-v2/forms/secretrotationv2parametersfields/cloudflarer2accesskeyrotationparametersfields.tsx",
+     "matched_words": [
+      "general"
+     ],
+     "line": 39,
+     "snippet": "General = \"general\","
+    },
+    {
+     "file": "frontend/src/components/secret-rotations-v2/forms/secretrotationv2parametersfields/litellmapikeyrotationparametersfields.tsx",
+     "matched_words": [
+      "general"
+     ],
+     "line": 43,
+     "snippet": "General = \"general\","
+    },
+    {
+     "file": "frontend/src/components/secret-rotations-v2/forms/secretrotationv2parametersfields/cloudflareapitokenrotationparametersfields.tsx",
+     "matched_words": [
+      "general"
+     ],
+     "line": 58,
+     "snippet": "General = \"general\","
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:80/admin",
+    "attempted": true,
+    "outcome": "SUBMIT_FAILED",
+    "detail": "filled 1 field(s), click/submit raised TimeoutError: ElementHandle.click: Timeout 4000ms exceeded.\nCall log:\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 100ms\n    8 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 500ms\n"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: SUBMIT_FAILED - filled 1 field(s), click/submit raised TimeoutError: ElementHandle.click: Timeout 4000ms exceeded.\nCall log:\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 100ms\n    8 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 500ms\n"
+  },
+  {
+   "id": "CAP-042-03",
+   "name": "Integrations",
+   "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/integrations",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/const.ts",
+     "matched_words": [
+      "integrations"
+     ],
+     "line": 3,
+     "snippet": "// `/integrations`,"
+    },
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "integration",
+      "integrations"
+     ],
+     "line": 148,
+     "snippet": "\"/select-integration-auth\","
+    },
+    {
+     "file": "frontend/src/types/integrations.ts",
+     "matched_words": [
+      "integrations"
+     ],
+     "line": 3,
+     "snippet": "NativeIntegrations = \"native-integrations\","
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/integrations",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button (no form followed); app showed an explicit success message"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-042-04",
+   "name": "Organization Access Control",
+   "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/access-management",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "access",
+      "organization"
+     ],
+     "line": 17,
+     "snippet": "route(\"/access-management\", \"admin/AccessManagementPage/route.tsx\")"
+    },
     {
      "file": "frontend/src/helpers/honeytokens.ts",
      "matched_words": [
-      "credential"
+      "access"
      ],
-     "line": 19,
-     "snippet": "export const HONEY_TOKEN_CREDENTIAL_FIELDS: Record<"
+     "line": 24,
+     "snippet": "{ key: \"accessKeyId\", label: \"Access Key ID\" },"
+    },
+    {
+     "file": "frontend/src/helpers/project.ts",
+     "matched_words": [
+      "access",
+      "organization"
+     ],
+     "line": 171,
+     "snippet": "return \"/organizations/$orgId/pam/access\" as const;"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/access-management",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button, filled+submitted the form it opened (3 fields); app showed an explicit success message"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-042-05",
+   "name": "Usage & Billing",
+   "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/billing",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "billing"
+     ],
+     "line": 424,
+     "snippet": "route(\"/billing\", \"organization/BillingPage/route.tsx\"),"
+    },
+    {
+     "file": "frontend/src/helpers/agentvaulttemplates.ts",
+     "matched_words": [
+      "billing"
+     ],
+     "line": 157,
+     "snippet": "description: \"Payments and billing.\","
+    },
+    {
+     "file": "frontend/src/helpers/proxiedservicetemplates.ts",
+     "matched_words": [
+      "billing"
+     ],
+     "line": 226,
+     "snippet": "description: \"Payments and billing.\","
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/billing",
+    "attempted": false,
+    "outcome": "NO_FORM_FOUND",
+    "detail": "no visible <form> on this screen"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
+  },
+  {
+   "id": "CAP-042-06",
+   "name": "Organization Audit Logs",
+   "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/audit-logs",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "audit",
+      "logs",
+      "organization"
+     ],
+     "line": 28,
+     "snippet": "route(\"/audit-logs\", \"project/AuditLogsPage/route-secret-manager.tsx\"),"
     },
     {
      "file": "frontend/src/helpers/auditlogstreams.ts",
      "matched_words": [
-      "credentials"
-     ],
-     "line": 22,
-     "snippet": "logStream: DiscriminativePick<TAuditLogStream, \"provider\" | \"credentials\">"
-    },
-    {
-     "file": "frontend/src/helpers/project.ts",
-     "matched_words": [
-      "credential",
-      "credentials"
-     ],
-     "line": 202,
-     "snippet": "\"Connect to databases and servers securely with session brokering, recording, and credential vaulting.\","
-    }
-   ],
-   "ui_screen": null,
-   "live_test": null,
-   "verdict": "NOT VERIFIED",
-   "reason": "code attach point found but no reachable UI screen for it"
-  },
-  {
-   "id": "CAP-042-03",
-   "name": "password generation",
-   "attach_points": [
-    {
-     "file": "frontend/src/const.ts",
-     "matched_words": [
-      "password"
-     ],
-     "line": 23,
-     "snippet": "\"/password-reset\","
-    },
-    {
-     "file": "frontend/src/routes.ts",
-     "matched_words": [
-      "password"
-     ],
-     "line": 483,
-     "snippet": "route(\"/password-setup\", \"auth/PasswordSetupPage/route.tsx\"),"
-    },
-    {
-     "file": "frontend/src/helpers/project.ts",
-     "matched_words": [
-      "password"
-     ],
-     "line": 20,
-     "snippet": "secretValue: \"mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@mongodb.net\","
-    }
-   ],
-   "ui_screen": null,
-   "live_test": null,
-   "verdict": "NOT VERIFIED",
-   "reason": "code attach point found but no reachable UI screen for it"
-  },
-  {
-   "id": "CAP-042-04",
-   "name": "autofill",
-   "attach_points": [],
-   "ui_screen": null,
-   "live_test": null,
-   "verdict": "NOT VERIFIED",
-   "reason": "no code attach point and no matching UI screen found"
-  },
-  {
-   "id": "CAP-042-05",
-   "name": "sharing",
-   "attach_points": [
-    {
-     "file": "frontend/src/routes.ts",
-     "matched_words": [
-      "sharing"
-     ],
-     "line": 412,
-     "snippet": "route(\"/projects/secret-management/secret-sharing\", ["
-    },
-    {
-     "file": "frontend/src/helpers/project.ts",
-     "matched_words": [
-      "sharing"
-     ],
-     "line": 109,
-     "snippet": "// Org-wide resource pages (KMIP servers, Secret Sharing, Product Settings, Insights) live at"
-    },
-    {
-     "file": "frontend/src/components/agent-vault/agentvaultintro/useagentvaultintro.ts",
-     "matched_words": [
-      "sharing"
-     ],
-     "line": 17,
-     "snippet": "// the layout drive one dialog between them without sharing anything else."
-    }
-   ],
-   "ui_screen": null,
-   "live_test": null,
-   "verdict": "NOT VERIFIED",
-   "reason": "code attach point found but no reachable UI screen for it"
-  },
-  {
-   "id": "CAP-042-06",
-   "name": "permissions",
-   "attach_points": [
-    {
-     "file": "frontend/src/helpers/pkisyncs.ts",
-     "matched_words": [
-      "permissions"
-     ],
-     "line": 179,
-     "snippet": "{ key: \"fileMode\", label: \"File Permissions\" },"
-    },
-    {
-     "file": "frontend/src/helpers/resourcepermissions.ts",
-     "matched_words": [
-      "permission",
-      "permissions"
+      "audit"
      ],
      "line": 7,
-     "snippet": "import { conditionsMatcher } from \"@app/hooks/api/roles/permission-matcher\";"
+     "snippet": "export const AUDIT_LOG_STREAM_PROVIDER_MAP: Record<"
     },
     {
-     "file": "frontend/src/helpers/permissions.ts",
+     "file": "frontend/src/helpers/project.ts",
      "matched_words": [
-      "permission",
-      "permissions"
+      "organization"
      ],
-     "line": 4,
-     "snippet": "import { conditionsMatcher } from \"@app/hooks/api/roles/permission-matcher\";"
+     "line": 70,
+     "snippet": "* Create and initialize a new project in organization with id [organizationId]"
     }
    ],
-   "ui_screen": null,
-   "live_test": null,
+   "live_test": {
+    "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/audit-logs",
+    "attempted": false,
+    "outcome": "NO_FORM_FOUND",
+    "detail": "no visible <form> on this screen"
+   },
    "verdict": "NOT VERIFIED",
-   "reason": "code attach point found but no reachable UI screen for it"
+   "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
   },
   {
    "id": "CAP-042-07",
-   "name": "secure notes",
-   "attach_points": [
-    {
-     "file": "frontend/src/helpers/project.ts",
-     "matched_words": [
-      "note"
-     ],
-     "line": 71,
-     "snippet": "* Note: current user should be a member of the organization"
-    },
-    {
-     "file": "frontend/src/components/projects/requestprojectaccessmodal.tsx",
-     "matched_words": [
-      "note"
-     ],
-     "line": 26,
-     "snippet": "const form = useForm<{ note: string }>();"
-    },
-    {
-     "file": "frontend/src/components/auth/signupproducts.ts",
-     "matched_words": [
-      "secure"
-     ],
-     "line": 73,
-     "snippet": "description: \"Secure and record access to servers and databases.\","
-    }
+   "name": "Secret Sharing",
+   "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/secret-management/secret-sharing",
+   "discovered_from": "screen",
+   "matched_predefined_capability": [
+    "sharing"
    ],
-   "ui_screen": null,
-   "live_test": null,
-   "verdict": "NOT VERIFIED",
-   "reason": "code attach point found but no reachable UI screen for it"
-  },
-  {
-   "id": "CAP-042-08",
-   "name": "MFA",
    "attach_points": [
     {
      "file": "frontend/src/const.ts",
      "matched_words": [
-      "mfa"
+      "secret"
      ],
-     "line": 69,
-     "snippet": "MFA_TEMP_TOKEN = \"MFA_TEMP_TOKEN\""
+     "line": 27,
+     "snippet": "\"/shared/secret/[id]\","
     },
     {
      "file": "frontend/src/routes.ts",
      "matched_words": [
-      "mfa"
+      "secret",
+      "sharing"
      ],
-     "line": 484,
-     "snippet": "route(\"/mfa-session/$mfaSessionId\", \"MfaSessionPage/route.tsx\"),"
+     "line": 21,
+     "snippet": "const secretManagerRoutes = route(\"/organizations/$orgId/projects/secret-management/$projectId\", ["
     },
     {
-     "file": "frontend/src/helpers/mfasession.ts",
+     "file": "frontend/src/types/integrations.ts",
      "matched_words": [
-      "mfa"
+      "secret"
      ],
      "line": 6,
-     "snippet": "name: \"SESSION_MFA_REQUIRED\";"
+     "snippet": "SecretSyncs = \"secret-syncs\","
     }
    ],
-   "ui_screen": null,
-   "live_test": null,
+   "live_test": {
+    "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/secret-management/secret-sharing",
+    "attempted": false,
+    "outcome": "NO_FORM_FOUND",
+    "detail": "no visible <form> on this screen"
+   },
    "verdict": "NOT VERIFIED",
-   "reason": "code attach point found but no reachable UI screen for it"
+   "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
+  },
+  {
+   "id": "CAP-042-08",
+   "name": "Secrets Management",
+   "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/secret-management",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/const.ts",
+     "matched_words": [
+      "secret"
+     ],
+     "line": 27,
+     "snippet": "\"/shared/secret/[id]\","
+    },
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "secret",
+      "secrets"
+     ],
+     "line": 21,
+     "snippet": "const secretManagerRoutes = route(\"/organizations/$orgId/projects/secret-management/$projectId\", ["
+    },
+    {
+     "file": "frontend/src/types/integrations.ts",
+     "matched_words": [
+      "secret"
+     ],
+     "line": 6,
+     "snippet": "SecretSyncs = \"secret-syncs\","
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/secret-management",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button, filled+submitted the form it opened (2 fields); app showed an explicit success message"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-042-09",
+   "name": "KMS",
+   "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/kms",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/const.ts",
+     "matched_words": [
+      "project"
+     ],
+     "line": 61,
+     "snippet": "// Name of the sample project created during onboarding (see UserInfoStep). Referenced when"
+    },
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "organization",
+      "organizations",
+      "project",
+      "projects"
+     ],
+     "line": 405,
+     "snippet": "route(\"/projects\", \"organization/ProjectsPage/route.tsx\"),"
+    },
+    {
+     "file": "frontend/src/types/project.ts",
+     "matched_words": [
+      "project"
+     ],
+     "line": null,
+     "snippet": null
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/kms",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button, filled+submitted the form it opened (2 fields); app showed an explicit success message"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-042-10",
+   "name": "Secret Scanning",
+   "route": "/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/secret-scanning",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "frontend/src/const.ts",
+     "matched_words": [
+      "secret"
+     ],
+     "line": 27,
+     "snippet": "\"/shared/secret/[id]\","
+    },
+    {
+     "file": "frontend/src/routes.ts",
+     "matched_words": [
+      "scanning",
+      "secret"
+     ],
+     "line": 341,
+     "snippet": "const secretScanningRoutes = route(\"/organizations/$orgId/projects/secret-scanning/$projectId\", ["
+    },
+    {
+     "file": "frontend/src/types/integrations.ts",
+     "matched_words": [
+      "secret"
+     ],
+     "line": 6,
+     "snippet": "SecretSyncs = \"secret-syncs\","
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:80/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/secret-scanning",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button, filled+submitted the form it opened (2 fields); app showed an explicit success message"
+   },
+   "verdict": "PROVEN"
   }
  ]
 }

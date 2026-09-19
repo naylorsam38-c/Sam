@@ -342,13 +342,28 @@ class LiveTester:
                     continue
                 if typ in ("hidden", "submit", "button", "file"):
                     continue
-                name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("placeholder"),
-                                              _field_identity_text(self.page, inp)])).lower()
+                # attributes only for the general classification - see
+                # screens.py's identical comment: label TEXT is looser prose
+                # ("Limit allowed email domains" contains "email" but wants
+                # a bare domain, not an address) so it's consulted only for
+                # the one check that actually needs it (the URL check -
+                # DocuSeal's "App URL" field is id="encrypted_config_value",
+                # nothing in its attributes says "url").
+                name = " ".join(filter(None, [inp.get_attribute("name"), inp.get_attribute("placeholder")])).lower()
+                label_text = _field_identity_text(self.page, inp).lower()
+                if "domain" in name or "domain" in label_text:
+                    # see screens.py's identical comment: a narrow,
+                    # format-strict allowlist field - every filler value
+                    # here is either a full email address or free text,
+                    # neither a valid bare domain. It's an optional
+                    # restriction, so leaving it at its default is correct.
+                    continue
                 if typ == "email" or "email" in name:
                     val = TEST_VALUES["email"]
                 elif typ == "password":
                     val = TEST_VALUES["password"]
-                elif typ == "url" or "url" in name or "website" in name or "link" in name:
+                elif (typ == "url" or "url" in name or "website" in name or "link" in name or
+                      "url" in label_text or "website" in label_text or "link" in label_text):
                     # a plain "Library Walker Test" string in a URL field
                     # fails most apps' own format validation, so nothing
                     # after it is real evidence of anything - a syntactically

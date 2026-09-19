@@ -1,35 +1,43 @@
 {
  "application": "APP-042",
  "id": "CAP-042-01",
- "name": "Vaults",
+ "name": "Organization Overview",
+ "route": "/",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
  "attach_points": [
+  {
+   "file": "frontend/src/translation.tsx",
+   "matched_words": [
+    "overview"
+   ],
+   "line": 16,
+   "snippet": "// for all options read: https://www.i18next.com/overview/configuration-options"
+  },
   {
    "file": "frontend/src/routes.ts",
    "matched_words": [
-    "vault"
+    "organization",
+    "overview"
    ],
-   "line": 75,
-   "snippet": "\"/azure-key-vault/authorize\","
+   "line": 405,
+   "snippet": "route(\"/projects\", \"organization/ProjectsPage/route.tsx\"),"
   },
   {
    "file": "frontend/src/helpers/project.ts",
    "matched_words": [
-    "vault"
+    "organization",
+    "overview"
    ],
-   "line": 138,
-   "snippet": "const ORG_SCOPED_PRODUCT_PATH_RE = /^\\/organizations\\/[^/]+\\/(pam|agent-vault)(?:\\/|$)/;"
-  },
-  {
-   "file": "frontend/src/helpers/pkisyncs.ts",
-   "matched_words": [
-    "vault"
-   ],
-   "line": 14,
-   "snippet": "name: \"Azure Key Vault\","
+   "line": 70,
+   "snippet": "* Create and initialize a new project in organization with id [organizationId]"
   }
  ],
- "ui_screen": null,
- "live_test": null,
- "verdict": "NOT VERIFIED",
- "reason": "code attach point found but no reachable UI screen for it"
+ "live_test": {
+  "url": "http://127.0.0.1:80/",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "clicked action button (no form followed); navigated to a new page (http://127.0.0.1/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects -> http://127.0.0.1/organizations/bb5c3302-2064-4bba-b64d-5d03de607ce6/projects/cert-manager/893bc97c-83c1-401d-b79b-ceb39fd0bb90/overview) consistent with the action succeeding"
+ },
+ "verdict": "PROVEN"
 }
