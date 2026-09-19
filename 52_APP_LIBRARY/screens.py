@@ -339,6 +339,21 @@ class ScreenWalk:
                     # the other fields here, filling it wrong is worse than
                     # not filling it at all.
                     continue
+                if ("currency" in name or "currency" in label_text or
+                        "timezone" in name or "timezone" in label_text or
+                        "time zone" in label_text):
+                    # a locale/format-selector field, same shape as the
+                    # lang/locale <select> skip above but rendered as a
+                    # styled autocomplete <input type=text> instead (a
+                    # Vuetify combobox, on ezbookkeeping's own signup
+                    # wizard: id="input-v-NN", nothing in its attributes
+                    # says what it is, only its own label does). Typing
+                    # free text into one doesn't pick a real option from
+                    # its dropdown, so it silently fails the wizard's own
+                    # validation - leaving its own sensible pre-filled
+                    # default alone is the safe choice, same reasoning as
+                    # the domain-allowlist skip just above.
+                    continue
                 if typ == "email" or "email" in name:
                     val = TEST_USER["email"]
                 elif typ == "password" or "pass" in name:
@@ -685,11 +700,40 @@ class ScreenWalk:
         get_in(). Returns a log of what it did; never claims success it
         didn't reach."""
         steps = []
+        tried_signup_redirect = False
         for i in range(MAX_GATE_STEPS):
             form = self._find_gate_form()
             if form is None and self._looks_like_app():
                 break  # already past the gate - don't let choice-click fire on real UI
             if form is not None:
+                # A page can carry BOTH a login form AND a "Create an
+                # account" link at once (ezbookkeeping's own login screen
+                # does exactly this) - filling whatever form is already
+                # present, unconditionally, means a login-shaped form
+                # always wins even though nothing has an account yet and
+                # login can never succeed. A login form has exactly ONE
+                # visible password field; a signup form needs at least two
+                # (password + confirm) or otherwise isn't this shape at all
+                # - total field count was tried first and is NOT a reliable
+                # signal (ezbookkeeping's own login form carries 6 visible
+                # inputs, not the 2 a bare username+password suggests, for
+                # reasons unrelated to login/signup shape). Tried once per
+                # crawl: if a same-page signup link exists, take it first:
+                # the real signup form that follows is filled normally on
+                # the next iteration through the ordinary form path below.
+                if not tried_signup_redirect:
+                    tried_signup_redirect = True
+                    try:
+                        pw_count = len([el for el in form.query_selector_all("input[type=password]")
+                                        if el.is_visible()])
+                    except Exception:
+                        pw_count = 99
+                    if pw_count == 1:
+                        before = self.page.url
+                        if self._click_single_gate_link():
+                            steps.append({"step": i + 1, "kind": "single_gate_link", "url_before": before,
+                                         "url_after": self.page.url})
+                            continue
                 before = self.page.url
                 filled = self._fill_visible_inputs(form)
                 submitted = self._submit(form)

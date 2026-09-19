@@ -363,6 +363,16 @@ class LiveTester:
                     # neither a valid bare domain. It's an optional
                     # restriction, so leaving it at its default is correct.
                     continue
+                if ("currency" in name or "currency" in label_text or
+                        "timezone" in name or "timezone" in label_text or
+                        "time zone" in label_text):
+                    # see screens.py's identical comment: a locale/format-
+                    # selector rendered as a styled autocomplete <input
+                    # type=text> (a Vuetify combobox) rather than a native
+                    # <select> - typing free text into it doesn't pick a
+                    # real option, silently failing validation, so its own
+                    # pre-filled default is left alone.
+                    continue
                 if typ == "email" or "email" in name:
                     val = TEST_VALUES["email"]
                 elif typ == "password":
