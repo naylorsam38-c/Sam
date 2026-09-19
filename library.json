@@ -10,6 +10,11 @@
       "blurb": "Flagsmith is an open-source feature flag platform with remote config, experimentation, and self-hosted or cloud deployment options.",
       "keywords": ["feature flag", "feature flags", "a/b test", "ab test", "experiment", "remote config", "rollout", "toggle"],
       "family": "",
+      "real_integration": {
+        "status": "blocked",
+        "reason": "pyproject.toml requires flagsmith-private>=0.14.0,<1 as a mandatory (non-optional) dependency, resolved from a private index (flagsmith-pypi-production) with no public credentials. A real structural gap in the public OSS repo, not an environment issue -- not worked around by stripping a real dependency.",
+        "details": "shelf-integrations/STATUS.md"
+      },
       "screenshot": "shelf/ab-testing-experimentation/home.png"
     },
     {
@@ -21,6 +26,12 @@
       "blurb": "Customer communication platform (alternative to Intercom and Zendesk).",
       "keywords": ["customer support", "helpdesk", "live chat", "support inbox", "intercom", "zendesk", "customer service"],
       "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "f7f7754511df38c33455d2a968f7541e82d15e5b",
+        "mechanism": "Real Rails app + real Vue/Vite frontend + native Postgres (with pgvector) and Redis. Verified: onboarding, account creation, login, organization review screen with real dropdowns, mobile viewport fits, zero JS errors.",
+        "details": "shelf-integrations/STATUS.md"
+      },
       "screenshot": "shelf/customer-support/home.png"
     },
     {
@@ -32,6 +43,11 @@
       "blurb": "VS Code in the browser.",
       "keywords": ["code editor", "ide", "vs code", "vscode", "browser ide", "cloud ide", "develop"],
       "family": "",
+      "real_integration": {
+        "status": "deprioritized",
+        "reason": "code-server's npm postinstall.sh has a reproducible bug in this sandbox: @vscode/ripgrep's binary download 403s under npm's default request (works via curl, and via npm with a spoofed user-agent), but spoofing the user-agent breaks postinstall.sh's own node-version check (it parses npm_config_user_agent). --ignore-scripts avoids both but also skips VS Code's own bundled-source extraction. Not pursued further given the shelf's focus on business/self-hosted tools over a code editor; could be revisited.",
+        "details": "shelf-integrations/STATUS.md"
+      },
       "screenshot": "shelf/developer-tools/home.png"
     },
     {
@@ -43,6 +59,12 @@
       "blurb": "Create, fill, and sign digital documents (alternative to DocuSign).",
       "keywords": ["sign document", "e-signature", "esignature", "digital signature", "docusign", "contract signing", "fill and sign"],
       "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "6e2430e5a27a809c5ca9a3e81f351339387ea11e",
+        "mechanism": "Real Rails app + native Postgres (its committed SQLite schema has Postgres-only SQL, a real bug found while testing). Verified: full signup, login, Templates dashboard, Upload/Create buttons, mobile viewport fits, zero JS errors.",
+        "details": "shelf-integrations/STATUS.md"
+      },
       "screenshot": "shelf/digital-signiture/home.png"
     },
     {
@@ -55,6 +77,12 @@
       "blurb_note": "This app's own app.json/discovery_candidates had no usable description for the acquired repo (the one present there was for an unrelated project). Replaced with an accurate, well-established description of louislam/uptime-kuma rather than propagating the wrong one.",
       "keywords": ["uptime", "monitoring", "status page", "downtime alert", "ping monitor", "health check", "is it down"],
       "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "e62702d868a0b072c6e1870e5278762319637f04",
+        "mechanism": "Real Node server + bundled SQLite, no external DB. Verified: setup wizard, admin account creation, dashboard, Add Monitor, mobile viewport fits, zero JS errors.",
+        "details": "shelf-integrations/STATUS.md"
+      },
       "screenshot": "shelf/monitoring/home.png"
     },
     {
@@ -67,6 +95,12 @@
       "blurb_note": "This app's own app.json/discovery_candidates left description blank. Replaced with an accurate, well-established description of NginxProxyManager/nginx-proxy-manager.",
       "keywords": ["reverse proxy", "nginx", "ssl certificate", "lets encrypt", "proxy host", "domain routing"],
       "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "568c10594517b999dbb2240d9f7a6014b1c4bb2a",
+        "mechanism": "Real Node backend (SQLite) + real Vue frontend, served behind a real nginx reverse proxy this session configured. Verified: admin setup, full dashboard with working nav (Hosts/Access Lists/Certificates/Users/Audit Logs/Settings), mobile viewport fits, zero JS errors.",
+        "details": "shelf-integrations/STATUS.md"
+      },
       "screenshot": "shelf/networking/home.png"
     },
     {
@@ -78,6 +112,12 @@
       "blurb": "Platform for secrets, certificates, and privileged access management.",
       "keywords": ["secrets manager", "secret management", "env vars", "api keys", "vault", "credentials", "pam"],
       "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "bd2179cf211874925e2313664e22dae2501fe30a",
+        "mechanism": "Real Node/TS backend + native Postgres/Redis, real React frontend served behind a real nginx reverse proxy. Verified: super-admin signup, organization creation, instance setup wizard, mobile viewport fits, zero JS errors.",
+        "details": "shelf-integrations/STATUS.md"
+      },
       "screenshot": "shelf/password-manager/home.png"
     },
     {
@@ -90,6 +130,7 @@
       "blurb": "Advanced todo list app with integrated timeboxing and time tracking capabilities. Integrates with Jira, GitHub, GitLab, Redmine and OpenProject.",
       "keywords": ["todo list", "task tracker", "job tracker", "time tracking", "timeboxing", "productivity", "to-do"],
       "family": "",
+      "real_integration_note": "see shelf-integrations/STATUS.md for the full 8-app tally",
       "real_integration": {
         "status": "proven",
         "commit": "a1743173e923492bc15e9e1b3d96d92e8d2c8b94",
@@ -97,6 +138,58 @@
         "details": "shelf-integrations/productivity/README.md"
       },
       "screenshot": "shelf/productivity/home.png"
+    },
+    {
+      "id": "APP-006",
+      "slug": "ai-development",
+      "name": "langfuse",
+      "category": "AI Development",
+      "repository": "https://github.com/langfuse/langfuse",
+      "blurb": "Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform.",
+      "keywords": ["llm observability", "llm tracing", "agent evals", "prompt management", "ai monitoring", "llm ops"],
+      "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit_note": "Current main branch (v3/v4) requires ClickHouse + MinIO/S3, both genuinely unreachable here (ClickHouse's own registry pull is blocked; Ubuntu's own apt ClickHouse package is a 7-year-old 18.x; dl.min.io is blocked by egress policy). Used the last Postgres-only release instead: tag v2.95.12, commit 565ff73591365394a24e047973c15e69d6ffca93 -- its own env schema marks ClickHouse/S3/Redis as fully optional, Postgres as the only hard requirement. A disclosed, documented version choice, not a silent substitution.",
+        "mechanism": "Real Next.js app + native Postgres only.",
+        "details": "shelf-integrations/STATUS.md"
+      },
+      "screenshot": "shelf/ai-development/home.png"
+    },
+    {
+      "id": "APP-041",
+      "slug": "note-taking",
+      "name": "Memos",
+      "category": "Note Taking",
+      "repository": "https://github.com/usememos/memos",
+      "blurb": "Build detailed lists of to-do's for different projects while tracking the status of each one. Open Source Notion Alternative.",
+      "blurb_note": "This app's own app.json description ('to-do lists... Notion Alternative') actually describes the app reasonably well; kept as-is rather than second-guessed.",
+      "keywords": ["notes", "memo", "note taking", "notion alternative", "personal knowledge base", "markdown notes"],
+      "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "2b2192d4e153bd04f1d325b60fd880cf00d68b01",
+        "mechanism": "Real Go binary, self-contained (embeds its own React frontend + SQLite, no external DB). Verified: first-run admin signup, real dashboard (calendar, nav, memo composer), mobile viewport fits, zero JS errors.",
+        "details": "shelf-integrations/STATUS.md"
+      },
+      "screenshot": "shelf/note-taking/home.png"
+    },
+    {
+      "id": "APP-051",
+      "slug": "video-conferencing",
+      "name": "Galene",
+      "category": "Video Conferencing",
+      "repository": "https://github.com/jech/galene",
+      "blurb": "Video conferencing server that is easy to deploy and that requires moderate server resources.",
+      "keywords": ["video conferencing", "webrtc", "video call", "sfu", "meeting room", "video chat"],
+      "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "6d9338e909fdecdd906150e4dda34e10d9869654",
+        "mechanism": "Real Go binary, self-contained (embeds its own frontend, built-in TURN server, no external DB). Verified: real group login with real op/presenter credentials, connected with Chromium's fake camera/mic device, real in-call controls (Enable/Mute/Share Screen/Logout), zero JS errors.",
+        "details": "shelf-integrations/STATUS.md"
+      },
+      "screenshot": "shelf/video-conferencing/home.png"
     }
   ]
 }

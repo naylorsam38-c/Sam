@@ -14,17 +14,18 @@ faith later:
   is unmodified from Sam's upload. `skins-engine.js` is a byte-for-byte JS port of it,
   verified in `test_frontdoor.py` Sections A/B against every one of those 172 files *and*
   the full 360-hue x 4-look input range (1440 sets) -- not a sample.
-- **`library.json`** -- the real shelf catalog: 8 real, named, open-source self-hosted apps
-  (Flagsmith, Chatwoot, code-server, DocuSeal, Uptime Kuma, Nginx Proxy Manager, Infisical,
-  Super Productivity), copied verbatim from their own `app.json` entries in Sam's
-  52_APP_LIBRARY acquisition pipeline (name, category, repository, real screenshot). What
-  was **not** provided for any of them is their actual page source -- only this metadata and
-  a screenshot. So every one of these 8 apps is marked `"family": ""` (no `render_css.py`-style
-  CSS family) in `library.json`, per the rule below. One of them -- Super Productivity -- has
-  since had its real source cloned, built, and driven live through its own real UI; see
-  `shelf-integrations/productivity/` and the "Proven: a real app, wired for real" section
-  below. The other 7 remain colours-only metadata, honestly. Nothing here pretends one of
-  them has been measured when it hasn't.
+- **`library.json`** -- the real shelf catalog: 11 real, named, open-source self-hosted apps
+  (Flagsmith, langfuse, Chatwoot, code-server, DocuSeal, Uptime Kuma, Nginx Proxy Manager,
+  Memos, Infisical, Super Productivity, Galene), copied verbatim from their own `app.json`
+  entries in Sam's 52_APP_LIBRARY acquisition pipeline (name, category, repository, real
+  screenshot). None of them shipped their actual page source through this pipeline -- only
+  catalog metadata and a screenshot -- so every entry is marked `"family": ""` (no
+  `render_css.py`-style CSS family) in `library.json`, per the rule below. That's a separate
+  question from whether the app itself has been proven to actually run: **9 of the 11 have
+  been** -- real source cloned, built, and driven through their real UI in a real browser.
+  See `shelf-integrations/STATUS.md` for the full per-app tally, and
+  `shelf-integrations/productivity/` for the one that goes further still (the skin engine's
+  colour actually driving the app's own real theming service, not just "it boots").
 - **`front-door.html` / `shelf-ui.js` / `demo-app.html`** -- new, built for this task. The
   ask -> resolve -> preview -> keep/undo flow is real and fully tested, but the thing it
   visibly reskins live is `demo-app.html`, a small first-party `shared_card`-family fixture
@@ -137,12 +138,30 @@ check for itself rather than assume.
 separate from `test_frontdoor.py`'s 96 tests because it needs a live build already running
 (too heavy for every commit) and skips cleanly rather than failing when one isn't reachable.
 
+## Proven running: 9 of 11 shelf apps (`shelf-integrations/STATUS.md`)
+
+Beyond Super Productivity's full skin integration, 8 more apps were cloned, built with real
+native infrastructure (no docker -- image pulls are blocked here, so this runs on
+apt-installed Postgres/Redis/pgvector, Go, Ruby, Node), and driven through a real signup or
+setup flow into their real dashboard, with mobile-viewport overflow checked and the console
+watched for JS errors the whole way: **Uptime Kuma, DocuSeal, Chatwoot, Infisical, Nginx
+Proxy Manager, Memos, Galene, and langfuse** (the last on its final Postgres-only release,
+`v2.95.12`, since current main needs a ClickHouse+S3 stack unreachable here -- disclosed, not
+silently substituted). Full per-app mechanism notes, real bugs found along the way (DocuSeal's
+own committed SQLite schema has Postgres-only SQL), and the exact fixes applied are in
+`shelf-integrations/STATUS.md`.
+
+**Flagsmith is genuinely blocked**: its `pyproject.toml` requires `flagsmith-private` from a
+non-public package index -- a real gap in the OSS repo, not something to work around by
+stripping a real dependency. **code-server is deprioritized**: a reproducible bug in its own
+npm postinstall pipeline in this sandbox, lower-value to chase than the business apps.
+
 ## Not yet proven
 
-- The other 7 real shelf apps' actual page markup hasn't been measured. They ship
-  colours-only. Several (Chatwoot, DocuSeal, Infisical, Flagsmith) need a real
-  Postgres/Redis stack to boot, unlike Super Productivity -- that's the real reason they
-  weren't attempted in the same pass, not a smaller effort.
+- None of the 11 shelf apps' actual page markup has a `render_css.py`-style CSS family yet --
+  "proven running" (above) and "measured for a full stylesheet skin" are different bars. Only
+  Super Productivity has gone further, via its own real theming service rather than a CSS
+  family (see above).
 - `reference/` holds the original demo materials (`SKINS.md.orig`, `test_skins.py.orig`) this
   system was built from, for provenance -- they describe a smaller, fictional 43/52-category
   demo catalog, not this repo's real one.
