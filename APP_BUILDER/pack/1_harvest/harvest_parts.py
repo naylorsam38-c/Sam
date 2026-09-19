@@ -111,9 +111,12 @@ ENFORCE_ADMISSION = True
 #         library rests on every part sharing one stack, so leaving this off
 #         is a decision to break that.
 
-REQUIRED_FRAMEWORK = "flask"
+REQUIRED_FRAMEWORK = "django"
 # Rule A, first half. The framework every part must be built on. Compared
 # case-insensitively against the source's declared framework.
+# 2026-09-19: Django, was Flask -- see GOD_MODE_RULE_HARVEST_ADMISSION.md's
+# "superseding note". Every part harvested under the old value was retired
+# to pack/retired/, not deleted.
 
 REQUIRED_DATASTORE = "postgresql"
 # Rule A, second half. The database every part must be built on. Two parts
@@ -144,6 +147,27 @@ ONE_SOURCE_PER_APP = True
 # Rule E. Every capability in one app comes from one repo. Rule A makes parts
 # compatible at stack level; this keeps them compatible at application level --
 # one set of models, one session model, one set of conventions.
+
+REQUIRE_ATTACH_POINTS = True
+# Rule G. Candidate must expose a real plugin, hook, signal, event, extension,
+# or equivalent mechanism capable of producing at least one usable, nameable
+# attach point. Read from the form's harvest_source.attach_points list -- each
+# entry needs a name, a kind (EVENT/SLOT/DATA), and non-empty evidence. A
+# keyword appearing in documentation, with nothing else behind it, is not
+# evidence and does not count.
+
+MIN_HOOKS = 1
+# Rule G. Minimum number of usable, nameable attach points required for
+# admission -- counted only from harvest_source.attach_points entries that
+# pass the REQUIRE_ATTACH_POINTS check above. Raising this demands a richer
+# integration surface before a source is admitted at all; it does not change
+# what counts as "usable".
+
+WRITE_ATTACH_POINTS_FILE = True
+# True = ATTACH_POINTS.md is written once per app, alongside its shelf
+# directory (shelf/<app_slug>/ATTACH_POINTS.md) -- not per capability, the
+# way LICENCE.txt is. An attach point belongs to the application, not to any
+# one harvested capability.
 
 NETWORK_TIMEOUT_SECONDS = 30
 # Per-file fetch timeout.
@@ -295,7 +319,105 @@ def check_admission(src, caps, where):
             reasons.append(f"Rule E: capabilities name other repos besides "
                            f"{src.get('repo_name')}: {', '.join(sorted(repos))}")
 
+    if REQUIRE_ATTACH_POINTS:
+        usable = usable_attach_points(src.get("attach_points") or [])
+        if not usable:
+            reasons.append("Rule G: no usable, evidenced attach points recorded "
+                           "in harvest_source.attach_points")
+        elif len(usable) < MIN_HOOKS:
+            reasons.append(f"Rule G: {len(usable)} usable attach point(s) recorded, "
+                           f"needs at least MIN_HOOKS={MIN_HOOKS}")
+
     return reasons
+
+
+_VALID_ATTACH_KINDS = {"EVENT", "SLOT", "DATA"}
+_VALID_IMPLEMENTATIONS = {"NATIVE", "ADAPTER"}
+
+
+def usable_attach_points(attach_points):
+    """Rule G's own definition of 'usable, nameable' -- not every entry in
+    harvest_source.attach_points counts. An entry with a keyword and nothing
+    else behind it (no evidence, no kind, no symbol/data it actually names)
+    is exactly what Rule G exists to refuse, so it is filtered out here
+    rather than trusted at face value."""
+    usable = []
+    for ap in attach_points:
+        if not isinstance(ap, dict):
+            continue
+        name = (ap.get("name") or "").strip()
+        kind = (ap.get("kind") or "").strip().upper()
+        evidence = (ap.get("evidence") or "").strip()
+        implementation = (ap.get("implementation") or "").strip().upper()
+        if not name or kind not in _VALID_ATTACH_KINDS or not evidence:
+            continue
+        if implementation not in _VALID_IMPLEMENTATIONS:
+            continue
+        # A NATIVE point must name where it actually lives in the source; an
+        # ADAPTER point must name what it wraps. Either way, "evidence" alone
+        # is not enough -- there must be an address, not just a claim.
+        if not (ap.get("source_file") or ap.get("source_symbol")
+                or ap.get("underlying_source")):
+            continue
+        usable.append(ap)
+    return usable
+
+
+def render_attach_points_md(slug, src, attach_points):
+    """God mode's Rule G, section 15's table structure, filled from real
+    form data -- never invented here. Written once per app, alongside its
+    shelf directory, not per capability."""
+    usable = usable_attach_points(attach_points)
+    events = [a for a in usable if a.get("kind", "").upper() == "EVENT"]
+    slots = [a for a in usable if a.get("kind", "").upper() == "SLOT"]
+    data = [a for a in usable if a.get("kind", "").upper() == "DATA"]
+    adapters = [a for a in usable if a.get("implementation", "").upper() == "ADAPTER"]
+
+    def esc(v):
+        return str(v or "").replace("|", "\\|").replace("\n", " ")
+
+    lines = [
+        "# Attach Points", "",
+        f"Application: {esc(slug)}",
+        f"Repository: {esc(src.get('repo_url') or src.get('repo_name'))}",
+        f"Commit: {esc(src.get('commit'))}",
+        f"Framework: {esc(src.get('framework'))}",
+        f"Datastore: {esc(src.get('datastore'))}",
+        "",
+        "## Events",
+        "| Name | Source | Symbol | Payload | Implementation | Evidence |",
+        "|------|--------|--------|---------|----------------|----------|",
+    ]
+    for a in events:
+        lines.append(f"| {esc(a.get('name'))} | {esc(a.get('source_file'))} | "
+                     f"{esc(a.get('source_symbol'))} | {esc(a.get('payload'))} | "
+                     f"{esc(a.get('implementation'))} | {esc(a.get('evidence'))} |")
+    lines += ["", "## Slots",
+              "| Name | Source | Rendering Context | Implementation | Evidence |",
+              "|------|--------|-------------------|----------------|----------|"]
+    for a in slots:
+        lines.append(f"| {esc(a.get('name'))} | {esc(a.get('source_file'))} | "
+                     f"{esc(a.get('rendering_context'))} | "
+                     f"{esc(a.get('implementation'))} | {esc(a.get('evidence'))} |")
+    lines += ["", "## Data",
+              "| Name | Model/Table/Entity | Operations | Fields/Interface | Evidence |",
+              "|------|--------------------|------------|------------------|----------|"]
+    for a in data:
+        lines.append(f"| {esc(a.get('name'))} | {esc(a.get('source_symbol'))} | "
+                     f"{esc(a.get('operations'))} | {esc(a.get('payload'))} | "
+                     f"{esc(a.get('evidence'))} |")
+    lines += ["", "## Extension System", "",
+              esc(src.get("extension_system_description")) or
+              "(not recorded on the form)", ""]
+    lines += ["## Adapter Requirements", ""]
+    if adapters:
+        for a in adapters:
+            lines.append(f"- {esc(a.get('name'))} ({esc(a.get('kind'))}): "
+                         f"underlying source: {esc(a.get('underlying_source'))}")
+    else:
+        lines.append("None. Every attach point above is native to the source.")
+    lines.append("")
+    return "\n".join(lines)
 
 
 def harvest_form(form_path):
@@ -334,6 +456,12 @@ def harvest_form(form_path):
 
     app_dir = os.path.join(SHELF_DIR, slug)
     rows, failures = [], []
+
+    if WRITE_ATTACH_POINTS_FILE and not DRY_RUN:
+        os.makedirs(app_dir, exist_ok=True)
+        ap_md = render_attach_points_md(slug, src, src.get("attach_points") or [])
+        with open(os.path.join(app_dir, "ATTACH_POINTS.md"), "w") as f:
+            f.write(ap_md)
 
     for cap in caps:
         cap_id = cap.get("cap_id") or ""
