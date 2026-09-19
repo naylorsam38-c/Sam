@@ -43,165 +43,8 @@
   ],
   "anchor_count": 3
  },
- "none_admitted": false,
- "survivors": [
-  {
-   "name": "Zulip",
-   "repo": "https://github.com/zulip/zulip",
-   "commit": "ca20338a1c3ef6937274c53316b1187a7ef8b30a",
-   "website": "https://zulip.org",
-   "licence": "Apache-2.0",
-   "licence_file": "LICENSE",
-   "screens": {
-    "screen_files_total": 719,
-    "screen_files_user": 719,
-    "screen_files_admin": 0,
-    "screen_languages": [
-     ".astro",
-     ".erb",
-     ".hbs",
-     ".html"
-    ],
-    "user_screen_examples": [
-     "starlight_help/src/components/zuliptip.astro",
-     "starlight_help/src/components/emoticontranslations.astro",
-     "starlight_help/src/components/settingssteps.astro",
-     "starlight_help/src/components/flattenedlist.astro",
-     "starlight_help/src/components/navigationsteps.astro",
-     "starlight_help/src/components/head.astro"
-    ],
-    "login_evidence": [
-     "starlight_help/src/content/include/_samlloginbutton.mdx",
-     "starlight_help/src/content/include/_importhowuserswilllogin.mdx",
-     "starlight_help/src/content/include/_selfhostedbillingloginstep.mdx",
-     "web/src/portico/dev-login.ts",
-     "web/src/portico/desktop-login.ts"
-    ]
-   },
-   "run_recipes": [
-    "dockerfile-postgresql",
-    "tools/ci/dockerfile",
-    "tools/ci/dockerfile.prod",
-    "tools/setup/dev-vagrant-docker/dockerfile"
-   ],
-   "robustness": {
-    "score": 89.1,
-    "parts": {
-     "stars": 20.0,
-     "commits_12m": 20.0,
-     "release": 15.0,
-     "activity": 0.0,
-     "tests": 20.0,
-     "ci": 10.0,
-     "readme": 4.1
-    },
-    "facts": {
-     "stars": 25927,
-     "commits_12m": 4926,
-     "latest_release": "2026-08-10",
-     "updated_at": "2026-09-18"
-    },
-    "repo_metrics": {
-     "test_files": 2292,
-     "ci_evidence": [
-      ".github/workflows/zulip-cloud-deploy.yaml",
-      ".github/workflows/codeql-analysis.yml",
-      ".github/workflows/production-suite.yml"
-     ],
-     "readme_chars": 4867
-    }
-   },
-   "capability": {
-    "coverage_pct": 100.0,
-    "matched": [
-     "Accounts",
-     "contacts",
-     "1:1 chat",
-     "groups",
-     "media",
-     "voice messages",
-     "calls",
-     "video calls",
-     "status",
-     "notifications",
-     "encryption",
-     "blocking/reporting"
-    ],
-    "missing": [],
-    "evidence_tokens": {
-     "Accounts": [
-      "account",
-      "accounts"
-     ],
-     "contacts": [
-      "contact",
-      "contacts"
-     ],
-     "1:1 chat": [
-      "chat"
-     ],
-     "groups": [
-      "group",
-      "groups"
-     ],
-     "media": [
-      "media"
-     ],
-     "voice messages": [
-      "message",
-      "messages",
-      "voice"
-     ],
-     "calls": [
-      "call",
-      "calls"
-     ],
-     "video calls": [
-      "call",
-      "calls",
-      "video"
-     ],
-     "status": [
-      "status"
-     ],
-     "notifications": [
-      "notification",
-      "notifications"
-     ],
-     "encryption": [
-      "encryption"
-     ],
-     "blocking/reporting": [
-      "blocking",
-      "reporting"
-     ]
-    }
-   },
-   "rank_score": 94.5,
-   "found_via": "tag",
-   "clone_path": "/tmp/library_clones/github.com_zulip_zulip",
-   "description": "Zulip is a powerful, open source group chat application.",
-   "readme_file": "README.md",
-   "category_gate": {
-    "declared": true,
-    "declaration_phrases_found": [
-     "chat app"
-    ],
-    "declaration_hits": {
-     "description": [],
-     "readme": [
-      "chat app"
-     ]
-    },
-    "anchors": [
-     "Accounts",
-     "contacts",
-     "1:1 chat"
-    ],
-    "anchors_missing": []
-   }
-  }
- ],
+ "none_admitted": true,
+ "survivors": [],
  "refused": [
   {
    "name": "Chatwoot",
@@ -547,12 +390,12 @@
    }
   },
   {
-   "name": "Novu",
-   "repo": "https://github.com/novuhq/novu/",
-   "commit": "36c5c0cefa400e8edc6ec8b18ac4574288eabd03",
+   "name": "Zulip",
+   "repo": "https://github.com/zulip/zulip",
+   "commit": "ca20338a1c3ef6937274c53316b1187a7ef8b30a",
    "stage": "category",
    "reason": "does not declare itself as messaging \u2014 none of ['instant messaging', 'chat app', 'messenger', 'whatsapp'] in its description or README head",
-   "licence": "MIT",
+   "licence": "Apache-2.0",
    "found_via": "tag",
    "category_gate": {
     "declared": false,
@@ -569,7 +412,7 @@
     "anchors_missing": []
    },
    "capability_coverage_pct": 100.0,
-   "rank_before_category_gate": 95.0
+   "rank_before_category_gate": 94.5
   }
  ],
  "regated_at": "2026-09-19"

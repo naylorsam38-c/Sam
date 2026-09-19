@@ -1,12 +1,12 @@
 directory: refreshing
 directory: 1347 entries with a source URL, dataset commit 582d3f235c86
+Open Source Tools: live 52-category discovery enabled
 
 === regate dating  (Dating — exemplar Tinder) ===
   RESULT dating: NONE ADMITTED (0 struck by category gate)
 
 === regate social-network  (Social network — exemplar Facebook) ===
-  STRIKE remark42               rank=66.0  does not declare itself as social network — none of ['social network', 'social platform', 'facebook'] in its description or README head
-  RESULT social-network: NONE ADMITTED (1 struck by category gate)
+  RESULT social-network: NONE ADMITTED (0 struck by category gate)
 
 === regate short-form-video  (Short-form video — exemplar TikTok) ===
   RESULT short-form-video: NONE ADMITTED (0 struck by category gate)
@@ -15,23 +15,22 @@ directory: 1347 entries with a source URL, dataset commit 582d3f235c86
   RESULT photo-sharing: NONE ADMITTED (0 struck by category gate)
 
 === regate video-streaming  (Video streaming — exemplar YouTube) ===
-  KEEP   Youtarr                rank=89.5  declares via ['youtube']
-  STRIKE Stretto                rank=57.4  does not declare itself as video streaming — none of ['video platform', 'youtube', 'peertube'] in its description or README head
-  RESULT video-streaming: 1 survive, 1 struck — top Youtarr (rank 89.5)
+     (README not fetched for Youtarr: readme.rst: HTTP Error 429: Too Many Requests)
+  STRIKE Youtarr                rank=89.5  does not declare itself as video streaming — none of ['video platform', 'youtube', 'peertube'] in its description or README head
+  RESULT video-streaming: NONE ADMITTED (1 struck by category gate)
 
 === regate music-streaming  (Music streaming — exemplar Spotify) ===
   RESULT music-streaming: NONE ADMITTED (0 struck by category gate)
 
 === regate messaging  (Messaging — exemplar WhatsApp) ===
-  STRIKE Novu                   rank=95.0  does not declare itself as messaging — none of ['instant messaging', 'chat app', 'messenger', 'whatsapp'] in its description or README head
-  KEEP   Zulip                  rank=94.5  declares via ['chat app']
-  RESULT messaging: 1 survive, 1 struck — top Zulip (rank 94.5)
+     (README not fetched for Zulip: readme.rst: HTTP Error 429: Too Many Requests)
+  STRIKE Zulip                  rank=94.5  does not declare itself as messaging — none of ['instant messaging', 'chat app', 'messenger', 'whatsapp'] in its description or README head
+  RESULT messaging: NONE ADMITTED (1 struck by category gate)
 
 === regate team-communication  (Team communication — exemplar Slack) ===
   KEEP   Rocket.Chat            rank=105.0  declares via ['slack']
   KEEP   Zulip                  rank=94.5  declares via ['team chat']
-  STRIKE Novu                   rank=90.8  does not declare itself as team communication — none of ['slack', 'team chat', 'team communication'] in its description or README head
-  RESULT team-communication: 2 survive, 1 struck — top Rocket.Chat (rank 105.0)
+  RESULT team-communication: 2 survive, 0 struck — top Rocket.Chat (rank 105.0)
 
 === regate video-conferencing  (Video conferencing — exemplar Zoom) ===
   RESULT video-conferencing: NONE ADMITTED (0 struck by category gate)
@@ -48,7 +47,8 @@ directory: 1347 entries with a source URL, dataset commit 582d3f235c86
 
 === regate blogging  (Blogging — exemplar Medium) ===
   KEEP   Ghost                  rank=95.0  declares via ['blogging']
-  KEEP   Chyrp Lite             rank=65.3  declares via ['blog', 'blogging', 'publishing platform']
+     (README not fetched for Chyrp Lite: readme.rst: HTTP Error 429: Too Many Requests)
+  KEEP   Chyrp Lite             rank=65.3  declares via ['blog']
   RESULT blogging: 2 survive, 0 struck — top Ghost (rank 95.0)
 
 === regate news-reader  (News reader — exemplar Google News) ===
@@ -68,7 +68,8 @@ directory: 1347 entries with a source URL, dataset commit 582d3f235c86
 === regate notes-knowledge  (Notes/knowledge — exemplar Notion) ===
   KEEP   Memos                  rank=101.0  declares via ['knowledge base', 'notes']
   KEEP   SilverBullet           rank=87.6  declares via ['note-taking', 'notes']
-  KEEP   Colanode               rank=86.2  declares via ['notes', 'notion']
+     (README not fetched for Colanode: readme.rst: HTTP Error 404: Not Found)
+  KEEP   Colanode               rank=86.2  declares via ['notion']
   RESULT notes-knowledge: 3 survive, 0 struck — top Memos (rank 101.0)
 
 === regate documents  (Documents — exemplar Google Docs) ===
@@ -87,16 +88,16 @@ directory: 1347 entries with a source URL, dataset commit 582d3f235c86
   RESULT office-suite: NONE ADMITTED (0 struck by category gate)
 
 === regate project-management  (Project management — exemplar Jira) ===
-  STRIKE Super Productivity     rank=105.0  does not declare itself as project management — none of ['project management', 'issue tracking', 'jira', 'sprint'] in its description or README head
   KEEP   Kaneo                  rank=100.3  declares via ['project management']
   KEEP   Gitea                  rank=90.5  declares via ['issue tracking']
   KEEP   OneDev                 rank=82.8  declares via ['issue tracking']
-  RESULT project-management: 3 survive, 1 struck — top Kaneo (rank 100.3)
+  RESULT project-management: 3 survive, 0 struck — top Kaneo (rank 100.3)
 
 === regate task-management  (Task management — exemplar Asana) ===
   KEEP   Super Productivity     rank=105.0  declares via ['todo']
   KEEP   tududi                 rank=95.4  declares via ['task management']
   KEEP   Wekan                  rank=95.0  declares via ['todo']
+     (README not fetched for 4ga Boards: readme.rst: HTTP Error 404: Not Found)
   KEEP   4ga Boards             rank=82.6  declares via ['todo']
   RESULT task-management: 4 survive, 0 struck — top Super Productivity (rank 105.0)
 
@@ -115,6 +116,7 @@ directory: 1347 entries with a source URL, dataset commit 582d3f235c86
 
 === regate accounting  (Accounting — exemplar Xero) ===
   KEEP   FOSSBilling            rank=91.4  declares via ['invoicing']
+     (README not fetched for ezbookkeeping: readme.rst: HTTP Error 404: Not Found)
   KEEP   ezbookkeeping          rank=88.8  declares via ['bookkeeping']
   RESULT accounting: 2 survive, 0 struck — top FOSSBilling (rank 91.4)
 
@@ -163,9 +165,8 @@ directory: 1347 entries with a source URL, dataset commit 582d3f235c86
 === regate web-analytics  (Web analytics — exemplar Google Analytics) ===
   KEEP   PostHog                rank=95.0  declares via ['web analytics']
   KEEP   Umami                  rank=92.6  declares via ['google analytics']
-  STRIKE Redash                 rank=73.0  does not declare itself as web analytics — none of ['web analytics', 'website analytics', 'google analytics', 'page views', 'pageviews'] in its description or README head
   KEEP   Litlyx                 rank=57.0  declares via ['google analytics']
-  RESULT web-analytics: 3 survive, 1 struck — top PostHog (rank 95.0)
+  RESULT web-analytics: 3 survive, 0 struck — top PostHog (rank 95.0)
 
 === regate bi-analytics  (BI/analytics — exemplar Tableau) ===
   KEEP   Superset               rank=95.0  declares via ['business intelligence', 'data exploration', 'data visualization']
@@ -182,6 +183,7 @@ directory: 1347 entries with a source URL, dataset commit 582d3f235c86
   RESULT workflow-automation: NONE ADMITTED (0 struck by category gate)
 
 === regate file-document-management  (File/document management — exemplar Dropbox) ===
+     (README not fetched for Papermerge: readme.rst: HTTP Error 429: Too Many Requests)
   KEEP   Papermerge             rank=66.7  declares via ['document management', 'dropbox']
   RESULT file-document-management: 1 survive, 0 struck — top Papermerge (rank 66.7)
 
@@ -190,6 +192,7 @@ directory: 1347 entries with a source URL, dataset commit 582d3f235c86
 
 === regate document-scanning-ocr  (Document scanning/OCR — exemplar Adobe Acrobat) ===
   KEEP   Stirling-PDF           rank=103.8  declares via ['ocr']
+     (README not fetched for Papermerge: readme.rst: HTTP Error 404: Not Found)
   KEEP   Papermerge             rank=59.0  declares via ['ocr', 'scanned documents']
   RESULT document-scanning-ocr: 2 survive, 0 struck — top Stirling-PDF (rank 103.8)
 
@@ -197,16 +200,12 @@ directory: 1347 entries with a source URL, dataset commit 582d3f235c86
   RESULT password-manager: NONE ADMITTED (0 struck by category gate)
 
 === regate identity-sso  (Identity/SSO — exemplar Okta) ===
-     (README not fetched for Firezone: readme.rst: HTTP Error 404: Not Found)
-  STRIKE Firezone               rank=101.7  does not declare itself as identity/sso — none of ['identity provider', 'single sign-on', 'single sign on', 'identity and access', 'iam', 'keycloak', 'authentik', 'okta'] in its description or README head
-  STRIKE LibreDB Studio         rank=91.1  does not declare itself as identity/sso — none of ['identity provider', 'single sign-on', 'single sign on', 'identity and access', 'iam', 'keycloak', 'authentik', 'okta'] in its description or README head
-  RESULT identity-sso: NONE ADMITTED (2 struck by category gate)
+  RESULT identity-sso: NONE ADMITTED (0 struck by category gate)
 
 === regate git-code-hosting  (Git/code hosting — exemplar GitHub) ===
   KEEP   Gitea                  rank=105.0  declares via ['git hosting', 'gitea']
-  STRIKE Super Productivity     rank=105.0  does not declare itself as git/code hosting — none of ['git hosting', 'code hosting', 'repository hosting', 'git service', 'git server', 'gitea', 'gitlab', 'github alternative', 'forge'] in its description or README head
   KEEP   Gogs                   rank=85.0  declares via ['git service']
-  RESULT git-code-hosting: 2 survive, 1 struck — top Gitea (rank 105.0)
+  RESULT git-code-hosting: 2 survive, 0 struck — top Gitea (rank 105.0)
 
 === regate ci-cd  (CI/CD — exemplar GitHub Actions) ===
   KEEP   Gitea                  rank=99.5  declares via ['ci/cd']
@@ -229,3 +228,41 @@ directory: 1347 entries with a source URL, dataset commit 582d3f235c86
 
 === regate ai-image-generation  (AI image generation — exemplar Midjourney) ===
   RESULT ai-image-generation: NONE ADMITTED (0 struck by category gate)
+
+=== regate search-engine  (Search engine — exemplar Google) ===
+  RESULT search-engine: NONE ADMITTED (0 struck by category gate)
+
+=== regate maps-navigation  (Maps/navigation — exemplar Google Maps) ===
+  KEEP   Wavelog                rank=81.0  declares via ['maps']
+  RESULT maps-navigation: 1 survive, 0 struck — top Wavelog (rank 81.0)
+
+=== regate fitness-activity  (Fitness/activity — exemplar Strava) ===
+  RESULT fitness-activity: NONE ADMITTED (0 struck by category gate)
+
+=== regate recipe-meal-planning  (Recipe/meal planning — exemplar Paprika) ===
+  RESULT recipe-meal-planning: NONE ADMITTED (0 struck by category gate)
+
+=== regate personal-finance  (Personal finance — exemplar YNAB) ===
+  KEEP   Actual                 rank=104.0  declares via ['budget', 'budgeting', 'personal finance']
+  RESULT personal-finance: 1 survive, 0 struck — top Actual (rank 104.0)
+
+=== regate job-marketplace  (Job marketplace — exemplar Upwork) ===
+  RESULT job-marketplace: NONE ADMITTED (0 struck by category gate)
+
+=== regate property-marketplace  (Property marketplace — exemplar Realestate.com.au) ===
+  RESULT property-marketplace: NONE ADMITTED (0 struck by category gate)
+
+=== regate classified-marketplace  (Classified marketplace — exemplar Facebook Marketplace) ===
+  RESULT classified-marketplace: NONE ADMITTED (0 struck by category gate)
+
+=== regate social-events  (Dating/social events — exemplar Meetup) ===
+  RESULT social-events: NONE ADMITTED (0 struck by category gate)
+
+=== regate federated-social  (Community/federated social — exemplar Mastodon) ===
+  RESULT federated-social: NONE ADMITTED (0 struck by category gate)
+
+=== regate video-editing  (Video creation/editing — exemplar CapCut) ===
+  RESULT video-editing: NONE ADMITTED (0 struck by category gate)
+
+=== regate media-library  (Media/library management — exemplar Plex) ===
+  RESULT media-library: NONE ADMITTED (0 struck by category gate)

@@ -144,56 +144,6 @@
      "para-server/src/main/java/com/erudika/para/server/security/signinpage.java"
     ]
    }
-  },
-  {
-   "name": "Firezone",
-   "repo": "https://github.com/firezone/firezone",
-   "commit": "f59d5b8b1981fe49257ca9fba91418f0d9f8ac41",
-   "stage": "category",
-   "reason": "does not declare itself as identity/sso \u2014 none of ['identity provider', 'single sign-on', 'single sign on', 'identity and access', 'iam', 'keycloak', 'authentik', 'okta'] in its description or README head",
-   "licence": "Apache-2.0",
-   "found_via": "keyword",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Users",
-     "groups",
-     "authentication"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 100.0,
-   "rank_before_category_gate": 101.7
-  },
-  {
-   "name": "LibreDB Studio",
-   "repo": "https://github.com/libredb/libredb-studio",
-   "commit": "1039c1d45032e024e698136cd8ca7c1ad981dc62",
-   "stage": "category",
-   "reason": "does not declare itself as identity/sso \u2014 none of ['identity provider', 'single sign-on', 'single sign on', 'identity and access', 'iam', 'keycloak', 'authentik', 'okta'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "keyword",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Users",
-     "groups",
-     "authentication"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 87.5,
-   "rank_before_category_gate": 91.1
   }
  ],
  "regated_at": "2026-09-19"

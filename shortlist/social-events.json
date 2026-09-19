@@ -273,56 +273,6 @@
    "found_via": "tag"
   },
   {
-   "name": "Cal.diy",
-   "repo": "https://github.com/calcom/cal.diy",
-   "commit": "6bc45298226f96ff79e0c070c8b2ce39727e8477",
-   "stage": "category",
-   "reason": "does not declare itself as dating/social events \u2014 none of ['meetup', 'rsvp', 'event management'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Groups",
-     "events",
-     "discovery"
-    ],
-    "anchors_missing": [
-     "discovery"
-    ]
-   },
-   "capability_coverage_pct": 87.5
-  },
-  {
-   "name": "Hasura",
-   "repo": "https://github.com/hasura/graphql-engine",
-   "commit": "6afe2022e0f49d96c2f8b28085b23c56b2ae6106",
-   "stage": "category",
-   "reason": "does not declare itself as dating/social events \u2014 none of ['meetup', 'rsvp', 'event management'] in its description or README head",
-   "licence": "Apache-2.0",
-   "found_via": "keyword",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Groups",
-     "events",
-     "discovery"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 62.5
-  },
-  {
    "name": "Fider",
    "repo": "https://github.com/getfider/fider",
    "commit": "7673eb15bba3e0ff1f8036d70f2d19f75b07058a",
@@ -385,56 +335,6 @@
    }
   },
   {
-   "name": "Razzia",
-   "repo": "https://github.com/Ralex91/Razzia",
-   "commit": "277a33849827c0847ec85e99f2135888f72bd0c1",
-   "stage": "category",
-   "reason": "does not declare itself as dating/social events \u2014 none of ['meetup', 'rsvp', 'event management'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "keyword",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Groups",
-     "events",
-     "discovery"
-    ],
-    "anchors_missing": [
-     "discovery"
-    ]
-   },
-   "capability_coverage_pct": 37.5
-  },
-  {
-   "name": "docassemble",
-   "repo": "https://github.com/jhpyle/docassemble",
-   "commit": "c6722a90b0d6bcddb85970ca7dc981abd8ceb36f",
-   "stage": "category",
-   "reason": "does not declare itself as dating/social events \u2014 none of ['meetup', 'rsvp', 'event management'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Groups",
-     "events",
-     "discovery"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 75.0
-  },
-  {
    "name": "pretalx",
    "repo": "https://github.com/pretalx/pretalx",
    "commit": "b7813cf259ad3ea5521fa165ad9131816667c4a4",
@@ -444,5 +344,6 @@
    "found_via": "keyword",
    "screens": null
   }
- ]
+ ],
+ "regated_at": "2026-09-19"
 }

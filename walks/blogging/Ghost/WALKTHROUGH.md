@@ -1,12 +1,12 @@
 # Walkthrough — Ghost for Blogging
 
 Repo https://github.com/TryGhost/Ghost @ `8e2eb8abfccdc4c373d5d9b6192b7ca4aba5809d`  
-Started 2026-09-19T10:07:16, finished 2026-09-19T10:07:24
+Started 2026-09-19T10:09:17, finished 2026-09-19T10:09:32
 
 ## Boot: **BOOT FAILED**
 
 - recipe: Dockerfile.production
-- reason: image build failed: Run 'docker buildx build --help' for more information
+- reason: image build failed: ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref qo5jhdggkcqvqetvy631nuqr1::ucf62tzty871thw7e2lhwhhhp: "/ghost/core/core/built/admin": not found
 
 ## Getting in: **—**
 

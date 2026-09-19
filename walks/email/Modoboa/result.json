@@ -4,7 +4,7 @@
  "app": "Modoboa",
  "repo": "https://github.com/modoboa/modoboa",
  "commit": "0b368d1217cd330c214d7f8a22493837d033a00a",
- "started": "2026-09-19T10:07:28",
+ "started": "2026-09-19T10:09:37",
  "boot": {
   "status": "BOOT FAILED",
   "reason": "compose up failed (rc 1): env file /tmp/walk_clones/https_github_com_modoboa_modoboa/test_project/envfile not found: stat /tmp/walk_clones/https_github_com_modoboa_modoboa/test_project/envfile: no such file or directory",
@@ -24,5 +24,5 @@
   "absent": 0,
   "gaps": []
  },
- "finished": "2026-09-19T10:07:30"
+ "finished": "2026-09-19T10:09:39"
 }

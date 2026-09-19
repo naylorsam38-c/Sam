@@ -188,57 +188,6 @@
    }
   },
   {
-   "name": "Aleph",
-   "repo": "https://github.com/alephdata/aleph",
-   "commit": "fafcc8dfa4384f5d73ab47f84c03e469a91741c2",
-   "stage": "category",
-   "reason": "does not declare itself as search engine \u2014 none of ['search engine', 'metasearch', 'crawler'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Web crawling/indexing",
-     "search",
-     "ranking"
-    ],
-    "anchors_missing": [
-     "Web crawling/indexing",
-     "ranking"
-    ]
-   },
-   "capability_coverage_pct": 75.0
-  },
-  {
-   "name": "Apache Solr",
-   "repo": "https://github.com/apache/solr",
-   "commit": "b475e58ccf969775d3bd43efc65b724ef33f36b9",
-   "stage": "category",
-   "reason": "does not declare itself as search engine \u2014 none of ['search engine', 'metasearch', 'crawler'] in its description or README head",
-   "licence": "Apache-2.0",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Web crawling/indexing",
-     "search",
-     "ranking"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 100.0
-  },
-  {
    "name": "Fess",
    "repo": "https://github.com/codelibs/fess",
    "commit": "32cfe9479f953b011055d6f571c13ac59b16ba06",
@@ -267,38 +216,7 @@
      "src/main/java/org/codelibs/fess/app/web/login/passwordform.java"
     ]
    }
-  },
-  {
-   "name": "Meme Search",
-   "repo": "https://github.com/meme-search/meme-search",
-   "commit": "c6da790c37cc6d71f8f2a3e4aaff9073980bcfa8",
-   "stage": "category",
-   "reason": "declares itself but is missing anchor capabilities ['Web crawling/indexing']",
-   "licence": "Apache-2.0",
-   "found_via": "tag+keyword",
-   "category_gate": {
-    "declared": true,
-    "declaration_phrases_found": [
-     "search engine"
-    ],
-    "declaration_hits": {
-     "description": [
-      "search engine"
-     ],
-     "readme": [
-      "search engine"
-     ]
-    },
-    "anchors": [
-     "Web crawling/indexing",
-     "search",
-     "ranking"
-    ],
-    "anchors_missing": [
-     "Web crawling/indexing"
-    ]
-   },
-   "capability_coverage_pct": 75.0
   }
- ]
+ ],
+ "regated_at": "2026-09-19"
 }

@@ -334,57 +334,6 @@
    }
   },
   {
-   "name": "Answer",
-   "repo": "https://github.com/apache/answer",
-   "commit": "3b9f1370612e690a0b7f230f05e688930db4c6d3",
-   "stage": "category",
-   "reason": "does not declare itself as community/federated social \u2014 none of ['fediverse', 'activitypub', 'mastodon', 'federated'] in its description or README head",
-   "licence": "Apache-2.0",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Accounts",
-     "follows",
-     "timelines"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 77.8
-  },
-  {
-   "name": "remark42",
-   "repo": "https://github.com/umputun/remark42",
-   "commit": "419ef4f0bd817e9217a5ce0d808fb3acc192972d",
-   "stage": "category",
-   "reason": "does not declare itself as community/federated social \u2014 none of ['fediverse', 'activitypub', 'mastodon', 'federated'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Accounts",
-     "follows",
-     "timelines"
-    ],
-    "anchors_missing": [
-     "Accounts",
-     "timelines"
-    ]
-   },
-   "capability_coverage_pct": 44.4
-  },
-  {
    "name": "Isso",
    "repo": "https://github.com/isso-comments/isso",
    "commit": "413d447a46437d0e9ccf206c8525119355e291d4",
@@ -411,89 +360,6 @@
    }
   },
   {
-   "name": "Artalk",
-   "repo": "https://github.com/ArtalkJS/Artalk",
-   "commit": "d25beede911d59a571382c6821cb8e7a7c27850a",
-   "stage": "category",
-   "reason": "does not declare itself as community/federated social \u2014 none of ['fediverse', 'activitypub', 'mastodon', 'federated'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Accounts",
-     "follows",
-     "timelines"
-    ],
-    "anchors_missing": [
-     "timelines"
-    ]
-   },
-   "capability_coverage_pct": 66.7
-  },
-  {
-   "name": "Coral",
-   "repo": "https://github.com/coralproject/talk",
-   "commit": "8bf2ad784d65ae23a277be045819af04642ed8ce",
-   "stage": "category",
-   "reason": "does not declare itself as community/federated social \u2014 none of ['fediverse', 'activitypub', 'mastodon', 'federated'] in its description or README head",
-   "licence": "Apache-2.0",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Accounts",
-     "follows",
-     "timelines"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 77.8
-  },
-  {
-   "name": "Databag",
-   "repo": "https://github.com/balzack/databag",
-   "commit": "45343338582b394f4f5fdb4b7e271ea1dc8dd5fd",
-   "stage": "category",
-   "reason": "declares itself but is missing anchor capabilities ['follows', 'timelines']",
-   "licence": "Apache-2.0",
-   "found_via": "keyword",
-   "category_gate": {
-    "declared": true,
-    "declaration_phrases_found": [
-     "federated"
-    ],
-    "declaration_hits": {
-     "description": [
-      "federated"
-     ],
-     "readme": [
-      "federated"
-     ]
-    },
-    "anchors": [
-     "Accounts",
-     "follows",
-     "timelines"
-    ],
-    "anchors_missing": [
-     "follows",
-     "timelines"
-    ]
-   },
-   "capability_coverage_pct": 44.4
-  },
-  {
    "name": "Scoold",
    "repo": "https://github.com/Erudika/scoold",
    "commit": "c6ac03c5c2852407396bc8942ff2d780265ae966",
@@ -513,5 +379,6 @@
     ]
    }
   }
- ]
+ ],
+ "regated_at": "2026-09-19"
 }

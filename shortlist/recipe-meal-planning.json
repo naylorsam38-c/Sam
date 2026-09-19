@@ -111,40 +111,6 @@
    "screens": null
   },
   {
-   "name": "CookCLI",
-   "repo": "https://github.com/cooklang/CookCLI",
-   "commit": "20950f745f0f8aef29b352fa168509b7484a5034",
-   "stage": "category",
-   "reason": "declares itself but is missing anchor capabilities ['organisation']",
-   "licence": "MIT",
-   "found_via": "tag+keyword",
-   "category_gate": {
-    "declared": true,
-    "declaration_phrases_found": [
-     "recipe",
-     "recipes"
-    ],
-    "declaration_hits": {
-     "description": [
-      "recipes"
-     ],
-     "readme": [
-      "recipe",
-      "recipes"
-     ]
-    },
-    "anchors": [
-     "Recipes",
-     "import",
-     "organisation"
-    ],
-    "anchors_missing": [
-     "organisation"
-    ]
-   },
-   "capability_coverage_pct": 85.7
-  },
-  {
    "name": "Bar Assistant",
    "repo": "https://github.com/karlomikus/bar-assistant",
    "commit": "8478809cbff55843bb2277dcb2059cdca533c135",
@@ -174,5 +140,6 @@
     ]
    }
   }
- ]
+ ],
+ "regated_at": "2026-09-19"
 }

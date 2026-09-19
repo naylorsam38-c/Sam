@@ -43,155 +43,8 @@
   ],
   "anchor_count": 3
  },
- "none_admitted": false,
- "survivors": [
-  {
-   "name": "Youtarr",
-   "repo": "https://github.com/DialmasterOrg/Youtarr",
-   "commit": "636a2b0d5aff157621a7c0ecddc6a9e1a8853acb",
-   "website": "https://github.com/DialmasterOrg/Youtarr",
-   "licence": "ISC",
-   "licence_file": "LICENSE.md",
-   "screens": {
-    "screen_files_total": 260,
-    "screen_files_user": 260,
-    "screen_files_admin": 0,
-    "screen_languages": [
-     ".html",
-     ".tsx"
-    ],
-    "user_screen_examples": [
-     "client/index.html",
-     "client/.storybook/preview.tsx",
-     "client/src/app.tsx",
-     "client/src/app.test.tsx",
-     "client/src/test-utils.tsx",
-     "client/src/index.tsx"
-    ],
-    "login_evidence": [
-     "client/src/components/locallogin.stories.tsx",
-     "client/src/components/locallogin.tsx"
-    ]
-   },
-   "run_recipes": [
-    "docker-compose.dev.yml",
-    "docker-compose.yml",
-    "dockerfile"
-   ],
-   "robustness": {
-    "score": 74.5,
-    "parts": {
-     "stars": 14.9,
-     "commits_12m": 9.6,
-     "release": 15.0,
-     "activity": 0.0,
-     "tests": 20.0,
-     "ci": 10.0,
-     "readme": 5.0
-    },
-    "facts": {
-     "stars": 1572,
-     "commits_12m": 719,
-     "latest_release": "2026-09-15",
-     "updated_at": "2026-09-15"
-    },
-    "repo_metrics": {
-     "test_files": 458,
-     "ci_evidence": [
-      ".github/workflows/coverage-comment.yml",
-      ".github/workflows/ci.yml",
-      ".github/workflows/claude.yml"
-     ],
-     "readme_chars": 10889
-    }
-   },
-   "capability": {
-    "coverage_pct": 84.6,
-    "matched": [
-     "Upload",
-     "transcoding",
-     "channels",
-     "subscriptions",
-     "recommendations",
-     "search",
-     "playlists",
-     "comments",
-     "likes",
-     "live streaming",
-     "captions"
-    ],
-    "missing": [
-     "analytics",
-     "monetisation"
-    ],
-    "evidence_tokens": {
-     "Upload": [
-      "upload"
-     ],
-     "transcoding": [
-      "transcoding"
-     ],
-     "channels": [
-      "channel",
-      "channels"
-     ],
-     "subscriptions": [
-      "subscription",
-      "subscriptions"
-     ],
-     "recommendations": [
-      "recommendations"
-     ],
-     "search": [
-      "search"
-     ],
-     "playlists": [
-      "playlist",
-      "playlists"
-     ],
-     "comments": [
-      "comment",
-      "comments"
-     ],
-     "likes": [
-      "like"
-     ],
-     "live streaming": [
-      "streaming"
-     ],
-     "captions": [
-      "caption",
-      "captions"
-     ],
-     "analytics": [],
-     "monetisation": []
-    }
-   },
-   "rank_score": 89.5,
-   "found_via": "keyword",
-   "clone_path": "/tmp/library_clones/github.com_DialmasterOrg_Youtarr",
-   "description": "Download videos from YouTube channels on a schedule via yt-dlp, with a web UI to browse and selectively download videos. Integrates with Plex Media Server and generates NFO metadata for Jellyfin, Kodi, and Emby.",
-   "readme_file": "README.md",
-   "category_gate": {
-    "declared": true,
-    "declaration_phrases_found": [
-     "youtube"
-    ],
-    "declaration_hits": {
-     "description": [],
-     "readme": [
-      "youtube"
-     ]
-    },
-    "anchors": [
-     "Upload",
-     "transcoding",
-     "channels"
-    ],
-    "anchors_missing": []
-   }
-  }
- ],
+ "none_admitted": true,
+ "survivors": [],
  "refused": [
   {
    "name": "Channels DVR Server",
@@ -480,12 +333,12 @@
    }
   },
   {
-   "name": "Stretto",
-   "repo": "https://github.com/benkaiser/stretto",
-   "commit": "bc37c7baed464aed14e26c60714db8a039d7d83a",
+   "name": "Youtarr",
+   "repo": "https://github.com/DialmasterOrg/Youtarr",
+   "commit": "636a2b0d5aff157621a7c0ecddc6a9e1a8853acb",
    "stage": "category",
    "reason": "does not declare itself as video streaming \u2014 none of ['video platform', 'youtube', 'peertube'] in its description or README head",
-   "licence": "MIT",
+   "licence": "ISC",
    "found_via": "keyword",
    "category_gate": {
     "declared": false,
@@ -501,8 +354,8 @@
     ],
     "anchors_missing": []
    },
-   "capability_coverage_pct": 61.5,
-   "rank_before_category_gate": 57.4
+   "capability_coverage_pct": 84.6,
+   "rank_before_category_gate": 89.5
   }
  ],
  "regated_at": "2026-09-19"

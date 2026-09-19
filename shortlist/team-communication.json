@@ -759,31 +759,6 @@
    "licence": "",
    "found_via": "tag",
    "screens": null
-  },
-  {
-   "name": "Novu",
-   "repo": "https://github.com/novuhq/novu/",
-   "commit": "36c5c0cefa400e8edc6ec8b18ac4574288eabd03",
-   "stage": "category",
-   "reason": "does not declare itself as team communication \u2014 none of ['slack', 'team chat', 'team communication'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Workspaces",
-     "channels",
-     "DMs"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 91.7,
-   "rank_before_category_gate": 90.8
   }
  ],
  "regated_at": "2026-09-19"

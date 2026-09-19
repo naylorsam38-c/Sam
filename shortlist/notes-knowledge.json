@@ -470,21 +470,17 @@
    "found_via": "keyword",
    "clone_path": "/tmp/library_clones/github.com_colanode_colanode",
    "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
-   "readme_file": "README.md",
+   "readme_file": null,
    "category_gate": {
     "declared": true,
     "declaration_phrases_found": [
-     "notes",
      "notion"
     ],
     "declaration_hits": {
      "description": [
       "notion"
      ],
-     "readme": [
-      "notion",
-      "notes"
-     ]
+     "readme": []
     },
     "anchors": [
      "Pages",

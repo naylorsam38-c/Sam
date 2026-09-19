@@ -696,31 +696,6 @@
     "user_screen_examples": [],
     "login_evidence": []
    }
-  },
-  {
-   "name": "Super Productivity",
-   "repo": "https://github.com/super-productivity/super-productivity",
-   "commit": "679a7823a36dab59283acf55a81113d7677513ab",
-   "stage": "category",
-   "reason": "does not declare itself as git/code hosting \u2014 none of ['git hosting', 'code hosting', 'repository hosting', 'git service', 'git server', 'gitea', 'gitlab', 'github alternative', 'forge'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "keyword",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Repositories",
-     "Git",
-     "branches"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 100.0,
-   "rank_before_category_gate": 105.0
   }
  ],
  "regated_at": "2026-09-19"

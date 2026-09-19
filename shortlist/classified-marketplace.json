@@ -195,54 +195,6 @@
    }
   },
   {
-   "name": "Bagisto",
-   "repo": "https://github.com/bagisto/bagisto",
-   "commit": "9beff85ece6fe13378a97e6f84765b50647d3327",
-   "stage": "category",
-   "reason": "does not declare itself as classified marketplace \u2014 none of ['classified', 'classifieds', 'buy and sell', 'facebook marketplace'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Listings",
-     "categories",
-     "search"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 87.5
-  },
-  {
-   "name": "Saleor",
-   "repo": "https://github.com/saleor/saleor",
-   "commit": "4cb1609a90eade14b6275a407bc7a00c35698090",
-   "stage": "category",
-   "reason": "does not declare itself as classified marketplace \u2014 none of ['classified', 'classifieds', 'buy and sell', 'facebook marketplace'] in its description or README head",
-   "licence": "BSD-3-Clause",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Listings",
-     "categories",
-     "search"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 50.0
-  },
-  {
    "name": "Spree Commerce",
    "repo": "https://github.com/spree/spree",
    "commit": "3d815e1430285f0c93dd8f5d4ad541dca0fa7ec8",
@@ -278,30 +230,6 @@
    }
   },
   {
-   "name": "Sylius",
-   "repo": "https://github.com/Sylius/Sylius",
-   "commit": "6b24cc10fab893e2448c0c274775121b7e0b047a",
-   "stage": "category",
-   "reason": "does not declare itself as classified marketplace \u2014 none of ['classified', 'classifieds', 'buy and sell', 'facebook marketplace'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Listings",
-     "categories",
-     "search"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 62.5
-  },
-  {
    "name": "Vendure",
    "repo": "https://github.com/vendurehq/vendure",
    "commit": "3e7310140ea15f8ed308fff447810ffe8f383263",
@@ -310,57 +238,7 @@
    "licence": "GPL",
    "found_via": "tag",
    "screens": null
-  },
-  {
-   "name": "Aimeos",
-   "repo": "https://github.com/aimeos/aimeos",
-   "commit": "919720089ad5ff6e63eee9c0aaf4a42c2cc27340",
-   "stage": "category",
-   "reason": "does not declare itself as classified marketplace \u2014 none of ['classified', 'classifieds', 'buy and sell', 'facebook marketplace'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Listings",
-     "categories",
-     "search"
-    ],
-    "anchors_missing": [
-     "Listings",
-     "search"
-    ]
-   },
-   "capability_coverage_pct": 37.5
-  },
-  {
-   "name": "Solidus",
-   "repo": "https://github.com/solidusio/solidus",
-   "commit": "e0a625aad4eaa62c7c50f8e549f38c31d8239b0c",
-   "stage": "category",
-   "reason": "does not declare itself as classified marketplace \u2014 none of ['classified', 'classifieds', 'buy and sell', 'facebook marketplace'] in its description or README head",
-   "licence": "BSD-3-Clause",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Listings",
-     "categories",
-     "search"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 100.0
   }
- ]
+ ],
+ "regated_at": "2026-09-19"
 }

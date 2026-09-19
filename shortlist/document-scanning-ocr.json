@@ -278,7 +278,7 @@
    "found_via": "tag+keyword",
    "clone_path": "(deleted after inspection)",
    "description": "Document management system focused on scanned documents (electronic archives). Features file browsing in similar way to dropbox/google drive. OCR, full text search, text overlay/selection.",
-   "readme_file": "README.md",
+   "readme_file": null,
    "category_gate": {
     "declared": true,
     "declaration_phrases_found": [
@@ -290,10 +290,7 @@
       "ocr",
       "scanned documents"
      ],
-     "readme": [
-      "ocr",
-      "scanned documents"
-     ]
+     "readme": []
     },
     "anchors": [
      "PDF creation",

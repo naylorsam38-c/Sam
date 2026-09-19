@@ -635,31 +635,6 @@
      "source/dagre.js (in content)"
     ]
    }
-  },
-  {
-   "name": "Redash",
-   "repo": "https://github.com/getredash/redash",
-   "commit": "8f6b15d30da433ae881dd6376a38df17bb6c2663",
-   "stage": "category",
-   "reason": "does not declare itself as web analytics \u2014 none of ['web analytics', 'website analytics', 'google analytics', 'page views', 'pageviews'] in its description or README head",
-   "licence": "BSD-2-Clause",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Events",
-     "users",
-     "sessions"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 87.5,
-   "rank_before_category_gate": 73.0
   }
  ],
  "regated_at": "2026-09-19"

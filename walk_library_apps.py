@@ -362,7 +362,9 @@ class Boot:
         else:
             img = f"localhost/{self.project}:walk"
             bargs = [CONTAINER_TOOL, "build", "-t", img, "--network=host"]
-            if CA_BUNDLE:
+            if CA_BUNDLE and USING_PODMAN:
+                # docker build (buildx) has no --volume/--env flags for the build step;
+                # this CA-trust injection is podman-build-specific, same as the compose path above.
                 bargs += ["--volume", f"{CA_BUNDLE}:{CA_BUNDLE}:ro", "--env", f"SSL_CERT_FILE={CA_BUNDLE}",
                           "--env", f"NODE_EXTRA_CA_CERTS={CA_BUNDLE}"]
             rc, out, err = run(bargs + ["-f", str(r["path"]), "."], cwd=self.root, timeout=BOOT_TIMEOUT_SECONDS)

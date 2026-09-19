@@ -375,31 +375,6 @@
      "sources/actions/login.php"
     ]
    }
-  },
-  {
-   "name": "remark42",
-   "repo": "https://github.com/umputun/remark42",
-   "commit": "419ef4f0bd817e9217a5ce0d808fb3acc192972d",
-   "stage": "category",
-   "reason": "does not declare itself as social network \u2014 none of ['social network', 'social platform', 'facebook'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Profiles",
-     "feeds",
-     "posts"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 73.3,
-   "rank_before_category_gate": 66.0
   }
  ],
  "regated_at": "2026-09-19"

@@ -98,30 +98,7 @@
    "stage": "pre-filter",
    "reason": "directory lists licence ['AGPL-3.0']",
    "found_via": "tag+keyword"
-  },
-  {
-   "name": "OpenELIS Global",
-   "repo": "https://github.com/DIGI-UW/OpenELIS-Global-2",
-   "commit": "9344653aa184999058acd70f0c0da662a23aba3f",
-   "stage": "category",
-   "reason": "does not declare itself as fitness/activity \u2014 none of ['fitness', 'workout', 'strava', 'activity tracking'] in its description or README head",
-   "licence": "MPL-2.0",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Activities",
-     "GPS",
-     "routes"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 77.8
   }
- ]
+ ],
+ "regated_at": "2026-09-19"
 }

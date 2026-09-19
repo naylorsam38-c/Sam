@@ -296,7 +296,7 @@
    "found_via": "tag+keyword",
    "clone_path": "(deleted after inspection)",
    "description": "A lightweight personal bookkeeping app hosted by yourself.",
-   "readme_file": "README.md",
+   "readme_file": null,
    "category_gate": {
     "declared": true,
     "declaration_phrases_found": [
@@ -306,9 +306,7 @@
      "description": [
       "bookkeeping"
      ],
-     "readme": [
-      "bookkeeping"
-     ]
+     "readme": []
     },
     "anchors": [
      "Accounts",

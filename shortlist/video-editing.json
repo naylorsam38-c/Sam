@@ -218,33 +218,6 @@
    "found_via": "tag"
   },
   {
-   "name": "Seerr",
-   "repo": "https://github.com/seerr-team/seerr",
-   "commit": "59d5947b4df8591882bda70ae199f3a708e2d02b",
-   "stage": "category",
-   "reason": "does not declare itself as video creation/editing \u2014 none of ['video editor', 'video editing', 'capcut'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Timeline editing",
-     "trimming",
-     "transitions"
-    ],
-    "anchors_missing": [
-     "Timeline editing",
-     "trimming"
-    ]
-   },
-   "capability_coverage_pct": 77.8
-  },
-  {
    "name": "yt-dlp Web UI",
    "repo": "https://github.com/marcopiovanello/yt-dlp-web-ui",
    "commit": "c7ad3bd79c7c520a7d17e7f2ba19d962be8e7897",
@@ -255,32 +228,6 @@
    "screens": null
   },
   {
-   "name": "Youtarr",
-   "repo": "https://github.com/DialmasterOrg/Youtarr",
-   "commit": "636a2b0d5aff157621a7c0ecddc6a9e1a8853acb",
-   "stage": "category",
-   "reason": "does not declare itself as video creation/editing \u2014 none of ['video editor', 'video editing', 'capcut'] in its description or README head",
-   "licence": "ISC",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Timeline editing",
-     "trimming",
-     "transitions"
-    ],
-    "anchors_missing": [
-     "Timeline editing"
-    ]
-   },
-   "capability_coverage_pct": 100.0
-  },
-  {
    "name": "Watcharr",
    "repo": "https://github.com/sbondCo/Watcharr",
    "commit": "18f7cf817e2958a1b4b4f0d7deee303ffec9af04",
@@ -289,30 +236,6 @@
    "licence": "GPL",
    "found_via": "tag",
    "screens": null
-  },
-  {
-   "name": "MyTube",
-   "repo": "https://github.com/franklioxygen/MyTube",
-   "commit": "a1d46ec970755dcded9a781c1610dfcc1226483a",
-   "stage": "category",
-   "reason": "does not declare itself as video creation/editing \u2014 none of ['video editor', 'video editing', 'capcut'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Timeline editing",
-     "trimming",
-     "transitions"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 100.0
   },
   {
    "name": "Lidify",
@@ -334,33 +257,6 @@
     ],
     "login_evidence": []
    }
-  },
-  {
-   "name": "PodFetch",
-   "repo": "https://github.com/SamTV12345/PodFetch",
-   "commit": "0d5c8fb3da78ab5eedf364d9e77ee98afaf6d087",
-   "stage": "category",
-   "reason": "does not declare itself as video creation/editing \u2014 none of ['video editor', 'video editing', 'capcut'] in its description or README head",
-   "licence": "Apache-2.0",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Timeline editing",
-     "trimming",
-     "transitions"
-    ],
-    "anchors_missing": [
-     "Timeline editing",
-     "trimming"
-    ]
-   },
-   "capability_coverage_pct": 77.8
   },
   {
    "name": "Deleterr",
@@ -385,5 +281,6 @@
     ]
    }
   }
- ]
+ ],
+ "regated_at": "2026-09-19"
 }

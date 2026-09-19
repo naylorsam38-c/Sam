@@ -73,34 +73,7 @@
    "stage": "pre-filter",
    "reason": "directory lists licence ['\u2298 Proprietary']",
    "found_via": "keyword"
-  },
-  {
-   "name": "gocron",
-   "repo": "https://github.com/flohoss/gocron",
-   "commit": "e2b455c086ce46c05c815db8df3120548faab164",
-   "stage": "category",
-   "reason": "does not declare itself as job marketplace \u2014 none of ['job board', 'freelance', 'upwork', 'recruiting', 'recruitment', 'applicant tracking'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "keyword",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Profiles",
-     "portfolios",
-     "job posting"
-    ],
-    "anchors_missing": [
-     "Profiles",
-     "portfolios",
-     "job posting"
-    ]
-   },
-   "capability_coverage_pct": 20.0
   }
- ]
+ ],
+ "regated_at": "2026-09-19"
 }

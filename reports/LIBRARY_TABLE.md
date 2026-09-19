@@ -1,15 +1,15 @@
-# Library table — 2026-09-19 — directory dataset 582d3f235c86
+# Library table — 2026-09-19 — directory dataset awesome-selfhosted:582d3f235c86
 
 | # | Category | Exemplar | Top survivor | Declares itself via | Licence | Screens | Runs | Robustness | Capability | Survivors | Refused |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Dating | Tinder | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 0 |
-| 2 | Social network | Facebook | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 39 |
+| 2 | Social network | Facebook | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 38 |
 | 3 | Short-form video | TikTok | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 1 |
 | 4 | Photo sharing | Instagram | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 22 |
-| 5 | Video streaming | YouTube | [Youtarr](https://github.com/DialmasterOrg/Youtarr) @ 636a2b0d5aff | youtube | ISC | 260 | 3 | 74.5 | 84.6% | 1 | 32 |
+| 5 | Video streaming | YouTube | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 32 |
 | 6 | Music streaming | Spotify | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 32 |
-| 7 | Messaging | WhatsApp | [Zulip](https://github.com/zulip/zulip) @ ca20338a1c3e | chat app | Apache-2.0 | 719 | 4 | 89.1 | 100.0% | 1 | 45 |
-| 8 | Team communication | Slack | [Rocket.Chat](https://github.com/RocketChat/Rocket.Chat) @ a2132d777c5b | slack | MIT | 2231 | 4 | 90.0 | 100.0% | 2 | 54 |
+| 7 | Messaging | WhatsApp | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 45 |
+| 8 | Team communication | Slack | [Rocket.Chat](https://github.com/RocketChat/Rocket.Chat) @ a2132d777c5b | slack | MIT | 2231 | 4 | 90.0 | 100.0% | 2 | 53 |
 | 9 | Video conferencing | Zoom | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 13 |
 | 10 | Professional network | LinkedIn | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 0 |
 | 11 | Forums/community | Reddit | [Answer](https://github.com/apache/answer) @ 3b9f1370612e | forum | Apache-2.0 | 247 | 2 | 60.4 | 81.8% | 1 | 40 |
@@ -24,7 +24,7 @@
 | 20 | Spreadsheets | Google Sheets | [Grist](https://github.com/gristlabs/grist-core) @ c1f3a6971208 | airtable, sheets, spreadsheet | Apache-2.0 | 9 | 6 | 84.1 | 100.0% | 2 | 5 |
 | 21 | Presentation | PowerPoint | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 6 |
 | 22 | Office suite | Microsoft 365 | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 25 |
-| 23 | Project management | Jira | [Kaneo](https://github.com/usekaneo/kaneo) @ d26878807d04 | project management | MIT | 272 | 4 | 80.7 | 100.0% | 3 | 47 |
+| 23 | Project management | Jira | [Kaneo](https://github.com/usekaneo/kaneo) @ d26878807d04 | project management | MIT | 272 | 4 | 80.7 | 100.0% | 3 | 46 |
 | 24 | Task management | Asana | [Super Productivity](https://github.com/super-productivity/super-productivity) @ 679a7823a36d | todo | MIT | 267 | 6 | 90.0 | 100.0% | 4 | 23 |
 | 25 | Kanban | Trello | [Wekan](https://github.com/wekan/wekan) @ e1e64e92b4fd | kanban, kanban board, trello | MIT | 136 | 4 | 90.0 | 100.0% | 3 | 74 |
 | 26 | CRM | Salesforce | [Corteza](https://github.com/cortezaproject/corteza) @ 3835dfc4ac8b | crm | Apache-2.0 | 376 | 6 | 78.8 | 91.7% | 1 | 11 |
@@ -43,7 +43,7 @@
 | 39 | Customer chat | Intercom | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 50 |
 | 40 | Marketing automation | HubSpot | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 19 |
 | 41 | Email marketing | Mailchimp | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 14 |
-| 42 | Web analytics | Google Analytics | [PostHog](https://github.com/posthog/posthog) @ 88ff4ebbdb8b | web analytics | MIT | 5072 | 6 | 90.0 | 100.0% | 3 | 27 |
+| 42 | Web analytics | Google Analytics | [PostHog](https://github.com/posthog/posthog) @ 88ff4ebbdb8b | web analytics | MIT | 5072 | 6 | 90.0 | 100.0% | 3 | 26 |
 | 43 | BI/analytics | Tableau | [Superset](https://github.com/apache/superset) @ 128c0c159ab8 | business intelligence, data exploration, data visualization | Apache-2.0 | 1663 | 6 | 90.0 | 100.0% | 1 | 51 |
 | 44 | Forms/surveys | Typeform | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 22 |
 | 45 | Automation/iPaaS | Zapier | [Huginn](https://github.com/huginn/huginn) @ f2cc19148df9 | zapier | MIT | 67 | 3 | 69.6 | 87.5% | 1 | 40 |
@@ -52,11 +52,23 @@
 | 48 | E-signature | DocuSign | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 16 |
 | 49 | Document scanning/OCR | Adobe Acrobat | [Stirling-PDF](https://github.com/Stirling-Tools/Stirling-PDF) @ d6784b3962c1 | ocr | MIT | 1900 | 6 | 87.6 | 100.0% | 2 | 27 |
 | 50 | Password manager | 1Password | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 10 |
-| 51 | Identity/SSO | Okta | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 13 |
-| 52 | Git/code hosting | GitHub | [Gitea](https://github.com/go-gitea/gitea) @ 2a3d0473390e | git hosting, gitea | MIT | 541 | 2 | 90.0 | 100.0% | 2 | 51 |
+| 51 | Identity/SSO | Okta | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 11 |
+| 52 | Git/code hosting | GitHub | [Gitea](https://github.com/go-gitea/gitea) @ 2a3d0473390e | git hosting, gitea | MIT | 541 | 2 | 90.0 | 100.0% | 2 | 50 |
 | 53 | CI/CD | GitHub Actions | [Gitea](https://github.com/go-gitea/gitea) @ 2a3d0473390e | ci/cd | MIT | 541 | 2 | 90.0 | 88.9% | 2 | 2 |
 | 54 | Developer issue tracking | Linear | [Gitea](https://github.com/go-gitea/gitea) @ 2a3d0473390e | issue tracking | MIT | 541 | 2 | 90.0 | 100.0% | 2 | 48 |
 | 55 | Cloud IDE | GitHub Codespaces | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 17 |
 | 56 | AI assistant/chat | ChatGPT | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 22 |
 | 57 | AI coding | GitHub Copilot | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 28 |
 | 58 | AI image generation | Midjourney | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 14 |
+| 59 | Search engine | Google | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 14 |
+| 60 | Maps/navigation | Google Maps | [Wavelog](https://github.com/wavelog/wavelog) @ cbdc1d07b3ae | maps | MIT | 107 | 1 | 64.2 | 77.8% | 1 | 21 |
+| 61 | Fitness/activity | Strava | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 8 |
+| 62 | Recipe/meal planning | Paprika | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 10 |
+| 63 | Personal finance | YNAB | [Actual](https://github.com/actualbudget/actual) @ d789e41540d7 | budget, budgeting, personal finance | MIT | 1023 | 4 | 88.1 | 100.0% | 1 | 38 |
+| 64 | Job marketplace | Upwork | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 4 |
+| 65 | Property marketplace | Realestate.com.au | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 0 |
+| 66 | Classified marketplace | Facebook Marketplace | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 20 |
+| 67 | Dating/social events | Meetup | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 37 |
+| 68 | Community/federated social | Mastodon | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 42 |
+| 69 | Video creation/editing | CapCut | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 29 |
+| 70 | Media/library management | Plex | **NONE ADMITTED** | — | — | — | — | — | — | 0 | 52 |

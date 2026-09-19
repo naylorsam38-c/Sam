@@ -306,23 +306,17 @@
    "found_via": "tag+keyword",
    "clone_path": "/tmp/library_clones/github.com_xenocrat_chyrp-lite",
    "description": "Extra-awesome, extra-lightweight blog engine.",
-   "readme_file": "README.md",
+   "readme_file": null,
    "category_gate": {
     "declared": true,
     "declaration_phrases_found": [
-     "blog",
-     "blogging",
-     "publishing platform"
+     "blog"
     ],
     "declaration_hits": {
      "description": [
       "blog"
      ],
-     "readme": [
-      "blog",
-      "blogging",
-      "publishing platform"
-     ]
+     "readme": []
     },
     "anchors": [
      "Author profiles",

@@ -428,56 +428,6 @@
    "found_via": "tag"
   },
   {
-   "name": "HyperSwitch",
-   "repo": "https://github.com/juspay/hyperswitch",
-   "commit": "027f7cfb3c53d4a646e3c621aaed4448232f3d88",
-   "stage": "category",
-   "reason": "does not declare itself as personal finance \u2014 none of ['budget', 'personal finance', 'ynab', 'budgeting'] in its description or README head",
-   "licence": "Apache-2.0",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Accounts",
-     "transactions",
-     "budgets"
-    ],
-    "anchors_missing": []
-   },
-   "capability_coverage_pct": 85.7
-  },
-  {
-   "name": "BTCPay Server",
-   "repo": "https://github.com/btcpayserver/btcpayserver",
-   "commit": "0f40a6be2addc86a904dfa12277fa17a94bc2b70",
-   "stage": "category",
-   "reason": "does not declare itself as personal finance \u2014 none of ['budget', 'personal finance', 'ynab', 'budgeting'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Accounts",
-     "transactions",
-     "budgets"
-    ],
-    "anchors_missing": [
-     "budgets"
-    ]
-   },
-   "capability_coverage_pct": 71.4
-  },
-  {
    "name": "Kill Bill",
    "repo": "https://github.com/killbill/killbill",
    "commit": "cb60779c171391be558cd7aebb1eafea60ad2b82",
@@ -508,62 +458,6 @@
    }
   },
   {
-   "name": "ezbookkeeping",
-   "repo": "https://github.com/mayswind/ezbookkeeping",
-   "commit": "057be38cd51bb5789439752dfa2bacd549537939",
-   "stage": "category",
-   "reason": "declares itself but is missing anchor capabilities ['budgets']",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": true,
-    "declaration_phrases_found": [
-     "personal finance"
-    ],
-    "declaration_hits": {
-     "description": [],
-     "readme": [
-      "personal finance"
-     ]
-    },
-    "anchors": [
-     "Accounts",
-     "transactions",
-     "budgets"
-    ],
-    "anchors_missing": [
-     "budgets"
-    ]
-   },
-   "capability_coverage_pct": 71.4
-  },
-  {
-   "name": "InvoicePlane",
-   "repo": "https://github.com/InvoicePlane/InvoicePlane",
-   "commit": "eb39ddcf86bff2329d7259c674ce9e7b1e4b3f8c",
-   "stage": "category",
-   "reason": "does not declare itself as personal finance \u2014 none of ['budget', 'personal finance', 'ynab', 'budgeting'] in its description or README head",
-   "licence": "MIT",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Accounts",
-     "transactions",
-     "budgets"
-    ],
-    "anchors_missing": [
-     "budgets"
-    ]
-   },
-   "capability_coverage_pct": 42.9
-  },
-  {
    "name": "Fava",
    "repo": "https://github.com/beancount/fava",
    "commit": "7096e25c6dcc48ab0059643b5592197492ddd0dc",
@@ -589,32 +483,7 @@
     ],
     "login_evidence": []
    }
-  },
-  {
-   "name": "FOSSBilling",
-   "repo": "https://github.com/FOSSBilling/FOSSBilling",
-   "commit": "3b630baa6d66218d4199f48b7d4c2124b076a926",
-   "stage": "category",
-   "reason": "does not declare itself as personal finance \u2014 none of ['budget', 'personal finance', 'ynab', 'budgeting'] in its description or README head",
-   "licence": "Apache-2.0",
-   "found_via": "tag",
-   "category_gate": {
-    "declared": false,
-    "declaration_phrases_found": [],
-    "declaration_hits": {
-     "description": [],
-     "readme": []
-    },
-    "anchors": [
-     "Accounts",
-     "transactions",
-     "budgets"
-    ],
-    "anchors_missing": [
-     "budgets"
-    ]
-   },
-   "capability_coverage_pct": 85.7
   }
- ]
+ ],
+ "regated_at": "2026-09-19"
 }
