@@ -297,6 +297,30 @@
         "details": "shelf-integrations/appsmith/README.md"
       },
       "screenshot": "shelf/no-code-platforms/home.png"
+    },
+    {
+      "id": "APP-037",
+      "slug": "marketing",
+      "name": "Mautic",
+      "category": "Marketing",
+      "repository": "https://github.com/mautic/mautic",
+      "blurb": "Open source marketing automation: email, campaigns, contacts, segments, and more, self-hosted.",
+      "keywords": [
+        "marketing automation",
+        "email marketing",
+        "campaigns",
+        "crm",
+        "contacts",
+        "segments"
+      ],
+      "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "7912edbd7",
+        "mechanism": "Real PHP 8.3 (from Ubuntu's own archive, since the pinned 8.2 lives on a blocked PPA) + native MariaDB 10.11 (Mautic 7.x's own installer refuses MySQL 8.0). A small front-controller router script reproduces the app's real .htaccess rewrite semantics for PHP's built-in server.",
+        "details": "shelf-integrations/mautic/README.md"
+      },
+      "screenshot": "shelf/marketing/home.png"
     }
   ]
 }

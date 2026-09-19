@@ -19,11 +19,12 @@ JS errors throughout.
 | APP-039 | Nginx Proxy Manager | Proven running | Node backend (SQLite) + Vue frontend, served behind a real nginx reverse proxy configured this session (the app's own production topology). |
 | APP-040 | Appsmith | **Blocked** | Core config store is Spring Data reactive MongoDB (`ReactiveMongoRepository`/`@Document` across 7 backend files); no Postgres/MySQL fallback in CE. MongoDB itself is unreachable here three separate ways (no apt package, `repo.mongodb.org` unreachable, `fastdl.mongodb.org` tarball blocked by egress policy). See `shelf-integrations/appsmith/README.md`. |
 | APP-041 | Memos | Proven running | Self-contained Go binary; embeds its own React frontend + SQLite. |
+| APP-037 | Mautic | Proven running | Symfony/PHP + native MariaDB (Mautic 7.x refuses MySQL 8.0; the pinned PHP 8.2's own PPA is blocked, ran on PHP 8.3 from Ubuntu's archive instead). Real contact created through the UI, round-tripped to the real `leads` table. See `shelf-integrations/mautic/README.md`. |
 | APP-042 | Infisical | Proven running | Node/TS backend + React frontend + native Postgres/Redis, served behind nginx. |
 | APP-044 | Super Productivity | Proven, real skin integration | See `shelf-integrations/productivity/README.md` -- the deepest integration: our skin engine's colour was driven through the app's own real theming service, not just "it boots". |
 | APP-051 | Galene | Proven running | Self-contained Go binary; embeds its own frontend, built-in TURN server. Connected to a real room with a real op/presenter login and Chromium's fake camera/mic device. |
 
-**10 of 12 admitted apps proven running end-to-end. 2 genuinely blocked
+**11 of 13 admitted apps proven running end-to-end. 2 genuinely blocked
 (both external dependencies unreachable here, not fixable in this sandbox).
 1 deprioritized (lower relevance, real but lower-value fix needed).**
 

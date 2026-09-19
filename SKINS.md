@@ -14,14 +14,14 @@ faith later:
   is unmodified from Sam's upload. `skins-engine.js` is a byte-for-byte JS port of it,
   verified in `test_frontdoor.py` Sections A/B against every one of those 172 files *and*
   the full 360-hue x 4-look input range (1440 sets) -- not a sample.
-- **`library.json`** -- the real shelf catalog: 12 real, named, open-source self-hosted apps
+- **`library.json`** -- the real shelf catalog: 13 real, named, open-source self-hosted apps
   (Flagsmith, langfuse, Chatwoot, code-server, DocuSeal, Uptime Kuma, Nginx Proxy Manager,
-  Appsmith, Memos, Infisical, Super Productivity, Galene), copied verbatim from their own
-  `app.json` entries in Sam's 52_APP_LIBRARY acquisition pipeline (name, category, repository,
-  real screenshot). None of them shipped their actual page source through this pipeline -- only
-  catalog metadata and a screenshot -- so every entry is marked `"family": ""` (no
-  `render_css.py`-style CSS family) in `library.json`, per the rule below. That's a separate
-  question from whether the app itself has been proven to actually run: **10 of the 12 have
+  Appsmith, Mautic, Memos, Infisical, Super Productivity, Galene), copied verbatim from their
+  own `app.json` entries in Sam's 52_APP_LIBRARY acquisition pipeline (name, category,
+  repository, real screenshot). None of them shipped their actual page source through this
+  pipeline -- only catalog metadata and a screenshot -- so every entry is marked `"family": ""`
+  (no `render_css.py`-style CSS family) in `library.json`, per the rule below. That's a separate
+  question from whether the app itself has been proven to actually run: **11 of the 13 have
   been** -- real source cloned, built, and driven through their real UI in a real browser.
   See `shelf-integrations/STATUS.md` for the full per-app tally, and
   `shelf-integrations/productivity/` for the one that goes further still (the skin engine's
@@ -138,18 +138,20 @@ check for itself rather than assume.
 separate from `test_frontdoor.py`'s 96 tests because it needs a live build already running
 (too heavy for every commit) and skips cleanly rather than failing when one isn't reachable.
 
-## Proven running: 10 of 12 shelf apps (`shelf-integrations/STATUS.md`)
+## Proven running: 11 of 13 shelf apps (`shelf-integrations/STATUS.md`)
 
-Beyond Super Productivity's full skin integration, 9 more apps were cloned, built with real
+Beyond Super Productivity's full skin integration, 10 more apps were cloned, built with real
 native infrastructure (no docker -- image pulls are blocked here, so this runs on
-apt-installed Postgres/Redis/pgvector, Go, Ruby, Node), and driven through a real signup or
-setup flow into their real dashboard, with mobile-viewport overflow checked and the console
-watched for JS errors the whole way: **Uptime Kuma, DocuSeal, Chatwoot, Infisical, Nginx
-Proxy Manager, Memos, Galene, and langfuse** (the last on its final Postgres-only release,
-`v2.95.12`, since current main needs a ClickHouse+S3 stack unreachable here -- disclosed, not
-silently substituted). Full per-app mechanism notes, real bugs found along the way (DocuSeal's
-own committed SQLite schema has Postgres-only SQL), and the exact fixes applied are in
-`shelf-integrations/STATUS.md`.
+apt-installed Postgres/MariaDB/Redis/pgvector, Go, Ruby, PHP, Node), and driven through a real
+signup or setup flow into their real dashboard, with mobile-viewport overflow checked and the
+console watched for JS errors the whole way: **Uptime Kuma, DocuSeal, Chatwoot, Infisical,
+Nginx Proxy Manager, Memos, Galene, Mautic, and langfuse** (the last on its final
+Postgres-only release, `v2.95.12`, since current main needs a ClickHouse+S3 stack unreachable
+here -- disclosed, not silently substituted; Mautic on MariaDB 10.11 since Mautic 7.x's own
+installer refuses the Ubuntu-archive MySQL 8.0, and MariaDB is a real, supported alternative
+per Mautic's own compatibility matrix). Full per-app mechanism notes, real bugs found along
+the way (DocuSeal's own committed SQLite schema has Postgres-only SQL), and the exact fixes
+applied are in `shelf-integrations/STATUS.md`.
 
 **Flagsmith and Appsmith are genuinely blocked**: Flagsmith's `pyproject.toml` requires
 `flagsmith-private` from a non-public package index; Appsmith's entire config store is built
@@ -162,7 +164,7 @@ this sandbox, lower-value to chase than the business apps.
 
 ## Not yet proven
 
-- None of the 12 shelf apps' actual page markup has a `render_css.py`-style CSS family yet --
+- None of the 13 shelf apps' actual page markup has a `render_css.py`-style CSS family yet --
   "proven running" (above) and "measured for a full stylesheet skin" are different bars. Only
   Super Productivity has gone further, via its own real theming service rather than a CSS
   family (see above).
