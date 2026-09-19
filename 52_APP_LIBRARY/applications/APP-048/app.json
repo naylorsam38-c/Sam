@@ -152,7 +152,7 @@
  ],
  "install_startup": {
   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-  "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c /deps/install_deps.sh\" did not complete successfully: exit code: 100",
+  "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c /deps/install_deps.sh\" did not complete successfully: exit code: 100 Checked for a Docker Hub alternative (the pattern that unblocked several other apps this pass): blakeblackshear/frigate exists on Docker Hub but is a stale, abandoned mirror stuck at v0.11.1 (years behind the actively-developed source in this repo, which only ships current builds via ghcr.io) - using it would mean testing a different, outdated product build under the current app's name, not a legitimate same-release substitution like the ones that worked elsewhere. Remains genuinely blocked: ghcr.io/pkg-containers.githubusercontent.com is a deliberate policy denial with no current legitimate alternate channel found.",
   "blocked_host": "pkg-containers.githubusercontent.com",
   "runtime_hint": [
    "python"

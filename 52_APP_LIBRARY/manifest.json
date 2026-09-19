@@ -986,7 +986,7 @@
    ],
    "install_startup": {
     "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:18664310d22f348f6bab66e284f0a72e7dd7c98911fcdeab13fcb45857de30f8?se=2026-09-19T12%3A05%3A00Z&sig=c83Y%2Fx3rnayNs%2Fo88WhvU3fvPkjnDvqN6eNmiMmy%2BMQ%3D&ske=2026-09-20T04%3A28%3A47Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T04%3A28%3A47Z&sktid=3",
+    "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:18664310d22f348f6bab66e284f0a72e7dd7c98911fcdeab13fcb45857de30f8?se=2026-09-19T12%3A05%3A00Z&sig=c83Y%2Fx3rnayNs%2Fo88WhvU3fvPkjnDvqN6eNmiMmy%2BMQ%3D&ske=2026-09-20T04%3A28%3A47Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T04%3A28%3A47Z&sktid=3 Checked for a Docker Hub alternative: firezone/firezone exists but is Firezone's old, pre-rewrite monolithic self-hosted product. This repo's compose file is the current split portal/elixir/gateway architecture, published only to ghcr.io/firezone/* with no Docker Hub counterpart for portal or gateway - substituting the old monolith would test a different, unrelated product generation under the current app's name, not a legitimate same-release substitution like the ones that worked elsewhere. Remains genuinely blocked: ghcr.io/pkg-containers.githubusercontent.com is a deliberate policy denial with no current legitimate alternate channel found.",
     "blocked_host": "pkg-containers.githubusercontent.com",
     "runtime_hint": [],
     "startup_command": "docker compose -f docker-compose.yml up -d",
@@ -6972,7 +6972,7 @@
    ],
    "install_startup": {
     "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c /deps/install_deps.sh\" did not complete successfully: exit code: 100",
+    "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c /deps/install_deps.sh\" did not complete successfully: exit code: 100 Checked for a Docker Hub alternative (the pattern that unblocked several other apps this pass): blakeblackshear/frigate exists on Docker Hub but is a stale, abandoned mirror stuck at v0.11.1 (years behind the actively-developed source in this repo, which only ships current builds via ghcr.io) - using it would mean testing a different, outdated product build under the current app's name, not a legitimate same-release substitution like the ones that worked elsewhere. Remains genuinely blocked: ghcr.io/pkg-containers.githubusercontent.com is a deliberate policy denial with no current legitimate alternate channel found.",
     "blocked_host": "pkg-containers.githubusercontent.com",
     "runtime_hint": [
      "python"
@@ -7003,7 +7003,7 @@
    "version": null,
    "commit": "6f1078011b39612838a1ce271dac5535ef9a57e5",
    "source_path": "applications/APP-049/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "BUILD_RESOURCE_CONSTRAINED",
    "declared_itself": false,
    "manual_override_reason": "automated pick (RSSHub) is an RSS feed aggregator, not a social-media app",
    "discovery_candidates": [
@@ -7074,17 +7074,16 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs18/blobs/sha256:5a92b2257df2e5998411020df629daf810e3bee7f86e8746cb7979de422ba15b?se=2026-09-19T12%3A45%3A00Z&sig=MSkvwK3BZOBBXKCF9gai110QvRboFg815Q9Fj6mndrs%3D&ske=2026-09-20T08%3A31%3A09Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T08%3A31%3A09Z&sktid=3",
-    "blocked_host": "pkg-containers.githubusercontent.com",
+    "status": "BUILD_RESOURCE_CONSTRAINED",
+    "reason": "The project's own compose file pulls ghcr.io/gitroomhq/postiz-app, with no Docker Hub equivalent (gitroomhq isn't on Docker Hub at all) - but the repo ships Dockerfile.dev, a real production build (pnpm install, pnpm build, nginx+pm2 to serve), just named for local/dev compose. Built from it directly instead (docker-compose.library.yml + Dockerfile.library), which needed two fixes: (1) Dockerfile.dev's apt-get for g++/make/python3-pip/nginx needs deb.debian.org, also blocked - switched the base image from node:22.20-bookworm-slim to the non-slim node:22.20-bookworm (already ships g++/make/python3) and got nginx by copying its binary + libs from the official nginx:stable-bookworm Docker Hub image (matched to the same Debian bookworm base for glibc compatibility, verified the copied binary actually runs before writing the Dockerfile). (2) the sandbox's proxy CA needed adding for pnpm install (NODE_EXTRA_CA_CERTS), confirmed working - pnpm resolved and downloaded 2200+ packages successfully. Both external-dependency blocks are genuinely resolved. The pnpm install itself is disk-heavy for this monorepo and didn't fit this sandbox's free space alongside the other unblocked apps' live containers - aborted at ~3.4GB free and dropping to avoid risking those, same call made for Cal.diy. Needs a re-run with more headroom - Dockerfile.library and docker-compose.library.yml are committed and ready.",
+    "blocked_host": null,
     "runtime_hint": [
      "node"
     ],
-    "startup_command": "docker compose -f docker-compose.yaml up -d",
-    "log": [
-     "copied .env.example -> .env",
-     "$ docker compose -p lib_app049 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-049/source/docker-compose.yaml up -d\n\n Image postgres:17-alpine Pulling \n Image ghcr.io/gitroomhq/postiz-app:latest Pulling \n Image elasticsearch:7.17.27 Pulling \n Image postgres:16 Pulling \n Image temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1 Pulling \n Image temporalio/auto-setup:1.28.1 Pulling \n Image temporalio/ui:2.34.0 Pulling \n Image redis:7.2 Pulling \n Image ghcr.io/getsentry/spotlight:latest Pulling \n Image temporalio/ui:2.34.0 Interrupted \n Image temporalio/auto-setup:1.28.1 Interrupted \nfailed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs18/blobs/sha256:5a92b2257df2e5998411020df629daf810e3bee7f86e8746cb7979de422ba15b?se=2026-09-19T12%3A45%3A00Z&sig=MSkvwK3BZOBBXKCF9gai110QvRboFg815Q9Fj6mndrs%3D&ske=2026-09-20T08%3A31%3A09Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T08%3A31%3A09Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=2fcb3203940c0cdaa0a7c55c05dc31b05f38158f30d48ebc789ab849a4b60790\": Forbidden\n"
-    ]
+    "recipe": "docker-compose.library.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "Trimmed the project's own compose file to postiz + postiz-postgres + postiz-redis only (dropped Temporal/Elasticsearch/Spotlight - postiz only depends_on postgres+redis, Temporal is joined via a network reference, not a hard dependency). Built the app from Dockerfile.dev's own real production build instead of the ghcr.io image (see reason). JWT_SECRET/URLs left as the project's own documented example values (not real credentials).",
+    "startup_command": "docker compose -f docker-compose.library.yml build postiz && docker compose -f docker-compose.library.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
