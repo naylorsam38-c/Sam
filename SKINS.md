@@ -19,9 +19,12 @@ faith later:
   Super Productivity), copied verbatim from their own `app.json` entries in Sam's
   52_APP_LIBRARY acquisition pipeline (name, category, repository, real screenshot). What
   was **not** provided for any of them is their actual page source -- only this metadata and
-  a screenshot. So every one of these 8 apps is honestly marked `"family": ""` (colours only)
-  in `library.json`, per the rule below. Nothing here pretends one of them has been measured
-  when it hasn't.
+  a screenshot. So every one of these 8 apps is marked `"family": ""` (no `render_css.py`-style
+  CSS family) in `library.json`, per the rule below. One of them -- Super Productivity -- has
+  since had its real source cloned, built, and driven live through its own real UI; see
+  `shelf-integrations/productivity/` and the "Proven: a real app, wired for real" section
+  below. The other 7 remain colours-only metadata, honestly. Nothing here pretends one of
+  them has been measured when it hasn't.
 - **`front-door.html` / `shelf-ui.js` / `demo-app.html`** -- new, built for this task. The
   ask -> resolve -> preview -> keep/undo flow is real and fully tested, but the thing it
   visibly reskins live is `demo-app.html`, a small first-party `shared_card`-family fixture
@@ -104,12 +107,42 @@ different port for the cross-origin adapter proof):
 - Adapter: both measured families delivered across a real different origin, colours-only
   apps get variables with no guessed stylesheet, wrong-origin senders are refused and named.
 
+## Proven: a real app, wired for real (`shelf-integrations/productivity/`)
+
+Super Productivity's real source (`github.com/johannesjo/super-productivity`, commit
+`a1743173`) was cloned, `npm install`ed, and built for real
+(`ng build sp2 --configuration=productionWeb` -- it's purely client-side, no backend or
+database, which is why it was picked first). A real Chromium opened the real build and,
+through the app's **own real Settings UI** (not a console shortcut), created a tag, set its
+colour via the app's own native colour-input component, saved, and switched into that tag's
+context -- exactly what a person would click through. The colour handed in was our engine's
+real output for this exact shelf entry:
+`design_tokens.build_tokens("bold_contrast", category_hue("productivity"))["primary"]`.
+
+Verified live, in the browser, with zero JS errors: the app's own real
+`--palette-primary-500` custom property (and the whole Material colour ladder behind it) was
+recomputed by the app's own `MaterialCssVarsService` to our exact colour, and the whole
+chrome -- sidenav highlight, add-task button, header icon -- visibly recoloured. Screenshots
+in `shelf-integrations/productivity/evidence/`.
+
+A genuinely useful negative result came out of this too: a naive direct override of
+`--palette-primary-500`/`--brand` (the same generic-variable pattern
+`frontdoor-skin-adapter.js` uses) **did not work** -- the app's dynamic theming computes far
+more than those two variables at runtime. Driving the real UI was the only mechanism that
+actually worked; see `shelf-integrations/productivity/README.md` for the full account, kept
+rather than hidden, since it's exactly the kind of thing the next app's integration needs to
+check for itself rather than assume.
+
+`shelf-integrations/productivity/test_super_productivity_live.py` reproduces this; it's kept
+separate from `test_frontdoor.py`'s 96 tests because it needs a live build already running
+(too heavy for every commit) and skips cleanly rather than failing when one isn't reachable.
+
 ## Not yet proven
 
-- **None of the 8 real shelf apps' actual page markup has been measured.** They ship
-  colours-only. Doing this for real (per `skins_library/REPORT.md`'s own methodology: read
-  the real source, find the real selectors, add a renderer, verify live) is the next step,
-  app by app, starting with whichever is easiest to reach without a full docker stack.
+- The other 7 real shelf apps' actual page markup hasn't been measured. They ship
+  colours-only. Several (Chatwoot, DocuSeal, Infisical, Flagsmith) need a real
+  Postgres/Redis stack to boot, unlike Super Productivity -- that's the real reason they
+  weren't attempted in the same pass, not a smaller effort.
 - `reference/` holds the original demo materials (`SKINS.md.orig`, `test_skins.py.orig`) this
   system was built from, for provenance -- they describe a smaller, fictional 43/52-category
   demo catalog, not this repo's real one.

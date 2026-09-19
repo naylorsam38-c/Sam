@@ -86,9 +86,16 @@
       "name": "Super Productivity",
       "category": "Productivity",
       "repository": "https://github.com/super-productivity/super-productivity",
+      "repository_note": "This app's own app.json gives this URL, but it 404s -- the real, actively-maintained repo (cloned, built, and verified for this project's real integration below) is https://github.com/johannesjo/super-productivity. Kept the catalog's original field as-is and noting the discrepancy, per this file's own rule of not silently rewriting acquired metadata.",
       "blurb": "Advanced todo list app with integrated timeboxing and time tracking capabilities. Integrates with Jira, GitHub, GitLab, Redmine and OpenProject.",
       "keywords": ["todo list", "task tracker", "job tracker", "time tracking", "timeboxing", "productivity", "to-do"],
       "family": "",
+      "real_integration": {
+        "status": "proven",
+        "commit": "a1743173e923492bc15e9e1b3d96d92e8d2c8b94",
+        "mechanism": "UI-automation, not a render_css.py CSS family -- the app's own real Settings/tag colour picker drives its own real MaterialCssVarsService.setPrimaryColor(), verified live in a real browser with zero JS errors.",
+        "details": "shelf-integrations/productivity/README.md"
+      },
       "screenshot": "shelf/productivity/home.png"
     }
   ]
