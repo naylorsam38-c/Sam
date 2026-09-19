@@ -9,7 +9,7 @@
  "version": null,
  "commit": "057be38cd51bb5789439752dfa2bacd549537939",
  "source_path": "applications/APP-032/source",
- "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -212,17 +212,14 @@
   }
  ],
  "install_startup": {
-  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-  "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add tzdata\" did not complete successfully: exit code: 1",
-  "blocked_host": "dl-cdn.alpinelinux.org",
-  "runtime_hint": [
-   "node",
-   "go"
-  ],
-  "startup_command": "docker build -f Dockerfile .",
-  "log": [
-   "$ docker build -t localhost/lib_app032:lib --network=host -f /home/user/Sam/52_APP_LIBRARY/applications/APP-032/source/Dockerfile .\n\n3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#11 0.139 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#11 0.140 ERROR: unable to select packages:\n#11 0.140   tzdata (no such package):\n#11 0.140     required by: world[tzdata]\n#11 ERROR: process \"/bin/sh -c apk --no-cache add tzdata\" did not complete successfully: exit code: 1\n\n#12 [be-builder 2/6] WORKDIR /go/src/github.com/mayswind/ezbookkeeping\n#12 CANCELED\n\n#6 [fe-builder 1/6] FROM docker.io/library/node:26.8.1-alpine3.24@sha256:2d984a15c9b54fd0aeb608b8e0d0d83529eb34d2966db27a1fb4f1edc3d298a3\n#6 sha256:80d39da31aaab43d6b63da0ed87ad747290062bd97f8901fe45eefb469cfeb0c 451B / 451B 0.6s done\n#6 sha256:9098cc82c400bbe83569e25f937227d53aad39a688142b5dbb979dab5cfc5414 59.76MB / 59.76MB 1.7s done\n#6 extracting sha256:9098cc82c400bbe83569e25f937227d53aad39a688142b5dbb979dab5cfc5414 0.2s done\n#6 DONE 2.1s\n\n#13 [fe-builder 2/6] WORKDIR /go/src/github.com/mayswind/ezbookkeeping\n#13 CANCELED\n------\n > [stage-2  3/12] RUN apk --no-cache add tzdata:\n0.125 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.139 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.140 ERROR: unable to select packages:\n0.140   tzdata (no such package):\n0.140     required by: world[tzdata]\n------\nDockerfile:43\n--------------------\n  41 |     LABEL maintainer=\"MaysWind <i@mayswind.net>\"\n  42 |     RUN addgroup -S -g 1000 ezbookkeeping && adduser -S -G ezbookkeeping -u 1000 ezbookkeeping\n  43 | >>> RUN apk --no-cache add tzdata\n  44 |     COPY docker/docker-entrypoint.sh /docker-entrypoint.sh\n  45 |     RUN chmod +x /docker-entrypoint.sh\n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add tzdata\" did not complete successfully: exit code: 1\n"
-  ]
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8093/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The project's own Dockerfile builds from source, needing tzdata from dl-cdn.alpinelinux.org, which this sandbox's egress policy denies. mayswind/ezbookkeeping is the same project's image also officially published to Docker Hub - used it directly in a new compose file instead of building from source, reached via the org's already-allowed Docker Hub route. The container runs as uid 1000, so the host-created bind-mounted data/log directories needed chown -R 1000:1000 before boot to avoid a permission-denied error opening the sqlite database.",
+  "startup_command": "docker compose -f docker-compose.yml up -d"
  },
  "ecosystem": {
   "detected_ecosystems": {
@@ -235,5 +232,11 @@
   },
   "has_container_recipe": true,
   "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 1,
+  "screens_reached": 1,
+  "screens_rendered": 1,
+  "screens_browser_verified": 1
  }
 }

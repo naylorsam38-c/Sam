@@ -14,7 +14,7 @@
    "version": null,
    "commit": "190c645d83d11f627a241cd4e5540d0a26ad73ba",
    "source_path": "applications/APP-001/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -59,19 +59,25 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs docker.flagsmith.com, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"docker.flagsmith.com/flagsmith/flagsmith:latest\": failed to do request: Head \"https://docker.flagsmith.com/v2/flagsmith/flagsmith/manifests/latest\": Forbidden",
-    "blocked_host": "docker.flagsmith.com",
-    "runtime_hint": [],
-    "startup_command": "docker compose -f docker-compose.yml up -d",
-    "log": [
-     "$ docker compose -p lib_app001 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-001/source/docker-compose.yml up -d\n\n Image docker.flagsmith.com/flagsmith/flagsmith:latest Pulling \n Image postgres:15.5-alpine Pulling \n Image docker.flagsmith.com/flagsmith/flagsmith:latest Pulling \n Image docker.flagsmith.com/flagsmith/flagsmith:latest Pulling \n Image docker.flagsmith.com/flagsmith/flagsmith:latest Error failed to resolve reference \"docker.flagsmith.com/flagsmith/flagsmith:latest\": failed to do request: Head \"https://docker.flagsmith.com/v2/flagsmith/flagsmith/manifests/latest\": Forbidden\n Image docker.flagsmith.com/flagsmith/flagsmith:latest Interrupted \n Image postgres:15.5-alpine Interrupted \n Image docker.flagsmith.com/flagsmith/flagsmith:latest Interrupted \nError response from daemon: failed to resolve reference \"docker.flagsmith.com/flagsmith/flagsmith:latest\": failed to do request: Head \"https://docker.flagsmith.com/v2/flagsmith/flagsmith/manifests/latest\": Forbidden\n"
-    ]
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:8094/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "The project's own compose file pulls from docker.flagsmith.com, a vendor-run registry mirror that this sandbox's egress policy denies (403). flagsmith/flagsmith is the same image also officially published to Docker Hub - pointed the compose file at flagsmith/flagsmith:latest there instead, with a standalone Postgres service and a migrate-db one-shot job (Flagsmith's own documented self-hosted pattern), reached via the org's already-allowed Docker Hub route.",
+    "startup_command": "docker compose -f docker-compose.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {},
     "has_container_recipe": true,
     "database_requirement": "postgres"
+   },
+   "screen_summary": {
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 15,
+    "screens_browser_verified": 15
    }
   },
   {
@@ -1587,7 +1593,7 @@
    "version": null,
    "commit": "ddf2787c5e3891f4578da5552436694a94f1ae22",
    "source_path": "applications/APP-012/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": false,
    "manual_override_reason": "automated pick (code-server) matched 'browser' as a stray word in 'VS Code in the browser' - it's a web IDE, not a browser app",
    "discovery_candidates": [
@@ -1812,19 +1818,25 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs06/blobs/sha256:6377fb6a3f0a8c03f4ca07a3f0af7e991c32cb53983e0c638bddfcffdc9f3dc1?se=2026-09-19T12%3A15%3A00Z&sig=naj19RwG7Vb3VINn4NVUfxzzGB8cU2iW7R5%2BIpuHEfE%3D&ske=2026-09-20T02%3A20%3A05Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T02%3A20%3A05Z&sktid",
-    "blocked_host": "pkg-containers.githubusercontent.com",
-    "runtime_hint": [],
-    "startup_command": "docker compose -f docker-compose.yaml up -d",
-    "log": [
-     "$ docker compose -p lib_app012 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-012/source/docker-compose.yaml up -d\n\n Image ghcr.io/m1k1o/neko/firefox:latest Pulling \nfailed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs06/blobs/sha256:6377fb6a3f0a8c03f4ca07a3f0af7e991c32cb53983e0c638bddfcffdc9f3dc1?se=2026-09-19T12%3A15%3A00Z&sig=naj19RwG7Vb3VINn4NVUfxzzGB8cU2iW7R5%2BIpuHEfE%3D&ske=2026-09-20T02%3A20%3A05Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T02%3A20%3A05Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=b169a51e479b3e19c7d7c8b647302b0da363e3a40ba29c05d96a7ffad3fdf143\": Forbidden\n"
-    ]
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:8095/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "The project's own compose file pulls a GHCR-hosted image via pkg-containers.githubusercontent.com, which this sandbox's egress policy denies. m1k1o/neko is the same project's image also officially published to Docker Hub - pointed a new compose file at m1k1o/neko:firefox instead, reached via the org's already-allowed Docker Hub route, keeping the same WebRTC port range and shared-memory size the project documents.",
+    "startup_command": "docker compose -f docker-compose.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {},
     "has_container_recipe": true,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 2,
+    "screens_browser_verified": 2
    }
   },
   {
@@ -3892,7 +3904,7 @@
    "version": null,
    "commit": "c37bfd95797fd6da8a6da53fc13d191994b3f687",
    "source_path": "applications/APP-027/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4132,16 +4144,14 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk add git musl-dev mailcap\" did not complete successfully: exit code: 3",
-    "blocked_host": "dl-cdn.alpinelinux.org",
-    "runtime_hint": [
-     "go"
-    ],
-    "startup_command": "docker build -f Dockerfile .",
-    "log": [
-     "$ docker build -t localhost/lib_app027:lib --network=host -f /home/user/Sam/52_APP_LIBRARY/applications/APP-027/source/Dockerfile .\n\ne314006f231fe6e9f219cf5432ca done\n#5 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done\n#5 DONE 6.4s\n\n#6 [build 2/8] RUN apk add git musl-dev mailcap\n#6 0.196 WARNING: updating and opening https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#6 0.212 WARNING: updating and opening https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#6 0.213 ERROR: unable to select packages:\n#6 0.213   git (no such package):\n#6 0.213     required by: world[git]\n#6 0.213   mailcap (no such package):\n#6 0.213     required by: world[mailcap]\n#6 0.213   musl-dev (no such package):\n#6 0.213     required by: world[musl-dev]\n#6 ERROR: process \"/bin/sh -c apk add git musl-dev mailcap\" did not complete successfully: exit code: 3\n------\n > [build 2/8] RUN apk add git musl-dev mailcap:\n0.196 WARNING: updating and opening https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.212 WARNING: updating and opening https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.213 ERROR: unable to select packages:\n0.213   git (no such package):\n0.213     required by: world[git]\n0.213   mailcap (no such package):\n0.213     required by: world[mailcap]\n0.213   musl-dev (no such package):\n0.213     required by: world[musl-dev]\n------\n\n \u001b[33m1 warning found (use docker --debug to expand):\n\u001b[0m - FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 3)\nDockerfile:6\n--------------------\n   4 |     \n   5 |     # Necessary to run 'go get' and to compile the linked binary\n   6 | >>> RUN apk add git musl-dev mailcap\n   7 |     \n   8 |     WORKDIR /go/src/github.com/dutchcoders/transfer.sh\n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk add git musl-dev mailcap\" did not complete successfully: exit code: 3\n"
-    ]
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:8092/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "The project's own Dockerfile builds from source, needing git/musl-dev/mailcap from dl-cdn.alpinelinux.org, which this sandbox's egress policy denies. dutchcoders/transfer.sh is the same project's image also officially published to Docker Hub - used it directly in a new compose file instead of building from source, reached via the org's already-allowed Docker Hub route.",
+    "startup_command": "docker compose -f docker-compose.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -4151,6 +4161,12 @@
     },
     "has_container_recipe": true,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 6,
+    "screens_reached": 6,
+    "screens_rendered": 3,
+    "screens_browser_verified": 3
    }
   },
   {
@@ -4427,7 +4443,7 @@
    "version": null,
    "commit": "057be38cd51bb5789439752dfa2bacd549537939",
    "source_path": "applications/APP-032/source",
-   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4630,17 +4646,14 @@
     }
    ],
    "install_startup": {
-    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add tzdata\" did not complete successfully: exit code: 1",
-    "blocked_host": "dl-cdn.alpinelinux.org",
-    "runtime_hint": [
-     "node",
-     "go"
-    ],
-    "startup_command": "docker build -f Dockerfile .",
-    "log": [
-     "$ docker build -t localhost/lib_app032:lib --network=host -f /home/user/Sam/52_APP_LIBRARY/applications/APP-032/source/Dockerfile .\n\n3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#11 0.139 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n#11 0.140 ERROR: unable to select packages:\n#11 0.140   tzdata (no such package):\n#11 0.140     required by: world[tzdata]\n#11 ERROR: process \"/bin/sh -c apk --no-cache add tzdata\" did not complete successfully: exit code: 1\n\n#12 [be-builder 2/6] WORKDIR /go/src/github.com/mayswind/ezbookkeeping\n#12 CANCELED\n\n#6 [fe-builder 1/6] FROM docker.io/library/node:26.8.1-alpine3.24@sha256:2d984a15c9b54fd0aeb608b8e0d0d83529eb34d2966db27a1fb4f1edc3d298a3\n#6 sha256:80d39da31aaab43d6b63da0ed87ad747290062bd97f8901fe45eefb469cfeb0c 451B / 451B 0.6s done\n#6 sha256:9098cc82c400bbe83569e25f937227d53aad39a688142b5dbb979dab5cfc5414 59.76MB / 59.76MB 1.7s done\n#6 extracting sha256:9098cc82c400bbe83569e25f937227d53aad39a688142b5dbb979dab5cfc5414 0.2s done\n#6 DONE 2.1s\n\n#13 [fe-builder 2/6] WORKDIR /go/src/github.com/mayswind/ezbookkeeping\n#13 CANCELED\n------\n > [stage-2  3/12] RUN apk --no-cache add tzdata:\n0.125 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.139 WARNING: fetching https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/APKINDEX.tar.gz: TLS: server certificate not trusted\n0.140 ERROR: unable to select packages:\n0.140   tzdata (no such package):\n0.140     required by: world[tzdata]\n------\nDockerfile:43\n--------------------\n  41 |     LABEL maintainer=\"MaysWind <i@mayswind.net>\"\n  42 |     RUN addgroup -S -g 1000 ezbookkeeping && adduser -S -G ezbookkeeping -u 1000 ezbookkeeping\n  43 | >>> RUN apk --no-cache add tzdata\n  44 |     COPY docker/docker-entrypoint.sh /docker-entrypoint.sh\n  45 |     RUN chmod +x /docker-entrypoint.sh\n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add tzdata\" did not complete successfully: exit code: 1\n"
-    ]
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:8093/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "The project's own Dockerfile builds from source, needing tzdata from dl-cdn.alpinelinux.org, which this sandbox's egress policy denies. mayswind/ezbookkeeping is the same project's image also officially published to Docker Hub - used it directly in a new compose file instead of building from source, reached via the org's already-allowed Docker Hub route. The container runs as uid 1000, so the host-created bind-mounted data/log directories needed chown -R 1000:1000 before boot to avoid a permission-denied error opening the sqlite database.",
+    "startup_command": "docker compose -f docker-compose.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -4653,6 +4666,12 @@
     },
     "has_container_recipe": true,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 1,
+    "screens_reached": 1,
+    "screens_rendered": 1,
+    "screens_browser_verified": 1
    }
   },
   {

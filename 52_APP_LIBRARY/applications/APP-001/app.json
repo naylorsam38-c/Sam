@@ -9,7 +9,7 @@
  "version": null,
  "commit": "190c645d83d11f627a241cd4e5540d0a26ad73ba",
  "source_path": "applications/APP-001/source",
- "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -54,18 +54,24 @@
   }
  ],
  "install_startup": {
-  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-  "reason": "install needs docker.flagsmith.com, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"docker.flagsmith.com/flagsmith/flagsmith:latest\": failed to do request: Head \"https://docker.flagsmith.com/v2/flagsmith/flagsmith/manifests/latest\": Forbidden",
-  "blocked_host": "docker.flagsmith.com",
-  "runtime_hint": [],
-  "startup_command": "docker compose -f docker-compose.yml up -d",
-  "log": [
-   "$ docker compose -p lib_app001 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-001/source/docker-compose.yml up -d\n\n Image docker.flagsmith.com/flagsmith/flagsmith:latest Pulling \n Image postgres:15.5-alpine Pulling \n Image docker.flagsmith.com/flagsmith/flagsmith:latest Pulling \n Image docker.flagsmith.com/flagsmith/flagsmith:latest Pulling \n Image docker.flagsmith.com/flagsmith/flagsmith:latest Error failed to resolve reference \"docker.flagsmith.com/flagsmith/flagsmith:latest\": failed to do request: Head \"https://docker.flagsmith.com/v2/flagsmith/flagsmith/manifests/latest\": Forbidden\n Image docker.flagsmith.com/flagsmith/flagsmith:latest Interrupted \n Image postgres:15.5-alpine Interrupted \n Image docker.flagsmith.com/flagsmith/flagsmith:latest Interrupted \nError response from daemon: failed to resolve reference \"docker.flagsmith.com/flagsmith/flagsmith:latest\": failed to do request: Head \"https://docker.flagsmith.com/v2/flagsmith/flagsmith/manifests/latest\": Forbidden\n"
-  ]
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8094/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The project's own compose file pulls from docker.flagsmith.com, a vendor-run registry mirror that this sandbox's egress policy denies (403). flagsmith/flagsmith is the same image also officially published to Docker Hub - pointed the compose file at flagsmith/flagsmith:latest there instead, with a standalone Postgres service and a migrate-db one-shot job (Flagsmith's own documented self-hosted pattern), reached via the org's already-allowed Docker Hub route.",
+  "startup_command": "docker compose -f docker-compose.yml up -d"
  },
  "ecosystem": {
   "detected_ecosystems": {},
   "has_container_recipe": true,
   "database_requirement": "postgres"
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
  }
 }
