@@ -1,10 +1,22 @@
 {
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0028",
-  "invoice_a": 1036,
-  "invoice_b": 1037,
+  "invoice_a": 946,
+  "invoice_b": 947,
   "result": "PASS",
   "steps": [
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_customer_A",
+      "url": "http://127.0.0.1:5057/api/customers"
+    },
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_customer_B",
+      "url": "http://127.0.0.1:5057/api/customers"
+    },
     {
       "method": "POST",
       "status_code": 201,
@@ -19,10 +31,10 @@
     },
     {
       "method": "GET",
-      "search": "Aadhya Ali",
+      "search": "HarvestProof1789829301CustomerA",
       "status_code": 200,
       "step": "filter_by_customer_a_name",
-      "url": "http://127.0.0.1:5057/api/invoices?search=Aadhya+Ali"
+      "url": "http://127.0.0.1:5057/api/invoices?search=HarvestProof1789829301CustomerA"
     },
     {
       "method": "GET",
@@ -31,5 +43,5 @@
       "url": "http://127.0.0.1:5057/api/invoices?search=zzz-no-such-customer-or-invoice-zzz"
     }
   ],
-  "verified_at": "2026-09-19T14:31:50.639885+00:00"
+  "verified_at": "2026-09-19T14:48:21.517608+00:00"
 }

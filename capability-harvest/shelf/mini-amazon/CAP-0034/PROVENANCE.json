@@ -1,0 +1,51 @@
+{
+  "application": {
+    "category": "e-commerce",
+    "commit": "ce13c893cafbf79119703d2c662d094e1cd9e01f",
+    "repo_url": "https://github.com/benjaminyan1/Mini-Amazon.git",
+    "slug": "mini-amazon"
+  },
+  "cap_id": "CAP-0034",
+  "capability_name": "apply discount code",
+  "category": "e-commerce",
+  "checksums": {
+    "harvested_source_sha256": "cce548787dda4d8f286c92ebfef1040efb881485fe8ba294813310a5d8283828",
+    "whole_source_file_sha256_at_harvest": "3e621ed4780ed67b04f7b002e6d436fdb208c35eac93e5f17c6675234d3f3582"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "Coupon",
+      "bp",
+      "current_user",
+      "flash",
+      "login_required",
+      "redirect",
+      "request",
+      "url_for"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T14:47:31.499255+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@bp.route('/cart/apply_coupon', methods=['POST'])",
+      "@login_required"
+    ],
+    "end_lineno": 124,
+    "evidence_calls_matched": [
+      "apply_coupon",
+      "flash"
+    ],
+    "file": "app/cart.py",
+    "lineno": 113,
+    "route_path": null,
+    "symbol": "apply_coupon"
+  }
+}

@@ -87,8 +87,31 @@ PYTHON_BY_VERSION = {
     "3.11": VENV_PYTHON,
     "3.12": config.PROJECT_ROOT / ".venv-py312" / "bin" / "python3",
     "3.11-legacy-flask": config.PROJECT_ROOT / ".venv-legacy-flask" / "bin" / "python3",
+    # Mini-Amazon needs its own different old Flask 2.3.3/Werkzeug 2.3.7
+    # pairing (its own `werkzeug.urls.url_parse` import, removed by the
+    # time of the shared venv's modern Werkzeug -- confirmed with a real
+    # ImportError before creating this venv, not assumed) -- a different
+    # pinned set than .venv-legacy-flask's Flask 2.2.2, so it gets its own
+    # dedicated venv rather than reusing or further overloading that one.
+    "3.11-mini-amazon": config.PROJECT_ROOT / ".venv-mini-amazon" / "bin" / "python3",
 }
 BUILD_DB_PATH = config.OUTPUT_ROOT / "build_run.db"  # used only by flask_factory apps with a DATABASE_URL env var
+# A real PostgreSQL 16 server is already running in this sandbox (confirmed
+# with `service postgresql start`/`psql`, not assumed) for apps whose own
+# config.py has no SQLite fallback (e.g. Mini-Amazon's
+# `postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}`, no
+# escape hatch). One dedicated, superuser role/database is created ONCE as
+# a real one-time environment setup step (see README "How to reproduce this
+# from scratch") -- build.py itself never creates roles, only drops and
+# recreates the one fixed database it owns, the same "reset before every
+# build" treatment BUILD_DB_PATH gets for SQLite apps. A runner opts in via
+# `needs_postgres: {"schema_relpath": "db/create.sql"}`; its own real,
+# unmodified schema file is applied fresh every build run.
+POSTGRES_HOST = "127.0.0.1"
+POSTGRES_PORT = "5432"
+POSTGRES_USER = "harvestuser"
+POSTGRES_PASSWORD = "harvestpass"
+POSTGRES_DB_NAME = "capability_harvest_build"
 # Some apps resolve their own data directory from $HOME (e.g. an
 # XDG-style `~/.local/share/<app>`) rather than anything inside the
 # cloned repo -- a real, deliberate app behaviour, not something to work
@@ -213,9 +236,32 @@ def _resolve_env(runner: dict) -> dict:
     pointing at a fresh BUILD_DB_PATH), formatted once so setup scripts
     that touch the same database agree with the server on where it is."""
     return {
-        k: v.format(db_path=str(BUILD_DB_PATH), smtp_host="127.0.0.1", smtp_port=SMTP_DEBUG_PORT, isolated_home=str(ISOLATED_HOME))
+        k: v.format(
+            db_path=str(BUILD_DB_PATH), smtp_host="127.0.0.1", smtp_port=SMTP_DEBUG_PORT,
+            isolated_home=str(ISOLATED_HOME), postgres_host=POSTGRES_HOST, postgres_port=POSTGRES_PORT,
+            postgres_user=POSTGRES_USER, postgres_password=POSTGRES_PASSWORD, postgres_db=POSTGRES_DB_NAME,
+        )
         for k, v in runner.get("env", {}).items()
     }
+
+
+def _reset_postgres(cloned_path: Path, needs_postgres: dict):
+    """Drop and recreate the one fixed build database, then apply the
+    app's own real, unmodified schema file -- the Postgres analogue of
+    _reset_files for a SQLite app's stale .db file."""
+    pg_env = {**os.environ, "PGPASSWORD": POSTGRES_PASSWORD}
+    common = ["-h", POSTGRES_HOST, "-p", POSTGRES_PORT, "-U", POSTGRES_USER]
+    subprocess.run(["dropdb", *common, "--if-exists", POSTGRES_DB_NAME], env=pg_env, check=True)
+    subprocess.run(["createdb", *common, POSTGRES_DB_NAME], env=pg_env, check=True)
+    schema_path = cloned_path / needs_postgres["schema_relpath"]
+    result = subprocess.run(
+        ["psql", "-h", POSTGRES_HOST, "-p", POSTGRES_PORT, "-U", POSTGRES_USER, "-v", "ON_ERROR_STOP=1",
+         "-f", str(schema_path), POSTGRES_DB_NAME],
+        env=pg_env, capture_output=True, text=True,
+    )
+    if result.returncode != 0:
+        raise SystemExit(f"ABORT: applying {schema_path} to {POSTGRES_DB_NAME} failed\nstdout={result.stdout}\nstderr={result.stderr}")
+    print(f"  reset: recreated postgres database {POSTGRES_DB_NAME!r} from {schema_path}")
 
 
 def _run_setup_scripts(cloned_path: Path, setup_scripts, python_exe: Path, env_overrides: dict):
@@ -311,6 +357,8 @@ def start(cap_id: str, host: str, port: int):
             shutil.rmtree(ISOLATED_HOME)
         ISOLATED_HOME.mkdir(parents=True)
     _reset_files(cloned_path, runner.get("reset_globs"))
+    if runner.get("needs_postgres"):
+        _reset_postgres(cloned_path, runner["needs_postgres"])
     _run_setup_scripts(cloned_path, runner.get("setup_scripts"), python_exe, _resolve_env(runner))
 
     smtp_proc = None

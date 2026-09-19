@@ -822,6 +822,99 @@ APPLICATION_MANIFEST = [
             },
         },
     },
+    {
+        "slug": "mini-amazon",
+        "clone_url": "https://github.com/benjaminyan1/Mini-Amazon.git",
+        "ref": None,
+        "category": "e-commerce",
+        "why_selected": (
+            "Real Flask + real PostgreSQL (SQLAlchemy raw-SQL engine, no "
+            "SQLite fallback in the app's own config.py) e-commerce app, "
+            "MIT licensed. Coupon.apply_coupon()/cart()'s real discount "
+            "reduction does genuine reserve-checked coupon application -- "
+            "confirmed by attempting an already-expired real seeded "
+            "coupon (rejected, cart total unchanged), applying a real "
+            "non-expired coupon and confirming the cart's real persisted "
+            "total dropped by exactly its discount percentage (a real "
+            "$200.00 -> $160.00 for a 20% coupon), and attempting to "
+            "reapply the same coupon a second time (rejected, 'already "
+            "applied', the real composite-PK AppliedCoupons(user_id, "
+            "coupon_id) uniqueness enforced at the row level). Needs its "
+            "own dedicated Postgres database (build.py's needs_postgres) "
+            "and its own dedicated venv (old Flask 2.3.3/Werkzeug 2.3.7 "
+            "pairing, confirmed by a real ImportError under the shared "
+            "venv's modern Werkzeug before creating one)."
+        ),
+        "runner": {
+            "kind": "flask_factory",
+            "factory_module": "app",
+            "factory_func": "create_app",
+            "python_version": "3.11-mini-amazon",
+            "needs_postgres": {"schema_relpath": "db/create.sql"},
+            "setup_scripts": [
+                # Real setup, not a change to the harvested capability's
+                # logic: seeds one real seller, one real buyer, one real
+                # category/product, one real cart item, and two real
+                # coupons (one genuinely non-expired, one genuinely
+                # already-expired) directly via the app's own real
+                # app.db.execute() calls -- the app exposes no HTTP route
+                # to create a coupon (only its own CSV-seed data does),
+                # so this replicates that same real admin-seed role
+                # non-interactively, the same class of setup already used
+                # for BuyMe/Social-Life/CasettaFit.
+                "-c import sys\n"
+                "sys.path.insert(0, '.')\n"
+                "from app import create_app\n"
+                "from werkzeug.security import generate_password_hash\n"
+                "from datetime import date, timedelta\n"
+                "app = create_app()\n"
+                "with app.app_context():\n"
+                "    db = app.db\n"
+                "    seller = db.execute(\"SELECT user_id FROM Users WHERE email=:e\", e='harvestseller@example.com')\n"
+                "    if not seller:\n"
+                "        seller_id = db.execute(\"INSERT INTO Users(email, password_hash, full_name, address, is_seller) VALUES(:e, :p, 'Harvest Seller', '1 Test St', TRUE) RETURNING user_id\", e='harvestseller@example.com', p=generate_password_hash('SellerPass123!'))[0][0]\n"
+                "    else:\n"
+                "        seller_id = seller[0][0]\n"
+                "    buyer = db.execute(\"SELECT user_id FROM Users WHERE email=:e\", e='harvestbuyer@example.com')\n"
+                "    if not buyer:\n"
+                "        buyer_id = db.execute(\"INSERT INTO Users(email, password_hash, full_name, address) VALUES(:e, :p, 'Harvest Buyer', '2 Test St') RETURNING user_id\", e='harvestbuyer@example.com', p=generate_password_hash('BuyerPass123!'))[0][0]\n"
+                "    else:\n"
+                "        buyer_id = buyer[0][0]\n"
+                "    cat = db.execute(\"SELECT category_name FROM Categories WHERE category_name='Harvest'\")\n"
+                "    if not cat:\n"
+                "        db.execute(\"INSERT INTO Categories(category_name) VALUES('Harvest')\")\n"
+                "    prod = db.execute(\"SELECT product_id FROM Products WHERE name='Harvest Proof Product'\")\n"
+                "    if not prod:\n"
+                "        product_id = db.execute(\"INSERT INTO Products(category_name, name, description, price, created_by) VALUES('Harvest', 'Harvest Proof Product', 'test', 100.00, :s) RETURNING product_id\", s=seller_id)[0][0]\n"
+                "    else:\n"
+                "        product_id = prod[0][0]\n"
+                "    cart_item = db.execute(\"SELECT cart_item_id FROM CartItems WHERE user_id=:u AND product_id=:p\", u=buyer_id, p=product_id)\n"
+                "    if not cart_item:\n"
+                "        db.execute(\"INSERT INTO CartItems(user_id, product_id, seller_id, quantity) VALUES(:u, :p, :s, 2)\", u=buyer_id, p=product_id, s=seller_id)\n"
+                "    valid_coupon = db.execute(\"SELECT coupon_id FROM Coupons WHERE name='Harvest Valid Coupon'\")\n"
+                "    if not valid_coupon:\n"
+                "        valid_id = db.execute(\"INSERT INTO Coupons(name, categories, discount, expiry_date) VALUES('Harvest Valid Coupon', 'all', 20, :d) RETURNING coupon_id\", d=(date.today() + timedelta(days=30)))[0][0]\n"
+                "    else:\n"
+                "        valid_id = valid_coupon[0][0]\n"
+                "    expired_coupon = db.execute(\"SELECT coupon_id FROM Coupons WHERE name='Harvest Expired Coupon'\")\n"
+                "    if not expired_coupon:\n"
+                "        expired_id = db.execute(\"INSERT INTO Coupons(name, categories, discount, expiry_date) VALUES('Harvest Expired Coupon', 'all', 50, :d) RETURNING coupon_id\", d=(date.today() - timedelta(days=5)))[0][0]\n"
+                "    else:\n"
+                "        expired_id = expired_coupon[0][0]\n"
+                "    print('seeded seller_id=', seller_id, 'buyer_id=', buyer_id, 'product_id=', product_id, 'valid_coupon_id=', valid_id, 'expired_coupon_id=', expired_id)",
+            ],
+            "readiness_path": "/login",
+            "env": {
+                "DB_USER": "{postgres_user}",
+                "DB_PASSWORD": "{postgres_password}",
+                "DB_HOST": "{postgres_host}",
+                "DB_PORT": "{postgres_port}",
+                "DB_NAME": "{postgres_db}",
+                "SECRET_KEY": "capability-harvest-build-run",
+                "OPENAI_API_KEY": "unused",
+            },
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

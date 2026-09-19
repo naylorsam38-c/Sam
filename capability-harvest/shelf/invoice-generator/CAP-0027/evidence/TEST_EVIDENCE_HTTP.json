@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0027",
-  "invoice_id": 1000,
+  "invoice_id": 1089,
   "result": "PASS",
   "steps": [
     {
@@ -20,8 +20,8 @@
       "method": "GET",
       "status_code": 200,
       "step": "fetch_invoice_detail",
-      "url": "http://127.0.0.1:5057/api/invoices/1000"
+      "url": "http://127.0.0.1:5057/api/invoices/1089"
     }
   ],
-  "verified_at": "2026-09-19T14:31:48.920425+00:00"
+  "verified_at": "2026-09-19T14:48:20.129954+00:00"
 }

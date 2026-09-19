@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 33 capabilities harvested from 21 real applications, each one
+**Status**: 34 capabilities harvested from 22 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 33 capabilities harvested so far
+## The 34 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -80,6 +80,7 @@ No script assumes a working directory.
 | CAP-0031 | paginate list | [MadGotten/Social-Life](https://github.com/MadGotten/Social-Life) | Apache-2.0 | `app.py:16` `index` (real Flask-SQLAlchemy `.paginate()` LIMIT+OFFSET split, `order_by`, `paginate`) | HTTP |
 | CAP-0032 | scan barcode | [UserSky21/Pharmaceutical-Inventory-System-](https://github.com/UserSky21/Pharmaceutical-Inventory-System-) | Apache-2.0 | `app.py:326` `get_product_by_barcode` (real barcode-to-product lookup, `filter_by`, `jsonify`) | HTTP |
 | CAP-0033 | close auction | [arpannookala12/BuyMe---Online-Auction-System](https://github.com/arpannookala12/BuyMe---Online-Auction-System) | MIT | `app/routes/auction.py:682` `end_auction` (real reserve-price-checked winner determination, admin/customer-rep-gated, `determine_winner`, `commit`) | HTTP |
+| CAP-0034 | apply discount code | [benjaminyan1/Mini-Amazon](https://github.com/benjaminyan1/Mini-Amazon) | MIT | `app/cart.py:113` `apply_coupon` (real expiry-checked, duplicate-guarded coupon application against a real PostgreSQL cart total, `apply_coupon`, `flash`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -197,6 +198,19 @@ code):
   `reset_globs` before seeding runs, exactly as it would for any other
   stale local file; leaving it in place would have silently mixed a prior
   developer's real sample data into what should be a fresh proof run.
+- Invoice-generator's own `seed_database.py` procedurally generates real
+  customers each run from a small (22 first name × 15 last name) random
+  pool with no uniqueness check, so two of them can genuinely collide on
+  the same full name -- caught for real when CAP-0028's original proof
+  (which picked "the first two seeded customers" and assumed their names
+  wouldn't overlap) started intermittently failing during a later batch's
+  full reproducibility sweep, a real `LIKE '%name%'` match correctly
+  returning both customers' invoices once their names happened to be
+  identical, not a bug in the filter itself. Fixed at the test's level
+  (not the app's): CAP-0028's proof now creates two customers with a
+  guaranteed-unique marker in their names via the app's own real `POST
+  /api/customers` route, rather than trusting the random seed pool never
+  to collide.
 - Invoice-generator's `server.py` constructs `Flask(__name__,
   template_folder='.')`, but the PDF templates it renders
   (`invoice_pdf*.html`) live under `templates/` — a real bug in the
@@ -300,7 +314,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 33 capabilities across 21 apps (see the
+AST-based, line-accurate for all 34 capabilities across 22 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -521,6 +535,22 @@ Highlights beyond the basic "call it and check 200":
   `/auction/<id>/bid` submission endpoint -- and silently produced zero
   persisted bids; caught by reading the real bids table directly rather
   than trusting the 200 status code, not assumed away.)
+- CAP-0034: against a real PostgreSQL-backed database (this app's own
+  `config.py` has no SQLite fallback), attempts an already-expired real
+  seeded coupon and confirms it's genuinely rejected with the cart total
+  unchanged, applies a real non-expired coupon and confirms the cart's
+  real persisted total drops by exactly its discount percentage (a real
+  $200.00 subtotal to $160.00 for a 20% coupon), and confirms re-applying
+  the same coupon a second time is genuinely rejected -- the real
+  composite-PK `AppliedCoupons(user_id, coupon_id)` uniqueness enforced
+  at the row level. First real PostgreSQL-backed capability in this
+  pipeline (`build.py`'s new `needs_postgres` runner field drops and
+  recreates one fixed build database and applies the app's own real,
+  unmodified schema file fresh before every build, the Postgres analogue
+  of `reset_globs` for a SQLite app's stale file); needs its own
+  dedicated venv too (a different old Flask 2.3.3/Werkzeug 2.3.7 pairing
+  than `.venv-legacy-flask`'s, confirmed by a real `ImportError` under
+  the shared venv's modern Werkzeug before creating `.venv-mini-amazon`).
 
 ## How to reproduce this from scratch
 
@@ -556,13 +586,31 @@ python3.11 -m venv .venv-legacy-flask
     flask-bootstrap==3.3.7.1 flask-babel==2.0.0 flask-wtf==1.1.1 \
     elasticsearch==8.6.0 email-validator==1.3.1 werkzeug==2.2.2 python-dotenv
 
+# Mini-Amazon genuinely needs a DIFFERENT old Flask 2.3.3 / Werkzeug 2.3.7
+# pairing (its own `werkzeug.urls.url_parse` import, removed by the time
+# of the shared venv's modern Werkzeug -- confirmed with a real
+# ImportError before creating this venv, not assumed) -- not the same
+# pinned set as .venv-legacy-flask's Flask 2.2.2, so it gets its own
+# dedicated venv too.
+python3.11 -m venv .venv-mini-amazon
+./.venv-mini-amazon/bin/pip install flask==2.3.3 werkzeug==2.3.7 \
+    flask-sqlalchemy flask-wtf psycopg2-binary flask-login \
+    email-validator faker python-dotenv sqlalchemy requests openai
+
+# Mini-Amazon also needs a real PostgreSQL server. This sandbox already
+# has one (PostgreSQL 16, confirmed with `service postgresql start`/
+# `psql`, not assumed) -- one dedicated superuser role is created ONCE,
+# a real one-time environment setup step, not something build.py itself
+# does (the same way it never installs Python or creates venvs):
+sudo -u postgres psql -c "CREATE ROLE harvestuser WITH LOGIN PASSWORD 'harvestpass' SUPERUSER;"
+
 python3 discovery/discover_applications.py
 python3 detection/detect_capability.py
 for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
            CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013 CAP-0014 \
            CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019 CAP-0020 CAP-0021 \
            CAP-0022 CAP-0023 CAP-0024 CAP-0025 CAP-0026 CAP-0027 \
-           CAP-0028 CAP-0029 CAP-0030 CAP-0031 CAP-0032 CAP-0033; do
+           CAP-0028 CAP-0029 CAP-0030 CAP-0031 CAP-0032 CAP-0033 CAP-0034; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -705,19 +753,29 @@ python3 build.py stop
 python3 build.py start --cap CAP-0033 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0033_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0034 --port 5057
+./.venv/bin/python3 test/prove_CAP-0034_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) twelve times now, at twelve different capability
-counts, to confirm it's genuinely reproducible, not an artifact of an
-ad-hoc fixing sequence.
+deleted first, venvs and the Postgres role/database kept) thirteen times
+now, at thirteen different capability counts, to confirm it's genuinely
+reproducible, not an artifact of an ad-hoc fixing sequence. This same
+sweep is what caught CAP-0028's real name-collision flakiness (see "Real
+applications aren't all shaped the same way" above) -- a real, previously
+passing proof that started intermittently failing once the app's own
+random customer-name generator happened to produce a collision, exactly
+the kind of regression a full re-run from a clean state, not a
+one-off pass, is meant to surface.
 
 ## What this proves vs. what's next
 
 **Proved, for real:**
 - Real application discovery with real licence verification from the
-  source file, across 21 different repositories and three distinct real
+  source file, across 22 different repositories and three distinct real
   licences (MIT, BSD-3-Clause, Apache-2.0).
 - Real AST-based attach-point detection that rejects name-only matches,
   across both route-handler and helper-function capability shapes,
@@ -730,7 +788,7 @@ ad-hoc fixing sequence.
   anything, across two Python versions and an app whose data path resolves
   outside its own repo entirely (`$HOME`-based, handled via an isolated,
   resettable `HOME` override rather than patching the app).
-- Thirty-three independent, real, non-mocked live proofs, including negative/
+- Thirty-four independent, real, non-mocked live proofs, including negative/
   access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
@@ -789,7 +847,7 @@ ad-hoc fixing sequence.
   the status code.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 33.** ~47 names in the 81-name vocabulary (see
+- **Scale beyond 34.** ~46 names in the 81-name vocabulary (see
   `CAPABILITY_VOCABULARY.md` for the full recovered list and live status)
   have not been researched yet. Each one needs the same real vetting
   (license read from source, AST-confirmed evidence, live proof) — this is

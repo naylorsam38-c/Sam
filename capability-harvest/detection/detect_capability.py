@@ -338,6 +338,15 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "end_auction",
         "evidence_call_names": {"determine_winner", "commit"},
     },
+    {
+        "cap_id": "CAP-0034",
+        "name": "apply discount code",
+        "category": "e-commerce",
+        "app_slug": "mini-amazon",
+        "source_file_relative": "app/cart.py",
+        "symbol_hint": "apply_coupon",
+        "evidence_call_names": {"apply_coupon", "flash"},
+    },
 ]
 # ----------------------------------------------------------------------------
 

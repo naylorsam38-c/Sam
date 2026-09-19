@@ -635,6 +635,26 @@
       "route_path": null,
       "source_file_relative": "app/routes/auction.py",
       "symbol": "end_auction"
+    },
+    {
+      "app_slug": "mini-amazon",
+      "cap_id": "CAP-0034",
+      "category": "e-commerce",
+      "decorators": [
+        "@bp.route('/cart/apply_coupon', methods=['POST'])",
+        "@login_required"
+      ],
+      "end_lineno": 124,
+      "evidence_calls_matched": [
+        "apply_coupon",
+        "flash"
+      ],
+      "found": true,
+      "lineno": 113,
+      "name": "apply discount code",
+      "route_path": null,
+      "source_file_relative": "app/cart.py",
+      "symbol": "apply_coupon"
     }
   ]
 }

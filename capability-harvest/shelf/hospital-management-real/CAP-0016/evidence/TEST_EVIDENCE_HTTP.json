@@ -1,11 +1,11 @@
 {
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0016",
-  "registered_email": "harvest-proof-1789828286@example.test",
+  "registered_email": "harvest-proof-1789829277@example.test",
   "result": "PASS",
   "steps": [
     {
-      "email": "harvest-proof-1789828286@example.test",
+      "email": "harvest-proof-1789829277@example.test",
       "method": "GET",
       "status_code": 200,
       "step": "register_new_patient",
@@ -30,5 +30,5 @@
       "url": "http://127.0.0.1:5057/patient"
     }
   ],
-  "verified_at": "2026-09-19T14:31:26.719253+00:00"
+  "verified_at": "2026-09-19T14:47:57.598066+00:00"
 }

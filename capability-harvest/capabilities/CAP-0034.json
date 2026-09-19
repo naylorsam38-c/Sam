@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0034",
+  "category": "e-commerce",
+  "generated_at": "2026-09-19T14:47:31.546055+00:00",
+  "implementations": [
+    {
+      "app_slug": "mini-amazon",
+      "commit": "ce13c893cafbf79119703d2c662d094e1cd9e01f",
+      "harvested_at": "2026-09-19T14:47:31.499255+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/mini-amazon/CAP-0034/PROVENANCE.json",
+      "shelf_path": "shelf/mini-amazon/CAP-0034"
+    }
+  ],
+  "name": "apply discount code"
+}

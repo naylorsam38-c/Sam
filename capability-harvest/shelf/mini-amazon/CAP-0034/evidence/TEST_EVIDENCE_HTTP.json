@@ -1,0 +1,58 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0034",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_login_form",
+      "url": "http://127.0.0.1:5057/login"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login_as_buyer",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_cart_before_coupon",
+      "url": "http://127.0.0.1:5057/cart"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "apply_expired_coupon",
+      "url": "http://127.0.0.1:5057/cart"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_cart_after_expired_attempt",
+      "url": "http://127.0.0.1:5057/cart"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "apply_valid_coupon",
+      "url": "http://127.0.0.1:5057/cart"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_cart_after_valid_coupon",
+      "url": "http://127.0.0.1:5057/cart"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "reapply_same_coupon",
+      "url": "http://127.0.0.1:5057/cart"
+    }
+  ],
+  "subtotal": 200.0,
+  "total_after_valid_coupon": 160.0,
+  "verified_at": "2026-09-19T14:48:38.405194+00:00"
+}
