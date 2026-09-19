@@ -9,7 +9,7 @@
  "version": null,
  "commit": "7e3d3c63156c206209fdc8e75a4fb117b1aaf1fb",
  "source_path": "applications/APP-033/source",
- "status": "INSTALL_FAILED",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -240,8 +240,14 @@
   }
  ],
  "install_startup": {
-  "status": "INSTALL_FAILED",
-  "reason": "no Dockerfile or compose file - no documented way to run it"
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:5231/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Same usememos/memos project as APP-041 (this app appears twice in the 52-app set). The repo ships no Dockerfile or compose file at all (a Go+React app built and released as prebuilt images only). Used the project's own official prebuilt Docker Hub image (neosmemo/memos:stable) directly - no build needed. Single service, SQLite storage on a named volume, host port 5231 (offset from APP-041's 5230 to avoid a port clash if both were ever run at once).",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
  },
  "ecosystem": {
   "detected_ecosystems": {
@@ -251,5 +257,11 @@
   },
   "has_container_recipe": false,
   "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
  }
 }
