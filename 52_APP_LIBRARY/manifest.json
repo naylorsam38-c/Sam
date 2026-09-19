@@ -7114,7 +7114,7 @@
    "version": null,
    "commit": "a2132d777c5b1ec3c181632f9d12f2085457fe27",
    "source_path": "applications/APP-050/source",
-   "status": "INSTALL_FAILED",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -7339,8 +7339,14 @@
     }
    ],
    "install_startup": {
-    "status": "INSTALL_FAILED",
-    "reason": "no Dockerfile or compose file - no documented way to run it"
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://localhost:3000/",
+    "http_status": 200,
+    "recipe": "docker-compose.library.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "This repo's own compose files (docker-compose-local.yml/-ci.yml) are CI/dev-testing rigs for its microservices architecture, pulling per-branch images from ghcr.io/${LOWERCASE_REPOSITORY} - not a usable self-host recipe even before considering ghcr.io. Wrote a standard compose file instead, following Rocket.Chat's own documented self-hosting pattern: the same project's official rocketchat/rocket.chat:latest image (already on Docker Hub) + a MongoDB replica set (required for its oplog-based change streams). First tried mongo:6 (mongo:6 is what several other apps in this pass already used) but Rocket.Chat 8.8.1 refused it outright - needs Mongo 8.0+; switched to mongo:8 and it started cleanly.",
+    "startup_command": "docker compose -f docker-compose.library.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -7350,6 +7356,12 @@
     },
     "has_container_recipe": false,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 12,
+    "screens_browser_verified": 12
    }
   },
   {
