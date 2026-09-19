@@ -9,7 +9,7 @@
  "version": null,
  "commit": "aa56a7655840471f33890028fad2185549d1ded9",
  "source_path": "applications/APP-043/source",
- "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -32,17 +32,14 @@
   }
  ],
  "install_startup": {
-  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-  "reason": "install needs ghcr.io, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"ghcr.io/linkcraftstudio/feedlog:v0.1.0\": ghcr.io/linkcraftstudio/feedlog:v0.1.0: not found",
-  "blocked_host": "ghcr.io",
-  "runtime_hint": [
-   "node"
-  ],
-  "startup_command": "docker compose -f compose.yml up -d",
-  "log": [
-   "copied .env.example -> .env",
-   "$ docker compose -p lib_app043 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-043/source/compose.yml up -d\n\n Image ghcr.io/linkcraftstudio/feedlog:v0.1.0 Pulling \n Image pgvector/pgvector:pg17 Pulling \n Image ghcr.io/linkcraftstudio/feedlog:v0.1.0 Error failed to resolve reference \"ghcr.io/linkcraftstudio/feedlog:v0.1.0\": ghcr.io/linkcraftstudio/feedlog:v0.1.0: not found\n Image pgvector/pgvector:pg17 Interrupted \nError response from daemon: failed to resolve reference \"ghcr.io/linkcraftstudio/feedlog:v0.1.0\": ghcr.io/linkcraftstudio/feedlog:v0.1.0: not found\n"
-  ]
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:3000/",
+  "http_status": 200,
+  "recipe": "compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "ghcr.io/linkcraftstudio/feedlog:v0.1.0 is blocked, and there's no Docker Hub mirror for it - but the repo ships its own complete production Dockerfile (a proper 3-stage build that already discards node_modules in the final image, same pattern used for other apps this pass). Pointed compose at building from that Dockerfile directly instead of pulling the ghcr.io image. Needed the sandbox's proxy CA bundle for pnpm install, and the two required env vars the project's own README documents as mandatory (BETTER_AUTH_SECRET, SYSTEM_ADMIN_EMAILS) filled with placeholder values since none were provided.",
+  "startup_command": "docker compose -f compose.library.yml build app && docker compose -f compose.library.yml up -d"
  },
  "ecosystem": {
   "detected_ecosystems": {
@@ -52,5 +49,11 @@
   },
   "has_container_recipe": true,
   "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 14,
+  "screens_browser_verified": 14
  }
 }
