@@ -1,15 +1,15 @@
 {
  "application": "APP-037",
  "category": "marketing",
- "repository_url": "https://github.com/phpList/phplist3",
- "commit_sha": "7bf0499e78542afb7a01b88c7a21febeaaff8bdf",
- "branch": "main",
- "download_timestamp": "2026-09-19T11:49:32.092788+00:00",
+ "repository_url": "https://github.com/mautic/mautic",
+ "commit_sha": "7912edbd7ede249ddbb2721abd6def94bee52f3e",
+ "branch": "7.x",
+ "download_timestamp": "2026-09-19T12:34:03.378407+00:00",
  "download_method": "git clone --depth 1",
- "licence_file": "COPYING",
- "licence_detected": "AGPL-3.0",
- "licence_allowed": false,
- "source_checksum_sha256": "97b6ec992133352e2e7621e0f4ad52d3afc3cc821a94c407c7c9a98b5feb25b8",
+ "licence_file": "LICENSE.txt",
+ "licence_detected": "GPL",
+ "licence_allowed": true,
+ "source_checksum_sha256": "231c4c49e333fdda1ae8c714486ca5a58af656273a025c59060844b5b7b6f27c",
  "discovery_source": "awesome-selfhosted",
- "stargazers_count": 871
+ "stargazers_count": 10529
 }

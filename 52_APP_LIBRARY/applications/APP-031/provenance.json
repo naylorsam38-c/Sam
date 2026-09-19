@@ -1,15 +1,15 @@
 {
  "application": "APP-031",
  "category": "human-resources",
- "repository_url": "https://github.com/horilla/horilla-hr",
- "commit_sha": "d5cb062d5e2d33beb367f524760593592a16c58e",
- "branch": "2.0",
- "download_timestamp": "2026-09-19T11:46:32.124081+00:00",
+ "repository_url": "https://github.com/frappe/hrms",
+ "commit_sha": "d222ced551c2d9de2ac67edb89fde121eb39a9af",
+ "branch": "develop",
+ "download_timestamp": "2026-09-19T12:33:26.744972+00:00",
  "download_method": "git clone --depth 1",
- "licence_file": "LICENSE",
- "licence_detected": "LGPL",
- "licence_allowed": false,
- "source_checksum_sha256": "fdddc73dc1acdcd5329d37dc4b9505e518193b31ad7c3f3228d19e8d2bd14c22",
+ "licence_file": "license.txt",
+ "licence_detected": "GPL",
+ "licence_allowed": true,
+ "source_checksum_sha256": "0d48c85dbce08d925a47f061856a817574c9ac6f2517185b5997bc842d17baed",
  "discovery_source": "github-search-or-directory",
- "stargazers_count": 1427
+ "stargazers_count": 8805
 }

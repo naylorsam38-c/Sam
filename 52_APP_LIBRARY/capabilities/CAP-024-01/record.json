@@ -1,0 +1,42 @@
+{
+ "application": "APP-024",
+ "id": "CAP-024-01",
+ "name": "Documents",
+ "attach_points": [
+  {
+   "file": "app/controllers/template_documents_page_objects_controller.rb",
+   "matched_words": [
+    "documents"
+   ],
+   "line": 7,
+   "snippet": "attachment = @template.documents_attachments.find_by!(uuid: params[:attachment_uuid])"
+  },
+  {
+   "file": "app/controllers/send_submission_email_controller.rb",
+   "matched_words": [
+    "documents"
+   ],
+   "line": 31,
+   "snippet": "SubmitterMailer.documents_copy_email(@submitter, sig: true).deliver_later! if can_send?(@submitter)"
+  },
+  {
+   "file": "app/controllers/submit_form_completed_download_controller.rb",
+   "matched_words": [
+    "document"
+   ],
+   "line": 44,
+   "snippet": "render json: Submitters.build_document_urls(last_submitter)"
+  }
+ ],
+ "ui_screen": {
+  "name": "Home",
+  "route": "/"
+ },
+ "live_test": {
+  "url": "http://127.0.0.1:3000/",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "submitted, page responded without a visible error banner (same URL http://127.0.0.1:3000/setup)"
+ },
+ "verdict": "PROVEN"
+}

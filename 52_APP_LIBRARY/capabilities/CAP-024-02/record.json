@@ -1,0 +1,35 @@
+{
+ "application": "APP-024",
+ "id": "CAP-024-02",
+ "name": "recipients",
+ "attach_points": [
+  {
+   "file": "app/controllers/templates_recipients_controller.rb",
+   "matched_words": [
+    "recipients"
+   ],
+   "line": null,
+   "snippet": null
+  },
+  {
+   "file": "app/controllers/submissions_resend_email_controller.rb",
+   "matched_words": [
+    "recipients"
+   ],
+   "line": 34,
+   "snippet": "I18n.t('emails_have_been_sent_to_n_recipients', count: submitters.size)"
+  },
+  {
+   "file": "app/controllers/submissions_controller.rb",
+   "matched_words": [
+    "recipients"
+   ],
+   "line": 65,
+   "snippet": "redirect_to template_path(@template), notice: I18n.t('new_recipients_have_been_added')"
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}

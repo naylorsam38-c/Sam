@@ -1,0 +1,42 @@
+{
+ "application": "APP-024",
+ "id": "CAP-024-03",
+ "name": "signing fields",
+ "attach_points": [
+  {
+   "file": "app/controllers/templates_detect_fields_controller.rb",
+   "matched_words": [
+    "fields"
+   ],
+   "line": 32,
+   "snippet": "Templates::DetectFields.call(io, attachment: document, page_number:) do |(attachment_uuid, page, fields)|"
+  },
+  {
+   "file": "app/controllers/templates_debug_controller.rb",
+   "matched_words": [
+    "fields"
+   ],
+   "line": 16,
+   "snippet": "fields ="
+  },
+  {
+   "file": "app/controllers/account_custom_fields_controller.rb",
+   "matched_words": [
+    "fields"
+   ],
+   "line": 18,
+   "snippet": "AccountConfig.find_or_initialize_by(account: current_account, key: AccountConfig::TEMPLATE_CUSTOM_FIELDS_KEY)"
+  }
+ ],
+ "ui_screen": {
+  "name": "Home",
+  "route": "/"
+ },
+ "live_test": {
+  "url": "http://127.0.0.1:3000/",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "submitted, page responded without a visible error banner (same URL http://127.0.0.1:3000/setup)"
+ },
+ "verdict": "PROVEN"
+}

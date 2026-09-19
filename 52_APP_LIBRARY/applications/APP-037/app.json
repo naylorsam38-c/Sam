@@ -5,11 +5,11 @@
  "category_slug": "marketing",
  "repository": "https://github.com/mautic/mautic",
  "source_platform": "github.com",
- "licence": "AGPL-3.0",
+ "licence": "GPL",
  "version": null,
- "commit": "7bf0499e78542afb7a01b88c7a21febeaaff8bdf",
+ "commit": "7912edbd7ede249ddbb2721abd6def94bee52f3e",
  "source_path": "applications/APP-037/source",
- "status": "LICENCE_UNCLEAR",
+ "status": "INSTALL_FAILED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -90,26 +90,24 @@
   {
    "name": "Mautic",
    "repo": "https://github.com/mautic/mautic",
-   "status": "LICENCE_UNCLEAR",
-   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-  },
-  {
-   "name": "RudderStack",
-   "repo": "https://github.com/rudderlabs/rudder-server/",
-   "status": "LICENCE_UNCLEAR",
-   "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-  },
-  {
-   "name": "Erxes",
-   "repo": "https://github.com/erxes/erxes",
-   "status": "LICENCE_UNCLEAR",
-   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-  },
-  {
-   "name": "phpList",
-   "repo": "https://github.com/phpList/phplist3",
-   "status": "LICENCE_UNCLEAR",
-   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "status": "ACQUIRED",
+   "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "INSTALL_FAILED",
+  "reason": "no Dockerfile or compose file - no documented way to run it"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "php": [
+    "composer.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ }
 }

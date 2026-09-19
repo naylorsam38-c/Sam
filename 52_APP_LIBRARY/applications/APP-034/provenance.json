@@ -1,15 +1,15 @@
 {
  "application": "APP-034",
  "category": "learning-management",
- "repository_url": "https://github.com/ILIAS-eLearning/ILIAS",
- "commit_sha": "55149b2a468991458bb98a05e0619f32a72e1eae",
- "branch": "release_11",
- "download_timestamp": "2026-09-19T11:48:25.365807+00:00",
+ "repository_url": "https://github.com/instructure/canvas-lms",
+ "commit_sha": "1c9f0bb8013ed69c4f2efe11fd483025469b7e6c",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T12:33:57.418742+00:00",
  "download_method": "git clone --depth 1",
  "licence_file": "LICENSE",
- "licence_detected": "GPL",
- "licence_allowed": false,
- "source_checksum_sha256": "c345b3ec0eb7760c4853f58a3005451683cbc1137f8c25211ec5e41c6dcea080",
+ "licence_detected": "AGPL-3.0",
+ "licence_allowed": true,
+ "source_checksum_sha256": "51309aa8703a9854908ac8037d778cee6534ac132968e1d33866c45252cf127b",
  "discovery_source": "awesome-selfhosted",
- "stargazers_count": 504
+ "stargazers_count": 6822
 }

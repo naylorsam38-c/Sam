@@ -4,12 +4,12 @@
  "repository_url": "https://github.com/gitroomhq/postiz-app",
  "commit_sha": "6f1078011b39612838a1ce271dac5535ef9a57e5",
  "branch": "main",
- "download_timestamp": "2026-09-19T11:55:53.149486+00:00",
+ "download_timestamp": "2026-09-19T12:34:05.804629+00:00",
  "download_method": "git clone --depth 1",
  "licence_file": "LICENSE",
  "licence_detected": "AGPL-3.0",
- "licence_allowed": false,
+ "licence_allowed": true,
  "source_checksum_sha256": "0eee033ac6c6d348e2614f142e468250bb596de1eceea455625c68d28daf07eb",
- "discovery_source": "github-search-manual-override",
- "stargazers_count": null
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 36052
 }

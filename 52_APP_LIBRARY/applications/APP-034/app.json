@@ -5,11 +5,11 @@
  "category_slug": "learning-management",
  "repository": "https://github.com/instructure/canvas-lms",
  "source_platform": "github.com",
- "licence": "GPL",
+ "licence": "AGPL-3.0",
  "version": null,
- "commit": "55149b2a468991458bb98a05e0619f32a72e1eae",
+ "commit": "1c9f0bb8013ed69c4f2efe11fd483025469b7e6c",
  "source_path": "applications/APP-034/source",
- "status": "LICENCE_UNCLEAR",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -90,26 +90,33 @@
   {
    "name": "Canvas LMS",
    "repo": "https://github.com/instructure/canvas-lms",
-   "status": "LICENCE_UNCLEAR",
-   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-  },
-  {
-   "name": "LMS",
-   "repo": "https://github.com/epoupon/lms",
-   "status": "LICENCE_UNCLEAR",
-   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-  },
-  {
-   "name": "Chamilo LMS",
-   "repo": "https://github.com/chamilo/chamilo-lms",
-   "status": "LICENCE_UNCLEAR",
-   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-  },
-  {
-   "name": "ILIAS",
-   "repo": "https://github.com/ILIAS-eLearning/ILIAS",
-   "status": "LICENCE_UNCLEAR",
-   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "status": "ACQUIRED",
+   "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs deb.debian.org, which this sandbox's egress policy denies: target postgres: failed to solve: process \"/bin/sh -c apt-get update -qq  && apt-get install -qqy --no-install-recommends postgresql-$PG_MAJOR-pgvector\" did not complete successfully: exit code: 100",
+  "blocked_host": "deb.debian.org",
+  "runtime_hint": [
+   "node",
+   "ruby"
+  ],
+  "startup_command": "docker compose -f docker-compose.yml up -d",
+  "log": [
+   "$ docker compose -p lib_app034 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-034/source/docker-compose.yml up -d\n  Forbidden [IP: 151.101.2.132 80]\n#12 0.288 E: The repository 'http://deb.debian.org/debian trixie-updates InRelease' is not signed.\n#12 0.288 E: Failed to fetch http://deb.debian.org/debian/dists/trixie-updates/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n#12 0.288 E: Failed to fetch http://deb.debian.org/debian-security/dists/trixie-security/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n#12 0.288 E: The repository 'http://deb.debian.org/debian-security trixie-security InRelease' is not signed.\n#12 0.288 E: Failed to fetch http://apt.postgresql.org/pub/repos/apt/dists/trixie-pgdg/InRelease  403  Forbidden [IP: 167.82.51.52 80]\n#12 0.288 E: The repository 'http://apt.postgresql.org/pub/repos/apt trixie-pgdg InRelease' is not signed.\n#12 ERROR: process \"/bin/sh -c apt-get update -qq  && apt-get install -qqy --no-install-recommends postgresql-$PG_MAJOR-pgvector\" did not complete successfully: exit code: 100\n\n#13 [web 2/8] WORKDIR /usr/src/app/\n#13 CANCELED\n------\n > [postgres 3/5] RUN apt-get update -qq  && apt-get install -qqy --no-install-recommends postgresql-14-pgvector:\n0.288 E: The repository 'http://deb.debian.org/debian trixie InRelease' is not signed.\n0.288 E: Failed to fetch http://deb.debian.org/debian/dists/trixie/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n0.288 E: The repository 'http://deb.debian.org/debian trixie-updates InRelease' is not signed.\n0.288 E: Failed to fetch http://deb.debian.org/debian/dists/trixie-updates/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n0.288 E: Failed to fetch http://deb.debian.org/debian-security/dists/trixie-security/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n0.288 E: The repository 'http://deb.debian.org/debian-security trixie-security InRelease' is not signed.\n0.288 E: Failed to fetch http://apt.postgresql.org/pub/repos/apt/dists/trixie-pgdg/InRelease  403  Forbidden [IP: 167.82.51.52 80]\n0.288 E: The repository 'http://apt.postgresql.org/pub/repos/apt trixie-pgdg InRelease' is not signed.\n------\n\n Image redis:alpine Pulling \n 745f7a62f61f Pulling fs layer 0B\n 20af41c6552c Pulling fs layer 0B\n 7815c39c92d6 Pulling fs layer 0B\n 93171b853d94 Pulling fs layer 0B\n 47df353050fe Pulling fs layer 0B\n 4f4fb700ef54 Pulling fs layer 0B\n 4f4fb700ef54 Already exists 0B\n 20af41c6552c Download complete 0B\n 41b2c75454dd Download complete 0B\n 20af41c6552c Pull complete 0B\n 47df353050fe Download complete 0B\n ff22b1b20584 Download complete 0B\n 745f7a62f61f Download complete 0B\n 7815c39c92d6 Download complete 0B\n 7815c39c92d6 Extracting 1B\n 7815c39c92d6 Pull complete 0B\n 93171b853d94 Downloading 3.146MB\n 93171b853d94 Downloading 8.389MB\n 93171b853d94 Downloading 14.68MB\n 93171b853d94 Downloading 23.07MB\n 93171b853d94 Downloading 30.41MB\n 93171b853d94 Download complete 0B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 2B\n 93171b853d94 Extracting 2B\n 93171b853d94 Extracting 2B\n 4f4fb700ef54 Pull complete 0B\n 47df353050fe Pull complete 0B\n 745f7a62f61f Pull complete 0B\n 93171b853d94 Pull complete 0B\n Image redis:alpine Pulled \n Image lib_app034-web Building \n Image lib_app034-jobs Building \n Image lib_app034-postgres Building \nDockerfile:12\n\n--------------------\n\n  11 |     \n\n  12 | >>> RUN apt-get update -qq \\\n\n  13 | >>>  && apt-get install -qqy --no-install-recommends postgresql-$PG_MAJOR-pgvector\n\n  14 |     \n\n--------------------\n\ntarget postgres: failed to solve: process \"/bin/sh -c apt-get update -qq  && apt-get install -qqy --no-install-recommends postgresql-$PG_MAJOR-pgvector\" did not complete successfully: exit code: 100\n\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "ruby": [
+    "Gemfile"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ }
 }

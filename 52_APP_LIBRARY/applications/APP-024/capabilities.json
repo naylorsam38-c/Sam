@@ -1,0 +1,271 @@
+{
+ "application": "APP-024",
+ "category": "digital-signiture",
+ "capabilities_defined": true,
+ "capabilities": [
+  {
+   "id": "CAP-024-01",
+   "name": "Documents",
+   "attach_points": [
+    {
+     "file": "app/controllers/template_documents_page_objects_controller.rb",
+     "matched_words": [
+      "documents"
+     ],
+     "line": 7,
+     "snippet": "attachment = @template.documents_attachments.find_by!(uuid: params[:attachment_uuid])"
+    },
+    {
+     "file": "app/controllers/send_submission_email_controller.rb",
+     "matched_words": [
+      "documents"
+     ],
+     "line": 31,
+     "snippet": "SubmitterMailer.documents_copy_email(@submitter, sig: true).deliver_later! if can_send?(@submitter)"
+    },
+    {
+     "file": "app/controllers/submit_form_completed_download_controller.rb",
+     "matched_words": [
+      "document"
+     ],
+     "line": 44,
+     "snippet": "render json: Submitters.build_document_urls(last_submitter)"
+    }
+   ],
+   "ui_screen": {
+    "name": "Home",
+    "route": "/"
+   },
+   "live_test": {
+    "url": "http://127.0.0.1:3000/",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "submitted, page responded without a visible error banner (same URL http://127.0.0.1:3000/setup)"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-024-02",
+   "name": "recipients",
+   "attach_points": [
+    {
+     "file": "app/controllers/templates_recipients_controller.rb",
+     "matched_words": [
+      "recipients"
+     ],
+     "line": null,
+     "snippet": null
+    },
+    {
+     "file": "app/controllers/submissions_resend_email_controller.rb",
+     "matched_words": [
+      "recipients"
+     ],
+     "line": 34,
+     "snippet": "I18n.t('emails_have_been_sent_to_n_recipients', count: submitters.size)"
+    },
+    {
+     "file": "app/controllers/submissions_controller.rb",
+     "matched_words": [
+      "recipients"
+     ],
+     "line": 65,
+     "snippet": "redirect_to template_path(@template), notice: I18n.t('new_recipients_have_been_added')"
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  },
+  {
+   "id": "CAP-024-03",
+   "name": "signing fields",
+   "attach_points": [
+    {
+     "file": "app/controllers/templates_detect_fields_controller.rb",
+     "matched_words": [
+      "fields"
+     ],
+     "line": 32,
+     "snippet": "Templates::DetectFields.call(io, attachment: document, page_number:) do |(attachment_uuid, page, fields)|"
+    },
+    {
+     "file": "app/controllers/templates_debug_controller.rb",
+     "matched_words": [
+      "fields"
+     ],
+     "line": 16,
+     "snippet": "fields ="
+    },
+    {
+     "file": "app/controllers/account_custom_fields_controller.rb",
+     "matched_words": [
+      "fields"
+     ],
+     "line": 18,
+     "snippet": "AccountConfig.find_or_initialize_by(account: current_account, key: AccountConfig::TEMPLATE_CUSTOM_FIELDS_KEY)"
+    }
+   ],
+   "ui_screen": {
+    "name": "Home",
+    "route": "/"
+   },
+   "live_test": {
+    "url": "http://127.0.0.1:3000/",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "submitted, page responded without a visible error banner (same URL http://127.0.0.1:3000/setup)"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-024-04",
+   "name": "workflows",
+   "attach_points": [],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "no code attach point and no matching UI screen found"
+  },
+  {
+   "id": "CAP-024-05",
+   "name": "signatures",
+   "attach_points": [
+    {
+     "file": "app/controllers/submit_form_completed_download_controller.rb",
+     "matched_words": [
+      "signature"
+     ],
+     "line": 13,
+     "snippet": "signature_valid = @submitter&.slug == submitter_slug"
+    },
+    {
+     "file": "app/controllers/submit_form_draw_signature_controller.rb",
+     "matched_words": [
+      "signature"
+     ],
+     "line": null,
+     "snippet": null
+    },
+    {
+     "file": "app/controllers/submitters_resubmit_controller.rb",
+     "matched_words": [
+      "signature"
+     ],
+     "line": 50,
+     "snippet": "next if field['type'] == 'signature'"
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  },
+  {
+   "id": "CAP-024-06",
+   "name": "authentication",
+   "attach_points": [
+    {
+     "file": "app/controllers/passwords_controller.rb",
+     "matched_words": [
+      "authentication"
+     ],
+     "line": 5,
+     "snippet": "skip_before_action :require_no_authentication, only: %i[edit update]"
+    },
+    {
+     "file": "app/views/email_smtp_settings/index.html.erb",
+     "matched_words": [
+      "authentication"
+     ],
+     "line": 34,
+     "snippet": "<%= ff.label :authentication, 'Authentication', class: 'label' %>"
+    },
+    {
+     "file": "app/views/users/_form.html.erb",
+     "matched_words": [
+      "authentication"
+     ],
+     "line": 36,
+     "snippet": "<%= f.label :otp_required_for_login, t('two_factor_authentication'), class: 'label' %>"
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  },
+  {
+   "id": "CAP-024-07",
+   "name": "audit trail",
+   "attach_points": [
+    {
+     "file": "app/controllers/templates_preferences_controller.rb",
+     "matched_words": [
+      "audit"
+     ],
+     "line": 58,
+     "snippet": "documents_copy_email_enabled documents_copy_email_attach_audit"
+    },
+    {
+     "file": "app/controllers/submissions_debug_controller.rb",
+     "matched_words": [
+      "audit"
+     ],
+     "line": 20,
+     "snippet": "if params[:audit]"
+    },
+    {
+     "file": "app/controllers/api/form_events_controller.rb",
+     "matched_words": [
+      "audit",
+      "trail"
+     ],
+     "line": 15,
+     "snippet": "submission: [:submitters, { audit_trail_attachment: :blob,"
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  },
+  {
+   "id": "CAP-024-08",
+   "name": "templates",
+   "attach_points": [
+    {
+     "file": "app/controllers/template_documents_page_objects_controller.rb",
+     "matched_words": [
+      "template",
+      "templates"
+     ],
+     "line": 4,
+     "snippet": "load_and_authorize_resource :template"
+    },
+    {
+     "file": "app/controllers/send_submission_email_controller.rb",
+     "matched_words": [
+      "template"
+     ],
+     "line": 13,
+     "snippet": "if params[:template_slug]"
+    },
+    {
+     "file": "app/controllers/start_form_resubmit_controller.rb",
+     "matched_words": [
+      "template",
+      "templates"
+     ],
+     "line": 11,
+     "snippet": "before_action :load_template"
+    }
+   ],
+   "ui_screen": null,
+   "live_test": null,
+   "verdict": "NOT VERIFIED",
+   "reason": "code attach point found but no reachable UI screen for it"
+  }
+ ]
+}

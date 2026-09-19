@@ -1,7 +1,16 @@
 {
- "generated_at": "2026-09-19T12:21:08.412989+00:00",
+ "generated_at": "2026-09-19T12:40:23.523948+00:00",
  "categories_with_capability_lists": "22 of 52 (copied from benchmark70.json where the category means the same thing; the rest have none - none invented)",
  "applications": [
+  {
+   "id": "APP-024",
+   "name": "Docuseal",
+   "category": "digital-signiture",
+   "capabilities_defined": true,
+   "discovered": 8,
+   "attach_points_found": 7,
+   "proven": 2
+  },
   {
    "id": "APP-038",
    "name": "Uptime Kuma",
@@ -22,8 +31,8 @@
   }
  ],
  "totals": {
-  "discovered": 8,
-  "attach_points_found": 7,
-  "proven": 0
+  "discovered": 16,
+  "attach_points_found": 14,
+  "proven": 2
  }
 }

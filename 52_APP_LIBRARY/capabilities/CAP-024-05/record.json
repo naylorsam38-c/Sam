@@ -1,0 +1,35 @@
+{
+ "application": "APP-024",
+ "id": "CAP-024-05",
+ "name": "signatures",
+ "attach_points": [
+  {
+   "file": "app/controllers/submit_form_completed_download_controller.rb",
+   "matched_words": [
+    "signature"
+   ],
+   "line": 13,
+   "snippet": "signature_valid = @submitter&.slug == submitter_slug"
+  },
+  {
+   "file": "app/controllers/submit_form_draw_signature_controller.rb",
+   "matched_words": [
+    "signature"
+   ],
+   "line": null,
+   "snippet": null
+  },
+  {
+   "file": "app/controllers/submitters_resubmit_controller.rb",
+   "matched_words": [
+    "signature"
+   ],
+   "line": 50,
+   "snippet": "next if field['type'] == 'signature'"
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}

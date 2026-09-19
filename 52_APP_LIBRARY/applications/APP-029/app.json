@@ -9,7 +9,7 @@
  "version": null,
  "commit": "c21363f03ad715b839adf69b2f7cb423432278b4",
  "source_path": "applications/APP-029/source",
- "status": "LICENCE_UNCLEAR",
+ "status": "INSTALL_FAILED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -27,8 +27,17 @@
   {
    "name": "gaseous-server",
    "repo": "https://github.com/gaseous-project/gaseous-server",
-   "status": "LICENCE_UNCLEAR",
-   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "status": "ACQUIRED",
+   "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "INSTALL_FAILED",
+  "reason": "no Dockerfile or compose file - no documented way to run it"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {},
+  "has_container_recipe": false,
+  "database_requirement": null
+ }
 }

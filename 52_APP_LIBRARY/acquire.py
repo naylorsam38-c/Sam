@@ -27,8 +27,21 @@ APPS_DIR = HERE / "applications"
 CLONE_TIMEOUT = 600
 GIT_ENV = {"GIT_TERMINAL_PROMPT": "0", "GIT_LFS_SKIP_SMUDGE": "1"}
 
+# Per Sam: use everything whose licence is genuinely good open source, not just
+# the permissive subset. That means every OSI-approved licence, copyleft
+# included (GPL/AGPL/LGPL/EUPL obligate you to share your changes; they don't
+# stop you using and deploying the app, which is what this library does).
+# Still refused: source-available-but-not-open-source licences that restrict
+# who can run the software or how (BUSL, Elastic, SSPL, Commons-Clause,
+# PolyForm, OSL's patent-termination terms), non-commercial-only licences
+# (CC-BY-NC), and no licence file at all / UNRECOGNISED - those really are
+# "no good" for a library meant to be used.
 ALLOWED_LICENCES = ("MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "ISC",
-                    "MPL-2.0", "Unlicense", "0BSD", "Zlib", "CC0-1.0")
+                    "MPL-2.0", "Unlicense", "0BSD", "Zlib", "CC0-1.0",
+                    "GPL", "GPL-2.0", "GPL-3.0", "AGPL-3.0", "LGPL", "LGPL-2.1",
+                    "LGPL-3.0", "EUPL-1.2")
+REFUSED_LICENCES_NOTE = ("Commons-Clause", "BUSL-1.1", "Elastic-2.0", "SSPL", "OSL-3.0",
+                         "PolyForm", "CC-BY-NC", "UNRECOGNISED", None)
 LICENCE_FILE_NAMES = ("LICENSE", "LICENSE.txt", "LICENSE.md", "LICENCE", "LICENCE.txt",
                       "LICENCE.md", "COPYING", "COPYING.txt", "LICENSE-MIT", "LICENSE.MIT",
                       "MIT-LICENSE", "MIT-LICENSE.txt", "LICENSE.rst", "UNLICENSE")
@@ -142,6 +155,15 @@ def main():
         app_id = entry["id"]
         if entry["status"] == "DISCOVERY_FAILED":
             results["DISCOVERY_FAILED"] += 1
+            continue
+        # Anything other than LICENCE_UNCLEAR already passed (or is past) the
+        # licence gate under the OLD allowed list - re-running would just
+        # redundantly re-clone an app that's already correctly ACQUIRED, or
+        # worse, re-roll the candidate for one that's already progressed
+        # further (INSTALL_FAILED/STARTUP_FAILED/BLOCKED_EXTERNAL_DEPENDENCY/
+        # SCREEN-VERIFIED all imply a valid licence was already found).
+        if entry["status"] != "LICENCE_UNCLEAR":
+            results[entry["status"]] = results.get(entry["status"], 0) + 1
             continue
         candidates = entry.get("discovery_candidates") or [{
             "source_code_url": entry["repository"], "name": entry["name"],

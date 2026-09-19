@@ -2999,7 +2999,7 @@
      "name": "airbyte",
      "repo": "https://github.com/airbytehq/airbyte",
      "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+     "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0', 'GPL', 'GPL-2.0', 'GPL-3.0', 'AGPL-3.0', 'LGPL', 'LGPL-2.1', 'LGPL-3.0', 'EUPL-1.2')"
     }
    ]
   },
@@ -3305,9 +3305,9 @@
    "source_platform": "github.com",
    "licence": "AGPL-3.0",
    "version": null,
-   "commit": "9e2811af332082ecbab13d21ffb24cc59e018273",
+   "commit": "6e2430e5a27a809c5ca9a3e81f351339387ea11e",
    "source_path": "applications/APP-024/source",
-   "status": "LICENCE_UNCLEAR",
+   "status": "FUNCTIONALLY_VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3375,28 +3375,47 @@
     {
      "name": "Docuseal",
      "repo": "https://github.com/docusealco/docuseal",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "Documenso",
-     "repo": "https://github.com/documenso/documenso",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "OpenSign",
-     "repo": "https://github.com/opensignlabs/opensign",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "Signature PDF",
-     "repo": "https://github.com/24eme/signaturepdf",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+     "status": "ACQUIRED",
+     "reason": null
     }
-   ]
+   ],
+   "install_startup": {
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:3000/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "runtime_hint": [
+     "node",
+     "ruby"
+    ],
+    "startup_command": "docker compose -f docker-compose.yml up -d"
+   },
+   "ecosystem": {
+    "detected_ecosystems": {
+     "node": [
+      "package.json"
+     ],
+     "ruby": [
+      "Gemfile"
+     ]
+    },
+    "has_container_recipe": true,
+    "database_requirement": "postgres"
+   },
+   "screen_summary": {
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 15,
+    "screens_browser_verified": 15
+   },
+   "capability_summary": {
+    "capabilities_defined": true,
+    "discovered": 8,
+    "attach_point_found": 7,
+    "proven": 2
+   }
   },
   {
    "id": "APP-025",
@@ -4204,7 +4223,7 @@
    "version": null,
    "commit": "c21363f03ad715b839adf69b2f7cb423432278b4",
    "source_path": "applications/APP-029/source",
-   "status": "LICENCE_UNCLEAR",
+   "status": "INSTALL_FAILED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4222,10 +4241,19 @@
     {
      "name": "gaseous-server",
      "repo": "https://github.com/gaseous-project/gaseous-server",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+     "status": "ACQUIRED",
+     "reason": null
     }
-   ]
+   ],
+   "install_startup": {
+    "status": "INSTALL_FAILED",
+    "reason": "no Dockerfile or compose file - no documented way to run it"
+   },
+   "ecosystem": {
+    "detected_ecosystems": {},
+    "has_container_recipe": false,
+    "database_requirement": null
+   }
   },
   {
    "id": "APP-030",
@@ -4238,7 +4266,7 @@
    "version": null,
    "commit": "112d07a4719fb233feaf3ef3a89fc9df42c2a30c",
    "source_path": "applications/APP-030/source",
-   "status": "LICENCE_UNCLEAR",
+   "status": "INSTALL_FAILED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4256,10 +4284,19 @@
     {
      "name": "websoft9",
      "repo": "https://github.com/Websoft9/websoft9",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says LGPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+     "status": "ACQUIRED",
+     "reason": null
     }
-   ]
+   ],
+   "install_startup": {
+    "status": "INSTALL_FAILED",
+    "reason": "no Dockerfile or compose file - no documented way to run it"
+   },
+   "ecosystem": {
+    "detected_ecosystems": {},
+    "has_container_recipe": false,
+    "database_requirement": null
+   }
   },
   {
    "id": "APP-031",
@@ -4268,11 +4305,11 @@
    "category_slug": "human-resources",
    "repository": "https://github.com/frappe/hrms",
    "source_platform": "github.com",
-   "licence": "LGPL",
+   "licence": "GPL",
    "version": null,
-   "commit": "d5cb062d5e2d33beb367f524760593592a16c58e",
+   "commit": "d222ced551c2d9de2ac67edb89fde121eb39a9af",
    "source_path": "applications/APP-031/source",
-   "status": "LICENCE_UNCLEAR",
+   "status": "INSTALL_FAILED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4298,16 +4335,26 @@
     {
      "name": "hrms",
      "repo": "https://github.com/frappe/hrms",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "horilla-hr",
-     "repo": "https://github.com/horilla/horilla-hr",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says LGPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+     "status": "ACQUIRED",
+     "reason": null
     }
-   ]
+   ],
+   "install_startup": {
+    "status": "INSTALL_FAILED",
+    "reason": "no Dockerfile or compose file - no documented way to run it"
+   },
+   "ecosystem": {
+    "detected_ecosystems": {
+     "node": [
+      "package.json"
+     ],
+     "python": [
+      "pyproject.toml"
+     ]
+    },
+    "has_container_recipe": false,
+    "database_requirement": null
+   }
   },
   {
    "id": "APP-032",
@@ -4810,11 +4857,11 @@
    "category_slug": "learning-management",
    "repository": "https://github.com/instructure/canvas-lms",
    "source_platform": "github.com",
-   "licence": "GPL",
+   "licence": "AGPL-3.0",
    "version": null,
-   "commit": "55149b2a468991458bb98a05e0619f32a72e1eae",
+   "commit": "1c9f0bb8013ed69c4f2efe11fd483025469b7e6c",
    "source_path": "applications/APP-034/source",
-   "status": "LICENCE_UNCLEAR",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4895,28 +4942,35 @@
     {
      "name": "Canvas LMS",
      "repo": "https://github.com/instructure/canvas-lms",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "LMS",
-     "repo": "https://github.com/epoupon/lms",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "Chamilo LMS",
-     "repo": "https://github.com/chamilo/chamilo-lms",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "ILIAS",
-     "repo": "https://github.com/ILIAS-eLearning/ILIAS",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+     "status": "ACQUIRED",
+     "reason": null
     }
-   ]
+   ],
+   "install_startup": {
+    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+    "reason": "install needs deb.debian.org, which this sandbox's egress policy denies: target postgres: failed to solve: process \"/bin/sh -c apt-get update -qq  && apt-get install -qqy --no-install-recommends postgresql-$PG_MAJOR-pgvector\" did not complete successfully: exit code: 100",
+    "blocked_host": "deb.debian.org",
+    "runtime_hint": [
+     "node",
+     "ruby"
+    ],
+    "startup_command": "docker compose -f docker-compose.yml up -d",
+    "log": [
+     "$ docker compose -p lib_app034 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-034/source/docker-compose.yml up -d\n  Forbidden [IP: 151.101.2.132 80]\n#12 0.288 E: The repository 'http://deb.debian.org/debian trixie-updates InRelease' is not signed.\n#12 0.288 E: Failed to fetch http://deb.debian.org/debian/dists/trixie-updates/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n#12 0.288 E: Failed to fetch http://deb.debian.org/debian-security/dists/trixie-security/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n#12 0.288 E: The repository 'http://deb.debian.org/debian-security trixie-security InRelease' is not signed.\n#12 0.288 E: Failed to fetch http://apt.postgresql.org/pub/repos/apt/dists/trixie-pgdg/InRelease  403  Forbidden [IP: 167.82.51.52 80]\n#12 0.288 E: The repository 'http://apt.postgresql.org/pub/repos/apt trixie-pgdg InRelease' is not signed.\n#12 ERROR: process \"/bin/sh -c apt-get update -qq  && apt-get install -qqy --no-install-recommends postgresql-$PG_MAJOR-pgvector\" did not complete successfully: exit code: 100\n\n#13 [web 2/8] WORKDIR /usr/src/app/\n#13 CANCELED\n------\n > [postgres 3/5] RUN apt-get update -qq  && apt-get install -qqy --no-install-recommends postgresql-14-pgvector:\n0.288 E: The repository 'http://deb.debian.org/debian trixie InRelease' is not signed.\n0.288 E: Failed to fetch http://deb.debian.org/debian/dists/trixie/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n0.288 E: The repository 'http://deb.debian.org/debian trixie-updates InRelease' is not signed.\n0.288 E: Failed to fetch http://deb.debian.org/debian/dists/trixie-updates/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n0.288 E: Failed to fetch http://deb.debian.org/debian-security/dists/trixie-security/InRelease  403  Forbidden [IP: 151.101.2.132 80]\n0.288 E: The repository 'http://deb.debian.org/debian-security trixie-security InRelease' is not signed.\n0.288 E: Failed to fetch http://apt.postgresql.org/pub/repos/apt/dists/trixie-pgdg/InRelease  403  Forbidden [IP: 167.82.51.52 80]\n0.288 E: The repository 'http://apt.postgresql.org/pub/repos/apt trixie-pgdg InRelease' is not signed.\n------\n\n Image redis:alpine Pulling \n 745f7a62f61f Pulling fs layer 0B\n 20af41c6552c Pulling fs layer 0B\n 7815c39c92d6 Pulling fs layer 0B\n 93171b853d94 Pulling fs layer 0B\n 47df353050fe Pulling fs layer 0B\n 4f4fb700ef54 Pulling fs layer 0B\n 4f4fb700ef54 Already exists 0B\n 20af41c6552c Download complete 0B\n 41b2c75454dd Download complete 0B\n 20af41c6552c Pull complete 0B\n 47df353050fe Download complete 0B\n ff22b1b20584 Download complete 0B\n 745f7a62f61f Download complete 0B\n 7815c39c92d6 Download complete 0B\n 7815c39c92d6 Extracting 1B\n 7815c39c92d6 Pull complete 0B\n 93171b853d94 Downloading 3.146MB\n 93171b853d94 Downloading 8.389MB\n 93171b853d94 Downloading 14.68MB\n 93171b853d94 Downloading 23.07MB\n 93171b853d94 Downloading 30.41MB\n 93171b853d94 Download complete 0B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 1B\n 93171b853d94 Extracting 2B\n 93171b853d94 Extracting 2B\n 93171b853d94 Extracting 2B\n 4f4fb700ef54 Pull complete 0B\n 47df353050fe Pull complete 0B\n 745f7a62f61f Pull complete 0B\n 93171b853d94 Pull complete 0B\n Image redis:alpine Pulled \n Image lib_app034-web Building \n Image lib_app034-jobs Building \n Image lib_app034-postgres Building \nDockerfile:12\n\n--------------------\n\n  11 |     \n\n  12 | >>> RUN apt-get update -qq \\\n\n  13 | >>>  && apt-get install -qqy --no-install-recommends postgresql-$PG_MAJOR-pgvector\n\n  14 |     \n\n--------------------\n\ntarget postgres: failed to solve: process \"/bin/sh -c apt-get update -qq  && apt-get install -qqy --no-install-recommends postgresql-$PG_MAJOR-pgvector\" did not complete successfully: exit code: 100\n\n"
+    ]
+   },
+   "ecosystem": {
+    "detected_ecosystems": {
+     "node": [
+      "package.json"
+     ],
+     "ruby": [
+      "Gemfile"
+     ]
+    },
+    "has_container_recipe": true,
+    "database_requirement": "postgres"
+   }
   },
   {
    "id": "APP-035",
@@ -5008,11 +5062,11 @@
    "category_slug": "marketing",
    "repository": "https://github.com/mautic/mautic",
    "source_platform": "github.com",
-   "licence": "AGPL-3.0",
+   "licence": "GPL",
    "version": null,
-   "commit": "7bf0499e78542afb7a01b88c7a21febeaaff8bdf",
+   "commit": "7912edbd7ede249ddbb2721abd6def94bee52f3e",
    "source_path": "applications/APP-037/source",
-   "status": "LICENCE_UNCLEAR",
+   "status": "INSTALL_FAILED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5093,28 +5147,26 @@
     {
      "name": "Mautic",
      "repo": "https://github.com/mautic/mautic",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "RudderStack",
-     "repo": "https://github.com/rudderlabs/rudder-server/",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "Erxes",
-     "repo": "https://github.com/erxes/erxes",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "phpList",
-     "repo": "https://github.com/phpList/phplist3",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+     "status": "ACQUIRED",
+     "reason": null
     }
-   ]
+   ],
+   "install_startup": {
+    "status": "INSTALL_FAILED",
+    "reason": "no Dockerfile or compose file - no documented way to run it"
+   },
+   "ecosystem": {
+    "detected_ecosystems": {
+     "node": [
+      "package.json"
+     ],
+     "php": [
+      "composer.json"
+     ]
+    },
+    "has_container_recipe": false,
+    "database_requirement": null
+   }
   },
   {
    "id": "APP-038",
@@ -6823,7 +6875,7 @@
    "version": null,
    "commit": "6f1078011b39612838a1ce271dac5535ef9a57e5",
    "source_path": "applications/APP-049/source",
-   "status": "LICENCE_UNCLEAR",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
    "declared_itself": false,
    "manual_override_reason": "automated pick (RSSHub) is an RSS feed aggregator, not a social-media app",
    "discovery_candidates": [
@@ -6889,34 +6941,32 @@
     {
      "name": "Postiz",
      "repo": "https://github.com/gitroomhq/postiz-app",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "RSSHub",
-     "repo": "https://github.com/DIYgod/RSSHub",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "LinkStack",
-     "repo": "https://github.com/LinkStackOrg/LinkStack",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "Socioboard",
-     "repo": "https://github.com/socioboard/Socioboard-5.0",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
-    },
-    {
-     "name": "Postiz",
-     "repo": "https://github.com/gitroomhq/postiz-app",
-     "status": "LICENCE_UNCLEAR",
-     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+     "status": "ACQUIRED",
+     "reason": null
     }
-   ]
+   ],
+   "install_startup": {
+    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+    "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs18/blobs/sha256:5a92b2257df2e5998411020df629daf810e3bee7f86e8746cb7979de422ba15b?se=2026-09-19T12%3A45%3A00Z&sig=MSkvwK3BZOBBXKCF9gai110QvRboFg815Q9Fj6mndrs%3D&ske=2026-09-20T08%3A31%3A09Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T08%3A31%3A09Z&sktid=3",
+    "blocked_host": "pkg-containers.githubusercontent.com",
+    "runtime_hint": [
+     "node"
+    ],
+    "startup_command": "docker compose -f docker-compose.yaml up -d",
+    "log": [
+     "copied .env.example -> .env",
+     "$ docker compose -p lib_app049 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-049/source/docker-compose.yaml up -d\n\n Image postgres:17-alpine Pulling \n Image ghcr.io/gitroomhq/postiz-app:latest Pulling \n Image elasticsearch:7.17.27 Pulling \n Image postgres:16 Pulling \n Image temporalio/admin-tools:1.28.1-tctl-1.18.4-cli-1.4.1 Pulling \n Image temporalio/auto-setup:1.28.1 Pulling \n Image temporalio/ui:2.34.0 Pulling \n Image redis:7.2 Pulling \n Image ghcr.io/getsentry/spotlight:latest Pulling \n Image temporalio/ui:2.34.0 Interrupted \n Image temporalio/auto-setup:1.28.1 Interrupted \nfailed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs18/blobs/sha256:5a92b2257df2e5998411020df629daf810e3bee7f86e8746cb7979de422ba15b?se=2026-09-19T12%3A45%3A00Z&sig=MSkvwK3BZOBBXKCF9gai110QvRboFg815Q9Fj6mndrs%3D&ske=2026-09-20T08%3A31%3A09Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T08%3A31%3A09Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=2fcb3203940c0cdaa0a7c55c05dc31b05f38158f30d48ebc789ab849a4b60790\": Forbidden\n"
+    ]
+   },
+   "ecosystem": {
+    "detected_ecosystems": {
+     "node": [
+      "package.json"
+     ]
+    },
+    "has_container_recipe": true,
+    "database_requirement": "postgres"
+   }
   },
   {
    "id": "APP-050",

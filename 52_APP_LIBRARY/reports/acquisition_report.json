@@ -1,12 +1,13 @@
 {
- "generated_at": "2026-09-19T12:21:08.410763+00:00",
+ "generated_at": "2026-09-19T12:40:23.376251+00:00",
  "target": 52,
  "by_status": {
-  "BLOCKED_EXTERNAL_DEPENDENCY": 17,
-  "INSTALL_FAILED": 14,
+  "BLOCKED_EXTERNAL_DEPENDENCY": 19,
+  "INSTALL_FAILED": 18,
   "STARTUP_FAILED": 8,
-  "LICENCE_UNCLEAR": 8,
+  "LICENCE_UNCLEAR": 1,
   "DISCOVERY_FAILED": 3,
+  "FUNCTIONALLY_VERIFIED": 1,
   "SCREEN-VERIFIED": 2
  },
  "applications": [
@@ -198,7 +199,7 @@
    "repository": "https://github.com/airbytehq/airbyte",
    "commit": "156d6d32937c546b048c010dcb7cfbe52201341e",
    "licence": "Elastic-2.0",
-   "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0', 'GPL', 'GPL-2.0', 'GPL-3.0', 'AGPL-3.0', 'LGPL', 'LGPL-2.1', 'LGPL-3.0', 'EUPL-1.2')"
   },
   {
    "id": "APP-020",
@@ -244,11 +245,11 @@
    "id": "APP-024",
    "category": "digital-signiture",
    "name": "Docuseal",
-   "status": "LICENCE_UNCLEAR",
+   "status": "FUNCTIONALLY_VERIFIED",
    "repository": "https://github.com/docusealco/docuseal",
-   "commit": "9e2811af332082ecbab13d21ffb24cc59e018273",
+   "commit": "6e2430e5a27a809c5ca9a3e81f351339387ea11e",
    "licence": "AGPL-3.0",
-   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "reason": null
   },
   {
    "id": "APP-025",
@@ -294,31 +295,31 @@
    "id": "APP-029",
    "category": "game-development",
    "name": "gaseous-server",
-   "status": "LICENCE_UNCLEAR",
+   "status": "INSTALL_FAILED",
    "repository": "https://github.com/gaseous-project/gaseous-server",
    "commit": "c21363f03ad715b839adf69b2f7cb423432278b4",
    "licence": "AGPL-3.0",
-   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "reason": "no Dockerfile or compose file - no documented way to run it"
   },
   {
    "id": "APP-030",
    "category": "hosting-control-panel",
    "name": "websoft9",
-   "status": "LICENCE_UNCLEAR",
+   "status": "INSTALL_FAILED",
    "repository": "https://github.com/Websoft9/websoft9",
    "commit": "112d07a4719fb233feaf3ef3a89fc9df42c2a30c",
    "licence": "LGPL",
-   "reason": "licence file says LGPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "reason": "no Dockerfile or compose file - no documented way to run it"
   },
   {
    "id": "APP-031",
    "category": "human-resources",
    "name": "hrms",
-   "status": "LICENCE_UNCLEAR",
+   "status": "INSTALL_FAILED",
    "repository": "https://github.com/frappe/hrms",
-   "commit": "d5cb062d5e2d33beb367f524760593592a16c58e",
-   "licence": "LGPL",
-   "reason": "licence file says LGPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "commit": "d222ced551c2d9de2ac67edb89fde121eb39a9af",
+   "licence": "GPL",
+   "reason": "no Dockerfile or compose file - no documented way to run it"
   },
   {
    "id": "APP-032",
@@ -344,11 +345,11 @@
    "id": "APP-034",
    "category": "learning-management",
    "name": "Canvas LMS",
-   "status": "LICENCE_UNCLEAR",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
    "repository": "https://github.com/instructure/canvas-lms",
-   "commit": "55149b2a468991458bb98a05e0619f32a72e1eae",
-   "licence": "GPL",
-   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "commit": "1c9f0bb8013ed69c4f2efe11fd483025469b7e6c",
+   "licence": "AGPL-3.0",
+   "reason": "install needs deb.debian.org, which this sandbox's egress policy denies: target postgres: failed to solve: process \"/bin/sh -c apt-get update -qq  && apt-get install -qqy --no-install-recommends postgresql-$PG_MAJOR-pgvector\" did not complete successfully: exit code: 100"
   },
   {
    "id": "APP-035",
@@ -374,11 +375,11 @@
    "id": "APP-037",
    "category": "marketing",
    "name": "Mautic",
-   "status": "LICENCE_UNCLEAR",
+   "status": "INSTALL_FAILED",
    "repository": "https://github.com/mautic/mautic",
-   "commit": "7bf0499e78542afb7a01b88c7a21febeaaff8bdf",
-   "licence": "AGPL-3.0",
-   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "commit": "7912edbd7ede249ddbb2721abd6def94bee52f3e",
+   "licence": "GPL",
+   "reason": "no Dockerfile or compose file - no documented way to run it"
   },
   {
    "id": "APP-038",
@@ -494,11 +495,11 @@
    "id": "APP-049",
    "category": "social-media",
    "name": "Postiz",
-   "status": "LICENCE_UNCLEAR",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
    "repository": "https://github.com/gitroomhq/postiz-app",
    "commit": "6f1078011b39612838a1ce271dac5535ef9a57e5",
    "licence": "AGPL-3.0",
-   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+   "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs18/blobs/sha256:5a92b2257df2e5998411020df629daf810e3bee7f86e8746cb7979de422ba15b?se=2026-09-19T12%3A45%3A00Z&sig=MSkvwK3BZOBBXKCF9gai110QvRboFg815Q9Fj6mndrs%3D&ske=2026-09-20T08%3A31%3A09Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T08%3A31%3A09Z&sktid=3"
   },
   {
    "id": "APP-050",
