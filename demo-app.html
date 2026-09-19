@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+  demo-app.html -- a tiny, real "shared_card"-family page (the exact selectors
+  skins_library/render_css.py's render_shared_card() targets: body/.card/h1/
+  input,select,textarea/button/button.danger/button.secondary/ul/li/.row).
+  It is loaded same-origin inside front-door.html's #slot iframe so the Front
+  Door can prove its skin engine genuinely reskins real markup live, not just
+  compute colors nobody looks at. This is a first-party fixture, not one of
+  the real shelf apps in library.json -- those apps' real markup was never
+  provided (see SKINS.md), so nothing here claims to represent them.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Job tracker (live skin preview)</title>
+<style>
+  /* The app's own native look -- exactly what "original" restores. */
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 700px; margin: 40px auto; color: #1D1D1B; background: #FFFFFF; }
+  .card { background: #F5F5F4; border: 1px solid #e2e5e9; border-radius: 12px; padding: 24px; }
+  h1 { font-size: 22px; margin: 0 0 16px; }
+  input { font-size: 15px; padding: 9px 12px; border: 1px solid #d5d8dc; border-radius: 8px; }
+  button { font-size: 14px; padding: 9px 16px; border: none; border-radius: 8px; background: #1D1D1B; color: #ffffff; cursor: pointer; }
+  button.secondary { background: #e9eaec; color: #1D1D1B; }
+  button.danger { background: #af2f2f; color: #ffffff; }
+  ul { list-style: none; margin: 16px 0 0; padding: 0; }
+  li { border-bottom: 1px solid #e2e5e9; padding: 10px 4px; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+</style>
+<style id="skin"></style>
+</head>
+<body data-family="shared_card">
+  <div class="card">
+    <h1>Job tracker</h1>
+    <div class="row">
+      <input id="new-job" placeholder="New job">
+      <button id="add">Add</button>
+      <button class="secondary" id="clear">Clear</button>
+      <button class="danger" id="danger-demo">Danger</button>
+    </div>
+    <ul id="jobs">
+      <li>Fix the leaking tap at 12 Elm Street</li>
+      <li>Quote for the Baker Street boiler</li>
+    </ul>
+  </div>
+<script>
+  document.getElementById("add").addEventListener("click", function () {
+    var v = document.getElementById("new-job").value.trim();
+    if (!v) return;
+    var li = document.createElement("li");
+    li.textContent = v;
+    document.getElementById("jobs").appendChild(li);
+    document.getElementById("new-job").value = "";
+  });
+  document.getElementById("clear").addEventListener("click", function () {
+    document.getElementById("jobs").innerHTML = "";
+  });
+</script>
+</body>
+</html>

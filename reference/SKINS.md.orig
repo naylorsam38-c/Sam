@@ -1,0 +1,43 @@
+# Front Door skins
+
+## What's in
+The four looks from `skins_library.zip` — Minimal Neutral, Bold Contrast, Warm Editorial, Soft Rounded — plus **Original** (the app's own look, untouched).
+
+Each look gets its own accent per category, worked out from the category's name the same way the zip's `design_tokens.py` does it. So all 52 openapps.pro categories have all four looks. No colours were picked by hand.
+
+## How a person uses it
+Tap the round icon on their app. A row of five looks sits at the top of the sheet, each drawn in its own colours.
+
+- Tap one → the app changes **straight away** as a preview → "Keep it" or "Not that".
+- "Not that", closing the sheet, or typing something else → it goes back.
+- They can also just say it: "make it dark", "more classic". The model picks the look and lists it back for approval.
+- Colour, font and corner changes sit on top of whatever look is on. Asking for a colour while on Original adds a visible "switches to Minimal Neutral" line to the approval list first — never done silently.
+- Every kept change is in the list with Undo.
+
+## Where to change things (RULES block at the top of `front-door.html`)
+- `LOOK_ON_LOAD` — what an app wears the moment it opens. `"original"` now.
+- `LIBRARY` — each entry now takes `family`:
+  - `"shared_card"` or `"todomvc"` → the app gets the full stylesheet (these are the two page layouts the zip measured).
+  - `""` → the app gets colours and fonts only. Nothing is guessed at a page layout nobody has measured.
+
+## Putting the skin into a real app (`frontdoor-skin-adapter.js`)
+1. Add `<script src="frontdoor-skin-adapter.js"></script>` to the end of the app's page. Nothing else in the app changes.
+2. Open the app through the Front Door and pick a look.
+3. First time, nothing will happen and the browser console will say `ignored a skin from https://…`. Copy that address into `ALLOWED_ORIGINS` in the adapter's RULES block. Reload. Done.
+
+The adapter only ever adds one `<style>` tag, one font link and `--fd-*` colour variables. Original takes them all off. Delete the script line and the app is exactly as it was.
+
+## Tested (real Chromium, `test_skins.py`)
+**86/86**, plus the earlier **54/54** still passing.
+- All 172 skin files in the zip reproduced **byte for byte** by the page's own code.
+- Every possible accent (all 360) × 4 looks = 1440 token sets identical to the Python.
+- Preview, keep, not-that, undo, reload, close-mid-preview — desktop, mobile, mobile dark.
+- Adapter: skin crosses to a page on another address, strips off on Original, refuses any other sender.
+
+Broken on purpose four ways (wrong rounding, adapter open to anyone, "Not that" not restoring, the maths bug below) — the tests caught every one.
+
+Bug found and fixed along the way: at one accent (hue 210, Soft Rounded) a button shade came out one step off the Python. Cause was how the remainder was taken. Now exact across the whole range.
+
+## Not yet proven
+- The adapter test used a plain test page, not one of your shelf apps. The first real proof is the first admitted app.
+- Your new shelf apps (Gitea, Superset, etc.) are not `shared_card` or `todomvc` pages. They'll get colours only until each one's layout is measured and a renderer is added — same rule the zip's `render_css.py` sets.

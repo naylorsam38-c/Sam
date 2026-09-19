@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- A page whose markup matches neither measured family -- standing in for
+     the 8 real catalog apps in library.json, none of which have been
+     measured. Proves the adapter/LIBRARY path only ever sends variables,
+     never a stylesheet, for a family the Front Door doesn't recognise. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fixture: unmeasured</title>
+<style>
+  body { font-family: sans-serif; margin: 40px; }
+  .widget-xyz { padding: 20px; background: #eee; }
+</style>
+</head>
+<body>
+  <div class="widget-xyz"><p id="p">Not a shared_card or todomvc page.</p></div>
+<script src="frontdoor-skin-adapter.js"></script>
+</body>
+</html>

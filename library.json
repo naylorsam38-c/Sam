@@ -1,0 +1,95 @@
+{
+  "_comment": "Real shelf-app catalog entries, one per admitted app. Every field except `family` and `blurb` is copied verbatim from that app's own app.json (produced by Sam's 52_APP_LIBRARY acquisition pipeline). `family` is '' (colours + font only, no full stylesheet) for every entry here because none of these apps' actual page markup was provided to the Front Door -- only this catalog metadata and a verification screenshot were. Per SKINS.md's own rule: 'Nothing is guessed at a page layout nobody has measured.' Measuring one of these for real (cloning its source, finding its real selectors, adding a render_css.js family for it, verifying live) is tracked in SKINS.md under 'Not yet proven'.",
+  "apps": [
+    {
+      "id": "APP-001",
+      "slug": "ab-testing-experimentation",
+      "name": "Flagsmith",
+      "category": "A/B Testing & Experimentation",
+      "repository": "https://github.com/Flagsmith/flagsmith",
+      "blurb": "Flagsmith is an open-source feature flag platform with remote config, experimentation, and self-hosted or cloud deployment options.",
+      "keywords": ["feature flag", "feature flags", "a/b test", "ab test", "experiment", "remote config", "rollout", "toggle"],
+      "family": "",
+      "screenshot": "shelf/ab-testing-experimentation/home.png"
+    },
+    {
+      "id": "APP-018",
+      "slug": "customer-support",
+      "name": "Chatwoot",
+      "category": "Customer Support",
+      "repository": "https://github.com/chatwoot/chatwoot",
+      "blurb": "Customer communication platform (alternative to Intercom and Zendesk).",
+      "keywords": ["customer support", "helpdesk", "live chat", "support inbox", "intercom", "zendesk", "customer service"],
+      "family": "",
+      "screenshot": "shelf/customer-support/home.png"
+    },
+    {
+      "id": "APP-022",
+      "slug": "developer-tools",
+      "name": "code-server",
+      "category": "Developer Tools",
+      "repository": "https://github.com/coder/code-server",
+      "blurb": "VS Code in the browser.",
+      "keywords": ["code editor", "ide", "vs code", "vscode", "browser ide", "cloud ide", "develop"],
+      "family": "",
+      "screenshot": "shelf/developer-tools/home.png"
+    },
+    {
+      "id": "APP-024",
+      "slug": "digital-signiture",
+      "name": "DocuSeal",
+      "category": "Digital Signature",
+      "repository": "https://github.com/docusealco/docuseal",
+      "blurb": "Create, fill, and sign digital documents (alternative to DocuSign).",
+      "keywords": ["sign document", "e-signature", "esignature", "digital signature", "docusign", "contract signing", "fill and sign"],
+      "family": "",
+      "screenshot": "shelf/digital-signiture/home.png"
+    },
+    {
+      "id": "APP-038",
+      "slug": "monitoring",
+      "name": "Uptime Kuma",
+      "category": "Monitoring",
+      "repository": "https://github.com/louislam/uptime-kuma",
+      "blurb": "Self-hosted uptime and status monitoring, with a dashboard and alerts when a site or service goes down.",
+      "blurb_note": "This app's own app.json/discovery_candidates had no usable description for the acquired repo (the one present there was for an unrelated project). Replaced with an accurate, well-established description of louislam/uptime-kuma rather than propagating the wrong one.",
+      "keywords": ["uptime", "monitoring", "status page", "downtime alert", "ping monitor", "health check", "is it down"],
+      "family": "",
+      "screenshot": "shelf/monitoring/home.png"
+    },
+    {
+      "id": "APP-039",
+      "slug": "networking",
+      "name": "Nginx Proxy Manager",
+      "category": "Networking",
+      "repository": "https://github.com/NginxProxyManager/nginx-proxy-manager",
+      "blurb": "A web UI for managing Nginx reverse-proxy hosts and free Let's Encrypt SSL certificates, without hand-editing Nginx config.",
+      "blurb_note": "This app's own app.json/discovery_candidates left description blank. Replaced with an accurate, well-established description of NginxProxyManager/nginx-proxy-manager.",
+      "keywords": ["reverse proxy", "nginx", "ssl certificate", "lets encrypt", "proxy host", "domain routing"],
+      "family": "",
+      "screenshot": "shelf/networking/home.png"
+    },
+    {
+      "id": "APP-042",
+      "slug": "password-manager",
+      "name": "Infisical",
+      "category": "Password Manager",
+      "repository": "https://github.com/Infisical/infisical",
+      "blurb": "Platform for secrets, certificates, and privileged access management.",
+      "keywords": ["secrets manager", "secret management", "env vars", "api keys", "vault", "credentials", "pam"],
+      "family": "",
+      "screenshot": "shelf/password-manager/home.png"
+    },
+    {
+      "id": "APP-044",
+      "slug": "productivity",
+      "name": "Super Productivity",
+      "category": "Productivity",
+      "repository": "https://github.com/super-productivity/super-productivity",
+      "blurb": "Advanced todo list app with integrated timeboxing and time tracking capabilities. Integrates with Jira, GitHub, GitLab, Redmine and OpenProject.",
+      "keywords": ["todo list", "task tracker", "job tracker", "time tracking", "timeboxing", "productivity", "to-do"],
+      "family": "",
+      "screenshot": "shelf/productivity/home.png"
+    }
+  ]
+}

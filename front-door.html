@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!--
+  front-door.html -- the Front Door itself.
+
+  Flow: ask a plain-text question -> resolveAsk() matches it against the real
+  shelf catalog in library.json -> the matched app's own real name/category/
+  screenshot/repo link are shown, honestly labelled with whether its markup
+  has been measured (none in library.json have been -- see SKINS.md) -> the
+  round fab opens a sheet of five looks (Original + the four measured looks
+  from skins_library/design_tokens.py) that live-preview on the one piece of
+  markup this page can actually reskin for real: the first-party demo-app.html
+  in #slot, whose CSS comes byte-for-byte from skins-engine.js's port of
+  skins_library/render_css.py.
+
+  The fab/sheet/undo mechanics live in shelf-ui.js, shared with
+  _test_with_library.html so the cross-origin adapter proof exercises the
+  exact same picker code, not a re-implementation of it.
+
+  See SKINS.md for what "measured" vs "colours only" means and why the 8
+  catalog apps in library.json are all colours-only right now.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Front Door</title>
+<script src="skins-engine.js"></script>
+<script src="shelf-ui.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 0; background: #f4f5f6; color: #171a1f; }
+  #ask-screen { max-width: 480px; margin: 15vh auto; padding: 24px; text-align: center; }
+  #ask-screen h1 { font-size: 22px; }
+  #ask-form { display: flex; gap: 8px; margin-top: 16px; }
+  #ask-input, #say-input { flex: 1; font-size: 15px; padding: 10px 12px; border: 1px solid #d5d8dc; border-radius: 8px; }
+  #ask-form button, #say-form button { font-size: 14px; padding: 10px 16px; border: none; border-radius: 8px; background: #1D1D1B; color: #fff; cursor: pointer; }
+  #ask-empty { margin-top: 12px; color: #af2f2f; }
+
+  #app-screen { max-width: 760px; margin: 0 auto; padding: 24px 24px 96px; }
+  #app-card { display: flex; gap: 16px; background: #fff; border: 1px solid #e2e5e9; border-radius: 12px; padding: 16px; align-items: flex-start; }
+  #app-card > div { min-width: 0; flex: 1 1 auto; }
+  #app-card > div p { overflow-wrap: break-word; }
+  #app-repo { display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; }
+  #app-shot { width: 160px; max-width: 35vw; border-radius: 8px; border: 1px solid #e2e5e9; flex-shrink: 0; }
+  #app-name { margin: 0 0 4px; }
+  #app-family-note { font-size: 13px; color: #6b7280; }
+  #preview-wrap { margin-top: 24px; }
+  #preview-wrap .hint { font-size: 13px; color: #6b7280; }
+  #slot { width: 100%; height: 420px; border: 1px solid #e2e5e9; border-radius: 12px; background: #fff; }
+
+  #fab { position: fixed; right: 24px; bottom: 24px; width: 56px; height: 56px; border-radius: 999px; border: none;
+    background: #1D1D1B; color: #fff; font-size: 22px; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+
+  #sheet { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; border-top-left-radius: 16px; border-top-right-radius: 16px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,.15); padding: 16px; max-height: 80vh; overflow-y: auto; }
+  #sheet[hidden] { display: none; }
+  #looks { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+  .look { flex: 0 0 auto; width: 84px; border: 2px solid transparent; border-radius: 10px; padding: 8px; cursor: pointer; text-align: center; font-size: 12px; background: #f4f5f6; }
+  .look[aria-pressed="true"] { border-color: #1D1D1B; background: #eef2ff; }
+  .swatch { width: 100%; height: 40px; border-radius: 6px; margin-bottom: 6px; }
+  #say-form { display: flex; gap: 8px; margin: 12px 0; }
+  #ecol { min-height: 20px; }
+  #ecol .say { margin: 4px 0; }
+  #ecol .choices { margin-top: 8px; display: flex; gap: 8px; }
+  #ecol .choices button { font-size: 14px; padding: 8px 14px; border: 1px solid #d5d8dc; border-radius: 8px; background: #fff; cursor: pointer; }
+  #log-wrap { margin-top: 16px; border-top: 1px solid #e2e5e9; padding-top: 12px; }
+  #log { list-style: none; margin: 0; padding: 0; }
+  #log li.link { cursor: pointer; padding: 6px 0; color: #2563EB; font-size: 13px; }
+  #close { margin-top: 12px; background: none; border: none; color: #6b7280; cursor: pointer; font-size: 13px; }
+</style>
+</head>
+<body data-state="ask">
+
+<div id="ask-screen">
+  <h1>What do you need?</h1>
+  <form id="ask-form">
+    <input id="ask-input" autocomplete="off" placeholder="e.g. I need a feature flag tool">
+    <button type="submit">Go</button>
+  </form>
+  <p id="ask-empty" hidden>Nothing on the shelf matches that yet -- try describing it differently.</p>
+</div>
+
+<div id="app-screen" hidden>
+  <div id="app-card">
+    <img id="app-shot" alt="">
+    <div>
+      <h2 id="app-name"></h2>
+      <p id="app-blurb"></p>
+      <p><a id="app-repo" target="_blank" rel="noopener"></a></p>
+      <p id="app-family-note"></p>
+    </div>
+  </div>
+  <div id="preview-wrap">
+    <h3>Live skin preview</h3>
+    <p class="hint">A first-party demo page, not <span id="preview-app-name"></span> itself -- see SKINS.md's "Not yet proven" section.</p>
+    <iframe id="slot" src="demo-app.html" title="Live skin preview"></iframe>
+  </div>
+  <button id="fab" aria-label="Change look">&#127912;</button>
+</div>
+
+<div id="sheet" hidden>
+  <div id="looks"></div>
+  <form id="say-form">
+    <input id="say-input" autocomplete="off" placeholder="or just say it: 'make it dark'">
+    <button type="submit">Go</button>
+  </form>
+  <div id="ecol"></div>
+  <div id="log-wrap">
+    <h4>Changes</h4>
+    <ul id="log"></ul>
+  </div>
+  <button id="close">Close</button>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  window.SKIN_DEFAULT = { look: "original", accent: "#1D1D1B", background: "#FFFFFF", surface: "#F5F5F4", text: "#1D1D1B", font: "", radius: 12 };
+  window.LIBRARY = {};    // slug -> {family}. Populated from library.json; every entry is "" today (see SKINS.md).
+  var SHELF = [];         // library.json's `apps` array, verbatim.
+  var inst = null;        // the current resolved instance: {app, skin, log}
+
+  Object.defineProperty(window, "inst", { get: function () { return inst; } });
+
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function slotDoc() { return document.getElementById("slot").contentDocument; }
+
+  function applySkinToSlot(currentInst, skin) {
+    var doc = slotDoc();
+    if (!doc) return;
+    var styleEl = doc.getElementById("skin");
+    if (!styleEl) return;
+    if (skin.look === "original") { styleEl.textContent = ""; return; }
+    var hue = Skins.hue(currentInst.app.slug);
+    var tokens = Skins.build(skin.look, hue);
+    var edited = Skins.withEdits(tokens, skin);
+    styleEl.textContent = Skins.render("shared_card", edited) + "\n";
+  }
+
+  var ui = attachShelfUI({
+    els: {
+      fab: document.getElementById("fab"), sheet: document.getElementById("sheet"),
+      looks: document.getElementById("looks"), sayForm: document.getElementById("say-form"),
+      sayInput: document.getElementById("say-input"), ecol: document.getElementById("ecol"),
+      log: document.getElementById("log"), close: document.getElementById("close")
+    },
+    getInstance: function () { return inst; },
+    getHue: function (i) { return Skins.hue(i.app.slug); },
+    applySkin: applySkinToSlot,
+    onChange: function (updated) { inst = updated; save(); renderAppScreen(); }
+  });
+
+  window.checkEdit = function (proposal) { return Skins.checkEdit(proposal); };
+  window.normalizeChanges = function (changes) { return Skins.normalizeChanges(changes, inst ? inst.skin.look : "original"); };
+  window.showProposal = ui.showProposal;
+
+  function renderAppScreen() {
+    document.getElementById("app-shot").src = inst.app.screenshot;
+    document.getElementById("app-shot").alt = inst.app.name + " screenshot";
+    document.getElementById("app-name").textContent = inst.app.name;
+    document.getElementById("app-blurb").textContent = inst.app.blurb;
+    document.getElementById("preview-app-name").textContent = inst.app.name;
+    var repo = document.getElementById("app-repo");
+    repo.href = inst.app.repository; repo.textContent = inst.app.repository;
+    var fam = LIBRARY[inst.app.slug] ? LIBRARY[inst.app.slug].family : "";
+    document.getElementById("app-family-note").textContent = fam
+      ? ("Full stylesheet available (family: " + fam + ", verified).")
+      : "Colours only -- this app's real markup hasn't been measured yet.";
+    applySkinToSlot(inst, inst.skin);
+  }
+
+  function render() {
+    document.body.dataset.state = inst ? "app" : "ask";
+    document.getElementById("ask-screen").hidden = !!inst;
+    document.getElementById("app-screen").hidden = !inst;
+    if (inst) renderAppScreen();
+  }
+
+  function save() { localStorage.setItem("fd.instance", JSON.stringify(inst)); }
+
+  function resolve(text) {
+    var match = Skins.resolveAsk(text, SHELF);
+    if (!match) { document.getElementById("ask-empty").hidden = false; return; }
+    document.getElementById("ask-empty").hidden = true;
+    inst = {
+      category_id: match.slug, label: match.name, capabilities: [text], app: match,
+      skin: clone(SKIN_DEFAULT), log: [], created: new Date().toISOString()
+    };
+    save();
+    render();
+  }
+
+  document.getElementById("ask-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    resolve(document.getElementById("ask-input").value.trim());
+  });
+
+  fetch("library.json").then(function (r) { return r.json(); }).then(function (data) {
+    SHELF = data.apps;
+    SHELF.forEach(function (app) { LIBRARY[app.slug] = { family: app.family }; });
+    var saved = localStorage.getItem("fd.instance");
+    if (saved) inst = JSON.parse(saved);
+    document.getElementById("slot").addEventListener("load", render);
+    render();
+  });
+})();
+</script>
+</body>
+</html>
