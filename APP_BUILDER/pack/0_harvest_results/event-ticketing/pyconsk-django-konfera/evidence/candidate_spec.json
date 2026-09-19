@@ -1,0 +1,18 @@
+{
+  "repo_name": "pyconsk/django-konfera",
+  "repo_url": "https://github.com/pyconsk/django-konfera",
+  "branch": "main",
+  "commit": "1072778e109d67bbc49fe3b06fa8ab29d6131eea",
+  "licence": "MIT",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "Conference organisation (speakers, talks, sponsors, venues) -- adjacent to event ticketing but no evidence of ticket sales/payment in requirements.txt; PostgreSQL is not declared anywhere in requirements.txt or requirements-test.txt (only django==1.10.4, django-wkhtmltopdf, django-sitetree).",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": null,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": null,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected. MIT LICENSE file present and verified. Last commit 2017-03-21 -- abandoned for 9 years at the time of this pilot. Django 1.10 (long EOL). No psycopg2 or postgres backend evidence found in either requirements file. Expected admission result: REJECTED on Rule A datastore (not recorded/not postgresql) and on activity/quality grounds."
+}

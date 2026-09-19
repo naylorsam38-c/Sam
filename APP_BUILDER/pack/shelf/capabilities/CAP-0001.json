@@ -1,0 +1,57 @@
+{
+  "id": "CAP-0001",
+  "name": "register account",
+  "category": "Challenge Platform",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [
+        "name",
+        "email",
+        "password"
+      ],
+      "types": {
+        "name": "string",
+        "email": "string",
+        "password": "string",
+        "website": "string",
+        "affiliation": "string",
+        "country": "string"
+      }
+    },
+    "output": {
+      "fields": [],
+      "types": {}
+    },
+    "nullable": [],
+    "requires_auth": false,
+    "security_constraints": {
+      "csrf": "auth blueprint form CSRF"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": []
+  },
+  "dependencies": [],
+  "permissions": [],
+  "side_effects": [
+    "creates a Users row",
+    "may send a confirmation email if mail is configured",
+    "creates a session for the new user"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "VALIDATION_ERROR",
+      "REGISTRATION_CODE_INVALID",
+      "REGISTRATION_DISABLED"
+    ]
+  },
+  "implementations": [
+    "CAP-0001/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

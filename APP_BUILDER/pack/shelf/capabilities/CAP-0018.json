@@ -1,0 +1,67 @@
+{
+  "id": "CAP-0018",
+  "name": "create visualisation",
+  "category": "Data Dashboard",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [
+        "query_id",
+        "type",
+        "options"
+      ],
+      "types": {
+        "query_id": "integer",
+        "type": "string",
+        "name": "string",
+        "options": "object"
+      }
+    },
+    "output": {
+      "fields": [
+        "id",
+        "type",
+        "name",
+        "options"
+      ],
+      "types": {
+        "id": "integer",
+        "type": "string",
+        "name": "string",
+        "options": "object"
+      }
+    },
+    "nullable": [],
+    "requires_auth": true,
+    "security_constraints": {
+      "decorator": "require_permission(\"edit_query\")"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [
+    "edit_query"
+  ],
+  "side_effects": [
+    "creates a Visualization row"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "NOT_FOUND",
+      "FORBIDDEN"
+    ]
+  },
+  "implementations": [
+    "CAP-0018/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

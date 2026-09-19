@@ -1,0 +1,18 @@
+{
+  "repo_name": "marinho/django-bi",
+  "repo_url": "https://github.com/marinho/django-bi",
+  "branch": "main",
+  "commit": "29f9de5622e0fd9e9a6608daafd30a4f2f8593a0",
+  "licence": "LGPL",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "A small Django app meant to be added to INSTALLED_APPS in someone else's project ('add \"bi\" to your INSTALLED_APPS') -- not a whole, standalone BI application in the sense the Redash/Metabase/Superset exemplar is. Section 9 requires evaluating whole candidate applications; this is a library.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": null,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": null,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected. setup.py declares licence = 'GNU Lesser General Public License (LGPL)' verbatim -- not on the permissive list regardless of the whole-application question. 7 total commits, last release April 2019, 6 GitHub stars. Expected admission result: REJECTED on Rule C (LGPL is copyleft, not permissive) and, independently, on not being a whole candidate application."
+}

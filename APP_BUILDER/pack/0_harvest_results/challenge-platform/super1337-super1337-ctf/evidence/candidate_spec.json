@@ -1,0 +1,18 @@
+{
+  "repo_name": "super1337/Super1337-CTF",
+  "repo_url": "https://github.com/super1337/Super1337-CTF",
+  "branch": "main",
+  "commit": "3af085d310a8303ef3aff376ba930649586d5993",
+  "licence": "MIT",
+  "framework": "django",
+  "datastore": "postgresql",
+  "api_docs_url": "",
+  "structural_match": "Jeopardy-style CTF site (app name 'jeopardyctf') -- correct domain.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": null,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": null,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected. MIT LICENSE file present and verified. settings.py defaults to sqlite3 for local dev but requirements.txt pins psycopg2==2.7.3.1 and dj-database-url==0.4.2, and settings.py calls DATABASES['default'].update(db_from_env) -- genuine, evidenced production PostgreSQL capability via DATABASE_URL (Heroku-style deploy), recorded as postgresql on that real basis rather than the sqlite default alone. Django requirement is Django>=1.11.18 (EOL for years). Last commit 2019-01-23 -- abandoned 7+ years. No signals.py, no plugin documentation, no published API docs found. Expected admission result: REJECTED on Rule G (no usable attach points recorded) and Rule B (no published API docs); this is the closest any candidate in this category came to clearing Rules A and C together, and it still fails outright on activity/extensibility evidence."
+}

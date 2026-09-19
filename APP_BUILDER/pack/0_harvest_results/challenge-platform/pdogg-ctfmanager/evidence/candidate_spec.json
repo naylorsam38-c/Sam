@@ -1,0 +1,18 @@
+{
+  "repo_name": "pdogg/ctfmanager",
+  "repo_url": "https://github.com/pdogg/ctfmanager",
+  "branch": "main",
+  "commit": "d8f0ac7d7e12d7973b7eb39cd30a0bc81e4cb770",
+  "licence": "BSD-3-Clause",
+  "framework": "django",
+  "datastore": "mysql",
+  "api_docs_url": "",
+  "structural_match": "Jeopardy-style CTF management/scoreboard -- correct domain.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": null,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": null,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected. LICENSE file text is a verbatim 3-clause BSD licence (verified word-for-word against the standard text) -- permissive, and it IS on the allowed list, but settings.py declares 'django.db.backends.mysql', not PostgreSQL, and the settings.py comment scaffolding ('# Django settings for ctfmanager project.') is generic django-admin startproject boilerplate left unedited -- this project was never brought past an initial scaffold toward production. Last commit 2014-05-12 -- abandoned 12 years. Expected admission result: REJECTED on Rule A datastore (mysql, not postgresql) and activity/quality grounds; this is the one candidate in this pilot that genuinely clears Rule C on licence alone."
+}

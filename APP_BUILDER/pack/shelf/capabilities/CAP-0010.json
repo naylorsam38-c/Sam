@@ -1,0 +1,47 @@
+{
+  "id": "CAP-0010",
+  "name": "generate report",
+  "category": "Event Ticketing",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [
+        "registration_id"
+      ],
+      "types": {
+        "registration_id": "array[integer]"
+      }
+    },
+    "output": {
+      "fields": [],
+      "types": {}
+    },
+    "nullable": [],
+    "requires_auth": true,
+    "security_constraints": {},
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [
+    "registration"
+  ],
+  "side_effects": [],
+  "error_contract": {
+    "error_codes": [
+      "FORBIDDEN"
+    ]
+  },
+  "implementations": [
+    "CAP-0010/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

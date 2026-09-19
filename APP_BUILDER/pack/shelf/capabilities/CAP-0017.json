@@ -1,0 +1,75 @@
+{
+  "id": "CAP-0017",
+  "name": "run query",
+  "category": "Data Dashboard",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [
+        "data_source_id",
+        "query"
+      ],
+      "types": {
+        "data_source_id": "integer",
+        "query": "string",
+        "name": "string",
+        "description": "string",
+        "schedule": "string",
+        "options": "object"
+      }
+    },
+    "output": {
+      "fields": [
+        "id",
+        "name",
+        "query",
+        "query_hash",
+        "data_source_id",
+        "is_draft",
+        "created_at"
+      ],
+      "types": {
+        "id": "integer",
+        "name": "string",
+        "query": "string",
+        "query_hash": "string",
+        "data_source_id": "integer",
+        "is_draft": "boolean",
+        "created_at": "string"
+      }
+    },
+    "nullable": [],
+    "requires_auth": true,
+    "security_constraints": {
+      "decorator": "require_permission(\"create_query\")"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [
+    "create_query"
+  ],
+  "side_effects": [
+    "creates a Query row",
+    "triggers execution against the data source and attaches the latest QueryResult"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "FORBIDDEN",
+      "VALIDATION_ERROR"
+    ]
+  },
+  "implementations": [
+    "CAP-0017/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

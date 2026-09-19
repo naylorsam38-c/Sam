@@ -1,0 +1,65 @@
+{
+  "id": "CAP-0016",
+  "name": "create data source",
+  "category": "Data Dashboard",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [
+        "name",
+        "type",
+        "options"
+      ],
+      "types": {
+        "name": "string",
+        "type": "string",
+        "options": "object"
+      }
+    },
+    "output": {
+      "fields": [
+        "id",
+        "name",
+        "type"
+      ],
+      "types": {
+        "id": "integer",
+        "name": "string",
+        "type": "string"
+      }
+    },
+    "nullable": [],
+    "requires_auth": true,
+    "security_constraints": {
+      "decorator": "require_admin"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [
+    "admin"
+  ],
+  "side_effects": [
+    "creates a DataSource row",
+    "creates a DataSourceGroup row for the default group"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "VALIDATION_ERROR",
+      "DUPLICATE_NAME"
+    ]
+  },
+  "implementations": [
+    "CAP-0016/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

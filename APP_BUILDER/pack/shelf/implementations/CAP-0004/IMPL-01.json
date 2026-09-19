@@ -1,0 +1,21 @@
+{
+  "id": "CAP-0004/IMPL-01",
+  "capability_id": "CAP-0004",
+  "status": "retired",
+  "release": {
+    "version": "1.0.0",
+    "commit": "eb90264caec7d1210959c453d1f93ad88a98e6ce",
+    "approved": true,
+    "approval_ref": "APPROVAL-IMPL-HARVEST"
+  },
+  "source": {
+    "repository": "indico/indico",
+    "path": "CAP-0004/IMPL-01",
+    "entrypoint": "CAP-0004/route.py"
+  },
+  "dependencies": [],
+  "tests": [],
+  "rollback": {
+    "previous_version": null
+  }
+}

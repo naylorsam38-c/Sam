@@ -1,0 +1,18 @@
+{
+  "repo_name": "DefinitelyNotAnAssassin/TicketManagementSystem",
+  "repo_url": "https://github.com/DefinitelyNotAnAssassin/TicketManagementSystem",
+  "branch": "main",
+  "commit": "c5c8a742aa7bd4acff6bb0702414405efd51b91a",
+  "licence": "",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "A small student-style ticket system (module named 'StudentTicket', db.sqlite3 committed to the repo) -- not event ticket sales.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": null,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": null,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected. README claims 'This project is licensed under the MIT License. See the LICENSE file for details' but no LICENSE file actually exists in the repository -- a claim the repo's own contents do not back up, so licence is recorded here as unverifiable rather than trusting the README text at face value. Expected admission result: REJECTED on Rule C (no verifiable licence) and Rule D (structural mismatch)."
+}

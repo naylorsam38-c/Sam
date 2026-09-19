@@ -1,0 +1,55 @@
+{
+  "id": "CAP-0020",
+  "name": "share dashboard",
+  "category": "Data Dashboard",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [],
+      "types": {}
+    },
+    "output": {
+      "fields": [
+        "public_url",
+        "api_key"
+      ],
+      "types": {
+        "public_url": "string",
+        "api_key": "string"
+      }
+    },
+    "nullable": [],
+    "requires_auth": true,
+    "security_constraints": {
+      "decorator": "require_admin_or_owner(dashboard.user_id)"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [
+    "admin_or_owner"
+  ],
+  "side_effects": [
+    "creates or reuses an ApiKey row for the dashboard",
+    "logs an 'activate_api_key' event"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "NOT_FOUND",
+      "FORBIDDEN"
+    ]
+  },
+  "implementations": [
+    "CAP-0020/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

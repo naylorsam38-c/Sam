@@ -1,0 +1,55 @@
+{
+  "id": "CAP-0015",
+  "name": "join team",
+  "category": "Challenge Platform",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [
+        "name"
+      ],
+      "types": {
+        "name": "string",
+        "password": "string"
+      }
+    },
+    "output": {
+      "fields": [],
+      "types": {}
+    },
+    "nullable": [
+      "password"
+    ],
+    "requires_auth": true,
+    "security_constraints": {
+      "decorator": "require_team_mode / authed_only (via blueprint before_request)"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [],
+  "side_effects": [
+    "adds the current user to the target team's member list"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "TEAM_NOT_FOUND",
+      "WRONG_PASSWORD",
+      "TEAM_FULL",
+      "ALREADY_ON_A_TEAM"
+    ]
+  },
+  "implementations": [
+    "CAP-0015/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

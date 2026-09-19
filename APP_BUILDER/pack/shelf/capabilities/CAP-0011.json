@@ -1,0 +1,52 @@
+{
+  "id": "CAP-0011",
+  "name": "list challenges",
+  "category": "Challenge Platform",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [],
+      "types": {
+        "category": "string",
+        "tags": "string"
+      }
+    },
+    "output": {
+      "fields": [
+        "success",
+        "data"
+      ],
+      "types": {
+        "success": "boolean",
+        "data": "array[object]"
+      }
+    },
+    "nullable": [],
+    "requires_auth": false,
+    "security_constraints": {
+      "decorators": "check_challenge_visibility, during_ctf_time_only, require_verified_emails"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [],
+  "side_effects": [],
+  "error_contract": {
+    "error_codes": [
+      "FORBIDDEN"
+    ]
+  },
+  "implementations": [
+    "CAP-0011/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

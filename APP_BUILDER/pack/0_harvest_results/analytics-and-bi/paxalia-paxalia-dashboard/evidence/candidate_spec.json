@@ -1,0 +1,18 @@
+{
+  "repo_name": "paxalia/paxalia-dashboard",
+  "repo_url": "https://github.com/paxalia/paxalia-dashboard",
+  "branch": "main",
+  "commit": "f5a280342b7a5aeaa85487d39172f7debea6ab4e",
+  "licence": "Apache-2.0",
+  "framework": "django",
+  "datastore": "",
+  "api_docs_url": "",
+  "structural_match": "Explicitly a drop-in package for other Django projects ('Drop it into any Django project and get a beautiful, full-featured analytics dashboard') -- a library/addon, not a standalone whole application. Fails the Section 9 'whole candidate application' requirement on its own terms, independent of any other rule.",
+  "attach_points": [],
+  "extension_system_description": "",
+  "plugin_authoring_docs_present": null,
+  "plugin_authoring_docs_location": "",
+  "third_party_plugins_present": null,
+  "third_party_plugin_evidence": [],
+  "researcher_notes": "Real clone inspected. Genuinely Apache-2.0 licensed with no provenance red flags (unlike eventyay). But: exactly 1 commit in its entire history, created days before this pilot ran -- no track record, no real users, no evidence this is anything beyond a freshly-scaffolded package. Expected admission result: REJECTED as not a whole candidate application, and independently on quality/maturity grounds."
+}

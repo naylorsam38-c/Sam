@@ -1,0 +1,22 @@
+{
+  "cap_id": "CAP-0019",
+  "cap_name": "add to dashboard",
+  "app_slug": "data-dashboard",
+  "repo_name": "getredash/redash",
+  "repo_url": "https://github.com/getredash/redash",
+  "licence": "BSD-2-Clause",
+  "commit": "8f6b15d30da433ae881dd6376a38df17bb6c2663",
+  "source_file": "redash/handlers/widgets.py",
+  "source_symbol": "WidgetListResource",
+  "source_lines": "14-49",
+  "ranges_fetched": [
+    {
+      "path": "redash/handlers/widgets.py",
+      "start": 14,
+      "end": 49
+    }
+  ],
+  "lines_written": 80,
+  "symbol_verified": true,
+  "fetched_by": "harvest_parts.py"
+}

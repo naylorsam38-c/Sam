@@ -1,0 +1,56 @@
+{
+  "id": "CAP-0005",
+  "name": "filter list",
+  "category": "Event Ticketing",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [],
+      "types": {
+        "filters": "object",
+        "visible_items": "array[string]"
+      }
+    },
+    "output": {
+      "fields": [
+        "html"
+      ],
+      "types": {
+        "html": "string"
+      }
+    },
+    "nullable": [],
+    "requires_auth": true,
+    "security_constraints": {},
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": [
+      "user",
+      "authenticated"
+    ]
+  },
+  "dependencies": [],
+  "permissions": [
+    "registration",
+    "registration_moderation",
+    "registration_checkin",
+    "registration_edit"
+  ],
+  "side_effects": [
+    "persists the filter/column configuration for the current manager"
+  ],
+  "error_contract": {
+    "error_codes": [
+      "FORBIDDEN",
+      "VALIDATION_ERROR"
+    ]
+  },
+  "implementations": [
+    "CAP-0005/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

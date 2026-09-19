@@ -1,0 +1,102 @@
+{
+  "_form": "TEMPLATE-HARVEST-FORM v2-GODMODE",
+  "_governing_spec": "GOD_MODE/ACTIVE/God_Mode_Specification.md",
+  "_read_this_first": "Every field below exists because a god mode contract requires it. Do not add fields. Do not remove fields. Do not invent a value. If you cannot determine something by opening a real file in the clone, leave it blank and name it in 'unresolved'. A named blank is correct. A guess is a defect.",
+
+  "tpl_id": "<ALLOCATED - do not change>",
+  "app_type": "<ALLOCATED - do not change>",
+  "app_slug": "",
+  "cap_block": "",
+
+  "exemplar": {
+    "brand_name": "",
+    "evidence_urls": [],
+    "capability_targets": [
+      { "target_name": "", "what_it_does": "", "evidence_url": "" }
+    ],
+    "peers_considered": [],
+    "notes": ""
+  },
+
+  "harvest_source": {
+    "repo_name": "",
+    "repo_url": "",
+    "licence": "",
+    "branch": "",
+    "commit": "",
+    "clone_path": "",
+    "framework": "",
+    "api_docs_url": "",
+    "structural_match": ""
+  },
+
+  "identity_types": [],
+  "role_source": { "data_filename": "", "id_field": "" },
+  "journey_cap_id": "",
+
+  "capabilities": [
+    {
+      "cap_id": "",
+      "cap_name": "",
+      "engine": "",
+      "exemplar_target": "",
+      "what_it_does": "",
+      "route": "",
+      "method": "",
+      "data_filename": "",
+      "binary_response": false,
+      "shared_lib_calls": [],
+      "data_shape": {
+        "contract_version": "2.0",
+        "data_access": [],
+        "context_fields": [],
+        "required_input_fields": [],
+        "input_types": {},
+        "output_type": "",
+        "output_fields": [],
+        "output_types": {},
+        "nullable_fields": [],
+        "permissions": [],
+        "requires_auth": false,
+        "required_role": "",
+        "dependencies": [],
+        "error_contract": { "error_codes": [] },
+        "security_constraints": {},
+        "side_effects": [],
+        "min_version": "1.0.0"
+      },
+      "provenance": {
+        "source_file": "",
+        "source_symbol": "",
+        "source_lines": ""
+      }
+    }
+  ],
+
+  "screens": [
+    {
+      "screen_name": "",
+      "slots": [
+        {
+          "slot_id": "",
+          "bound_cap_id": "UNBOUND",
+          "requires_auth": false,
+          "selector": "",
+          "position": "center",
+          "control_name": "",
+          "trigger_type": "",
+          "trigger_on": ""
+        }
+      ]
+    }
+  ],
+
+  "run": {
+    "start_command": [],
+    "port": 0,
+    "health_endpoint": "/health"
+  },
+
+  "unresolved": [],
+  "state": "blank"
+}

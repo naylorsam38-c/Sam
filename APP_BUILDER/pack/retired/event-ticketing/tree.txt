@@ -1,0 +1,18 @@
+APP-001  Event Ticketing  (event-ticketing)
+  screen: Public: Login
+    button   "Login with Indico"          -> CAP-0002  log in
+  screen: Public: Sign up
+    button   "Create my Indico profile"   -> CAP-0001  register account
+  screen: Header: account menu
+    button   "Logout"                     -> CAP-0003  log out
+  screen: Header: search
+    button   "Enter your search term"     -> CAP-0004  search records
+  screen: Event: Registration form
+    button   "Register"                   -> CAP-0007  book slot
+  screen: Manage: Registration list
+    button   "Customize"                  -> CAP-0005  filter list
+    button   "registration row"           -> CAP-0006  view record detail
+    button   "Send email"                 -> CAP-0009  send email notification
+    button   "Export CSV"                 -> CAP-0010  generate report
+  screen: Check-in App: ticket scan
+    device_event "Scan"                       -> CAP-0008  scan barcode

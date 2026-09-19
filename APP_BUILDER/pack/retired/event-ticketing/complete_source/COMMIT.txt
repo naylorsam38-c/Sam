@@ -1,0 +1,14 @@
+repo: indico/indico
+url:  https://github.com/indico/indico
+commit: eb90264caec7d1210959c453d1f93ad88a98e6ce
+branch at clone time: master
+cloned fresh for this file: 2026-09-19 (original clone from an earlier
+session no longer existed on disk; re-cloned and checked out to this exact
+commit, confirmed via `git rev-parse HEAD`, before .git was stripped)
+licence: MIT
+
+This is the complete working tree at that commit, .git history excluded.
+Only the ~10 files under ../shelf/CAP-000X/source.py were individually
+harvested as capability parts; everything else here was never processed by
+harvest_parts.py -- it is the whole application, for reference and any
+future re-harvest.

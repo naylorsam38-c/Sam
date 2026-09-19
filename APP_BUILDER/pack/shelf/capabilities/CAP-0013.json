@@ -1,0 +1,47 @@
+{
+  "id": "CAP-0013",
+  "name": "view scoreboard",
+  "category": "Challenge Platform",
+  "status": "retired",
+  "data_shape": {
+    "input": {
+      "required": [],
+      "types": {}
+    },
+    "output": {
+      "fields": [
+        "success",
+        "data"
+      ],
+      "types": {
+        "success": "boolean",
+        "data": "array[object]"
+      }
+    },
+    "nullable": [],
+    "requires_auth": false,
+    "security_constraints": {
+      "decorators": "check_account_visibility, check_score_visibility",
+      "cache": "cached 60s, key includes request args"
+    },
+    "contract_version": "2.0",
+    "data_access": [],
+    "context_fields": []
+  },
+  "dependencies": [],
+  "permissions": [],
+  "side_effects": [],
+  "error_contract": {
+    "error_codes": [
+      "FORBIDDEN"
+    ]
+  },
+  "implementations": [
+    "CAP-0013/IMPL-01"
+  ],
+  "qualification": {
+    "status": "retired",
+    "approved_by": "Sam",
+    "approval_ref": "APPROVAL-CAP-HARVEST"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "apps": {
+    "event-ticketing": {
+      "number": 1,
+      "category": "Event Ticketing",
+      "status": "retired",
+      "retired_reason": "Rule A now requires Django, not Flask. See pack/retired/event-ticketing/RETIRED.md.",
+      "retired_date": "2026-09-19"
+    },
+    "challenge-platform": {
+      "number": 2,
+      "category": "Challenge Platform",
+      "status": "retired",
+      "retired_reason": "Rule A now requires Django, not Flask. See pack/retired/challenge-platform/RETIRED.md.",
+      "retired_date": "2026-09-19"
+    },
+    "data-dashboard": {
+      "number": 3,
+      "category": "Data Dashboard",
+      "status": "retired",
+      "retired_reason": "Rule A now requires Django, not Flask. See pack/retired/data-dashboard/RETIRED.md.",
+      "retired_date": "2026-09-19"
+    }
+  },
+  "capabilities": {
+    "register account [standard individual]": 1,
+    "log in [standard individual]": 2,
+    "log out [standard individual]": 3,
+    "search records": 4,
+    "filter list": 5,
+    "view record detail": 6,
+    "book slot": 7,
+    "scan barcode": 8,
+    "send email notification": 9,
+    "generate report": 10,
+    "list challenges": 11,
+    "submit flag": 12,
+    "view scoreboard": 13,
+    "create team": 14,
+    "join team": 15,
+    "create data source": 16,
+    "run query": 17,
+    "create visualisation": 18,
+    "add to dashboard": 19,
+    "share dashboard": 20
+  }
+}

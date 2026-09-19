@@ -1,0 +1,21 @@
+{
+  "id": "CAP-0002/IMPL-01",
+  "capability_id": "CAP-0002",
+  "status": "retired",
+  "release": {
+    "version": "1.0.0",
+    "commit": "8864bc0cea5b67d9ae96978b5d559e70330ff071",
+    "approved": true,
+    "approval_ref": "APPROVAL-IMPL-HARVEST"
+  },
+  "source": {
+    "repository": "CTFd/CTFd",
+    "path": "CAP-0002/IMPL-01",
+    "entrypoint": "CAP-0002/route.py"
+  },
+  "dependencies": [],
+  "tests": [],
+  "rollback": {
+    "previous_version": null
+  }
+}

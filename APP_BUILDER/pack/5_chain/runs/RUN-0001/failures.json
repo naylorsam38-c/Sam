@@ -1,0 +1,66 @@
+[
+  {
+    "run": "RUN-0001",
+    "check": "CHK-001",
+    "level": 0,
+    "text": "CAP-0001 is served by its own part on the shelf",
+    "message": "part has no class named by 'register'",
+    "capability": "CAP-0001"
+  },
+  {
+    "run": "RUN-0001",
+    "check": "CHK-002",
+    "level": 0,
+    "text": "CAP-0002 is served by its own part on the shelf",
+    "message": "part has no class named by 'login'",
+    "capability": "CAP-0002"
+  },
+  {
+    "run": "RUN-0001",
+    "check": "CHK-003",
+    "level": 0,
+    "text": "CAP-0003 is served by its own part on the shelf",
+    "message": "part has no class named by 'logout'",
+    "capability": "CAP-0003"
+  },
+  {
+    "run": "RUN-0001",
+    "check": "CHK-004",
+    "level": 0,
+    "text": "CAP-0014 is served by its own part on the shelf",
+    "message": "part has no class named by 'new'",
+    "capability": "CAP-0014"
+  },
+  {
+    "run": "RUN-0001",
+    "check": "CHK-005",
+    "level": 0,
+    "text": "CAP-0015 is served by its own part on the shelf",
+    "message": "part has no class named by 'join'",
+    "capability": "CAP-0015"
+  },
+  {
+    "run": "RUN-0001",
+    "check": "CHK-013",
+    "level": 0,
+    "text": "the challenge list answers (empty board is a real answer)",
+    "message": "500 with no X-Shelf-Capability -- the host refused it rather than CAP-0011 serving it",
+    "capability": "CAP-0011"
+  },
+  {
+    "run": "RUN-0001",
+    "check": "CHK-014",
+    "level": 0,
+    "text": "the scoreboard answers (empty board is a real answer)",
+    "message": "500 with no X-Shelf-Capability -- the host refused it rather than CAP-0013 serving it",
+    "capability": "CAP-0013"
+  },
+  {
+    "run": "RUN-0001",
+    "check": "CHK-018",
+    "level": 0,
+    "text": "the page a person lands on throws no javascript errors",
+    "message": "2 error(s), first: Failed to load resource: the server responded with a status of 404 (NOT FOUND)",
+    "capability": null
+  }
+]

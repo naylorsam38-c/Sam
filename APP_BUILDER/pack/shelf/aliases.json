@@ -1,0 +1,84 @@
+{
+  "aliases": [
+    {
+      "alias": "add to dashboard@1.0.0",
+      "impl_id": "CAP-0019/IMPL-01"
+    },
+    {
+      "alias": "book slot@1.0.0",
+      "impl_id": "CAP-0007/IMPL-01"
+    },
+    {
+      "alias": "create data source@1.0.0",
+      "impl_id": "CAP-0016/IMPL-01"
+    },
+    {
+      "alias": "create team@1.0.0",
+      "impl_id": "CAP-0014/IMPL-01"
+    },
+    {
+      "alias": "create visualisation@1.0.0",
+      "impl_id": "CAP-0018/IMPL-01"
+    },
+    {
+      "alias": "filter list@1.0.0",
+      "impl_id": "CAP-0005/IMPL-01"
+    },
+    {
+      "alias": "generate report@1.0.0",
+      "impl_id": "CAP-0010/IMPL-01"
+    },
+    {
+      "alias": "join team@1.0.0",
+      "impl_id": "CAP-0015/IMPL-01"
+    },
+    {
+      "alias": "list challenges@1.0.0",
+      "impl_id": "CAP-0011/IMPL-01"
+    },
+    {
+      "alias": "log in@1.0.0",
+      "impl_id": "CAP-0002/IMPL-01"
+    },
+    {
+      "alias": "log out@1.0.0",
+      "impl_id": "CAP-0003/IMPL-01"
+    },
+    {
+      "alias": "register account@1.0.0",
+      "impl_id": "CAP-0001/IMPL-01"
+    },
+    {
+      "alias": "run query@1.0.0",
+      "impl_id": "CAP-0017/IMPL-01"
+    },
+    {
+      "alias": "scan barcode@1.0.0",
+      "impl_id": "CAP-0008/IMPL-01"
+    },
+    {
+      "alias": "search records@1.0.0",
+      "impl_id": "CAP-0004/IMPL-01"
+    },
+    {
+      "alias": "send email notification@1.0.0",
+      "impl_id": "CAP-0009/IMPL-01"
+    },
+    {
+      "alias": "share dashboard@1.0.0",
+      "impl_id": "CAP-0020/IMPL-01"
+    },
+    {
+      "alias": "submit flag@1.0.0",
+      "impl_id": "CAP-0012/IMPL-01"
+    },
+    {
+      "alias": "view record detail@1.0.0",
+      "impl_id": "CAP-0006/IMPL-01"
+    },
+    {
+      "alias": "view scoreboard@1.0.0",
+      "impl_id": "CAP-0013/IMPL-01"
+    }
+  ]
+}

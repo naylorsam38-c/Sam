@@ -1,0 +1,12 @@
+repo: getredash/redash
+url:  https://github.com/getredash/redash
+commit: 8f6b15d30da433ae881dd6376a38df17bb6c2663
+branch at clone time: master
+cloned: 2026-09-18, this session
+licence: BSD-2-Clause
+
+This is the complete working tree at that commit, .git history excluded.
+Only the 8 files under ../shelf/CAP-000X/source.py were individually
+harvested as capability parts; everything else here was never processed by
+harvest_parts.py -- it is the whole application, for reference and any
+future re-harvest.
