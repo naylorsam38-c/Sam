@@ -103,6 +103,13 @@ def main():
             else:
                 pick = ov
                 override_reason = ov["override_reason"]
+                # the override must actually be IN the candidate pool, not just
+                # the top-level pick - acquire.py reads discovery_candidates,
+                # not this entry's name/repository, when it cascades through
+                # licence/acquisition failures.
+                if not any((c.get("source_code_url") or "").rstrip("/").lower() ==
+                           ov["source_code_url"].rstrip("/").lower() for c in ranked):
+                    ranked = [ov] + ranked
 
         app_id = f"APP-{i:03d}"
         entry = {

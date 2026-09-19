@@ -5,11 +5,11 @@
  "category_slug": "product-management",
  "repository": "https://github.com/linkcraftstudio/feedlog",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "aa56a7655840471f33890028fad2185549d1ded9",
  "source_path": "applications/APP-043/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -22,5 +22,13 @@
    "description": "Open-source feedback & roadmap tool - feedback boards, public roadmap, AI-assisted changelog."
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "feedlog",
+   "repo": "https://github.com/linkcraftstudio/feedlog",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

@@ -1,0 +1,15 @@
+{
+ "application": "APP-041",
+ "category": "note-taking",
+ "repository_url": "https://github.com/usememos/memos",
+ "commit_sha": "7e3d3c63156c206209fdc8e75a4fb117b1aaf1fb",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:49:55.514721+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "ef50ab25019f785c33d354fc1a8de9b5ff3b6137fcb9be8e1740524d90e3bc45",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 63161
+}

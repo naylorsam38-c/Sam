@@ -5,11 +5,11 @@
  "category_slug": "team-chat",
  "repository": "https://github.com/RocketChat/Rocket.Chat",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "a2132d777c5b1ec3c181632f9d12f2085457fe27",
  "source_path": "applications/APP-050/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -224,5 +224,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Rocket.Chat",
+   "repo": "https://github.com/RocketChat/Rocket.Chat",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

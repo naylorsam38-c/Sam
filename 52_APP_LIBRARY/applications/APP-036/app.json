@@ -1,15 +1,15 @@
 {
  "id": "APP-036",
- "name": "tooljet",
+ "name": "appsmith",
  "category": "Low Code Platforms",
  "category_slug": "low-code-platforms",
- "repository": "https://github.com/ToolJet/ToolJet",
+ "repository": "https://github.com/appsmithorg/appsmith",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "Apache-2.0",
  "version": null,
- "commit": null,
+ "commit": "983129bffdfb0655d8e00d8d3906ae9dbb45dcaf",
  "source_path": "applications/APP-036/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -38,5 +38,19 @@
    "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "tooljet",
+   "repo": "https://github.com/ToolJet/ToolJet",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "appsmith",
+   "repo": "https://github.com/appsmithorg/appsmith",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

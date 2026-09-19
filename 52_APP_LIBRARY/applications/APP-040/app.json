@@ -5,11 +5,11 @@
  "category_slug": "no-code-platforms",
  "repository": "https://github.com/appsmithorg/appsmith",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "Apache-2.0",
  "version": null,
- "commit": null,
+ "commit": "983129bffdfb0655d8e00d8d3906ae9dbb45dcaf",
  "source_path": "applications/APP-040/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -30,5 +30,13 @@
    "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "appsmith",
+   "repo": "https://github.com/appsmithorg/appsmith",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

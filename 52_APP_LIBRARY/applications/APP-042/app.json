@@ -5,11 +5,11 @@
  "category_slug": "password-manager",
  "repository": "https://github.com/Infisical/infisical",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "bd2179cf211874925e2313664e22dae2501fe30a",
  "source_path": "applications/APP-042/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -155,5 +155,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Infisical Community Edition",
+   "repo": "https://github.com/Infisical/infisical",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

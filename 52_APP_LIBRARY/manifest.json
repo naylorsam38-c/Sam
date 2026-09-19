@@ -10,11 +10,11 @@
    "category_slug": "ab-testing-experimentation",
    "repository": "https://github.com/Flagsmith/flagsmith",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "BSD-3-Clause",
    "version": null,
-   "commit": null,
+   "commit": "190c645d83d11f627a241cd4e5540d0a26ad73ba",
    "source_path": "applications/APP-001/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -49,7 +49,15 @@
      "description": "Enterprise-grade feature flag platform that you can self-host."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "flagsmith",
+     "repo": "https://github.com/Flagsmith/flagsmith",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-002",
@@ -58,11 +66,11 @@
    "category_slug": "ai-agents",
    "repository": "https://github.com/Mintplex-Labs/anything-llm",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "da6685510ce691b2e1be417f739c7dffee3cfc49",
    "source_path": "applications/APP-002/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -109,20 +117,28 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "AnythingLLM",
+     "repo": "https://github.com/Mintplex-Labs/anything-llm",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-003",
-   "name": "LobeHub",
+   "name": "Home Assistant",
    "category": "AI Assistants",
    "category_slug": "ai-assistants",
-   "repository": "https://github.com/lobehub/lobehub",
+   "repository": "https://github.com/home-assistant/core",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "Apache-2.0",
    "version": null,
-   "commit": null,
+   "commit": "4a6b3a2d7e7301f7e38b0c9afe0cf54063dff208",
    "source_path": "applications/APP-003/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -268,7 +284,21 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "LobeHub",
+     "repo": "https://github.com/lobehub/lobehub",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says UNRECOGNISED, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Home Assistant",
+     "repo": "https://github.com/home-assistant/core",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-004",
@@ -277,11 +307,11 @@
    "category_slug": "ai-code-assistants",
    "repository": "https://github.com/TabbyML/tabby",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "Apache-2.0",
    "version": null,
-   "commit": null,
+   "commit": "21b29048d7bcf6b94f9f482f2d0fd05efadfd19f",
    "source_path": "applications/APP-004/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -294,7 +324,15 @@
      "description": "Self-hosted AI coding assistant."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "tabby",
+     "repo": "https://github.com/TabbyML/tabby",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-005",
@@ -303,11 +341,11 @@
    "category_slug": "ai-design-tools",
    "repository": "https://github.com/penpot/penpot",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MPL-2.0",
    "version": null,
-   "commit": null,
+   "commit": "b402637fe4c35a31eac4007356d3a750ba6187c8",
    "source_path": "applications/APP-005/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -320,7 +358,15 @@
      "description": "Penpot: The open-source design platform for Product teams that need scalable collaboration."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "penpot",
+     "repo": "https://github.com/penpot/penpot",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-006",
@@ -329,11 +375,11 @@
    "category_slug": "ai-development",
    "repository": "https://github.com/langfuse/langfuse",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "ef0add7b2598200bd44573178d9d1cc5f7cc770b",
    "source_path": "applications/APP-006/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -354,20 +400,28 @@
      "description": "Open Source AI Platform - AI Chat with advanced features that works with every LLM."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "langfuse",
+     "repo": "https://github.com/langfuse/langfuse",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-007",
-   "name": "ElasticSearch",
+   "name": "Superset",
    "category": "Analytics",
    "category_slug": "analytics",
-   "repository": "https://github.com/elastic/elasticsearch",
+   "repository": "https://github.com/apache/superset",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "Apache-2.0",
    "version": null,
-   "commit": null,
+   "commit": "128c0c159ab8a1157e1f0688b43ba16b0c034889",
    "source_path": "applications/APP-007/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -582,7 +636,21 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "ElasticSearch",
+     "repo": "https://github.com/elastic/elasticsearch",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Superset",
+     "repo": "https://github.com/apache/superset",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-008",
@@ -591,11 +659,11 @@
    "category_slug": "authentication",
    "repository": "https://github.com/firezone/firezone",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "Apache-2.0",
    "version": null,
-   "commit": null,
+   "commit": "f59d5b8b1981fe49257ca9fba91418f0d9f8ac41",
    "source_path": "applications/APP-008/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -784,20 +852,28 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Firezone",
+     "repo": "https://github.com/firezone/firezone",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-009",
-   "name": "n8n",
+   "name": "Home Assistant",
    "category": "Automation",
    "category_slug": "automation",
-   "repository": "https://github.com/n8n-io/n8n",
+   "repository": "https://github.com/home-assistant/core",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "Apache-2.0",
    "version": null,
-   "commit": null,
+   "commit": "cbc435157b764ffe4ea131e583b4ec3bd1184fa1",
    "source_path": "applications/APP-009/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -1017,7 +1093,21 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "n8n",
+     "repo": "https://github.com/n8n-io/n8n",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says UNRECOGNISED, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Home Assistant",
+     "repo": "https://github.com/home-assistant/core",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-010",
@@ -1026,11 +1116,11 @@
    "category_slug": "blogging",
    "repository": "https://github.com/TryGhost/Ghost",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "8e2eb8abfccdc4c373d5d9b6192b7ca4aba5809d",
    "source_path": "applications/APP-010/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -1246,20 +1336,28 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Ghost",
+     "repo": "https://github.com/TryGhost/Ghost",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-011",
-   "name": "linkwarden",
+   "name": "linkding",
    "category": "Bookmarks & Archiving",
    "category_slug": "bookmarks-archiving",
-   "repository": "https://github.com/linkwarden/linkwarden",
+   "repository": "https://github.com/sissbruecker/linkding",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "27b7303baf41bb28babc610ac8eaa486e1ddfab5",
    "source_path": "applications/APP-011/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -1280,7 +1378,21 @@
      "description": "Self-hosted bookmark manager that is designed be to be minimal, fast, and easy to set up using Docker."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "linkwarden",
+     "repo": "https://github.com/linkwarden/linkwarden",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "linkding",
+     "repo": "https://github.com/sissbruecker/linkding",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-012",
@@ -1289,11 +1401,11 @@
    "category_slug": "browser",
    "repository": "https://github.com/m1k1o/neko",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "Apache-2.0",
    "version": null,
-   "commit": null,
+   "commit": "ddf2787c5e3891f4578da5552436694a94f1ae22",
    "source_path": "applications/APP-012/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": "automated pick (code-server) matched 'browser' as a stray word in 'VS Code in the browser' - it's a web IDE, not a browser app",
    "discovery_candidates": [
@@ -1508,7 +1620,15 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Neko",
+     "repo": "https://github.com/m1k1o/neko",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-013",
@@ -1517,11 +1637,11 @@
    "category_slug": "cms",
    "repository": "https://github.com/strapi/strapi",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "d83af0410bf31b034b01757729f2231862ee5e87",
    "source_path": "applications/APP-013/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -1736,7 +1856,15 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Strapi",
+     "repo": "https://github.com/strapi/strapi",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-014",
@@ -1745,11 +1873,11 @@
    "category_slug": "code-editors",
    "repository": "https://github.com/ekzhang/rustpad",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "54e4a9383c84d7317af42a7ddb177ce8bcba058d",
    "source_path": "applications/APP-014/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -1764,7 +1892,15 @@
      "description": "Efficient and minimal collaborative code editor, self-hosted, no database required."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "rustpad",
+     "repo": "https://github.com/ekzhang/rustpad",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-015",
@@ -1773,11 +1909,11 @@
    "category_slug": "collaboration",
    "repository": "https://github.com/go-gitea/gitea",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2",
    "source_path": "applications/APP-015/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -1924,20 +2060,28 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Gitea",
+     "repo": "https://github.com/go-gitea/gitea",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-016",
-   "name": "Discourse",
+   "name": "Hoppscotch Community Edition",
    "category": "Community",
    "category_slug": "community",
-   "repository": "https://github.com/discourse/discourse",
+   "repository": "https://github.com/hoppscotch/hoppscotch",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "d86e59f6e9574c69f01b300691b9f4396eeb38d2",
    "source_path": "applications/APP-016/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2155,20 +2299,34 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Discourse",
+     "repo": "https://github.com/discourse/discourse",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Hoppscotch Community Edition",
+     "repo": "https://github.com/hoppscotch/hoppscotch",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-017",
-   "name": "Twenty",
+   "name": "Krayin",
    "category": "CRM",
    "category_slug": "crm",
-   "repository": "https://github.com/twentyhq/twenty",
+   "repository": "https://github.com/krayin/laravel-crm",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "570a8db102607f1c191f239f06f6db06ec8b942b",
    "source_path": "applications/APP-017/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2341,7 +2499,21 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Twenty",
+     "repo": "https://github.com/twentyhq/twenty",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Krayin",
+     "repo": "https://github.com/krayin/laravel-crm",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-018",
@@ -2350,11 +2522,11 @@
    "category_slug": "customer-support",
    "repository": "https://github.com/chatwoot/chatwoot",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "f7f7754511df38c33455d2a968f7541e82d15e5b",
    "source_path": "applications/APP-018/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2473,7 +2645,15 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Chatwoot",
+     "repo": "https://github.com/chatwoot/chatwoot",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-019",
@@ -2482,11 +2662,11 @@
    "category_slug": "data-engineering",
    "repository": "https://github.com/airbytehq/airbyte",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "Elastic-2.0",
    "version": null,
-   "commit": null,
+   "commit": "156d6d32937c546b048c010dcb7cfbe52201341e",
    "source_path": "applications/APP-019/source",
-   "status": "DISCOVERED",
+   "status": "LICENCE_UNCLEAR",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2499,7 +2679,15 @@
      "description": "Open-source data movement for ELT pipelines and AI agents."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "airbyte",
+     "repo": "https://github.com/airbytehq/airbyte",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    }
+   ]
   },
   {
    "id": "APP-020",
@@ -2508,11 +2696,11 @@
    "category_slug": "databases",
    "repository": "https://github.com/mindsdb/mindshub",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "780bbcbb8b9367c667e9b6af2aecc8277f24c0ad",
    "source_path": "applications/APP-020/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2629,7 +2817,15 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "MindsDB",
+     "repo": "https://github.com/mindsdb/mindshub",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-021",
@@ -2638,11 +2834,11 @@
    "category_slug": "design-tools",
    "repository": "https://github.com/penpot/penpot",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MPL-2.0",
    "version": null,
-   "commit": null,
+   "commit": "b402637fe4c35a31eac4007356d3a750ba6187c8",
    "source_path": "applications/APP-021/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2655,7 +2851,15 @@
      "description": "Penpot: The open-source design platform for Product teams that need scalable collaboration."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "penpot",
+     "repo": "https://github.com/penpot/penpot",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-022",
@@ -2681,11 +2885,11 @@
    "category_slug": "devops",
    "repository": "https://github.com/theonedev/onedev",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "aef745b5fd5a14b32981a99e763bc75bfe0cbee5",
    "source_path": "applications/APP-023/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2732,7 +2936,15 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "OneDev",
+     "repo": "https://github.com/theonedev/onedev",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-024",
@@ -2741,11 +2953,11 @@
    "category_slug": "digital-signiture",
    "repository": "https://github.com/docusealco/docuseal",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "AGPL-3.0",
    "version": null,
-   "commit": null,
+   "commit": "9e2811af332082ecbab13d21ffb24cc59e018273",
    "source_path": "applications/APP-024/source",
-   "status": "DISCOVERED",
+   "status": "LICENCE_UNCLEAR",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2808,7 +3020,33 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Docuseal",
+     "repo": "https://github.com/docusealco/docuseal",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Documenso",
+     "repo": "https://github.com/documenso/documenso",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "OpenSign",
+     "repo": "https://github.com/opensignlabs/opensign",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Signature PDF",
+     "repo": "https://github.com/24eme/signaturepdf",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    }
+   ]
   },
   {
    "id": "APP-025",
@@ -2817,11 +3055,11 @@
    "category_slug": "ecommerce",
    "repository": "https://github.com/bagisto/bagisto",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "9beff85ece6fe13378a97e6f84765b50647d3327",
    "source_path": "applications/APP-025/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3040,20 +3278,28 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Bagisto",
+     "repo": "https://github.com/bagisto/bagisto",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-026",
-   "name": "Odoo",
+   "name": "grocy",
    "category": "ERP",
    "category_slug": "erp",
-   "repository": "https://github.com/odoo/odoo",
+   "repository": "https://github.com/grocy/grocy",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "41206cb90154e0d17d3e108cc1f182b94fdb465d",
    "source_path": "applications/APP-026/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3142,20 +3388,40 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Odoo",
+     "repo": "https://github.com/odoo/odoo",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says LGPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "ERPNext",
+     "repo": "https://github.com/frappe/erpnext",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "grocy",
+     "repo": "https://github.com/grocy/grocy",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-027",
-   "name": "Joplin",
+   "name": "transfer.sh",
    "category": "File Storage",
    "category_slug": "file-storage",
-   "repository": "https://github.com/laurent22/joplin",
+   "repository": "https://github.com/dutchcoders/transfer.sh",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "c37bfd95797fd6da8a6da53fc13d191994b3f687",
    "source_path": "applications/APP-027/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3373,20 +3639,40 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Joplin",
+     "repo": "https://github.com/laurent22/joplin",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says UNRECOGNISED, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Nextcloud",
+     "repo": "https://github.com/nextcloud/server",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "transfer.sh",
+     "repo": "https://github.com/dutchcoders/transfer.sh",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-028",
-   "name": "Formbricks",
+   "name": "Typebot",
    "category": "Forms & Surveys",
    "category_slug": "forms-surveys",
-   "repository": "https://github.com/formbricks/formbricks",
+   "repository": "https://github.com/baptisteArno/typebot.io",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "Apache-2.0",
    "version": null,
-   "commit": null,
+   "commit": "61056ff9a98082485add8111e901d3148ca358ef",
    "source_path": "applications/APP-028/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3462,7 +3748,21 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Formbricks",
+     "repo": "https://github.com/formbricks/formbricks",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Typebot",
+     "repo": "https://github.com/baptisteArno/typebot.io",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-029",
@@ -3471,11 +3771,11 @@
    "category_slug": "game-development",
    "repository": "https://github.com/gaseous-project/gaseous-server",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "AGPL-3.0",
    "version": null,
-   "commit": null,
+   "commit": "c21363f03ad715b839adf69b2f7cb423432278b4",
    "source_path": "applications/APP-029/source",
-   "status": "DISCOVERED",
+   "status": "LICENCE_UNCLEAR",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3488,7 +3788,15 @@
      "description": "A game ROM manager, with a built in web based emulator."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "gaseous-server",
+     "repo": "https://github.com/gaseous-project/gaseous-server",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    }
+   ]
   },
   {
    "id": "APP-030",
@@ -3497,11 +3805,11 @@
    "category_slug": "hosting-control-panel",
    "repository": "https://github.com/Websoft9/websoft9",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "LGPL",
    "version": null,
-   "commit": null,
+   "commit": "112d07a4719fb233feaf3ef3a89fc9df42c2a30c",
    "source_path": "applications/APP-030/source",
-   "status": "DISCOVERED",
+   "status": "LICENCE_UNCLEAR",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3514,7 +3822,15 @@
      "description": "Applications self-hosting and DevOps platform for running open source, web-based linux Panel of lite PaaS."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "websoft9",
+     "repo": "https://github.com/Websoft9/websoft9",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says LGPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    }
+   ]
   },
   {
    "id": "APP-031",
@@ -3523,11 +3839,11 @@
    "category_slug": "human-resources",
    "repository": "https://github.com/frappe/hrms",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "LGPL",
    "version": null,
-   "commit": null,
+   "commit": "d5cb062d5e2d33beb367f524760593592a16c58e",
    "source_path": "applications/APP-031/source",
-   "status": "DISCOVERED",
+   "status": "LICENCE_UNCLEAR",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3548,20 +3864,34 @@
      "description": "Horilla is a free and open source HR software."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "hrms",
+     "repo": "https://github.com/frappe/hrms",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "horilla-hr",
+     "repo": "https://github.com/horilla/horilla-hr",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says LGPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    }
+   ]
   },
   {
    "id": "APP-032",
-   "name": "Akaunting",
+   "name": "ezbookkeeping",
    "category": "Invoicing & Finance",
    "category_slug": "invoicing-finance",
-   "repository": "https://github.com/akaunting/akaunting",
+   "repository": "https://github.com/mayswind/ezbookkeeping",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "057be38cd51bb5789439752dfa2bacd549537939",
    "source_path": "applications/APP-032/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3736,20 +4066,46 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Akaunting",
+     "repo": "https://github.com/akaunting/akaunting",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says BUSL-1.1, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Invoice Ninja",
+     "repo": "https://github.com/invoiceninja/invoiceninja",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Dolibarr",
+     "repo": "https://github.com/Dolibarr/dolibarr",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "ezbookkeeping",
+     "repo": "https://github.com/mayswind/ezbookkeeping",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-033",
-   "name": "AppFlowy",
+   "name": "Memos",
    "category": "Knowledge Management",
    "category_slug": "knowledge-management",
-   "repository": "https://github.com/AppFlowy-IO/appflowy",
+   "repository": "https://github.com/usememos/memos",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "7e3d3c63156c206209fdc8e75a4fb117b1aaf1fb",
    "source_path": "applications/APP-033/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3964,7 +4320,21 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "AppFlowy",
+     "repo": "https://github.com/AppFlowy-IO/appflowy",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Memos",
+     "repo": "https://github.com/usememos/memos",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-034",
@@ -3973,11 +4343,11 @@
    "category_slug": "learning-management",
    "repository": "https://github.com/instructure/canvas-lms",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "GPL",
    "version": null,
-   "commit": null,
+   "commit": "55149b2a468991458bb98a05e0619f32a72e1eae",
    "source_path": "applications/APP-034/source",
-   "status": "DISCOVERED",
+   "status": "LICENCE_UNCLEAR",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4053,7 +4423,33 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Canvas LMS",
+     "repo": "https://github.com/instructure/canvas-lms",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "LMS",
+     "repo": "https://github.com/epoupon/lms",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Chamilo LMS",
+     "repo": "https://github.com/chamilo/chamilo-lms",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "ILIAS",
+     "repo": "https://github.com/ILIAS-eLearning/ILIAS",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    }
+   ]
   },
   {
    "id": "APP-035",
@@ -4074,16 +4470,16 @@
   },
   {
    "id": "APP-036",
-   "name": "tooljet",
+   "name": "appsmith",
    "category": "Low Code Platforms",
    "category_slug": "low-code-platforms",
-   "repository": "https://github.com/ToolJet/ToolJet",
+   "repository": "https://github.com/appsmithorg/appsmith",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "Apache-2.0",
    "version": null,
-   "commit": null,
+   "commit": "983129bffdfb0655d8e00d8d3906ae9dbb45dcaf",
    "source_path": "applications/APP-036/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4112,7 +4508,21 @@
      "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "tooljet",
+     "repo": "https://github.com/ToolJet/ToolJet",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "appsmith",
+     "repo": "https://github.com/appsmithorg/appsmith",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-037",
@@ -4121,11 +4531,11 @@
    "category_slug": "marketing",
    "repository": "https://github.com/mautic/mautic",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "AGPL-3.0",
    "version": null,
-   "commit": null,
+   "commit": "7bf0499e78542afb7a01b88c7a21febeaaff8bdf",
    "source_path": "applications/APP-037/source",
-   "status": "DISCOVERED",
+   "status": "LICENCE_UNCLEAR",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4201,7 +4611,33 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Mautic",
+     "repo": "https://github.com/mautic/mautic",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "RudderStack",
+     "repo": "https://github.com/rudderlabs/rudder-server/",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Erxes",
+     "repo": "https://github.com/erxes/erxes",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "phpList",
+     "repo": "https://github.com/phpList/phplist3",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    }
+   ]
   },
   {
    "id": "APP-038",
@@ -4210,11 +4646,11 @@
    "category_slug": "monitoring",
    "repository": "https://github.com/louislam/uptime-kuma",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "5998570a3564afa82e540b660dae4b3b2178f58c",
    "source_path": "applications/APP-038/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": "automated pick (Pi-hole) is primarily a DNS/ad-blocker; this is the category-defining self-hosted monitoring tool",
    "discovery_candidates": [
@@ -4275,7 +4711,39 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Pi-hole",
+     "repo": "https://github.com/pi-hole/pi-hole",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says EUPL-1.2, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "LinkAce",
+     "repo": "https://github.com/Kovah/LinkAce/",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Pelican Panel",
+     "repo": "https://github.com/pelican/panel",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "SIPCAPTURE Homer",
+     "repo": "https://github.com/sipcapture/homer",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Uptime Kuma",
+     "repo": "https://github.com/louislam/uptime-kuma",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-039",
@@ -4344,11 +4812,11 @@
    "category_slug": "no-code-platforms",
    "repository": "https://github.com/appsmithorg/appsmith",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "Apache-2.0",
    "version": null,
-   "commit": null,
+   "commit": "983129bffdfb0655d8e00d8d3906ae9dbb45dcaf",
    "source_path": "applications/APP-040/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4369,20 +4837,28 @@
      "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "appsmith",
+     "repo": "https://github.com/appsmithorg/appsmith",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-041",
-   "name": "AppFlowy",
+   "name": "Memos",
    "category": "Note Taking",
    "category_slug": "note-taking",
-   "repository": "https://github.com/AppFlowy-IO/appflowy",
+   "repository": "https://github.com/usememos/memos",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "7e3d3c63156c206209fdc8e75a4fb117b1aaf1fb",
    "source_path": "applications/APP-041/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4598,7 +5074,21 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "AppFlowy",
+     "repo": "https://github.com/AppFlowy-IO/appflowy",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Memos",
+     "repo": "https://github.com/usememos/memos",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-042",
@@ -4607,11 +5097,11 @@
    "category_slug": "password-manager",
    "repository": "https://github.com/Infisical/infisical",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "bd2179cf211874925e2313664e22dae2501fe30a",
    "source_path": "applications/APP-042/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4757,7 +5247,15 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Infisical Community Edition",
+     "repo": "https://github.com/Infisical/infisical",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-043",
@@ -4766,11 +5264,11 @@
    "category_slug": "product-management",
    "repository": "https://github.com/linkcraftstudio/feedlog",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "aa56a7655840471f33890028fad2185549d1ded9",
    "source_path": "applications/APP-043/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -4783,7 +5281,15 @@
      "description": "Open-source feedback & roadmap tool - feedback boards, public roadmap, AI-assisted changelog."
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "feedlog",
+     "repo": "https://github.com/linkcraftstudio/feedlog",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-044",
@@ -4792,11 +5298,11 @@
    "category_slug": "productivity",
    "repository": "https://github.com/super-productivity/super-productivity",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "da69391e81013aca5b077fd6994c767863515e71",
    "source_path": "applications/APP-044/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": "automated pick (4ga Boards) is a minor kanban board; this is the well-established, higher-star fit that didn't literally contain the word 'productivity' in its description",
    "discovery_candidates": [
@@ -4829,20 +5335,28 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Super Productivity",
+     "repo": "https://github.com/super-productivity/super-productivity",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-045",
-   "name": "Plane",
+   "name": "Super Productivity",
    "category": "Project Management",
    "category_slug": "project-management",
-   "repository": "https://github.com/makeplane/plane",
+   "repository": "https://github.com/super-productivity/super-productivity",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "da69391e81013aca5b077fd6994c767863515e71",
    "source_path": "applications/APP-045/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5045,7 +5559,27 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Plane",
+     "repo": "https://github.com/makeplane/plane",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Huly",
+     "repo": "https://github.com/hcengineering/platform",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says UNRECOGNISED, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Super Productivity",
+     "repo": "https://github.com/super-productivity/super-productivity",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-046",
@@ -5054,11 +5588,11 @@
    "category_slug": "scheduling",
    "repository": "https://github.com/calcom/cal.diy",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "6bc45298226f96ff79e0c070c8b2ce39727e8477",
    "source_path": "applications/APP-046/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5161,20 +5695,28 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Cal.diy",
+     "repo": "https://github.com/calcom/cal.diy",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-047",
-   "name": "ElasticSearch",
+   "name": "LibreChat",
    "category": "Search",
    "category_slug": "search",
-   "repository": "https://github.com/elastic/elasticsearch",
+   "repository": "https://github.com/danny-avila/LibreChat",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "12d78909d3f5247a8d40a47f0ef5c3ac771d9c5a",
    "source_path": "applications/APP-047/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5390,7 +5932,27 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "ElasticSearch",
+     "repo": "https://github.com/elastic/elasticsearch",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "MeiliSearch",
+     "repo": "https://github.com/meilisearch/MeiliSearch",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says BUSL-1.1, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "LibreChat",
+     "repo": "https://github.com/danny-avila/LibreChat",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-048",
@@ -5399,11 +5961,11 @@
    "category_slug": "security",
    "repository": "https://github.com/blakeblackshear/frigate",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "3d08bbe5201389c65f80d22ad38a7b7432c75e87",
    "source_path": "applications/APP-048/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5535,7 +6097,15 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Frigate",
+     "repo": "https://github.com/blakeblackshear/frigate",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-049",
@@ -5544,11 +6114,11 @@
    "category_slug": "social-media",
    "repository": "https://github.com/gitroomhq/postiz-app",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "AGPL-3.0",
    "version": null,
-   "commit": null,
+   "commit": "6f1078011b39612838a1ce271dac5535ef9a57e5",
    "source_path": "applications/APP-049/source",
-   "status": "DISCOVERED",
+   "status": "LICENCE_UNCLEAR",
    "declared_itself": false,
    "manual_override_reason": "automated pick (RSSHub) is an RSS feed aggregator, not a social-media app",
    "discovery_candidates": [
@@ -5609,7 +6179,39 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Postiz",
+     "repo": "https://github.com/gitroomhq/postiz-app",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "RSSHub",
+     "repo": "https://github.com/DIYgod/RSSHub",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "LinkStack",
+     "repo": "https://github.com/LinkStackOrg/LinkStack",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Socioboard",
+     "repo": "https://github.com/socioboard/Socioboard-5.0",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Postiz",
+     "repo": "https://github.com/gitroomhq/postiz-app",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    }
+   ]
   },
   {
    "id": "APP-050",
@@ -5618,11 +6220,11 @@
    "category_slug": "team-chat",
    "repository": "https://github.com/RocketChat/Rocket.Chat",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "a2132d777c5b1ec3c181632f9d12f2085457fe27",
    "source_path": "applications/APP-050/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5837,7 +6439,15 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Rocket.Chat",
+     "repo": "https://github.com/RocketChat/Rocket.Chat",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-051",
@@ -5846,11 +6456,11 @@
    "category_slug": "video-conferencing",
    "repository": "https://github.com/jech/galene",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "6d9338e909fdecdd906150e4dda34e10d9869654",
    "source_path": "applications/APP-051/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5883,7 +6493,15 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Galene",
+     "repo": "https://github.com/jech/galene",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   },
   {
    "id": "APP-052",
@@ -5892,11 +6510,11 @@
    "category_slug": "video-editors",
    "repository": "https://github.com/Augani/openreel-video",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "5f3c85e5fc223c86060bf4b12e1b4dec58e9b8a9",
    "source_path": "applications/APP-052/source",
-   "status": "DISCOVERED",
+   "status": "ACQUIRED",
    "declared_itself": false,
    "manual_override_reason": "automated pick (Dawarich) is a location/travel tracker matched on the stray keyword 'timeline'; no real video editor was in either discovery source's candidate pool for this category",
    "discovery_candidates": [
@@ -5943,7 +6561,33 @@
      "discovery_source": "awesome-selfhosted"
     }
    ],
-   "discovery_failed_reason": null
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Dawarich",
+     "repo": "https://github.com/Freika/dawarich",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "TimeTagger",
+     "repo": "https://github.com/almarklein/timetagger",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "Operational.co",
+     "repo": "https://github.com/operational-co/operational.co",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+    },
+    {
+     "name": "OpenReel Video",
+     "repo": "https://github.com/Augani/openreel-video",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ]
   }
  ]
 }

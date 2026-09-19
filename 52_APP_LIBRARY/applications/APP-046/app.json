@@ -5,11 +5,11 @@
  "category_slug": "scheduling",
  "repository": "https://github.com/calcom/cal.diy",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "6bc45298226f96ff79e0c070c8b2ce39727e8477",
  "source_path": "applications/APP-046/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -112,5 +112,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Cal.diy",
+   "repo": "https://github.com/calcom/cal.diy",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

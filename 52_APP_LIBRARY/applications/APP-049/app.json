@@ -5,11 +5,11 @@
  "category_slug": "social-media",
  "repository": "https://github.com/gitroomhq/postiz-app",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "AGPL-3.0",
  "version": null,
- "commit": null,
+ "commit": "6f1078011b39612838a1ce271dac5535ef9a57e5",
  "source_path": "applications/APP-049/source",
- "status": "DISCOVERED",
+ "status": "LICENCE_UNCLEAR",
  "declared_itself": false,
  "manual_override_reason": "automated pick (RSSHub) is an RSS feed aggregator, not a social-media app",
  "discovery_candidates": [
@@ -70,5 +70,37 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Postiz",
+   "repo": "https://github.com/gitroomhq/postiz-app",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "RSSHub",
+   "repo": "https://github.com/DIYgod/RSSHub",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "LinkStack",
+   "repo": "https://github.com/LinkStackOrg/LinkStack",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Socioboard",
+   "repo": "https://github.com/socioboard/Socioboard-5.0",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Postiz",
+   "repo": "https://github.com/gitroomhq/postiz-app",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  }
+ ]
 }

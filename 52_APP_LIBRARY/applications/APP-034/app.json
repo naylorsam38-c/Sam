@@ -5,11 +5,11 @@
  "category_slug": "learning-management",
  "repository": "https://github.com/instructure/canvas-lms",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "GPL",
  "version": null,
- "commit": null,
+ "commit": "55149b2a468991458bb98a05e0619f32a72e1eae",
  "source_path": "applications/APP-034/source",
- "status": "DISCOVERED",
+ "status": "LICENCE_UNCLEAR",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -85,5 +85,31 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Canvas LMS",
+   "repo": "https://github.com/instructure/canvas-lms",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "LMS",
+   "repo": "https://github.com/epoupon/lms",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Chamilo LMS",
+   "repo": "https://github.com/chamilo/chamilo-lms",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "ILIAS",
+   "repo": "https://github.com/ILIAS-eLearning/ILIAS",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  }
+ ]
 }

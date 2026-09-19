@@ -1,0 +1,15 @@
+{
+ "application": "APP-050",
+ "category": "team-chat",
+ "repository_url": "https://github.com/RocketChat/Rocket.Chat",
+ "commit_sha": "a2132d777c5b1ec3c181632f9d12f2085457fe27",
+ "branch": "develop",
+ "download_timestamp": "2026-09-19T11:52:02.682312+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "197ebdfcc845e6d63d6c601400382dc6b30750ba1dcbd56e5a30f8c90cac7809",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 46144
+}

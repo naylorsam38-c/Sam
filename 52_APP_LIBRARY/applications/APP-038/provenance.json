@@ -1,0 +1,15 @@
+{
+ "application": "APP-038",
+ "category": "monitoring",
+ "repository_url": "https://github.com/louislam/uptime-kuma",
+ "commit_sha": "5998570a3564afa82e540b660dae4b3b2178f58c",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T11:55:51.943536+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "5f1b3e446f1a81f48ad75eb9128556ed5b823646b84d168f87561701830f46f9",
+ "discovery_source": "github-search-manual-override",
+ "stargazers_count": null
+}

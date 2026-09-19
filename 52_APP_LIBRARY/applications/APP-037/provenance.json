@@ -1,0 +1,15 @@
+{
+ "application": "APP-037",
+ "category": "marketing",
+ "repository_url": "https://github.com/phpList/phplist3",
+ "commit_sha": "7bf0499e78542afb7a01b88c7a21febeaaff8bdf",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:49:32.092788+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "COPYING",
+ "licence_detected": "AGPL-3.0",
+ "licence_allowed": false,
+ "source_checksum_sha256": "97b6ec992133352e2e7621e0f4ad52d3afc3cc821a94c407c7c9a98b5feb25b8",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 871
+}

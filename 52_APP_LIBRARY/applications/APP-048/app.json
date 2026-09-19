@@ -5,11 +5,11 @@
  "category_slug": "security",
  "repository": "https://github.com/blakeblackshear/frigate",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "3d08bbe5201389c65f80d22ad38a7b7432c75e87",
  "source_path": "applications/APP-048/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -141,5 +141,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Frigate",
+   "repo": "https://github.com/blakeblackshear/frigate",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

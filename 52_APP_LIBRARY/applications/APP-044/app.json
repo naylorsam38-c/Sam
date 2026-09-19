@@ -5,11 +5,11 @@
  "category_slug": "productivity",
  "repository": "https://github.com/super-productivity/super-productivity",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "da69391e81013aca5b077fd6994c767863515e71",
  "source_path": "applications/APP-044/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": false,
  "manual_override_reason": "automated pick (4ga Boards) is a minor kanban board; this is the well-established, higher-star fit that didn't literally contain the word 'productivity' in its description",
  "discovery_candidates": [
@@ -42,5 +42,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Super Productivity",
+   "repo": "https://github.com/super-productivity/super-productivity",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

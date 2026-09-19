@@ -5,11 +5,11 @@
  "category_slug": "video-conferencing",
  "repository": "https://github.com/jech/galene",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "6d9338e909fdecdd906150e4dda34e10d9869654",
  "source_path": "applications/APP-051/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -42,5 +42,13 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Galene",
+   "repo": "https://github.com/jech/galene",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

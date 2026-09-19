@@ -1,15 +1,15 @@
 {
  "id": "APP-045",
- "name": "Plane",
+ "name": "Super Productivity",
  "category": "Project Management",
  "category_slug": "project-management",
- "repository": "https://github.com/makeplane/plane",
+ "repository": "https://github.com/super-productivity/super-productivity",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "da69391e81013aca5b077fd6994c767863515e71",
  "source_path": "applications/APP-045/source",
- "status": "DISCOVERED",
+ "status": "ACQUIRED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -212,5 +212,25 @@
    "discovery_source": "awesome-selfhosted"
   }
  ],
- "discovery_failed_reason": null
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Plane",
+   "repo": "https://github.com/makeplane/plane",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Huly",
+   "repo": "https://github.com/hcengineering/platform",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says UNRECOGNISED, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Super Productivity",
+   "repo": "https://github.com/super-productivity/super-productivity",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ]
 }

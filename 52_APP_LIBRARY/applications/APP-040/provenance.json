@@ -1,0 +1,15 @@
+{
+ "application": "APP-040",
+ "category": "no-code-platforms",
+ "repository_url": "https://github.com/appsmithorg/appsmith",
+ "commit_sha": "983129bffdfb0655d8e00d8d3906ae9dbb45dcaf",
+ "branch": "release",
+ "download_timestamp": "2026-09-19T11:49:50.621965+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "Apache-2.0",
+ "licence_allowed": true,
+ "source_checksum_sha256": "e611d2198e34ca82da57a8c62dc35a9d87b625259cc8a1b4497efc444118422b",
+ "discovery_source": "github-search-or-directory",
+ "stargazers_count": 40903
+}
