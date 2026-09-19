@@ -1,0 +1,46 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0036",
+  "imported_marker": "HarvestImportedFeature1789830460",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 302,
+      "step": "anonymous_import_page_check",
+      "url": "http://127.0.0.1:5057/import-data/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_login_form",
+      "url": "http://127.0.0.1:5057/accounts/login/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login_as_real_user",
+      "url": "http://127.0.0.1:5057/users/1/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_import_form",
+      "url": "http://127.0.0.1:5057/import-data/"
+    },
+    {
+      "marker": "HarvestImportedFeature1789830460",
+      "method": "POST",
+      "status_code": 200,
+      "step": "upload_real_csv",
+      "url": "http://127.0.0.1:5057/import-data/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_map_after_import",
+      "url": "http://127.0.0.1:5057/"
+    }
+  ],
+  "verified_at": "2026-09-19T15:07:40.597809+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0036",
+  "category": "geospatial",
+  "generated_at": "2026-09-19T15:06:23.180031+00:00",
+  "implementations": [
+    {
+      "app_slug": "django-folium",
+      "commit": "1f6833904db1375e9326cabd76e19372610bdf60",
+      "harvested_at": "2026-09-19T15:06:23.137509+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/django-folium/CAP-0036/PROVENANCE.json",
+      "shelf_path": "shelf/django-folium/CAP-0036"
+    }
+  ],
+  "name": "import data"
+}

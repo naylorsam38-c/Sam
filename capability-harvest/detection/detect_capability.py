@@ -356,6 +356,15 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "index",
         "evidence_call_names": {"basemap", "render"},
     },
+    {
+        "cap_id": "CAP-0036",
+        "name": "import data",
+        "category": "geospatial",
+        "app_slug": "django-folium",
+        "source_file_relative": "django_and_folium/django_and_folium/geo_app/views.py",
+        "symbol_hint": "import_data",
+        "evidence_call_names": {"import_data", "load"},
+    },
 ]
 # ----------------------------------------------------------------------------
 

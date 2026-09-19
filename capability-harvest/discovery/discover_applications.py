@@ -969,9 +969,12 @@ APPLICATION_MANIFEST = [
                 "u.save()\n"
                 "f1, _ = Feature.objects.get_or_create(name='Harvest Landmark', defaults={'type': 'Landmark', 'description': 'test feature', 'latitude': 47.6062, 'longitude': -122.3321, 'owner': u})\n"
                 "f2, _ = Feature.objects.get_or_create(name='Second Harvest Marker', defaults={'type': 'POI', 'description': 'second test feature', 'latitude': 40.7128, 'longitude': -74.0060, 'owner': u})\n"
+                "from allauth.account.models import EmailAddress\n"
+                "EmailAddress.objects.get_or_create(user=u, email=u.email, defaults={'primary': True, 'verified': True})\n"
                 "print('seeded user id=', u.id, 'feature1 id=', f1.id, 'feature2 id=', f2.id)",
             ],
             "readiness_path": "/",
+            "needs_smtp": True,
             "env": {
                 "DJANGO_SETTINGS_MODULE": "config.settings.local",
                 "DATABASE_URL": "postgres://{postgres_user}:{postgres_password}@{postgres_host}:{postgres_port}/{postgres_db}",

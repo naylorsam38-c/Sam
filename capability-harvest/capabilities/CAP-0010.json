@@ -2,12 +2,12 @@
   "aliases": [],
   "cap_id": "CAP-0010",
   "category": "cafe-directory",
-  "generated_at": "2026-09-19T14:59:01.093591+00:00",
+  "generated_at": "2026-09-19T15:06:23.177402+00:00",
   "implementations": [
     {
       "app_slug": "flask-coffee-and-wifi",
       "commit": "7e66b37733df7fc62e3c81d6d4008211005597df",
-      "harvested_at": "2026-09-19T14:58:59.593959+00:00",
+      "harvested_at": "2026-09-19T15:06:21.683738+00:00",
       "licence": "MIT",
       "provenance_path": "shelf/flask-coffee-and-wifi/CAP-0010/PROVENANCE.json",
       "shelf_path": "shelf/flask-coffee-and-wifi/CAP-0010"

@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 35 capabilities harvested from 23 real applications, each one
+**Status**: 36 capabilities harvested from 23 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 35 capabilities harvested so far
+## The 36 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -82,6 +82,7 @@ No script assumes a working directory.
 | CAP-0033 | close auction | [arpannookala12/BuyMe---Online-Auction-System](https://github.com/arpannookala12/BuyMe---Online-Auction-System) | MIT | `app/routes/auction.py:682` `end_auction` (real reserve-price-checked winner determination, admin/customer-rep-gated, `determine_winner`, `commit`) | HTTP |
 | CAP-0034 | apply discount code | [benjaminyan1/Mini-Amazon](https://github.com/benjaminyan1/Mini-Amazon) | MIT | `app/cart.py:113` `apply_coupon` (real expiry-checked, duplicate-guarded coupon application against a real PostgreSQL cart total, `apply_coupon`, `flash`) | HTTP |
 | CAP-0035 | show map | [moustafa-shaaban/Django_and_Folium](https://github.com/moustafa-shaaban/Django_and_Folium) | MIT | `django_and_folium/django_and_folium/geo_app/views.py:20` `index` (real Folium map genuinely driven by persisted Feature rows, `basemap`, `render`) | HTTP |
+| CAP-0036 | import data | [moustafa-shaaban/Django_and_Folium](https://github.com/moustafa-shaaban/Django_and_Folium) (same app, different attach point) | MIT | `django_and_folium/django_and_folium/geo_app/views.py:80` `import_data` (real django-import-export dry-run-then-commit CSV import, `import_data`, `load`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -337,7 +338,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 35 capabilities across 23 apps (see the
+AST-based, line-accurate for all 36 capabilities across 23 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -585,10 +586,24 @@ Highlights beyond the basic "call it and check 200":
   `django_manage` runner kind and `needs_postgres`'s new empty-database
   mode). A real, separate `map_features()` view in the same file builds
   an empty map with no `Feature` query at all and has no route anywhere
-  in the app's own `urls.py` -- confirmed dead/unwired code (the same
-  class of finding as this pipeline's earlier rejection of an unused
-  `BlockedUser` model elsewhere) and correctly not used as this
-  capability's attach point.
+  in the app's own `urls.py` -- confirmed dead/unwired code and
+  correctly not used as this capability's attach point.
+- CAP-0036: confirms anonymous access to the import route is genuinely
+  rejected, logs in as the real seeded user via the app's own real
+  allauth login form (seeded with an already-verified `EmailAddress` row
+  so login doesn't trigger a real confirmation-email send), uploads a
+  real CSV file through the app's own real django-import-export
+  dry-run-then-commit path, and confirms the imported feature's exact
+  name and coordinates appear on the real map page afterward -- proving
+  it was actually written to the database, not merely accepted and
+  discarded. (First attempt at logging in hit a real `ConnectionRefusedError`
+  from allauth trying to send a real confirmation email to a local SMTP
+  server that wasn't running for an unverified seeded account -- fixed
+  properly, not routed around: the app's own real local SMTP debug
+  server this pipeline already runs for Flask apps needing it is
+  reusable as-is here too (`needs_smtp` is kind-agnostic), and the seed
+  step now creates an already-verified `EmailAddress` row the same way a
+  real user who'd clicked their confirmation link would have one.)
 
 ## How to reproduce this from scratch
 
@@ -661,7 +676,7 @@ for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
            CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019 CAP-0020 CAP-0021 \
            CAP-0022 CAP-0023 CAP-0024 CAP-0025 CAP-0026 CAP-0027 \
            CAP-0028 CAP-0029 CAP-0030 CAP-0031 CAP-0032 CAP-0033 CAP-0034 \
-           CAP-0035; do
+           CAP-0035 CAP-0036; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -812,12 +827,16 @@ python3 build.py stop
 python3 build.py start --cap CAP-0035 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0035_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0036 --port 5057
+./.venv/bin/python3 test/prove_CAP-0036_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs and the Postgres role/database kept) fourteen times
-now, at fourteen different capability counts, to confirm it's genuinely
+deleted first, venvs and the Postgres role/database kept) fifteen times
+now, at fifteen different capability counts, to confirm it's genuinely
 reproducible, not an artifact of an ad-hoc fixing sequence. This same
 sweep is what caught CAP-0028's real name-collision flakiness (see "Real
 applications aren't all shaped the same way" above) -- a real, previously
@@ -843,7 +862,7 @@ one-off pass, is meant to surface.
   anything, across two Python versions and an app whose data path resolves
   outside its own repo entirely (`$HOME`-based, handled via an isolated,
   resettable `HOME` override rather than patching the app).
-- Thirty-five independent, real, non-mocked live proofs, including negative/
+- Thirty-six independent, real, non-mocked live proofs, including negative/
   access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
@@ -902,7 +921,7 @@ one-off pass, is meant to surface.
   the status code.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 35.** ~45 names in the 81-name vocabulary (see
+- **Scale beyond 36.** ~44 names in the 81-name vocabulary (see
   `CAPABILITY_VOCABULARY.md` for the full recovered list and live status)
   have not been researched yet. Each one needs the same real vetting
   (license read from source, AST-confirmed evidence, live proof) — this is

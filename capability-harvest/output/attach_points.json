@@ -672,6 +672,25 @@
       "route_path": null,
       "source_file_relative": "django_and_folium/django_and_folium/geo_app/views.py",
       "symbol": "index"
+    },
+    {
+      "app_slug": "django-folium",
+      "cap_id": "CAP-0036",
+      "category": "geospatial",
+      "decorators": [
+        "@login_required"
+      ],
+      "end_lineno": 95,
+      "evidence_calls_matched": [
+        "import_data",
+        "load"
+      ],
+      "found": true,
+      "lineno": 80,
+      "name": "import data",
+      "route_path": null,
+      "source_file_relative": "django_and_folium/django_and_folium/geo_app/views.py",
+      "symbol": "import_data"
     }
   ]
 }

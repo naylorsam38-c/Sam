@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0025",
-  "invoice_id": 1103,
+  "invoice_id": 1077,
   "result": "PASS",
   "steps": [
     {
@@ -14,14 +14,14 @@
       "method": "PUT",
       "status_code": 200,
       "step": "edit_invoice",
-      "url": "http://127.0.0.1:5057/api/invoices/1103"
+      "url": "http://127.0.0.1:5057/api/invoices/1077"
     },
     {
       "method": "GET",
       "status_code": 200,
       "step": "fetch_after_edit",
-      "url": "http://127.0.0.1:5057/api/invoices/1103"
+      "url": "http://127.0.0.1:5057/api/invoices/1077"
     }
   ],
-  "verified_at": "2026-09-19T14:59:47.413808+00:00"
+  "verified_at": "2026-09-19T15:07:09.585220+00:00"
 }

@@ -1,8 +1,8 @@
 {
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0028",
-  "invoice_a": 1042,
-  "invoice_b": 1043,
+  "invoice_a": 1039,
+  "invoice_b": 1040,
   "result": "PASS",
   "steps": [
     {
@@ -31,10 +31,10 @@
     },
     {
       "method": "GET",
-      "search": "HarvestProof1789829991CustomerA",
+      "search": "HarvestProof1789830433CustomerA",
       "status_code": 200,
       "step": "filter_by_customer_a_name",
-      "url": "http://127.0.0.1:5057/api/invoices?search=HarvestProof1789829991CustomerA"
+      "url": "http://127.0.0.1:5057/api/invoices?search=HarvestProof1789830433CustomerA"
     },
     {
       "method": "GET",
@@ -43,5 +43,5 @@
       "url": "http://127.0.0.1:5057/api/invoices?search=zzz-no-such-customer-or-invoice-zzz"
     }
   ],
-  "verified_at": "2026-09-19T14:59:51.627441+00:00"
+  "verified_at": "2026-09-19T15:07:13.736022+00:00"
 }

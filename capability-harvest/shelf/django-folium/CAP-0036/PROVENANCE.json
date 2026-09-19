@@ -1,0 +1,47 @@
+{
+  "application": {
+    "category": "geospatial",
+    "commit": "1f6833904db1375e9326cabd76e19372610bdf60",
+    "repo_url": "https://github.com/moustafa-shaaban/Django_and_Folium.git",
+    "slug": "django-folium"
+  },
+  "cap_id": "CAP-0036",
+  "capability_name": "import data",
+  "category": "geospatial",
+  "checksums": {
+    "harvested_source_sha256": "bb720a329da309fde59ce4d557b92770249f57f154a37eb03437906503bc0e47",
+    "whole_source_file_sha256_at_harvest": "7246c1a12c78367fd7ae9e9e8b719c6f8dbaf6a2010701a3833c01ba827ce095"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "Dataset",
+      "FeatureResource",
+      "login_required",
+      "messages",
+      "render"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:06:23.137509+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@login_required"
+    ],
+    "end_lineno": 95,
+    "evidence_calls_matched": [
+      "import_data",
+      "load"
+    ],
+    "file": "django_and_folium/django_and_folium/geo_app/views.py",
+    "lineno": 80,
+    "route_path": null,
+    "symbol": "import_data"
+  }
+}
