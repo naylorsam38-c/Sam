@@ -1,0 +1,34 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0016",
+  "registered_email": "harvest-proof-1789823387@example.test",
+  "result": "PASS",
+  "steps": [
+    {
+      "email": "harvest-proof-1789823387@example.test",
+      "method": "GET",
+      "status_code": 200,
+      "step": "register_new_patient",
+      "url": "http://127.0.0.1:5057/patient/login"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login_with_new_credentials",
+      "url": "http://127.0.0.1:5057/patient"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "attempt_login_with_duplicate_registration_password",
+      "url": "http://127.0.0.1:5057/patient/login"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "original_credentials_still_work",
+      "url": "http://127.0.0.1:5057/patient"
+    }
+  ],
+  "verified_at": "2026-09-19T13:09:48.280512+00:00"
+}

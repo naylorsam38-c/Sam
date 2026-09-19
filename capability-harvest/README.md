@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 15 capabilities harvested from 14 real applications, each one
+**Status**: 19 capabilities harvested from 15 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 15 capabilities harvested so far
+## The 19 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -62,6 +62,10 @@ No script assumes a working directory.
 | CAP-0013 | calculate tax | [rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics](https://github.com/rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics) | Apache-2.0 | `salary_engine.py:3` `calculate_payroll_details` (real progressive bracket computation, `max`, `min`) | HTTP |
 | CAP-0014 | book slot | [Raviraj0001/Hospital_Management_Real](https://github.com/Raviraj0001/Hospital_Management_Real) | MIT | `app.py:864` `patient_book` (real per-doctor/per-slot conflict check, `filter_by`, `add`, `commit`) | HTTP |
 | CAP-0015 | generate invoice | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) | MIT | `server.py:265` `generate_invoice_pdf` (real WeasyPrint PDF from real persisted line items/tax, `render_template`, `write_pdf`) | HTTP |
+| CAP-0016 | register account | [Raviraj0001/Hospital_Management_Real](https://github.com/Raviraj0001/Hospital_Management_Real) (same app, different attach point) | MIT | `app.py:824` `patient_register` (`generate_password_hash`, `commit`) | HTTP |
+| CAP-0017 | log in | [Raviraj0001/Hospital_Management_Real](https://github.com/Raviraj0001/Hospital_Management_Real) (same app, different attach point) | MIT | `app.py:290` `login` (`check_password_hash`, `commit`) | HTTP |
+| CAP-0018 | log out | [Raviraj0001/Hospital_Management_Real](https://github.com/Raviraj0001/Hospital_Management_Real) (same app, different attach point) | MIT | `app.py:308` `logout` (`commit`, real session teardown) | HTTP |
+| CAP-0019 | upload image | [Mukesh-Web-Dev/imageUploadFlaskApp](https://github.com/Mukesh-Web-Dev/imageUploadFlaskApp) | MIT | `app.py:86` `upload_image` (`secure_filename`, real `file.save()` to disk, duplicate/extension-guarded) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -202,7 +206,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 15 capabilities across 14 apps (see the
+AST-based, line-accurate for all 19 capabilities across 15 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -312,6 +316,21 @@ Highlights beyond the basic "call it and check 200":
   theme and confirms a distinct (not byte-identical) real PDF, proving the
   theme parameter genuinely selects a different template rather than
   being a no-op.
+- CAP-0016/0017/0018: three genuinely distinct real attach points
+  harvested from the SAME already-vetted app (the same pattern already
+  established by CAP-0008/0009 sharing Bounty-Simulator) — `patient_register`,
+  `login`, and `logout` are three separate functions, each independently
+  AST-confirmed and independently re-verified against drift. This app's
+  own `base.html` never renders flashed messages on any unauthenticated
+  page (confirmed by reading the template, not assumed), so these proofs
+  deliberately use directly observable before/after behaviour instead —
+  a real round-trip login with the exact just-submitted password for
+  registration, dashboard reachability for login/logout, never flash text.
+- CAP-0019: uploads a real PNG (its own real bytes, not a placeholder
+  string) via genuine multipart/form-data, confirms the served-back bytes
+  are byte-identical to what was uploaded, then confirms the app's own
+  real duplicate-filename guard and extension whitelist both genuinely
+  reject a second attempt rather than silently accepting anything.
 
 ## How to reproduce this from scratch
 
@@ -332,7 +351,7 @@ python3 discovery/discover_applications.py
 python3 detection/detect_capability.py
 for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
            CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013 CAP-0014 \
-           CAP-0015; do
+           CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -407,7 +426,7 @@ python3 build.py stop
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) five times now, at five different capability
+deleted first, venvs kept) six times now, at six different capability
 counts, to confirm it's genuinely reproducible, not an artifact of an
 ad-hoc fixing sequence.
 
@@ -415,7 +434,7 @@ ad-hoc fixing sequence.
 
 **Proved, for real:**
 - Real application discovery with real licence verification from the
-  source file, across 14 different repositories and three distinct real
+  source file, across 15 different repositories and three distinct real
   licences (MIT, BSD-3-Clause, Apache-2.0).
 - Real AST-based attach-point detection that rejects name-only matches,
   across both route-handler and helper-function capability shapes,
@@ -428,7 +447,7 @@ ad-hoc fixing sequence.
   anything, across two Python versions and an app whose data path resolves
   outside its own repo entirely (`$HOME`-based, handled via an isolated,
   resettable `HOME` override rather than patching the app).
-- Ten independent, real, non-mocked live proofs, including negative/
+- Fourteen independent, real, non-mocked live proofs, including negative/
   access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
@@ -436,15 +455,22 @@ ad-hoc fixing sequence.
   distinction confirmed by row `id` stability, a real progressive
   tax-bracket proof that solves the app's own arithmetic CAPTCHA rather
   than bypassing it, a real per-doctor/per-slot double-booking rejection,
-  and a real multi-theme PDF-invoice proof that required first
-  reproducing, then correctly working around (via file placement, not a
-  source-code patch), a genuine bug in the harvested repository itself.
+  a real multi-theme PDF-invoice proof that required first reproducing,
+  then correctly working around (via file placement, not a source-code
+  patch), a genuine bug in the harvested repository itself, a real
+  register/login/logout triad proven against a template that never
+  renders flash messages on unauthenticated pages (confirmed by reading
+  the template, not assumed, so the proofs use directly observable
+  session/round-trip behaviour instead), and a real byte-identical
+  file-upload round trip with a genuine duplicate-name and extension
+  guard.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 15.** ~66 names in the 81-name vocabulary have not been
-  researched yet. Each one needs the same real vetting (license read from
-  source, AST-confirmed evidence, live proof) — this is not a
-  copy-paste-N-times exercise, and a name with no genuine real-app
+- **Scale beyond 19.** ~62 names in the 81-name vocabulary (see
+  `CAPABILITY_VOCABULARY.md` for the full recovered list and live status)
+  have not been researched yet. Each one needs the same real vetting
+  (license read from source, AST-confirmed evidence, live proof) — this is
+  not a copy-paste-N-times exercise, and a name with no genuine real-app
   candidate gets recorded as blocked/empty with a reason, never forced.
   **Escalate ticket** was researched but every small, single-file,
   HTTP-route candidate found failed either the licence check or the "must

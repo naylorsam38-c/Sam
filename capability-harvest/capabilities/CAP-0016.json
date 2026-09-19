@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0016",
+  "category": "healthcare-scheduling",
+  "generated_at": "2026-09-19T13:09:07.252143+00:00",
+  "implementations": [
+    {
+      "app_slug": "hospital-management-real",
+      "commit": "2ef9184f817eb880f55685ee2535d49a322e2ca8",
+      "harvested_at": "2026-09-19T13:09:07.041702+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/hospital-management-real/CAP-0016/PROVENANCE.json",
+      "shelf_path": "shelf/hospital-management-real/CAP-0016"
+    }
+  ],
+  "name": "register account"
+}

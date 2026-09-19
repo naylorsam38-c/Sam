@@ -445,6 +445,28 @@ APPLICATION_MANIFEST = [
             "readiness_path": "/api/invoices",
         },
     },
+    {
+        "slug": "image-upload-app",
+        "clone_url": "https://github.com/Mukesh-Web-Dev/imageUploadFlaskApp.git",
+        "ref": None,
+        "category": "media",
+        "why_selected": (
+            "Real Flask app, MIT licensed. upload_image() does a genuine "
+            "multipart file upload: request.files['image'], an extension "
+            "whitelist, werkzeug secure_filename(), a real duplicate-name "
+            "guard, and a real file.save() to local disk -- confirmed by "
+            "actually uploading a real PNG and finding it on disk at the "
+            "expected path, then re-uploading it and getting the app's "
+            "own real 'already exists' rejection."
+        ),
+        "runner": {
+            "kind": "flask_module_attr",
+            "app_module": "app",
+            "app_attr": "app",
+            "reset_globs": ["static/image/*"],
+            "readiness_path": "/",
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

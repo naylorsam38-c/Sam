@@ -176,6 +176,42 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "generate_invoice_pdf",
         "evidence_call_names": {"render_template", "write_pdf"},
     },
+    {
+        "cap_id": "CAP-0016",
+        "name": "register account",
+        "category": "healthcare-scheduling",
+        "app_slug": "hospital-management-real",
+        "source_file_relative": "app.py",
+        "symbol_hint": "patient_register",
+        "evidence_call_names": {"generate_password_hash", "commit"},
+    },
+    {
+        "cap_id": "CAP-0017",
+        "name": "log in",
+        "category": "healthcare-scheduling",
+        "app_slug": "hospital-management-real",
+        "source_file_relative": "app.py",
+        "symbol_hint": "login",
+        "evidence_call_names": {"check_password_hash", "commit"},
+    },
+    {
+        "cap_id": "CAP-0018",
+        "name": "log out",
+        "category": "healthcare-scheduling",
+        "app_slug": "hospital-management-real",
+        "source_file_relative": "app.py",
+        "symbol_hint": "logout",
+        "evidence_call_names": {"commit"},
+    },
+    {
+        "cap_id": "CAP-0019",
+        "name": "upload image",
+        "category": "media",
+        "app_slug": "image-upload-app",
+        "source_file_relative": "app.py",
+        "symbol_hint": "upload_image",
+        "evidence_call_names": {"secure_filename", "save"},
+    },
 ]
 # ----------------------------------------------------------------------------
 

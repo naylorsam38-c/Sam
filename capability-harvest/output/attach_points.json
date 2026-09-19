@@ -286,6 +286,81 @@
       "route_path": null,
       "source_file_relative": "server.py",
       "symbol": "generate_invoice_pdf"
+    },
+    {
+      "app_slug": "hospital-management-real",
+      "cap_id": "CAP-0016",
+      "category": "healthcare-scheduling",
+      "decorators": [
+        "@app.route('/patient/register', methods=['GET', 'POST'])"
+      ],
+      "end_lineno": 833,
+      "evidence_calls_matched": [
+        "commit",
+        "generate_password_hash"
+      ],
+      "found": true,
+      "lineno": 824,
+      "name": "register account",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "patient_register"
+    },
+    {
+      "app_slug": "hospital-management-real",
+      "cap_id": "CAP-0017",
+      "category": "healthcare-scheduling",
+      "decorators": [
+        "@app.route('/login', methods=['GET', 'POST'])"
+      ],
+      "end_lineno": 304,
+      "evidence_calls_matched": [
+        "check_password_hash",
+        "commit"
+      ],
+      "found": true,
+      "lineno": 290,
+      "name": "log in",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "login"
+    },
+    {
+      "app_slug": "hospital-management-real",
+      "cap_id": "CAP-0018",
+      "category": "healthcare-scheduling",
+      "decorators": [
+        "@app.route('/logout')"
+      ],
+      "end_lineno": 313,
+      "evidence_calls_matched": [
+        "commit"
+      ],
+      "found": true,
+      "lineno": 308,
+      "name": "log out",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "logout"
+    },
+    {
+      "app_slug": "image-upload-app",
+      "cap_id": "CAP-0019",
+      "category": "media",
+      "decorators": [
+        "@app.route('/upload', methods=['POST'])"
+      ],
+      "end_lineno": 112,
+      "evidence_calls_matched": [
+        "save",
+        "secure_filename"
+      ],
+      "found": true,
+      "lineno": 86,
+      "name": "upload image",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "upload_image"
     }
   ]
 }
