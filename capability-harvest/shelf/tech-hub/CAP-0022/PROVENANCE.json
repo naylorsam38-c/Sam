@@ -1,0 +1,50 @@
+{
+  "application": {
+    "category": "auth",
+    "commit": "8d1f31982401ab0d08ff34e6f4207e10310313fd",
+    "repo_url": "https://github.com/Dixieboy76/tech_hub.git",
+    "slug": "tech-hub"
+  },
+  "cap_id": "CAP-0022",
+  "capability_name": "verify email",
+  "category": "auth",
+  "checksums": {
+    "harvested_source_sha256": "9e456798dfcf79acc9c0c346b0558e8922a4ddbccb33ba699e3e73e126383281",
+    "whole_source_file_sha256_at_harvest": "cdba720feea15c4ae14e24c0e742e93374efd46ff9fa21c5b38f564fb11d5cd0"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "User",
+      "auth_routes",
+      "current_user",
+      "db",
+      "flash",
+      "redirect",
+      "url_for",
+      "verify_email_token"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T13:50:13.348891+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@auth_routes.route('/verify_email/<token>')"
+    ],
+    "end_lineno": 83,
+    "evidence_calls_matched": [
+      "commit",
+      "verify_email_token"
+    ],
+    "file": "app/routes.py",
+    "lineno": 65,
+    "route_path": null,
+    "symbol": "verify_email"
+  }
+}

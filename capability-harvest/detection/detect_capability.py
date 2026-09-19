@@ -221,6 +221,24 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "mark_attendance",
         "evidence_call_names": {"verify_location", "commit"},
     },
+    {
+        "cap_id": "CAP-0021",
+        "name": "set permissions",
+        "category": "staff-management",
+        "app_slug": "enterprise-project",
+        "source_file_relative": "app/admin/routes.py",
+        "symbol_hint": "update_role",
+        "evidence_call_names": {"from_string", "commit"},
+    },
+    {
+        "cap_id": "CAP-0022",
+        "name": "verify email",
+        "category": "auth",
+        "app_slug": "tech-hub",
+        "source_file_relative": "app/routes.py",
+        "symbol_hint": "verify_email",
+        "evidence_call_names": {"verify_email_token", "commit"},
+    },
 ]
 # ----------------------------------------------------------------------------
 

@@ -29,7 +29,7 @@
     "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
   },
   "harvest_tool": "harvest_parts.py",
-  "harvested_at": "2026-09-19T13:17:55.910577+00:00",
+  "harvested_at": "2026-09-19T13:50:12.947217+00:00",
   "licence": {
     "file": "LICENSE",
     "flagged_for_sign_off": false,

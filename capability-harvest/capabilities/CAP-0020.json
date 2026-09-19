@@ -2,12 +2,12 @@
   "aliases": [],
   "cap_id": "CAP-0020",
   "category": "attendance-tracking",
-  "generated_at": "2026-09-19T13:17:56.171885+00:00",
+  "generated_at": "2026-09-19T13:50:13.389890+00:00",
   "implementations": [
     {
       "app_slug": "smart-attendance-system",
       "commit": "614adbdb7132985bed88beeb3f5857e52684be16",
-      "harvested_at": "2026-09-19T13:17:56.132794+00:00",
+      "harvested_at": "2026-09-19T13:50:13.252343+00:00",
       "licence": "MIT",
       "provenance_path": "shelf/smart-attendance-system/CAP-0020/PROVENANCE.json",
       "shelf_path": "shelf/smart-attendance-system/CAP-0020"

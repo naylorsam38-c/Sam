@@ -492,6 +492,106 @@ APPLICATION_MANIFEST = [
             "env": {"SECRET_KEY": "capability-harvest-build-run"},
         },
     },
+    {
+        "slug": "enterprise-project",
+        "clone_url": "https://github.com/RishiS-HSCProjects/EnterpriseProject.git",
+        "ref": None,
+        "category": "staff-management",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy staff/tournament management app "
+            "for a Minecraft server community, MIT licensed. update_role() "
+            "does a genuine admin-gated, persisted role change (staff / "
+            "manager / admin) with a real self-demotion guard and a real "
+            "access-control check rejecting non-admins -- all logic "
+            "entirely self-contained (no external API dependency). Real "
+            "account creation/whitelisting DOES require a live third-party "
+            "NetherGames Minecraft API call this sandbox cannot and should "
+            "not depend on, so two real accounts are seeded directly via "
+            "the app's own real User/Whitelist models and set_password() "
+            "(the same class of setup already used for CasettaFit's admin "
+            "seed) -- update_role() itself is exercised entirely through "
+            "its own real HTTP route, unmodified."
+        ),
+        "runner": {
+            "kind": "flask_factory",
+            "factory_module": "app",
+            "factory_func": "create_app",
+            "python_version": "3.12",
+            "reset_globs": ["instance/tourney.db"],
+            "setup_scripts": [
+                "-c import sys, os\n"
+                "sys.path.insert(0, '.')\n"
+                "os.makedirs('instance', exist_ok=True)\n"
+                "from app import create_app, db\n"
+                "from app.models.user import User, UserRole\n"
+                "from app.models.whitelist import Whitelist\n"
+                "app = create_app()\n"
+                "ctx = app.app_context()\n"
+                "ctx.push()\n"
+                "db.create_all()\n"
+                "def ensure(xuid, username, password, role):\n"
+                "    u = User.query.filter_by(xuid=xuid).first()\n"
+                "    if not u:\n"
+                "        u = User(); u.xuid = xuid; u.username = username; u.role = role; u.set_password(password)\n"
+                "        db.session.add(u); db.session.flush()\n"
+                "    if not Whitelist.query.filter_by(xuid=xuid).first():\n"
+                "        w = Whitelist(); w.xuid = xuid; w.username = username; w.whitelisted_by = None\n"
+                "        db.session.add(w)\n"
+                "    db.session.commit()\n"
+                "    return u\n"
+                "admin = ensure('TESTXUID001', 'AdminTester', 'AdminPass123!', UserRole.ADMIN)\n"
+                "staff = ensure('TESTXUID002', 'StaffTester', 'StaffPass123!', UserRole.STAFF)\n"
+                "print('seeded admin id=', admin.id, 'staff id=', staff.id)",
+            ],
+            "readiness_path": "/login",
+            "env": {"SECRET_KEY": "capability-harvest-build-run", "VERIFY_STAFF_STATUS": "false"},
+        },
+    },
+    {
+        "slug": "tech-hub",
+        "clone_url": "https://github.com/Dixieboy76/tech_hub.git",
+        "ref": None,
+        "category": "auth",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy job-marketplace app, MIT "
+            "licensed. verify_email() genuinely consumes a real "
+            "itsdangerous URLSafeTimedSerializer token (minted at real "
+            "registration time and stored on the user row) and flips a "
+            "real persisted email_verified boolean via a real commit -- "
+            "confirmed by registering a real account, reading its real "
+            "token back from the app's own database, and hitting the "
+            "route with it."
+        ),
+        "runner": {
+            "kind": "flask_factory",
+            "factory_module": "app",
+            "factory_func": "create_app",
+            "needs_smtp": True,
+            "reset_globs": ["techhub.db"],
+            "setup_scripts": [
+                # This app's mail config is a plain committed config.py, not
+                # env-var driven -- a real deployer would edit it to point
+                # at their real SMTP provider; this points it at the local
+                # debug server the same way, and blanks the placeholder
+                # MAIL_USERNAME/PASSWORD so Flask-Mail doesn't attempt a
+                # real AUTH login the debug server doesn't support.
+                "-c import re, os\n"
+                "content = open('config.py').read()\n"
+                "smtp_host = os.environ['HARVEST_SMTP_HOST']\n"
+                "smtp_port = os.environ['HARVEST_SMTP_PORT']\n"
+                "content = re.sub(r\"MAIL_SERVER = .*\", f\"MAIL_SERVER = '{smtp_host}'\", content)\n"
+                "content = re.sub(r\"MAIL_PORT = .*\", f\"MAIL_PORT = {smtp_port}\", content)\n"
+                "content = re.sub(r\"MAIL_USE_TLS = .*\", \"MAIL_USE_TLS = False\", content)\n"
+                "content = re.sub(r\"MAIL_USERNAME = .*\", \"MAIL_USERNAME = ''\", content)\n"
+                "content = re.sub(r\"MAIL_PASSWORD = .*\", \"MAIL_PASSWORD = ''\", content)\n"
+                "open('config.py', 'w').write(content)\n"
+                "print('patched config.py mail settings')",
+                "initialize_database.py",
+            ],
+            "readiness_path": "/login",
+            "env": {"HARVEST_SMTP_HOST": "{smtp_host}", "HARVEST_SMTP_PORT": "{smtp_port}"},
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

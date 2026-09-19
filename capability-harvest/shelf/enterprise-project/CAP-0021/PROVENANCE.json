@@ -1,0 +1,53 @@
+{
+  "application": {
+    "category": "staff-management",
+    "commit": "b2965b6b8af0cd0a32f47b02ee266fa0b7b7b54e",
+    "repo_url": "https://github.com/RishiS-HSCProjects/EnterpriseProject.git",
+    "slug": "enterprise-project"
+  },
+  "cap_id": "CAP-0021",
+  "capability_name": "set permissions",
+  "category": "staff-management",
+  "checksums": {
+    "harvested_source_sha256": "07ddf684d38ce48fbde41b0f2b065aa1a7ff2e7e5af99cb0ebb2c20630a8f502",
+    "whole_source_file_sha256_at_harvest": "f907f3807e5dd7adccb64fc3f5a13e9245855f2edcd3f663804dae1aaebe171a"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "UserRole",
+      "Whitelist",
+      "admin_bp",
+      "admin_required",
+      "current_app",
+      "current_user",
+      "db",
+      "exc",
+      "jsonify",
+      "request"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T13:50:13.302039+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@admin_bp.route('/update_role/<int:entry_id>', methods=['POST'])",
+      "@admin_required"
+    ],
+    "end_lineno": 152,
+    "evidence_calls_matched": [
+      "commit",
+      "from_string"
+    ],
+    "file": "app/admin/routes.py",
+    "lineno": 106,
+    "route_path": null,
+    "symbol": "update_role"
+  }
+}

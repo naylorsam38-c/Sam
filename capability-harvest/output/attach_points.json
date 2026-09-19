@@ -382,6 +382,45 @@
       "route_path": null,
       "source_file_relative": "views/student.py",
       "symbol": "mark_attendance"
+    },
+    {
+      "app_slug": "enterprise-project",
+      "cap_id": "CAP-0021",
+      "category": "staff-management",
+      "decorators": [
+        "@admin_bp.route('/update_role/<int:entry_id>', methods=['POST'])",
+        "@admin_required"
+      ],
+      "end_lineno": 152,
+      "evidence_calls_matched": [
+        "commit",
+        "from_string"
+      ],
+      "found": true,
+      "lineno": 106,
+      "name": "set permissions",
+      "route_path": null,
+      "source_file_relative": "app/admin/routes.py",
+      "symbol": "update_role"
+    },
+    {
+      "app_slug": "tech-hub",
+      "cap_id": "CAP-0022",
+      "category": "auth",
+      "decorators": [
+        "@auth_routes.route('/verify_email/<token>')"
+      ],
+      "end_lineno": 83,
+      "evidence_calls_matched": [
+        "commit",
+        "verify_email_token"
+      ],
+      "found": true,
+      "lineno": 65,
+      "name": "verify email",
+      "route_path": null,
+      "source_file_relative": "app/routes.py",
+      "symbol": "verify_email"
     }
   ]
 }

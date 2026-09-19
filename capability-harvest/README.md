@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 20 capabilities harvested from 16 real applications, each one
+**Status**: 22 capabilities harvested from 18 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 20 capabilities harvested so far
+## The 22 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -67,6 +67,8 @@ No script assumes a working directory.
 | CAP-0018 | log out | [Raviraj0001/Hospital_Management_Real](https://github.com/Raviraj0001/Hospital_Management_Real) (same app, different attach point) | MIT | `app.py:308` `logout` (`commit`, real session teardown) | HTTP |
 | CAP-0019 | upload image | [Mukesh-Web-Dev/imageUploadFlaskApp](https://github.com/Mukesh-Web-Dev/imageUploadFlaskApp) | MIT | `app.py:86` `upload_image` (`secure_filename`, real `file.save()` to disk, duplicate/extension-guarded) | HTTP |
 | CAP-0020 | track location | [talha-siddiqui137/smart-attendance-system](https://github.com/talha-siddiqui137/smart-attendance-system) | MIT | `views/student.py:41` `mark_attendance` (real geopy geodesic distance vs. a real 100m geofence, `verify_location`, `commit`) | HTTP |
+| CAP-0021 | set permissions | [RishiS-HSCProjects/EnterpriseProject](https://github.com/RishiS-HSCProjects/EnterpriseProject) | MIT | `app/admin/routes.py:106` `update_role` (real admin-gated, persisted role change, `UserRole.from_string`, `commit`) | HTTP |
+| CAP-0022 | verify email | [Dixieboy76/tech_hub](https://github.com/Dixieboy76/tech_hub) | MIT | `app/routes.py:65` `verify_email` (real itsdangerous signed-token verification, `verify_email_token`, `commit`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -197,6 +199,26 @@ code):
   decision, the same category of thing as hostelfix's `init_db.py`/
   `dummy_data.py` setup scripts, not a change to what `generate_invoice_pdf`
   itself computes or renders.
+- EnterpriseProject also hits the PEP 701 f-string gotcha (a multi-line
+  dict literal nested inside an f-string expression, valid only on
+  Python 3.12+) — same fix as recipe-app, `python_version: "3.12"`. Its
+  real account-creation path (registration and admin whitelisting alike)
+  requires a live third-party NetherGames Minecraft API call with no
+  offline/test-mode bypass in the app's own code — a dependency this
+  sandbox cannot and should not take on for a repeatable harvest proof.
+  The harvested capability itself, `update_role()`, has no such
+  dependency, so two real accounts are seeded directly via the app's own
+  real `User`/`Whitelist` models and `set_password()` (the same class of
+  setup already used for CasettaFit's admin seed) and `update_role()` is
+  exercised entirely through its own real, unmodified HTTP route.
+- tech_hub's mail configuration is a plain committed `config.py`, not
+  env-var driven like every other harvested app so far. A real deployer
+  would edit that file to point at their real SMTP provider; the build
+  does the same thing, pointing it at the local SMTP debug server via a
+  `setup_scripts` step, and blanks the placeholder `MAIL_USERNAME`/
+  `MAIL_PASSWORD` so Flask-Mail doesn't attempt a real AUTH login the
+  debug server doesn't support (confirmed by first reproducing the real
+  `SMTPNotSupportedError` this causes, not assumed).
 
 ## What each pipeline stage actually proved
 
@@ -207,7 +229,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 20 capabilities across 16 apps (see the
+AST-based, line-accurate for all 22 capabilities across 18 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -345,6 +367,19 @@ Highlights beyond the basic "call it and check 200":
   geofence distance check (not a coincidental falsy-value short-circuit --
   confirmed by checking the real distance appears in the rejection
   message).
+- CAP-0021: promotes a real seeded staff account to Manager as a real
+  seeded admin, confirms the change shows up on a fresh real page load,
+  confirms the app's own real self-demotion guard rejects an admin
+  changing their own role (403), and confirms the just-promoted Manager
+  still can't call the admin-only route themselves (real access control,
+  not merely a UI hint).
+- CAP-0022: registers a genuinely new account, reads its real
+  itsdangerous verification token back from the app's own live database,
+  confirms a tampered token is rejected (signature check, not a stub),
+  confirms the real token flips `email_verified` to true, and confirms
+  revisiting the same real link afterward hits the app's own "already
+  verified" branch cleanly rather than crashing or un-verifying the
+  account.
 
 ## How to reproduce this from scratch
 
@@ -354,18 +389,24 @@ python3 -m venv .venv
 ./.venv/bin/pip install flask flask-login flask-sqlalchemy flask-bcrypt \
     flask-mail flask-migrate flask-cors flask-wtf python-dotenv requests \
     reportlab geopy pillow cs50 pandas openpyxl zinny-surveys \
-    numpy joblib weasyprint num2words python-dateutil
+    numpy joblib weasyprint num2words python-dateutil \
+    flask-limiter pyjwt pillow apscheduler qrcode pytz \
+    flask-mailman discord-webhook bcrypt "flask-admin==1.6.1" email_validator
 
-# recipe-app needs Python 3.12+ (see "Real applications aren't all shaped
-# the same way" below) -- a separate venv, not the one above.
+# recipe-app and EnterpriseProject both need Python 3.12+ (see "Real
+# applications aren't all shaped the same way" below -- a multi-line
+# dict literal inside an f-string is PEP 701 syntax) -- a separate venv,
+# not the one above.
 python3.12 -m venv .venv-py312
-./.venv-py312/bin/pip install flask requests
+./.venv-py312/bin/pip install flask flask-login flask-sqlalchemy flask-migrate \
+    flask-wtf python-dotenv requests bcrypt discord-webhook
 
 python3 discovery/discover_applications.py
 python3 detection/detect_capability.py
 for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
            CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013 CAP-0014 \
-           CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019 CAP-0020; do
+           CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019 CAP-0020 CAP-0021 \
+           CAP-0022; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -456,11 +497,19 @@ python3 build.py stop
 python3 build.py start --cap CAP-0020 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0020_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0021 --port 5057
+./.venv/bin/python3 test/prove_CAP-0021_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0022 --port 5057
+./.venv/bin/python3 test/prove_CAP-0022_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) seven times now, at seven different capability
+deleted first, venvs kept) eight times now, at eight different capability
 counts, to confirm it's genuinely reproducible, not an artifact of an
 ad-hoc fixing sequence.
 
@@ -468,7 +517,7 @@ ad-hoc fixing sequence.
 
 **Proved, for real:**
 - Real application discovery with real licence verification from the
-  source file, across 16 different repositories and three distinct real
+  source file, across 18 different repositories and three distinct real
   licences (MIT, BSD-3-Clause, Apache-2.0).
 - Real AST-based attach-point detection that rejects name-only matches,
   across both route-handler and helper-function capability shapes,
@@ -481,7 +530,7 @@ ad-hoc fixing sequence.
   anything, across two Python versions and an app whose data path resolves
   outside its own repo entirely (`$HOME`-based, handled via an isolated,
   resettable `HOME` override rather than patching the app).
-- Fourteen independent, real, non-mocked live proofs, including negative/
+- Sixteen independent, real, non-mocked live proofs, including negative/
   access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
@@ -501,10 +550,15 @@ ad-hoc fixing sequence.
   location check-in with a genuine duplicate-attendance rejection and a
   genuine out-of-range distance rejection (verified to actually be
   distance-based, not a coincidental falsy-value short-circuit on a
-  literal `0.0` coordinate caught during proof development).
+  literal `0.0` coordinate caught during proof development), a real
+  admin-gated role-change proof with both a genuine self-demotion guard
+  and a genuine non-admin access-control rejection, and a real signed
+  email-verification-token proof that confirms a tampered token is
+  rejected and that revisiting an already-consumed real link is
+  idempotent rather than crashing.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 20.** ~61 names in the 81-name vocabulary (see
+- **Scale beyond 22.** ~59 names in the 81-name vocabulary (see
   `CAPABILITY_VOCABULARY.md` for the full recovered list and live status)
   have not been researched yet. Each one needs the same real vetting
   (license read from source, AST-confirmed evidence, live proof) — this is
