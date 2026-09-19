@@ -125,6 +125,10 @@ def _base_src(**overrides):
         "attach_points": [
             {"name": "thing.happened", "kind": "EVENT", "evidence": "real evidence",
              "implementation": "NATIVE", "source_file": "app/signals.py"},
+            # MIN_DATA defaults to 1 (Section 30) -- a plausible admittable
+            # fixture needs a DATA point too, not just an EVENT one.
+            {"name": "thing", "kind": "DATA", "evidence": "real evidence",
+             "implementation": "NATIVE", "source_file": "app/models.py"},
         ],
     }
     src.update(overrides)
@@ -179,6 +183,11 @@ class TestAttachPointGate:
              "evidence": "signals.py:42, real Signal() instance",
              "implementation": "NATIVE", "source_file": "app/signals.py",
              "source_symbol": "booking_confirmed"},
+            # MIN_DATA defaults to 1 (Section 30) -- pair the EVENT point
+            # under test with a DATA point so this stays a plausible
+            # admittable fixture, not just an EVENT-gate exercise.
+            {"name": "bookings", "kind": "DATA", "evidence": "models.py:10, real Model",
+             "implementation": "NATIVE", "source_file": "app/models.py"},
         ])
         reasons = HP.check_admission(src, [], "test")
         assert not any("Rule G" in r for r in reasons)
@@ -351,7 +360,11 @@ class TestAttachPointsFileMandatory:
 
         json_content = json.loads(atp_json.read_text())
         assert json_content["app_slug"] == "my-app"
-        assert json_content["attach_points"] == ["thing.happened"]
+        # _base_src()'s default attach_points now carries both the EVENT
+        # point this test names directly and a DATA point (Section 30's
+        # MIN_DATA=1 default needs one) -- both are real, evidenced points,
+        # so both are expected here.
+        assert json_content["attach_points"] == sorted(["thing.happened", "thing"])
 
         cap_source = tmp_path / "shelf" / "my-app" / "CAP-9999" / "source.py"
         assert cap_source.is_file()

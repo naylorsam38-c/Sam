@@ -163,6 +163,23 @@ MIN_HOOKS = 1
 # integration surface before a source is admitted at all; it does not change
 # what counts as "usable".
 
+MIN_EVENTS = 0
+MIN_SLOTS = 0
+MIN_DATA = 1
+# Per-kind minimums (handoff Section 30). A capability needs something to
+# trigger it (EVENT), somewhere to show (SLOT), and data to touch (DATA).
+# Set all three to 1 to admit only apps a capability can fully plug into.
+# Checked against the same usable_attach_points() list MIN_HOOKS uses,
+# filtered by kind -- never a second count.
+
+REQUIRE_MODEL_SIGNALS_COUNT = False
+# Section 33.1. Django fires post_save/pre_save/post_delete/pre_delete on
+# every model in every app -- counting those toward MIN_EVENTS would make
+# the EVENT gate meaningless (every Django app would pass). False = only the
+# app's own custom Signal() definitions (with a real .send() site) and
+# outgoing webhooks count as EVENT attach points. attach_points.py reads
+# this flag directly.
+
 WRITE_ATTACH_POINTS_FILE = True
 # True = ATTACH_POINTS.md is written once per app, alongside its shelf
 # directory (shelf/<app_slug>/ATTACH_POINTS.md) -- not per capability, the
@@ -327,6 +344,20 @@ def check_admission(src, caps, where):
         elif len(usable) < MIN_HOOKS:
             reasons.append(f"Rule G: {len(usable)} usable attach point(s) recorded, "
                            f"needs at least MIN_HOOKS={MIN_HOOKS}")
+
+        by_kind = {"EVENT": 0, "SLOT": 0, "DATA": 0}
+        for ap in usable:
+            k = (ap.get("kind") or "").strip().upper()
+            if k in by_kind:
+                by_kind[k] += 1
+        for kind, minimum, cfgname in (
+            ("EVENT", MIN_EVENTS, "MIN_EVENTS"),
+            ("SLOT", MIN_SLOTS, "MIN_SLOTS"),
+            ("DATA", MIN_DATA, "MIN_DATA"),
+        ):
+            if by_kind[kind] < minimum:
+                reasons.append(f"Rule G: {by_kind[kind]} usable {kind} attach point(s), "
+                               f"needs at least {cfgname}={minimum}")
 
     return reasons
 

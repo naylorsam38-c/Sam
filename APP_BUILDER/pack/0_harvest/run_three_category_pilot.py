@@ -403,10 +403,15 @@ if __name__ == "__main__":
         ("challenge platform", challenge_platform),
     ]:
         winner, all_results = H.run_category(category, specs)
-        results[category] = (winner, all_results)
+        # These three ran before the canonical CATEGORY_REGISTRY.json existed
+        # (Section 24) -- there is no registry id for "analytics and BI" or
+        # "challenge platform" at all, so H._category_dict()'s id=None,
+        # exemplar=None fallback is the honest representation, not a gap to
+        # paper over.
+        results[category] = (winner, all_results, H._category_dict(category))
 
     H.write_harvest_summary(results)
     print("\n\n=== PILOT COMPLETE ===")
-    for category, (winner, all_results) in results.items():
+    for category, (winner, all_results, _cat) in results.items():
         print(f"{category}: {'ADMITTED ' + winner['repo_name'] if winner else 'NONE ADMITTED'} "
               f"({len(all_results)} candidates inspected)")

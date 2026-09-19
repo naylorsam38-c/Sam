@@ -1,0 +1,71 @@
+{
+  "registry": "canonical",
+  "note": "Section 26.1. Every feature below carries a source_url from the exemplar's own domain, found via live web search during this run -- never written from memory. This file currently covers only the 3 categories used in the validation run (ids 1, 25, 27). The remaining 67 registry categories are NOT YET RESEARCHED and are intentionally absent -- see harvester behaviour: a category with no entry here is recorded as feature_match NOT MEASURED (reason: no exemplar feature entry yet), which is distinct from a category whose exemplar genuinely has no public feature page. Sam can edit this file directly; the harvester reads it and never overwrites it.",
+  "categories": [
+    {
+      "id": 1,
+      "category": "Todo List",
+      "exemplar": "Todoist",
+      "secondary_exemplar": null,
+      "features": [
+        {"name": "recurring tasks", "keywords": ["recurring", "recurrence", "repeat", "rrule", "due date"], "source_url": "https://www.todoist.com/help/todoist/features/introduction-to-recurring-dates-YUYVJJAV", "retrieved": "2026-09-19"},
+        {"name": "labels", "keywords": ["label", "tag", "@label", "categorize"], "source_url": "https://www.todoist.com/help/categories/features/filters-and-labels", "retrieved": "2026-09-19"},
+        {"name": "custom filters", "keywords": ["filter", "query", "saved search", "syntax"], "source_url": "https://www.todoist.com/help/todoist/features/introduction-to-filters-V98wIH", "retrieved": "2026-09-19"},
+        {"name": "reminders", "keywords": ["reminder", "notification", "alert", "due time"], "source_url": "https://www.todoist.com/help/articles/introduction-to-reminders-9PezfU", "retrieved": "2026-09-19"},
+        {"name": "sub-tasks", "keywords": ["subtask", "sub-task", "parent task", "indent", "breakdown"], "source_url": "https://www.todoist.com/help/todoist/features/use-sub-tasks-in-todoist-kMamDo", "retrieved": "2026-09-19"},
+        {"name": "sections", "keywords": ["section", "group tasks", "project phase", "organize"], "source_url": "https://www.todoist.com/help/articles/introduction-to-sections-rOrK0aEn", "retrieved": "2026-09-19"},
+        {"name": "karma productivity tracking", "keywords": ["karma", "points", "streak", "productivity", "gamification"], "source_url": "https://www.todoist.com/karma", "retrieved": "2026-09-19"},
+        {"name": "shared projects", "keywords": ["share", "collaborator", "invite", "team project"], "source_url": "https://www.todoist.com/help/articles/collaborate-with-friends-or-family-in-todoist-tzkGUy", "retrieved": "2026-09-19"},
+        {"name": "task assignment", "keywords": ["assign", "assignee", "responsible", "delegate"], "source_url": "https://www.todoist.com/help/articles/manage-team-tasks-in-todoist-S99543QzY", "retrieved": "2026-09-19"},
+        {"name": "task priorities", "keywords": ["priority", "p1", "p2", "urgency"], "source_url": "https://www.todoist.com/help/articles/introduction-to-priorities-Wy82Jp", "retrieved": "2026-09-19"},
+        {"name": "board (kanban) view", "keywords": ["board", "kanban", "column", "drag and drop"], "source_url": "https://www.todoist.com/inspiration/kanban-board", "retrieved": "2026-09-19"},
+        {"name": "project templates", "keywords": ["template", "preset", "copy project", "workflow"], "source_url": "https://www.todoist.com/help/articles/introduction-to-templates-in-todoist-uofJ8i40M", "retrieved": "2026-09-19"},
+        {"name": "natural language quick add", "keywords": ["quick add", "natural language", "parse date", "nlp"], "source_url": "https://www.todoist.com/help/articles/use-task-quick-add-in-todoist-va4Lhpzz", "retrieved": "2026-09-19"},
+        {"name": "calendar integration", "keywords": ["calendar", "sync", "google calendar", "outlook", "ical"], "source_url": "https://www.todoist.com/help/todoist/integrations/use-the-calendar-integration-rCqwLCt3G", "retrieved": "2026-09-19"},
+        {"name": "task comments and file attachments", "keywords": ["comment", "attachment", "file upload", "discussion"], "source_url": "https://www.todoist.com/help/articles/introduction-to-comments-and-file-uploads-CwiA50", "retrieved": "2026-09-19"}
+      ]
+    },
+    {
+      "id": 25,
+      "category": "Appointment Booking",
+      "exemplar": "Calendly",
+      "secondary_exemplar": null,
+      "features": [
+        {"name": "round robin routing", "keywords": ["round robin", "distribution", "team routing", "assign host"], "source_url": "https://help.calendly.com/hc/en-us/articles/4402432846999-How-does-round-robin-distribution-work-", "retrieved": "2026-09-19"},
+        {"name": "buffer time", "keywords": ["buffer", "travel time", "prep time", "before after"], "source_url": "https://calendly.com/help/how-to-use-buffers", "retrieved": "2026-09-19"},
+        {"name": "meeting limits", "keywords": ["meeting limit", "daily limit", "booking limit", "scheduling notice"], "source_url": "https://calendly.com/help/how-to-set-meeting-limits", "retrieved": "2026-09-19"},
+        {"name": "automated workflows", "keywords": ["workflow", "reminder", "automation", "follow-up", "notification"], "source_url": "https://help.calendly.com/hc/en-us/articles/360051017814-Workflows-overview", "retrieved": "2026-09-19"},
+        {"name": "group events", "keywords": ["group event", "webinar", "invitee limit", "capacity"], "source_url": "https://help.calendly.com/hc/en-us/articles/5430450060439-Group-event-types", "retrieved": "2026-09-19"},
+        {"name": "calendar sync", "keywords": ["calendar sync", "google calendar", "outlook", "ical", "connect calendar"], "source_url": "https://calendly.com/help/calendar-connections", "retrieved": "2026-09-19"},
+        {"name": "website embed", "keywords": ["embed", "widget", "iframe", "inline"], "source_url": "https://calendly.com/help/embed-options-overview", "retrieved": "2026-09-19"},
+        {"name": "payment collection", "keywords": ["payment", "stripe", "paypal", "collect payment", "checkout"], "source_url": "https://calendly.com/help/calendly-stripe", "retrieved": "2026-09-19"},
+        {"name": "custom invitee questions", "keywords": ["custom question", "invitee form", "intake form", "required field"], "source_url": "https://help.calendly.com/hc/en-us/articles/14076808543511-How-to-add-or-remove-invitee-questions", "retrieved": "2026-09-19"},
+        {"name": "automatic time zone detection", "keywords": ["timezone", "time zone", "auto-detect", "dst"], "source_url": "https://help.calendly.com/hc/en-us/articles/14078163170071-Time-Zones-overview", "retrieved": "2026-09-19"},
+        {"name": "video conferencing integration", "keywords": ["zoom", "google meet", "video conferencing", "teams", "webex"], "source_url": "https://calendly.com/help/how-to-schedule-with-video-conferencing", "retrieved": "2026-09-19"}
+      ]
+    },
+    {
+      "id": 27,
+      "category": "Event Ticketing",
+      "exemplar": "Eventbrite",
+      "secondary_exemplar": "Ticketmaster",
+      "features": [
+        {"name": "reserved seating", "keywords": ["seat map", "reserved seating", "seating chart", "assigned seat"], "source_url": "https://www.eventbrite.com/organizer/features/reserved-seating/", "retrieved": "2026-09-19"},
+        {"name": "promo codes", "keywords": ["promo code", "discount code", "coupon", "access code"], "source_url": "https://www.eventbrite.com/organizer/features/promo-codes/", "retrieved": "2026-09-19"},
+        {"name": "ticket tiers", "keywords": ["ticket tier", "ticket type", "early bird", "vip", "pricing tier"], "source_url": "https://www.eventbrite.com/features/ticket-tiers/", "retrieved": "2026-09-19"},
+        {"name": "check-in app", "keywords": ["check-in", "qr code", "scan", "attendee", "organizer app"], "source_url": "https://www.eventbrite.com/features/check-in-app/", "retrieved": "2026-09-19"},
+        {"name": "email marketing", "keywords": ["email campaign", "email marketing", "newsletter", "segment"], "source_url": "https://www.eventbrite.com/organizer/features/email-marketing/", "retrieved": "2026-09-19"},
+        {"name": "virtual event registration", "keywords": ["virtual event", "online event", "livestream", "registration link"], "source_url": "https://www.eventbrite.com/event-ticketing/virtual-events/", "retrieved": "2026-09-19"},
+        {"name": "recurring events", "keywords": ["recurring event", "multiple dates", "timed entry", "repeat event"], "source_url": "https://www.eventbrite.com/help/en-us/articles/193464/set-up-an-event-with-multiple-dates-without-an-event-schedule/", "retrieved": "2026-09-19"},
+        {"name": "event analytics", "keywords": ["analytics", "reporting", "dashboard", "conversion", "sales report"], "source_url": "https://www.eventbrite.com/features/analytics/", "retrieved": "2026-09-19"},
+        {"name": "mobile tickets / Apple Wallet", "keywords": ["mobile ticket", "apple wallet", "digital ticket", "qr code"], "source_url": "https://www.eventbrite.com/blog/eventbrite-app-tickets/", "retrieved": "2026-09-19"},
+        {"name": "refunds and order management", "keywords": ["refund", "cancel order", "refund policy", "order management"], "source_url": "https://www.eventbrite.com/features/refunds/", "retrieved": "2026-09-19"},
+        {"name": "waitlist", "keywords": ["waitlist", "sold out", "waiting list", "notify"], "source_url": "https://www.eventbrite.com/features/waitlist/", "retrieved": "2026-09-19"},
+        {"name": "dynamic/platinum pricing", "keywords": ["dynamic pricing", "platinum", "market-based pricing", "demand pricing"], "source_url": "https://help.ticketmaster.com/hc/en-us/articles/9782440112017-What-are-Platinum-Tickets", "retrieved": "2026-09-19", "secondary": true},
+        {"name": "verified fan presale", "keywords": ["verified fan", "presale", "registration", "bot detection"], "source_url": "https://www.ticketmaster.com/verified/", "retrieved": "2026-09-19", "secondary": true},
+        {"name": "fan-to-fan resale exchange", "keywords": ["resale", "face value", "ticket exchange", "fan-to-fan"], "source_url": "https://business.ticketmaster.com/face-value-exchange/", "retrieved": "2026-09-19", "secondary": true},
+        {"name": "rotating barcode mobile ticket (SafeTix)", "keywords": ["safetix", "rotating barcode", "mobile ticket", "fraud prevention"], "source_url": "https://www.ticketmaster.com/safetix", "retrieved": "2026-09-19", "secondary": true}
+      ]
+    }
+  ]
+}

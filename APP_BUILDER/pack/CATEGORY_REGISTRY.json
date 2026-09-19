@@ -1,0 +1,426 @@
+{
+  "registry": "canonical",
+  "count": 70,
+  "categories": [
+    {
+      "id": 1,
+      "category": "Todo List",
+      "slug": "todo-list",
+      "exemplar": "Todoist"
+    },
+    {
+      "id": 2,
+      "category": "Note Taking",
+      "slug": "note-taking",
+      "exemplar": "Evernote / Microsoft OneNote"
+    },
+    {
+      "id": 3,
+      "category": "Habit Tracker",
+      "slug": "habit-tracker",
+      "exemplar": "Streaks"
+    },
+    {
+      "id": 4,
+      "category": "Calendar & Scheduling",
+      "slug": "calendar-scheduling",
+      "exemplar": "Google Calendar"
+    },
+    {
+      "id": 5,
+      "category": "Expense Tracker",
+      "slug": "expense-tracker",
+      "exemplar": "Expensify"
+    },
+    {
+      "id": 6,
+      "category": "Invoicing",
+      "slug": "invoicing",
+      "exemplar": "Xero / FreshBooks"
+    },
+    {
+      "id": 7,
+      "category": "Accounting Ledger",
+      "slug": "accounting-ledger",
+      "exemplar": "Xero / QuickBooks"
+    },
+    {
+      "id": 8,
+      "category": "Payroll",
+      "slug": "payroll",
+      "exemplar": "ADP / Gusto"
+    },
+    {
+      "id": 9,
+      "category": "CRM",
+      "slug": "crm",
+      "exemplar": "Salesforce"
+    },
+    {
+      "id": 10,
+      "category": "Helpdesk Ticketing",
+      "slug": "helpdesk-ticketing",
+      "exemplar": "Zendesk"
+    },
+    {
+      "id": 11,
+      "category": "Project Management",
+      "slug": "project-management",
+      "exemplar": "Jira / Asana"
+    },
+    {
+      "id": 12,
+      "category": "Team Chat",
+      "slug": "team-chat",
+      "exemplar": "Slack"
+    },
+    {
+      "id": 13,
+      "category": "Video Conferencing",
+      "slug": "video-conferencing",
+      "exemplar": "Zoom"
+    },
+    {
+      "id": 14,
+      "category": "Email Client",
+      "slug": "email-client",
+      "exemplar": "Microsoft Outlook"
+    },
+    {
+      "id": 15,
+      "category": "File Storage & Sync",
+      "slug": "file-storage-sync",
+      "exemplar": "Dropbox"
+    },
+    {
+      "id": 16,
+      "category": "Collaborative Document Editor",
+      "slug": "collaborative-document-editor",
+      "exemplar": "Google Docs"
+    },
+    {
+      "id": 17,
+      "category": "Spreadsheet",
+      "slug": "spreadsheet",
+      "exemplar": "Microsoft Excel"
+    },
+    {
+      "id": 18,
+      "category": "Form Builder & Survey",
+      "slug": "form-builder-survey",
+      "exemplar": "Typeform / SurveyMonkey"
+    },
+    {
+      "id": 19,
+      "category": "E-commerce Storefront",
+      "slug": "e-commerce-storefront",
+      "exemplar": "Shopify"
+    },
+    {
+      "id": 20,
+      "category": "Multi-Vendor Marketplace",
+      "slug": "multi-vendor-marketplace",
+      "exemplar": "Etsy / Amazon Marketplace"
+    },
+    {
+      "id": 21,
+      "category": "Auction",
+      "slug": "auction",
+      "exemplar": "eBay"
+    },
+    {
+      "id": 22,
+      "category": "Food Delivery",
+      "slug": "food-delivery",
+      "exemplar": "DoorDash / Uber Eats"
+    },
+    {
+      "id": 23,
+      "category": "Ride Hailing",
+      "slug": "ride-hailing",
+      "exemplar": "Uber"
+    },
+    {
+      "id": 24,
+      "category": "Parcel Tracking",
+      "slug": "parcel-tracking",
+      "exemplar": "AfterShip / 17TRACK"
+    },
+    {
+      "id": 25,
+      "category": "Appointment Booking",
+      "slug": "appointment-booking",
+      "exemplar": "Calendly"
+    },
+    {
+      "id": 26,
+      "category": "Property Rental",
+      "slug": "property-rental",
+      "exemplar": "Airbnb"
+    },
+    {
+      "id": 27,
+      "category": "Event Ticketing",
+      "slug": "event-ticketing",
+      "exemplar": "Eventbrite / Ticketmaster"
+    },
+    {
+      "id": 28,
+      "category": "Restaurant POS",
+      "slug": "restaurant-pos",
+      "exemplar": "Toast / Square for Restaurants"
+    },
+    {
+      "id": 29,
+      "category": "Inventory & Warehouse",
+      "slug": "inventory-warehouse",
+      "exemplar": "NetSuite WMS / Fishbowl Inventory"
+    },
+    {
+      "id": 30,
+      "category": "Fleet Tracking",
+      "slug": "fleet-tracking",
+      "exemplar": "Samsara / Verizon Connect"
+    },
+    {
+      "id": 31,
+      "category": "Dating",
+      "slug": "dating",
+      "exemplar": "Tinder / Hinge"
+    },
+    {
+      "id": 32,
+      "category": "Social Feed",
+      "slug": "social-feed",
+      "exemplar": "Facebook"
+    },
+    {
+      "id": 33,
+      "category": "Photo Sharing",
+      "slug": "photo-sharing",
+      "exemplar": "Instagram"
+    },
+    {
+      "id": 34,
+      "category": "Short Video Feed",
+      "slug": "short-video-feed",
+      "exemplar": "TikTok"
+    },
+    {
+      "id": 35,
+      "category": "Music Streaming",
+      "slug": "music-streaming",
+      "exemplar": "Spotify"
+    },
+    {
+      "id": 36,
+      "category": "Video Streaming",
+      "slug": "video-streaming",
+      "exemplar": "YouTube"
+    },
+    {
+      "id": 37,
+      "category": "Podcast",
+      "slug": "podcast",
+      "exemplar": "Apple Podcasts / Spotify"
+    },
+    {
+      "id": 38,
+      "category": "Fitness Tracking",
+      "slug": "fitness-tracking",
+      "exemplar": "Strava / Fitbit"
+    },
+    {
+      "id": 39,
+      "category": "Meditation & Wellbeing",
+      "slug": "meditation-wellbeing",
+      "exemplar": "Headspace / Calm"
+    },
+    {
+      "id": 40,
+      "category": "Language Learning",
+      "slug": "language-learning",
+      "exemplar": "Duolingo"
+    },
+    {
+      "id": 41,
+      "category": "Online Course LMS",
+      "slug": "online-course-lms",
+      "exemplar": "Canvas LMS / Coursera"
+    },
+    {
+      "id": 42,
+      "category": "Quiz & Flashcards",
+      "slug": "quiz-flashcards",
+      "exemplar": "Quizlet / Anki"
+    },
+    {
+      "id": 43,
+      "category": "Recipe & Meal Planning",
+      "slug": "recipe-meal-planning",
+      "exemplar": "Paprika / Mealime"
+    },
+    {
+      "id": 44,
+      "category": "Banking",
+      "slug": "banking",
+      "exemplar": "Revolut / Chase Mobile"
+    },
+    {
+      "id": 45,
+      "category": "Online Multiplayer Game",
+      "slug": "online-multiplayer-game",
+      "exemplar": "Fortnite / Among Us"
+    },
+    {
+      "id": 46,
+      "category": "Smart Home Control",
+      "slug": "smart-home-control",
+      "exemplar": "Google Home / Samsung SmartThings"
+    },
+    {
+      "id": 47,
+      "category": "Augmented Reality Gaming",
+      "slug": "augmented-reality-gaming",
+      "exemplar": "Pokémon GO"
+    },
+    {
+      "id": 48,
+      "category": "Virtual Reality Experience",
+      "slug": "virtual-reality-experience",
+      "exemplar": "Meta Quest"
+    },
+    {
+      "id": 49,
+      "category": "Cryptocurrency Exchange",
+      "slug": "cryptocurrency-exchange",
+      "exemplar": "Coinbase / Binance"
+    },
+    {
+      "id": 50,
+      "category": "Crypto Wallet",
+      "slug": "crypto-wallet",
+      "exemplar": "MetaMask"
+    },
+    {
+      "id": 51,
+      "category": "Cryptocurrency Trading",
+      "slug": "cryptocurrency-trading",
+      "exemplar": "Binance / Kraken Pro"
+    },
+    {
+      "id": 52,
+      "category": "Voice Assistant",
+      "slug": "voice-assistant",
+      "exemplar": "Amazon Alexa / Google Assistant"
+    },
+    {
+      "id": 53,
+      "category": "Workspace & Productivity",
+      "slug": "workspace-productivity",
+      "exemplar": "Notion"
+    },
+    {
+      "id": 54,
+      "category": "Maps & Navigation",
+      "slug": "maps-navigation",
+      "exemplar": "Google Maps"
+    },
+    {
+      "id": 55,
+      "category": "Enterprise Resource Planning",
+      "slug": "enterprise-resource-planning",
+      "exemplar": "SAP S/4HANA / Oracle NetSuite"
+    },
+    {
+      "id": 56,
+      "category": "Peer-to-Peer File Sharing",
+      "slug": "peer-to-peer-file-sharing",
+      "exemplar": "BitTorrent / Resilio Sync"
+    },
+    {
+      "id": 57,
+      "category": "Telehealth Consultation",
+      "slug": "telehealth-consultation",
+      "exemplar": "Teladoc Health / Doxy.me"
+    },
+    {
+      "id": 58,
+      "category": "Public Transport & Vehicle Sharing",
+      "slug": "public-transport-vehicle-sharing",
+      "exemplar": "Lime / Citymapper"
+    },
+    {
+      "id": 59,
+      "category": "Offline-First Field Operations",
+      "slug": "offline-first-field-operations",
+      "exemplar": "ArcGIS Field Maps / ServiceMax"
+    },
+    {
+      "id": 60,
+      "category": "Government & Civic Services",
+      "slug": "government-civic-services",
+      "exemplar": "GOV.UK / Accela"
+    },
+    {
+      "id": 61,
+      "category": "Live Sports Betting",
+      "slug": "live-sports-betting",
+      "exemplar": "DraftKings / Bet365"
+    },
+    {
+      "id": 62,
+      "category": "Genomics & Lab-Result Analysis",
+      "slug": "genomics-lab-result-analysis",
+      "exemplar": "Illumina BaseSpace / 23andMe"
+    },
+    {
+      "id": 63,
+      "category": "CAD & 3D Design",
+      "slug": "cad-3d-design",
+      "exemplar": "Autodesk Fusion 360 / SolidWorks"
+    },
+    {
+      "id": 64,
+      "category": "Subscription Management",
+      "slug": "subscription-management",
+      "exemplar": "Chargebee / Stripe Billing"
+    },
+    {
+      "id": 65,
+      "category": "Emergency Dispatch",
+      "slug": "emergency-dispatch",
+      "exemplar": "Motorola PremierOne CAD / Tyler Enterprise CAD"
+    },
+    {
+      "id": 66,
+      "category": "Real-Time Translation",
+      "slug": "real-time-translation",
+      "exemplar": "Google Translate / DeepL"
+    },
+    {
+      "id": 67,
+      "category": "Insurance & Warranty Claims",
+      "slug": "insurance-warranty-claims",
+      "exemplar": "Guidewire ClaimCenter / Lemonade"
+    },
+    {
+      "id": 68,
+      "category": "Embedded IoT Firmware",
+      "slug": "embedded-iot-firmware",
+      "exemplar": "FreeRTOS / Zephyr RTOS"
+    },
+    {
+      "id": 69,
+      "category": "Legacy Batch Banking",
+      "slug": "legacy-batch-banking",
+      "exemplar": "IBM CICS on z/OS / Temenos Transact"
+    },
+    {
+      "id": 70,
+      "category": "Anonymous Networking",
+      "slug": "anonymous-networking",
+      "exemplar": "Tor Browser / Signal"
+    }
+  ]
+}
