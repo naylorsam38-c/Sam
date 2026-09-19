@@ -39,6 +39,123 @@ APPLICATION_MANIFEST = [
             "export route (GET /export, app/routes.py) protected by @login_required. "
             "13 stars, actively maintained, MIT-licensed per its own LICENSE file."
         ),
+        # build.py's runner: this app exposes create_app(); DB/mail config is
+        # entirely env-var driven (the app's own designed extension point),
+        # so build.py can point it at a fresh SQLite file and a local SMTP
+        # debug server without touching the app's source at all.
+        "runner": {
+            "kind": "flask_factory",
+            "factory_module": "app",
+            "factory_func": "create_app",
+            "needs_smtp": True,
+            "readiness_path": "/login",
+            "env": {
+                "DATABASE_URL": "sqlite:///{db_path}",
+                "FLASK_SECRET_KEY": "capability-harvest-build-run",
+                "MAIL_SERVER": "{smtp_host}",
+                "MAIL_PORT": "{smtp_port}",
+                "MAIL_USE_TLS": "false",
+                "MAIL_USE_SSL": "false",
+            },
+        },
+    },
+    {
+        "slug": "inventory-tracker",
+        "clone_url": "https://github.com/Antoh254/Inventory-Tracker.git",
+        "ref": None,
+        "category": "inventory",
+        "why_selected": (
+            "Single-file Flask + raw sqlite3 app, MIT licensed, one runtime "
+            "dependency (flask only), no auth. Genuine stock adjustment: "
+            "UPDATE products SET quantity = quantity +/- 1 gated by a real "
+            "reorder_level column and an `action` form field (sell/restock)."
+        ),
+        "runner": {
+            "kind": "flask_module_attr",
+            "app_module": "app",
+            "app_attr": "app",
+            # init_db() runs at module import time (module-level call, not
+            # gated behind __main__), so importing the module is enough to
+            # get a fresh schema once the stale db file is removed.
+            "reset_globs": ["inventory.db"],
+            "readiness_path": "/",
+        },
+    },
+    {
+        "slug": "hostelfix",
+        "clone_url": "https://github.com/makona-OG/hostelFix.git",
+        "ref": None,
+        "category": "hostel-booking",
+        "why_selected": (
+            "Real Flask + SQLAlchemy + SQLite student-hostel-booking app "
+            "(live Render deployment linked in its own README), MIT "
+            "licensed. Its GET /search route runs a genuine SQLAlchemy "
+            "`.filter(Hostel.name.ilike(...))` query against a real Hostel "
+            "model -- not a client-side filter -- and needs no auth."
+        ),
+        "runner": {
+            "kind": "flask_module_attr",
+            "app_module": "app",
+            "app_attr": "app",
+            "reset_globs": ["hostelfix.db", "instance/hostelfix.db"],
+            # Unlike inventory-tracker, this app's table creation and demo
+            # data are NOT side effects of importing app.py -- they're in
+            # init_db.py / dummy_data.py, which the app's own README
+            # documents running before first use. Running the app's own
+            # scripts is not us inventing data; it's the fixture set the
+            # app ships to be usable at all.
+            "setup_scripts": ["init_db.py", "dummy_data.py"],
+            "readiness_path": "/",
+        },
+    },
+    {
+        "slug": "habit-tracker",
+        "clone_url": "https://github.com/batrisyiasafri/habit_tracker.git",
+        "ref": None,
+        "category": "habit-tracking",
+        "why_selected": (
+            "Single-file Flask + Flask-SQLAlchemy habit tracker, MIT "
+            "licensed, no real auth (session user id hardcoded per the "
+            "app's own 'demo purposes' comment/README). Genuine consecutive"
+            "-day streak calculation (calculate_streaks) over real "
+            "HabitLog.date rows, not a stub."
+        ),
+        "runner": {
+            "kind": "flask_module_attr",
+            "app_module": "app",
+            "app_attr": "app",
+            # Flask-SQLAlchemy resolves the relative sqlite:///habits.db
+            # URI against the app's instance path, not the process cwd --
+            # confirmed by inspecting which file actually holds the
+            # habit/habit_log tables after a real run.
+            "reset_globs": ["habits.db", "instance/habits.db", "instance/database.db"],
+            "readiness_path": "/",
+        },
+    },
+    {
+        "slug": "flask-messenger",
+        "clone_url": "https://github.com/jgoney/flask-messenger.git",
+        "ref": None,
+        "category": "messaging",
+        "why_selected": (
+            "Small Flask + raw sqlite3 message board with both a "
+            "server-rendered form and an unauthenticated REST API, MIT "
+            "licensed. _add_message() performs a genuine persisted INSERT, "
+            "confirmed live (POST then GET returns the same row)."
+        ),
+        "runner": {
+            # This app's schema creation is gated behind
+            # `if __name__ == '__main__':` in messenger.py itself, so it
+            # must be run as a script, not imported as a module -- we run
+            # the app exactly the way its own author runs it, rather than
+            # replicating that setup logic ourselves.
+            "kind": "script_entrypoint",
+            "entry_script": "messenger.py",
+            "known_host": "127.0.0.1",
+            "known_port": 5000,
+            "reset_globs": ["main.db"],  # settings/settings_common.py: DB_NAME = 'main.db'
+            "readiness_path": "/",
+        },
     },
 ]
 # Common LICENSE filenames to look for, in priority order.
@@ -123,6 +240,7 @@ def main():
             "discovered_at": datetime.now(timezone.utc).isoformat(),
             "licence": licence,
             "blocked": licence["licence_id"] is None,
+            "runner": entry["runner"],
         }
         if licence["licence_file"]:
             record["licence"]["file_sha256"] = _sha256_of_file(dest / licence["licence_file"])

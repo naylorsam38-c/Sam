@@ -1,0 +1,33 @@
+{
+  "base_url": "http://127.0.0.1:5058",
+  "cap_id": "CAP-0002",
+  "quantities_observed": {
+    "after_add": 10,
+    "after_restock": 11,
+    "after_sell": 9
+  },
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "add_product",
+      "url": "http://127.0.0.1:5058/"
+    },
+    {
+      "method": "GET",
+      "product_id": 1,
+      "status_code": 200,
+      "step": "sell_one",
+      "url": "http://127.0.0.1:5058/"
+    },
+    {
+      "method": "GET",
+      "product_id": 1,
+      "status_code": 200,
+      "step": "restock_two",
+      "url": "http://127.0.0.1:5058/"
+    }
+  ],
+  "verified_at": "2026-09-19T12:11:00.914607+00:00"
+}

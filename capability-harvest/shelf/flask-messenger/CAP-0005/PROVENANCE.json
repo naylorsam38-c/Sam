@@ -1,0 +1,44 @@
+{
+  "application": {
+    "category": "messaging",
+    "commit": "4e9a9b31b5fc091a38f3162fb9cb9b579c11a047",
+    "repo_url": "https://github.com/jgoney/flask-messenger.git",
+    "slug": "flask-messenger"
+  },
+  "cap_id": "CAP-0005",
+  "capability_name": "send message",
+  "category": "messaging",
+  "checksums": {
+    "harvested_source_sha256": "2efeb14ade9e48af687d9f0f276b4f34480e9b2b8b97e6738373535d953800ae",
+    "whole_source_file_sha256_at_harvest": "ed49a88d5ff446aaf8e15e3bbe455977a4d7ee902721cb330e5bdb84a0568a68"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "app",
+      "conn",
+      "sqlite3"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T12:10:45.799610+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [],
+    "end_lineno": 36,
+    "evidence_calls_matched": [
+      "commit",
+      "connect",
+      "execute"
+    ],
+    "file": "messenger.py",
+    "lineno": 30,
+    "route_path": null,
+    "symbol": "_add_message"
+  }
+}

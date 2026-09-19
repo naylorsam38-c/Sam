@@ -40,6 +40,50 @@ CAPABILITY_TARGETS = [
         "route_path_hint": "/export",
         "evidence_call_names": {"writer", "send_file"},
     },
+    {
+        "cap_id": "CAP-0002",
+        "name": "manage inventory",
+        "category": "inventory",
+        "app_slug": "inventory-tracker",
+        "source_file_relative": "app.py",
+        "route_path_hint": "/update/",
+        "evidence_call_names": {"execute", "commit"},
+    },
+    {
+        "cap_id": "CAP-0003",
+        "name": "search records",
+        "category": "hostel-booking",
+        "app_slug": "hostelfix",
+        "source_file_relative": "app.py",
+        "route_path_hint": "/search",
+        "evidence_call_names": {"filter", "ilike"},
+    },
+    {
+        "cap_id": "CAP-0004",
+        "name": "track streak",
+        "category": "habit-tracking",
+        "app_slug": "habit-tracker",
+        "source_file_relative": "app.py",
+        # calculate_streaks() is a plain function, not a Flask route -- it
+        # has no @app.route decorator to hint on. detect_by_symbol_name
+        # below is used for this target instead of the route-based search.
+        "symbol_hint": "calculate_streaks",
+        "evidence_call_names": {"sorted", "max"},
+    },
+    {
+        "cap_id": "CAP-0005",
+        "name": "send message",
+        "category": "messaging",
+        "app_slug": "flask-messenger",
+        "source_file_relative": "messenger.py",
+        "route_path_hint": "/",
+        "evidence_call_names": {"connect", "execute", "commit"},
+        # home() is a thin route that delegates to _add_message(); the real
+        # evidence (the INSERT) lives in the helper it calls, which is why
+        # this target's evidence_call_names are checked against
+        # _add_message via symbol_hint instead of the route function body.
+        "symbol_hint": "_add_message",
+    },
 ]
 # ----------------------------------------------------------------------------
 
@@ -76,6 +120,18 @@ def _unparse_decorator(node: ast.expr) -> str:
 
 
 def find_attach_point(source_path: Path, target: dict):
+    """
+    Two search modes, both requiring genuine evidence in the candidate's
+    own body before it counts as a match -- a route path or a symbol name
+    is only ever a HINT that narrows candidates, never the decision itself:
+
+      - route_path_hint: candidate functions are Flask routes whose
+        decorator path contains the hint (the capability lives directly in
+        the route handler).
+      - symbol_hint: candidate is the function with exactly that name,
+        wherever it's defined (the capability lives in a plain function or
+        a helper the route delegates to, not the route handler itself).
+    """
     source = source_path.read_text(encoding="utf-8")
     tree = ast.parse(source, filename=str(source_path))
 
@@ -84,20 +140,24 @@ def find_attach_point(source_path: Path, target: dict):
             continue
 
         route_path = None
-        for dec in node.decorator_list:
-            path = _decorator_route_path(dec)
-            if path is not None:
-                route_path = path
-                break
-        if route_path is None or target["route_path_hint"] not in route_path:
-            continue  # not even a hint match -- keep looking
+        if "symbol_hint" in target:
+            if node.name != target["symbol_hint"]:
+                continue
+        else:
+            for dec in node.decorator_list:
+                path = _decorator_route_path(dec)
+                if path is not None:
+                    route_path = path
+                    break
+            if route_path is None or target["route_path_hint"] not in route_path:
+                continue  # not even a hint match -- keep looking
 
         evidence_present = _call_names_in(node) & target["evidence_call_names"]
         if not evidence_present:
-            # The route matched by name/path alone -- exactly the kind of
-            # false positive this detector exists to reject. Do not record
-            # it as an attach point; keep looking in case of an overload,
-            # then fall through to "not found" if nothing else matches.
+            # The candidate matched by name/route alone -- exactly the kind
+            # of false positive this detector exists to reject. Do not
+            # record it as an attach point; keep looking in case of an
+            # overload, then fall through to "not found" if nothing matches.
             continue
 
         return {
@@ -115,16 +175,15 @@ def find_attach_point(source_path: Path, target: dict):
             "evidence_calls_matched": sorted(evidence_present),
         }
 
+    hint_desc = f"symbol named '{target['symbol_hint']}'" if "symbol_hint" in target else \
+        f"a route containing '{target['route_path_hint']}'"
     return {
         "cap_id": target["cap_id"],
         "name": target["name"],
         "category": target["category"],
         "app_slug": target["app_slug"],
         "found": False,
-        "reason": (
-            f"no function decorated with a route containing '{target['route_path_hint']}' "
-            f"was found whose body calls any of {sorted(target['evidence_call_names'])}"
-        ),
+        "reason": f"no function matching {hint_desc} was found whose body calls any of {sorted(target['evidence_call_names'])}",
     }
 
 

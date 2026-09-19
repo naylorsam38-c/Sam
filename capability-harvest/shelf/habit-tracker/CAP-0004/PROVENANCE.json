@@ -1,0 +1,43 @@
+{
+  "application": {
+    "category": "habit-tracking",
+    "commit": "c9d2b6b72fbf8f4008aa9b29d0e4f48f584949e8",
+    "repo_url": "https://github.com/batrisyiasafri/habit_tracker.git",
+    "slug": "habit-tracker"
+  },
+  "cap_id": "CAP-0004",
+  "capability_name": "track streak",
+  "category": "habit-tracking",
+  "checksums": {
+    "harvested_source_sha256": "54bcfa1bb0390e7f0c8b77665344d9b3e1853c556192f37220de563595e13017",
+    "whole_source_file_sha256_at_harvest": "45a9a2e7b548e0f154d51a2d4c5bef96d520af97cba460d76f2723cd7e0cfa9b"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "date",
+      "i",
+      "timedelta"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T12:10:45.752806+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [],
+    "end_lineno": 253,
+    "evidence_calls_matched": [
+      "max",
+      "sorted"
+    ],
+    "file": "app.py",
+    "lineno": 215,
+    "route_path": null,
+    "symbol": "calculate_streaks"
+  }
+}

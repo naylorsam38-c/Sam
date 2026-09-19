@@ -5,7 +5,7 @@
       "category": "personal-finance",
       "clone_url": "https://github.com/NHasan143/monthly-expenses-tracker.git",
       "cloned_path": "/home/user/Sam/capability-harvest/application_pool/monthly-expenses-tracker",
-      "discovered_at": "2026-09-19T11:49:37.093217+00:00",
+      "discovered_at": "2026-09-19T12:10:42.184945+00:00",
       "licence": {
         "file_sha256": "a61bc004f3dd54ad607e2611c3ad554af39f6be379389b52740db5e9f0cc30ef",
         "flagged": false,
@@ -14,8 +14,135 @@
         "marker_matched": "MIT License"
       },
       "resolved_commit": "7fd04edb0756e8dda501ee01b98dc30de2d238b6",
+      "runner": {
+        "env": {
+          "DATABASE_URL": "sqlite:///{db_path}",
+          "FLASK_SECRET_KEY": "capability-harvest-build-run",
+          "MAIL_PORT": "{smtp_port}",
+          "MAIL_SERVER": "{smtp_host}",
+          "MAIL_USE_SSL": "false",
+          "MAIL_USE_TLS": "false"
+        },
+        "factory_func": "create_app",
+        "factory_module": "app",
+        "kind": "flask_factory",
+        "needs_smtp": true,
+        "readiness_path": "/login"
+      },
       "slug": "monthly-expenses-tracker",
       "why_selected": "Real, working Flask app (flask-login auth + flask-sqlalchemy models, SQLite dev fallback so no external DB is required) with a genuine CSV export route (GET /export, app/routes.py) protected by @login_required. 13 stars, actively maintained, MIT-licensed per its own LICENSE file."
+    },
+    {
+      "blocked": false,
+      "category": "inventory",
+      "clone_url": "https://github.com/Antoh254/Inventory-Tracker.git",
+      "cloned_path": "/home/user/Sam/capability-harvest/application_pool/inventory-tracker",
+      "discovered_at": "2026-09-19T12:10:42.828206+00:00",
+      "licence": {
+        "file_sha256": "c8d5135ff29b71dd81cf3cf6bb9b61bf3f18a6a696ab86d0a51ff2feaf1fd24e",
+        "flagged": false,
+        "licence_file": "LICENSE",
+        "licence_id": "MIT",
+        "marker_matched": "MIT License"
+      },
+      "resolved_commit": "6aba7fb8ef1b86e1d9e03184476b8bb37fe2bc12",
+      "runner": {
+        "app_attr": "app",
+        "app_module": "app",
+        "kind": "flask_module_attr",
+        "readiness_path": "/",
+        "reset_globs": [
+          "inventory.db"
+        ]
+      },
+      "slug": "inventory-tracker",
+      "why_selected": "Single-file Flask + raw sqlite3 app, MIT licensed, one runtime dependency (flask only), no auth. Genuine stock adjustment: UPDATE products SET quantity = quantity +/- 1 gated by a real reorder_level column and an `action` form field (sell/restock)."
+    },
+    {
+      "blocked": false,
+      "category": "hostel-booking",
+      "clone_url": "https://github.com/makona-OG/hostelFix.git",
+      "cloned_path": "/home/user/Sam/capability-harvest/application_pool/hostelfix",
+      "discovered_at": "2026-09-19T12:10:44.191560+00:00",
+      "licence": {
+        "file_sha256": "68dd35412cda8f55852e9db9b1da4be560792e107e1563d4e011c9fc565310af",
+        "flagged": false,
+        "licence_file": "LICENSE",
+        "licence_id": "MIT",
+        "marker_matched": "MIT License"
+      },
+      "resolved_commit": "8d54ca9aebe956eb135f53fdb8aabb4e3a5a8748",
+      "runner": {
+        "app_attr": "app",
+        "app_module": "app",
+        "kind": "flask_module_attr",
+        "readiness_path": "/",
+        "reset_globs": [
+          "hostelfix.db",
+          "instance/hostelfix.db"
+        ],
+        "setup_scripts": [
+          "init_db.py",
+          "dummy_data.py"
+        ]
+      },
+      "slug": "hostelfix",
+      "why_selected": "Real Flask + SQLAlchemy + SQLite student-hostel-booking app (live Render deployment linked in its own README), MIT licensed. Its GET /search route runs a genuine SQLAlchemy `.filter(Hostel.name.ilike(...))` query against a real Hostel model -- not a client-side filter -- and needs no auth."
+    },
+    {
+      "blocked": false,
+      "category": "habit-tracking",
+      "clone_url": "https://github.com/batrisyiasafri/habit_tracker.git",
+      "cloned_path": "/home/user/Sam/capability-harvest/application_pool/habit-tracker",
+      "discovered_at": "2026-09-19T12:10:44.849562+00:00",
+      "licence": {
+        "file_sha256": "91de2d1224c4284eb0ec3d59946687468160e5ad9d8f1d17082b096c4ce082a5",
+        "flagged": false,
+        "licence_file": "LICENSE",
+        "licence_id": "MIT",
+        "marker_matched": "MIT License"
+      },
+      "resolved_commit": "c9d2b6b72fbf8f4008aa9b29d0e4f48f584949e8",
+      "runner": {
+        "app_attr": "app",
+        "app_module": "app",
+        "kind": "flask_module_attr",
+        "readiness_path": "/",
+        "reset_globs": [
+          "habits.db",
+          "instance/habits.db",
+          "instance/database.db"
+        ]
+      },
+      "slug": "habit-tracker",
+      "why_selected": "Single-file Flask + Flask-SQLAlchemy habit tracker, MIT licensed, no real auth (session user id hardcoded per the app's own 'demo purposes' comment/README). Genuine consecutive-day streak calculation (calculate_streaks) over real HabitLog.date rows, not a stub."
+    },
+    {
+      "blocked": false,
+      "category": "messaging",
+      "clone_url": "https://github.com/jgoney/flask-messenger.git",
+      "cloned_path": "/home/user/Sam/capability-harvest/application_pool/flask-messenger",
+      "discovered_at": "2026-09-19T12:10:45.522052+00:00",
+      "licence": {
+        "file_sha256": "b2dd585cd38d20d7528940b202aac157e0de26823cd9beb7b6a83b277c26ea09",
+        "flagged": false,
+        "licence_file": "LICENSE",
+        "licence_id": "MIT",
+        "marker_matched": "MIT License"
+      },
+      "resolved_commit": "4e9a9b31b5fc091a38f3162fb9cb9b579c11a047",
+      "runner": {
+        "entry_script": "messenger.py",
+        "kind": "script_entrypoint",
+        "known_host": "127.0.0.1",
+        "known_port": 5000,
+        "readiness_path": "/",
+        "reset_globs": [
+          "main.db"
+        ]
+      },
+      "slug": "flask-messenger",
+      "why_selected": "Small Flask + raw sqlite3 message board with both a server-rendered form and an unauthenticated REST API, MIT licensed. _add_message() performs a genuine persisted INSERT, confirmed live (POST then GET returns the same row)."
     }
   ]
 }

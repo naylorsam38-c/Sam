@@ -19,6 +19,79 @@
       "route_path": "/export",
       "source_file_relative": "app/routes.py",
       "symbol": "export_csv"
+    },
+    {
+      "app_slug": "inventory-tracker",
+      "cap_id": "CAP-0002",
+      "category": "inventory",
+      "decorators": [
+        "@app.route('/update/<int:id>', methods=['POST'])"
+      ],
+      "end_lineno": 62,
+      "evidence_calls_matched": [
+        "commit",
+        "execute"
+      ],
+      "found": true,
+      "lineno": 49,
+      "name": "manage inventory",
+      "route_path": "/update/<int:id>",
+      "source_file_relative": "app.py",
+      "symbol": "update_stock"
+    },
+    {
+      "app_slug": "hostelfix",
+      "cap_id": "CAP-0003",
+      "category": "hostel-booking",
+      "decorators": [
+        "@app.route('/search')"
+      ],
+      "end_lineno": 229,
+      "evidence_calls_matched": [
+        "filter",
+        "ilike"
+      ],
+      "found": true,
+      "lineno": 213,
+      "name": "search records",
+      "route_path": "/search",
+      "source_file_relative": "app.py",
+      "symbol": "search"
+    },
+    {
+      "app_slug": "habit-tracker",
+      "cap_id": "CAP-0004",
+      "category": "habit-tracking",
+      "decorators": [],
+      "end_lineno": 253,
+      "evidence_calls_matched": [
+        "max",
+        "sorted"
+      ],
+      "found": true,
+      "lineno": 215,
+      "name": "track streak",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "calculate_streaks"
+    },
+    {
+      "app_slug": "flask-messenger",
+      "cap_id": "CAP-0005",
+      "category": "messaging",
+      "decorators": [],
+      "end_lineno": 36,
+      "evidence_calls_matched": [
+        "commit",
+        "connect",
+        "execute"
+      ],
+      "found": true,
+      "lineno": 30,
+      "name": "send message",
+      "route_path": null,
+      "source_file_relative": "messenger.py",
+      "symbol": "_add_message"
     }
   ]
 }

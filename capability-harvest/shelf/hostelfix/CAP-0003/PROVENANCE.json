@@ -1,0 +1,48 @@
+{
+  "application": {
+    "category": "hostel-booking",
+    "commit": "8d54ca9aebe956eb135f53fdb8aabb4e3a5a8748",
+    "repo_url": "https://github.com/makona-OG/hostelFix.git",
+    "slug": "hostelfix"
+  },
+  "cap_id": "CAP-0003",
+  "capability_name": "search records",
+  "category": "hostel-booking",
+  "checksums": {
+    "harvested_source_sha256": "4e3d7c091248d9644c15161582ae0c3b3075d6c7e038108eb08b4d685c770992",
+    "whole_source_file_sha256_at_harvest": "8e6a0a0de3ce42264a51a5177a9008b579e1af37e78f142ece18d85f3d3d0921"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "Hostel",
+      "app",
+      "hostel",
+      "os",
+      "render_template",
+      "request"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T12:10:45.707947+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@app.route('/search')"
+    ],
+    "end_lineno": 229,
+    "evidence_calls_matched": [
+      "filter",
+      "ilike"
+    ],
+    "file": "app.py",
+    "lineno": 213,
+    "route_path": "/search",
+    "symbol": "search"
+  }
+}
