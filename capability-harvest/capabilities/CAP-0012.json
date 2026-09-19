@@ -2,12 +2,12 @@
   "aliases": [],
   "cap_id": "CAP-0012",
   "category": "media-rating",
-  "generated_at": "2026-09-19T13:56:32.617503+00:00",
+  "generated_at": "2026-09-19T14:04:04.519822+00:00",
   "implementations": [
     {
       "app_slug": "zinny-api",
       "commit": "65dbe26a4762675fb1ce031a3fc951fb0d784e78",
-      "harvested_at": "2026-09-19T13:56:31.978969+00:00",
+      "harvested_at": "2026-09-19T14:04:03.473813+00:00",
       "licence": "BSD-3-Clause",
       "provenance_path": "shelf/zinny-api/CAP-0012/PROVENANCE.json",
       "shelf_path": "shelf/zinny-api/CAP-0012"

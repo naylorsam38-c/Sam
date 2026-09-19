@@ -4,7 +4,7 @@
   "result": "PASS",
   "steps": [
     {
-      "filename": "harvest_proof_1789826363.png",
+      "filename": "harvest_proof_1789826690.png",
       "method": "POST",
       "status_code": 302,
       "step": "upload_real_png",
@@ -14,13 +14,13 @@
       "method": "GET",
       "status_code": 200,
       "step": "view_uploaded_image_page",
-      "url": "http://127.0.0.1:5057/image/harvest_proof_1789826363.png"
+      "url": "http://127.0.0.1:5057/image/harvest_proof_1789826690.png"
     },
     {
       "method": "GET",
       "status_code": 200,
       "step": "fetch_raw_uploaded_bytes",
-      "url": "http://127.0.0.1:5057/capturedimage/harvest_proof_1789826363.png"
+      "url": "http://127.0.0.1:5057/capturedimage/harvest_proof_1789826690.png"
     },
     {
       "method": "POST",
@@ -36,6 +36,6 @@
     }
   ],
   "uploaded_bytes": 69,
-  "uploaded_filename": "harvest_proof_1789826363.png",
-  "verified_at": "2026-09-19T13:59:23.054608+00:00"
+  "uploaded_filename": "harvest_proof_1789826690.png",
+  "verified_at": "2026-09-19T14:04:50.779439+00:00"
 }

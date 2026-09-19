@@ -1,7 +1,7 @@
 {
   "base_url": "http://127.0.0.1:5057",
   "cap_id": "CAP-0022",
-  "registered_email": "hproof26372@example.com",
+  "registered_email": "hproof26700@example.com",
   "result": "PASS",
   "steps": [
     {
@@ -11,7 +11,7 @@
       "url": "http://127.0.0.1:5057/register"
     },
     {
-      "email": "hproof26372@example.com",
+      "email": "hproof26700@example.com",
       "method": "GET",
       "status_code": 200,
       "step": "register_new_account",
@@ -21,7 +21,7 @@
       "method": "GET",
       "status_code": 302,
       "step": "attempt_tampered_token",
-      "url": "http://127.0.0.1:5057/verify_email/Imhwcm9vZjI2MzcyQGV4YW1wbGUuY29tIg.aq6VRA.3ZBwBk2Csa9sdu4hm5Elnzg0000"
+      "url": "http://127.0.0.1:5057/verify_email/Imhwcm9vZjI2NzAwQGV4YW1wbGUuY29tIg.aq6WjA.Oi79YjstYavzwjK_5oFq-hB0000"
     },
     {
       "method": "GET",
@@ -36,5 +36,5 @@
       "url": "http://127.0.0.1:5057/"
     }
   ],
-  "verified_at": "2026-09-19T13:59:32.535652+00:00"
+  "verified_at": "2026-09-19T14:05:00.937149+00:00"
 }

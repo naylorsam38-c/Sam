@@ -36,15 +36,17 @@ implementations harvested so far.
 27 take payment              54 add favourite                81 synthesise speech
 ```
 
-## Status (23 harvested, 1 deferred, 57 remaining)
+## Status (28 harvested, 1 deferred, 52 remaining)
 
 Harvested, live-proven, real (see README.md for full detail):
-#1 register account, #2 log in, #3 log out, #9 search records, #13
-export data, #14 upload image, #16 track streak, #17 award badge, #18
-generate report, #19 book slot, #22 set permissions, #25 calculate tax,
-#26 generate invoice, #34 send message, #39 edit profile, #54 add
-favourite, #57 manage inventory, #58 rate item, #59 write review, #64
-track location, #69 verify email, #79 log workout, #80 show leaderboard.
+#1 register account, #2 log in, #3 log out, #4 create record, #5 edit
+record, #6 delete record, #7 view record detail, #8 filter list, #9
+search records, #13 export data, #14 upload image, #16 track streak,
+#17 award badge, #18 generate report, #19 book slot, #22 set
+permissions, #25 calculate tax, #26 generate invoice, #34 send message,
+#39 edit profile, #54 add favourite, #57 manage inventory, #58 rate
+item, #59 write review, #64 track location, #69 verify email, #79 log
+workout, #80 show leaderboard.
 
 Researched, real candidates confirmed unworkable, deferred with reason
 (see README.md "what's next"):

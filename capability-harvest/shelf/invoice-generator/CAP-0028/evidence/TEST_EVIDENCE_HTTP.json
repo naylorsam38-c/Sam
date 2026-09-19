@@ -1,0 +1,35 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0028",
+  "invoice_a": 1042,
+  "invoice_b": 1043,
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_invoice_for_A",
+      "url": "http://127.0.0.1:5057/api/invoices"
+    },
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_invoice_for_B",
+      "url": "http://127.0.0.1:5057/api/invoices"
+    },
+    {
+      "method": "GET",
+      "search": "Aadhya Agarwal",
+      "status_code": 200,
+      "step": "filter_by_customer_a_name",
+      "url": "http://127.0.0.1:5057/api/invoices?search=Aadhya+Agarwal"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "filter_with_no_matches",
+      "url": "http://127.0.0.1:5057/api/invoices?search=zzz-no-such-customer-or-invoice-zzz"
+    }
+  ],
+  "verified_at": "2026-09-19T14:05:10.595226+00:00"
+}

@@ -441,6 +441,101 @@
       "route_path": null,
       "source_file_relative": "app/routes.py",
       "symbol": "edit_profile"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0024",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices', methods=['POST'])"
+      ],
+      "end_lineno": 536,
+      "evidence_calls_matched": [
+        "commit",
+        "executemany"
+      ],
+      "found": true,
+      "lineno": 492,
+      "name": "create record",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "create_invoice"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0025",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices/<int:invoice_id>', methods=['PUT'])"
+      ],
+      "end_lineno": 625,
+      "evidence_calls_matched": [
+        "commit",
+        "executemany"
+      ],
+      "found": true,
+      "lineno": 573,
+      "name": "edit record",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "update_invoice"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0026",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices/<int:invoice_id>', methods=['DELETE'])"
+      ],
+      "end_lineno": 72,
+      "evidence_calls_matched": [
+        "commit",
+        "execute"
+      ],
+      "found": true,
+      "lineno": 60,
+      "name": "delete record",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "delete_invoice"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0027",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices/<int:invoice_id>', methods=['GET'])"
+      ],
+      "end_lineno": 570,
+      "evidence_calls_matched": [
+        "execute",
+        "fetchall"
+      ],
+      "found": true,
+      "lineno": 539,
+      "name": "view record detail",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "get_invoice_details"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0028",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices', methods=['GET'])"
+      ],
+      "end_lineno": 115,
+      "evidence_calls_matched": [
+        "execute",
+        "fetchall"
+      ],
+      "found": true,
+      "lineno": 75,
+      "name": "filter list",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "get_invoices"
     }
   ]
 }

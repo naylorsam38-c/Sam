@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0028",
+  "category": "billing",
+  "generated_at": "2026-09-19T14:04:04.523776+00:00",
+  "implementations": [
+    {
+      "app_slug": "invoice-generator",
+      "commit": "14f0b74b979604e970dc1b14e803581c42e78b2d",
+      "harvested_at": "2026-09-19T14:04:04.462459+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/invoice-generator/CAP-0028/PROVENANCE.json",
+      "shelf_path": "shelf/invoice-generator/CAP-0028"
+    }
+  ],
+  "name": "filter list"
+}

@@ -3,18 +3,18 @@
   "cap_id": "CAP-0005",
   "messages_observed": [
     {
-      "dt": "2026-09-19 13:56:51",
+      "dt": "2026-09-19 14:04:23",
       "id": 1,
-      "message": "Capability-harvest proof message 1789826211",
-      "sender": "harvest-proof-1789826211"
+      "message": "Capability-harvest proof message 1789826663",
+      "sender": "harvest-proof-1789826663"
     }
   ],
   "result": "PASS",
   "steps": [
     {
-      "message": "Capability-harvest proof message 1789826211",
+      "message": "Capability-harvest proof message 1789826663",
       "method": "POST",
-      "sender": "harvest-proof-1789826211",
+      "sender": "harvest-proof-1789826663",
       "status_code": 200,
       "step": "send_message",
       "url": "http://127.0.0.1:5000/"
@@ -26,5 +26,5 @@
       "url": "http://127.0.0.1:5000/messages/api"
     }
   ],
-  "verified_at": "2026-09-19T13:56:51.725637+00:00"
+  "verified_at": "2026-09-19T14:04:23.076955+00:00"
 }

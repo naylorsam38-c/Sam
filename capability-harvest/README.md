@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 23 capabilities harvested from 19 real applications, each one
+**Status**: 28 capabilities harvested from 19 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 23 capabilities harvested so far
+## The 28 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -70,6 +70,11 @@ No script assumes a working directory.
 | CAP-0021 | set permissions | [RishiS-HSCProjects/EnterpriseProject](https://github.com/RishiS-HSCProjects/EnterpriseProject) | MIT | `app/admin/routes.py:106` `update_role` (real admin-gated, persisted role change, `UserRole.from_string`, `commit`) | HTTP |
 | CAP-0022 | verify email | [Dixieboy76/tech_hub](https://github.com/Dixieboy76/tech_hub) | MIT | `app/routes.py:65` `verify_email` (real itsdangerous signed-token verification, `verify_email_token`, `commit`) | HTTP |
 | CAP-0023 | edit profile | [rafaelsmedina/dataviva-training](https://github.com/rafaelsmedina/dataviva-training) | MIT | `app/routes.py:103` `edit_profile` (real persisted username/about_me update, `validate_on_submit`, `commit`) | HTTP |
+| CAP-0024 | create record | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) (same app, different attach point) | MIT | `server.py:492` `create_invoice` (real transactional multi-table insert, `executemany`, `commit`) | HTTP |
+| CAP-0025 | edit record | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) (same app, different attach point) | MIT | `server.py:573` `update_invoice` (real transactional replace of invoice + line items, `executemany`, `commit`) | HTTP |
+| CAP-0026 | delete record | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) (same app, different attach point) | MIT | `server.py:60` `delete_invoice` (real `DELETE`, rowcount-checked 404, `execute`, `commit`) | HTTP |
+| CAP-0027 | view record detail | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) (same app, different attach point) | MIT | `server.py:539` `get_invoice_details` (real multi-table `JOIN` aggregation, `execute`, `fetchall`) | HTTP |
+| CAP-0028 | filter list | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) (same app, different attach point) | MIT | `server.py:75` `get_invoices` (real dynamic `LIKE`-filtered query, `execute`, `fetchall`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -244,7 +249,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 23 capabilities across 19 apps (see the
+AST-based, line-accurate for all 28 capabilities across 19 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -399,6 +404,21 @@ Highlights beyond the basic "call it and check 200":
   rejected, registers a genuinely new account, edits its real about_me
   text, and confirms the exact submitted text appears on a fresh real
   GET of that user's own public profile page afterward.
+- CAP-0024/0025/0026/0027/0028: five more genuinely distinct real attach
+  points harvested from the already-vetted Invoice-generator (same
+  multi-capability-per-app pattern as Bounty-Simulator and
+  Hospital_Management_Real) — a real required-field rejection plus a
+  real created-then-fetched round trip (create record); a real edit that
+  replaces both the invoice's own fields and its full line-item set
+  rather than appending to it, confirmed by item count after the edit
+  (edit record); a real delete confirmed by a genuine 404 on the next
+  fetch, plus a clean 404 (not a crash) deleting an id that never existed
+  (delete record); a real multi-table `JOIN` detail view confirmed by the
+  real joined customer and item *names* appearing, not just raw foreign
+  keys (view record detail); and a real dynamic search-filter proof using
+  two invoices for two different real customers, confirming a search by
+  one customer's name returns only their invoice and never the other's
+  (filter list).
 
 ## How to reproduce this from scratch
 
@@ -437,7 +457,8 @@ python3 detection/detect_capability.py
 for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
            CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013 CAP-0014 \
            CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019 CAP-0020 CAP-0021 \
-           CAP-0022 CAP-0023; do
+           CAP-0022 CAP-0023 CAP-0024 CAP-0025 CAP-0026 CAP-0027 \
+           CAP-0028; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -540,11 +561,31 @@ python3 build.py stop
 python3 build.py start --cap CAP-0023 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0023_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0024 --port 5057
+./.venv/bin/python3 test/prove_CAP-0024_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0025 --port 5057
+./.venv/bin/python3 test/prove_CAP-0025_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0026 --port 5057
+./.venv/bin/python3 test/prove_CAP-0026_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0027 --port 5057
+./.venv/bin/python3 test/prove_CAP-0027_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0028 --port 5057
+./.venv/bin/python3 test/prove_CAP-0028_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) nine times now, at nine different capability
+deleted first, venvs kept) ten times now, at ten different capability
 counts, to confirm it's genuinely reproducible, not an artifact of an
 ad-hoc fixing sequence.
 
@@ -565,7 +606,7 @@ ad-hoc fixing sequence.
   anything, across two Python versions and an app whose data path resolves
   outside its own repo entirely (`$HOME`-based, handled via an isolated,
   resettable `HOME` override rather than patching the app).
-- Seventeen independent, real, non-mocked live proofs, including negative/
+- Twenty-two independent, real, non-mocked live proofs, including negative/
   access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
@@ -595,10 +636,19 @@ ad-hoc fixing sequence.
   fully isolated Python environment after an old, mutually-incompatible
   dependency pair was mistakenly test-installed into the shared venv and
   broke an already-harvested capability -- caught and fixed by the same
-  full-reproducibility sweep this pipeline runs every batch.
+  full-reproducibility sweep this pipeline runs every batch. Five more of
+  the twenty-two: a real required-field rejection alongside a real
+  create-then-fetch round trip; a real edit proof that confirms the full
+  line-item set was replaced (by item count), not appended to; a real
+  delete proof with a genuine 404 both for the just-deleted row and for
+  an id that never existed; a real multi-table `JOIN` detail view
+  confirmed by real joined names, not raw foreign keys; and a real
+  search-filter proof using two different real customers' invoices to
+  confirm the filter genuinely narrows results rather than merely
+  appearing to.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 23.** ~58 names in the 81-name vocabulary (see
+- **Scale beyond 28.** ~53 names in the 81-name vocabulary (see
   `CAPABILITY_VOCABULARY.md` for the full recovered list and live status)
   have not been researched yet. Each one needs the same real vetting
   (license read from source, AST-confirmed evidence, live proof) — this is
