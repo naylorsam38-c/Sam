@@ -1,0 +1,58 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0014",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 302,
+      "step": "anonymous_portal_check",
+      "url": "http://127.0.0.1:5057/patient"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "patient_login",
+      "url": "http://127.0.0.1:5057/patient"
+    },
+    {
+      "appointment_date": "2027-03-15T10:00",
+      "doctor_id": 1,
+      "method": "GET",
+      "status_code": 200,
+      "step": "book_first_slot",
+      "url": "http://127.0.0.1:5057/patient"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "portal_after_first_booking",
+      "url": "http://127.0.0.1:5057/patient"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "attempt_duplicate_slot",
+      "url": "http://127.0.0.1:5057/patient"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "portal_after_duplicate_attempt",
+      "url": "http://127.0.0.1:5057/patient"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "book_second_distinct_slot",
+      "url": "http://127.0.0.1:5057/patient"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "portal_after_second_booking",
+      "url": "http://127.0.0.1:5057/patient"
+    }
+  ],
+  "verified_at": "2026-09-19T13:00:14.418039+00:00"
+}

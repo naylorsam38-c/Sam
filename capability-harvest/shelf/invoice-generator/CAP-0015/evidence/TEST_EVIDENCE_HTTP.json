@@ -1,0 +1,39 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0015",
+  "default_pdf_bytes": 17167,
+  "invoice_no": "FY26-27/0298",
+  "line_item_count": 1,
+  "modern_theme_pdf_bytes": 13794,
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_seeded_invoices",
+      "url": "http://127.0.0.1:5057/api/invoices"
+    },
+    {
+      "invoice_id": 988,
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_invoice_details",
+      "url": "http://127.0.0.1:5057/api/invoices/988"
+    },
+    {
+      "invoice_id": 988,
+      "invoice_no": "FY26-27/0298",
+      "method": "GET",
+      "status_code": 200,
+      "step": "generate_invoice_pdf",
+      "url": "http://127.0.0.1:5057/api/invoices/988/pdf"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "generate_invoice_pdf_modern_theme",
+      "url": "http://127.0.0.1:5057/api/invoices/988/pdf?theme=modern"
+    }
+  ],
+  "verified_at": "2026-09-19T13:00:16.415188+00:00"
+}

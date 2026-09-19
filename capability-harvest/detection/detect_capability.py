@@ -158,6 +158,24 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "calculate_payroll_details",
         "evidence_call_names": {"max", "min"},
     },
+    {
+        "cap_id": "CAP-0014",
+        "name": "book slot",
+        "category": "healthcare-scheduling",
+        "app_slug": "hospital-management-real",
+        "source_file_relative": "app.py",
+        "symbol_hint": "patient_book",
+        "evidence_call_names": {"filter_by", "add", "commit"},
+    },
+    {
+        "cap_id": "CAP-0015",
+        "name": "generate invoice",
+        "category": "billing",
+        "app_slug": "invoice-generator",
+        "source_file_relative": "server.py",
+        "symbol_hint": "generate_invoice_pdf",
+        "evidence_call_names": {"render_template", "write_pdf"},
+    },
 ]
 # ----------------------------------------------------------------------------
 

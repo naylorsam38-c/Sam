@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 13 capabilities harvested from 12 real applications, each one
+**Status**: 15 capabilities harvested from 14 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 13 capabilities harvested so far
+## The 15 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -60,6 +60,8 @@ No script assumes a working directory.
 | CAP-0011 | log workout | [wifizak/CasettaFit](https://github.com/wifizak/CasettaFit) | MIT | `app/routes/workout.py:211` `log_set` (`add`, `commit`) | HTTP |
 | CAP-0012 | rate item | [RyLaney/zinny-api](https://github.com/RyLaney/zinny-api) | BSD-3-Clause | `src/zinny_api/api/ratings.py:96` `save_rating` (real SQL `ON CONFLICT ... DO UPDATE` upsert, `execute`, `commit`) | HTTP |
 | CAP-0013 | calculate tax | [rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics](https://github.com/rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics) | Apache-2.0 | `salary_engine.py:3` `calculate_payroll_details` (real progressive bracket computation, `max`, `min`) | HTTP |
+| CAP-0014 | book slot | [Raviraj0001/Hospital_Management_Real](https://github.com/Raviraj0001/Hospital_Management_Real) | MIT | `app.py:864` `patient_book` (real per-doctor/per-slot conflict check, `filter_by`, `add`, `commit`) | HTTP |
+| CAP-0015 | generate invoice | [rishabh0510rishabh/Invoice-generator](https://github.com/rishabh0510rishabh/Invoice-generator) | MIT | `server.py:265` `generate_invoice_pdf` (real WeasyPrint PDF from real persisted line items/tax, `render_template`, `write_pdf`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -168,6 +170,28 @@ code):
   out of the session store directly — the same "don't shortcut what the
   app itself requires" principle applied to an access-control mechanism
   instead of a data assertion.
+- Hospital_Management_Real hits the same Flask-SQLAlchemy instance-path
+  gotcha as habit-tracker (`sqlite:///hospital.db` resolves under
+  `instance/`, not the repo root) — but compounds it by having
+  accidentally *committed* a working `instance/hospital.db` straight into
+  the repository (no `.gitignore` entry for it), pre-populated with a
+  handful of real sample appointments. Every build resets it via
+  `reset_globs` before seeding runs, exactly as it would for any other
+  stale local file; leaving it in place would have silently mixed a prior
+  developer's real sample data into what should be a fresh proof run.
+- Invoice-generator's `server.py` constructs `Flask(__name__,
+  template_folder='.')`, but the PDF templates it renders
+  (`invoice_pdf*.html`) live under `templates/` — a real bug in the
+  repository as cloned (confirmed by first reproducing a genuine
+  `jinja2.exceptions.TemplateNotFound` before working around it, not
+  assumed). Patching the app's own Flask construction or `server.py`
+  itself would mean harvesting a version of the capability that doesn't
+  actually exist in the repo. Instead, a `setup_scripts` step copies the
+  app's own unmodified template files into the location its own,
+  unmodified Flask config already expects — a file-placement/deployment
+  decision, the same category of thing as hostelfix's `init_db.py`/
+  `dummy_data.py` setup scripts, not a change to what `generate_invoice_pdf`
+  itself computes or renders.
 
 ## What each pipeline stage actually proved
 
@@ -178,7 +202,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 13 capabilities across 12 apps (see the
+AST-based, line-accurate for all 15 capabilities across 14 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -273,6 +297,21 @@ Highlights beyond the basic "call it and check 200":
   tax figures are genuinely progressive — the higher-salary employee's
   tax-to-salary ratio differs from the lower-salary employee's, ruling out
   a flat-percentage stub.
+- CAP-0014: confirms anonymous access to the patient portal is rejected,
+  logs in as the real seeded demo patient, books a real appointment slot,
+  then attempts to book the exact same doctor/slot a second time and
+  confirms the app's own real conflict check rejects it (row count stays
+  at 1), then books a genuinely different slot for the same doctor and
+  confirms both persist independently — proving the rejection was about
+  the specific slot, not the doctor.
+- CAP-0015: fetches one of the app's own real seeded invoices (real
+  customers/items/GST tax, generated by the app's own `seed_database.py`,
+  not invented here), requests its real PDF, and confirms a genuine
+  `%PDF-` document whose `Content-Disposition` filename reflects that
+  invoice's own real invoice number — then requests a second, different
+  theme and confirms a distinct (not byte-identical) real PDF, proving the
+  theme parameter genuinely selects a different template rather than
+  being a no-op.
 
 ## How to reproduce this from scratch
 
@@ -281,7 +320,8 @@ cd capability-harvest
 python3 -m venv .venv
 ./.venv/bin/pip install flask flask-login flask-sqlalchemy flask-bcrypt \
     flask-mail flask-migrate flask-cors flask-wtf python-dotenv requests \
-    reportlab geopy pillow cs50 pandas openpyxl zinny-surveys
+    reportlab geopy pillow cs50 pandas openpyxl zinny-surveys \
+    numpy joblib weasyprint num2words python-dateutil
 
 # recipe-app needs Python 3.12+ (see "Real applications aren't all shaped
 # the same way" below) -- a separate venv, not the one above.
@@ -291,7 +331,8 @@ python3.12 -m venv .venv-py312
 python3 discovery/discover_applications.py
 python3 detection/detect_capability.py
 for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
-           CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013; do
+           CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013 CAP-0014 \
+           CAP-0015; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -354,11 +395,19 @@ python3 build.py stop
 python3 build.py start --cap CAP-0013 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0013_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0014 --port 5057
+./.venv/bin/python3 test/prove_CAP-0014_http.py
+python3 build.py stop
+
+python3 build.py start --cap CAP-0015 --port 5057
+./.venv/bin/python3 test/prove_CAP-0015_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) four times now, at four different capability
+deleted first, venvs kept) five times now, at five different capability
 counts, to confirm it's genuinely reproducible, not an artifact of an
 ad-hoc fixing sequence.
 
@@ -366,7 +415,7 @@ ad-hoc fixing sequence.
 
 **Proved, for real:**
 - Real application discovery with real licence verification from the
-  source file, across 12 different repositories and three distinct real
+  source file, across 14 different repositories and three distinct real
   licences (MIT, BSD-3-Clause, Apache-2.0).
 - Real AST-based attach-point detection that rejects name-only matches,
   across both route-handler and helper-function capability shapes,
@@ -379,35 +428,31 @@ ad-hoc fixing sequence.
   anything, across two Python versions and an app whose data path resolves
   outside its own repo entirely (`$HOME`-based, handled via an isolated,
   resettable `HOME` override rather than patching the app).
-- Eight independent, real, non-mocked live proofs, including negative/
+- Ten independent, real, non-mocked live proofs, including negative/
   access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
   surface, which doesn't support backdating), a real upsert-vs-append
-  distinction confirmed by row `id` stability, and a real progressive
+  distinction confirmed by row `id` stability, a real progressive
   tax-bracket proof that solves the app's own arithmetic CAPTCHA rather
-  than bypassing it.
+  than bypassing it, a real per-doctor/per-slot double-booking rejection,
+  and a real multi-theme PDF-invoice proof that required first
+  reproducing, then correctly working around (via file placement, not a
+  source-code patch), a genuine bug in the harvested repository itself.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 13.** ~68 names in the 81-name vocabulary have not been
+- **Scale beyond 15.** ~66 names in the 81-name vocabulary have not been
   researched yet. Each one needs the same real vetting (license read from
   source, AST-confirmed evidence, live proof) — this is not a
   copy-paste-N-times exercise, and a name with no genuine real-app
   candidate gets recorded as blocked/empty with a reason, never forced.
-  Two further capabilities were researched and license-verified but not
-  yet harvested (queued for the next batch): **book slot**
-  (Raviraj0001/Hospital_Management_Real, MIT — real per-doctor
-  availability/conflict check before booking), and **generate invoice**
-  (rishabh0510rishabh/Invoice-generator, MIT — real WeasyPrint PDF
-  aggregating real line items and tax, needs system `cairo`/`pango`
-  libraries evaluated before harvesting). **Escalate ticket** was
-  researched but every small, single-file, HTTP-route candidate found
-  failed either the licence check or the "must genuinely update a
-  persisted field" check; the one fully-verified real implementation found
-  (django-helpdesk's `escalate_tickets` management command, BSD-3-Clause)
-  is a mature production project but is invoked by cron, not an HTTP
-  route, and needs a heavier Django setup than this pipeline's other apps
-  — deferred, not forced in.
+  **Escalate ticket** was researched but every small, single-file,
+  HTTP-route candidate found failed either the licence check or the "must
+  genuinely update a persisted field" check; the one fully-verified real
+  implementation found (django-helpdesk's `escalate_tickets` management
+  command, BSD-3-Clause) is a mature production project but is invoked by
+  cron, not an HTTP route, and needs a heavier Django setup than this
+  pipeline's other apps — deferred, not forced in.
 - **Cross-application composition.** `build.py` verifies and mounts each
   harvested route within its *own* source application. Grafting a
   harvested capability onto a *different*, unrelated host application

@@ -1,0 +1,58 @@
+{
+  "application": {
+    "category": "healthcare-scheduling",
+    "commit": "2ef9184f817eb880f55685ee2535d49a322e2ca8",
+    "repo_url": "https://github.com/Raviraj0001/Hospital_Management_Real.git",
+    "slug": "hospital-management-real"
+  },
+  "cap_id": "CAP-0014",
+  "capability_name": "book slot",
+  "category": "healthcare-scheduling",
+  "checksums": {
+    "harvested_source_sha256": "befc059ab0ed9fbb225576c2296d16b59e0be498754a93113b4da8c845cc994d",
+    "whole_source_file_sha256_at_harvest": "91404633f3ea199ebba499ad006aed22d6784584e3d117598decba2eb2a86397"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "Appointment",
+      "Doctor",
+      "Patient",
+      "ZoneInfo",
+      "app",
+      "datetime",
+      "db",
+      "flash",
+      "patient_required",
+      "redirect",
+      "request",
+      "send_confirmation_email",
+      "session",
+      "url_for"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T12:59:36.028505+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@app.route('/patient/book', methods=['POST'])",
+      "@patient_required"
+    ],
+    "end_lineno": 878,
+    "evidence_calls_matched": [
+      "add",
+      "commit",
+      "filter_by"
+    ],
+    "file": "app.py",
+    "lineno": 864,
+    "route_path": null,
+    "symbol": "patient_book"
+  }
+}

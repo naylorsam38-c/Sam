@@ -376,6 +376,75 @@ APPLICATION_MANIFEST = [
             "readiness_path": "/api/auth/companies",
         },
     },
+    {
+        "slug": "hospital-management-real",
+        "clone_url": "https://github.com/Raviraj0001/Hospital_Management_Real.git",
+        "ref": None,
+        "category": "healthcare-scheduling",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy hospital-management app, MIT "
+            "licensed. patient_book() does a genuine per-doctor "
+            "availability/conflict check -- rejects a real double-booking "
+            "of the same doctor/timeslot with a real query "
+            "(Appointment.query.filter_by(doctor_id=..., appointment_date=..., "
+            "status='Scheduled')) before persisting, not just a form-side "
+            "check. Auto-seeds a real demo patient account and demo doctors "
+            "at import time."
+        ),
+        "runner": {
+            "kind": "flask_module_attr",
+            "app_module": "app",
+            "app_attr": "app",
+            # Flask-SQLAlchemy resolves the relative sqlite:///hospital.db
+            # URI against the app's instance path, not the repo root -- the
+            # same gotcha already documented for habit-tracker. The repo
+            # also (accidentally) commits a working instance/hospital.db
+            # with sample rows, so this MUST be reset every run.
+            "reset_globs": ["instance/hospital.db", "hospital.db"],
+            "readiness_path": "/login",
+        },
+    },
+    {
+        "slug": "invoice-generator",
+        "clone_url": "https://github.com/rishabh0510rishabh/Invoice-generator.git",
+        "ref": None,
+        "category": "billing",
+        "why_selected": (
+            "Real Flask + raw sqlite3 invoice/billing app, MIT licensed. "
+            "generate_invoice_pdf() genuinely aggregates real persisted "
+            "line items and per-rate GST tax totals (Invoice_Items joined "
+            "against Items, summed by tax rate) and renders a real "
+            "WeasyPrint PDF -- confirmed by a real %PDF- signature, not a "
+            "stub. System cairo/pango libraries (WeasyPrint's real "
+            "dependency) were confirmed present in this environment before "
+            "harvesting, per the earlier deferral note."
+        ),
+        "runner": {
+            "kind": "flask_module_attr",
+            "app_module": "server",
+            "app_attr": "app",
+            "reset_globs": ["invoice_app.db"],
+            "setup_scripts": [
+                # The app's own real seed script: applies its own schema.sql,
+                # clears old data, and procedurally generates real
+                # customers/items/invoices with real per-item GST tax split
+                # (cgst/sgst) -- not data we invented.
+                "seed_database.py",
+                # A real, confirmed bug in this repo as cloned: server.py
+                # constructs Flask with template_folder='.' (the repo
+                # root), but the PDF templates (invoice_pdf*.html) live
+                # under templates/ -- confirmed by reproducing a genuine
+                # TemplateNotFound before this step existed. This copies
+                # the app's OWN unmodified template files into the
+                # location its OWN Flask config already expects -- a file
+                # placement/deployment step, the same class of thing as
+                # hostelfix's init_db.py/dummy_data.py setup scripts, not a
+                # change to the harvested capability's logic.
+                "-c import shutil, glob; [shutil.copy(f, '.') for f in glob.glob('templates/invoice_pdf*.html')]",
+            ],
+            "readiness_path": "/api/invoices",
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

@@ -246,6 +246,46 @@
       "route_path": null,
       "source_file_relative": "salary_engine.py",
       "symbol": "calculate_payroll_details"
+    },
+    {
+      "app_slug": "hospital-management-real",
+      "cap_id": "CAP-0014",
+      "category": "healthcare-scheduling",
+      "decorators": [
+        "@app.route('/patient/book', methods=['POST'])",
+        "@patient_required"
+      ],
+      "end_lineno": 878,
+      "evidence_calls_matched": [
+        "add",
+        "commit",
+        "filter_by"
+      ],
+      "found": true,
+      "lineno": 864,
+      "name": "book slot",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "patient_book"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0015",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices/<int:invoice_id>/pdf')"
+      ],
+      "end_lineno": 284,
+      "evidence_calls_matched": [
+        "render_template",
+        "write_pdf"
+      ],
+      "found": true,
+      "lineno": 265,
+      "name": "generate invoice",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "generate_invoice_pdf"
     }
   ]
 }
