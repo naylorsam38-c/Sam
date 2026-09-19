@@ -3209,7 +3209,7 @@
    "version": null,
    "commit": "59c988c744a240b05b039f57b856a5312f19d5b1",
    "source_path": "applications/APP-022/source",
-   "status": "SCREEN-VERIFIED",
+   "status": "FUNCTIONALLY_VERIFIED",
    "declared_itself": false,
    "manual_override_reason": "the earlier 'browser' category override (Neko) exists precisely because code-server is a developer tool, not a browser - it belongs here instead; verified MIT LICENSE file",
    "discovery_candidates": [
@@ -3257,6 +3257,11 @@
     "screens_reached": 12,
     "screens_rendered": 9,
     "screens_browser_verified": 9
+   },
+   "capability_summary": {
+    "discovered": 3,
+    "attach_point_found": 2,
+    "proven": 1
    }
   },
   {
@@ -3351,7 +3356,7 @@
    "version": null,
    "commit": "6e2430e5a27a809c5ca9a3e81f351339387ea11e",
    "source_path": "applications/APP-024/source",
-   "status": "SCREEN-VERIFIED",
+   "status": "FUNCTIONALLY_VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5266,7 +5271,7 @@
    "version": null,
    "commit": "5998570a3564afa82e540b660dae4b3b2178f58c",
    "source_path": "applications/APP-038/source",
-   "status": "SCREEN-VERIFIED",
+   "status": "FUNCTIONALLY_VERIFIED",
    "declared_itself": false,
    "manual_override_reason": "automated pick (Pi-hole) is primarily a DNS/ad-blocker; this is the category-defining self-hosted monitoring tool",
    "discovery_candidates": [
@@ -5404,7 +5409,7 @@
    "version": null,
    "commit": "568c10594517b999dbb2240d9f7a6014b1c4bb2a",
    "source_path": "applications/APP-039/source",
-   "status": "SCREEN-VERIFIED",
+   "status": "FUNCTIONALLY_VERIFIED",
    "declared_itself": true,
    "manual_override_reason": "per Sam's instruction that popularity/sandbox limits are never a valid exclusion reason, re-searched GitHub directly instead of leaving this DISCOVERY_FAILED - a real, actively-maintained self-hosted networking/VPN-coordination tool with its own verified BSD-3-Clause LICENSE file",
    "discovery_candidates": [
@@ -5447,6 +5452,11 @@
     "screens_reached": 15,
     "screens_rendered": 15,
     "screens_browser_verified": 15
+   },
+   "capability_summary": {
+    "discovered": 10,
+    "attach_point_found": 9,
+    "proven": 2
    }
   },
   {
@@ -5768,7 +5778,7 @@
    "version": null,
    "commit": "bd2179cf211874925e2313664e22dae2501fe30a",
    "source_path": "applications/APP-042/source",
-   "status": "SCREEN-VERIFIED",
+   "status": "FUNCTIONALLY_VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
