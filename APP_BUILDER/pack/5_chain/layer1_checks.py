@@ -26,16 +26,16 @@ Usage:  layer1_checks.py                run the suite
 # CONFIGURATION BLOCK -- one comment per setting, above all logic.
 # =====================================================================
 
-CHECK_SUITE = "../4_host/host_test_data_dashboard.py"
+CHECK_SUITE = ""
 # The suite that actually drives the system. If altered: that script is run
 # instead. It must write a run record (see run_record.py) or this cannot
 # report anything and exits 2.
-# 2026-09-18: pointed at the data-dashboard (Redash) suite for this app's
-# chain run -- was host_test_challenge_platform.py (CTFd) before that, and
-# "./host_test.py" (event-ticketing/Indico) originally. Per
-# HARVEST_TWO_MORE_APPS.md step 5: "pass the app through as that script's
-# config expects" -- chain.py has no app-slug parameter of its own, so this
-# config block is what actually selects which app the chain drives.
+# 2026-09-19: blanked out. Was host_test_data_dashboard.py (Redash), before
+# that host_test_challenge_platform.py (CTFd), before that "./host_test.py"
+# (event-ticketing/Indico) -- all three retired under the Django/PostgreSQL
+# Rule A rewrite; their app-specific suites moved to pack/retired/<slug>/
+# host_test.py along with everything else. Point this at a new app's own
+# host_test suite once one is promoted (Section 25).
 
 SUITE_ENV = {
     "REDASH_DATABASE_URL": "postgresql://redash_app:redash_app_pw@localhost/redash",

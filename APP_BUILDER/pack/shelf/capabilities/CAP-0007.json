@@ -2,7 +2,7 @@
   "id": "CAP-0007",
   "name": "book slot",
   "category": "Event Ticketing",
-  "status": "active",
+  "status": "retired",
   "data_shape": {
     "input": {
       "required": [
@@ -52,7 +52,7 @@
     "CAP-0007/IMPL-01"
   ],
   "qualification": {
-    "status": "approved",
+    "status": "retired",
     "approved_by": "Sam",
     "approval_ref": "APPROVAL-CAP-HARVEST"
   }

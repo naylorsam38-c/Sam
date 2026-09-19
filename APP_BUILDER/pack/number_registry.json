@@ -2,15 +2,24 @@
   "apps": {
     "event-ticketing": {
       "number": 1,
-      "category": "Event Ticketing"
+      "category": "Event Ticketing",
+      "status": "retired",
+      "retired_reason": "Rule A now requires Django, not Flask. See pack/retired/event-ticketing/RETIRED.md.",
+      "retired_date": "2026-09-19"
     },
     "challenge-platform": {
       "number": 2,
-      "category": "Challenge Platform"
+      "category": "Challenge Platform",
+      "status": "retired",
+      "retired_reason": "Rule A now requires Django, not Flask. See pack/retired/challenge-platform/RETIRED.md.",
+      "retired_date": "2026-09-19"
     },
     "data-dashboard": {
       "number": 3,
-      "category": "Data Dashboard"
+      "category": "Data Dashboard",
+      "status": "retired",
+      "retired_reason": "Rule A now requires Django, not Flask. See pack/retired/data-dashboard/RETIRED.md.",
+      "retired_date": "2026-09-19"
     }
   },
   "capabilities": {

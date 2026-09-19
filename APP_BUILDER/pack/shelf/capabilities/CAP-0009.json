@@ -2,7 +2,7 @@
   "id": "CAP-0009",
   "name": "send email notification",
   "category": "Event Ticketing",
-  "status": "active",
+  "status": "retired",
   "data_shape": {
     "input": {
       "required": [
@@ -51,7 +51,7 @@
     "CAP-0009/IMPL-01"
   ],
   "qualification": {
-    "status": "approved",
+    "status": "retired",
     "approved_by": "Sam",
     "approval_ref": "APPROVAL-CAP-HARVEST"
   }

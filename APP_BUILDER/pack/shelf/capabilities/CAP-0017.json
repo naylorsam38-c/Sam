@@ -2,7 +2,7 @@
   "id": "CAP-0017",
   "name": "run query",
   "category": "Data Dashboard",
-  "status": "active",
+  "status": "retired",
   "data_shape": {
     "input": {
       "required": [
@@ -68,7 +68,7 @@
     "CAP-0017/IMPL-01"
   ],
   "qualification": {
-    "status": "approved",
+    "status": "retired",
     "approved_by": "Sam",
     "approval_ref": "APPROVAL-CAP-HARVEST"
   }

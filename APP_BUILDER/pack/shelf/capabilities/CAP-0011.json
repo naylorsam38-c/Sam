@@ -2,7 +2,7 @@
   "id": "CAP-0011",
   "name": "list challenges",
   "category": "Challenge Platform",
-  "status": "active",
+  "status": "retired",
   "data_shape": {
     "input": {
       "required": [],
@@ -45,7 +45,7 @@
     "CAP-0011/IMPL-01"
   ],
   "qualification": {
-    "status": "approved",
+    "status": "retired",
     "approved_by": "Sam",
     "approval_ref": "APPROVAL-CAP-HARVEST"
   }

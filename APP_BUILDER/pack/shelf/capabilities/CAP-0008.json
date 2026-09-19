@@ -2,7 +2,7 @@
   "id": "CAP-0008",
   "name": "scan barcode",
   "category": "Event Ticketing",
-  "status": "active",
+  "status": "retired",
   "data_shape": {
     "input": {
       "required": [],
@@ -67,7 +67,7 @@
     "CAP-0008/IMPL-01"
   ],
   "qualification": {
-    "status": "approved",
+    "status": "retired",
     "approved_by": "Sam",
     "approval_ref": "APPROVAL-CAP-HARVEST"
   }

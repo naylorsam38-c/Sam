@@ -2,7 +2,7 @@
   "id": "CAP-0003",
   "name": "log out",
   "category": "Challenge Platform",
-  "status": "active",
+  "status": "retired",
   "data_shape": {
     "input": {
       "required": [],
@@ -31,7 +31,7 @@
     "CAP-0003/IMPL-01"
   ],
   "qualification": {
-    "status": "approved",
+    "status": "retired",
     "approved_by": "Sam",
     "approval_ref": "APPROVAL-CAP-HARVEST"
   }

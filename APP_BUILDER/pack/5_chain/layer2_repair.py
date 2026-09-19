@@ -63,13 +63,14 @@ REQUIRE_EXACTLY_ONE_MATCH = True
 # False = the first match wins. Do not turn this off to get past a clash --
 #         fix the map.
 
-APP_SLUG = "data-dashboard"
+APP_SLUG = ""
 # Which app on the shelf is being repaired. A part belongs to a capability, and
 # the running app loads that capability from
 # shelf/<APP_SLUG>/<CAP-id>/source.py -- so this is what decides where a repair
 # actually lands. If altered: repairs are applied to that app instead.
-# 2026-09-18: set for this app's chain run, was "challenge-platform" then
-# "event-ticketing" before that.
+# 2026-09-19: blanked out. Was "data-dashboard", then "challenge-platform",
+# then "event-ticketing" before that -- all three retired under the
+# Django/PostgreSQL Rule A rewrite. See pack/retired/.
 
 BACKUP_BEFORE_APPLY = True
 # True  = whatever a repair overwrites is copied into the run directory first,

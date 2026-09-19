@@ -2,7 +2,7 @@
   "id": "CAP-0015",
   "name": "join team",
   "category": "Challenge Platform",
-  "status": "active",
+  "status": "retired",
   "data_shape": {
     "input": {
       "required": [
@@ -48,7 +48,7 @@
     "CAP-0015/IMPL-01"
   ],
   "qualification": {
-    "status": "approved",
+    "status": "retired",
     "approved_by": "Sam",
     "approval_ref": "APPROVAL-CAP-HARVEST"
   }

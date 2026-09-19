@@ -2,7 +2,7 @@
   "id": "CAP-0014",
   "name": "create team",
   "category": "Challenge Platform",
-  "status": "active",
+  "status": "retired",
   "data_shape": {
     "input": {
       "required": [
@@ -48,7 +48,7 @@
     "CAP-0014/IMPL-01"
   ],
   "qualification": {
-    "status": "approved",
+    "status": "retired",
     "approved_by": "Sam",
     "approval_ref": "APPROVAL-CAP-HARVEST"
   }

@@ -2,7 +2,7 @@
   "id": "CAP-0001",
   "name": "register account",
   "category": "Challenge Platform",
-  "status": "active",
+  "status": "retired",
   "data_shape": {
     "input": {
       "required": [
@@ -50,7 +50,7 @@
     "CAP-0001/IMPL-01"
   ],
   "qualification": {
-    "status": "approved",
+    "status": "retired",
     "approved_by": "Sam",
     "approval_ref": "APPROVAL-CAP-HARVEST"
   }

@@ -89,13 +89,14 @@ CANDIDATE_JUDGE = "./layer1_checks.py"
 # the judge is a script driving the real system. If altered: that script
 # decides instead. It must exit 0 only on a real pass.
 
-APP_SLUG = "data-dashboard"
+APP_SLUG = ""
 # Which app on the shelf the built part belongs to. The running app loads a
 # capability from shelf/<APP_SLUG>/<CAP-id>/source.py, and that is where a
 # candidate must be placed to be judged at all. If altered: candidates are
 # applied to that app instead.
-# 2026-09-18: set for this app's chain run, was "challenge-platform" then
-# "event-ticketing" before that.
+# 2026-09-19: blanked out. Was "data-dashboard", then "challenge-platform",
+# then "event-ticketing" before that -- all three retired under the
+# Django/PostgreSQL Rule A rewrite. See pack/retired/.
 
 PART_FILENAME = "source.py"
 # The filename a candidate is written as when it is applied. If altered: the

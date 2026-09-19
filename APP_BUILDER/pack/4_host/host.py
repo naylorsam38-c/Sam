@@ -28,9 +28,14 @@ decides what exists.
 # RULES / CONFIG  -- edit these, nothing below this block
 # =====================================================================
 
-APP_SLUG = "event-ticketing"
+APP_SLUG = ""
 # Which app on the shelf this host serves. One host, one app. Change this to
 # stand up a different app from the same shelf.
+# 2026-09-19: blanked out. Was "event-ticketing" (Indico); retired under the
+# Django/PostgreSQL Rule A rewrite along with data-dashboard (Redash) and
+# challenge-platform (CTFd) -- see pack/retired/. Nothing is admitted right
+# now. Set this to the app_slug of whichever candidate is first PROMOTED
+# under the new rule (Section 25).
 
 SHELF_DIR = "shelf"
 # Where the harvested capabilities live. Must be the same shelf
