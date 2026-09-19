@@ -5557,7 +5557,7 @@
    "version": null,
    "commit": "7e3d3c63156c206209fdc8e75a4fb117b1aaf1fb",
    "source_path": "applications/APP-041/source",
-   "status": "INSTALL_FAILED",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -5789,8 +5789,14 @@
     }
    ],
    "install_startup": {
-    "status": "INSTALL_FAILED",
-    "reason": "no Dockerfile or compose file - no documented way to run it"
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://localhost:5230/",
+    "http_status": 200,
+    "recipe": "docker-compose.library.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "No Dockerfile/compose was found at the repo root by the finder - one exists at scripts/Dockerfile, but it builds an Alpine image via apk (dl-cdn.alpinelinux.org, blocked) and also expects the frontend to already be built separately first. Used the project's own official Docker Hub image instead (neosmemo/memos:stable - go.mod confirms the module is github.com/usememos/memos, same project, just published to Docker Hub under a different org name). SQLite-backed by default, no external database needed.",
+    "startup_command": "docker compose -f docker-compose.library.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -5800,6 +5806,12 @@
     },
     "has_container_recipe": false,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 15,
+    "screens_reached": 15,
+    "screens_rendered": 15,
+    "screens_browser_verified": 15
    }
   },
   {
