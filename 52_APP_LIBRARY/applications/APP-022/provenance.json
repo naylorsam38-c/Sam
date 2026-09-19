@@ -1,0 +1,15 @@
+{
+ "application": "APP-022",
+ "category": "developer-tools",
+ "repository_url": "https://github.com/coder/code-server",
+ "commit_sha": "59c988c744a240b05b039f57b856a5312f19d5b1",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T15:04:43.012434+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "64badda8ec613620336e1a0de260ef8774306f9d16adb813223819a47438205e",
+ "discovery_source": "manual_override",
+ "stargazers_count": null
+}

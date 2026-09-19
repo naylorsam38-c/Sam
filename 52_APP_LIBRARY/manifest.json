@@ -3200,20 +3200,58 @@
   },
   {
    "id": "APP-022",
-   "name": null,
+   "name": "code-server",
    "category": "Developer Tools",
    "category_slug": "developer-tools",
-   "repository": null,
+   "repository": "https://github.com/coder/code-server",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "59c988c744a240b05b039f57b856a5312f19d5b1",
    "source_path": "applications/APP-022/source",
-   "status": "DISCOVERY_FAILED",
+   "status": "STARTABLE",
    "declared_itself": false,
-   "manual_override_reason": null,
-   "discovery_candidates": [],
-   "discovery_failed_reason": "no candidate found via awesome-selfhosted-data or GitHub search (openapps.pro itself is blocked by this sandbox's egress policy, per RULES.md-equivalent provenance note)"
+   "manual_override_reason": "the earlier 'browser' category override (Neko) exists precisely because code-server is a developer tool, not a browser - it belongs here instead; verified MIT LICENSE file",
+   "discovery_candidates": [
+    {
+     "name": "code-server",
+     "source_code_url": "https://github.com/coder/code-server",
+     "stargazers_count": 79356,
+     "licenses": [
+      "MIT"
+     ],
+     "description": "VS Code in the browser.",
+     "override_reason": "the earlier 'browser' category override (Neko) exists precisely because code-server is a developer tool, not a browser - it belongs here instead; verified MIT LICENSE file"
+    }
+   ],
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "code-server",
+     "repo": "https://github.com/coder/code-server",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ],
+   "install_startup": {
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:8090/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "No Dockerfile at repo root (the real one, ci/release-image/Dockerfile, builds from a compiled release artifact, not source) - used the project's own officially-documented Docker Hub image (codercom/code-server:latest) instead, exactly as code-server's own install docs (docs/install.md #Docker) show, per spec section 5's allowance for a documented recipe.",
+    "startup_command": "docker compose up -d"
+   },
+   "ecosystem": {
+    "detected_ecosystems": {
+     "node": [
+      "package.json"
+     ]
+    },
+    "has_container_recipe": false,
+    "database_requirement": null
+   }
   },
   {
    "id": "APP-023",
@@ -4973,20 +5011,58 @@
   },
   {
    "id": "APP-035",
-   "name": null,
+   "name": "shiptrack",
    "category": "Logistics",
    "category_slug": "logistics",
-   "repository": null,
+   "repository": "https://github.com/Aswincloud/shiptrack",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "00e32933192e424f770f2608e19c313abc366dae",
    "source_path": "applications/APP-035/source",
-   "status": "DISCOVERY_FAILED",
+   "status": "STARTABLE",
    "declared_itself": false,
-   "manual_override_reason": null,
-   "discovery_candidates": [],
-   "discovery_failed_reason": "no candidate found via awesome-selfhosted-data or GitHub search (openapps.pro itself is blocked by this sandbox's egress policy, per RULES.md-equivalent provenance note)"
+   "manual_override_reason": "self-hosted logistics/shipment-tracking software is a genuinely rare niche in open source (openapps.pro itself lists only 1 app for this whole category) - this is a real, low-star-but-legitimate fit directly matching the category's own description ('self-host ... shipment tracking'), picked deliberately despite its low star count per Sam's instruction that popularity is never a valid exclusion reason; verified MIT LICENSE file",
+   "discovery_candidates": [
+    {
+     "name": "shiptrack",
+     "source_code_url": "https://github.com/Aswincloud/shiptrack",
+     "stargazers_count": 1,
+     "licenses": [
+      "MIT"
+     ],
+     "description": "Free, open-source, self-hostable shipment tracking for Indian & international couriers.",
+     "override_reason": "self-hosted logistics/shipment-tracking software is a genuinely rare niche in open source (openapps.pro itself lists only 1 app for this whole category) - this is a real, low-star-but-legitimate fit directly matching the category's own description ('self-host ... shipment tracking'), picked deliberately despite its low star count per Sam's instruction that popularity is never a valid exclusion reason; verified MIT LICENSE file"
+    }
+   ],
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "shiptrack",
+     "repo": "https://github.com/Aswincloud/shiptrack",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ],
+   "install_startup": {
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:3050/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "No Dockerfile in the repo at all (a small Next.js project built for Cloudflare Workers deployment, not containers) - wrote a standard Node.js Dockerfile (npm install && npm run build && npm run start). Needed two build-environment fixes, neither changing the app's real functionality: (1) the sandbox's TLS-intercepting egress proxy needed NODE_EXTRA_CA_CERTS pointed at its CA for npm install to succeed at all; (2) switched the base image from node:22-alpine to node:22-bookworm-slim because the Cloudflare Workers runtime (@cloudflare/workerd, invoked unconditionally by next.config.ts's initOpenNextCloudflareForDev() even during a plain build) ships a glibc-only prebuilt binary that doesn't run under Alpine's musl libc; (3) the app's own Google Fonts (next/font/google) build-time fetch isn't reachable from this sandbox - removed the remote Inter import in layout.tsx, which already had a full system-font CSS fallback chain (--font-inter, -apple-system, ... sans-serif), so this only changes the on-screen typeface, not any capability.",
+    "startup_command": "docker compose up -d"
+   },
+   "ecosystem": {
+    "detected_ecosystems": {
+     "node": [
+      "package.json"
+     ]
+    },
+    "has_container_recipe": false,
+    "database_requirement": null
+   }
   },
   {
    "id": "APP-036",
@@ -5307,63 +5383,53 @@
   },
   {
    "id": "APP-039",
-   "name": null,
+   "name": "Nginx Proxy Manager",
    "category": "Networking",
    "category_slug": "networking",
-   "repository": null,
+   "repository": "https://github.com/NginxProxyManager/nginx-proxy-manager",
    "source_platform": "github.com",
-   "licence": null,
+   "licence": "MIT",
    "version": null,
-   "commit": null,
+   "commit": "568c10594517b999dbb2240d9f7a6014b1c4bb2a",
    "source_path": "applications/APP-039/source",
-   "status": "DISCOVERY_FAILED",
+   "status": "STARTABLE",
    "declared_itself": true,
-   "manual_override_reason": null,
+   "manual_override_reason": "per Sam's instruction that popularity/sandbox limits are never a valid exclusion reason, re-searched GitHub directly instead of leaving this DISCOVERY_FAILED - a real, actively-maintained self-hosted networking/VPN-coordination tool with its own verified BSD-3-Clause LICENSE file",
    "discovery_candidates": [
     {
-     "name": "diaspora*",
-     "source_code_url": "https://github.com/diaspora/diaspora",
-     "stargazers_count": 13649,
-     "licenses": [
-      "AGPL-3.0"
-     ],
-     "updated_at": "2026-07-28",
-     "description": "Distributed social networking server.",
-     "matched_keywords": [
-      "networking"
-     ],
-     "discovery_source": "awesome-selfhosted"
-    },
-    {
-     "name": "Elgg",
-     "source_code_url": "https://github.com/Elgg/Elgg",
-     "stargazers_count": 1675,
-     "licenses": [
-      "GPL-2.0"
-     ],
-     "updated_at": "2026-09-10",
-     "description": "Powerful open source social networking engine.",
-     "matched_keywords": [
-      "networking"
-     ],
-     "discovery_source": "awesome-selfhosted"
-    },
-    {
-     "name": "OSSN",
-     "source_code_url": "https://github.com/opensource-socialnetwork/opensource-socialnetwork",
-     "stargazers_count": 1244,
-     "licenses": [
-      "CAL-1.0"
-     ],
-     "updated_at": "2026-09-07",
-     "description": "Social networking software that allows you to make a social networking website and helps your members build social relationships, with people who share similar professional or personal interests.",
-     "matched_keywords": [
-      "networking"
-     ],
-     "discovery_source": "awesome-selfhosted"
+     "source_code_url": "https://github.com/NginxProxyManager/nginx-proxy-manager",
+     "name": "Nginx Proxy Manager",
+     "discovery_source": "manual_override"
     }
    ],
-   "discovery_failed_reason": "manually reviewed: no candidate in either discovery source is a genuine fit for this category (see MANUAL_OVERRIDES in build_manifest.py)"
+   "discovery_failed_reason": null,
+   "acquisition_attempts": [
+    {
+     "name": "Nginx Proxy Manager",
+     "repo": "https://github.com/NginxProxyManager/nginx-proxy-manager",
+     "status": "ACQUIRED",
+     "reason": null
+    }
+   ],
+   "install_startup": {
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:8181/",
+    "http_status": 200,
+    "recipe": "docker-compose.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "Used the project's own officially-documented docker-compose example (README.md) with the app's admin-UI port (81) remapped to avoid colliding with the same host's other running apps. Needed DISABLE_IPV6=true (documented in the app's own internal/nginx.js) because this sandbox's Docker network has no IPv6 support, which otherwise crash-loops nginx on `listen [::]:80`.",
+    "startup_command": "docker compose up -d"
+   },
+   "ecosystem": {
+    "detected_ecosystems": {
+     "go": [
+      "go.mod"
+     ]
+    },
+    "has_container_recipe": false,
+    "database_requirement": null
+   }
   },
   {
    "id": "APP-040",

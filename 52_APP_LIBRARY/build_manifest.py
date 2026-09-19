@@ -60,9 +60,35 @@ MANUAL_OVERRIDES = {
                        "override_reason": "automated pick (Dawarich) is a location/travel tracker matched "
                                            "on the stray keyword 'timeline'; no real video editor was in "
                                            "either discovery source's candidate pool for this category"},
-    "networking": None,  # nothing found is a genuine fit ("networking" kept matching
-                         # federated *social* networking software, not network management
-                         # tooling); left DISCOVERY_FAILED rather than forced.
+    "networking": {"name": "Nginx Proxy Manager", "source_code_url": "https://github.com/NginxProxyManager/nginx-proxy-manager",
+                    "stargazers_count": 34175, "licenses": ["MIT"],
+                    "description": "Docker container for managing Nginx proxy hosts with a simple, "
+                                    "powerful interface.",
+                    "override_reason": "per Sam's instruction that popularity/sandbox limits are never a "
+                                        "valid exclusion reason, re-searched GitHub directly instead of "
+                                        "leaving this DISCOVERY_FAILED. First picked Headscale (a "
+                                        "self-hosted Tailscale control server), but it's a pure CLI/API "
+                                        "coordination daemon with no web UI of its own - nothing for "
+                                        "screens.py/capabilities.py to browser-test - so switched to this: "
+                                        "a real networking tool (reverse-proxy/traffic management) with a "
+                                        "genuine web dashboard and its own verified MIT LICENSE file"},
+    "developer-tools": {"name": "code-server", "source_code_url": "https://github.com/coder/code-server",
+                         "stargazers_count": 79356, "licenses": ["MIT"],
+                         "description": "VS Code in the browser.",
+                         "override_reason": "the earlier 'browser' category override (Neko) exists "
+                                             "precisely because code-server is a developer tool, not a "
+                                             "browser - it belongs here instead; verified MIT LICENSE file"},
+    "logistics": {"name": "shiptrack", "source_code_url": "https://github.com/Aswincloud/shiptrack",
+                  "stargazers_count": 1, "licenses": ["MIT"],
+                  "description": "Free, open-source, self-hostable shipment tracking for Indian & "
+                                  "international couriers.",
+                  "override_reason": "self-hosted logistics/shipment-tracking software is a genuinely "
+                                      "rare niche in open source (openapps.pro itself lists only 1 app "
+                                      "for this whole category) - this is a real, low-star-but-legitimate "
+                                      "fit directly matching the category's own description ('self-host "
+                                      "... shipment tracking'), picked deliberately despite its low star "
+                                      "count per Sam's instruction that popularity is never a valid "
+                                      "exclusion reason; verified MIT LICENSE file"},
 }
 
 

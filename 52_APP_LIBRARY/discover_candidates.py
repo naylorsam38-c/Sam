@@ -26,7 +26,12 @@ DIRECTORY_DIR = Path("/tmp/selfhosted_directory")
 CATEGORY_FILE = HERE / "categories_openapps52.json"
 OUT_FILE = HERE / "candidates.json"
 MIN_CANDIDATES_BEFORE_SUPPLEMENT = 3
-MIN_STARS = 100
+# Per Sam: use every category as a capability source regardless of
+# popularity, and only exclude an app for a real legal prohibition - a star
+# count, an "archived" flag, or a staleness cutoff are none of those, so
+# none of them gate discovery here any more. A candidate's star count still
+# sorts the pool (below) so the acquisition cascade tries the best-known
+# option first, but nothing is dropped from the pool for having too few.
 
 
 def load_directory():
@@ -69,15 +74,8 @@ def main():
         kws = c["keywords"]
         cands = []
         for e in entries:
-            if e.get("archived"):
-                continue
-            if (e.get("stargazers_count") or 0) < MIN_STARS:
-                continue
             hits = matches(e, kws)
             if not hits:
-                continue
-            m = months_since(e.get("updated_at"))
-            if m is not None and m > 18:
                 continue
             cands.append({
                 "name": e.get("name"), "source_code_url": e.get("source_code_url"),
@@ -85,6 +83,8 @@ def main():
                 "licenses": e.get("licenses") or [], "updated_at": e.get("updated_at"),
                 "description": e.get("description"), "matched_keywords": hits,
                 "discovery_source": "awesome-selfhosted",
+                "archived": bool(e.get("archived")),
+                "months_since_update": months_since(e.get("updated_at")),
             })
         cands.sort(key=lambda x: -x["stargazers_count"])
         out[c["slug"]] = cands[:15]

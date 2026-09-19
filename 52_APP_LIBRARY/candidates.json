@@ -14,7 +14,9 @@
     "matched_keywords": [
      "ai agents"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Langfuse",
@@ -28,7 +30,9 @@
     "matched_keywords": [
      "ai agents"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Composio",
@@ -42,7 +46,9 @@
     "matched_keywords": [
      "ai agents"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "ai-assistants": [
@@ -58,7 +64,9 @@
     "matched_keywords": [
      "assistant"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "LobeHub",
@@ -72,7 +80,9 @@
     "matched_keywords": [
      "ai chat"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "LibreChat",
@@ -87,7 +97,9 @@
      "ai chat",
      "chatgpt"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Leon",
@@ -101,7 +113,9 @@
     "matched_keywords": [
      "assistant"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Gladys",
@@ -115,7 +129,9 @@
     "matched_keywords": [
      "assistant"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Relaticle",
@@ -129,7 +145,9 @@
     "matched_keywords": [
      "assistant"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Bar Assistant",
@@ -143,7 +161,9 @@
     "matched_keywords": [
      "assistant"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Kibitzr",
@@ -157,7 +177,9 @@
     "matched_keywords": [
      "assistant"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 5
    },
    {
     "name": "NutriTrace",
@@ -171,7 +193,9 @@
     "matched_keywords": [
      "assistant"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "OrcaQ",
@@ -185,7 +209,25 @@
     "matched_keywords": [
      "assistant"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "whois",
+    "source_code_url": "https://github.com/KincaidYang/whois",
+    "stargazers_count": 64,
+    "licenses": [
+     "MIT"
+    ],
+    "updated_at": "2026-09-16",
+    "description": "WHOIS/RDAP query API for domains, IP addresses, CIDR prefixes and ASNs, with unified JSON output, caching, API key authentication, batch queries and MCP support for AI assistants.",
+    "matched_keywords": [
+     "ai assistants"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "ai-code-assistants": [],
@@ -204,7 +246,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Superset",
@@ -218,7 +262,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Metabase",
@@ -232,7 +278,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "PostHog",
@@ -246,7 +294,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Umami",
@@ -260,7 +310,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Postiz",
@@ -274,7 +326,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Netron",
@@ -288,7 +342,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Plausible Analytics",
@@ -302,7 +358,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Redash",
@@ -316,7 +374,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Matomo",
@@ -330,7 +390,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "GoAccess",
@@ -344,7 +406,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Druid",
@@ -358,7 +422,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Rybbit",
@@ -372,7 +438,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Manticore Search",
@@ -386,7 +454,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Tyk",
@@ -400,7 +470,9 @@
     "matched_keywords": [
      "analytics"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "authentication": [
@@ -416,7 +488,9 @@
     "matched_keywords": [
      "sso"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Pomerium",
@@ -430,7 +504,9 @@
     "matched_keywords": [
      "oauth"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "2FAuth",
@@ -444,7 +520,9 @@
     "matched_keywords": [
      "authentication"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "ByteStash",
@@ -458,7 +536,9 @@
     "matched_keywords": [
      "authentication"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Watcharr",
@@ -472,7 +552,9 @@
     "matched_keywords": [
      "authentication"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Keeper.sh",
@@ -486,7 +568,9 @@
     "matched_keywords": [
      "oauth"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Ownfoil",
@@ -500,7 +584,9 @@
     "matched_keywords": [
      "authentication"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "LibreDB Studio",
@@ -514,7 +600,9 @@
     "matched_keywords": [
      "sso"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "TimeTracker",
@@ -529,7 +617,9 @@
      "oidc",
      "sso"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Para",
@@ -543,7 +633,9 @@
     "matched_keywords": [
      "authentication"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "VoucherVault",
@@ -558,7 +650,9 @@
      "oidc",
      "sso"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Pingvin Share X",
@@ -572,7 +666,9 @@
     "matched_keywords": [
      "authentication"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "socks5-proxy-server",
@@ -586,7 +682,41 @@
     "matched_keywords": [
      "authentication"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 10
+   },
+   {
+    "name": "whois",
+    "source_code_url": "https://github.com/KincaidYang/whois",
+    "stargazers_count": 64,
+    "licenses": [
+     "MIT"
+    ],
+    "updated_at": "2026-09-16",
+    "description": "WHOIS/RDAP query API for domains, IP addresses, CIDR prefixes and ASNs, with unified JSON output, caching, API key authentication, batch queries and MCP support for AI assistants.",
+    "matched_keywords": [
+     "authentication"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "sE2EEnd",
+    "source_code_url": "https://github.com/sE2EEnd/sE2EEnd",
+    "stargazers_count": 9,
+    "licenses": [
+     "AGPL-3.0"
+    ],
+    "updated_at": "2026-09-14",
+    "description": "End-to-end encrypted file sharing with password protection, download limits, and auto-expiration, integrated with Keycloak for authentication.",
+    "matched_keywords": [
+     "authentication"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "automation": [
@@ -606,7 +736,9 @@
      "workflow",
      "workflow automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Home Assistant",
@@ -620,7 +752,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Huginn",
@@ -634,7 +768,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Apache Airflow",
@@ -648,7 +784,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "changedetection.io",
@@ -662,7 +800,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Kestra",
@@ -676,7 +816,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Tasmota",
@@ -690,7 +832,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Activepieces",
@@ -704,7 +848,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Leon",
@@ -718,7 +864,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Automatisch",
@@ -732,7 +880,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 8
    },
    {
     "name": "Gotenberg",
@@ -746,7 +896,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Mautic",
@@ -760,7 +912,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Healthchecks",
@@ -774,7 +928,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "StackStorm",
@@ -789,7 +945,9 @@
      "automation",
      "workflow"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Cronicle",
@@ -803,7 +961,9 @@
     "matched_keywords": [
      "automation"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "blogging": [
@@ -819,7 +979,9 @@
     "matched_keywords": [
      "blogging"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "WordPress",
@@ -833,7 +995,9 @@
     "matched_keywords": [
      "blogging"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "WriteFreely",
@@ -847,7 +1011,9 @@
     "matched_keywords": [
      "blog"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Ech0",
@@ -861,7 +1027,9 @@
     "matched_keywords": [
      "publishing platform"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Bludit",
@@ -875,7 +1043,9 @@
     "matched_keywords": [
      "blog"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "MODX",
@@ -889,7 +1059,9 @@
     "matched_keywords": [
      "publishing platform"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "HTMLy",
@@ -904,7 +1076,9 @@
      "blog",
      "blogging"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 8
    },
    {
     "name": "Known",
@@ -918,7 +1092,9 @@
     "matched_keywords": [
      "publishing platform"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 5
    },
    {
     "name": "Haven",
@@ -932,7 +1108,9 @@
     "matched_keywords": [
      "blogging"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Superdesk",
@@ -946,7 +1124,9 @@
     "matched_keywords": [
      "publishing platform"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Omeka S",
@@ -960,7 +1140,9 @@
     "matched_keywords": [
      "publishing platform"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Chyrp Lite",
@@ -974,7 +1156,9 @@
     "matched_keywords": [
      "blog"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Mataroa",
@@ -988,7 +1172,9 @@
     "matched_keywords": [
      "blogging"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "fx",
@@ -1002,7 +1188,9 @@
     "matched_keywords": [
      "blog"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "BuddyPress",
@@ -1016,7 +1204,9 @@
     "matched_keywords": [
      "blog"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    }
   ],
   "bookmarks-archiving": [],
@@ -1033,7 +1223,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "CyberChef",
@@ -1047,7 +1239,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Node RED",
@@ -1061,7 +1255,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Neko",
@@ -1075,7 +1271,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Bitwarden",
@@ -1089,7 +1287,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "BentoPDF",
@@ -1103,7 +1303,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "PeerTube",
@@ -1117,7 +1319,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Screego",
@@ -1131,7 +1335,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "A Dark Room",
@@ -1145,7 +1351,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 16
    },
    {
     "name": "Roundcube",
@@ -1159,7 +1367,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "SimpleLogin",
@@ -1173,7 +1383,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "WeTTY",
@@ -1187,7 +1399,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "RStudio Server",
@@ -1201,7 +1415,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Converse.js",
@@ -1215,7 +1431,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Kyoo",
@@ -1229,7 +1447,9 @@
     "matched_keywords": [
      "browser"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "cms": [
@@ -1245,7 +1465,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Payload CMS",
@@ -1259,7 +1481,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "WordPress",
@@ -1273,7 +1497,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "october",
@@ -1287,7 +1513,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "KeystoneJS",
@@ -1301,7 +1529,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Umbraco",
@@ -1315,7 +1545,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Joomla!",
@@ -1329,7 +1561,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "MediaCMS",
@@ -1343,7 +1577,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Apostrophe",
@@ -1357,7 +1593,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "CraftCMS",
@@ -1371,7 +1609,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Squidex",
@@ -1385,7 +1625,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Kirby",
@@ -1399,7 +1641,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "HTMLy",
@@ -1413,7 +1657,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 8
    },
    {
     "name": "TYPO3",
@@ -1427,7 +1673,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Vvveb CMS",
@@ -1441,7 +1689,9 @@
     "matched_keywords": [
      "cms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    }
   ],
   "code-editors": [],
@@ -1458,7 +1708,9 @@
     "matched_keywords": [
      "collaboration"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Mattermost",
@@ -1472,7 +1724,9 @@
     "matched_keywords": [
      "collaboration"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "CryptPad",
@@ -1486,7 +1740,9 @@
     "matched_keywords": [
      "collaboration"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 4
    },
    {
     "name": "OpenCloud",
@@ -1500,7 +1756,9 @@
     "matched_keywords": [
      "collaboration"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Colanode",
@@ -1514,7 +1772,9 @@
     "matched_keywords": [
      "collaboration"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 5
    },
    {
     "name": "Openfire",
@@ -1528,7 +1788,9 @@
     "matched_keywords": [
      "collaboration"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Sync-in",
@@ -1542,7 +1804,9 @@
     "matched_keywords": [
      "collaboration"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Signature PDF",
@@ -1556,7 +1820,9 @@
     "matched_keywords": [
      "collaboration"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Ideon",
@@ -1570,7 +1836,9 @@
     "matched_keywords": [
      "collaboration"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    },
    {
     "name": "Tracim",
@@ -1586,7 +1854,74 @@
     "matched_keywords": [
      "collaboration"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "Tine",
+    "source_code_url": "https://github.com/tine-groupware/tine",
+    "stargazers_count": 22,
+    "licenses": [
+     "AGPL-3.0"
+    ],
+    "updated_at": "2026-09-17",
+    "description": "Software for digital collaboration in companies and organizations. From powerful groupware functionalities to clever add-ons, tine combines everything to make daily team collaboration easier.",
+    "matched_keywords": [
+     "collaboration"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "Kantree",
+    "source_code_url": "https://kantree.io",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Work management and collaboration.",
+    "matched_keywords": [
+     "collaboration"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "Virola Messenger",
+    "source_code_url": "https://virola.io/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Instant messaging and collaboration tool with private and group chat rooms, continuous voice and video meetings, files sharing, issue tracking with integrated task board (alternative to Slack).",
+    "matched_keywords": [
+     "collaboration"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "Zimbra Collaboration",
+    "source_code_url": "https://github.com/zimbra",
+    "stargazers_count": 0,
+    "licenses": [
+     "GPL-2.0",
+     "CPAL-1.0"
+    ],
+    "updated_at": null,
+    "description": "Email, calendar, collaboration server with Web interface and lots of integrations.",
+    "matched_keywords": [
+     "collaboration"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "community": [
@@ -1602,7 +1937,9 @@
     "matched_keywords": [
      "community"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Discourse",
@@ -1617,7 +1954,9 @@
      "community",
      "forum"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Onyx Community Edition",
@@ -1631,7 +1970,9 @@
     "matched_keywords": [
      "community"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Infisical Community Edition",
@@ -1645,7 +1986,9 @@
     "matched_keywords": [
      "community"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "docmost Community Edition",
@@ -1659,7 +2002,9 @@
     "matched_keywords": [
      "community"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "UVDesk",
@@ -1673,7 +2018,9 @@
     "matched_keywords": [
      "community"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 11
    },
    {
     "name": "Flarum",
@@ -1688,7 +2035,9 @@
      "discussion",
      "forum"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Answer",
@@ -1702,7 +2051,9 @@
     "matched_keywords": [
      "community"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    },
    {
     "name": "NodeBB",
@@ -1716,7 +2067,9 @@
     "matched_keywords": [
      "forum"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Lemmy",
@@ -1730,7 +2083,9 @@
     "matched_keywords": [
      "reddit"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "sftpgo Community Edition",
@@ -1745,7 +2100,9 @@
     "matched_keywords": [
      "community"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "PrivateBin",
@@ -1759,7 +2116,9 @@
     "matched_keywords": [
      "discussion"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Countly Community Edition",
@@ -1773,7 +2132,9 @@
     "matched_keywords": [
      "community"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "WriteFreely",
@@ -1787,7 +2148,9 @@
     "matched_keywords": [
      "community"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Umbraco",
@@ -1801,7 +2164,9 @@
     "matched_keywords": [
      "community"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "crm": [
@@ -1817,7 +2182,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Krayin",
@@ -1831,7 +2198,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Ever Gauzy",
@@ -1845,7 +2214,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Dolibarr",
@@ -1859,7 +2230,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "SuiteCRM",
@@ -1873,7 +2246,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "EspoCRM",
@@ -1887,7 +2262,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Corteza",
@@ -1901,7 +2278,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Relaticle",
@@ -1915,7 +2294,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Django-CRM",
@@ -1929,7 +2310,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "TimeTracker",
@@ -1943,7 +2326,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "egroupware",
@@ -1957,7 +2342,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Group Office",
@@ -1971,7 +2358,9 @@
     "matched_keywords": [
      "crm"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "customer-support": [
@@ -1987,7 +2376,9 @@
     "matched_keywords": [
      "zendesk"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "UVDesk",
@@ -2001,7 +2392,9 @@
     "matched_keywords": [
      "helpdesk"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 11
    },
    {
     "name": "Answer",
@@ -2015,7 +2408,9 @@
     "matched_keywords": [
      "customer support"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    },
    {
     "name": "FreeScout",
@@ -2031,7 +2426,9 @@
      "help desk",
      "zendesk"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Frappe Helpdesk",
@@ -2045,7 +2442,9 @@
     "matched_keywords": [
      "helpdesk"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Libredesk",
@@ -2059,7 +2458,9 @@
     "matched_keywords": [
      "customer support"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "OTOBO",
@@ -2073,7 +2474,9 @@
     "matched_keywords": [
      "help desk"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Tiledesk",
@@ -2087,7 +2490,90 @@
     "matched_keywords": [
      "zendesk"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "Deskpro",
+    "source_code_url": "https://www.deskpro.com/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "On-Premise help desk software that includes email, chat, voice & help centre publishing. Full visible source code and API.",
+    "matched_keywords": [
+     "help desk"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "EKSO",
+    "source_code_url": "https://ekso.app",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Help desk ticketing and project/issue tracker.",
+    "matched_keywords": [
+     "help desk"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "Full Help",
+    "source_code_url": "https://www.fullhelp.com/en/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Simple, easy to use help desk & knowledge base software. Custom branding, custom themes, restful API, communication channels, multi-company support, multi-language support, and much more! At least 1 new release per month.",
+    "matched_keywords": [
+     "help desk"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "Jitbit Helpdesk",
+    "source_code_url": "https://www.jitbit.com/helpdesk/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Help desk software - simple but powerful.",
+    "matched_keywords": [
+     "help desk",
+     "helpdesk"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "SupportPal",
+    "source_code_url": "https://www.supportpal.com/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Powerful help desk software - easy, fast and intuitive.",
+    "matched_keywords": [
+     "help desk"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "data-engineering": [],
@@ -2104,7 +2590,9 @@
     "matched_keywords": [
      "databases"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "SearXNG",
@@ -2118,7 +2606,9 @@
     "matched_keywords": [
      "databases"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Teleport",
@@ -2132,7 +2622,9 @@
     "matched_keywords": [
      "databases"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "CloudBeaver",
@@ -2146,7 +2638,9 @@
     "matched_keywords": [
      "databases"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Colanode",
@@ -2160,7 +2654,9 @@
     "matched_keywords": [
      "databases"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 5
    },
    {
     "name": "Chartbrew",
@@ -2174,7 +2670,9 @@
     "matched_keywords": [
      "databases"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Azimutt",
@@ -2188,7 +2686,9 @@
     "matched_keywords": [
      "databases"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "d9",
@@ -2202,7 +2702,57 @@
     "matched_keywords": [
      "databases"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "Cluster Control",
+    "source_code_url": "https://severalnines.com/clustercontrol/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Setup many databases in few clicks with monitoring, load balancing and more.",
+    "matched_keywords": [
+     "databases"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "Feather Wiki",
+    "source_code_url": "https://codeberg.org/Alamantus/FeatherWiki",
+    "stargazers_count": 0,
+    "licenses": [
+     "AGPL-3.0"
+    ],
+    "updated_at": null,
+    "description": "A lightning fast and infinitely extensible tool for creating personal non-linear notebooks, databases, and wikis that is entirely self-contained, runs in your browser, and is only 58 kilobytes in size.",
+    "matched_keywords": [
+     "databases"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "GoS\u0190",
+    "source_code_url": "https://codeberg.org/stv0g/gose",
+    "stargazers_count": 0,
+    "licenses": [
+     "Apache-2.0"
+    ],
+    "updated_at": null,
+    "description": "Modern file-uploader focusing on scalability and simplicity. It only depends on a S3 storage backend and hence scales horizontally without the need for additional databases or caches.",
+    "matched_keywords": [
+     "databases"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "design-tools": [],
@@ -2220,7 +2770,9 @@
     "matched_keywords": [
      "devops"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Bytebase",
@@ -2234,7 +2786,9 @@
     "matched_keywords": [
      "devops"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "FlowForge",
@@ -2248,7 +2802,9 @@
     "matched_keywords": [
      "devops"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "digital-signiture": [
@@ -2264,7 +2820,9 @@
     "matched_keywords": [
      "docusign"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Documenso",
@@ -2279,7 +2837,9 @@
      "docusign",
      "signing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "OpenSign",
@@ -2294,7 +2854,9 @@
      "docusign",
      "signing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Signature PDF",
@@ -2308,7 +2870,9 @@
     "matched_keywords": [
      "signature"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "ecommerce": [
@@ -2324,7 +2888,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Bagisto",
@@ -2338,7 +2904,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Saleor",
@@ -2353,7 +2921,9 @@
      "e-commerce",
      "storefront"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Spree Commerce",
@@ -2367,7 +2937,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Magento Open Source",
@@ -2381,7 +2953,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "WooCommerce",
@@ -2395,7 +2969,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "EverShop",
@@ -2409,7 +2985,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "PrestaShop",
@@ -2423,7 +3001,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Sylius",
@@ -2438,7 +3018,9 @@
      "e-commerce",
      "ecommerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Vendure",
@@ -2452,7 +3034,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "OpenCart",
@@ -2466,7 +3050,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Aimeos",
@@ -2481,7 +3067,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    },
    {
     "name": "Solidus",
@@ -2496,7 +3084,9 @@
      "e-commerce",
      "ecommerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Open Source POS",
@@ -2510,7 +3100,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Hi.Events",
@@ -2524,7 +3116,9 @@
     "matched_keywords": [
      "e-commerce"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "erp": [
@@ -2540,7 +3134,9 @@
     "matched_keywords": [
      "erp"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "ERPNext",
@@ -2554,7 +3150,9 @@
     "matched_keywords": [
      "erp"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "grocy",
@@ -2568,7 +3166,9 @@
     "matched_keywords": [
      "erp"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Ever Gauzy",
@@ -2582,7 +3182,9 @@
     "matched_keywords": [
      "erp"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "OFBiz",
@@ -2596,7 +3198,9 @@
     "matched_keywords": [
      "enterprise resource"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "LedgerSMB",
@@ -2610,7 +3214,9 @@
     "matched_keywords": [
      "erp"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "file-storage": [
@@ -2626,7 +3232,9 @@
     "matched_keywords": [
      "nextcloud"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Nextcloud",
@@ -2640,7 +3248,9 @@
     "matched_keywords": [
      "nextcloud"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "transfer.sh",
@@ -2654,7 +3264,9 @@
     "matched_keywords": [
      "file sharing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 3
    },
    {
     "name": "Seafile",
@@ -2671,7 +3283,9 @@
     "matched_keywords": [
      "seafile"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "OpenCloud",
@@ -2685,7 +3299,9 @@
     "matched_keywords": [
      "file sharing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "TagSpaces",
@@ -2699,7 +3315,9 @@
     "matched_keywords": [
      "nextcloud"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    },
    {
     "name": "slskd",
@@ -2713,7 +3331,9 @@
     "matched_keywords": [
      "file sharing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Nextcloud Memories",
@@ -2727,7 +3347,9 @@
     "matched_keywords": [
      "nextcloud"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Zipline",
@@ -2741,7 +3363,9 @@
     "matched_keywords": [
      "file sharing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "NextCloudPi",
@@ -2755,7 +3379,9 @@
     "matched_keywords": [
      "nextcloud"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 3
    },
    {
     "name": "ByteStash",
@@ -2769,7 +3395,9 @@
     "matched_keywords": [
      "file storage"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Pydio",
@@ -2783,7 +3411,9 @@
     "matched_keywords": [
      "cloud storage"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "PsiTransfer",
@@ -2797,7 +3427,9 @@
     "matched_keywords": [
      "file sharing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 4
    },
    {
     "name": "Sync-in",
@@ -2811,7 +3443,9 @@
     "matched_keywords": [
      "file storage"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Hoodik",
@@ -2825,7 +3459,9 @@
     "matched_keywords": [
      "cloud storage"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    }
   ],
   "forms-surveys": [
@@ -2841,7 +3477,9 @@
     "matched_keywords": [
      "survey"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Typebot",
@@ -2855,7 +3493,9 @@
     "matched_keywords": [
      "typeform"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "HeyForm",
@@ -2870,7 +3510,9 @@
      "form builder",
      "forms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "LimeSurvey",
@@ -2884,7 +3526,9 @@
     "matched_keywords": [
      "survey"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "OpnForm",
@@ -2898,7 +3542,25 @@
     "matched_keywords": [
      "form builder"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "form.io",
+    "source_code_url": "https://github.com/formio",
+    "stargazers_count": 0,
+    "licenses": [
+     "MIT"
+    ],
+    "updated_at": null,
+    "description": "A REST API building platform that utilizes a drag & drop form builder, and is application framework agnostic. Contains open source and enterprise version.",
+    "matched_keywords": [
+     "form builder"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "game-development": [],
@@ -2917,7 +3579,9 @@
     "matched_keywords": [
      "accounting"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Invoice Ninja",
@@ -2931,7 +3595,9 @@
     "matched_keywords": [
      "invoice"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Dolibarr",
@@ -2945,7 +3611,9 @@
     "matched_keywords": [
      "accounting"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "ezbookkeeping",
@@ -2959,7 +3627,9 @@
     "matched_keywords": [
      "bookkeeping"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Bigcapital",
@@ -2973,7 +3643,9 @@
     "matched_keywords": [
      "accounting"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Fava",
@@ -2987,7 +3659,9 @@
     "matched_keywords": [
      "accounting"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "ITFlow",
@@ -3002,7 +3676,9 @@
      "accounting",
      "invoicing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "SolidInvoice",
@@ -3016,7 +3692,9 @@
     "matched_keywords": [
      "invoicing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "TimeTracker",
@@ -3030,7 +3708,9 @@
     "matched_keywords": [
      "invoicing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "LedgerSMB",
@@ -3045,7 +3725,9 @@
      "accounting",
      "invoicing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Family Accounting Tool",
@@ -3059,7 +3741,9 @@
     "matched_keywords": [
      "accounting"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Foodsoft",
@@ -3073,7 +3757,25 @@
     "matched_keywords": [
      "accounting"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "Pancake",
+    "source_code_url": "https://www.pancakeapp.com/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Online invoicing, project management, time tracking and proposal software.",
+    "matched_keywords": [
+     "invoicing"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "knowledge-management": [
@@ -3089,7 +3791,9 @@
     "matched_keywords": [
      "notion"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 3
    },
    {
     "name": "Memos",
@@ -3103,7 +3807,9 @@
     "matched_keywords": [
      "knowledge base"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "SiYuan",
@@ -3117,7 +3823,9 @@
     "matched_keywords": [
      "knowledge management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "TriliumNext Notes",
@@ -3131,7 +3839,9 @@
     "matched_keywords": [
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Huly",
@@ -3145,7 +3855,9 @@
     "matched_keywords": [
      "notion"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "docmost Community Edition",
@@ -3159,7 +3871,9 @@
     "matched_keywords": [
      "notion"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "HedgeDoc",
@@ -3173,7 +3887,9 @@
     "matched_keywords": [
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Eclipse Che",
@@ -3187,7 +3903,9 @@
     "matched_keywords": [
      "workspace"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Standard Notes",
@@ -3201,7 +3919,9 @@
     "matched_keywords": [
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Colanode",
@@ -3215,7 +3935,9 @@
     "matched_keywords": [
      "notion"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 5
    },
    {
     "name": "Personal Management System",
@@ -3229,7 +3951,9 @@
     "matched_keywords": [
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "WBO",
@@ -3243,7 +3967,9 @@
     "matched_keywords": [
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Corteza",
@@ -3257,7 +3983,9 @@
     "matched_keywords": [
      "workspace"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Jotty",
@@ -3271,7 +3999,9 @@
     "matched_keywords": [
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Atomic Server",
@@ -3285,7 +4015,9 @@
     "matched_keywords": [
      "notion"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "learning-management": [
@@ -3302,7 +4034,9 @@
      "learning management",
      "lms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 5
    },
    {
     "name": "LMS",
@@ -3316,7 +4050,9 @@
     "matched_keywords": [
      "lms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Chamilo LMS",
@@ -3330,7 +4066,9 @@
     "matched_keywords": [
      "lms"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "ILIAS",
@@ -3344,7 +4082,9 @@
     "matched_keywords": [
      "learning management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "OpenOLAT",
@@ -3358,7 +4098,42 @@
     "matched_keywords": [
      "learning management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "Digitools",
+    "source_code_url": "https://codeberg.org/ladigitale/digitools",
+    "stargazers_count": 0,
+    "licenses": [
+     "AGPL-3.0"
+    ],
+    "updated_at": null,
+    "description": "A set of simple tools to accompany the animation of courses in person or remotely. (documentation in French).",
+    "matched_keywords": [
+     "courses"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "Moodle",
+    "source_code_url": "https://git.moodle.org/gw",
+    "stargazers_count": 0,
+    "licenses": [
+     "GPL-3.0"
+    ],
+    "updated_at": null,
+    "description": "Learning and courses platform with one of the largest open source communities worldwide.",
+    "matched_keywords": [
+     "courses",
+     "moodle"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "logistics": [],
@@ -3376,7 +4151,9 @@
     "matched_keywords": [
      "marketing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "RudderStack",
@@ -3390,7 +4167,9 @@
     "matched_keywords": [
      "marketing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Erxes",
@@ -3405,7 +4184,9 @@
     "matched_keywords": [
      "marketing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "phpList",
@@ -3419,7 +4200,9 @@
     "matched_keywords": [
      "marketing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Django-CRM",
@@ -3433,7 +4216,9 @@
     "matched_keywords": [
      "marketing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "monitoring": [
@@ -3449,7 +4234,9 @@
     "matched_keywords": [
      "monitoring"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    },
    {
     "name": "LinkAce",
@@ -3463,7 +4250,9 @@
     "matched_keywords": [
      "monitoring"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Pelican Panel",
@@ -3477,7 +4266,9 @@
     "matched_keywords": [
      "monitoring"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "SIPCAPTURE Homer",
@@ -3491,7 +4282,41 @@
     "matched_keywords": [
      "monitoring"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "Cluster Control",
+    "source_code_url": "https://severalnines.com/clustercontrol/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Setup many databases in few clicks with monitoring, load balancing and more.",
+    "matched_keywords": [
+     "monitoring"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "SIP3",
+    "source_code_url": "https://github.com/sip3io/",
+    "stargazers_count": 0,
+    "licenses": [
+     "Apache-2.0"
+    ],
+    "updated_at": null,
+    "description": "VoIP troubleshooting and monitoring platform.",
+    "matched_keywords": [
+     "monitoring"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "networking": [
@@ -3507,7 +4332,9 @@
     "matched_keywords": [
      "networking"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    },
    {
     "name": "Elgg",
@@ -3521,7 +4348,9 @@
     "matched_keywords": [
      "networking"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "OSSN",
@@ -3535,7 +4364,25 @@
     "matched_keywords": [
      "networking"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "GNUnet",
+    "source_code_url": "https://gnunet.org/git/",
+    "stargazers_count": 0,
+    "licenses": [
+     "GPL-3.0"
+    ],
+    "updated_at": null,
+    "description": "Software framework for decentralized, peer-to-peer networking.",
+    "matched_keywords": [
+     "networking"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "no-code-platforms": [],
@@ -3552,7 +4399,9 @@
     "matched_keywords": [
      "notion"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 3
    },
    {
     "name": "Memos",
@@ -3566,7 +4415,9 @@
     "matched_keywords": [
      "knowledge base"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Joplin",
@@ -3580,7 +4431,9 @@
     "matched_keywords": [
      "note taking"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "TriliumNext Notes",
@@ -3595,7 +4448,9 @@
      "note taking",
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Huly",
@@ -3609,7 +4464,9 @@
     "matched_keywords": [
      "notion"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "docmost Community Edition",
@@ -3623,7 +4480,9 @@
     "matched_keywords": [
      "notion"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Docs",
@@ -3637,7 +4496,9 @@
     "matched_keywords": [
      "note taking"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "HedgeDoc",
@@ -3651,7 +4512,9 @@
     "matched_keywords": [
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Eclipse Che",
@@ -3665,7 +4528,9 @@
     "matched_keywords": [
      "workspace"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Standard Notes",
@@ -3679,7 +4544,9 @@
     "matched_keywords": [
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "TagSpaces",
@@ -3693,7 +4560,9 @@
     "matched_keywords": [
      "note taking"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    },
    {
     "name": "Colanode",
@@ -3707,7 +4576,9 @@
     "matched_keywords": [
      "notion"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 5
    },
    {
     "name": "Personal Management System",
@@ -3721,7 +4592,9 @@
     "matched_keywords": [
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "WBO",
@@ -3735,7 +4608,9 @@
     "matched_keywords": [
      "notes"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Corteza",
@@ -3749,7 +4624,9 @@
     "matched_keywords": [
      "workspace"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    }
   ],
   "password-manager": [
@@ -3765,7 +4642,9 @@
     "matched_keywords": [
      "secrets"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Bitwarden",
@@ -3779,7 +4658,9 @@
     "matched_keywords": [
      "password manager"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Passbolt",
@@ -3793,7 +4674,9 @@
     "matched_keywords": [
      "password manager"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Yopass",
@@ -3807,7 +4690,9 @@
     "matched_keywords": [
      "secrets"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "AliasVault",
@@ -3821,7 +4706,9 @@
     "matched_keywords": [
      "password manager"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Teampass",
@@ -3835,7 +4722,9 @@
     "matched_keywords": [
      "password manager"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Hemmelig",
@@ -3849,7 +4738,9 @@
     "matched_keywords": [
      "secrets"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Sup3rS3cretMes5age",
@@ -3864,7 +4755,9 @@
      "secrets",
      "vault"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Shhh",
@@ -3878,7 +4771,9 @@
     "matched_keywords": [
      "secrets"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Flare",
@@ -3892,7 +4787,25 @@
     "matched_keywords": [
      "vault"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "Psono",
+    "source_code_url": "https://gitlab.com/esaqa/psono/psono-fileserver",
+    "stargazers_count": 0,
+    "licenses": [
+     "Apache-2.0"
+    ],
+    "updated_at": null,
+    "description": "Password manager for companies.",
+    "matched_keywords": [
+     "password manager"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "product-management": [],
@@ -3909,7 +4822,9 @@
     "matched_keywords": [
      "productivity"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "4ga Boards",
@@ -3923,7 +4838,9 @@
     "matched_keywords": [
      "productivity"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    }
   ],
   "project-management": [
@@ -3939,7 +4856,9 @@
     "matched_keywords": [
      "jira"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Huly",
@@ -3954,7 +4873,9 @@
      "jira",
      "project management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Super Productivity",
@@ -3968,7 +4889,9 @@
     "matched_keywords": [
      "jira"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "OneDev",
@@ -3982,7 +4905,9 @@
     "matched_keywords": [
      "issue tracking"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Leantime",
@@ -3996,7 +4921,9 @@
     "matched_keywords": [
      "project management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Kaneo",
@@ -4010,7 +4937,9 @@
     "matched_keywords": [
      "project management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "GitLab",
@@ -4024,7 +4953,9 @@
     "matched_keywords": [
      "issue tracking"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "ZenTao",
@@ -4038,7 +4969,9 @@
     "matched_keywords": [
      "project management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Gerrit",
@@ -4052,7 +4985,9 @@
     "matched_keywords": [
      "project management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Request Tracker",
@@ -4066,7 +5001,9 @@
     "matched_keywords": [
      "issue tracking"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "eigenfocus",
@@ -4080,7 +5017,9 @@
     "matched_keywords": [
      "project management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "ShipShipShip",
@@ -4094,7 +5033,9 @@
     "matched_keywords": [
      "project management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 7
    },
    {
     "name": "egroupware",
@@ -4108,7 +5049,9 @@
     "matched_keywords": [
      "project management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Traq",
@@ -4123,7 +5066,25 @@
      "issue tracking",
      "project management"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 9
+   },
+   {
+    "name": "Active Collab",
+    "source_code_url": "https://activecollab.com/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Project management.",
+    "matched_keywords": [
+     "project management"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "scheduling": [
@@ -4139,7 +5100,9 @@
     "matched_keywords": [
      "scheduling"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Donetick",
@@ -4153,7 +5116,9 @@
     "matched_keywords": [
      "scheduling"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "pretalx",
@@ -4167,7 +5132,9 @@
     "matched_keywords": [
      "scheduling"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "LibreBooking",
@@ -4181,7 +5148,9 @@
     "matched_keywords": [
      "scheduling"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Foodsoft",
@@ -4195,7 +5164,9 @@
     "matched_keywords": [
      "scheduling"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "flowctl",
@@ -4209,7 +5180,9 @@
     "matched_keywords": [
      "scheduling"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Garlic-Hub",
@@ -4223,7 +5196,57 @@
     "matched_keywords": [
      "scheduling"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "RosarioSIS",
+    "source_code_url": "https://gitlab.com/francoisjacquet/rosariosis/",
+    "stargazers_count": 65,
+    "licenses": [
+     "GPL-2.0"
+    ],
+    "updated_at": "2026-09-15",
+    "description": "Student Information System for school management. Features students demographics, grades, scheduling, attendance, student billing, discipline & food service modules.",
+    "matched_keywords": [
+     "scheduling"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "Citadel",
+    "source_code_url": "https://www.citadel.org/source.html",
+    "stargazers_count": 0,
+    "licenses": [
+     "GPL-3.0"
+    ],
+    "updated_at": null,
+    "description": "Groupware including email, calendar/scheduling, address books, forums, mailing lists, IM, wiki and blog engines, RSS aggregation and more.",
+    "matched_keywords": [
+     "scheduling"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "Courier MTA",
+    "source_code_url": "https://www.courier-mta.org/repo.html",
+    "stargazers_count": 0,
+    "licenses": [
+     "GPL-3.0"
+    ],
+    "updated_at": null,
+    "description": "Fast, scalable, enterprise mail/groupware server providing ESMTP, IMAP, POP3, webmail, mailing list, basic web-based calendaring and scheduling services.",
+    "matched_keywords": [
+     "scheduling"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "search": [
@@ -4239,7 +5262,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "MeiliSearch",
@@ -4253,7 +5278,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "LibreChat",
@@ -4267,7 +5294,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "SearXNG",
@@ -4281,7 +5310,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Vane",
@@ -4295,7 +5326,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Onyx Community Edition",
@@ -4309,7 +5342,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Typesense",
@@ -4323,7 +5358,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "OpenSearch",
@@ -4337,7 +5374,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Manticore Search",
@@ -4351,7 +5390,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Local Deep Research",
@@ -4365,7 +5406,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Tandoor Recipes",
@@ -4380,7 +5423,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Tube Archivist",
@@ -4394,7 +5439,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Hister",
@@ -4408,7 +5455,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "bitmagnet",
@@ -4422,7 +5471,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 4
    },
    {
     "name": "Yacy",
@@ -4436,7 +5487,9 @@
     "matched_keywords": [
      "search"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    }
   ],
   "security": [
@@ -4452,7 +5505,9 @@
     "matched_keywords": [
      "security"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "StackStorm",
@@ -4466,7 +5521,9 @@
     "matched_keywords": [
      "security"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "2FAuth",
@@ -4480,7 +5537,9 @@
     "matched_keywords": [
      "security"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "UUSEC WAF",
@@ -4494,7 +5553,9 @@
     "matched_keywords": [
      "security"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Secluso",
@@ -4508,7 +5569,9 @@
     "matched_keywords": [
      "security"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "Dovecot",
@@ -4523,7 +5586,9 @@
     "matched_keywords": [
      "security"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Websurfx",
@@ -4537,7 +5602,9 @@
     "matched_keywords": [
      "security"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 4
    },
    {
     "name": "Pingvin Share X",
@@ -4551,7 +5618,9 @@
     "matched_keywords": [
      "security"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "GitProxy",
@@ -4565,7 +5634,41 @@
     "matched_keywords": [
      "security"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "chasquid",
+    "source_code_url": "https://blitiri.com.ar/git/r/chasquid/",
+    "stargazers_count": 0,
+    "licenses": [
+     "Apache-2.0"
+    ],
+    "updated_at": null,
+    "description": "SMTP (email) server with a focus on simplicity, security, and ease of operation.",
+    "matched_keywords": [
+     "security"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "CxReports",
+    "source_code_url": "https://www.cx-reports.com",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Reporting and PDF document generation with a user-friendly WYSIWYG template editor, API, automated email delivery, and robust security features.",
+    "matched_keywords": [
+     "security"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "social-media": [
@@ -4581,7 +5684,9 @@
     "matched_keywords": [
      "social media"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Postiz",
@@ -4595,7 +5700,9 @@
     "matched_keywords": [
      "social media"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "LinkStack",
@@ -4609,7 +5716,9 @@
     "matched_keywords": [
      "social media"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    },
    {
     "name": "Socioboard",
@@ -4623,7 +5732,25 @@
     "matched_keywords": [
      "social media"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
+   },
+   {
+    "name": "3CX",
+    "source_code_url": "https://www.3cx.com/pbx/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Full-featured PABX system, with call queues, built-in web conferencing, live chat and social media messaging all on one system.",
+    "matched_keywords": [
+     "social media"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "team-chat": [
@@ -4639,7 +5766,9 @@
     "matched_keywords": [
      "slack"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Mattermost",
@@ -4653,7 +5782,9 @@
     "matched_keywords": [
      "slack"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Huly",
@@ -4667,7 +5798,9 @@
     "matched_keywords": [
      "slack"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Activepieces",
@@ -4681,7 +5814,9 @@
     "matched_keywords": [
      "slack"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Apprise",
@@ -4695,7 +5830,9 @@
     "matched_keywords": [
      "slack"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Automatisch",
@@ -4709,7 +5846,9 @@
     "matched_keywords": [
      "slack"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 8
    },
    {
     "name": "Colanode",
@@ -4723,7 +5862,9 @@
     "matched_keywords": [
      "slack"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 5
    },
    {
     "name": "tubesync",
@@ -4737,7 +5878,9 @@
     "matched_keywords": [
      "channels"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Talkyard",
@@ -4751,7 +5894,9 @@
     "matched_keywords": [
      "slack"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    },
    {
     "name": "CyTube",
@@ -4765,7 +5910,9 @@
     "matched_keywords": [
      "channels"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 10
    },
    {
     "name": "Youtarr",
@@ -4779,7 +5926,9 @@
     "matched_keywords": [
      "channels"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Fredy",
@@ -4793,7 +5942,9 @@
     "matched_keywords": [
      "slack"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "ChiefOnboarding",
@@ -4807,7 +5958,9 @@
     "matched_keywords": [
      "slack"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "vod2pod-rss",
@@ -4821,7 +5974,9 @@
     "matched_keywords": [
      "channels"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    },
    {
     "name": "ChannelTube",
@@ -4835,7 +5990,9 @@
     "matched_keywords": [
      "channels"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 1
    }
   ],
   "video-conferencing": [
@@ -4851,7 +6008,9 @@
     "matched_keywords": [
      "video conferencing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "Openmeetings",
@@ -4865,7 +6024,57 @@
     "matched_keywords": [
      "video conferencing"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
+   },
+   {
+    "name": "Groupboard",
+    "source_code_url": "https://www.groupboard.com/products/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Online whiteboard, audio/video conferencing, screen sharing, shared code editing and optional session recording/playback.",
+    "matched_keywords": [
+     "video conferencing"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "TrueConf",
+    "source_code_url": "https://trueconf.com/products/tcsf/trueconf-server-free.html",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Platform for your corporate communications, based on the advanced architecture, with support for UltraHD video conferencing, built-in messenger with personal and group chats, and a free version for up to 1,000 users.",
+    "matched_keywords": [
+     "video conferencing"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
+   },
+   {
+    "name": "Virola Messenger",
+    "source_code_url": "https://virola.io/",
+    "stargazers_count": 0,
+    "licenses": [
+     "\u2298 Proprietary"
+    ],
+    "updated_at": null,
+    "description": "Instant messaging and collaboration tool with private and group chat rooms, continuous voice and video meetings, files sharing, issue tracking with integrated task board (alternative to Slack).",
+    "matched_keywords": [
+     "meetings"
+    ],
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": null
    }
   ],
   "video-editors": [
@@ -4881,7 +6090,9 @@
     "matched_keywords": [
      "timeline"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 0
    },
    {
     "name": "TimeTagger",
@@ -4895,7 +6106,9 @@
     "matched_keywords": [
      "timeline"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 4
    },
    {
     "name": "Operational.co",
@@ -4909,7 +6122,9 @@
     "matched_keywords": [
      "timeline"
     ],
-    "discovery_source": "awesome-selfhosted"
+    "discovery_source": "awesome-selfhosted",
+    "archived": false,
+    "months_since_update": 2
    }
   ]
  },
@@ -4930,7 +6145,6 @@
   "low-code-platforms",
   "no-code-platforms",
   "product-management",
-  "productivity",
-  "video-conferencing"
+  "productivity"
  ]
 }

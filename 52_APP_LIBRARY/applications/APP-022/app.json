@@ -1,17 +1,55 @@
 {
  "id": "APP-022",
- "name": null,
+ "name": "code-server",
  "category": "Developer Tools",
  "category_slug": "developer-tools",
- "repository": null,
+ "repository": "https://github.com/coder/code-server",
  "source_platform": "github.com",
- "licence": null,
+ "licence": "MIT",
  "version": null,
- "commit": null,
+ "commit": "59c988c744a240b05b039f57b856a5312f19d5b1",
  "source_path": "applications/APP-022/source",
- "status": "DISCOVERY_FAILED",
+ "status": "STARTABLE",
  "declared_itself": false,
- "manual_override_reason": null,
- "discovery_candidates": [],
- "discovery_failed_reason": "no candidate found via awesome-selfhosted-data or GitHub search (openapps.pro itself is blocked by this sandbox's egress policy, per RULES.md-equivalent provenance note)"
+ "manual_override_reason": "the earlier 'browser' category override (Neko) exists precisely because code-server is a developer tool, not a browser - it belongs here instead; verified MIT LICENSE file",
+ "discovery_candidates": [
+  {
+   "name": "code-server",
+   "source_code_url": "https://github.com/coder/code-server",
+   "stargazers_count": 79356,
+   "licenses": [
+    "MIT"
+   ],
+   "description": "VS Code in the browser.",
+   "override_reason": "the earlier 'browser' category override (Neko) exists precisely because code-server is a developer tool, not a browser - it belongs here instead; verified MIT LICENSE file"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "code-server",
+   "repo": "https://github.com/coder/code-server",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8090/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "No Dockerfile at repo root (the real one, ci/release-image/Dockerfile, builds from a compiled release artifact, not source) - used the project's own officially-documented Docker Hub image (codercom/code-server:latest) instead, exactly as code-server's own install docs (docs/install.md #Docker) show, per spec section 5's allowance for a documented recipe.",
+  "startup_command": "docker compose up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ }
 }
