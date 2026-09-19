@@ -3734,7 +3734,7 @@
    ],
    "install_startup": {
     "status": "BLOCKED_EXTERNAL_DEPENDENCY",
-    "reason": "install needs docker.elastic.co, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"docker.elastic.co/kibana/kibana:7.17.0\": failed to do request: Head \"https://docker.elastic.co/v2/kibana/kibana/manifests/7.17.0\": Forbidden",
+    "reason": "install needs docker.elastic.co, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"docker.elastic.co/kibana/kibana:7.17.0\": failed to do request: Head \"https://docker.elastic.co/v2/kibana/kibana/manifests/7.17.0\": Forbidden Docker Hub substitution for elasticsearch/kibana (docker.elastic.co is blocked, both images are also published to Docker Hub's official library/elasticsearch and library/kibana under the identical 7.17.0 tag) is written and ready in docker-compose.library.yml. Found a second, unrelated problem while wiring it up: the compose file's main app service builds from ./vendor/laravel/sail/runtimes/8.3/Dockerfile, but laravel/sail is not actually in this repo's composer.json (checked both require and require-dev) - composer install genuinely cannot produce that path, this isn't a network or cache issue. Paused here to work through the remaining app list from the other end per instruction; will need a hand-written Dockerfile for the PHP/Laravel service (matching Bagisto's actual PHP version requirements) to finish this one, not just a registry swap.",
     "blocked_host": "docker.elastic.co",
     "runtime_hint": [
      "node",
