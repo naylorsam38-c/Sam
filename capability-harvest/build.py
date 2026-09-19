@@ -74,10 +74,19 @@ VENV_PYTHON = config.PROJECT_ROOT / ".venv" / "bin" / "python3"
 # f-string quoting, Python 3.12+) -- not a bug in the app, a real
 # interpreter-compatibility requirement. Rather than force every app onto
 # one Python version, a runner may set "python_version" to pick one of
-# these; default is "3.11" (VENV_PYTHON) when unset.
+# these; default is "3.11" (VENV_PYTHON) when unset. The same mechanism
+# also covers an app that genuinely needs an OLD, mutually-incompatible
+# dependency set (e.g. Flask 2.2 + Flask-Babel 2.0, which imports a Flask
+# API removed by the time this pipeline's shared venv's modern Flask/
+# Werkzeug were installed) -- installing that into the shared venv would
+# silently break every other harvested app that depends on the modern
+# stack (confirmed the hard way: doing this once broke CAP-0001 with a
+# real ImportError until the shared venv was restored), so it gets its
+# own dedicated venv instead, keyed here like any other python_version.
 PYTHON_BY_VERSION = {
     "3.11": VENV_PYTHON,
     "3.12": config.PROJECT_ROOT / ".venv-py312" / "bin" / "python3",
+    "3.11-legacy-flask": config.PROJECT_ROOT / ".venv-legacy-flask" / "bin" / "python3",
 }
 BUILD_DB_PATH = config.OUTPUT_ROOT / "build_run.db"  # used only by flask_factory apps with a DATABASE_URL env var
 # Some apps resolve their own data directory from $HOME (e.g. an

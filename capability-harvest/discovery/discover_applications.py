@@ -592,6 +592,42 @@ APPLICATION_MANIFEST = [
             "env": {"HARVEST_SMTP_HOST": "{smtp_host}", "HARVEST_SMTP_PORT": "{smtp_port}"},
         },
     },
+    {
+        "slug": "dataviva-training",
+        "clone_url": "https://github.com/rafaelsmedina/dataviva-training.git",
+        "ref": None,
+        "category": "social",
+        "why_selected": (
+            "Real Flask + Flask-SQLAlchemy microblog app (a Miguel "
+            "Grinberg 'Flask Mega-Tutorial' derivative), MIT licensed. "
+            "edit_profile() does a genuine authenticated, persisted "
+            "update of a real user's username/about_me via db.session."
+            "commit() -- confirmed by registering a real account, editing "
+            "its real profile, and confirming the new text appears on a "
+            "fresh real page load of that user's public profile. Needs a "
+            "real, old Flask 2.2/Flask-Babel 2.0 dependency pair "
+            "(Flask-Babel 2.0 imports a Flask API removed from modern "
+            "Flask) -- installing that into the shared venv broke every "
+            "other harvested app's Flask import, confirmed the hard way, "
+            "so this app gets its own dedicated venv "
+            "(python_version: '3.11-legacy-flask')."
+        ),
+        "runner": {
+            "kind": "flask_module_attr",
+            "app_module": "app",
+            "app_attr": "app",
+            "python_version": "3.11-legacy-flask",
+            "reset_globs": ["app/app.db"],
+            "setup_scripts": [
+                "-c import sys; sys.path.insert(0, '.'); "
+                "from app import app, db; "
+                "ctx = app.app_context(); ctx.push(); "
+                "db.create_all(); "
+                "print('schema created')",
+            ],
+            "readiness_path": "/login",
+        },
+    },
 ]
 # Common LICENSE filenames to look for, in priority order.
 LICENSE_FILENAMES = ["LICENSE", "LICENSE.txt", "LICENSE.md", "COPYING", "COPYING.txt"]

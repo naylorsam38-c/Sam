@@ -1,0 +1,53 @@
+{
+  "about_me": "Real about-me text written by the harvest proof at 2026-09-19T13:59:34.721139+00:00.",
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0023",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 302,
+      "step": "anonymous_edit_profile_check",
+      "url": "http://127.0.0.1:5057/edit_profile"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_register_form",
+      "url": "http://127.0.0.1:5057/register"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "register_new_account",
+      "url": "http://127.0.0.1:5057/login",
+      "username": "hproof26374"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login",
+      "url": "http://127.0.0.1:5057/home"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_edit_profile_form",
+      "url": "http://127.0.0.1:5057/edit_profile"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "submit_edit_profile",
+      "url": "http://127.0.0.1:5057/edit_profile"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_public_profile_after_edit",
+      "url": "http://127.0.0.1:5057/user/hproof26374"
+    }
+  ],
+  "username": "hproof26374",
+  "verified_at": "2026-09-19T13:59:34.773510+00:00"
+}

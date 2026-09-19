@@ -7,7 +7,7 @@ into a verified running build, and prove it against a live running
 application. No invented capabilities, no fake implementations, no mocks in
 any proof.
 
-**Status**: 22 capabilities harvested from 18 real applications, each one
+**Status**: 23 capabilities harvested from 19 real applications, each one
 independently license-verified, AST-evidence-confirmed, and live-proven.
 Per the handoff: *"300 discovered ≠ 300 proven."* This is real, growing
 progress toward the library, not a claim that it's done — see "What's next"
@@ -43,7 +43,7 @@ Every stage resolves its paths from `config.py` (`SOURCE_ROOT`,
 `SHELF_ROOT`, `REGISTRY_ROOT`, `TEST_TARGET`) and prints them at startup.
 No script assumes a working directory.
 
-## The 22 capabilities harvested so far
+## The 23 capabilities harvested so far
 
 | CAP-ID | Capability | App | Licence | Attach point | Live proof |
 |---|---|---|---|---|---|
@@ -69,6 +69,7 @@ No script assumes a working directory.
 | CAP-0020 | track location | [talha-siddiqui137/smart-attendance-system](https://github.com/talha-siddiqui137/smart-attendance-system) | MIT | `views/student.py:41` `mark_attendance` (real geopy geodesic distance vs. a real 100m geofence, `verify_location`, `commit`) | HTTP |
 | CAP-0021 | set permissions | [RishiS-HSCProjects/EnterpriseProject](https://github.com/RishiS-HSCProjects/EnterpriseProject) | MIT | `app/admin/routes.py:106` `update_role` (real admin-gated, persisted role change, `UserRole.from_string`, `commit`) | HTTP |
 | CAP-0022 | verify email | [Dixieboy76/tech_hub](https://github.com/Dixieboy76/tech_hub) | MIT | `app/routes.py:65` `verify_email` (real itsdangerous signed-token verification, `verify_email_token`, `commit`) | HTTP |
+| CAP-0023 | edit profile | [rafaelsmedina/dataviva-training](https://github.com/rafaelsmedina/dataviva-training) | MIT | `app/routes.py:103` `edit_profile` (real persisted username/about_me update, `validate_on_submit`, `commit`) | HTTP |
 
 None of these were picked by keyword. `detect_capability.py` uses Python's
 `ast` module: a route path or a function name is only a *hint* that
@@ -219,6 +220,20 @@ code):
   `MAIL_PASSWORD` so Flask-Mail doesn't attempt a real AUTH login the
   debug server doesn't support (confirmed by first reproducing the real
   `SMTPNotSupportedError` this causes, not assumed).
+- dataviva-training (a Miguel Grinberg "Flask Mega-Tutorial" derivative)
+  genuinely needs an old Flask 2.2 / Flask-Babel 2.0 pairing (Flask-Babel
+  2.0 imports a Flask API modern Flask has removed). A real, costly
+  mistake made and fixed while harvesting this one: pinned old
+  Flask/Flask-SQLAlchemy/Flask-Bootstrap/Flask-Babel versions were first
+  installed into the pipeline's *shared* `.venv` to test-drive this app,
+  which silently broke a previously-working, already-harvested capability
+  (CAP-0010, via an overwritten `flask-bootstrap`/`Bootstrap-Flask`
+  module collision) until the full reproducibility sweep below caught it
+  and it was reverted. The fix: this app gets its own fully isolated
+  `.venv-legacy-flask` (same mechanism as `.venv-py312`, extended to key
+  by dependency-set as well as Python version — see `build.py`'s
+  `PYTHON_BY_VERSION`), and nothing outside that dedicated venv is ever
+  touched for an app with unusual dependency needs again.
 
 ## What each pipeline stage actually proved
 
@@ -229,7 +244,7 @@ app's own `LICENSE` file — never metadata, never a badge. Blocks (records
 marker is found.
 
 ### 2. Attach-point detection
-AST-based, line-accurate for all 22 capabilities across 18 apps (see the
+AST-based, line-accurate for all 23 capabilities across 19 apps (see the
 table above). Two search modes: `route_path_hint` (the capability lives
 directly in a Flask route handler) and `symbol_hint` (the capability lives
 in a plain function or a helper the route delegates to — used for
@@ -380,6 +395,10 @@ Highlights beyond the basic "call it and check 200":
   revisiting the same real link afterward hits the app's own "already
   verified" branch cleanly rather than crashing or un-verifying the
   account.
+- CAP-0023: confirms an anonymous request to the edit-profile route is
+  rejected, registers a genuinely new account, edits its real about_me
+  text, and confirms the exact submitted text appears on a fresh real
+  GET of that user's own public profile page afterward.
 
 ## How to reproduce this from scratch
 
@@ -401,12 +420,24 @@ python3.12 -m venv .venv-py312
 ./.venv-py312/bin/pip install flask flask-login flask-sqlalchemy flask-migrate \
     flask-wtf python-dotenv requests bcrypt discord-webhook
 
+# dataviva-training genuinely needs an OLD Flask 2.2 / Flask-Babel 2.0
+# pairing that is mutually incompatible with the modern Flask/Werkzeug the
+# venv above (and every other harvested app) depends on -- NEVER install
+# these into .venv or .venv-py312. Learned the hard way: doing so once
+# broke CAP-0010 until a full reproducibility sweep caught it. This one
+# gets its own fully isolated venv instead.
+python3.11 -m venv .venv-legacy-flask
+./.venv-legacy-flask/bin/pip install flask==2.2.2 flask-sqlalchemy==3.0.2 \
+    flask-migrate==4.0.2 flask-login==0.6.2 flask-moment==1.0.5 \
+    flask-bootstrap==3.3.7.1 flask-babel==2.0.0 flask-wtf==1.1.1 \
+    elasticsearch==8.6.0 email-validator==1.3.1 werkzeug==2.2.2 python-dotenv
+
 python3 discovery/discover_applications.py
 python3 detection/detect_capability.py
 for cap in CAP-0001 CAP-0002 CAP-0003 CAP-0004 CAP-0005 CAP-0006 CAP-0007 \
            CAP-0008 CAP-0009 CAP-0010 CAP-0011 CAP-0012 CAP-0013 CAP-0014 \
            CAP-0015 CAP-0016 CAP-0017 CAP-0018 CAP-0019 CAP-0020 CAP-0021 \
-           CAP-0022; do
+           CAP-0022 CAP-0023; do
     python3 harvest_parts.py harvest_requests/${cap}.request.json
 done
 python3 shelf_records.py
@@ -505,11 +536,15 @@ python3 build.py stop
 python3 build.py start --cap CAP-0022 --port 5057
 ./.venv/bin/python3 test/prove_CAP-0022_http.py
 python3 build.py stop
+
+python3 build.py start --cap CAP-0023 --port 5057
+./.venv/bin/python3 test/prove_CAP-0023_http.py
+python3 build.py stop
 ```
 
 This exact sequence was run against a fully wiped state (`application_pool/`,
 `shelf/`, `capabilities/`, `output/*`, `discovery/applications.json` all
-deleted first, venvs kept) eight times now, at eight different capability
+deleted first, venvs kept) nine times now, at nine different capability
 counts, to confirm it's genuinely reproducible, not an artifact of an
 ad-hoc fixing sequence.
 
@@ -517,7 +552,7 @@ ad-hoc fixing sequence.
 
 **Proved, for real:**
 - Real application discovery with real licence verification from the
-  source file, across 18 different repositories and three distinct real
+  source file, across 19 different repositories and three distinct real
   licences (MIT, BSD-3-Clause, Apache-2.0).
 - Real AST-based attach-point detection that rejects name-only matches,
   across both route-handler and helper-function capability shapes,
@@ -530,7 +565,7 @@ ad-hoc fixing sequence.
   anything, across two Python versions and an app whose data path resolves
   outside its own repo entirely (`$HOME`-based, handled via an isolated,
   resettable `HOME` override rather than patching the app).
-- Sixteen independent, real, non-mocked live proofs, including negative/
+- Seventeen independent, real, non-mocked live proofs, including negative/
   access-control checks, cross-interface consistency checks, a real
   multi-day date-diffing proof that required inserting real historical
   data directly into the app's own real database (not through its HTTP
@@ -555,10 +590,15 @@ ad-hoc fixing sequence.
   and a genuine non-admin access-control rejection, and a real signed
   email-verification-token proof that confirms a tampered token is
   rejected and that revisiting an already-consumed real link is
-  idempotent rather than crashing.
+  idempotent rather than crashing, and a real profile-edit proof (with a
+  real anonymous-access rejection) against an app that required its own
+  fully isolated Python environment after an old, mutually-incompatible
+  dependency pair was mistakenly test-installed into the shared venv and
+  broke an already-harvested capability -- caught and fixed by the same
+  full-reproducibility sweep this pipeline runs every batch.
 
 **Explicitly not yet built (do not assume it exists):**
-- **Scale beyond 22.** ~59 names in the 81-name vocabulary (see
+- **Scale beyond 23.** ~58 names in the 81-name vocabulary (see
   `CAPABILITY_VOCABULARY.md` for the full recovered list and live status)
   have not been researched yet. Each one needs the same real vetting
   (license read from source, AST-confirmed evidence, live proof) — this is

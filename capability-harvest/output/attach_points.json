@@ -421,6 +421,26 @@
       "route_path": null,
       "source_file_relative": "app/routes.py",
       "symbol": "verify_email"
+    },
+    {
+      "app_slug": "dataviva-training",
+      "cap_id": "CAP-0023",
+      "category": "social",
+      "decorators": [
+        "@app.route('/edit_profile', methods=['GET', 'POST'])",
+        "@login_required"
+      ],
+      "end_lineno": 115,
+      "evidence_calls_matched": [
+        "commit",
+        "validate_on_submit"
+      ],
+      "found": true,
+      "lineno": 103,
+      "name": "edit profile",
+      "route_path": null,
+      "source_file_relative": "app/routes.py",
+      "symbol": "edit_profile"
     }
   ]
 }

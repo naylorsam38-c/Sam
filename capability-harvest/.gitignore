@@ -7,6 +7,7 @@
 # apps genuinely need a newer interpreter (see build.py PYTHON_BY_VERSION).
 /.venv/
 /.venv-py312/
+/.venv-legacy-flask/
 __pycache__/
 *.pyc
 

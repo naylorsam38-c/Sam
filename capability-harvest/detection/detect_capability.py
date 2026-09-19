@@ -239,6 +239,15 @@ CAPABILITY_TARGETS = [
         "symbol_hint": "verify_email",
         "evidence_call_names": {"verify_email_token", "commit"},
     },
+    {
+        "cap_id": "CAP-0023",
+        "name": "edit profile",
+        "category": "social",
+        "app_slug": "dataviva-training",
+        "source_file_relative": "app/routes.py",
+        "symbol_hint": "edit_profile",
+        "evidence_call_names": {"validate_on_submit", "commit"},
+    },
 ]
 # ----------------------------------------------------------------------------
 
