@@ -7,8 +7,10 @@
 #   original, verified against its own explicit spec (this file's assertions).
 # Section D: checkEdit/normalizeChanges gates.
 # Section E: the real ask -> resolve -> preview -> keep/undo flow in
-#   front-door.html, against the real 8-app shelf catalog in library.json,
+#   front-door.html, against the real shelf catalog in library.json,
 #   three viewports.
+# Section E2: ask-resolution regression -- every one of the 19 real catalog
+#   apps must resolve from a natural, non-keyword-copying plain-language ask.
 # Section F: frontdoor-skin-adapter.js's postMessage contract, proven against
 #   genuinely cross-origin pages (a second HTTP server on a different port),
 #   both measured families plus an unmeasured one.
@@ -212,6 +214,54 @@ with sync_playwright() as p:
             pg.click("#close"); pg.wait_for_timeout(150)
         check(f"{label}: no JS errors across the whole flow", not errs, errs)
         pg.close()
+
+    # ── E2. Ask-resolution regression: every one of the 19 real catalog apps must
+    # resolve from a natural, non-keyword-copying plain-language ask, driven through
+    # the real UI (#ask-input -> #ask-form -> resolveAsk() -> app.slug), not a direct
+    # function call. Added after a real bug was found: resolveAsk's original scoring
+    # let a single-word keyword double-dip (a verbatim-substring bonus *and* a
+    # word-overlap bonus), which beat more specific multi-word keyword phrases, and
+    # had no stemming, so a plural/singular mismatch (ask "bookmark" vs. keyword
+    # "bookmarks") silently zeroed out an otherwise-correct match. Concretely, before
+    # the fix: "I need a bookmark manager" resolved to Infisical instead of linkding,
+    # "I need a blog platform" matched nothing instead of Ghost, "I need to get
+    # documents signed electronically" resolved to AnythingLLM instead of DocuSeal,
+    # and "I need to trace my LLM calls" resolved to AnythingLLM instead of langfuse.
+    # This section pins every app in the shelf, not just the four that were broken,
+    # so this class of bug can't silently regress for any of them.
+    ASK_RESOLUTION_CASES = [
+        ("I need feature flags for gradual rollouts", "ab-testing-experimentation"),
+        ("I need a customer support helpdesk", "customer-support"),
+        ("I want to code in the browser", "developer-tools"),
+        ("I need to get documents signed electronically", "digital-signiture"),
+        ("I need to monitor if my website is down", "monitoring"),
+        ("I need a reverse proxy with SSL certificates", "networking"),
+        ("I need to store my secrets and API keys", "password-manager"),
+        ("I need a to-do list app", "productivity"),
+        ("I need to trace my LLM calls", "ai-development"),
+        ("I want to take notes", "note-taking"),
+        ("I need video calling for my team", "video-conferencing"),
+        ("I want to build an internal admin tool without code", "no-code-platforms"),
+        ("I want to send marketing emails to customers", "marketing"),
+        ("I need a blog platform", "blogging"),
+        ("I need a self-hosted git server with CI/CD", "devops"),
+        ("I need a bookmark manager", "bookmarks-archiving"),
+        ("I want to chat with my documents using AI", "ai-agents"),
+        ("I need a headless CMS for my website content", "cms"),
+        ("I need a CRM for my sales team", "crm"),
+    ]
+    pg = b.new_page(viewport={"width": 1280, "height": 800})
+    pg.goto(URL); pg.wait_for_timeout(200)
+    for ask, expected_slug in ASK_RESOLUTION_CASES:
+        pg.evaluate("localStorage.clear()")
+        pg.reload(); pg.wait_for_timeout(150)
+        pg.fill("#ask-input", ask)
+        pg.click("#ask-form button")
+        pg.wait_for_timeout(200)
+        got = pg.evaluate("() => (window.inst && inst.app) ? inst.app.slug : null")
+        check(f"ask-resolution: {ask!r} -> {expected_slug}", got == expected_slug, got)
+    pg.evaluate("localStorage.clear()")
+    pg.close()
 
     # ── F. Adapter: real cross-origin postMessage, both measured families + one unmeasured ──
     pg = b.new_page(viewport={"width": 1280, "height": 800}); errs = []; warns = []

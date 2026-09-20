@@ -94,7 +94,7 @@ task. Both are pinned down by `test_frontdoor.py`'s own assertions, not vibes:
 
 ## Tested (real Chromium via Playwright, `test_frontdoor.py`)
 
-**96/96**, run against two real local HTTP servers (one for the Front Door, a second on a
+**115/115**, run against two real local HTTP servers (one for the Front Door, a second on a
 different port for the cross-origin adapter proof):
 
 - All 172 real `skins_library` files reproduced byte-for-byte by `skins-engine.js`, plus the
@@ -104,8 +104,20 @@ different port for the cross-origin adapter proof):
   floating-point remainder was taken -- the same class of bug `_verification`'s history
   already called out once before. Fixed in `skins-engine.js`'s `pymod`; see the comment there.
 - `withEdits`/`lookFields`, gates (`checkEdit`/`normalizeChanges`), ask-resolution against
-  all 8 real shelf apps (including a no-match case), preview/keep/not-that/undo/reload/
+  the real shelf apps (including a no-match case), preview/keep/not-that/undo/reload/
   close-mid-preview, three viewports (desktop, mobile, mobile dark), no JS errors.
+- Ask-resolution regression, all 19 real catalog apps: a real bug was found and fixed here
+  too -- `resolveAsk`'s original scoring let a single-word keyword double-dip (a verbatim-
+  substring bonus *and* a word-overlap bonus for the same evidence), and had no stemming, so
+  natural asks like "I need a bookmark manager" or "I need a blog platform" silently resolved
+  to the wrong app (or nothing at all). Fixed with a small deterministic stemmer, a scoring
+  split so the substring bonus only applies to multi-word phrases, and an extended stopword
+  list excluding generic descriptor nouns ("manager", "platform", "tool", ...); see the
+  comments above `stem()`/`scoreApp()`/`resolveAsk()` in `skins-engine.js`. All 19 apps now
+  proven, live in a real browser with screenshots, in
+  `shelf-integrations/_frontdoor-live-check/README.md` -- including a full click-through
+  proving the demo preview's own real "Add" button genuinely works, not just that resolution
+  picked the right app.
 - Adapter: both measured families delivered across a real different origin, colours-only
   apps get variables with no guessed stylesheet, wrong-origin senders are refused and named.
 

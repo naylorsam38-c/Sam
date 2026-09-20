@@ -445,21 +445,56 @@
   }
 
   // ---- Shelf resolution: free text -> best-matching real app in the library ----
-  var STOPWORDS = { i: 1, want: 1, need: 1, to: 1, a: 1, an: 1, the: 1, for: 1, my: 1, me: 1, some: 1, with: 1, of: 1, and: 1 };
+  // Ordinary stopwords (contribute no meaning) plus generic descriptor nouns that
+  // show up incidentally across many unrelated categories/keywords ("platform",
+  // "manager", "tool", ...) and would otherwise win a match on pure accident --
+  // e.g. "I need a blog platform" matching a *No-Code Platforms* app on the word
+  // "platform" alone, or "I need a bookmark manager" matching a *Password Manager*
+  // app on the word "manager" alone. Excluding them from scoring entirely (rather
+  // than just down-weighting them) keeps resolveAsk's logic a single, auditable
+  // word-overlap pass instead of two different scoring paths.
+  var STOPWORDS = {
+    i: 1, want: 1, need: 1, to: 1, a: 1, an: 1, the: 1, for: 1, my: 1, me: 1, some: 1, with: 1, of: 1, and: 1,
+    platform: 1, platforms: 1, manager: 1, managers: 1, tool: 1, tools: 1, app: 1, apps: 1,
+    software: 1, solution: 1, solutions: 1, service: 1, services: 1, system: 1, systems: 1
+  };
 
   function tokenize(text) {
     return (text.toLowerCase().match(/[a-z0-9]+/g) || []).filter(function (w) { return !STOPWORDS[w]; });
   }
 
-  function scoreApp(app, askWords, askText) {
+  // A tiny, deterministic English stemmer -- not linguistically complete, just enough
+  // to stop plural/singular and simple verb-form mismatches (e.g. "bookmark" vs.
+  // "bookmarks", "trace" vs. "tracing", "blog" vs. "blogging") from silently zeroing
+  // out an otherwise-correct keyword match. Matches this module's existing "small
+  // deterministic table, not an LLM call" design for parseAsk/resolveAsk.
+  function stem(w) {
+    if (w.length > 5 && /(.)\1ing$/.test(w)) return w.slice(0, -4); // doubled consonant: "blogging" -> "blog"
+    if (w.length > 4 && /ing$/.test(w)) return w.slice(0, -3);
+    if (w.length > 4 && /ies$/.test(w)) return w.slice(0, -3) + "y";
+    if (w.length > 3 && /es$/.test(w)) return w.slice(0, -2);
+    if (w.length > 3 && /s$/.test(w)) return w.slice(0, -1);
+    return w;
+  }
+
+  function scoreApp(app, askText, askStems) {
     var score = 0;
     var haystacks = [app.name, app.category].concat(app.keywords || []);
     haystacks.forEach(function (h) {
-      if (askText.indexOf(h.toLowerCase()) !== -1) score += 5;
-    });
-    askWords.forEach(function (w) {
-      haystacks.forEach(function (h) {
-        if (h.toLowerCase().split(/[^a-z0-9]+/).indexOf(w) !== -1) score += 2;
+      var hWords = h.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+      // A multi-word haystack phrase matching verbatim inside the ask is a strong,
+      // specific signal (e.g. "reverse proxy" appearing in the ask) and scores highest.
+      // Single-word haystacks are scored through the per-word channel below only --
+      // otherwise a generic one-word keyword like "llm" or "manager" would double-dip
+      // (a verbatim-substring bonus *and* a word-overlap bonus for the same evidence),
+      // letting it systematically outscore more specific multi-word keyword phrases
+      // that rarely appear verbatim in natural phrasing. This was a real bug: it made
+      // "I need to trace my LLM calls" resolve to the wrong app over langfuse's own
+      // "llm tracing"/"llm observability" keywords, and "I need a bookmark manager"
+      // resolve to a password manager over linkding's own "bookmarks" keyword.
+      if (hWords.length > 1 && askText.indexOf(h.toLowerCase()) !== -1) score += 5;
+      hWords.forEach(function (hw) {
+        if (askStems.indexOf(stem(hw)) !== -1) score += 2;
       });
     });
     return score;
@@ -471,10 +506,10 @@
   // the catalog.
   function resolveAsk(text, library) {
     var askText = text.toLowerCase();
-    var askWords = tokenize(text);
+    var askStems = tokenize(text).map(stem);
     var best = null, bestScore = 0;
     library.forEach(function (app) {
-      var s = scoreApp(app, askWords, askText);
+      var s = scoreApp(app, askText, askStems);
       if (s > bestScore) { bestScore = s; best = app; }
     });
     return best;
