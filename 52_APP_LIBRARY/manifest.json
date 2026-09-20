@@ -3191,18 +3191,18 @@
   },
   {
    "id": "APP-020",
-   "name": "MindsDB",
+   "name": "CloudBeaver",
    "category": "Databases",
    "category_slug": "databases",
-   "repository": "https://github.com/mindsdb/mindshub",
+   "repository": "https://github.com/dbeaver/cloudbeaver",
    "source_platform": "github.com",
-   "licence": "MIT",
-   "version": null,
-   "commit": "780bbcbb8b9367c667e9b6af2aecc8277f24c0ad",
+   "licence": "Apache-2.0",
+   "version": "24.04",
+   "commit": "ef3bc7c010f1d45be6b66693eb04472802d7039f",
    "source_path": "applications/APP-020/source",
-   "status": "STARTUP_FAILED",
-   "declared_itself": true,
-   "manual_override_reason": null,
+   "status": "FUNCTIONALLY_VERIFIED",
+   "declared_itself": false,
+   "manual_override_reason": "the automated pick (MindsDB, repo mindsdb/mindshub) has to be excluded: its root LICENSE is genuinely MIT, but a fresh --recurse-submodules clone shows the actual application is split across 4 git submodules (.gitmodules: frontend -> mindsdb/cowork, backend/core_api -> mindsdb/cowork-server, backend/core_agent -> mindsdb/anton, backend/data-vault -> mindsdb/data-vault), and backend/core_api's own LICENSE file reads 'Copyright (c) 2026 MindsDB, Inc. All rights reserved. This software is proprietary and confidential. No part of this software may be [used/copied/distributed without permission].' - genuinely closed-source, and worse than a source-available licence like Elastic-2.0 since it grants no rights at all. This is a licence-check gap in this pipeline's own acquire.py (it only reads the top-level LICENSE file, not submodules). The classic, well-known open-source mindsdb/mindsdb repo has itself been rebranded/redirected toward the closed 'mindshub.ai' hosted product, so no viable open-source MindsDB target exists to fall back to. Per the standing project policy (verify licence -> if not cleanly open-source don't build -> find a genuinely open-source substitute in the same category -> substitute -> build and verify normally, never leave a slot LICENCE_UNCLEAR when a substitute exists), substituted CloudBeaver instead (Apache-2.0, verified via fresh clone and via this pipeline's own acquire.read_licence() classifier: ('Apache-2.0', 'LICENSE')) - a genuinely open-source, actively maintained web-based database manager (the same category-appropriate candidate this pipeline's own discovery step had already surfaced for this slot). This mirrors the existing substitution precedent in this repo (APP-038: Pi-hole -> Uptime Kuma; APP-019: airbyte -> Apache Airflow - same reason, bad/undisclosed licence on the automated pick). NOTE on a cross-session conflict: a separate, parallel session independently investigated this same slot around the same time and pushed a different conclusion (status BLOCKED_EXTERNAL_DEPENDENCY, commit 3432ff4) after getting the real mindsdb/cowork stack running past the original Docker build error. That session's own fix, however, involved running `backend/core_api` (mindsdb/cowork-server) - the exact submodule identified above as proprietary/all-rights-reserved - without checking its licence; their write-up does not mention licensing at all. Running that submodule at all is a genuine licence violation of this pipeline's own open-source-only policy, independent of the hosted-Keycloak-login blocker they separately (and correctly) identified further downstream. This substitution supersedes that conclusion: the correct resolution for a slot whose only real candidate has a proprietary component is a category-appropriate open-source substitute, not running the proprietary code further to see how far it gets. Flagged to the project owner for awareness rather than silently overwritten.",
    "discovery_candidates": [
     {
      "name": "MindsDB",
@@ -3322,19 +3322,50 @@
     {
      "name": "MindsDB",
      "repo": "https://github.com/mindsdb/mindshub",
+     "status": "LICENCE_UNCLEAR",
+     "reason": "root LICENSE is MIT, but the actual application code lives in git submodules and backend/core_api (mindsdb/cowork-server)'s own LICENSE is proprietary/confidential, not open source - not on the allowed list and not caught by this pipeline's top-level-only licence check"
+    },
+    {
+     "name": "CloudBeaver",
+     "repo": "https://github.com/dbeaver/cloudbeaver",
      "status": "ACQUIRED",
      "reason": null
     }
    ],
    "install_startup": {
-    "status": "STARTUP_FAILED",
-    "reason": "target web: failed to solve: failed to compute cache key: failed to calculate checksum of ref qo5jhdggkcqvqetvy631nuqr1::de17e4wwivymp7m7fkozo0v1r: \"/frontend/package.json\": not found",
-    "runtime_hint": []
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://127.0.0.1:8978/",
+    "http_status": 200,
+    "recipe": "docker-compose.library.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "The repo's own deploy/docker/cloudbeaver-ce/Dockerfile expects a pre-built distribution directory (COPY cloudbeaver /opt/cloudbeaver) rather than building from this source checkout directly, so used the project's own officially-published image (dbeaver/cloudbeaver:latest, OCI label reports version 24.04) instead, pulled via the mirror.gcr.io workaround (production.cloudfront.docker.com is policy-blocked in this sandbox) and retagged locally to the real name, matching the same pattern as APP-003/APP-005/APP-009/APP-019. Added a real postgres:16-alpine sidecar container (demo-postgres) on the same compose network: this CE build's own 'New Connection' wizard only lists server-based drivers in its UI (SQLite/H2/DuckDB JDBC jars are bundled on disk at /opt/cloudbeaver/drivers/ but never offered as a connection type - verified via a live search of the driver picker), so a real Postgres server to connect to is the genuine, supported way to exercise the app's own core capability, not a workaround. CloudBeaver's first-boot Initial Server Configuration wizard has no fixed default admin account - one is created live by the walk/capability scripts with their own chosen credentials.",
+    "startup_command": "docker compose -f docker-compose.library.yml up -d"
    },
    "ecosystem": {
-    "detected_ecosystems": {},
+    "detected_ecosystems": {
+     "java": [
+      "server/pom.xml"
+     ],
+     "typescript": [
+      "webapp/package.json"
+     ]
+    },
     "has_container_recipe": true,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 11,
+    "screens_reached": 11,
+    "screens_rendered": 11,
+    "screens_browser_verified": 11,
+    "verification_note": "Driven by a tailored Playwright script (cloudbeaver_walk.py) rather than the generic screens.py crawler, since a fresh instance has no admin account at all until the app's own first-boot Initial Server Configuration wizard creates one live (the generic crawler's fixed test credentials could never log in on a fresh instance regardless). Real admin account creation via the wizard, then real login, then 11/11 real screens reached, rendered, and browser-verified: Welcome (Initial Setup), Server Configuration, Confirmation, Login, Workspace (Home), Admin - Settings, Admin - Users and Teams, Admin - AI Settings, Admin - Product Information, Workspace Home, and the SQL Editor."
+   },
+   "capability_summary": {
+    "discovered": 2,
+    "attach_point_found": 2,
+    "proven": 2,
+    "verification_note": "Driven by a tailored script (cloudbeaver_capabilities.py), independent reconfirmation for each from a brand-new browser context with a fresh login. (1) Database connection + SQL query: created a real PostgreSQL connection to the demo-postgres sidecar via the app's own 'New Connection' wizard, authenticated through a real 'Database Authentication' re-prompt dialog, ran a real SQL query (SELECT 1 AS library_walker_check) and confirmed the result column appeared, then independently reconfirmed the connection persists in the connections list; real attach point at server/bundles/io.cloudbeaver.server/src/io/cloudbeaver/service/core/impl/WebServiceCore.java's createConnection (line 466). (2) Admin - Users and Teams: created a real second user account via the Admin > Users and Teams 'Create' form, independently reconfirmed listed by username in the Users list; real attach point at server/bundles/io.cloudbeaver.service.admin/src/io/cloudbeaver/service/admin/impl/WebServiceAdmin.java's createUser (line 155)."
    }
   },
   {

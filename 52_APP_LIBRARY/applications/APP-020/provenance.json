@@ -1,15 +1,16 @@
 {
  "application": "APP-020",
  "category": "databases",
- "repository_url": "https://github.com/mindsdb/mindshub",
- "commit_sha": "780bbcbb8b9367c667e9b6af2aecc8277f24c0ad",
- "branch": "main",
- "download_timestamp": "2026-09-19T11:44:49.166685+00:00",
+ "repository_url": "https://github.com/dbeaver/cloudbeaver",
+ "commit_sha": "ef3bc7c010f1d45be6b66693eb04472802d7039f",
+ "branch": "devel",
+ "download_timestamp": "2026-09-20T06:49:03.876270+00:00",
  "download_method": "git clone --depth 1",
  "licence_file": "LICENSE",
- "licence_detected": "MIT",
+ "licence_detected": "Apache-2.0",
  "licence_allowed": true,
- "source_checksum_sha256": "988969ab9d2de88c3f6808df52fba8e8f5489b0f12475beed552a60fb05fbfba",
- "discovery_source": "awesome-selfhosted",
- "stargazers_count": 39749
+ "source_checksum_sha256": "42efc8c2aaabb4d105f8ea88517a7bac9cca8e974ffd0bea893e69a2b117d5c9",
+ "discovery_source": "manual_override",
+ "stargazers_count": null,
+ "manual_override_note": "Substituted for the originally-discovered mindsdb/mindshub (MIT top-level LICENSE, but a proprietary/confidential submodule behind it - correctly excluded once found; see the original acquisition_attempts entry retained in app.json for the record). See app.json manual_override_reason for the full substitution rationale."
 }
