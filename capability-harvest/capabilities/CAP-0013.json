@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0013",
+  "category": "payroll",
+  "generated_at": "2026-09-19T15:17:46.531425+00:00",
+  "implementations": [
+    {
+      "app_slug": "payroll-tax-calculator",
+      "commit": "af699c7d3a12f66b9ff9a88a97f193743f58c04e",
+      "harvested_at": "2026-09-19T15:17:45.113406+00:00",
+      "licence": "Apache-2.0",
+      "provenance_path": "shelf/payroll-tax-calculator/CAP-0013/PROVENANCE.json",
+      "shelf_path": "shelf/payroll-tax-calculator/CAP-0013"
+    }
+  ],
+  "name": "calculate tax"
+}

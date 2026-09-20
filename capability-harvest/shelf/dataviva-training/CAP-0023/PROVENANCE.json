@@ -1,0 +1,52 @@
+{
+  "application": {
+    "category": "social",
+    "commit": "284d831a2c1b0b6109ac3c964aa0190225f8a25f",
+    "repo_url": "https://github.com/rafaelsmedina/dataviva-training.git",
+    "slug": "dataviva-training"
+  },
+  "cap_id": "CAP-0023",
+  "capability_name": "edit profile",
+  "category": "social",
+  "checksums": {
+    "harvested_source_sha256": "7c9e8bca2de4f52c1782e69bcc2910309f6eadea320e5f2a759d78e996060104",
+    "whole_source_file_sha256_at_harvest": "f7df78533bf8979b6fc3f4661076b5322837105b4611e93d978c23e12f026a3c"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "EditProfileForm",
+      "app",
+      "db",
+      "flash",
+      "login_required",
+      "redirect",
+      "render_template",
+      "request",
+      "url_for"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:45.700397+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@app.route('/edit_profile', methods=['GET', 'POST'])",
+      "@login_required"
+    ],
+    "end_lineno": 115,
+    "evidence_calls_matched": [
+      "commit",
+      "validate_on_submit"
+    ],
+    "file": "app/routes.py",
+    "lineno": 103,
+    "route_path": null,
+    "symbol": "edit_profile"
+  }
+}

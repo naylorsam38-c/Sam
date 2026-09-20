@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0037",
+  "category": "auth",
+  "generated_at": "2026-09-19T15:17:46.535865+00:00",
+  "implementations": [
+    {
+      "app_slug": "django-otp-auth",
+      "commit": "b67bc6848aceca230c4b84e4c22357c8870f2b04",
+      "harvested_at": "2026-09-19T15:17:46.490006+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/django-otp-auth/CAP-0037/PROVENANCE.json",
+      "shelf_path": "shelf/django-otp-auth/CAP-0037"
+    }
+  ],
+  "name": "verify phone"
+}

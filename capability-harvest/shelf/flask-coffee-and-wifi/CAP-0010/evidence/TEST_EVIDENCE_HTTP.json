@@ -1,0 +1,45 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0010",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "register",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "add_cafe",
+      "url": "http://127.0.0.1:5057/cafes"
+    },
+    {
+      "cafe_id": "1",
+      "method": "GET",
+      "status_code": 200,
+      "step": "add_bookmark",
+      "url": "http://127.0.0.1:5057/cafes"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "check_bookmarks_after_add",
+      "url": "http://127.0.0.1:5057/bookmarks"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "delete_bookmark",
+      "url": "http://127.0.0.1:5057/bookmarks"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "check_bookmarks_after_delete",
+      "url": "http://127.0.0.1:5057/bookmarks"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:01.971176+00:00"
+}

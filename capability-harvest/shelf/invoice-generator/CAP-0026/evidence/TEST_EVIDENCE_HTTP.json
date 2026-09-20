@@ -1,0 +1,39 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0026",
+  "deleted_invoice_id": 1106,
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_invoice_to_delete",
+      "url": "http://127.0.0.1:5057/api/invoices"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "confirm_exists_before_delete",
+      "url": "http://127.0.0.1:5057/api/invoices/1106"
+    },
+    {
+      "method": "DELETE",
+      "status_code": 200,
+      "step": "delete_invoice",
+      "url": "http://127.0.0.1:5057/api/invoices/1106"
+    },
+    {
+      "method": "GET",
+      "status_code": 404,
+      "step": "confirm_gone_after_delete",
+      "url": "http://127.0.0.1:5057/api/invoices/1106"
+    },
+    {
+      "method": "DELETE",
+      "status_code": 404,
+      "step": "delete_nonexistent_invoice",
+      "url": "http://127.0.0.1:5057/api/invoices/999999999"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:32.517905+00:00"
+}

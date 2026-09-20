@@ -1,0 +1,80 @@
+{
+  "anonymous_access_check": {
+    "location": "/login?next=%2Fexport",
+    "status_code": 302
+  },
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0001",
+  "csv_rows_observed": [
+    [
+      "Date",
+      "Description",
+      "Category",
+      "Amount"
+    ],
+    [
+      "2026-09-19",
+      "Capability-harvest proof expense",
+      "HarvestProof",
+      "42.42"
+    ],
+    [],
+    [
+      "--- SUMMARY ---",
+      "",
+      ""
+    ],
+    [
+      "Monthly Salary",
+      "",
+      "0.00"
+    ],
+    [
+      "Total Expenses",
+      "",
+      "42.42"
+    ],
+    [
+      "Remaining Balance",
+      "",
+      "-42.42"
+    ]
+  ],
+  "expense_found_in_export": true,
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "register",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "expense": {
+        "amount": "42.42",
+        "category": "HarvestProof",
+        "description": "Capability-harvest proof expense",
+        "expense_date": "2026-09-19"
+      },
+      "method": "GET",
+      "status_code": 200,
+      "step": "add_expense",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "content_disposition": "attachment; filename=budget_export.csv",
+      "content_type": "text/csv; charset=utf-8",
+      "method": "GET",
+      "status_code": 200,
+      "step": "export",
+      "url": "http://127.0.0.1:5057/export"
+    }
+  ],
+  "verified_at": "2026-09-19T15:19:09.521273+00:00"
+}

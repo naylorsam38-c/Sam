@@ -1,0 +1,59 @@
+{
+  "application": {
+    "category": "attendance-tracking",
+    "commit": "614adbdb7132985bed88beeb3f5857e52684be16",
+    "repo_url": "https://github.com/talha-siddiqui137/smart-attendance-system.git",
+    "slug": "smart-attendance-system"
+  },
+  "cap_id": "CAP-0020",
+  "capability_name": "track location",
+  "category": "attendance-tracking",
+  "checksums": {
+    "harvested_source_sha256": "4ead27e00db891163fc0b8a78b39d256036a70114ea6293a337256cdb2769a2b",
+    "whole_source_file_sha256_at_harvest": "f006850d49ee64b9778e97b36adc55bfba06ff1596237b86b82d5ab4c3f7af85"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "Attendance",
+      "Session",
+      "csrf",
+      "datetime",
+      "db",
+      "e",
+      "get_current_user",
+      "jsonify",
+      "log_audit",
+      "pytz",
+      "request",
+      "role_required",
+      "student_bp",
+      "validate_qr_token",
+      "verify_location"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:45.553639+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@student_bp.route('/attendance/mark', methods=['POST'])",
+      "@csrf.exempt",
+      "@role_required('undergraduate', 'postgraduate')"
+    ],
+    "end_lineno": 190,
+    "evidence_calls_matched": [
+      "commit",
+      "verify_location"
+    ],
+    "file": "views/student.py",
+    "lineno": 41,
+    "route_path": null,
+    "symbol": "mark_attendance"
+  }
+}

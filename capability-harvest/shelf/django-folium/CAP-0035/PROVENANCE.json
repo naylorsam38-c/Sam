@@ -1,0 +1,42 @@
+{
+  "application": {
+    "category": "geospatial",
+    "commit": "1f6833904db1375e9326cabd76e19372610bdf60",
+    "repo_url": "https://github.com/moustafa-shaaban/Django_and_Folium.git",
+    "slug": "django-folium"
+  },
+  "cap_id": "CAP-0035",
+  "capability_name": "show map",
+  "category": "geospatial",
+  "checksums": {
+    "harvested_source_sha256": "446cb8d2b62c1863f03c1d065ece5693d259acc70d9665034b823ea8ecf8f9fe",
+    "whole_source_file_sha256_at_harvest": "7246c1a12c78367fd7ae9e9e8b719c6f8dbaf6a2010701a3833c01ba827ce095"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "basemap",
+      "render"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:46.390465+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [],
+    "end_lineno": 22,
+    "evidence_calls_matched": [
+      "basemap",
+      "render"
+    ],
+    "file": "django_and_folium/django_and_folium/geo_app/views.py",
+    "lineno": 20,
+    "route_path": null,
+    "symbol": "index"
+  }
+}

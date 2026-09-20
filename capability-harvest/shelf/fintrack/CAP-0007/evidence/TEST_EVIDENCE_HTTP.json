@@ -1,0 +1,42 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0007",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 302,
+      "step": "anonymous_access_check",
+      "url": "http://127.0.0.1:5057/generate_report"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "demo_login",
+      "url": "http://127.0.0.1:5057/dashboard"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_report_form",
+      "url": "http://127.0.0.1:5057/generate_report"
+    },
+    {
+      "content_length": 5367,
+      "content_type": "application/pdf",
+      "method": "POST",
+      "status_code": 200,
+      "step": "generate_pdf",
+      "url": "http://127.0.0.1:5057/generate_report"
+    },
+    {
+      "content_length": 6556,
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "method": "POST",
+      "status_code": 200,
+      "step": "generate_excel",
+      "url": "http://127.0.0.1:5057/generate_report"
+    }
+  ],
+  "verified_at": "2026-09-19T15:17:56.044708+00:00"
+}

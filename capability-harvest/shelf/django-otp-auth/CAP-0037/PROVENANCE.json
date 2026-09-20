@@ -1,0 +1,45 @@
+{
+  "application": {
+    "category": "auth",
+    "commit": "b67bc6848aceca230c4b84e4c22357c8870f2b04",
+    "repo_url": "https://github.com/tohid-ab/django-otp-auth.git",
+    "slug": "django-otp-auth"
+  },
+  "cap_id": "CAP-0037",
+  "capability_name": "verify phone",
+  "category": "auth",
+  "checksums": {
+    "harvested_source_sha256": "08fafa16871d44c2ae2886e54ede7c9f5efd5d6145c375c02cd10a073c0429c9",
+    "whole_source_file_sha256_at_harvest": "9f705808cc48343ef4d0ce93873dc632e85f5416252969c3bc3ff027a154097e"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "OTPCode",
+      "Response",
+      "VerifyOtpRequestSerializer",
+      "err_msg",
+      "err_serializer",
+      "status"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:46.490006+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [],
+    "end_lineno": 62,
+    "evidence_calls_matched": [
+      "_handle_login"
+    ],
+    "file": "otp/django_otp_auth/apps/rest/auth/views.py",
+    "lineno": 52,
+    "route_path": null,
+    "symbol": "post"
+  }
+}

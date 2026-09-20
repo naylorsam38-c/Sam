@@ -1,0 +1,50 @@
+{
+  "application": {
+    "category": "media",
+    "commit": "227f005343bd815e2f5360ab818beb6b93cf9b48",
+    "repo_url": "https://github.com/Mukesh-Web-Dev/imageUploadFlaskApp.git",
+    "slug": "image-upload-app"
+  },
+  "cap_id": "CAP-0029",
+  "capability_name": "capture photo",
+  "category": "media",
+  "checksums": {
+    "harvested_source_sha256": "ac530db2d530bf7fb339e06f14b96f4383640b862a5fb3f62493523ab8448bd9",
+    "whole_source_file_sha256_at_harvest": "82aa682599b7a436c170b076b3160e27bda01d38f5690bbde11612a64975c9c4"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "BytesIO",
+      "Image",
+      "app",
+      "base64",
+      "datetime",
+      "os",
+      "render_template",
+      "request"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:46.048109+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@app.route('/capture', methods=['GET', 'POST'])"
+    ],
+    "end_lineno": 81,
+    "evidence_calls_matched": [
+      "b64decode",
+      "save"
+    ],
+    "file": "app.py",
+    "lineno": 62,
+    "route_path": null,
+    "symbol": "capture"
+  }
+}

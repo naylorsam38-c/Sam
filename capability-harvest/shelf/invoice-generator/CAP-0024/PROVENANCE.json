@@ -1,0 +1,48 @@
+{
+  "application": {
+    "category": "billing",
+    "commit": "14f0b74b979604e970dc1b14e803581c42e78b2d",
+    "repo_url": "https://github.com/rishabh0510rishabh/Invoice-generator.git",
+    "slug": "invoice-generator"
+  },
+  "cap_id": "CAP-0024",
+  "capability_name": "create record",
+  "category": "billing",
+  "checksums": {
+    "harvested_source_sha256": "ff2bdf40a85c28acff082c53b41e8bcd18326ddcf5721369ce812d5666cb2226",
+    "whole_source_file_sha256_at_harvest": "bc49c16f5268edbc255b7ace0c2d665993b80feb3334c463648f82997f2414e2"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "app",
+      "e",
+      "get_db_connection",
+      "item",
+      "jsonify",
+      "request"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:45.755523+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@app.route('/api/invoices', methods=['POST'])"
+    ],
+    "end_lineno": 536,
+    "evidence_calls_matched": [
+      "commit",
+      "executemany"
+    ],
+    "file": "server.py",
+    "lineno": 492,
+    "route_path": null,
+    "symbol": "create_invoice"
+  }
+}

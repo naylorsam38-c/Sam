@@ -1,0 +1,22 @@
+{
+  "aliases": [
+    "export",
+    "csv export",
+    "download export",
+    "export data"
+  ],
+  "cap_id": "CAP-0001",
+  "category": "personal-finance",
+  "generated_at": "2026-09-19T15:17:46.529060+00:00",
+  "implementations": [
+    {
+      "app_slug": "monthly-expenses-tracker",
+      "commit": "7fd04edb0756e8dda501ee01b98dc30de2d238b6",
+      "harvested_at": "2026-09-19T15:17:44.497145+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/monthly-expenses-tracker/CAP-0001/PROVENANCE.json",
+      "shelf_path": "shelf/monthly-expenses-tracker/CAP-0001"
+    }
+  ],
+  "name": "export data"
+}

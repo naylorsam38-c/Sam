@@ -1,0 +1,53 @@
+{
+  "application": {
+    "category": "social",
+    "commit": "22c8625704b2e600fe69e94b26570c2cb1bf8abe",
+    "repo_url": "https://github.com/MadGotten/Social-Life.git",
+    "slug": "social-life"
+  },
+  "cap_id": "CAP-0031",
+  "capability_name": "paginate list",
+  "category": "social",
+  "checksums": {
+    "harvested_source_sha256": "149bda631d24f4d898ad029d84ab9b1d280cbf2300420cad69a8f57a52092c0c",
+    "whole_source_file_sha256_at_harvest": "d8d62312c130f05a61ddb45240a8921a6f2ce4fb64e4052f95256eaef4109f3c"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "Post",
+      "ROWS_PER_PAGE",
+      "User",
+      "current_user",
+      "login_required",
+      "main",
+      "render_template",
+      "request",
+      "verified_account"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:46.156089+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "Apache-2.0",
+    "marker_matched": "Apache License"
+  },
+  "source": {
+    "decorators": [
+      "@main.route('/')",
+      "@login_required",
+      "@verified_account"
+    ],
+    "end_lineno": 26,
+    "evidence_calls_matched": [
+      "order_by",
+      "paginate"
+    ],
+    "file": "app.py",
+    "lineno": 16,
+    "route_path": null,
+    "symbol": "index"
+  }
+}

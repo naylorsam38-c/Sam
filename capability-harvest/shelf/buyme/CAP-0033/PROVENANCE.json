@@ -1,0 +1,54 @@
+{
+  "application": {
+    "category": "auctions",
+    "commit": "86693e87bde6e8cb34a9cb22893c7c7c1e1caf92",
+    "repo_url": "https://github.com/arpannookala12/BuyMe---Online-Auction-System.git",
+    "slug": "buyme"
+  },
+  "cap_id": "CAP-0033",
+  "capability_name": "close auction",
+  "category": "auctions",
+  "checksums": {
+    "harvested_source_sha256": "7b00f2a70dad0395585361baabb2ec88df868d7f2f3924224ceb5880ee53afa4",
+    "whole_source_file_sha256_at_harvest": "aaba47881f86587009c36a827628577203403798a5e4439832879d4f171f3e3f"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "Auction",
+      "abort",
+      "auction_bp",
+      "current_user",
+      "datetime",
+      "db",
+      "flash",
+      "login_required",
+      "redirect",
+      "send_notification_email",
+      "url_for"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:46.287176+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@auction_bp.route('/<int:id>/end', methods=['POST'])",
+      "@login_required"
+    ],
+    "end_lineno": 716,
+    "evidence_calls_matched": [
+      "commit",
+      "determine_winner"
+    ],
+    "file": "app/routes/auction.py",
+    "lineno": 682,
+    "route_path": null,
+    "symbol": "end_auction"
+  }
+}

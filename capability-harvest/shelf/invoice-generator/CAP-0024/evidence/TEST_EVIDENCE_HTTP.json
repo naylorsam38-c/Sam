@@ -1,0 +1,40 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0024",
+  "created_invoice_id": 1041,
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "POST",
+      "status_code": 400,
+      "step": "attempt_create_with_missing_fields",
+      "url": "http://127.0.0.1:5057/api/invoices"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_seeded_customers",
+      "url": "http://127.0.0.1:5057/api/customers"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_seeded_items",
+      "url": "http://127.0.0.1:5057/api/items"
+    },
+    {
+      "invoice_no": "HARVEST-PROOF-1789831109",
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_real_invoice",
+      "url": "http://127.0.0.1:5057/api/invoices"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_created_invoice",
+      "url": "http://127.0.0.1:5057/api/invoices/1041"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:29.781888+00:00"
+}

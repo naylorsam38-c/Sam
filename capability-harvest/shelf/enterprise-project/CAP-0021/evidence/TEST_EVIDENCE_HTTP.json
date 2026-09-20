@@ -1,0 +1,44 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0021",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "admin_login",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "promote_staff_to_manager",
+      "url": "http://127.0.0.1:5057/admin/update_role/2"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_admin_panel_after_promotion",
+      "url": "http://127.0.0.1:5057/admin/"
+    },
+    {
+      "method": "POST",
+      "status_code": 403,
+      "step": "attempt_self_demotion",
+      "url": "http://127.0.0.1:5057/admin/update_role/1"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "promoted_manager_login",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "POST",
+      "status_code": 302,
+      "step": "non_admin_attempts_role_change",
+      "url": "http://127.0.0.1:5057/admin/update_role/1"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:23.248565+00:00"
+}

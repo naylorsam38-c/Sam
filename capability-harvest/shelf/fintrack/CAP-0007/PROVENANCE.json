@@ -1,0 +1,54 @@
+{
+  "application": {
+    "category": "personal-finance",
+    "commit": "948a9a007776488607e55971687970bc25874ddc",
+    "repo_url": "https://github.com/vedpatel-real-ai/Fintrack-Flask-CS50-Final-Project.git",
+    "slug": "fintrack"
+  },
+  "cap_id": "CAP-0007",
+  "capability_name": "generate report",
+  "category": "personal-finance",
+  "checksums": {
+    "harvested_source_sha256": "34da1d605a9c7e6ba5a15a82166f2d358bbd95177a0434c1772252e09de720f7",
+    "whole_source_file_sha256_at_harvest": "4eba83e795d5b6ba11a4acf3cdca5b23ac2254dedf177f35cd9bc8498ff931f9"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "_build_excel_report",
+      "_build_pdf_report",
+      "_user_expenses",
+      "db",
+      "expense",
+      "get_exchange_rates",
+      "login_required",
+      "render_template",
+      "reports_bp",
+      "request",
+      "session"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:44.794343+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@reports_bp.route('/generate_report', methods=['GET', 'POST'])",
+      "@login_required"
+    ],
+    "end_lineno": 56,
+    "evidence_calls_matched": [
+      "_build_excel_report",
+      "_build_pdf_report"
+    ],
+    "file": "app/routes/reports.py",
+    "lineno": 33,
+    "route_path": "/generate_report",
+    "symbol": "generate_report"
+  }
+}

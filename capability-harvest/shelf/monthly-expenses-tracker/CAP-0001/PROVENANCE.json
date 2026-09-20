@@ -1,0 +1,51 @@
+{
+  "application": {
+    "category": "personal-finance",
+    "commit": "7fd04edb0756e8dda501ee01b98dc30de2d238b6",
+    "repo_url": "https://github.com/NHasan143/monthly-expenses-tracker.git",
+    "slug": "monthly-expenses-tracker"
+  },
+  "cap_id": "CAP-0001",
+  "capability_name": "export data",
+  "category": "personal-finance",
+  "checksums": {
+    "harvested_source_sha256": "822213996a5e5f855af99c6a1f91612387cbd7fe3a6a3f2ba78614b0e563653b",
+    "whole_source_file_sha256_at_harvest": "dcdddaf7b1c9f3aa676676c603ab21b0c95e31ad054b3b7f30f40d59f4846ec5"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "calculate_balance",
+      "csv",
+      "current_user",
+      "io",
+      "load_data",
+      "login_required",
+      "main",
+      "send_file"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:44.497145+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@main.route('/export')",
+      "@login_required"
+    ],
+    "end_lineno": 381,
+    "evidence_calls_matched": [
+      "send_file",
+      "writer"
+    ],
+    "file": "app/routes.py",
+    "lineno": 358,
+    "route_path": "/export",
+    "symbol": "export_csv"
+  }
+}

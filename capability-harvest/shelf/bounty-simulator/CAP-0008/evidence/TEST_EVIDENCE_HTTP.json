@@ -1,0 +1,53 @@
+{
+  "badge_names_after_100xp": [
+    "First Blood"
+  ],
+  "badge_names_after_200xp": [
+    "First Blood"
+  ],
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0008",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "register",
+      "url": "http://127.0.0.1:5057/api/register"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "profile_before",
+      "url": "http://127.0.0.1:5057/api/profile"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "submit_challenge_1",
+      "url": "http://127.0.0.1:5057/api/challenges/1/submit"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "submit_challenge_2",
+      "url": "http://127.0.0.1:5057/api/challenges/2/submit"
+    },
+    {
+      "badges": [
+        "First Blood"
+      ],
+      "method": "GET",
+      "status_code": 200,
+      "step": "profile_after_100xp",
+      "url": "http://127.0.0.1:5057/api/profile"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "submit_challenge_3",
+      "url": "http://127.0.0.1:5057/api/challenges/3/submit"
+    }
+  ],
+  "verified_at": "2026-09-19T15:17:58.158667+00:00"
+}

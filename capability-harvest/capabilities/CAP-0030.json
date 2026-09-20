@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0030",
+  "category": "auctions",
+  "generated_at": "2026-09-19T15:17:46.534324+00:00",
+  "implementations": [
+    {
+      "app_slug": "smartbid",
+      "commit": "ccc3e0de84a20dedd6ab2cc866a12cb5125f2279",
+      "harvested_at": "2026-09-19T15:17:46.099035+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/smartbid/CAP-0030/PROVENANCE.json",
+      "shelf_path": "shelf/smartbid/CAP-0030"
+    }
+  ],
+  "name": "place bid"
+}

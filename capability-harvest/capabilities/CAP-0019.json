@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0019",
+  "category": "media",
+  "generated_at": "2026-09-19T15:17:46.532319+00:00",
+  "implementations": [
+    {
+      "app_slug": "image-upload-app",
+      "commit": "227f005343bd815e2f5360ab818beb6b93cf9b48",
+      "harvested_at": "2026-09-19T15:17:45.504845+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/image-upload-app/CAP-0019/PROVENANCE.json",
+      "shelf_path": "shelf/image-upload-app/CAP-0019"
+    }
+  ],
+  "name": "upload image"
+}

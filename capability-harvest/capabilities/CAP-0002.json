@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0002",
+  "category": "inventory",
+  "generated_at": "2026-09-19T15:17:46.529356+00:00",
+  "implementations": [
+    {
+      "app_slug": "inventory-tracker",
+      "commit": "6aba7fb8ef1b86e1d9e03184476b8bb37fe2bc12",
+      "harvested_at": "2026-09-19T15:17:44.545899+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/inventory-tracker/CAP-0002/PROVENANCE.json",
+      "shelf_path": "shelf/inventory-tracker/CAP-0002"
+    }
+  ],
+  "name": "manage inventory"
+}

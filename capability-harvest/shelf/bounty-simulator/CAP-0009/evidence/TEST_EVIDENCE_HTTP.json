@@ -1,0 +1,40 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0009",
+  "leaderboard_excerpt": [
+    {
+      "id": 4,
+      "rank": "Newbie",
+      "username": "harvesthigh1789831079",
+      "xp": 100
+    },
+    {
+      "id": 3,
+      "rank": "Newbie",
+      "username": "harvestlow1789831079",
+      "xp": 50
+    }
+  ],
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "low_user_submits_50xp",
+      "url": "http://127.0.0.1:5057/api/challenges/1/submit"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "high_user_submits_100xp",
+      "url": "http://127.0.0.1:5057/api/challenges/3/submit"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_leaderboard",
+      "url": "http://127.0.0.1:5057/api/leaderboard"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:00.209916+00:00"
+}

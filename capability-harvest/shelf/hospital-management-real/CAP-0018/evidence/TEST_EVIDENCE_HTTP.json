@@ -1,0 +1,32 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0018",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login_as_admin",
+      "url": "http://127.0.0.1:5057/dashboard"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "dashboard_reachable_before_logout",
+      "url": "http://127.0.0.1:5057/dashboard"
+    },
+    {
+      "method": "GET",
+      "status_code": 302,
+      "step": "logout",
+      "url": "http://127.0.0.1:5057/logout"
+    },
+    {
+      "method": "GET",
+      "status_code": 302,
+      "step": "dashboard_unreachable_after_logout",
+      "url": "http://127.0.0.1:5057/dashboard"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:15.718138+00:00"
+}

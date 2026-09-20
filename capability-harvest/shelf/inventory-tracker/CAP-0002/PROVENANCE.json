@@ -1,0 +1,48 @@
+{
+  "application": {
+    "category": "inventory",
+    "commit": "6aba7fb8ef1b86e1d9e03184476b8bb37fe2bc12",
+    "repo_url": "https://github.com/Antoh254/Inventory-Tracker.git",
+    "slug": "inventory-tracker"
+  },
+  "cap_id": "CAP-0002",
+  "capability_name": "manage inventory",
+  "category": "inventory",
+  "checksums": {
+    "harvested_source_sha256": "20bb8bd26d3668b1a76424bf22a5b0b870a03197f5ca6634f164f4b7d962b188",
+    "whole_source_file_sha256_at_harvest": "c516b1831970df924217ff0b6eeebd5ceb07861db1b9f824a983f4daca714015"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "DB_NAME",
+      "app",
+      "redirect",
+      "request",
+      "sqlite3",
+      "url_for"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:44.545899+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@app.route('/update/<int:id>', methods=['POST'])"
+    ],
+    "end_lineno": 62,
+    "evidence_calls_matched": [
+      "commit",
+      "execute"
+    ],
+    "file": "app.py",
+    "lineno": 49,
+    "route_path": "/update/<int:id>",
+    "symbol": "update_stock"
+  }
+}

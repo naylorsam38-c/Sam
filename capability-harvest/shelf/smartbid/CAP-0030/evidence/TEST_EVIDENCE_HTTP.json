@@ -1,0 +1,63 @@
+{
+  "auction_id": 1,
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0030",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "register_seller",
+      "url": "http://127.0.0.1:5057/api/auth/register"
+    },
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "register_bidder",
+      "url": "http://127.0.0.1:5057/api/auth/register"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "login_seller",
+      "url": "http://127.0.0.1:5057/api/auth/login"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "login_bidder",
+      "url": "http://127.0.0.1:5057/api/auth/login"
+    },
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_auction",
+      "url": "http://127.0.0.1:5057/api/auctions"
+    },
+    {
+      "method": "POST",
+      "status_code": 400,
+      "step": "bid_not_enough",
+      "url": "http://127.0.0.1:5057/api/auctions/1/bid"
+    },
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "bid_valid",
+      "url": "http://127.0.0.1:5057/api/auctions/1/bid"
+    },
+    {
+      "method": "POST",
+      "status_code": 400,
+      "step": "bid_repeat_same_amount_now_invalid",
+      "url": "http://127.0.0.1:5057/api/auctions/1/bid"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_auction_after_bids",
+      "url": "http://127.0.0.1:5057/api/auctions/1"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:37.993600+00:00"
+}

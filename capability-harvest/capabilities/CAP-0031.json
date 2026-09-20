@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0031",
+  "category": "social",
+  "generated_at": "2026-09-19T15:17:46.534519+00:00",
+  "implementations": [
+    {
+      "app_slug": "social-life",
+      "commit": "22c8625704b2e600fe69e94b26570c2cb1bf8abe",
+      "harvested_at": "2026-09-19T15:17:46.156089+00:00",
+      "licence": "Apache-2.0",
+      "provenance_path": "shelf/social-life/CAP-0031/PROVENANCE.json",
+      "shelf_path": "shelf/social-life/CAP-0031"
+    }
+  ],
+  "name": "paginate list"
+}

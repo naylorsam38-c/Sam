@@ -1,0 +1,77 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0031",
+  "page1_count": 5,
+  "page2_count": 1,
+  "posts_created": 6,
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_login_form",
+      "url": "http://127.0.0.1:5057/login"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "create_real_post_0",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "create_real_post_1",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "create_real_post_2",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "create_real_post_3",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "create_real_post_4",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "create_real_post_5",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_page_1",
+      "url": "http://127.0.0.1:5057/?page=1"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_page_2",
+      "url": "http://127.0.0.1:5057/?page=2"
+    },
+    {
+      "method": "GET",
+      "status_code": 404,
+      "step": "fetch_page_3",
+      "url": "http://127.0.0.1:5057/?page=3"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:40.511386+00:00"
+}

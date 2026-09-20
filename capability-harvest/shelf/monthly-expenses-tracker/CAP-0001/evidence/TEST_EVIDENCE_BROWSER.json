@@ -1,0 +1,23 @@
+{
+  "cap_id": "CAP-0001",
+  "base_url": "http://127.0.0.1:5057",
+  "steps": [
+    {
+      "step": "register",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "step": "add_expense",
+      "url": "http://127.0.0.1:5057/expenses"
+    },
+    {
+      "step": "download_export",
+      "suggested_filename": "budget_export.csv",
+      "saved_to": "/home/user/Sam/capability-harvest/output/browser_export_download.csv"
+    }
+  ],
+  "downloaded_csv_text": "Date,Description,Category,Amount\r\n2026-09-19,Capability-harvest browser proof expense,HarvestBrowserProof,17.50\r\n\r\n--- SUMMARY ---,,\r\nMonthly Salary,,0.00\r\nTotal Expenses,,17.50\r\nRemaining Balance,,-17.50\r\n",
+  "expense_found_in_download": true,
+  "verified_at": "2026-09-19T15:19:13.586Z",
+  "result": "PASS"
+}

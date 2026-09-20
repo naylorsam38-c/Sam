@@ -1,0 +1,35 @@
+{
+  "base_url": "http://127.0.0.1:5000",
+  "cap_id": "CAP-0032",
+  "matched_product_name": "Paracetamol 500mg",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 302,
+      "step": "anonymous_barcode_lookup_check",
+      "url": "http://127.0.0.1:5000/api/products/barcode/8901234567890"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login_as_admin",
+      "url": "http://127.0.0.1:5000/"
+    },
+    {
+      "barcode": "8901234567890",
+      "method": "GET",
+      "status_code": 200,
+      "step": "lookup_real_seeded_barcode",
+      "url": "http://127.0.0.1:5000/api/products/barcode/8901234567890"
+    },
+    {
+      "barcode": "0000000000000",
+      "method": "GET",
+      "status_code": 200,
+      "step": "lookup_never_seeded_barcode",
+      "url": "http://127.0.0.1:5000/api/products/barcode/0000000000000"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:41.578402+00:00"
+}

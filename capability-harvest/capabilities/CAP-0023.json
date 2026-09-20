@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0023",
+  "category": "social",
+  "generated_at": "2026-09-19T15:17:46.532967+00:00",
+  "implementations": [
+    {
+      "app_slug": "dataviva-training",
+      "commit": "284d831a2c1b0b6109ac3c964aa0190225f8a25f",
+      "harvested_at": "2026-09-19T15:17:45.700397+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/dataviva-training/CAP-0023/PROVENANCE.json",
+      "shelf_path": "shelf/dataviva-training/CAP-0023"
+    }
+  ],
+  "name": "edit profile"
+}

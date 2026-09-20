@@ -1,0 +1,41 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0004",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "establish_session",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "add_habit",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "habit_id": 1,
+      "method": "GET",
+      "status_code": 200,
+      "step": "mark_done_today",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "backfilled_dates": [
+        "2026-09-18",
+        "2026-09-17"
+      ],
+      "method": "GET",
+      "status_code": 200,
+      "step": "homepage_after_backfill",
+      "url": "http://127.0.0.1:5057/"
+    }
+  ],
+  "streaks_observed": {
+    "after_one_day": 1,
+    "after_three_consecutive_days": 3
+  },
+  "verified_at": "2026-09-19T15:17:52.394525+00:00"
+}

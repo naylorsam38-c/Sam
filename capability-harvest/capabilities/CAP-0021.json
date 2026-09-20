@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0021",
+  "category": "staff-management",
+  "generated_at": "2026-09-19T15:17:46.532706+00:00",
+  "implementations": [
+    {
+      "app_slug": "enterprise-project",
+      "commit": "b2965b6b8af0cd0a32f47b02ee266fa0b7b7b54e",
+      "harvested_at": "2026-09-19T15:17:45.600136+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/enterprise-project/CAP-0021/PROVENANCE.json",
+      "shelf_path": "shelf/enterprise-project/CAP-0021"
+    }
+  ],
+  "name": "set permissions"
+}

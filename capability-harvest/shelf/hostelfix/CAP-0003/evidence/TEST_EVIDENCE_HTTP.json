@@ -1,0 +1,22 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0003",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "query": "hostel a",
+      "status_code": 200,
+      "step": "search_positive",
+      "url": "http://127.0.0.1:5057/search?query=hostel+a"
+    },
+    {
+      "method": "GET",
+      "query": "NoSuchPlaceXYZ999",
+      "status_code": 200,
+      "step": "search_negative",
+      "url": "http://127.0.0.1:5057/search?query=NoSuchPlaceXYZ999"
+    }
+  ],
+  "verified_at": "2026-09-19T15:17:51.424326+00:00"
+}

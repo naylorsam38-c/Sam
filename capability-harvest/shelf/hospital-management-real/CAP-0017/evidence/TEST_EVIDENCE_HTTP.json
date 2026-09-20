@@ -1,0 +1,38 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0017",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 302,
+      "step": "anonymous_dashboard_check",
+      "url": "http://127.0.0.1:5057/dashboard"
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "login_with_wrong_password",
+      "url": "http://127.0.0.1:5057/login"
+    },
+    {
+      "method": "GET",
+      "status_code": 302,
+      "step": "dashboard_still_unreachable_after_failed_login",
+      "url": "http://127.0.0.1:5057/dashboard"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login_with_real_admin_credentials",
+      "url": "http://127.0.0.1:5057/dashboard"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_dashboard_after_login",
+      "url": "http://127.0.0.1:5057/dashboard"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:13.991323+00:00"
+}

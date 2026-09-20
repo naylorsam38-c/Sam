@@ -1,0 +1,52 @@
+{
+  "application": {
+    "category": "fitness",
+    "commit": "5c5737130c8052d7c7094ae5c45df29bcb93b635",
+    "repo_url": "https://github.com/wifizak/CasettaFit.git",
+    "slug": "casettafit"
+  },
+  "cap_id": "CAP-0011",
+  "capability_name": "log workout",
+  "category": "fitness",
+  "checksums": {
+    "harvested_source_sha256": "438a377453b2500fed20198fe1db1417722f5b31ea535b2fcc8bd0d8bec32532",
+    "whole_source_file_sha256_at_harvest": "2f974cc89deed84be7d1fed30b39ab54b84cb769202c2e57fbcb6c64b6faf355"
+  },
+  "dependencies": {
+    "collaborators_referenced": [
+      "WorkoutSession",
+      "WorkoutSet",
+      "bp",
+      "current_user",
+      "datetime",
+      "db",
+      "jsonify",
+      "login_required",
+      "request"
+    ],
+    "note": "These names are referenced by the harvested function but are not themselves harvested as separate shelf entries in this walking skeleton. build.py resolves them from a live checkout of the same application at the same commit, and verifies (by source comparison) that the mounted route is byte-identical to what was harvested here."
+  },
+  "harvest_tool": "harvest_parts.py",
+  "harvested_at": "2026-09-19T15:17:45.010379+00:00",
+  "licence": {
+    "file": "LICENSE",
+    "flagged_for_sign_off": false,
+    "id": "MIT",
+    "marker_matched": "MIT License"
+  },
+  "source": {
+    "decorators": [
+      "@bp.route('/api/session/<int:session_id>/log-set', methods=['POST'])",
+      "@login_required"
+    ],
+    "end_lineno": 272,
+    "evidence_calls_matched": [
+      "add",
+      "commit"
+    ],
+    "file": "app/routes/workout.py",
+    "lineno": 211,
+    "route_path": "/api/session/<int:session_id>/log-set",
+    "symbol": "log_set"
+  }
+}

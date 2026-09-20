@@ -1,0 +1,712 @@
+{
+  "attach_points": [
+    {
+      "app_slug": "monthly-expenses-tracker",
+      "cap_id": "CAP-0001",
+      "category": "personal-finance",
+      "decorators": [
+        "@main.route('/export')",
+        "@login_required"
+      ],
+      "end_lineno": 381,
+      "evidence_calls_matched": [
+        "send_file",
+        "writer"
+      ],
+      "found": true,
+      "lineno": 358,
+      "name": "export data",
+      "route_path": "/export",
+      "source_file_relative": "app/routes.py",
+      "symbol": "export_csv"
+    },
+    {
+      "app_slug": "inventory-tracker",
+      "cap_id": "CAP-0002",
+      "category": "inventory",
+      "decorators": [
+        "@app.route('/update/<int:id>', methods=['POST'])"
+      ],
+      "end_lineno": 62,
+      "evidence_calls_matched": [
+        "commit",
+        "execute"
+      ],
+      "found": true,
+      "lineno": 49,
+      "name": "manage inventory",
+      "route_path": "/update/<int:id>",
+      "source_file_relative": "app.py",
+      "symbol": "update_stock"
+    },
+    {
+      "app_slug": "hostelfix",
+      "cap_id": "CAP-0003",
+      "category": "hostel-booking",
+      "decorators": [
+        "@app.route('/search')"
+      ],
+      "end_lineno": 229,
+      "evidence_calls_matched": [
+        "filter",
+        "ilike"
+      ],
+      "found": true,
+      "lineno": 213,
+      "name": "search records",
+      "route_path": "/search",
+      "source_file_relative": "app.py",
+      "symbol": "search"
+    },
+    {
+      "app_slug": "habit-tracker",
+      "cap_id": "CAP-0004",
+      "category": "habit-tracking",
+      "decorators": [],
+      "end_lineno": 253,
+      "evidence_calls_matched": [
+        "max",
+        "sorted"
+      ],
+      "found": true,
+      "lineno": 215,
+      "name": "track streak",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "calculate_streaks"
+    },
+    {
+      "app_slug": "flask-messenger",
+      "cap_id": "CAP-0005",
+      "category": "messaging",
+      "decorators": [],
+      "end_lineno": 36,
+      "evidence_calls_matched": [
+        "commit",
+        "connect",
+        "execute"
+      ],
+      "found": true,
+      "lineno": 30,
+      "name": "send message",
+      "route_path": null,
+      "source_file_relative": "messenger.py",
+      "symbol": "_add_message"
+    },
+    {
+      "app_slug": "recipe-app",
+      "cap_id": "CAP-0006",
+      "category": "recipe-sharing",
+      "decorators": [
+        "@comments_blueprint.route('/recipe/<int:recipe_id>/comment', methods=['POST'])",
+        "@login_needed"
+      ],
+      "end_lineno": 36,
+      "evidence_calls_matched": [
+        "commit",
+        "execute"
+      ],
+      "found": true,
+      "lineno": 18,
+      "name": "write review",
+      "route_path": null,
+      "source_file_relative": "routes/comments.py",
+      "symbol": "make_comment"
+    },
+    {
+      "app_slug": "fintrack",
+      "cap_id": "CAP-0007",
+      "category": "personal-finance",
+      "decorators": [
+        "@reports_bp.route('/generate_report', methods=['GET', 'POST'])",
+        "@login_required"
+      ],
+      "end_lineno": 56,
+      "evidence_calls_matched": [
+        "_build_excel_report",
+        "_build_pdf_report"
+      ],
+      "found": true,
+      "lineno": 33,
+      "name": "generate report",
+      "route_path": "/generate_report",
+      "source_file_relative": "app/routes/reports.py",
+      "symbol": "generate_report"
+    },
+    {
+      "app_slug": "bounty-simulator",
+      "cap_id": "CAP-0008",
+      "category": "gamified-learning",
+      "decorators": [],
+      "end_lineno": 40,
+      "evidence_calls_matched": [
+        "add",
+        "commit",
+        "filter_by"
+      ],
+      "found": true,
+      "lineno": 36,
+      "name": "award badge",
+      "route_path": null,
+      "source_file_relative": "backend/main.py",
+      "symbol": "check_badges"
+    },
+    {
+      "app_slug": "bounty-simulator",
+      "cap_id": "CAP-0009",
+      "category": "gamified-learning",
+      "decorators": [
+        "@app.route('/api/leaderboard')"
+      ],
+      "end_lineno": 88,
+      "evidence_calls_matched": [
+        "desc",
+        "limit",
+        "order_by"
+      ],
+      "found": true,
+      "lineno": 86,
+      "name": "show leaderboard",
+      "route_path": "/api/leaderboard",
+      "source_file_relative": "backend/main.py",
+      "symbol": "leaderboard"
+    },
+    {
+      "app_slug": "flask-coffee-and-wifi",
+      "cap_id": "CAP-0010",
+      "category": "cafe-directory",
+      "decorators": [
+        "@app.route('/add_bookmark/<int:cafe_id>')",
+        "@login_required"
+      ],
+      "end_lineno": 250,
+      "evidence_calls_matched": [
+        "add",
+        "commit"
+      ],
+      "found": true,
+      "lineno": 235,
+      "name": "add favourite",
+      "route_path": "/add_bookmark/<int:cafe_id>",
+      "source_file_relative": "main.py",
+      "symbol": "add_bookmark"
+    },
+    {
+      "app_slug": "casettafit",
+      "cap_id": "CAP-0011",
+      "category": "fitness",
+      "decorators": [
+        "@bp.route('/api/session/<int:session_id>/log-set', methods=['POST'])",
+        "@login_required"
+      ],
+      "end_lineno": 272,
+      "evidence_calls_matched": [
+        "add",
+        "commit"
+      ],
+      "found": true,
+      "lineno": 211,
+      "name": "log workout",
+      "route_path": "/api/session/<int:session_id>/log-set",
+      "source_file_relative": "app/routes/workout.py",
+      "symbol": "log_set"
+    },
+    {
+      "app_slug": "zinny-api",
+      "cap_id": "CAP-0012",
+      "category": "media-rating",
+      "decorators": [
+        "@ratings_bp.route('/', methods=['POST'])"
+      ],
+      "end_lineno": 161,
+      "evidence_calls_matched": [
+        "commit",
+        "execute"
+      ],
+      "found": true,
+      "lineno": 96,
+      "name": "rate item",
+      "route_path": null,
+      "source_file_relative": "src/zinny_api/api/ratings.py",
+      "symbol": "save_rating"
+    },
+    {
+      "app_slug": "payroll-tax-calculator",
+      "cap_id": "CAP-0013",
+      "category": "payroll",
+      "decorators": [],
+      "end_lineno": 105,
+      "evidence_calls_matched": [
+        "max",
+        "min"
+      ],
+      "found": true,
+      "lineno": 3,
+      "name": "calculate tax",
+      "route_path": null,
+      "source_file_relative": "salary_engine.py",
+      "symbol": "calculate_payroll_details"
+    },
+    {
+      "app_slug": "hospital-management-real",
+      "cap_id": "CAP-0014",
+      "category": "healthcare-scheduling",
+      "decorators": [
+        "@app.route('/patient/book', methods=['POST'])",
+        "@patient_required"
+      ],
+      "end_lineno": 878,
+      "evidence_calls_matched": [
+        "add",
+        "commit",
+        "filter_by"
+      ],
+      "found": true,
+      "lineno": 864,
+      "name": "book slot",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "patient_book"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0015",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices/<int:invoice_id>/pdf')"
+      ],
+      "end_lineno": 284,
+      "evidence_calls_matched": [
+        "render_template",
+        "write_pdf"
+      ],
+      "found": true,
+      "lineno": 265,
+      "name": "generate invoice",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "generate_invoice_pdf"
+    },
+    {
+      "app_slug": "hospital-management-real",
+      "cap_id": "CAP-0016",
+      "category": "healthcare-scheduling",
+      "decorators": [
+        "@app.route('/patient/register', methods=['GET', 'POST'])"
+      ],
+      "end_lineno": 833,
+      "evidence_calls_matched": [
+        "commit",
+        "generate_password_hash"
+      ],
+      "found": true,
+      "lineno": 824,
+      "name": "register account",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "patient_register"
+    },
+    {
+      "app_slug": "hospital-management-real",
+      "cap_id": "CAP-0017",
+      "category": "healthcare-scheduling",
+      "decorators": [
+        "@app.route('/login', methods=['GET', 'POST'])"
+      ],
+      "end_lineno": 304,
+      "evidence_calls_matched": [
+        "check_password_hash",
+        "commit"
+      ],
+      "found": true,
+      "lineno": 290,
+      "name": "log in",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "login"
+    },
+    {
+      "app_slug": "hospital-management-real",
+      "cap_id": "CAP-0018",
+      "category": "healthcare-scheduling",
+      "decorators": [
+        "@app.route('/logout')"
+      ],
+      "end_lineno": 313,
+      "evidence_calls_matched": [
+        "commit"
+      ],
+      "found": true,
+      "lineno": 308,
+      "name": "log out",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "logout"
+    },
+    {
+      "app_slug": "image-upload-app",
+      "cap_id": "CAP-0019",
+      "category": "media",
+      "decorators": [
+        "@app.route('/upload', methods=['POST'])"
+      ],
+      "end_lineno": 112,
+      "evidence_calls_matched": [
+        "save",
+        "secure_filename"
+      ],
+      "found": true,
+      "lineno": 86,
+      "name": "upload image",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "upload_image"
+    },
+    {
+      "app_slug": "smart-attendance-system",
+      "cap_id": "CAP-0020",
+      "category": "attendance-tracking",
+      "decorators": [
+        "@student_bp.route('/attendance/mark', methods=['POST'])",
+        "@csrf.exempt",
+        "@role_required('undergraduate', 'postgraduate')"
+      ],
+      "end_lineno": 190,
+      "evidence_calls_matched": [
+        "commit",
+        "verify_location"
+      ],
+      "found": true,
+      "lineno": 41,
+      "name": "track location",
+      "route_path": null,
+      "source_file_relative": "views/student.py",
+      "symbol": "mark_attendance"
+    },
+    {
+      "app_slug": "enterprise-project",
+      "cap_id": "CAP-0021",
+      "category": "staff-management",
+      "decorators": [
+        "@admin_bp.route('/update_role/<int:entry_id>', methods=['POST'])",
+        "@admin_required"
+      ],
+      "end_lineno": 152,
+      "evidence_calls_matched": [
+        "commit",
+        "from_string"
+      ],
+      "found": true,
+      "lineno": 106,
+      "name": "set permissions",
+      "route_path": null,
+      "source_file_relative": "app/admin/routes.py",
+      "symbol": "update_role"
+    },
+    {
+      "app_slug": "tech-hub",
+      "cap_id": "CAP-0022",
+      "category": "auth",
+      "decorators": [
+        "@auth_routes.route('/verify_email/<token>')"
+      ],
+      "end_lineno": 83,
+      "evidence_calls_matched": [
+        "commit",
+        "verify_email_token"
+      ],
+      "found": true,
+      "lineno": 65,
+      "name": "verify email",
+      "route_path": null,
+      "source_file_relative": "app/routes.py",
+      "symbol": "verify_email"
+    },
+    {
+      "app_slug": "dataviva-training",
+      "cap_id": "CAP-0023",
+      "category": "social",
+      "decorators": [
+        "@app.route('/edit_profile', methods=['GET', 'POST'])",
+        "@login_required"
+      ],
+      "end_lineno": 115,
+      "evidence_calls_matched": [
+        "commit",
+        "validate_on_submit"
+      ],
+      "found": true,
+      "lineno": 103,
+      "name": "edit profile",
+      "route_path": null,
+      "source_file_relative": "app/routes.py",
+      "symbol": "edit_profile"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0024",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices', methods=['POST'])"
+      ],
+      "end_lineno": 536,
+      "evidence_calls_matched": [
+        "commit",
+        "executemany"
+      ],
+      "found": true,
+      "lineno": 492,
+      "name": "create record",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "create_invoice"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0025",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices/<int:invoice_id>', methods=['PUT'])"
+      ],
+      "end_lineno": 625,
+      "evidence_calls_matched": [
+        "commit",
+        "executemany"
+      ],
+      "found": true,
+      "lineno": 573,
+      "name": "edit record",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "update_invoice"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0026",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices/<int:invoice_id>', methods=['DELETE'])"
+      ],
+      "end_lineno": 72,
+      "evidence_calls_matched": [
+        "commit",
+        "execute"
+      ],
+      "found": true,
+      "lineno": 60,
+      "name": "delete record",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "delete_invoice"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0027",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices/<int:invoice_id>', methods=['GET'])"
+      ],
+      "end_lineno": 570,
+      "evidence_calls_matched": [
+        "execute",
+        "fetchall"
+      ],
+      "found": true,
+      "lineno": 539,
+      "name": "view record detail",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "get_invoice_details"
+    },
+    {
+      "app_slug": "invoice-generator",
+      "cap_id": "CAP-0028",
+      "category": "billing",
+      "decorators": [
+        "@app.route('/api/invoices', methods=['GET'])"
+      ],
+      "end_lineno": 115,
+      "evidence_calls_matched": [
+        "execute",
+        "fetchall"
+      ],
+      "found": true,
+      "lineno": 75,
+      "name": "filter list",
+      "route_path": null,
+      "source_file_relative": "server.py",
+      "symbol": "get_invoices"
+    },
+    {
+      "app_slug": "image-upload-app",
+      "cap_id": "CAP-0029",
+      "category": "media",
+      "decorators": [
+        "@app.route('/capture', methods=['GET', 'POST'])"
+      ],
+      "end_lineno": 81,
+      "evidence_calls_matched": [
+        "b64decode",
+        "save"
+      ],
+      "found": true,
+      "lineno": 62,
+      "name": "capture photo",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "capture"
+    },
+    {
+      "app_slug": "smartbid",
+      "cap_id": "CAP-0030",
+      "category": "auctions",
+      "decorators": [
+        "@auctions_bp.route('/<int:auction_id>/bid', methods=['POST'])",
+        "@require_auth"
+      ],
+      "end_lineno": 201,
+      "evidence_calls_matched": [
+        "encrypt_bid_amount"
+      ],
+      "found": true,
+      "lineno": 128,
+      "name": "place bid",
+      "route_path": null,
+      "source_file_relative": "app/routes/auctions.py",
+      "symbol": "place_bid"
+    },
+    {
+      "app_slug": "social-life",
+      "cap_id": "CAP-0031",
+      "category": "social",
+      "decorators": [
+        "@main.route('/')",
+        "@login_required",
+        "@verified_account"
+      ],
+      "end_lineno": 26,
+      "evidence_calls_matched": [
+        "order_by",
+        "paginate"
+      ],
+      "found": true,
+      "lineno": 16,
+      "name": "paginate list",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "index"
+    },
+    {
+      "app_slug": "pharma-inventory",
+      "cap_id": "CAP-0032",
+      "category": "inventory",
+      "decorators": [
+        "@app.route('/api/products/barcode/<barcode>', methods=['GET'])",
+        "@login_required"
+      ],
+      "end_lineno": 345,
+      "evidence_calls_matched": [
+        "filter_by",
+        "jsonify"
+      ],
+      "found": true,
+      "lineno": 326,
+      "name": "scan barcode",
+      "route_path": null,
+      "source_file_relative": "app.py",
+      "symbol": "get_product_by_barcode"
+    },
+    {
+      "app_slug": "buyme",
+      "cap_id": "CAP-0033",
+      "category": "auctions",
+      "decorators": [
+        "@auction_bp.route('/<int:id>/end', methods=['POST'])",
+        "@login_required"
+      ],
+      "end_lineno": 716,
+      "evidence_calls_matched": [
+        "commit",
+        "determine_winner"
+      ],
+      "found": true,
+      "lineno": 682,
+      "name": "close auction",
+      "route_path": null,
+      "source_file_relative": "app/routes/auction.py",
+      "symbol": "end_auction"
+    },
+    {
+      "app_slug": "mini-amazon",
+      "cap_id": "CAP-0034",
+      "category": "e-commerce",
+      "decorators": [
+        "@bp.route('/cart/apply_coupon', methods=['POST'])",
+        "@login_required"
+      ],
+      "end_lineno": 124,
+      "evidence_calls_matched": [
+        "apply_coupon",
+        "flash"
+      ],
+      "found": true,
+      "lineno": 113,
+      "name": "apply discount code",
+      "route_path": null,
+      "source_file_relative": "app/cart.py",
+      "symbol": "apply_coupon"
+    },
+    {
+      "app_slug": "django-folium",
+      "cap_id": "CAP-0035",
+      "category": "geospatial",
+      "decorators": [],
+      "end_lineno": 22,
+      "evidence_calls_matched": [
+        "basemap",
+        "render"
+      ],
+      "found": true,
+      "lineno": 20,
+      "name": "show map",
+      "route_path": null,
+      "source_file_relative": "django_and_folium/django_and_folium/geo_app/views.py",
+      "symbol": "index"
+    },
+    {
+      "app_slug": "django-folium",
+      "cap_id": "CAP-0036",
+      "category": "geospatial",
+      "decorators": [
+        "@login_required"
+      ],
+      "end_lineno": 95,
+      "evidence_calls_matched": [
+        "import_data",
+        "load"
+      ],
+      "found": true,
+      "lineno": 80,
+      "name": "import data",
+      "route_path": null,
+      "source_file_relative": "django_and_folium/django_and_folium/geo_app/views.py",
+      "symbol": "import_data"
+    },
+    {
+      "app_slug": "django-otp-auth",
+      "cap_id": "CAP-0037",
+      "category": "auth",
+      "decorators": [],
+      "end_lineno": 62,
+      "evidence_calls_matched": [
+        "_handle_login"
+      ],
+      "found": true,
+      "lineno": 52,
+      "name": "verify phone",
+      "route_path": null,
+      "source_file_relative": "otp/django_otp_auth/apps/rest/auth/views.py",
+      "symbol": "post"
+    }
+  ]
+}

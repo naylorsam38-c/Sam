@@ -1,0 +1,46 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0011",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "create_exercise",
+      "url": "http://127.0.0.1:5057/exercises/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "start_workout_session",
+      "url": "http://127.0.0.1:5057/workout/execute/1"
+    },
+    {
+      "exercise_id": 1,
+      "method": "POST",
+      "status_code": 200,
+      "step": "log_set_1",
+      "url": "http://127.0.0.1:5057/workout/api/session/1/log-set",
+      "workout_session_id": 1
+    },
+    {
+      "method": "POST",
+      "status_code": 200,
+      "step": "log_set_2",
+      "url": "http://127.0.0.1:5057/workout/api/session/1/log-set"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_session_data",
+      "url": "http://127.0.0.1:5057/workout/api/session/1/data"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:04.439284+00:00"
+}

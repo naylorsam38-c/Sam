@@ -1,0 +1,17 @@
+{
+  "aliases": [],
+  "cap_id": "CAP-0007",
+  "category": "personal-finance",
+  "generated_at": "2026-09-19T15:17:46.530326+00:00",
+  "implementations": [
+    {
+      "app_slug": "fintrack",
+      "commit": "948a9a007776488607e55971687970bc25874ddc",
+      "harvested_at": "2026-09-19T15:17:44.794343+00:00",
+      "licence": "MIT",
+      "provenance_path": "shelf/fintrack/CAP-0007/PROVENANCE.json",
+      "shelf_path": "shelf/fintrack/CAP-0007"
+    }
+  ],
+  "name": "generate report"
+}

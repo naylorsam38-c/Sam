@@ -1,0 +1,47 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0012",
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_seeded_titles",
+      "url": "http://127.0.0.1:5057/api/v1/titles/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_seeded_surveys",
+      "url": "http://127.0.0.1:5057/api/v1/surveys/"
+    },
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "initial_rating",
+      "survey_id": "acting",
+      "title_id": 1,
+      "url": "http://127.0.0.1:5057/api/v1/ratings/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_initial_rating",
+      "url": "http://127.0.0.1:5057/api/v1/ratings/?title_id=1&survey_id=acting"
+    },
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "updated_rating",
+      "url": "http://127.0.0.1:5057/api/v1/ratings/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_updated_rating",
+      "url": "http://127.0.0.1:5057/api/v1/ratings/?title_id=1&survey_id=acting"
+    }
+  ],
+  "title_rated": "A Complete Unknown",
+  "verified_at": "2026-09-19T15:18:05.078017+00:00"
+}

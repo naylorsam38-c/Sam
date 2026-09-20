@@ -1,0 +1,60 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0033",
+  "is_active_after_end": 0,
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login_harvestbidder1",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login_harvestbidder2",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "amount": 12.0,
+      "method": "GET",
+      "status_code": 200,
+      "step": "bidder1_places_real_bid",
+      "url": "http://127.0.0.1:5057/auction/1"
+    },
+    {
+      "amount": 15.0,
+      "method": "GET",
+      "status_code": 200,
+      "step": "bidder2_places_real_bid",
+      "url": "http://127.0.0.1:5057/auction/1"
+    },
+    {
+      "method": "POST",
+      "status_code": 403,
+      "step": "non_admin_bidder_attempts_end",
+      "url": "http://127.0.0.1:5057/auction/1/end"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "login_harvestrep",
+      "url": "http://127.0.0.1:5057/"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "customer_rep_ends_real_auction",
+      "url": "http://127.0.0.1:5057/auction/1"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "fetch_ended_auction_page",
+      "url": "http://127.0.0.1:5057/auction/1"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:46.274202+00:00",
+  "winner_id": 3
+}

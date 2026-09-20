@@ -1,0 +1,47 @@
+{
+  "base_url": "http://127.0.0.1:5057",
+  "cap_id": "CAP-0028",
+  "invoice_a": 1035,
+  "invoice_b": 1036,
+  "result": "PASS",
+  "steps": [
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_customer_A",
+      "url": "http://127.0.0.1:5057/api/customers"
+    },
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_customer_B",
+      "url": "http://127.0.0.1:5057/api/customers"
+    },
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_invoice_for_A",
+      "url": "http://127.0.0.1:5057/api/invoices"
+    },
+    {
+      "method": "POST",
+      "status_code": 201,
+      "step": "create_invoice_for_B",
+      "url": "http://127.0.0.1:5057/api/invoices"
+    },
+    {
+      "method": "GET",
+      "search": "HarvestProof1789831115CustomerA",
+      "status_code": 200,
+      "step": "filter_by_customer_a_name",
+      "url": "http://127.0.0.1:5057/api/invoices?search=HarvestProof1789831115CustomerA"
+    },
+    {
+      "method": "GET",
+      "status_code": 200,
+      "step": "filter_with_no_matches",
+      "url": "http://127.0.0.1:5057/api/invoices?search=zzz-no-such-customer-or-invoice-zzz"
+    }
+  ],
+  "verified_at": "2026-09-19T15:18:35.243848+00:00"
+}
