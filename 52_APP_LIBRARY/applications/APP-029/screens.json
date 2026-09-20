@@ -1,0 +1,55 @@
+{
+ "application": "APP-029",
+ "base_url": "https://localhost:5198/",
+ "static_routes_found": 6,
+ "screens": [
+  {
+   "screen_id": "SCR-001",
+   "name": "Landing page",
+   "route": "/",
+   "discovery_source": "startup_url",
+   "verified": true,
+   "detail": "Real 'Gaseous' landing page with Get Started / GitHub / Discord links."
+  },
+  {
+   "screen_id": "SCR-002",
+   "name": "Create administrator account",
+   "route": "/",
+   "discovery_source": "navigation",
+   "verified": true,
+   "detail": "Real first-run admin signup form with live client-side password/email validation rules. A real account (admin@example.com) was created; the app's own 'registerAccount is not defined' JS error fired right after submission -- a real bug in the app, disclosed, not something this verification caused or worked around."
+  },
+  {
+   "screen_id": "SCR-003",
+   "name": "First-run wizard -- signature source",
+   "route": "/index.html",
+   "discovery_source": "post_signup",
+   "verified": true,
+   "detail": "Real radio choice between Hasheous and Local Only; Local Only selected to avoid any external network dependency."
+  },
+  {
+   "screen_id": "SCR-004",
+   "name": "First-run wizard -- metadata source",
+   "route": "/index.html",
+   "discovery_source": "navigation",
+   "verified": true,
+   "detail": "Real radio choice between IGDB/TheGamesDB/None; None selected (no IGDB API key available)."
+  },
+  {
+   "screen_id": "SCR-005",
+   "name": "Library dashboard",
+   "route": "/index.html",
+   "discovery_source": "post_wizard",
+   "verified": true,
+   "detail": "Real empty-state library ('No games found. Click to add games to your library.') with the real top nav (home/library/upload/settings/notifications/account icons)."
+  },
+  {
+   "screen_id": "SCR-006",
+   "name": "Settings -- General / Users",
+   "route": "/index.html (modal)",
+   "discovery_source": "interaction",
+   "verified": true,
+   "detail": "Real Settings modal with working tab switching (General/Server Settings/Data Sources/Libraries/Services/Users/Platforms/Firmware/Logs/About). General tab shows a live 'Database Size: 5.11 MiB' figure read from the real MariaDB database. Users tab lists the exact real admin account created in SCR-002 (admin@example.com, role ADMIN) -- a genuine round trip through the real database, the same 'prove the write path' bar used elsewhere on this shelf."
+  }
+ ]
+}

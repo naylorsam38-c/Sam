@@ -1,0 +1,15 @@
+{
+ "application": "APP-004",
+ "category": "ai-code-assistants",
+ "repository_url": "https://github.com/TabbyML/tabby",
+ "commit_sha": "21b29048d7bcf6b94f9f482f2d0fd05efadfd19f",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:42:01.459142+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "Apache-2.0",
+ "licence_allowed": true,
+ "source_checksum_sha256": "6b629d93acb235b1d1e23244edf9bf0b9db9b0e7622f2b3027ba9756bbf3a23d",
+ "discovery_source": "github-search-or-directory",
+ "stargazers_count": 33881
+}

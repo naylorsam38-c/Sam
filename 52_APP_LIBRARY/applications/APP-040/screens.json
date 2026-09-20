@@ -1,0 +1,108 @@
+{
+ "application": "APP-040",
+ "base_url": "http://localhost:8080/",
+ "static_routes_found": 40,
+ "screens": [
+  {
+   "screen_id": "SCR-001",
+   "name": "Home",
+   "route": "/",
+   "discovery_source": "startup_url",
+   "gate_steps": [
+    {
+     "step": 1,
+     "kind": "form",
+     "url_before": "http://localhost:8080/setup/welcome",
+     "fields_filled": 5,
+     "submitted": true,
+     "url_after": "http://localhost:8080/setup/welcome"
+    },
+    {
+     "step": 2,
+     "kind": "form",
+     "url_before": "http://localhost:8080/setup/welcome",
+     "fields_filled": 0,
+     "submitted": true,
+     "url_after": "http://localhost:8080/setup/welcome"
+    },
+    {
+     "step": 3,
+     "kind": "form",
+     "url_before": "http://localhost:8080/setup/welcome",
+     "fields_filled": 0,
+     "submitted": true,
+     "url_after": "http://localhost:8080/setup/welcome"
+    },
+    {
+     "step": 4,
+     "kind": "form",
+     "url_before": "http://localhost:8080/setup/welcome",
+     "fields_filled": 0,
+     "submitted": true,
+     "url_after": "http://localhost:8080/setup/welcome"
+    },
+    {
+     "step": 5,
+     "kind": "form",
+     "url_before": "http://localhost:8080/setup/welcome",
+     "fields_filled": 0,
+     "submitted": true,
+     "url_after": "http://localhost:8080/setup/welcome"
+    },
+    {
+     "step": 6,
+     "kind": "form",
+     "url_before": "http://localhost:8080/setup/welcome",
+     "fields_filled": 0,
+     "submitted": true,
+     "url_after": "http://localhost:8080/setup/welcome"
+    },
+    {
+     "step": 7,
+     "kind": "form",
+     "url_before": "http://localhost:8080/setup/welcome",
+     "fields_filled": 0,
+     "submitted": true,
+     "url_after": "http://localhost:8080/setup/welcome"
+    },
+    {
+     "step": 8,
+     "kind": "form",
+     "url_before": "http://localhost:8080/setup/welcome",
+     "fields_filled": 0,
+     "submitted": true,
+     "url_after": "http://localhost:8080/setup/welcome"
+    },
+    {
+     "step": 9,
+     "kind": "form",
+     "url_before": "http://localhost:8080/setup/welcome",
+     "fields_filled": 0,
+     "submitted": true,
+     "url_after": "http://localhost:8080/setup/welcome"
+    }
+   ],
+   "gate_state": "STUCK",
+   "reachable": true,
+   "rendered": true,
+   "error_state": null,
+   "controls_detected": true,
+   "browser_verified": true,
+   "title": "Appsmith",
+   "heading": "",
+   "controls": {
+    "button": 7,
+    "input": 6,
+    "textarea": 0,
+    "select": 0,
+    "checkbox": 1,
+    "link": 0,
+    "menu": 0,
+    "table": 0,
+    "form": 1
+   },
+   "screenshot": "001_home.png",
+   "final_url": "http://localhost:8080/setup/welcome"
+  }
+ ]
+}

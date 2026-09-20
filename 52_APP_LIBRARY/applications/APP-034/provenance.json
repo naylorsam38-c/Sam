@@ -1,0 +1,15 @@
+{
+ "application": "APP-034",
+ "category": "learning-management",
+ "repository_url": "https://github.com/instructure/canvas-lms",
+ "commit_sha": "1c9f0bb8013ed69c4f2efe11fd483025469b7e6c",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T12:33:57.418742+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "AGPL-3.0",
+ "licence_allowed": true,
+ "source_checksum_sha256": "51309aa8703a9854908ac8037d778cee6534ac132968e1d33866c45252cf127b",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 6822
+}

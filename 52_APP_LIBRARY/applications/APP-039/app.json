@@ -1,0 +1,61 @@
+{
+ "id": "APP-039",
+ "name": "Nginx Proxy Manager",
+ "category": "Networking",
+ "category_slug": "networking",
+ "repository": "https://github.com/NginxProxyManager/nginx-proxy-manager",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "568c10594517b999dbb2240d9f7a6014b1c4bb2a",
+ "source_path": "applications/APP-039/source",
+ "status": "FUNCTIONALLY_VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": "per Sam's instruction that popularity/sandbox limits are never a valid exclusion reason, re-searched GitHub directly instead of leaving this DISCOVERY_FAILED - a real, actively-maintained self-hosted networking/VPN-coordination tool with its own verified BSD-3-Clause LICENSE file",
+ "discovery_candidates": [
+  {
+   "source_code_url": "https://github.com/NginxProxyManager/nginx-proxy-manager",
+   "name": "Nginx Proxy Manager",
+   "discovery_source": "manual_override"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Nginx Proxy Manager",
+   "repo": "https://github.com/NginxProxyManager/nginx-proxy-manager",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8181/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Used the project's own officially-documented docker-compose example (README.md) with the app's admin-UI port (81) remapped to avoid colliding with the same host's other running apps. Needed DISABLE_IPV6=true (documented in the app's own internal/nginx.js) because this sandbox's Docker network has no IPv6 support, which otherwise crash-loops nginx on `listen [::]:80`.",
+  "startup_command": "docker compose up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "go": [
+    "go.mod"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
+ },
+ "capability_summary": {
+  "discovered": 10,
+  "attach_point_found": 9,
+  "proven": 2
+ }
+}

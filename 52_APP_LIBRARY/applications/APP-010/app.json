@@ -1,0 +1,262 @@
+{
+ "id": "APP-010",
+ "name": "Ghost",
+ "category": "Blogging",
+ "category_slug": "blogging",
+ "repository": "https://github.com/TryGhost/Ghost",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "8e2eb8abfccdc4c373d5d9b6192b7ca4aba5809d",
+ "source_path": "applications/APP-010/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Ghost",
+   "source_code_url": "https://github.com/TryGhost/Ghost",
+   "stargazers_count": 55352,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Just a blogging platform.",
+   "matched_keywords": [
+    "blogging"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "WordPress",
+   "source_code_url": "https://github.com/WordPress/WordPress",
+   "stargazers_count": 21428,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "World's most-used blogging and CMS engine.",
+   "matched_keywords": [
+    "blogging"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "WriteFreely",
+   "source_code_url": "https://github.com/writefreely/writefreely",
+   "stargazers_count": 5252,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-08-28",
+   "description": "Writing software for starting a minimalist, federated blog \u2014 or an entire community.",
+   "matched_keywords": [
+    "blog"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Ech0",
+   "source_code_url": "https://github.com/lin-snow/Ech0",
+   "stargazers_count": 2058,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Lightweight federated publishing platform focused on personal idea sharing (documentation in Chinese).",
+   "matched_keywords": [
+    "publishing platform"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Bludit",
+   "source_code_url": "https://github.com/bludit/bludit",
+   "stargazers_count": 1466,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-09",
+   "description": "Build a site or blog in seconds. Bludit uses flat-files (text files in JSON format) to store posts and pages.",
+   "matched_keywords": [
+    "blog"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "MODX",
+   "source_code_url": "https://github.com/modxcms/revolution",
+   "stargazers_count": 1409,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-08-31",
+   "description": "Advanced content management and publishing platform. The current version is called 'Revolution'.",
+   "matched_keywords": [
+    "publishing platform"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "HTMLy",
+   "source_code_url": "https://github.com/danpros/htmly",
+   "stargazers_count": 1363,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-01-25",
+   "description": "Databaseless PHP blogging platform. A flat-file CMS that allows you to create a fast, secure, and powerful website or blog in seconds.",
+   "matched_keywords": [
+    "blog",
+    "blogging"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Known",
+   "source_code_url": "https://github.com/idno/idno",
+   "stargazers_count": 1123,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-04-12",
+   "description": "Collaborative social publishing platform.",
+   "matched_keywords": [
+    "publishing platform"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Haven",
+   "source_code_url": "https://github.com/havenweb/haven",
+   "stargazers_count": 803,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Private blogging system with markdown editing and built in RSS reader.",
+   "matched_keywords": [
+    "blogging"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Superdesk",
+   "source_code_url": "https://github.com/superdesk/superdesk",
+   "stargazers_count": 751,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "End-to-end news creation, production, curation, distribution, and publishing platform.",
+   "matched_keywords": [
+    "publishing platform"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Omeka S",
+   "source_code_url": "https://github.com/omeka/omeka-s",
+   "stargazers_count": 513,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-08",
+   "description": "Next-generation web publishing platform for institutions interested in connecting digital cultural heritage collections with other resources online.",
+   "matched_keywords": [
+    "publishing platform"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Chyrp Lite",
+   "source_code_url": "https://github.com/xenocrat/chyrp-lite",
+   "stargazers_count": 495,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
+   "updated_at": "2026-08-07",
+   "description": "Extra-awesome, extra-lightweight blog engine.",
+   "matched_keywords": [
+    "blog"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Mataroa",
+   "source_code_url": "https://github.com/mataroablog/mataroa",
+   "stargazers_count": 367,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-08-05",
+   "description": "Naked blogging platform for minimalists.",
+   "matched_keywords": [
+    "blogging"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "fx",
+   "source_code_url": "https://github.com/rikhuijzer/fx",
+   "stargazers_count": 325,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-15",
+   "description": "Micro-blog tool offering built-in syntax highlighting, mobile publishing and more (alternative to Twitter, Bluesky).",
+   "matched_keywords": [
+    "blog"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "BuddyPress",
+   "source_code_url": "https://github.com/buddypress/BuddyPress",
+   "stargazers_count": 255,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-08-13",
+   "description": "Powerful plugin that takes your WordPress.org powered site beyond the blog with social-network features like user profiles, activity streams, user groups, and more.",
+   "matched_keywords": [
+    "blog"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Ghost",
+   "repo": "https://github.com/TryGhost/Ghost",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:2368/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The repo ships only a Dockerfile.production meant for Ghost's own CI/multi-stage release build (not a plain docker compose recipe), so used the project's official prebuilt image (ghost:5-alpine) directly instead. Two fixes needed: (1) the image's default config bound to an address this sandbox's Docker network couldn't serve on, crash-looping with an 'InternalServerError (Code: -97)' (EADDRNOTAVAIL) - fixed via server__host=0.0.0.0 and server__port=2368 env vars (the image's own supported config-override mechanism). (2) Ghost defaults to requiring a MySQL connection (ECONNREFUSED 127.0.0.1:3306 with none provided) - switched to Ghost's built-in SQLite support (database__client=sqlite3 + a file path under the content volume) instead of adding a separate MySQL service, since SQLite is a fully supported first-class Ghost backend and keeps this a single-container recipe. Booted cleanly with the default seeded blog (a real 'Coming soon' demo post), 1 screen genuinely discovered/rendered for this fresh install.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 1,
+  "screens_reached": 1,
+  "screens_rendered": 1,
+  "screens_browser_verified": 1
+ }
+}

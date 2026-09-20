@@ -1,0 +1,15 @@
+{
+ "application": "APP-017",
+ "category": "crm",
+ "repository_url": "https://github.com/krayin/laravel-crm",
+ "commit_sha": "570a8db102607f1c191f239f06f6db06ec8b942b",
+ "branch": "2.2",
+ "download_timestamp": "2026-09-19T11:44:16.920504+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "2b33dcf4158699316091695362c805de0b46e0e6feeea7d80f94eaece69dc646",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 23899
+}

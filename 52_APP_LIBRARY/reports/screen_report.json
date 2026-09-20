@@ -1,0 +1,39 @@
+{
+ "generated_at": "2026-09-19T12:40:23.522531+00:00",
+ "apps_with_screen_data": 3,
+ "totals": {
+  "discovered": 45,
+  "reachable": 45,
+  "rendered": 44,
+  "browser_verified": 44
+ },
+ "applications": [
+  {
+   "id": "APP-024",
+   "name": "Docuseal",
+   "category": "digital-signiture",
+   "screens_discovered": 15,
+   "screens_reached": 15,
+   "screens_rendered": 15,
+   "screens_browser_verified": 15
+  },
+  {
+   "id": "APP-038",
+   "name": "Uptime Kuma",
+   "category": "monitoring",
+   "screens_discovered": 15,
+   "screens_reached": 15,
+   "screens_rendered": 15,
+   "screens_browser_verified": 15
+  },
+  {
+   "id": "APP-042",
+   "name": "Infisical Community Edition",
+   "category": "password-manager",
+   "screens_discovered": 15,
+   "screens_reached": 15,
+   "screens_rendered": 14,
+   "screens_browser_verified": 14
+  }
+ ]
+}

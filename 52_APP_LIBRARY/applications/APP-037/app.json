@@ -1,0 +1,125 @@
+{
+ "id": "APP-037",
+ "name": "Mautic",
+ "category": "Marketing",
+ "category_slug": "marketing",
+ "repository": "https://github.com/mautic/mautic",
+ "source_platform": "github.com",
+ "licence": "GPL",
+ "version": null,
+ "commit": "7912edbd7ede249ddbb2721abd6def94bee52f3e",
+ "source_path": "applications/APP-037/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Mautic",
+   "source_code_url": "https://github.com/mautic/mautic",
+   "stargazers_count": 10529,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Marketing automation software (email, social and more).",
+   "matched_keywords": [
+    "marketing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "RudderStack",
+   "source_code_url": "https://github.com/rudderlabs/rudder-server/",
+   "stargazers_count": 4487,
+   "licenses": [
+    "Elastic-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Collect, unify, transform, and store your customer data, and route it to a wide range of common, popular marketing, sales, and product tools (alternative to Segment).",
+   "matched_keywords": [
+    "marketing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Erxes",
+   "source_code_url": "https://github.com/erxes/erxes",
+   "stargazers_count": 4082,
+   "licenses": [
+    "AGPL-3.0",
+    "Commons-Clause"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Marketing, sales, and customer service platform designed to help businesses attract more engaged customers.",
+   "matched_keywords": [
+    "marketing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "phpList",
+   "source_code_url": "https://github.com/phpList/phplist3",
+   "stargazers_count": 871,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Newsletter and email marketing with advanced management of subscribers, bounces, and plugins.",
+   "matched_keywords": [
+    "marketing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Django-CRM",
+   "source_code_url": "https://github.com/DjangoCRM/django-crm",
+   "stargazers_count": 626,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Analytical CRM with tasks management, email marketing and many more. Django CRM is built for individual use, businesses of any size or freelancers and is designed to provide easy customization and quick development.",
+   "matched_keywords": [
+    "marketing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Mautic",
+   "repo": "https://github.com/mautic/mautic",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:8081/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Two real fixes were needed, both left in the recipe: (1) mysql:8.0 is explicitly rejected by Mautic's own installer ('Your database version (8.0.46) is too old for Mautic to work correctly. Supported versions are MySQL 8.4.0 (or higher) and MariaDB 10.11.0 (or higher)') - switched the db service to mysql:8.4. (2) The generic screen crawler's default form-filler blindly overwrites every detected input with placeholder text, including a pre-filled, valid numeric Database Port field on Mautic's own installer - this broke the DB-setup step ('The port must be an integer greater than 0'). Rather than patch the shared crawler under time pressure, the installer wizard (DB connection step, then admin-user creation step) was driven directly with a one-off Playwright script using the real field IDs (install_doctrine_step_host/port/name/user/password, then install_user_step_username/password/firstname/lastname/email), which completed cleanly through /installer/final to a real login screen. The admin account was then reset via Mautic's own Account Details page (/s/account) to the pipeline's standard libwalker/Walker-Pass-2026! test credentials, so the standard screens.py crawler could log in and complete a full, unmodified 15/15 screen walkthrough on its own - no crawler code changes needed.",
+  "startup_command": "docker compose -p lib_app037 -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "php": [
+    "composer.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
+ }
+}

@@ -1,0 +1,52 @@
+{
+ "application": "APP-021",
+ "base_url": "http://localhost:9001/",
+ "static_routes_found": 11,
+ "screens": [
+  {
+   "screen_id": "SCR-001",
+   "name": "Home",
+   "route": "/",
+   "discovery_source": "startup_url",
+   "gate_steps": [
+    {
+     "step": 1,
+     "kind": "form",
+     "url_before": "http://localhost:9001/#/auth/login",
+     "fields_filled": 2,
+     "submitted": true,
+     "url_after": "http://localhost:9001/#/dashboard/recent?team-id=f7c4bc2d-0d1a-80f6-8008-aa62d22e2f5e"
+    },
+    {
+     "step": 2,
+     "kind": "form",
+     "url_before": "http://localhost:9001/#/dashboard/recent?team-id=f7c4bc2d-0d1a-80f6-8008-aa62d22e2f5e",
+     "fields_filled": 0,
+     "submitted": false,
+     "url_after": "http://localhost:9001/#/dashboard/recent?team-id=f7c4bc2d-0d1a-80f6-8008-aa62d22e2f5e"
+    }
+   ],
+   "gate_state": "STUCK",
+   "reachable": true,
+   "rendered": true,
+   "error_state": null,
+   "controls_detected": true,
+   "browser_verified": true,
+   "title": "Projects - Your Penpot - Penpot",
+   "heading": "Help us get to know you",
+   "controls": {
+    "button": 10,
+    "input": 6,
+    "textarea": 0,
+    "select": 0,
+    "checkbox": 0,
+    "link": 1,
+    "menu": 1,
+    "table": 0,
+    "form": 4
+   },
+   "screenshot": "001_home.png",
+   "final_url": "http://localhost:9001/#/dashboard/recent?team-id=f7c4bc2d-0d1a-80f6-8008-aa62d22e2f5e"
+  }
+ ]
+}

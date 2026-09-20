@@ -1,0 +1,107 @@
+{
+ "id": "APP-049",
+ "name": "Postiz",
+ "category": "Social Media",
+ "category_slug": "social-media",
+ "repository": "https://github.com/gitroomhq/postiz-app",
+ "source_platform": "github.com",
+ "licence": "AGPL-3.0",
+ "version": null,
+ "commit": "6f1078011b39612838a1ce271dac5535ef9a57e5",
+ "source_path": "applications/APP-049/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": false,
+ "manual_override_reason": "automated pick (RSSHub) is an RSS feed aggregator, not a social-media app",
+ "discovery_candidates": [
+  {
+   "name": "RSSHub",
+   "source_code_url": "https://github.com/DIYgod/RSSHub",
+   "stargazers_count": 46241,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Easy to use, and extensible RSS feed aggregator capable of generating RSS feeds from pretty much everything ranging from social media to university departments.",
+   "matched_keywords": [
+    "social media"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Postiz",
+   "source_code_url": "https://github.com/gitroomhq/postiz-app",
+   "stargazers_count": 36052,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Schedule posts, track the performance of your content, and manage all your social media accounts in one place (Alternative to Buffer, Hootsuite, Sprout Social).",
+   "matched_keywords": [
+    "social media"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LinkStack",
+   "source_code_url": "https://github.com/LinkStackOrg/LinkStack",
+   "stargazers_count": 3875,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-07-06",
+   "description": "Link all your social media platforms easily accessible on one page, customizable through an intuitive, easy to use user/admin interface (alternative to Linktree and Manylink).",
+   "matched_keywords": [
+    "social media"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Socioboard",
+   "source_code_url": "https://github.com/socioboard/Socioboard-5.0",
+   "stargazers_count": 1507,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-17",
+   "description": "Social media management, analytics, and reporting platform supporting nine social media networks out-of-the-box.",
+   "matched_keywords": [
+    "social media"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Postiz",
+   "repo": "https://github.com/gitroomhq/postiz-app",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:4007/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The project's own compose file pulls ghcr.io/gitroomhq/postiz-app, with no Docker Hub equivalent (gitroomhq isn't on Docker Hub at all) - but the repo ships Dockerfile.dev, a real production build (pnpm install, pnpm build, nginx+pm2 to serve), just named for local dev compose. Built from it directly instead (Dockerfile.library), which needed several fixes: (1) Dockerfile.dev's apt-get for g++/make/python3-pip/nginx needs deb.debian.org, also blocked - switched the base image to the non-slim node:22.20-bookworm (already ships g++/make/python3) and got nginx by copying its binary + libs from the official nginx:stable-bookworm Docker Hub image (matched to the same Debian bookworm base for glibc compatibility), plus the standard nginx cache/temp directories nginx's own apt package would have created. (2) the sandbox's proxy CA needed adding for pnpm install (NODE_EXTRA_CA_CERTS). (3) next build fetches next/font/google files at build time, not just runtime - needed HTTPS_PROXY/HTTP_PROXY build args plus network: host on the build so the sandbox's egress proxy (on the host's 127.0.0.1) was reachable from inside the build container. (4) the backend hard-requires Temporal at startup (gRPC to TEMPORAL_ADDRESS, not optional despite only being network-joined in the original compose) - added trimmed temporal + temporal-postgresql + temporal-elasticsearch services (all official Docker Hub images already used by the project's own compose file); SQL-only visibility (ENABLE_ES=false) failed registering the app's custom search attributes ('cannot have more than 3 search attribute of type Text'), so kept Elasticsearch as the project's own compose does. (5) the frontend calls its backend at the literal hostname in NEXT_PUBLIC_BACKEND_URL/MAIN_URL (localhost) - reached via 127.0.0.1 in the browser, the same-origin check failed as a cross-origin CORS request with no Access-Control-Allow-Origin; using http://localhost:4007/ (matching the configured URLs) instead of 127.0.0.1 resolved it, no image change needed. Dropped the admin-panel-equivalent (spotlight, temporal-ui, temporal-admin-tools) as debug/ops tooling, not core functionality.",
+  "startup_command": "docker compose -f docker-compose.library.yml build postiz && docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 14
+ }
+}

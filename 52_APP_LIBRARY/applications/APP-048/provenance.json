@@ -1,0 +1,15 @@
+{
+ "application": "APP-048",
+ "category": "security",
+ "repository_url": "https://github.com/blakeblackshear/frigate",
+ "commit_sha": "3d08bbe5201389c65f80d22ad38a7b7432c75e87",
+ "branch": "dev",
+ "download_timestamp": "2026-09-19T11:51:43.896889+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "68ba74dcb481814f97617230d19323a14ef20484f16dc6a1710e595e446d5608",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 35981
+}

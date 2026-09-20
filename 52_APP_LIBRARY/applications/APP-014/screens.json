@@ -1,0 +1,49 @@
+{
+ "application": "APP-014",
+ "base_url": "http://127.0.0.1:3080/",
+ "static_routes_found": 1,
+ "screens": [
+  {
+   "screen_id": "SCR-001",
+   "name": "Home",
+   "route": "/",
+   "discovery_source": "startup_url",
+   "gate_steps": [],
+   "gate_state": "IN",
+   "reachable": true,
+   "rendered": true,
+   "error_state": null,
+   "controls_detected": true,
+   "browser_verified": true,
+   "title": "Rustpad",
+   "heading": "Dark Mode",
+   "controls": {
+    "button": 5,
+    "input": 3,
+    "textarea": 0,
+    "select": 1,
+    "checkbox": 1,
+    "link": 1,
+    "menu": 0,
+    "table": 0,
+    "form": 0
+   },
+   "screenshot": "001_home.png",
+   "final_url": "http://127.0.0.1:3080/#larZHQ"
+  },
+  {
+   "screen_id": "SCR-002",
+   "name": "api",
+   "route": "/api",
+   "discovery_source": "static_route",
+   "reachable": false,
+   "rendered": false,
+   "controls_detected": false,
+   "browser_verified": false,
+   "title": null,
+   "controls": {},
+   "screenshot": null,
+   "note": "navigation failed (timeout or network error)"
+  }
+ ]
+}

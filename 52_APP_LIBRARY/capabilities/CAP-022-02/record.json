@@ -1,0 +1,44 @@
+{
+ "application": "APP-022",
+ "id": "CAP-022-02",
+ "name": "Welcome to code-server",
+ "route": "/logout",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "src/node/settings.ts",
+   "matched_words": [
+    "code",
+    "server"
+   ],
+   "line": 22,
+   "snippet": "if (error.code !== \"ENOENT\") {"
+  },
+  {
+   "file": "src/node/update.ts",
+   "matched_words": [
+    "code",
+    "server"
+   ],
+   "line": 28,
+   "snippet": "* The URL for getting the latest version of code-server. Should return JSON"
+  },
+  {
+   "file": "src/node/vscodesocket.ts",
+   "matched_words": [
+    "code",
+    "server"
+   ],
+   "line": 173,
+   "snippet": "reject(new Error(\"Unexpected status code: \" + res.statusCode))"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:8090/logout",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "submitted 1 field(s); navigated to a new page (http://127.0.0.1:8090/login -> http://127.0.0.1:8090/?folder=/home/coder) consistent with the action succeeding"
+ },
+ "verdict": "PROVEN"
+}

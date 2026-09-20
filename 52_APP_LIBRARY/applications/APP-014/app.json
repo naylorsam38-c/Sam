@@ -1,0 +1,61 @@
+{
+ "id": "APP-014",
+ "name": "rustpad",
+ "category": "Code Editors",
+ "category_slug": "code-editors",
+ "repository": "https://github.com/ekzhang/rustpad",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "54e4a9383c84d7317af42a7ddb177ce8bcba058d",
+ "source_path": "applications/APP-014/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "rustpad",
+   "source_code_url": "https://github.com/ekzhang/rustpad",
+   "stargazers_count": 4075,
+   "licenses": [
+    "MIT"
+   ],
+   "archived": false,
+   "description": "Efficient and minimal collaborative code editor, self-hosted, no database required."
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "rustpad",
+   "repo": "https://github.com/ekzhang/rustpad",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:3080/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "rustpad's own Dockerfile builds from source, needing musl-dev/openssl-dev from dl-cdn.alpinelinux.org - used the project's own officially-published Docker Hub image (ekzhang/rustpad, referenced directly in its own README) instead.",
+  "startup_command": "docker compose up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 2,
+  "screens_reached": 1,
+  "screens_rendered": 1,
+  "screens_browser_verified": 1
+ }
+}

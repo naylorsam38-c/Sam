@@ -1,0 +1,15 @@
+{
+ "application": "APP-007",
+ "category": "analytics",
+ "repository_url": "https://github.com/apache/superset",
+ "commit_sha": "128c0c159ab8a1157e1f0688b43ba16b0c034889",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T11:42:55.615078+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE.txt",
+ "licence_detected": "Apache-2.0",
+ "licence_allowed": true,
+ "source_checksum_sha256": "237f6032f1d3285892cbc25ac57c2ad47211c8deec40e2a41f0c859e7e8a27f0",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 74835
+}

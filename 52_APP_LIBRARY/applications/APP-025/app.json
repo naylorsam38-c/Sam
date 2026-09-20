@@ -1,0 +1,266 @@
+{
+ "id": "APP-025",
+ "name": "Bagisto",
+ "category": "E-Commerce",
+ "category_slug": "ecommerce",
+ "repository": "https://github.com/bagisto/bagisto",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "9beff85ece6fe13378a97e6f84765b50647d3327",
+ "source_path": "applications/APP-025/source",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "MedusaJs",
+   "source_code_url": "https://github.com/medusajs/medusa",
+   "stargazers_count": 36376,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Headless commerce engine that enables developers to create amazing digital commerce experiences.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Bagisto",
+   "source_code_url": "https://github.com/bagisto/bagisto",
+   "stargazers_count": 28132,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Leading Laravel open source e-commerce framework with multi-inventory sources, taxation, localization, dropshipping and more exciting features.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Saleor",
+   "source_code_url": "https://github.com/saleor/saleor",
+   "stargazers_count": 23350,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "GraphQL native, API-only platform for scalable composable e-commerce storefront.",
+   "matched_keywords": [
+    "e-commerce",
+    "storefront"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Spree Commerce",
+   "source_code_url": "https://github.com/spree/spree",
+   "stargazers_count": 15709,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Spree is a complete, modular & API-driven open source e-commerce solution for Ruby on Rails.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Magento Open Source",
+   "source_code_url": "https://github.com/magento/magento2",
+   "stargazers_count": 12198,
+   "licenses": [
+    "OSL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Leading provider of open omnichannel innovation.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "WooCommerce",
+   "source_code_url": "https://github.com/woocommerce/woocommerce",
+   "stargazers_count": 10515,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "WordPress based e-commerce solution.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "EverShop",
+   "source_code_url": "https://github.com/evershopcommerce/evershop",
+   "stargazers_count": 10476,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "E-commerce platform with essential commerce features. Modular architecture and fully customizable.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "PrestaShop",
+   "source_code_url": "https://github.com/PrestaShop/PrestaShop",
+   "stargazers_count": 9215,
+   "licenses": [
+    "OSL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Fully scalable e-commerce solution.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Sylius",
+   "source_code_url": "https://github.com/Sylius/Sylius",
+   "stargazers_count": 8537,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Symfony2 powered open source full-stack platform for eCommerce.",
+   "matched_keywords": [
+    "e-commerce",
+    "ecommerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Vendure",
+   "source_code_url": "https://github.com/vendurehq/vendure",
+   "stargazers_count": 8452,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "A headless commerce framework.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OpenCart",
+   "source_code_url": "https://github.com/opencart/opencart",
+   "stargazers_count": 8201,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Shopping cart solution.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Aimeos",
+   "source_code_url": "https://github.com/aimeos/aimeos",
+   "stargazers_count": 5454,
+   "licenses": [
+    "LGPL-3.0",
+    "MIT"
+   ],
+   "updated_at": "2026-07-29",
+   "description": "E-commerce framework for building custom online shops, market places and complex B2B applications scaling to billions of items with Laravel.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Solidus",
+   "source_code_url": "https://github.com/solidusio/solidus",
+   "stargazers_count": 5329,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Ecommerce platform that gives you complete control over your store.",
+   "matched_keywords": [
+    "e-commerce",
+    "ecommerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Open Source POS",
+   "source_code_url": "https://github.com/opensourcepos/opensourcepos",
+   "stargazers_count": 4389,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-10",
+   "description": "Open Source Point of Sale is a web based point of sale system.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Hi.Events",
+   "source_code_url": "https://github.com/HiEventsDev/hi.events",
+   "stargazers_count": 4027,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-15",
+   "description": "Event management and ticketing platform for conferences, concerts, and more. Offering customizable event pages and embeddable ticket widgets.",
+   "matched_keywords": [
+    "e-commerce"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Bagisto",
+   "repo": "https://github.com/bagisto/bagisto",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs docker.elastic.co, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"docker.elastic.co/kibana/kibana:7.17.0\": failed to do request: Head \"https://docker.elastic.co/v2/kibana/kibana/manifests/7.17.0\": Forbidden Docker Hub substitution for elasticsearch/kibana (docker.elastic.co is blocked, both images are also published to Docker Hub's official library/elasticsearch and library/kibana under the identical 7.17.0 tag) is written and ready in docker-compose.library.yml. Found a second, unrelated problem while wiring it up: the compose file's main app service builds from ./vendor/laravel/sail/runtimes/8.3/Dockerfile, but laravel/sail is not actually in this repo's composer.json (checked both require and require-dev) - composer install genuinely cannot produce that path, this isn't a network or cache issue. Paused here to work through the remaining app list from the other end per instruction; will need a hand-written Dockerfile for the PHP/Laravel service (matching Bagisto's actual PHP version requirements) to finish this one, not just a registry swap.",
+  "blocked_host": "docker.elastic.co",
+  "runtime_hint": [
+   "node",
+   "php"
+  ],
+  "startup_command": "docker compose -f docker-compose.yml up -d",
+  "log": [
+   "copied .env.example -> .env",
+   "$ docker compose -p lib_app025 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-025/source/docker-compose.yml up -d\n\ntime=\"2026-09-19T12:05:54Z\" level=warning msg=\"The \\\"WWWGROUP\\\" variable is not set. Defaulting to a blank string.\"\ntime=\"2026-09-19T12:05:54Z\" level=warning msg=\"The \\\"WWWUSER\\\" variable is not set. Defaulting to a blank string.\"\n Image mysql/mysql-server:8.0 Pulling \n Image docker.elastic.co/kibana/kibana:7.17.0 Pulling \n Image docker.elastic.co/elasticsearch/elasticsearch:7.17.0 Pulling \n Image axllent/mailpit:latest Pulling \n Image sail-8.3/app Pulling \n Image docker.elastic.co/kibana/kibana:7.17.0 Error failed to resolve reference \"docker.elastic.co/kibana/kibana:7.17.0\": failed to do request: Head \"https://docker.elastic.co/v2/kibana/kibana/manifests/7.17.0\": Forbidden\n Image sail-8.3/app Interrupted \n Image axllent/mailpit:latest Interrupted \n Image mysql/mysql-server:8.0 Interrupted \n Image docker.elastic.co/elasticsearch/elasticsearch:7.17.0 Interrupted \nError response from daemon: failed to resolve reference \"docker.elastic.co/kibana/kibana:7.17.0\": failed to do request: Head \"https://docker.elastic.co/v2/kibana/kibana/manifests/7.17.0\": Forbidden\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "php": [
+    "composer.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "mysql"
+ }
+}

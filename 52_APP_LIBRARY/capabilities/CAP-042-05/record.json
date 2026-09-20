@@ -1,0 +1,42 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-05",
+ "name": "Usage & Billing",
+ "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/billing",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "frontend/src/routes.ts",
+   "matched_words": [
+    "billing"
+   ],
+   "line": 424,
+   "snippet": "route(\"/billing\", \"organization/BillingPage/route.tsx\"),"
+  },
+  {
+   "file": "frontend/src/helpers/agentvaulttemplates.ts",
+   "matched_words": [
+    "billing"
+   ],
+   "line": 157,
+   "snippet": "description: \"Payments and billing.\","
+  },
+  {
+   "file": "frontend/src/helpers/proxiedservicetemplates.ts",
+   "matched_words": [
+    "billing"
+   ],
+   "line": 226,
+   "snippet": "description: \"Payments and billing.\","
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:80/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/billing",
+  "attempted": false,
+  "outcome": "NO_FORM_FOUND",
+  "detail": "no visible <form> on this screen"
+ },
+ "verdict": "NOT VERIFIED",
+ "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
+}

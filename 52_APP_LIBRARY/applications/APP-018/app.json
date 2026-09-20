@@ -1,0 +1,168 @@
+{
+ "id": "APP-018",
+ "name": "Chatwoot",
+ "category": "Customer Support",
+ "category_slug": "customer-support",
+ "repository": "https://github.com/chatwoot/chatwoot",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "f7f7754511df38c33455d2a968f7541e82d15e5b",
+ "source_path": "applications/APP-018/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Chatwoot",
+   "source_code_url": "https://github.com/chatwoot/chatwoot",
+   "stargazers_count": 36947,
+   "licenses": [
+    "\u2298 Proprietary"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Customer communication platform (alternative to Intercom and Zendesk).",
+   "matched_keywords": [
+    "zendesk"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "UVDesk",
+   "source_code_url": "https://github.com/uvdesk/community-skeleton",
+   "stargazers_count": 19594,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2025-10-01",
+   "description": "UVDesk community is a service oriented, event driven extensible opensource helpdesk system that can be used by your organization to provide efficient support to your clients effortlessly whichever way you imagine.",
+   "matched_keywords": [
+    "helpdesk"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Answer",
+   "source_code_url": "https://github.com/apache/answer",
+   "stargazers_count": 15681,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-07-17",
+   "description": "Knowledge-based community software. You can use it to quickly build your Q&A community for product technical support, customer support, user communication, and more.",
+   "matched_keywords": [
+    "customer support"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "FreeScout",
+   "source_code_url": "https://github.com/freescout-help-desk/freescout",
+   "stargazers_count": 4542,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-12",
+   "description": "Email-based customer support application, help desk and shared mailbox (alternative to Zendesk and Help Scout).",
+   "matched_keywords": [
+    "customer support",
+    "help desk",
+    "zendesk"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Frappe Helpdesk",
+   "source_code_url": "https://github.com/frappe/helpdesk",
+   "stargazers_count": 3384,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Helpdesk software which helps you streamline your company's support, offers an easy setup, clean user interface, and automation tools to resolve customer queries efficiently.",
+   "matched_keywords": [
+    "helpdesk"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Libredesk",
+   "source_code_url": "https://github.com/abhinavxd/libredesk",
+   "stargazers_count": 2942,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Modern omnichannel customer support desk. Live chat, email, and more in a single binary.",
+   "matched_keywords": [
+    "customer support"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OTOBO",
+   "source_code_url": "https://github.com/RotherOSS/otobo",
+   "stargazers_count": 337,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Flexible web-based ticketing system used for customer service, help desk, IT service management.",
+   "matched_keywords": [
+    "help desk"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Tiledesk",
+   "source_code_url": "https://github.com/Tiledesk/tiledesk",
+   "stargazers_count": 321,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "All-in-one customer engagement platform from lead-gen to post-sales, from WhatsApp to your website. With omni-channel live agents and AI-powered chatbots (alternative to Intercom, Zendesk, Tawk.to and Tidio).",
+   "matched_keywords": [
+    "zendesk"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Chatwoot",
+   "repo": "https://github.com/chatwoot/chatwoot",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:3110/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Chatwoot's default docker-compose.yaml builds from source (needing dl-cdn.alpinelinux.org) - used the project's own documented docker-compose.production.yaml instead, which runs the officially-published chatwoot/chatwoot image directly. Generated SECRET_KEY_BASE/POSTGRES_PASSWORD/REDIS_PASSWORD locally (no external credential needed) and ran the image's own db:chatwoot_prepare rake task once before starting the app, exactly as its production docs describe.",
+  "startup_command": "docker compose up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "ruby": [
+    "Gemfile"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
+ }
+}

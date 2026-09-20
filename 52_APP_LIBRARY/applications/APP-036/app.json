@@ -1,0 +1,77 @@
+{
+ "id": "APP-036",
+ "name": "appsmith",
+ "category": "Low Code Platforms",
+ "category_slug": "low-code-platforms",
+ "repository": "https://github.com/appsmithorg/appsmith",
+ "source_platform": "github.com",
+ "licence": "Apache-2.0",
+ "version": null,
+ "commit": "983129bffdfb0655d8e00d8d3906ae9dbb45dcaf",
+ "source_path": "applications/APP-036/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "tooljet",
+   "source_code_url": "https://github.com/ToolJet/ToolJet",
+   "stargazers_count": 40941,
+   "licenses": [],
+   "archived": false,
+   "description": "Open-source foundation of ToolJet AI - the enterprise app generation platform for internal tools, dashboards, business applications."
+  },
+  {
+   "name": "appsmith",
+   "source_code_url": "https://github.com/appsmithorg/appsmith",
+   "stargazers_count": 40903,
+   "licenses": [],
+   "archived": false,
+   "description": "Platform to build admin panels, internal tools, and dashboards."
+  },
+  {
+   "name": "nocobase",
+   "source_code_url": "https://github.com/nocobase/nocobase",
+   "stargazers_count": 24287,
+   "licenses": [],
+   "archived": false,
+   "description": "NocoBase is an open-source AI + no-code platform for building business systems fast."
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "tooljet",
+   "repo": "https://github.com/ToolJet/ToolJet",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "appsmith",
+   "repo": "https://github.com/appsmithorg/appsmith",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:8080/",
+  "http_status": 200,
+  "recipe": "deploy/docker/docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Same appsmithorg/appsmith commit and same fix as APP-040 (this app appears twice in the 52-app set, once per matching category): the repo's Dockerfile needs a BASE build-arg (a pre-built OS/deps image, appsmith/base-ce:release, only ever supplied by CI workflows, never documented for local builds) - `base name (${BASE}) should not be blank` with no value supplied. Used the project's own ready-made deploy/docker/docker-compose.yml instead (its documented 'for running Appsmith during development' recipe), which pulls the official pre-built appsmith/appsmith-ce:release image directly - no build or BASE arg needed at all. All-in-one container (embedded MongoDB + Redis + backend + frontend); the backend takes a few minutes after container start to finish its own migrations before the app is actually usable (an early crawl caught it still on its own 'Appsmith is starting' placeholder and was discarded and re-run once the API confirmed it was live). Only 1 screen was browser-verified - the first-run '/setup/welcome' wizard has a choice-card step (proficiency/purpose) followed by an admin-account form step, and manual testing (independently reproduced on this second, separately-built instance, same as APP-040) found submitting the account form with fully valid input sends the wizard back to the choice-card step rather than advancing - a real app-side quirk in this automated environment, confirmed reproducible across two independent installs, not a crawler gap. Recorded honestly as reaching and rendering the home/setup screen, not as a completed onboarding walkthrough.",
+  "startup_command": "docker compose -f deploy/docker/docker-compose.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {},
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 1,
+  "screens_reached": 1,
+  "screens_rendered": 1,
+  "screens_browser_verified": 1
+ }
+}

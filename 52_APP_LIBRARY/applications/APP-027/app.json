@@ -1,0 +1,276 @@
+{
+ "id": "APP-027",
+ "name": "transfer.sh",
+ "category": "File Storage",
+ "category_slug": "file-storage",
+ "repository": "https://github.com/dutchcoders/transfer.sh",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "c37bfd95797fd6da8a6da53fc13d191994b3f687",
+ "source_path": "applications/APP-027/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Joplin",
+   "source_code_url": "https://github.com/laurent22/joplin",
+   "stargazers_count": 56430,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Note taking application with markdown editor and encryption support for mobile and desktop platforms. Runs client-side and syncs through a self hosted Nextcloud instance or similar (alternative to Evernote).",
+   "matched_keywords": [
+    "nextcloud"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Nextcloud",
+   "source_code_url": "https://github.com/nextcloud/server",
+   "stargazers_count": 36847,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Access and share your files, calendars, contacts, mail and [more](https://apps.nextcloud.com/) from any device, on your terms.",
+   "matched_keywords": [
+    "nextcloud"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "transfer.sh",
+   "source_code_url": "https://github.com/dutchcoders/transfer.sh",
+   "stargazers_count": 15898,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-06-13",
+   "description": "Easy file sharing from the command line.",
+   "matched_keywords": [
+    "file sharing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Seafile",
+   "source_code_url": "https://github.com/haiwen/seafile",
+   "stargazers_count": 15256,
+   "licenses": [
+    "GPL-2.0",
+    "GPL-3.0",
+    "AGPL-3.0",
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-08-26",
+   "description": "File hosting and sharing solution primary for teams and organizations.",
+   "matched_keywords": [
+    "seafile"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OpenCloud",
+   "source_code_url": "https://github.com/opencloud-eu/opencloud",
+   "stargazers_count": 6021,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "File Sharing and Collaboration Platform.",
+   "matched_keywords": [
+    "file sharing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "TagSpaces",
+   "source_code_url": "https://github.com/tagspaces/tagspaces",
+   "stargazers_count": 5286,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-07-24",
+   "description": "TagSpaces is an offline, cross-platform file manager and organiser that also can function as a note taking app. The WebDAV version of the application can be installed on top of a WebDAV servers such as Nextcloud or ownCloud.",
+   "matched_keywords": [
+    "nextcloud"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "slskd",
+   "source_code_url": "https://github.com/slskd/slskd",
+   "stargazers_count": 3936,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "A modern client-server application for the Soulseek file sharing network.",
+   "matched_keywords": [
+    "file sharing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Nextcloud Memories",
+   "source_code_url": "https://github.com/pulsejet/memories",
+   "stargazers_count": 3840,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Fast, modern and advanced photo management suite. Runs as a Nextcloud app.",
+   "matched_keywords": [
+    "nextcloud"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Zipline",
+   "source_code_url": "https://github.com/diced/zipline",
+   "stargazers_count": 3417,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "A lightweight, fast and reliable file sharing server that is commonly used with ShareX, offering a react-based Web UI and fast API.",
+   "matched_keywords": [
+    "file sharing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "NextCloudPi",
+   "source_code_url": "https://github.com/nextcloud/nextcloudpi",
+   "stargazers_count": 2939,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-06-29",
+   "description": "Nextcloud preinstalled and preconfigured, with a text and web management interface and all the tools needed to self host private data. With installation images for Raspberry Pi, Odroid, Rock64, Docker, and a curl installer for Armbian/Debian.",
+   "matched_keywords": [
+    "nextcloud"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ByteStash",
+   "source_code_url": "https://github.com/jordan-dalby/ByteStash",
+   "stargazers_count": 2534,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-08",
+   "description": "Pastebin and file storage service with a simple web interface. Supports syntax highlighting, optional user authentication and public sharing.",
+   "matched_keywords": [
+    "file storage"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Pydio",
+   "source_code_url": "https://github.com/pydio/cells",
+   "stargazers_count": 2247,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Turn any web server into a powerful file management system and an alternative to mainstream cloud storage providers.",
+   "matched_keywords": [
+    "cloud storage"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "PsiTransfer",
+   "source_code_url": "https://github.com/psi-4ward/psitransfer",
+   "stargazers_count": 1943,
+   "licenses": [
+    "BSD-2-Clause"
+   ],
+   "updated_at": "2026-05-29",
+   "description": "Simple file sharing solution with robust up-/download-resume and password protection.",
+   "matched_keywords": [
+    "file sharing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Sync-in",
+   "source_code_url": "https://github.com/Sync-in/server",
+   "stargazers_count": 1771,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "File storage, syncing, sharing, and collaboration with real-time editing, permission management, and desktop/CLI clients.",
+   "matched_keywords": [
+    "file storage"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Hoodik",
+   "source_code_url": "https://github.com/hudikhq/hoodik",
+   "stargazers_count": 1478,
+   "licenses": [
+    "CC-BY-NC-4.0"
+   ],
+   "updated_at": "2026-08-29",
+   "description": "End-to-end encrypted cloud storage server. Files are encrypted and decrypted in the browser, so the server only ever holds ciphertext. Runs on SQLite or PostgreSQL, stores chunks on local disk or any S3-compatible service.",
+   "matched_keywords": [
+    "cloud storage"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Joplin",
+   "repo": "https://github.com/laurent22/joplin",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says UNRECOGNISED, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Nextcloud",
+   "repo": "https://github.com/nextcloud/server",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "transfer.sh",
+   "repo": "https://github.com/dutchcoders/transfer.sh",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8092/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The project's own Dockerfile builds from source, needing git/musl-dev/mailcap from dl-cdn.alpinelinux.org, which this sandbox's egress policy denies. dutchcoders/transfer.sh is the same project's image also officially published to Docker Hub - used it directly in a new compose file instead of building from source, reached via the org's already-allowed Docker Hub route.",
+  "startup_command": "docker compose -f docker-compose.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "go": [
+    "go.mod"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 6,
+  "screens_reached": 6,
+  "screens_rendered": 3,
+  "screens_browser_verified": 3
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "application": "APP-038",
+ "id": "CAP-038-07",
+ "name": "Maintenance",
+ "route": "/maintenance",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "server/model/status_page.js",
+   "matched_words": [
+    "maintenance"
+   ],
+   "line": 16,
+   "snippet": "STATUS_PAGE_MAINTENANCE,"
+  },
+  {
+   "file": "server/model/heartbeat.js",
+   "matched_words": [
+    "maintenance"
+   ],
+   "line": 11,
+   "snippet": "*      3 = MAINTENANCE"
+  },
+  {
+   "file": "server/model/maintenance.js",
+   "matched_words": [
+    "maintenance"
+   ],
+   "line": 9,
+   "snippet": "class Maintenance extends BeanModel {"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:3001/maintenance",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "clicked action button, filled+submitted the form it opened (15 fields); a value this test typed now appears on the page where it didn't before (persisted)"
+ },
+ "verdict": "PROVEN"
+}

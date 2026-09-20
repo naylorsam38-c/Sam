@@ -1,0 +1,15 @@
+{
+ "application": "APP-025",
+ "category": "ecommerce",
+ "repository_url": "https://github.com/bagisto/bagisto",
+ "commit_sha": "9beff85ece6fe13378a97e6f84765b50647d3327",
+ "branch": "2.4",
+ "download_timestamp": "2026-09-19T11:45:12.850046+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "671e7a0a4bcc4a28272e0ad5aa105bbaa5a598bef05ce2fbdae7792ef5853f83",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 28132
+}

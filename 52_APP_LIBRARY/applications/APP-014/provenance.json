@@ -1,0 +1,15 @@
+{
+ "application": "APP-014",
+ "category": "code-editors",
+ "repository_url": "https://github.com/ekzhang/rustpad",
+ "commit_sha": "54e4a9383c84d7317af42a7ddb177ce8bcba058d",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:43:41.528948+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "47fbf7dda159965f66d99973c42c6160a898e206f7d4970688656247470399e4",
+ "discovery_source": "github-search-or-directory",
+ "stargazers_count": 4075
+}

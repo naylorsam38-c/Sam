@@ -1,0 +1,295 @@
+{
+ "application": "APP-038",
+ "capabilities_defined": true,
+ "discovery_method": "app-derived",
+ "predefined_capabilities_for_category": [],
+ "capabilities": [
+  {
+   "id": "CAP-038-01",
+   "name": "Quick Stats",
+   "route": "/",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "server/model/monitor.js",
+     "matched_words": [
+      "stats"
+     ],
+     "line": 1346,
+     "snippet": "log.debug(\"monitor\", \"No clients in the room, no need to send stats\");"
+    },
+    {
+     "file": "src/components/monitorlistfilter.vue",
+     "matched_words": [
+      "stats"
+     ],
+     "line": 26,
+     "snippet": "{{ $root.stats.up }}"
+    },
+    {
+     "file": "src/components/notifications/googlesheets.vue",
+     "matched_words": [
+      "quick"
+     ],
+     "line": 17,
+     "snippet": "<h6 style=\"margin-bottom: 12px; font-weight: 600\">{{ $t(\"Quick Setup Guide\") }}:</h6>"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:3001/",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button, filled+submitted the form it opened (15 fields); a value this test typed now appears on the page where it didn't before (persisted)"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-038-02",
+   "name": "Status Pages",
+   "route": "/manage-status-page",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "server/model/status_page.js",
+     "matched_words": [
+      "page",
+      "pages",
+      "status"
+     ],
+     "line": 14,
+     "snippet": "STATUS_PAGE_ALL_DOWN,"
+    },
+    {
+     "file": "server/model/heartbeat.js",
+     "matched_words": [
+      "status"
+     ],
+     "line": 7,
+     "snippet": "* status:"
+    },
+    {
+     "file": "server/model/api_key.js",
+     "matched_words": [
+      "status"
+     ],
+     "line": 7,
+     "snippet": "* Get the current status of this API key"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:3001/manage-status-page",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button, filled+submitted the form it opened (15 fields); a value this test typed now appears on the page where it didn't before (persisted)"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-038-03",
+   "name": "Add New Monitor",
+   "route": "/add",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "server/model/status_page.js",
+     "matched_words": [
+      "monitor"
+     ],
+     "line": 283,
+     "snippet": "for (const monitor of monitorGroup.monitorList) {"
+    },
+    {
+     "file": "server/model/domain_expiry.js",
+     "matched_words": [
+      "monitor"
+     ],
+     "line": 144,
+     "snippet": "* @param {string} domain Domain we monitor"
+    },
+    {
+     "file": "server/model/monitor.js",
+     "matched_words": [
+      "monitor"
+     ],
+     "line": 74,
+     "snippet": "class Monitor extends BeanModel {"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:3001/add",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "submitted 15 field(s); a value this test typed now appears on the page where it didn't before (persisted)"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-038-04",
+   "name": "Schedule Maintenance",
+   "route": "/add-maintenance",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "server/model/status_page.js",
+     "matched_words": [
+      "maintenance"
+     ],
+     "line": 16,
+     "snippet": "STATUS_PAGE_MAINTENANCE,"
+    },
+    {
+     "file": "server/model/heartbeat.js",
+     "matched_words": [
+      "maintenance"
+     ],
+     "line": 11,
+     "snippet": "*      3 = MAINTENANCE"
+    },
+    {
+     "file": "server/model/maintenance.js",
+     "matched_words": [
+      "maintenance"
+     ],
+     "line": 9,
+     "snippet": "class Maintenance extends BeanModel {"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:3001/add-maintenance",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "submitted 5 field(s); a value this test typed now appears on the page where it didn't before (persisted)"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-038-05",
+   "name": "Add New Status Page",
+   "route": "/add-status-page",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "server/model/status_page.js",
+     "matched_words": [
+      "status"
+     ],
+     "line": 14,
+     "snippet": "STATUS_PAGE_ALL_DOWN,"
+    },
+    {
+     "file": "server/model/heartbeat.js",
+     "matched_words": [
+      "status"
+     ],
+     "line": 7,
+     "snippet": "* status:"
+    },
+    {
+     "file": "server/model/api_key.js",
+     "matched_words": [
+      "status"
+     ],
+     "line": 7,
+     "snippet": "* Get the current status of this API key"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:3001/add-status-page",
+    "attempted": true,
+    "outcome": "FAIL",
+    "detail": "submitted 2 field(s); page shows an error indicator: Uptime Kuma\n Status Pages\n Dashboard\nL\n Add New Monitor\nStatus\nTags\nNo Monitors, please add one\nAdd New Status Page\nName\nSlug\n/status/\nAccept characters: a-z0-9-\nNo consecutive dashes --\nSpecial slug "
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: FAIL - submitted 2 field(s); page shows an error indicator: Uptime Kuma\n Status Pages\n Dashboard\nL\n Add New Monitor\nStatus\nTags\nNo Monitors, please add one\nAdd New Status Page\nName\nSlug\n/status/\nAccept characters: a-z0-9-\nNo consecutive dashes --\nSpecial slug "
+  },
+  {
+   "id": "CAP-038-06",
+   "name": "Uptime Kuma",
+   "route": "/alerts/event/uptimekuma",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "server/model/status_page.js",
+     "matched_words": [
+      "kuma",
+      "uptime"
+     ],
+     "line": 4,
+     "snippet": "const { UptimeKumaServer } = require(\"../uptime-kuma-server\");"
+    },
+    {
+     "file": "server/model/maintenance.js",
+     "matched_words": [
+      "kuma",
+      "uptime"
+     ],
+     "line": 6,
+     "snippet": "const { UptimeKumaServer } = require(\"../uptime-kuma-server\");"
+    },
+    {
+     "file": "server/model/monitor.js",
+     "matched_words": [
+      "kuma",
+      "uptime"
+     ],
+     "line": 52,
+     "snippet": "const { UptimeKumaServer } = require(\"../uptime-kuma-server\");"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:3001/alerts/event/uptimekuma",
+    "attempted": false,
+    "outcome": "NO_FORM_FOUND",
+    "detail": "no visible <form> on this screen"
+   },
+   "verdict": "NOT VERIFIED",
+   "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
+  },
+  {
+   "id": "CAP-038-07",
+   "name": "Maintenance",
+   "route": "/maintenance",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "server/model/status_page.js",
+     "matched_words": [
+      "maintenance"
+     ],
+     "line": 16,
+     "snippet": "STATUS_PAGE_MAINTENANCE,"
+    },
+    {
+     "file": "server/model/heartbeat.js",
+     "matched_words": [
+      "maintenance"
+     ],
+     "line": 11,
+     "snippet": "*      3 = MAINTENANCE"
+    },
+    {
+     "file": "server/model/maintenance.js",
+     "matched_words": [
+      "maintenance"
+     ],
+     "line": 9,
+     "snippet": "class Maintenance extends BeanModel {"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:3001/maintenance",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "clicked action button, filled+submitted the form it opened (15 fields); a value this test typed now appears on the page where it didn't before (persisted)"
+   },
+   "verdict": "PROVEN"
+  }
+ ]
+}

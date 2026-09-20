@@ -1,0 +1,76 @@
+{
+ "id": "APP-011",
+ "name": "linkding",
+ "category": "Bookmarks & Archiving",
+ "category_slug": "bookmarks-archiving",
+ "repository": "https://github.com/sissbruecker/linkding",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "27b7303baf41bb28babc610ac8eaa486e1ddfab5",
+ "source_path": "applications/APP-011/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "linkwarden",
+   "source_code_url": "https://github.com/linkwarden/linkwarden",
+   "stargazers_count": 19800,
+   "licenses": [],
+   "archived": false,
+   "description": "Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters."
+  },
+  {
+   "name": "linkding",
+   "source_code_url": "https://github.com/sissbruecker/linkding",
+   "stargazers_count": 11200,
+   "licenses": [],
+   "archived": false,
+   "description": "Self-hosted bookmark manager that is designed be to be minimal, fast, and easy to set up using Docker."
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "linkwarden",
+   "repo": "https://github.com/linkwarden/linkwarden",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "linkding",
+   "repo": "https://github.com/sissbruecker/linkding",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:9091/",
+  "http_status": 302,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The project's own recipe (building from source) previously failed to serve a real HTML UI within the startup timeout. Switched to the project's official prebuilt Docker Hub image (sissbruecker/linkding) instead. The image's uWSGI server defaults to binding LD_SERVER_HOST='[::]' (IPv6), which crash-looped with 'socket(): Address family not supported by protocol' in this sandbox's IPv4-only Docker network - fixed via LD_SERVER_HOST=0.0.0.0 (the image's own documented env var). The admin account was provisioned directly at first boot via the image's own LD_SUPERUSER_NAME/LD_SUPERUSER_PASSWORD env vars, set to the pipeline's standard libwalker/Walker-Pass-2026! test credentials, so the standard screens.py crawler logged in and rendered the real (empty, fresh-install) Bookmarks dashboard on its own.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "python": [
+    "pyproject.toml"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 1,
+  "screens_reached": 1,
+  "screens_rendered": 1,
+  "screens_browser_verified": 1
+ }
+}

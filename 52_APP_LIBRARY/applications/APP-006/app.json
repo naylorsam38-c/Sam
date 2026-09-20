@@ -1,0 +1,67 @@
+{
+ "id": "APP-006",
+ "name": "langfuse",
+ "category": "AI Development",
+ "category_slug": "ai-development",
+ "repository": "https://github.com/langfuse/langfuse",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "ef0add7b2598200bd44573178d9d1cc5f7cc770b",
+ "source_path": "applications/APP-006/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "langfuse",
+   "source_code_url": "https://github.com/langfuse/langfuse",
+   "stargazers_count": 34804,
+   "licenses": [],
+   "archived": false,
+   "description": "Open source agent evals & observability: Trace, evaluate, and improve LLM applications with one open platform."
+  },
+  {
+   "name": "onyx",
+   "source_code_url": "https://github.com/onyx-dot-app/onyx",
+   "stargazers_count": 32162,
+   "licenses": [],
+   "archived": false,
+   "description": "Open Source AI Platform - AI Chat with advanced features that works with every LLM."
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "langfuse",
+   "repo": "https://github.com/langfuse/langfuse",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:3000/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The project's own compose file pulls minio from cgr.dev (Chainguard), blocked. Beyond that, the main langfuse/langfuse-worker images pull from docker.langfuse.com, the project's own vendor registry - also blocked (403), only discovered once cgr.dev was fixed. Both are the same project's own images also published to Docker Hub (langfuse/langfuse:4, langfuse/langfuse-worker:4, exact same major version tag) - substituted those directly. minio/minio itself is no longer published to Docker Hub at all (MinIO moved off Docker Hub entirely) - used bitnamilegacy/minio instead (a maintained, widely-used minio build, also already used elsewhere in this project's own compose variants), with MINIO_DEFAULT_BUCKETS replacing the original entrypoint's manual mkdir-then-serve wrapper, and a curl-based healthcheck replacing `mc ready local` (bitnami's image doesn't bundle the mc CLI).",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 8
+ }
+}

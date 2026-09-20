@@ -1,0 +1,15 @@
+{
+ "application": "APP-012",
+ "category": "browser",
+ "repository_url": "https://github.com/m1k1o/neko",
+ "commit_sha": "ddf2787c5e3891f4578da5552436694a94f1ae22",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T11:43:36.384452+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "Apache-2.0",
+ "licence_allowed": true,
+ "source_checksum_sha256": "aed0652b114e925559ac2b761f40f0df7df170e83dc00d04ef15f1ceea73d50e",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 22330
+}

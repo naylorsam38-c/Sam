@@ -1,0 +1,15 @@
+{
+ "application": "APP-023",
+ "category": "devops",
+ "repository_url": "https://github.com/theonedev/onedev",
+ "commit_sha": "aef745b5fd5a14b32981a99e763bc75bfe0cbee5",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:45:01.779248+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "license.txt",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "31f568acf0ecceba1eb384bde0c9ed5aa81b32f58cd91450f6d6b6cfa18db9d4",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 15256
+}

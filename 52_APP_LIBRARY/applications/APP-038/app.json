@@ -1,0 +1,138 @@
+{
+ "id": "APP-038",
+ "name": "Uptime Kuma",
+ "category": "Monitoring",
+ "category_slug": "monitoring",
+ "repository": "https://github.com/louislam/uptime-kuma",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "5998570a3564afa82e540b660dae4b3b2178f58c",
+ "source_path": "applications/APP-038/source",
+ "status": "FUNCTIONALLY_VERIFIED",
+ "declared_itself": false,
+ "manual_override_reason": "automated pick (Pi-hole) is primarily a DNS/ad-blocker; this is the category-defining self-hosted monitoring tool",
+ "discovery_candidates": [
+  {
+   "name": "Pi-hole",
+   "source_code_url": "https://github.com/pi-hole/pi-hole",
+   "stargazers_count": 60977,
+   "licenses": [
+    "EUPL-1.2"
+   ],
+   "updated_at": "2026-07-06",
+   "description": "Blackhole for Internet advertisements with a GUI for management and monitoring.",
+   "matched_keywords": [
+    "monitoring"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LinkAce",
+   "source_code_url": "https://github.com/Kovah/LinkAce/",
+   "stargazers_count": 3337,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-28",
+   "description": "Bookmark archive with automatic backups to the Internet Archive, link monitoring, and a full REST API. Installation is done via Docker, or as a simple PHP application.",
+   "matched_keywords": [
+    "monitoring"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Pelican Panel",
+   "source_code_url": "https://github.com/pelican/panel",
+   "stargazers_count": 2324,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Web application for easy management of game servers, offering a user-friendly interface for deploying, configuring, and managing servers, server monitoring tools, and extensive customization options (fork of Pterodactyl).",
+   "matched_keywords": [
+    "monitoring"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "SIPCAPTURE Homer",
+   "source_code_url": "https://github.com/sipcapture/homer",
+   "stargazers_count": 2015,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Troubleshooting and monitoring VoIP calls.",
+   "matched_keywords": [
+    "monitoring"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Pi-hole",
+   "repo": "https://github.com/pi-hole/pi-hole",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says EUPL-1.2, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "LinkAce",
+   "repo": "https://github.com/Kovah/LinkAce/",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Pelican Panel",
+   "repo": "https://github.com/pelican/panel",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "SIPCAPTURE Homer",
+   "repo": "https://github.com/sipcapture/homer",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Uptime Kuma",
+   "repo": "https://github.com/louislam/uptime-kuma",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:3001/",
+  "http_status": 200,
+  "recipe": "compose.yaml",
+  "recipe_kind": "compose",
+  "runtime_hint": [
+   "node"
+  ],
+  "startup_command": "docker compose -f compose.yaml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
+ },
+ "capability_summary": {
+  "discovered": 7,
+  "attach_point_found": 7,
+  "proven": 5
+ }
+}

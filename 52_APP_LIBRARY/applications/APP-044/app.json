@@ -1,0 +1,82 @@
+{
+ "id": "APP-044",
+ "name": "Super Productivity",
+ "category": "Productivity",
+ "category_slug": "productivity",
+ "repository": "https://github.com/super-productivity/super-productivity",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "da69391e81013aca5b077fd6994c767863515e71",
+ "source_path": "applications/APP-044/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": false,
+ "manual_override_reason": "automated pick (4ga Boards) is a minor kanban board; this is the well-established, higher-star fit that didn't literally contain the word 'productivity' in its description",
+ "discovery_candidates": [
+  {
+   "name": "Super Productivity",
+   "source_code_url": "https://github.com/super-productivity/super-productivity",
+   "stargazers_count": 22121,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Advanced todo list app with integrated timeboxing and time tracking capabilities. Integrates with Jira, GitHub, GitLab, Redmine and OpenProject.",
+   "matched_keywords": [
+    "productivity"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "4ga Boards",
+   "source_code_url": "https://github.com/RARgames/4gaBoards",
+   "stargazers_count": 715,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-07-16",
+   "description": "Straightforward realtime kanban boards management for intuitive task tracking. Featuring an elegant dark mode, collapsible todo lists, and multitasking tools to supercharge your team's productivity.",
+   "matched_keywords": [
+    "productivity"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Super Productivity",
+   "repo": "https://github.com/super-productivity/super-productivity",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8096/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Super Productivity's own compose recipe builds from source (needing dl-cdn.alpinelinux.org) - used the project's own officially-published Docker Hub image (johannesjo/super-productivity) instead, referenced from its own wiki's 'Run with Docker' page.",
+  "startup_command": "docker compose up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "ruby": [
+    "Gemfile"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
+ }
+}

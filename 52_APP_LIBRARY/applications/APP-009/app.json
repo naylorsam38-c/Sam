@@ -1,0 +1,280 @@
+{
+ "id": "APP-009",
+ "name": "Home Assistant",
+ "category": "Automation",
+ "category_slug": "automation",
+ "repository": "https://github.com/home-assistant/core",
+ "source_platform": "github.com",
+ "licence": "Apache-2.0",
+ "version": null,
+ "commit": "949a484720ac3ebd2f474ce7e408a800c6c4ebdc",
+ "source_path": "applications/APP-009/source",
+ "status": "FUNCTIONALLY_VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "n8n",
+   "source_code_url": "https://github.com/n8n-io/n8n",
+   "stargazers_count": 205289,
+   "licenses": [
+    "Apache-2.0",
+    "Commons-Clause"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Free node based Workflow Automation Tool. Easily automate tasks across different services.",
+   "matched_keywords": [
+    "automation",
+    "n8n",
+    "workflow",
+    "workflow automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Home Assistant",
+   "source_code_url": "https://github.com/home-assistant/core",
+   "stargazers_count": 90737,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Home automation platform.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Huginn",
+   "source_code_url": "https://github.com/huginn/huginn",
+   "stargazers_count": 49970,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Build agents that monitor and act on your behalf.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Apache Airflow",
+   "source_code_url": "https://github.com/apache/airflow/",
+   "stargazers_count": 46890,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Platform to programmatically author, schedule, and monitor workflows.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "changedetection.io",
+   "source_code_url": "https://github.com/dgtlmoon/changedetection.io",
+   "stargazers_count": 34338,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Stay up-to-date with web-site content changes.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Kestra",
+   "source_code_url": "https://github.com/kestra-io/kestra",
+   "stargazers_count": 28163,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Event-driven, language-agnostic platform to create, schedule, and monitor workflows. In code. Coordinate data pipelines and tasks such as ETL and ELT.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Tasmota",
+   "source_code_url": "https://github.com/arendst/Tasmota",
+   "stargazers_count": 24763,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Open source firmware for ESP devices. Total local control with quick setup and updates. Control using MQTT, Web UI, HTTP or serial. Automate using timers, rules or scripts. Integration with home automation solutions.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Activepieces",
+   "source_code_url": "https://github.com/activepieces/activepieces",
+   "stargazers_count": 24543,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "No-code business automation tool like Zapier or Tray. For example, you can send a Slack notification for each new Trello card.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Leon",
+   "source_code_url": "https://github.com/leon-ai/leon",
+   "stargazers_count": 17520,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Personal assistant who can live on your server.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Automatisch",
+   "source_code_url": "https://github.com/automatisch/automatisch",
+   "stargazers_count": 13974,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-01-15",
+   "description": "Business automation tool that lets you connect different services like Twitter, Slack, and more to automate your business processes (alternative to Zapier).",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Gotenberg",
+   "source_code_url": "https://github.com/gotenberg/gotenberg",
+   "stargazers_count": 13120,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Developer-friendly API to interact with powerful tools like Chromium and LibreOffice for converting numerous document formats (HTML, Markdown, Word, Excel, etc.) into PDF files, and more.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Mautic",
+   "source_code_url": "https://github.com/mautic/mautic",
+   "stargazers_count": 10529,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Marketing automation software (email, social and more).",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Healthchecks",
+   "source_code_url": "https://github.com/healthchecks/healthchecks",
+   "stargazers_count": 10341,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "Listen for pings and sends alerts when pings are late.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "StackStorm",
+   "source_code_url": "https://github.com/StackStorm/st2",
+   "stargazers_count": 6536,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-02",
+   "description": "StackStorm (aka _IFTTT for Ops_) is event-driven automation for auto-remediation, security responses, troubleshooting, deployments, and more. Includes rules engine, workflow, 160 integration packs with 6000+ actions and ChatOps.",
+   "matched_keywords": [
+    "automation",
+    "workflow"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Cronicle",
+   "source_code_url": "https://github.com/jhuckaby/Cronicle",
+   "stargazers_count": 5844,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Simple, distributed task scheduler and runner with a web based UI.",
+   "matched_keywords": [
+    "automation"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "n8n",
+   "repo": "https://github.com/n8n-io/n8n",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says UNRECOGNISED, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Home Assistant",
+   "repo": "https://github.com/home-assistant/core",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8123/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Identical repo, same STARTUP_FAILED root cause, and the same fix as the sibling duplicate APP-003 (also home-assistant/core - this pipeline discovered the same project twice under different category slugs): the repo's own Dockerfile needs a Supervisor-only ${BUILD_FROM} base image with no default and separately pulls a helper from ghcr.io, both unusable/blocked here. Used the project's own officially-documented standalone deployment ('Home Assistant Container') instead - the prebuilt homeassistant/home-assistant:stable image, pulled via Google's public Docker Hub mirror (mirror.gcr.io) to work around this sandbox's production.cloudfront.docker.com CDN block (see APP-003's own app.json for the full diagnosis of both blocks) and retagged locally to its real name. docker-compose.library.yml runs it with privileged: true and network_mode: host, exactly as Home Assistant's own docs specify, with a named volume for /config.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "python": [
+    "requirements.txt",
+    "pyproject.toml"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15,
+  "verification_note": "Driven by a tailored Playwright script (ha_walk.py) rather than the generic screens.py crawler, for the same reason already diagnosed and documented on the sibling duplicate APP-003: Home Assistant's frontend renders almost entirely inside nested open shadow roots, which the generic crawler's whole-page text checks don't reliably see into. This is APP-009's own independent run against its own freshly booted instance (a separate container, a separate genuine owner account 'Library Walker', its own real onboarding wizard) - not copied evidence from APP-003. 15/15 screens reached, rendered, and browser-verified: Overview, Map, Energy, Activity, History, Media, To-do lists, Settings landing + Devices & services + Automations & scenes + People, Notifications, and Profile."
+ },
+ "capability_summary": {
+  "discovered": 2,
+  "attach_point_found": 2,
+  "proven": 2,
+  "verification_note": "Driven by a tailored script (ha_capabilities.py), same reason as APP-003's own verification_note. This is APP-009's own independent run: a real shopping-list item added and independently reconfirmed present via a brand-new browser context with a fresh login, and a real time-triggered automation (Time trigger + 'send a persistent notification' action) created via the app's own visual editor, saved, and independently reconfirmed by name in the Automations list. Real attach points at homeassistant/components/shopping_list/todo.py's ShoppingTodoListEntity + shopping_list/__init__.py's ShoppingListView, and homeassistant/components/automation/__init__.py's AutomationEntity + _async_process_config."
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "application": "APP-024",
+ "capabilities_defined": true,
+ "discovery_method": "app-derived",
+ "predefined_capabilities_for_category": [
+  "Documents",
+  "recipients",
+  "signing fields",
+  "workflows",
+  "signatures",
+  "authentication",
+  "audit trail",
+  "templates"
+ ],
+ "capabilities": [
+  {
+   "id": "CAP-024-01",
+   "name": "Document Templates",
+   "route": "/",
+   "discovered_from": "screen",
+   "matched_predefined_capability": [
+    "Documents",
+    "templates"
+   ],
+   "attach_points": [
+    {
+     "file": "app/controllers/template_documents_page_objects_controller.rb",
+     "matched_words": [
+      "template",
+      "templates"
+     ],
+     "line": 4,
+     "snippet": "load_and_authorize_resource :template"
+    },
+    {
+     "file": "app/controllers/send_submission_email_controller.rb",
+     "matched_words": [
+      "template"
+     ],
+     "line": 13,
+     "snippet": "if params[:template_slug]"
+    },
+    {
+     "file": "app/controllers/submit_form_completed_download_controller.rb",
+     "matched_words": [
+      "document"
+     ],
+     "line": 44,
+     "snippet": "render json: Submitters.build_document_urls(last_submitter)"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:3000/",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "submitted 1 field(s); a value this test typed now appears on the page where it didn't before (persisted)"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-024-02",
+   "name": "Profile",
+   "route": "/settings/profile",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "app/controllers/user_signatures_controller.rb",
+     "matched_words": [
+      "profile"
+     ],
+     "line": 12,
+     "snippet": "return redirect_to settings_profile_index_path, notice: I18n.t('unable_to_save_signature') if file.blank?"
+    },
+    {
+     "file": "app/controllers/profile_controller.rb",
+     "matched_words": [
+      "profile"
+     ],
+     "line": 15,
+     "snippet": "redirect_to settings_profile_index_path,"
+    },
+    {
+     "file": "app/controllers/mfa_setup_controller.rb",
+     "matched_words": [
+      "profile"
+     ],
+     "line": 23,
+     "snippet": "redirect_to settings_profile_index_path, notice: I18n.t('2fa_has_been_configured')"
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:3000/settings/profile",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "submitted 3 field(s); a value this test typed now appears on the page where it didn't before (persisted)"
+   },
+   "verdict": "PROVEN"
+  },
+  {
+   "id": "CAP-024-03",
+   "name": "Library Walker Test 1789826037",
+   "route": "/folders/2",
+   "discovered_from": "screen",
+   "matched_predefined_capability": null,
+   "attach_points": [
+    {
+     "file": "app/controllers/timestamp_server_controller.rb",
+     "matched_words": [
+      "test"
+     ],
+     "line": 14,
+     "snippet": "test_timeserver_url(@encrypted_config.value) if @encrypted_config.value.present?"
+    },
+    {
+     "file": "app/controllers/application_controller.rb",
+     "matched_words": [
+      "test"
+     ],
+     "line": 36,
+     "snippet": "if Rails.env.production? || Rails.env.test?"
+    },
+    {
+     "file": "app/jobs/send_test_webhook_request_job.rb",
+     "matched_words": [
+      "test"
+     ],
+     "line": null,
+     "snippet": null
+    }
+   ],
+   "live_test": {
+    "url": "http://127.0.0.1:3000/folders/2",
+    "attempted": true,
+    "outcome": "PASS",
+    "detail": "submitted 1 field(s); navigated to a new page (http://127.0.0.1:3000/folders/2 -> http://127.0.0.1:3000/folders/2?q=Library+Walker+Test+1789831724) consistent with the action succeeding"
+   },
+   "verdict": "PROVEN"
+  }
+ ]
+}

@@ -1,0 +1,242 @@
+{
+ "id": "APP-032",
+ "name": "ezbookkeeping",
+ "category": "Invoicing & Finance",
+ "category_slug": "invoicing-finance",
+ "repository": "https://github.com/mayswind/ezbookkeeping",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "057be38cd51bb5789439752dfa2bacd549537939",
+ "source_path": "applications/APP-032/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Akaunting",
+   "source_code_url": "https://github.com/akaunting/akaunting",
+   "stargazers_count": 10126,
+   "licenses": [
+    "BUSL-1.1"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Accounting software designed for small businesses and freelancers.",
+   "matched_keywords": [
+    "accounting"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Invoice Ninja",
+   "source_code_url": "https://github.com/invoiceninja/invoiceninja",
+   "stargazers_count": 10088,
+   "licenses": [
+    "Elastic-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Powerful tool to invoice clients online.",
+   "matched_keywords": [
+    "invoice"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Dolibarr",
+   "source_code_url": "https://github.com/Dolibarr/dolibarr",
+   "stargazers_count": 7630,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Modern CRM software package to manage your company or foundation activity (contacts, suppliers, invoices, orders, stocks, agenda, accounting, ...).",
+   "matched_keywords": [
+    "accounting"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ezbookkeeping",
+   "source_code_url": "https://github.com/mayswind/ezbookkeeping",
+   "stargazers_count": 5610,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "A lightweight personal bookkeeping app hosted by yourself.",
+   "matched_keywords": [
+    "bookkeeping"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Bigcapital",
+   "source_code_url": "https://github.com/bigcapitalhq/bigcapital",
+   "stargazers_count": 3901,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Financial accounting and inventory management software for small to medium businesses.",
+   "matched_keywords": [
+    "accounting"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Fava",
+   "source_code_url": "https://github.com/beancount/fava",
+   "stargazers_count": 2575,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-11",
+   "description": "Web frontend of Beancount, a text based double-entry accounting system.",
+   "matched_keywords": [
+    "accounting"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ITFlow",
+   "source_code_url": "https://github.com/itflow-org/itflow",
+   "stargazers_count": 1003,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-04",
+   "description": "Client IT documentation, ticketing, invoicing and accounting for MSPs (Managed Service Providers).",
+   "matched_keywords": [
+    "accounting",
+    "invoicing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "SolidInvoice",
+   "source_code_url": "https://github.com/SolidInvoice/SolidInvoice",
+   "stargazers_count": 972,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Open source invoicing and quote application.",
+   "matched_keywords": [
+    "invoicing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "TimeTracker",
+   "source_code_url": "https://github.com/drytrix/TimeTracker",
+   "stargazers_count": 625,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Track time across projects and clients, with timers, kanban tasks, CRM, expense tracking, multi-currency invoicing (PDF, Peppol/ZugFerd e-invoicing), reports, OIDC/SSO, and a REST API.",
+   "matched_keywords": [
+    "invoicing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LedgerSMB",
+   "source_code_url": "https://github.com/ledgersmb/LedgerSMB",
+   "stargazers_count": 568,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Integrated accounting and ERP system for small and midsize businesses, with double entry accounting, budgeting, invoicing, quotations, projects, orders and inventory management, shipping and more.",
+   "matched_keywords": [
+    "accounting",
+    "invoicing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Family Accounting Tool",
+   "source_code_url": "https://github.com/nymanjens/facto",
+   "stargazers_count": 369,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-08-29",
+   "description": "Web-based finance management tool for partners with partially shared expenses.",
+   "matched_keywords": [
+    "accounting"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Foodsoft",
+   "source_code_url": "https://github.com/foodcoops/foodsoft",
+   "stargazers_count": 359,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-10",
+   "description": "Manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).",
+   "matched_keywords": [
+    "accounting"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Akaunting",
+   "repo": "https://github.com/akaunting/akaunting",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says BUSL-1.1, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Invoice Ninja",
+   "repo": "https://github.com/invoiceninja/invoiceninja",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Dolibarr",
+   "repo": "https://github.com/Dolibarr/dolibarr",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "ezbookkeeping",
+   "repo": "https://github.com/mayswind/ezbookkeeping",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8093/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The project's own Dockerfile builds from source, needing tzdata from dl-cdn.alpinelinux.org, which this sandbox's egress policy denies. mayswind/ezbookkeeping is the same project's image also officially published to Docker Hub - used it directly in a new compose file instead of building from source, reached via the org's already-allowed Docker Hub route. The container runs as uid 1000, so the host-created bind-mounted data/log directories needed chown -R 1000:1000 before boot to avoid a permission-denied error opening the sqlite database.",
+  "startup_command": "docker compose -f docker-compose.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "go": [
+    "go.mod"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 1,
+  "screens_reached": 1,
+  "screens_rendered": 1,
+  "screens_browser_verified": 1
+ }
+}

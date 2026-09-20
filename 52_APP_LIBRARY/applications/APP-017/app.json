@@ -1,0 +1,228 @@
+{
+ "id": "APP-017",
+ "name": "Krayin",
+ "category": "CRM",
+ "category_slug": "crm",
+ "repository": "https://github.com/krayin/laravel-crm",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "570a8db102607f1c191f239f06f6db06ec8b942b",
+ "source_path": "applications/APP-017/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Twenty",
+   "source_code_url": "https://github.com/twentyhq/twenty",
+   "stargazers_count": 57013,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "A modern CRM offering the flexibility of open source, advanced features, and a sleek design.",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Krayin",
+   "source_code_url": "https://github.com/krayin/laravel-crm",
+   "stargazers_count": 23899,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "CRM solution for SMEs and Enterprises for complete customer lifecycle management.",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Ever Gauzy",
+   "source_code_url": "https://github.com/ever-co/ever-gauzy",
+   "stargazers_count": 7741,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Open business management platform for collaborative, on-demand and sharing economies (ERP/CRM/HRM/ATS/PM).",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Dolibarr",
+   "source_code_url": "https://github.com/Dolibarr/dolibarr",
+   "stargazers_count": 7630,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Modern CRM software package to manage your company or foundation activity (contacts, suppliers, invoices, orders, stocks, agenda, accounting, ...).",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "SuiteCRM",
+   "source_code_url": "https://github.com/SuiteCRM/SuiteCRM",
+   "stargazers_count": 5752,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "The award-winning, enterprise-class open source CRM.",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "EspoCRM",
+   "source_code_url": "https://github.com/espocrm/espocrm",
+   "stargazers_count": 3371,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "CRM with a frontend designed as a single page application, and a REST API.",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Corteza",
+   "source_code_url": "https://github.com/cortezaproject/corteza",
+   "stargazers_count": 2161,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-08-27",
+   "description": "CRM including a unified workspace, enterprise messaging and a low code environment for rapidly and securely delivering records-based management solutions.",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Relaticle",
+   "source_code_url": "https://github.com/relaticle/relaticle",
+   "stargazers_count": 1693,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "CRM with an MCP server, an AI assistant with human-approved changes, a REST API, custom fields, and kanban boards.",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Django-CRM",
+   "source_code_url": "https://github.com/DjangoCRM/django-crm",
+   "stargazers_count": 626,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Analytical CRM with tasks management, email marketing and many more. Django CRM is built for individual use, businesses of any size or freelancers and is designed to provide easy customization and quick development.",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "TimeTracker",
+   "source_code_url": "https://github.com/drytrix/TimeTracker",
+   "stargazers_count": 625,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Track time across projects and clients, with timers, kanban tasks, CRM, expense tracking, multi-currency invoicing (PDF, Peppol/ZugFerd e-invoicing), reports, OIDC/SSO, and a REST API.",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "egroupware",
+   "source_code_url": "https://github.com/EGroupware/egroupware",
+   "stargazers_count": 296,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Software suite including calendars, address books, notepad, project management tools, client relationship management tools (CRM), knowledge management tools, a wiki and a CMS.",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Group Office",
+   "source_code_url": "https://github.com/Intermesh/groupoffice/",
+   "stargazers_count": 278,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Enterprise CRM and groupware tool. Share projects, calendars, files and e-mail online with co-workers and clients.",
+   "matched_keywords": [
+    "crm"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Twenty",
+   "repo": "https://github.com/twentyhq/twenty",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Krayin",
+   "repo": "https://github.com/krayin/laravel-crm",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:8085/admin/login",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "No Dockerfile/compose file in the repo and no official Docker Hub image - a plain Laravel 12 app meant to be deployed onto an existing PHP/webserver stack. Wrote a Dockerfile.library (Ubuntu 24.04 base, not the official Debian-based php Docker Hub image - this sandbox's egress policy denies all Debian apt mirrors including deb.debian.org, while Ubuntu's own default mirrors are allowed and Ubuntu 24.04 already ships PHP 8.3). Ubuntu's default apt sources use plain HTTP, which this sandbox's proxy rejects with 405 (it only tunnels HTTPS) - switched them to https:// and bootstrapped apt's trust store directly from the proxy's CA bundle before the first apt-get update (the base image ships no ca-certificates package yet, and apt won't fetch one without HTTPS trust first - chicken-and-egg, solved by writing the bundle straight to /etc/ssl/certs/ca-certificates.crt and /usr/local/share/ca-certificates/ so the real ca-certificates package's install doesn't wipe it). A handful of composer dependencies (myclabs/deep-copy, webklex/laravel-imap, prettus/l5-repository, smalot/pdfparser, mpdf/mpdf, ...) have no Packagist-hosted dist zip and fall back to GitHub's codeload API, which hit an exhausted 60/hour anonymous rate limit from repeated use earlier in this pipeline session - the repo's own composer.json forces 'preferred-install: dist', which disables Composer's automatic git-source fallback; overriding with `composer install --prefer-source` uses git clone for every package instead (this sandbox's proxy does inject real GitHub credentials for git operations specifically), avoiding the anonymous API limit entirely. MySQL (mysql:8.4) via a standard compose service. Ran the project's own installer (`php artisan krayin-crm:install --skip-env-check --no-interaction`), which creates a default admin (admin@example.com/admin123) since its account-creation prompts have defaults and --no-interaction accepts them; the admin's own account-settings page was then used to reset the email/password to the pipeline's standard libwalker/Walker-Pass-2026! test credentials, letting the standard screens.py crawler log in and complete a real 15-screen walkthrough on its own (9 fully rendered - CRM detail views for a fresh install with no seed data render a loading-skeleton state, which is genuine app behavior, not a crawler failure).",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "php": [
+    "composer.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 9,
+  "screens_browser_verified": 9
+ }
+}

@@ -1,0 +1,93 @@
+{
+ "id": "APP-002",
+ "name": "AnythingLLM",
+ "category": "AI Agents",
+ "category_slug": "ai-agents",
+ "repository": "https://github.com/Mintplex-Labs/anything-llm",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "da6685510ce691b2e1be417f739c7dffee3cfc49",
+ "source_path": "applications/APP-002/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "AnythingLLM",
+   "source_code_url": "https://github.com/Mintplex-Labs/anything-llm",
+   "stargazers_count": 66193,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "All-in-one desktop & Docker AI application with built-in RAG, AI agents, No-code agent builder, MCP compatibility, and more.",
+   "matched_keywords": [
+    "ai agents"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Langfuse",
+   "source_code_url": "https://github.com/langfuse/langfuse",
+   "stargazers_count": 34787,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "LLM engineering platform for model tracing, prompt management, and application evaluation. Langfuse helps teams collaboratively debug, analyze, and iterate on their LLM applications such as chatbots or AI agents.",
+   "matched_keywords": [
+    "ai agents"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Composio",
+   "source_code_url": "https://github.com/ComposioHQ/composio",
+   "stargazers_count": 30236,
+   "licenses": [
+    "Elastic-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Integration platform for AI agents & LLMs with support for 250+ apps and custom tools.",
+   "matched_keywords": [
+    "ai agents"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "AnythingLLM",
+   "repo": "https://github.com/Mintplex-Labs/anything-llm",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:3210/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "No Dockerfile/compose file in-repo for a plain local run (the project documents Docker via its own website, not the repo). Used the project's official prebuilt image (mintplexlabs/anythingllm) directly - single container, SQLite storage on a named volume. No other changes needed; booted and rendered cleanly on the first attempt.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 14,
+  "screens_browser_verified": 14
+ }
+}

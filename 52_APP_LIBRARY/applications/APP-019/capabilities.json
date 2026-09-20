@@ -1,0 +1,64 @@
+{
+ "application": "APP-019",
+ "capabilities_defined": true,
+ "discovery_method": "app-derived",
+ "verification_method": "manual (airflow_capabilities.py) - see screens.json's verification_note for why",
+ "capabilities": [
+  {
+   "id": "CAP-019-01",
+   "name": "DAG Trigger (workflow execution)",
+   "route": "/dags/example_bash_operator",
+   "discovered_from": "screen",
+   "live_test": {
+    "action": "manually triggered a real run of the example DAG 'example_bash_operator' via the UI's own Trigger button",
+    "dag_runs_before": 2,
+    "dag_runs_after": 3,
+    "independent_reconfirmation": true,
+    "evidence": [
+     "001_cap_dag_before_trigger.png",
+     "002_cap_dag_after_trigger.png"
+    ]
+   },
+   "verdict": "PROVEN",
+   "reason": "`airflow dags list-runs` inside the container - the scheduler's own database, queried independently of the browser session that triggered it - shows 3 runs where there were 2 before, proving a real DagRun was created server-side",
+   "attach_points": [
+    {
+     "file": "airflow-core/src/airflow/api/common/trigger_dag.py",
+     "matched_words": [
+      "trigger",
+      "dag"
+     ],
+     "line": 146,
+     "snippet": "def trigger_dag("
+    }
+   ]
+  },
+  {
+   "id": "CAP-019-02",
+   "name": "Admin - Variables",
+   "route": "/variables",
+   "discovered_from": "screen",
+   "live_test": {
+    "action": "created a real Airflow Variable (key='library_walker_test_key_1789883687', value='library_walker_test_value_1789883687') via the Admin > Variables 'Add Variable' form",
+    "independent_reconfirmation": true,
+    "evidence": [
+     "003_cap_variable_form_filled.png",
+     "004_cap_variable_created.png",
+     "005_cap_variable_list_independent_reconfirm.png"
+    ]
+   },
+   "verdict": "PROVEN",
+   "reason": "variable now appears, by its exact given key, in the Variables list re-fetched from a brand-new browser context + fresh login - proves it was really saved server-side",
+   "attach_points": [
+    {
+     "file": "airflow-core/src/airflow/models/variable.py",
+     "matched_words": [
+      "variable"
+     ],
+     "line": 61,
+     "snippet": "class Variable(Base, LoggingMixin):"
+    }
+   ]
+  }
+ ]
+}

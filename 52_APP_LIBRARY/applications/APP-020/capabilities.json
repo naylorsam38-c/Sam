@@ -1,0 +1,49 @@
+{
+ "application": "APP-020",
+ "capabilities_defined": true,
+ "discovery_method": "app-derived",
+ "verification_method": "manual (cloudbeaver_capabilities.py) - see screens.json's verification_note for why",
+ "capabilities": [
+  {
+   "id": "CAP-020-01",
+   "name": "Database connection + SQL query",
+   "route": "/#/",
+   "discovered_from": "screen",
+   "live_test": {
+    "action": "created a real PostgreSQL connection (named 'library_walker_test_conn_1789886804') to a live demo-postgres sidecar container via CloudBeaver's own connection wizard, authenticated against it, ran a real SQL query (SELECT 1 AS library_walker_check) and confirmed the result column appeared",
+    "query_result_visible": true,
+    "independent_reconfirmation": true,
+    "evidence": [
+     "001_cap_new_connection_dialog.png",
+     "002_cap_driver_selected.png",
+     "003_cap_connection_configured.png",
+     "004_cap_connection_tested.png",
+     "005_cap_connection_created.png",
+     "006_cap_before_sql_editor_click.png",
+     "007_cap_database_authentication_prompt.png",
+     "008_cap_query_executed.png",
+     "009_cap_connection_list_independent_reconfirm.png"
+    ]
+   },
+   "verdict": "PROVEN",
+   "reason": "both the query's own result column and the connection itself (re-fetched from a brand-new browser context with a fresh login) are present, proving the connection was really created server-side and could actually run a query"
+  },
+  {
+   "id": "CAP-020-02",
+   "name": "Admin - Users and Teams",
+   "route": "/#/admin/users/users",
+   "discovered_from": "screen",
+   "live_test": {
+    "action": "created a real second user account (username='library_walker_user_1789886804') via the Admin > Users and Teams 'Create' form",
+    "independent_reconfirmation": true,
+    "evidence": [
+     "010_cap_user_form_filled.png",
+     "011_cap_user_created.png",
+     "012_cap_user_list_independent_reconfirm.png"
+    ]
+   },
+   "verdict": "PROVEN",
+   "reason": "user now appears, by its exact given username, in the Users list re-fetched from a brand-new browser context + fresh login - proves it was really saved server-side"
+  }
+ ]
+}

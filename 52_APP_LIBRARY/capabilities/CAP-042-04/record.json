@@ -1,0 +1,43 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-04",
+ "name": "Organization Access Control",
+ "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/access-management",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "frontend/src/routes.ts",
+   "matched_words": [
+    "access",
+    "organization"
+   ],
+   "line": 17,
+   "snippet": "route(\"/access-management\", \"admin/AccessManagementPage/route.tsx\")"
+  },
+  {
+   "file": "frontend/src/helpers/honeytokens.ts",
+   "matched_words": [
+    "access"
+   ],
+   "line": 24,
+   "snippet": "{ key: \"accessKeyId\", label: \"Access Key ID\" },"
+  },
+  {
+   "file": "frontend/src/helpers/project.ts",
+   "matched_words": [
+    "access",
+    "organization"
+   ],
+   "line": 171,
+   "snippet": "return \"/organizations/$orgId/pam/access\" as const;"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:80/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/access-management",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "clicked action button, filled+submitted the form it opened (3 fields); app showed an explicit success message"
+ },
+ "verdict": "PROVEN"
+}

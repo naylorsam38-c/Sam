@@ -1,0 +1,36 @@
+{
+ "application": "APP-024",
+ "id": "CAP-024-07",
+ "name": "audit trail",
+ "attach_points": [
+  {
+   "file": "app/controllers/templates_preferences_controller.rb",
+   "matched_words": [
+    "audit"
+   ],
+   "line": 58,
+   "snippet": "documents_copy_email_enabled documents_copy_email_attach_audit"
+  },
+  {
+   "file": "app/controllers/submissions_debug_controller.rb",
+   "matched_words": [
+    "audit"
+   ],
+   "line": 20,
+   "snippet": "if params[:audit]"
+  },
+  {
+   "file": "app/controllers/api/form_events_controller.rb",
+   "matched_words": [
+    "audit",
+    "trail"
+   ],
+   "line": 15,
+   "snippet": "submission: [:submitters, { audit_trail_attachment: :blob,"
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}

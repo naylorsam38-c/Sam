@@ -1,0 +1,35 @@
+{
+ "application": "APP-024",
+ "id": "CAP-024-06",
+ "name": "authentication",
+ "attach_points": [
+  {
+   "file": "app/controllers/passwords_controller.rb",
+   "matched_words": [
+    "authentication"
+   ],
+   "line": 5,
+   "snippet": "skip_before_action :require_no_authentication, only: %i[edit update]"
+  },
+  {
+   "file": "app/views/email_smtp_settings/index.html.erb",
+   "matched_words": [
+    "authentication"
+   ],
+   "line": 34,
+   "snippet": "<%= ff.label :authentication, 'Authentication', class: 'label' %>"
+  },
+  {
+   "file": "app/views/users/_form.html.erb",
+   "matched_words": [
+    "authentication"
+   ],
+   "line": 36,
+   "snippet": "<%= f.label :otp_required_for_login, t('two_factor_authentication'), class: 'label' %>"
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}

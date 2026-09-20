@@ -1,0 +1,440 @@
+{
+ "generated_at": "2026-09-19T12:40:23.524264+00:00",
+ "target_applications": 52,
+ "applications": {
+  "discovered": 49,
+  "acquired": 48,
+  "installed_or_installable": 48,
+  "started": 3,
+  "screen_verified": 3,
+  "functionally_verified": 1,
+  "ready": 1,
+  "failed": 51
+ },
+ "screens": {
+  "discovered": 45,
+  "reachable": 45,
+  "rendered": 44,
+  "browser_verified": 44
+ },
+ "capabilities": {
+  "discovered": 16,
+  "attach_points_found": 14,
+  "proven": 2
+ },
+ "failures": [
+  {
+   "application": "APP-001",
+   "name": "flagsmith",
+   "category": "ab-testing-experimentation",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs docker.flagsmith.com, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"docker.flagsmith.com/flagsmith/flagsmith:latest\": failed to do request: Head \"https://docker.flagsmith.com/v2/flagsmith/flagsmith/manifests/latest\": Forbidden",
+   "evidence": "applications/APP-001/app.json"
+  },
+  {
+   "application": "APP-002",
+   "name": "AnythingLLM",
+   "category": "ai-agents",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-002/app.json"
+  },
+  {
+   "application": "APP-003",
+   "name": "Home Assistant",
+   "category": "ai-assistants",
+   "stage": "STARTUP_FAILED",
+   "reason": "ERROR: failed to build: failed to solve: base name (${BUILD_FROM}) should not be blank",
+   "evidence": "applications/APP-003/app.json"
+  },
+  {
+   "application": "APP-004",
+   "name": "tabby",
+   "category": "ai-code-assistants",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-004/app.json"
+  },
+  {
+   "application": "APP-005",
+   "name": "penpot",
+   "category": "ai-design-tools",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-005/app.json"
+  },
+  {
+   "application": "APP-006",
+   "name": "langfuse",
+   "category": "ai-development",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs cgr.dev, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"cgr.dev/chainguard/minio:latest\": failed to do request: Head \"https://cgr.dev/v2/chainguard/minio/manifests/latest\": Forbidden",
+   "evidence": "applications/APP-006/app.json"
+  },
+  {
+   "application": "APP-007",
+   "name": "Superset",
+   "category": "analytics",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs deb.debian.org, which this sandbox's egress policy denies: target superset-node: failed to solve: process \"/bin/sh -c /app/docker/apt-install.sh build-essential python3 zstd\" did not complete successfully: exit code: 100",
+   "evidence": "applications/APP-007/app.json"
+  },
+  {
+   "application": "APP-008",
+   "name": "Firezone",
+   "category": "authentication",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:18664310d22f348f6bab66e284f0a72e7dd7c98911fcdeab13fcb45857de30f8?se=2026-09-19T12%3A05%3A00Z&sig=c83Y%2Fx3rnayNs%2Fo88WhvU3fvPkjnDvqN6eNmiMmy%2BMQ%3D&ske=2026-09-20T04%3A28%3A47Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T04%3A28%3A47Z&sktid=3",
+   "evidence": "applications/APP-008/app.json"
+  },
+  {
+   "application": "APP-009",
+   "name": "Home Assistant",
+   "category": "automation",
+   "stage": "STARTUP_FAILED",
+   "reason": "ERROR: failed to build: failed to solve: base name (${BUILD_FROM}) should not be blank",
+   "evidence": "applications/APP-009/app.json"
+  },
+  {
+   "application": "APP-010",
+   "name": "Ghost",
+   "category": "blogging",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-010/app.json"
+  },
+  {
+   "application": "APP-011",
+   "name": "linkding",
+   "category": "bookmarks-archiving",
+   "stage": "STARTUP_FAILED",
+   "reason": "no real HTML UI within 480s (last: http://IP:9090/ui -> URLError)",
+   "evidence": "applications/APP-011/app.json"
+  },
+  {
+   "application": "APP-012",
+   "name": "Neko",
+   "category": "browser",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs06/blobs/sha256:6377fb6a3f0a8c03f4ca07a3f0af7e991c32cb53983e0c638bddfcffdc9f3dc1?se=2026-09-19T12%3A15%3A00Z&sig=naj19RwG7Vb3VINn4NVUfxzzGB8cU2iW7R5%2BIpuHEfE%3D&ske=2026-09-20T02%3A20%3A05Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T02%3A20%3A05Z&sktid",
+   "evidence": "applications/APP-012/app.json"
+  },
+  {
+   "application": "APP-013",
+   "name": "Strapi",
+   "category": "cms",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-013/app.json"
+  },
+  {
+   "application": "APP-014",
+   "name": "rustpad",
+   "category": "code-editors",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add musl-dev openssl-dev\" did not complete successfully: exit code: 1",
+   "evidence": "applications/APP-014/app.json"
+  },
+  {
+   "application": "APP-015",
+   "name": "Gitea",
+   "category": "collaboration",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add     bash     ca-certificates     curl     gettext     git     linux-pam     openssh     s6     sqlite     su-exec     gnupg\" did not complete successfully: exit code: 11",
+   "evidence": "applications/APP-015/app.json"
+  },
+  {
+   "application": "APP-016",
+   "name": "Hoppscotch Community Edition",
+   "category": "community",
+   "stage": "STARTUP_FAILED",
+   "reason": "no service selected",
+   "evidence": "applications/APP-016/app.json"
+  },
+  {
+   "application": "APP-017",
+   "name": "Krayin",
+   "category": "crm",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-017/app.json"
+  },
+  {
+   "application": "APP-018",
+   "name": "Chatwoot",
+   "category": "customer-support",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk update && apk add --no-cache   build-base   openssl   tzdata   postgresql-client   imagemagick   git   vips   && gem install bundler -v \\\"$BUNDLER_VERSION\\\"\" did not complete successfully: exit code: 4",
+   "evidence": "applications/APP-018/app.json"
+  },
+  {
+   "application": "APP-019",
+   "name": "airbyte",
+   "category": "data-engineering",
+   "stage": "LICENCE_UNCLEAR",
+   "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0', 'GPL', 'GPL-2.0', 'GPL-3.0', 'AGPL-3.0', 'LGPL', 'LGPL-2.1', 'LGPL-3.0', 'EUPL-1.2')",
+   "evidence": "applications/APP-019/app.json"
+  },
+  {
+   "application": "APP-020",
+   "name": "MindsDB",
+   "category": "databases",
+   "stage": "STARTUP_FAILED",
+   "reason": "target web: failed to solve: failed to compute cache key: failed to calculate checksum of ref qo5jhdggkcqvqetvy631nuqr1::de17e4wwivymp7m7fkozo0v1r: \"/frontend/package.json\": not found",
+   "evidence": "applications/APP-020/app.json"
+  },
+  {
+   "application": "APP-021",
+   "name": "penpot",
+   "category": "design-tools",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-021/app.json"
+  },
+  {
+   "application": "APP-022",
+   "name": null,
+   "category": "developer-tools",
+   "stage": "DISCOVERY_FAILED",
+   "reason": "no candidate found via awesome-selfhosted-data or GitHub search (openapps.pro itself is blocked by this sandbox's egress policy, per RULES.md-equivalent provenance note)",
+   "evidence": "applications/APP-022/app.json"
+  },
+  {
+   "application": "APP-023",
+   "name": "OneDev",
+   "category": "devops",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-023/app.json"
+  },
+  {
+   "application": "APP-025",
+   "name": "Bagisto",
+   "category": "ecommerce",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs docker.elastic.co, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"docker.elastic.co/kibana/kibana:7.17.0\": failed to do request: Head \"https://docker.elastic.co/v2/kibana/kibana/manifests/7.17.0\": Forbidden",
+   "evidence": "applications/APP-025/app.json"
+  },
+  {
+   "application": "APP-026",
+   "name": "grocy",
+   "category": "erp",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-026/app.json"
+  },
+  {
+   "application": "APP-027",
+   "name": "transfer.sh",
+   "category": "file-storage",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk add git musl-dev mailcap\" did not complete successfully: exit code: 3",
+   "evidence": "applications/APP-027/app.json"
+  },
+  {
+   "application": "APP-028",
+   "name": "Typebot",
+   "category": "forms-surveys",
+   "stage": "STARTUP_FAILED",
+   "reason": "ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref qo5jhdggkcqvqetvy631nuqr1::wc0jo15r4o0rhr47l9g37029d: \"/scripts/-entrypoint.sh\": not found",
+   "evidence": "applications/APP-028/app.json"
+  },
+  {
+   "application": "APP-029",
+   "name": "gaseous-server",
+   "category": "game-development",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-029/app.json"
+  },
+  {
+   "application": "APP-030",
+   "name": "websoft9",
+   "category": "hosting-control-panel",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-030/app.json"
+  },
+  {
+   "application": "APP-031",
+   "name": "hrms",
+   "category": "human-resources",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-031/app.json"
+  },
+  {
+   "application": "APP-032",
+   "name": "ezbookkeeping",
+   "category": "invoicing-finance",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: ERROR: failed to build: failed to solve: process \"/bin/sh -c apk --no-cache add tzdata\" did not complete successfully: exit code: 1",
+   "evidence": "applications/APP-032/app.json"
+  },
+  {
+   "application": "APP-033",
+   "name": "Memos",
+   "category": "knowledge-management",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-033/app.json"
+  },
+  {
+   "application": "APP-034",
+   "name": "Canvas LMS",
+   "category": "learning-management",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs deb.debian.org, which this sandbox's egress policy denies: target postgres: failed to solve: process \"/bin/sh -c apt-get update -qq  && apt-get install -qqy --no-install-recommends postgresql-$PG_MAJOR-pgvector\" did not complete successfully: exit code: 100",
+   "evidence": "applications/APP-034/app.json"
+  },
+  {
+   "application": "APP-035",
+   "name": null,
+   "category": "logistics",
+   "stage": "DISCOVERY_FAILED",
+   "reason": "no candidate found via awesome-selfhosted-data or GitHub search (openapps.pro itself is blocked by this sandbox's egress policy, per RULES.md-equivalent provenance note)",
+   "evidence": "applications/APP-035/app.json"
+  },
+  {
+   "application": "APP-036",
+   "name": "appsmith",
+   "category": "low-code-platforms",
+   "stage": "STARTUP_FAILED",
+   "reason": "ERROR: failed to build: failed to solve: base name (${BASE}) should not be blank",
+   "evidence": "applications/APP-036/app.json"
+  },
+  {
+   "application": "APP-037",
+   "name": "Mautic",
+   "category": "marketing",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-037/app.json"
+  },
+  {
+   "application": "APP-038",
+   "name": "Uptime Kuma",
+   "category": "monitoring",
+   "stage": "FUNCTION_FAILED",
+   "reason": "see application record",
+   "evidence": "applications/APP-038/app.json"
+  },
+  {
+   "application": "APP-039",
+   "name": null,
+   "category": "networking",
+   "stage": "DISCOVERY_FAILED",
+   "reason": "manually reviewed: no candidate in either discovery source is a genuine fit for this category (see MANUAL_OVERRIDES in build_manifest.py)",
+   "evidence": "applications/APP-039/app.json"
+  },
+  {
+   "application": "APP-040",
+   "name": "appsmith",
+   "category": "no-code-platforms",
+   "stage": "STARTUP_FAILED",
+   "reason": "ERROR: failed to build: failed to solve: base name (${BASE}) should not be blank",
+   "evidence": "applications/APP-040/app.json"
+  },
+  {
+   "application": "APP-041",
+   "name": "Memos",
+   "category": "note-taking",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-041/app.json"
+  },
+  {
+   "application": "APP-042",
+   "name": "Infisical Community Edition",
+   "category": "password-manager",
+   "stage": "FUNCTION_FAILED",
+   "reason": "see application record",
+   "evidence": "applications/APP-042/app.json"
+  },
+  {
+   "application": "APP-043",
+   "name": "feedlog",
+   "category": "product-management",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs ghcr.io, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"ghcr.io/linkcraftstudio/feedlog:v0.1.0\": ghcr.io/linkcraftstudio/feedlog:v0.1.0: not found",
+   "evidence": "applications/APP-043/app.json"
+  },
+  {
+   "application": "APP-044",
+   "name": "Super Productivity",
+   "category": "productivity",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2",
+   "evidence": "applications/APP-044/app.json"
+  },
+  {
+   "application": "APP-045",
+   "name": "Super Productivity",
+   "category": "project-management",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs dl-cdn.alpinelinux.org, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c apk add --no-cache openssl libc6-compat\" did not complete successfully: exit code: 2",
+   "evidence": "applications/APP-045/app.json"
+  },
+  {
+   "application": "APP-046",
+   "name": "Cal.diy",
+   "category": "scheduling",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs calcom.docker.scarf.sh, which this sandbox's egress policy denies: Image calcom.docker.scarf.sh/calcom/cal.diy Error failed to resolve reference \"calcom.docker.scarf.sh/calcom/cal.diy:latest\": failed to do request: Head \"https://calcom.docker.scarf.sh/v2/calcom/cal.diy/manifests/latest\": Forbidden",
+   "evidence": "applications/APP-046/app.json"
+  },
+  {
+   "application": "APP-047",
+   "name": "LibreChat",
+   "category": "search",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs registry.librechat.ai, which this sandbox's egress policy denies: Error response from daemon: failed to resolve reference \"registry.librechat.ai/clickhouse/librechat-admin-panel:latest\": failed to do request: Head \"https://registry.librechat.ai/v2/clickhouse/librechat-admin-panel/manifests/latest\": Forbidden",
+   "evidence": "applications/APP-047/app.json"
+  },
+  {
+   "application": "APP-048",
+   "name": "Frigate",
+   "category": "security",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to solve: process \"/bin/sh -c /deps/install_deps.sh\" did not complete successfully: exit code: 100",
+   "evidence": "applications/APP-048/app.json"
+  },
+  {
+   "application": "APP-049",
+   "name": "Postiz",
+   "category": "social-media",
+   "stage": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcrblobs18/blobs/sha256:5a92b2257df2e5998411020df629daf810e3bee7f86e8746cb7979de422ba15b?se=2026-09-19T12%3A45%3A00Z&sig=MSkvwK3BZOBBXKCF9gai110QvRboFg815Q9Fj6mndrs%3D&ske=2026-09-20T08%3A31%3A09Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T08%3A31%3A09Z&sktid=3",
+   "evidence": "applications/APP-049/app.json"
+  },
+  {
+   "application": "APP-050",
+   "name": "Rocket.Chat",
+   "category": "team-chat",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-050/app.json"
+  },
+  {
+   "application": "APP-051",
+   "name": "Galene",
+   "category": "video-conferencing",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-051/app.json"
+  },
+  {
+   "application": "APP-052",
+   "name": "OpenReel Video",
+   "category": "video-editors",
+   "stage": "INSTALL_FAILED",
+   "reason": "no Dockerfile or compose file - no documented way to run it",
+   "evidence": "applications/APP-052/app.json"
+  }
+ ],
+ "definitions": {
+  "READY": "booted from its own recipe, got a real UI response, at least one screen was browser-verified (rendered, not just HTTP 200), AND at least one capability was PROVEN by a real in-browser action - not source inspection.",
+  "NOT_VERIFIED_vs_PASS": "a capability with an attach point but no live UI exercise, or a live action with no code attach point, is NOT VERIFIED - never PASS."
+ },
+ "known_environment_constraint": "This sandbox's egress policy denies ghcr.io, quay.io, and OS package mirrors (deb.debian.org, Alpine's apk mirrors) outright, confirmed by direct request. Any app whose install needs one of those is recorded BLOCKED_EXTERNAL_DEPENDENCY, per spec section 15 - this is an infrastructure ceiling of this sandbox, not a defect in the pipeline."
+}

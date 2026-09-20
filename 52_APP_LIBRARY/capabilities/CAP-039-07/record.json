@@ -1,0 +1,44 @@
+{
+ "application": "APP-039",
+ "id": "CAP-039-07",
+ "name": "Proxy Hosts",
+ "route": "/nginx/proxy",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "frontend/src/router.tsx",
+   "matched_words": [
+    "proxy"
+   ],
+   "line": 69,
+   "snippet": "<Route path=\"/nginx/proxy\" element={<ProxyHosts />} />"
+  },
+  {
+   "file": "frontend/src/modules/permissions.ts",
+   "matched_words": [
+    "hosts",
+    "proxy"
+   ],
+   "line": 5,
+   "snippet": "export const PROXY_HOSTS = \"proxyHosts\";"
+  },
+  {
+   "file": "frontend/src/components/sitemenu.tsx",
+   "matched_words": [
+    "hosts",
+    "proxy"
+   ],
+   "line": 18,
+   "snippet": "DEAD_HOSTS,"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:8181/nginx/proxy",
+  "attempted": true,
+  "outcome": "FAIL",
+  "detail": "clicked action button, filled+submitted the form it opened (7 fields); page shows an error indicator: Nginx Proxy Manager\nLibrary\nAdministrator\nDashboard\nHosts\nAccess Lists\nCertificates\nUsers\nAudit Logs\nSettings\nProxy Hosts\nThere are no Proxy Hosts\n\nWhy don't you create one?\n\nAdd Proxy Host\nFork me on"
+ },
+ "verdict": "NOT VERIFIED",
+ "reason": "live test did not pass: FAIL - clicked action button, filled+submitted the form it opened (7 fields); page shows an error indicator: Nginx Proxy Manager\nLibrary\nAdministrator\nDashboard\nHosts\nAccess Lists\nCertificates\nUsers\nAudit Logs\nSettings\nProxy Hosts\nThere are no Proxy Hosts\n\nWhy don't you create one?\n\nAdd Proxy Host\nFork me on"
+}

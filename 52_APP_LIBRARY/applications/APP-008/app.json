@@ -1,0 +1,225 @@
+{
+ "id": "APP-008",
+ "name": "Firezone",
+ "category": "Authentication",
+ "category_slug": "authentication",
+ "repository": "https://github.com/firezone/firezone",
+ "source_platform": "github.com",
+ "licence": "Apache-2.0",
+ "version": null,
+ "commit": "f59d5b8b1981fe49257ca9fba91418f0d9f8ac41",
+ "source_path": "applications/APP-008/source",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Firezone",
+   "source_code_url": "https://github.com/firezone/firezone",
+   "stargazers_count": 9096,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Secure remote access gateway that supports the WireGuard protocol. It offers a Web GUI, 1-line install script, multi-factor auth (MFA), and SSO.",
+   "matched_keywords": [
+    "sso"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Pomerium",
+   "source_code_url": "https://github.com/pomerium/pomerium",
+   "stargazers_count": 5010,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Identity-aware reverse proxy, successor to now obsolete oauth_proxy. It inserts an OAuth step before proxying your request to the backend, so that you can safely expose your self-hosted websites to public Internet.",
+   "matched_keywords": [
+    "oauth"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "2FAuth",
+   "source_code_url": "https://github.com/Bubka/2FAuth",
+   "stargazers_count": 4155,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-02",
+   "description": "Manage your Two-Factor Authentication (2FA) accounts and generate their security codes.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ByteStash",
+   "source_code_url": "https://github.com/jordan-dalby/ByteStash",
+   "stargazers_count": 2534,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-08",
+   "description": "Pastebin and file storage service with a simple web interface. Supports syntax highlighting, optional user authentication and public sharing.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Watcharr",
+   "source_code_url": "https://github.com/sbondCo/Watcharr",
+   "stargazers_count": 1503,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-12",
+   "description": "Add and track all the shows and movies you are watching. Comes with user authentication, modern and clean UI and a very simple setup.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Keeper.sh",
+   "source_code_url": "https://github.com/ridafkih/keeper.sh",
+   "stargazers_count": 1343,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Calendar syncing tool that pulls and pushes events between calendar sources and destinations via iCal/ICS or OAuth, with support for anonymized busy/free events.",
+   "matched_keywords": [
+    "oauth"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Ownfoil",
+   "source_code_url": "https://github.com/a1ex4/ownfoil",
+   "stargazers_count": 916,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "Nintendo Switch library manager, with automated management tasks (file identification and organization, missing updates/DLC), serving your library to multiple supported clients on your Switch, with shop customization and multi user authentication.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LibreDB Studio",
+   "source_code_url": "https://github.com/libredb/libredb-studio",
+   "stargazers_count": 800,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Browser-based SQL IDE for PostgreSQL, MySQL, Oracle, SQL Server, MongoDB, Redis, ClickHouse, DuckDB and more, with SSO, audit trail, ER diagrams and optional AI assistance on your own model key (alternative to DataGrip, DBeaver, CloudBeaver).",
+   "matched_keywords": [
+    "sso"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "TimeTracker",
+   "source_code_url": "https://github.com/drytrix/TimeTracker",
+   "stargazers_count": 625,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Track time across projects and clients, with timers, kanban tasks, CRM, expense tracking, multi-currency invoicing (PDF, Peppol/ZugFerd e-invoicing), reports, OIDC/SSO, and a REST API.",
+   "matched_keywords": [
+    "oidc",
+    "sso"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Para",
+   "source_code_url": "https://github.com/erudika/para",
+   "stargazers_count": 573,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-08-25",
+   "description": "Flexible and modular backend framework/server for object persistence, API development and authentication.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "VoucherVault",
+   "source_code_url": "https://github.com/l4rm4nd/VoucherVault",
+   "stargazers_count": 512,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-31",
+   "description": "Store and manage vouchers, coupons, loyalty and gift cards digitally. Supports expiry notifications, transaction histories, file uploads and OIDC SSO.",
+   "matched_keywords": [
+    "oidc",
+    "sso"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Pingvin Share X",
+   "source_code_url": "https://github.com/smp46/pingvin-share-x",
+   "stargazers_count": 439,
+   "licenses": [
+    "BSD-2-Clause"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "File sharing platform with support for logins, reverse shares, share expiry, S3 Buckets, advanced authentication, ClamAV for security scans and more (fork of Pingvin Share).",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "socks5-proxy-server",
+   "source_code_url": "https://github.com/nskondratev/socks5-proxy-server",
+   "stargazers_count": 143,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2025-11-29",
+   "description": "SOCKS5 proxy server with built-in authentication and Telegram-bot for user management and user statistics on data spent (handy when you pay per GB of data). It is dockerised and simple to install.",
+   "matched_keywords": [
+    "authentication"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Firezone",
+   "repo": "https://github.com/firezone/firezone",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "install needs pkg-containers.githubusercontent.com, which this sandbox's egress policy denies: failed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:18664310d22f348f6bab66e284f0a72e7dd7c98911fcdeab13fcb45857de30f8?se=2026-09-19T12%3A05%3A00Z&sig=c83Y%2Fx3rnayNs%2Fo88WhvU3fvPkjnDvqN6eNmiMmy%2BMQ%3D&ske=2026-09-20T04%3A28%3A47Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T04%3A28%3A47Z&sktid=3 Checked for a Docker Hub alternative: firezone/firezone exists but is Firezone's old, pre-rewrite monolithic self-hosted product. This repo's compose file is the current split portal/elixir/gateway architecture, published only to ghcr.io/firezone/* with no Docker Hub counterpart for portal or gateway - substituting the old monolith would test a different, unrelated product generation under the current app's name, not a legitimate same-release substitution like the ones that worked elsewhere. Remains genuinely blocked: ghcr.io/pkg-containers.githubusercontent.com is a deliberate policy denial with no current legitimate alternate channel found.",
+  "blocked_host": "pkg-containers.githubusercontent.com",
+  "runtime_hint": [],
+  "startup_command": "docker compose -f docker-compose.yml up -d",
+  "log": [
+   "$ docker compose -p lib_app008 -f /home/user/Sam/52_APP_LIBRARY/applications/APP-008/source/docker-compose.yml up -d\n\n Image ghcr.io/firezone/debug/client:main Pulling \n Image ghcr.io/firezone/debug/gateway:main Pulling \n Image ghcr.io/firezone/debug/client:main Pulling \n Image ghcr.io/firezone/elixir:main Pulling \n Image ghcr.io/siemens/ghostwire Pulling \n Image mlabbe/iperf3 Pulling \n Image ghcr.io/firezone/debug/http-test-server:main Pulling \n Image ghcr.io/firezone/secnetperf:v2.6.0 Pulling \n Image ghcr.io/firezone/debug/relay:main Pulling \n Image ghcr.io/firezone/portal:main Pulling \n Image postgres:18 Pulling \n Image ghcr.io/firezone/debug/relay:main Pulling \n Image kennethreitz/httpbin Pulling \n Image alpine:latest Pulling \n Image kennethreitz/httpbin Pulling \n Image ghcr.io/firezone/xdp-pass Pulling \n Image otel/opentelemetry-collector:latest Pulling \n Image ghcr.io/firezone/secnetperf:v2.6.0 Pulling \n Image ghcr.io/siemens/packetflix Pulling \nfailed to copy: httpReadSeeker: failed open: failed to do request: Get \"https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:18664310d22f348f6bab66e284f0a72e7dd7c98911fcdeab13fcb45857de30f8?se=2026-09-19T12%3A05%3A00Z&sig=c83Y%2Fx3rnayNs%2Fo88WhvU3fvPkjnDvqN6eNmiMmy%2BMQ%3D&ske=2026-09-20T04%3A28%3A47Z&skoid=fb3d2a07-ec6c-4fe4-aced-9efe0fd2fe1a&sks=b&skt=2026-09-19T04%3A28%3A47Z&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skv=2025-01-05&sp=r&spr=https&sr=b&sv=2025-01-05&hmac=c0534aced09267771dc700c164391d84c2234c174353af96c5e22a8a0152a146\": Forbidden\n"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {},
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ }
+}

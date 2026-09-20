@@ -1,0 +1,16 @@
+{
+ "application": "APP-019",
+ "category": "data-engineering",
+ "repository_url": "https://github.com/apache/airflow",
+ "commit_sha": "61db43fba9ac86a6f35df19ffd985278b97b4c1b",
+ "branch": "main",
+ "download_timestamp": "2026-09-20T05:55:53.844419+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "Apache-2.0",
+ "licence_allowed": true,
+ "source_checksum_sha256": "2dd829a125ff72d683f917893d3747fb2f4cf1d7a16dddba8f5eb42111097e03",
+ "discovery_source": "manual_override",
+ "stargazers_count": null,
+ "manual_override_note": "Substituted for the originally-discovered airbytehq/airbyte (Elastic-2.0, correctly excluded - see the original acquisition_attempts entry retained in app.json for the record). See app.json manual_override_reason for the full substitution rationale."
+}

@@ -1,0 +1,15 @@
+{
+ "application": "APP-043",
+ "category": "product-management",
+ "repository_url": "https://github.com/linkcraftstudio/feedlog",
+ "commit_sha": "aa56a7655840471f33890028fad2185549d1ded9",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:50:36.621424+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "d402491e798cdfb65ce78e775d98d3eb5b04c6791c4c1faa29d41b5cf81b50b0",
+ "discovery_source": "github-search-or-directory",
+ "stargazers_count": 153
+}

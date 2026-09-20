@@ -1,0 +1,44 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-06",
+ "name": "Organization Audit Logs",
+ "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/audit-logs",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "frontend/src/routes.ts",
+   "matched_words": [
+    "audit",
+    "logs",
+    "organization"
+   ],
+   "line": 28,
+   "snippet": "route(\"/audit-logs\", \"project/AuditLogsPage/route-secret-manager.tsx\"),"
+  },
+  {
+   "file": "frontend/src/helpers/auditlogstreams.ts",
+   "matched_words": [
+    "audit"
+   ],
+   "line": 7,
+   "snippet": "export const AUDIT_LOG_STREAM_PROVIDER_MAP: Record<"
+  },
+  {
+   "file": "frontend/src/helpers/project.ts",
+   "matched_words": [
+    "organization"
+   ],
+   "line": 70,
+   "snippet": "* Create and initialize a new project in organization with id [organizationId]"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:80/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/audit-logs",
+  "attempted": false,
+  "outcome": "NO_FORM_FOUND",
+  "detail": "no visible <form> on this screen"
+ },
+ "verdict": "NOT VERIFIED",
+ "reason": "live test did not pass: NO_FORM_FOUND - no visible <form> on this screen"
+}

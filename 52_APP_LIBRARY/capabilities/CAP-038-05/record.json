@@ -1,0 +1,42 @@
+{
+ "application": "APP-038",
+ "id": "CAP-038-05",
+ "name": "Add New Status Page",
+ "route": "/add-status-page",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "server/model/status_page.js",
+   "matched_words": [
+    "status"
+   ],
+   "line": 14,
+   "snippet": "STATUS_PAGE_ALL_DOWN,"
+  },
+  {
+   "file": "server/model/heartbeat.js",
+   "matched_words": [
+    "status"
+   ],
+   "line": 7,
+   "snippet": "* status:"
+  },
+  {
+   "file": "server/model/api_key.js",
+   "matched_words": [
+    "status"
+   ],
+   "line": 7,
+   "snippet": "* Get the current status of this API key"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:3001/add-status-page",
+  "attempted": true,
+  "outcome": "FAIL",
+  "detail": "submitted 2 field(s); page shows an error indicator: Uptime Kuma\n Status Pages\n Dashboard\nL\n Add New Monitor\nStatus\nTags\nNo Monitors, please add one\nAdd New Status Page\nName\nSlug\n/status/\nAccept characters: a-z0-9-\nNo consecutive dashes --\nSpecial slug "
+ },
+ "verdict": "NOT VERIFIED",
+ "reason": "live test did not pass: FAIL - submitted 2 field(s); page shows an error indicator: Uptime Kuma\n Status Pages\n Dashboard\nL\n Add New Monitor\nStatus\nTags\nNo Monitors, please add one\nAdd New Status Page\nName\nSlug\n/status/\nAccept characters: a-z0-9-\nNo consecutive dashes --\nSpecial slug "
+}

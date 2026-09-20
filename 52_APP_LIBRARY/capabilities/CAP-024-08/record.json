@@ -1,0 +1,37 @@
+{
+ "application": "APP-024",
+ "id": "CAP-024-08",
+ "name": "templates",
+ "attach_points": [
+  {
+   "file": "app/controllers/template_documents_page_objects_controller.rb",
+   "matched_words": [
+    "template",
+    "templates"
+   ],
+   "line": 4,
+   "snippet": "load_and_authorize_resource :template"
+  },
+  {
+   "file": "app/controllers/send_submission_email_controller.rb",
+   "matched_words": [
+    "template"
+   ],
+   "line": 13,
+   "snippet": "if params[:template_slug]"
+  },
+  {
+   "file": "app/controllers/start_form_resubmit_controller.rb",
+   "matched_words": [
+    "template",
+    "templates"
+   ],
+   "line": 11,
+   "snippet": "before_action :load_template"
+  }
+ ],
+ "ui_screen": null,
+ "live_test": null,
+ "verdict": "NOT VERIFIED",
+ "reason": "code attach point found but no reachable UI screen for it"
+}

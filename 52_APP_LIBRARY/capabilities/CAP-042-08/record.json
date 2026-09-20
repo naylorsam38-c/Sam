@@ -1,0 +1,42 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-08",
+ "name": "Secrets Management",
+ "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/secret-management",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "frontend/src/const.ts",
+   "matched_words": [
+    "secret"
+   ],
+   "line": 27,
+   "snippet": "\"/shared/secret/[id]\","
+  },
+  {
+   "file": "frontend/src/routes.ts",
+   "matched_words": [
+    "secret",
+    "secrets"
+   ],
+   "line": 21,
+   "snippet": "const secretManagerRoutes = route(\"/organizations/$orgId/projects/secret-management/$projectId\", ["
+  },
+  {
+   "file": "frontend/src/types/integrations.ts",
+   "matched_words": [
+    "secret"
+   ],
+   "line": 6,
+   "snippet": "SecretSyncs = \"secret-syncs\","
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:80/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/projects/secret-management",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "clicked action button, filled+submitted the form it opened (2 fields); app showed an explicit success message"
+ },
+ "verdict": "PROVEN"
+}

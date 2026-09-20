@@ -1,0 +1,199 @@
+{
+ "id": "APP-042",
+ "name": "Infisical Community Edition",
+ "category": "Password Manager",
+ "category_slug": "password-manager",
+ "repository": "https://github.com/Infisical/infisical",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "bd2179cf211874925e2313664e22dae2501fe30a",
+ "source_path": "applications/APP-042/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Infisical Community Edition",
+   "source_code_url": "https://github.com/Infisical/infisical",
+   "stargazers_count": 29310,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Platform for secrets, certificates, and privileged access management.",
+   "matched_keywords": [
+    "secrets"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Bitwarden",
+   "source_code_url": "https://github.com/bitwarden/server",
+   "stargazers_count": 20160,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Password manager with a webapp, browser extension, and mobile app.",
+   "matched_keywords": [
+    "password manager"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Passbolt",
+   "source_code_url": "https://github.com/passbolt/passbolt_api",
+   "stargazers_count": 6128,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Collaborative password manager.",
+   "matched_keywords": [
+    "password manager"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Yopass",
+   "source_code_url": "https://github.com/jhaals/yopass",
+   "stargazers_count": 3140,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Secure sharing of secrets, passwords and files.",
+   "matched_keywords": [
+    "secrets"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "AliasVault",
+   "source_code_url": "https://github.com/aliasvault/aliasvault",
+   "stargazers_count": 3130,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "End-to-end encrypted password manager with a built-in email alias generator and server.",
+   "matched_keywords": [
+    "password manager"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Teampass",
+   "source_code_url": "https://github.com/nilsteampassnet/TeamPass",
+   "stargazers_count": 1826,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-12",
+   "description": "Password manager dedicated for managing passwords in a collaborative way. One symmetric key is used to encrypt all shared/team passwords and stored server side in a file and the database. works on any server Apache, MySQL and PHP.",
+   "matched_keywords": [
+    "password manager"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Hemmelig",
+   "source_code_url": "https://github.com/HemmeligOrg/Hemmelig.app",
+   "stargazers_count": 1243,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-08-27",
+   "description": "Share encrypted secrets cross organizations, or as private persons.",
+   "matched_keywords": [
+    "secrets"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Sup3rS3cretMes5age",
+   "source_code_url": "https://github.com/algolia/sup3rS3cretMes5age",
+   "stargazers_count": 569,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-15",
+   "description": "Very simple (to deploy and to use) secret message service using Hashicorp Vault as a secrets storage.",
+   "matched_keywords": [
+    "secrets",
+    "vault"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Shhh",
+   "source_code_url": "https://github.com/smallwat3r/shhh",
+   "stargazers_count": 418,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Keep secrets out of emails or chat logs, share them using secure links with passphrase and expiration dates.",
+   "matched_keywords": [
+    "secrets"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Flare",
+   "source_code_url": "https://github.com/FlintSH/Flare",
+   "stargazers_count": 136,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "A nonbloated, modern, and highly configurable file/screenshot vault server with support for ShareX, Flameshot, and Spectacle. Offers OCR search and more.",
+   "matched_keywords": [
+    "vault"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Infisical Community Edition",
+   "repo": "https://github.com/Infisical/infisical",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:80/",
+  "http_status": 200,
+  "recipe": "docker-compose.prod.yml",
+  "recipe_kind": "compose",
+  "runtime_hint": [
+   "node"
+  ],
+  "startup_command": "docker compose -f docker-compose.prod.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
+ },
+ "capability_summary": {
+  "discovered": 10,
+  "attach_point_found": 10,
+  "proven": 6
+ }
+}

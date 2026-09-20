@@ -1,0 +1,15 @@
+{
+ "application": "APP-039",
+ "category": "networking",
+ "repository_url": "https://github.com/NginxProxyManager/nginx-proxy-manager",
+ "commit_sha": "568c10594517b999dbb2240d9f7a6014b1c4bb2a",
+ "branch": "develop",
+ "download_timestamp": "2026-09-19T15:06:21.388100+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "513bac154e3754f7829a3d35186881ef6e4deb47ae8bcb37f6ffe717de4b89af",
+ "discovery_source": "manual_override",
+ "stargazers_count": null
+}

@@ -1,0 +1,42 @@
+{
+ "application": "APP-042",
+ "id": "CAP-042-03",
+ "name": "Integrations",
+ "route": "/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/integrations",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "frontend/src/const.ts",
+   "matched_words": [
+    "integrations"
+   ],
+   "line": 3,
+   "snippet": "// `/integrations`,"
+  },
+  {
+   "file": "frontend/src/routes.ts",
+   "matched_words": [
+    "integration",
+    "integrations"
+   ],
+   "line": 148,
+   "snippet": "\"/select-integration-auth\","
+  },
+  {
+   "file": "frontend/src/types/integrations.ts",
+   "matched_words": [
+    "integrations"
+   ],
+   "line": 3,
+   "snippet": "NativeIntegrations = \"native-integrations\","
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:80/organizations/ed3236a1-18b5-4ec7-ad43-2fcf57db1825/integrations",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "clicked action button (no form followed); app showed an explicit success message"
+ },
+ "verdict": "PROVEN"
+}

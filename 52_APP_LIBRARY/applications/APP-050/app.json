@@ -1,0 +1,261 @@
+{
+ "id": "APP-050",
+ "name": "Rocket.Chat",
+ "category": "Team Chat",
+ "category_slug": "team-chat",
+ "repository": "https://github.com/RocketChat/Rocket.Chat",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "a2132d777c5b1ec3c181632f9d12f2085457fe27",
+ "source_path": "applications/APP-050/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Rocket.Chat",
+   "source_code_url": "https://github.com/RocketChat/Rocket.Chat",
+   "stargazers_count": 46144,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Communications platform that puts data protection first (alternative to Gitter.im and Slack).",
+   "matched_keywords": [
+    "slack"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Mattermost",
+   "source_code_url": "https://github.com/mattermost/mattermost",
+   "stargazers_count": 39099,
+   "licenses": [
+    "\u2298 Proprietary"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Platform for secure collaboration across the entire software development lifecycle, can be integrated with Gitlab (alternative to Slack).",
+   "matched_keywords": [
+    "slack"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Huly",
+   "source_code_url": "https://github.com/hcengineering/platform",
+   "stargazers_count": 27713,
+   "licenses": [
+    "EPL-2.0"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "All-in-one project management platform (alternative to Linear, Jira, Slack, Notion, Motion).",
+   "matched_keywords": [
+    "slack"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Activepieces",
+   "source_code_url": "https://github.com/activepieces/activepieces",
+   "stargazers_count": 24543,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "No-code business automation tool like Zapier or Tray. For example, you can send a Slack notification for each new Trello card.",
+   "matched_keywords": [
+    "slack"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Apprise",
+   "source_code_url": "https://github.com/caronc/apprise",
+   "stargazers_count": 17350,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Apprise allows you to send a notification to almost all of the most popular notification services available to us today such as: Telegram, Discord, Slack, Amazon SNS, Gotify, etc.",
+   "matched_keywords": [
+    "slack"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Automatisch",
+   "source_code_url": "https://github.com/automatisch/automatisch",
+   "stargazers_count": 13974,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-01-15",
+   "description": "Business automation tool that lets you connect different services like Twitter, Slack, and more to automate your business processes (alternative to Zapier).",
+   "matched_keywords": [
+    "slack"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Colanode",
+   "source_code_url": "https://github.com/colanode/colanode",
+   "stargazers_count": 5142,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-04-03",
+   "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
+   "matched_keywords": [
+    "slack"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "tubesync",
+   "source_code_url": "https://github.com/meeb/tubesync",
+   "stargazers_count": 2794,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "Syncs YouTube channels and playlists to a locally hosted media server.",
+   "matched_keywords": [
+    "channels"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Talkyard",
+   "source_code_url": "https://github.com/debiki/talkyard",
+   "stargazers_count": 1812,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-07-10",
+   "description": "Create a community, where your users can suggest ideas and get questions answered. And have friendly open-ended discussions and chat (Slack/StackOverflow/Discourse/Reddit/Disqus hybrid).",
+   "matched_keywords": [
+    "slack"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "CyTube",
+   "source_code_url": "https://github.com/calzoneman/sync",
+   "stargazers_count": 1588,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2025-11-07",
+   "description": "Synchronize media, chat, and more for an arbitrary number of channels.",
+   "matched_keywords": [
+    "channels"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Youtarr",
+   "source_code_url": "https://github.com/DialmasterOrg/Youtarr",
+   "stargazers_count": 1572,
+   "licenses": [
+    "ISC"
+   ],
+   "updated_at": "2026-09-15",
+   "description": "Download videos from YouTube channels on a schedule via yt-dlp, with a web UI to browse and selectively download videos. Integrates with Plex Media Server and generates NFO metadata for Jellyfin, Kodi, and Emby.",
+   "matched_keywords": [
+    "channels"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Fredy",
+   "source_code_url": "https://github.com/orangecoding/fredy",
+   "stargazers_count": 1519,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Searches for new apartments, houses, and flats in Germany on platforms like ImmoScout24, Immowelt, and others, and instantly delivers the results to you via Slack, Telegram, and more.",
+   "matched_keywords": [
+    "slack"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ChiefOnboarding",
+   "source_code_url": "https://github.com/chiefonboarding/ChiefOnboarding",
+   "stargazers_count": 930,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-15",
+   "description": "Employee onboarding platform that allows you to provision user accounts and create sequences with todo items, resources, text/email/Slack messages, and more! Available as a web portal and Slack bot.",
+   "matched_keywords": [
+    "slack"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "vod2pod-rss",
+   "source_code_url": "https://github.com/madiele/vod2pod-rss",
+   "stargazers_count": 386,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-08-25",
+   "description": "Convert YouTube and Twitch channels to podcasts, no storage required. Transcodes VoDs to MP3 192k on the fly, generates an RSS feed to use in podcast clients.",
+   "matched_keywords": [
+    "channels"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ChannelTube",
+   "source_code_url": "https://github.com/TheWicklowWolf/ChannelTube",
+   "stargazers_count": 324,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-08-21",
+   "description": "Download video or audio from YouTube channels on a schedule via yt-dlp.",
+   "matched_keywords": [
+    "channels"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Rocket.Chat",
+   "repo": "https://github.com/RocketChat/Rocket.Chat",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:3000/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "This repo's own compose files (docker-compose-local.yml/-ci.yml) are CI/dev-testing rigs for its microservices architecture, pulling per-branch images from ghcr.io/${LOWERCASE_REPOSITORY} - not a usable self-host recipe even before considering ghcr.io. Wrote a standard compose file instead, following Rocket.Chat's own documented self-hosting pattern: the same project's official rocketchat/rocket.chat:latest image (already on Docker Hub) + a MongoDB replica set (required for its oplog-based change streams). First tried mongo:6 (mongo:6 is what several other apps in this pass already used) but Rocket.Chat 8.8.1 refused it outright - needs Mongo 8.0+; switched to mongo:8 and it started cleanly.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 12,
+  "screens_browser_verified": 12
+ }
+}

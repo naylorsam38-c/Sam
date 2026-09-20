@@ -1,0 +1,79 @@
+{
+ "id": "APP-051",
+ "name": "Galene",
+ "category": "Video Conferencing",
+ "category_slug": "video-conferencing",
+ "repository": "https://github.com/jech/galene",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "6d9338e909fdecdd906150e4dda34e10d9869654",
+ "source_path": "applications/APP-051/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Galene",
+   "source_code_url": "https://github.com/jech/galene",
+   "stargazers_count": 1406,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-08",
+   "description": "Video conferencing server that is easy to deploy and that requires moderate server resources.",
+   "matched_keywords": [
+    "video conferencing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Openmeetings",
+   "source_code_url": "https://github.com/apache/openmeetings",
+   "stargazers_count": 684,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Video conferencing, instant messaging, whiteboard, collaborative document editing and other groupware tools using API functions of the Red5 Streaming Server for Remoting and Streaming.",
+   "matched_keywords": [
+    "video conferencing"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Galene",
+   "repo": "https://github.com/jech/galene",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "https://localhost:8443/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "No Dockerfile or compose file shipped with this project - it's a pure Go server (an SFU video-conferencing server), meant to be built with `go build` and run directly per its own README. Wrote a multi-stage Dockerfile matching that exactly: golang:1.24-bookworm builder runs the project's own documented `CGO_ENABLED=0 go build -ldflags='-s -w'`, final stage is a plain debian-slim with just the resulting static binary + static/ assets, a groups/ config with one operator user created the same way the README's own quickstart does (createuser/password directly in a JSON file, no external auth). Serves HTTPS with a self-signed cert by default (the project's own behavior, not a workaround) - screens.py already sets ignore_https_errors, so this needed no crawler changes.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "go": [
+    "go.mod"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 13,
+  "screens_browser_verified": 13
+ }
+}

@@ -1,0 +1,15 @@
+{
+ "application": "APP-021",
+ "category": "design-tools",
+ "repository_url": "https://github.com/penpot/penpot",
+ "commit_sha": "b402637fe4c35a31eac4007356d3a750ba6187c8",
+ "branch": "develop",
+ "download_timestamp": "2026-09-19T11:44:58.502825+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MPL-2.0",
+ "licence_allowed": true,
+ "source_checksum_sha256": "fa3e8aa997ada4c251099be0955cb9346bc240d862dec72f19aa224ca66346c2",
+ "discovery_source": "github-search-or-directory",
+ "stargazers_count": 60152
+}

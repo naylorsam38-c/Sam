@@ -1,0 +1,15 @@
+{
+ "application": "APP-024",
+ "category": "digital-signiture",
+ "repository_url": "https://github.com/docusealco/docuseal",
+ "commit_sha": "6e2430e5a27a809c5ca9a3e81f351339387ea11e",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T12:33:18.171407+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "AGPL-3.0",
+ "licence_allowed": true,
+ "source_checksum_sha256": "455d4e707686db581f62880b75c4018ace2fee95e7204395cd90bba59ecd7357",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 18566
+}

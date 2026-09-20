@@ -1,0 +1,41 @@
+{
+ "application": "APP-039",
+ "id": "CAP-039-06",
+ "name": "Settings",
+ "route": "/settings",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "frontend/src/router.tsx",
+   "matched_words": [
+    "settings"
+   ],
+   "line": 19,
+   "snippet": "const Settings = lazy(() => import(\"src/pages/Settings\"));"
+  },
+  {
+   "file": "frontend/src/components/sitemenu.tsx",
+   "matched_words": [
+    "settings"
+   ],
+   "line": 99,
+   "snippet": "to: \"/settings\","
+  },
+  {
+   "file": "frontend/src/modals/redirectionhostmodal.tsx",
+   "matched_words": [
+    "settings"
+   ],
+   "line": 133,
+   "snippet": "title=\"Settings\""
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:8181/settings",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "clicked action button, filled+submitted the form it opened (0 fields); app showed an explicit success message"
+ },
+ "verdict": "PROVEN"
+}

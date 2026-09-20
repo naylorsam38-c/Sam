@@ -1,0 +1,1386 @@
+{
+ "source": "https://openapps.pro/categories (live), capabilities copied from benchmark70.json where mapped \u2014 see capabilities_from",
+ "categories": [
+  {
+   "id": 1,
+   "slug": "ab-testing-experimentation",
+   "category": "A/B Testing & Experimentation",
+   "openapps_slug": "ab-testing-experimentation",
+   "openapps_app_count": 6,
+   "openapps_description": "Discover open source A/B testing and experimentation platforms for feature flags, split tests, and multivariate experiments. Self-hosted alternatives to SaaS.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "a/b testing & experimentation"
+   ],
+   "declares": [
+    "a/b testing & experimentation"
+   ]
+  },
+  {
+   "id": 2,
+   "slug": "ai-agents",
+   "category": "AI Agents",
+   "openapps_slug": "ai-agents",
+   "openapps_app_count": 86,
+   "openapps_description": "Discover open source AI agent frameworks, runtimes, and orchestration tools. Build autonomous agents that plan, use tools, and execute multi-step tasks.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "ai agents"
+   ],
+   "declares": [
+    "ai agents"
+   ]
+  },
+  {
+   "id": 3,
+   "slug": "ai-assistants",
+   "category": "AI Assistants",
+   "openapps_slug": "ai-assistants",
+   "openapps_app_count": 51,
+   "openapps_description": "Discover powerful iopen source AI Assistant apps on Open Apps! Automate tasks, provide instant support & enhance productivity with conversational AI.",
+   "exemplar": "ChatGPT",
+   "capabilities_from": "ai-assistant-chat",
+   "capabilities": [
+    "Conversations",
+    "files",
+    "multimodal input",
+    "tools",
+    "memory/context",
+    "search",
+    "code execution",
+    "custom assistants"
+   ],
+   "directory_tags": [
+    "Generative Artificial Intelligence (GenAI)"
+   ],
+   "keywords": [
+    "ai assistants",
+    "ai chat",
+    "assistant",
+    "chatgpt",
+    "llm chat"
+   ],
+   "declares": [
+    "ai assistants",
+    "ai chat",
+    "chat ui for",
+    "chatgpt",
+    "language model",
+    "llm",
+    "llm chat"
+   ]
+  },
+  {
+   "id": 4,
+   "slug": "ai-code-assistants",
+   "category": "AI Code Assistants",
+   "openapps_slug": "ai-code-assistants",
+   "openapps_app_count": 36,
+   "openapps_description": "Discover the best open source AI code assistants to boost your productivity! Automate tasks, generate code snippets & improve quality. Free and powerful tools.",
+   "exemplar": "GitHub Copilot",
+   "capabilities_from": "ai-coding",
+   "capabilities": [
+    "Code completion",
+    "chat",
+    "repository context",
+    "code generation",
+    "debugging",
+    "tests",
+    "agent workflows"
+   ],
+   "directory_tags": [
+    "Generative Artificial Intelligence (GenAI)",
+    "Software Development - IDE & Tools"
+   ],
+   "keywords": [
+    "ai code assistants",
+    "ai coding",
+    "code completion",
+    "code generation",
+    "copilot"
+   ],
+   "declares": [
+    "ai code assistants",
+    "ai coding",
+    "code completion",
+    "code generation",
+    "copilot",
+    "github copilot"
+   ]
+  },
+  {
+   "id": 5,
+   "slug": "ai-design-tools",
+   "category": "AI Design Tools",
+   "openapps_slug": "ai-design-tools",
+   "openapps_app_count": 13,
+   "openapps_description": "Discover the best AI Design Tools to automate your creative process! Generate images, UI designs & logos faster. Perfect for designers and non-designers.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "ai design tools"
+   ],
+   "declares": [
+    "ai design tools"
+   ]
+  },
+  {
+   "id": 6,
+   "slug": "ai-development",
+   "category": "AI Development",
+   "openapps_slug": "ai-development",
+   "openapps_app_count": 97,
+   "openapps_description": "Discover the best open source AI Development tools to build intelligent applications. From ML frameworks to data labeling, and unlock the power of AI.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "ai development"
+   ],
+   "declares": [
+    "ai development"
+   ]
+  },
+  {
+   "id": 7,
+   "slug": "analytics",
+   "category": "Analytics",
+   "openapps_slug": "analytics",
+   "openapps_app_count": 65,
+   "openapps_description": "Discover open source analytics software that collects, visualizes, and interprets data. Boost decision\u2011making with dashboards, and predictive insights.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "analytics"
+   ],
+   "declares": [
+    "analytics"
+   ]
+  },
+  {
+   "id": 8,
+   "slug": "authentication",
+   "category": "Authentication",
+   "openapps_slug": "authentication",
+   "openapps_app_count": 24,
+   "openapps_description": "Secure your apps with robust Authentication solutions! Explore password managers, MFA, SSO & more. Protect user data and simplify login processes.",
+   "exemplar": "Okta",
+   "capabilities_from": "identity-sso",
+   "capabilities": [
+    "Users",
+    "groups",
+    "authentication",
+    "MFA",
+    "SSO",
+    "policies",
+    "provisioning",
+    "audit logs"
+   ],
+   "directory_tags": [
+    "Identity Management",
+    "Federated Identity & Authentication"
+   ],
+   "keywords": [
+    "authentication",
+    "identity provider",
+    "oauth",
+    "oidc",
+    "sso"
+   ],
+   "declares": [
+    "authentication",
+    "authentik",
+    "iam",
+    "identity and access",
+    "identity provider",
+    "keycloak",
+    "okta",
+    "single sign on",
+    "single sign-on"
+   ]
+  },
+  {
+   "id": 9,
+   "slug": "automation",
+   "category": "Automation",
+   "openapps_slug": "automation",
+   "openapps_app_count": 57,
+   "openapps_description": "Discover open source automation solutions to streamline workflows, reduce manual tasks & improve efficiency. Find tools for CI/CD, and more.",
+   "exemplar": "n8n",
+   "capabilities_from": "workflow-automation",
+   "capabilities": [
+    "Nodes",
+    "triggers",
+    "actions",
+    "credentials",
+    "branching",
+    "loops",
+    "webhooks",
+    "scheduling",
+    "execution history"
+   ],
+   "directory_tags": [
+    "Automation",
+    "Software Development - Low Code"
+   ],
+   "keywords": [
+    "automation",
+    "n8n",
+    "workflow",
+    "workflow automation"
+   ],
+   "declares": [
+    "automation",
+    "n8n",
+    "workflow automation"
+   ]
+  },
+  {
+   "id": 10,
+   "slug": "blogging",
+   "category": "Blogging",
+   "openapps_slug": "blogging",
+   "openapps_app_count": 10,
+   "openapps_description": "Discover top blogging software for creators and businesses. Learn how headless CMS, static generators, boost SEO, engagement, and publishing speed.",
+   "exemplar": "Medium",
+   "capabilities_from": "blogging",
+   "capabilities": [
+    "Author profiles",
+    "articles",
+    "editor",
+    "publishing",
+    "images",
+    "tags",
+    "follows",
+    "recommendations",
+    "comments",
+    "reactions",
+    "memberships"
+   ],
+   "directory_tags": [
+    "Blogging Platforms"
+   ],
+   "keywords": [
+    "blog",
+    "blogging",
+    "publishing platform"
+   ],
+   "declares": [
+    "blog",
+    "blogging",
+    "publishing platform",
+    "substack"
+   ]
+  },
+  {
+   "id": 11,
+   "slug": "bookmarks-archiving",
+   "category": "Bookmarks & Archiving",
+   "openapps_slug": "bookmarks-archiving",
+   "openapps_app_count": 15,
+   "openapps_description": "Discover the best bookmarks & archiving tools to save, organize, and permanently store web content. Ideal for developers, researchers, and knowledge workers.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "bookmarks & archiving"
+   ],
+   "declares": [
+    "bookmarks & archiving"
+   ]
+  },
+  {
+   "id": 12,
+   "slug": "browser",
+   "category": "Browser",
+   "openapps_slug": "browser",
+   "openapps_app_count": 6,
+   "openapps_description": "Discover the best open source browsers for a secure, private & customizable web experience. Take control of your online access. Explore today!",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "browser"
+   ],
+   "declares": [
+    "browser"
+   ]
+  },
+  {
+   "id": 13,
+   "slug": "cms",
+   "category": "CMS",
+   "openapps_slug": "cms",
+   "openapps_app_count": 17,
+   "openapps_description": "Discover top Open Source CMS platforms to create, manage, and publish digital content without coding. Ideal for blogs, e-commerce, and headless websites.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "cms"
+   ],
+   "declares": [
+    "cms"
+   ]
+  },
+  {
+   "id": 14,
+   "slug": "code-editors",
+   "category": "Code Editors",
+   "openapps_slug": "code-editors",
+   "openapps_app_count": 13,
+   "openapps_description": "Find the best open source code editors to boost your productivity! Explore standalone IDEs like VS Code, Sublime Text & lightweight options. ",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "code editors"
+   ],
+   "declares": [
+    "code editors"
+   ]
+  },
+  {
+   "id": 15,
+   "slug": "collaboration",
+   "category": "Collaboration",
+   "openapps_slug": "collaboration",
+   "openapps_app_count": 31,
+   "openapps_description": "Discover the best open source collaboration tools for developers and teams. Enhance productivity, streamline workflows, & manage projects effectively.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "collaboration"
+   ],
+   "declares": [
+    "collaboration"
+   ]
+  },
+  {
+   "id": 16,
+   "slug": "community",
+   "category": "Community",
+   "openapps_slug": "community",
+   "openapps_app_count": 9,
+   "openapps_description": "Find the best open source community software to connect your users, build engagement and foster collaboration. Explore platforms for forums, chat & more!",
+   "exemplar": "Reddit",
+   "capabilities_from": "forums-community",
+   "capabilities": [
+    "Communities",
+    "posts",
+    "comments",
+    "voting",
+    "moderation",
+    "feeds",
+    "search",
+    "profiles",
+    "messaging",
+    "media",
+    "notifications"
+   ],
+   "directory_tags": [
+    "Communication - Social Networks and Forums"
+   ],
+   "keywords": [
+    "community",
+    "community platform",
+    "discussion",
+    "forum",
+    "reddit"
+   ],
+   "declares": [
+    "community",
+    "community platform",
+    "discussion board",
+    "discussion platform",
+    "forum",
+    "forums",
+    "reddit"
+   ]
+  },
+  {
+   "id": 17,
+   "slug": "crm",
+   "category": "CRM",
+   "openapps_slug": "crm",
+   "openapps_app_count": 9,
+   "openapps_description": "Discover the best open source Customer Relationship Management (CRM) solutions to streamline sales, boost customer engagement & drive growth.",
+   "exemplar": "Salesforce",
+   "capabilities_from": "crm",
+   "capabilities": [
+    "Contacts",
+    "accounts",
+    "leads",
+    "opportunities",
+    "pipelines",
+    "activities",
+    "email",
+    "workflows",
+    "dashboards",
+    "reporting",
+    "permissions",
+    "APIs"
+   ],
+   "directory_tags": [
+    "Customer Relationship Management (CRM)"
+   ],
+   "keywords": [
+    "crm"
+   ],
+   "declares": [
+    "crm",
+    "salesforce"
+   ]
+  },
+  {
+   "id": 18,
+   "slug": "customer-support",
+   "category": "Customer Support",
+   "openapps_slug": "customer-support",
+   "openapps_app_count": 5,
+   "openapps_description": "Find the best open source Customer Support software to manage interactions, resolve issues & improve satisfaction. Switch from costly SaaS to open source.",
+   "exemplar": "Zendesk",
+   "capabilities_from": "helpdesk",
+   "capabilities": [
+    "Tickets",
+    "email support",
+    "queues",
+    "assignment",
+    "SLA",
+    "automation",
+    "knowledge base",
+    "customer portal",
+    "reporting"
+   ],
+   "directory_tags": [
+    "Ticketing"
+   ],
+   "keywords": [
+    "customer support",
+    "help desk",
+    "helpdesk",
+    "support tickets",
+    "zendesk"
+   ],
+   "declares": [
+    "customer support",
+    "help desk",
+    "helpdesk",
+    "support tickets",
+    "ticketing system",
+    "zendesk"
+   ]
+  },
+  {
+   "id": 19,
+   "slug": "data-engineering",
+   "category": "Data Engineering",
+   "openapps_slug": "data-engineering",
+   "openapps_app_count": 36,
+   "openapps_description": "Discover open source data engineering tools for building reliable data pipelines, ETL processes & scalable data storage. Unlock the power of your data!",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "data engineering"
+   ],
+   "declares": [
+    "data engineering"
+   ]
+  },
+  {
+   "id": 20,
+   "slug": "databases",
+   "category": "Databases",
+   "openapps_slug": "databases",
+   "openapps_app_count": 52,
+   "openapps_description": "Find the best open source databases to power your applications. Explore powerful, flexible solutions for data storage, management & retrieval.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "databases"
+   ],
+   "declares": [
+    "databases"
+   ]
+  },
+  {
+   "id": 21,
+   "slug": "design-tools",
+   "category": "Design Tools",
+   "openapps_slug": "design-tools",
+   "openapps_app_count": 30,
+   "openapps_description": "Discover the best open source design tools for creating graphics, UI prototypes & visuals. Empower your creativity with collaborative, customizable solutions.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "design tools"
+   ],
+   "declares": [
+    "design tools"
+   ]
+  },
+  {
+   "id": 22,
+   "slug": "developer-tools",
+   "category": "Developer Tools",
+   "openapps_slug": "developer-tools",
+   "openapps_app_count": 199,
+   "openapps_description": "Discover the best open source developer tools for code management, testing, automation & more. Accelerate your projects with powerful utilities.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "developer tools"
+   ],
+   "declares": [
+    "developer tools"
+   ]
+  },
+  {
+   "id": 23,
+   "slug": "devops",
+   "category": "DevOps",
+   "openapps_slug": "devops",
+   "openapps_app_count": 82,
+   "openapps_description": "Discover the best open source DevOps tools to automate your software delivery pipeline, improve collaboration & accelerate release cycles. Streamline CI/CD!",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "devops"
+   ],
+   "declares": [
+    "devops"
+   ]
+  },
+  {
+   "id": 24,
+   "slug": "digital-signiture",
+   "category": "Digital Signature",
+   "openapps_slug": "digital-signiture",
+   "openapps_app_count": 5,
+   "openapps_description": "Find open source digital signature solutions to securely authenticate & sign documents. Streamline workflows, reduce fraud & ensure compliance.",
+   "exemplar": "DocuSign",
+   "capabilities_from": "e-signature",
+   "capabilities": [
+    "Documents",
+    "recipients",
+    "signing fields",
+    "workflows",
+    "signatures",
+    "authentication",
+    "audit trail",
+    "templates"
+   ],
+   "directory_tags": [
+    "Document Management"
+   ],
+   "keywords": [
+    "digital signature",
+    "docusign",
+    "e-signature",
+    "signature",
+    "signing"
+   ],
+   "declares": [
+    "digital signature",
+    "document signing",
+    "docusign",
+    "e-signature",
+    "electronic signature",
+    "esignature",
+    "sign documents"
+   ]
+  },
+  {
+   "id": 25,
+   "slug": "ecommerce",
+   "category": "E-Commerce",
+   "openapps_slug": "ecommerce",
+   "openapps_app_count": 14,
+   "openapps_description": "Discover the best open source E-commerce platforms to build & manage your online store. Get complete control, customization features and scalability!",
+   "exemplar": "Shopify",
+   "capabilities_from": "e-commerce",
+   "capabilities": [
+    "Products",
+    "variants",
+    "catalogue",
+    "cart",
+    "checkout",
+    "payments",
+    "orders",
+    "customers",
+    "discounts",
+    "shipping",
+    "tax",
+    "inventory",
+    "analytics"
+   ],
+   "directory_tags": [
+    "E-commerce"
+   ],
+   "keywords": [
+    "e-commerce",
+    "ecommerce",
+    "shop",
+    "storefront"
+   ],
+   "declares": [
+    "e-commerce",
+    "ecommerce",
+    "shopify",
+    "storefront"
+   ]
+  },
+  {
+   "id": 26,
+   "slug": "erp",
+   "category": "ERP",
+   "openapps_slug": "erp",
+   "openapps_app_count": 3,
+   "openapps_description": "Discover the top open source ERP systems to manage finances, supply chain, CRM & more. Streamline your business processes with powerful, customizable solutions.",
+   "exemplar": "SAP / ERPNext",
+   "capabilities_from": "erp",
+   "capabilities": [
+    "Accounting",
+    "sales",
+    "purchasing",
+    "inventory",
+    "manufacturing",
+    "HR",
+    "projects",
+    "reporting",
+    "workflows",
+    "permissions"
+   ],
+   "directory_tags": [
+    "Resource Planning"
+   ],
+   "keywords": [
+    "enterprise resource",
+    "erp"
+   ],
+   "declares": [
+    "enterprise resource",
+    "erp",
+    "erpnext",
+    "sap"
+   ]
+  },
+  {
+   "id": 27,
+   "slug": "file-storage",
+   "category": "File Storage",
+   "openapps_slug": "file-storage",
+   "openapps_app_count": 27,
+   "openapps_description": "Find the best open source file storage solutions to securely manage & sync your data. Collaborate easily, control access and scale efficiently.",
+   "exemplar": "Google Drive",
+   "capabilities_from": "cloud-storage",
+   "capabilities": [
+    "Files",
+    "folders",
+    "upload/download",
+    "sharing",
+    "permissions",
+    "search",
+    "previews",
+    "versioning",
+    "sync",
+    "collaboration"
+   ],
+   "directory_tags": [
+    "File Transfer & Synchronization",
+    "File Transfer - Web-based File Managers"
+   ],
+   "keywords": [
+    "cloud storage",
+    "file sharing",
+    "file storage",
+    "file sync",
+    "nextcloud",
+    "seafile"
+   ],
+   "declares": [
+    "cloud storage",
+    "file sharing",
+    "file storage",
+    "file sync",
+    "google drive",
+    "nextcloud",
+    "seafile"
+   ]
+  },
+  {
+   "id": 28,
+   "slug": "forms-surveys",
+   "category": "Forms & Surveys",
+   "openapps_slug": "forms-surveys",
+   "openapps_app_count": 7,
+   "openapps_description": "Discover the best open source forms and surveys apps to collect data efficiently. Build custom forms, analyze results & gain valuable insights.",
+   "exemplar": "Typeform",
+   "capabilities_from": "forms-surveys",
+   "capabilities": [
+    "Forms",
+    "questions",
+    "branching",
+    "validation",
+    "submissions",
+    "themes",
+    "embeds",
+    "analytics"
+   ],
+   "directory_tags": [
+    "Polls and Events"
+   ],
+   "keywords": [
+    "form builder",
+    "forms",
+    "forms & surveys",
+    "survey",
+    "typeform"
+   ],
+   "declares": [
+    "form builder",
+    "forms & surveys",
+    "online forms",
+    "survey",
+    "surveys",
+    "typeform"
+   ]
+  },
+  {
+   "id": 29,
+   "slug": "game-development",
+   "category": "Game Development",
+   "openapps_slug": "game-development",
+   "openapps_app_count": 15,
+   "openapps_description": "Discover the best open source tools for game creation. Build 2D & 3D games, prototypes, simulations - all with the power of community-driven development.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "game development"
+   ],
+   "declares": [
+    "game development"
+   ]
+  },
+  {
+   "id": 30,
+   "slug": "hosting-control-panel",
+   "category": "Hosting Control Panel",
+   "openapps_slug": "hosting-control-panel",
+   "openapps_app_count": 12,
+   "openapps_description": "Find the best open source hosting control panel to simplify server management! Control domains, databases, files & more. Streamline web hosting tasks.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "hosting control panel"
+   ],
+   "declares": [
+    "hosting control panel"
+   ]
+  },
+  {
+   "id": 31,
+   "slug": "human-resources",
+   "category": "Human Resources",
+   "openapps_slug": "human-resources",
+   "openapps_app_count": 2,
+   "openapps_description": "Discover the best open source HR software to manage employees, automate payroll, track attendance & improve your workforce. Customizable and cost-effective.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "human resources"
+   ],
+   "declares": [
+    "human resources"
+   ]
+  },
+  {
+   "id": 32,
+   "slug": "invoicing-finance",
+   "category": "Invoicing & Finance",
+   "openapps_slug": "invoicing-finance",
+   "openapps_app_count": 27,
+   "openapps_description": "Discover the top open source Invoicing & Finance software to manage billing, expenses, payments, and accounting. Take control of your finances!",
+   "exemplar": "Xero",
+   "capabilities_from": "accounting",
+   "capabilities": [
+    "Accounts",
+    "invoices",
+    "bills",
+    "payments",
+    "bank feeds",
+    "reconciliation",
+    "expenses",
+    "tax",
+    "reports",
+    "contacts"
+   ],
+   "directory_tags": [
+    "Money, Budgeting & Management"
+   ],
+   "keywords": [
+    "accounting",
+    "bookkeeping",
+    "invoice",
+    "invoicing",
+    "invoicing & finance"
+   ],
+   "declares": [
+    "accounting",
+    "bookkeeping",
+    "invoice",
+    "invoicing",
+    "invoicing & finance",
+    "xero"
+   ]
+  },
+  {
+   "id": 33,
+   "slug": "knowledge-management",
+   "category": "Knowledge Management",
+   "openapps_slug": "knowledge-management",
+   "openapps_app_count": 24,
+   "openapps_description": "Discover the best open source knowledge management solutions to organize, share & access information efficiently. Boost team productivity and reduce silos!",
+   "exemplar": "Notion",
+   "capabilities_from": "notes-knowledge",
+   "capabilities": [
+    "Pages",
+    "blocks",
+    "rich text",
+    "databases",
+    "tables",
+    "views",
+    "search",
+    "sharing",
+    "comments",
+    "templates",
+    "permissions"
+   ],
+   "directory_tags": [
+    "Note-taking & Editors",
+    "Knowledge Management Tools"
+   ],
+   "keywords": [
+    "knowledge base",
+    "knowledge management",
+    "notes",
+    "notion",
+    "workspace"
+   ],
+   "declares": [
+    "knowledge base",
+    "knowledge management",
+    "note taking",
+    "note-taking",
+    "notes",
+    "notion"
+   ]
+  },
+  {
+   "id": 34,
+   "slug": "learning-management",
+   "category": "Learning Management",
+   "openapps_slug": "learning-management",
+   "openapps_app_count": 1,
+   "openapps_description": "Discover open source LMS platforms for building & delivering online courses. Track student progress, manage content & scale your education programs.",
+   "exemplar": "Moodle",
+   "capabilities_from": "learning-lms",
+   "capabilities": [
+    "Courses",
+    "lessons",
+    "enrolment",
+    "users",
+    "assignments",
+    "quizzes",
+    "grading",
+    "certificates",
+    "forums",
+    "progress"
+   ],
+   "directory_tags": [
+    "Learning and Courses"
+   ],
+   "keywords": [
+    "courses",
+    "learning management",
+    "lms",
+    "moodle"
+   ],
+   "declares": [
+    "learning management",
+    "lms",
+    "moodle"
+   ]
+  },
+  {
+   "id": 35,
+   "slug": "logistics",
+   "category": "Logistics",
+   "openapps_slug": "logistics",
+   "openapps_app_count": 1,
+   "openapps_description": "Discover open-source logistics, fleet management, and supply chain software. Self-host delivery routing, shipment tracking, and operations tools.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "logistics"
+   ],
+   "declares": [
+    "logistics"
+   ]
+  },
+  {
+   "id": 36,
+   "slug": "low-code-platforms",
+   "category": "Low Code Platforms",
+   "openapps_slug": "low-code-platforms",
+   "openapps_app_count": 14,
+   "openapps_description": "Discover the best open source low code platforms to build applications faster, reduce development costs & empower your team. Simplify app creation!",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "low code platforms"
+   ],
+   "declares": [
+    "low code platforms"
+   ]
+  },
+  {
+   "id": 37,
+   "slug": "marketing",
+   "category": "Marketing",
+   "openapps_slug": "marketing",
+   "openapps_app_count": 26,
+   "openapps_description": "Discover best open source Marketing solutions for email, CRM, social media & SEO. Empower your team to connect with customers and drive growth!",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "marketing"
+   ],
+   "declares": [
+    "marketing"
+   ]
+  },
+  {
+   "id": 38,
+   "slug": "monitoring",
+   "category": "Monitoring",
+   "openapps_slug": "monitoring",
+   "openapps_app_count": 59,
+   "openapps_description": "Discover  best open source monitoring tools to track system health,  performance & infrastructure. Ensure uptime, identify bottlenecks & improve reliability.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "monitoring"
+   ],
+   "declares": [
+    "monitoring"
+   ]
+  },
+  {
+   "id": 39,
+   "slug": "networking",
+   "category": "Networking",
+   "openapps_slug": "networking",
+   "openapps_app_count": 9,
+   "openapps_description": "Discover the best open source networking tools for secure connections, bandwidth control & remote access. Empower your infrastructure with custom solutions.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "networking"
+   ],
+   "declares": [
+    "networking"
+   ]
+  },
+  {
+   "id": 40,
+   "slug": "no-code-platforms",
+   "category": "No-Code Platforms",
+   "openapps_slug": "no-code-platforms",
+   "openapps_app_count": 23,
+   "openapps_description": "Discover open source no-code platforms to build apps & automate tasks visually. Empower your team with rapid development, lower costs, and faster innovation.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "no-code platforms"
+   ],
+   "declares": [
+    "no-code platforms"
+   ]
+  },
+  {
+   "id": 41,
+   "slug": "note-taking",
+   "category": "Note Taking",
+   "openapps_slug": "note-taking",
+   "openapps_app_count": 27,
+   "openapps_description": "Discover the best open source note taking apps to capture ideas, organize your thoughts. Find tools for personal or team knowledge management.",
+   "exemplar": "Notion",
+   "capabilities_from": "notes-knowledge",
+   "capabilities": [
+    "Pages",
+    "blocks",
+    "rich text",
+    "databases",
+    "tables",
+    "views",
+    "search",
+    "sharing",
+    "comments",
+    "templates",
+    "permissions"
+   ],
+   "directory_tags": [
+    "Note-taking & Editors",
+    "Knowledge Management Tools"
+   ],
+   "keywords": [
+    "knowledge base",
+    "note taking",
+    "notes",
+    "notion",
+    "workspace"
+   ],
+   "declares": [
+    "knowledge base",
+    "note taking",
+    "note-taking",
+    "notes",
+    "notion"
+   ]
+  },
+  {
+   "id": 42,
+   "slug": "password-manager",
+   "category": "Password Manager",
+   "openapps_slug": "password-manager",
+   "openapps_app_count": 4,
+   "openapps_description": "Find the best open source password managers to securely store & organize your credentials. Protect your accounts with encryption, auto-fill, and 2FA.",
+   "exemplar": "1Password",
+   "capabilities_from": "password-manager",
+   "capabilities": [
+    "Vaults",
+    "credentials",
+    "password generation",
+    "autofill",
+    "sharing",
+    "permissions",
+    "secure notes",
+    "MFA"
+   ],
+   "directory_tags": [
+    "Password Managers"
+   ],
+   "keywords": [
+    "password manager",
+    "secrets",
+    "vault"
+   ],
+   "declares": [
+    "1password",
+    "bitwarden",
+    "password manager",
+    "passwords"
+   ]
+  },
+  {
+   "id": 43,
+   "slug": "product-management",
+   "category": "Product Management",
+   "openapps_slug": "product-management",
+   "openapps_app_count": 7,
+   "openapps_description": "Discover the best open source product management tools to streamline your workflow, prioritize features & collaborate effectively. Build better products!",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "product management"
+   ],
+   "declares": [
+    "product management"
+   ]
+  },
+  {
+   "id": 44,
+   "slug": "productivity",
+   "category": "Productivity",
+   "openapps_slug": "productivity",
+   "openapps_app_count": 52,
+   "openapps_description": "Discover the best open source productivity apps to streamline tasks, manage time effectively & collaborate seamlessly. Boost your efficiency today!",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "productivity"
+   ],
+   "declares": [
+    "productivity"
+   ]
+  },
+  {
+   "id": 45,
+   "slug": "project-management",
+   "category": "Project Management",
+   "openapps_slug": "project-management",
+   "openapps_app_count": 23,
+   "openapps_description": "Discover best open source project management solutions to improve team collaboration, track progress & deliver projects on time. Find the perfect tool.",
+   "exemplar": "Jira",
+   "capabilities_from": "project-management",
+   "capabilities": [
+    "Projects",
+    "issues",
+    "workflows",
+    "boards",
+    "sprints",
+    "backlog",
+    "epics",
+    "dependencies",
+    "reports",
+    "dashboards",
+    "permissions"
+   ],
+   "directory_tags": [
+    "Software Development - Project Management"
+   ],
+   "keywords": [
+    "issue tracking",
+    "jira",
+    "project management",
+    "sprint"
+   ],
+   "declares": [
+    "issue tracking",
+    "jira",
+    "project management",
+    "sprint"
+   ]
+  },
+  {
+   "id": 46,
+   "slug": "scheduling",
+   "category": "Scheduling",
+   "openapps_slug": "scheduling",
+   "openapps_app_count": 3,
+   "openapps_description": "Discover open source scheduling solutions to streamline appointments, meetings & event planning. Improve team coordination and boost productivity!",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "scheduling"
+   ],
+   "declares": [
+    "scheduling"
+   ]
+  },
+  {
+   "id": 47,
+   "slug": "search",
+   "category": "Search",
+   "openapps_slug": "search",
+   "openapps_app_count": 16,
+   "openapps_description": "Find the best open source search solutions to power your applications! Index, store & retrieve data efficiently. Improve site search and accelerate discovery.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "search"
+   ],
+   "declares": [
+    "search"
+   ]
+  },
+  {
+   "id": 48,
+   "slug": "security",
+   "category": "Security",
+   "openapps_slug": "security",
+   "openapps_app_count": 51,
+   "openapps_description": "Discover the best open source security tools for vulnerability scanning, threat detection & access control. Protect your system with community-driven solutions.",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "security"
+   ],
+   "declares": [
+    "security"
+   ]
+  },
+  {
+   "id": 49,
+   "slug": "social-media",
+   "category": "Social Media",
+   "openapps_slug": "social-media",
+   "openapps_app_count": 10,
+   "openapps_description": "Discover the best open source Social Media platforms for building communities, sharing content and connecting with others. Take control of your social network!",
+   "exemplar": "\u2014",
+   "capabilities_from": null,
+   "capabilities": [],
+   "directory_tags": [],
+   "keywords": [
+    "social media"
+   ],
+   "declares": [
+    "social media"
+   ]
+  },
+  {
+   "id": 50,
+   "slug": "team-chat",
+   "category": "Team Chat",
+   "openapps_slug": "team-chat",
+   "openapps_app_count": 13,
+   "openapps_description": "Discover the best open source team chat apps for real-time communication, collaboration, and project management. Enhance your team's productivity!",
+   "exemplar": "Slack",
+   "capabilities_from": "team-communication",
+   "capabilities": [
+    "Workspaces",
+    "channels",
+    "DMs",
+    "threads",
+    "files",
+    "search",
+    "mentions",
+    "notifications",
+    "integrations",
+    "permissions",
+    "bots",
+    "huddles"
+   ],
+   "directory_tags": [
+    "Communication - Custom Communication Systems"
+   ],
+   "keywords": [
+    "channels",
+    "slack",
+    "team chat",
+    "team communication"
+   ],
+   "declares": [
+    "slack",
+    "team chat",
+    "team communication"
+   ]
+  },
+  {
+   "id": 51,
+   "slug": "video-conferencing",
+   "category": "Video Conferencing",
+   "openapps_slug": "video-conferencing",
+   "openapps_app_count": 3,
+   "openapps_description": "Find the best open source video conferencing software for secure, real-time communication and collaboration. Empower your team with flexible solutions.",
+   "exemplar": "Zoom",
+   "capabilities_from": "video-conferencing",
+   "capabilities": [
+    "Meetings",
+    "video/audio",
+    "screen sharing",
+    "chat",
+    "recording",
+    "breakout rooms",
+    "scheduling",
+    "waiting rooms",
+    "host controls",
+    "participants"
+   ],
+   "directory_tags": [
+    "Communication - Video Conferencing"
+   ],
+   "keywords": [
+    "meetings",
+    "video conferencing"
+   ],
+   "declares": [
+    "meetings",
+    "video conferencing",
+    "zoom"
+   ]
+  },
+  {
+   "id": 52,
+   "slug": "video-editors",
+   "category": "Video Editors",
+   "openapps_slug": "video-editors",
+   "openapps_app_count": 7,
+   "openapps_description": "Compare open-source video editors for cutting, trimming, and assembling footage into finished videos, without subscriptions, watermarks, or proprietary lock-in.",
+   "exemplar": "CapCut",
+   "capabilities_from": "video-editing",
+   "capabilities": [
+    "Timeline editing",
+    "trimming",
+    "transitions",
+    "text",
+    "audio",
+    "effects",
+    "captions",
+    "templates",
+    "export"
+   ],
+   "directory_tags": [
+    "Media Management"
+   ],
+   "keywords": [
+    "timeline",
+    "video editing",
+    "video editor",
+    "video editors"
+   ],
+   "declares": [
+    "capcut",
+    "video editing",
+    "video editor",
+    "video editors"
+   ]
+  }
+ ]
+}

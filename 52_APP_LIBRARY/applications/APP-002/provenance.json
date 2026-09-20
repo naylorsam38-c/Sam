@@ -1,0 +1,15 @@
+{
+ "application": "APP-002",
+ "category": "ai-agents",
+ "repository_url": "https://github.com/Mintplex-Labs/anything-llm",
+ "commit_sha": "da6685510ce691b2e1be417f739c7dffee3cfc49",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T11:41:35.900078+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "9a9a6dff2e4f3c716a3f7f99d9ba42385a1e47c904abccb5b2400e110d3cb9af",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 66193
+}

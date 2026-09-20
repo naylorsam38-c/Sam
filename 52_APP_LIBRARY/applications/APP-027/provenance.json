@@ -1,0 +1,15 @@
+{
+ "application": "APP-027",
+ "category": "file-storage",
+ "repository_url": "https://github.com/dutchcoders/transfer.sh",
+ "commit_sha": "c37bfd95797fd6da8a6da53fc13d191994b3f687",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:46:04.339753+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "314ab88309a39322be66baddbb17a5aeb85e3ea11c07efce326f02537f5bc7f4",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 15898
+}

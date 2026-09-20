@@ -1,0 +1,274 @@
+{
+ "id": "APP-047",
+ "name": "LibreChat",
+ "category": "Search",
+ "category_slug": "search",
+ "repository": "https://github.com/danny-avila/LibreChat",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "12d78909d3f5247a8d40a47f0ef5c3ac771d9c5a",
+ "source_path": "applications/APP-047/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "ElasticSearch",
+   "source_code_url": "https://github.com/elastic/elasticsearch",
+   "stargazers_count": 77934,
+   "licenses": [
+    "SSPL-1.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Distributed, RESTful search and analytics engine.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "MeiliSearch",
+   "source_code_url": "https://github.com/meilisearch/MeiliSearch",
+   "stargazers_count": 59331,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Ultra relevant, instant and typo-tolerant full-text search API.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LibreChat",
+   "source_code_url": "https://github.com/danny-avila/LibreChat",
+   "stargazers_count": 44331,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Enhanced ChatGPT-compatible AI chat interface supporting multiple AI providers, with multi-user auth, message search, and plugin support.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "SearXNG",
+   "source_code_url": "https://github.com/searxng/searxng/",
+   "stargazers_count": 37308,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Internet metasearch engine which aggregates results from various search services and databases (Fork of Searx).",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Vane",
+   "source_code_url": "https://github.com/ItzCrazyKns/Vane",
+   "stargazers_count": 36871,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-01",
+   "description": "AI-powered search engine (alternative to Perplexity AI).",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Onyx Community Edition",
+   "source_code_url": "https://github.com/onyx-dot-app/onyx",
+   "stargazers_count": 32162,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Chat UI that works with any LLM. It comes loaded with advanced features like agents, web search, RAG, MCP, deep research, Connectors to 40+ knowledge sources, and more.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Typesense",
+   "source_code_url": "https://github.com/typesense/typesense",
+   "stargazers_count": 26572,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Blazing fast, typo-tolerant open source search engine optimized for developer happiness and ease of use.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OpenSearch",
+   "source_code_url": "https://github.com/opensearch-project/OpenSearch",
+   "stargazers_count": 13731,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Distributed and RESTful search engine.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Manticore Search",
+   "source_code_url": "https://github.com/manticoresoftware/manticoresearch/",
+   "stargazers_count": 12018,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Full-text search and data analytics, with fast response time for small, medium and big data (alternative to Elasticsearch).",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Local Deep Research",
+   "source_code_url": "https://github.com/LearningCircuit/local-deep-research",
+   "stargazers_count": 9106,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "AI-powered deep research tool with multi-source search (arXiv, PubMed, web), PDF text extraction, and encrypted local storage.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Tandoor Recipes",
+   "source_code_url": "https://github.com/TandoorRecipes/recipes",
+   "stargazers_count": 8611,
+   "licenses": [
+    "MIT",
+    "Commons-Clause"
+   ],
+   "updated_at": "2026-09-11",
+   "description": "Django application to manage, tag and search recipes using either built-in models or external storage providers hosting PDFs, Images or other files.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Tube Archivist",
+   "source_code_url": "https://github.com/tubearchivist/tubearchivist",
+   "stargazers_count": 8455,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-08-28",
+   "description": "Organize, search, and enjoy your YouTube collection. Subscribe, download, and track viewed content with metadata indexing and a user-friendly interface.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Hister",
+   "source_code_url": "https://github.com/asciimoo/hister",
+   "stargazers_count": 4965,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Personal web search engine with automatic indexing of visited websites. Supports offline local result previews, local files, multi-user handling and optional semantic search.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "bitmagnet",
+   "source_code_url": "https://github.com/bitmagnet-io/bitmagnet",
+   "stargazers_count": 4361,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-05-21",
+   "description": "BitTorrent indexer, DHT crawler, content classifier and torrent search engine with web UI, GraphQL API and Servarr stack integration.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Yacy",
+   "source_code_url": "https://github.com/yacy/yacy_search_server",
+   "stargazers_count": 4037,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-04",
+   "description": "Peer based, decentralized search engine server.",
+   "matched_keywords": [
+    "search"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "ElasticSearch",
+   "repo": "https://github.com/elastic/elasticsearch",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "MeiliSearch",
+   "repo": "https://github.com/meilisearch/MeiliSearch",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says BUSL-1.1, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "LibreChat",
+   "repo": "https://github.com/danny-avila/LibreChat",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:3080/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The project's own compose file pulls its main app, admin-panel, and RAG-API images from registry.librechat.ai, a self-hosted registry this sandbox's egress policy denies. The main app is the same project's own image also officially published to Docker Hub (\"Main LibreChat image built from Dockerfile\") - pointed the compose file's api service at librechat/librechat:latest there instead, reached via the org's already-allowed Docker Hub route. The admin-panel and rag_api/vectordb services have no Docker Hub equivalent and are optional add-ons (a separate management UI, and file-upload RAG search) with no Docker Hub counterpart - removed them from the compose file; the app logs a non-fatal warning that the RAG API is unreachable and serves the full chat UI normally. Also needed JWT_SECRET/JWT_REFRESH_SECRET/CREDS_KEY/CREDS_IV generated (the project's own .env.example ships these blank; the app refuses to start without them) and UID/GID/MEILI_MASTER_KEY set (also blank in .env.example).",
+  "startup_command": "docker compose -f docker-compose.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 2
+ }
+}

@@ -1,0 +1,61 @@
+{
+ "id": "APP-035",
+ "name": "shiptrack",
+ "category": "Logistics",
+ "category_slug": "logistics",
+ "repository": "https://github.com/Aswincloud/shiptrack",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "00e32933192e424f770f2608e19c313abc366dae",
+ "source_path": "applications/APP-035/source",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+ "declared_itself": false,
+ "manual_override_reason": "self-hosted logistics/shipment-tracking software is a genuinely rare niche in open source (openapps.pro itself lists only 1 app for this whole category) - this is a real, low-star-but-legitimate fit directly matching the category's own description ('self-host ... shipment tracking'), picked deliberately despite its low star count per Sam's instruction that popularity is never a valid exclusion reason; verified MIT LICENSE file",
+ "discovery_candidates": [
+  {
+   "name": "shiptrack",
+   "source_code_url": "https://github.com/Aswincloud/shiptrack",
+   "stargazers_count": 1,
+   "licenses": [
+    "MIT"
+   ],
+   "description": "Free, open-source, self-hostable shipment tracking for Indian & international couriers.",
+   "override_reason": "self-hosted logistics/shipment-tracking software is a genuinely rare niche in open source (openapps.pro itself lists only 1 app for this whole category) - this is a real, low-star-but-legitimate fit directly matching the category's own description ('self-host ... shipment tracking'), picked deliberately despite its low star count per Sam's instruction that popularity is never a valid exclusion reason; verified MIT LICENSE file"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "shiptrack",
+   "repo": "https://github.com/Aswincloud/shiptrack",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "App boots and serves its landing/signup/login pages (confirmed live, screens rendered), but its signup and login routes hard-require env.DB (a Cloudflare D1 database binding via the @aswincloud/auth/d1 package - not a plain SQL connection string, so it can't be swapped for a local Postgres/SQLite without rewriting the app's own auth package) AND a real RESEND_API_KEY (a third-party transactional-email account for its OTP email-verification signup flow). TOKEN_SECRET is just a random string we can generate ourselves, but a Resend account credential is a genuine external dependency this pipeline has no way to provision - not a sandbox network restriction (nothing here is being blocked by egress policy) and not fixable by a recipe change, so left honestly as BLOCKED_EXTERNAL_DEPENDENCY rather than forced by bypassing the app's own auth checks.",
+  "url": "http://127.0.0.1:3050/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "No Dockerfile in the repo at all (a small Next.js project built for Cloudflare Workers deployment, not containers) - wrote a standard Node.js Dockerfile (npm install && npm run build && npm run start). Needed two build-environment fixes, neither changing the app's real functionality: (1) the sandbox's TLS-intercepting egress proxy needed NODE_EXTRA_CA_CERTS pointed at its CA for npm install to succeed at all; (2) switched the base image from node:22-alpine to node:22-bookworm-slim because the Cloudflare Workers runtime (@cloudflare/workerd, invoked unconditionally by next.config.ts's initOpenNextCloudflareForDev() even during a plain build) ships a glibc-only prebuilt binary that doesn't run under Alpine's musl libc; (3) the app's own Google Fonts (next/font/google) build-time fetch isn't reachable from this sandbox - removed the remote Inter import in layout.tsx, which already had a full system-font CSS fallback chain (--font-inter, -apple-system, ... sans-serif), so this only changes the on-screen typeface, not any capability.",
+  "startup_command": "docker compose up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 1,
+  "screens_reached": 1,
+  "screens_rendered": 1,
+  "screens_browser_verified": 1
+ }
+}

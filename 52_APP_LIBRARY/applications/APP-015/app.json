@@ -1,0 +1,199 @@
+{
+ "id": "APP-015",
+ "name": "Gitea",
+ "category": "Collaboration",
+ "category_slug": "collaboration",
+ "repository": "https://github.com/go-gitea/gitea",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "2a3d0473390eb57ff5e705f4a4122afc2a9f8cd2",
+ "source_path": "applications/APP-015/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Gitea",
+   "source_code_url": "https://github.com/go-gitea/gitea",
+   "stargazers_count": 58066,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Git with a cup of tea! Painless self-hosted all-in-one software development service, including Git hosting, code review, team collaboration, package registry and CI/CD.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Mattermost",
+   "source_code_url": "https://github.com/mattermost/mattermost",
+   "stargazers_count": 39099,
+   "licenses": [
+    "\u2298 Proprietary"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Platform for secure collaboration across the entire software development lifecycle, can be integrated with Gitlab (alternative to Slack).",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "CryptPad",
+   "source_code_url": "https://github.com/cryptpad/cryptpad",
+   "stargazers_count": 7929,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-05-26",
+   "description": "Collaboration suite built to enable collaboration, synchronizing changes to documents in real time.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OpenCloud",
+   "source_code_url": "https://github.com/opencloud-eu/opencloud",
+   "stargazers_count": 6021,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "File Sharing and Collaboration Platform.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Colanode",
+   "source_code_url": "https://github.com/colanode/colanode",
+   "stargazers_count": 5142,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-04-03",
+   "description": "Collaboration suite with real-time messaging, rich text pages, file management, and dynamic databases - built for offline work (alternative to Slack, Notion).",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Openfire",
+   "source_code_url": "https://github.com/igniterealtime/Openfire",
+   "stargazers_count": 3064,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-15",
+   "description": "Real time collaboration (RTC) server.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Sync-in",
+   "source_code_url": "https://github.com/Sync-in/server",
+   "stargazers_count": 1771,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "File storage, syncing, sharing, and collaboration with real-time editing, permission management, and desktop/CLI clients.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Signature PDF",
+   "source_code_url": "https://github.com/24eme/signaturepdf",
+   "stargazers_count": 831,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-08",
+   "description": "Sign and manipulate PDFs with collaboration, organization, compression and metadata editing.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Ideon",
+   "source_code_url": "https://github.com/3xpyth0n/ideon",
+   "stargazers_count": 607,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-07-26",
+   "description": "Project workspace built around an infinite canvas; embed GitHub, GitLab, Gitea, and Forgejo repositories alongside notes, links, and tasks, with real-time collaboration.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Tracim",
+   "source_code_url": "https://github.com/tracim/tracim",
+   "stargazers_count": 275,
+   "licenses": [
+    "AGPL-3.0",
+    "LGPL-3.0",
+    "MIT"
+   ],
+   "updated_at": "2026-09-17",
+   "description": "Collaborative Platform for team collaboration: file,threads,notes,agenda,etc.",
+   "matched_keywords": [
+    "collaboration"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Gitea",
+   "repo": "https://github.com/go-gitea/gitea",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:3100/",
+  "http_status": 200,
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Gitea's own Dockerfile builds from source, needing bash/git/openssh/sqlite/etc from dl-cdn.alpinelinux.org - used the project's own officially-published Docker Hub image (gitea/gitea) instead. Its own multi-field web install wizard also didn't reliably complete under this pipeline's automated form-filling (9 fields submitted, no progress after 9 attempts) - switched to Gitea's own documented INSTALL_LOCK=true + DB_TYPE=sqlite3 env-var pattern (a standard, officially-supported way to skip the wizard for unattended deploys), landing directly on the real app with open registration enabled.",
+  "startup_command": "docker compose up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "python": [
+    "pyproject.toml"
+   ],
+   "go": [
+    "go.mod"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
+ }
+}

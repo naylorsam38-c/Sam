@@ -1,0 +1,59 @@
+{
+ "id": "APP-043",
+ "name": "feedlog",
+ "category": "Product Management",
+ "category_slug": "product-management",
+ "repository": "https://github.com/linkcraftstudio/feedlog",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "aa56a7655840471f33890028fad2185549d1ded9",
+ "source_path": "applications/APP-043/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "feedlog",
+   "source_code_url": "https://github.com/linkcraftstudio/feedlog",
+   "stargazers_count": 153,
+   "licenses": [],
+   "archived": false,
+   "description": "Open-source feedback & roadmap tool - feedback boards, public roadmap, AI-assisted changelog."
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "feedlog",
+   "repo": "https://github.com/linkcraftstudio/feedlog",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:3000/",
+  "http_status": 200,
+  "recipe": "compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "ghcr.io/linkcraftstudio/feedlog:v0.1.0 is blocked, and there's no Docker Hub mirror for it - but the repo ships its own complete production Dockerfile (a proper 3-stage build that already discards node_modules in the final image, same pattern used for other apps this pass). Pointed compose at building from that Dockerfile directly instead of pulling the ghcr.io image. Needed the sandbox's proxy CA bundle for pnpm install, and the two required env vars the project's own README documents as mandatory (BETTER_AUTH_SECRET, SYSTEM_ADMIN_EMAILS) filled with placeholder values since none were provided.",
+  "startup_command": "docker compose -f compose.library.yml build app && docker compose -f compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 14,
+  "screens_browser_verified": 14
+ }
+}

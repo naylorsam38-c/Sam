@@ -1,0 +1,41 @@
+{
+ "application": "APP-024",
+ "id": "CAP-024-03",
+ "name": "Library Walker Test 1789826037",
+ "route": "/folders/2",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "app/controllers/timestamp_server_controller.rb",
+   "matched_words": [
+    "test"
+   ],
+   "line": 14,
+   "snippet": "test_timeserver_url(@encrypted_config.value) if @encrypted_config.value.present?"
+  },
+  {
+   "file": "app/controllers/application_controller.rb",
+   "matched_words": [
+    "test"
+   ],
+   "line": 36,
+   "snippet": "if Rails.env.production? || Rails.env.test?"
+  },
+  {
+   "file": "app/jobs/send_test_webhook_request_job.rb",
+   "matched_words": [
+    "test"
+   ],
+   "line": null,
+   "snippet": null
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:3000/folders/2",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "submitted 1 field(s); navigated to a new page (http://127.0.0.1:3000/folders/2 -> http://127.0.0.1:3000/folders/2?q=Library+Walker+Test+1789831724) consistent with the action succeeding"
+ },
+ "verdict": "PROVEN"
+}

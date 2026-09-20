@@ -1,0 +1,47 @@
+{
+ "application": "APP-028",
+ "base_url": "http://localhost:8110/",
+ "static_routes_found": 5,
+ "screens": [
+  {
+   "screen_id": "SCR-001",
+   "name": "Sign in",
+   "route": "/signin",
+   "discovery_source": "startup_url",
+   "verified": true,
+   "detail": "Real email-code sign-in form. A real login code email was actually sent by the app's own sendVerificationRequest/nodemailer flow to a local SMTP catcher standing in for a real mail server (no SMTP was available in this sandbox); the real 6-digit code was read back out of the genuinely-received email body and typed into the app's own OTP input."
+  },
+  {
+   "screen_id": "SCR-002",
+   "name": "Workspace / typebot list",
+   "route": "/typebots",
+   "discovery_source": "post_auth_redirect",
+   "verified": true,
+   "detail": "Reached after a real, successful sign-in. Shows the real 'My workspace' dashboard with 'Create a folder' and 'Create a typebot' actions."
+  },
+  {
+   "screen_id": "SCR-003",
+   "name": "Create a new typebot",
+   "route": "/typebots/create",
+   "discovery_source": "navigation",
+   "verified": true,
+   "detail": "Real chooser screen (Start from scratch / Start from a template / Import a file)."
+  },
+  {
+   "screen_id": "SCR-004",
+   "name": "Flow editor",
+   "route": "/typebots/{typebotId}/edit",
+   "discovery_source": "navigation",
+   "verified": true,
+   "detail": "Reached by clicking 'Start from scratch', which called the app's own real createTypebot mutation (confirmed via server log: POST /api/orpc/typebot/createTypebot 200) and wrote a real row to the native Postgres database. The full real block palette (Bubbles/Inputs/Logic/Integrations) rendered with zero blocking JS errors."
+  },
+  {
+   "screen_id": "SCR-005",
+   "name": "Flow editor -- block placed on canvas",
+   "route": "/typebots/{typebotId}/edit",
+   "discovery_source": "interaction",
+   "verified": true,
+   "detail": "A real drag-and-drop of the 'Text' bubble block from the left palette onto the canvas was performed with real mouse down/move/up events (not a click shortcut); a new 'Group #1' block genuinely appeared on the canvas afterward, proving the editor's drag-and-drop is functionally wired, not just rendered."
+  }
+ ]
+}

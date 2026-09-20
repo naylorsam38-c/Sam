@@ -1,0 +1,132 @@
+{
+ "id": "APP-028",
+ "name": "Typebot",
+ "category": "Forms & Surveys",
+ "category_slug": "forms-surveys",
+ "repository": "https://github.com/baptisteArno/typebot.io",
+ "source_platform": "github.com",
+ "licence": "Apache-2.0",
+ "version": null,
+ "commit": "61056ff9a98082485add8111e901d3148ca358ef",
+ "source_path": "applications/APP-028/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Formbricks",
+   "source_code_url": "https://github.com/formbricks/formbricks",
+   "stargazers_count": 12952,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Experience Management Suite built on the largest open source survey stack worldwide. Gracefully gather feedback at every step of the customer journey to know what your customers need.",
+   "matched_keywords": [
+    "survey"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Typebot",
+   "source_code_url": "https://github.com/baptisteArno/typebot.io",
+   "stargazers_count": 10335,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "Conversational app builder (alternative to Typeform and Landbot).",
+   "matched_keywords": [
+    "typeform"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "HeyForm",
+   "source_code_url": "https://github.com/heyform/heyform",
+   "stargazers_count": 8980,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-09",
+   "description": "Form builder that allows anyone to create engaging conversational forms for surveys, questionnaires, quizzes, and polls.",
+   "matched_keywords": [
+    "form builder",
+    "forms"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LimeSurvey",
+   "source_code_url": "https://github.com/LimeSurvey/LimeSurvey",
+   "stargazers_count": 3729,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Feature-rich web-based polling software. Supports extensive survey logic.",
+   "matched_keywords": [
+    "survey"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OpnForm",
+   "source_code_url": "https://github.com/OpnForm/OpnForm",
+   "stargazers_count": 3724,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Beautiful form builder.",
+   "matched_keywords": [
+    "form builder"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Formbricks",
+   "repo": "https://github.com/formbricks/formbricks",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says AGPL-3.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "Typebot",
+   "repo": "https://github.com/baptisteArno/typebot.io",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:8110/",
+  "http_status": 200,
+  "recipe": "native (no compose/Docker recipe used)",
+  "recipe_kind": "native",
+  "recipe_modification_note": "The project's own docker-compose.build.yml build genuinely fails (its Dockerfile references /scripts/-entrypoint.sh, which does not exist in the build context -- a real, disclosed bug in the app's own repo, not an environment issue). Separately, this session's own container cannot pull ANY Docker image at all: docker pull hello-world and docker pull flagsmith/flagsmith:latest (the exact image APP-001's own recipe_modification_note says worked in an earlier session on this same project) both fail identically with a 403 Forbidden at the CDN blob-download stage, for both Docker Hub and ghcr.io -- a real, reproducible difference from whatever session verified APP-001, not something fixable here. Given both the Dockerfile bug and the registry block, verified instead with a genuine native build: bun 1.3.11 + Node 24.20.0 (nvm) install, native Postgres 16 (schema pushed via the project's own `bun run --cwd packages/prisma db:push`), native Redis, and a local aiosmtpd catcher standing in for a real SMTP server so the app's own real email-code login flow could be driven end-to-end with a genuinely-received email rather than skipped. `apps/builder` run directly via `next dev` (bypassing `docker-compose.dev.yml`, which itself needs Postgres/MinIO/Redis images this sandbox also can't pull) after fixing two real environment-setup bugs found along the way: (1) `@typebot.io/react` needs an explicit `nx build` before `next dev` will resolve it when not going through the project's own `nx run-many` dev task; (2) `next-runtime-env` writes its browser env file relative to CWD, so running `next dev apps/builder` from the repo root wrote `public/__ENV.js` to the wrong directory -- fixed by running with `apps/builder` as the actual CWD (via `bun run --cwd apps/builder`) and colocating `.env` there. `apps/viewer`, `apps/workflows` and the PartyKit realtime server were not started -- out of scope for the builder-only verification done here.",
+  "startup_command": "bun run --cwd apps/builder next dev -p 8110 --hostname 0.0.0.0 (with a native Postgres DB pushed via the prisma package's own db:push script, and a local SMTP catcher standing in for outbound email)",
+  "runtime_hint": [
+   "node"
+  ]
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ },
+ "screen_summary": {
+  "screens_discovered": 5,
+  "screens_reached": 5,
+  "screens_rendered": 5,
+  "screens_browser_verified": 5
+ },
+ "capability_summary": null
+}

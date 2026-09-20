@@ -1,0 +1,150 @@
+{
+ "id": "APP-026",
+ "name": "grocy",
+ "category": "ERP",
+ "category_slug": "erp",
+ "repository": "https://github.com/grocy/grocy",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "41206cb90154e0d17d3e108cc1f182b94fdb465d",
+ "source_path": "applications/APP-026/source",
+ "status": "SCREEN-VERIFIED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Odoo",
+   "source_code_url": "https://github.com/odoo/odoo",
+   "stargazers_count": 54450,
+   "licenses": [
+    "LGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Free open source ERP system.",
+   "matched_keywords": [
+    "erp"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "ERPNext",
+   "source_code_url": "https://github.com/frappe/erpnext",
+   "stargazers_count": 39358,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "ERP system to help you run your business.",
+   "matched_keywords": [
+    "erp"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "grocy",
+   "source_code_url": "https://github.com/grocy/grocy",
+   "stargazers_count": 9513,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-16",
+   "description": "ERP beyond your fridge. Groceries & household management solution for your home.",
+   "matched_keywords": [
+    "erp"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Ever Gauzy",
+   "source_code_url": "https://github.com/ever-co/ever-gauzy",
+   "stargazers_count": 7741,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Open business management platform for collaborative, on-demand and sharing economies (ERP/CRM/HRM/ATS/PM).",
+   "matched_keywords": [
+    "erp"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "OFBiz",
+   "source_code_url": "https://github.com/apache/ofbiz-framework",
+   "stargazers_count": 1124,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Enterprise Resource Planning system with a suite of business applications flexible enough to be used across any industry.",
+   "matched_keywords": [
+    "enterprise resource"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LedgerSMB",
+   "source_code_url": "https://github.com/ledgersmb/LedgerSMB",
+   "stargazers_count": 568,
+   "licenses": [
+    "GPL-2.0"
+   ],
+   "updated_at": "2026-09-19",
+   "description": "Integrated accounting and ERP system for small and midsize businesses, with double entry accounting, budgeting, invoicing, quotations, projects, orders and inventory management, shipping and more.",
+   "matched_keywords": [
+    "erp"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Odoo",
+   "repo": "https://github.com/odoo/odoo",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says LGPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "ERPNext",
+   "repo": "https://github.com/frappe/erpnext",
+   "status": "LICENCE_UNCLEAR",
+   "reason": "licence file says GPL, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0')"
+  },
+  {
+   "name": "grocy",
+   "repo": "https://github.com/grocy/grocy",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:9283/",
+  "http_status": 302,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The repo ships no Dockerfile or compose file at all (a plain PHP app meant to be deployed onto an existing PHP+webserver stack, not containerized upstream). Used the project's own official image (linuxserver/grocy) via Docker Hub instead of lscr.io (that registry is denied by this sandbox's egress policy - 403 Forbidden - but the identical image is mirrored to Docker Hub under the same linuxserver/grocy name, so no functional change). Two real fixes needed: (1) this sandbox's Docker network has no IPv6 stack, so the image's default nginx site config (which unconditionally listens on [::]:80/443) crash-looped with 'socket() [::]:80 failed (97: Address family not supported by protocol)' - added a custom-cont-init.d/10-disable-ipv6-listen.sh script (the image's own supported hook mechanism) that strips the IPv6 listen lines from /config/nginx/site-confs/default.conf on every start, so the IPv4 listener still works normally. (2) grocy's own default admin account (admin/admin) doesn't match this pipeline's standard test credentials, so the crawler's login attempt failed with 'Invalid credentials' - logged in once as admin/admin and reset the account's username/password to the pipeline's standard libwalker/Walker-Pass-2026! via grocy's own user-edit page, letting the standard screens.py crawler log in and complete a full, unmodified 15/15 screen walkthrough on its own.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ],
+   "php": [
+    "composer.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15
+ }
+}

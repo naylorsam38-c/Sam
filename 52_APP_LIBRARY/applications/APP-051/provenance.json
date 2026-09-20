@@ -1,0 +1,15 @@
+{
+ "application": "APP-051",
+ "category": "video-conferencing",
+ "repository_url": "https://github.com/jech/galene",
+ "commit_sha": "6d9338e909fdecdd906150e4dda34e10d9869654",
+ "branch": "master",
+ "download_timestamp": "2026-09-19T11:52:03.654188+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENCE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "2456bcd836326e7ee827a483e5a1ccd6535c7cc33f48fab220d2b1d56cac9864",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 1406
+}

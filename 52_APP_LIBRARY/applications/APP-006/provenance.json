@@ -1,0 +1,15 @@
+{
+ "application": "APP-006",
+ "category": "ai-development",
+ "repository_url": "https://github.com/langfuse/langfuse",
+ "commit_sha": "ef0add7b2598200bd44573178d9d1cc5f7cc770b",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:42:13.963319+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "524868c801814a77f735fe467f7ab15caab957113f23233cc72429c302875a33",
+ "discovery_source": "github-search-or-directory",
+ "stargazers_count": 34804
+}

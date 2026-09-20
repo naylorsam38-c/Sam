@@ -1,0 +1,145 @@
+{
+ "id": "APP-046",
+ "name": "Cal.diy",
+ "category": "Scheduling",
+ "category_slug": "scheduling",
+ "repository": "https://github.com/calcom/cal.diy",
+ "source_platform": "github.com",
+ "licence": "MIT",
+ "version": null,
+ "commit": "6bc45298226f96ff79e0c070c8b2ce39727e8477",
+ "source_path": "applications/APP-046/source",
+ "status": "BUILD_RESOURCE_CONSTRAINED",
+ "declared_itself": true,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "Cal.diy",
+   "source_code_url": "https://github.com/calcom/cal.diy",
+   "stargazers_count": 48543,
+   "licenses": [
+    "MIT"
+   ],
+   "updated_at": "2026-09-14",
+   "description": "Online appointment scheduling system.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Donetick",
+   "source_code_url": "https://github.com/donetick/donetick",
+   "stargazers_count": 2570,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-08-18",
+   "description": "Task and chore management tool for personal and family use, with advanced scheduling, flexible assignment, and group sharing capabilities, detailed history, automation via API, simple and modern design.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "pretalx",
+   "source_code_url": "https://github.com/pretalx/pretalx",
+   "stargazers_count": 943,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-18",
+   "description": "Web-based event management, including running a Call for Papers, reviewing submissions, and scheduling talks. Exports and imports for various related tools.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "LibreBooking",
+   "source_code_url": "https://github.com/LibreBooking/librebooking",
+   "stargazers_count": 808,
+   "licenses": [
+    "GPL-3.0"
+   ],
+   "updated_at": "2026-09-03",
+   "description": "Resource scheduling solution offering a flexible, mobile-friendly, and extensible interface for organizations to manage resource reservations.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Foodsoft",
+   "source_code_url": "https://github.com/foodcoops/foodsoft",
+   "stargazers_count": 359,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-10",
+   "description": "Manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "flowctl",
+   "source_code_url": "https://github.com/cvhariharan/flowctl",
+   "stargazers_count": 340,
+   "licenses": [
+    "Apache-2.0"
+   ],
+   "updated_at": "2026-09-11",
+   "description": "Self-service workflow execution platform with approvals, remote execution and scheduling.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  },
+  {
+   "name": "Garlic-Hub",
+   "source_code_url": "https://github.com/garlic-signage/garlic-hub",
+   "stargazers_count": 145,
+   "licenses": [
+    "AGPL-3.0"
+   ],
+   "updated_at": "2026-09-03",
+   "description": "Digital signage device and content management system with SMIL playlist support and scheduling.",
+   "matched_keywords": [
+    "scheduling"
+   ],
+   "discovery_source": "awesome-selfhosted"
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "Cal.diy",
+   "repo": "https://github.com/calcom/cal.diy",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "BUILD_RESOURCE_CONSTRAINED",
+  "reason": "The project's own compose file pointed at calcom.docker.scarf.sh (a scarf.sh pull-tracking proxy), which this sandbox's egress policy denies - calcom/cal.diy has no equivalent image on Docker Hub, but the compose file also already ships the project's own multi-stage Dockerfile, so removed the scarf.sh image line and built from source instead (no workaround needed, this is the project's documented build path). The build's yarn install/Next.js build steps needed the sandbox's proxy CA bundle added to the image (COPY + NODE_EXTRA_CA_CERTS) to get past TLS interception - confirmed working, the full yarn/turbo/Next.js build completed successfully. The final runner stage's apt-get install (netcat-openbsd + wget) then failed on deb.debian.org, which this sandbox's egress policy also denies - fixed by copying a statically-linked busybox (from the official busybox:musl Docker Hub image, verified it runs on Debian/glibc) to provide `nc` instead, since wget is already in the node:20 base image. Both external-dependency blocks are genuinely resolved. The build itself (a large Turborepo/Next.js monorepo yarn install + build) is disk-heavy and does not fit in this sandbox's remaining free disk space alongside the other unblocked apps' live containers - retried once, aborted partway through re-fetching yarn's dependency cache when free disk dropped under 2GB, to avoid risking the other already-verified apps' running containers. Needs a re-run with more headroom (either after freeing more space or before other apps' containers are live) - recipe and Dockerfile fixes are committed and ready, this is a resource-timing issue, not an unresolved external-dependency block. Retried 4 times total with real fixes each round (dynamic proxy port instead of a hardcoded one, collapsing the project's 3-stage Dockerfile into one to cut peak disk usage roughly 3x, disabling buildx provenance/SBOM attestation generation) - every attempt got all the way through the actual build (yarn install, Next.js build, NestJS builds all succeed) and failed only during the final image export/unpack step, each time exhausting the sandbox's disk even starting from 16GB+ free. This is a genuine capacity ceiling for this specific build in this sandbox, not a bug being chased in circles - confirmed BUILD_RESOURCE_CONSTRAINED, not BLOCKED_EXTERNAL_DEPENDENCY. Every external-dependency block (scarf.sh, deb.debian.org) is resolved and committed; a re-run needs either more disk headroom than this sandbox provides for a single build, or building on a separate machine/session and importing the resulting image.",
+  "blocked_host": null,
+  "runtime_hint": [
+   "node"
+  ],
+  "recipe": "docker-compose.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Removed the calcom.docker.scarf.sh image line so compose builds from the project's own Dockerfile; patched that Dockerfile to trust the sandbox's proxy CA during yarn install (NODE_EXTRA_CA_CERTS) and to get `nc` from busybox:musl instead of apt-get (deb.debian.org is blocked). Compose env vars (DATABASE_URL/DATABASE_DIRECT_URL, NEXTAUTH_SECRET, CALENDSO_ENCRYPTION_KEY, NEXT_PUBLIC_LICENSE_CONSENT) also needed filling in - the project's own .env.example ships them blank.",
+  "startup_command": "docker compose -f docker-compose.yml build calcom && docker compose -f docker-compose.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "postgres"
+ }
+}

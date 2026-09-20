@@ -1,0 +1,41 @@
+{
+ "application": "APP-024",
+ "id": "CAP-024-02",
+ "name": "Profile",
+ "route": "/settings/profile",
+ "discovered_from": "screen",
+ "matched_predefined_capability": null,
+ "attach_points": [
+  {
+   "file": "app/controllers/user_signatures_controller.rb",
+   "matched_words": [
+    "profile"
+   ],
+   "line": 12,
+   "snippet": "return redirect_to settings_profile_index_path, notice: I18n.t('unable_to_save_signature') if file.blank?"
+  },
+  {
+   "file": "app/controllers/profile_controller.rb",
+   "matched_words": [
+    "profile"
+   ],
+   "line": 15,
+   "snippet": "redirect_to settings_profile_index_path,"
+  },
+  {
+   "file": "app/controllers/mfa_setup_controller.rb",
+   "matched_words": [
+    "profile"
+   ],
+   "line": 23,
+   "snippet": "redirect_to settings_profile_index_path, notice: I18n.t('2fa_has_been_configured')"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:3000/settings/profile",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "submitted 3 field(s); a value this test typed now appears on the page where it didn't before (persisted)"
+ },
+ "verdict": "PROVEN"
+}

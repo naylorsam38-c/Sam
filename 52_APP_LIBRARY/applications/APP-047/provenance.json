@@ -1,0 +1,15 @@
+{
+ "application": "APP-047",
+ "category": "search",
+ "repository_url": "https://github.com/danny-avila/LibreChat",
+ "commit_sha": "12d78909d3f5247a8d40a47f0ef5c3ac771d9c5a",
+ "branch": "main",
+ "download_timestamp": "2026-09-19T11:51:40.454949+00:00",
+ "download_method": "git clone --depth 1",
+ "licence_file": "LICENSE",
+ "licence_detected": "MIT",
+ "licence_allowed": true,
+ "source_checksum_sha256": "806fb5859c7c50aefa69c2dbf3f260cec4b34135c13c6dfa6bc4a4f2806c1388",
+ "discovery_source": "awesome-selfhosted",
+ "stargazers_count": 44331
+}

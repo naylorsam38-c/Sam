@@ -1,0 +1,45 @@
+{
+ "application": "APP-024",
+ "id": "CAP-024-01",
+ "name": "Document Templates",
+ "route": "/",
+ "discovered_from": "screen",
+ "matched_predefined_capability": [
+  "Documents",
+  "templates"
+ ],
+ "attach_points": [
+  {
+   "file": "app/controllers/template_documents_page_objects_controller.rb",
+   "matched_words": [
+    "template",
+    "templates"
+   ],
+   "line": 4,
+   "snippet": "load_and_authorize_resource :template"
+  },
+  {
+   "file": "app/controllers/send_submission_email_controller.rb",
+   "matched_words": [
+    "template"
+   ],
+   "line": 13,
+   "snippet": "if params[:template_slug]"
+  },
+  {
+   "file": "app/controllers/submit_form_completed_download_controller.rb",
+   "matched_words": [
+    "document"
+   ],
+   "line": 44,
+   "snippet": "render json: Submitters.build_document_urls(last_submitter)"
+  }
+ ],
+ "live_test": {
+  "url": "http://127.0.0.1:3000/",
+  "attempted": true,
+  "outcome": "PASS",
+  "detail": "submitted 1 field(s); a value this test typed now appears on the page where it didn't before (persisted)"
+ },
+ "verdict": "PROVEN"
+}

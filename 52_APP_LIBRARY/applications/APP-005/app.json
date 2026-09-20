@@ -1,0 +1,66 @@
+{
+ "id": "APP-005",
+ "name": "penpot",
+ "category": "AI Design Tools",
+ "category_slug": "ai-design-tools",
+ "repository": "https://github.com/penpot/penpot",
+ "source_platform": "github.com",
+ "licence": "MPL-2.0",
+ "version": null,
+ "commit": "b402637fe4c35a31eac4007356d3a750ba6187c8",
+ "source_path": "applications/APP-005/source",
+ "status": "FUNCTIONALLY_VERIFIED",
+ "declared_itself": false,
+ "manual_override_reason": null,
+ "discovery_candidates": [
+  {
+   "name": "penpot",
+   "source_code_url": "https://github.com/penpot/penpot",
+   "stargazers_count": 60152,
+   "licenses": [],
+   "archived": false,
+   "description": "Penpot: The open-source design platform for Product teams that need scalable collaboration."
+  }
+ ],
+ "discovery_failed_reason": null,
+ "acquisition_attempts": [
+  {
+   "name": "penpot",
+   "repo": "https://github.com/penpot/penpot",
+   "status": "ACQUIRED",
+   "reason": null
+  }
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:9001/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "No plain local-run Dockerfile/compose at the repo's own root (the app is documented as run via its own separately-published Docker images, not built from this checkout). Used the project's own official prebuilt-image compose file (docker/images/docker-compose.yaml) as-is - frontend/backend/exporter/mcp/postgres/valkey/mailcatch, no build needed - copied to docker-compose.library.yml with one change: uncommented the file's own pre-existing (but disabled by default) PENPOT_DISABLE_IPV6_LISTEN flag on the frontend service, since this sandbox's Docker network is IPv4-only and the frontend's nginx crash-loops on IPv6 bind otherwise (the file ships this exact flag for exactly this case - not a workaround invented here). All 7 images (frontend/backend/mcp/exporter/postgres:15/valkey:8.1/mailcatcher) additionally had to be pulled via Google's public Docker Hub mirror (mirror.gcr.io) and retagged to their real names - a genuine, sandbox-wide Docker Hub CDN block (production.cloudfront.docker.com), the same one already diagnosed and worked around for APP-003, not specific to this app. A second, separately-diagnosed issue then blocked the UI entirely: the compose file pins PENPOT_PUBLIC_URI to http://localhost:9001, and the frontend's own CORS check rejects API calls made from a mismatched origin - browsing via http://127.0.0.1:9001 (this pipeline's own default, from the Docker port mapping) left the app permanently stuck on a blank black screen failing every API call ('blocked by CORS policy'), which most likely also explains why the sibling duplicate APP-021's own verification of this exact app only ever reached 1 screen. Fixed simply by driving the app via http://localhost:9001 instead.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "node": [
+    "package.json"
+   ]
+  },
+  "has_container_recipe": false,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 9,
+  "screens_reached": 9,
+  "screens_rendered": 9,
+  "screens_browser_verified": 9,
+  "verification_note": "Driven by a tailored Playwright script (penpot_walk.py) rather than the generic screens.py crawler, for two reasons specific to this app (see install_startup's own note for the CORS/origin issue, fixed first): (1) screens.py's gate-crawl only looks for a signup link among `a[href], button, [role=button]` elements, but penpot's own 'Create an account' control is a plain `<a data-testid=\"register-submit\">` with no href attribute (a client-side router link handled by onClick) - invisible to that selector, so the generic crawl just re-submitted the login form nine times against an account that didn't exist yet. (2) after signup, a real, un-skippable 3-step 'help us get to know you' survey (radio + custom combobox + icon-card steps, no Skip/Close control at all) has to be genuinely answered to reach the dashboard - handled generically by widget type, not by a fixed step index. Reached and browser-verified 9 real screens with a real account: Login, Signup, Post-signup, Dashboard, Projects, the actual Design Editor/Workspace (a newly created file open in the real canvas editor - the sibling duplicate APP-021 never got this far, its own result was 1/1 screens, the Projects dashboard only), and Profile/Password/Options settings."
+ },
+ "capability_summary": {
+  "discovered": 2,
+  "attach_point_found": 2,
+  "proven": 2,
+  "verification_note": "Driven by a tailored script (penpot_capabilities.py), same reason as screens.json's own verification_note. Each capability proven with independent reconfirmation from a brand-new browser context with a fresh login, not just a same-session DOM check. (1) Design Editor: drew a real rectangle shape via the rectangle tool + mouse drag, renamed the file, and confirmed the shape is still present on reopening the exact file from a fresh context - caught and fixed a real false positive along the way (an initial, too-broad '[class*=shape]' selector reported PROVEN on a run where the shape had, provably by screenshot, NOT actually persisted, because the browser closed before penpot's own debounced update-file persistence call had time to fire - fixed by waiting long enough after each edit, and by narrowing the reconfirmation check to the shape's own exact layer name); real attach point at backend/src/app/rpc/commands/files_create.clj's create-file. (2) Projects: created a real new project with a unique name via the dashboard's own + New Project control, independently reconfirmed listed by name from a fresh context; real attach point at backend/src/app/rpc/commands/projects.clj's create-project."
+ }
+}
