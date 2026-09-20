@@ -1,0 +1,108 @@
+{
+ "application": "APP-010",
+ "base_url": "http://localhost:2368/",
+ "static_routes_found": 40,
+ "screens": [
+  {
+   "screen_id": "SCR-001",
+   "name": "Home",
+   "route": "/",
+   "discovery_source": "startup_url",
+   "gate_steps": [
+    {
+     "step": 1,
+     "kind": "form",
+     "url_before": "http://localhost:2368/",
+     "fields_filled": 1,
+     "submitted": true,
+     "url_after": "http://localhost:2368/?email=libwalker%40example.com"
+    },
+    {
+     "step": 2,
+     "kind": "form",
+     "url_before": "http://localhost:2368/?email=libwalker%40example.com",
+     "fields_filled": 1,
+     "submitted": true,
+     "url_after": "http://localhost:2368/?email=libwalker%40example.com"
+    },
+    {
+     "step": 3,
+     "kind": "form",
+     "url_before": "http://localhost:2368/?email=libwalker%40example.com",
+     "fields_filled": 1,
+     "submitted": true,
+     "url_after": "http://localhost:2368/?email=libwalker%40example.com"
+    },
+    {
+     "step": 4,
+     "kind": "form",
+     "url_before": "http://localhost:2368/?email=libwalker%40example.com",
+     "fields_filled": 1,
+     "submitted": true,
+     "url_after": "http://localhost:2368/?email=libwalker%40example.com"
+    },
+    {
+     "step": 5,
+     "kind": "form",
+     "url_before": "http://localhost:2368/?email=libwalker%40example.com",
+     "fields_filled": 1,
+     "submitted": true,
+     "url_after": "http://localhost:2368/?email=libwalker%40example.com"
+    },
+    {
+     "step": 6,
+     "kind": "form",
+     "url_before": "http://localhost:2368/?email=libwalker%40example.com",
+     "fields_filled": 1,
+     "submitted": true,
+     "url_after": "http://localhost:2368/?email=libwalker%40example.com"
+    },
+    {
+     "step": 7,
+     "kind": "form",
+     "url_before": "http://localhost:2368/?email=libwalker%40example.com",
+     "fields_filled": 1,
+     "submitted": true,
+     "url_after": "http://localhost:2368/?email=libwalker%40example.com"
+    },
+    {
+     "step": 8,
+     "kind": "form",
+     "url_before": "http://localhost:2368/?email=libwalker%40example.com",
+     "fields_filled": 1,
+     "submitted": true,
+     "url_after": "http://localhost:2368/?email=libwalker%40example.com"
+    },
+    {
+     "step": 9,
+     "kind": "form",
+     "url_before": "http://localhost:2368/?email=libwalker%40example.com",
+     "fields_filled": 1,
+     "submitted": true,
+     "url_after": "http://localhost:2368/?email=libwalker%40example.com"
+    }
+   ],
+   "gate_state": "STUCK",
+   "reachable": true,
+   "rendered": true,
+   "error_state": null,
+   "controls_detected": true,
+   "browser_verified": true,
+   "title": "Ghost",
+   "heading": "Thoughts, stories and ideas",
+   "controls": {
+    "button": 5,
+    "input": 2,
+    "textarea": 0,
+    "select": 0,
+    "checkbox": 0,
+    "link": 8,
+    "menu": 2,
+    "table": 0,
+    "form": 2
+   },
+   "screenshot": "001_home.png",
+   "final_url": "http://localhost:2368/?email=libwalker%40example.com"
+  }
+ ]
+}
