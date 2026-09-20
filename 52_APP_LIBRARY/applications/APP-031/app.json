@@ -9,7 +9,7 @@
  "version": null,
  "commit": "d222ced551c2d9de2ac67edb89fde121eb39a9af",
  "source_path": "applications/APP-031/source",
- "status": "INSTALL_FAILED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -40,8 +40,19 @@
   }
  ],
  "install_startup": {
-  "status": "INSTALL_FAILED",
-  "reason": "no Dockerfile or compose file - no documented way to run it"
+  "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+  "reason": "hrms is a Frappe framework app, not a standalone project -- it must be installed into a Frappe 'bench' alongside the frappe framework itself and erpnext (both declared as direct dependencies in pyproject.toml: frappe>=17.0.0-dev,<18.0.0, erpnext>=17.0.0-dev,<18.0.0). No stable 'version-17' branch of frappe exists yet (confirmed via git ls-remote); the only branch satisfying that range is frappe/frappe's own 'develop' branch. That branch's pyproject.toml has required Python >=3.14,<3.15 for its entire v17 development cycle -- confirmed by walking frappe's git history from the exact hrms pin date (2026-09-18) back 269 days to the commit where __version__ first became '17.0.0-dev': every single commit across that whole range already declared requires-python '>=3.14,<3.15'. This is not environment drift or a moving target that could be dodged by picking an older frappe commit -- it is a real, structural fact of the frappe v17 dependency graph hrms itself declares. Python 3.14 (a real, currently-released version, not a typo or a not-yet-released one) is unobtainable in this sandbox through any reachable channel: it is not yet in Ubuntu 24.04's own apt archive, its only real distribution channels are the deadsnakes PPA (ppa.launchpadcontent.net, blocked: 403 Forbidden from this sandbox's egress policy) and the official python.org source tarball (www.python.org, also blocked: 403 Forbidden). Left honestly as BLOCKED_EXTERNAL_DEPENDENCY rather than forcing a Python version frappe itself refuses to install under (uv's own dependency resolver hard-errors: 'the current Python version (3.12.3) does not satisfy Python>=3.14,<3.15 and frappe==17.0.0.dev0 depends on Python>=3.14,<3.15').",
+  "blocked_host": "ppa.launchpadcontent.net, www.python.org",
+  "url": null,
+  "http_status": null,
+  "recipe": "no compose/Docker recipe in this repo (a docker/ directory with its own docker-compose.yml exists and is the project's documented Docker path, but Docker image pulls are also blocked in this sandbox, same as elsewhere on this shelf -- moot either way given the Python 3.14 block below it)",
+  "recipe_kind": "bench (frappe framework CLI)",
+  "recipe_modification_note": "Real, disclosed attempts made before concluding this is blocked, in order: (1) bench init as root fails by design (bench refuses to run as root without a configured frappe_user) -- fixed by creating a dedicated non-root 'frappe' system user, the standard practice for Frappe development anyway. (2) bench's internal 'uv venv' step failed with a TLS trust error against pypi.org -- fixed with SSL_CERT_FILE/UV_SYSTEM_CERTS/REQUESTS_CA_BUNDLE/NODE_EXTRA_CA_CERTS pointed at this sandbox's proxy CA bundle. (3) --frappe-branch version-17 fails: that branch does not exist (confirmed via git ls-remote --heads). (4) --frappe-branch develop with Python 3.11 fails to build: a source file uses PEP 695 'type X = ...' statement syntax, which requires Python >=3.12 to even parse -- installed Python 3.12 via Ubuntu's own apt archive to fix this specific error. (5) With Python 3.12, uv's dependency resolver then correctly reports the real, underlying blocker: frappe==17.0.0.dev0 requires Python>=3.14,<3.15, which this sandbox cannot install. None of these were the real blocker except the last.",
+  "startup_command": null,
+  "runtime_hint": [
+   "python",
+   "node"
+  ]
  },
  "ecosystem": {
   "detected_ecosystems": {
@@ -53,6 +64,6 @@
    ]
   },
   "has_container_recipe": false,
-  "database_requirement": null
+  "database_requirement": "mariadb"
  }
 }
