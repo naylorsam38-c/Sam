@@ -1,0 +1,427 @@
+<title>API Key Reference</title>
+<meta name="description" content="Every third-party API key, token, or credential the 52-app self-hosted library can use, sourced from each project's own docs — required vs. optional, per app.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#181c22;
+  --paper:#f4f3ef;
+  --surface:#ffffff;
+  --surface-2:#eceae4;
+  --border:#d9d6cd;
+  --muted:#6b6f76;
+  --accent:#a9791f;
+  --accent-ink:#5c4212;
+  --required:#b5432c;
+  --required-bg:#fbeae5;
+  --required-bd:#e7bfae;
+  --optional:#3d6a99;
+  --optional-bg:#e9f0f7;
+  --optional-bd:#bcd2e6;
+  --ok:#3f7a4e;
+  --ok-bg:#e9f3ea;
+  --ok-bd:#bdddc3;
+  --focus:#a9791f;
+  --shadow: 0 1px 2px rgba(24,28,34,.06), 0 6px 16px -8px rgba(24,28,34,.15);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#eae7de;
+    --paper:#14171c;
+    --surface:#1b1f26;
+    --surface-2:#20242c;
+    --border:#2c313b;
+    --muted:#9aa0aa;
+    --accent:#d8a941;
+    --accent-ink:#f0cd80;
+    --required:#e2836d;
+    --required-bg:#33211d;
+    --required-bd:#5a3229;
+    --optional:#8fb6dd;
+    --optional-bg:#1c2733;
+    --optional-bd:#2c435c;
+    --ok:#8fcb9c;
+    --ok-bg:#1c2e20;
+    --ok-bd:#2c4a33;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 24px -10px rgba(0,0,0,.55);
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#eae7de;
+  --paper:#14171c;
+  --surface:#1b1f26;
+  --surface-2:#20242c;
+  --border:#2c313b;
+  --muted:#9aa0aa;
+  --accent:#d8a941;
+  --accent-ink:#f0cd80;
+  --required:#e2836d;
+  --required-bg:#33211d;
+  --required-bd:#5a3229;
+  --optional:#8fb6dd;
+  --optional-bg:#1c2733;
+  --optional-bd:#2c435c;
+  --ok:#8fcb9c;
+  --ok-bg:#1c2e20;
+  --ok-bd:#2c4a33;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 24px -10px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;
+  padding:0 16px;
+}
+.wrap{max-width:920px;margin:0 auto}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+header.top{
+  padding:28px 0 18px;
+  border-bottom:1px solid var(--border);
+}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--accent-ink);
+  margin:0 0 8px;
+}
+h1{
+  font-family:"IBM Plex Mono",monospace;
+  font-weight:600;
+  font-size:clamp(22px,4.4vw,30px);
+  margin:0 0 8px;
+  letter-spacing:-.01em;
+  text-wrap:balance;
+}
+.lede{
+  color:var(--muted);
+  font-size:14.5px;
+  line-height:1.55;
+  max-width:62ch;
+  margin:0;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  margin:20px 0;
+}
+.stat{
+  background:var(--surface);
+  padding:14px 12px;
+  text-align:left;
+}
+.stat b{
+  display:block;
+  font-family:"IBM Plex Mono",monospace;
+  font-size:22px;
+  font-variant-numeric:tabular-nums;
+  line-height:1.1;
+}
+.stat span{
+  display:block;
+  margin-top:4px;
+  font-size:11.5px;
+  color:var(--muted);
+  line-height:1.3;
+}
+.stat.req b{color:var(--required)}
+.stat.ok b{color:var(--ok)}
+.stat.opt b{color:var(--optional)}
+
+.controls{
+  position:sticky;
+  top:env(safe-area-inset-top,0px);
+  background:var(--paper);
+  padding:14px 0 12px;
+  z-index:5;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+#search{
+  flex:1 1 220px;
+  min-width:0;
+  font-family:"IBM Plex Sans",sans-serif;
+  font-size:14px;
+  padding:9px 12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--ink);
+}
+#search:focus{outline:2px solid var(--focus);outline-offset:1px}
+.chip{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:12px;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--muted);
+  cursor:pointer;
+  white-space:nowrap;
+}
+.chip[aria-pressed="true"]{
+  background:var(--ink);
+  color:var(--paper);
+  border-color:var(--ink);
+}
+.chip:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+#count{
+  font-size:12px;
+  color:var(--muted);
+  margin:10px 0 4px;
+  font-family:"IBM Plex Mono",monospace;
+}
+
+.list{display:flex;flex-direction:column;gap:8px;margin:10px 0 40px}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.card summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:13px 14px;
+  user-select:none;
+}
+.card summary::-webkit-details-marker{display:none}
+.card summary:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.id{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;
+  color:var(--muted);
+  flex:0 0 auto;
+  min-width:58px;
+}
+.name-wrap{flex:1 1 auto;min-width:0}
+.name{font-weight:600;font-size:14.5px}
+.cat{font-size:11.5px;color:var(--muted);margin-top:1px}
+.badges{display:flex;gap:6px;flex:0 0 auto;flex-wrap:wrap;justify-content:flex-end}
+.badge{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10.5px;
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid;
+  white-space:nowrap;
+}
+.badge.req{color:var(--required);background:var(--required-bg);border-color:var(--required-bd)}
+.badge.opt{color:var(--optional);background:var(--optional-bg);border-color:var(--optional-bd)}
+.badge.ok{color:var(--ok);background:var(--ok-bg);border-color:var(--ok-bd)}
+.chev{
+  flex:0 0 auto;
+  color:var(--muted);
+  transition:transform .15s ease;
+  font-size:12px;
+}
+.card[open] .chev{transform:rotate(90deg)}
+
+.body{
+  padding:0 14px 16px;
+  border-top:1px solid var(--border);
+}
+.groupnote{
+  font-size:12.5px;
+  color:var(--muted);
+  padding-top:12px;
+  line-height:1.5;
+}
+.grouplabel{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10.5px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin:14px 0 6px;
+}
+.grouplabel.req{color:var(--required)}
+.grouplabel.opt{color:var(--optional)}
+.rows{display:flex;flex-direction:column;gap:8px}
+.row{
+  background:var(--surface-2);
+  border-radius:8px;
+  padding:9px 11px;
+}
+.row .env{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:12.5px;
+  font-weight:500;
+  color:var(--ink);
+  word-break:break-word;
+  line-height:1.5;
+}
+.row .note{
+  font-size:12.5px;
+  color:var(--muted);
+  margin-top:3px;
+  line-height:1.5;
+}
+.dupnote{
+  padding-top:12px;
+  font-size:13px;
+  color:var(--muted);
+}
+.dupnote b{color:var(--ink)}
+
+footer{
+  padding:20px 0 40px;
+  color:var(--muted);
+  font-size:12px;
+  border-top:1px solid var(--border);
+  line-height:1.6;
+}
+
+@media (max-width:520px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .id{display:none}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">52-App Library — Configuration Reference</p>
+    <h1>API keys you'll need</h1>
+    <p class="lede">Every third-party API key, token, or credential each app can use, checked against that project's own docs — not guessed. Required vs. optional, per app, with the exact environment variable and what it unlocks.</p>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="controls">
+    <input id="search" type="text" placeholder="Search app or category…" autocomplete="off" />
+    <button class="chip" data-filter="all" aria-pressed="true">All 52</button>
+    <button class="chip" data-filter="required" aria-pressed="false">Needs setup</button>
+    <button class="chip" data-filter="zero" aria-pressed="false">Zero-key apps</button>
+  </div>
+
+  <div id="count"></div>
+  <div class="list" id="list"></div>
+
+  <footer>
+    Compiled 2026-09-20 from each app's own README, docs site, or shipped <span class="mono">.env.example</span> — six parallel research passes, one per batch of apps, each independently sourced. “Required” marks a key the app's own docs call necessary for its core or production use (a few are conditional — e.g. unless you run a local LLM instead). Everything else is an optional integration: the app runs fully without it.
+  </footer>
+</div>
+
+<script>
+const APPS = [{"id": "APP-001", "name": "flagsmith", "cat": "A/B Testing & Experimentation", "req": [], "opt": [{"env": "EMAIL_HOST_USER / EMAIL_HOST_PASSWORD", "note": "SMTP for invites & password reset"}, {"env": "EMAIL_BACKEND (+ SendGrid or AWS SES creds)", "note": "alternate mail backend"}, {"env": "GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET", "note": "GitHub SSO login"}, {"env": "Google OAuth client ID / secret", "note": "Google SSO login"}]}, {"id": "APP-002", "name": "AnythingLLM", "cat": "AI Agents", "req": [{"env": "OPEN_AI_KEY (or any one alt. LLM provider key)", "note": "powers the core chat/LLM function — not needed only if using a local model (Ollama/LM Studio/LocalAI)", "conditional": true}], "opt": [{"env": "ANTHROPIC_API_KEY / GEMINI_API_KEY / AZURE_OPENAI_KEY / MISTRAL_API_KEY / GROQ_API_KEY / TOGETHER_AI_API_KEY / OPENROUTER_API_KEY / PERPLEXITY_API_KEY / COHERE_API_KEY / AWS_BEDROCK_API_KEY / DEEPSEEK_API_KEY", "note": "alternate LLM providers (pick one instead of OpenAI)"}, {"env": "PINECONE_API_KEY / WEAVIATE_API_KEY / QDRANT_API_KEY / ASTRA_DB_APPLICATION_TOKEN / ZILLIZ_API_TOKEN", "note": "hosted vector DB instead of the built-in local store"}, {"env": "AGENT_SERPER_DEV_KEY / AGENT_TAVILY_API_KEY / AGENT_GSE_KEY+CTX / AGENT_BING_SEARCH_API_KEY", "note": "gives AI agents live web-search"}, {"env": "TTS_ELEVEN_LABS_KEY / STT_DEEPGRAM_API_KEY", "note": "text-to-speech / speech-to-text"}]}, {"id": "APP-003", "name": "Home Assistant", "cat": "AI Assistants", "req": [], "opt": [{"env": "Per-integration keys (weather, maps, Nabu Casa cloud, smart-home clouds…)", "note": "configured per-integration in the UI, not global env vars"}]}, {"id": "APP-004", "name": "tabby", "cat": "AI Code Assistants", "req": [], "opt": [{"env": "api_key (config.toml, [model.completion.http])", "note": "only if pointing at an external OpenAI-compatible endpoint instead of a local model"}, {"env": "GitHub / GitLab Personal Access Token", "note": "lets Tabby index a private repo as context; not needed for public repos"}]}, {"id": "APP-005", "name": "penpot", "cat": "AI Design Tools", "req": [], "opt": [{"env": "PENPOT_SMTP_HOST / _USERNAME / _PASSWORD / _PORT", "note": "invite & password-reset email"}, {"env": "PENPOT_GOOGLE_CLIENT_ID / _SECRET", "note": "Google SSO login"}, {"env": "PENPOT_GITHUB_CLIENT_ID / _SECRET", "note": "GitHub SSO login"}, {"env": "PENPOT_GITLAB_CLIENT_ID / _SECRET / _BASE_URI", "note": "GitLab SSO login"}, {"env": "PENPOT_OIDC_CLIENT_ID / _SECRET / _BASE_URI", "note": "generic OIDC SSO"}, {"env": "AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY", "note": "S3 object storage instead of local disk"}]}, {"id": "APP-006", "name": "langfuse", "cat": "AI Development", "req": [{"env": "LANGFUSE_S3_EVENT_UPLOAD_* (bucket/region/access key/secret/endpoint)", "note": "S3-compatible storage for trace data — mandatory, but can point at your own self-hosted MinIO instead of a paid cloud vendor", "conditional": true}], "opt": [{"env": "LANGFUSE_S3_MEDIA_UPLOAD_BUCKET", "note": "multi-modal (image/audio) trace media"}, {"env": "LANGFUSE_S3_BATCH_EXPORT_BUCKET", "note": "batch data export"}, {"env": "SMTP_CONNECTION_URL / EMAIL_FROM_ADDRESS", "note": "password reset & invite email"}, {"env": "AUTH_GOOGLE_/_GITHUB_/_OKTA_/_AZURE_AD_/_CUSTOM_CLIENT_ID+SECRET", "note": "SSO login providers"}]}, {"id": "APP-007", "name": "Superset", "cat": "Analytics", "req": [], "opt": [{"env": "MAPBOX_API_KEY", "note": "Mapbox/deck.gl geospatial charts only"}, {"env": "SMTP_HOST / _USER / _PASSWORD / _PORT (superset_config.py)", "note": "Alerts & Reports email delivery"}, {"env": "SLACK_API_TOKEN (superset_config.py)", "note": "Alerts & Reports delivery to Slack"}]}, {"id": "APP-008", "name": "Firezone", "cat": "Authentication", "req": [{"env": "OUTBOUND_EMAIL_ADAPTER + _OPTS (Postmark/Mailgun/SES-style key)", "note": "default sign-in is passwordless magic-link email — needed for auth to work in a real deployment", "conditional": true}], "opt": [{"env": "OIDC/SSO client ID + secret (Google Workspace, Entra ID, Okta, generic OIDC)", "note": "SSO login + directory sync"}]}, {"id": "APP-009", "name": "Home Assistant", "cat": "Automation", "dup": "APP-003"}, {"id": "APP-010", "name": "Ghost", "cat": "Blogging", "req": [{"env": "mail.options (SMTP host/user/pass)", "note": "staff invites, password reset, member magic-link sign-in — boots without it but these core admin/membership functions fail", "conditional": true}], "opt": [{"env": "bulkEmail.mailgun.apiKey / .domain", "note": "Mailgun — only supported provider for emailing newsletter posts to members"}, {"env": "Stripe secret/publishable key (Admin UI, not env var)", "note": "paid member subscriptions"}, {"env": "Slack webhook URL (Admin UI setting)", "note": "post-published notifications"}]}, {"id": "APP-011", "name": "linkding", "cat": "Bookmarks & Archiving", "req": [], "opt": [{"env": "LD_ENABLE_AUTH_PROXY / _USERNAME_HEADER / _LOGOUT_URL", "note": "delegate login to a reverse-auth-proxy like Authelia/Authentik — header trust config, not a vendor API key"}]}, {"id": "APP-012", "name": "Neko", "cat": "Browser", "req": [], "opt": [{"env": "NEKO_WEBRTC_ICESERVERS_FRONTEND / _BACKEND", "note": "TURN/STUN NAT traversal — usually self-hosted coturn, optionally a third-party relay"}]}, {"id": "APP-013", "name": "Strapi", "cat": "CMS", "req": [], "opt": [{"env": "SENDGRID_API_KEY or SMTP_HOST/_USERNAME/_PASSWORD", "note": "outbound email (password reset etc.)"}, {"env": "AWS_ACCESS_KEY_ID / AWS_ACCESS_SECRET or Cloudinary key/secret", "note": "cloud media storage instead of local disk"}, {"env": "Social login client ID/secret (Google/Facebook/GitHub…, Users & Permissions plugin)", "note": "social sign-in for end users"}]}, {"id": "APP-014", "name": "rustpad", "cat": "Code Editors", "req": [], "opt": []}, {"id": "APP-015", "name": "Gitea", "cat": "Collaboration", "req": [], "opt": [{"env": "[mailer] SMTP_ADDR / PORT / USER / PASSWD", "note": "password reset, notifications, registration confirmation"}, {"env": "RECAPTCHA_SECRET/SITEKEY, HCAPTCHA_*, MCAPTCHA_*, or Cloudflare Turnstile keys", "note": "bot-prevention captcha on registration/login"}, {"env": "OAuth2/OpenID client ID+secret (Admin UI, per-provider)", "note": "external SSO login"}]}, {"id": "APP-016", "name": "Hoppscotch Community Edition", "cat": "Community", "req": [{"env": "MAILER_SMTP_URL (or one of GOOGLE_/GITHUB_/MICROSOFT_CLIENT_ID+SECRET)", "note": "no local username/password auth exists — at least one sign-in method must be configured for anyone to log in", "conditional": true}], "opt": []}, {"id": "APP-017", "name": "Krayin", "cat": "CRM", "req": [], "opt": [{"env": "MAIL_HOST / MAIL_USERNAME / MAIL_PASSWORD / MAIL_PORT", "note": "lead/quote/user notification email, password reset"}, {"env": "MAIL_RECEIVER_DRIVER (SendGrid inbound parse webhook)", "note": "turns inbound email into CRM leads/tickets"}, {"env": "WhatsApp Business API access token + webhook token (paid extension)", "note": "lead capture via WhatsApp"}]}, {"id": "APP-018", "name": "Chatwoot", "cat": "Customer Support", "req": [{"env": "SMTP_ADDRESS / _USERNAME / _PASSWORD / _PORT", "note": "account confirmation, notifications, email channel — treated as essential for real production use", "conditional": true}], "opt": [{"env": "AWS_ACCESS_KEY_ID / _SECRET_ACCESS_KEY / S3_BUCKET_NAME (or GCS/Azure)", "note": "cloud file storage for attachments"}, {"env": "VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY", "note": "web push notifications to agents"}, {"env": "FB_APP_ID / FB_APP_SECRET / FB_VERIFY_TOKEN, IG_VERIFY_TOKEN", "note": "Facebook Page/Messenger & Instagram channel"}, {"env": "TWITTER_APP_ID / CONSUMER_KEY / CONSUMER_SECRET", "note": "Twitter/X channel"}, {"env": "SLACK_CLIENT_ID / _SECRET / SIGNING_SECRET", "note": "Slack agent notifications"}, {"env": "GOOGLE_OAUTH_CLIENT_ID / _SECRET, AZURE_APP_ID / _SECRET", "note": "Google / Microsoft sign-in & Gmail channel"}, {"env": "MAILGUN_INGRESS_SIGNING_KEY / MANDRILL_INGRESS_API_KEY", "note": "inbound-email channel verification"}, {"env": "FCM_SERVER_KEY", "note": "push to mobile agent app"}, {"env": "IP_LOOKUP_API_KEY (MaxMind)", "note": "visitor IP geolocation"}, {"env": "CAPTAIN_OPEN_AI_API_KEY", "note": "AI reply-suggestion features"}, {"env": "STRIPE_SECRET_KEY / _WEBHOOK_SECRET", "note": "Chatwoot Cloud billing — not relevant to self-hosted CE"}, {"env": "SENTRY_DSN / New Relic / Scout / Elastic APM keys", "note": "error & performance monitoring"}]}, {"id": "APP-019", "name": "Apache Airflow", "cat": "Data Engineering", "req": [], "opt": [{"env": "AIRFLOW__SMTP__SMTP_HOST / _USER / _PASSWORD / _PORT / _MAIL_FROM", "note": "task-failure/SLA alert & password-reset email"}, {"env": "Per-Connection provider credentials (AWS/GCP/Azure/Slack/Snowflake…)", "note": "only if a DAG actually uses that integration, configured per-Connection"}]}, {"id": "APP-020", "name": "CloudBeaver", "cat": "Databases", "req": [], "opt": []}, {"id": "APP-021", "name": "penpot", "cat": "Design Tools", "dup": "APP-005"}, {"id": "APP-022", "name": "code-server", "cat": "Developer Tools", "req": [], "opt": []}, {"id": "APP-023", "name": "OneDev", "cat": "DevOps", "req": [], "opt": [{"env": "SMTP mail server (Admin UI → Mail Service)", "note": "notification email & Service Desk email-to-issue"}, {"env": "OAuth client ID/secret — GitHub/GitLab/Google/Office 365 (Admin UI → SSO)", "note": "social/SSO login"}, {"env": "LDAP bind credentials (Admin UI)", "note": "external LDAP/AD authentication"}]}, {"id": "APP-024", "name": "Docuseal", "cat": "Digital Signature", "req": [], "opt": [{"env": "SMTP_ADDRESS / _PORT / _USERNAME / _PASSWORD / _DOMAIN", "note": "signing-invitation & notification email — core to the signing workflow even though technically optional"}, {"env": "AWS_ACCESS_KEY_ID / _SECRET_ACCESS_KEY / AWS_REGION / S3_ATTACHMENTS_BUCKET", "note": "S3 storage instead of local disk"}, {"env": "GCS_CREDENTIALS / GCS_PROJECT / GCS_BUCKET", "note": "Google Cloud Storage alternative"}, {"env": "AZURE_STORAGE_ACCOUNT_NAME / _ACCESS_KEY / _CONTAINER", "note": "Azure Blob Storage alternative"}]}, {"id": "APP-025", "name": "Bagisto", "cat": "E-Commerce", "req": [], "opt": [{"env": "MAIL_HOST / MAIL_USERNAME / MAIL_PASSWORD / MAIL_PORT", "note": "order confirmation & admin email"}, {"env": "AWS_ACCESS_KEY_ID / _SECRET_ACCESS_KEY / AWS_BUCKET", "note": "S3 storage for product images"}, {"env": "R2_ACCESS_KEY_ID / _SECRET_ACCESS_KEY / R2_BUCKET", "note": "Cloudflare R2 storage alternative"}, {"env": "PayPal Client ID / Secret (Admin Panel, not env var)", "note": "PayPal Smart Button payment gateway — Cash on Delivery works with no key"}]}, {"id": "APP-026", "name": "grocy", "cat": "ERP", "req": [], "opt": [], "note": "Barcode lookup uses the free, keyless Open Food Facts database by default — no external key anywhere in the app."}, {"id": "APP-027", "name": "transfer.sh", "cat": "File Storage", "req": [], "opt": [{"env": "AWS_ACCESS_KEY / AWS_SECRET_KEY", "note": "S3 (or S3-compatible/MinIO) storage provider instead of local"}, {"env": "STORJ_ACCESS / STORJ_BUCKET", "note": "Storj decentralized storage provider"}, {"env": "GDRIVE_CLIENT_JSON_FILEPATH", "note": "Google Drive storage provider (OAuth client JSON)"}, {"env": "GA_KEY", "note": "Google Analytics on the web front end"}, {"env": "USERVOICE_KEY", "note": "UserVoice feedback widget"}]}, {"id": "APP-028", "name": "Typebot", "cat": "Forms & Surveys", "req": [{"env": "SMTP_HOST/_USERNAME/_PASSWORD, or one of GOOGLE_/GITHUB_/GITLAB_/FACEBOOK_/AZURE_AD_/KEYCLOAK_/CUSTOM_OAUTH_ CLIENT_ID+SECRET", "note": "official self-host guide requires configuring at least one auth provider", "conditional": true}], "opt": [{"env": "S3_ACCESS_KEY / S3_SECRET_KEY", "note": "S3-compatible storage for uploaded bot media"}, {"env": "GOOGLE_SHEETS_CLIENT_ID/_SECRET + NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY", "note": "Google Sheets integration block"}, {"env": "GMAIL_CLIENT_ID / _SECRET", "note": "“Send Email via Gmail” integration block"}, {"env": "NEXT_PUBLIC_GOOGLE_FONTS_API_KEY", "note": "custom font picker in the builder"}, {"env": "NEXT_PUBLIC_GIPHY_API_KEY", "note": "GIF picker block"}, {"env": "NEXT_PUBLIC_UNSPLASH_ACCESS_KEY", "note": "image picker block"}, {"env": "NEXT_PUBLIC_PEXELS_API_KEY", "note": "video picker block"}, {"env": "META_SYSTEM_USER_TOKEN / WHATSAPP_PREVIEW_APP_SECRET / _FROM_PHONE_NUMBER_ID", "note": "WhatsApp Business Cloud API channel"}, {"env": "NEXT_PUBLIC_POSTHOG_KEY / POSTHOG_PERSONAL_API_KEY", "note": "product analytics"}]}, {"id": "APP-029", "name": "gaseous-server", "cat": "Game Development", "req": [{"env": "igdbclientid / igdbclientsecret", "note": "IGDB (via Twitch dev account) — sole metadata/artwork source; listed as a prerequisite for all deployments", "conditional": true}], "opt": [{"env": "igdbusehasheousproxy", "note": "routes IGDB queries through the public hasheous proxy instead of your own IGDB credentials"}]}, {"id": "APP-030", "name": "websoft9", "cat": "Hosting Control Panel", "req": [], "opt": [{"env": "SMTP settings (in-app)", "note": "password recovery / notification email from the panel itself"}]}, {"id": "APP-031", "name": "hrms", "cat": "Human Resources", "req": [], "opt": [{"env": "mail_server / mail_login / mail_password (site_config.json)", "note": "outgoing notification & password-reset email"}, {"env": "Social Login Key client_id / client_secret", "note": "SSO via Google/GitHub/Microsoft/Facebook"}, {"env": "Google Settings OAuth client_id / client_secret", "note": "Gmail/Calendar/Contacts sync + Maps route optimization"}, {"env": "Dropbox app_access_key / app_secret_key", "note": "offsite backups to Dropbox"}]}, {"id": "APP-032", "name": "ezbookkeeping", "cat": "Invoicing & Finance", "req": [], "opt": [{"env": "[map] tomtom_map_api_key / google_map_api_key / baidu_map_ak / amap_application_key+secret / tianditu_map_app_key", "note": "transaction map provider — default is the keyless OpenStreetMap"}, {"env": "[llm_*] openai_api_key / anthropic_api_key / openrouter_api_key / google_ai_api_key", "note": "AI auto-creation of transactions from text/receipt photos"}, {"env": "[mail] smtp_host / smtp_user / smtp_passwd", "note": "verification & password-reset email"}, {"env": "[auth] oauth2_client_id / oauth2_client_secret", "note": "SSO via OIDC/Nextcloud/Gitea/GitHub"}]}, {"id": "APP-033", "name": "Memos", "cat": "Knowledge Management", "req": [], "opt": [{"env": "S3-compatible access_key_id / access_key_secret (Admin UI)", "note": "move attachments to S3/R2/MinIO instead of local/DB"}, {"env": "SMTP smtp_host / smtp_username / smtp_password (Admin UI)", "note": "email notifications"}, {"env": "OAuth2 IdP client_id / client_secret (Admin UI)", "note": "custom SSO login"}, {"env": "AI provider api_key — OpenAI or Gemini (Admin UI)", "note": "AI writing assist / voice-memo transcription"}]}, {"id": "APP-034", "name": "Canvas LMS", "cat": "Learning Management", "req": [], "opt": [{"env": "config/outgoing_mail.yml (address/user_name/password)", "note": "password-reset & course-notification email"}, {"env": "config/amazon_s3.yml (access_key_id/secret_access_key)", "note": "S3 file storage instead of local disk"}, {"env": "config/twilio.yml (account_sid/auth_token)", "note": "SMS notifications / two-factor"}, {"env": "config/sentry.yml (dsn)", "note": "error tracking"}, {"env": "config/saml.yml", "note": "SAML-based SSO login"}, {"env": "config/incoming_mail.yml (IMAP/POP3)", "note": "reply-to-discussion-by-email"}, {"env": "config/bounce_notifications.yml (AWS SES/SNS)", "note": "processes email bounce notifications"}]}, {"id": "APP-035", "name": "shiptrack", "cat": "Logistics", "req": [{"env": "RESEND_API_KEY / RESEND_FROM", "note": "signup verification, OTP, password reset, shipment alerts — public read-only tracking API works without it", "conditional": true}], "opt": [{"env": "DELHIVERY_API_TOKEN", "note": "richer scan history for Delhivery shipments under your own account"}, {"env": "GOOGLE_/GITHUB_/MICROSOFT_ CLIENT_ID+SECRET (+TENANT_ID)", "note": "social login buttons"}, {"env": "AUTH_BROKER_URL / RELAY_SECRET", "note": "route OAuth sign-in through a centralized external broker instead"}]}, {"id": "APP-036", "name": "appsmith", "cat": "Low Code Platforms", "req": [], "opt": [{"env": "APPSMITH_OAUTH2_GOOGLE_CLIENT_ID / _SECRET", "note": "Google sign-in"}, {"env": "APPSMITH_OAUTH2_GITHUB_CLIENT_ID / _SECRET", "note": "GitHub sign-in"}, {"env": "APPSMITH_MAIL_HOST / _USERNAME / _PASSWORD", "note": "invites, password reset, notifications"}, {"env": "APPSMITH_RECAPTCHA_SITE_KEY / _SECRET_KEY", "note": "reCAPTCHA on signup"}, {"env": "APPSMITH_SENTRY_DSN", "note": "error tracking"}, {"env": "APPSMITH_SMART_LOOK_ID", "note": "Smartlook session recording"}, {"env": "APPSMITH_SEGMENT_KEY", "note": "Segment analytics"}, {"env": "APPSMITH_PYLON_APP_ID", "note": "Pylon in-app support chat"}]}, {"id": "APP-037", "name": "Mautic", "cat": "Marketing", "req": [{"env": "MAUTIC_MAILER_DSN", "note": "SMTP/mail transport — Mautic's whole purpose is sending marketing email; UI loads without it but sending is broken", "conditional": true}], "opt": [{"env": "MAUTIC_MESSENGER_DSN_*", "note": "async mail/webhook queue transport"}, {"env": "Google reCAPTCHA site key + secret", "note": "bot protection on forms"}, {"env": "Social Login plugin client ID+secret — Facebook/Twitter/LinkedIn/Google", "note": "social sign-in / form autofill"}, {"env": "Per-connector keys (Salesforce, HubSpot, Zapier…, via Settings → Plugins)", "note": "optional CRM/marketing integrations, not core"}]}, {"id": "APP-038", "name": "Uptime Kuma", "cat": "Monitoring", "req": [], "opt": [{"env": "90+ notification providers via Apprise, each its own credential (configured in-app, not env vars)", "note": "Telegram bot token+chat ID, Slack/Discord webhook URL, PagerDuty integration key, Pushover user+token, Twilio SID+token, Matrix, Gotify, ntfy, Mattermost, Rocket.Chat, Google Chat, and dozens more"}]}, {"id": "APP-039", "name": "Nginx Proxy Manager", "cat": "Networking", "req": [], "opt": [{"env": "DNS provider API token (~50 providers, entered via UI per certificate)", "note": "enables DNS-01 wildcard/behind-firewall Let's Encrypt certs — e.g. Cloudflare, DigitalOcean, Route53/AWS, DuckDNS, Azure, ClouDNS"}]}, {"id": "APP-040", "name": "appsmith", "cat": "No-Code Platforms", "dup": "APP-036"}, {"id": "APP-041", "name": "Memos", "cat": "Note Taking", "dup": "APP-033"}, {"id": "APP-042", "name": "Infisical Community Edition", "cat": "Password Manager", "req": [], "opt": [{"env": "SMTP_HOST / _USERNAME / _PASSWORD / _PORT / _FROM_ADDRESS", "note": "MFA email, project invites, suspicious-login alerts"}, {"env": "CLIENT_ID_GOOGLE_LOGIN / _SECRET", "note": "Google OAuth SSO"}, {"env": "CLIENT_ID_GITHUB_LOGIN / _SECRET", "note": "GitHub OAuth SSO"}, {"env": "CLIENT_ID_GITLAB_LOGIN / _SECRET / URL_GITLAB_LOGIN", "note": "GitLab OAuth SSO (incl. self-hosted)"}, {"env": "INF_APP_CONNECTION_AWS_ACCESS_KEY_ID / _SECRET_ACCESS_KEY", "note": "AWS App Connection for dynamic secrets"}, {"env": "INF_APP_CONNECTION_GITHUB_APP_ID/_SLUG/_CLIENT_ID/_CLIENT_SECRET/_PRIVATE_KEY", "note": "GitHub App connection to sync secrets"}, {"env": "INF_APP_CONNECTION_GITLAB_/_HEROKU_ OAUTH_CLIENT_ID+SECRET", "note": "GitLab / Heroku OAuth App connections"}, {"env": "SECRET_SCANNING_GIT_APP_ID/_SLUG/_PRIVATE_KEY/_WEBHOOK_SECRET", "note": "GitHub App for repo secret-scanning"}]}, {"id": "APP-043", "name": "feedlog", "cat": "Product Management", "req": [], "opt": [{"env": "GOOGLE_CLIENT_ID / _SECRET", "note": "Google OAuth login"}, {"env": "GITHUB_CLIENT_ID / _SECRET", "note": "GitHub OAuth login"}, {"env": "OPENAI_API_KEY (+ OPENAI_BASE_URL)", "note": "similar-idea detection, AI-drafted changelog entries"}, {"env": "RESEND_API_KEY", "note": "password reset & verification email"}, {"env": "S3_ACCESS_KEY_ID / _SECRET_ACCESS_KEY / S3_BUCKET / _ENDPOINT / _REGION", "note": "S3-compatible upload storage — falls back to local disk if unset"}]}, {"id": "APP-044", "name": "Super Productivity", "cat": "Productivity", "req": [], "opt": [{"env": "GitHub personal access token (repo scope, entered in-app)", "note": "GitHub issue/PR sync"}, {"env": "GitLab personal access token (api scope, entered in-app)", "note": "GitLab issue/MR sync, incl. self-hosted"}, {"env": "Jira API token (entered in-app)", "note": "Jira issue sync & time tracking"}, {"env": "Dropbox OAuth (per-user, in-app)", "note": "Dropbox-based sync"}, {"env": "WebDAV URL/username/password", "note": "self-hosted sync, e.g. Nextcloud"}]}, {"id": "APP-045", "name": "Super Productivity", "cat": "Project Management", "dup": "APP-044"}, {"id": "APP-046", "name": "Cal.diy", "cat": "Scheduling", "req": [], "opt": [{"env": "NEXT_PUBLIC_VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY", "note": "Web Push — self-generated, not a vendor key"}, {"env": "GOOGLE_API_CREDENTIALS", "note": "Google Calendar/Meet sync + “Sign in with Google”"}, {"env": "OUTLOOK_LOGIN_ENABLED + Microsoft OAuth creds", "note": "Microsoft/Outlook calendar & login"}, {"env": "SENDGRID_API_KEY / SENDGRID_EMAIL", "note": "booking confirmation/reminder email"}, {"env": "RESEND_API_KEY", "note": "alternate transactional email provider"}, {"env": "EMAIL_SERVER_HOST/_PORT/_USER/_PASSWORD", "note": "generic SMTP alternative"}, {"env": "STRIPE_PRIVATE_KEY / _CLIENT_ID / _WEBHOOK_SECRET", "note": "paid bookings/billing"}, {"env": "CLOUDFLARE_TURNSTILE_SECRET", "note": "bot/captcha protection on booking forms"}, {"env": "HUDDLE01_API_TOKEN", "note": "Huddle01 video conferencing for meetings"}, {"env": "SENTRY_AUTH_TOKEN / NEXT_PUBLIC_SENTRY_DSN", "note": "error tracking"}, {"env": "NEXT_PUBLIC_POSTHOG_KEY", "note": "product analytics"}, {"env": "CLOSECOM_CLIENT_ID / _SECRET", "note": "Close.com CRM integration"}, {"env": "DUB_API_KEY / SINK_API_KEY", "note": "link shortening for SMS/workflow messages"}], "note": "Upstream docs explicitly say this fork is “strictly recommended for personal, non-production use.”"}, {"id": "APP-047", "name": "LibreChat", "cat": "Search", "req": [{"env": "At least one LLM provider key (or a local endpoint like Ollama, which needs none)", "note": "app has nothing to chat with otherwise — no single key is universally required", "conditional": true}], "opt": [{"env": "OPENAI_API_KEY / ANTHROPIC_API_KEY / GOOGLE_KEY / GEMINI_API_KEY / BEDROCK_AWS_*", "note": "major LLM providers (pick any)"}, {"env": "GROQ_/_MISTRAL_/_DEEPSEEK_/_OPENROUTER_/_PERPLEXITY_/_TOGETHERAI_/_COHERE_/_HUGGINGFACE_/_XAI_ API_KEY", "note": "further alternate LLM providers"}, {"env": "GOOGLE_SEARCH_API_KEY+CSE_ID, TAVILY_API_KEY, SERPER_API_KEY, FIRECRAWL_API_KEY", "note": "web search/scraping plugin tools"}, {"env": "DALLE_API_KEY / DALLE3_API_KEY", "note": "DALL-E image generation plugin"}, {"env": "EMAIL_USERNAME / EMAIL_PASSWORD or MAILGUN_API_KEY", "note": "password reset & verification email"}, {"env": "GOOGLE_/_GITHUB_/_DISCORD_/_FACEBOOK_/_APPLE_ CLIENT_ID+SECRET, OPENID_*", "note": "social login / SSO"}, {"env": "AWS_ACCESS_KEY_ID/_SECRET_ACCESS_KEY or AZURE_STORAGE_CONNECTION_STRING", "note": "S3/Azure Blob file storage instead of local disk"}, {"env": "MEILI_MASTER_KEY", "note": "required only if you enable the built-in MeiliSearch container"}, {"env": "RAG_OPENAI_API_KEY", "note": "embeddings for the RAG/file-upload API"}, {"env": "STT_API_KEY / TTS_API_KEY", "note": "speech-to-text / text-to-speech"}, {"env": "LANGFUSE_PUBLIC_KEY / _SECRET_KEY", "note": "LLM observability/tracing"}]}, {"id": "APP-048", "name": "Frigate", "cat": "Security", "req": [], "opt": [{"env": "PLUS_API_KEY", "note": "Frigate+ cloud: submit snapshots for review, custom-trained detection models"}, {"env": "FRIGATE_OPENAI_API_KEY / FRIGATE_GEMINI_API_KEY", "note": "Generative-AI auto object-description — Ollama alternative needs no key"}]}, {"id": "APP-049", "name": "Postiz", "cat": "Social Media", "req": [], "opt": [{"env": "X_API_KEY/_SECRET, LINKEDIN_, FACEBOOK_APP_ID/_SECRET, TIKTOK_, REDDIT_, DISCORD_, SLACK_, YOUTUBE_, PINTEREST_, MASTODON_, THREADS_, TUMBLR_, DRIBBBLE_, NEYNAR_(Farcaster)", "note": "one OAuth app credential per social platform you want to post to — nothing works as a posting tool without at least one"}, {"env": "RESEND_API_KEY", "note": "invite & notification email"}, {"env": "CLOUDFLARE_ACCOUNT_ID / _ACCESS_KEY / _SECRET_ACCESS_KEY", "note": "R2 storage for uploaded media"}, {"env": "RUNPOD_API_KEY / _ENDPOINT_ID", "note": "GPU media-processing pipeline"}, {"env": "OPENAI_API_KEY", "note": "AI-assisted post writing"}, {"env": "STRIPE_PUBLISHABLE_KEY / _SECRET_KEY", "note": "billing — hosted/paid deployments only"}]}, {"id": "APP-050", "name": "Rocket.Chat", "cat": "Team Chat", "req": [], "opt": [{"env": "SMTP_Host / _Username / _Password (OVERWRITE_SETTING_SMTP_*)", "note": "password reset, invitations, email notifications"}, {"env": "APN certificate + FCM Server Key", "note": "only if disabling the default free Rocket.Chat cloud push gateway"}, {"env": "Google/GitHub/GitLab/Apple OAuth client ID+secret (Admin UI)", "note": "social/SSO login"}, {"env": "Custom OAuth / SAML / LDAP credentials", "note": "enterprise SSO"}]}, {"id": "APP-051", "name": "Galene", "cat": "Video Conferencing", "req": [], "opt": [{"env": "TURN/STUN credentials (ice-servers.json)", "note": "reliable use behind restrictive NAT/firewalls — built-in TURN auto-activates if this file is absent; can point at your own coturn or a commercial TURN provider"}]}, {"id": "APP-052", "name": "OpenReel Video", "cat": "Video Editors", "req": [], "opt": [], "note": "Fully client-side (WebCodecs/WebGPU/IndexedDB) — no uploads, no cloud processing. An open PR proposes an optional future LLM-provider integration, not yet released."}];
+
+function countKeys(a){
+  const req = (a.req||[]).length;
+  const opt = (a.opt||[]).length;
+  return {req, opt};
+}
+
+function resolveDup(a){
+  if(!a.dup) return a;
+  const target = APPS.find(x=>x.id===a.dup);
+  return target || a;
+}
+
+function render(){
+  const listEl = document.getElementById('list');
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const filter = document.querySelector('.chip[aria-pressed="true"]').dataset.filter;
+
+  let items = APPS.filter(a=>{
+    const hay = (a.id+' '+a.name+' '+a.cat).toLowerCase();
+    if(q && !hay.includes(q)) return false;
+    const src = resolveDup(a);
+    const {req, opt} = countKeys(src);
+    if(filter==='required' && req===0) return false;
+    if(filter==='zero' && (req>0 || opt>0)) return false;
+    return true;
+  });
+
+  document.getElementById('count').textContent = items.length + ' of 52 apps';
+
+  listEl.innerHTML = items.map(a=>{
+    const isDup = !!a.dup;
+    const src = resolveDup(a);
+    const {req, opt} = countKeys(src);
+
+    let badges = '';
+    if(req>0) badges += `<span class="badge req">${req} required</span>`;
+    if(opt>0) badges += `<span class="badge opt">${opt} optional</span>`;
+    if(req===0 && opt===0) badges += `<span class="badge ok">no keys needed</span>`;
+
+    let body = '';
+    if(isDup){
+      body = `<div class="dupnote">Same app as <b>${a.dup} ${src.name}</b> — see that entry; findings are identical.</div>`;
+    } else {
+      if(src.note){
+        body += `<div class="groupnote">${src.note}</div>`;
+      }
+      if(req>0){
+        body += `<div class="grouplabel req">Required</div><div class="rows">` +
+          src.req.map(r=>`<div class="row"><div class="env">${r.env}</div><div class="note">${r.note}${r.conditional? ' <em>(conditional)</em>':''}</div></div>`).join('') +
+          `</div>`;
+      }
+      if(opt>0){
+        body += `<div class="grouplabel opt">Optional</div><div class="rows">` +
+          src.opt.map(r=>`<div class="row"><div class="env">${r.env}</div><div class="note">${r.note}</div></div>`).join('') +
+          `</div>`;
+      }
+      if(req===0 && opt===0 && !src.note){
+        body += `<div class="groupnote">No external API key documented anywhere for this app.</div>`;
+      }
+    }
+
+    return `<details class="card">
+      <summary>
+        <span class="id mono">${a.id}</span>
+        <span class="name-wrap">
+          <div class="name">${a.name}</div>
+          <div class="cat">${a.cat}</div>
+        </span>
+        <span class="badges">${badges}</span>
+        <span class="chev">▶</span>
+      </summary>
+      <div class="body">${body}</div>
+    </details>`;
+  }).join('');
+}
+
+function renderStats(){
+  const own = APPS.filter(a=>!a.dup);
+  const req = own.filter(a=>(a.req||[]).length>0).length;
+  const zero = own.filter(a=>(a.req||[]).length===0 && (a.opt||[]).length===0).length;
+  const optOnly = own.length - req - zero;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><b>52</b><span>apps in the library</span></div>
+    <div class="stat req"><b>${req}</b><span>have a required key (a few conditionally)</span></div>
+    <div class="stat opt"><b>${optOnly}</b><span>work with zero keys, more with optional ones</span></div>
+    <div class="stat ok"><b>${zero}</b><span>need no external key at all, ever</span></div>
+  `;
+}
+
+document.querySelectorAll('.chip').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.chip').forEach(b=>b.setAttribute('aria-pressed','false'));
+    btn.setAttribute('aria-pressed','true');
+    render();
+  });
+});
+document.getElementById('search').addEventListener('input', render);
+
+renderStats();
+render();
+</script>
