@@ -366,6 +366,29 @@
         "details": "shelf-integrations/onedev/README.md"
       },
       "screenshot": "shelf/devops/home.png"
+    },
+    {
+      "id": "APP-011",
+      "slug": "bookmarks-archiving",
+      "name": "linkding",
+      "category": "Bookmarks & Archiving",
+      "repository": "https://github.com/sissbruecker/linkding",
+      "blurb": "Minimal, fast, self-hosted bookmark manager with tags, full-text search, and automatic snapshots.",
+      "keywords": [
+        "bookmarks",
+        "link management",
+        "archiving",
+        "tags",
+        "read later"
+      ],
+      "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "27b7303ba",
+        "mechanism": "Real Django app + native Python 3.13 (via uv) + linkding's own default SQLite, no external DB.",
+        "details": "shelf-integrations/linkding/README.md"
+      },
+      "screenshot": "shelf/bookmarks-archiving/home.png"
     }
   ]
 }
