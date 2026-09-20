@@ -21,12 +21,13 @@ JS errors throughout.
 | APP-041 | Memos | Proven running | Self-contained Go binary; embeds its own React frontend + SQLite. |
 | APP-037 | Mautic | Proven running | Symfony/PHP + native MariaDB (Mautic 7.x refuses MySQL 8.0; the pinned PHP 8.2's own PPA is blocked, ran on PHP 8.3 from Ubuntu's archive instead). Real contact created through the UI, round-tripped to the real `leads` table. See `shelf-integrations/mautic/README.md`. |
 | APP-010 | Ghost | Proven running | Node/Nx monorepo + better-sqlite3 (Ghost's own default, no external DB). A real Node 24-specific native-module crash in `better-sqlite3` was found and worked around by using Ghost's own `.nvmrc`-pinned Node 22.23.1 instead. Real post published end-to-end. See `shelf-integrations/ghost/README.md`. |
+| APP-023 | OneDev | **Blocked** | Root `pom.xml`'s parent (`io.onedev:parent:1.4.0`) is published only on the project's own private Maven repo (`code.onedev.io`), unreachable here; genuinely absent from Maven Central (real 404). Its only other distribution channel, the `1dev/server` Docker image, is unreachable for the same reason as every other Docker Hub pull on this shelf. See `shelf-integrations/onedev/README.md`. |
 | APP-042 | Infisical | Proven running | Node/TS backend + React frontend + native Postgres/Redis, served behind nginx. |
 | APP-044 | Super Productivity | Proven, real skin integration | See `shelf-integrations/productivity/README.md` -- the deepest integration: our skin engine's colour was driven through the app's own real theming service, not just "it boots". |
 | APP-051 | Galene | Proven running | Self-contained Go binary; embeds its own frontend, built-in TURN server. Connected to a real room with a real op/presenter login and Chromium's fake camera/mic device. |
 
-**12 of 14 admitted apps proven running end-to-end. 2 genuinely blocked
-(both external dependencies unreachable here, not fixable in this sandbox).
+**12 of 15 admitted apps proven running end-to-end. 3 genuinely blocked
+(all external dependencies unreachable here, not fixable in this sandbox).
 1 deprioritized (lower relevance, real but lower-value fix needed).**
 
 ## What "proven running" means here, concretely

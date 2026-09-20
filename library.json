@@ -344,6 +344,28 @@
         "details": "shelf-integrations/ghost/README.md"
       },
       "screenshot": "shelf/blogging/home.png"
+    },
+    {
+      "id": "APP-023",
+      "slug": "devops",
+      "name": "OneDev",
+      "category": "DevOps",
+      "repository": "https://github.com/theonedev/onedev",
+      "blurb": "Self-hosted Git server with CI/CD, code search, packages, and kanban issue tracking in one platform.",
+      "keywords": [
+        "git server",
+        "ci/cd",
+        "devops",
+        "code review",
+        "issue tracking"
+      ],
+      "family": "",
+      "real_integration": {
+        "status": "blocked",
+        "reason": "Root pom.xml's parent (io.onedev:parent:1.4.0) is published only on the project's own private Maven repo (code.onedev.io), which is unreachable in this sandbox; Maven Central genuinely lacks it (real 404, not a block). The project's other distribution channel, the 1dev/server Docker image, is unreachable for the same reason as every other Docker Hub pull on this shelf. No GitHub release binaries exist as a fallback.",
+        "details": "shelf-integrations/onedev/README.md"
+      },
+      "screenshot": "shelf/devops/home.png"
     }
   ]
 }
