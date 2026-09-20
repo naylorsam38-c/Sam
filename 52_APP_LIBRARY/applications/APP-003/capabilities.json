@@ -1,0 +1,81 @@
+{
+ "application": "APP-003",
+ "capabilities_defined": true,
+ "discovery_method": "app-derived",
+ "verification_method": "manual (ha_capabilities.py) - see screens.json's verification_note for why",
+ "capabilities": [
+  {
+   "id": "CAP-003-01",
+   "name": "To-do lists (shopping list)",
+   "route": "/todo",
+   "discovered_from": "screen",
+   "live_test": {
+    "action": "added item 'Library Walker Test Item 1789880556' via the list's own Add-item input + Enter",
+    "immediate_dom_evidence": true,
+    "independent_reconfirmation": true,
+    "evidence": [
+     "001_cap_todo_before.png",
+     "002_cap_todo_after_add.png",
+     "003_cap_todo_independent_reconfirm.png"
+    ]
+   },
+   "verdict": "PROVEN",
+   "reason": "item added, then independently re-confirmed present via a brand-new browser context + fresh login + fresh navigation (not merely 'still in the DOM of the same page') - proves it was really persisted server-side",
+   "attach_points": [
+    {
+     "file": "homeassistant/components/shopping_list/todo.py",
+     "matched_words": [
+      "shopping",
+      "list"
+     ],
+     "line": 29,
+     "snippet": "class ShoppingTodoListEntity(TodoListEntity):"
+    },
+    {
+     "file": "homeassistant/components/shopping_list/__init__.py",
+     "matched_words": [
+      "shopping",
+      "list"
+     ],
+     "line": 90,
+     "snippet": "class ShoppingListView(http.HomeAssistantView):"
+    }
+   ]
+  },
+  {
+   "id": "CAP-003-02",
+   "name": "Automations & scenes",
+   "route": "/config/automation/dashboard",
+   "discovered_from": "screen",
+   "live_test": {
+    "action": "created a real time-triggered automation named 'Library Walker Test Automation 1789880556' (trigger: time 06:30:00, action: send a persistent notification) via the app's own visual automation editor and saved it",
+    "url_after_save": "http://127.0.0.1:8123/config/automation/edit/1789880587064",
+    "independent_reconfirmation": true,
+    "evidence": [
+     "007_cap_automation_saved.png",
+     "008_cap_automation_list_independent_reconfirm.png"
+    ]
+   },
+   "verdict": "PROVEN",
+   "reason": "automation now appears, by its exact given name, in the Automations list re-fetched from a brand-new browser context + fresh login - proves it was really saved server-side, not just left in an editor's local state",
+   "attach_points": [
+    {
+     "file": "homeassistant/components/automation/__init__.py",
+     "matched_words": [
+      "automation"
+     ],
+     "line": 481,
+     "snippet": "class AutomationEntity(BaseAutomationEntity, RestoreEntity):"
+    },
+    {
+     "file": "homeassistant/components/automation/__init__.py",
+     "matched_words": [
+      "automation"
+     ],
+     "line": 1111,
+     "snippet": "async def _async_process_config("
+    }
+   ]
+  }
+ ]
+}
