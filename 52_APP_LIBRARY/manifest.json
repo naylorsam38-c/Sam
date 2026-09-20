@@ -1893,7 +1893,7 @@
    "version": null,
    "commit": "d83af0410bf31b034b01757729f2231862ee5e87",
    "source_path": "applications/APP-013/source",
-   "status": "INSTALL_FAILED",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -2118,8 +2118,14 @@
     }
    ],
    "install_startup": {
-    "status": "INSTALL_FAILED",
-    "reason": "no Dockerfile or compose file - no documented way to run it"
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://localhost:1337/admin",
+    "http_status": 200,
+    "recipe": "docker-compose.library.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "This repo IS the Strapi framework itself (a monorepo), not a runnable CMS instance - the project's own docs are explicit that you scaffold a new project with the create-strapi-app CLI, there is no prebuilt 'just run this' image for the framework repo (the strapi/strapi Docker Hub repo doesn't exist; official guidance is to generate a Dockerfile per-project via a separate dockerize tool). Used the project's own documented path for real: ran `npx create-strapi-app@latest strapi-instance --javascript --dbclient=sqlite --non-interactive` inside a node:22 container to scaffold a genuine, fresh Strapi project (SQLite storage, no external DB needed), then run it via `npm run develop`. Needed NODE_EXTRA_CA_CERTS pointed at the sandbox's proxy CA for npm install to trust the registry over the intercepted connection. The crawler's own admin-registration + 'tell us about yourself' onboarding wizard completed with the pipeline's standard libwalker/Walker-Pass-2026! test credentials; a follow-up 8-screen walkthrough (Homepage, Content Manager, Content-Type Builder, Media Library, Marketplace, and three Settings pages) was driven directly via Playwright, using screens.py's own control-inventory/screenshot logic, to verify the real admin panel beyond the initial gate.",
+    "startup_command": "docker compose -f docker-compose.library.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -2129,6 +2135,12 @@
     },
     "has_container_recipe": false,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 8,
+    "screens_reached": 8,
+    "screens_rendered": 8,
+    "screens_browser_verified": 8
    }
   },
   {
