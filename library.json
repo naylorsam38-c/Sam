@@ -412,6 +412,29 @@
         "details": "shelf-integrations/anythingllm/README.md"
       },
       "screenshot": "shelf/ai-agents/home.png"
+    },
+    {
+      "id": "APP-013",
+      "slug": "cms",
+      "name": "Strapi",
+      "category": "CMS",
+      "repository": "https://github.com/strapi/strapi",
+      "blurb": "Open source headless CMS: build APIs fast with a customizable content-type builder and admin panel.",
+      "keywords": [
+        "cms",
+        "headless cms",
+        "content management",
+        "api builder",
+        "admin panel"
+      ],
+      "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "d83af041",
+        "mechanism": "Real Yarn Berry monorepo build (37 workspace packages via Nx) run through the framework's own real examples/getstarted fixture app + default SQLite, following the project's own CONTRIBUTING.md workflow rather than its generic Docker recipe.",
+        "details": "shelf-integrations/strapi/README.md"
+      },
+      "screenshot": "shelf/cms/home.png"
     }
   ]
 }
