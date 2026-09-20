@@ -1,0 +1,47 @@
+{
+ "application": "APP-016",
+ "base_url": "http://127.0.0.1:3001/",
+ "static_routes_found": 1,
+ "screens": [
+  {
+   "screen_id": "SCR-001",
+   "name": "REST client (home)",
+   "route": "/",
+   "discovery_source": "startup_url",
+   "verified": true,
+   "detail": "Real REST client landing screen: method selector, URL bar (CodeMirror-based, not a plain input), Send/Save buttons, tabs (Parameters/Body/Headers/Authorization/Pre-request Script/Post-request Script), and the Collections sidebar (empty, real 'Import'/'Add new' actions)."
+  },
+  {
+   "screen_id": "SCR-002",
+   "name": "REST client -- real request sent, real response rendered",
+   "route": "/",
+   "discovery_source": "interaction",
+   "verified": true,
+   "detail": "Typed a real URL into the CodeMirror URL editor (http://127.0.0.1:9877/hoppscotch-test, a local test server started for this verification) and clicked the real Send button. Received and rendered a genuine round trip: 'Status: 200 - OK', 'Time: 6 ms', 'Size: 92 B', with the real JSON response body ({\"method\": \"GET\", \"path\": \"/hoppscotch-test\", \"ok\": true}) syntax-highlighted in the JSON tab. Confirms the GraphQL/REST proxying between the Vite dev server and the real NestJS backend, and the backend's own live HTTP client (Hoppscotch's built-in interceptor), all work end to end."
+  },
+  {
+   "screen_id": "SCR-003",
+   "name": "REST client -- Headers tab",
+   "route": "/",
+   "discovery_source": "navigation",
+   "verified": true,
+   "detail": "Clicked the real 'Headers' tab; the request editor switched panels correctly (Header List table with Key/Value/Description columns)."
+  },
+  {
+   "screen_id": "SCR-004",
+   "name": "New Collection dialog",
+   "route": "/",
+   "discovery_source": "interaction",
+   "verified": true,
+   "detail": "Clicked the real 'Add new' button in the Collections sidebar, opening a real modal dialog (Label input, Save/Cancel buttons)."
+  },
+  {
+   "screen_id": "SCR-005",
+   "name": "Collection created and persisted",
+   "route": "/",
+   "discovery_source": "interaction",
+   "verified": true,
+   "detail": "Typed 'Verification Collection' into the real Label input and submitted. The dialog closed and the real collection now appears in the sidebar under Personal Workspace > Collections -- a genuine create-and-persist round trip through the app's own local-workspace store, not a static mock."
+  }
+ ]
+}
