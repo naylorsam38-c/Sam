@@ -374,7 +374,7 @@
    "version": null,
    "commit": "21b29048d7bcf6b94f9f482f2d0fd05efadfd19f",
    "source_path": "applications/APP-004/source",
-   "status": "INSTALL_FAILED",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
    "declared_itself": true,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -397,8 +397,15 @@
     }
    ],
    "install_startup": {
-    "status": "INSTALL_FAILED",
-    "reason": "no Dockerfile or compose file - no documented way to run it"
+    "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+    "reason": "Tabby's own server binary hard-requires downloading real model weight files (multi-hundred-MB GGUF files, e.g. starcoderbase-1B.Q8_0.gguf) from huggingface.co at first startup - there is no bundled-weights image and no offline/local-file mode documented. huggingface.co and its CDN mirrors (cdn-lfs.huggingface.co, hf.co) are all denied by this sandbox's egress policy (connection rejected / 403 Forbidden - confirmed both by direct curl and by the app's own error log), not merely a TLS trust issue (that part - the app's Rust TLS stack not trusting the sandbox's intercepting proxy CA for its OWN registry-metadata fetch to raw.githubusercontent.com - was fixed via a mounted CA bundle + SSL_CERT_FILE, and that fetch now succeeds). The app panics and exits before binding any HTTP listener when the model download 403s, so there is no partial UI or setup screen reachable either. Not fixable by a recipe change - a genuine external dependency this pipeline has no way to provision, left honestly as BLOCKED_EXTERNAL_DEPENDENCY rather than forced by fabricating a fake model file.",
+    "blocked_host": "huggingface.co",
+    "url": null,
+    "http_status": null,
+    "recipe": "docker-compose.library.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "Used the project's official prebuilt image (tabbyml/tabby) with --device cpu (no GPU available in this sandbox) instead of the documented --gpus all/--device cuda. Mounted the sandbox's CA bundle and set SSL_CERT_FILE so the app's own Rust TLS stack trusts the intercepting egress proxy for its registry-metadata fetch (raw.githubusercontent.com, now reachable) - the remaining, unfixable block is the actual model-weight download from huggingface.co.",
+    "startup_command": "docker compose -f docker-compose.library.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
