@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- A real todomvc-family page (the second, and only other, measured family
+     in skins_library/render_css.py), served cross-origin, same purpose as
+     app-shared-card.html: prove the adapter works on both measured families.
+     Uses the actual selectors render_todomvc() targets. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fixture: todomvc</title>
+<style>
+  body { font-family: sans-serif; max-width: 550px; margin: 40px auto; color: #1D1D1B; background: #FFFFFF; }
+  .todoapp { background: #F5F5F4; border-radius: 12px; }
+</style>
+</head>
+<body>
+  <section class="todoapp">
+    <header class="header"><input id="new-todo" placeholder="What needs doing?"></header>
+    <ul id="todo-list">
+      <li><input type="checkbox" class="toggle" id="toggle"><label>Buy milk</label></li>
+    </ul>
+  </section>
+<script src="frontdoor-skin-adapter.js"></script>
+</body>
+</html>

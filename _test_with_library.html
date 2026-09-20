@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+  _test_with_library.html -- proves frontdoor-skin-adapter.js's postMessage
+  contract for real, against genuinely cross-origin pages (adapter-fixture/*,
+  served from a different port -- see test_frontdoor.py). Not part of the
+  user-facing product; a harness. Reuses shelf-ui.js so the exact same
+  fab/sheet/undo code that front-door.html ships is what drives postMessage
+  here -- this is not a second, divergent implementation of the picker.
+
+  Three LIBRARY entries stand in for "a real shelf app was admitted and its
+  markup got measured" (shared-demo, todomvc-demo) and "one that hasn't been
+  measured yet" (unmeasured-demo) -- exactly library.json's real state for
+  the 8 actual catalog apps today.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Adapter test harness</title>
+<script src="skins-engine.js"></script>
+<script src="shelf-ui.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: sans-serif; margin: 0; }
+  #app { padding: 16px; }
+  #app iframe { width: 100%; height: 300px; border: 1px solid #ccc; }
+  #fab { position: fixed; right: 24px; bottom: 24px; width: 56px; height: 56px; border-radius: 999px; border: none; background: #1D1D1B; color: #fff; font-size: 22px; cursor: pointer; }
+  #sheet { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; border-top: 1px solid #ccc; padding: 16px; }
+  #sheet[hidden] { display: none; }
+  #looks { display: flex; gap: 12px; overflow-x: auto; }
+  .look { flex: 0 0 auto; width: 84px; border: 2px solid transparent; border-radius: 10px; padding: 8px; cursor: pointer; text-align: center; font-size: 12px; background: #f4f5f6; }
+  .look[aria-pressed="true"] { border-color: #1D1D1B; background: #eef2ff; }
+  .swatch { width: 100%; height: 40px; border-radius: 6px; margin-bottom: 6px; }
+  #ecol .choices { margin-top: 8px; display: flex; gap: 8px; }
+  #log li.link { cursor: pointer; color: #2563EB; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<button id="fab" aria-label="Change look">&#127912;</button>
+<div id="sheet" hidden>
+  <div id="looks"></div>
+  <form id="say-form"><input id="say-input"><button type="submit">Go</button></form>
+  <div id="ecol"></div>
+  <ul id="log"></ul>
+  <button id="close">Close</button>
+</div>
+<script>
+(function () {
+  "use strict";
+  var CHILD_ORIGIN = new URLSearchParams(location.search).get("child_origin") || (location.protocol + "//" + location.hostname + ":8767");
+  window.SKIN_DEFAULT = { look: "original", accent: "#1D1D1B", background: "#FFFFFF", surface: "#F5F5F4", text: "#1D1D1B", font: "", radius: 12 };
+  window.LIBRARY = {
+    "shared-demo": { family: "shared_card", path: "/app-shared-card.html" },
+    "todomvc-demo": { family: "todomvc", path: "/app-todomvc.html" },
+    "unmeasured-demo": { family: "", path: "/app-unmeasured.html" }
+  };
+  var inst = null;
+  Object.defineProperty(window, "inst", { get: function () { return inst; } });
+
+  function iframeEl() { return document.querySelector("#app iframe"); }
+
+  function applySkinViaAdapter(currentInst, skin) {
+    var frame = iframeEl();
+    if (!frame || !frame.contentWindow) return;
+    if (skin.look === "original") {
+      frame.contentWindow.postMessage({ type: "frontdoor.skin", tokens: null, css: null }, CHILD_ORIGIN);
+      return;
+    }
+    var hue = Skins.hue(currentInst.category_id);
+    var tokens = Skins.build(skin.look, hue);
+    var edited = Skins.withEdits(tokens, skin);
+    delete edited._hue;
+    var family = LIBRARY[currentInst.category_id].family;
+    var css = family ? Skins.render(family, edited) : null;
+    frame.contentWindow.postMessage({ type: "frontdoor.skin", tokens: edited, css: css, font_url: null }, CHILD_ORIGIN);
+  }
+
+  function save() { localStorage.setItem("fd.instance", JSON.stringify(inst)); }
+
+  function renderApp() {
+    var frame = document.createElement("iframe");
+    frame.src = CHILD_ORIGIN + LIBRARY[inst.category_id].path;
+    document.getElementById("app").innerHTML = "";
+    document.getElementById("app").appendChild(frame);
+    frame.addEventListener("load", function () { applySkinViaAdapter(inst, inst.skin); });
+  }
+
+  attachShelfUI({
+    els: {
+      fab: document.getElementById("fab"), sheet: document.getElementById("sheet"),
+      looks: document.getElementById("looks"), sayForm: document.getElementById("say-form"),
+      sayInput: document.getElementById("say-input"), ecol: document.getElementById("ecol"),
+      log: document.getElementById("log"), close: document.getElementById("close")
+    },
+    getInstance: function () { return inst; },
+    getHue: function (i) { return Skins.hue(i.category_id); },
+    applySkin: applySkinViaAdapter,
+    onChange: function (updated) { inst = updated; save(); }
+  });
+
+  var saved = localStorage.getItem("fd.instance");
+  if (saved) { inst = JSON.parse(saved); renderApp(); }
+})();
+</script>
+</body>
+</html>

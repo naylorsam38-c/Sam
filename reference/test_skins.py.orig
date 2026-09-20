@@ -1,0 +1,187 @@
+# RULES — edit these. One comment per setting.
+URL      = "http://localhost:8766/front-door.html"            # the page being delivered
+URL_LIB  = "http://localhost:8766/_test_with_library.html"    # same page with two library entries, for the adapter path
+SKINS    = "/home/claude/skins/skins_library"                 # the unzipped skins_library from Sam's upload (ground truth)
+SHOTS    = "/home/claude/shots3"                              # screenshots land here
+CATEGORY = "crm"                                              # the category the UI checks run in (one of the 52)
+TEXT     = "I want to track jobs for my plumbing business"    # the request text the earlier suite already uses
+
+import json, glob, os, sys
+sys.path.insert(0, SKINS)
+import design_tokens as dt, render_css as rc
+from playwright.sync_api import sync_playwright
+
+res = []
+def check(name, ok, detail=""):
+    res.append(bool(ok)); print(("PASS " if ok else "FAIL ") + name + ("" if ok or not detail else " — " + str(detail)[:300]))
+
+def seed(pg, skin_look="original"):
+    inst = {"category_id": CATEGORY, "label": "job tracker", "capabilities": [TEXT[2:].capitalize()],
+            "skin": {"look": skin_look, "accent": "#1D1D1B", "background": "#FFFFFF", "surface": "#F5F5F4", "text": "#1D1D1B",
+                     "font": "Instrument Sans", "radius": 12, "name": "Job tracker"}, "log": [], "created": "2026-09-20T00:00:00Z"}
+    pg.evaluate("i => localStorage.setItem('fd.instance', JSON.stringify(i))", inst)
+
+def rgb(h): h = h.lstrip("#"); return "rgb(%d, %d, %d)" % tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+
+with sync_playwright() as p:
+    b = p.chromium.launch()
+
+    # ── A. Port fidelity: the page's own code against all 172 files ─────────────────
+    pg = b.new_page(); pg.goto(URL); pg.wait_for_timeout(300)
+    idx = json.load(open(f"{SKINS}/_index.json"))["categories"]
+    rows = []
+    for slug, info in idx.items():
+        for i, th in enumerate(dt.THEME_ORDER):
+            sid = f"skin-00{i+2}"
+            rows.append({"slug": slug, "family": info["family"], "theme": th, "sid": sid,
+                         "css": open(f"{SKINS}/{slug}/{sid}.css").read(),
+                         "tokens": json.load(open(f"{SKINS}/{slug}/{sid}.json"))["design_tokens"]})
+    out = pg.evaluate("""rows => rows.map(r => {
+        const t = Skins.build(r.theme, Skins.hue(r.slug));
+        return { css: Skins.render(r.family, t) + "\\n", tokens: t };
+    })""", rows)
+    css_ok = [r["sid"] + " " + r["slug"] for r, o in zip(rows, out) if o["css"] != r["css"]]
+    tok_ok = [r["sid"] + " " + r["slug"] for r, o in zip(rows, out) if o["tokens"] != r["tokens"]]
+    check(f"all {len(rows)} skin CSS files reproduced byte-for-byte by the page", len(rows) == 172 and not css_ok, css_ok[:5])
+    check(f"all {len(rows)} skin token sets reproduced exactly by the page", not tok_ok, tok_ok[:5])
+    check("both markup families covered (shared_card, todomvc)", {r["family"] for r in rows} == {"shared_card", "todomvc"})
+
+    # ── B. The 52 categories get the same derivation the Python uses ──────────────
+    cats = pg.evaluate("CATEGORIES.map(c => c[0])")
+    js52 = pg.evaluate("""cats => cats.map(c => ["minimal_neutral","bold_contrast","warm_editorial","soft_rounded"].map(th => Skins.build(th, Skins.hue(c))))""", cats)
+    bad = [c for c, js in zip(cats, js52) if js != [dt.build_tokens(th, dt.category_hue(c)) for th in dt.THEME_ORDER]]
+    check("52 categories × 4 looks = 208 token sets, identical to the Python source", len(cats) == 52 and not bad, bad[:5])
+
+    # B2. Every hue any category slug can produce (0-359), all four looks, against the Python
+    alljs = pg.evaluate("""() => { const o = []; for (let h = 0; h < 360; h++) for (const th of ["minimal_neutral","bold_contrast","warm_editorial","soft_rounded"]) o.push(Skins.build(th, h)); return o; }""")
+    allpy = [dt.build_tokens(th, float(h)) for h in range(360) for th in dt.THEME_ORDER]
+    diff = [i for i, (a, c) in enumerate(zip(alljs, allpy)) if a != c]
+    check("all 360 hues × 4 looks = 1440 token sets identical to the Python (whole input range)", len(alljs) == 1440 and not diff, [(i // 4, dt.THEME_ORDER[i % 4]) for i in diff[:5]])
+    rnd = pg.evaluate("() => [0.5, 1.5, 2.5, 3.5, 2.4999, 2.5001].map(x => Skins.pyRound(x))")
+    check("rounding matches Python's round() on halves", rnd == [round(x) for x in [0.5, 1.5, 2.5, 3.5, 2.4999, 2.5001]], rnd)
+
+    # ── C. A look with no edits is exactly the tested skin (edits layer only when they differ) ──
+    ident = pg.evaluate("""cats => cats.flatMap(c => ["minimal_neutral","bold_contrast","warm_editorial","soft_rounded"].map(th => {
+        const h = Skins.hue(c), t = Skins.build(th, h), skin = { ...SKIN_DEFAULT, ...Skins.lookFields(th, h) };
+        return JSON.stringify(Skins.withEdits(t, skin)) === JSON.stringify(t) ? null : c + " " + th; })).filter(Boolean)""", cats)
+    check("picking a look with no edits changes nothing in its 208 tested token sets", not ident, ident[:5])
+    edit = pg.evaluate("""() => { const h = Skins.hue("crm"), t = Skins.build("bold_contrast", h);
+        const e = Skins.withEdits(t, { ...SKIN_DEFAULT, ...Skins.lookFields("bold_contrast", h), accent: "#1F3A5F", radius: 8 });
+        return e; }""")
+    check("accent edit recolours primary, hover, focus ring and glow together",
+          edit["primary"] == "#1f3a5f" and "#1f3a5f" in edit["shadow_focus_ring"] and "#1f3a5f" in edit["shadow_card"] and edit["primary_hover"] != "#1f3a5f", edit)
+    check("radius edit keeps the look's small-to-large ratio", edit["radius"] == "8px" and edit["radius_sm"] == "6px", edit)
+    check("readable text on the new accent", edit["primary_foreground"] == "#ffffff", edit["primary_foreground"])
+    pill = pg.evaluate("""() => { const h = Skins.hue("crm"); return Skins.withEdits(Skins.build("soft_rounded", h), { ...SKIN_DEFAULT, ...Skins.lookFields("soft_rounded", h), radius: 6 }).radius_pill; }""")
+    check("pill buttons stay pills when corners change", pill == "999px", pill)
+
+    # ── D. Gates ────────────────────────────────────────────────────────────────
+    g = pg.evaluate("""() => ({
+        badLook: checkEdit({changes:[{key:"look",value:"neon",say:"x"}]}).length > 0,
+        goodLook: checkEdit({changes:[{key:"look",value:"warm_editorial",say:"x"}]}).length === 0,
+        lookFont: checkEdit({changes:[{key:"font",value:"",say:"x"}]}).length === 0,
+        badFont: checkEdit({changes:[{key:"font",value:"Comic Sans MS",say:"x"}]}).length > 0,
+        noFamily: (() => { try { Skins.render("bootstrap", Skins.build("minimal_neutral", 1)); return false; } catch (e) { return true; } })(),
+        noTheme: (() => { try { Skins.build("neon", 1); return false; } catch (e) { return true; } })(),
+        libEmpty: Object.keys(LIBRARY).length === 0
+    })""")
+    for k in ["badLook", "badFont", "noFamily", "noTheme"]: check("gate refuses: " + k, g[k])
+    for k in ["goodLook", "lookFont"]: check("gate accepts: " + k, g[k])
+    check("delivered library still ships empty", g["libEmpty"])
+    pg.close()
+
+    # ── E. The flow on screen, three viewports ────────────────────────────────────
+    for label, vp, scheme in [("desktop", {"width": 1280, "height": 800}, "light"), ("mobile", {"width": 390, "height": 844}, "light"), ("mobile-dark", {"width": 390, "height": 844}, "dark")]:
+        pg = b.new_page(viewport=vp, color_scheme=scheme); errs = []
+        pg.on("pageerror", lambda e: errs.append(str(e)))
+        pg.goto(URL); pg.wait_for_timeout(200); seed(pg); pg.reload(); pg.wait_for_timeout(600)
+        slot = lambda: pg.frame_locator("#slot")
+        def btn_bg(): return slot().locator("button").first.evaluate("e => getComputedStyle(e).backgroundColor")
+        def body_bg(): return slot().locator("body").evaluate("e => getComputedStyle(e).backgroundColor")
+        def slot_css(): return slot().locator("#skin").evaluate("e => e.textContent")
+        check(f"{label}: saved app opens straight into the app state", pg.evaluate("document.body.dataset.state") == "app")
+        check(f"{label}: original look = plain monochrome buttons", btn_bg() == rgb("#1D1D1B"), btn_bg())
+        slot_text = slot().locator("body").inner_text()
+        check(f"{label}: app screen reveals no library", not any(w in slot_text.lower() for w in ("library", "categor", "shelf")), slot_text)
+        pg.click("#fab"); pg.wait_for_timeout(200)
+        tiles = pg.locator(".look")
+        check(f"{label}: five looks offered, original marked", tiles.count() == 5 and pg.locator('.look[data-look="original"]').get_attribute("aria-pressed") == "true")
+        check(f"{label}: looks row fits (scrolls sideways, page doesn't)", pg.evaluate("document.documentElement.scrollWidth <= innerWidth"))
+        exp = pg.evaluate("() => Skins.build('bold_contrast', Skins.hue('crm'))")
+        exp_css = pg.evaluate("() => Skins.render('shared_card', Skins.build('bold_contrast', Skins.hue('crm')))")
+        pg.click('.look[data-look="bold_contrast"]'); pg.wait_for_timeout(300)
+        check(f"{label}: tapping a look previews it live", btn_bg() == rgb(exp["primary"]) and body_bg() == rgb(exp["background"]), (btn_bg(), body_bg()))
+        check(f"{label}: preview uses the exact tested skin CSS", slot_css() == exp_css)
+        check(f"{label}: preview asks before keeping", pg.locator("#ecol .choices").last.is_visible() and "Keep this?" in pg.locator("#ecol").inner_text())
+        pg.screenshot(path=f"{SHOTS}/{label}-preview-bold.png")
+        pg.locator("#ecol .choices").last.get_by_text("Not that").click(); pg.wait_for_timeout(300)
+        check(f"{label}: 'Not that' puts it back", btn_bg() == rgb("#1D1D1B") and pg.evaluate("inst.log.length") == 0)
+        warm = pg.evaluate("() => Skins.build('warm_editorial', Skins.hue('crm'))")
+        pg.click('.look[data-look="warm_editorial"]'); pg.wait_for_timeout(200)
+        pg.locator("#ecol .choices").last.get_by_text("Keep it").click(); pg.wait_for_timeout(300)
+        saved = pg.evaluate("JSON.parse(localStorage.getItem('fd.instance'))")
+        check(f"{label}: kept look is saved and logged", saved["skin"]["look"] == "warm_editorial" and len(saved["log"]) == 1)
+        check(f"{label}: warm look applied (serif headings, warm accent)", btn_bg() == rgb(warm["primary"]) and "Georgia" in slot().locator("h1").evaluate("e => getComputedStyle(e).fontFamily"))
+        check(f"{label}: tile now marked", pg.locator('.look[data-look="warm_editorial"]').get_attribute("aria-pressed") == "true")
+        pg.click('.look[data-look="warm_editorial"]'); pg.wait_for_timeout(150)
+        check(f"{label}: same look again says so, changes nothing", "That's the look it has now." in pg.locator("#ecol").inner_text() and pg.evaluate("inst.log.length") == 1)
+        # A model-style edit on top of the look, through the same approve path
+        pg.evaluate("() => showProposal(normalizeChanges([{key:'accent',value:'#1F3A5F',say:'Buttons go navy'}]), false)")
+        pg.locator("#ecol .choices").last.get_by_text("Apply").click(); pg.wait_for_timeout(300)
+        check(f"{label}: colour edit lands on top of the look", btn_bg() == rgb("#1F3A5F") and "Georgia" in slot().locator("h1").evaluate("e => getComputedStyle(e).fontFamily"))
+        pg.screenshot(path=f"{SHOTS}/{label}-warm-navy.png")
+        pg.reload(); pg.wait_for_timeout(600)
+        check(f"{label}: survives reload", btn_bg() == rgb("#1F3A5F") and pg.evaluate("inst.skin.look") == "warm_editorial")
+        pg.click("#fab"); pg.wait_for_timeout(150)
+        pg.locator("#log .link").first.click(); pg.wait_for_timeout(300)   # newest entry first → undo the navy
+        check(f"{label}: undo the colour → back to plain warm", btn_bg() == rgb(warm["primary"]))
+        pg.locator("#log .link").first.click(); pg.wait_for_timeout(300)
+        check(f"{label}: undo the look → back to original", btn_bg() == rgb("#1D1D1B") and pg.evaluate("inst.skin.look") == "original")
+        pg.click('.look[data-look="soft_rounded"]'); pg.wait_for_timeout(200)
+        pg.click("#close"); pg.wait_for_timeout(200)
+        check(f"{label}: closing mid-preview puts it back", btn_bg() == rgb("#1D1D1B") and pg.evaluate("inst.skin.look") == "original")
+        # Colour asked for while on "original": the move to a look is listed, not done silently
+        nc = pg.evaluate("() => normalizeChanges([{key:'accent',value:'#1F3A5F',say:'x'}])")
+        check(f"{label}: colour on original adds a visible look step first", nc[0]["key"] == "look" and nc[0]["value"] == "minimal_neutral" and nc[0]["say"])
+        for look in ["minimal_neutral", "bold_contrast", "soft_rounded"]:
+            pg.click("#fab"); pg.wait_for_timeout(100); pg.click(f'.look[data-look="{look}"]'); pg.wait_for_timeout(250)
+            pg.locator("#ecol .choices").last.get_by_text("Keep it").click(); pg.wait_for_timeout(250)
+            pg.click("#close"); pg.wait_for_timeout(150); pg.screenshot(path=f"{SHOTS}/{label}-{look}.png")
+        check(f"{label}: no JS errors", not errs, errs)
+        pg.close()
+
+    # ── F. Adapter: the skin reaches a page on another origin through the real message ──
+    # The receiving page is a plain test page in the shared_card markup — NOT one of the shelf apps.
+    pg = b.new_page(viewport={"width": 1280, "height": 800}); errs = []; warns = []
+    pg.on("pageerror", lambda e: errs.append(str(e)))
+    pg.on("console", lambda m: warns.append(m.text) if "skin adapter" in m.text else None)
+    pg.goto(URL_LIB); pg.wait_for_timeout(200); seed(pg); pg.reload(); pg.wait_for_timeout(1200)
+    app = pg.frame_locator("#app iframe")
+    has_style = lambda: app.locator("#frontdoor-skin").count() > 0
+    check("adapter: app loads in its own frame, own look on 'original'", not has_style() and app.locator("#b").evaluate("e => getComputedStyle(e).backgroundColor") == "rgb(153, 153, 153)")
+    pg.click("#fab"); pg.click('.look[data-look="bold_contrast"]'); pg.wait_for_timeout(500)
+    exp_css = pg.evaluate("() => Skins.render('shared_card', Skins.build('bold_contrast', Skins.hue('crm')))")
+    exp = pg.evaluate("() => Skins.build('bold_contrast', Skins.hue('crm'))")
+    check("adapter: preview reaches the app across origins", has_style() and app.locator("#frontdoor-skin").evaluate("e => e.textContent") == exp_css)
+    check("adapter: app's buttons wear the skin", app.locator("#b").evaluate("e => getComputedStyle(e).backgroundColor") == rgb(exp["primary"]))
+    check("adapter: colours exposed as variables", app.locator("html").evaluate("e => e.style.getPropertyValue('--fd-primary')") == exp["primary"])
+    pg.locator("#ecol .choices").last.get_by_text("Not that").click(); pg.wait_for_timeout(400)
+    check("adapter: 'Not that' strips the skin off again", not has_style() and app.locator("html").evaluate("e => e.style.getPropertyValue('--fd-primary')") == "")
+    app.locator("body").evaluate("() => window.postMessage({type:'frontdoor.skin', tokens:{primary:'#ff0000'}, css:'button{background:#ff0000}'}, '*')")
+    pg.wait_for_timeout(300)
+    check("adapter: refuses a skin from any other origin, and says which", not has_style() and any("localhost:8767" in w for w in warns), warns)
+    app.locator("body").evaluate("() => 0")
+    check("adapter: no JS errors", not errs, errs)
+    pg.close()
+    # A category whose app nobody has measured: colours only, no CSS guessed at it
+    pg = b.new_page(); pg.goto(URL_LIB); pg.wait_for_timeout(200)
+    CATEGORY_SAVE = CATEGORY; CATEGORY = "scheduling"; seed(pg); CATEGORY = CATEGORY_SAVE
+    pg.reload(); pg.wait_for_timeout(1200)
+    pg.click("#fab"); pg.click('.look[data-look="minimal_neutral"]'); pg.wait_for_timeout(500)
+    app = pg.frame_locator("#app iframe")
+    check("adapter: unmeasured app gets variables but no stylesheet",
+          app.locator("#frontdoor-skin").count() == 0 and app.locator("html").evaluate("e => e.style.getPropertyValue('--fd-primary')") != "")
+    pg.close()
+    b.close()
+
+print(f"\n{sum(res)}/{len(res)} passed")

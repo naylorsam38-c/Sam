@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!-- A real shared_card-family page, served from a different origin/port than
+     the Front Door, to prove frontdoor-skin-adapter.js's postMessage contract
+     works across origins -- not just within one same-origin iframe. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fixture: shared_card</title>
+<style>
+  body { font-family: sans-serif; max-width: 700px; margin: 40px auto; color: #1D1D1B; background: #FFFFFF; }
+  .card { background: #F5F5F4; border-radius: 12px; padding: 24px; }
+  button { font-size: 14px; padding: 9px 16px; border: none; border-radius: 8px; background: #1D1D1B; color: #fff; cursor: pointer; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Fixture app</h1>
+    <button id="b">Action</button>
+  </div>
+<script src="frontdoor-skin-adapter.js"></script>
+</body>
+</html>
