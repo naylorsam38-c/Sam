@@ -321,6 +321,29 @@
         "details": "shelf-integrations/mautic/README.md"
       },
       "screenshot": "shelf/marketing/home.png"
+    },
+    {
+      "id": "APP-010",
+      "slug": "blogging",
+      "name": "Ghost",
+      "category": "Blogging",
+      "repository": "https://github.com/TryGhost/Ghost",
+      "blurb": "Open source publishing platform for blogs, newsletters, and memberships, self-hosted.",
+      "keywords": [
+        "blogging",
+        "cms",
+        "newsletter",
+        "publishing",
+        "membership"
+      ],
+      "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "8e2eb8abf",
+        "mechanism": "Real Node.js monorepo (Nx + pnpm) + better-sqlite3, Ghost's own default datastore, no external DB. Built for real: tsc, asset bundling, and the real Ember/Vite admin SPA.",
+        "details": "shelf-integrations/ghost/README.md"
+      },
+      "screenshot": "shelf/blogging/home.png"
     }
   ]
 }
