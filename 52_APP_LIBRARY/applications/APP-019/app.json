@@ -1,17 +1,17 @@
 {
  "id": "APP-019",
- "name": "airbyte",
+ "name": "Apache Airflow",
  "category": "Data Engineering",
  "category_slug": "data-engineering",
- "repository": "https://github.com/airbytehq/airbyte",
+ "repository": "https://github.com/apache/airflow",
  "source_platform": "github.com",
- "licence": "Elastic-2.0",
- "version": null,
- "commit": "156d6d32937c546b048c010dcb7cfbe52201341e",
+ "licence": "Apache-2.0",
+ "version": "3.3.2",
+ "commit": "61db43fba9ac86a6f35df19ffd985278b97b4c1b",
  "source_path": "applications/APP-019/source",
- "status": "LICENCE_UNCLEAR",
+ "status": "FUNCTIONALLY_VERIFIED",
  "declared_itself": false,
- "manual_override_reason": null,
+ "manual_override_reason": "the automated pick (airbyte) has to be excluded: its own root LICENSE file is genuinely Elastic License 2.0 (verified via a fresh clone, matching this pipeline's own acquire.py classifier output), a source-available licence that is explicitly refused by this pipeline's own licence policy (restricts who can run the software), not open source. No fallback candidate was listed for this category slot. A first substitute, Meltano (MIT, verified via fresh clone), was investigated and rejected: Meltano dropped its web UI entirely as of v2/v3 and is now CLI-only ('Meltano will eventually have a UI again...' per its own troubleshooting docs), incompatible with this pipeline's browser-screen-verification requirement. Substituted Apache Airflow instead (Apache-2.0, verified via fresh clone) - the single most canonical open-source data-engineering/workflow-orchestration tool, with a full, rich web UI, and already a valid-licence candidate this same pipeline's own discovery step surfaced for the neighbouring 'automation' category (APP-009). This mirrors the existing substitution precedent in this repo (APP-038: Pi-hole -> Uptime Kuma, same reason - bad licence on the automated pick).",
  "discovery_candidates": [
   {
    "name": "airbyte",
@@ -29,6 +29,50 @@
    "repo": "https://github.com/airbytehq/airbyte",
    "status": "LICENCE_UNCLEAR",
    "reason": "licence file says Elastic-2.0, not on the allowed list ('MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'Unlicense', '0BSD', 'Zlib', 'CC0-1.0', 'GPL', 'GPL-2.0', 'GPL-3.0', 'AGPL-3.0', 'LGPL', 'LGPL-2.1', 'LGPL-3.0', 'EUPL-1.2')"
+  },
+  {
+   "name": "Meltano",
+   "repo": "https://github.com/meltano/meltano",
+   "status": "REJECTED",
+   "reason": "licence is MIT (allowed), but the project dropped its web UI as of v2/v3 and is now CLI-only - incompatible with this pipeline's browser-screen-verification requirement, not a licence problem"
+  },
+  {
+   "name": "Apache Airflow",
+   "repo": "https://github.com/apache/airflow",
+   "status": "ACQUIRED",
+   "reason": null
   }
- ]
+ ],
+ "install_startup": {
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8080/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The repo's own officially-documented production quick-start (airflow-core/docs/howto/docker-compose/docker-compose.yaml) is a full CeleryExecutor cluster (postgres + redis + api-server + scheduler + dag-processor + celery worker + triggerer + init container) built for a real multi-node deployment, not a lightweight local trial. Used the project's own OTHER officially-documented quick-start instead: `airflow standalone` (see airflow's own CLI --help: 'Run an all-in-one copy of Airflow'), a single container that runs the api-server, scheduler, triggerer and dag-processor together against a bundled SQLite database - the exact command Airflow's own Quick Start guide recommends for trying the app out. Pulled apache/airflow (no version-pinned tag was resolvable against this checkout's own in-development __version__; used the ':latest' tag via Google's public Docker Hub mirror per the same sandbox-wide CDN workaround as APP-003/APP-005/APP-009, then retagged locally to the real released version its own OCI label reports it corresponds to, 3.3.2) and ran it with AIRFLOW__CORE__LOAD_EXAMPLES=true so there is real, non-empty content (116 example DAGs) to browse and exercise. `airflow standalone` generates a random admin password on first boot and prints it to the container's own logs rather than using a fixed default - read fresh from `docker logs` by both the screen-walk and capability scripts rather than hardcoded.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
+ },
+ "ecosystem": {
+  "detected_ecosystems": {
+   "python": [
+    "pyproject.toml"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 16,
+  "screens_reached": 16,
+  "screens_rendered": 16,
+  "screens_browser_verified": 16,
+  "verification_note": "Driven by a tailored Playwright script (airflow_walk.py) rather than the generic screens.py crawler, since the generic crawler's fixed test credentials (libwalker/Walker-Pass-2026!) can never log in to a `standalone`-mode instance, whose single admin account and RANDOM password only exist inside the container's own logs. Real admin login, then 16/16 real screens reached, rendered, and browser-verified: the Welcome/Home dashboard, the DAGs list (116 real example DAGs), a specific DAG's Grid/Runs/Tasks/Code/Details tabs, Assets, Browse > DAG Runs + Task Instances, and Admin > Connections/Variables/Pools + Security > Permissions + Config."
+ },
+ "capability_summary": {
+  "discovered": 2,
+  "attach_point_found": 2,
+  "proven": 2,
+  "verification_note": "Driven by a tailored script (airflow_capabilities.py), independent reconfirmation for each. (1) DAG Trigger: manually triggered a real run of the example_bash_operator DAG via the UI's own Trigger button, confirmed not from the browser session that triggered it but from the scheduler's own database, queried fresh via `airflow dags list-runs` inside the container (the single most authoritative source available for this fact) - a genuine new DagRun with state 'success' was created and ran to completion; real attach point at airflow-core/src/airflow/api/common/trigger_dag.py's trigger_dag. (2) Admin - Variables: created a real Variable with a unique key/value via the Admin > Variables form, independently reconfirmed listed by key from a brand-new browser context with a fresh login; real attach point at airflow-core/src/airflow/models/variable.py's Variable model."
+ }
 }
