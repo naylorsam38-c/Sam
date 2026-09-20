@@ -389,6 +389,29 @@
         "details": "shelf-integrations/linkding/README.md"
       },
       "screenshot": "shelf/bookmarks-archiving/home.png"
+    },
+    {
+      "id": "APP-002",
+      "slug": "ai-agents",
+      "name": "AnythingLLM",
+      "category": "AI Agents",
+      "repository": "https://github.com/Mintplex-Labs/anything-llm",
+      "blurb": "All-in-one AI application: chat with your documents, build agents, and manage LLM workspaces, self-hosted.",
+      "keywords": [
+        "ai agents",
+        "llm",
+        "chat with documents",
+        "rag",
+        "ai workspace"
+      ],
+      "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "da668551",
+        "mechanism": "Real Node.js three-process app (server + collector, frontend built and served as static) + default SQLite, following the project's own official BARE_METAL.md guide. One optional file-format converter (.xlsx) excluded from install since its dependency chain resolves to a CDN blocked here; every other document type is unaffected.",
+        "details": "shelf-integrations/anythingllm/README.md"
+      },
+      "screenshot": "shelf/ai-agents/home.png"
     }
   ]
 }

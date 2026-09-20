@@ -127,7 +127,7 @@ with sync_playwright() as p:
     })""")
     for k in ["badLook", "badFont", "badAccent", "noFamily", "noTheme"]: check("gate refuses: " + k, g[k])
     for k in ["goodLook", "lookFont"]: check("gate accepts: " + k, g[k])
-    check("shelf library has all 16 real catalog apps", g["libSize"] == 16, g["libSize"])
+    check("shelf library has all 17 real catalog apps", g["libSize"] == 17, g["libSize"])
     check("every shelf app is honestly colours-only (no markup was measured)", g["libAllColorsOnly"])
     nc = pg.evaluate("() => normalizeChanges([{key:'accent',value:'#1F3A5F',say:'x'}])")
     check("colour change while on 'original' adds a visible look-switch step first", nc[0]["key"] == "look" and nc[0]["value"] == "minimal_neutral" and bool(nc[0]["say"]))
