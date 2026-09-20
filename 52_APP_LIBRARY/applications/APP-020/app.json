@@ -9,7 +9,7 @@
  "version": null,
  "commit": "780bbcbb8b9367c667e9b6af2aecc8277f24c0ad",
  "source_path": "applications/APP-020/source",
- "status": "STARTUP_FAILED",
+ "status": "BLOCKED_EXTERNAL_DEPENDENCY",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -136,13 +136,38 @@
   }
  ],
  "install_startup": {
-  "status": "STARTUP_FAILED",
-  "reason": "target web: failed to solve: failed to compute cache key: failed to calculate checksum of ref qo5jhdggkcqvqetvy631nuqr1::de17e4wwivymp7m7fkozo0v1r: \"/frontend/package.json\": not found",
-  "runtime_hint": []
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:8130/",
+  "http_status": 200,
+  "recipe": "native (docker/api.Dockerfile + docker/web.Dockerfile exist and are the project's documented Docker path, but Docker image pulls are blocked in this sandbox, same as elsewhere on this shelf)",
+  "recipe_kind": "native",
+  "recipe_modification_note": "The recorded 'target web: ... /frontend/package.json: not found' failure is real but shallow: frontend/, backend/core_api, backend/core_agent, and backend/data-vault are all git submodules (declared with `ignore = all` in .gitmodules) that were never checked out during acquisition, so the Docker build context genuinely had no frontend/package.json to COPY. Fixed with a real `git submodule update --init --recursive`, which pulls in four separate, all-public repos (mindsdb/cowork for the frontend, mindsdb/cowork-server for core_api, mindsdb/anton for core_agent, mindsdb/data-vault, unused by this compose file). One further real build bug found and fixed: core_api/pyproject.toml pins its `hermes-agent` dependency to a git URL (github.com/NousResearch/hermes-agent), but that package's own setup.py deliberately refuses to be built as a wheel/sdist ('Hermes is distributed via the shell installer, Docker image, or Nix... If you are developing, use an editable install instead') -- meaning even the project's own official docker/api.Dockerfile, as checked in at this exact commit, would fail the same way inside a real Docker build too, not just natively here. Fixed by cloning hermes-agent locally and pointing core_api's [tool.uv.sources] entry at that local editable path instead of the git URL (an environment-local pyproject.toml edit; source/ is gitignored project-wide so nothing here needed reverting). With both fixes, `uv pip install ./backend/core_agent ./backend/core_api` succeeds cleanly and `cowork-server` boots for real. The frontend's checked-in docker/nginx.conf also proxies the stale prefix `/v1/`, while the actual built frontend (and the live core_api's own OpenAPI schema) both use `/api/v1/` -- a second real, disclosed drift between this repo's committed Docker config and its currently-pinned submodule commits. Reflected in the native nginx config used here.",
+  "startup_command": "api: DATABASE_URI=sqlite:///.../.cowork/cowork.db COWORK_SERVER_HOST=0.0.0.0 COWORK_SERVER_PORT=26866 cowork-server; web: npm run build:web in frontend/, served via nginx on :8130 proxying /api/ to the api process",
+  "runtime_hint": [
+   "python",
+   "node"
+  ]
  },
  "ecosystem": {
-  "detected_ecosystems": {},
+  "detected_ecosystems": {
+   "python": [
+    "backend/core_api/pyproject.toml",
+    "backend/core_agent/pyproject.toml"
+   ],
+   "node": [
+    "frontend/package.json"
+   ]
+  },
   "has_container_recipe": true,
-  "database_requirement": null
- }
+  "database_requirement": "sqlite"
+ },
+ "screen_summary": {
+  "screens_discovered": 1,
+  "screens_reached": 0,
+  "screens_rendered": 0,
+  "screens_browser_verified": 0
+ },
+ "capability_summary": null,
+ "blocked_reason_detail": "Both the real backend API (cowork-server, FastAPI) and the real built frontend genuinely start and serve traffic -- confirmed via the API's own real /api/v1/health/ endpoint (status:ok, anton_available:true) and /api/v1/settings/install-status (antonInstalled:true, serverDepsReady:true). But the web frontend's login flow is hard-wired (frontend/src/renderer/lib/keycloak.ts) to redirect to MindsDB's own hosted Keycloak identity provider at auth.dev.mindshub.ai, realm 'mindsdb', client 'anton-desktop' -- there is no documented self-hosted Keycloak realm export or no-auth/local mode anywhere in this repo (checked docs/, CLAUDE.md, dev.env.example). auth.dev.mindshub.ai is itself blocked by this sandbox's egress policy (403 Forbidden), and even if it were reachable, proceeding would mean authenticating against the vendor's real, live production identity service under an assumed identity, which this verification does not do. Left honestly as BLOCKED_EXTERNAL_DEPENDENCY -- despite the word 'self-hosted' in its own description, this product's web login is not actually self-hostable as shipped at this commit."
 }
