@@ -9,7 +9,7 @@
  "version": null,
  "commit": "c21363f03ad715b839adf69b2f7cb423432278b4",
  "source_path": "applications/APP-029/source",
- "status": "INSTALL_FAILED",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -32,12 +32,33 @@
   }
  ],
  "install_startup": {
-  "status": "INSTALL_FAILED",
-  "reason": "no Dockerfile or compose file - no documented way to run it"
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "https://localhost:5198/",
+  "http_status": 200,
+  "recipe": "native (no compose/Docker recipe in this repo; a Dockerfile exists at build/Dockerfile but this session's container cannot pull the mcr.microsoft.com/dotnet/sdk:10.0 base image -- confirmed against both Docker Hub and ghcr.io, both fail identically at the CDN blob-download stage with 403 Forbidden)",
+  "recipe_kind": "native",
+  "recipe_modification_note": "The automated pipeline's 'no Dockerfile or compose file' finding was about the acquisition pipeline's own container-recipe detection, not the actual repo -- a real Dockerfile (build/Dockerfile) and docker-compose-build.yml do exist. Docker wasn't usable here regardless (image pulls blocked), so verified natively instead: .NET SDK 10.0.112 (matching the Dockerfile's own mcr.microsoft.com/dotnet/sdk:10.0) installed via Ubuntu's own apt archive (dotnet-sdk-10.0 package), native MariaDB (already running on this shelf), ffmpeg via apt. One real build fix needed, disclosed in README.md: this apt-packaged SDK's linux-x64 FrameworkReference resolution doesn't expose Microsoft.AspNetCore.Server.IIS's reference assembly for compilation even though it is physically present in the installed Microsoft.AspNetCore.App.Ref pack; since this app only ever runs under Kestrel on Linux (IIS is Windows-only, and the equivalent Kestrel option is configured right next to it in the same file), the four-line IISServerOptions.Configure block in Program.cs was removed rather than fighting the reference-resolution gap further. The EmulatorJS submodule (the in-browser emulation UI) clones fine from GitHub, but its own emulator core binaries are fetched separately from cdn.emulatorjs.org, which this sandbox's egress policy blocks (confirmed: 403) -- the 'Play in browser' feature specifically is therefore unverified; core library/account/settings management is not affected.",
+  "startup_command": "dbhost=127.0.0.1 dbuser=gaseous dbpass=gaseous dotnet run --project gaseous-server/gaseous-server.csproj -c Release -r linux-x64 --no-self-contained",
+  "runtime_hint": [
+   "dotnet"
+  ]
  },
  "ecosystem": {
-  "detected_ecosystems": {},
-  "has_container_recipe": false,
-  "database_requirement": null
- }
+  "detected_ecosystems": {
+   "dotnet": [
+    "Gaseous.sln",
+    "gaseous-server/gaseous-server.csproj"
+   ]
+  },
+  "has_container_recipe": true,
+  "database_requirement": "mariadb"
+ },
+ "screen_summary": {
+  "screens_discovered": 6,
+  "screens_reached": 6,
+  "screens_rendered": 6,
+  "screens_browser_verified": 6
+ },
+ "capability_summary": null
 }
