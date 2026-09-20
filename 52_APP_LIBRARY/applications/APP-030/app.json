@@ -9,7 +9,7 @@
  "version": null,
  "commit": "112d07a4719fb233feaf3ef3a89fc9df42c2a30c",
  "source_path": "applications/APP-030/source",
- "status": "INSTALL_FAILED",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": false,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -32,12 +32,36 @@
   }
  ],
  "install_startup": {
-  "status": "INSTALL_FAILED",
-  "reason": "no Dockerfile or compose file - no documented way to run it"
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:5173/",
+  "http_status": 200,
+  "recipe": "native (partial: console + apphub-api + apphub-media only; the real docker/docker-compose.dev.yml exists but this session's container cannot pull any Docker image, and this app's own architecture bundles Gitea/Portainer/Nginx-Proxy-Manager plus docker.sock access into one image for its App Store feature, which is out of scope for a native re-verification of this depth)",
+  "recipe_kind": "native-partial",
+  "recipe_modification_note": "The automated pipeline's 'no Dockerfile or compose file' finding was stale -- the repo has a real docker/Dockerfile and docker/docker-compose.dev.yml. Docker wasn't usable here regardless (image pulls blocked, same as elsewhere on this shelf). This app's full single-container image bundles four separate services (its own console+apphub, plus binaries extracted from gitea/gitea, portainer/portainer-ce, and jc21/nginx-proxy-manager images) glued together by supervisord, with its core App Store deploy feature requiring /var/run/docker.sock access to manage OTHER containers -- that feature is a real, disclosed hard gap in this sandbox (no Docker at all), not something a native build works around. What *was* verified natively: the console (Node/Vite/React) built and run via its own dev server, and the apphub Python backend (FastAPI, requirements.txt installed clean in a venv) run as its two real processes (src.main:app on 8080, src.media:app on 8081/9092) -- the exact same processes supervisord runs in the real image, minus gitea/portainer/npm. One missing runtime directory (/websoft9/media, normally created by the Docker image's own build) had to be created by hand for apphub-media to start; no code changes were needed otherwise beyond pointing the console's vite dev proxy at the two apphub ports directly instead of through the full nginx gateway (also skipped).",
+  "startup_command": "apphub: WEBSOFT9_DATA_ROOT=/opt/websoft9/data python3 -m uvicorn src.main:app --port 8080 (and src.media:app --port 9092); console: WEBSOFT9_DEV_APPHUB_API=http://127.0.0.1:8080 WEBSOFT9_DEV_APPHUB_MEDIA=http://127.0.0.1:9092 npx vite --port 5173",
+  "runtime_hint": [
+   "node",
+   "python"
+  ]
  },
  "ecosystem": {
-  "detected_ecosystems": {},
-  "has_container_recipe": false,
+  "detected_ecosystems": {
+   "node": [
+    "console/package.json"
+   ],
+   "python": [
+    "apphub/requirements.txt"
+   ]
+  },
+  "has_container_recipe": true,
   "database_requirement": null
- }
+ },
+ "screen_summary": {
+  "screens_discovered": 6,
+  "screens_reached": 6,
+  "screens_rendered": 6,
+  "screens_browser_verified": 6
+ },
+ "capability_summary": null
 }

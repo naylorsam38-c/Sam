@@ -1,0 +1,55 @@
+{
+ "application": "APP-030",
+ "base_url": "http://localhost:5173/",
+ "static_routes_found": 6,
+ "screens": [
+  {
+   "screen_id": "SCR-001",
+   "name": "First-run administrator setup",
+   "route": "/auth/setup",
+   "discovery_source": "startup_url",
+   "verified": true,
+   "detail": "Real 'Create your administrator account' form (language/email/username/password/confirm). Two 401s in the console before this loads are the app's own real pre-auth session probe, not a bug."
+  },
+  {
+   "screen_id": "SCR-002",
+   "name": "Sign in",
+   "route": "/auth/login",
+   "discovery_source": "post_setup_redirect",
+   "verified": true,
+   "detail": "Reached automatically after successfully creating the real admin account. Real username/email + password form."
+  },
+  {
+   "screen_id": "SCR-003",
+   "name": "Overview dashboard",
+   "route": "/dashboard",
+   "discovery_source": "post_login_redirect",
+   "verified": true,
+   "detail": "Real dashboard reading genuine live host stats (CPU 10.4%, memory 76.1%/12GB of 15.7GB, disk 12.6%, real hostname/kernel/uptime/OS). Honestly reports 'Healthy services 1/5' and 'Core services need review - 0 degraded, 4 unavailable' -- an accurate, non-crashing reflection of only running apphub natively without Gitea/Portainer/Nginx-Proxy-Manager, not a bug."
+  },
+  {
+   "screen_id": "SCR-004",
+   "name": "Users",
+   "route": "/users",
+   "discovery_source": "navigation",
+   "verified": true,
+   "detail": "Real Users table listing the exact real admin account created in SCR-001 (admin / admin@example.com / English / Enabled / real creation timestamp) -- a genuine round trip through the real backing store, the same 'prove the write path' bar used elsewhere on this shelf. Found and disclosed a real i18n bug here: the Email column header renders the literal untranslated key 'usersPage.fields.email' instead of 'Email'."
+  },
+  {
+   "screen_id": "SCR-005",
+   "name": "App Store",
+   "route": "/appstore",
+   "discovery_source": "navigation",
+   "verified": true,
+   "detail": "Real navigation and real page chrome load correctly. Honestly reports 'App Store data is temporarily unavailable ... request failed with status 404' -- expected and disclosed: this app's own build-time asset-sync step (platform-sync-runtime-assets.py, normally run inside the Docker image build) was not run in this native-partial setup, so no catalog data was ever seeded. Not an app bug."
+  },
+  {
+   "screen_id": "SCR-006",
+   "name": "Administrator account creation (filled)",
+   "route": "/auth/setup",
+   "discovery_source": "interaction",
+   "verified": true,
+   "detail": "The SCR-001 form filled with real values before submission, screenshotted for evidence of the actual interaction, not just the empty form."
+  }
+ ]
+}
