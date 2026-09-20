@@ -2,14 +2,14 @@
  "application": "APP-009",
  "category": "automation",
  "repository_url": "https://github.com/home-assistant/core",
- "commit_sha": "cbc435157b764ffe4ea131e583b4ec3bd1184fa1",
+ "commit_sha": "949a484720ac3ebd2f474ce7e408a800c6c4ebdc",
  "branch": "dev",
- "download_timestamp": "2026-09-19T11:43:25.547936+00:00",
+ "download_timestamp": "2026-09-20T05:38:02.406430+00:00",
  "download_method": "git clone --depth 1",
  "licence_file": "LICENSE.md",
  "licence_detected": "Apache-2.0",
  "licence_allowed": true,
- "source_checksum_sha256": "418ff63945f5a9d86442aca0995f8b3f707c00a61becde7032d8adf609bc382a",
+ "source_checksum_sha256": "de61e0c6db2950e504560305624e50c271836a461579f86029f746401da97dcc",
  "discovery_source": "awesome-selfhosted",
  "stargazers_count": 90737
 }

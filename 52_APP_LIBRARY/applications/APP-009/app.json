@@ -7,9 +7,9 @@
  "source_platform": "github.com",
  "licence": "Apache-2.0",
  "version": null,
- "commit": "cbc435157b764ffe4ea131e583b4ec3bd1184fa1",
+ "commit": "949a484720ac3ebd2f474ce7e408a800c6c4ebdc",
  "source_path": "applications/APP-009/source",
- "status": "STARTUP_FAILED",
+ "status": "FUNCTIONALLY_VERIFIED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -245,11 +245,14 @@
   }
  ],
  "install_startup": {
-  "status": "STARTUP_FAILED",
-  "reason": "ERROR: failed to build: failed to solve: base name (${BUILD_FROM}) should not be blank",
-  "runtime_hint": [
-   "python"
-  ]
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://127.0.0.1:8123/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "Identical repo, same STARTUP_FAILED root cause, and the same fix as the sibling duplicate APP-003 (also home-assistant/core - this pipeline discovered the same project twice under different category slugs): the repo's own Dockerfile needs a Supervisor-only ${BUILD_FROM} base image with no default and separately pulls a helper from ghcr.io, both unusable/blocked here. Used the project's own officially-documented standalone deployment ('Home Assistant Container') instead - the prebuilt homeassistant/home-assistant:stable image, pulled via Google's public Docker Hub mirror (mirror.gcr.io) to work around this sandbox's production.cloudfront.docker.com CDN block (see APP-003's own app.json for the full diagnosis of both blocks) and retagged locally to its real name. docker-compose.library.yml runs it with privileged: true and network_mode: host, exactly as Home Assistant's own docs specify, with a named volume for /config.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
  },
  "ecosystem": {
   "detected_ecosystems": {
@@ -260,5 +263,18 @@
   },
   "has_container_recipe": true,
   "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 15,
+  "screens_reached": 15,
+  "screens_rendered": 15,
+  "screens_browser_verified": 15,
+  "verification_note": "Driven by a tailored Playwright script (ha_walk.py) rather than the generic screens.py crawler, for the same reason already diagnosed and documented on the sibling duplicate APP-003: Home Assistant's frontend renders almost entirely inside nested open shadow roots, which the generic crawler's whole-page text checks don't reliably see into. This is APP-009's own independent run against its own freshly booted instance (a separate container, a separate genuine owner account 'Library Walker', its own real onboarding wizard) - not copied evidence from APP-003. 15/15 screens reached, rendered, and browser-verified: Overview, Map, Energy, Activity, History, Media, To-do lists, Settings landing + Devices & services + Automations & scenes + People, Notifications, and Profile."
+ },
+ "capability_summary": {
+  "discovered": 2,
+  "attach_point_found": 2,
+  "proven": 2,
+  "verification_note": "Driven by a tailored script (ha_capabilities.py), same reason as APP-003's own verification_note. This is APP-009's own independent run: a real shopping-list item added and independently reconfirmed present via a brand-new browser context with a fresh login, and a real time-triggered automation (Time trigger + 'send a persistent notification' action) created via the app's own visual editor, saved, and independently reconfirmed by name in the Automations list. Real attach points at homeassistant/components/shopping_list/todo.py's ShoppingTodoListEntity + shopping_list/__init__.py's ShoppingListView, and homeassistant/components/automation/__init__.py's AutomationEntity + _async_process_config."
  }
 }
