@@ -1,0 +1,64 @@
+{
+ "application": "APP-005",
+ "capabilities_defined": true,
+ "discovery_method": "app-derived",
+ "verification_method": "manual (penpot_capabilities.py) - see screens.json's verification_note for why",
+ "capabilities": [
+  {
+   "id": "CAP-005-01",
+   "name": "Design Editor (drawing)",
+   "route": "/#/workspace",
+   "discovered_from": "screen",
+   "live_test": {
+    "action": "created a new file, drew a real rectangle shape on the canvas via the rectangle tool + mouse drag, renamed the file to 'Library Walker Test File 1789882305'",
+    "independent_reconfirmation": true,
+    "shape_count_on_reopen": 1,
+    "evidence": [
+     "002_cap_rectangle_drawn.png",
+     "003_cap_file_renamed.png",
+     "004_cap_reopened_independent.png"
+    ]
+   },
+   "verdict": "PROVEN",
+   "reason": "reopening the exact same file from a brand-new browser context with a fresh login shows the drawn shape still present in the layer tree/canvas - proves it was really persisted server-side, not just left in the editor's local in-memory state",
+   "attach_points": [
+    {
+     "file": "backend/src/app/rpc/commands/files_create.clj",
+     "matched_words": [
+      "file",
+      "create"
+     ],
+     "line": 37,
+     "snippet": "(defn create-file"
+    }
+   ]
+  },
+  {
+   "id": "CAP-005-02",
+   "name": "Projects (dashboard)",
+   "route": "/#/dashboard/recent",
+   "discovered_from": "screen",
+   "live_test": {
+    "action": "created a real new project named 'Library Walker Test Project 1789882305' via the dashboard's own + New Project control",
+    "independent_reconfirmation": true,
+    "evidence": [
+     "005_cap_project_created.png",
+     "006_cap_project_list_independent_reconfirm.png"
+    ]
+   },
+   "verdict": "PROVEN",
+   "reason": "project now appears, by its exact given name, in the dashboard re-fetched from a brand-new browser context + fresh login - proves it was really saved server-side",
+   "attach_points": [
+    {
+     "file": "backend/src/app/rpc/commands/projects.clj",
+     "matched_words": [
+      "project",
+      "create"
+     ],
+     "line": 179,
+     "snippet": "(defn- create-project"
+    }
+   ]
+  }
+ ]
+}
