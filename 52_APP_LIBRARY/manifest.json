@@ -3229,7 +3229,7 @@
    "version": null,
    "commit": "b402637fe4c35a31eac4007356d3a750ba6187c8",
    "source_path": "applications/APP-021/source",
-   "status": "INSTALL_FAILED",
+   "status": "SCREEN-VERIFIED",
    "declared_itself": false,
    "manual_override_reason": null,
    "discovery_candidates": [
@@ -3252,8 +3252,14 @@
     }
    ],
    "install_startup": {
-    "status": "INSTALL_FAILED",
-    "reason": "no Dockerfile or compose file - no documented way to run it"
+    "status": "STARTABLE",
+    "reason": null,
+    "url": "http://localhost:9001/",
+    "http_status": 200,
+    "recipe": "docker-compose.library.yml",
+    "recipe_kind": "compose",
+    "recipe_modification_note": "Used the project's own official, fully prebuilt-image compose file (docker/images/docker-compose.yaml) as-is - frontend/backend/exporter/mcp/postgres/valkey/mailcatch, no build needed. One fix required: the frontend's nginx crash-looped binding IPv6 ('socket() [::]:8080 failed') in this sandbox's IPv4-only Docker network - the file already ships a commented-out PENPOT_DISABLE_IPV6_LISTEN flag for exactly this case, just needed uncommenting. Fresh install had no user account, so the crawler's login attempt correctly failed with 'Email or password is incorrect' - signed up once via the app's own registration form (email verification is disabled via the compose file's own PENPOT_FLAGS) using the pipeline's standard libwalker/Walker-Pass-2026! test credentials, landing on a real working Projects dashboard with templates and an onboarding survey modal.",
+    "startup_command": "docker compose -f docker-compose.library.yml up -d"
    },
    "ecosystem": {
     "detected_ecosystems": {
@@ -3263,6 +3269,12 @@
     },
     "has_container_recipe": false,
     "database_requirement": null
+   },
+   "screen_summary": {
+    "screens_discovered": 1,
+    "screens_reached": 1,
+    "screens_rendered": 1,
+    "screens_browser_verified": 1
    }
   },
   {
