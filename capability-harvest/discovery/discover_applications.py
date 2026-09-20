@@ -31,7 +31,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "monthly-expenses-tracker",
         "clone_url": "https://github.com/NHasan143/monthly-expenses-tracker.git",
-        "ref": None,  # None = default branch HEAD at clone time; set a commit sha to pin it
+        "ref": "7fd04edb0756e8dda501ee01b98dc30de2d238b6",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README  # None = default branch HEAD at clone time; set a commit sha to pin it
         "category": "personal-finance",
         "why_selected": (
             "Real, working Flask app (flask-login auth + flask-sqlalchemy models, "
@@ -62,7 +62,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "inventory-tracker",
         "clone_url": "https://github.com/Antoh254/Inventory-Tracker.git",
-        "ref": None,
+        "ref": "6aba7fb8ef1b86e1d9e03184476b8bb37fe2bc12",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "inventory",
         "why_selected": (
             "Single-file Flask + raw sqlite3 app, MIT licensed, one runtime "
@@ -84,7 +84,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "hostelfix",
         "clone_url": "https://github.com/makona-OG/hostelFix.git",
-        "ref": None,
+        "ref": "8d54ca9aebe956eb135f53fdb8aabb4e3a5a8748",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "hostel-booking",
         "why_selected": (
             "Real Flask + SQLAlchemy + SQLite student-hostel-booking app "
@@ -111,7 +111,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "habit-tracker",
         "clone_url": "https://github.com/batrisyiasafri/habit_tracker.git",
-        "ref": None,
+        "ref": "c9d2b6b72fbf8f4008aa9b29d0e4f48f584949e8",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "habit-tracking",
         "why_selected": (
             "Single-file Flask + Flask-SQLAlchemy habit tracker, MIT "
@@ -135,7 +135,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "flask-messenger",
         "clone_url": "https://github.com/jgoney/flask-messenger.git",
-        "ref": None,
+        "ref": "4e9a9b31b5fc091a38f3162fb9cb9b579c11a047",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "messaging",
         "why_selected": (
             "Small Flask + raw sqlite3 message board with both a "
@@ -160,7 +160,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "recipe-app",
         "clone_url": "https://github.com/ichi-saki/Recipe_app.git",
-        "ref": None,
+        "ref": "da7fdc8337d191228b1b1ffedffaabdb3291c7dc",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "recipe-sharing",
         "why_selected": (
             "Small Flask + raw sqlite3 recipe-sharing app, MIT licensed, "
@@ -194,7 +194,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "fintrack",
         "clone_url": "https://github.com/vedpatel-real-ai/Fintrack-Flask-CS50-Final-Project.git",
-        "ref": None,
+        "ref": "948a9a007776488607e55971687970bc25874ddc",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "personal-finance",
         "why_selected": (
             "Real, well-engineered Flask app (application-factory pattern, "
@@ -224,7 +224,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "bounty-simulator",
         "clone_url": "https://github.com/shaikayan2084/Bounty-Simulator.git",
-        "ref": None,
+        "ref": "53bd597ccd9d9469e6bd15618817584ec404eb06",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "gamified-learning",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy 'bug bounty simulator' learning "
@@ -255,7 +255,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "flask-coffee-and-wifi",
         "clone_url": "https://github.com/pranjalco/flask-coffee-and-wifi.git",
-        "ref": None,
+        "ref": "7e66b37733df7fc62e3c81d6d4008211005597df",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "cafe-directory",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy + Flask-Login cafe directory, "
@@ -275,7 +275,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "casettafit",
         "clone_url": "https://github.com/wifizak/CasettaFit.git",
-        "ref": None,
+        "ref": "5c5737130c8052d7c7094ae5c45df29bcb93b635",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "fitness",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy + Flask-Login self-hosted "
@@ -330,7 +330,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "zinny-api",
         "clone_url": "https://github.com/RyLaney/zinny-api.git",
-        "ref": None,
+        "ref": "65dbe26a4762675fb1ce031a3fc951fb0d784e78",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "media-rating",
         "why_selected": (
             "Real Flask API for rating movies/TV titles, BSD-3-Clause "
@@ -357,7 +357,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "payroll-tax-calculator",
         "clone_url": "https://github.com/rishu879/Payroll-Tax-Calculator-with-Persistence-Analytics.git",
-        "ref": None,
+        "ref": "af699c7d3a12f66b9ff9a88a97f193743f58c04e",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "payroll",
         "why_selected": (
             "Real single-file Flask + raw sqlite3 payroll/HRMS app, "
@@ -379,7 +379,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "hospital-management-real",
         "clone_url": "https://github.com/Raviraj0001/Hospital_Management_Real.git",
-        "ref": None,
+        "ref": "2ef9184f817eb880f55685ee2535d49a322e2ca8",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "healthcare-scheduling",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy hospital-management app, MIT "
@@ -407,7 +407,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "invoice-generator",
         "clone_url": "https://github.com/rishabh0510rishabh/Invoice-generator.git",
-        "ref": None,
+        "ref": "14f0b74b979604e970dc1b14e803581c42e78b2d",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "billing",
         "why_selected": (
             "Real Flask + raw sqlite3 invoice/billing app, MIT licensed. "
@@ -448,7 +448,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "image-upload-app",
         "clone_url": "https://github.com/Mukesh-Web-Dev/imageUploadFlaskApp.git",
-        "ref": None,
+        "ref": "227f005343bd815e2f5360ab818beb6b93cf9b48",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "media",
         "why_selected": (
             "Real Flask app, MIT licensed. upload_image() does a genuine "
@@ -470,7 +470,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "smart-attendance-system",
         "clone_url": "https://github.com/talha-siddiqui137/smart-attendance-system.git",
-        "ref": None,
+        "ref": "614adbdb7132985bed88beeb3f5857e52684be16",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "attendance-tracking",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy QR/geofence attendance app, MIT "
@@ -495,7 +495,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "enterprise-project",
         "clone_url": "https://github.com/RishiS-HSCProjects/EnterpriseProject.git",
-        "ref": None,
+        "ref": "b2965b6b8af0cd0a32f47b02ee266fa0b7b7b54e",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "staff-management",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy staff/tournament management app "
@@ -550,7 +550,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "tech-hub",
         "clone_url": "https://github.com/Dixieboy76/tech_hub.git",
-        "ref": None,
+        "ref": "8d1f31982401ab0d08ff34e6f4207e10310313fd",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "auth",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy job-marketplace app, MIT "
@@ -595,7 +595,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "dataviva-training",
         "clone_url": "https://github.com/rafaelsmedina/dataviva-training.git",
-        "ref": None,
+        "ref": "284d831a2c1b0b6109ac3c964aa0190225f8a25f",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "social",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy microblog app (a Miguel "
@@ -631,7 +631,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "smartbid",
         "clone_url": "https://github.com/vamsishesamsetti/SmartBid.git",
-        "ref": None,
+        "ref": "ccc3e0de84a20dedd6ab2cc866a12cb5125f2279",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "auctions",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy JWT-authenticated auction API, "
@@ -664,7 +664,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "social-life",
         "clone_url": "https://github.com/MadGotten/Social-Life.git",
-        "ref": None,
+        "ref": "22c8625704b2e600fe69e94b26570c2cb1bf8abe",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "social",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy social-feed app, Apache-2.0 "
@@ -722,7 +722,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "pharma-inventory",
         "clone_url": "https://github.com/UserSky21/Pharmaceutical-Inventory-System-.git",
-        "ref": None,
+        "ref": "42e44bb4690a2aaff432a99631abc490569c1ce0",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "inventory",
         "why_selected": (
             "Real single-file Flask + Flask-SQLAlchemy pharmacy inventory "
@@ -750,7 +750,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "buyme",
         "clone_url": "https://github.com/arpannookala12/BuyMe---Online-Auction-System.git",
-        "ref": None,
+        "ref": "86693e87bde6e8cb34a9cb22893c7c7c1e1caf92",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "auctions",
         "why_selected": (
             "Real Flask + Flask-SQLAlchemy online-auction app, MIT "
@@ -825,7 +825,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "mini-amazon",
         "clone_url": "https://github.com/benjaminyan1/Mini-Amazon.git",
-        "ref": None,
+        "ref": "ce13c893cafbf79119703d2c662d094e1cd9e01f",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "e-commerce",
         "why_selected": (
             "Real Flask + real PostgreSQL (SQLAlchemy raw-SQL engine, no "
@@ -918,7 +918,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "django-folium",
         "clone_url": "https://github.com/moustafa-shaaban/Django_and_Folium.git",
-        "ref": None,
+        "ref": "1f6833904db1375e9326cabd76e19372610bdf60",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "geospatial",
         "why_selected": (
             "Real Django + Folium (wraps Leaflet.js) geospatial app, MIT "
@@ -985,7 +985,7 @@ APPLICATION_MANIFEST = [
     {
         "slug": "django-otp-auth",
         "clone_url": "https://github.com/tohid-ab/django-otp-auth.git",
-        "ref": None,
+        "ref": "b67bc6848aceca230c4b84e4c22357c8870f2b04",  # pinned: was None (origin/HEAD-at-clone-time), which drifted for enterprise-project on re-discovery -- see README
         "category": "auth",
         "why_selected": (
             "Real Django + DRF phone-number OTP login app, MIT licensed, "
