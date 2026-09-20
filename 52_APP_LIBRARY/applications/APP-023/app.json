@@ -9,7 +9,7 @@
  "version": null,
  "commit": "aef745b5fd5a14b32981a99e763bc75bfe0cbee5",
  "source_path": "applications/APP-023/source",
- "status": "INSTALL_FAILED",
+ "status": "SCREEN-VERIFIED",
  "declared_itself": true,
  "manual_override_reason": null,
  "discovery_candidates": [
@@ -66,8 +66,14 @@
   }
  ],
  "install_startup": {
-  "status": "INSTALL_FAILED",
-  "reason": "no Dockerfile or compose file - no documented way to run it"
+  "status": "STARTABLE",
+  "reason": null,
+  "url": "http://localhost:6610/",
+  "http_status": 200,
+  "recipe": "docker-compose.library.yml",
+  "recipe_kind": "compose",
+  "recipe_modification_note": "The repo has no Dockerfile/compose file (docs live on the project website, not in-repo). The documented Docker Hub image (onedev/server) no longer exists there ('object not found') - the project's org moved to 1dev/server on Docker Hub at some point; used that instead, same official image, just a renamed org. Single container, ports 6610 (HTTP) and 6611 (SSH). The server's own first-run wizard (admin account creation, then a Server URL confirmation step) was completed with the pipeline's standard libwalker/Walker-Pass-2026! test credentials. The generic screen crawler couldn't drive this app's own login/setup flow: unauthenticated visits to '/' show a Sign Up page rather than a login form (self-registration is enabled by default), and OneDev's real /login page submits via an in-place Wicket AJAX update rather than a normal navigation - the page left behind immediately after submit can still be a stale/broken view even once the session is genuinely authenticated, which the crawler reads as a failed login. Driven directly via a one-off Playwright script instead: login at /login, then a fresh navigation to '/' (not the AJAX-updated page) to land on the real authenticated dashboard, followed by a 7-screen walkthrough (Projects, Pull Requests, Issues, Builds, and Admin's Users/System Settings) captured with the exact same control-inventory/screenshot logic screens.py itself uses.",
+  "startup_command": "docker compose -f docker-compose.library.yml up -d"
  },
  "ecosystem": {
   "detected_ecosystems": {
@@ -77,5 +83,11 @@
   },
   "has_container_recipe": false,
   "database_requirement": null
+ },
+ "screen_summary": {
+  "screens_discovered": 7,
+  "screens_reached": 7,
+  "screens_rendered": 7,
+  "screens_browser_verified": 7
  }
 }
