@@ -94,7 +94,7 @@ task. Both are pinned down by `test_frontdoor.py`'s own assertions, not vibes:
 
 ## Tested (real Chromium via Playwright, `test_frontdoor.py`)
 
-**115/115**, run against two real local HTTP servers (one for the Front Door, a second on a
+**381/381**, run against two real local HTTP servers (one for the Front Door, a second on a
 different port for the cross-origin adapter proof):
 
 - All 172 real `skins_library` files reproduced byte-for-byte by `skins-engine.js`, plus the
@@ -118,6 +118,14 @@ different port for the cross-origin adapter proof):
   `shelf-integrations/_frontdoor-live-check/README.md` -- including a full click-through
   proving the demo preview's own real "Add" button genuinely works, not just that resolution
   picked the right app.
+- Full-screen walkthrough regression, all 19 real catalog apps: resolving to the right app
+  is a different bar from every one of its own screens actually working, so every app is now
+  separately driven through the app screen (real name, real screenshot verified to actually
+  render via `naturalWidth > 0`, real repo link, honest colours-only note), the skin-picker
+  sheet, live preview, keep/log, the demo fixture's own real Add/Clear buttons, and undo --
+  266 checks (19 x 14), zero JS errors on any of them. Verified as a real check (not a
+  tautology) by pointing one app's screenshot at a nonexistent file and confirming it alone
+  failed. See `shelf-integrations/_frontdoor-live-check/README.md`.
 - Adapter: both measured families delivered across a real different origin, colours-only
   apps get variables with no guessed stylesheet, wrong-origin senders are refused and named.
 

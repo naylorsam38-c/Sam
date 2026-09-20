@@ -89,6 +89,45 @@ This is now proven two ways:
      with an inline data-URI `<link rel="icon">` in `front-door.html`;
      reproduced as present before the fix and absent after.
 
+## Every app, every screen (not just ask-resolution)
+
+Being asked directly whether *every* app had actually been checked loading in
+properly, through every screen, with buttons and photos verified -- not just
+resolved correctly -- surfaced a real gap: until this point, only
+ask-resolution had been checked for all 19 apps, and only one app (linkding)
+had been driven through a full interactive click-through by hand. The other
+18 apps' own screens (their real screenshot actually rendering, the
+skin-picker sheet, live preview, keep/undo, the demo's own real Add/Clear
+buttons) had never individually been exercised.
+
+`test_frontdoor.py`'s new Section E3 closes that gap for good: every one of
+the 19 real catalog apps is now driven through every screen the Front Door
+shows for it --
+
+1. the app screen (real name, real screenshot -- checked via
+   `naturalWidth > 0` in a real browser, not just "the file exists on disk",
+   real repo link, the honest "colours only" family note),
+2. the skin-picker sheet (`#fab`, five look tiles, original marked pressed),
+3. live preview (picking a look visibly changes the demo's rendered colour),
+4. keep it (saved to `localStorage`, logged),
+5. the demo fixture's own real "Add" and "Clear" buttons (its own JS
+   handlers, not a shortcut -- job count and text verified, not assumed),
+6. undo (reverts to original) and close.
+
+266 new checks (19 apps x 14 each), all passing -- **381/381 total**, up
+from 115. Verified this is a real check, not a tautology, by temporarily
+pointing one app's `screenshot` field at a nonexistent file: both the
+image-load check and the "no errors" check failed immediately and correctly
+for that one app, with the other 18 unaffected; reverted after confirming.
+
+`walkthrough-01-ab-testing-experimentation-*.png` (Flagsmith, first in the
+catalog), `walkthrough-02-note-taking-*.png` (Memos, an app in the middle of
+the catalog), and `walkthrough-03-crm-*.png` (Krayin, last in the catalog)
+are a representative sample of this, screenshotted live: the app screen with
+its own real name/screenshot/repo link, then after picking a look and
+clicking the demo's own real "Add" button, showing a genuinely different
+job text appended for each app's session ("Walkthrough job for Memos", etc).
+
 ## What this does and doesn't prove
 
 This proves the Front Door's own ask/resolve/preview/keep flow is real and

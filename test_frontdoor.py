@@ -11,6 +11,10 @@
 #   three viewports.
 # Section E2: ask-resolution regression -- every one of the 19 real catalog
 #   apps must resolve from a natural, non-keyword-copying plain-language ask.
+# Section E3: full-screen walkthrough regression -- every one of the 19 real
+#   catalog apps driven through every screen it shows (app screen incl. its
+#   real screenshot actually loading, skin-picker sheet, live preview, keep/
+#   undo, the demo's own real Add/Clear buttons), not just ask-resolution.
 # Section F: frontdoor-skin-adapter.js's postMessage contract, proven against
 #   genuinely cross-origin pages (a second HTTP server on a different port),
 #   both measured families plus an unmeasured one.
@@ -262,6 +266,71 @@ with sync_playwright() as p:
         check(f"ask-resolution: {ask!r} -> {expected_slug}", got == expected_slug, got)
     pg.evaluate("localStorage.clear()")
     pg.close()
+
+    # ── E3. Full-screen walkthrough regression: every one of the 19 real catalog
+    # apps, driven through every screen the Front Door shows for it, not just
+    # ask-resolution. Added after being asked directly whether every app had been
+    # checked loading in properly, through every screen, moving buttons and photos --
+    # until this, only ask-resolution (all 19) and one full interactive click-through
+    # (linkding, by hand) had actually been verified; the other 18 apps' own screens
+    # (their real screenshot loading, the skin-picker sheet, live preview, keep/undo,
+    # the demo's own real Add/Clear buttons) had never individually been driven.
+    library_data = json.load(open(os.path.join(ROOT, "library.json")))
+    for app in library_data["apps"]:
+        slug, name = app["slug"], app["name"]
+        pg = b.new_page(viewport={"width": 1280, "height": 900}); errs = []
+        pg.on("pageerror", lambda e: errs.append(str(e)))
+        pg.on("console", lambda m: errs.append(m.text) if m.type == "error" and "favicon" not in m.text else None)
+        pg.goto(URL); pg.wait_for_timeout(150)
+        seed_front_door(pg, "walkthrough", slug)
+        pg.reload(); pg.wait_for_timeout(250)
+
+        # Screen 1: the app screen -- real name, a real screenshot that actually
+        # loads (not a broken image), the real repo link, the honest family note.
+        check(f"walkthrough {slug}: app screen reached", pg.evaluate("document.body.dataset.state") == "app")
+        check(f"walkthrough {slug}: real app name shown", pg.locator("#app-name").inner_text() == name)
+        shot_w = pg.locator("#app-shot").evaluate("e => e.naturalWidth")
+        check(f"walkthrough {slug}: real screenshot photo actually loads", shot_w > 0, shot_w)
+        check(f"walkthrough {slug}: real repo link shown", pg.locator("#app-repo").get_attribute("href") == app["repository"])
+        check(f"walkthrough {slug}: honest colours-only family note shown", "hasn't been measured" in pg.locator("#app-family-note").inner_text())
+
+        # Screen 2: the skin-picker sheet.
+        pg.click("#fab"); pg.wait_for_timeout(150)
+        check(f"walkthrough {slug}: five looks offered, original marked pressed",
+              pg.locator(".look").count() == 5 and pg.locator('.look[data-look="original"]').get_attribute("aria-pressed") == "true")
+
+        # Screen 3: live preview updates when a look is picked.
+        slot = pg.frame_locator("#slot")
+        before_bg = slot.locator("button").first.evaluate("e => getComputedStyle(e).backgroundColor")
+        pg.click('.look[data-look="bold_contrast"]'); pg.wait_for_timeout(250)
+        after_bg = slot.locator("button").first.evaluate("e => getComputedStyle(e).backgroundColor")
+        check(f"walkthrough {slug}: picking a look changes the live preview", after_bg != before_bg, (before_bg, after_bg))
+        check(f"walkthrough {slug}: preview asks before keeping", pg.locator("#ecol .choices").last.is_visible() and "Keep it" in pg.locator("#ecol").inner_text())
+
+        # Screen 4: keep it, saved and logged.
+        pg.locator("#ecol .choices").last.get_by_text("Keep it").click(); pg.wait_for_timeout(250)
+        saved = pg.evaluate("JSON.parse(localStorage.getItem('fd.instance'))")
+        check(f"walkthrough {slug}: kept look is saved and logged", saved["skin"]["look"] == "bold_contrast" and len(saved["log"]) == 1)
+
+        # Screen 5: the demo's own real Add/Clear buttons, not a shortcut.
+        before_jobs = slot.locator("#jobs li").count()
+        slot.locator("#new-job").fill(f"Walkthrough job for {name}")
+        slot.locator("#add").click(); pg.wait_for_timeout(200)
+        after_jobs, job_texts = slot.locator("#jobs li").count(), slot.locator("#jobs li").all_text_contents()
+        check(f"walkthrough {slug}: demo's real Add button appends the job",
+              after_jobs == before_jobs + 1 and f"Walkthrough job for {name}" in job_texts, (before_jobs, after_jobs))
+        slot.locator("#clear").click(); pg.wait_for_timeout(150)
+        check(f"walkthrough {slug}: demo's real Clear button empties the list", slot.locator("#jobs li").count() == 0)
+
+        # Screen 6: undo (the sheet is still open from the Keep it step above).
+        check(f"walkthrough {slug}: undo link present after keeping a look", pg.locator("#log .link").count() >= 1)
+        pg.locator("#log .link").first.click(); pg.wait_for_timeout(250)
+        check(f"walkthrough {slug}: undo reverts to original", pg.evaluate("inst.skin.look") == "original")
+        pg.click("#close"); pg.wait_for_timeout(150)
+
+        check(f"walkthrough {slug}: no JS/console errors across every screen", not errs, errs)
+        pg.evaluate("localStorage.clear()")
+        pg.close()
 
     # ── F. Adapter: real cross-origin postMessage, both measured families + one unmeasured ──
     pg = b.new_page(viewport={"width": 1280, "height": 800}); errs = []; warns = []
