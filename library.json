@@ -435,6 +435,29 @@
         "details": "shelf-integrations/strapi/README.md"
       },
       "screenshot": "shelf/cms/home.png"
+    },
+    {
+      "id": "APP-017",
+      "slug": "crm",
+      "name": "Krayin",
+      "category": "CRM",
+      "repository": "https://github.com/krayin/laravel-crm",
+      "blurb": "Open source CRM built on Laravel: leads, quotes, pipelines, and contact management, self-hosted.",
+      "keywords": [
+        "crm",
+        "leads",
+        "sales pipeline",
+        "contact management",
+        "laravel"
+      ],
+      "family": "",
+      "real_integration": {
+        "status": "proven-running",
+        "commit": "570a8db1",
+        "mechanism": "Real Laravel app + native PHP 8.3 + MariaDB, installed via Krayin's own real krayin-crm:install command. Real lead created through the UI, verified directly in the MariaDB database.",
+        "details": "shelf-integrations/krayin/README.md"
+      },
+      "screenshot": "shelf/crm/home.png"
     }
   ]
 }

@@ -25,11 +25,12 @@ JS errors throughout.
 | APP-011 | linkding | Proven running | Django + native Python 3.13 (via uv) + linkding's own default SQLite. Real bookmark added through the UI, round-tripped to the real list view. See `shelf-integrations/linkding/README.md`. |
 | APP-002 | AnythingLLM | Proven running | Node three-process app (server + collector + static frontend) + default SQLite, built via the project's own official BARE_METAL.md guide. One optional `.xlsx` converter excluded (its dependency resolves to a blocked CDN); a real mobile-layout gap at 390px disclosed. See `shelf-integrations/anythingllm/README.md`. |
 | APP-013 | Strapi | Proven running | Real Yarn Berry monorepo (37 packages via Nx) run through the framework's own examples/getstarted fixture + default SQLite. Real content entry created through the admin UI, verified directly in the SQLite database. See `shelf-integrations/strapi/README.md`. |
+| APP-017 | Krayin | Proven running | Real Laravel app + native PHP 8.3 + MariaDB, installed via Krayin's own real installer command. Real lead created through the UI, verified directly in the database. See `shelf-integrations/krayin/README.md`. |
 | APP-042 | Infisical | Proven running | Node/TS backend + React frontend + native Postgres/Redis, served behind nginx. |
 | APP-044 | Super Productivity | Proven, real skin integration | See `shelf-integrations/productivity/README.md` -- the deepest integration: our skin engine's colour was driven through the app's own real theming service, not just "it boots". |
 | APP-051 | Galene | Proven running | Self-contained Go binary; embeds its own frontend, built-in TURN server. Connected to a real room with a real op/presenter login and Chromium's fake camera/mic device. |
 
-**15 of 18 admitted apps proven running end-to-end. 3 genuinely blocked
+**16 of 19 admitted apps proven running end-to-end. 3 genuinely blocked
 (all external dependencies unreachable here, not fixable in this sandbox).
 1 deprioritized (lower relevance, real but lower-value fix needed).**
 
